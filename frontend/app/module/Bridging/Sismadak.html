@@ -1,0 +1,173 @@
+<style type="text/css">
+    .style-center {
+        display: inline-block;
+        text-align: center;
+        width: 100%;
+    }
+
+    .style-right {
+        display: inline-block;
+        text-align: right;
+        width: 100%;
+    }
+
+    .style-left {
+        display: inline-block;
+        text-align: left;
+        width: 100%;
+    }
+
+    .k-treeview .k-item {
+        background-color: #f9f9f9 !important;
+    }
+
+    .k-checkbox-label:before {
+        margin: 1px 0px 0px 6px;
+    }
+
+    .k-grid .k-grid-header .k-header .k-link {
+        height: auto;
+    }
+
+    .k-grid .k-grid-header .k-header {
+        white-space: normal;
+    }
+
+    .k-grid .k-grid-header .k-header {
+        text-align: center;
+    }
+
+    fieldset {
+        border-radius: 5px;
+    }
+</style>
+
+<div class="panel panel-default container_12">
+    <div class="panel-heading" c-translate>SISMADAK</div>
+    <div class="panel-body">
+        <div class="grid_12">
+            <div ng-cloak>
+                <md-content>
+                    <md-tabs md-dynamic-height md-border-bottom md-selected="myVar">
+
+                        <md-tab label="List Data " md-on-select="onTabChanges(1)">
+                            <md-content class="md-padding">
+                                <div class="panel panel-default container_12">
+                                    <div class="panel-body">
+                                        <div class="grid_12">
+                                            <div class="grid_3">
+                                                <label c-label c-label-text="Indikator" real></label>
+                                                <input c-text-box type="input" filter="" class="k-textbox"
+                                                    ng-model="item.nama" />
+                                            </div>
+                                            <div class="grid_1">
+                                                <label c-label c-label-text=""></label>
+                                                <em style="margin-top:6px;" ng-click='cari1()' id="iconButton"
+                                                    data-role="button" class="k-button k-button-icon k-primary"
+                                                    role="button" aria-disabled="false" tabindex="0"><span
+                                                        class="k-sprite k-icon k-i-search">Cari</span></em>
+
+                                                <em style="margin-top:6px;" ng-click='resetFilter1()' id="iconButton"
+                                                    data-role="button" class="k-button k-button-icon k-primary"
+                                                    role="button" aria-disabled="false" tabindex="0"><span
+                                                        class="k-sprite k-icon k-i-cancel">Refresh</span></em>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="grid_12">
+                                    <kendo-grid id="grid1" k-data-source="sourceJenisPemeriksaan" k-selectable="'row'"
+                                        k-groupable="'true'" k-options="gridJenisPemeriksaan"
+                                        k-ng-model="selectedJenisPemeriksaan"
+                                        ng-click="klikJp(selectedJenisPemeriksaan)">
+                                    </kendo-grid>
+
+                                </div>
+                            </md-content>
+                        </md-tab>
+                    
+                    </md-tabs>
+                </md-content>
+            </div>
+        </div>
+    </div>
+</div>
+<div kendo-window="popUp" k-title="'Form Indikator '" k-width="750" k-visible="false" k-on-open="win2visible = true"
+    k-on-close="win2visible = false">
+    <div class="panel panel-default container_12" style="padding: 10px 10px;">
+        <div class="panel-body">
+
+            <div class="grid_12">
+                <div class="grid_3" style="margin-top: 10px;">
+                    <label class="c-label">Tanggal</label>
+                </div>
+                <div class="grid_9">
+                    <input style="width: 100%" k-ng-model="item.date" kendo-datepicker placeholer="yyyy-MM-dd"
+                        k-format="'yyyy-MM-dd'" parsedate="yyyy-MM-dd" />
+                </div>
+            </div>
+            <div class="grid_12">
+                <div class="grid_3" style="margin-top: 10px;">
+                    <label class="c-label">Indikator</label>
+                </div>
+                <div class="grid_9">
+                    <input style="width: 100%;" kendo-combo-box k-ng-model="item.indikator" k-data-text-field="'indicator_element'"
+                        k-data-value-field="'indicator_id'" k-filter="'contains'" k-auto-bind="false"
+                        k-data-source="listIndikator" />
+                </div>
+            </div>
+            <div class="grid_12">
+                <div class="grid_3" style="margin-top: 10px;">
+                    <label class="c-label">Departemen</label>
+                </div>
+                <div class="grid_9">
+                    <input style="width: 100%;" kendo-combo-box k-ng-model="item.departemen" k-data-text-field="'namadepartemen'"
+                        k-data-value-field="'id'" k-filter="'contains'" k-auto-bind="false"
+                        k-data-source="listDepartemen" />
+                </div>
+            </div>
+            <div class="grid_12">
+                <div class="grid_3" style="margin-top: 10px;">
+                    <label class="c-label">Tipe</label>
+                </div>
+                <div class="grid_9">
+                    <div ng-repeat="stat in listTipe | orderBy:'id'">
+                        <div class="grid_6">
+                            <md-radio-group ng-model="item.type">
+                                <md-radio-button value="{{stat.id}}" class="md-primary">
+                                    {{stat.name}}
+                                </md-radio-button>
+                            </md-radio-group>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid_12">
+                <div class="grid_3" style="margin-top: 10px;">
+                    <label class="c-label">Nilai</label>
+                </div>
+                <div class="grid_9">
+                    <input c-text-box type="input" filter="'numeric'" class="k-textbox" ng-model="item.jumlah" />
+                </div>
+            </div>
+        </div>
+        <div class="grid_12">
+            <div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
+                <div class="grid_6">
+                    <button class="k-button btnSimpan k-button-icontext" ng-click="save()"><span
+                            class="k-icon k-update"></span>Simpan</button>
+                </div>
+                <div class="grid_6">
+                    <button class="k-button btnHapus k-button-icontext" ng-click="tutup()"><span
+                            class="k-icon k-cancel"></span>Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="grid_12">
+    <div ng-include='"../app/template/Shared/TemplateLoading"'></div>
+</div>
