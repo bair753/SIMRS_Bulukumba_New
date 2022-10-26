@@ -31,6 +31,7 @@ use Closure;
 
 use App\Transaksi\IdentifikasiPasien;
 use App\Transaksi\PasienDaftar;
+use App\Web\Profile;
 
 class ExternalController extends ApiController
 {
