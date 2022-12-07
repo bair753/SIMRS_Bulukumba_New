@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{C4847593-972C-11D0-9567-00A0C9273C2A}#8.0#0"; "crviewer.dll"
-Object = "{248DD890-BB45-11CF-9ABC-0080C7E7B78D}#1.0#0"; "mswinsck.ocx"
+Object = "{248DD890-BB45-11CF-9ABC-0080C7E7B78D}#1.0#0"; "MSWINSCK.OCX"
 Begin VB.Form frmCetakPendaftaran 
    Caption         =   "Transmedic"
    ClientHeight    =   7005
@@ -147,10 +147,11 @@ Dim ReportResep As New crSuratPerintahKerja
 'Dim WithEvents sect As CRAXDRT.Section
 'Dim reportLabel_3 As New Cr_cetakLabel_3
 Dim reportGelangPasien As New Cr_cetakLabelFotoGel
-Dim reportGelangPasienBayi As New Cr_gelangbayi
+'Dim reportGelangPasienBayi As New Cr_gelangbayi
 Dim reportLabel_3 As New Cr_cetakLabelFoto 'Cr_cetakLabel_2
 'Dim reportLabel_3 As New Cr_cetakLabelMagelang
 Dim reportTriage As New Cr_cetakHeaderTriage
+Dim reportGelangPasienBayi As New Cr_cetakLabelFotoGel
 
 Dim ii As Integer
 Dim tempPrint1 As String
@@ -419,7 +420,7 @@ Dim namaRs As String
             .usnoantri.SetUnboundFieldSource ("{ado.noantrian}")
             .udtgl.SetUnboundFieldSource ("{ado.tglregistrasi}")
             .usnodft.SetUnboundFieldSource ("{ado.noregistrasi}")
-            .usNoCm.SetUnboundFieldSource ("{ado.nocm}")
+            .usNocm.SetUnboundFieldSource ("{ado.nocm}")
             .usnmpasien.SetUnboundFieldSource ("{ado.namapasien}")
             .usJK.SetUnboundFieldSource ("{ado.jk}")
             .udTglLahir.SetUnboundFieldSource ("{ado.tgllahir}")
@@ -505,7 +506,7 @@ boolGelangBayi = False
             .usnoantri.SetUnboundFieldSource ("{ado.noantrian}")
             .udtgl.SetUnboundFieldSource ("{ado.tglregistrasi}")
             .usnodft.SetUnboundFieldSource ("{ado.noregistrasi}")
-            .usNoCm.SetUnboundFieldSource ("{ado.nocm}")
+            .usNocm.SetUnboundFieldSource ("{ado.nocm}")
             .usnmpasien.SetUnboundFieldSource ("{ado.namapasien}")
             .usJK.SetUnboundFieldSource ("{ado.jk}")
             .udTglLahir.SetUnboundFieldSource ("{ado.tgllahir}")
@@ -627,7 +628,7 @@ namaKomputer = Winsock1.LocalHostName
             .usnoantri.SetUnboundFieldSource ("{ado.noantrian}")
 '            .udtgl.SetUnboundFieldSource ("{ado.tglregistrasi}")
             .usnodft.SetUnboundFieldSource ("{ado.noregistrasi}")
-            .usNoCm.SetUnboundFieldSource ("{ado.nocm}")
+            .usNocm.SetUnboundFieldSource ("{ado.nocm}")
             .usnmpasien.SetUnboundFieldSource ("{ado.namapasien}")
             .usJK.SetUnboundFieldSource ("{ado.jk}")
             .usStatusPasien.SetUnboundFieldSource ("{ado.statuspasien}")
@@ -972,7 +973,7 @@ boolGelangBayi = False
 
             .udtgl.SetUnboundFieldSource ("{ado.tglregistrasi}")
             .usNoregistrasi.SetUnboundFieldSource ("{ado.noregistrasi}")
-            .usNoCm.SetUnboundFieldSource ("{ado.nocm}")
+            .usNocm.SetUnboundFieldSource ("{ado.nocm}")
             .usnmpasien.SetUnboundFieldSource ("{ado.namapasien}")
             .usJK.SetUnboundFieldSource ("{ado.jk}")
             
@@ -1093,7 +1094,7 @@ boolGelangBayi = False
 
             .udtgl.SetUnboundFieldSource ("{ado.tglregistrasi}")
             .usNoregistrasi.SetUnboundFieldSource ("{ado.noregistrasi}")
-            .usNoCm.SetUnboundFieldSource ("{ado.nocm}")
+            .usNocm.SetUnboundFieldSource ("{ado.nocm}")
             .usnmpasien.SetUnboundFieldSource ("{ado.namapasien}")
             .usJK.SetUnboundFieldSource ("{ado.jk}")
             
@@ -1250,7 +1251,7 @@ boolGelangBayi = False
             .txtWebEmail.SetText strEmail & ", " & strWebSite
             .udtgl.SetUnboundFieldSource ("{ado.tglregistrasi}")
             .usNoregistrasi.SetUnboundFieldSource ("{ado.noregistrasi}")
-            .usNoCm.SetUnboundFieldSource ("{ado.nocm}")
+            .usNocm.SetUnboundFieldSource ("{ado.nocm}")
             .usnmpasien.SetUnboundFieldSource ("{ado.namapasien}")
             .usJK.SetUnboundFieldSource ("{ado.jk}")
 
@@ -1402,7 +1403,7 @@ boolGelangBayi = False
             adoReport.CommandText = str & strSQL
             adoReport.CommandType = adCmdUnknown
             .database.AddADOCommand CN_String, adoReport
-            .usNoCm.SetUnboundFieldSource ("{ado.nocm}")
+            .usNocm.SetUnboundFieldSource ("{ado.nocm}")
             .usNamaPasien.SetUnboundFieldSource ("{ado.namapasien}")
             .usTglLahir.SetUnboundFieldSource ("{ado.tgllahir}")
             .usAlamat.SetUnboundFieldSource ("{ado.alamatlengkap}")
@@ -1702,12 +1703,12 @@ boolGelangBayi = False
                 '.Text1.SetText RS2!nocmbarcode
                 '.txtTglLahir.SetText IIf(IsNull(RS2("umur")), "", RS2("umur"))
                 '.txtAlamatPasien.SetText IIf(IsNull(RS2("alamat")), "", RS2("alamat"))
-                .usNorm.SetUnboundFieldSource ("{ado.nocm}")
+                .usNoRM.SetUnboundFieldSource ("{ado.nocm}")
                 .usPasien.SetUnboundFieldSource ("{ado.namapasien}")
                 .usTglLahir.SetUnboundFieldSource ("{ado.umur}")
                 .usBarcode.SetUnboundFieldSource ("{ado.barcode}")
                 .usJK.SetUnboundFieldSource ("{ado.jeniskelamin}")
-                .usNIK.SetUnboundFieldSource ("{ado.nik}")
+                .usNik.SetUnboundFieldSource ("{ado.nik}")
             End If
             view = "true"
             If view = "false" Then
@@ -1791,7 +1792,7 @@ boolGelangBayi = False
 '            .usNamaKeuarga.SetUnboundFieldSource ("{ado.namakeluarga}")
 '            .udTglLahir.SetUnboundFieldSource ("{ado.tglLahir}")
             .usJK.SetUnboundFieldSource ("{ado.jeniskelamin}")
-            .usNoCm.SetUnboundFieldSource ("{ado.nocm}")
+            .usNocm.SetUnboundFieldSource ("{ado.nocm}")
             .usAlamat.SetUnboundFieldSource ("{ado.alamatlengkap}")
 '            .usKota.SetUnboundFieldSource ("{ado.kotakabupaten}")
 '            .usKel.SetUnboundFieldSource ("{ado.namadesakelurahan}")
@@ -1876,7 +1877,7 @@ boolGelangBayi = False
            ' .usNamaKeuarga.SetUnboundFieldSource ("{ado.namakeluarga}")
             .udTglLahir.SetUnboundFieldSource ("{ado.tgllahir}")
             .usJK.SetUnboundFieldSource ("{ado.jeniskelamin}")
-            .usNoCm.SetUnboundFieldSource ("{ado.nocm}")
+            .usNocm.SetUnboundFieldSource ("{ado.nocm}")
             .usAlamat.SetUnboundFieldSource ("{ado.alamatlengkap}")
             .usJamRegis.SetUnboundFieldSource ("{ado.jamregistrasi}")
             .usTglRegis.SetUnboundFieldSource ("{ado.tglregistrasi}")
@@ -2081,7 +2082,7 @@ End If
             .database.AddADOCommand CN_String, adoReport
             If rs.EOF = False Then
               .usNamaPasien.SetUnboundFieldSource ("if isnull({ado.namapasien}) then "" "" else {ado.namapasien} ")
-              .usNoCm.SetUnboundFieldSource ("if isnull({ado.nocm}) then "" "" else {ado.nocm} ")
+              .usNocm.SetUnboundFieldSource ("if isnull({ado.nocm}) then "" "" else {ado.nocm} ")
               .usJK.SetUnboundFieldSource ("if isnull({ado.jeniskelamin}) then "" "" else {ado.jeniskelamin} ")
               .usAgama.SetUnboundFieldSource ("{ado.agama}")
               .usJenisPembayaran.SetUnboundFieldSource ("if isnull({ado.kelompokpasien}) then "" "" else {ado.kelompokpasien} ")
@@ -2293,7 +2294,7 @@ boolGelangBayi = False
             
             .udtgl.SetUnboundFieldSource ("{ado.tglregistrasi}")
             .usNoregistrasi.SetUnboundFieldSource ("{ado.noregistrasi}")
-            .usNoCm.SetUnboundFieldSource ("{ado.nocm}")
+            .usNocm.SetUnboundFieldSource ("{ado.nocm}")
             .usnmpasien.SetUnboundFieldSource ("{ado.namapasien}")
             .usJK.SetUnboundFieldSource ("{ado.jk}")
 
@@ -2436,7 +2437,7 @@ boolGelangBayi = False
             .txtWebEmail.SetText strEmail & ", " & strWebSite
             .udtgl.SetUnboundFieldSource ("{ado.tglregistrasi}")
             .usNoregistrasi.SetUnboundFieldSource ("{ado.noregistrasi}")
-            .usNoCm.SetUnboundFieldSource ("{ado.nocm}")
+            .usNocm.SetUnboundFieldSource ("{ado.nocm}")
             .usnmpasien.SetUnboundFieldSource ("{ado.namapasien}")
             .usJK.SetUnboundFieldSource ("{ado.jk}")
 
@@ -2580,7 +2581,7 @@ boolGelangBayi = False
             .txtWebEmail.SetText strEmail & ", " & strWebSite
             .udtgl.SetUnboundFieldSource ("{ado.tglregistrasi}")
             .usNoregistrasi.SetUnboundFieldSource ("{ado.noregistrasi}")
-            .usNoCm.SetUnboundFieldSource ("{ado.nocm}")
+            .usNocm.SetUnboundFieldSource ("{ado.nocm}")
             .usnmpasien.SetUnboundFieldSource ("{ado.namapasien}")
             .usJK.SetUnboundFieldSource ("{ado.jk}")
 
@@ -2717,7 +2718,7 @@ boolGelangBayi = False
             
             .udtgl.SetUnboundFieldSource ("{ado.tglregistrasi}")
             .usNoregistrasi.SetUnboundFieldSource ("{ado.noregistrasi}")
-            .usNoCm.SetUnboundFieldSource ("{ado.nocm}")
+            .usNocm.SetUnboundFieldSource ("{ado.nocm}")
             .usnmpasien.SetUnboundFieldSource ("{ado.namapasien}")
             .usJK.SetUnboundFieldSource ("{ado.jk}")
 
@@ -3109,7 +3110,7 @@ Dim jk As String
                      " to_char(p.tgllahir, 'DD-MM-YYYY') as tgllahirs,p.tgllahir, " & _
                      " case when pg.namalengkap is null then '-' ELSE " & _
                      " pg.namalengkap end as namadokter, '*' || p.nocm || '*' as barcode," & _
-                     " EXTRACT(YEAR FROM AGE(pd.tglregistrasi, p.tgllahir)) || ' Thn ' || EXTRACT(MONTH FROM AGE(pd.tglregistrasi, p.tgllahir)) || ' Bln ' || EXTRACT(DAY FROM AGE(pd.tglregistrasi, p.tgllahir)) || ' Hr' AS umur " & _
+                     " EXTRACT(YEAR FROM AGE(pd.tglregistrasi, p.tgllahir)) || ' Thn ' || EXTRACT(MONTH FROM AGE(pd.tglregistrasi, p.tgllahir)) || ' Bln ' || EXTRACT(DAY FROM AGE(pd.tglregistrasi, p.tgllahir)) || ' Hr' AS umur,CASE WHEN p.noidentitas IS NULL THEN '' ELSE p.noidentitas END AS nik " & _
                      " from pasiendaftar_t pd " & _
                      " INNER JOIN pasien_m p on pd.nocmfk=p.id " & _
                      " INNER JOIN jeniskelamin_m jk on jk.id=p.objectjeniskelaminfk " & _
@@ -3142,7 +3143,8 @@ Dim jk As String
                 .usTglLahir.SetUnboundFieldSource ("{ado.tgllahirs}")
                 '.usBarcode.SetUnboundFieldSource ("{ado.barcode}")
                 '.usUmur.SetUnboundFieldSource ("{ado.umur}")
-                .usNoCm.SetUnboundFieldSource ("{ado.nocm}")
+                .usNocm.SetUnboundFieldSource ("{ado.nocm}")
+                .usNik.SetUnboundFieldSource ("{ado.nik}")
 '            view = "true"
             If view = "false" Then
                 strPrinter1 = GetTxt("Setting.ini", "Printer", "GelangPasien")
@@ -3195,7 +3197,7 @@ boolGelangBayi = True
 
 
 
-    With reportGelangPasien
+    With reportGelangPasienBayi
             Set adoReport = New ADODB.Command
              adoReport.ActiveConnection = CN_String
             
@@ -3218,7 +3220,7 @@ boolGelangBayi = True
                      " to_char(p.tgllahir, 'DD-MM-YYYY') as tgllahirs,p.tgllahir, " & _
                      " case when pg.namalengkap is null then '-' ELSE " & _
                      " pg.namalengkap end as namadokter, '*' || p.nocm || '*' as barcode," & _
-                     " EXTRACT(YEAR FROM AGE(pd.tglregistrasi, p.tgllahir)) || ' Thn ' || EXTRACT(MONTH FROM AGE(pd.tglregistrasi, p.tgllahir)) || ' Bln ' || EXTRACT(DAY FROM AGE(pd.tglregistrasi, p.tgllahir)) || ' Hr' AS umur " & _
+                     " EXTRACT(YEAR FROM AGE(pd.tglregistrasi, p.tgllahir)) || ' Thn ' || EXTRACT(MONTH FROM AGE(pd.tglregistrasi, p.tgllahir)) || ' Bln ' || EXTRACT(DAY FROM AGE(pd.tglregistrasi, p.tgllahir)) || ' Hr' AS umur,CASE WHEN p.noidentitas IS NULL THEN '' ELSE p.noidentitas END AS nik " & _
                      " from pasiendaftar_t pd " & _
                      " INNER JOIN pasien_m p on pd.nocmfk=p.id " & _
                      " INNER JOIN jeniskelamin_m jk on jk.id=p.objectjeniskelaminfk " & _
@@ -3247,6 +3249,8 @@ boolGelangBayi = True
                 .usTglLahir.SetUnboundFieldSource ("{ado.tgllahirs}")
                 '.usBarcode.SetUnboundFieldSource ("{ado.barcode}")
                 '.usUmur.SetUnboundFieldSource ("{ado.umur}")
+                .usNocm.SetUnboundFieldSource ("{ado.nocm}")
+                .usNik.SetUnboundFieldSource ("{ado.nik}")
 '            view = "true"
             If view = "false" Then
                     strPrinter1 = GetTxt("Setting.ini", "Printer", "GelangPasienBayi")
@@ -3255,7 +3259,222 @@ boolGelangBayi = True
                     Unload Me
              Else
                 With CRViewer1
-                    .ReportSource = reportLabel_3
+                    .ReportSource = reportGelangPasienBayi
+                    .ViewReport
+                    .Zoom 1
+                End With
+                Me.Show
+                Screen.MousePointer = vbDefault
+            End If
+     
+    End With
+Exit Sub
+errLoad:
+
+    MsgBox Err.Number & " " & Err.Description
+End Sub
+
+Public Sub cetakGelangPasienPerempuan(strNorec As String, view As String, qty As String)
+'On Error GoTo errLoad
+Set frmCetakPendaftaran = Nothing
+Dim strSQL As String
+Dim i As Integer
+Dim str As String
+Dim jml As Integer
+Dim Barcode As Image
+Dim filename As String
+boolBlangkoBpjs = False
+bolBuktiPendaftaran = False
+bolBuktiLayanan = False
+bolBuktiLayananRuangan = False
+bolBuktiLayananRuanganPerTindakan = False
+bolcetakSep = False
+bolTracer1 = False
+bolKartuPasien = False
+boolLabelPasien = False
+boolLabelPasienZebra = False
+boolSumList = False
+boolLembarRMK = False
+boolLembarPersetujuan = False
+bolBuktiLayananRuanganBedah = False
+boolGelangPasien = True
+boolGelangBayi = False
+Dim jk As String
+
+
+    With reportGelangPasien
+            Set adoReport = New ADODB.Command
+             adoReport.ActiveConnection = CN_String
+            
+            ' SQLSERVER
+'            strSQL = "select pd.noregistrasi,pd.tglregistrasi,p.nocm,p.nocm as noCm, " & _
+'                     "upper(p.namapasien) as namapasien, jk.jeniskelamin as jk, upper(alm.alamatlengkap) as alamat, " & _
+'                     "CONVERT(VARCHAR,p.tgllahir,105) as tgllahir, " & _
+'                     "case when pg.namalengkap is null then '-' ELSE " & _
+'                     "pg.namalengkap end as namadokter from pasiendaftar_t pd " & _
+'                     " INNER JOIN pasien_m p on pd.nocmfk=p.id " & _
+'                     " INNER JOIN jeniskelamin_m jk on jk.id=p.objectjeniskelaminfk " & _
+'                     " LEFT JOIN pegawai_m as pg on pg.id = pd.objectpegawaifk " & _
+'                     " LEFT JOIN alamat_m as alm on alm.nocmfk = p.id " & _
+'                     " where pd.noregistrasi ='" & strNorec & "' "
+
+            ' POSTGRESSQL
+            strSQL = " select pd.noregistrasi,pd.tglregistrasi,p.nocm,p.nocm as noCm,jk.reportdisplay, " & _
+                     " upper(p.namapasien) || '' || CASE WHEN jk.id = 1 THEN '(L)' WHEN jk.id = 2 THEN '(P)' ELSE '' END as namapasiens,CASE WHEN jk.id = 1 THEN 'L' WHEN jk.id = 2 THEN 'P' ELSE '-' END as jk, " & _
+                     " upper(alm.alamatlengkap) as alamat, " & _
+                     " to_char(p.tgllahir, 'DD-MM-YYYY') as tgllahirs,p.tgllahir, " & _
+                     " case when pg.namalengkap is null then '-' ELSE " & _
+                     " pg.namalengkap end as namadokter, '*' || p.nocm || '*' as barcode," & _
+                     " EXTRACT(YEAR FROM AGE(pd.tglregistrasi, p.tgllahir)) || ' Thn ' || EXTRACT(MONTH FROM AGE(pd.tglregistrasi, p.tgllahir)) || ' Bln ' || EXTRACT(DAY FROM AGE(pd.tglregistrasi, p.tgllahir)) || ' Hr' AS umur,CASE WHEN p.noidentitas IS NULL THEN '' ELSE p.noidentitas END AS nik " & _
+                     " from pasiendaftar_t pd " & _
+                     " INNER JOIN pasien_m p on pd.nocmfk=p.id " & _
+                     " INNER JOIN jeniskelamin_m jk on jk.id=p.objectjeniskelaminfk " & _
+                     " LEFT JOIN pegawai_m as pg on pg.id = pd.objectpegawaifk " & _
+                     " LEFT JOIN alamat_m as alm on alm.nocmfk = p.id " & _
+                     " where pd.noregistrasi ='" & strNorec & "' "
+
+            
+            jml = qty - 1
+            ReadRs2 strSQL
+            If RS2.BOF Then
+                jk = ""
+            Else
+                jk = RS2!reportdisplay
+            End If
+            str = ""
+            If Val(qty) - 1 = 0 Then
+                adoReport.CommandText = strSQL
+             Else
+                For i = 1 To Val(qty) - 1
+                    str = strSQL & " union all " & str
+                Next
+                
+                adoReport.CommandText = str & strSQL
+           
+           End If
+                adoReport.CommandType = adCmdUnknown
+                .database.AddADOCommand CN_String, adoReport
+                .usNamaPasien.SetUnboundFieldSource ("{ado.namapasiens}")
+                .usTglLahir.SetUnboundFieldSource ("{ado.tgllahirs}")
+                '.usBarcode.SetUnboundFieldSource ("{ado.barcode}")
+                '.usUmur.SetUnboundFieldSource ("{ado.umur}")
+                .usNocm.SetUnboundFieldSource ("{ado.nocm}")
+                .usNik.SetUnboundFieldSource ("{ado.nik}")
+'            view = "true"
+            If view = "false" Then
+                strPrinter1 = GetTxt("Setting.ini", "Printer", "GelangPasienPerempuan")
+                .SelectPrinter "winspool", strPrinter1, "Ne00:"
+                .PrintOut False
+                Unload Me
+                Screen.MousePointer = vbDefault
+             Else
+                With CRViewer1
+                    .ReportSource = reportGelangPasien
+                    .ViewReport
+                    .Zoom 1
+                End With
+                Me.Show
+                Screen.MousePointer = vbDefault
+            End If
+     
+    End With
+Exit Sub
+errLoad:
+
+    MsgBox Err.Number & " " & Err.Description
+End Sub
+
+Public Sub cetakGelangBayiPerempuan(strNorec As String, view As String, qty As String)
+'On Error GoTo errLoad
+Set frmCetakPendaftaran = Nothing
+Dim strSQL As String
+Dim i As Integer
+Dim str As String
+Dim jml As Integer
+Dim Barcode As Image
+Dim filename As String
+boolBlangkoBpjs = False
+bolBuktiPendaftaran = False
+bolBuktiLayanan = False
+bolBuktiLayananRuangan = False
+bolBuktiLayananRuanganPerTindakan = False
+bolcetakSep = False
+bolTracer1 = False
+bolKartuPasien = False
+boolLabelPasien = False
+boolLabelPasienZebra = False
+boolSumList = False
+boolLembarRMK = False
+boolLembarPersetujuan = False
+bolBuktiLayananRuanganBedah = False
+boolGelangPasien = False
+boolGelangBayi = True
+
+
+
+    With reportGelangPasienBayi
+            Set adoReport = New ADODB.Command
+             adoReport.ActiveConnection = CN_String
+            
+            ' SQLSERVER
+'            strSQL = "select pd.noregistrasi,pd.tglregistrasi,p.nocm,p.nocm as noCm, " & _
+'                     "upper(p.namapasien) as namapasien, jk.jeniskelamin as jk, upper(alm.alamatlengkap) as alamat, " & _
+'                     "CONVERT(VARCHAR,p.tgllahir,105) as tgllahir, " & _
+'                     "case when pg.namalengkap is null then '-' ELSE " & _
+'                     "pg.namalengkap end as namadokter from pasiendaftar_t pd " & _
+'                     " INNER JOIN pasien_m p on pd.nocmfk=p.id " & _
+'                     " INNER JOIN jeniskelamin_m jk on jk.id=p.objectjeniskelaminfk " & _
+'                     " LEFT JOIN pegawai_m as pg on pg.id = pd.objectpegawaifk " & _
+'                     " LEFT JOIN alamat_m as alm on alm.nocmfk = p.id " & _
+'                     " where pd.noregistrasi ='" & strNorec & "' "
+
+            ' POSTGRESSQL
+            strSQL = " select pd.noregistrasi,pd.tglregistrasi,p.nocm,p.nocm as noCm,jk.reportdisplay, " & _
+                     " upper(p.namapasien) || '' || CASE WHEN jk.id = 1 THEN '(L)' WHEN jk.id = 2 THEN '(P)' ELSE '' END as namapasiens,CASE WHEN jk.id = 1 THEN 'L' WHEN jk.id = 2 THEN 'P' ELSE '-' END as jk, " & _
+                     " upper(alm.alamatlengkap) as alamat, " & _
+                     " to_char(p.tgllahir, 'DD-MM-YYYY') as tgllahirs,p.tgllahir, " & _
+                     " case when pg.namalengkap is null then '-' ELSE " & _
+                     " pg.namalengkap end as namadokter, '*' || p.nocm || '*' as barcode," & _
+                     " EXTRACT(YEAR FROM AGE(pd.tglregistrasi, p.tgllahir)) || ' Thn ' || EXTRACT(MONTH FROM AGE(pd.tglregistrasi, p.tgllahir)) || ' Bln ' || EXTRACT(DAY FROM AGE(pd.tglregistrasi, p.tgllahir)) || ' Hr' AS umur,CASE WHEN p.noidentitas IS NULL THEN '' ELSE p.noidentitas END AS nik " & _
+                     " from pasiendaftar_t pd " & _
+                     " INNER JOIN pasien_m p on pd.nocmfk=p.id " & _
+                     " INNER JOIN jeniskelamin_m jk on jk.id=p.objectjeniskelaminfk " & _
+                     " LEFT JOIN pegawai_m as pg on pg.id = pd.objectpegawaifk " & _
+                     " LEFT JOIN alamat_m as alm on alm.nocmfk = p.id " & _
+                     " where pd.noregistrasi ='" & strNorec & "' "
+
+            
+            jml = qty - 1
+            ReadRs2 strSQL
+            
+            str = ""
+            If Val(qty) - 1 = 0 Then
+                adoReport.CommandText = strSQL
+             Else
+                For i = 1 To Val(qty) - 1
+                    str = strSQL & " union all " & str
+                Next
+                
+                adoReport.CommandText = str & strSQL
+           
+           End If
+                adoReport.CommandType = adCmdUnknown
+                .database.AddADOCommand CN_String, adoReport
+                .usNamaPasien.SetUnboundFieldSource ("{ado.namapasiens}")
+                .usTglLahir.SetUnboundFieldSource ("{ado.tgllahirs}")
+                '.usBarcode.SetUnboundFieldSource ("{ado.barcode}")
+                '.usUmur.SetUnboundFieldSource ("{ado.umur}")
+                .usNocm.SetUnboundFieldSource ("{ado.nocm}")
+                .usNik.SetUnboundFieldSource ("{ado.nik}")
+'            view = "true"
+            If view = "false" Then
+                    strPrinter1 = GetTxt("Setting.ini", "Printer", "GelangPasienBayiPerempuan")
+                    .SelectPrinter "winspool", strPrinter1, "Ne00:"
+                    .PrintOut False
+                    Unload Me
+             Else
+                With CRViewer1
+                    .ReportSource = reportGelangPasienBayi
                     .ViewReport
                     .Zoom 1
                 End With

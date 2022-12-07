@@ -153,5 +153,7 @@ Private Sub Form_Load()
     Combo1.AddItem "NotaPengambilanDarah"
     Combo1.AddItem "SuratKontrolBpjs"
     Combo1.AddItem "BuktiIurPasien"
+    Combo1.AddItem "GelangPasienPerempuan"
+    Combo1.AddItem "GelangPasienBayiPerempuan"
 End Sub
 

@@ -458,6 +458,7 @@ On Error Resume Next
                 Set Root = New JNode
                 Root("Status") = "Sedang Dicetak!!"
                 Root("by") = "ea@epic"
+                
             Case "cetak-akte"
                 lblStatus.Caption = "Cetak Lahir"
                 Call frmSuratDokter.CetakLahir(Param2(1), Param3(1))
@@ -465,6 +466,7 @@ On Error Resume Next
                 Set Root = New JNode
                 Root("Status") = "Sedang Dicetak!!"
                 Root("by") = "ea@epic"
+                
             Case "cetak-persetujuan-umum"
                 lblStatus.Caption = "Cetak Persetujuan Umum"
                 Call frmCetakSuratKetRajal.Cetak(Param2(1), Param3(1))
@@ -472,6 +474,24 @@ On Error Resume Next
                 Set Root = New JNode
                 Root("Status") = "Sedang Dicetak!!"
                 Root("by") = "ea@epic"
+                
+             Case "cetak-gelangpasien-perempuan"
+                Param4 = Split(arrItem(3), "=")
+                lblStatus.Caption = "Cetak Gelang Pasien"
+                Call frmCetakPendaftaran.cetakGelangPasienPerempuan(Param2(1), Param3(1), Param4(1))
+                'http://127.0.0.1:1237/printvb/Pendaftaran?cetak-labelpasien=1&norec=2c9090ce5af40be8015af40eb1f80006&view=false&qty=2
+                Set Root = New JNode
+                Root("Status") = "Sedang Dicetak!!"
+                Root("by") = "grh@epic"
+                
+            Case "cetak-gelangpasien-bayi-perempuan"
+                Param4 = Split(arrItem(3), "=")
+                lblStatus.Caption = "Cetak Gelang Pasien"
+                Call frmCetakPendaftaran.cetakGelangBayiPerempuan(Param2(1), Param3(1), Param4(1))
+                'http://127.0.0.1:1237/printvb/Pendaftaran?cetak-labelpasien=1&norec=2c9090ce5af40be8015af40eb1f80006&view=false&qty=2
+                Set Root = New JNode
+                Root("Status") = "Sedang Dicetak!!"
+                Root("by") = "grh@epic"
             
             Case Else
                 Set Root = New JNode

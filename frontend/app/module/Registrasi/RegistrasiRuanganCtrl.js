@@ -837,19 +837,39 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
             }
 
             $scope.cetakGelang = function(){
-                var stt = 'false'
-                if (confirm('View Gelang Pasien? ')) {
-                    // Save it!
-                    stt = 'true';
-                } else {
-                    // Do nothing!
-                    stt = 'false'
-                }
-                var client = new HttpClient();
-                client.get('http://127.0.0.1:1237/printvb/Pendaftaran?cetak-gelangpasien=1&norec=' + $scope.cacheNoRegistrasi + '&view=' + stt + '&qty=' + 1, function (response) {
-                    // do something with response
-                });
+                // var stt = 'false'
+                // if (confirm('View Gelang Pasien? ')) {
+                //     // Save it!
+                //     stt = 'true';
+                // } else {
+                //     // Do nothing!
+                //     stt = 'false'
+                // }
+                // var client = new HttpClient();
+                // client.get('http://127.0.0.1:1237/printvb/Pendaftaran?cetak-gelangpasien=1&norec=' + $scope.cacheNoRegistrasi + '&view=' + stt + '&qty=' + 1, function (response) {
+                //     // do something with response
+                // });
+                if ($scope.item == undefined) {
+					toastr.error('Pilih data dulu')
+					return
+				}
+				var noregistrasi = $scope.cacheNoRegistrasi
+				$scope.listCetakanGelang = [
+					{ id: 1, nama: 'Gelang Pasien Laki-Laki', url: 'http://127.0.0.1:1237/printvb/Pendaftaran?cetak-gelangpasien=1&norec=' + noregistrasi + '&view=true' +'&qty=1' },
+					{ id: 2, nama: 'Gelang Pasien Perempuan', url: 'http://127.0.0.1:1237/printvb/Pendaftaran?cetak-gelangpasien-perempuan=1&norec=' + noregistrasi + '&view=true' +'&qty=1' },
+					{ id: 3, nama: 'Gelang Pasien Bayi Laki-Laki', url: 'http://127.0.0.1:1237/printvb/Pendaftaran?cetak-gelangpasien-bayi=1&norec=' + noregistrasi + '&view=true' +'&qty=1' },
+					{ id: 4, nama: 'Gelang Pasien Bayi Perempuan', url: 'http://127.0.0.1:1237/printvb/Pendaftaran?cetak-gelangpasien-bayi-perempuan=1&norec=' + noregistrasi + '&view=true' +'&qty=1' },					
+				]
+				$scope.popUpCetakanGelang.center().open()
             }
+
+            $scope.cetakGelangPasien = function(params){
+				if (!params) return
+				var client = new HttpClient();
+				client.get(params.url, function (response) {
+					//aadc=response; 
+				});
+			}
 
             $scope.cetakBuktiLayanan = function () {
                 if ($scope.item != undefined) {
