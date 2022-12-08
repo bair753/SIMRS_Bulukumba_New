@@ -427,7 +427,7 @@ define(['initialize'], function (initialize) {
                 socket.emit('call-antrian-poli', {
                     namapasien: $scope.dataSelected.namapasien,
                     namaruangan: $scope.dataSelected.namaruangan,
-                    noantri: $scope.dataSelected.noregistrasi,
+                    noantri: '',
                     nocm: $scope.dataSelected.nocm,
                 });
             }
