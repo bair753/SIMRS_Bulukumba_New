@@ -2,7 +2,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 	'use strict';
 	initialize.controller('DaftarRegistrasiPasienOperatorCtrl', ['$mdDialog', '$state', '$q', '$scope', 'CacheHelper', 'DateHelper', 'ModelItem', 'CetakHelper', 'MedifirstService',
 		function ($mdDialog, $state, $q, $scope, cacheHelper, dateHelper, ModelItem, cetakHelper, medifirstService) {
-
+			var baseTransaksi = config.baseApiBackend;
 			$scope.dataVOloaded = true;
 			$scope.now = new Date();
 			$scope.item = {};
@@ -2889,8 +2889,16 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 				medifirstService.jspdfSEP(nosep + backdate, tglsep, nokartu, nmpst, tgllahir, jnskelamin, notelp, poli, faskesperujuk, dxawal, catatan, jnspst, cob, jnsrawat, klsrawat,
 					prolanis, eksekutif, _kodejaminan, statuskll, katarak, potensiprb, cetakan, dokter, kunjungan, FLAGPROSEDUR, poliPerujuk, FLAGNAIKKELAS, klsrawat_naik,
 					isrujukanthalasemia_hemofilia, ispotensiHEMOFILIA_cetak, namappkRumahSakit);
+			}
 
+			$scope.cetakSuratJaminanPelayanan = function(){
+				var user = medifirstService.getPegawaiLogin();
+				if ($scope.dataPasienSelected == undefined) {
+					toastr.error("Pilih Dahulu Pasien!")
+					return
+				}
 
+				window.open(baseTransaksi + "report/cetak-suratjaminanpelayanan?noregistrasi="+ $scope.dataPasienSelected.noregistrasi + "&user=" + user.namaLengkap); 
 			}
 
 			//** BATAS */

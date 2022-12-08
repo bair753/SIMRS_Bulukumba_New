@@ -147,11 +147,13 @@ Dim ReportResep As New crSuratPerintahKerja
 'Dim WithEvents sect As CRAXDRT.Section
 'Dim reportLabel_3 As New Cr_cetakLabel_3
 Dim reportGelangPasien As New Cr_cetakLabelFotoGel
+Dim reportGelangPasienPerempuan As New Cr_cetakLabelFotoGelPerempuan
 'Dim reportGelangPasienBayi As New Cr_gelangbayi
 Dim reportLabel_3 As New Cr_cetakLabelFoto 'Cr_cetakLabel_2
 'Dim reportLabel_3 As New Cr_cetakLabelMagelang
 Dim reportTriage As New Cr_cetakHeaderTriage
-Dim reportGelangPasienBayi As New Cr_cetakLabelFotoGel
+Dim reportGelangPasienBayi As New Cr_cetakLabelFotoGelBayiLaki
+Dim reportGelangPasienBayiCw As New Cr_cetakLabelFotoGelBayiCw
 
 Dim ii As Integer
 Dim tempPrint1 As String
@@ -183,6 +185,9 @@ Dim strPrinter1 As String
 Dim PrinterNama As String
 Dim boolGelangPasien As Boolean
 Dim boolGelangBayi As Boolean
+Dim boolGelangPasienPerempuan As Boolean
+Dim boolGelangPasienBayiLaki As Boolean
+Dim boolGelangPasienBayiPerempuan As Boolean
 Dim adoReport As New ADODB.Command
 
 Private Sub cmdCetak_Click()
@@ -259,6 +264,14 @@ Private Sub cmdCetak_Click()
         reportGelangPasienBayi.SelectPrinter "winspool", cboPrinter.Text, "Ne00:"
         PrinterNama = cboPrinter.Text
         reportGelangPasienBayi.PrintOut False
+    ElseIf boolGelangPasienPerempuan = True Then
+        reportGelangPasienPerempuan.SelectPrinter "winspool", cboPrinter.Text, "Ne00:"
+        PrinterNama = cboPrinter.Text
+        reportGelangPasienPerempuan.PrintOut False
+    ElseIf boolGelangPasienBayiPerempuan = True Then
+        reportGelangPasienBayiCw.SelectPrinter "winspool", cboPrinter.Text, "Ne00:"
+        PrinterNama = cboPrinter.Text
+        reportGelangPasienBayiCw.PrintOut False
     End If
     SaveSetting "SMART", "SettingPrinter", "cboPrinter", PrinterNama
 End Sub
@@ -301,8 +314,12 @@ Private Sub CmdOption_Click()
         reportBuktiLayananKecil.PrinterSetup Me.hwnd
     ElseIf reportGelangPasien = True Then
         reportGelangPasien.PrinterSetup Me.hwnd
-    ElseIf reportGelangPasienBayi = True Then
+    ElseIf boolGelangPasienBayiLaki = True Then
         reportGelangPasienBayi.PrinterSetup Me.hwnd
+    ElseIf boolGelangPasienPerempuan = True Then
+        reportGelangPasienPerempuan.PrinterSetup Me.hwnd
+    ElseIf boolGelangPasienBayiPerempuan = True Then
+        reportGelangPasienBayiCw.PrinterSetup Me.hwnd
     End If
     
     CRViewer1.Refresh
@@ -356,6 +373,8 @@ bolBuktiLayananRuanganBedah = False
 boolBlangkoBpjs = False
 boolGelangPasien = False
 boolGelangBayi = False
+boolGelangPasienPerempuan = False
+boolGelangPasienBayiPerempuan = False
 Dim NamaPetugas As String
 Dim alamatRs As String
 Dim namaRs As String
@@ -481,6 +500,8 @@ boolLembarPersetujuan = False
 bolBuktiLayananRuanganBedah = False
 boolGelangPasien = False
 boolGelangBayi = False
+boolGelangPasienPerempuan = False
+boolGelangPasienBayiPerempuan = False
 
     With reportBuktiPendaftaranOnline
             Set adoReport = New ADODB.Command
@@ -561,6 +582,9 @@ boolLembarPersetujuan = False
 bolBuktiLayananRuanganBedah = False
 boolGelangPasien = False
 boolGelangBayi = False
+boolGelangPasienPerempuan = False
+boolGelangPasienBayiPerempuan = False
+
 Dim tglRegis As String
 Dim ruang As String
 Dim tglRegistrasi As String
@@ -687,6 +711,8 @@ boolLembarRMK = False
 boolLembarPersetujuan = False
 bolBuktiLayananRuanganBedah = False
 boolGelangBayi = False
+boolGelangPasienPerempuan = False
+boolGelangPasienBayiPerempuan = False
 
     If kdProfile <> "" Then
         ReadRs2 "select * from profile_m where id = '" & kdProfile & "'"
@@ -788,6 +814,9 @@ boolLembarRMK = False
 boolLembarPersetujuan = False
 bolBuktiLayananRuanganBedah = False
 boolGelangBayi = False
+boolGelangPasienPerempuan = False
+boolGelangPasienBayiPerempuan = False
+
 Dim dept As Integer
 
     With reportSepNew
@@ -906,6 +935,8 @@ boolLembarRMK = False
 boolLembarPersetujuan = False
 bolBuktiLayananRuanganBedah = False
 boolGelangBayi = False
+boolGelangPasienPerempuan = False
+boolGelangPasienBayiPerempuan = False
 
     With reportBuktiLayanan
             Set adoReport = New ADODB.Command
@@ -1042,6 +1073,8 @@ boolLembarRMK = False
 boolLembarPersetujuan = False
 bolBuktiLayananRuanganBedah = False
 boolGelangBayi = False
+boolGelangPasienPerempuan = False
+boolGelangPasienBayiPerempuan = False
 
     Dim strarr() As String
     Dim norec_apc As String
@@ -1166,6 +1199,8 @@ boolLembarPersetujuan = False
 bolBuktiLayananRuanganBedah = False
 boolBuktiLayananKecil = False
 boolGelangBayi = False
+boolGelangPasienPerempuan = False
+boolGelangPasienBayiPerempuan = False
 
     strSQL = ""
     StrFilter = ""
@@ -1326,6 +1361,8 @@ boolLembarRMK = False
 boolLembarPersetujuan = False
 bolBuktiLayananRuanganBedah = False
 boolGelangBayi = False
+boolGelangPasienPerempuan = False
+boolGelangPasienBayiPerempuan = False
 
     With reportKartuPasien
 '            Set adoReport = New ADODB.Command
@@ -1386,6 +1423,8 @@ boolLembarRMK = False
 boolLembarPersetujuan = False
 bolBuktiLayananRuanganBedah = False
 boolGelangBayi = False
+boolGelangPasienPerempuan = False
+boolGelangPasienBayiPerempuan = False
 
     With reportLabel
             Set adoReport = New ADODB.Command
@@ -1618,6 +1657,8 @@ boolLembarRMK = False
 boolLembarPersetujuan = False
 bolBuktiLayananRuanganBedah = False
 boolGelangBayi = False
+boolGelangPasienPerempuan = False
+boolGelangPasienBayiPerempuan = False
 
     With reportLabel_3
             Set adoReport = New ADODB.Command
@@ -1710,7 +1751,7 @@ boolGelangBayi = False
                 .usJK.SetUnboundFieldSource ("{ado.jeniskelamin}")
                 .usNik.SetUnboundFieldSource ("{ado.nik}")
             End If
-            view = "true"
+'            view = "true"
             If view = "false" Then
                 strPrinter1 = GetTxt("Setting.ini", "Printer", "LabelPasien")
                 .SelectPrinter "winspool", strPrinter1, "Ne00:"
@@ -1754,6 +1795,8 @@ boolLembarRMK = False
 boolLembarPersetujuan = False
 bolBuktiLayananRuanganBedah = False
 boolGelangBayi = False
+boolGelangPasienPerempuan = False
+boolGelangPasienBayiPerempuan = False
 
     With reportSumList
             Set adoReport = New ADODB.Command
@@ -1846,6 +1889,8 @@ boolLembarRMK = False
 boolLembarPersetujuan = False
 bolBuktiLayananRuanganBedah = False
 boolGelangBayi = False
+boolGelangPasienPerempuan = False
+boolGelangPasienBayiPerempuan = False
 
     With reportTriage
             Set adoReport = New ADODB.Command
@@ -2008,6 +2053,8 @@ boolSumList = False
 boolLembarRMK = True
 boolLembarPersetujuan = False
 boolGelangBayi = False
+boolGelangPasienPerempuan = False
+boolGelangPasienBayiPerempuan = False
 
 Dim RuanganAsal As String
 Dim i As Integer
@@ -2147,6 +2194,8 @@ boolLembarRMK = False
 boolLembarPersetujuan = True
 bolBuktiLayananRuanganBedah = False
 boolGelangBayi = False
+boolGelangPasienPerempuan = False
+boolGelangPasienBayiPerempuan = False
 
     With reportLembarGC
             Set adoReport = New ADODB.Command
@@ -2245,6 +2294,8 @@ boolLembarRMK = False
 boolLembarPersetujuan = False
 bolBuktiLayananRuanganBedah = False
 boolGelangBayi = False
+boolGelangPasienPerempuan = False
+boolGelangPasienBayiPerempuan = False
 
     strSQL = ""
     StrFilter = ""
@@ -2370,6 +2421,8 @@ boolLembarRMK = False
 boolLembarPersetujuan = False
 bolBuktiLayananRuanganBedah = False
 boolGelangBayi = False
+boolGelangPasienPerempuan = False
+boolGelangPasienBayiPerempuan = False
 
 
     Dim strarr() As String
@@ -2514,6 +2567,8 @@ boolLembarRMK = False
 boolLembarPersetujuan = False
 bolBuktiLayananRuanganBedah = False
 boolGelangBayi = False
+boolGelangPasienPerempuan = False
+boolGelangPasienBayiPerempuan = False
 
 
     Dim strarr() As String
@@ -2656,6 +2711,8 @@ boolLembarRMK = False
 boolLembarPersetujuan = False
 bolBuktiLayananRuanganBedah = True
 boolGelangBayi = False
+boolGelangPasienPerempuan = False
+boolGelangPasienBayiPerempuan = False
 
 
     Dim strarr() As String
@@ -2911,6 +2968,8 @@ boolLembarPersetujuan = False
 bolBuktiLayananRuanganBedah = False
 boolGelangPasien = False
 boolGelangBayi = False
+boolGelangPasienPerempuan = False
+boolGelangPasienBayiPerempuan = False
 
 Dim qty As String
 qty = 2
@@ -3084,6 +3143,8 @@ boolLembarPersetujuan = False
 bolBuktiLayananRuanganBedah = False
 boolGelangPasien = True
 boolGelangBayi = False
+boolGelangPasienPerempuan = False
+boolGelangPasienBayiPerempuan = False
 Dim jk As String
 
 
@@ -3194,6 +3255,8 @@ boolLembarPersetujuan = False
 bolBuktiLayananRuanganBedah = False
 boolGelangPasien = False
 boolGelangBayi = True
+boolGelangPasienPerempuan = False
+boolGelangPasienBayiPerempuan = False
 
 
 
@@ -3297,12 +3360,14 @@ boolSumList = False
 boolLembarRMK = False
 boolLembarPersetujuan = False
 bolBuktiLayananRuanganBedah = False
-boolGelangPasien = True
+boolGelangPasien = False
 boolGelangBayi = False
+boolGelangPasienPerempuan = True
+boolGelangPasienBayiPerempuan = False
 Dim jk As String
 
 
-    With reportGelangPasien
+    With reportGelangPasienPerempuan
             Set adoReport = New ADODB.Command
              adoReport.ActiveConnection = CN_String
             
@@ -3369,7 +3434,7 @@ Dim jk As String
                 Screen.MousePointer = vbDefault
              Else
                 With CRViewer1
-                    .ReportSource = reportGelangPasien
+                    .ReportSource = reportGelangPasienPerempuan
                     .ViewReport
                     .Zoom 1
                 End With
@@ -3408,7 +3473,9 @@ boolLembarRMK = False
 boolLembarPersetujuan = False
 bolBuktiLayananRuanganBedah = False
 boolGelangPasien = False
-boolGelangBayi = True
+boolGelangBayi = False
+boolGelangPasienPerempuan = False
+boolGelangPasienBayiPerempuan = True
 
 
 

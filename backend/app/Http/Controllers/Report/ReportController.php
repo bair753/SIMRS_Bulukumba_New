@@ -2397,4 +2397,64 @@ class ReportController extends ApiController{
         return view('report.keuangan.labarugi',
             compact('dataReport', 'pageWidth','profile'));
     }
+
+    public function cetakSuratJaminanPelayanan(Request $r){
+        $kdProfile = (int) $this->settingDataFixed('KdProfileAktif', 39);
+        $profile = collect(DB::select("
+            select * from profile_m where statusenabled = true
+        "))->first();
+        $pageWidth = 950;
+        $noregistrasi = $r['noregistrasi'];
+        $datas = collect(DB::select("
+            SELECT  pd.tglregistrasi,to_char(pd.tglregistrasi, 'YYYY/MM/DD') || '/' || pd.noregistrasi AS nomor,pm.nocm,
+                    pd.noregistrasi,pm.namapasien,alm.alamatlengkap,pg.namalengkap AS dokter,kp.kelompokpasien,rkn.namarekanan,
+                    kp.namaexternal AS jenis,CASE WHEN ru.objectdepartemenfk = 18 THEN 'RAWAT JALAN' 
+                    WHEN ru.objectdepartemenfk = 24 THEN 'GAWAT DARURAT'
+                    WHEN ru.objectdepartemenfk = 16 THEN 'RAWAT INAP'
+                    ELSE dp.namadepartemen END AS instalasi,ru.namaruangan,pd.objectpegawaifk
+            FROM pasiendaftar_t AS pd
+            LEFT JOIN ruangan_m AS ru ON ru.id = pd.objectruanganlastfk
+            LEFT JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+            INNER JOIN pasien_m AS pm ON pm.id = pd.nocmfk
+            LEFT JOIN alamat_m AS alm ON alm.nocmfk = pm.id
+            LEFT JOIN jeniskelamin_m AS jk ON jk.id = pm.objectjeniskelaminfk
+            LEFT JOIN departemen_m AS dp ON dp.id = ru.objectdepartemenfk
+            LEFT JOIN kelompokpasien_m AS kp ON kp.id = pd.objectkelompokpasienlastfk
+            LEFT JOIN rekanan_m AS rkn ON rkn.id = pd.objectrekananfk
+            WHERE pd.statusenabled = true AND pd.kdprofile = $kdProfile AND pd.noregistrasi = '$noregistrasi'
+        "))->first();
+
+        if (empty($datas)) {
+            echo 'Data Tidak ada';
+            die;
+        }
+
+        return view(
+            'report.pendaftaran.suratjaminanpelayanan',
+            compact('datas', 'pageWidth', 'r', 'profile')
+        );
+    }
+
+    public function cetakPegawai(Request $r) {
+        $kdProfile = (int)$r['kdprofile'];
+        $raw = collect(DB::select("
+            SELECT pg.nip, pg.nosip,pg.namalengkap,jk.jeniskelamin,pg.tgllahir
+            FROM pegawai_m AS pg                        
+            LEFT  JOIN jeniskelamin_m AS jk ON jk.id=pg.objectjeniskelaminfk 
+            WHERE pg.id = '$r[reg]'
+        "))->first();
+        if(!empty($raw)){
+            $raw->umur = $this->getAge($raw->tgllahir ,date('Y-m-d'));
+        }else{
+            echo 'Data Tidak ada ';
+            return;
+        }
+
+        $pageWidth = 950;
+        $now =  $this->getDateTime();
+
+        return view('report.pdf.infopegawai',
+            compact('raw', 'pageWidth','r','now'));
+
+    }
 }
