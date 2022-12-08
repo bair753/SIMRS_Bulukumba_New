@@ -2,6 +2,7 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
     'use strict';
     initialize.controller('RegistrasiRuanganCtrl', ['MedifirstService', '$scope', '$state', '$mdDialog', '$rootScope', 'CacheHelper', 'DateHelper', 'CetakHelper', 'ModelItem',
         function (medifirstService, $scope, $state, $mdDialog, $rootScope, cacheHelper, dateHelper, cetakHelper, ModelItem) {
+            var baseTransaksi = configuration.baseApiBackend;
             $scope.now = new Date();
             $scope.dataItem = {};
             $scope.currentNoCm = $state.params.noCm;
@@ -1674,6 +1675,16 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                 }
                 medifirstService.postNonMessage('rawatjalan/save-monitoring-taskid', json).then(function (e) {})
             }
+
+            $scope.cetakSuratJaminanPelayanan = function(){
+				var user = medifirstService.getPegawaiLogin();
+				if ($scope.cacheNoRegistrasi == undefined) {
+					toastr.error("Pilih Dahulu Pasien!")
+					return
+				}
+
+				window.open(baseTransaksi + "report/cetak-suratjaminanpelayanan?noregistrasi="+ $scope.cacheNoRegistrasi + "&user=" + user.namaLengkap); 
+			}
 
             //** BATAS */
         }

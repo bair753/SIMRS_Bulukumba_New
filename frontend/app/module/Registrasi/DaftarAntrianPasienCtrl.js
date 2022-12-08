@@ -1,7 +1,8 @@
-define(['initialize'], function (initialize) {
+define(['initialize', 'Configuration'], function (initialize, config) {
     'use strict';
     initialize.controller('DaftarAntrianPasienCtrl', ['DateHelper', '$rootScope', '$scope', 'ModelItem', 'MedifirstService', '$state', '$window', 'CetakHelper', 'CacheHelper',
         function (dateHelper, $rootScope, $scope, ModelItem, medifirstService, $state, $window, cetakHelper, cacheHelper) {
+            var baseTransaksi = config.baseApiBackend;
             $scope.isRouteLoading = true;
             $scope.title = "ini page pencarian pasien";
             $scope.kodeRuangan = $state.params.kodeRuangan;
@@ -998,6 +999,16 @@ define(['initialize'], function (initialize) {
                 $scope.dataItem.pegawaiDua = undefined;
                 $scope.popUpDua.close();
             }
+
+            $scope.cetakSuratJaminanPelayanan = function(){
+				var user = medifirstService.getPegawaiLogin();
+				if ($scope.item == undefined) {
+					toastr.error("Pilih Dahulu Pasien!")
+					return
+				}
+
+				window.open(baseTransaksi + "report/cetak-suratjaminanpelayanan?noregistrasi="+ $scope.item.noregistrasi + "&user=" + user.namaLengkap); 
+			}
 
             /*
             Batas
