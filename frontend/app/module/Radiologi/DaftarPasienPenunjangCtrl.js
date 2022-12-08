@@ -1,7 +1,7 @@
 define(['initialize'], function (initialize) {
     'use strict';
-    initialize.controller('DaftarPasienPenunjangCtrl', ['$scope', 'MedifirstService', '$state', 'CacheHelper', 'DateHelper',
-        function ($scope, medifirstService, $state, cacheHelper, dateHelper) {
+    initialize.controller('DaftarPasienPenunjangCtrl', ['$scope', 'MedifirstService', '$state', 'CacheHelper', 'DateHelper','socket',
+        function ($scope, medifirstService, $state, cacheHelper, dateHelper, socket) {
             $scope.item = {};
             $scope.dataVOloaded = true;
             $scope.now = new Date();
