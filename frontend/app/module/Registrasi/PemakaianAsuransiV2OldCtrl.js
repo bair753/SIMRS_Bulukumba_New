@@ -1,6 +1,6 @@
 define(['initialize', 'Configuration'], function (initialize, configuration) {
     'use strict'
-    initialize.controller('PemakaianAsuransiV2Ctrl', ['$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService', '$mdDialog',
+    initialize.controller('PemakaianAsuransiV2OldCtrl', ['$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService', '$mdDialog',
         function ($scope, modelItem, $state, cacheHelper, dateHelper, medifirstService, $mdDialog) {
             $scope.now = new Date();
 
@@ -23,7 +23,6 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
             $scope.isHapusSep = true;
             $scope.isBatal = true;
             $scope.isKembali = true;
-            $scope.isHidecopysep = true;
             var cacheNoreg = '';
             var responData = "";
             var kdSpesialis = '';
@@ -49,7 +48,7 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                 { id: "3", name: "KK" },
             ]
             $scope.listJenis = [
-                { id: 1, name: 'Rencana Rawat Inap' }, { id: 2, name: 'Rencana Kontrol' }
+                { id: 1, name: 'SPRI' }, { id: 2, name: 'Rencana Kontrol' }
             ];
             $scope.listFilter = [{ kode: 2, nama: 'Tgl Rencana Kontrol' }, { kode: 1, nama: 'Tgl Entri' }]
             $scope.captionRujukan = 'No Rujukan'
@@ -2167,53 +2166,62 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
             }
             // $scope.kontrol.tglRencanaKontrol = new Date()
             $scope.kontrol = {
-                bulan : new Date(),
+                tglAwal :new Date(),
+                tglAkhir:new Date()
             }
             
             $scope.kontrol.filter = $scope.listFilter[0]
             function loadGridKontrol(){
-                var tahun = moment($scope.kontrol.bulan).format('YYYY'); 
-                var bulan = moment($scope.kontrol.bulan).format('MM');
-                var noka = $scope.model.noKepesertaan
-                var filter = $scope.kontrol.filter.kode;
+                $scope.popUpRSPRI.center().open()
+                var tglAwal = moment($scope.kontrol.tglAwal).format('YYYY-MM-DD')
+                var tglAkhir = moment($scope.kontrol.tglAkhir).format('YYYY-MM-DD')
 
-                const pastetext = document.getElementById("copyNoSep").value;
-                if(pastetext != undefined)
-                    $scope.kontrol.sep = pastetext
-
-                var json = {
-                    "url": `RencanaKontrol/ListRencanaKontrol/Bulan/${bulan}/Tahun/${tahun}/Nokartu/${noka}/filter/${filter}`,
+                let json = {
+                    "url": "RencanaKontrol/ListRencanaKontrol/tglAwal/" + tglAwal + "/tglAkhir/" + tglAkhir + "/filter/"+$scope.kontrol.filter.kode,
                     "method": "GET",
                     "data": null
                 }
-                $scope.isRouteLoading = true;
+                $scope.isRouteloading =true
+
                 medifirstService.postNonMessage("bridging/bpjs/tools", json).then(function (e) {
-                    $scope.isRouteLoading = false;
-                    var result = e.data;
-                    var dataKon = [];
-                    if(result.metaData.code == "200") {
-                        for (let i = 0; i < e.data.response.list.length; i++) {
-                            e.data.response.list[i].no = i + 1;
+                    $scope.isRouteloading =false
+                    var dataKon = []
+                    if (e.data.metaData.code == 200) {
+                        for (var i = e.data.response.list.length - 1; i >= 0; i--) {
+                            const element = e.data.response.list[i]
+                            if ($scope.model.noKepesertaan == element.noKartu) {
+                                dataKon.push(element)
+                            }
+
                         }
-                        dataKon = result.response.list;
+                       
+
+                    } else toastr.info(e.data.metaData.message, 'Rencana Kontrol/SPRI')
+                    if (dataKon.length > 0) {
+                        for (let x = 0; x < dataKon.length; x++) {
+                            const element = dataKon[x];
+                            element.no = x + 1
+                        }
+                    }else{
+                        toastr.info("Data tidak ditemukan", 'Rencana Kontrol/SPRI')
                     }
-                    toastr.info(result.metaData.message, 'Rencana Kontrol/SPRI')
+                  
+
                     $scope.dataSourceSPRI = new kendo.data.DataSource({
                         data: dataKon,
                         pageSize: 10,
                         serverPaging: false,
                     });
-                    $scope.popUpRSPRI.center().open()
                 })
             }
             $scope.generateSKDP = function (data) {
                 if (data === true) {
                     $scope.model.cekNoSkdp = true
                     $scope.myVar = 0
+                    $scope.kontrol.noKartu = $scope.model.noKepesertaan
                     $scope.kontrol = {
-                        bulan : new Date(),
-                        jenisPelayanan: $scope.listJenis[1],
-                        noKartu: $scope.model.noKepesertaan
+                        tglAwal :new Date(),
+                        tglAkhir:new Date()
                     }
                     
                     $scope.kontrol.filter = $scope.listFilter[0]
@@ -2291,23 +2299,18 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
             }
             $scope.columnHistoriPeserta = {
 
-                selectable: 'row',
+                selectable: 'cell',
                 pageable: true,
                 columns: [
                     {
-                        "command": [
-                            {
-                                text: "Form Entry",
-                                click: buatSPRI,
-                            },
-                        ],
-                        title: "#",
-                        width: "80px",
+                        "field": "no",
+                        "title": "No",
+                        "width": "30px",
                     },
                     {
                         "field": "noSep",
                         "title": "No SEP",
-                        "width": "140px",
+                        "width": "130px",
 
                         "template": "<button class=\"k-button custom-button\" ng-click=\"setSep(dataItem)\"  style=\"margin:0 0 5px\">#:  noSep #</button> ",
 
@@ -2315,12 +2318,12 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                     {
                         "field": "tglSep",
                         "title": "Tgl SEP",
-                        "width": "70px"
+                        "width": "100px"
                     },
                     {
                         "field": "noRujukan",
                         "title": "No Rujukan",
-                        "width": "140px"
+                        "width": "90px"
                     },
                     {
                         "field": "noKartu",
@@ -2335,11 +2338,6 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                     {
                         "field": "kelasRawat",
                         "title": "Kelas",
-                        "width": "70px"
-                    },
-                    {
-                        "field": "namaPelayanan",
-                        "title": "Pelayanan",
                         "width": "90px"
                     },
                     {
@@ -2372,22 +2370,13 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                 ]
             };
 
+
             $scope.setSep = function (dataHistorySelect) {
-                if ($scope.model.rawatInap === true) {
-                    $scope.model.noRujukan = dataHistorySelect.noSep
-                    $scope.kodeProvider = ppkRumahSakit
-                    $scope.namaProvider = namappkRumahSakit
-                    $scope.model.faskesRujukan = false;
-                    $scope.model.namaAsalRujukan = $scope.kodeProvider + " - " + $scope.namaProvider;
-                } else {
-                    if($scope.model.asalRujukan !== 1){
-                        $scope.model.noRujukan = dataHistorySelect.noSep
-                        $scope.kodeProvider = ppkRumahSakit
-                        $scope.namaProvider = namappkRumahSakit
-                        $scope.model.faskesRujukan = false;
-                        $scope.model.namaAsalRujukan = $scope.kodeProvider + " - " + $scope.namaProvider;
-                    }
-                }
+                $scope.model.noRujukan = dataHistorySelect.noSep
+                $scope.kodeProvider = ppkRumahSakit
+                $scope.namaProvider = namappkRumahSakit
+                $scope.model.faskesRujukan = false;
+                $scope.model.namaAsalRujukan = $scope.kodeProvider + " - " + $scope.namaProvider;
                 $scope.popUpHistoriPelayananPeserta.close()
                 //     // $scope.dataHistorySelect = dataHistorySelect
             }
@@ -2396,7 +2385,6 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                     if ($scope.model.noKepesertaan == undefined) return
                     var dataz= []    
                     $scope.popUpHistoriPelayananPeserta.center().open()
-                    $scope.isRouteLoading = true;
                     medifirstService.get("bridging/bpjs/monitoring/HistoriPelayanan/NoKartu/" + $scope.model.noKepesertaan).then(function (data) {
                         if (data.data.metaData.code == 200) {
 
@@ -2406,11 +2394,6 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                                 const element = data.data.response.histori[i];
                                 if(element.ppkPelayanan == namappkRumahSakit){
                                     element.no = x=1
-                                    if(element.jnsPelayanan == 2) {
-                                        element.namaPelayanan = "R. Jalan"
-                                    } else {
-                                        element.namaPelayanan = "R. Inap"
-                                    }
                                     dataz.push(element)
                                 }
                                 // element.no = i + 1
@@ -2420,7 +2403,6 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                                 "method": "GET",
                                 "data": null
                             }
-                            $scope.isRouteLoading = true;
                             medifirstService.postNonMessage("bridging/bpjs/tools", json).then(function (dataKon) {
                                 if (dataKon.data.metaData.code == 200) {
 
@@ -2437,7 +2419,6 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
 
                                 }
 
-                                $scope.isRouteLoading = false;
                                 $scope.dataSourceHistoriPeserta = new kendo.data.DataSource({
                                     data: dataz,
                                     pageSize: 10,
@@ -2454,8 +2435,6 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
 
                            
                         }else{
-                            $scope.isRouteLoading = false
-                            toastr.info(data.data.metaData.message)
                             $scope.popUpHistoriPelayananPeserta.close()
                         }
                     })
@@ -2544,7 +2523,7 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                 var faskesperujuk = $scope.item.pasien.israwatinap == 'true' ? namappkRumahSakit : nmperujuk;
                 var notelp = $scope.model.noTelpons
                 var dxawal = $scope.model.diagnosa.nama.substring(0, 45);
-                var catatan = $scope.model.catatan == undefined ? "" : $scope.model.catatan
+                var catatan = $scope.model.catatan
                 var jnspst = $scope.model.jenisPeserta
                 var FLAGCOB = $scope.model.cob
                 var cob = '-';
@@ -2866,95 +2845,101 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
             function AddZero(num) {
                 return (num >= 0 && num < 10) ? "0" + num : num + "";
             }
-            var onDataBound = function () {
-                $('td').each(function () {
-                    if ($(this).text() == 'Belum') { $(this).addClass('red') }
-                    if ($(this).text() == 'Sudah') { $(this).addClass('green') }
-                })
-            }
             $scope.columnSPRI = {
-                selectable: 'row',
-				dataBound: onDataBound,
-				pageable: true,
+
+                selectable: 'cell',
+                pageable: true,
                 columns: [
-                {
-                    "command": [
-                        {
-                            text: " Cetak",
-                            click: cetakSPRI,
-                        },
-                        {
-                            text: " Edit",
-                            click: editSPRI,
-                        },
-                        {
-                            text: " Hapus",
-                            click: hapusSPRI,
-                        }
-                    ],
-                    title: "",
-                    width: "220px",
-                },
-                {
-                    "field": "no",
-                    "title": "No",
-                    "width": "40px",
-                    "attributes": { align: "center" }
 
-                },
-                {
-                    "field": "noSuratKontrol",
-                    "title": "No Surat",
-                    "width": "180px",
-                    "template": "<button class=\"k-button custom-button\" ng-click=\"setKontrol(dataItem)\"  style=\"margin:0 0 5px\">#:  noSuratKontrol #</button> ",
+                    {
+                        "field": "no",
+                        "title": "No",
+                        "width": "50px",
+                    },
+                    {
+                        "field": "noSuratKontrol",
+                        "title": "No Surat",
+                        "width": "240px",
+                        "template": "<button class=\"k-button custom-button\" ng-click=\"setKontrol(dataItem)\"  style=\"margin:0 0 5px\">#:  noSuratKontrol #</button> ",
 
-                },
-                {
-                    "field": "namaJnsKontrol",
-                    "title": "Jenis",
-                    "width": "150px",
-                },
-                {
-                    "field": "terbitSEP",
-                    "title": "Terbit SEP",
-                    "width": "100px",
-                },
-                {
-                    "field": "tglRencanaKontrol",
-                    "title": "Tgl Rencana Kontrol",
-                    "width": "100px",
-                }, 
-                {
+                    },
 
-                    "field": "namaPoliAsal",
-                    "title": "Poli Asal",
-                    "width": "100px",
-                },
-                {
+                    {
+                        "field": "namaJnsKontrol",
+                        "title": "Jenis",
+                        "width": "100px"
+                    },
+                    {
+                        "field": "tglRencanaKontrol",
+                        "title": "Tgl Rencana Kontrol",
+                        "width": "100px"
+                    },
+                    {
 
-                    "field": "namaPoliTujuan",
-                    "title": "Poli Tujuan",
-                    "width": "150px"
-                },
-                {
+                        "field": "noSepAsalKontrol",
+                        "title": "No SEP Asal",
+                        "width": "100px"
+                    },
+                    {
 
-                    "field": "namaDokter",
-                    "title": "DPJP",
-                    "width": "200px"
-                },
-                {
+                        "field": "namaPoliAsal",
+                        "title": "Poli Asal",
+                        "width": "150px"
+                    },
+                    {
 
-                    "field": "noSepAsalKontrol",
-                    "title": "No SEP Asal",
-                    "width": "180px",
-                },
-                {
+                        "field": "namaPoliTujuan",
+                        "title": "Poli Tujuan",
+                        "width": "150px"
+                    },
+                    {
 
-                    "field": "tglTerbitKontrol",
-                    "title": "Tgl Terbit Kontrol ",
-                    "width": "100px",
-                }]
-            }
+                        "field": "namaDokter",
+                        "title": "DPJP",
+                        "width": "200px"
+                    },
+                    // {
+                    //     "field": "",
+                    //     "title": "",
+                    //     "width":"210px",
+                    //     "template": " <button style='height: 1.5rem;width: 1.5rem;' title='Print' "+
+                    //         " class='style-center p-button p-button-rounded p-button-success p-mr-2 p-button p-component p-button-icon-only' "+
+                    //         " ng-click='cetakSPRI(dataItem)'><span class='p-button-icon fa fa-print'></span></button> &nbsp;"+
+                            
+                    //         " <button style='height: 1.5rem;width: 1.5rem;' title='Edit' "+
+                    //         " class='style-center p-button p-button-rounded p-button-success p-mr-2 p-button p-component p-button-icon-only' "+
+                    //         " ng-click='editSPRI(dataItem)'><span class='p-button-icon fa fa-edit'></span></button> &nbsp;"+
+
+                               
+                    //         " <button style='height: 1.5rem;width: 1.5rem;' title='Hapus' "+
+                    //         " class='style-center p-button p-button-rounded p-button-success p-mr-2 p-button p-component p-button-icon-only' "+
+                    //         " ng-click='hapusSPRI(dataItem)'><span class='p-button-icon fa fa-trash'></span></button> &nbsp;"
+                    // },
+                    {
+                        "command": [
+                            {
+                                text: " Cetak",
+                                click: cetakSPRI,
+                                imageClass: " fa fa-print"
+                            },
+                            {
+                                text: " Edit",
+                                click: editSPRI,
+                                imageClass: " fa fa-edit"
+                            },
+                            {
+                                text: " Hapus",
+                                click: hapusSPRI,
+                                imageClass: " fa fa-trash"
+                            }],
+                        title: "",
+                        width: "250px",
+                    }
+
+
+                ]
+            };
+
             $scope.setKontrol = function (data) {
                 if (data != undefined) {
                     $scope.model.skdp = data.noSuratKontrol
@@ -3809,39 +3794,113 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                 return (num >= 0 && num < 10) ? "0" + num : num + "";
             }
             $scope.kontrol.tglRencanaKontrol = new Date()
-			medifirstService.get("bridging/bpjs/get-ruangan-rj").then(function (data) {
-                $scope.ruangans = data.data.data;
-            })
-
-            $scope.resetForm = function () {
-                delete $scope.kontrol.poliKontrol
-                delete $scope.kontrol.kodeDokter
-            }
-            $scope.getJadwalDok = function(e){
-                delete $scope.kontrol.kodeDokter
-                if(!e) return;
-                if(!$scope.kontrol.jenisPelayanan) {
-                    delete $scope.kontrol.poliKontrol
-                    toastr.error("Harap pilih terlebih dahulu jenis kontrol !");
-                    return;
-                }
-                if(!$scope.kontrol.tglRencanaKontrol) {
-                    delete $scope.kontrol.poliKontrol
-                    toastr.error("Harap pilih terlebih dahulu tgl rencana kontrol !");
-                    return;
-                }
-
-                var tgl = moment($scope.kontrol.tglRencanaKontrol).format('YYYY-MM-DD');
-                var jp = $scope.kontrol.jenisPelayanan.id
-                $scope.listDPJP = []
+            $scope.cariNoka = function () {
+                $scope.enabledDetail = false
+                if ($scope.kontrol.noKartu == null) {
+					toastr.error('No Kartu harus di isi')
+					return 
+				}
                 let json = {
-                    "url": "RencanaKontrol/JadwalPraktekDokter/JnsKontrol/" + jp + "/KdPoli/" + e.kdinternal + "/TglRencanaKontrol/" + tgl,
+
+                    "url": "Peserta/nokartu/" + $scope.kontrol.noKartu  + "/tglSEP/" + moment(new Date()).format('YYYY-MM-DD'),
                     "method": "GET",
                     "data": null
                 }
-                $scope.isRouteLoading = true;
                 medifirstService.postNonMessage("bridging/bpjs/tools", json).then(function (e) {
-                    $scope.isRouteLoading = false;
+
+                    if (e.data.metaData.code === "200") {
+                        $scope.enabledDetail = true;
+                        $scope.kontrol.peserta = e.data.response.peserta
+
+                    } else {
+                        toastr.error(e.data.metaData.message)
+                    }
+                })
+            }
+			
+            $scope.cariSep = function () {
+                $scope.enabledDetail = false
+				if ($scope.kontrol.sep == null) {
+					toastr.error('No SEP harus di isi')
+					return 
+				}
+          
+                let json = {
+                    "url": "RencanaKontrol/nosep/" + $scope.kontrol.sep,
+                    "method": "GET",
+                    "data": null
+                }
+                medifirstService.postNonMessage("bridging/bpjs/tools", json).then(function (e) {
+                 
+                    if (e.data.metaData.code === "200") {
+                        $scope.enabledDetail = true;
+                        $scope.kontrol.noSep = e.data.response.noSep
+                        $scope.kontrol.jnsPelayanan = e.data.response.jnsPelayanan
+                        $scope.kontrol.tglSep = e.data.response.tglSep
+                        $scope.kontrol.poli = e.data.response.poli
+                        $scope.kontrol.diagnosa = e.data.response.diagnosa
+                        $scope.kontrol.noKartu = e.data.response.peserta.noKartu
+
+                    } else {
+                        toastr.error(e.data.metaData.message)
+                    }
+                })
+            }
+			$scope.$watch('kontrol.jenisPelayanan', function (e) {
+                if (!e) return;
+                if (e.id == 1) {
+                    $scope.showSep = false
+					$scope.cariNoka()
+                } else {
+                    $scope.showSep = true
+					$scope.cariSep()
+                }
+            })
+            function refreshJenisPelayanan(e) {
+                if (!e) return;
+                if (e.id == 1) {
+                    $scope.showSep = false
+					$scope.cariNoka()
+                } else {
+                    $scope.showSep = true
+					$scope.cariSep()
+                }
+            }
+			medifirstService.get("bridging/bpjs/get-ruangan-rj").then(function (data) {
+                $scope.ruangans = data.data.data;
+            })
+            $scope.$watch('kontrol.tglRencanaKontrol', function (newValue, oldValue) {
+                if (newValue != oldValue) {
+                    if(! $scope.kontrol.poliKontrol)return
+                    if(! $scope.kontrol.jenisPelayanan)return
+                    if(! $scope.kontrol.tglRencanaKontrol)return
+
+                    $scope.kontrol.tglAkhir = $scope.kontrol.tglRencanaKontrol
+                    getJadwalDok($scope.kontrol.jenisPelayanan.id, $scope.kontrol.poliKontrol.kdinternal ,moment($scope.kontrol.tglRencanaKontrol).format('YYYY-MM-DD'))
+                }
+            })
+			$scope.$watch('kontrol.poliKontrol', function (newValue, oldValue) {
+                if (newValue != oldValue) {
+                    if (newValue.kdinternal == null) {
+                        newValue.kdinternal = ""
+                    }
+                    if(! $scope.kontrol.poliKontrol)return
+                    if(! $scope.kontrol.jenisPelayanan)return
+                    if(! $scope.kontrol.tglRencanaKontrol)return
+               
+                    getJadwalDok($scope.kontrol.jenisPelayanan.id, $scope.kontrol.poliKontrol.kdinternal ,moment($scope.kontrol.tglRencanaKontrol).format('YYYY-MM-DD'))
+
+                }
+            })
+            function getJadwalDok(jp,poli,tgl){
+                $scope.listDPJP = []
+                let json = {
+                    "url": "RencanaKontrol/JadwalPraktekDokter/JnsKontrol/" + jp
+                        + "/KdPoli/" +poli+ "/TglRencanaKontrol/" + tgl,
+                    "method": "GET",
+                    "data": null
+                }
+                medifirstService.postNonMessage("bridging/bpjs/tools", json).then(function (e) {
                     if (e.data.metaData.code == 200) {
                         for (let x = 0; x < e.data.response.list.length; x++) {
                             const element = e.data.response.list[x];
@@ -3857,29 +3916,8 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                 })
             }
 			$scope.saveSPRI = function () {
-                if(!$scope.kontrol.jenisPelayanan) {
-                    toastr.error('Harap pilih jenis kontrol telebih dahulu !');
-                    return;
-                }
-                if(!$scope.kontrol.tglRencanaKontrol) {
-                    toastr.error('Harap isi Tanggal Rencana Kontrol / Inap telebih dahulu !');
-                    return;
-                }
-                if(!$scope.kontrol.poliKontrol) {
-                    toastr.error('Harap isi Spesialis / SubSpesialis telebih dahulu !');
-                    return;
-                }
-                if(!$scope.kontrol.kodeDokter) {
-                    toastr.error('Harap isi DPJP Tujuan Kontrol / Inap telebih dahulu !');
-                    return;
-                }
-
+				$scope.isSaves =true
                 if ($scope.kontrol.jenisPelayanan.id == 1) {
-                    if(!$scope.kontrol.noKartu) {
-                        toastr.error('Harap isi No kartu peserta dibagian Data Kartu Peserta !');
-                        return;
-                    }
-
                     if ($scope.kontrol.noSuratKontrol == undefined) {
                         // insert
 
@@ -3897,14 +3935,12 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                             }
                         }
 
-                        $scope.isSaves =true
                         medifirstService.postNonMessage('bridging/bpjs/tools', json).then(function (e) {
                             if (e.data.metaData.code == '200') {
 								$scope.kontrol.resNoSurat = e.data.response.noSPRI
 								saveSPRILokal('insert')
 								
                                 toastr.success(e.data.response.noSPRI, e.data.metaData.message);
-                                $scope.myVar = 0
                             } else {
 								$scope.isSaves =false
                                 toastr.error(e.data.metaData.message, 'Info');
@@ -3927,14 +3963,12 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                         }
 
 
-                        $scope.isSaves =true
                         medifirstService.postNonMessage('bridging/bpjs/tools', json).then(function (e) {
                             if (e.data.metaData.code == '200') {
 								$scope.kontrol.resNoSurat = e.data.response.noSPRI
 								saveSPRILokal('update')
 								
                                 toastr.success(e.data.response.noSPRI, e.data.metaData.message);
-                                $scope.myVar = 0
                             } else {
 								$scope.isSaves =false
                                 toastr.error(e.data.metaData.message, 'Info');
@@ -3942,11 +3976,6 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                         })
                     }
                 } else {
-                    if(!$scope.kontrol.sep) {
-                        toastr.error('Harap isi No Sep telebih dahulu !');
-                        return;
-                    }
-
                     if ($scope.kontrol.noSuratKontrol == undefined) {
                         // insert
                         let json = {
@@ -3954,7 +3983,7 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                             "method": "POST",
                             "data": {
                                 "request": {
-                                    "noSEP": $scope.kontrol.sep,
+                                    "noSEP": $scope.kontrol.noSep,
                                     "kodeDokter": $scope.kontrol.kodeDokter.kode,
                                     "poliKontrol": $scope.kontrol.poliKontrol.kdinternal,
                                     "tglRencanaKontrol": moment($scope.kontrol.tglRencanaKontrol).format('YYYY-MM-DD'),
@@ -3963,14 +3992,12 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                             }
                         }
 
-                        $scope.isSaves = true
                         medifirstService.postNonMessage('bridging/bpjs/tools', json).then(function (e) {
                             if (e.data.metaData.code == '200') {
 								$scope.kontrol.resNoSurat = e.data.response.noSuratKontrol
 								saveSPRILokal('insert')
 								
                                 toastr.success(e.data.response.noSuratKontrol, e.data.metaData.message);
-                                $scope.myVar = 0
                             } else {
 								$scope.isSaves =false
                                 toastr.error(e.data.metaData.message, 'Info');
@@ -3984,7 +4011,7 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                             "data": {
                                 "request": {
                                     "noSuratKontrol": $scope.kontrol.noSuratKontrol,
-                                    "noSEP": $scope.kontrol.sep,
+                                    "noSEP": $scope.kontrol.noSep,
                                     "kodeDokter": $scope.kontrol.kodeDokter.kode,
                                     "poliKontrol": $scope.kontrol.poliKontrol.kdinternal,
                                     "tglRencanaKontrol": moment($scope.kontrol.tglRencanaKontrol).format('YYYY-MM-DD'),
@@ -3993,13 +4020,11 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                             }
                         }
 
-                        $scope.isSaves = true
                         medifirstService.postNonMessage('bridging/bpjs/tools', json).then(function (e) {
                             if (e.data.metaData.code == '200') {
 								$scope.kontrol.resNoSurat = e.data.response.noSuratKontrol
 								saveSPRILokal('update')
                                 toastr.success(e.data.response.noSuratKontrol, e.data.metaData.message);
-                                $scope.myVar = 0
                             } else {
 								$scope.isSaves =false
                                 toastr.error(e.data.metaData.message, 'Info');
@@ -4020,7 +4045,7 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
 					'namajnskontrol':  $scope.kontrol.jenisPelayanan.id == 1?'SPRI':'Surat Kontrol',
 					'tglrencanakontrol':moment($scope.kontrol.tglRencanaKontrol).format('YYYY-MM-DD'),
 					'tglterbitkontrol': moment(new Date()).format('YYYY-MM-DD') ,
-					'nosepasalkontrol':$scope.kontrol.sep?$scope.kontrol.sep :null ,
+					'nosepasalkontrol':$scope.kontrol.noSep?$scope.kontrol.noSep :null ,
 					'poliasal':  $scope.item.pasien.namaruangan,
 					'politujuan':  $scope.kontrol.poliKontrol ?$scope.kontrol.poliKontrol.kdinternal :null,
 					'namapolitujuan':  $scope.kontrol.poliKontrol ?$scope.kontrol.poliKontrol.namaruangan :null,
@@ -4039,44 +4064,33 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
             function hapusSPRI(e) {
                 e.preventDefault();
                 var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
-                var confirm = $mdDialog.confirm()
-					.title('Peringatan')
-					.textContent('Apakah Anda yang ingin menghapus data ?')
-					.ariaLabel('Lucky day')
-					.cancel('Tidak')
-					.ok('Ya')
-				$mdDialog.show(confirm).then(function () {
-                    let json = {
-                        "url": "RencanaKontrol/Delete",
-                        "method": "DELETE",
-                        "data":   {
-                            "request": {
-                                "t_suratkontrol":{
-                                "noSuratKontrol": dataItem.noSuratKontrol,
-                                "user": "xxx"
-                                }
-                            }
-                        }
+				let json = {
+                    "url": "RencanaKontrol/Delete",
+                    "method": "DELETE",
+                    "data":   {
+						"request": {
+							"t_suratkontrol":{
+							"noSuratKontrol": dataItem.noSuratKontrol,
+							"user": "xxx"
+							}
+						}
+					}
+                }
+                medifirstService.postNonMessage("bridging/bpjs/tools", json).then(function (e) {
+
+                    if (e.data.metaData.code === "200") {
+						var data = {
+							'tipe':'delete',
+							'nosuratkontrol': dataItem.noSuratKontrol ,
+						};
+						medifirstService.post("bridging/bpjs/save-rencana-kontrol", data).then(function (z) {
+							loadGridKontrol()
+						})
+						toastr.info(e.data.metaData.message)
+                    } else {
+                        toastr.error(e.data.metaData.message)
                     }
-                    $scope.isRouteLoading = true
-                    medifirstService.postNonMessage("bridging/bpjs/tools", json).then(function (e) {
-    
-                        if (e.data.metaData.code === "200") {
-                            var data = {
-                                'tipe':'delete',
-                                'nosuratkontrol': dataItem.noSuratKontrol ,
-                            };
-                            medifirstService.post("bridging/bpjs/save-rencana-kontrol", data).then(function (z) {
-                                loadGridKontrol()
-                            })
-                            toastr.info(e.data.metaData.message)
-                        } else {
-                            toastr.error(e.data.metaData.message)
-                        }
-                        $scope.isRouteLoading = false
-                    })
                 })
-				
 			}
 
             function editSPRI(e) {
@@ -4086,8 +4100,10 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                 $scope.kontrol.noKartu = dataItem.noKartu
                 $scope.kontrol.tglRencanaKontrol = new Date(dataItem.tglRencanaKontrol)
                 if (dataItem.jnsKontrol == '2') {
+                    $scope.cariSep()
                     $scope.kontrol.jenisPelayanan = $scope.listJenis[1]
                 } else {
+                    $scope.cariNoka()
                     $scope.kontrol.jenisPelayanan = $scope.listJenis[0]
                 }
                 $scope.kontrol.noSuratKontrol = dataItem.noSuratKontrol
@@ -4100,36 +4116,53 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                     }
                 }
                 $scope.kontrol.poliKontrol = ruang
-                $scope.getJadwalDok($scope.kontrol.poliKontrol);
-                $scope.kontrol.kodeDokter = { kode: dataItem.kodeDokter, nama: dataItem.namaDokter }
+                let json = {
+                    "url": "RencanaKontrol/JadwalPraktekDokter/JnsKontrol/" + $scope.kontrol.jenisPelayanan.id
+                        + "/KdPoli/" + ruang.kdinternal + "/TglRencanaKontrol/" + moment($scope.kontrol.tglRencanaKontrol).format('YYYY-MM-DD'),
+                    "method": "GET",
+                    "data": null
+                }
                 $scope.myVar = 1
+                medifirstService.postNonMessage("bridging/bpjs/tools", json).then(function (e) {
+                    if (e.data.metaData.code == 200) {
+                        for (let x = 0; x < e.data.response.list.length; x++) {
+                            const element = e.data.response.list[x];
+                            element.kode = element.kodeDokter
+                            element.nama = element.namaDokter
+                        }
+                        $scope.kontrol.kodeDokter = { kode: dataItem.kodeDokter, nama: dataItem.namaDokter }
+                   
+                        $scope.listDPJP = e.data.response.list;
+                    }
+                    else {
+                        toastr.info(e.data.metaData.message, 'Jadwal Dokter')
+                    }
+
+                })
+            
             }
 
             $scope.batalSPRI = function(){
 				$scope.popUpRSPRI.close()
 			}
 
-            function buatSPRI(e){
-                e.preventDefault()
-                var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
-                if(dataItem.noSuratKontrol != null) {
-                    toastr.error(`No Sep ${dataItem.noSep} sudah pernah diterbitkan SKDP/SRPI !`);
-                    return;
-                }
-
+            $scope.buatSPRI = function(){
+               if($scope.dataHistorySelect == undefined){
+                   toastr.error('Pilih data dulu')
+                   return
+               }
                 $scope.enabledDetail = false
                 $scope.myVar = 1
-                $scope.kontrol.noKartu = dataItem.noKartu
-                $scope.kontrol.sep = dataItem.noSep
-                if(dataItem.noSep != null){
+                $scope.kontrol.noKartu = $scope.dataHistorySelect.noKartu
+                $scope.kontrol.sep = $scope.dataHistorySelect.noSep
+                if($scope.dataHistorySelect.noSep!=null){
                     $scope.kontrol.jenisPelayanan = $scope.listJenis[1]
+                    refreshJenisPelayanan($scope.kontrol.jenisPelayanan)
                 }else{
-                    $scope.kontrol.jenisPelayanan = $scope.listJenis[0]
+                    $scope.kontrol.jenisPelayanan = $scope.listJenis[0] 
+                    refreshJenisPelayanan($scope.kontrol.jenisPelayanan)
                 }
-
-                if(dataItem.jnsPelayanan == 2)
-                    $scope.popUpHistoriPelayananPeserta.close()
-
+               
                 $scope.popUpRSPRI.center().open()
             }
 

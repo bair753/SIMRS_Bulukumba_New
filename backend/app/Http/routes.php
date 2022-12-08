@@ -1819,6 +1819,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
 
               Route::post('registrasi/hapus-sep', 'Registrasi\RegistrasiController@updateNoseppa');
               Route::get('registrasi/get-data-antrean', 'Registrasi\RegistrasiController@getDataAntrean');
+              Route::post('jkn/save-checkin','ReservasiOnline\MyJKNV2Controller@saveCheckInAntrean_fix');
 
 
         // });

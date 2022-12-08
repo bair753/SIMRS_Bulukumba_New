@@ -23,6 +23,7 @@ use App\Traits\PelayananPasienTrait;
 use App\Traits\Valet;
 use DB;
 use App\Transaksi\AntrianPasienRegistrasi;
+use App\Transaksi\AntrianPasienDiperiksa;
 use App\Transaksi\PasienDaftar;
 use Webpatser\Uuid\Uuid;
 
@@ -770,7 +771,7 @@ class MyJKNV2Controller extends ApiController
             PasienDaftar::where('statusschedule',$data->noreservasi)->update([
                 'ischeckin' => true,
             ]);
-            date_default_timezone_set("Asia/Jakarta");
+            date_default_timezone_set("Asia/Makassar");
             $json = array(
                 "kodebooking" => $data->noreservasi,
                 "taskid" => 3, //pasien lama langsung task 3 //(akhir waktu layan admisi/mulai waktu tunggu poli)
@@ -792,6 +793,15 @@ class MyJKNV2Controller extends ApiController
             $objetoRequest2['statuskirim'] = false;
             $objetoRequest2['userData'] = $userData['userData'];
             $post2 = app('App\Http\Controllers\RawatJalan\RawatJalanController')->saveMonitoringTaksId($objetoRequest2);
+
+            $dataapd = AntrianPasienDiperiksa::where('noregistrasifk', $datapd->norec)
+            ->where('objectruanganfk', $datapd->objectruanganlastfk)
+            ->first();
+            $objetoRequest3 = new \Illuminate\Http\Request();
+            $objetoRequest3['norec'] = $datapd->norec;
+            $objetoRequest3['norec_apd'] = $dataapd->norec;
+            $objetoRequest3['userData'] = $userData['userData'];
+            $post3 = app('App\Http\Controllers\Registrasi\RegistrasiController')->saveAdministrasi($objetoRequest3);
 
             $transStatus = 'true';
             $transMessage = "Ok";
@@ -1052,55 +1062,52 @@ class MyJKNV2Controller extends ApiController
         try {
             if (!empty($request)){
 
-                return redirect()->route("savePasienBaruJkn",[
-                    'isbayi' => false,
-                    'istriageigd' => false,
-                    'isPenunjang' => false,
-                    'idpasien' => '',
-                    'pasien' => $pasien,
-                    'agama' =>['id' => null],
-                    'jenisKelamin'=> $jk->id,
-                    'pekerjaan' => [ 'id' => null],
-                    'pendidikan' =>  [ 'id' => null],
-                    'statusPerkawinan' => null,
-                    'golonganDarah' => null,
-                    'suku' => null,
-                    'namaIbu' => null,
-                    'noTelepon' => $request['nohp'],
-                    'noAditional' => null,
-                    'kebangsaan' => null,
-                    'negara' => ['id' => 0],
-                    'namaAyah' => null,
-                    'alamatLengkap' => $request['alamat'],
-                    'desaKelurahan' => null,
-                    'namaDesaKelurahan' => $request['namakel'],
-                    'kecamatan' => null,
-                    'namaKecamatan' => $request['namakec'],
-                    'kotaKabupaten' => null,
-                    'namaKotaKabupaten' => $request['namadati2'],
-                    'propinsi' => $propinsi->id,
-                    'namapropinsi' => $request['namaprop'],
-                    'kodePos' => null,
-                    'penanggungjawab' => null,
-                    'hubungankeluargapj' => null,
-                    'pekerjaanpenangggungjawab' => null,
-                    'ktppenanggungjawab' => null,
-                    'alamatrmh' => null,
-                    'alamatktr' => null,
-                    'teleponpenanggungjawab' => null,
-                    'bahasa' => null,
-                    'jeniskelaminpenanggungjawab' => null,
-                    'umurpenanggungjawab' => null,
-                    'dokterpengirim' => null,
-                    'alamatdokter' => null,
-                    'rtrw' => $request['rt'] . '/' . $request['rw'],
-                    'kategoriPelayanan' => array(
-                        'id' => 1,
-                        'kdpelayanan' => 1,
-                        'kategori' => 'Pelayanan Umum',
-                    ),
-                    'isjkn' => true,
-                ]);
+                $objetoRequest = new \Illuminate\Http\Request();
+                $objetoRequest ['isbayi'] = false;
+                $objetoRequest ['istriageigd'] = false;
+                $objetoRequest ['isPenunjang'] = false;
+                $objetoRequest ['idpasien'] = '';
+                $objetoRequest ['pasien'] = $pasien;
+                $objetoRequest ['agama'] = ['id' => null];
+                $objetoRequest ['jenisKelamin'] = $jk->id;
+                $objetoRequest ['pekerjaan'] = [ 'id' => null];
+                $objetoRequest ['pendidikan'] = [ 'id' => null];
+                $objetoRequest ['statusPerkawinan'] = null;
+                $objetoRequest ['golonganDarah'] = null;
+                $objetoRequest ['suku'] = null;
+                $objetoRequest ['namaIbu'] = null;
+                $objetoRequest ['noTelepon'] = $request['nohp'];
+                $objetoRequest ['noAditional'] = null;
+                $objetoRequest ['kebangsaan'] = null;
+                $objetoRequest ['negara'] = ['id' => 0];
+                $objetoRequest ['namaAyah'] = null;
+                $objetoRequest ['alamatLengkap'] = $request['alamat'];
+                $objetoRequest ['desaKelurahan'] = null;
+                $objetoRequest ['namaDesaKelurahan'] = $request['namakel'];
+                $objetoRequest ['kecamatan'] = null;
+                $objetoRequest ['namaKecamatan'] = $request['namakec'];
+                $objetoRequest ['kotaKabupaten'] = null;
+                $objetoRequest ['namaKotaKabupaten'] = $request['namadati2'];
+                $objetoRequest ['propinsi'] =  $propinsi->id;
+                $objetoRequest ['namapropinsi'] = $request['namaprop'];
+                $objetoRequest ['kodePos'] = null;
+                $objetoRequest ['penanggungjawab'] = null;
+                $objetoRequest ['hubungankeluargapj'] = null;
+                $objetoRequest ['pekerjaanpenangggungjawab'] = null;
+                $objetoRequest ['ktppenanggungjawab'] = null;
+                $objetoRequest ['alamatrmh'] = null;
+                $objetoRequest ['alamatktr'] = null;
+                $objetoRequest ['teleponpenanggungjawab'] = null;
+                $objetoRequest ['bahasa'] = null;
+                $objetoRequest ['jeniskelaminpenanggungjawab'] = null;
+                $objetoRequest ['umurpenanggungjawab'] = null;
+                $objetoRequest ['dokterpengirim'] = null;
+                $objetoRequest ['alamatdokter'] = null;
+                $objetoRequest ['rtrw'] = $request['rt'] . '/' . $request['rw'];
+                $objetoRequest ['isjkn'] = true;
+                $objetoRequest ['userData'] = $request['userData'];
+                $cek = app('App\Http\Controllers\Registrasi\RegistrasiController')->savePasienFix($objetoRequest);
+                $simpan = json_decode($cek->content(), true);
             }
 
             $transStatus = 'true';
@@ -1113,6 +1120,9 @@ class MyJKNV2Controller extends ApiController
         if ($transStatus != 'false') {
             DB::commit();
             $result = array(
+                "response" => array(
+                    "norm" => $simpan['response']['norm']
+                ),
                 "metadata" => array(
                     "message" => 'Harap datang ke adminsi untuk melengkapi data rekam medis',
                     "code" => 200)

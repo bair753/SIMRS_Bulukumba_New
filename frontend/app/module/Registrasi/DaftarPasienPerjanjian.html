@@ -100,6 +100,10 @@
             position="'right'"><i class="fa fa-trash"></i>Hapus</button>
      
     </div>
+    <div class="grid_2">
+        <button ng-show="!isLoading" kendo-button style="width: 100%" class="success" ng-click="CheckinJKN()"
+        position="'right'"><i class="fa fa-sign-in"></i>Checkin MyJKN</button>
+    </div>
     <!-- <div class="grid_4">
                 <c-button style="width: 100%; padding:0px, margin:0px;" item="item" position="'right'" is-validate click="CetakLaporan()">
                     <span class="title">Cetak</span>
@@ -117,6 +121,12 @@
 <style>
     .green {
        background-color: #98FB98;
+       /*color: #000000;*/
+       font-weight: bold;
+       color: black;
+   }
+   .red {
+       background-color: #fb9898;
        /*color: #000000;*/
        font-weight: bold;
        color: black;
