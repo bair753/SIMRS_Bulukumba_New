@@ -31,7 +31,15 @@ define(['initialize'], function (initialize) {
                         $(row.cells[9]).addClass("green");
 
                     }else{
-                        // $(row.cells[1]).addClass("red");
+                        $(row.cells[9]).addClass("red");
+                    }
+
+                    var ischeckin = kendoGrid.dataItem(row).ischeckin;
+                    if (ischeckin != null && ischeckin == '✔') {
+                        $(row.cells[10]).addClass("green");
+
+                    }else{
+                        $(row.cells[10]).addClass("red");
                     }
 
 
@@ -115,6 +123,13 @@ define(['initialize'], function (initialize) {
                     {
                         field: "nomorantrean",
                         title: "No Antrean",
+                        field: "ischeckin",
+                        title: "Checkin",
+                        width: 100
+                    },
+                    {
+                        field: "nomorantrean",
+                        title: "No Antrean",
                         width: 100
                     },
                     {
@@ -182,6 +197,11 @@ define(['initialize'], function (initialize) {
                             element.ismobilejkn = "✔"            
                         }else{
                             element.ismobilejkn = "✘"    
+                        }
+                        if(element.ischeckin ==true){
+                            element.ischeckin = "✔"            
+                        }else{
+                            element.ischeckin = "✘"    
                         }
                     }
 
@@ -313,6 +333,46 @@ define(['initialize'], function (initialize) {
                 medifirstService.post( "reservasionline/delete",{"norec":$scope.item.norec})
                 .then(function (data) {               
                    LoadData();            
+                })
+            }
+
+            $scope.CheckinJKN = function() {
+                if ($scope.item == undefined){
+                    toastr.error('silahkan pilih data ...')
+                    return
+                }
+
+                if ($scope.item.ismobilejkn == "✘"){
+                    toastr.error('Bukan pasien mobile jkn !')
+                    return
+                }
+
+                if ($scope.item.ischeckin == "✔"){
+                    toastr.error('Pasien sudah melakukan checkin !');
+                    return
+                }
+
+                var confirm = $mdDialog.confirm()
+                    .title('Peringatan')
+                    .textContent('Apakah anda yakin akan melakukan checkin ?')                                
+                    .ariaLabel('Lucky day')
+                    .cancel('Tidak')
+                    .ok('Ya')
+                $mdDialog.show(confirm).then(function () {
+                    var jsonSave = {
+                        "kodebooking": $scope.item.noreservasi,
+                        "waktu": new Date().getTime()
+                    }
+                    $scope.isRouteLoading = true;
+                    medifirstService.post("jkn/save-checkin", jsonSave).then(function (data) {               
+                        $scope.isRouteLoading = false;
+                        $state.go('UGVtYWthaWFuQXN1cmFuc2k=', {
+                            norecPD: $scope.item.norec_pd,
+                            norecAPD: $scope.item.norec_apd,
+                        });
+                        var cacheSet = undefined;
+                        cacheHelper.set('CachePemakaianAsuransi', cacheSet);         
+                    })
                 })
             }
 

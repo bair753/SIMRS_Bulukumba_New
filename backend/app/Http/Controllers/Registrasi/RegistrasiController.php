@@ -6062,6 +6062,8 @@ class RegistrasiController extends ApiController
     public function getPasienPerjanjian(Request $request){
         $kdProfile = $this->getDataKdProfile($request);
         $data = \DB::table('antrianpasienregistrasi_t as apr')
+            ->leftJoin('pasiendaftar_t as pd','pd.statusschedule','=','apr.noreservasi')
+            ->leftJoin('antrianpasiendiperiksa_t as apd','apd.noregistrasifk','=','pd.norec')
             ->leftJoin('pasien_m as pm','pm.id','=','apr.nocmfk')
             ->leftJoin('ruangan_m as ru','ru.id','=','apr.objectruanganfk')
             ->leftJoin('pegawai_m as pg','pg.id','=','apr.objectpegawaifk')
@@ -6069,9 +6071,9 @@ class RegistrasiController extends ApiController
             ->select('apr.norec','pm.nocm','apr.noreservasi','apr.tanggalreservasi','apr.objectruanganfk',
                 'apr.objectpegawaifk','ru.namaruangan','apr.isconfirm','pg.namalengkap as dokter',
                 'apr.notelepon','pm.namapasien','apr.namapasien','apr.objectkelompokpasienfk','kps.kelompokpasien',
-                'apr.tglinput','apr.nocmfk',
+                'apr.tglinput','apr.nocmfk', 'pd.ischeckin', 'apd.norec as norec_apd', 'pd.norec as norec_pd', 'ru.prefixnoantrian',
                 DB::raw('(case when pm.namapasien is null then apr.namapasien else pm.namapasien end) as namapasien,
-                (case when apr.isconfirm=\'true\' then \'Confirm\' else \'Reservasi\' end) as status,apr.ismobilejkn,apr.noantrian,apr.jenis')
+                (case when apr.isconfirm=\'true\' then \'Confirm\' else \'Reservasi\' end) as status,apr.ismobilejkn,apd.noantrian,apr.jenis')
             )
             ->where('apr.noreservasi','<>','-')
             ->where('apr.statusenabled',true)
@@ -6111,13 +6113,12 @@ class RegistrasiController extends ApiController
         foreach($data as $d){
             $d->nomorantrean  = null;
             if($d->ismobilejkn ==true){
-                $nomorAntrian = strlen((string)$d->noantrian);
-                if ($nomorAntrian == 1){
-                    $nomorAntrian = '0'.$d->noantrian;
-                }else{
-                    $nomorAntrian = $d->noantrian;
+                $huruf = 'Z';
+                if ($d->prefixnoantrian != null) {
+                    $huruf = $d->prefixnoantrian;
                 }
-                $d->nomorantrean  =$d->jenis .'-'.$nomorAntrian;
+                $nomorAntrian = $huruf . '-' . str_pad($d->noantrian, 4, "0", STR_PAD_LEFT);
+                $d->nomorantrean = $nomorAntrian;
             }
         }
 

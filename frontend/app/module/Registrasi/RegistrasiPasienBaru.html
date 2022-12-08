@@ -256,6 +256,8 @@
                                         </div>
                                         <div class="grid_8">
                                             <input c-text-box type="input" class="k-textbox" ng-model="item.noBpjs" />
+                                            <img ng-show="isLoadingNoBPJS" style="position:absolute;right:5px;top:12px;margin-left:-10px;"
+                                            height="24" src="stylesheets\Flat\loading-image.gif" />
                                         </div>
                                     </div>
                                     <div class="grid_12">
@@ -264,7 +266,7 @@
                                         </div>
                                         <div class="grid_8">
                                             <input c-text-box type="input" class="k-textbox"
-                                                ng-model="item.noAsuransiLain" />
+                                                ng-model="item.noAsuransiLain" ng-keypress="($event.key === 'Enter')? getNoBPJS(item.noBpjs):item.noAsuransiLain"/>
                                         </div>
                                     </div>
                                     <div class="grid_12">

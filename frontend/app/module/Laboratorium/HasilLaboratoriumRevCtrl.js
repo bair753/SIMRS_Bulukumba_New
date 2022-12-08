@@ -1,4 +1,4 @@
-define(['initialize'], function (initialize) {
+define(['initialize', 'Configuration'], function (initialize, config) {
     'use strict';
     initialize.controller('HasilLaboratoriumRevCtrl', ['$scope', '$state', 'MedifirstService', 'CacheHelper',
         function ($scope, $state, medifirstService, cacheHelper) {
@@ -683,6 +683,21 @@ define(['initialize'], function (initialize) {
             medifirstService.getPart("laboratorium/get-combo-dokter-lab").then(function (data) {
                 $scope.ListDataPegawai = data;
             });
+
+            $scope.cetakhtml = function () {
+                var dokter = "";
+                var user = medifirstService.getPegawaiLogin();
+                var catatan = $scope.item.catatan == undefined ? "" : $scope.item.catatan;
+                if ($scope.item.DataPegawai == undefined) {
+                    alert("Pilih terlebih dahulu dokter nya!!")
+                    return;
+                } else {
+                    dokter = $scope.item.DataPegawai
+                }
+                window.open(config.baseApiBackend + 'report/cetak-hasil-lab-manual?norec=&norec=' + $scope.norecAPD
+                + '&objectjeniskelaminfk=' + $scope.item.objectjeniskelaminfk + '&umur=' + $scope.item.umurDay
+                + '&strIdPegawai=' + user.namaLengkap + '&strNorecPP=' + $scope.item.norecPP + '&doketr=' + dokter.namalengkap + '&catatan=' + catatan,"_blank");
+            }
 
            
 

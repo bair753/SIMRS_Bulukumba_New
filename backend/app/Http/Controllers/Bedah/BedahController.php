@@ -126,7 +126,7 @@ class BedahController extends ApiController
         $data =DB::select(DB::raw("select * from
                 (select pd.tglregistrasi,  ps.id as nocmfk,  ps.nocm,  pd.noregistrasi,  ps.namapasien,  ps.tgllahir, 
                  jk.jeniskelamin,  apd.objectruanganfk, ru.namaruangan,  kls.id as idkelas,kls.namakelas,  kp.kelompokpasien,  rek.namarekanan, 
-                 apd.objectpegawaifk,  pg.namalengkap as namadokter,  br.norec,pg2.namalengkap as pegawaiverif, 
+                 apd.objectpegawaifk,  pg.namalengkap as namadokter,  br.norec,pg2.namalengkap as pegawaiverif, apd.jammulaioperasi, apd.jamselesaioperasi, apd.statusoperasi,
                  pd.norec as norec_pd, apd.tglmasuk, apd.norec as norec_apd, row_number() over (partition by pd.noregistrasi,apd.tglregistrasi order by apd.tglmasuk desc) as rownum 
                  from antrianpasiendiperiksa_t as apd
                  inner join pasiendaftar_t as pd on pd.norec = apd.noregistrasifk 
@@ -515,5 +515,76 @@ class BedahController extends ApiController
             'message' => 'ea@epic',
         );
         return $this->respond($result);
+    }
+
+    public function saveMulaiOperasi(Request $request) {
+        $kdProfile = (int) $this->getDataKdProfile($request);
+        DB::beginTransaction();
+        try {
+
+            AntrianPasienDiperiksa::where("norec", $request['norec_apd'])
+            ->update([
+                'jammulaioperasi' => $request['jammulaioperasi'],
+                'jamselesaioperasi' => $request['jamselesaioperasi'],
+            ]);
+
+            $transStatus = true;
+            $transMessage = "Simpan data Berhasil";
+        } catch (\Exception $e) {
+            $transStatus = false;
+            $transMessage = "Simpan data Gagal";
+        }
+
+        if ($transStatus) {
+            DB::commit();
+            $result = array(
+                'status' => 201,
+                'message' => $transMessage,
+                'as' => 'hs@epic',
+            );
+        } else {
+            DB::rollBack();
+            $result = array(
+                'status' => 400,
+                'message'  => $transMessage,
+                'as' => 'hs@epic',
+            );
+        }
+        return $this->setStatusCode($result['status'])->respond($result, $transMessage);
+    }
+
+    public function saveStatusOperasi(Request $request) {
+        $kdProfile = (int) $this->getDataKdProfile($request);
+        DB::beginTransaction();
+        try {
+
+            AntrianPasienDiperiksa::where("norec", $request['norec_apd'])
+            ->update([
+                'statusoperasi' => $request['statusoperasi'],
+            ]);
+
+            $transStatus = true;
+            $transMessage = "Simpan data Berhasil";
+        } catch (\Exception $e) {
+            $transStatus = false;
+            $transMessage = "Simpan data Gagal";
+        }
+
+        if ($transStatus) {
+            DB::commit();
+            $result = array(
+                'status' => 201,
+                'message' => $transMessage,
+                'as' => 'hs@epic',
+            );
+        } else {
+            DB::rollBack();
+            $result = array(
+                'status' => 400,
+                'message'  => $transMessage,
+                'as' => 'hs@epic',
+            );
+        }
+        return $this->setStatusCode($result['status'])->respond($result, $transMessage);
     }
 }

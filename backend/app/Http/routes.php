@@ -115,6 +115,8 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
           Route::post('bedah/delete-verif-bedah', 'Bedah\BedahController@deleteVerifBedah');
           Route::get('bedah/lap-tindakan-bedah', 'Bedah\BedahController@getLaporanTindakanBedah');
           Route::get('bedah/get-tindakan-bedah','Bedah\BedahController@getTindakanBedah');
+          Route::post('bedah/save-mulai-operasi','Bedah\BedahController@saveMulaiOperasi');
+          Route::post('bedah/save-status-operasi','Bedah\BedahController@saveStatusOperasi');
         // });
         // Route::group(['prefix' => 'bedmonitor'], function () {
           Route::get('bedmonitor/get-data-view-bed', 'BedMonitor\BedMonitorController@getKetersediaanTempatTidurViewBM');
@@ -1819,6 +1821,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
 
               Route::post('registrasi/hapus-sep', 'Registrasi\RegistrasiController@updateNoseppa');
               Route::get('registrasi/get-data-antrean', 'Registrasi\RegistrasiController@getDataAntrean');
+              Route::post('jkn/save-checkin','ReservasiOnline\MyJKNV2Controller@saveCheckInAntrean_fix');
 
 
         // });
@@ -2656,6 +2659,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
         Route::get('report/cetak-anggaran','Report\ReportController@cetakRbaAnggaran_2021');
         Route::get('report/cetak-neraca','Report\ReportController@cetakNeraca');
         Route::get('report/cetak-labarugi','Report\ReportController@cetakLabaRugi');
+        Route::get('report/cetak-hasil-lab-manual','Report\ReportController@cetakHasilLabManual');
         Route::get('report/cetak-suratjaminanpelayanan','Report\ReportController@cetakSuratJaminanPelayanan');
         Route::get('report/cetak-pegawai','Report\ReportController@cetakPegawai');
 

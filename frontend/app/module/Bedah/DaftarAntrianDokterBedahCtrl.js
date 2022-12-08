@@ -18,6 +18,12 @@ define(['initialize'], function (initialize) {
             // $scope.title = "ini page pencarian pasien";
             // $scope.kodeRuangan = $state.params.kodeRuangan;
             // $scope.isCalling = false;
+            $scope.listStatusOperasi = [
+                { id: 0, nama: "Menunggu" },
+                { id: 1, nama: "Sedang Operasi" },
+                { id: 2, nama: "Recovery Room" },
+                { id: 3, nama: "Selesai" },
+            ]
             $scope.pegawai = ModelItem.getPegawai();
             loadCombo()
             loadData()
@@ -41,7 +47,7 @@ define(['initialize'], function (initialize) {
                     // $scope.item.tglpulang = $scope.now;                 
                 }
                 medifirstService.get("bedah/get-data-combo-dokter", false).then(function (data) {
-                    $scope.listRuangan = data.data.ruanganRanap;
+                    $scope.listRuangan = data.data.ruanganRanap;             
                 });
             }
 
@@ -88,6 +94,21 @@ define(['initialize'], function (initialize) {
                         var tanggalLahir = new Date(datas[i].tgllahir);
                         var umurzz = DateHelper.CountAge(tanggalLahir, tanggal);
                         datas[i].umurzz = umurzz.year + ' thn ' + umurzz.month + ' bln ' + umurzz.day + ' hari'
+
+                        switch(datas[i].statusoperasi) {
+                            case '1':
+                                datas[i].namastatusoperasi = "Sedang Operasi";
+                                break;
+                            case '2':
+                                datas[i].namastatusoperasi = "Recovery Room";
+                                break;
+                            case '3':
+                                datas[i].namastatusoperasi = "Selesai";
+                                break;
+                            default:
+                                datas[i].namastatusoperasi = "Menunggu";
+                                break;
+                        }
                     }
                     $scope.GridPasien = new kendo.data.DataSource({
                         data: datas,
@@ -154,6 +175,18 @@ define(['initialize'], function (initialize) {
                     "width": "80px"
                 },
                 {
+                    "field": "jammulaioperasi",
+                    "title": "Mulai Operasi",
+                    "template": '# if( jammulaioperasi==null) {# - # } else {# #= jammulaioperasi # #} #',
+                    "width": "50px"
+                },
+                {
+                    "field": "jamselesaioperasi",
+                    "title": "Selesai Operasi",
+                    "template": '# if( jamselesaioperasi==null) {# - # } else {# #= jamselesaioperasi # #} #',
+                    "width": "50px"
+                },
+                {
                     "field": "noregistrasi",
                     "title": "No Registrasi",
                     "width": "60px"
@@ -186,6 +219,11 @@ define(['initialize'], function (initialize) {
                 {
                     "field": "kelompokpasien",
                     "title": "Tipe Pembayaran",
+                    "width": "80px"
+                },
+                {
+                    "field": "namastatusoperasi",
+                    "title": "Status",
                     "width": "80px"
                 },
                 // {
@@ -287,7 +325,8 @@ define(['initialize'], function (initialize) {
             }
             $scope.rekamMedisElektronik = function () {
                 if ($scope.item.nocm == null && $scope.item.norec_apd == null) {
-                    window.messageContainer.error("Pilih Dahulu Pasien!")
+                    toastr.error("Pilih pasien terlebih dahulu !")
+                    // window.messageContainer.error("Pilih Dahulu Pasien!")
                     return
                 }
                 // debugger;
@@ -914,7 +953,8 @@ define(['initialize'], function (initialize) {
 
             $scope.InsidenInternal = function () {
                 if ($scope.item.norec_pd == undefined) {
-                    alert("Data Belum Dipilih!")
+                    toastr.error("Pilih pasien terlebih dahulu !")
+                    // alert("Data Belum Dipilih!")
                     return;
                 }
                 var chacePeriode = {
@@ -932,6 +972,78 @@ define(['initialize'], function (initialize) {
                     kpid: $scope.item.norec_pd,
                     noOrder: 'InputInsidenInternal'
                 });
+            }
+
+            $scope.jamOperasi = function () {
+                if ($scope.item.norec_pd == undefined) {
+                    toastr.error("Pilih pasien terlebih dahulu !")
+                    return;
+                }
+
+                var pelengkap = moment($scope.item.tglregistrasi).format('YYYY-MM-DD')
+                $scope.item.pjoRuanganOperasi = { id: $scope.item.objectkamaroperasifk, namakamarok: $scope.item.namakamarok }
+                if($scope.item.jammulaioperasi != null)
+                    $scope.item.pjoJamMulaiOperasi = new Date(pelengkap + " " + $scope.item.jammulaioperasi)
+                
+                if($scope.item.jamselesaioperasi != null)
+                    $scope.item.pjoJamSelesaiOperasi = new Date(pelengkap + " " + $scope.item.jamselesaioperasi)
+                
+                $scope.winJamOperasi.center().open();
+            }
+
+            $scope.simpanJamOperasi = function () {
+                if($scope.item.pjoRuanganOperasi == undefined) {
+                    toastr.error("Pilih terlebih dahulu Ruangan Operasi !")
+                    return;
+                }
+                if($scope.item.pjoJamMulaiOperasi == undefined) {
+                    toastr.error("Pilih terlebih dahulu Mulai Operasi !")
+                    return;
+                }
+                if($scope.item.pjoJamSelesaiOperasi == undefined) {
+                    toastr.error("Pilih terlebih dahulu Selesai Operasi !")
+                    return;
+                }
+
+                var jsonSave = {
+                    "norec_apd": $scope.item.norec_apd,
+                    "objectkamaroperasifk": $scope.item.pjoRuanganOperasi.id,
+                    "jammulaioperasi": moment($scope.item.pjoJamMulaiOperasi).format('YYYY-MM-DD HH:mm'),
+                    "jamselesaioperasi": moment($scope.item.pjoJamSelesaiOperasi).format('YYYY-MM-DD HH:mm'),
+                }
+                $scope.isRouteLoading = true;
+                medifirstService.post('bedah/save-mulai-operasi', jsonSave).then(function (e) {
+                    $scope.isRouteLoading = false;
+                    loadData();
+                    $scope.winJamOperasi.close();
+                })
+            }
+
+            $scope.statusOperasi = function () {
+                if ($scope.item.norec_pd == undefined) {
+                    toastr.error("Pilih pasien terlebih dahulu !")
+                    return;
+                }
+
+                $scope.winStatusOperasi.center().open();
+            }
+
+            $scope.simpanStatusOperasi = function () {
+                if($scope.item.psoStatusOperasi == undefined) {
+                    toastr.error("Pilih status operasi dahulu !")
+                    return;
+                }
+
+                var jsonSave = {
+                    "norec_apd": $scope.item.norec_apd,
+                    "statusoperasi": $scope.item.psoStatusOperasi.id,
+                }
+                $scope.isRouteLoading = true;
+                medifirstService.post('bedah/save-status-operasi', jsonSave).then(function (e) {
+                    $scope.isRouteLoading = false;
+                    loadData();
+                    $scope.winStatusOperasi.close();
+                })
             }
 
         }

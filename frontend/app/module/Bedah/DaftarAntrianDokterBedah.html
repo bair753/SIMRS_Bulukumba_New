@@ -46,27 +46,28 @@
                 </div>
             </div>
             <div class="grid_12">
-                <div class="grid_12 borderBox">
-                    
-                    <div kendo-grid id="grid"
-                    k-groupable="'true'" 
-                    k-aggregate='aggregate' 
-                    k-ng-model="item" 
-                    k-data-source="GridPasien" 
-                    k-selectable="'row'" 
-                    k-sortable="'true'" 
-                    k-pageable="'true'"
-                    k-columns="ColumnPasien"
-                    ng-click="klikGrid(item)">
+                <div class="grid_12">
+                    <div class="borderBox">
+                        <div kendo-grid id="grid"
+                        k-groupable="'true'" 
+                        k-aggregate='aggregate' 
+                        k-ng-model="item" 
+                        k-data-source="GridPasien" 
+                        k-selectable="'row'" 
+                        k-sortable="'true'" 
+                        k-pageable="'true'"
+                        k-columns="ColumnPasien"
+                        ng-click="klikGrid(item)">
+                        </div>
                     </div>
 
                 </div>    
             </div>
         </div>
     </div>
-    <div class="grid_12 place_button">
-        <div class="grid_6">
-        </div>
+    <div class="grid_12">
+        <!-- <div class="grid_6">
+        </div> -->
       <!--   <div class="grid_3">
             <c-button style="width: 100%; padding:0px, margin:0px;" ng-click="diagnosaICD10()" position="'right'">
                 <span class="title">Diagnosa ICD 10</span>
@@ -77,10 +78,17 @@
                 <span class="title">Diagnosa ICD 9</span>
             </c-button>
         </div> -->
-        <div class="grid_3">
-            <c-button style="width: 100%; padding:0px, margin:0px;" ng-click="rekamMedisElektronik()" position="'right'">
-                <span class="title">Pengkajian Medis</span>
-            </c-button>
+        <div class="grid_2">
+            <button class="btnTemplate1" style="margin-left: 0;" ng-click="rekamMedisElektronik()"><i
+                class="fa fa-user-md"></i>Pengkajian Medis</button>
+        </div> 
+        <div class="grid_2">
+            <button class="btnTemplate1" style="margin-left: 0;" ng-click="jamOperasi()"><i
+                class="fa fa-clock-o"></i>Jam Operasi</button>
+        </div>
+        <div class="grid_2">
+            <button class="btnTemplate1" style="margin-left: 0;" ng-click="statusOperasi()"><i
+                class="fa fa-bookmark"></i>Status</button>
         </div> 
         <!-- <div class="grid_3">
             <c-button style="width: 100%; padding:0px, margin:0px;" ng-click="inputTindakanDokter()" position="'right'">
@@ -107,10 +115,9 @@
                 <span class="title">Penunjang Radiologi</span>
             </c-button>
         </div> -->
-        <div class="grid_3">
-            <c-button style="width: 100%; padding:0px, margin:0px;" ng-click="Detail()" position="'right'">
-                <span class="title">Rincian</span>
-            </c-button>
+        <div class="grid_2">
+            <button class="btnTemplate1" style="margin-left: 0;" ng-click="Detail()"><i
+                class="fa fa-list"></i>Rincian</button> 
         </div>
         <div class="grid_2">
             <button class="btnTemplate1" style="margin-left: 0;" ng-click="InsidenInternal()"><i
@@ -201,6 +208,45 @@
         <input style="width: 100%; " kendo-combo-box k-ng-model="items.pilihDokter" k-data-text-field="'namalengkap'" k-filter=" 'contains' " k-data-value-field=" 'id' " k-auto-bind="false " k-data-source="listDokter" />
         <div class="clear">
         <button class="k-button" ng-click="simpanDokter(item, items.pilihDokter)" style="float:right;margin-top:4%">Simpan</button>
+    </div>
+    <div kendo-window="winJamOperasi" k-title="'Periode Jam Operasi'" k-width="400" k-visible="false" k-on-open="win2visible = true" k-on-close="win2visible = false">
+        <div class="panel panel-default container_12" style="padding: 0px 10px;">
+            <div class="grid_6">
+                <div class="grid_12">
+                    <label c-label item="item" c-label-text="Mulai Operasi"></label>
+                </div>
+                <div class="clear"></div>
+
+                <div class="grid_12 padDatePicker" style="padding: 0 !important;">
+                    <input k-ng-model="item.pjoJamMulaiOperasi" 
+                    kendo-timepicker
+                    placeholer="HH:mm" 
+                    k-format="'HH:mm'" style="width: 100%;" />
+                </div>
+            </div>
+            <div class="grid_6">
+                <div class="grid_12">
+                    <label c-label item="item" c-label-text="Selesai Operasi"></label>
+                </div>
+                <div class="clear"></div>
+
+                <div class="grid_12 padDatePicker" style="padding: 0 !important;">
+                    <input k-ng-model="item.pjoJamSelesaiOperasi" 
+                    kendo-timepicker
+                    placeholer="HH:mm" 
+                    k-format="'HH:mm'" style="width: 100%;" />
+                </div>
+            </div>
+            <div class="grid_12" style="padding: 5px;">
+                <button class="k-button" ng-click="simpanJamOperasi()">Simpan</button>
+            </div>
+        </div>
+    </div>
+    <div kendo-window="winStatusOperasi" k-title="'Pilih Status Operasi'" k-width="400" k-visible="false" k-on-open="win2visible = true" k-on-close="win2visible = false">
+        <label c-label item="item " c-label-text="statusOperasi "></label>
+        <input style="width: 100%; " kendo-combo-box k-ng-model="item.psoStatusOperasi" k-data-text-field="'nama'" k-filter=" 'contains' " k-data-value-field=" 'id' " k-auto-bind="false " k-data-source="listStatusOperasi" />
+        <div class="clear">
+        <button class="k-button" ng-click="simpanStatusOperasi()" style="float:right;margin-top:4%">Simpan</button>
     </div>
 
 </div>
