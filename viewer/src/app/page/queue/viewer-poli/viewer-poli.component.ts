@@ -261,7 +261,7 @@ export class ViewerPoliComponent implements OnInit {
                 this.playAudio(
                     "Nomor Antrian " +
                         Terbilang(this.item.antriTerakhir) +
-                        ". " +
+                        ". Pasien Atas Nama." +
                         this.item.nama +
                         ". Ke Ruang." +
                         this.item.poliPanggil
