@@ -417,8 +417,22 @@ define(['initialize'], function (initialize) {
                     noRec: $scope.dataSelected.norec_apd
                 })
             }
-            //***********************************
 
+            $scope.PanggilPasien = function () {
+                if ($scope.dataSelected == undefined) {
+                    window.messageContainer.error("Pilih Dahulu Pasien!")
+                    return
+                }
+
+                socket.emit('call-antrian-poli', {
+                    namapasien: $scope.dataSelected.namapasien,
+                    namaruangan: $scope.dataSelected.namaruangan,
+                    noantri: $scope.dataSelected.noregistrasi,
+                    nocm: $scope.dataSelected.nocm,
+                });
+            }
+
+            //***********************************
         }
     ]);
 });
