@@ -1266,6 +1266,33 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                 }
                 return binary_to_base64(binary);
             }
+
+            $scope.getNoBPJS = function (e) {
+                let json = {
+                    "url": `Peserta/nokartu/${e}/tglSEP/` + moment(new Date()).format("YYYY-MM-DD"),
+                    "method": "GET",
+                    "data": null
+                }
+                $scope.isLoadingNoBPJS = true;
+                medifirstService.postNonMessage("bridging/bpjs/tools", json).then(function (e) {
+                    if (e.data.metaData.code == 200) {
+                        var data = e.data.response
+                        $scope.item.namaPasien = data.peserta.nama
+                        $scope.item.noBpjs = data.peserta.noKartu
+                        $scope.item.tglLahir = new Date(data.peserta.tglLahir)
+                        if(data.peserta.sex.toUpperCase() === "L"){
+                            $scope.item.jenisKelamin = { id: 1, jeniskelamin: "LAKI-LAKI" }
+                        }
+                        if(data.peserta.sex.toUpperCase() === "P"){
+                            $scope.item.jenisKelamin = { id: 2, jeniskelamin: "PEREMPUAN" }
+                        }
+                       
+                    }else{
+                        toastr.info(e.data.metaData.message)
+                    }
+                    $scope.isLoadingNoBPJS = false;
+                })
+            }
         }
     ]);
 });

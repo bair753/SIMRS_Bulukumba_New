@@ -115,6 +115,8 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
           Route::post('bedah/delete-verif-bedah', 'Bedah\BedahController@deleteVerifBedah');
           Route::get('bedah/lap-tindakan-bedah', 'Bedah\BedahController@getLaporanTindakanBedah');
           Route::get('bedah/get-tindakan-bedah','Bedah\BedahController@getTindakanBedah');
+          Route::post('bedah/save-mulai-operasi','Bedah\BedahController@saveMulaiOperasi');
+          Route::post('bedah/save-status-operasi','Bedah\BedahController@saveStatusOperasi');
         // });
         // Route::group(['prefix' => 'bedmonitor'], function () {
           Route::get('bedmonitor/get-data-view-bed', 'BedMonitor\BedMonitorController@getKetersediaanTempatTidurViewBM');
