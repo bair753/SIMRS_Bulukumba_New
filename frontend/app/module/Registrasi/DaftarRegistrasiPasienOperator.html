@@ -1505,3 +1505,11 @@
 		</button>
 	</div>
 </div>
+
+<div kendo-window="popUpCetakanGelang" k-title="'Pilih Cetakan'" k-width="400" k-height="120" k-visible="false" k-on-open="win2visible = true" k-on-close="win2visible = false">
+	<label c-label item="item " >Nama Gelang </label>
+		<input style="width: 100%;" kendo-combo-box k-ng-model="item.cetakanGelang" k-data-text-field="'nama'" k-data-value-field="'id'"
+		 k-filter="'contains'" k-auto-bind="false" k-data-source="listCetakanGelang" />
+	<div class="clear">
+	<button class="k-button" ng-click="cetakGelangPasien(item.cetakanGelang)" style="float:right;margin-top:4%" >Cetak</button>	
+</div>

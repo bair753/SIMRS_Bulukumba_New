@@ -97,7 +97,8 @@
                             placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" ng-disabled='cekBelumVerifs' />
                     </div>
                     <div class="grid_2" style="margin-top: -5px;">
-                        <button class="btnTemplate1" style="margin-left: 0;" ng-click="cariFilter()"><i class="fa fa-search" ></i>Cari</button>
+                        <button class="btnTemplate1" style="margin-left: 0;" ng-click="cariFilter()"><i
+                                class="fa fa-search"></i>Cari</button>
                         <!-- <button class="c-button" ng-click="cariFilter()">Cari</button> -->
                     </div>
                 </div>
@@ -126,8 +127,8 @@
                 </div>
 
                 <div class="grid_12">
-                    <input c-text-box type="input" filter="" class="k-textbox" ng-model="item.noReg"     
-                     ng-keypress="($event.which == 13)? cariFilter():item.noReg" />
+                    <input c-text-box type="input" filter="" class="k-textbox" ng-model="item.noReg"
+                        ng-keypress="($event.which == 13)? cariFilter():item.noReg" />
                 </div>
             </div>
             <div class="grid_1">
@@ -136,8 +137,8 @@
                 </div>
 
                 <div class="grid_12">
-                    <input c-text-box type="input" filter="" class="k-textbox" ng-model="item.noMr"   
-                    ng-keypress="($event.which == 13)? cariFilter():item.noMr"/>
+                    <input c-text-box type="input" filter="" class="k-textbox" ng-model="item.noMr"
+                        ng-keypress="($event.which == 13)? cariFilter():item.noMr" />
                 </div>
             </div>
             <div class="grid_2">
@@ -146,7 +147,8 @@
                 </div>
 
                 <div class="grid_12">
-                    <input c-text-box type="input" filter="" class="k-textbox" ng-model="item.namaPasien"  ng-keypress="($event.which == 13)? cariFilter():item.namaPasien" />
+                    <input c-text-box type="input" filter="" class="k-textbox" ng-model="item.namaPasien"
+                        ng-keypress="($event.which == 13)? cariFilter():item.namaPasien" />
                 </div>
             </div>
             <div class="grid_1">
@@ -159,20 +161,32 @@
                 </div>
             </div>
             <div class="grid_1" style="margin-top:15px">
-                    <button class="btnTemplate1" style="margin-left: 0;" ng-click="TransaksiPelayanan()"><i class="fa fa-th-list" ></i>Rincian</button>
-                    <!-- <button class="c-button" ng-click="TransaksiPelayanan()">Rincian</button> -->
-                </div>
-            <div class="grid_2"  style="margin-top:15px">
-                    <button class="btnTemplate1" style="margin-left: 0;" ng-click="pengkajianMedis()"><i class="fa fa-stethoscope" ></i>Pengkajian Medis</button>
-                    <!-- <button class="c-button" ng-click="TransaksiPelayanan()">Pengkajian Medis</button> -->
-                </div>
-          
-            <div class="grid_2"  style="margin-top:15px">
-                    <button class="btnTemplate1" style="margin-left: 0;" ng-click="UbahJk()"><i class="fa  fa-intersex" ></i>Ubah Jenis Kelamin</button>
+                <button class="btnTemplate1" style="margin-left: 0;" ng-click="TransaksiPelayanan()"><i
+                        class="fa fa-th-list"></i>Rincian</button>
+                <!-- <button class="c-button" ng-click="TransaksiPelayanan()">Rincian</button> -->
+            </div>
+            <div class="grid_2" style="margin-top:15px">
+                <button class="btnTemplate1" style="margin-left: 0;" ng-click="pengkajianMedis()"><i
+                        class="fa fa-stethoscope"></i>Pengkajian Medis</button>
+                <!-- <button class="c-button" ng-click="TransaksiPelayanan()">Pengkajian Medis</button> -->
+            </div>
+
+            <div class="grid_2" style="margin-top:15px">
+                <button class="btnTemplate1" style="margin-left: 0;" ng-click="UbahJk()"><i
+                        class="fa  fa-intersex"></i>Ubah Jenis Kelamin</button>
                 <!-- <button class="c-button" ng-click="UbahJk()">Ubah Jenis Kelamin</button> -->
             </div>
-            <div class="grid_2"  style="margin-top:15px">
-                    <button class="btnTemplate1" style="margin-left: 0;" ng-click="UbahGolDar()"><i class="fa fa-heart" ></i>Ubah Golongan Darah</button>
+            <div class="grid_2" style="margin-top:15px">
+                <button class="btnTemplate1" style="margin-left: 0;" ng-click="UbahGolDar()"><i
+                        class="fa fa-heart"></i>Ubah Golongan Darah</button>
+                <!-- <button class="c-button" ng-click="UbahGolDar()">Ubah Golongan Darah</button> -->
+            </div>            
+        </div>
+        <div class="grid_12">
+            <div class="grid_10"></div>
+            <div class="grid_2">
+                <button class="btnTemplate1" style="margin-left: 0;" ng-click="PanggilPasien()"><i
+                        class="fa fa-phone-square"></i>Panggil Pasien</button>
                 <!-- <button class="c-button" ng-click="UbahGolDar()">Ubah Golongan Darah</button> -->
             </div>
         </div>

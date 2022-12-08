@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 var app = require('../app');
-app.set('port', 2222);
+app.set('port', 3333);
 var server = app.listen(app.get('port'), function() {
     console.log('Express Server for HTPP Server & Notification Server, listening on port ' + server.address().port);
 });

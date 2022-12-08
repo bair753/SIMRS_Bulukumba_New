@@ -258,14 +258,23 @@ export class ViewerPoliComponent implements OnInit {
 
             if (status == true) {
                 this.dipanggil = true;
-                this.playAudio(
-                    "Nomor Antrian " +
-                        Terbilang(this.item.antriTerakhir) +
-                        ". " +
-                        this.item.nama +
-                        ". Ke Ruang." +
-                        this.item.poliPanggil
-                );
+                if (this.item.antriTerakhir == "") {
+                    this.playAudio(
+                        "Pasien Atas Nama " +                            
+                            this.item.nama +
+                            ". Ke Ruang." +
+                            this.item.poliPanggil
+                    );
+                }else{
+                    this.playAudio(
+                        "Nomor Antrian " +
+                            Terbilang(this.item.antriTerakhir) +
+                            ". " +
+                            this.item.nama +
+                            ". Ke Ruang." +
+                            this.item.poliPanggil
+                    );
+                }                
             }
         });
         this.socket.on("suara-perawat", (data: any) => {
