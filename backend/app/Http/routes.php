@@ -2656,6 +2656,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
         Route::get('report/cetak-anggaran','Report\ReportController@cetakRbaAnggaran_2021');
         Route::get('report/cetak-neraca','Report\ReportController@cetakNeraca');
         Route::get('report/cetak-labarugi','Report\ReportController@cetakLabaRugi');
+        Route::get('report/cetak-hasil-lab-manual','Report\ReportController@cetakHasilLabManual');
 
         Route::get('viewer/get-list-antrian','Antrian\AntrianController@getListAntrian');
         Route::get('viewer/update-antrian','Antrian\AntrianController@updatePanggil');
