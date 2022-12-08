@@ -18,7 +18,7 @@ import { CoreConfig } from '@core/types';
 export const coreConfig: CoreConfig = {
   app: {
     appName: 'Kiosk',                            // App Name
-    appTitle: 'Kiosk - RSUD Bulukumba', // App Title
+    appTitle: 'Kiosk - RSUD BULUKUMBA', // App Title
     // appLogoImage: 'assets/images/logo/logo.svg',                  // App Logo
     appLogoImage: 'assets/images/logo_only.png',
     appVendor: 'TRANSMEDIC',

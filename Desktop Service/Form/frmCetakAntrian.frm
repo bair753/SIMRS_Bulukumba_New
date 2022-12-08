@@ -89,7 +89,7 @@ On Error Resume Next
     Set rs = Nothing
     rs.Open " select apr.*,CASE WHEN ru.namaruangan IS NULL THEN '' ELSE ru.namaruangan END AS namaruangan " & _
             " FROM antrianpasienregistrasi_t AS apr " & _
-            " INNER JOIN ruangan_m AS ru ON ru.id = apr.objectruanganfk" & _
+            " LEFT JOIN ruangan_m AS ru ON ru.id = apr.objectruanganfk" & _
             " WHERE apr.norec ='" & strNorec & "'", CN, adOpenStatic, adLockReadOnly
       NoAh = rs!noantrian
     If Len(NoAh) = 1 Then
@@ -110,9 +110,9 @@ On Error Resume Next
     
      
     If jenis = "A" Then
-        ruangan = "UMUM"
+        ruangan = "PASIEN BARU"
     ElseIf jenis = "B" Then
-        ruangan = "BPJS"
+        ruangan = "PASIEN LAMA"
 '    ElseIf jenis = "C" Then
 '        ruangan = "Poli Obgyn, Anak, Jantung, Kulit"
 '    ElseIf jenis = "D" Then
@@ -145,7 +145,8 @@ On Error Resume Next
 '        Printer.Print "      SURAKARTA"
         Printer.FontBold = False
         Printer.fontSize = 10
-        Printer.Print strAlamatRS
+        Printer.Print "Jl. Serikaya No.17, Caile, Kec. Ujung Bulu,"
+        Printer.Print "Kabupaten Bulukumba, Sulawesi Selatan"
 '        Printer.Print "Kec. Cipocok Jaya, Kota Serang,Banten 42123"
         Printer.Print strNoTlpn & " " & strNoFax
         Printer.Print "___________________________________"
