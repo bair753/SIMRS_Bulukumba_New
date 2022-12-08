@@ -126,7 +126,7 @@ class AntrianController extends ApiController
         $ruangan = DB::table('ruangan_m')
             ->select('id', 'namaruangan','nocounter')
             ->where('statusenabled', true)
-            ->wherein('objectdepartemenfk', [18])
+            ->wherein('objectdepartemenfk', [18,27,3])
             ->orderBy('namaruangan')
             ->get();
         $res['ruangan'] = $ruangan;
@@ -136,7 +136,7 @@ class AntrianController extends ApiController
     public function getDipanggil(Request $r){
         $arruangn = [];
         foreach (explode(',', $r['ruangan']) as $z){
-            $arruangn[] =$z;
+            $arruangn[] = $z;
         }
         $apd = DB::table('antrianpasiendiperiksa_t as apd')
         ->join('pasiendaftar_t as pd','pd.norec','=','apd.noregistrasifk')
