@@ -596,10 +596,10 @@
             </div>
         </div>
         <div class="grid_12">
-            <div class="grid_3">
+            <div class="grid_1">
 
             </div>
-            <div class="grid_9">
+            <div class="grid_11">
                 <div ng-hide='isSimpan' class="grid_2" style="float:right">
                     <button ng-show="!isLoading" kendo-button style="width: 100%" class="success" ng-click="Save()"
                         ng-hide='hideBtnSimpan'><i class="fa fa-save"></i>Simpan</button>
@@ -607,7 +607,12 @@
                 <div class="grid_2" style="float:right">
                     <button ng-show="!isLoading" kendo-button style="width: 100%" class="primary" is-back><i
                             class="fa fa-arrow-left"></i>Kembali</button>
-                </div>            
+                </div>  
+                
+                <div class="grid_2" style="float:right">
+                    <button ng-show="!isLoading" kendo-button style="width: 100%" class="success"
+                        ng-click="cetakSuratJaminanPelayanan()"><i class="fa fa-print"></i>Cetak Surat Jaminan Pelayanan</button>
+                </div>
 
                 <div class="grid_2" style="float:right">
                     <button ng-show="!isLoading" kendo-button style="width: 100%" class="success"
