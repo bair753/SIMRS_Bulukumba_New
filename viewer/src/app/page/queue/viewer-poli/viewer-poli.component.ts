@@ -229,29 +229,55 @@ export class ViewerPoliComponent implements OnInit {
                     const element2 = this.listRuanganAktif[x];
                     if (element2.namaruangan == result.namaruangan) {
                         status = true;
+                        if (element2.noantri == "") {
+                            element2.noantri =
+                                this.listAntri[this.listAntri.length - 1].noantri;
 
-                        element2.noantri =
-                            this.listAntri[this.listAntri.length - 1].noantri;
+                            this.item.poliPanggil =
+                                this.listAntri[
+                                    this.listAntri.length - 1
+                                ].namaruangan;
+                            this.item.antriTerakhir =
+                                this.listAntri[
+                                    this.listAntri.length - 1
+                                ].namapasien;
+                            this.item.nama =
+                                this.listAntri[
+                                    this.listAntri.length - 1
+                                ].namapasien;
+                            // this.item.namapasien = this.listAntri[this.listAntri.length - 1].nocm + ',' + this.listAntri[this.listAntri.length - 1].namapasien
+                            let nama =
+                                this.listAntri[
+                                    this.listAntri.length - 1
+                                ].namapasien.split(" ");
+                            this.item.namapasien =
+                                this.listAntri[
+                                    this.listAntri.length - 1
+                                ].namapasien; //nama[0]
+                        } else {
+                            element2.noantri =
+                                this.listAntri[this.listAntri.length - 1].noantri;
 
-                        this.item.poliPanggil =
-                            this.listAntri[
-                                this.listAntri.length - 1
-                            ].namaruangan;
-                        this.item.antriTerakhir =
-                            this.listAntri[this.listAntri.length - 1].noantri;
-                        this.item.nama =
-                            this.listAntri[
-                                this.listAntri.length - 1
-                            ].namapasien;
-                        // this.item.namapasien = this.listAntri[this.listAntri.length - 1].nocm + ',' + this.listAntri[this.listAntri.length - 1].namapasien
-                        let nama =
-                            this.listAntri[
-                                this.listAntri.length - 1
-                            ].namapasien.split(" ");
-                        this.item.namapasien =
-                            this.listAntri[
-                                this.listAntri.length - 1
-                            ].namapasien; //nama[0]
+                            this.item.poliPanggil =
+                                this.listAntri[
+                                    this.listAntri.length - 1
+                                ].namaruangan;
+                            this.item.antriTerakhir =
+                                this.listAntri[this.listAntri.length - 1].noantri;
+                            this.item.nama =
+                                this.listAntri[
+                                    this.listAntri.length - 1
+                                ].namapasien;
+                            // this.item.namapasien = this.listAntri[this.listAntri.length - 1].nocm + ',' + this.listAntri[this.listAntri.length - 1].namapasien
+                            let nama =
+                                this.listAntri[
+                                    this.listAntri.length - 1
+                                ].namapasien.split(" ");
+                            this.item.namapasien =
+                                this.listAntri[
+                                    this.listAntri.length - 1
+                                ].namapasien; //nama[0]
+                        }
                     }
                 }
             }
@@ -260,21 +286,21 @@ export class ViewerPoliComponent implements OnInit {
                 this.dipanggil = true;
                 if (this.item.antriTerakhir == "") {
                     this.playAudio(
-                        "Pasien Atas Nama " +                            
-                            this.item.nama +
-                            ". Ke Ruang." +
-                            this.item.poliPanggil
+                        "Pasien Atas Nama " +
+                        this.item.nama +
+                        ". Ke Ruang." +
+                        this.item.poliPanggil
                     );
-                }else{
+                } else {
                     this.playAudio(
                         "Nomor Antrian " +
-                            Terbilang(this.item.antriTerakhir) +
-                            ". " +
-                            this.item.nama +
-                            ". Ke Ruang." +
-                            this.item.poliPanggil
+                        Terbilang(this.item.antriTerakhir) +
+                        ". " +
+                        this.item.nama +
+                        ". Ke Ruang." +
+                        this.item.poliPanggil
                     );
-                }                
+                }
             }
         });
         this.socket.on("suara-perawat", (data: any) => {
