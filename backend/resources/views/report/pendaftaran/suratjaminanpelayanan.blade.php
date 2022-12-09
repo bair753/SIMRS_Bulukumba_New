@@ -219,13 +219,13 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td style="text-align: center" height="75px">
+                                <td style="text-align: center">
                                     <div style="text-align: center" id="qrPasien"></div>
                                 </td>
-                                <td style="text-align: center" height="75px">
+                                <td style="text-align: center">
                                     <div style="text-align: center" id="qrDokter"></div>
                                 </td>
-                                <td style="text-align: center" height="75px">
+                                <td style="text-align: center">
                                     <div style="text-align: center" id="qrPemberi"></div>
                                 </td>
                             </tr>
