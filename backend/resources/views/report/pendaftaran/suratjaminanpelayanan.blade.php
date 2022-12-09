@@ -78,34 +78,34 @@
     }
 </style>
 
-<body style="background-color: #CCCCCC;margin: 0" onLoad="window.print()">
+<body style="background-color: #CCCCCC;margin: 0" >
     <div align="center">
-        <table class="bayangprint" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0" width="{{$pageWidth}}" style="padding:25px">
+        <table class="bayangprint" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0" width="{{$pageWidth}}" style="padding:15px">
             <tbody>
                 <tr>
                     <td>
                         <table width="100%" cellspacing="0" cellpadding="0" border="0">
                             <tr>
                                 <td>
-                                    <p align="left" style="font-size: 12pt;font-weight:600;letter-spacing: 4px;" color="#000000">
+                                    <p align="left" style="font-size: 11pt;font-weight:600;letter-spacing: 4px;" color="#000000">
                                         RSUD H. A. SULTHAN DG RADJA<br />
                                         BULUKUMBA
                                     </p>
                                 </td>
                                 <td align="center">
-                                    <p align="center" style="font-size: 12pt;font-weight:600;letter-spacing: 4px;" color="#000000">
+                                    <p align="center" style="font-size: 11pt;font-weight:600;letter-spacing: 4px;" color="#000000">
                                         <br /><br /><br /><br />
                                     </p>
                                 </td>
                                 <td>
-                                    <p align="center" style="font-size: 12pt;font-weight:600;letter-spacing: 4px;border-width:2px; border-style:solid; border-color:black; padding: 1em;" color="#000000">
+                                    <p align="center" style="font-size: 11pt;font-weight:600;letter-spacing: 4px;border-width:2px; border-style:solid; border-color:black; padding: 1em;" color="#000000">
                                         {{ $datas->instalasi }}
                                     </p>
                                 </td>
                             </tr>
                             <tr>
                                 <td align="center" colspan="3">
-                                    <p align="center" style="font-size: 14pt;font-weight:600;letter-spacing: 4px;" color="#000000">
+                                    <p align="center" style="font-size: 13pt;font-weight:600;letter-spacing: 4px;margin-top: -15px;" color="#000000">
                                         <br />{{ $datas->jenis }} <br />
                                         Surat Jaminan Pelayanan
                                     </p>
@@ -119,86 +119,86 @@
                         <table width="100%" cellspacing="0" cellpadding="0" border="0">
                             <tr>
                                 <td width="20%">
-                                    <font style="font-size: 12pt;" color="#000000">Nomor</font>
+                                    <font style="font-size: 11pt;" color="#000000">Nomor</font>
                                 </td>
                                 <td width="45%">
-                                    <font style="font-size: 12pt;" color="#000000">: {{ $datas->noregistrasi }}</font>
+                                    <font style="font-size: 11pt;" color="#000000">: {{ $datas->noregistrasi }}</font>
                                 </td>
                                 <td width="15%">
-                                    <font style="font-size: 12pt;" color="#000000">No.RM</font>
+                                    <font style="font-size: 11pt;" color="#000000">No.RM</font>
                                 </td>
                                 <td width="35%">
-                                    <font style="font-size: 12pt;" color="#000000">: {{ $datas->nocm }}</font>
+                                    <font style="font-size: 11pt;" color="#000000">: {{ $datas->nocm }}</font>
                                 </td>
                             </tr>
                             <tr>
                                 <td width="20%">
-                                    <font style="font-size: 12pt;" color="#000000">Perawatan/Poli</font>
+                                    <font style="font-size: 11pt;" color="#000000">Perawatan/Poli</font>
                                 </td>
                                 <td width="45%">
-                                    <font style="font-size: 12pt;" color="#000000">: {{ $datas->namaruangan }}</font>
+                                    <font style="font-size: 11pt;" color="#000000">: {{ $datas->namaruangan }}</font>
                                 </td>
                                 <td width="15%">
-                                    <font style="font-size: 12pt;" color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;</font>
+                                    <font style="font-size: 11pt;" color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;</font>
                                 </td>
                                 <td width="35%">
-                                    <font style="font-size: 12pt;" color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;</font>
+                                    <font style="font-size: 11pt;" color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;</font>
                                 </td>
                             </tr>
                             <tr>
                                 <td width="20%">
-                                    <font style="font-size: 12pt;" color="#000000">Nama Peserta</font>
+                                    <font style="font-size: 11pt;" color="#000000">Nama Peserta</font>
                                 </td>
                                 <td width="45%">
-                                    <font style="font-size: 12pt;" color="#000000">: {{ $datas->namapasien }}</font>
+                                    <font style="font-size: 11pt;" color="#000000">: {{ $datas->namapasien }}</font>
                                 </td>
                                 <td width="15%">
-                                    <font style="font-size: 12pt;" color="#000000">Tgl Masuk</font>
+                                    <font style="font-size: 11pt;" color="#000000">Tgl Masuk</font>
                                 </td>
                                 <td width="35%">
-                                    <font style="font-size: 12pt;" color="#000000">: {{ date_format(date_create($datas->tglregistrasi),"d/m/Y H:i:s") }}</font>
+                                    <font style="font-size: 11pt;" color="#000000">: {{ date_format(date_create($datas->tglregistrasi),"d/m/Y H:i:s") }}</font>
                                 </td>
                             </tr>
                             <tr>
                                 <td width="20%">
-                                    <font style="font-size: 12pt;" color="#000000">Alamat</font>
+                                    <font style="font-size: 11pt;" color="#000000">Alamat</font>
                                 </td>
                                 <td width="45%">
-                                    <font style="font-size: 12pt;" color="#000000">: {{ $datas->alamatlengkap }}</font>
+                                    <font style="font-size: 11pt;" color="#000000">: {{ $datas->alamatlengkap }}</font>
                                 </td>
                                 <td width="15%">
-                                    <font style="font-size: 12pt;" color="#000000">Tgl Masuk</font>
+                                    <font style="font-size: 11pt;" color="#000000">Tgl Masuk</font>
                                 </td>
                                 <td width="35%">
-                                    <font style="font-size: 12pt;" color="#000000">: &nbsp;&nbsp;&nbsp;&nbsp;</font>
+                                    <font style="font-size: 11pt;" color="#000000">: &nbsp;&nbsp;&nbsp;&nbsp;</font>
                                 </td>
                             </tr>
                             <tr>
                                 <td width="20%">
-                                    <font style="font-size: 12pt;" color="#000000">Diagnosa Penyakit</font>
+                                    <font style="font-size: 11pt;" color="#000000">Diagnosa Penyakit</font>
                                 </td>
                                 <td width="45%">
-                                    <font style="font-size: 12pt;" color="#000000">: &nbsp;&nbsp;&nbsp;&nbsp;</font>
+                                    <font style="font-size: 11pt;" color="#000000">: &nbsp;&nbsp;&nbsp;&nbsp;</font>
                                 </td>
                                 <td width="15%">
-                                    <font style="font-size: 12pt;" color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;</font>
+                                    <font style="font-size: 11pt;" color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;</font>
                                 </td>
                                 <td width="35%">
-                                    <font style="font-size: 12pt;" color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;</font>
+                                    <font style="font-size: 11pt;" color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;</font>
                                 </td>
                             </tr>
                             <tr>
                                 <td width="20%">
-                                    <font style="font-size: 12pt;" color="#000000">Prosedur/Tindakan</font>
+                                    <font style="font-size: 11pt;" color="#000000">Prosedur/Tindakan</font>
                                 </td>
                                 <td width="45%">
-                                    <font style="font-size: 12pt;" color="#000000">: &nbsp;&nbsp;&nbsp;&nbsp;</font>
+                                    <font style="font-size: 11pt;" color="#000000">: &nbsp;&nbsp;&nbsp;&nbsp;</font>
                                 </td>
                                 <td width="15%">
-                                    <font style="font-size: 12pt;" color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;</font>
+                                    <font style="font-size: 11pt;" color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;</font>
                                 </td>
                                 <td width="35%">
-                                    <font style="font-size: 12pt;" color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;</font>
+                                    <font style="font-size: 11pt;" color="#000000">&nbsp;&nbsp;&nbsp;&nbsp;</font>
                                 </td>
                             </tr>
                         </table>
@@ -209,13 +209,13 @@
                         <table width="100%" cellspacing="0" cellpadding="0" border="0">
                             <tr>
                                 <td style="text-align: center">
-                                    <font style="font-size: 12pt;" color="#000000"><b>Penerima Pelayanan</b></font>
+                                    <font style="font-size: 11pt;" color="#000000"><b>Penerima Pelayanan</b></font>
                                 </td>
                                 <td style="text-align: center">
-                                    <font style="font-size: 12pt;" color="#000000"><b>Pemberi Pelayanan</b></font>
+                                    <font style="font-size: 11pt;" color="#000000"><b>Pemberi Pelayanan</b></font>
                                 </td>
                                 <td style="text-align: center">
-                                    <font style="font-size: 12pt;" color="#000000"><b>Pemberi Jaminan</b></font>
+                                    <font style="font-size: 11pt;" color="#000000"><b>Pemberi Jaminan</b></font>
                                 </td>
                             </tr>
                             <tr>
@@ -231,13 +231,13 @@
                             </tr>
                             <tr>
                                 <td style="text-align: center">
-                                    <font style="font-size: 12pt;" color="#000000"><b>{{ $datas->namapasien }}</b></font>
+                                    <font style="font-size: 11pt;" color="#000000"><b>{{ $datas->namapasien }}</b></font>
                                 </td>
                                 <td style="text-align: center">
-                                    <font style="font-size: 12pt;" color="#000000"><b>{{ $datas->dokter }}</b></font>
+                                    <font style="font-size: 11pt;" color="#000000"><b>{{ $datas->dokter }}</b></font>
                                 </td>
                                 <td style="text-align: center">
-                                    <font style="font-size: 12pt;" color="#000000"><b>RSUD H.A. Sulthan DG Radja</b></font>
+                                    <font style="font-size: 11pt;" color="#000000"><b>RSUD H.A. Sulthan DG Radja</b></font>
                                 </td>
                             </tr>
                         </table>
