@@ -1712,14 +1712,14 @@ define(['initialize'], function (initialize) {
                     }
 
                 }
-                for (var i = data2.length - 1; i >= 0; i--) {
-                    if (parseFloat(data2[i].jmlstok) < parseFloat(data2[i].jumlah)) {
-                        alert("Terdapat obat dengan jumlah melebihi STOK !! " + data2[i].namaproduk)
-                        $scope.isRouteLoading = false;
-                        return
-                    }
+                // for (var i = data2.length - 1; i >= 0; i--) {
+                //     if ( parseFloat(data2[i].jumlah) < parseFloat(data2[i].jmlstok) ) {
+                //         alert("Terdapat obat dengan jumlah melebihi STOK !! " + data2[i].namaproduk)
+                //         $scope.isRouteLoading = false;
+                //         return
+                //     }
 
-                }
+                // }
                 var strukresep = {
                     tglresep: moment($scope.item.tglAwal).format('YYYY-MM-DD HH:mm:ss'),
                     pasienfk: norec_apd,//
