@@ -11,10 +11,10 @@ class Helper
       
         // default data array
         $DefaultData = [
-          'title' => 'EIS - TRANSMEDIC',
+          'title' => 'EIS - RSUD H. A. SULTHAN DAENG RADJA BULUKUMBA',
           'favicon' => 'favicon_trans.ico',
           'project' => 'TRANSMEDIC',
-          'namaProfile' => 'Rumah Sakit Transindo',
+          'namaProfile' => 'RSUD H. A. SULTHAN DAENG RADJA BULUKUMBA',
           'navbarColor' => '',
           'horizontalMenuType' => 'floating',
           'verticalMenuNavbarType' => 'floating',
