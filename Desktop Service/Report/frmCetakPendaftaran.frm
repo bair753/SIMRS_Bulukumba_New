@@ -152,8 +152,8 @@ Dim reportGelangPasienPerempuan As New Cr_cetakLabelFotoGelPerempuan
 Dim reportLabel_3 As New Cr_cetakLabelFoto 'Cr_cetakLabel_2
 'Dim reportLabel_3 As New Cr_cetakLabelMagelang
 Dim reportTriage As New Cr_cetakHeaderTriage
-Dim reportGelangPasienBayi As New Cr_cetakLabelFotoGelBayiLaki
-Dim reportGelangPasienBayiCw As New Cr_cetakLabelFotoGelBayiCw
+Dim reportGelangPasienBayi As New Cr_cetakLabelGelBayiCowo
+Dim reportGelangPasienBayiCw As New Cr_cetakLabelGelBayiCewe
 
 Dim ii As Integer
 Dim tempPrint1 As String
@@ -314,7 +314,7 @@ Private Sub CmdOption_Click()
         reportBuktiLayananKecil.PrinterSetup Me.hwnd
     ElseIf reportGelangPasien = True Then
         reportGelangPasien.PrinterSetup Me.hwnd
-    ElseIf boolGelangPasienBayiLaki = True Then
+    ElseIf boolGelangBayi = True Then
         reportGelangPasienBayi.PrinterSetup Me.hwnd
     ElseIf boolGelangPasienPerempuan = True Then
         reportGelangPasienPerempuan.PrinterSetup Me.hwnd
@@ -761,11 +761,11 @@ boolGelangPasienBayiPerempuan = False
               .txtAsalRujukan.SetText IIf(IsNull(rs("nmprovider")), "-", rs("nmprovider"))
               .txtPeserta.SetText IIf(IsNull(rs("jenispeserta")), "-", rs("jenispeserta"))
               .txtJenisrawat.SetText IIf(IsNull(rs("jenisrawat")), "-", rs("jenisrawat")) 'RS("jenisrawat")
-              .txtnocm2.SetText IIf(IsNull(rs("nocm")), "-", rs("nocm")) 'RS("nocm")
+              .txtNoCM2.SetText IIf(IsNull(rs("nocm")), "-", rs("nocm")) 'RS("nocm")
               .txtDiagnosa.SetText IIf(IsNull(rs("namadiagnosa")), "-", rs("namadiagnosa")) 'RS("namadiagnosa")
               .txtKelasRawat.SetText IIf(IsNull(rs("namakelas")), "-", rs("namakelas")) 'RS("namakelas")
               .txtCatatan.SetText IIf(IsNull(rs("catatan")), "-", rs("catatan"))
-              .txtnocm2.SetText IIf(IsNull(rs("nocm")), "-", rs("nocm"))
+              .txtNoCM2.SetText IIf(IsNull(rs("nocm")), "-", rs("nocm"))
               .txtNoPendaftaran2.SetText IIf(IsNull(rs("noregistrasi")), "-", rs("noregistrasi"))
              End If
 
@@ -876,11 +876,11 @@ Dim dept As Integer
               .txtAsalRujukan.SetText IIf(IsNull(rs("nmprovider")), "-", rs("nmprovider"))
               .txtPeserta.SetText IIf(IsNull(rs("jenispeserta")), "-", rs("jenispeserta"))
               .txtJenisrawat.SetText IIf(IsNull(rs("jenisrawat")), "-", rs("jenisrawat")) 'RS("jenisrawat")
-              .txtnocm2.SetText IIf(IsNull(rs("nocm")), "-", rs("nocm")) 'RS("nocm")
+              .txtNoCM2.SetText IIf(IsNull(rs("nocm")), "-", rs("nocm")) 'RS("nocm")
               .txtDiagnosa.SetText IIf(IsNull(rs("namadiagnosa")), "-", rs("namadiagnosa")) 'RS("namadiagnosa")
               .txtKelasRawat.SetText IIf(IsNull(rs("namakelas")), "-", rs("namakelas")) 'RS("namakelas")
               .txtCatatan.SetText IIf(IsNull(rs("catatan")), "-", rs("catatan"))
-              .txtnocm2.SetText IIf(IsNull(rs("nocm")), "-", rs("nocm"))
+              .txtNoCM2.SetText IIf(IsNull(rs("nocm")), "-", rs("nocm"))
               .txtnoantrian.SetText IIf(IsNull(rs("noantrian")), "-", rs("noantrian"))
               .txtNoPendaftaran2.SetText IIf(IsNull(rs("noregistrasi")), "-", rs("noregistrasi"))
               .txtNoTelpon.SetText IIf(IsNull(rs("notelpmobile")), "-", rs("notelpmobile"))
@@ -991,9 +991,9 @@ boolGelangPasienBayiPerempuan = False
             
             .database.AddADOCommand CN_String, adoReport
             If rs.BOF Then
-                .txtUmur.SetText "-"
+                .txtumur.SetText "-"
             Else
-                .txtUmur.SetText hitungUmur(Format(rs!tgllahir, "yyyy/MM/dd"), Format(Now, "yyyy/MM/dd"))
+                .txtumur.SetText hitungUmur(Format(rs!tgllahir, "yyyy/MM/dd"), Format(Now, "yyyy/MM/dd"))
             End If
 '            If rs.BOF Then
 '                .txtUmur.SetText "-"
@@ -1119,9 +1119,9 @@ boolGelangPasienBayiPerempuan = False
             
             .database.AddADOCommand CN_String, adoReport
             If rs.BOF Then
-                .txtUmur.SetText "-"
+                .txtumur.SetText "-"
             Else
-                .txtUmur.SetText hitungUmur(Format(rs!tgllahir, "yyyy/MM/dd"), Format(Now, "yyyy/MM/dd"))
+                .txtumur.SetText hitungUmur(Format(rs!tgllahir, "yyyy/MM/dd"), Format(Now, "yyyy/MM/dd"))
             End If
 
 
@@ -1277,9 +1277,9 @@ boolGelangPasienBayiPerempuan = False
 '            .database.SetDataSource rs
 '            .database.SetDataSource = rs
             If rs.BOF Then
-                .txtUmur.SetText "-"
+                .txtumur.SetText "-"
             Else
-                .txtUmur.SetText UCase(IIf(IsNull(rs("tglKelahiran")), "-", rs("tglKelahiran"))) & " (" & hitungUmur(Format(rs!tgllahir, "yyyy/MM/dd"), Format(rs!tglRegistrasi, "yyyy/MM/dd")) & ")"
+                .txtumur.SetText UCase(IIf(IsNull(rs("tglKelahiran")), "-", rs("tglKelahiran"))) & " (" & hitungUmur(Format(rs!tgllahir, "yyyy/MM/dd"), Format(rs!tglRegistrasi, "yyyy/MM/dd")) & ")"
             End If
             .txtNamaRs.SetText strNamaLengkapRs
             .txtAlamatRs.SetText strAlamatRS & ", " & strKodePos & ", " & strNoTlpn & ", " & strNoFax
@@ -1744,7 +1744,7 @@ boolGelangPasienBayiPerempuan = False
                 '.Text1.SetText RS2!nocmbarcode
                 '.txtTglLahir.SetText IIf(IsNull(RS2("umur")), "", RS2("umur"))
                 '.txtAlamatPasien.SetText IIf(IsNull(RS2("alamat")), "", RS2("alamat"))
-                .usNoRm.SetUnboundFieldSource ("{ado.nocm}")
+                .usNoRM.SetUnboundFieldSource ("{ado.nocm}")
                 .usPasien.SetUnboundFieldSource ("{ado.namapasien}")
                 .usTglLahir.SetUnboundFieldSource ("{ado.umur}")
                 .usBarcode.SetUnboundFieldSource ("{ado.barcode}")
@@ -1911,12 +1911,12 @@ boolGelangPasienBayiPerempuan = False
             .database.AddADOCommand CN_String, adoReport
 
             If rs.BOF Then
-                .txtUmur.SetText "-"
+                .txtumur.SetText "-"
             Else
-                .txtUmur.SetText hitungUmur(Format(rs!tgllahir, "yyyy/MM/dd"), Format(Now, "yyyy/MM/dd"))
+                .txtumur.SetText hitungUmur(Format(rs!tgllahir, "yyyy/MM/dd"), Format(Now, "yyyy/MM/dd"))
             End If
             '.txtTglLahir.SetText Format(RS!umur, "yyyy/MM/dd")
-            .txtUmur.SetText Format(rs!tgllahir, "yyyy  MM  dd")
+            .txtumur.SetText Format(rs!tgllahir, "yyyy  MM  dd")
 '            .txtTglLahir.SetText (RS!umur)
             .usNamaPasien.SetUnboundFieldSource ("{ado.namapasien}")
            ' .usNamaKeuarga.SetUnboundFieldSource ("{ado.namakeluarga}")
@@ -2338,9 +2338,9 @@ boolGelangPasienBayiPerempuan = False
             
             .database.AddADOCommand CN_String, adoReport
             If rs.BOF Then
-                .txtUmur.SetText "-"
+                .txtumur.SetText "-"
             Else
-                .txtUmur.SetText hitungUmur(Format(rs!tgllahir, "yyyy/MM/dd"), Format(Now, "yyyy/MM/dd"))
+                .txtumur.SetText hitungUmur(Format(rs!tgllahir, "yyyy/MM/dd"), Format(Now, "yyyy/MM/dd"))
             End If
             
             .udtgl.SetUnboundFieldSource ("{ado.tglregistrasi}")
@@ -2481,9 +2481,9 @@ boolGelangPasienBayiPerempuan = False
             
             .database.AddADOCommand CN_String, adoReport
             If rs.BOF Then
-                .txtUmur.SetText "-"
+                .txtumur.SetText "-"
             Else
-                .txtUmur.SetText rs!tgllahir
+                .txtumur.SetText rs!tgllahir
             End If
             .txtNamaRs.SetText strNamaLengkapRs
             .txtAlamatRs.SetText strAlamatRS & ", " & strKodePos & ", " & strNoTlpn & ", " & strNoFax
@@ -2627,9 +2627,9 @@ boolGelangPasienBayiPerempuan = False
             
             .database.AddADOCommand CN_String, adoReport
             If rs.BOF Then
-                .txtUmur.SetText "-"
+                .txtumur.SetText "-"
             Else
-                .txtUmur.SetText IIf(IsNull(rs("tglKelahiran")), "-", rs("tglKelahiran")) & " (" & hitungUmurNew(Format(rs!tgllahir, "yyyy/MM/dd"), Format(rs!tglRegistrasi, "yyyy/MM/dd")) & ") "
+                .txtumur.SetText IIf(IsNull(rs("tglKelahiran")), "-", rs("tglKelahiran")) & " (" & hitungUmurNew(Format(rs!tgllahir, "yyyy/MM/dd"), Format(rs!tglRegistrasi, "yyyy/MM/dd")) & ") "
             End If
             .txtNamaRs.SetText strNamaLengkapRs
             .txtAlamatRs.SetText strAlamatRS & ", " & strKodePos & ", " & strNoTlpn & ", " & strNoFax
@@ -2768,9 +2768,9 @@ boolGelangPasienBayiPerempuan = False
             
             .database.AddADOCommand CN_String, adoReport
             If rs.BOF Then
-                .txtUmur.SetText "-"
+                .txtumur.SetText "-"
             Else
-                .txtUmur.SetText hitungUmur(Format(rs!tgllahir, "yyyy/MM/dd"), Format(Now, "yyyy/MM/dd"))
+                .txtumur.SetText hitungUmur(Format(rs!tgllahir, "yyyy/MM/dd"), Format(Now, "yyyy/MM/dd"))
             End If
             
             .udtgl.SetUnboundFieldSource ("{ado.tglregistrasi}")
@@ -3072,7 +3072,7 @@ End If
                 .txtkel.SetText IIf(IsNull(RS2("namarekanan")), "", RS2("namarekanan"))
                 .txtNamaPasien.SetText IIf(IsNull(RS2("namapasien")), "", RS2("namapasien"))
                 .txtTglLahir.SetText IIf(IsNull(RS2("tgllahir")), "", RS2("tgllahir"))
-                .txtUmur.SetText IIf(IsNull(RS2("umur")), "", RS2("umur"))
+                .txtumur.SetText IIf(IsNull(RS2("umur")), "", RS2("umur"))
                 .txtJenisKelamin.SetText IIf(IsNull(RS2("jeniskelamin")), "", RS2("jeniskelamin"))
                 .txtAlamatPasien.SetText IIf(IsNull(RS2("alamatlengkap")), "", RS2("alamatlengkap"))
                 .txtJenisPerawatan.SetText IIf(IsNull(RS2("jenisrawat")), "", RS2("jenisrawat"))
@@ -3479,7 +3479,7 @@ boolGelangPasienBayiPerempuan = True
 
 
 
-    With reportGelangPasienBayi
+    With reportGelangPasienBayiCw
             Set adoReport = New ADODB.Command
              adoReport.ActiveConnection = CN_String
             
@@ -3541,7 +3541,7 @@ boolGelangPasienBayiPerempuan = True
                     Unload Me
              Else
                 With CRViewer1
-                    .ReportSource = reportGelangPasienBayi
+                    .ReportSource = reportGelangPasienBayiCw
                     .ViewReport
                     .Zoom 1
                 End With
