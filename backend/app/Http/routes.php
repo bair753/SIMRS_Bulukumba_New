@@ -1542,6 +1542,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
           Route::post('rawatjalan/save-monitoring-taskid', 'RawatJalan\RawatJalanController@saveMonitoringTaksId');
           Route::get('rawatjalan/get-monitoring-taskid', 'RawatJalan\RawatJalanController@getMonitoringTaksId');
           Route::get('rawatjalan/get-informasi-monitoring-taskid', 'RawatJalan\RawatJalanController@getInformasiMonitoringTaksId');
+          Route::post('rawatjalan/save-pulang-pasien', 'RawatJalan\RawatJalanController@savePulangPasienRajal');
         // });
         // Route::group(['prefix' => 'registrasi'], function () {
             // 2019-12 penambahan arif awal
