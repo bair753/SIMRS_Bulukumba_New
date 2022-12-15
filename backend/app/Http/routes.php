@@ -20,9 +20,9 @@
 */
 
 // api buat my jkn v2
-Route::group(['middleware' => 'cors', 'prefix' => 'new-api-bpjs'], function () {
+// Route::group(['middleware' => 'cors', 'prefix' => 'new-api-bpjs'], function () {
   Route::get('/', 'ReservasiOnline\MyJKNV2Controller@jalurMasuk');
-});
+// });
 
 //yang pasti
 Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
@@ -2795,7 +2795,7 @@ Route::get('encode-base64/{data}', function($data){
 Route::get('decode-base64/{data}', function($data){
     return  base64_decode($data);
 });
-Route::get('', function(){
+Route::get('profile', function(){
     $profile = \App\Web\Profile::where('statusenabled',true)->first();
     return view('welcome', compact('profile'));
 //    return view('welcome');
