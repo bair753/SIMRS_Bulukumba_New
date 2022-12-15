@@ -31,8 +31,12 @@ class MyJKNV2Controller extends ApiController
 {
     use Valet, PelayananPasienTrait;
 
-    public function __construct() {
-        parent::__construct($skip_authentication=false);
+    public function __construct(Request $request) {
+        if($request->url === "auth") {
+            parent::__construct($skip_authentication=true);
+        } else {
+            parent::__construct($skip_authentication=false);
+        }
     }
 
     public function GetAntrean_fix(Request $request){
@@ -668,7 +672,7 @@ class MyJKNV2Controller extends ApiController
 
             $nomorPanggil = 0;
             if (!empty($pangil)) {
-                $nomorPanggil =  ($pangil->noruangan != null ? $pangil->noruangan : 'Z') . '-' . str_pad($pangil->noantrian, 4, "0", STR_PAD_LEFT);
+                $nomorPanggil =  ($pangil->prefixnoantrian != null ? $pangil->prefixnoantrian : 'Z') . '-' . str_pad($pangil->noantrian, 4, "0", STR_PAD_LEFT);
             }
             $result = array(
                 "namapoli" => count($getStatusAntrian) > 0 ? $getStatusAntrian[0]->namapoli : '-',
@@ -1434,5 +1438,39 @@ class MyJKNV2Controller extends ApiController
             return array("antrian"=> 0,"jamkosong"=>"00:00");
         }
 
+    }
+
+    public function jalurMasuk(Request $request)
+    {
+        $url = $request['url'];
+        switch ($url) {
+            case 'auth':
+                return app('App\Http\Controllers\Auth\LoginController')->getTokens($request);
+                break;
+            case 'ambilantrean':
+                return $this->GetAntrean_fix($request);
+                break;
+            case 'statusantrean':
+                return $this->GetStatusAntrian_fix($request);
+                break;
+            case 'sisaantrean':
+                return $this->GetSisaAntrean_fix($request);
+                break;
+            case 'batalantrean':
+                return $this->saveBatalAntrean_fix($request);
+                break;
+            case 'checkinantrean':
+                return $this->saveCheckInAntrean_fix($request);
+                break;
+            case 'pasienbaru':
+                return $this->savePasienBaru_fix($request);
+                break;
+            case 'jadwaloperasipasien':
+                return $this->getKodeBokingOperasi_fix($request);
+                break;
+            case 'jadwaloperasirs':
+                return $this->getJadwalOperasi_fix($request);
+                break;
+        }
     }
 }
