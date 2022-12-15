@@ -90,6 +90,7 @@ class PindahPulangController extends ApiController
             ->where('sp.id',2)
             ->orderBy('sp.statuspulang')
             ->get();
+        $pembatalan = DB::select(DB::raw("select id,name from pembatal_m where statusenabled='true'"));
         $result = array(
             'statuskeluar' => $statusKeluar,
             'kondisipasien' =>$kondisiKeluar,
@@ -101,6 +102,7 @@ class PindahPulangController extends ApiController
             'penyebabkematian' => $penyebabKematian,
             'datalogin' => $dataLogin,
             'pindah' => $pindah,
+            'pembatalan' => $pembatalan,
             'message' => 'ramdanegie',
         );
 
