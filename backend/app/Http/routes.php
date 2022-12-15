@@ -273,6 +273,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
               Route::get('bridging/bpjs/get-monitoring-klaim-status', 'Bridging\BridgingBPJSV2Controller@getMonitoringKlaimStts');
               Route::get('bridging/bpjs/get-rekap-monitoring-klaim', 'Bridging\BridgingBPJSV2Controller@getRekapMonitoringKlaim');
               Route::post('bridging/bpjs/save-rencana-kontrol', 'Bridging\BridgingBPJSV2Controller@simpanLokalSPRI');
+              Route::post('bridging/bpjs/save-rencana-kontrol2', 'Bridging\BridgingBPJSV2Controller@simpanLokalSPRI2');
 
               Route::get('bridging/bpjs/get-daftar-poli-internal', 'Bridging\BridgingBPJSV2Controller@getRuanganBPJSInternal');
               Route::get('bridging/bpjs/get-nosep-by-norec-pd', 'Bridging\BridgingBPJSV2Controller@getNoSEPByNorecPd');
