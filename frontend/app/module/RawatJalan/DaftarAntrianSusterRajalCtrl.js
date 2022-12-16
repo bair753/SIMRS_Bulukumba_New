@@ -609,7 +609,7 @@ define(['initialize'], function (initialize) {
                 if ($scope.dataPasienSelected.noreservasi != undefined && $scope.dataPasienSelected.noreservasi != '' && $scope.dataPasienSelected.noreservasi != 'Kios-K') {
                     params = $scope.dataPasienSelected.noreservasi
                 }
-                saveAntrol(params, $scope.dataPasienSelected.norec_pd)
+                saveAntrol(4, params, $scope.dataPasienSelected.norec_pd)
                 // debugger;
                 var arrStr = {
                     0: $scope.dataPasienSelected.nocm,
@@ -2244,7 +2244,7 @@ define(['initialize'], function (initialize) {
                 if ($scope.dataPasienSelected.noreservasi != undefined && $scope.dataPasienSelected.noreservasi != '' && $scope.dataPasienSelected.noreservasi != 'Kios-K') {
                     params = $scope.dataPasienSelected.noreservasi
                 }
-                saveAntrol(params, $scope.dataPasienSelected.norec_pd)
+                saveAntrol(4, params, $scope.dataPasienSelected.norec_pd)
                 var cookie = document.cookie.split(';');
                 cookie = cookie[0].split('=');
                 var data = {
@@ -2297,7 +2297,7 @@ define(['initialize'], function (initialize) {
 
                     })
             }
-            function saveAntrol(param, norec_pd) {
+            function saveAntrol(taskid, param, norec_pd) {
                 var data = {
                     "url": "antrean/updatewaktu",
                     "jenis": "antrean",
@@ -2305,16 +2305,16 @@ define(['initialize'], function (initialize) {
                     "data":
                     {
                         "kodebooking": param,
-                        "taskid": 4,//Waktu layan poli
+                        "taskid": taskid,//Waktu layan poli
                         "waktu": new Date().getTime()
                     }
                 }
-                saveMonitoringTaksId(norec_pd, 4, new Date().getTime(), false)
+                saveMonitoringTaksId(norec_pd, taskid, new Date().getTime(), false)
                 medifirstService.postNonMessage('bridging/bpjs/tools', data).then(function (e) {
                     if (e.data.metaData.code == 200) {
-                        saveMonitoringTaksId(norec_pd, 4, new Date().getTime(), true)
+                        saveMonitoringTaksId(norec_pd, taskid, new Date().getTime(), true)
                     } else {
-                        repeatSendTaskId(norec_pd, 4)
+                        repeatSendTaskId(norec_pd, taskid)
                     }
                 })
             }
@@ -2480,6 +2480,12 @@ define(['initialize'], function (initialize) {
                     toastr.error('Pilih Data dulu')
                     return
                 }
+
+                let params = $scope.dataPasienSelected.noregistrasi
+                if ($scope.dataPasienSelected.noreservasi != undefined && $scope.dataPasienSelected.noreservasi != '' && $scope.dataPasienSelected.noreservasi != 'Kios-K') {
+                    params = $scope.dataPasienSelected.noreservasi
+                }
+                saveAntrol(5, params, $scope.dataPasienSelected.norec_pd)
 
                 $scope.popUpStatusPulang.center().open().maximize();;
             }
