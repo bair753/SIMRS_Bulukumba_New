@@ -1833,52 +1833,56 @@ class RawatJalanController extends ApiController
 
         return $data;
     }
-    public function getInformasiMonitoringTaksId(Request $request)
-    {
+    public function getInformasiMonitoringTaksId(Request $request){
         $kdProfile = $this->getDataKdProfile($request);
         $tglawal = $request['tglAwal'];
         $tglakhir = $request['tglAkhir'];
 
         $nocm = "";
-        if (isset($request['norm']) && $request['norm'] != '' && $request['norm'] != null) {
-            $nocm = " and ps.nocm = '" . $request['norm'] . "'";
+        if(isset($request['norm']) && $request['norm'] != '' && $request['norm'] != null) {
+            $nocm = " and ps.nocm = '". $request['norm'] ."'";
         }
         $nama = "";
-        if (isset($request['nama']) && $request['nama'] != '' && $request['nama'] != null) {
-            $nama = " and ps.namapasien ilike '%" . $request['nama'] . "%'";
+        if(isset($request['nama']) && $request['nama'] != '' && $request['nama'] != null) {
+            $nama = " and ps.namapasien ilike '%". $request['nama'] ."%'";
         }
         $ruangId = "";
-        if (isset($request['ruangId']) && $request['ruangId'] != '' && $request['ruangId'] != null) {
-            $ruangId = " and rm.id = '" . $request['ruangId'] . "'";
+        if(isset($request['ruangId']) && $request['ruangId'] != '' && $request['ruangId'] != null) {
+            $ruangId = " and rm.id = '". $request['ruangId'] ."'";
         }
         $kdBooking = "";
-        if (isset($request['kdBooking']) && $request['kdBooking'] != '' && $request['kdBooking'] != null) {
-            $kdBooking = " and sx.noregistrasi = '" . $request['kdBooking'] . "'";
+        if(isset($request['kdBooking']) && $request['kdBooking'] != '' && $request['kdBooking'] != null) {
+            $kdBooking = " and sx.noregistrasi = '". $request['kdBooking'] ."'";
         }
 
         $data = collect(DB::select("
             WITH sumber AS (
-                select
-                ps.nocm as norm,
-                case when pd.ismobilejkn = true then pd.statusschedule else pd.noregistrasi end as noregistrasi,
-                pd.tglregistrasi,
-                ps.namapasien,
-                rm.namaruangan,
-                mt.taskid,
-                mt.waktu,
-                mt.statuskirim
-                from monitoringtaskid_t mt
-                inner join pasiendaftar_t pd on pd.norec = mt.noregistrasifk
-                inner join ruangan_m rm on rm.id = pd.objectruanganasalfk
-                inner join pasien_m ps on ps.id = pd.nocmfk
-                where pd.statusenabled = true
-                and rm.objectdepartemenfk = 18
-                and pd.tglregistrasi between '$tglawal' and '$tglakhir'
-                $nocm
-                $nama
-                $ruangId
+                select * from (
+                    select
+                    ps.nocm as norm,
+                    case when pd.ismobilejkn = true then pd.statusschedule else pd.noregistrasi end as noregistrasi,
+                    mt.noregistrasifk,
+                    pd.tglregistrasi,
+                    ps.namapasien,
+                    rm.namaruangan,
+                    mt.taskid,
+                    mt.waktu,
+                    mt.statuskirim,
+                    row_number() over(PARTITION BY mt.noregistrasifk,mt.taskid ORDER BY taskid) as nomor
+                    from monitoringtaskid_t mt
+                    inner join pasiendaftar_t pd on pd.norec = mt.noregistrasifk
+                    inner join ruangan_m rm on rm.id = pd.objectruanganasalfk
+                    inner join pasien_m ps on ps.id = pd.nocmfk
+                    where pd.statusenabled = true
+                    and rm.objectdepartemenfk = 18
+                    and pd.tglregistrasi between '$tglawal' and '$tglakhir'
+                    $nocm
+                    $nama
+                    $ruangId
+                ) x
+                where x.nomor = 1
             )
-            select sx.norm, sx.noregistrasi, sx.tglregistrasi, sx.namapasien, sx.namaruangan,
+            select sx.norm, sx.noregistrasi, sx.tglregistrasi, sx.namapasien, sx.namaruangan, sx.noregistrasifk,
             (select sz.waktu from sumber sz where sz.noregistrasi = sx.noregistrasi and sz.taskid = 1) as taksid_1,
             (select sz.statuskirim from sumber sz where sz.noregistrasi = sx.noregistrasi and sz.taskid = 1) as status_1,
             (select sz.waktu from sumber sz where sz.noregistrasi = sx.noregistrasi and sz.taskid = 2) as taksid_2,
@@ -1896,11 +1900,11 @@ class RawatJalanController extends ApiController
             from sumber sx
             where 1=1
             $kdBooking
-            GROUP BY sx.norm, sx.noregistrasi, sx.tglregistrasi, sx.namapasien, sx.namaruangan
+            GROUP BY sx.norm, sx.noregistrasi, sx.tglregistrasi, sx.namapasien, sx.namaruangan, sx.noregistrasifk
             ORDER BY sx.noregistrasi
         "));
 
-        foreach ($data as $item) {
+        foreach($data as $item) {
             $item->taksid_1 = $item->taksid_1 == null ? "-" : date('Y-m-d H:i', $item->taksid_1 / 1000);
             $item->taksid_2 = $item->taksid_2 == null ? "-" : date('Y-m-d H:i', $item->taksid_2 / 1000);
             $item->taksid_3 = $item->taksid_3 == null ? "-" : date('Y-m-d H:i', $item->taksid_3 / 1000);
