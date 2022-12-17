@@ -431,7 +431,7 @@ class LaboratoriumController extends ApiController
             ->where('pr.kdprofile', $kdProfile)
             ->where('pr.statusenabled',true)
 //            ->where('pr.kodeexternal','<>','BTN 2 TN')
-            ->whereIn('djp.objectjenisprodukfk',[1971,1972,1973,1974,1647,1975,1976,1977,1978,1979,1980,1981,1982,1983,1656,1654,1336,1544,1499,1404,1984,2005,2006])
+            ->whereIn('djp.objectjenisprodukfk',[1549,36])
             ->groupBy('pr.id','pr.namaproduk')
             ->orderBy('pr.namaproduk')
             ->get();
@@ -598,7 +598,7 @@ class LaboratoriumController extends ApiController
     }
     public function getNilaiNormal(Request $request) {
         $kdProfile = $this->getDataKdProfile($request);
-        $jenis  = DB::table('nilainormal_m as djp')
+        $jenis  = DB::table('nilainormal_m as djps')
             ->leftjoin('jeniskelamin_m as dp','dp.id','=','djp.objectjeniskelaminfk')
             ->leftjoin('kelompokumur_m as ku','ku.id','=','djp.kelompokumurfk')
             ->select('djp.*','dp.jeniskelamin','ku.kelompokumur','ku.umurmax','ku.umurmin','ku.statusumur')
