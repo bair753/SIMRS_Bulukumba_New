@@ -101,7 +101,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             <tr>
                                 <td align="left">
                                     <font style="font-size: 12pt;font-weight: 600;letter-spacing: 2px;" color="#000000">
-                                        <b>RSUD dr. LA PALALOI</b>
+                                        <b>{{ $profile->namalengkap }}</b>
                                     </font>
                                 </td>
                             <tr>
@@ -114,7 +114,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             <tr>
                                 <td align="left">
                                     <font style="font-size: 12pt;font-weight: 600;letter-spacing: 2px;" color="#000000">
-                                        <b>JL. Poros Maros-Makassar Km. 03, Kelurahan Adatongeng, Kecamatan Turikale, 90516, Kabupaten Maros, Sulawesi Selatan, Indonesia 90516, Badung</b>
+                                        <b>{{ $profile->alamatlengkap }}</b>
                                     </font>
                                 </td>
                             </tr>
