@@ -19,6 +19,11 @@
 |
 */
 
+// api buat my jkn v2
+// Route::group(['middleware' => 'cors', 'prefix' => 'new-api-bpjs'], function () {
+  Route::get('/', 'ReservasiOnline\MyJKNV2Controller@jalurMasuk');
+// });
+
 //yang pasti
 Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
 
@@ -268,6 +273,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
               Route::get('bridging/bpjs/get-monitoring-klaim-status', 'Bridging\BridgingBPJSV2Controller@getMonitoringKlaimStts');
               Route::get('bridging/bpjs/get-rekap-monitoring-klaim', 'Bridging\BridgingBPJSV2Controller@getRekapMonitoringKlaim');
               Route::post('bridging/bpjs/save-rencana-kontrol', 'Bridging\BridgingBPJSV2Controller@simpanLokalSPRI');
+              Route::post('bridging/bpjs/save-rencana-kontrol2', 'Bridging\BridgingBPJSV2Controller@simpanLokalSPRI2');
 
               Route::get('bridging/bpjs/get-daftar-poli-internal', 'Bridging\BridgingBPJSV2Controller@getRuanganBPJSInternal');
               Route::get('bridging/bpjs/get-nosep-by-norec-pd', 'Bridging\BridgingBPJSV2Controller@getNoSEPByNorecPd');
@@ -1537,6 +1543,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
           Route::post('rawatjalan/save-monitoring-taskid', 'RawatJalan\RawatJalanController@saveMonitoringTaksId');
           Route::get('rawatjalan/get-monitoring-taskid', 'RawatJalan\RawatJalanController@getMonitoringTaksId');
           Route::get('rawatjalan/get-informasi-monitoring-taskid', 'RawatJalan\RawatJalanController@getInformasiMonitoringTaksId');
+          Route::post('rawatjalan/save-pulang-pasien', 'RawatJalan\RawatJalanController@savePulangPasienRajal');
         // });
         // Route::group(['prefix' => 'registrasi'], function () {
             // 2019-12 penambahan arif awal
@@ -2789,7 +2796,7 @@ Route::get('encode-base64/{data}', function($data){
 Route::get('decode-base64/{data}', function($data){
     return  base64_decode($data);
 });
-Route::get('', function(){
+Route::get('profile', function(){
     $profile = \App\Web\Profile::where('statusenabled',true)->first();
     return view('welcome', compact('profile'));
 //    return view('welcome');

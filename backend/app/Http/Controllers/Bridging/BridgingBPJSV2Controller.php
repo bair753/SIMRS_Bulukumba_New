@@ -3265,4 +3265,61 @@ class BridgingBPJSV2Controller extends ApiController
 
         return $this->setStatusCode($result['status'])->respond($result, $transMessage);
     }
+
+    public function simpanLokalSPRI2(Request $request)
+    {
+
+        $kdProfile = $this->getDataKdProfile($request);
+        DB::beginTransaction();
+        try {
+                $data1 =  BpjsRencanaKontrol::where('norec_pd', $request['norec_pd'])->first();
+                if(empty($data1)) {
+                    $data1 = new BpjsRencanaKontrol();
+                    $data1->norec = $data1->generateNewId();
+                    $data1->kdprofile = $kdProfile;
+                    $data1->statusenabled = true;
+                } 
+                $data1->nosuratkontrol = $request['nosuratkontrol'];
+                $data1->jnspelayanan = $request['jnspelayanan'];
+                $data1->jnskontrol = $request['jnskontrol'];
+                $data1->namajnskontrol = $request['namajnskontrol'];
+                $data1->tglrencanakontrol = $request['tglrencanakontrol'];
+                $data1->tglterbitkontrol = $request['tglterbitkontrol'];
+                $data1->nosepasalkontrol = $request['nosepasalkontrol'];
+                $data1->poliasal = $request['poliasal'];
+                $data1->politujuan = $request['politujuan'];
+                $data1->namapolitujuan = $request['namapolitujuan'];
+                $data1->tglsep = $request['tglsep'];
+                $data1->kodedokter = $request['kodedokter'];
+                $data1->namadokter = $request['namadokter'];
+                $data1->nokartu = $request['nokartu'];
+                $data1->nama = $request['nama'];
+                $data1->norec_pd = $request['norec_pd'];
+                $data1->save();
+
+            $transMessage = "Sukses";
+            $transStatus = 'true';
+        } catch (\Exception $e) {
+            $transMessage = "Failed";
+            $transStatus = 'false';
+        }
+
+
+        if ($transStatus != 'false') {
+            DB::commit();
+            $result = array(
+                "status" => 201,
+                "message" => $transMessage,
+            );
+        } else {
+            DB::rollBack();
+            $result = array(
+                "status" => 400,
+                "e" => $e->getMessage() . ' ' . $e->getLine(),
+                "message" => $transMessage . ' Gagal',
+            );
+        }
+
+        return $this->setStatusCode($result['status'])->respond($result, $transMessage);
+    }
 }

@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{C4847593-972C-11D0-9567-00A0C9273C2A}#8.0#0"; "crviewer.dll"
-Object = "{248DD890-BB45-11CF-9ABC-0080C7E7B78D}#1.0#0"; "MSWINSCK.OCX"
+Object = "{248DD890-BB45-11CF-9ABC-0080C7E7B78D}#1.0#0"; "mswinsck.ocx"
 Begin VB.Form frmCetakPendaftaran 
    Caption         =   "Transmedic"
    ClientHeight    =   7005
@@ -125,7 +125,7 @@ Option Explicit
 Dim Report As New Cr_cetakBuktiPendaftaran
 Dim ReportTracer As New Cr_cetakLabelTracer
 Dim reportSep As New crCetakSJP
-Dim reportSepNew As New crCetakSEP
+Dim reportSepNew As New crCetakSEPV2
 Dim reportBlangko As New crCetakBlangkoBpjs
 Dim reportBuktiLayanan As New Cr_cetakbuktilayanan
 Dim reportBuktiLayananRuangan As New Cr_cetakbuktilayananruangan
@@ -152,8 +152,8 @@ Dim reportGelangPasienPerempuan As New Cr_cetakLabelFotoGelPerempuan
 Dim reportLabel_3 As New Cr_cetakLabelFoto 'Cr_cetakLabel_2
 'Dim reportLabel_3 As New Cr_cetakLabelMagelang
 Dim reportTriage As New Cr_cetakHeaderTriage
-Dim reportGelangPasienBayi As New Cr_cetakLabelFotoGelBayiLaki
-Dim reportGelangPasienBayiCw As New Cr_cetakLabelFotoGelBayiCw
+Dim reportGelangPasienBayi As New Cr_cetakLabelGelBayiCowo
+Dim reportGelangPasienBayiCw As New Cr_cetakLabelGelBayiCewe
 
 Dim ii As Integer
 Dim tempPrint1 As String
@@ -314,7 +314,7 @@ Private Sub CmdOption_Click()
         reportBuktiLayananKecil.PrinterSetup Me.hwnd
     ElseIf reportGelangPasien = True Then
         reportGelangPasien.PrinterSetup Me.hwnd
-    ElseIf boolGelangPasienBayiLaki = True Then
+    ElseIf boolGelangBayi = True Then
         reportGelangPasienBayi.PrinterSetup Me.hwnd
     ElseIf boolGelangPasienPerempuan = True Then
         reportGelangPasienPerempuan.PrinterSetup Me.hwnd
@@ -761,11 +761,11 @@ boolGelangPasienBayiPerempuan = False
               .txtAsalRujukan.SetText IIf(IsNull(rs("nmprovider")), "-", rs("nmprovider"))
               .txtPeserta.SetText IIf(IsNull(rs("jenispeserta")), "-", rs("jenispeserta"))
               .txtJenisrawat.SetText IIf(IsNull(rs("jenisrawat")), "-", rs("jenisrawat")) 'RS("jenisrawat")
-              .txtnocm2.SetText IIf(IsNull(rs("nocm")), "-", rs("nocm")) 'RS("nocm")
+              .txtNoCM2.SetText IIf(IsNull(rs("nocm")), "-", rs("nocm")) 'RS("nocm")
               .txtDiagnosa.SetText IIf(IsNull(rs("namadiagnosa")), "-", rs("namadiagnosa")) 'RS("namadiagnosa")
               .txtKelasRawat.SetText IIf(IsNull(rs("namakelas")), "-", rs("namakelas")) 'RS("namakelas")
               .txtCatatan.SetText IIf(IsNull(rs("catatan")), "-", rs("catatan"))
-              .txtnocm2.SetText IIf(IsNull(rs("nocm")), "-", rs("nocm"))
+              .txtNoCM2.SetText IIf(IsNull(rs("nocm")), "-", rs("nocm"))
               .txtNoPendaftaran2.SetText IIf(IsNull(rs("noregistrasi")), "-", rs("noregistrasi"))
              End If
 
@@ -823,30 +823,56 @@ Dim dept As Integer
             Set adoReport = New ADODB.Command
              adoReport.ActiveConnection = CN_String
             
-            strSQL = "select pa.nosep,pa.tanggalsep,pa.nokepesertaan,pi.nocm,pd.noregistrasi,apdp.noantrian,  " & _
-                       " pa.norujukan,ap.namapeserta,ap.tgllahir,jk.jeniskelamin, " & _
-                       " CASE WHEN pa.polirujukankode IS NULL THEN rp.namaruangan ELSE pa.polirujukannama END AS namaruangan,rp.kdinternal as namapolibpjs,pa.ppkrujukan, " & _
-                       " (CASE WHEN rp.objectdepartemenfk=16 then 'R. Inap' else 'R. Jalan' END) as jenisrawat, " & _
-                       " CASE WHEN dg.kddiagnosa IS NULL THEN '-' ELSE dg.kddiagnosa END || '-' ||(case when dg.namadiagnosa is null then '-' else dg.namadiagnosa end) as namadiagnosa , " & _
-                       " ap.jenispeserta,ap.kdprovider,ap.nmprovider, pa.catatan, " & _
-                       " (case when rp.objectdepartemenfk=16 then kls.namakelas else '-' end) as namakelas, " & _
-                       " ap.notelpmobile,pa.penjaminlaka," & _
-                       " (case when pa.penjaminlaka='1' then 'Jasa Raharja PT' " & _
-                       " when pa.penjaminlaka='2' then 'BPJS Ketenagakerjaan' " & _
-                       " when pa.penjaminlaka='3' then 'TASPEN PT' " & _
-                       " when pa.penjaminlaka='4' then 'ASABRI PT' " & _
-                       " Else '-' end) as penjaminlakalantas,pa.prolanisprb,pa.namadjpjpmelayanni,rp.objectdepartemenfk " & _
-                       " from pemakaianasuransi_t pa " & _
-                       " LEFT JOIN asuransipasien_m ap on pa.objectasuransipasienfk= ap.id " & _
-                       " LEFT JOIN pasiendaftar_t pd on pd.norec=pa.noregistrasifk " & _
-                       " INNER JOIN antrianpasiendiperiksa_t apdp ON apdp.noregistrasifk = pd.norec " & _
-                       " LEFT JOIN pasien_m pi on pi.id=pd.nocmfk " & _
-                       " LEFT JOIN jeniskelamin_m jk on jk.id=pi.objectjeniskelaminfk " & _
-                       " LEFT JOIN ruangan_m rp on rp.id=pd.objectruanganlastfk " & _
-                       " LEFT JOIN diagnosa_m dg on pa.diagnosisfk=dg.id" & _
-                       " LEFT JOIN kelas_m kls on kls.id=ap.objectkelasdijaminfk " & _
-                       " where pd.noregistrasi ='" & strNorec & "' " & _
-                       " and pa.nosep is not null  "
+'            strSQL = "select pa.nosep,pa.tanggalsep,pa.nokepesertaan,pi.nocm,pd.noregistrasi,apdp.noantrian,  " & _
+'                       " pa.norujukan,ap.namapeserta,ap.tgllahir,jk.jeniskelamin, " & _
+'                       " CASE WHEN pa.polirujukankode IS NULL THEN rp.namaruangan ELSE pa.polirujukannama END AS namaruangan,rp.kdinternal as namapolibpjs,pa.ppkrujukan, " & _
+'                       " (CASE WHEN rp.objectdepartemenfk=16 then 'R. Inap' else 'R. Jalan' END) as jenisrawat, " & _
+'                       " CASE WHEN dg.kddiagnosa IS NULL THEN '-' ELSE dg.kddiagnosa END || '-' ||(case when dg.namadiagnosa is null then '-' else dg.namadiagnosa end) as namadiagnosa , " & _
+'                       " ap.jenispeserta,ap.kdprovider,ap.nmprovider, pa.catatan, " & _
+'                       " (case when rp.objectdepartemenfk=16 then kls.namakelas else '-' end) as namakelas, " & _
+'                       " ap.notelpmobile,pa.penjaminlaka," & _
+'                       " (case when pa.penjaminlaka='1' then 'Jasa Raharja PT' " & _
+'                       " when pa.penjaminlaka='2' then 'BPJS Ketenagakerjaan' " & _
+'                       " when pa.penjaminlaka='3' then 'TASPEN PT' " & _
+'                       " when pa.penjaminlaka='4' then 'ASABRI PT' " & _
+'                       " Else '-' end) as penjaminlakalantas,pa.prolanisprb,pa.namadjpjpmelayanni,rp.objectdepartemenfk " & _
+'                       " from pemakaianasuransi_t pa " & _
+'                       " LEFT JOIN asuransipasien_m ap on pa.objectasuransipasienfk= ap.id " & _
+'                       " LEFT JOIN pasiendaftar_t pd on pd.norec=pa.noregistrasifk " & _
+'                       " INNER JOIN antrianpasiendiperiksa_t apdp ON apdp.noregistrasifk = pd.norec " & _
+'                       " LEFT JOIN pasien_m pi on pi.id=pd.nocmfk " & _
+'                       " LEFT JOIN jeniskelamin_m jk on jk.id=pi.objectjeniskelaminfk " & _
+'                       " LEFT JOIN ruangan_m rp on rp.id=pd.objectruanganlastfk " & _
+'                       " LEFT JOIN diagnosa_m dg on pa.diagnosisfk=dg.id" & _
+'                       " LEFT JOIN kelas_m kls on kls.id=ap.objectkelasdijaminfk " & _
+'                       " where pd.noregistrasi ='" & strNorec & "' " & _
+'                       " and pa.nosep is not null  "
+
+            strSQL = "select pd.norec as norec_pd, pa.nosep,pa.tanggalsep,pa.nokepesertaan,pi.nocm,pd.noregistrasi,apdp.noantrian, pa.norujukan,ap.namapeserta,ap.tgllahir,jk.jeniskelamin, " & _
+                        " case when rp.objectdepartemenfk=18 then CASE WHEN pa.polirujukankode IS NULL THEN rp.namaruangan ELSE pa.polirujukannama END else '-' end AS namaruangan,rp.kdinternal as namapolibpjs,pa.ppkrujukan, (CASE WHEN rp.objectdepartemenfk=16 then 'R. Inap' else 'R. Jalan' END) as jenisrawat, " & _
+                        " CASE WHEN pa.statuskunjungan = 1 THEN 'Konsultasi dokter (pertama)' WHEN pa.statuskunjungan = 2 THEN 'Kunjungan rujukan internal' WHEN pa.statuskunjungan = 3 THEN 'Kunjungan Kontrol (ulangan)' ELSE '' END as kunjungan, " & _
+                        " CASE WHEN pa.flagprocedure = '0' THEN 'Prosedur tidak berkelanjutan' WHEN pa.flagprocedure = '1' THEN 'Prosedur dan terapi berkelanjutan' END as procedures, " & _
+                        " CASE WHEN dg.kddiagnosa IS NULL THEN '-' ELSE dg.kddiagnosa END || '-' ||(case when dg.namadiagnosa is null then '-' else dg.namadiagnosa end) as namadiagnosa, ap.jenispeserta,ap.kdprovider,ap.nmprovider, pa.catatan, " & _
+                        " CASE WHEN pa.cob = true THEN 'Ya' ELSE '' END as cob, CASE WHEN rp.objectdepartemenfk=16 then true else false END as isSPRI, " & _
+                        " (case when rp.objectdepartemenfk=16 then kls.namakelas else '-' end) as namakelas, kls.namakelas as haknamakelas, " & _
+                        " ap.notelpmobile,pa.penjaminlaka," & _
+                        " (case when pa.penjaminlaka='1' then 'Jasa Raharja PT' " & _
+                        " when pa.penjaminlaka='2' then 'BPJS Ketenagakerjaan' " & _
+                        " when pa.penjaminlaka='3' then 'TASPEN PT' " & _
+                        " when pa.penjaminlaka='4' then 'ASABRI PT' " & _
+                        " Else '-' end) as penjaminlakalantas,pa.prolanisprb,pa.namadjpjpmelayanni,rp.objectdepartemenfk " & _
+                        " ,(case when rp.objectdepartemenfk=18 then pa.polirujukannama else '-' end) as polirujukannama " & _
+                        " from pemakaianasuransi_t pa " & _
+                        " LEFT JOIN asuransipasien_m ap on pa.objectasuransipasienfk= ap.id " & _
+                        " LEFT JOIN pasiendaftar_t pd on pd.norec=pa.noregistrasifk " & _
+                        " INNER JOIN antrianpasiendiperiksa_t apdp ON apdp.noregistrasifk = pd.norec " & _
+                        " LEFT JOIN pasien_m pi on pi.id=pd.nocmfk " & _
+                        " LEFT JOIN jeniskelamin_m jk on jk.id=pi.objectjeniskelaminfk " & _
+                        " LEFT JOIN ruangan_m rp on rp.id=pd.objectruanganlastfk " & _
+                        " LEFT JOIN diagnosa_m dg on pa.diagnosisfk=dg.id" & _
+                        " LEFT JOIN kelas_m kls on kls.id=ap.objectkelasdijaminfk " & _
+                        " where pd.noregistrasi ='" & strNorec & "' " & _
+                        " and pa.nosep is not null  "
             
             ReadRs strSQL
             
@@ -854,17 +880,17 @@ Dim dept As Integer
             adoReport.CommandType = adCmdUnknown
             
             .database.AddADOCommand CN_String, adoReport
-            .txtNamaRs.SetText strNamaLengkapRs
+'            .txtNamaRs.SetText strNamaLengkapRs
              If Not rs.EOF Then
               dept = rs!objectdepartemenfk
-              If dept = 24 Or dept = 25 Or dept = 16 Then
-                .Text12.Suppress = True
-                .Text36.Suppress = True
-                .txtnoantrian.Suppress = True
-              Else
+              If dept = 16 Then
                 .Text12.Suppress = False
-                .Text36.Suppress = False
-                .txtnoantrian.Suppress = False
+                '.Text36.Suppress = True
+                '.txtnoantrian.Suppress = True
+              Else
+                .Text12.Suppress = True
+                '.Text36.Suppress = False
+                '.txtnoantrian.Suppress = False
               End If
               .txtnosjp.SetText IIf(IsNull(rs("nosep")), "-", rs("nosep")) 'RS("nosep")
               .txtTglSep.SetText Format(rs("tanggalsep"), "dd/MM/yyyy")
@@ -872,21 +898,68 @@ Dim dept As Integer
               .txtNamaPasien.SetText IIf(IsNull(rs("namapeserta")), "-", rs("namapeserta")) 'RS("namapeserta")
               .txtkelamin.SetText IIf(IsNull(rs("jeniskelamin")), "-", rs("jeniskelamin")) 'RS("jeniskelamin")
               .txtTanggalLahir.SetText IIf(IsNull(rs("tgllahir")), "-", Format(rs("tgllahir"), "dd/MM/yyyy")) 'Format(RS("tgllahir"), "dd/mm/yyyy")
-              .txtTujuan.SetText rs("namaruangan") ' rs("namapolibpjs") & " / " & rs("namaruangan")
+              .txtTujuan.SetText rs("namaruangan") 'rs("namapolibpjs") & " / " & rs("namaruangan")
               .txtAsalRujukan.SetText IIf(IsNull(rs("nmprovider")), "-", rs("nmprovider"))
               .txtPeserta.SetText IIf(IsNull(rs("jenispeserta")), "-", rs("jenispeserta"))
               .txtJenisrawat.SetText IIf(IsNull(rs("jenisrawat")), "-", rs("jenisrawat")) 'RS("jenisrawat")
-              .txtnocm2.SetText IIf(IsNull(rs("nocm")), "-", rs("nocm")) 'RS("nocm")
+              .txtNoCM2.SetText IIf(IsNull(rs("nocm")), "-", rs("nocm")) 'RS("nocm")
               .txtDiagnosa.SetText IIf(IsNull(rs("namadiagnosa")), "-", rs("namadiagnosa")) 'RS("namadiagnosa")
               .txtKelasRawat.SetText IIf(IsNull(rs("namakelas")), "-", rs("namakelas")) 'RS("namakelas")
               .txtCatatan.SetText IIf(IsNull(rs("catatan")), "-", rs("catatan"))
-              .txtnocm2.SetText IIf(IsNull(rs("nocm")), "-", rs("nocm"))
-              .txtnoantrian.SetText IIf(IsNull(rs("noantrian")), "-", rs("noantrian"))
-              .txtNoPendaftaran2.SetText IIf(IsNull(rs("noregistrasi")), "-", rs("noregistrasi"))
+              .txtNoCM2.SetText IIf(IsNull(rs("nocm")), "-", rs("nocm"))
+'              .txtNoPendaftaran2.SetText IIf(IsNull(rs("noregistrasi")), "-", rs("noregistrasi"))
               .txtNoTelpon.SetText IIf(IsNull(rs("notelpmobile")), "-", rs("notelpmobile"))
               .txtPenjamin.SetText IIf(IsNull(rs("penjaminlakalantas")), "-", rs("penjaminlakalantas"))
-              .txtProlanis.SetText IIf(IsNull(rs("prolanisprb")), "-", rs("prolanisprb"))
+'              .txtProlanis.SetText IIf(IsNull(rs("prolanisprb")), "-", rs("prolanisprb"))
               .txtDPJP.SetText IIf(IsNull(rs("namadjpjpmelayanni")), "-", rs("namadjpjpmelayanni"))
+              
+              .txtPoliperujuk.SetText IIf(IsNull(rs("polirujukannama")), "-", rs("polirujukannama"))
+              .txtKelashak.SetText IIf(IsNull(rs("haknamakelas")), "-", rs("haknamakelas"))
+              .txtJenisprosedur.SetText IIf(IsNull(rs("procedures")), "-", rs("procedures"))
+              .txtJeniskunjungan.SetText IIf(IsNull(rs("kunjungan")), "-", rs("kunjungan"))
+              .txtCOB.SetText IIf(IsNull(rs("cob")), "-", rs("cob"))
+              .usCetakSPRI.SetUnboundFieldSource ("{ado.isSPRI}")
+              
+              ' Cetak Surat Jaminan Pelayanan
+              ReadRs3 "SELECT CASE WHEN ru.objectdepartemenfk = 18 THEN 'RAWAT JALAN' WHEN ru.objectdepartemenfk = 24 THEN 'GAWAT DARURAT' WHEN ru.objectdepartemenfk = 16 THEN 'RAWAT INAP' ELSE dp.namadepartemen END AS instalasi, " & _
+                    " pm.nocm,pd.noregistrasi,ru.namaruangan,pm.namapasien, pm.nobpjs, pg.namalengkap AS dokter, to_char(pd.tglregistrasi, 'DD/MM/YYYY') as tglmasuk " & _
+                    " FROM pasiendaftar_t AS pd " & _
+                    " LEFT JOIN ruangan_m AS ru ON ru.id = pd.objectruanganlastfk " & _
+                    " LEFT JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk " & _
+                    " INNER JOIN pasien_m AS pm ON pm.id = pd.nocmfk " & _
+                    " LEFT JOIN alamat_m AS alm ON alm.nocmfk = pm.id " & _
+                    " LEFT JOIN departemen_m AS dp ON dp.id = ru.objectdepartemenfk " & _
+                    " LEFT JOIN kelompokpasien_m AS kp ON kp.id = pd.objectkelompokpasienlastfk " & _
+                    " LEFT JOIN rekanan_m AS rkn ON rkn.id = pd.objectrekananfk " & _
+                    " WHERE pd.noregistrasi = '" & strNorec & "'"
+              If Not RS3.EOF Then
+              .txtsjjenis.SetText IIf(IsNull(RS3("instalasi")), "-", RS3("instalasi"))
+              .txtsjruangan.SetText IIf(IsNull(RS3("namaruangan")), "-", RS3("namaruangan"))
+              .txtsjnamapasien.SetText IIf(IsNull(RS3("namapasien")), "-", RS3("namapasien"))
+              .txtsjnokartu.SetText IIf(IsNull(RS3("nobpjs")), "-", RS3("nobpjs"))
+              .txtsjtglmasuk.SetText IIf(IsNull(RS3("tglmasuk")), "-", RS3("tglmasuk"))
+              .txtsjnorm.SetText IIf(IsNull(RS3("nocm")), "-", RS3("nocm"))
+              .txtsjpenerima.SetText IIf(IsNull(RS3("namapasien")), "-", RS3("namapasien"))
+              .txtsjpemberipel.SetText IIf(IsNull(RS3("dokter")), "-", RS3("dokter"))
+              .txtsjnomor.SetText IIf(IsNull(RS3("noregistrasi")), "-", RS3("noregistrasi"))
+              End If
+              
+              ' Cetak SPRI
+              ReadRs2 "select to_char(tglrencanakontrol, 'dd Month yyyy') as tglrencana, to_char(tglterbitkontrol, 'dd Month yyyy') as tglterbit,* from bpjsrencanakontrol_t where statusenabled = true and norec_pd = '" & rs!norec_pd & "'"
+              If Not RS2.EOF Then
+              .txtsrnomor.SetText IIf(IsNull(RS2("nosuratkontrol")), "-", RS2("nosuratkontrol"))
+              .txtsrtgl.SetText IIf(IsNull(RS2("tglrencana")), "-", RS2("tglrencana"))
+              .txtsrdokter.SetText IIf(IsNull(RS2("namadokter")), "-", RS2("namadokter"))
+              .txtsrpoli.SetText IIf(IsNull(RS2("namapolitujuan")), "-", Replace(RS2("namapolitujuan"), "Poliklinik", ""))
+              .txtsrnoka.SetText IIf(IsNull(RS2("nokartu")), "-", RS2("nokartu"))
+              .txtsrnamapasien.SetText IIf(IsNull(RS2("nama")), "-", RS2("nama"))
+              .txtsrtgllahir.SetText IIf(IsNull(rs("tgllahir")), "-", Format(rs("tgllahir"), "dd/MM/yyyy"))
+              .txtsrdiagnosa.SetText IIf(IsNull(rs("namadiagnosa")), "-", rs("namadiagnosa"))
+              .txtsrtglentri.SetText IIf(IsNull(RS2("tglterbit")), "-", RS2("tglterbit"))
+              .txtsrdpjp.SetText IIf(IsNull(RS2("namadokter")), "-", RS2("namadokter"))
+              .txtsjnomor.SetText "BPJS " & IIf(IsNull(RS2("nosuratkontrol")), "-", RS2("nosuratkontrol"))
+              End If
+              
              End If
 
             If view = "false" Then
@@ -991,9 +1064,9 @@ boolGelangPasienBayiPerempuan = False
             
             .database.AddADOCommand CN_String, adoReport
             If rs.BOF Then
-                .txtUmur.SetText "-"
+                .txtumur.SetText "-"
             Else
-                .txtUmur.SetText hitungUmur(Format(rs!tgllahir, "yyyy/MM/dd"), Format(Now, "yyyy/MM/dd"))
+                .txtumur.SetText hitungUmur(Format(rs!tgllahir, "yyyy/MM/dd"), Format(Now, "yyyy/MM/dd"))
             End If
 '            If rs.BOF Then
 '                .txtUmur.SetText "-"
@@ -1119,9 +1192,9 @@ boolGelangPasienBayiPerempuan = False
             
             .database.AddADOCommand CN_String, adoReport
             If rs.BOF Then
-                .txtUmur.SetText "-"
+                .txtumur.SetText "-"
             Else
-                .txtUmur.SetText hitungUmur(Format(rs!tgllahir, "yyyy/MM/dd"), Format(Now, "yyyy/MM/dd"))
+                .txtumur.SetText hitungUmur(Format(rs!tgllahir, "yyyy/MM/dd"), Format(Now, "yyyy/MM/dd"))
             End If
 
 
@@ -1277,9 +1350,9 @@ boolGelangPasienBayiPerempuan = False
 '            .database.SetDataSource rs
 '            .database.SetDataSource = rs
             If rs.BOF Then
-                .txtUmur.SetText "-"
+                .txtumur.SetText "-"
             Else
-                .txtUmur.SetText UCase(IIf(IsNull(rs("tglKelahiran")), "-", rs("tglKelahiran"))) & " (" & hitungUmur(Format(rs!tgllahir, "yyyy/MM/dd"), Format(rs!tglRegistrasi, "yyyy/MM/dd")) & ")"
+                .txtumur.SetText UCase(IIf(IsNull(rs("tglKelahiran")), "-", rs("tglKelahiran"))) & " (" & hitungUmur(Format(rs!tgllahir, "yyyy/MM/dd"), Format(rs!tglRegistrasi, "yyyy/MM/dd")) & ")"
             End If
             .txtNamaRs.SetText strNamaLengkapRs
             .txtAlamatRs.SetText strAlamatRS & ", " & strKodePos & ", " & strNoTlpn & ", " & strNoFax
@@ -1744,7 +1817,7 @@ boolGelangPasienBayiPerempuan = False
                 '.Text1.SetText RS2!nocmbarcode
                 '.txtTglLahir.SetText IIf(IsNull(RS2("umur")), "", RS2("umur"))
                 '.txtAlamatPasien.SetText IIf(IsNull(RS2("alamat")), "", RS2("alamat"))
-                .usNoRm.SetUnboundFieldSource ("{ado.nocm}")
+                .usNoRM.SetUnboundFieldSource ("{ado.nocm}")
                 .usPasien.SetUnboundFieldSource ("{ado.namapasien}")
                 .usTglLahir.SetUnboundFieldSource ("{ado.umur}")
                 .usBarcode.SetUnboundFieldSource ("{ado.barcode}")
@@ -1911,12 +1984,12 @@ boolGelangPasienBayiPerempuan = False
             .database.AddADOCommand CN_String, adoReport
 
             If rs.BOF Then
-                .txtUmur.SetText "-"
+                .txtumur.SetText "-"
             Else
-                .txtUmur.SetText hitungUmur(Format(rs!tgllahir, "yyyy/MM/dd"), Format(Now, "yyyy/MM/dd"))
+                .txtumur.SetText hitungUmur(Format(rs!tgllahir, "yyyy/MM/dd"), Format(Now, "yyyy/MM/dd"))
             End If
             '.txtTglLahir.SetText Format(RS!umur, "yyyy/MM/dd")
-            .txtUmur.SetText Format(rs!tgllahir, "yyyy  MM  dd")
+            .txtumur.SetText Format(rs!tgllahir, "yyyy  MM  dd")
 '            .txtTglLahir.SetText (RS!umur)
             .usNamaPasien.SetUnboundFieldSource ("{ado.namapasien}")
            ' .usNamaKeuarga.SetUnboundFieldSource ("{ado.namakeluarga}")
@@ -2338,9 +2411,9 @@ boolGelangPasienBayiPerempuan = False
             
             .database.AddADOCommand CN_String, adoReport
             If rs.BOF Then
-                .txtUmur.SetText "-"
+                .txtumur.SetText "-"
             Else
-                .txtUmur.SetText hitungUmur(Format(rs!tgllahir, "yyyy/MM/dd"), Format(Now, "yyyy/MM/dd"))
+                .txtumur.SetText hitungUmur(Format(rs!tgllahir, "yyyy/MM/dd"), Format(Now, "yyyy/MM/dd"))
             End If
             
             .udtgl.SetUnboundFieldSource ("{ado.tglregistrasi}")
@@ -2481,9 +2554,9 @@ boolGelangPasienBayiPerempuan = False
             
             .database.AddADOCommand CN_String, adoReport
             If rs.BOF Then
-                .txtUmur.SetText "-"
+                .txtumur.SetText "-"
             Else
-                .txtUmur.SetText rs!tgllahir
+                .txtumur.SetText rs!tgllahir
             End If
             .txtNamaRs.SetText strNamaLengkapRs
             .txtAlamatRs.SetText strAlamatRS & ", " & strKodePos & ", " & strNoTlpn & ", " & strNoFax
@@ -2627,9 +2700,9 @@ boolGelangPasienBayiPerempuan = False
             
             .database.AddADOCommand CN_String, adoReport
             If rs.BOF Then
-                .txtUmur.SetText "-"
+                .txtumur.SetText "-"
             Else
-                .txtUmur.SetText IIf(IsNull(rs("tglKelahiran")), "-", rs("tglKelahiran")) & " (" & hitungUmurNew(Format(rs!tgllahir, "yyyy/MM/dd"), Format(rs!tglRegistrasi, "yyyy/MM/dd")) & ") "
+                .txtumur.SetText IIf(IsNull(rs("tglKelahiran")), "-", rs("tglKelahiran")) & " (" & hitungUmurNew(Format(rs!tgllahir, "yyyy/MM/dd"), Format(rs!tglRegistrasi, "yyyy/MM/dd")) & ") "
             End If
             .txtNamaRs.SetText strNamaLengkapRs
             .txtAlamatRs.SetText strAlamatRS & ", " & strKodePos & ", " & strNoTlpn & ", " & strNoFax
@@ -2768,9 +2841,9 @@ boolGelangPasienBayiPerempuan = False
             
             .database.AddADOCommand CN_String, adoReport
             If rs.BOF Then
-                .txtUmur.SetText "-"
+                .txtumur.SetText "-"
             Else
-                .txtUmur.SetText hitungUmur(Format(rs!tgllahir, "yyyy/MM/dd"), Format(Now, "yyyy/MM/dd"))
+                .txtumur.SetText hitungUmur(Format(rs!tgllahir, "yyyy/MM/dd"), Format(Now, "yyyy/MM/dd"))
             End If
             
             .udtgl.SetUnboundFieldSource ("{ado.tglregistrasi}")
@@ -3072,7 +3145,7 @@ End If
                 .txtkel.SetText IIf(IsNull(RS2("namarekanan")), "", RS2("namarekanan"))
                 .txtNamaPasien.SetText IIf(IsNull(RS2("namapasien")), "", RS2("namapasien"))
                 .txtTglLahir.SetText IIf(IsNull(RS2("tgllahir")), "", RS2("tgllahir"))
-                .txtUmur.SetText IIf(IsNull(RS2("umur")), "", RS2("umur"))
+                .txtumur.SetText IIf(IsNull(RS2("umur")), "", RS2("umur"))
                 .txtJenisKelamin.SetText IIf(IsNull(RS2("jeniskelamin")), "", RS2("jeniskelamin"))
                 .txtAlamatPasien.SetText IIf(IsNull(RS2("alamatlengkap")), "", RS2("alamatlengkap"))
                 .txtJenisPerawatan.SetText IIf(IsNull(RS2("jenisrawat")), "", RS2("jenisrawat"))
@@ -3479,7 +3552,7 @@ boolGelangPasienBayiPerempuan = True
 
 
 
-    With reportGelangPasienBayi
+    With reportGelangPasienBayiCw
             Set adoReport = New ADODB.Command
              adoReport.ActiveConnection = CN_String
             
@@ -3541,7 +3614,7 @@ boolGelangPasienBayiPerempuan = True
                     Unload Me
              Else
                 With CRViewer1
-                    .ReportSource = reportGelangPasienBayi
+                    .ReportSource = reportGelangPasienBayiCw
                     .ViewReport
                     .Zoom 1
                 End With

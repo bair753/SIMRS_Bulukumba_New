@@ -2281,6 +2281,69 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                 }
             }
 
+            $scope.cetakSEPL3 = function () {
+                if (noRegistrasis != "") {
+
+                    // //##save identifikasi sep
+                    // medifirstService.get("operator/identifikasi-sep?norec_pd="
+                    //     + $scope.cacheNorecPD
+                    // ).then(function (data) {
+                    //     var datas = data.data;
+                    // })
+                    // //##end
+
+
+                    if (statusBridgingTemporary == 'false') {
+                        medifirstService.get("bridging/bpjs/cek-sep?nosep=" + $scope.model.noSep).then(function (e) {
+                            if (e.data.metaData.code === "200" || e.data.metaData.code === "404") {
+
+                                if ($scope.model.rawatInap == true) { 
+                                    var jsonSpri = {
+                                        "url": `RencanaKontrol/ListRencanaKontrol/Bulan/${moment(new Date()).format("MM")}/Tahun/${moment(new Date()).format("YYYY")}/Nokartu/${$scope.model.noKepesertaan}/filter/2`,
+                                        "method": "GET",
+                                        "data": null
+                                    }
+                                    medifirstService.postNonMessage("bridging/bpjs/tools", jsonSpri).then(function (dataKon) {
+                                        console.log(dataKon.data);
+                                        if(dataKon.data.metaData.code == 200) {
+                                            for (let i = 0; i < dataKon.data.response.list.length; i++) {
+                                                const element = dataKon.data.response.list[i];
+                                                if(element.noSuratKontrol == $scope.model.skdp) {
+                                                    saveSPRILokal2(element, noRegistrasis);
+                                                    break;
+                                                }
+                                            }
+                                        } else {
+                                            toastr.error("Data SPRI tidak ditemukan !");
+                                            return
+                                        }
+                                    })
+                                } else {
+                                    var client = new HttpClient();
+                                    client.get('http://127.0.0.1:1237/printvb/Pendaftaran?cetak-sep-new=1&norec=' + noRegistrasis + '&view=false', function (response) {
+                                        // do something with response
+                                    });
+                                    // cetakSEP()
+                                    // if(e.data.response.kontrol.noSurat != null) {
+                                    //     cetakRencanaKontrol(e.data.response)
+                                    // }
+                                }
+                                
+                            } else {
+                                window.messageContainer.error('SEP tidak ada atau tidak sesuai dengan Vclaim mohon dicek kembali !');
+                            }
+                        });
+                    } else {
+                        var client = new HttpClient();
+                        client.get('http://127.0.0.1:1237/printvb/Pendaftaran?cetak-sep-new=1&norec=' + noRegistrasis + '&view=false', function (response) {
+                            // do something with response
+                        });
+
+                    }
+
+                }
+            }
+
             function cetakRencanaKontrol(dataSep) {
                 var bulan = moment($scope.model.tglSEP).format("MM");
                 var tahun = moment($scope.model.tglSEP).format("YYYY");
@@ -4067,6 +4130,33 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
 				};
 				medifirstService.post("bridging/bpjs/save-rencana-kontrol", data).then(function (z) {
 
+				})
+
+			}
+            function saveSPRILokal2(data, noRegistrasis) {
+				var data = {
+					'nosuratkontrol': data.noSuratKontrol ,
+					'jnspelayanan':   data.jnsKontrol == "1"?'Rawat Inap':'Rawat Jalan',
+					'jnskontrol':  data.jnsKontrol,
+					'namajnskontrol':  data.jnsKontrol == "1"?'SPRI':'Surat Kontrol',
+					'tglrencanakontrol':moment(data.tglRencanaKontrol).format('YYYY-MM-DD'),
+					'tglterbitkontrol': moment(data.tglTerbit).format('YYYY-MM-DD'),
+					'nosepasalkontrol': data.noSepAsalKontrol,
+					'poliasal':  $scope.item.pasien.namaruangan,
+					'politujuan': data.poliTujuan,
+					'namapolitujuan':  data.namaPoliTujuan,
+					'tglsep': data.tglSEP,
+					'kodedokter': data.kodeDokter,
+					'namadokter': data.namaDokter,
+					'nokartu': data.noKartu,
+					'nama':$scope.item.pasien.namapasien,
+					'norec_pd': $scope.currentNorecPD ,
+				};
+				medifirstService.post("bridging/bpjs/save-rencana-kontrol2", data).then(function (z) {
+                    var client = new HttpClient();
+                    client.get('http://127.0.0.1:1237/printvb/Pendaftaran?cetak-sep-new=1&norec=' + noRegistrasis + '&view=false', function (response) {
+                        // do something with response
+                    });
 				})
 
 			}

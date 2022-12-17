@@ -295,6 +295,127 @@ define(['initialize'], function (initialize) {
 					$scope.modalLogAntrol.open().center();
 				});
 			}
+
+			$scope.syncData = function(){
+				if($scope.dataDaftarPasien._data.length == 0)return
+
+				let pass = prompt("Masukan password", "");
+				if (pass != null) {
+					if(pass == 'bulukumba'){
+						sendANTROL($scope.dataDaftarPasien._data )
+					}else{
+						toastr.error('Password Salah')
+					}
+				}
+				
+			}
+			async function sendANTROL(dataSource){
+				
+				$scope.isRouteLoading = true
+				for (let x = 0; x < dataSource.length; x++) {
+					const element = dataSource[x];
+					await repeatSendTaskId(element.noregistrasifk,7)
+				}
+				$scope.isRouteLoading = false
+			}
+			function repeatSendTaskId(norec_pd, taskid) {
+                medifirstService.get('registrasi/get-data-antrean?norec_pd=' + norec_pd).then(function (e) {
+                    var data = {
+                        "url": "antrean/add",
+                        "jenis": "antrean",
+                        "method": "POST",
+                        "data": e.data
+                    }
+                    medifirstService.postNonMessage('bridging/bpjs/tools', data).then(function (x) {
+                        // simpan log
+                        if(x.data.metaData.code != 208) {
+							medifirstService.postLogging('Antrol Task ID', 'norec Pasien Daftar',
+							e.data.kodebooking, 'Tambah Antrean Kode ' + e.data.kodebooking +' | '+
+							JSON.stringify(data) + ' | '+ JSON.stringify(x.data))
+						}
+                        // mengabil data catatan task id dari 1 - 4
+                        medifirstService.get('rawatjalan/get-monitoring-taskid?taskid=' + taskid + '&norec_pd=' + norec_pd).then(function (res) {
+							if(res.data.length == (taskid - 1 )){
+                           		updateWaktuId(res, e.data.kodebooking, norec_pd)
+							}else if(res.data.length == 7){
+								
+							}else{
+								checkTaksId(e.data.kodebooking,norec_pd)
+							}
+                        })
+                    })
+                })
+            }
+			async function updateWaktuId(res, kodebooking, norec_pd) {
+                for (let i = 0; i < res.data.length; i++) {
+                    const element = res.data[i];
+                    var data = {
+                        "url": "antrean/updatewaktu",
+                        "jenis": "antrean",
+                        "method": "POST",
+                        "data":
+                        {
+                            "kodebooking": kodebooking,
+                            "taskid": element.taskid,
+                            "waktu": parseInt(element.waktu)
+                        }
+                    }
+                    await medifirstService.postNonMessage('bridging/bpjs/tools', data).then(async function (e) {
+                        if(e.data.metaData.code == 200) {
+                            await saveMonitoringTaksId(norec_pd,  element.taskid, parseInt(element.waktu), true);
+                        }
+                    })
+                }
+            }
+
+            function saveMonitoringTaksId(noregistrasifk, taskid, waktu, statuskirim) {
+                var json = {
+                    "noregistrasifk": noregistrasifk,
+                    "taskid": taskid,
+                    "waktu": waktu,
+                    "statuskirim": statuskirim
+                }
+                medifirstService.postNonMessage('rawatjalan/save-monitoring-taskid', json).then(function (e) {
+					loadData()
+				})
+            }
+			const random = (min, max) => Math.floor(Math.random() * (max - min)) + min;
+			async function checkTaksId(param,norec_pd) {
+				var taksId = [
+                    { Id: 1, waktu: random(7500000, 9300000) }, // 1 ke 2 range waktu 60 - 90 menit 
+                    { Id: 2, waktu: random(3600000, 3900000) }, // 2 ke 3 range waktu 5 - 10 menit 
+                    { Id: 3, waktu: random(3000000, 3300000) }, // 3 ke 4 range waktu 15 - 20 menit 
+                    { Id: 4, waktu: random(1320000, 2100000) }, // 4 ke 5 range waktu 7 - 20 menit
+                    { Id: 5, waktu: random(600000, 900000) },  // 5 ke 6 range waktu 10 - 15 menit
+                    { Id: 6, waktu: random(300000, 500000) }, // 
+					{ Id: 7, waktu: random(0, 0) }, // 
+                ]
+                for (let i = 0; i < taksId.length; i++) {
+                    var element = taksId[i]
+                    var waktuS =  new Date().getTime() - element.waktu
+                    var json = {
+                        "url": "antrean/updatewaktu",
+                        "jenis": "antrean",
+                        "method": "POST",
+                        "data": {
+                        "kodebooking": param,
+                        "taskid": element.Id,
+                        "waktu":waktuS
+                        }
+                    }
+                  
+                    await medifirstService.postNonMessage('bridging/bpjs/tools', json).then(async function (e) {
+                        if(e.data.metaData.code == 200) {
+                           await saveMonitoringTaksId(norec_pd, element.Id, waktuS, true)
+                        }
+						if(e.data.metaData.code == 208) {
+							if(e.data.metaData.message == "TaskId="+element.Id+" sudah ada") {
+								await saveMonitoringTaksId(norec_pd, element.Id, waktuS, true)
+							}
+						 }
+                    })
+                }
+            }
 			
 
 			// END ################

@@ -41,11 +41,12 @@
     .label-primary {
         background-color: #58a2e2;
     }
-      .green {
-    background-color: #49e171;
-    color: #FFFFFF;
-    /* font-weight: bold; */
-}
+
+    .green {
+        background-color: #49e171;
+        color: #FFFFFF;
+        /* font-weight: bold; */
+    }
 </style>
 <div>
     <div class="panel panel-default container_12" ng-hide="klikDiagnosa">
@@ -263,17 +264,25 @@
                     <span class="notif-badge">{{lengthKonsul}}</span> </a></button>
 
         </div>
-        <div class="grid_2" style="margin-top:-10px">
+        <!-- <div class="grid_2" style="margin-top:-10px">
             <button class="btnTemplate1" style="margin-left: 0;" ng-click="InsidenInternal()"><i
                     class="fa fa-phone-square"></i>Input Insiden Internal</button>
+        </div> -->
+        <div class="grid_2" style="margin-top:-10px">
+            <button class="btnTemplate1 green" style="margin-left: 0;" ng-click="statusPulang()"><i
+                    class="fa fa-phone-square"></i>Status Pulang</button>
         </div>
         <div class="grid_2" style="margin-top:-10px">
             <button class="btnTemplate1" style="margin-left: 0;" ng-click="pasienMeninggal()"><i
                     class="fa fa-bed"></i>Meninggal</button>
         </div>
-         <div class="grid_2" style="margin-top:-10px">
+        <div class="grid_2" style="margin-top:-10px">
             <button class="btnTemplate1 red" style="margin-left: 0;" ng-click="emr()"><i
                     class="fa fa-stethoscope"></i>EMR</button>
+        </div>
+        <div class="grid_2" style="margin-top:-10px">
+            <button class="btnTemplate1 red" style="margin-left: 0;" ng-click="batalPeriksa()"><i
+                    class="fa fa-trash"></i>Batal Periksa</button>
         </div>
     </div>
 
@@ -512,19 +521,18 @@
         </div>
     </div>
     <div kendo-window="winPasienMeninggal" k-title="'Pasien Meninggal'" k-width="750" k-visible="false"
-        k-on-open="win2visible = true" k-on-close="win2visible = false">    
+        k-on-open="win2visible = true" k-on-close="win2visible = false">
         <div class="panel panel-default container_12" style="padding: 0px 10px;">
             <div class="grid_12">
                 <div class="grid_6">
                     <!-- Status keluar -->
-                    <div class="grid_12" >
+                    <div class="grid_12">
                         <label c-label item="item" c-label-text="statusKeluar"></label>
                     </div>
                     <div class="grid_12">
                         <input style="width: 100%;" kendo-combo-box k-ng-model="item.statusKeluarJ"
                             k-data-text-field="'statuskeluar'" k-filter="'contains'" k-data-value-field="'id'"
-                            k-auto-bind="false" k-data-source="listStatusKeluar" k-on-change="loadKelas()"
-                            disabled />
+                            k-auto-bind="false" k-data-source="listStatusKeluar" k-on-change="loadKelas()" disabled />
                     </div>
                 </div>
                 <div class="grid_6">
@@ -542,25 +550,139 @@
             <div class="grid_12">
                 <div class="grid_4">
                     <label c-label item="item" c-label-text="tanggalMeninggal"></label>
-                    <input style="width: 100%" kendo-date-time-picker k-ng-model="item.tglMeninggal" k-options="formatJam24"/>
+                    <input style="width: 100%" kendo-date-time-picker k-ng-model="item.tglMeninggal"
+                        k-options="formatJam24" />
                 </div>
                 <div class="grid_4">
                     <label c-label item="item" c-label-text="PenyebabKematian"></label>
-                    <input style="width: 100%;" kendo-combo-box k-ng-model="item.penyebabKematian" k-data-text-field="'penyebabkematian'" k-filter="'contains'" k-data-value-field="'id'" k-auto-bind="false" k-data-source="listPenyebabKematian" k-on-change="IsiPenyebab()"/>
+                    <input style="width: 100%;" kendo-combo-box k-ng-model="item.penyebabKematian"
+                        k-data-text-field="'penyebabkematian'" k-filter="'contains'" k-data-value-field="'id'"
+                        k-auto-bind="false" k-data-source="listPenyebabKematian" k-on-change="IsiPenyebab()" />
                 </div>
                 <div class="grid_4" ng-show="PenyebabKematianManual">
                     <label c-label item="item" c-label-text="PenyebabKematian"></label>
-                    <input c-text-box type="input" filter="'string'" class="k-textbox" ng-model="item.PenyebabKematianText" />
+                    <input c-text-box type="input" filter="'string'" class="k-textbox"
+                        ng-model="item.PenyebabKematianText" />
                 </div>
-                
-            </div>            
+
+            </div>
             <div class="dialog_buttons pull-right" style="margin-top: 15px;">
-                <input type="button" class="confirm_no k-button" value="Batal" style="width: 70px" ng-click="BatalMeninggal()"/>
+                <input type="button" class="confirm_no k-button" value="Batal" style="width: 70px"
+                    ng-click="BatalMeninggal()" />
                 &nbsp;
-                <input type="button" class="confirm_yes k-button" value="Simpan" style="width: 70px" ng-click="SimpanMeninggal()"/>
-            </div> 
+                <input type="button" class="confirm_yes k-button" value="Simpan" style="width: 70px"
+                    ng-click="SimpanMeninggal()" />
+            </div>
         </div>
     </div>
+
+    <!-- popup konfirmasi batal periksa -->
+    <div kendo-window="winDialogBatal" k-title="'Batal Periksa'" k-width="400" k-visible="false"
+        k-on-open="win2visible = true" k-on-close="win2visible = false">
+        <label c-label item="item" c-label-text="Tgl Batal"></label>
+        <input style="width: 100%" k-ng-model="item.tglbatal" kendo-datetimepicker k-max="now"
+            placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" disabled />
+        </br>
+        <label c-label item="item" c-label-text="Ruangan"></label>
+        <input style="width: 100%;" kendo-combo-box k-ng-model="item.ruanganBatal" k-data-text-field="'namaruangan'"
+            k-data-value-field="'id'" k-auto-bind="false" k-data-source="listRuanganBatal" disabled />
+        </br>
+        <label c-label item="item" c-label-text="Pembatalan" style="margin-top:1.5em"></label>
+        <input style="width: 100%;" kendo-combo-box k-ng-model="item.pembatalan" k-data-text-field="'name'"
+            k-data-value-field="'id'" k-auto-bind="false" k-data-source="listPembatalan" />
+        </br>
+        <label c-label item="item" c-label-text="Alasan Pembatalan" style="margin:1.5em 0 .5em"></label>
+        <textarea c-text-area type="input" style="height:60px" filter="'string'" class="k-textbox"
+            ng-model="item.alasanBatal" placeholder="Alasan pembatalan" />
+
+        <!--<label>ID :<span style="margin-left:20px;font-size:large">{{item.pasien.id}}</span></label><br/>
+        <label>Nama :<span style="margin-left:20px;font-size:large">{{item.pasien.namaPasien}}</span></label></br/>
+        <label>Tanggal Daftar :<span style="margin-left:20px;font-size:large">{{item.pasienDaftar.tglRegistrasi}}</span></label>-->
+        <br />
+        <div class="dialog_buttons pull-right" style="margin-top:5%">
+            <input type="button" class="confirm_no k-button" value="Tidak" style="width: 70px"
+                ng-click="batalBatal()" />
+            &nbsp;
+            <input type="button" class="confirm_yes k-button" value="Ya" style="width: 70px" ng-click="lanjutBatal()" />
+        </div>
+    </div>
+
+    <div kendo-window="popUpStatusPulang" k-title="'Status Pulang'" k-width="870" k-visible="false"
+        k-on-open="win2visible = true" k-on-close="win2visible = false">
+        <div class="panel panel-default container_12" style="padding: 0px 10px;">
+            <div class='panel-body'>
+                <div class="grid_12">
+                    <div class="grid_4">
+                        <!-- Status keluar -->
+                        <label c-label item="item" c-label-text="statusKeluar"></label>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.statusKeluar"
+                            k-data-text-field="'statuskeluar'" k-filter="'contains'" k-data-value-field="'id'"
+                            k-auto-bind="false" k-data-source="listStatusKeluar" k-on-change="loadKelas()"
+                            ng-disabled="disabledStatus" />
+                    </div>
+                    <div class="grid_4" ng-hide="item.statusKeluar.id === 2">
+                        <!-- Kondisi Keluar -->
+                        <label c-label item="item" c-label-text="kondisiKeluar"></label>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.kondisiKeluar"
+                            k-data-text-field="'kondisipasien'" k-filter="'contains'" k-data-value-field="'id'"
+                            k-auto-bind="false" k-data-source="listKondisiPasien" />
+                    </div>
+                    <div class="grid_4" ng-hide="item.statusKeluar.id === 2">
+                        <!-- Status Pulang -->
+                        <label c-label item="item" c-label-text="statusPulang"></label>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.statusPulang"
+                            k-data-text-field="'statuspulang'" k-filter="'contains'" k-data-value-field="'id'"
+                            k-auto-bind="false" k-data-source="listStatusPulang" />
+                    </div>
+                    <!-- <div class="grid_1" style="margin-top:5px" ng-show="item.statusKeluar.id === 2">
+                        <input type="checkbox" class="k-checkbox" id="rawatGabung" ng-model="item.rawatGabung"
+                            ng-click="cekRawatGabung(item.rawatGabung)">
+                        <label class="k-checkbox-label" for="rawatGabung"><b>Rawat Gabung</b></label>
+                    </div> -->
+                    <div class="grid_3" ng-show="item.statusKeluar.id === 2">
+                        <label c-label item="item" c-label-text="tanggalRencanaPindah"></label>
+                        <input kendo-date-time-picker k-options="formatJam24" k-ng-model="item.tglRencanaKeluar"
+                            style="width: 100%" />
+                    </div>
+                    <div class="grid_4" ng-show="item.statusKeluar.id === 2">
+                        <label c-label item="item" c-label-text="ruanganRencanaPindah"></label>
+                        <!-- <input style="width: 100%;" kendo-combo-box k-ng-model="item.ruangan" k-data-text-field="'namaRuangan'" k-filter="'contains'" k-data-value-field="'id'" k-auto-bind="false" k-data-source="sourceRuangan" k-on-change="cariKamar()"/> -->
+                        <input style="width: 100%; " kendo-combo-box k-ng-model="item.ruangan"
+                            k-data-text-field=" 'namaruangan' " k-filter=" 'contains' " k-data-value-field=" 'id' "
+                            k-auto-bind="false " k-data-source="listRuanganRencana"
+                            k-on-change="pilihRuangan(item.ruangan.id)" />
+                    </div>
+                </div>
+
+                <div class="grid_12" ng-show="item.statusKeluar.id === 5">
+                    <div class="grid_4">
+                        <label c-label item="item" c-label-text="tanggalMeninggal"></label>
+                        <input style="width: 100%" kendo-date-time-picker k-ng-model="item.tglMeninggal"
+                            k-options="formatJam24" />
+                    </div>
+                    <div class="grid_4">
+                        <label c-label item="item" c-label-text="PenyebabKematian"></label>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.penyebabKematian"
+                            k-data-text-field="'penyebabkematian'" k-filter="'contains'" k-data-value-field="'id'"
+                            k-auto-bind="false" k-data-source="listPenyebabKematian" k-on-change="IsiPenyebab()" />
+                    </div>
+                    <div class="grid_4" ng-show="PenyebabKematianManual">
+                        <label c-label item="item" c-label-text="PenyebabKematian"></label>
+                        <input c-text-box type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.PenyebabKematianText" />
+                    </div>
+                </div>
+                <div class="dialog_buttons pull-right" style="margin-top:5%">
+                    <input type="button" class="confirm_no k-button" value="Batal" style="width: 70px"
+                        ng-click="batalStatPulang()" />
+                    &nbsp;
+                    <input type="button" class="confirm_yes k-button" value="Simpan" style="width: 70px" ng-click="LanjutUpStatPulang()" />
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
     <style>
         .k-window-content .k-content {
             overflow: none
