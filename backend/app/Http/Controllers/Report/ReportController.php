@@ -2513,8 +2513,6 @@ class ReportController extends ApiController{
                 ELSE hh.hasil 
 		    END AS hasil,
             hh.keterangan as keterangan_lab,
-            hh.kesan,
-            hh.saran,
             CASE WHEN hh.FLAG = 'Y' THEN '*' ELSE '' END AS stathasil,
             hh.hasil as hasilawal,
             maps.ID AS map_id,

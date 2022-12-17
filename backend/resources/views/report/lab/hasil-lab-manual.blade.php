@@ -379,7 +379,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                         <table width="100%" cellspacing="0" cellpadding="0" border="0">
                             <tr>
                                 <td>
-                                    <font style="font-size: 8pt;" color="#000000">Kesan : </font>
+                                    {{-- <font style="font-size: 8pt;" color="#000000">Kesan : </font> --}}
                                 </td>
                                 <td style="text-align:center">
                                     <font style="font-size: 8pt;" color="#000000">Penanggung Jawab</font>
@@ -387,23 +387,24 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             </tr>
                             <tr>
                                 <td style="padding-bottom:30px;">
-                                    <font style="font-size: 8pt;" color="#000000">{{ $datas[0]->kesan }}</font>
+                                    {{-- <font style="font-size: 8pt;" color="#000000">{{ $datas[0]->kesan }}</font> --}}
                                 </td>
                                 <td style="padding-bottom:30px;"></td>
                             </tr>
-                            <tr>
+                            {{-- <tr>
                                 <td>
                                     <font style="font-size: 8pt;" color="#000000">Saran : </font>
                                 </td>
-                            </tr>
+                            </tr> --}}
                             <tr>
                                 <td style="padding-bottom:15px;">
-                                    <font style="font-size: 8pt;" color="#000000">{{ $datas[0]->saran }}</font>
+                                    {{-- <font style="font-size: 8pt;" color="#000000">{{ $datas[0]->saran }}</font> --}}
                                 </td>
                                 <td style="padding-bottom:15px;"></td>
                             </tr>
                             <tr>
-                                <td>T{{ $datas[0]->tat }}</td>
+                                <td>{{ $datas[0]->tat }}</td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <td>
