@@ -2278,6 +2278,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
                 Route::get('sysadmin/general/view-bed', 'SysAdmin\GeneralController@viewBed');
                 Route::get('sysadmin/general/get-datacombo-produk', 'SysAdmin\GeneralController@getProdukPart');
                 Route::get('sysadmin/general/get-datacombo-icd10', 'SysAdmin\GeneralController@getIcd10');
+                Route::get('sysadmin/general/get-datacombo-icd10-secondary', 'SysAdmin\GeneralController@getIcd10Secondary');
                 Route::get('sysadmin/general/get-jenis-pelayanan/{norec}','SysAdmin\GeneralController@getJenisPelayananByNorecPd');
                 Route::get('sysadmin/general/get-tindakan','SysAdmin\GeneralController@getTindakanPart');
                 Route::get('sysadmin/general/get-komponenharga','SysAdmin\GeneralController@getKomponenHarga');

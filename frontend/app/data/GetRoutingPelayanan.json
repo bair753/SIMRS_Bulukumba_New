@@ -16796,6 +16796,26 @@
         "define": "MedifirstService"
       }
     ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.RingkasanPasienMasukdanKeluar",
+    "url": "/RingkasanPasienMasukdanKeluar",
+    "templateurl": "module/EMR/RingkasanPasienMasukdanKeluar.html",
+    "controller": "RingkasanPasienMasukdanKeluarCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      }
+    ]
   }
   
 ] 

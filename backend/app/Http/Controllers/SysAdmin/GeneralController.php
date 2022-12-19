@@ -5305,4 +5305,28 @@ class GeneralController extends ApiController
         return $this->respond($dataPenulis2);
     }
 
+    public function getIcd10Secondary(Request $request){
+        $req = $request->all();
+        $icdIX = \DB::table('diagnosa_m as dg')
+            ->leftJoin('detaildiagnosapasien_t as ddp', 'ddp.objectdiagnosafk', '=', 'dg.id')
+            ->select('dg.id','dg.kddiagnosa','dg.namadiagnosa')
+            ->where('dg.statusenabled', true)
+            ->where('ddp.objectjenisdiagnosafk', '=', 2) // Jenis diagnosa secondary
+            ->orderBy('dg.kddiagnosa');
+
+        if(isset($req['filter']['filters'][0]['value']) &&
+            $req['filter']['filters'][0]['value']!="" &&
+            $req['filter']['filters'][0]['value']!="undefined"){
+            $icdIX = $icdIX
+                ->where('dg.namadiagnosa','ilike','%'.$req['filter']['filters'][0]['value'].'%' )
+                ->orWhere('dg.kddiagnosa','ilike',$req['filter']['filters'][0]['value'].'%' )  ;
+        }
+
+
+        $icdIX=$icdIX->take(10);
+        $icdIX=$icdIX->get();
+
+        return $this->respond($icdIX);
+    }
+
 }

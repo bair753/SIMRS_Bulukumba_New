@@ -3005,6 +3005,10 @@
         {
             "nameDep": "InformasiWaktuPelayananRawatJalanCtrl",
             "urlDep": "module/RawatJalan/InformasiWaktuPelayananRawatJalanCtrl"
+        },
+        {
+            "nameDep": "RingkasanPasienMasukdanKeluarCtrl",
+            "urlDep": "module/EMR/RingkasanPasienMasukdanKeluarCtrl"
         }
     ]
 }
