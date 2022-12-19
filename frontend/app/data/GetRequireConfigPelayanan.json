@@ -3009,6 +3009,18 @@
         {
             "nameDep": "RingkasanPasienMasukdanKeluarCtrl",
             "urlDep": "module/EMR/RingkasanPasienMasukdanKeluarCtrl"
+        },
+        {
+            "nameDep": "PersetujuanUmumRajalCtrl",
+            "urlDep": "module/EMR/PersetujuanUmumRajalCtrl"
+        },
+        {
+            "nameDep": "LembarTriaseGawatDaruratAnakDanNeonatusCtrl",
+            "urlDep": "module/EMR/LembarTriaseGawatDaruratAnakDanNeonatusCtrl"
+        },
+        {
+            "nameDep": "LembarTriaseGawatDaruratDewasaCtrl",
+            "urlDep": "module/EMR/LembarTriaseGawatDaruratDewasaCtrl"
         }
     ]
 }
