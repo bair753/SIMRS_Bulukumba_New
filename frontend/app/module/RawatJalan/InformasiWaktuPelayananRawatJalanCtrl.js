@@ -501,7 +501,15 @@ define(['initialize'], function (initialize) {
 				
 			}
 			async function cekValidDataDiBPJS(dataSource){
-				
+				var listWaktu = [
+                    { Id: 1, waktu: random(7500000, 9300000) }, // 1 ke 2 range waktu 60 - 90 menit 
+                    { Id: 2, waktu: random(3600000, 3900000) }, // 2 ke 3 range waktu 5 - 10 menit 
+                    { Id: 3, waktu: random(3000000, 3300000) }, // 3 ke 4 range waktu 15 - 20 menit 
+                    { Id: 4, waktu: random(1320000, 2100000) }, // 4 ke 5 range waktu 7 - 20 menit
+                    { Id: 5, waktu: random(600000, 900000) },  // 5 ke 6 range waktu 10 - 15 menit
+                    { Id: 6, waktu: random(300000, 500000) }, // 
+					{ Id: 7, waktu: random(0, 0) }, // 
+                ]
 				$scope.isRouteLoading = true
 				for (let x = 0; x < dataSource.length; x++) {
 					const element = dataSource[x];
@@ -515,11 +523,13 @@ define(['initialize'], function (initialize) {
 					}
 					var response =  await medifirstService.postNonMessage('bridging/bpjs/tools', jsontask)
 					if(response.data.metaData.code == 200){
+						var satu = false,dua =false ,tiga=false,empat = false,lima=false,enam=false,tujuh=false
 						for (let xx = 0; xx < response.data.response.length; xx++) {
 							const element2 = response.data.response[xx];
 							var wakturs =  element2.wakturs.substr(0,16) +' '+element2.wakturs.substr(20,3)
 							var taskid = element2.taskid
 							if(element2.taskid ==  1  ){
+								satu = true
 								var waktu =	element.taksid_1
 								if(wakturs!= moment(new Date(waktu )).format('DD-MM-YYYY HH:mm' ) + ' WIB'){
 									let wak = moment(element2.wakturs.replace(' WIB',''), "DD/MM/YYYY HH:mm")._d
@@ -539,6 +549,7 @@ define(['initialize'], function (initialize) {
 								await medifirstService.postNonMessage('rawatjalan/save-monitoring-taskid', json)
 							}
 							if(element2.taskid ==  2  ){
+								dua = true
 								var waktu =	element.taksid_2
 								if(wakturs!= moment(new Date(waktu )).format('DD-MM-YYYY HH:mm' ) + ' WIB'){
 									let wak = moment(element2.wakturs.replace(' WIB',''), "DD/MM/YYYY HH:mm")._d
@@ -556,6 +567,7 @@ define(['initialize'], function (initialize) {
 								await medifirstService.postNonMessage('rawatjalan/save-monitoring-taskid', json)
 							}
 							if(element2.taskid ==  3 ){
+								tiga = true
 								var waktu =	element.taksid_3
 								if(wakturs!= moment(new Date(waktu )).format('DD-MM-YYYY HH:mm' ) + ' WIB'){
 									let wak = moment(element2.wakturs.replace(' WIB',''), "DD/MM/YYYY HH:mm")._d
@@ -575,6 +587,7 @@ define(['initialize'], function (initialize) {
 								
 							}
 							if(element2.taskid ==  4 ){
+								empat = true
 								var waktu =	element.taksid_4
 								if(wakturs!= moment(new Date(waktu )).format('DD-MM-YYYY HH:mm' ) + ' WIB'){
 									let wak = moment(element2.wakturs.replace(' WIB',''), "DD/MM/YYYY HH:mm")._d
@@ -592,6 +605,7 @@ define(['initialize'], function (initialize) {
 								await medifirstService.postNonMessage('rawatjalan/save-monitoring-taskid', json)
 							}
 							if(element2.taskid ==  5 ){
+								lima = true
 								var waktu =	element.taksid_5
 								if(wakturs!= moment(new Date(waktu )).format('DD-MM-YYYY HH:mm' ) + ' WIB'){
 									let wak = moment(element2.wakturs.replace(' WIB',''), "DD/MM/YYYY HH:mm")._d
@@ -611,6 +625,7 @@ define(['initialize'], function (initialize) {
 							
 							}
 							if(element2.taskid ==  6  && waktu !='-'){
+								enam = true
 								var waktu =	element.taksid_6
 								if(wakturs!= moment(new Date(waktu )).format('DD-MM-YYYY HH:mm' ) + ' WIB'){
 									let wak = moment(element2.wakturs.replace(' WIB',''), "DD/MM/YYYY HH:mm")._d
@@ -628,6 +643,7 @@ define(['initialize'], function (initialize) {
 								await medifirstService.postNonMessage('rawatjalan/save-monitoring-taskid', json)
 							}
 							if(element2.taskid ==  7  && waktu !='-'){
+								tujuh = true
 								var waktu =	element.taksid_7
 								if(wakturs!= moment(new Date(waktu )).format('DD-MM-YYYY HH:mm' ) + ' WIB'){
 									let wak = moment(element2.wakturs.replace(' WIB',''), "DD/MM/YYYY HH:mm")._d
@@ -645,12 +661,69 @@ define(['initialize'], function (initialize) {
 								await medifirstService.postNonMessage('rawatjalan/save-monitoring-taskid', json)
 							}
 						}
+						
+						if(satu == false){await kirimTaskUlang(element.noregistrasi,1,element.noregistrasifk,(element.taksid_1!='-'?new Date(element.taksid_1).getTime(): new Date().getTime()))}
+						if(dua == false){await kirimTaskUlang(element.noregistrasi,2,element.noregistrasifk,(element.taksid_2!='-'?new Date(element.taksid_2).getTime():
+						
+						new Date(element.taksid_1).setTime(new Date(element.taksid_1).getTime() + 1080000)//3mnt
+						))}
+						if(tiga == false){await kirimTaskUlang(element.noregistrasi,3,element.noregistrasifk,(element.taksid_3!='-'?new Date(element.taksid_3).getTime()
+						:new Date(element.taksid_2).setTime(new Date(element.taksid_2).getTime() + 1080000)//3mnt
+						))}
+						if(empat == false){
+							await kirimTaskUlang(element.noregistrasi,4,element.noregistrasifk,(element.taksid_4!='-'?new Date(element.taksid_4).getTime():
+							new Date(element.taksid_3).setTime(new Date(element.taksid_3).getTime() + 1080000)//3mnt
+							))}
+						if(lima == false){await kirimTaskUlang(element.noregistrasi,5,element.noregistrasifk,(element.taksid_5!='-'?new Date(element.taksid_5).getTime():
+							new Date(element.taksid_4).setTime(new Date(element.taksid_4).getTime() + 1080000)//3mnt
+						))}
+						if(enam == false){await kirimTaskUlang(element.noregistrasi,6,element.noregistrasifk,(element.taksid_6!='-'?new Date(element.taksid_6).getTime():
+							new Date(element.taksid_5).setTime(new Date(element.taksid_5).getTime() + 1080000)//3mnt
+						))}
+						if(tujuh == false){await kirimTaskUlang(element.noregistrasi,7,element.noregistrasifk,(element.taksid_7!='-'?new Date(element.taksid_7).getTime():
+						new Date(element.taksid_6).setTime(new Date(element.taksidtaksid_6_4).getTime() + 1080000)//3mnt
+						))}
+					
 					}
 				}
 				await loadData()
 				$scope.isRouteLoading = false
 			}
-		
+			async function kirimTaskUlang(param,taskid,noregistrasifk,waktu){
+				var jsons = {
+					"url": "antrean/updatewaktu",
+					"jenis": "antrean",
+					"method": "POST",
+					"data": {
+						"kodebooking": param,
+						"taskid": taskid,
+						"waktu":waktu
+					}
+				}
+			
+				await medifirstService.postNonMessage('bridging/bpjs/tools', jsons).then(async function (e) {
+					if(e.data.metaData.code == 200) {
+						var json = {
+							"noregistrasifk": noregistrasifk,
+							"taskid": taskid,
+							"waktu": waktu,
+							"statuskirim": true
+						}
+						await medifirstService.postNonMessage('rawatjalan/save-monitoring-taskid', json)
+					}
+					if(e.data.metaData.code == 208) {
+						if(e.data.metaData.message == "TaskId="+taskid+" sudah ada") {
+							var json = {
+								"noregistrasifk": noregistrasifk,
+								"taskid": taskid,
+								"waktu": waktu,
+								"statuskirim": true
+							}
+							await medifirstService.postNonMessage('rawatjalan/save-monitoring-taskid', json)
+						}
+					}
+				})
+			}
 
 			// END ################
 		}
