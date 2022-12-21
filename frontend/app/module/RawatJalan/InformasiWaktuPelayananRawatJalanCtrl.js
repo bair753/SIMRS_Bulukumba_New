@@ -295,7 +295,7 @@ define(['initialize'], function (initialize) {
 					$scope.modalLogAntrol.open().center();
 				});
 			}
-
+			
 			$scope.syncData = function(){
 				if($scope.dataDaftarPasien._data.length == 0)return
 
@@ -320,6 +320,11 @@ define(['initialize'], function (initialize) {
 			}
 			function repeatSendTaskId(norec_pd, taskid) {
                 medifirstService.get('registrasi/get-data-antrean?norec_pd=' + norec_pd).then(function (e) {
+					if(e.data.nohp == null){
+                        e.data.nohp = "000000000000"
+                    }else{
+                        e.data.nohp  =  e.data.nohp.trim()
+                    }
                     var data = {
                         "url": "antrean/add",
                         "jenis": "antrean",
@@ -349,34 +354,83 @@ define(['initialize'], function (initialize) {
 			async function updateWaktuId(res, kodebooking, norec_pd) {
                 for (let i = 0; i < res.data.length; i++) {
                     const element = res.data[i];
-                    var data = {
-                        "url": "antrean/updatewaktu",
-                        "jenis": "antrean",
-                        "method": "POST",
-                        "data":
-                        {
-                            "kodebooking": kodebooking,
-                            "taskid": element.taskid,
-                            "waktu": parseInt(element.waktu)
-                        }
-                    }
-                    await medifirstService.postNonMessage('bridging/bpjs/tools', data).then(async function (e) {
-                        if(e.data.metaData.code == 200) {
-                            await saveMonitoringTaksId(norec_pd,  element.taskid, parseInt(element.waktu), true);
-                        }
-                    })
+					if(kodebooking.length <10){
+						if( element.taskid >=3){
+							var data = {
+								"url": "antrean/updatewaktu",
+								"jenis": "antrean",
+								"method": "POST",
+								"data":
+								{
+									"kodebooking": kodebooking,
+									"taskid": element.taskid,
+									"waktu": parseInt(element.waktu)
+								}
+							}
+							await medifirstService.postNonMessage('bridging/bpjs/tools', data).then(async function (e) {
+								if(e.data.metaData.code == 200) {
+									await saveMonitoringTaksId(kodebooking,norec_pd,  element.taskid, parseInt(element.waktu), true);
+								}
+							})
+						}
+					}else{
+						var data = {
+							"url": "antrean/updatewaktu",
+							"jenis": "antrean",
+							"method": "POST",
+							"data":
+							{
+								"kodebooking": kodebooking,
+								"taskid": element.taskid,
+								"waktu": parseInt(element.waktu)
+							}
+						}
+						await medifirstService.postNonMessage('bridging/bpjs/tools', data).then(async function (e) {
+							if(e.data.metaData.code == 200) {
+								await saveMonitoringTaksId(kodebooking,norec_pd,  element.taskid, parseInt(element.waktu), true);
+							}
+						})
+					}
+                   
                 }
             }
 
-            function saveMonitoringTaksId(noregistrasifk, taskid, waktu, statuskirim) {
+           async function saveMonitoringTaksId(kodebooking,noregistrasifk, taskid, waktu, statuskirim) {
+				if(statuskirim == true){
+					// 071e25a
+					var jsontask={
+						"url":"antrean/getlisttask",
+						"jenis":"antrean",
+						"method":"POST",
+						"data":{"kodebooking":kodebooking}
+					}
+					// debugger
+					var response = await medifirstService.postNonMessage('bridging/bpjs/tools', jsontask)
+					if(response.data.metaData.code == 200){
+						for (let xx = 0; xx < response.data.response.length; xx++) {
+							const element = response.data.response[xx];
+							if(element.taskid ==  taskid ){
+								if(element.wakturs != moment(new Date(waktu)).format('DD-MM-YYYY HH:mm:ss' ) + ' WIB'){
+									let wak = moment(element.wakturs.replace(' WIB',''), "DD/MM/YYYY HH:mm")._d
+									console.log('waktu BPJS : '+wak)
+									console.log('waktu RS : ' + new Date(waktu))
+									console.log('waktu TASK : ' +taskid)
+									waktu = wak.getTime()
+									break
+								}
+							}
+						}
+					}
+				}
+	
                 var json = {
                     "noregistrasifk": noregistrasifk,
                     "taskid": taskid,
                     "waktu": waktu,
                     "statuskirim": statuskirim
                 }
-                medifirstService.postNonMessage('rawatjalan/save-monitoring-taskid', json).then(function (e) {
-					loadData()
+                await medifirstService.postNonMessage('rawatjalan/save-monitoring-taskid', json).then(async function (e) {
+					await loadData()
 				})
             }
 			const random = (min, max) => Math.floor(Math.random() * (max - min)) + min;
@@ -393,30 +447,210 @@ define(['initialize'], function (initialize) {
                 for (let i = 0; i < taksId.length; i++) {
                     var element = taksId[i]
                     var waktuS =  new Date().getTime() - element.waktu
-                    var json = {
-                        "url": "antrean/updatewaktu",
-                        "jenis": "antrean",
-                        "method": "POST",
-                        "data": {
-                        "kodebooking": param,
-                        "taskid": element.Id,
-                        "waktu":waktuS
-                        }
-                    }
-                  
-                    await medifirstService.postNonMessage('bridging/bpjs/tools', json).then(async function (e) {
-                        if(e.data.metaData.code == 200) {
-                           await saveMonitoringTaksId(norec_pd, element.Id, waktuS, true)
-                        }
-						if(e.data.metaData.code == 208) {
-							if(e.data.metaData.message == "TaskId="+element.Id+" sudah ada") {
-								await saveMonitoringTaksId(norec_pd, element.Id, waktuS, true)
+					if(param.length <10){
+						if( element.Id >=3){
+							var json = {
+								"url": "antrean/updatewaktu",
+								"jenis": "antrean",
+								"method": "POST",
+								"data": {
+								"kodebooking": param,
+								"taskid": element.Id,
+								"waktu":waktuS
+								}
 							}
-						 }
-                    })
+						
+							await medifirstService.postNonMessage('bridging/bpjs/tools', json).then(async function (e) {
+								if(e.data.metaData.code == 200) {
+								await saveMonitoringTaksId(param,norec_pd, element.Id, waktuS, true)
+								}
+								if(e.data.metaData.code == 208) {
+									if(e.data.metaData.message == "TaskId="+element.Id+" sudah ada") {
+										await saveMonitoringTaksId(param,norec_pd, element.Id, waktuS, true)
+									}
+								}
+							})
+						}
+					}else{
+						var json = {
+							"url": "antrean/updatewaktu",
+							"jenis": "antrean",
+							"method": "POST",
+							"data": {
+							"kodebooking": param,
+							"taskid": element.Id,
+							"waktu":waktuS
+							}
+						}
+					
+						await medifirstService.postNonMessage('bridging/bpjs/tools', json).then(async function (e) {
+							if(e.data.metaData.code == 200) {
+							await saveMonitoringTaksId(param,norec_pd, element.Id, waktuS, true)
+							}
+							if(e.data.metaData.code == 208) {
+								if(e.data.metaData.message == "TaskId="+element.Id+" sudah ada") {
+									await saveMonitoringTaksId(param,norec_pd, element.Id, waktuS, true)
+								}
+							}
+						})
+					}
                 }
             }
-			
+			$scope.validasiData = function(){
+				cekValidDataDiBPJS($scope.dataDaftarPasien._data )
+				
+			}
+			async function cekValidDataDiBPJS(dataSource){
+				
+				$scope.isRouteLoading = true
+				for (let x = 0; x < dataSource.length; x++) {
+					const element = dataSource[x];
+					var jsontask={
+						"url":"antrean/getlisttask",
+						"jenis":"antrean",
+						"method":"POST",
+						"data":{
+							"kodebooking":element.noregistrasi
+						}
+					}
+					var response =  await medifirstService.postNonMessage('bridging/bpjs/tools', jsontask)
+					if(response.data.metaData.code == 200){
+						for (let xx = 0; xx < response.data.response.length; xx++) {
+							const element2 = response.data.response[xx];
+							var wakturs =  element2.wakturs.substr(0,16) +' '+element2.wakturs.substr(20,3)
+							var taskid = element2.taskid
+							if(element2.taskid ==  1  ){
+								var waktu =	element.taksid_1
+								if(wakturs!= moment(new Date(waktu )).format('DD-MM-YYYY HH:mm' ) + ' WIB'){
+									let wak = moment(element2.wakturs.replace(' WIB',''), "DD/MM/YYYY HH:mm")._d
+									console.log('waktu BPJS : ' + wak)
+									console.log('waktu RS : ' + new Date(waktu ))
+									console.log('waktu TASK : ' +element2.taskid)
+									waktu = wak.getTime()
+							
+								}
+
+								var json = {
+									"noregistrasifk":element.noregistrasifk,
+									"taskid": taskid,
+									"waktu": waktu,
+									"statuskirim": true
+								}
+								await medifirstService.postNonMessage('rawatjalan/save-monitoring-taskid', json)
+							}
+							if(element2.taskid ==  2  ){
+								var waktu =	element.taksid_2
+								if(wakturs!= moment(new Date(waktu )).format('DD-MM-YYYY HH:mm' ) + ' WIB'){
+									let wak = moment(element2.wakturs.replace(' WIB',''), "DD/MM/YYYY HH:mm")._d
+									console.log('waktu BPJS : ' + wak)
+									console.log('waktu RS : ' + new Date(waktu ))
+									console.log('waktu TASK : ' +element2.taskid)
+									waktu = wak.getTime()
+								}
+								var json = {
+									"noregistrasifk": element.noregistrasifk,
+									"taskid": taskid,
+									"waktu": waktu,
+									"statuskirim": true
+								}
+								await medifirstService.postNonMessage('rawatjalan/save-monitoring-taskid', json)
+							}
+							if(element2.taskid ==  3 ){
+								var waktu =	element.taksid_3
+								if(wakturs!= moment(new Date(waktu )).format('DD-MM-YYYY HH:mm' ) + ' WIB'){
+									let wak = moment(element2.wakturs.replace(' WIB',''), "DD/MM/YYYY HH:mm")._d
+									console.log('waktu BPJS : ' + wak)
+									console.log('waktu RS : ' + new Date(waktu ))
+									console.log('waktu TASK : ' +element2.taskid)
+									waktu = wak.getTime()
+									
+								}
+								var json = {
+									"noregistrasifk": element.noregistrasifk,
+									"taskid": taskid,
+									"waktu": waktu,
+									"statuskirim": true
+								}
+								await medifirstService.postNonMessage('rawatjalan/save-monitoring-taskid', json)
+								
+							}
+							if(element2.taskid ==  4 ){
+								var waktu =	element.taksid_4
+								if(wakturs!= moment(new Date(waktu )).format('DD-MM-YYYY HH:mm' ) + ' WIB'){
+									let wak = moment(element2.wakturs.replace(' WIB',''), "DD/MM/YYYY HH:mm")._d
+									console.log('waktu BPJS : ' + wak)
+									console.log('waktu RS : ' + new Date(waktu ))
+									console.log('waktu TASK : ' +element2.taskid)
+									waktu = wak.getTime()
+								}
+								var json = {
+									"noregistrasifk": element.noregistrasifk,
+									"taskid": taskid,
+									"waktu": waktu,
+									"statuskirim": true
+								}
+								await medifirstService.postNonMessage('rawatjalan/save-monitoring-taskid', json)
+							}
+							if(element2.taskid ==  5 ){
+								var waktu =	element.taksid_5
+								if(wakturs!= moment(new Date(waktu )).format('DD-MM-YYYY HH:mm' ) + ' WIB'){
+									let wak = moment(element2.wakturs.replace(' WIB',''), "DD/MM/YYYY HH:mm")._d
+									console.log('waktu BPJS : ' + wak)
+									console.log('waktu RS : ' + new Date(waktu ))
+									console.log('waktu TASK : ' +element2.taskid)
+									waktu = wak.getTime()
+								}
+								var json = {
+									"noregistrasifk": element.noregistrasifk,
+									"taskid": taskid,
+									"waktu": waktu,
+									"statuskirim": true
+								}
+								await medifirstService.postNonMessage('rawatjalan/save-monitoring-taskid', json)
+
+							
+							}
+							if(element2.taskid ==  6  && waktu !='-'){
+								var waktu =	element.taksid_6
+								if(wakturs!= moment(new Date(waktu )).format('DD-MM-YYYY HH:mm' ) + ' WIB'){
+									let wak = moment(element2.wakturs.replace(' WIB',''), "DD/MM/YYYY HH:mm")._d
+									console.log('waktu BPJS : ' + wak)
+									console.log('waktu RS : ' + new Date(waktu ))
+									console.log('waktu TASK : ' +element2.taskid)
+									waktu = wak.getTime()
+								}
+								var json = {
+									"noregistrasifk": element.noregistrasifk,
+									"taskid": taskid,
+									"waktu": waktu,
+									"statuskirim": true
+								}
+								await medifirstService.postNonMessage('rawatjalan/save-monitoring-taskid', json)
+							}
+							if(element2.taskid ==  7  && waktu !='-'){
+								var waktu =	element.taksid_7
+								if(wakturs!= moment(new Date(waktu )).format('DD-MM-YYYY HH:mm' ) + ' WIB'){
+									let wak = moment(element2.wakturs.replace(' WIB',''), "DD/MM/YYYY HH:mm")._d
+									console.log('waktu BPJS : ' + wak)
+									console.log('waktu RS : ' + new Date(waktu ))
+									console.log('waktu TASK : ' +element2.taskid)
+									waktu = wak.getTime()
+								}
+								var json = {
+									"noregistrasifk": element.noregistrasifk,
+									"taskid": taskid,
+									"waktu": waktu,
+									"statuskirim": true
+								}
+								await medifirstService.postNonMessage('rawatjalan/save-monitoring-taskid', json)
+							}
+						}
+					}
+				}
+				await loadData()
+				$scope.isRouteLoading = false
+			}
+		
 
 			// END ################
 		}

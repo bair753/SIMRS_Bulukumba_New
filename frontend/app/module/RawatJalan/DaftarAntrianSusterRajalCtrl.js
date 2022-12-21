@@ -2331,6 +2331,11 @@ define(['initialize'], function (initialize) {
 
             function repeatSendTaskId(norec_pd, taskid) {
                 medifirstService.get('registrasi/get-data-antrean?norec_pd=' + norec_pd).then(function (e) {
+                    if(e.data.nohp == null){
+                        e.data.nohp = "000000000000"
+                    }else{
+                        e.data.nohp  =  e.data.nohp.trim()
+                    }
                     var data = {
                         "url": "antrean/add",
                         "jenis": "antrean",

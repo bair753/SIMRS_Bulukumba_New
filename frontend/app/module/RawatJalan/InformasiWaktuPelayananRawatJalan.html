@@ -156,10 +156,9 @@
 						<div class="clear"></div>
 	
 						<div class="grid_12">
-							<button class="btnTemplate1" style="margin-left: 0;" ng-click="SearchData()">Cari</button>
+							<button class="btnTemplate1" style="margin-left: 0;" ng-click="SearchData()"><i class="fa fa-search"></i>Cari</button>
 						</div>
 					</div>
-	
 					<div class="grid_1">
 						<div class="grid_12">
 							<label>&nbsp;</label>
@@ -167,7 +166,7 @@
 						<div class="clear"></div>
 	
 						<div class="grid_12">
-							<button class="btnTemplate1" style="margin-left: 0;" ng-click="syncData()"><i class="fa fa-refresh"></i>Sync</button>
+							<button class="btnTemplate1 success" style="margin-left: 0;" ng-click="syncData()"><i class="fa fa-refresh"></i>Sync & Kirim</button>
 						</div>
 					</div>
 	
@@ -200,7 +199,10 @@
 				</div>
 				<div class="clear"></div>
 			</div>
-		
+			
+			<div class="grid_1">
+				<button class="btnTemplate1 error" style="margin-left: 0;" ng-click="validasiData()"><i class="fa fa-edit"></i>Validasi Data</button>
+			</div>
 			<div class="grid_12" style="margin-top:60px">
 				<div ng-include='"../app/template/Shared/TemplateLoading"'></div>
 			</div>
