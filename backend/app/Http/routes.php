@@ -514,6 +514,10 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
         Route::post('ocbc/v1/virtual-account/payment', 'Bridging\WSController@notifPaymentVA');
         Route::post('ocbc/v1/virtual-account/unflag', 'Bridging\WSController@unflagPaymenVA');
 
+        // ESPAY
+        Route::post('espay/send-invoice', 'Bridging\BridgingESPAYController@sendInvoice');
+        // END ESPAY
+
         Route::group(['prefix' => 'cssd'], function () {
 
         });

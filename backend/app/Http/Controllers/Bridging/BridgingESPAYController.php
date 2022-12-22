@@ -16,6 +16,7 @@ use App\Transaksi\StrukBuktiPenerimaanCaraBayar;
 use App\Transaksi\StrukOrder;
 use App\Transaksi\StrukPelayanan;
 use App\User;
+use App\Web\Profile;
 use Illuminate\Support\Facades\Storage;
 
 class BridgingESPAYController extends ApiController
@@ -27,24 +28,111 @@ class BridgingESPAYController extends ApiController
 
     public function __construct()
     {
-        parent::__construct($skip_authentication = false);
+        parent::__construct($skip_authentication = true);
     }
 
     protected function getKdProfile()
     {
-        $session = \Session::get('userData');
-
-        $user =  User::where('id', $session['id'])->first();
-        if (empty($user)) {
-            $user =  LoginPasien::where('id', $session['id'])->first();
-        }
-        return $user->kdprofile;
+        $profile =  Profile::where('statusenabled', true)->first();
+        return $profile->id;
     }
 
-    public function signature() 
+    public function signature($mode, $data) 
     {
-        $key = $this->settingDataFixed('signature_ESPAY', $this->getKdProfile());
-        $uppercase = strtoupper('##7bc074f97c3131d2e290a4707a54a623##2016-07-25 11:05:49##145000065##INQUIRY##');
+        $signature_key = $this->settingDataFixed('Signature_ESPAY', $this->getKdProfile());
+        $cmm_code = $this->settingDataFixed('MerchantCode_ESPAY', $this->getKdProfile());
+        $key = $this->settingDataFixed('APIKey_ESPAY', $this->getKdProfile());
+        switch ($mode) {
+            case 'SENDINVOICE':
+                // ##KEY##rq_uuid##rq_datetime##order_id##Amount##Ccy##Comm_code##SENDINVOICE##
+                $uppercase = strtoupper('##'.$key.'##'.$data['rq_uuid'].'##'.$data['rq_datetime'].'##'.$data['order_id'].'##'.$data['amount'].'##IDR##'.$cmm_code.'##SENDINVOICE##');
+                break;
+            case 'CLOSEDINVOICE':
+                // ##KEY##rq_uuid##rq_datetime##order_id##Comm_code##Mode##
+                $uppercase = strtoupper('##'.$key.'##'.$data['rq_uuid'].'##'.$data['rq_datetime'].'##'.$data['order_id'].'##'.$cmm_code.'##CLOSEDINVOICE##');
+                break;
+            default:
+                // ##KEY##rq_datetime##order_id##mode##
+                $uppercase = strtoupper('##'.$key.'##'.$data['rq_datetime'].'##'.$data['order_id'].'##'.$mode.'##');
+                break;
+        }
         $signature = hash('sha256', '$uppercase');
+        return $signature;
+    }
+
+    public function sendInvoice(Request $request) 
+    {   
+        $cmm_code = $this->settingDataFixed('MerchantCode_ESPAY', $this->getKdProfile());
+        $data = $request->all();
+        $dataSend = array (
+            'rq_uuid' => substr(Uuid::generate(), 0, 36),//$data['rq_uuid'],
+            'rq_datetime' => $data['rq_datetime'],
+            'order_id' => $data['order_id'],
+            'amount' => $data['amount'],
+            'ccy' => $data['ccy'],
+            'comm_code' => $cmm_code,
+            'remark1' => $data['remark1'],
+            'remark2' => $data['remark2'],
+            'remark3' => $data['remark3'],
+            'update' => $data['update'],
+            'bank_code' => $data['bank_code'],
+            'va_expired' => $data['va_expired'],
+        );
+        $signature = $this->signature('SENDINVOICE', $dataSend);
+        $dataSend['signature'] = $signature;
+        $xurldata = http_build_query($dataSend);
+        $response = $this->sendApi($xurldata, '/rest/merchantpg/sendinvoice');
+        return $this->respond($response);
+    }
+
+    public function sendApi($xform, $endpoint) 
+    {
+        $curl = curl_init();
+
+        $host = $this->settingDataFixed('Host_ESPAY', $this->getKdProfile());
+        $baseUrl = $this->settingDataFixed('Url_ESPAY', $this->getKdProfile());
+        $header = array(
+        'Host: '. $host,
+        'Connection: keep-alive',
+        'Content-Length: 250',
+        'Content-Type: application/x-www-form-urlencoded',
+        'Accept: */*',
+        );
+        curl_setopt_array($curl, array(
+        CURLOPT_URL => $baseUrl.$endpoint,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_POSTFIELDS => $xform,
+        CURLOPT_HTTPHEADER => $header,
+        ));
+
+        $response = curl_exec($curl);
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+        
+        if ($err) {
+            $result = array(
+                'metaData' => array(
+                    'code' => 400,
+                    'message' => 'Maaf terjadi kesalahan saat mengirim data.'. $err
+                ),
+            );
+        } else {
+            if ($this->isJson($response)) {
+                $result = json_decode($response);
+            } else {
+                $result = $response;
+            }
+        }
+
+        return $result;
     }
 }
