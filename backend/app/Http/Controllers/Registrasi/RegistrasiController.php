@@ -6948,9 +6948,13 @@ class RegistrasiController extends ApiController
                 'apd.objectruanganfk as id','ru.objectdepartemenfk',
                 'ru.namaruangan', 'apd.tglregistrasi', 'kls.namakelas', 'apd.objectruanganasalfk')
             ->where('pd.noregistrasi', $request['noregistrasi'])
-            ->where('pd.kdprofile',(int)$kdProfile)
-            ->orderBy('pd.objectruanganlastfk')
-            ->get();
+            ->where('pd.kdprofile',(int)$kdProfile);
+
+            if (isset($request['objectruanganlastfk']) && $request['objectruanganlastfk'] != "" && $request['objectruanganlastfk'] != "undefined") {
+                $data = $data->where('apd.objectruanganfk', $request['objectruanganlastfk']);
+            }
+            $data =  $data->orderBy('pd.objectruanganlastfk');
+            $data =  $data->get();
 
         $result = array(
             'ruangan' => $data,

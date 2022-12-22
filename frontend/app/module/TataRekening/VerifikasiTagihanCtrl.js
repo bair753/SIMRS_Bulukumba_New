@@ -30,6 +30,10 @@ define(['initialize'], function (initialize) {
 			var arrayMultiPenjamin = [];
 			var multiPenjaminFix = []
 			$scope.item.iurbayar = undefined;
+			$scope.item.totalSetDiskon = 0;
+			$scope.item.diskonTotal = 0;
+			$scope.item.deposit = 0;
+			$scope.item.diskonTotalPersen = 0;
 			FormLoad();
 
 			$scope.formatRupiah = function (value, currency) {
@@ -850,7 +854,20 @@ define(['initialize'], function (initialize) {
 			}
 
 			$scope.$watch('item.totalKlaim', function (newValue, oldValue) {
-				$scope.item.jumlahBayar = $scope.item.billing - newValue - $scope.item.deposit;
+				// $scope.item.jumlahBayar = $scope.item.billing - newValue - $scope.item.deposit;
+				var diskon = 0;
+				if ($scope.item.diskonTotal != undefined) {
+					diskon = parseFloat($scope.item.diskonTotal)
+				}
+
+				if ($scope.item.jumlahBayar != $scope.item.billing) {
+					var total = 0;															
+					total = parseFloat($scope.item.billing) - parseFloat(newValue) - $scope.item.deposit - diskon;
+					$scope.item.jumlahBayar = 0;
+					$scope.item.jumlahBayar = total;
+				}else{
+					$scope.item.jumlahBayar = $scope.item.billing - parseFloat(newValue) - $scope.item.deposit - diskon;
+				}
 			});
 
 			$scope.CariFilterRuanganLayanan = function () {
@@ -1368,7 +1385,11 @@ define(['initialize'], function (initialize) {
 				if ($scope.item.diskonTotalPersen > 0) {
 					var diskon = (parseFloat($scope.item.billing) * parseFloat($scope.item.diskonTotalPersen)) / 100
 					$scope.item.diskonTotal = diskon;
-					$scope.item.jumlahBayar = parseFloat($scope.item.billing) - parseFloat($scope.item.diskonTotal);
+					$scope.item.totalSetDiskon = (parseFloat($scope.item.billing) - parseFloat($scope.item.diskonTotal) - parseFloat($scope.item.deposit)).toFixed(2);
+					$scope.item.jumlahBayar = parseFloat($scope.item.billing) - parseFloat($scope.item.diskonTotal) - parseFloat($scope.item.deposit);
+				}else{
+					$scope.item.totalSetDiskon = 0
+					$scope.item.jumlahBayar = parseFloat($scope.item.billing)
 				}
 			}
 
@@ -1376,8 +1397,12 @@ define(['initialize'], function (initialize) {
 				$scope.item.diskonTotalPersen = 0;
 				if ($scope.item.diskonTotal > 0) {
 					var diskon = (parseFloat($scope.item.diskonTotal)*100) / parseFloat($scope.item.billing)					
-					$scope.item.diskonTotalPersen = diskon;					
-					$scope.item.jumlahBayar = parseFloat($scope.item.billing) - parseFloat($scope.item.diskonTotal);
+					$scope.item.diskonTotalPersen = diskon;		
+					$scope.item.totalSetDiskon = (parseFloat($scope.item.billing) - parseFloat($scope.item.diskonTotal) - parseFloat($scope.item.deposit)).toFixed(2);			
+					$scope.item.jumlahBayar = parseFloat($scope.item.billing) - parseFloat($scope.item.diskonTotal) - parseFloat($scope.item.deposit);
+				}else{
+					$scope.item.totalSetDiskon = 0
+					$scope.item.jumlahBayar = parseFloat($scope.item.billing)
 				}
 			}
 			// $scope.$watch('item.diskonTotalPersen', function (newValue, oldValue) {

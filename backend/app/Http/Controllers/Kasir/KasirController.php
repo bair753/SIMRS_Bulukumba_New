@@ -614,6 +614,7 @@ class KasirController extends ApiController{
 
         foreach ($pelayanan_pasien as $value){
             $harga = ($value->hargajual==null) ? 0 : $value->hargajual;
+            $jasa = ($value->jasa==null) ? 0 : $value->jasa;
             $diskon = ($value->hargadiscount==null) ? 0 : $value->hargadiscount;
             if($value->nilainormal== -1){
                 $deposit += $harga;
@@ -624,7 +625,7 @@ class KasirController extends ApiController{
                     'jumlah'  => $value->jumlah,
                     'harga'  => $harga,
                     'diskon'  => $diskon,
-                    'total'  => ($harga-$diskon) * $value->jumlah,
+                    'total'  => $jasa + ($harga-$diskon) * $value->jumlah,
                 );
             }
 
