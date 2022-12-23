@@ -3021,6 +3021,18 @@
         {
             "nameDep": "LembarTriaseGawatDaruratDewasaCtrl",
             "urlDep": "module/EMR/LembarTriaseGawatDaruratDewasaCtrl"
+        },
+        {
+            "nameDep": "AsesmenAwalKeperawatanIGDNewCtrl",
+            "urlDep": "module/EMR/AsesmenAwalKeperawatanIGDNewCtrl"
+        },
+        {
+            "nameDep": "AsesmenAwalMedisPasienGawatDaruratCtrl",
+            "urlDep": "module/EMR/AsesmenAwalMedisPasienGawatDaruratCtrl"
+        },
+        {
+            "nameDep": "PersetujuanUmumRanapCtrl",
+            "urlDep": "module/EMR/PersetujuanUmumRanapCtrl"
         }
     ]
 }

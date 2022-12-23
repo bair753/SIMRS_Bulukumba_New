@@ -16876,6 +16876,66 @@
         "define": "MedifirstService"
       }
     ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.AsesmenAwalKeperawatanIGDNew",
+    "url": "/AsesmenAwalKeperawatanIGDNew",
+    "templateurl": "module/EMR/AsesmenAwalKeperawatanIGDNew.html",
+    "controller": "AsesmenAwalKeperawatanIGDNewCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.AsesmenAwalMedisPasienGawatDarurat",
+    "url": "/AsesmenAwalMedisPasienGawatDarurat",
+    "templateurl": "module/EMR/AsesmenAwalMedisPasienGawatDarurat.html",
+    "controller": "AsesmenAwalMedisPasienGawatDaruratCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.PersetujuanUmumRanap",
+    "url": "/PersetujuanUmumRanap",
+    "templateurl": "module/EMR/PersetujuanUmumRanap.html",
+    "controller": "PersetujuanUmumRanapCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      }
+    ]
   }
   
   
