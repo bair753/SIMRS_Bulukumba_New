@@ -45,18 +45,18 @@ class BridgingESPAYController extends ApiController
         switch ($mode) {
             case 'SENDINVOICE':
                 // ##KEY##rq_uuid##rq_datetime##order_id##Amount##Ccy##Comm_code##SENDINVOICE##
-                $uppercase = strtoupper('##'.$key.'##'.$data['rq_uuid'].'##'.$data['rq_datetime'].'##'.$data['order_id'].'##'.$data['amount'].'##IDR##'.$cmm_code.'##SENDINVOICE##');
+                $uppercase = strtoupper('##'.$signature_key.'##'.$data['rq_uuid'].'##'.$data['rq_datetime'].'##'.$data['order_id'].'##'.$data['amount'].'##IDR##'.$cmm_code.'##SENDINVOICE##');
                 break;
             case 'CLOSEDINVOICE':
                 // ##KEY##rq_uuid##rq_datetime##order_id##Comm_code##Mode##
-                $uppercase = strtoupper('##'.$key.'##'.$data['rq_uuid'].'##'.$data['rq_datetime'].'##'.$data['order_id'].'##'.$cmm_code.'##CLOSEDINVOICE##');
+                $uppercase = strtoupper('##'.$signature_key.'##'.$data['rq_uuid'].'##'.$data['rq_datetime'].'##'.$data['order_id'].'##'.$cmm_code.'##CLOSEDINVOICE##');
                 break;
             default:
                 // ##KEY##rq_datetime##order_id##mode##
-                $uppercase = strtoupper('##'.$key.'##'.$data['rq_datetime'].'##'.$data['order_id'].'##'.$mode.'##');
+                $uppercase = strtoupper('##'.$signature_key.'##'.$data['rq_datetime'].'##'.$data['order_id'].'##'.$mode.'##');
                 break;
         }
-        $signature = hash('sha256', '$uppercase');
+        $signature = hash('sha256', $uppercase);
         return $signature;
     }
 
@@ -75,7 +75,7 @@ class BridgingESPAYController extends ApiController
             'remark2' => $data['remark2'],
             'remark3' => $data['remark3'],
             'update' => $data['update'],
-            'bank_code' => $data['bank_code'],
+            'bank_code' => '',//$data['bank_code'],
             'va_expired' => $data['va_expired'],
         );
         $signature = $this->signature('SENDINVOICE', $dataSend);
@@ -94,7 +94,6 @@ class BridgingESPAYController extends ApiController
         $header = array(
         'Host: '. $host,
         'Connection: keep-alive',
-        'Content-Length: 250',
         'Content-Type: application/x-www-form-urlencoded',
         'Accept: */*',
         );
