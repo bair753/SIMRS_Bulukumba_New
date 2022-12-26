@@ -3033,6 +3033,26 @@
         {
             "nameDep": "PersetujuanUmumRanapCtrl",
             "urlDep": "module/EMR/PersetujuanUmumRanapCtrl"
+        },
+        {
+            "nameDep": "AsesmenAwalKeperawatanRajalCtrl",
+            "urlDep": "module/EMR/AsesmenAwalKeperawatanRajalCtrl"
+        },
+        {
+            "nameDep": "AsesmenAwalMedisRajalCtrl",
+            "urlDep": "module/EMR/AsesmenAwalMedisRajalCtrl"
+        },
+        {
+            "nameDep": "ProfilRingkasMedisRajalCtrl",
+            "urlDep": "module/EMR/ProfilRingkasMedisRajalCtrl"
+        },
+        {
+            "nameDep": "PermintaanPemeriksaanPenunjangCtrl",
+            "urlDep": "module/EMR/PermintaanPemeriksaanPenunjangCtrl"
+        },
+        {
+            "nameDep": "CPPTRajalCtrl",
+            "urlDep": "module/EMR/CPPTRajalCtrl"
         }
     ]
 }

@@ -16936,6 +16936,106 @@
         "define": "MedifirstService"
       }
     ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.AsesmenAwalKeperawatanRajal",
+    "url": "/AsesmenAwalKeperawatanRajal",
+    "templateurl": "module/EMR/AsesmenAwalKeperawatanRajal.html",
+    "controller": "AsesmenAwalKeperawatanRajalCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.AsesmenAwalMedisRajal",
+    "url": "/AsesmenAwalMedisRajal",
+    "templateurl": "module/EMR/AsesmenAwalMedisRajal.html",
+    "controller": "AsesmenAwalMedisRajalCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.ProfilRingkasMedisRajal",
+    "url": "/ProfilRingkasMedisRajal",
+    "templateurl": "module/EMR/ProfilRingkasMedisRajal.html",
+    "controller": "ProfilRingkasMedisRajalCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.PermintaanPemeriksaanPenunjang",
+    "url": "/PermintaanPemeriksaanPenunjang",
+    "templateurl": "module/EMR/PermintaanPemeriksaanPenunjang.html",
+    "controller": "PermintaanPemeriksaanPenunjangCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.CPPTRajal",
+    "url": "/CPPTRajal",
+    "templateurl": "module/EMR/CPPTRajal.html",
+    "controller": "CPPTRajalCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      }
+    ]
   }
   
   
