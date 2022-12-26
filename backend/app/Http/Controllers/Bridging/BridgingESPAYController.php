@@ -60,8 +60,10 @@ class BridgingESPAYController extends ApiController
                 break;
             case 'INQUIRY-RS':
                 $uppercase = strtoupper('##'.$this->signature_key.'##'.$data['rq_uuid'].'##'.$data['rs_datetime'].'##'.$data['order_id'].'##'.$data['error_code'].'##INQUIRY-RS##');
+                break;
             case 'PAYMENTREPORT-RS':
                 $uppercase = strtoupper('##'.$this->signature_key.'##'.$data['rq_uuid'].'##'.$data['rs_datetime'].$data['error_code'].'##PAYMENTREPORT-RS##');
+                break;
             default:
                 $uppercase = strtoupper('##'.$this->signature_key.'##'.$data['rq_datetime'].'##'.$data['order_id'].'##'.$mode.'##');
                 break;
@@ -216,12 +218,12 @@ class BridgingESPAYController extends ApiController
     public function inquiryTransaction(Request $request)
     {
         $data = $request->all();
-        $findData = DB::table('espaypayment_t as ep')
-        ->join('strukpelayanan_t as sp', 'sp.nostruk', '=', 'ep.order_id')
+        $findData = DB::table('strukpelayanan_t as sp')
+        // ->join('espaypayment_t as ep', 'sp.nostruk', '=', 'ep.order_id')
         ->join('pasiendaftar_t as pd', 'pd.norec', '=', 'sp.noregistrasifk')
         ->join('pasien_m as ps', 'ps.id', '=', 'pd.nocmfk')
         ->join('alamat_m as al', 'al.nocmfk', '=', 'ps.id')
-        ->select('ep.*', 'sp.tglstruk', 'ps.namapasien', 'ps.nohp', 'al.alamatlengkap', 'al.kodepos', 'al.kotakabupaten')
+        ->select('sp.*', 'ps.namapasien', 'ps.nohp', 'al.alamatlengkap', 'al.kodepos', 'al.kotakabupaten')
         ->where('sp.statusenabled', true)
         ->where('sp.nostruk', $data['order_id'])
         ->first();
@@ -232,20 +234,20 @@ class BridgingESPAYController extends ApiController
                 'rq_uuid' => $rq_uuid,
                 'rs_datetime' => $rs_datetime,
                 'error_code' => "0000",
-                'order_id' => $findData->order_id
+                'order_id' => $findData->nostruk
             );
             $signature = $this->signature('INQUIRY-RS', $dataSend);
-            switch ($findData->type) {
+            switch ($findData->espaytype) {
                 case 'VA':
                     $response = array(
                         'rq_uuid' => $rq_uuid,
                         'rs_datetime' => $rs_datetime,
                         "error_code" => "0000",
                         "error_message"=> "Success",
-                        "order_id"=> $findData->order_id,
-                        "amount"=> $findData->amount,
+                        "order_id"=> $findData->nostruk,
+                        "amount"=> $findData->totalharusdibayar,
                         "ccy"=> "IDR",
-                        "description"=> $findData->description,
+                        "description"=> "Pembayaran tagihan pasien ". $findData->namapasien,
                         "trx_date"=> $findData->tglstruk,
                         "signature"=>  $signature,
                         "token"=> "",
@@ -257,10 +259,10 @@ class BridgingESPAYController extends ApiController
                         'rs_datetime' => $rs_datetime,
                         "error_code" => "0000",
                         "error_message"=> "Success",
-                        "order_id"=> $findData->order_id,
-                        "amount"=> $findData->amount,
+                        "order_id"=> $findData->nostruk,
+                        "amount"=> $findData->totalharusdibayar,
                         "ccy"=> "IDR",
-                        "description"=> $findData->description,
+                        "description"=> "Pembayaran tagihan pasien ". $findData->namapasien,
                         "trx_date"=> $findData->tglstruk,
                         "installment_period"=> "30D",
                         "signature"=> $signature,

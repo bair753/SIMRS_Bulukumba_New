@@ -787,6 +787,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 				var isValid = medifirstService.setValidation($scope, listRawRequired);
 				var objSave = {
 					"data": $scope.item,
+					"espaytype": $scope.item.espaymetodepembayaran == undefined ? null : $scope.item.espaymetodepembayaran.split('|')[2],
 				}
 				medifirstService.post('tatarekening/simpan-verifikasi-tagihan-tatarekening', objSave).then(function (e) {
 					$scope.tombolSaveIlang = true;
@@ -831,7 +832,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 								break;
 						}
 						medifirstService.post(urlEndpoint, jsonEspay).then(function (z) {
-							if(z.data.status == '000'){
+							if(z.data.error_code == '0000'){
 								toastr.success('Sukses, Pembuatan bayar melalui espay ','ESPAY')
 							
 								var profile = JSON.parse(localStorage.getItem('profile'))
@@ -842,7 +843,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 								}
 								
 							}else{
-								toastr.error(z.data.message,'BNI')
+								toastr.error(z.data.error_message,'ESPAY')
 							}
 						});
 					}

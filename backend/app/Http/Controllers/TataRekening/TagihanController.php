@@ -4942,6 +4942,9 @@ class TagihanController  extends ApiController
 //                    $strukPelayanan->totaldiscountfix = $request['data']['diskonTotal'];
                 }
             }
+            if (isset($request['espaytype'])) {
+                $strukPelayanan->espaytype = $request['espaytype'];
+            }
             $strukPelayanan->save();
                 foreach ($dataLogin['data']['datachecklist'] as $chklist){
                     PelayananPasien::where('norec', $chklist['norec'])
