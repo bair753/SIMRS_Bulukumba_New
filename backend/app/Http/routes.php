@@ -516,6 +516,9 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
 
         // ESPAY
         Route::post('espay/send-invoice', 'Bridging\BridgingESPAYController@sendInvoice');
+        Route::post('espay/qr-payment', 'Bridging\BridgingESPAYController@qrPayment');
+        Route::post('espay/inquiry-transaction', 'Bridging\BridgingESPAYController@inquiryTransaction');
+        Route::post('espay/payment-notification', 'Bridging\BridgingESPAYController@paymentNotification');
         // END ESPAY
 
         Route::group(['prefix' => 'cssd'], function () {
@@ -2533,6 +2536,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
           Route::post('tatarekening/ubah-tgl-detailregistrasi', 'TataRekening\TagihanController@ubahTanggalDetailRegis');
           Route::get('tatarekening/get-status-close-pemeriksaan', 'TataRekening\TagihanController@getStatusClosePemeriksaan');
           Route::get('tatarekening/get-data-login', 'TataRekening\TagihanController@getLogin');  //done
+          Route::get('tatarekening/get-data-product-espay', 'TataRekening\TagihanController@getProductEspay');  //done
           Route::get('tatarekening/detail-tagihan/{noRegister}', 'TataRekening\TagihanController@detailTagihan');  //done
           Route::post('tatarekening/save-update-dokter_ppp', 'TataRekening\TagihanController@simpanUpdateDokterPPP');
           Route::post('tatarekening/save-update-tanggal_pelayanan', 'TataRekening\TagihanController@simpanUpdateTglPelayanan');
@@ -2674,6 +2678,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
         Route::get('report/cetak-hasil-lab-manual','Report\ReportController@cetakHasilLabManual');
         Route::get('report/cetak-suratjaminanpelayanan','Report\ReportController@cetakSuratJaminanPelayanan');
         Route::get('report/cetak-pegawai','Report\ReportController@cetakPegawai');
+        Route::get('report/cetak-surat-perintah-bayar','Report\ReportController@cetakSuratBayar');
 
         Route::get('viewer/get-list-antrian','Antrian\AntrianController@getListAntrian');
         Route::get('viewer/update-antrian','Antrian\AntrianController@updatePanggil');

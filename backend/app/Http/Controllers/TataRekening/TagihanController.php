@@ -102,7 +102,7 @@ class TagihanController  extends ApiController
 //        $pasienDaftar = PasienDaftar::where('noregistrasi', $noRegister)->first();
 //        $pelayanan = $this->getPelayananPasienByNoRegistrasi($noRegister);
         $pelayanan = DB::select(DB::raw("select pd.objectruanganlastfk,pd.nostruklastfk,ps.id as psid,ps.nocm,
-            ps.namapasien,pd.tglpulang,kps.kelompokpasien,kl.namakelas,
+            ps.namapasien,ps.nohp,pd.tglpulang,kps.kelompokpasien,kl.namakelas,pd.norec as norec_pd,
             pd.objectruanganlastfk,ru.objectdepartemenfk,
             pd.noregistrasi,pp.* from pasiendaftar_t pd
             left JOIN antrianpasiendiperiksa_t apd on apd.noregistrasifk=pd.norec
@@ -179,6 +179,10 @@ class TagihanController  extends ApiController
 
         $totalDeposit = $totalDeposit;
         $totalKlaim = 0;
+        $nohp = $pelayanan->nohp;
+        if($nohp == null || strlen($nohp) <= 8){
+            $nohp = '';
+        }
         $result = array(
             'pasienID' => $pelayanan->psid,
             'noCm' => $pelayanan->nocm,
@@ -200,6 +204,8 @@ class TagihanController  extends ApiController
             'dokuments' => [], // sama ini juga ngambilnya dari mana ..
             'totaltakterklaim' => $totaltakterklaim,
             'isRawatInap' => $isRawatInap,
+            'nohp' => $nohp,
+            'norec_pd' => $pelayanan->norec_pd,
         );
         return $this->respond($result);
     }
@@ -9697,5 +9703,20 @@ class TagihanController  extends ApiController
         }
 
         return $this->setStatusCode($result['status'])->respond($result, $transMessage);    
+    }
+
+    public function getProductEspay(Request $request)
+    {
+        $kdProfile = (int) $this->getDataKdProfile($request);
+        $data = DB::table('espayproduct_m')
+            ->where('kdprofile',$kdProfile)
+            ->where('statusenabled',true)
+            ->whereNotNull('type')
+            ->get();
+
+        $result = array(
+            'data' => $data,
+        );
+        return $this->respond($result);
     }
 }

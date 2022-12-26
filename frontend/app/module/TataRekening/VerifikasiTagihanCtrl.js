@@ -1,4 +1,4 @@
-define(['initialize'], function (initialize) {
+define(['initialize', 'Configuration'], function (initialize, config) {
 	'use strict';
 	initialize.controller('VerifikasiTagihanCtrl', ['$state', '$q', '$scope', 'MedifirstService', '$mdDialog',
 		function ($state, $q, $scope, medifirstService, $mdDialog) {
@@ -74,6 +74,10 @@ define(['initialize'], function (initialize) {
 					$scope.listRuangAPD = e.data.listRuangan
 					$scope.passDefault = e.data.pass
 				});
+				medifirstService.get("tatarekening/get-data-product-espay").then(function (e) {
+					$scope.listProductEspay = e.data.data;
+				})
+				
 			}
 
 			function init() {
@@ -722,6 +726,19 @@ define(['initialize'], function (initialize) {
 				// if (isVerifAll == true) {
 				// 	SaveAll()
 				// }else{
+				if($scope.item.isEspay) {
+					if(!$scope.item.espaymetodepembayaran) {
+						toastr.error('Jenis pembayaran espay belum dipilih !')
+						return
+					}
+
+					if($scope.item.espaymetodepembayaran.split('|')[2] == 'QR') {
+						if(!$scope.item.espayCustomerId) {
+							toastr.error('Harap isi customer id telebih dahulu !')
+							return
+						}
+					}
+				}
 				if ($scope.item.cekDiskonTotal == 1) {
 					$scope.popUpPwd.open().center();
 				} else {
@@ -774,10 +791,65 @@ define(['initialize'], function (initialize) {
 				medifirstService.post('tatarekening/simpan-verifikasi-tagihan-tatarekening', objSave).then(function (e) {
 					$scope.tombolSaveIlang = true;
 					// syncTransdata()
+					if($scope.item.isEspay) {
+						var dataEspay = $scope.item.espaymetodepembayaran.split('|');
+						var codeEspay = dataEspay[0];
+						var typeEspay = dataEspay[2];
+						switch (typeEspay) {
+							case 'VA':
+								var urlEndpoint = "espay/send-invoice";
+								var jsonEspay = {
+									"rq_uuid": e.data.result.norec,
+									"rq_datetime": moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+									"order_id": e.data.result.nostruk,
+									"amount": e.data.result.totalharusdibayar,
+									"remark1": $scope.item.nohp,
+									"remark2": $scope.item.namaPasien,
+									"remark3": "",
+									"update": "N",
+									"bank_code": codeEspay,
+									"va_expired": "2880",
+									"type": typeEspay,
+									"norec_pd": $scope.item.norec_pd,
+									"pegawaifk": medifirstService.getPegawaiLogin().id,
+								}
+								break;
+							case 'QR':
+								var urlEndpoint = "espay/qr-payment";
+								var jsonEspay = {
+									"rq_uuid": e.data.result.norec,
+									"rq_datetime": moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+									"product_code": codeEspay,
+									"order_id": e.data.result.nostruk,
+									"amount": e.data.result.totalharusdibayar,
+									"description": "Pembayaran tagihan pasien " + $scope.item.namaPasien,
+									"customer_id": $scope.item.espayCustomerId,
+									"type": typeEspay,
+									"norec_pd": $scope.item.norec_pd,
+									"pegawaifk": medifirstService.getPegawaiLogin().id,
+								}
+								break;
+						}
+						medifirstService.post(urlEndpoint, jsonEspay).then(function (z) {
+							if(z.data.status == '000'){
+								toastr.success('Sukses, Pembuatan bayar melalui espay ','ESPAY')
+							
+								var profile = JSON.parse(localStorage.getItem('profile'))
+								var nama = medifirstService.getPegawaiLogin().namaLengkap
+								if (profile != null) {
+									window.open(config.baseApiBackend + "report/cetak-surat-perintah-bayar?nostruk=" +e.data.result.nostruk+ '&kdprofile=' + profile.id
+										+ '&nama=' + nama, '_blank');
+								}
+								
+							}else{
+								toastr.error(z.data.message,'BNI')
+							}
+						});
+					}
 					$scope.SaveLogUser();
 					// window.history.back();
 					var kelompokUser = medifirstService.getKelompokUser()
-					if (parseFloat($scope.item.jumlahBayar) > 0 && kelompokUser == 'kasir') {
+					if (parseFloat($scope.item.jumlahBayar) > 0 && kelompokUser == 'kasir' && $scope.item.isEspay != true) {
 						var confirm = $mdDialog.confirm()
 							.title('Informasi')
 							.textContent('Apakah anda mau melanjutkan ke Pembayaran ?')
@@ -1496,6 +1568,25 @@ define(['initialize'], function (initialize) {
 				$scope.iur = {};
 				$scope.popUpIur.close()
 			}
+
+			$scope.espaymethod = function (bool) {
+				if(bool){
+					$scope.item.espayCustomerId = $scope.item.nohp
+					$scope.popUpEspay.center().open();
+				} else {
+					delete $scope.item.espaymetodepembayaran
+					delete $scope.item.espayCustomerId
+					$scope.popUpEspay.close();
+				}
+			}
+
+			$scope.showVA = function () {
+                $scope.isShowVA = !$scope.isShowVA
+            }
+
+			$scope.showQR = function () {
+                $scope.isShowQR = !$scope.isShowQR
+            }
 
 			//** BATAS */
 		}

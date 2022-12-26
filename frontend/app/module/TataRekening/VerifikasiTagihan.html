@@ -143,11 +143,22 @@
 					<md-content class="md-padding">
 						<div class="grid_12">
 							<div class="grid_6">
-								<div class="grid_12">
+								<div class="grid_3">
 									<input type="checkbox" class="k-checkbox" id="item.kasusbaru"
 										ng-model="item.kasusbaru" ng-checked="item.kasusbaru"
 										ng-click="checkboxClicked(item.kasusbaru)">
 									<label class="k-checkbox-label" for="item.kasusbaru">Verifikasi Semua</label>
+								</div>
+								<div class="grid_1">
+									<input type="checkbox" class="k-checkbox" id="item.isEspay"
+										ng-model="item.isEspay" ng-click="espaymethod(item.isEspay)">
+									<label class="k-checkbox-label" for="item.isEspay">Espay</label>
+								</div>
+								<div class="grid_3" ng-if="item.espaymetodepembayaran.split('|')[2] == 'VA'">
+									<span class="k-in gemblung">{{ item.espaymetodepembayaran.split("|")[1] }}</span>
+								</div>
+								<div class="grid_3" ng-if="item.espaymetodepembayaran.split('|')[2] == 'QR'">
+									<span class="k-in gemblung">{{ item.espaymetodepembayaran.split("|")[1] }} - {{item.espayCustomerId}}</span>
 								</div>
 							</div>
 							<!-- <div class="grid_3">
@@ -610,9 +621,46 @@
 		</div>
 	</div>
 </div>
+<div kendo-window="popUpEspay" k-title="'Metode Pembayaran Espay'" k-visible="false" k-width="700">
+	<div class="panel panel-default container_12">
+		<div class="panel-heading-custom">
+			<span>Virtual Account</span>
+			<span class="icon fa fa-chevron-circle-up" ng-show="!isShowVA" style="right:10px" ng-click="showVA()"></span>
+			<span class="icon fa fa-chevron-circle-down" ng-show="isShowVA" style="right:10px" ng-click="showVA()"></span>
+		</div>
+		<div class="panel-body" ng-show="isShowVA">
+			<div class="border-menu">
+				<div ng-repeat="stat in listProductEspay | filter: { type: 'VA' }">
+					<md-radio-group ng-model="item.espaymetodepembayaran">
+						<md-radio-button value="{{stat.bankcode}}|{{stat.productname}}|{{stat.type}}" class="md-primary">{{stat.productname}}</md-radio-button>
+					</md-radio-group>
+				</div>
+			</div>
+		</div>
+		<div class="panel-heading-custom">
+			<span>QR Payment</span>
+			<span class="icon fa fa-chevron-circle-up" ng-show="!isShowQR" style="right:10px" ng-click="showQR()"></span>
+			<span class="icon fa fa-chevron-circle-down" ng-show="isShowQR" style="right:10px" ng-click="showQR()"></span>
+		</div>
+		<div class="panel-body" ng-show="isShowQR">
+			<div class="border-menu">
+				<div ng-repeat="stat in listProductEspay | filter: { type: 'QR' }">
+					<div class="grid_12">
+						<md-radio-group ng-model="item.espaymetodepembayaran">
+							<md-radio-button value="{{stat.productcode}}|{{stat.productname}}|{{stat.type}}|{{stat.namaexternal}}" class="md-primary">{{stat.productname}}</md-radio-button>
+						</md-radio-group>
+					</div>
+				</div>
+				<div class="grid_12" ng-if="item.espaymetodepembayaran.split('|')[2] == 'QR'">
+					<input c-text-box type="input" filter="" class="k-textbox" ng-model="item.espayCustomerId" placeholder="Masukan {{ item.espaymetodepembayaran.split('|')[3] }} Customer"/>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 <style type="text/css">
 	.k-i-close {
-		display: none;
+		display: block;
 	}
 
 	.btn2 {
@@ -639,4 +687,47 @@
 		color: white;
 		background-color: #3dcdbf;
 	}
+
+    .gemblung {
+        background-color: #0fa10f;
+        color: #ffffff;
+    }
+
+    .k-in {
+		margin: 1px 0 1px 0.16666em;
+		padding: 1px 0.3333em 1px 0.25em;
+		line-height: 1.3333em;
+		text-decoration: none;
+		border-style: solid;
+		border-width: 1px;
+		border-radius: 2px;
+	}
+
+	.panel-heading-custom {
+		padding: 10px 15px;
+		border-bottom: 1px solid white;
+	}
+
+	.panel-default > .panel-heading-custom {
+		position: relative;
+		z-index: 1;
+		color: white;
+		background-color: #2982be;
+		font-size: 12pt;
+	}
+
+	.panel-default > .panel-heading-custom > .icon {
+		position: absolute;
+		width: 24px;
+		height: 24px;
+		right: 0px;
+		color: white;
+		cursor: pointer;
+	}
+
+	.border-menu {
+        background-color: #ffffff;
+        color: #333333;
+        padding: 0.571em 1em;
+    }
 </style>

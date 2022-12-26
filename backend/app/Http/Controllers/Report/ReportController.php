@@ -2605,4 +2605,99 @@ class ReportController extends ApiController{
             compact('datas', 'header', 'pageWidth', 'r', 'profile')
         );
     }
+
+    public function cetakSuratBayar(Request $request)
+    {
+        $kdProfile = $request['kdprofile'];
+        $nostruk = $request['nostruk'];
+        $nama = $request['nama'];
+        $profile = collect(DB::select("
+            select * from profile_m where id = $kdProfile limit 1
+        "))->first();
+
+        $pageWidth = 950;
+        $data = collect(DB::select("
+            SELECT pd.noregistrasi
+            ,ps.namapasien
+            ,ep.amount
+            ,ps.namapasien || '/' || ps.nocm END || '/' || pd.noregistrasi END || '-' || ru.namaruangan END AS pasien
+            ,ru.namaruangan
+            ,pg.namalengkap
+            ,ps.nocm
+            ,pd.tglregistrasi
+            ,pd.tglpulang
+            ,to_char(sp.tglstruk, 'DD-MM-YYYY') AS tanggal
+            ,sp.nostruk 
+            ,ep.va_number
+            ,ep.qr_code
+            ,pg.namalengkap as pegawaipenerima
+            FROM strukpelayanan_t AS sp
+            INNER JOIN espaypayment_t AS ep ON ep.order_id = sp.nostruk
+            LEFT JOIN pasiendaftar_t AS pd ON pd.norec = sp.noregistrasifk
+            LEFT JOIN pasien_m AS ps ON ps.id = pd.nocmfk
+            LEFT JOIN ruangan_m AS ru ON ru.id = pd.objectruanganlastfk
+            LEFT JOIN pegawai_m as pg ON pg.id = sp.objectpegawaipenerimafk
+            WHERE sp.nostruk = '$nostruk'
+        "))->first();
+
+        if(empty($data)){
+            echo '
+                <script language="javascript">
+                    window.alert("Data tidak ada.");
+                    window.close()
+                </script>
+            ';
+            die;
+        }
+
+        $dataReport = array(
+            'namaprofile' => $profile->namalengkap,
+            'alamat' => $profile->alamatlengkap,
+            'user' => $nama,
+            'datas' => $data,
+        );
+        return view(
+            'report.kasir.suratperintahbayar',
+            compact('dataReport', 'pageWidth', 'profile')
+        );
+    }
+
+    public static function penyebut($nilai)
+    {
+        $nilai = abs($nilai);
+        $huruf = array("", "satu", "dua", "tiga", "empat", "lima", "enam", "tujuh", "delapan", "sembilan", "sepuluh", "sebelas");
+        $temp = "";
+        if ($nilai < 12) {
+            $temp = " " . $huruf[$nilai];
+        } else if ($nilai < 20) {
+            $temp = static::penyebut($nilai - 10) . " belas";
+        } else if ($nilai < 100) {
+            $temp = static::penyebut($nilai / 10) . " puluh" . static::penyebut($nilai % 10);
+        } else if ($nilai < 200) {
+            $temp = " seratus" . static::penyebut($nilai - 100);
+        } else if ($nilai < 1000) {
+            $temp = static::penyebut($nilai / 100) . " ratus" . static::penyebut($nilai % 100);
+        } else if ($nilai < 2000) {
+            $temp = " seribu" . static::penyebut($nilai - 1000);
+        } else if ($nilai < 1000000) {
+            $temp = static::penyebut($nilai / 1000) . " ribu" . static::penyebut($nilai % 1000);
+        } else if ($nilai < 1000000000) {
+            $temp = static::penyebut($nilai / 1000000) . " juta" . static::penyebut($nilai % 1000000);
+        } else if ($nilai < 1000000000000) {
+            $temp = static::penyebut($nilai / 1000000000) . " milyar" . static::penyebut(fmod($nilai, 1000000000));
+        } else if ($nilai < 1000000000000000) {
+            $temp = static::penyebut($nilai / 1000000000000) . " trilyun" . static::penyebut(fmod($nilai, 1000000000000));
+        }
+        return $temp;
+    }
+
+    public static function terbilang($nilai)
+    {
+        if ($nilai < 0) {
+            $hasil = "minus " . trim(static::penyebut($nilai));
+        } else {
+            $hasil = trim(static::penyebut($nilai));
+        }
+        return $hasil . " Rupiah";
+    }
 }
