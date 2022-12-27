@@ -165,16 +165,16 @@ class BridgingESPAYController extends ApiController
         $xurldata = http_build_query($dataSend);
         $authheader = base64_encode($this->cmm_code.':'.$this->password);
         $response = $this->sendApi($xurldata, '/rest/digitalpay/pushtopay', 'Authorization: Basic '. $authheader);
-        if($response['error_code'] == '0000') 
+        if($response->error_code == '0000')
         {
             $newPE = new PaymentEspay();
             $newPE->rq_uuid = $dataSend['rq_uuid'];
-            $newPE->trx_id = $response['trx_id'];
+            $newPE->trx_id = $response->trx_id;
             $newPE->order_id = $dataSend['order_id'];
             $newPE->customer_id = isset($dataSend['customer_id']) ? $dataSend['customer_id'] : null;
             $newPE->amount = $dataSend['amount'];
-            $newPE->qr_link = $response['QRLink'];
-            $newPE->qr_code = $response['QRCode'];
+            $newPE->qr_link = $response->QRLink;
+            $newPE->qr_code = $response->QRCode;
             $newPE->espayproduct_code = $dataSend['product_code'];
             $newPE->espayproduct_name = $data['espayproduct_name'];
             $newPE->status = "IP";
@@ -405,5 +405,10 @@ class BridgingESPAYController extends ApiController
             DB::rollBack();
         }
         return $this->respond($result);
+    }
+
+    public function settlementNotification(Request $request)
+    {
+        # code...
     }
 }
