@@ -328,17 +328,23 @@ class BridgingESPAYController extends ApiController
         try {
             if(!empty($findData))
             {
-                $strukPelayanan = StrukPelayanan::where('nostruk', $findData->order_id)->first();
+                $dataPegawai = DB::table('loginuser_s as lu')
+                ->where('lu.objectpegawaifk', $findData->pegawaifk)
+                ->first();
+
+                $strukPelayanan = StrukPelayanan::where('nostruk', $findData->order_id)
+                ->where('statusenabled', true)
+                ->first();
                 $strukBuktiPenerimanan = new StrukBuktiPenerimaan();
                 $strukBuktiPenerimanan->norec = $strukBuktiPenerimanan->generateNewId();
                 $strukBuktiPenerimanan->kdprofile = $this->getKdProfile();
                 $strukBuktiPenerimanan->keteranganlainnya = "Pembayaran Tagihan Pasien Espay";
                 $strukBuktiPenerimanan->statusenabled = 1;
                 $strukBuktiPenerimanan->nostrukfk = $strukPelayanan->norec;
-                $strukBuktiPenerimanan->objectkelompokpasienfk = $strukPelayanan->pasien_daftar->pasien->objectkelompokpasienfk;
+                $strukBuktiPenerimanan->objectkelompokpasienfk = $strukPelayanan->pasien_daftar->objectkelompokpasienlastfk;
                 $strukBuktiPenerimanan->objectkelompoktransaksifk = 1;
-                $strukBuktiPenerimanan->objectpegawaipenerimafk  = $findData->pegawaifk;
-                $strukBuktiPenerimanan->tglsbm  = $data['payment_datetime']; //$this->getDateTime();
+                $strukBuktiPenerimanan->objectpegawaipenerimafk  = $dataPegawai->id;
+                $strukBuktiPenerimanan->tglsbm  = substr($data['payment_datetime'], 0, 10); //$this->getDateTime();
                 $strukBuktiPenerimanan->totaldibayar  = $data['amount'];
                 $strukBuktiPenerimanan->nosbm = $this->generateCode(new StrukBuktiPenerimaan, 'nosbm', 14, 'RV-' . $this->getDateTime()->format('ym'), $this->getKdProfile());
                 $strukBuktiPenerimanan->save();
