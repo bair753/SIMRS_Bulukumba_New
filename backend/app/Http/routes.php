@@ -519,6 +519,9 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
         Route::post('espay/qr-payment', 'Bridging\BridgingESPAYController@qrPayment');
         Route::post('espay/inquiry-transaction', 'Bridging\BridgingESPAYController@inquiryTransaction');
         Route::post('espay/payment-notification', 'Bridging\BridgingESPAYController@paymentNotification');
+        Route::post('espay/settlement-notification', 'Bridging\BridgingESPAYController@settlementNotification');
+        Route::post('espay/check-payment-status', 'Bridging\BridgingESPAYController@checkPaymentStatus');
+        
         // END ESPAY
 
         Route::group(['prefix' => 'cssd'], function () {

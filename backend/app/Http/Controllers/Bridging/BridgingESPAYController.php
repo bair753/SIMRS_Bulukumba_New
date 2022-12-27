@@ -411,4 +411,26 @@ class BridgingESPAYController extends ApiController
     {
         # code...
     }
+
+    public function checkPaymentStatus(Request $request)
+    {
+        $data = $request->all();
+        $dataSend = array (
+            'uuid' => $data['uuid'],
+            'rq_datetime' => date('Y-m-d H:i:s'),
+            'comm_code' => $this->cmm_code,
+            'order_id' => $data['order_id'],
+            'is_paymentnotif' => $data['is_paymentnotif'],
+        );
+        $signature = $this->signature('CHECKSTATUS', $dataSend);
+        $dataSend['signature'] = $signature;
+        $xurldata = http_build_query($dataSend);
+        $response = $this->sendApi($xurldata, '/rest/merchant/status');
+        return $this->respond($response);
+    }
+
+    public function updateExpireTransaction(Request $request)
+    {
+        # code...
+    }
 }
