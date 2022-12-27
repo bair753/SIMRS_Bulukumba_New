@@ -3053,6 +3053,14 @@
         {
             "nameDep": "CPPTRajalCtrl",
             "urlDep": "module/EMR/CPPTRajalCtrl"
+        },
+        {
+            "nameDep": "AsesmenAwalKeperawatanRanapCtrl",
+            "urlDep": "module/EMR/AsesmenAwalKeperawatanRanapCtrl"
+        },
+        {
+            "nameDep": "AsesmenAwalMedisRanapCtrl",
+            "urlDep": "module/EMR/AsesmenAwalMedisRanapCtrl"
         }
     ]
 }

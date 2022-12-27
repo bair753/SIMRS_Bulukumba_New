@@ -17036,6 +17036,46 @@
         "define": "MedifirstService"
       }
     ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.AsesmenAwalKeperawatanRanap",
+    "url": "/AsesmenAwalKeperawatanRanap",
+    "templateurl": "module/EMR/AsesmenAwalKeperawatanRanap.html",
+    "controller": "AsesmenAwalKeperawatanRanapCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.AsesmenAwalMedisRanap",
+    "url": "/AsesmenAwalMedisRanap",
+    "templateurl": "module/EMR/AsesmenAwalMedisRanap.html",
+    "controller": "AsesmenAwalMedisRanapCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      }
+    ]
   }
   
   

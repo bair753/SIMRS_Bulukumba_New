@@ -2732,6 +2732,29 @@ class EMRController  extends ApiController
         return $this->respond($dataProduk);
     }
 
+    public function getDataComboBulanPart(Request $request)
+    {
+        $kdProfile = $this->getDataKdProfile($request);
+        $idProfile = (int) $kdProfile;
+        $req = $request->all();
+        $dataProduk = \DB::table('bulan_m')
+        ->select('id as value', 'namabulan as text')
+        ->where('statusenabled', true)
+        ->where('kdprofile', $idProfile)
+        ->orderBy('id');
+        if (
+            isset($req['filter']['filters'][0]['value']) &&
+            $req['filter']['filters'][0]['value'] != "" &&
+            $req['filter']['filters'][0]['value'] != "undefined"
+        ) {
+            $dataProduk = $dataProduk->where('namabulan', 'ilike', '%' . $req['filter']['filters'][0]['value'] . '%');
+        };
+        $dataProduk = $dataProduk->take(10);
+        $dataProduk = $dataProduk->get();
+
+        return $this->respond($dataProduk);
+    }
+
     public function getDataComboDokterPart(Request $request){
         $kdProfile = $this->getDataKdProfile($request);
         $idProfile = (int) $kdProfile;
