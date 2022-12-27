@@ -795,6 +795,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 					if($scope.item.isEspay) {
 						var dataEspay = $scope.item.espaymetodepembayaran.split('|');
 						var codeEspay = dataEspay[0];
+						var nameEspay = dataEspay[1];
 						var typeEspay = dataEspay[2];
 						switch (typeEspay) {
 							case 'VA':
@@ -809,6 +810,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 									"remark3": "",
 									"update": "N",
 									"bank_code": codeEspay,
+									"espayproduct_name": nameEspay,
 									"va_expired": "2880",
 									"type": typeEspay,
 									"norec_pd": $scope.item.norec_pd,
@@ -821,6 +823,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 									"rq_uuid": e.data.result.norec,
 									"rq_datetime": moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
 									"product_code": codeEspay,
+									"espayproduct_name": nameEspay,
 									"order_id": e.data.result.nostruk,
 									"amount": e.data.result.totalharusdibayar,
 									"description": "Pembayaran tagihan pasien " + $scope.item.namaPasien,

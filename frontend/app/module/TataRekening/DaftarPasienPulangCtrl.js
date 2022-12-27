@@ -1,4 +1,4 @@
-define(['initialize'], function (initialize) {
+define(['initialize', 'Configuration'], function (initialize, config) {
   'use strict';
   initialize.controller('DaftarPasienPulangCtrl', ['CacheHelper', '$mdDialog', '$state', '$scope', 'MedifirstService',
     function (cacheHelper, $mdDialog, $state, $scope, medifirstService) {
@@ -585,6 +585,21 @@ define(['initialize'], function (initialize) {
           "width": "120px"
         },
         {
+          "field": "va_number",
+          "title": "No. Virtual Account",
+          "width": "120px"
+        },
+        {
+          "field": "espayproduct_name",
+          "title": "Pembayaran",
+          "width": "120px"
+        },
+        {
+          "field": "expired",
+          "title": "Batas Pembayaran",
+          "width": "120px"
+        },
+        {
           "field": "totalharusdibayar",
           "title": "Total Harus Bayar",
           "width": "110px",
@@ -1025,6 +1040,19 @@ define(['initialize'], function (initialize) {
         }
         cacheHelper.set('KonversiHargaNOREG', $scope.dataPasienSelected.noRegistrasi);
         $scope.changePage("KonversiHarga");
+      }
+
+      $scope.cetakSuratBayar = function () {
+        if ($scope.dataSelected == undefined) {
+          toastr.error('Pilih data dulu')
+          return
+        }
+        var profile = JSON.parse(localStorage.getItem('profile'))
+        var nama = medifirstService.getPegawaiLogin().namaLengkap
+        if (profile != null) {
+            window.open(config.baseApiBackend + "report/cetak-surat-perintah-bayar?nostruk=" + $scope.dataSelected.nostruk + '&kdprofile=' + profile.id
+                + '&nama=' + nama, '_blank');
+        }
       }
 
       //** BATAS SUCI */

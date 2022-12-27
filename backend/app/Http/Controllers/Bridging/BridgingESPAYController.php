@@ -86,7 +86,7 @@ class BridgingESPAYController extends ApiController
             'remark2' => $data['remark2'],
             'remark3' => $data['remark3'],
             'update' => $data['update'],
-            'bank_code' => '',//$data['bank_code'],
+            'bank_code' => $data['bank_code'],
             'va_expired' => $data['va_expired'],
         );
         $signature = $this->signature('SENDINVOICE', $dataSend);
@@ -95,32 +95,53 @@ class BridgingESPAYController extends ApiController
         $response = $this->sendApi($xurldata, '/rest/merchantpg/sendinvoice');
         if($response->error_code == '0000') 
         {
-            foreach ($response->va_list as $item) {
-                if($item->bank_code == $data['bank_code']) {
-                    if($item->error_code == '0000'){
-                        $newPE = new PaymentEspay();
-                        $newPE->rq_uuid = $dataSend['rq_uuid'];
-                        $newPE->order_id = $dataSend['order_id'];
-                        $newPE->customer_name = $dataSend['remark2'];
-                        $newPE->customer_email = $dataSend['remark3'];
-                        $newPE->customer_phone = $dataSend['remark1'];
-                        $newPE->amount = $item->amount;
-                        $newPE->total_amount = $item->total_amount;
-                        $newPE->fee = $item->fee;
-                        $newPE->va_number = $item->va_number;
-                        $newPE->expired = $item->expiry_date_time;
-                        $newPE->description = $dataSend['description'];//$item->description;
-                        $newPE->espayproduct_code = $dataSend['bank_code'];
-                        $newPE->status = "IP";
-                        $newPE->type = 'VA';
-                        $newPE->norec_pd = $data['norec_pd'];
-                        $newPE->pegawaifk = $data['pegawaifk'];
-                        $newPE->statusenabled = true;
-                        $newPE->save();
-                    }
-                    break;
-                }
-            }
+            $newPE = new PaymentEspay();
+            $newPE->rq_uuid = $dataSend['rq_uuid'];
+            $newPE->order_id = $dataSend['order_id'];
+            $newPE->customer_name = $dataSend['remark2'];
+            $newPE->customer_email = $dataSend['remark3'];
+            $newPE->customer_phone = $dataSend['remark1'];
+            $newPE->amount = $response->amount;
+            $newPE->total_amount = $response->total_amount;
+            $newPE->fee = $response->fee;
+            $newPE->va_number = $response->va_number;
+            $newPE->expired = $response->expired;
+            $newPE->description = $dataSend['description'];//$item->description;
+            $newPE->espayproduct_code = $dataSend['bank_code'];
+            $newPE->espayproduct_name = $data['espayproduct_name'];
+            $newPE->status = "IP";
+            $newPE->type = 'VA';
+            $newPE->norec_pd = $data['norec_pd'];
+            $newPE->pegawaifk = $data['pegawaifk'];
+            $newPE->statusenabled = true;
+            $newPE->save();
+            // foreach ($response->va_list as $item) {
+            //     if($item->bank_code == $data['bank_code']) {
+            //         if($item->error_code == '0000'){
+            //             $newPE = new PaymentEspay();
+            //             $newPE->rq_uuid = $dataSend['rq_uuid'];
+            //             $newPE->order_id = $dataSend['order_id'];
+            //             $newPE->customer_name = $dataSend['remark2'];
+            //             $newPE->customer_email = $dataSend['remark3'];
+            //             $newPE->customer_phone = $dataSend['remark1'];
+            //             $newPE->amount = $item->amount;
+            //             $newPE->total_amount = $item->total_amount;
+            //             $newPE->fee = $item->fee;
+            //             $newPE->va_number = $item->va_number;
+            //             $newPE->expired = $item->expiry_date_time;
+            //             $newPE->description = $dataSend['description'];//$item->description;
+            //             $newPE->espayproduct_code = $dataSend['bank_code'];
+            //             $newPE->espayproduct_name = $data['espayproduct_name'];
+            //             $newPE->status = "IP";
+            //             $newPE->type = 'VA';
+            //             $newPE->norec_pd = $data['norec_pd'];
+            //             $newPE->pegawaifk = $data['pegawaifk'];
+            //             $newPE->statusenabled = true;
+            //             $newPE->save();
+            //         }
+            //         break;
+            //     }
+            // }
         }
         return $this->respond($response);
     }
@@ -155,6 +176,7 @@ class BridgingESPAYController extends ApiController
             $newPE->qr_link = $response['QRLink'];
             $newPE->qr_code = $response['QRCode'];
             $newPE->espayproduct_code = $dataSend['product_code'];
+            $newPE->espayproduct_name = $data['espayproduct_name'];
             $newPE->status = "IP";
             $newPE->type = 'QR';
             $newPE->norec_pd = $data['norec_pd'];

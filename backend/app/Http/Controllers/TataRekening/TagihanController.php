@@ -7300,6 +7300,7 @@ class TagihanController  extends ApiController
             ->leftJoin('loginuser_s as lu1','lu1.id','=','sbm.objectpegawaipenerimafk')
             ->leftJoin('pegawai_m as pg1','pg1.id', '=','lu.objectpegawaifk')
             ->leftJoin('strukpelayananpenjamin_t as spp','spp.nostrukfk','=','sp.norec')
+            ->leftJoin('espaypayment_t as ep','ep.order_id','=','sp.nostruk')
             ->select(DB::raw("pd.noregistrasi,sp.norec,sp.nostruk,sp.tglstruk,sp.totalharusdibayar,pg.namalengkap as petugasverif,sbm.tglsbm,
                                     CASE WHEN sp.nosbmlastfk IS NULL THEN 'Belum Bayar' ELSE 'Lunas' END AS status,
 		                            CASE WHEN sp.nosbmlastfk IS NULL THEN NULL ELSE pg1.namalengkap END AS kasir,
@@ -7307,7 +7308,8 @@ class TagihanController  extends ApiController
 		                            CASE WHEN sp.totalprekanan IS NULL THEN 0 ELSE sp.totalprekanan END AS totalprekanan,
                                     CASE WHEN sp.totaldiscount IS NULL THEN 0 ELSE sp.totaldiscount END totaldiscount,
                                     (sp.totalharusdibayar + CASE WHEN sp.totalprekanan IS NULL THEN 0 ELSE sp.totalprekanan END + 
-				                    CASE WHEN sp.totaldiscount IS NULL THEN 0 ELSE sp.totaldiscount END) AS totaltagihanverifikasi"))
+				                    CASE WHEN sp.totaldiscount IS NULL THEN 0 ELSE sp.totaldiscount END) AS totaltagihanverifikasi,
+                                    ep.va_number, ep.expired, ep.espayproduct_name"))
             ->where('pd.kdprofile', $idProfile)
 //            ->whereNull('sp.statusenabled')
             ->whereIn('sp.statusenabled', [null,true])
@@ -7345,6 +7347,9 @@ class TagihanController  extends ApiController
                 'nosbmlastfk' => $item->nosbmlastfk,
                 'noregistrasi' => $item->noregistrasi,
                 'noverifikasi' => $item->noverifikasi,
+                'va_number' => $item->va_number,
+                'expired' => $item->expired,
+                'espayproduct_name' => $item->espayproduct_name,
                 'details' => $details,
             );
 

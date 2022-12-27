@@ -126,7 +126,7 @@
                     <table width="100%" cellspacing="0" cellpadding="0">
                         <tr>
                             <td align="center">
-                                <font style="font-size: 14pt;font-weight: bold" color="#000000" >KWITANSI</font>
+                                <font style="font-size: 14pt;font-weight: bold" color="#000000" >SURAT PERINTAH BAYAR</font>
                             </td>
                         </tr>
                     </table>
@@ -149,13 +149,21 @@
                             <td width="15%"><font style="font-size: 11pt;" color="#000000">No. Kwitansi</font></td>
                             <td width="35%"><font style="font-size: 11pt;" color="#000000">: {{ $dataReport['datas']->nostruk }}</font></td>
                         </tr>
+                         <tr>
+                            <td width="20%"><font style="font-size: 11pt;" color="#000000">NAMA/MR</font></td>
+                            <td width="80%" colspan="3"><font style="font-size: 11pt;" color="#000000">: {{ $dataReport['datas']->pasien }}</font></td>
+                        </tr>
                         <tr>
                             <td width="20%"><font style="font-size: 11pt;" color="#000000">No. Virtual Account</font></td>
                             <td width="80%" colspan="3"><font style="font-size: 11pt;" color="#000000">: {{ $dataReport['datas']->va_number }}</font></td>
                         </tr>
                         <tr>
-                            <td width="20%"><font style="font-size: 11pt;" color="#000000">Sudah Terima dari</font></td>
-                            <td width="80%" colspan="3"><font style="font-size: 11pt;" color="#000000">: {{ $dataReport['datas']->namapasien }}</font></td>
+                            <td width="20%"><font style="font-size: 11pt;" color="#000000">Pembayaran</font></td>
+                            <td width="80%" colspan="3"><font style="font-size: 11pt;" color="#000000">: {{ $dataReport['datas']->espayproduct_name }}</font></td>
+                        </tr>
+                        <tr>
+                            <td width="20%"><font style="font-size: 11pt;" color="#000000">Batas Waktu Pembayaran</font></td>
+                            <td width="80%" colspan="3"><font style="font-size: 11pt;" color="#000000">: {{ $dataReport['datas']->tanggalexpired }}</font></td>
                         </tr>
                         <tr>
                             <td width="20%"><font style="font-size: 11pt;" color="#000000">Banyaknya uang</font></td>
@@ -165,16 +173,13 @@
                             <td width="20%"><font style="font-size: 11pt;" color="#000000">Terbilang</font></td>
                             <td width="80%" colspan="3"><font style="font-size: 11pt;" color="#000000">: {{ strtoupper(App\Http\Controllers\Report\ReportController::terbilang($dataReport['datas']->amount)) }}</font></td>
                         </tr>
-                        <tr>
-                            <td width="20%"><font style="font-size: 11pt;" color="#000000">NAMA/MR/NO.REG</font></td>
-                            <td width="80%" colspan="3"><font style="font-size: 11pt;" color="#000000">: {{ $dataReport['datas']->pasien }}</font></td>
-                        </tr>
                     </table>
                 </td>
             </tr>
             <tr>
                 <td style="padding-top:20px">
-                    <table width="100%" cellspacing="0" cellpadding="0">
+                    <table width="100%" cellspacing="0" cellpadding="0" border="1">
+                    @if($dataReport['datas']->type == "VA")
                         <tr>
                             <td width="50%" align="center"><font style="font-size: 11pt;" color="#000000"; align="center"></font></td>
                             <td width="50%" align="center"><font style="font-size: 11pt;" color="#000000">{!! $profile->namakota !!}, &nbsp;&nbsp;{{ $dataReport['datas']->tanggal }}</font></td>
@@ -190,6 +195,20 @@
                                 <font style="font-size: 11pt;" color="#000000" >{{ $dataReport['datas']->pegawaipenerima }}</font>
                             </td>
                         </tr>
+                    @else
+                        <tr>
+                            <td width="50%" align="center" rowspan="2">
+                                 <img src="{{ $dataReport['datas']->qr_code }}" alt="QR Payment" />
+                            </td>
+                            <td width="50%" align="center"><font style="font-size: 11pt;" color="#000000">{!! $profile->namakota !!}, &nbsp;&nbsp;{{ $dataReport['datas']->tanggal }}</font></td>
+                        </tr>
+                        <tr>
+                            <td height="80" valign="bottom" height="100"width="25%" align="center">
+                                <font style="font-size: 11pt;" color="#000000" >{{ $dataReport['datas']->pegawaipenerima }}</font>
+                            </td>
+                        </tr>
+                    @endif
+                        
                     </table>
                 </td>
             </tr>

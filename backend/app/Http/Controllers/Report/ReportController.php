@@ -2620,9 +2620,10 @@ class ReportController extends ApiController{
             SELECT pd.noregistrasi
             ,ps.namapasien
             ,ep.amount
-            ,ps.namapasien || '/' || ps.nocm END || '/' || pd.noregistrasi END || '-' || ru.namaruangan END AS pasien
+            ,ps.namapasien || '/' || ps.nocm AS pasien
             ,ru.namaruangan
             ,pg.namalengkap
+            ,sp.noregistrasifk
             ,ps.nocm
             ,pd.tglregistrasi
             ,pd.tglpulang
@@ -2630,7 +2631,10 @@ class ReportController extends ApiController{
             ,sp.nostruk 
             ,ep.va_number
             ,ep.qr_code
+            ,ep.espayproduct_name
+            ,ep.type
             ,pg.namalengkap as pegawaipenerima
+            ,CASE WHEN ep.expired IS NULL THEN '-' ELSE to_char(ep.expired, 'DD-MM-YYYY HH24:MI:SS') END AS tanggalexpired
             FROM strukpelayanan_t AS sp
             INNER JOIN espaypayment_t AS ep ON ep.order_id = sp.nostruk
             LEFT JOIN pasiendaftar_t AS pd ON pd.norec = sp.noregistrasifk
@@ -2638,6 +2642,8 @@ class ReportController extends ApiController{
             LEFT JOIN ruangan_m AS ru ON ru.id = pd.objectruanganlastfk
             LEFT JOIN pegawai_m as pg ON pg.id = sp.objectpegawaipenerimafk
             WHERE sp.nostruk = '$nostruk'
+            AND sp.kdprofile = $kdProfile
+            AND sp.statusenabled = true
         "))->first();
 
         if(empty($data)){
