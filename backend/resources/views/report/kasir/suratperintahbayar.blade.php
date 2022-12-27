@@ -178,7 +178,7 @@
             </tr>
             <tr>
                 <td style="padding-top:20px">
-                    <table width="100%" cellspacing="0" cellpadding="0" border="1">
+                    <table width="100%" cellspacing="0" cellpadding="0">
                     @if($dataReport['datas']->type == "VA")
                         <tr>
                             <td width="50%" align="center"><font style="font-size: 11pt;" color="#000000"; align="center"></font></td>
