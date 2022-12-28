@@ -108,7 +108,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                         }
                       }
 
-                      $scope.listDokter = dataDokter; //dat.data.dokter;
+                    //   $scope.listDokter = dataDokter; //dat.data.dokter;
                     } 
 
                     $scope.listDataPMI = dat.data.pmi;
