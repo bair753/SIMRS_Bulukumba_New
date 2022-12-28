@@ -331,22 +331,22 @@ class BridgingPenunjangController extends ApiController
             foreach ($raw as $item) {
                 $getAccNumber = $this->getAccNumber($item->kodeexternaldjp , $item->namaexternaljp);
 
-                if($item->namaexternaljp == null){
-                  $errorrr = "Modality belum disetting";
+                // if($item->namaexternaljp == null){
+                //   $errorrr = "Modality belum disetting";
                   $modality = null;
 //                    return $this->setStatusCode(400)->respond('', 'Kode External Bridging Produk '.$item->namaproduk. ' Kosong');
-                }else{
-                    if (strlen(trim($item->namaexternaljp)) > 4) {
-                      $errorrr = "Modality tidak dikenal";
-                      $modality = null;
-                    } else {
-                      $modality = str_limit(trim($item->namaexternaljp), 5);
-                    }                    
-                }
+                // }else{
+                //     if (strlen(trim($item->namaexternaljp)) > 4) {
+                //       $errorrr = "Modality tidak dikenal";
+                //       $modality = null;
+                //     } else {
+                //       $modality = str_limit(trim($item->namaexternaljp), 5);
+                //     }                    
+                // }
 
-                if ($modality == null) {
-                  break;
-                }
+                // if ($modality == null) {
+                //   break;
+                // }
 
                 // if (empty($item->nourut)) {
                 //   $errorrr = "Tidak ada nomor urut order pelayanan";
