@@ -62,7 +62,7 @@ class BridgingESPAYController extends ApiController
                 $uppercase = strtoupper('##'.$this->signature_key.'##'.$data['rq_uuid'].'##'.$data['rs_datetime'].'##'.$data['order_id'].'##'.$data['error_code'].'##INQUIRY-RS##');
                 break;
             case 'PAYMENTREPORT-RS':
-                $uppercase = strtoupper('##'.$this->signature_key.'##'.$data['rq_uuid'].'##'.$data['rs_datetime'].$data['error_code'].'##PAYMENTREPORT-RS##');
+                $uppercase = strtoupper('##'.$this->signature_key.'##'.$data['rq_uuid'].'##'.$data['rs_datetime'].'##'.$data['error_code'].'##PAYMENTREPORT-RS##');
                 break;
             default:
                 $uppercase = strtoupper('##'.$this->signature_key.'##'.$data['rq_datetime'].'##'.$data['order_id'].'##'.$mode.'##');
