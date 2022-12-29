@@ -1,0 +1,71 @@
+<style>
+    .red {
+        color: rgb(201, 18, 18);
+        font-weight: bold;
+    }
+
+    .green {
+        color: #49e171;
+        font-weight: bold;
+    }
+
+    .blue {
+        color: blue;
+    }
+
+    button:disabled {
+        background: #B5B2B1;
+    }
+
+    .italic {
+        font-style: italic;
+        font-size: 15px
+    }
+    .style-center {
+        display: inline-block;
+        text-align: center;
+        width: 100%;
+    }
+
+    .style-right {
+        display: inline-block;
+        text-align: right;
+        width: 100%;
+    }
+
+    .style-left {
+        display: inline-block;
+        text-align: left;
+        width: 100%;
+    }
+</style>
+
+<div class="grid_12">
+    <div ng-include='"../app/template/Shared/HeaderRekamMedis"'></div>
+    <div class="grid_12">
+        <div class="headerBox">
+            <h1 style="color: white;text-align: left;font-size: 12;margin-left: 10px">  Hasil Laboratorium</h1>
+        </div>
+    </div>
+    <!-- <c-panel item="item" header="'Hasil Laboratorium'" disabled> -->
+    <div class=" grid_12">
+        <div class=" grid_12">
+            <div class="grid_12">
+                <kendo-grid k-data-source="resultGrids" id="gridId" k-selectable="'row'" k-options="ColumnResult"
+                    k-ng-model="dataSelected" ng-click="kl(dataSelected)" ng-dblclick="gridDblKlik(dataSelected)">
+                </kendo-grid>
+            </div>
+            <div class="grid_12">
+                <div class="grid_2">
+                    <button class="btnTemplate1 cancel" ng-click="kembali()"><i class="fa fa-sign-out"></i>Tutup</button>
+                </div>
+                <div class="grid_2">
+                    <button class="btnTemplate1" ng-click="cetakhtml()"><i class="fa fa-print"></i>Cetak</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div ng-include=' "../app/template/Shared/TemplateLoading" '></div>
+</div>
+

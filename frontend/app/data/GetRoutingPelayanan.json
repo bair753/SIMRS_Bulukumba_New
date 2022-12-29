@@ -17076,6 +17076,26 @@
         "define": "MedifirstService"
       }
     ]
+  },
+  {
+    "name": "HasilLaboratoriumRuangan",
+    "url": "/SGFzaWxMYWJvcmF0b3JpdW1SdWFuZ2Fu=/:norecPd/:norecApd",
+    "templateurl": "module/Laboratorium/HasilLaboratoriumRuangan.html",
+    "controller": "HasilLaboratoriumRuanganCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      }
+    ]
   }
   
   
