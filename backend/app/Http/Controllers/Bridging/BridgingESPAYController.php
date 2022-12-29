@@ -182,6 +182,7 @@ class BridgingESPAYController extends ApiController
             $newPE->norec_pd = $data['norec_pd'];
             $newPE->pegawaifk = $data['pegawaifk'];
             $newPE->statusenabled = true;
+            $newPE->save();
         }
         return $this->respond($response);
     }
