@@ -1132,6 +1132,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
         Route::post('laboratorium/save-map-hasil-lab-bantu','Laboratorium\LaboratoriumController@saveMapHasilLabVB');
         Route::post('laboratorium/save-apd-darah', 'Laboratorium\LaboratoriumController@saveAntrianPasienDarah');
         Route::post('laboratorium/save-pmi', 'Laboratorium\LaboratoriumController@savePMI');
+        Route::get('laboratorium/get-hasil-lab-manual-ruangan','Laboratorium\LaboratoriumController@getHasilLabManualRuangan');
         
         Route::post('laboratorium/save-catatan-lab',  'Bridging\BridgingPenunjangController@saveUpdateCatatan');
         Route::get('laboratorium/get-catatan-lab',  'Bridging\BridgingPenunjangController@getCatatan');

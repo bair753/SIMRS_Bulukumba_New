@@ -1309,4 +1309,44 @@ class LaboratoriumController extends ApiController
         return $this->respond($jenis);
 
     }
+
+    public function getHasilLabManualRuangan(Request $r){
+        $umur =$r['umur'];
+        $data = DB::select(DB::raw("SELECT pp.noregistrasifk as norec_apd,djp.detailjenisproduk,pp.produkfk,prd.namaproduk,
+                maps.detailpemeriksaan,maps.memohasil,
+                maps.nourutdetail,maps.satuanstandarfk,ss.satuanstandar,nn.nilaitext,nn.tipedata,nn.nilaimin,nn.nilaimax,
+                hh.hasil,maps.id as map_id,hh.norec as norec_hasil,maps.nourutjenispemeriksaan,maps.nourutdetail,pp.norec as norecPP,nn.nilaimin || '-' || nn.nilaimax as nilainormalstr,
+                hh.flag,nn.id as idnn,maps2.jeniskelaminfk,hh.pegawaifk,hh.keterangan,hh.pegawaifk --,pg.namalengkap
+                FROM pelayananpasien_t  as pp
+                inner join produk_m as prd on prd.id = pp.produkfk
+                inner join detailjenisproduk_m as djp on djp.id = prd.objectdetailjenisprodukfk
+                inner join maphasillab_m  as maps on maps.produkfk = prd.id
+                inner join maphasillabdetail_m  as maps2 on maps2.maphasilfk = maps.id 
+                and maps2.jeniskelaminfk ='$r[objectjeniskelaminfk]'
+                and maps2.kelompokumurfk in (select id from kelompokumur_m  kuu where $umur BETWEEN kuu.umurmin and kuu.umurmax) 
+                inner join nilainormal_m  as nn on nn.id = maps2.nilainormalfk
+                left join satuanstandar_m  as ss on ss.id = maps.satuanstandarfk
+                left join hasillaboratorium_t  as hh on hh.norecpelayanan  = pp.norec
+                --left join pegawai_m AS pg ON pg.id = hh.pegawaifk
+                and pp.noregistrasifk=hh.noregistrasifk
+                 and maps.detailpemeriksaan =hh.detailpemeriksaan 
+                where   pp.norec in ($r[norec])  
+                order by  maps.nourutjenispemeriksaan,maps.nourutdetail asc"));
+        $id = null;
+        $nama= null;
+        foreach($data as $d){
+            if($d->pegawaifk!=null){
+                $id = $d->pegawaifk;
+            }
+        }
+        if($id!=null){
+            $nama = DB::table('pegawai_m')->where('id',$id)->first()->namalengkap;
+
+        }
+        $result =  array(
+            'data' => $data, 
+            'dokter' => array('id'=>$id,'namalengkap'=>$nama)
+        );        
+        return $this->respond($result);  
+    }
 }

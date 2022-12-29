@@ -3061,6 +3061,10 @@
         {
             "nameDep": "AsesmenAwalMedisRanapCtrl",
             "urlDep": "module/EMR/AsesmenAwalMedisRanapCtrl"
+        },
+        {
+            "nameDep": "HasilLaboratoriumRuanganCtrl",
+            "urlDep": "module/Laboratorium/HasilLaboratoriumRuanganCtrl"
         }
     ]
 }

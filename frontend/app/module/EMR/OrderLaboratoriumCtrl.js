@@ -45,6 +45,8 @@ define(['initialize'], function (initialize) {
                     namaRuanganFk = chacePeriode[11]
                     $scope.item.namaRuangan = chacePeriode[12]
                     $scope.header.DataNoregis = chacePeriode[13]
+                    $scope.jeniskelaminfk = chacePeriode[23]
+                    $scope.tgllahirpasien = chacePeriode[18]
                     // if ($scope.header.DataNoregis == undefined) {
                     //     $scope.header.DataNoregis = false;
                     // }
@@ -246,6 +248,46 @@ define(['initialize'], function (initialize) {
                     //     noOrder: $scope.dataSelectedRiwayat.noorder,
                     //     norecApd: norec_apd,
                     // })
+                }
+
+            }
+
+            $scope.LihatHasilManual = function (data) {
+                if ($scope.dataSelectedRiwayat == undefined) {
+                    toastr.error('Pilih data dulu');
+                    return
+                }
+                cacheHelper.set('hideHasilLab', undefined);
+
+                if (norec_apd != null) {
+                    var array_pp = ''
+                    for (let i = 0; i < $scope.dataSelectedRiwayat.details_pp.length; i++) {
+                        const element =  $scope.dataSelectedRiwayat.details_pp[i];
+                        array_pp = array_pp + "','" + element.norec_pp
+                    }
+                    array_pp = array_pp.substring(2, array_pp.length )+"'"
+                    var arrStr = {
+                        0: $scope.item.noMr,
+                        1: $scope.item.namaPasien,
+                        2: $scope.item.jenisKelamin,
+                        3: $scope.item.noregistrasi,
+                        4: $scope.item.umur,
+                        5: $scope.item.kelompokPasien,
+                        6: $scope.item.tglRegistrasi,
+                        7: norec_apd,
+                        8: norec_pd,
+                        9: $scope.item.idKelas,
+                        10: $scope.item.kelas,
+                        11: namaRuanganFk,
+                        12: $scope.item.namaRuangan,
+                        13: $scope.dataSelectedRiwayat.tgllahir,
+                        14: $scope.dataSelectedRiwayat.jk_id,
+                        15: array_pp,
+                        // 16: $scope.dataGrid._data[i].tglpelayanan ,
+                    }
+                    cacheHelper.set('hideHasilLab', true);
+                    cacheHelper.set('chaceHasilLab2', arrStr);
+                    window.open("/app/#/SGFzaWxMYWJvcmF0b3JpdW1SdWFuZ2Fu=/"+ norec_pd+"/"+$scope.dataSelectedRiwayat.norecapdlab)
                 }
 
             }

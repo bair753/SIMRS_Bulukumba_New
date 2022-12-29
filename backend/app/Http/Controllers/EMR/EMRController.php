@@ -6031,12 +6031,17 @@ class EMRController  extends ApiController
 
         $data = \DB::table('strukorder_t as so')
             ->LEFTJOIN('pasiendaftar_t as pd', 'pd.norec', '=', 'so.noregistrasifk')
+            ->LEFTJOIN('antrianpasiendiperiksa_t as apd', function($join){
+                $join->on('apd.noregistrasifk', '=', 'pd.norec')
+                ->on('apd.objectruanganfk', '=', 'so.objectruangantujuanfk');
+            })
             ->JOIN('pasien_m as pas', 'pas.id', '=', 'pd.nocmfk')
             ->LEFTJOIN('ruangan_m as ru', 'ru.id', '=', 'so.objectruanganfk')
+            ->LEFTJOIN('jeniskelamin_m as jk','jk.id','=','pas.objectjeniskelaminfk')
             ->LEFTJOIN('ruangan_m as ru2', 'ru2.id', '=', 'so.objectruangantujuanfk')
             ->LEFTJOIN('pegawai_m as p', 'p.id', '=', 'so.objectpegawaiorderfk')
 //            ->LEFTJOIN('reshd as pp','pp.ono','=','so.noorder')
-            ->select('so.norec', 'pd.norec as norecpd', 'pd.noregistrasi', 'so.tglorder', 'so.noorder',
+            ->select('so.norec', 'pd.norec as norecpd', 'apd.norec as norecapdlab', 'jk.id as jk_id', 'jk.jeniskelamin', 'pas.tgllahir', 'pd.noregistrasi', 'so.tglorder', 'so.noorder',
                 'ru.namaruangan as namaruanganasal', 'ru2.namaruangan as namaruangantujuan', 'p.namalengkap as dokter',
                 'so.noorder','pd.noregistrasi','so.keteranganlainnya','so.cito'
 //                ,DB::raw('case when pp.ono is null then \'PENDING\' else \'SELESAI DIPERIKSA\' end as statusorder')
@@ -6084,6 +6089,21 @@ class EMRController  extends ApiController
                 $nocm
                "));
 
+        $details3= DB::select(DB::raw("
+               select so.norec,so.tglorder,so.noorder,pp.norec AS norec_pp
+               from strukorder_t as so
+               inner  join pelayananpasien_t AS pp ON pp.strukorderfk = so.norec
+               inner join pasiendaftar_t as pd on pd.norec=so.noregistrasifk
+               inner join pasien_m as ps on ps.id=pd.nocmfk
+               where so.kdprofile = $idProfile
+               and so.statusenabled=true
+               and so.keteranganorder =  'Order Laboratorium'
+               and so.objectkelompoktransaksifk=93
+
+               $noreg
+               $nocm
+           "));
+
         //$results =array();
         $hasil = DB::select(DB::raw("
                 select * from order_lab where norec is not null 
@@ -6091,12 +6111,12 @@ class EMRController  extends ApiController
                 $nocm2"
             ));
            
-        try {
-              $cek= DB::connection('sqlsrv')->getPdo();
+        // try {
+        //       $cek= DB::connection('sqlsrv')->getPdo();
               $status = true;
-        } catch (\Exception $e) {
-              $status = false;
-        }
+        // } catch (\Exception $e) {
+        //       $status = false;
+        // }
    
         foreach ($data as $item) {
             $noorder = $item->noorder;
@@ -6110,6 +6130,16 @@ class EMRController  extends ApiController
                         'namaproduk' => $dss->namaproduk,
                         'qtyproduk' => $dss->qtyproduk,
                        
+                    );
+                }
+            }
+            foreach($details3 as $dss3){
+                if($item->norec == $dss3->norec){
+                    $item->details_pp[] = array(
+                        'tglorder' => $dss3->tglorder,
+                        'noorder' => $dss3->noorder,
+                        'norec_pp' => $dss3->norec_pp,
+
                     );
                 }
             }
