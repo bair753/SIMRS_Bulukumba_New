@@ -2631,6 +2631,7 @@ class ReportController extends ApiController{
             ,sp.nostruk 
             ,ep.va_number
             ,ep.qr_code
+            ,ep.qr_link
             ,ep.espayproduct_name
             ,ep.type
             ,pg.namalengkap as pegawaipenerima
