@@ -813,6 +813,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 									"espayproduct_name": nameEspay,
 									"va_expired": "2880",
 									"type": typeEspay,
+									"description": "Pembayaran tagihan pasien " + $scope.item.namaPasien,
 									"norec_pd": $scope.item.norec_pd,
 									"pegawaifk": medifirstService.getPegawaiLogin().id,
 								}

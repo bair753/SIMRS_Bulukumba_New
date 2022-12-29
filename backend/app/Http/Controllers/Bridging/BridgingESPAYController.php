@@ -106,7 +106,7 @@ class BridgingESPAYController extends ApiController
             $newPE->fee = $response->fee;
             $newPE->va_number = $response->va_number;
             $newPE->expired = $response->expired;
-            $newPE->description = $dataSend['description'];//$item->description;
+            $newPE->description = $data['description'];//$item->description;
             $newPE->espayproduct_code = $dataSend['bank_code'];
             $newPE->espayproduct_name = $data['espayproduct_name'];
             $newPE->status = "IP";
