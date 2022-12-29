@@ -248,6 +248,7 @@ class BridgingESPAYController extends ApiController
         ->select('sp.*', 'ps.namapasien', 'ps.nohp', 'al.alamatlengkap', 'al.kodepos', 'al.kotakabupaten')
         ->where('sp.statusenabled', true)
         ->where('sp.nostruk', $data['order_id'])
+        ->whereNull('sp.nosbmlastfk')
         ->first();
         if(!empty($findData)) {
             $rq_uuid = substr(Uuid::generate(), 0, 32);
@@ -322,54 +323,34 @@ class BridgingESPAYController extends ApiController
     public function paymentNotification(Request $request)
     {
         $data = $request->all();
-        $findData = PaymentEspay::where('order_id', $data['order_id'])->first();
+        $findData = PaymentEspay::where('order_id', $data['order_id'])
+        ->whereNull('norec_sbm')
+        ->first();
         $stt = false;
         DB::beginTransaction();
         try {
             if(!empty($findData))
             {
-                $dataPegawai = DB::table('loginuser_s as lu')
-                ->where('lu.objectpegawaifk', $findData->pegawaifk)
-                ->first();
-
-                $strukPelayanan = StrukPelayanan::where('nostruk', $findData->order_id)
-                ->where('statusenabled', true)
-                ->first();
-                $strukBuktiPenerimanan = new StrukBuktiPenerimaan();
-                $strukBuktiPenerimanan->norec = $strukBuktiPenerimanan->generateNewId();
-                $strukBuktiPenerimanan->kdprofile = $this->getKdProfile();
-                $strukBuktiPenerimanan->keteranganlainnya = "Pembayaran Tagihan Pasien Espay";
-                $strukBuktiPenerimanan->statusenabled = 1;
-                $strukBuktiPenerimanan->nostrukfk = $strukPelayanan->norec;
-                $strukBuktiPenerimanan->objectkelompokpasienfk = $strukPelayanan->pasien_daftar->objectkelompokpasienlastfk;
-                $strukBuktiPenerimanan->objectkelompoktransaksifk = 1;
-                $strukBuktiPenerimanan->objectpegawaipenerimafk  = $dataPegawai->id;
-                $strukBuktiPenerimanan->tglsbm  = substr($data['payment_datetime'], 0, 10); //$this->getDateTime();
-                $strukBuktiPenerimanan->totaldibayar  = $data['amount'];
-                $strukBuktiPenerimanan->nosbm = $this->generateCode(new StrukBuktiPenerimaan, 'nosbm', 14, 'RV-' . $this->getDateTime()->format('ym'), $this->getKdProfile());
-                $strukBuktiPenerimanan->save();
-
-                $SBPCB = new StrukBuktiPenerimaanCaraBayar();
-                $SBPCB->norec = $SBPCB->generateNewId();
-                $SBPCB->kdprofile = $this->getKdProfile();
-                $SBPCB->statusenabled = 1;
-                $SBPCB->nosbmfk = $strukBuktiPenerimanan->norec;
-                $SBPCB->objectcarabayarfk = 11;
-                $SBPCB->totaldibayar = $data['amount'];
-                $SBPCB->save();
-
-                $strukPelayanan->nosbmlastfk = $strukBuktiPenerimanan->norec;
-                $strukPelayanan->save();
-                $pd = $strukPelayanan->pasien_daftar;
-                $pd->nosbmlastfk = $strukBuktiPenerimanan->norec;
-                $pd->save();
-                // update status espaypayment_t
-                $findData->reconcile_datetime = date('Y-m-d H:i:s');
-                $findData->status = 'S';
-                $findData->norec_sbm = $strukBuktiPenerimanan->norec;
-                $findData->save();
-
-                $stt = true;
+                // update trx_id
+                $dataSend = array (
+                    'uuid' => substr(Uuid::generate(), 0, 32),
+                    'rq_datetime' => date('Y-m-d H:i:s'),
+                    'comm_code' => $this->cmm_code,
+                    'order_id' => $data['order_id']
+                );
+                $signature = $this->signature('CHECKSTATUS', $dataSend);
+                $dataSend['signature'] = $signature;
+                $xurldata = http_build_query($dataSend);
+                $response = $this->sendApi($xurldata, '/rest/merchant/status');
+                if($response->error_code == '0000')
+                {
+                    $findData->trx_id = $response->tx_id;
+                    $findData->status = $response->tx_status;
+                    $findData->payment_ref = $data['payment_ref'];
+                    $findData->reconcile_datetime = date('Y-m-d H:i:s');
+                    $findData->save();
+                    $stt = true;
+                }
             }
         } catch (\Exception $e) {
             $stt = false;
@@ -409,7 +390,82 @@ class BridgingESPAYController extends ApiController
 
     public function settlementNotification(Request $request)
     {
-        # code...
+        $data = $request->all();
+        $findData = PaymentEspay::where('trx_id', $data['data']['tx_id'])
+        ->whereNotNull('payment_ref')
+        ->whereNull('norec_sbm')
+        ->first();
+        $stt = false;
+        DB::beginTransaction();
+        try {
+            if(!empty($findData))
+            {
+                $dataPegawai = DB::table('loginuser_s as lu')
+                ->where('lu.objectpegawaifk', $findData->pegawaifk)
+                ->first();
+
+                $strukPelayanan = StrukPelayanan::where('nostruk', $findData->order_id)
+                ->where('statusenabled', true)
+                ->first();
+                $strukBuktiPenerimanan = new StrukBuktiPenerimaan();
+                $strukBuktiPenerimanan->norec = $strukBuktiPenerimanan->generateNewId();
+                $strukBuktiPenerimanan->kdprofile = $this->getKdProfile();
+                $strukBuktiPenerimanan->keteranganlainnya = "Pembayaran Tagihan Pasien Espay";
+                $strukBuktiPenerimanan->statusenabled = 1;
+                $strukBuktiPenerimanan->nostrukfk = $strukPelayanan->norec;
+                $strukBuktiPenerimanan->objectkelompokpasienfk = $strukPelayanan->pasien_daftar->objectkelompokpasienlastfk;
+                $strukBuktiPenerimanan->objectkelompoktransaksifk = 1;
+                $strukBuktiPenerimanan->objectpegawaipenerimafk  = $dataPegawai->id;
+                $strukBuktiPenerimanan->tglsbm  = $data['data']['settlement_date']; //$this->getDateTime();
+                $strukBuktiPenerimanan->totaldibayar  = $data['data']['settlement_amount'];
+                $strukBuktiPenerimanan->nosbm = $this->generateCode(new StrukBuktiPenerimaan, 'nosbm', 14, 'RV-' . $this->getDateTime()->format('ym'), $this->getKdProfile());
+                $strukBuktiPenerimanan->save();
+
+                $SBPCB = new StrukBuktiPenerimaanCaraBayar();
+                $SBPCB->norec = $SBPCB->generateNewId();
+                $SBPCB->kdprofile = $this->getKdProfile();
+                $SBPCB->statusenabled = 1;
+                $SBPCB->nosbmfk = $strukBuktiPenerimanan->norec;
+                $SBPCB->objectcarabayarfk = 11;
+                $SBPCB->totaldibayar = $data['data']['settlement_amount'];
+                $SBPCB->save();
+
+                $strukPelayanan->nosbmlastfk = $strukBuktiPenerimanan->norec;
+                $strukPelayanan->save();
+                $pd = $strukPelayanan->pasien_daftar;
+                $pd->nosbmlastfk = $strukBuktiPenerimanan->norec;
+                $pd->save();
+                // update status espaypayment_t
+                $espayData = PaymentEspay::where('order_id', $findData->order_id)->first();
+                $espayData->status = 'S';
+                $espayData->date_settle = date('Y-m-d H:i:s');
+                $espayData->norec_sbm = $strukBuktiPenerimanan->norec;
+                $espayData->save();
+
+                $stt = true;
+            }
+        } catch (\Exception $e) {
+            $stt = false;
+        }
+
+        if ($stt) {
+            $result = array(
+                "error_code" => "0000",
+                "error_message" => "Success",
+                "settlement_remark" => "Pembayaran order id ". $strukPelayanan->nostruk ." diterima",
+                "date_settle" => $espayData->date_settle
+            );
+            DB::commit();
+        } else {
+            $result = array(
+                "error_code" => "1111",
+                "error_message" => "Internal Error",
+                "settlement_remark" => "Pembayaran order id ". $findData->order_id ." gagal",
+                "date_settle" => date('Y-m-d H:i:s')
+            );
+            DB::rollBack();
+        }
+        return $this->respond($result);
     }
 
     public function checkPaymentStatus(Request $request)
@@ -426,11 +482,37 @@ class BridgingESPAYController extends ApiController
         $dataSend['signature'] = $signature;
         $xurldata = http_build_query($dataSend);
         $response = $this->sendApi($xurldata, '/rest/merchant/status');
+        if($response->error_code == '0000')
+        {
+            $data = PaymentEspay::where('order_id', $data['order_id'])->first();
+            $data->status = $response->tx_status;
+            $data->trx_id = $response->tx_id;
+            $data->save();
+        }
         return $this->respond($response);
     }
 
     public function updateExpireTransaction(Request $request)
     {
-        # code...
+        $data = $request->all();
+        $dataSend = array (
+            'uuid' => $data['uuid'],
+            'rq_datetime' => date('Y-m-d H:i:s'),
+            'comm_code' => $this->cmm_code,
+            'order_id' => $data['order_id'],
+            'tx_remark' => $data['tx_remark'],
+        );
+        $signature = $this->signature('EXPIRETRANSACTION', $dataSend);
+        $dataSend['signature'] = $signature;
+        $xurldata = http_build_query($dataSend);
+        $response = $this->sendApi($xurldata, '/rest/merchant/updateexpire');
+        if($response->error_code == '0000')
+        {
+            $data = PaymentEspay::where('order_id', $data['order_id'])->first();
+            $data->status = "F";
+            $data->trx_id = $response->tx_id;
+            $data->save();
+        }
+        return $this->respond($response);
     }
 }

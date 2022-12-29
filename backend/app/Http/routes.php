@@ -521,7 +521,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
         Route::post('espay/payment-notification', 'Bridging\BridgingESPAYController@paymentNotification');
         Route::post('espay/settlement-notification', 'Bridging\BridgingESPAYController@settlementNotification');
         Route::post('espay/check-payment-status', 'Bridging\BridgingESPAYController@checkPaymentStatus');
-        
+        Route::post('espay/update-expire-transaction', 'Bridging\BridgingESPAYController@updateExpireTransaction');
         // END ESPAY
 
         Route::group(['prefix' => 'cssd'], function () {
@@ -1050,6 +1050,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
             Route::get('kasir/get-data-lap-penerimaan-azalea-mcu', 'Kasir\KasirController@getDataLaporanPenerimaanAzaleaMCU');
             Route::get('kasir/get-data-detail-lap-penerimaan-semua-kasir-ok', 'Kasir\KasirController@getLaporanDetailPenerimaanKasirObatKronis');
             Route::get('kasir/data-virtual-account', 'Kasir\KasirController@daftarVirtualAccount');
+            Route::get('kasir/data-pembayaran-espay', 'Kasir\KasirController@daftarPembayaranEspay');
             Route::get('kasir/detail-piutang-pasien/{norecSPP}', 'Kasir\KasirController@detailPiutangPasien');
             Route::get('kasir/data-laporan-rekap-pendapatan', 'Kasir\KasirController@getDataLaporanRekapPendapatanRuangan');
             // GET

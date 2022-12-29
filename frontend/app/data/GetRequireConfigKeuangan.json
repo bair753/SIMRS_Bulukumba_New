@@ -395,6 +395,10 @@
         {
             "nameDep": "KonversiHargaCtrl",
             "urlDep": "module/TataRekening/KonversiHargaCtrl"
+        },
+        {
+            "nameDep": "DaftarPembayaranEspayCtrl",
+            "urlDep": "module/Kasir/DaftarPembayaranEspayCtrl"
         }
     ]
 }

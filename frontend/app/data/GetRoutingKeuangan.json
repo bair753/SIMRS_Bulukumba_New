@@ -1958,5 +1958,25 @@
         "define": "MedifirstService"
       }
     ]
+  },
+  {
+    "name": "DaftarPembayaranEspay",
+    "url": "/DaftarPembayaranEspay",
+    "templateurl": "module/Kasir/DaftarPembayaranEspay.html",
+    "controller": "DaftarPembayaranEspayCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      }
+    ]
   }
 ]

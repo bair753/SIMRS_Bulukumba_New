@@ -5804,4 +5804,55 @@ case when pjd.hargasatuand = 0 then pjd.hargasatuank else pjd.hargasatuand end
 
         return $this->respond($result);   
     }
+    public function daftarPembayaranEspay(Request $request){
+        $kdProfile = (int)$this->getDataKdProfile($request);
+        $data = DB::table('espaypayment_t as ep')
+            ->select('sp.norec','sp.tglstruk', 'sp.nostruk', 'ps.namapasien', 'ps.nocm', 'pd.noregistrasi', 
+            'ep.va_number', 'ep.espayproduct_name', 'ep.expired', 'ep.status', 'ep.amount', 'ep.type', 'ep.trx_id', 'ep.order_id',
+            'p.namalengkap as kasir', 'ru.namaruangan',
+            'sbm.nosbm' ,'sbm.tglsbm')
+            ->leftjoin('strukbuktipenerimaan_t as sbm', 'sbm.norec', '=', 'ep.norec_sbm')
+            ->leftjoin('strukpelayanan_t as sp', 'ep.order_id', '=', 'sp.nostruk')
+            ->leftjoin('pasiendaftar_t as pd', 'ep.norec_pd', '=', 'pd.norec')
+            ->leftjoin('ruangan_m as ru', 'ru.id', '=', 'pd.objectruanganlastfk')
+            ->leftjoin('pegawai_m as p', 'p.id', '=', 'ep.pegawaifk')
+            ->leftjoin('pasien_m as ps', 'ps.id', '=', 'pd.nocmfk')
+            ->where('ep.statusenabled',true)
+            ->where('sp.kdprofile', $kdProfile)
+            ->whereNotnull('ep.norec_pd');
+
+        $filter = $request->all();
+        if(isset($filter['tglAwal']) && $filter['tglAwal'] != "" && $filter['tglAwal'] != "undefined") {
+            $data = $data->where('sp.tglstruk', '>=', $filter['tglAwal']);
+        }
+        if(isset($filter['tglAkhir']) && $filter['tglAkhir'] != "" && $filter['tglAkhir'] != "undefined") {
+            $data = $data->where('sp.tglstruk', '<=', $filter['tglAkhir']);
+        }
+        if(isset($filter['ins']) && $filter['ins'] != "" && $filter['ins'] != "undefined") {
+            $data = $data->where('ru.objectdepartemenfk', $filter['ins']);
+        }
+        if(isset($filter['type']) && $filter['type'] != "" && $filter['type'] != "undefined") {
+            $data = $data->where('ep.type', $filter['type']);
+        }
+        if(isset($filter['nova']) && $filter['nova'] != "" && $filter['nova'] != "undefined") {
+            $data = $data->where('ep.va_number','ilike','%'.$filter['nova'].'%');
+        }
+        if(isset($filter['nocm']) && $filter['nocm'] != "" && $filter['nocm'] != "undefined") {
+            $data = $data->where('ps.nocm','ilike','%'.$filter['nocm'].'%');
+        }
+        if(isset($filter['nama']) && $filter['nama'] != "" && $filter['nama'] != "undefined") {
+            $data = $data->where('ps.namapasien','ilike','%'.$filter['nama'].'%');
+        }
+
+        if(isset($request['KasirArr']) && $request['KasirArr']!="" && $request['KasirArr']!="undefined"){
+            $arrRuang = explode(',',$request['KasirArr']) ;
+            $kodeRuang = [];
+            foreach ( $arrRuang as $item){
+                $kodeRuang[] = (int) $item;
+            }
+            $data = $data->whereIn('p.id',$kodeRuang);
+        }
+        $data = $data->get();
+        return $this->respond($data);
+    }
 }
