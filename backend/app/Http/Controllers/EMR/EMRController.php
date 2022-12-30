@@ -9002,25 +9002,29 @@ class EMRController  extends ApiController
     }
     public function SaveTransaksiEMRBackup(Request $request)
     {
-           $kdProfile = (int) $this->getDataKdProfile($request);
+        $kdProfile = (int) $this->getDataKdProfile($request);
 
         $dataReq = $request->all();
 
         $head = $dataReq['head'];
         $data = $dataReq['data'];
 
-//        foreach ($data as $itm){
-//            $dtdt[] = $itm;
-//        }
-//
-//        $keys = array_keys($data);
+        //        foreach ($data as $itm){
+        //            $dtdt[] = $itm;
+        //        }
+        //
+        //        $keys = array_keys($data);
 
         DB::beginTransaction();
         try {
+            $idx = null;
+            if (isset($head['index'])) {
+                $idx = $head['index'];
+            }
 
             if ($head['norec_emr'] == '-') {
 
-                $noemr = $this->generateCodeBySeqTable(new EMRPasien, 'noemr', 15, 'MR' . date('ym') . '/',$kdProfile);
+                $noemr = $this->generateCodeBySeqTable(new EMRPasien, 'noemr', 15, 'MR' . date('ym') . '/', $kdProfile);
                 // return $noemr;
                 if ($noemr == '') {
                     $transMessage = "Gagal mengumpukan data, Coba lagi.!";
@@ -9032,8 +9036,8 @@ class EMRController  extends ApiController
                     );
                     return $this->setStatusCode($result['status'])->respond($result, $transMessage);
                 }
-//                $noemr = $this->generateCode(new EMRPasien, 'noemr', 12, 'MR' . $this->getDateTime()->format('ym') . '/');
-//                $noemr = $this->generateCode(new EMRPasien, 'noemr', 14, 'MR' . $this->getDateTime()->format('ym') . '/');
+                //                $noemr = $this->generateCode(new EMRPasien, 'noemr', 12, 'MR' . $this->getDateTime()->format('ym') . '/');
+                //                $noemr = $this->generateCode(new EMRPasien, 'noemr', 14, 'MR' . $this->getDateTime()->format('ym') . '/');
 
                 $EMR = new EMRPasien();
                 $norecHead = $EMR->generateNewId();
@@ -9046,41 +9050,42 @@ class EMRController  extends ApiController
                 if (isset($head['noregistrasi'])) {
                     $EMR->noregistrasifk = $head['noregistrasi'];
                 }
-                $EMRPASIENDETAIL =[];
-                $EMRPASIENDETAILIMG =[];
-
+                $EMRPASIENDETAIL = [];
+                $EMRPASIENDETAILIMG = [];
             } else {
                 $EMR = EMRPasien::where('noemr', $head['norec_emr'])
-                   ->where('noregistrasifk', $head['noregistrasi'])
-                      ->where('kdprofile',$kdProfile)
+                ->where('noregistrasifk', $head['noregistrasi'])
+                ->where('kdprofile', $kdProfile)
                     ->first();
                 $noemr = $EMR->noemr;
 
                 //LOAD DATA EMR PEMBANDING
                 $EMRPASIENDETAIL = EMRPasienD::where('emrpasienfk', $noemr)
-                    ->select('emrdfk','value')
+                    ->select('emrdfk', 'value', 'index')
                     ->where('emrfk', $head['emrfk'])
-                    ->where('kdprofile',$kdProfile)
+                    ->where('index', $idx)
+                    ->where('kdprofile', $kdProfile)
                     ->where('statusenabled', 1)
                     ->orderBy('emrdfk')
                     ->get();
-                if(isset($dataReq['dataimg'])){ 
+                if (isset($dataReq['dataimg'])) {
                     $EMRPASIENDETAILIMG = EmrFoto::where('noemrpasienfk', $noemr)
-                        ->select('emrdfk','image')
+                        ->select('emrdfk', 'image')
                         ->where('emrfk', $head['emrfk'])
-                        ->where('kdprofile',$kdProfile)
+                        ->where('index', $idx)
+                        ->where('kdprofile', $kdProfile)
                         ->where('statusenabled', 1)
                         ->orderBy('emrdfk')
                         ->get();
-                 }  
+                }
 
-//                $EMRDelete = EMRPasienD::where('emrpasienfk', $noemr)
-//                ->where('emrfk', $head['emrfk'])
-//                ->delete();
+                //                $EMRDelete = EMRPasienD::where('emrpasienfk', $noemr)
+                //                ->where('emrfk', $head['emrfk'])
+                //                ->delete();
             }
 
             //VALIDASI JIKA NOREGISTRASI BEDA //
-            if((!empty($EMR) && isset($head['noregistrasi']) )&& trim($EMR->noregistrasifk) != $head['noregistrasi']){
+            if ((!empty($EMR) && isset($head['noregistrasi'])) && trim($EMR->noregistrasifk) != $head['noregistrasi']) {
                 $transMessage = "Kesalahan loading data..!";
                 DB::rollBack();
                 $result = array(
@@ -9094,9 +9099,9 @@ class EMRController  extends ApiController
 
             $EMR->noemr = $noemr;
             $EMR->emrfk = $head['emrfk'];
-//            if (isset($head['norec_pd'])) {
-//                $EMR->noregistrasifk = $head['norec_pd'];
-//            }
+            //            if (isset($head['norec_pd'])) {
+            //                $EMR->noregistrasifk = $head['norec_pd'];
+            //            }
             $EMR->nocm = $head['nocm'];
             $EMR->namapasien = $head['namapasien'];
             $EMR->jeniskelamin = $head['jeniskelamin'];
@@ -9107,7 +9112,7 @@ class EMRController  extends ApiController
             }
             if (isset($head['tglregistrasi'])) {
                 $EMR->tglregistrasi = $head['tglregistrasi'];
-            }else{
+            } else {
                 $EMR->tglregistrasi = date('Y-m-d H:i:s');
             }
             if (isset($head['norec'])) {
@@ -9134,7 +9139,7 @@ class EMRController  extends ApiController
                 $EMR->jenisemr = $head['jenisemr'];
             }
 
-             if (isset($head['jenis']) && $head['jenis'] == 'pasien') {
+            if (isset($head['jenis']) && $head['jenis'] == 'pasien') {
                 $EMR->pegawaifk = null;
             } else {
                 $EMR->pegawaifk = $this->getCurrentUserID();
@@ -9145,36 +9150,36 @@ class EMRController  extends ApiController
 
             $norec_EMR = $EMR->noemr;
 
-//            $EMRDelete = EMRPasienD::where('emrpasienfk', $norec_EMR)
-//                ->where('emrfk', $head['emrfk'])
-//                ->update([
-//                    'statusenabled' => false
-//                ]);
+            //            $EMRDelete = EMRPasienD::where('emrpasienfk', $norec_EMR)
+            //                ->where('emrfk', $head['emrfk'])
+            //                ->update([
+            //                    'statusenabled' => false
+            //                ]);
             $i = 0;
-//            foreach ($keys as $ky) {
-//                $emrdfk = $ky;
-//                $valueemr = $dtdt[$i];
+            //            foreach ($keys as $ky) {
+            //                $emrdfk = $ky;
+            //                $valueemr = $dtdt[$i];
             $sama = 0;
             $j = 0;
-            $h=0;
+            $h = 0;
             foreach ($data as $item) {
                 $emrdfk = $item['id'];
-                if(isset($item['values'])){
-                   if (is_array($item['values'])) {
+                if (isset($item['values'])) {
+                    if (is_array($item['values'])) {
                         $valueemr = $item['values']['value'] . '~' . $item['values']['text'];
                     } else {
                         $valueemr = $item['values'];
-                    } 
-                }else{
-                    $valueemr =null;
+                    }
+                } else {
+                    $valueemr = null;
                 }
-                
+
                 $sama = 0;
-                foreach ($EMRPASIENDETAIL as $emrupdate){
+                foreach ($EMRPASIENDETAIL as $emrupdate) {
                     $sama = 0;
-                    if ($emrupdate->emrdfk == $emrdfk ){
+                    if ($emrupdate->emrdfk == $emrdfk && $idx == $emrupdate->index) {
                         $sama =  1;
-                        if ($emrupdate->value != $valueemr){
+                        if ($emrupdate->value != $valueemr) {
                             $sama =  2;
                             break;
                         }
@@ -9182,19 +9187,19 @@ class EMRController  extends ApiController
                     }
                 }
 
-                if  ($sama ==  2){
+                if ($sama ==  2) {
                     $EMRPasienDUpdatekeun = EMRPasienD::where('emrpasienfk', $norec_EMR)
                         ->where('emrfk', $head['emrfk'])
                         ->where('emrdfk', $emrdfk)
-                           ->where('kdprofile',$kdProfile)
+                        ->where('kdprofile', $kdProfile)
                         ->where('statusenabled', 1)
                         ->update([
                             'value' => $valueemr
                         ]);
-                        $j++;
+                    $j++;
                 }
-                $EMRD =[];
-                if($sama ==  0){
+                $EMRD = [];
+                if ($sama ==  0) {
                     $EMRD = new EMRPasienD();
                     $norecD = $EMRD->generateNewId();
                     $EMRD->norec = $norecD;
@@ -9211,6 +9216,7 @@ class EMRController  extends ApiController
                     }
                     // dd($EMRD->pegawaifk);
                     $EMRD->tgl = $this->getDateTime()->format('Y-m-d H:i:s');
+                    $EMRD->index = $idx;
                     $EMRD->save();
                     $h++;
                 }
@@ -9218,34 +9224,34 @@ class EMRController  extends ApiController
 
 
 
-//                $EMRD_temp = new EMRPasienD_Temp();
-//                $norecDs = $EMRD_temp->generateNewId();
-//                $EMRD_temp->norec = $norecDs;
-//                $EMRD_temp->kdprofile = 1;
-//                $EMRD_temp->statusenabled = 1;
-//                $EMRD_temp->emrpasienfk = $norec_EMR;
-//                $EMRD_temp->value = $valueemr;
-//                $EMRD_temp->emrdfk = $emrdfk;
-//                $EMRD_temp->emrfk = $head['emrfk'];
-//                $EMRD_temp->pegawaifk = $this->getCurrentUserID();
-//                $EMRD_temp->tgl = $this->getDateTime()->format('Y-m-d H:i:s');
-//                $EMRD_temp->save();
+                //                $EMRD_temp = new EMRPasienD_Temp();
+                //                $norecDs = $EMRD_temp->generateNewId();
+                //                $EMRD_temp->norec = $norecDs;
+                //                $EMRD_temp->kdprofile = 1;
+                //                $EMRD_temp->statusenabled = 1;
+                //                $EMRD_temp->emrpasienfk = $norec_EMR;
+                //                $EMRD_temp->value = $valueemr;
+                //                $EMRD_temp->emrdfk = $emrdfk;
+                //                $EMRD_temp->emrfk = $head['emrfk'];
+                //                $EMRD_temp->pegawaifk = $this->getCurrentUserID();
+                //                $EMRD_temp->tgl = $this->getDateTime()->format('Y-m-d H:i:s');
+                //                $EMRD_temp->save();
                 $i = $i + 1;
             }
 
-            if(isset($dataReq['image']) && $dataReq['image']!=null){
-             
+            if (isset($dataReq['image']) && $dataReq['image'] != null) {
+
                 $img = $dataReq['image'];
                 $datas = unpack("H*hex", $img);
-                $datas = '0x'.$datas['hex'];
-              
+                $datas = '0x' . $datas['hex'];
+
                 $dataGambar = \DB::table('emrfoto_t as tt')
-                    ->where('tt.noemrpasienfk','=',$norec_EMR)
-                    ->where('tt.emrfk','=',$head['emrfk'])
-                      ->where('tt.kdprofile',$kdProfile)
+                ->where('tt.noemrpasienfk', '=', $norec_EMR)
+                    ->where('tt.emrfk', '=', $head['emrfk'])
+                    ->where('tt.kdprofile', $kdProfile)
                     ->first();
-//                return $this->respond($noRec);
-                if ($dataGambar == '' || $dataGambar == null){
+                //                return $this->respond($noRec);
+                if ($dataGambar == '' || $dataGambar == null) {
                     $emrFto = new EmrFoto();
                     $norecFto = $emrFto->generateNewId();
                     $emrFto->norec = $norecFto;
@@ -9253,68 +9259,70 @@ class EMRController  extends ApiController
                     $emrFto->statusenabled = 1;
                     $emrFto->noemrpasienfk = $norec_EMR;
                     $emrFto->emrfk = $head['emrfk'];
-                }else{
-                    $emrFto = EmrFoto::where('noemrpasienfk', $norec_EMR)  
-                    ->where('kdprofile',$kdProfile)->first();
-
+                } else {
+                    $emrFto = EmrFoto::where('noemrpasienfk', $norec_EMR)
+                        ->where('kdprofile', $kdProfile)->first();
                 }
                 $emrFto->image = \DB::raw("CONVERT(VARBINARY(MAX), $datas)");
+                $emrFto->index = $idx;
                 $emrFto->save();
             }
 
-            if(isset($dataReq['dataimg'])){
+            if (isset($dataReq['dataimg'])) {
                 $i2 = 0;
                 $sama2 = 0;
                 $j2 = 0;
                 $h2 = 0;
                 $dataImg =  $dataReq['dataimg'];
                 foreach ($dataImg as $item2) {
-                  if($item2['values'] != '../app/images/svg/no-image.svg'){
+                    if ($item2['values'] != '../app/images/svg/no-image.svg') {
 
-                    $emrdfk2 = $item2['id'];
-                    $valueemr2 = $item2['values'];
-                   
-                    $sama2 = 0;
-                    foreach ($EMRPASIENDETAILIMG as $emrupdate){
+                        $emrdfk2 = $item2['id'];
+                        $valueemr2 = $item2['values'];
+
                         $sama2 = 0;
-                        if ($emrupdate->emrdfk == $emrdfk2 ){
-                            $sama2 =  1;
-                            if ($emrupdate->image != $valueemr2){
-                                $sama2 =  2;
+                        foreach ($EMRPASIENDETAILIMG as $emrupdate) {
+                            $sama2 = 0;
+                            if ($emrupdate->emrdfk == $emrdfk2  && $idx == $emrupdate->index) {
+                                $sama2 =  1;
+                                if ($emrupdate->image != $valueemr2) {
+                                    $sama2 =  2;
+                                    break;
+                                }
                                 break;
                             }
-                            break;
                         }
-                    }
 
-                    if($sama2 ==  2){
-                        $EMRPasienDUpdatekeun2 = EmrFoto::where('noemrpasienfk', $norec_EMR)
-                            ->where('emrfk', $head['emrfk'])
-                            ->where('emrdfk', $emrdfk2)
-                            ->where('kdprofile',$kdProfile)
-                            ->where('statusenabled', 1)
-                            ->update([
-                                'image' => $valueemr2
-                            ]);
-                        $j2++;
-                    }
-                    $EMRD2 =[];
-                    if($sama2 ==  0){
-                        $EMRD2 = new EmrFoto();
-                        $norecD2 = $EMRD2->generateNewId();
-                        $EMRD2->norec = $norecD2;
-                        $EMRD2->kdprofile = $kdProfile;
-                        $EMRD2->statusenabled = 1;
-                        $EMRD2->noemrpasienfk = $norec_EMR;
-                        $EMRD2->image = $valueemr2;
-                        $EMRD2->emrdfk = $emrdfk2;
-                        $EMRD2->emrfk = $head['emrfk'];
-                        $EMRD2->save();
-                        $h2++;
-                    }
+                        if ($sama2 ==  2) {
+                            $EMRPasienDUpdatekeun2 = EmrFoto::where('noemrpasienfk', $norec_EMR)
+                                ->where('emrfk', $head['emrfk'])
+                                ->where('index', $idx)
+                                ->where('emrdfk', $emrdfk2)
+                                ->where('kdprofile', $kdProfile)
+                                ->where('statusenabled', 1)
+                                ->update([
+                                    'image' => $valueemr2
+                                ]);
+                            $j2++;
+                        }
+                        $EMRD2 = [];
+                        if ($sama2 ==  0) {
+                            $EMRD2 = new EmrFoto();
+                            $norecD2 = $EMRD2->generateNewId();
+                            $EMRD2->norec = $norecD2;
+                            $EMRD2->kdprofile = $kdProfile;
+                            $EMRD2->statusenabled = 1;
+                            $EMRD2->noemrpasienfk = $norec_EMR;
+                            $EMRD2->image = $valueemr2;
+                            $EMRD2->emrdfk = $emrdfk2;
+                            $EMRD2->emrfk = $head['emrfk'];
+                            $EMRD2->index = $idx;
+                            $EMRD2->save();
+                            $h2++;
+                        }
 
-                    $i2 = $i2 + 1;
-                  }
+                        $i2 = $i2 + 1;
+                    }
                 }
             }
             $transStatus = 'true';
@@ -9330,22 +9338,22 @@ class EMRController  extends ApiController
                 "status" => 201,
                 "data" => $EMR,
                 // "data2" => $EMRD,
-               "jumlah" => count($EMRPASIENDETAIL),
-               "update" => $j,
-               "new" => $h,
+                "jumlah" => count($EMRPASIENDETAIL),
+                "update" => $j,
+                "index" => $idx,
+                "new" => $h,
                 "as" => 'as@epic',
             );
-            $this->saveEMRBackup($data, $head, $norec_EMR,$kdProfile);
-
+            $this->saveEMRBackup($data, $head, $norec_EMR, $kdProfile);
         } else {
             $transMessage = $transMessage . " Gagal!!";
             DB::rollBack();
             $result = array(
                 "status" => 400,
                 "data" => $data,
-                    "e" => $e->getMessage().' '.$e->getLine(),
-//                "keys" => $keys,
-//                "dtdt" => $dtdt,
+                "e" => $e->getMessage() . ' ' . $e->getLine(),
+                //                "keys" => $keys,
+                //                "dtdt" => $dtdt,
                 "as" => 'as@epic',
             );
         }
@@ -10304,6 +10312,100 @@ class EMRController  extends ApiController
         );
 
         return $this->respond($result);
+    }
+
+    public function getEMRTransaksiDetailIndex(Request $request)
+    {
+        //todo : detail
+        $kdProfile = $this->getDataKdProfile($request);
+
+        $data = \DB::table('emrpasiend_t as emrdp')
+        ->select('emrdp.index')
+        ->where('emrdp.statusenabled', true)
+            ->where('emrdp.kdprofile', $kdProfile)
+            ->where('emrdp.emrpasienfk', $request['noemr'])
+            ->where('emrdp.emrfk', $request['emrfk'])
+            ->groupBy('emrdp.index');
+
+
+        $data = $data->get();
+        $result = array(
+            'data' => $data,
+            'message' => 'as@epic',
+        );
+        return $this->respond($result);
+    }
+
+    public function hapusEMRtransaksiDetail(Request $request)
+    {
+        $kdProfile = $this->getDataKdProfile($request);
+        $idProfile = (int) $kdProfile;
+        DB::beginTransaction();
+        try {
+            EMRPasienD::where('emrpasienfk', $request['noemr'])
+            ->where('kdprofile', $idProfile)
+                ->where('index', $request['index'])
+                ->update(
+                    ['statusenabled' => false]
+                );
+            $transStatus = 'true';
+        } catch (\Exception $e) {
+            $transStatus = 'false';
+        }
+
+        if ($transStatus == 'true') {
+            $transMessage = "Sukses";
+            DB::commit();
+            $result = array(
+                'status' => 201,
+                'message' => $transMessage,
+                'as' => 'er@epic',
+            );
+        } else {
+            $transMessage = " Gagal";
+            DB::rollBack();
+            $result = array(
+                'status' => 400,
+                'message' => $transMessage,
+                'as' => 'er@epic',
+            );
+        }
+        return $this->setStatusCode($result['status'])->respond($result, $transMessage);
+    }
+
+    public function getIcd10Secondary(Request $request)
+    {
+        $req = $request->all();
+        $icdIX = \DB::table('diagnosa_m as dg')
+        ->leftJoin('detaildiagnosapasien_t as ddp', 'ddp.objectdiagnosafk', '=', 'dg.id')
+        ->select('dg.id as value', 'dg.kddiagnosa', 'dg.namadiagnosa as text')
+        ->where('dg.statusenabled', true)
+            ->where('ddp.objectjenisdiagnosafk', '=', 2) // Jenis diagnosa secondary
+            ->orderBy('dg.kddiagnosa');
+
+        if (
+            isset($req['filter']['filters'][0]['value']) &&
+            $req['filter']['filters'][0]['value'] != "" &&
+            $req['filter']['filters'][0]['value'] != "undefined"
+        ) {
+            $icdIX = $icdIX->where('kddiagnosa', 'ilike', '%' . $req['filter']['filters'][0]['value'] . '%');
+            $icdIX = $icdIX->orwhere('namadiagnosa', 'ilike', '%' . $req['filter']['filters'][0]['value'] . '%');
+        };
+
+
+        $icdIX = $icdIX->take(10);
+        $icdIX = $icdIX->distinct();
+        $icdIX = $icdIX->get();
+
+        $dt = [];
+        foreach ($icdIX as $item) {
+            $dt[] = array(
+                'value' => $item->value,
+                'text' => $item->kddiagnosa . ' ' . $item->text,
+            );
+        }
+
+        return $this->respond($dt);
     }
 
 }
