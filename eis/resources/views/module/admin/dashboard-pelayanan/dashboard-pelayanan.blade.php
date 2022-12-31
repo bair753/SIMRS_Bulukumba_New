@@ -696,7 +696,7 @@
         setChartPerujuk()
         setChartRanap()
         setChartDiag()
-        getKecamatan(4)
+        getKecamatan(27)
         setChartDiagKec(null)
 
         function setChartTrend() {
@@ -2181,9 +2181,9 @@
             })
         }
        setTimeout(function(){
-             
+
                  window.location.reload();
-           
+
         }, 60000);
     </script>
 
