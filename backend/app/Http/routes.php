@@ -575,6 +575,8 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
           Route::get('emr/get-diagnosa-by-no-transaksi', 'EMR\EMRController@getDiagnosaByNotransaksi');
           Route::get('emr/get-resume-medis-db-lama/{notransaksi}', 'EMR\EMRController@getResumeMedisDbLama');
           Route::get('emr/get-menu-rekam-medis-dynamic-db-lama', 'EMR\EMRController@getMenuRekamMedisAtuhDbLama');
+          Route::get('emr/get-emr-transaksi-detail-index', 'EMR\EMRController@getEMRTransaksiDetailIndex');
+          Route::post('emr/hapus-emr-transaksi-index', 'EMR\EMRController@hapusEMRtransaksiDetail');
           //2019-12 penambahan arif akhir
 
           Route::post('emr/save-data-rekam-medis', 'EMR\EMRController@saveRekamMedis');
@@ -630,6 +632,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
           Route::get('emr/get-datacombo-part-bulan', 'EMR\EMRController@getDataComboBulanPart');
           Route::get('emr/get-datacombo-part-ruangan', 'EMR\EMRController@getDataComboRuanganPart');
           Route::get('emr/get-datacombo-part-diagnosa', 'EMR\EMRController@getDataComboDiagnosaPart');
+           Route::get('emr/get-datacombo-icd10-secondary', 'EMR\EMRController@getIcd10Secondary');
           Route::get('emr/get-datacombo-part-tindakan', 'EMR\EMRController@getDataComboTindakanPart');
           Route::get('emr/get-datacombo-part-dokter', 'EMR\EMRController@getDataComboDokterPart');
           Route::get('emr/get-datacombo-part-ruangan-pelayanan', 'EMR\EMRController@getDataComboRuanganPelayananPart');

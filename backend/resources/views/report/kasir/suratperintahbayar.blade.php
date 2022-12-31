@@ -153,17 +153,19 @@
                             <td width="20%"><font style="font-size: 11pt;" color="#000000">NAMA/MR</font></td>
                             <td width="80%" colspan="3"><font style="font-size: 11pt;" color="#000000">: {{ $dataReport['datas']->pasien }}</font></td>
                         </tr>
+                        @if($dataReport['datas']->type == "VA")
                         <tr>
                             <td width="20%"><font style="font-size: 11pt;" color="#000000">No. Virtual Account</font></td>
                             <td width="80%" colspan="3"><font style="font-size: 11pt;" color="#000000">: {{ $dataReport['datas']->va_number }}</font></td>
                         </tr>
                         <tr>
-                            <td width="20%"><font style="font-size: 11pt;" color="#000000">Pembayaran</font></td>
-                            <td width="80%" colspan="3"><font style="font-size: 11pt;" color="#000000">: {{ $dataReport['datas']->espayproduct_name }}</font></td>
-                        </tr>
-                        <tr>
                             <td width="20%"><font style="font-size: 11pt;" color="#000000">Batas Waktu Pembayaran</font></td>
                             <td width="80%" colspan="3"><font style="font-size: 11pt;" color="#000000">: {{ $dataReport['datas']->tanggalexpired }}</font></td>
+                        </tr>
+                        @endif
+                        <tr>
+                            <td width="20%"><font style="font-size: 11pt;" color="#000000">Pembayaran</font></td>
+                            <td width="80%" colspan="3"><font style="font-size: 11pt;" color="#000000">: {{ $dataReport['datas']->espayproduct_name }}</font></td>
                         </tr>
                         <tr>
                             <td width="20%"><font style="font-size: 11pt;" color="#000000">Banyaknya uang</font></td>
@@ -197,8 +199,9 @@
                         </tr>
                     @else
                         <tr>
-                            <td width="50%" align="center" rowspan="2">
-                                 <img src="{{ $dataReport['datas']->qr_code }}" alt="QR Payment" />
+                            <td width="50%" align="left" rowspan="2">
+                                <font style="font-size: 11pt;" color="#000000"; align="center">Silahkan Scan untuk melakukan pembayaran !</font>
+                                <img src="{{ $dataReport['datas']->qr_code }}" alt="QR Payment" />
                             </td>
                             <td width="50%" align="center"><font style="font-size: 11pt;" color="#000000">{!! $profile->namakota !!}, &nbsp;&nbsp;{{ $dataReport['datas']->tanggal }}</font></td>
                         </tr>

@@ -17096,6 +17096,141 @@
         "define": "MedifirstService"
       }
     ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuRAPT.RencanaAsuhanPasienTerintegrasi",
+    "url": "/RencanaAsuhanPasienTerintegrasi/:index/:idEMR",
+    "templateurl": "module/EMR/RencanaAsuhanPasienTerintegrasi.html",
+    "controller": "RencanaAsuhanPasienTerintegrasiCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuRAPT",
+    "url": "/MenuRAPT",
+    "templateurl": "module/EMR/MenuRAPT.html",
+    "controller": "MenuRAPTCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.RencanaAsuhanKeperawatan",
+    "url": "/RencanaAsuhanKeperawatan",
+    "templateurl": "module/EMR/RencanaAsuhanKeperawatan.html",
+    "controller": "RencanaAsuhanKeperawatanCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.ImplementasiAsuhanKeperawatan",
+    "url": "/ImplementasiAsuhanKeperawatan",
+    "templateurl": "module/EMR/ImplementasiAsuhanKeperawatan.html",
+    "controller": "ImplementasiAsuhanKeperawatanCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.RingkasanPasienMasukdanKeluarRajal",
+    "url": "/RingkasanPasienMasukdanKeluarRajal",
+    "templateurl": "module/EMR/RingkasanPasienMasukdanKeluarRajal.html",
+    "controller": "RingkasanPasienMasukdanKeluarRajalCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.PersetujuanUmumRawatJalan",
+    "url": "/PersetujuanUmumRawatJalan",
+    "templateurl": "module/EMR/PersetujuanUmumRawatJalan.html",
+    "controller": "PersetujuanUmumRawatJalanCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
   }
   
   

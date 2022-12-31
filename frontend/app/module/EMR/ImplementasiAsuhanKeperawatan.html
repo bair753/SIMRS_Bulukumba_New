@@ -1,0 +1,98 @@
+<style type="text/css">
+    fieldset {
+        border-radius: 5px;
+        border: 1px solid #228be6;
+    }
+
+    .k-slider-horizontal {
+        display: inline-block;
+        float: left;
+        width: 450px;
+
+        height: 26px;
+
+
+    }
+
+    .k-slider {
+
+        margin-left: 3%;
+        margin-right: 3%;
+        margin-top: 1%;
+        margin-bottom: 5%;
+        display: inline-block;
+    }
+
+    .activeBtn {
+        background-color: #10c4b2;
+        color: #ffffff;
+    }
+    table,
+    th,
+    td {
+        border: 1px solid #929191;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+    td {
+        padding: 5px;
+        text-align: left;
+    }
+    th {
+        padding: 5px;
+        text-align: center;
+    }
+    .clicks {
+        cursor: pointer;
+    }
+</style>
+
+ <!-- ng-class="{'my-disable':true}" -->
+<!-- <div class="grid_12"  disable-contents="allDisabled" id="form"> -->
+<div class="grid_12">
+    <div class="grid_12">
+        <div class="panel panel-default container_12">
+            <div class="panel-heading" c-translate>Implementasi Asuhan Keperawatan</div>
+        </div>
+
+        <div class="grid_12" style="margin-top: 10px;">
+            <fieldset style="margin-top: 10px;">
+                <div class="grid_12" style="margin-top: 20px;">
+                    <table>
+                        <tr>
+                            <th style="text-align: center;width: 250px">Tanggal/Jam</th>
+                            <th>Implementasi</th>
+                            <th style="text-align: center;width: 250px">Paraf dan Nama</th>
+                            <th style="width: 20px;"></th>
+                        </tr>
+                        <tr ng-repeat="(index, data) in listItemREV">
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[422550]" ng-disabled="item.obj2[422550]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <textarea style="width: 100%;height: 200px" cols="6" rows="5" c-text-area type="input" filter="'string'" class="k-textbox" ng-model="item.obj[422551]" ng-disabled="item.obj2[422551]"></textarea>
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[422552]" ng-disabled="item.obj2[422552]" k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <div class="grid_12" style="margin-top:20px" ng-show="show">
+                                    <label ng-click="tambah()" class="clicks"><img src="stylesheets/Addd.png" width="25" alt="Picture"></label>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </fieldset>
+        </div>
+
+    </div>
+</div>
+
+<br />
+<br />
+<div class="grid_12">
+    <div ng-include='"../app/module/EMR/TemplateButtonDinamis" '></div>
+
+</div>

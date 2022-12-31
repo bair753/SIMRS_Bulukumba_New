@@ -3065,6 +3065,30 @@
         {
             "nameDep": "HasilLaboratoriumRuanganCtrl",
             "urlDep": "module/Laboratorium/HasilLaboratoriumRuanganCtrl"
+        },
+        {
+            "nameDep": "RencanaAsuhanPasienTerintegrasiCtrl",
+            "urlDep": "module/EMR/RencanaAsuhanPasienTerintegrasiCtrl"
+        },
+        {
+            "nameDep": "MenuRAPTCtrl",
+            "urlDep": "module/EMR/MenuRAPTCtrl"
+        },
+        {
+            "nameDep": "RencanaAsuhanKeperawatanCtrl",
+            "urlDep": "module/EMR/RencanaAsuhanKeperawatanCtrl"
+        },
+        {
+            "nameDep": "ImplementasiAsuhanKeperawatanCtrl",
+            "urlDep": "module/EMR/ImplementasiAsuhanKeperawatanCtrl"
+        },
+        {
+            "nameDep": "RingkasanPasienMasukdanKeluarRajalCtrl",
+            "urlDep": "module/EMR/RingkasanPasienMasukdanKeluarRajalCtrl"
+        },
+        {
+            "nameDep": "PersetujuanUmumRawatJalanCtrl",
+            "urlDep": "module/EMR/PersetujuanUmumRawatJalanCtrl"
         }
     ]
 }
