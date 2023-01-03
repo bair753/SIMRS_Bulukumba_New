@@ -387,8 +387,9 @@ define(['initialize'], function (initialize) {
                     for (let j = 0; j < $scope.listItem.length; j++) {
                         const element2 = $scope.listItem[j];
                         if (element2.inuse == undefined) {
-                            $scope.item.obj[parseInt(element2.id)] = new Date()
-                            saveTosDipake(element2.id)
+                            $scope.item.obj[parseInt(element2.id)] = new Date();
+                            element2.inuse = true;
+                            saveTosDipake(element2.id);
                             break
                         }
                     }

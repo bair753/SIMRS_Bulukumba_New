@@ -396,6 +396,7 @@ define(['initialize'], function (initialize) {
                         const element2 = $scope.listItem[j];
                         if (element2.inuse == undefined) {
                             $scope.item.obj[parseInt(element2.id)] = new Date()
+                            element2.inuse = true
                             saveTosDipake(element2.id)
                             break
                         }
