@@ -3101,6 +3101,10 @@
         {
             "nameDep": "CPPTRanapCtrl",
             "urlDep": "module/EMR/CPPTRanapCtrl"
+        },
+        {
+            "nameDep": "PemberianEdukasiPasienCtrl",
+            "urlDep": "module/EMR/PemberianEdukasiPasienCtrl"
         }
     ]
 }
