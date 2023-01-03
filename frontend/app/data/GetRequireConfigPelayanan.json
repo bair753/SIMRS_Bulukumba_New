@@ -3089,6 +3089,18 @@
         {
             "nameDep": "PersetujuanUmumRawatJalanCtrl",
             "urlDep": "module/EMR/PersetujuanUmumRawatJalanCtrl"
+        },
+        {
+            "nameDep": "PermintaanPemeriksaanPenunjangRanapCtrl",
+            "urlDep": "module/EMR/PermintaanPemeriksaanPenunjangRanapCtrl"
+        },
+        {
+            "nameDep": "HasilLaboratoriumCtrl",
+            "urlDep": "module/EMR/HasilLaboratoriumCtrl"
+        },
+        {
+            "nameDep": "CPPTRanapCtrl",
+            "urlDep": "module/EMR/CPPTRanapCtrl"
         }
     ]
 }

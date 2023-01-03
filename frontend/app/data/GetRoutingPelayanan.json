@@ -17231,6 +17231,75 @@
         "define": "RekamMedisCtrl"
       }
     ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.PermintaanPemeriksaanPenunjangRanap",
+    "url": "/PermintaanPemeriksaanPenunjangRanap",
+    "templateurl": "module/EMR/PermintaanPemeriksaanPenunjangRanap.html",
+    "controller": "PermintaanPemeriksaanPenunjangRanapCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.HasilLaboratorium",
+    "url": "/HasilLaboratorium",
+    "templateurl": "module/EMR/HasilLaboratorium.html",
+    "controller": "HasilLaboratoriumCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.CPPTRanap",
+    "url": "/CPPTRanap",
+    "templateurl": "module/EMR/CPPTRanap.html",
+    "controller": "CPPTRanapCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
   }
   
   
