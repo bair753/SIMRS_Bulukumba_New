@@ -430,6 +430,7 @@
                 height: 55,
                 width: 55
             });
+            window.print()
         });
     })
 </script>
