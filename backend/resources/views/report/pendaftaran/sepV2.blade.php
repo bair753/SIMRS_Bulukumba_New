@@ -3,9 +3,15 @@
     <title>
         Report
     </title>
-    <link href="{{ asset('service/css/style.css') }}" rel="stylesheet">
-    <script src="{{ asset('js/jquery.min.js') }}"></script>
-    <script src="{{ asset('js/jquery.qr-code.js') }}"></script>
+    @if(stripos(\Request::url(), 'localhost') !== FALSE)
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+        <script src="{{ asset('js/jquery.min.js') }}"></script>
+        <script src="{{ asset('js/jquery.qr-code.js') }}"></script>
+    @else
+        <link href="{{ asset('service/css/style.css') }}" rel="stylesheet">
+        <script src="{{ asset('service/js/jquery.min.js') }}"></script>
+        <script src="{{ asset('service/js/jquery.qr-code.js') }}"></script>
+    @endif
 </head>
 <style type="text/css" media="print">
     @media print
@@ -47,7 +53,11 @@
                         <tr>
                             <td width="20%">
                                 <p align="left">
+                                @if(stripos(\Request::url(), 'localhost') !== FALSE)
                                     <img src="{{ asset('img/logo_bpjs.png') }}" style="width: 200px" border="0"/>
+                                @else
+                                    <img src="{{ asset('service/img/logo_bpjs.png') }}" style="width: 200px" border="0"/>
+                                @endif
                                 </p>
                             </td>
                             <td width="80%">
@@ -283,7 +293,11 @@
                     <table cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" width="100%">
                         <tr>
                             <td width="30%" align="left">
-                                <img src="{{ asset('img/logo_bpjs.png') }}" style="width: 200px" border="0"/>
+                                @if(stripos(\Request::url(), 'localhost') !== FALSE)
+                                    <img src="{{ asset('img/logo_bpjs.png') }}" style="width: 200px" border="0"/>
+                                @else
+                                    <img src="{{ asset('service/img/logo_bpjs.png') }}" style="width: 200px" border="0"/>
+                                @endif
                             </td>
                             <td width="40%" align="left">
                                 <font style="font-size: 11pt;font-weight:bold" color="#000000" face="Tahoma">SURAT PERINTAH RAWAT INAP</font><br>
