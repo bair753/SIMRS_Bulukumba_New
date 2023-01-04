@@ -2681,6 +2681,8 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
         Route::get('report/cetak-antrian','Report\ReportController@cetakAntrianKiosk');
         Route::get('report/cetak-bukti-pendaftaran','Report\ReportController@cetakBuktiPendaftaran');
         Route::get('report/cetak-sep','Report\ReportController@cetakSEP');
+        Route::get('report/cetak-sep-new','Report\ReportController@cetakSEPV2');
+        Route::get('report/ttd-digital/{noregistrasi}/{type}','Report\ReportController@ttdDigital');
         Route::get('report/cetak-anggaran','Report\ReportController@cetakRbaAnggaran_2021');
         Route::get('report/cetak-neraca','Report\ReportController@cetakNeraca');
         Route::get('report/cetak-labarugi','Report\ReportController@cetakLabaRugi');
