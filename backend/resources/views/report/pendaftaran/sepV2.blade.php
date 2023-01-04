@@ -300,8 +300,8 @@
                                 @endif
                             </td>
                             <td width="40%" align="left">
-                                <font style="font-size: 11pt;font-weight:bold" color="#000000" face="Tahoma">SURAT PERINTAH RAWAT INAP</font><br>
-                                <font style="font-size: 11pt;font-weight:bold" color="#000000" face="Tahoma">RSUD H.A SULTHAN DG. RADJA</font><br>
+                                <font style="font-size: 11pt;" color="#000000" face="Tahoma">SURAT PERINTAH RAWAT INAP</font><br>
+                                <font style="font-size: 11pt;" color="#000000" face="Tahoma">RSUD H.A SULTHAN DG. RADJA</font><br>
                             </td>
                             <td width="30%" align="left">
                                 <font style="font-size: 10pt;" color="#000000" face="Tahoma">No. {{ $dataReport['spri']->nosuratkontrol }}</font><br>
