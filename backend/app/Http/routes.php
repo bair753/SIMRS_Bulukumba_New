@@ -628,6 +628,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
           // Route::post('emr/save-emr-dinamis', 'EMR\EMRController@SaveTransaksiEMR');
           Route::get('emr/get-emr-transaksi', 'EMR\EMRController@getEMRTransaksiRiwayat');
           Route::get('emr/get-emr-transaksi-detail', 'EMR\EMRController@getEMRTransaksiDetail');
+          Route::get('emr/get-datacombo-part-obat', 'EMR\EMRController@getDataComboPartObat');
           Route::get('emr/get-datacombo-part-pegawai', 'EMR\EMRController@getDataComboPegawaiPart');
           Route::get('emr/get-datacombo-part-bulan', 'EMR\EMRController@getDataComboBulanPart');
           Route::get('emr/get-datacombo-part-ruangan', 'EMR\EMRController@getDataComboRuanganPart');
@@ -2681,8 +2682,6 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
         Route::get('report/cetak-antrian','Report\ReportController@cetakAntrianKiosk');
         Route::get('report/cetak-bukti-pendaftaran','Report\ReportController@cetakBuktiPendaftaran');
         Route::get('report/cetak-sep','Report\ReportController@cetakSEP');
-        Route::get('report/cetak-sep-new','Report\ReportController@cetakSEPV2');
-        Route::get('report/ttd-digital/{noregistrasi}/{type}','Report\ReportController@ttdDigital');
         Route::get('report/cetak-anggaran','Report\ReportController@cetakRbaAnggaran_2021');
         Route::get('report/cetak-neraca','Report\ReportController@cetakNeraca');
         Route::get('report/cetak-labarugi','Report\ReportController@cetakLabaRugi');

@@ -1,0 +1,465 @@
+<style type="text/css">
+    fieldset {
+        border-radius: 5px;
+        border: 1px solid #228be6;
+    }
+
+    fieldset legend a {
+        padding: 0.571em 1em;
+        border: 1px solid #c8c8c8;
+        color: #333333;
+        background-color: #f4f4f4;
+        -moz-border-radius: 3px;
+        -webkit-border-radius: 3px;
+        border-radius: 3px;
+        -moz-transition: background-color 0.2s;
+        -o-transition: background-color 0.2s;
+        -webkit-transition: background-color 0.2s;
+        transition: background-color 0.2s;
+    }
+
+    fieldset legend a .fieldset-toggler {
+        float: none;
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 0.5em;
+        color: #848484;
+    }
+
+    fieldset .fieldset-toggleable legend a:hover {
+        background-color: #dbdbdb;
+        border: 1px solid #dbdbdb;
+        color: #333333;
+    }
+
+    .warnaa {
+        color: #848484;
+    }
+
+    fieldset .fieldset-toggleable .fieldset-legend a:hover .fieldset-toggler {
+        color: #333333;
+    }
+
+    md-checkbox {
+        box-sizing: border-box;
+        display: inline-block;
+        margin-bottom: 0;
+        white-space: nowrap;
+        cursor: pointer;
+        outline: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        position: relative;
+        min-width: 20px;
+        min-height: 20px;
+        margin-left: 0;
+        margin-right: 10px;
+    }
+
+
+	.demo22:empty {
+    margin: auto;
+		width: 500px;
+		height: 200px; /* change height to see repeat-y behavior */
+    
+		background-image:
+				linear-gradient( lightgray 20px, transparent 0 ),
+			linear-gradient( 100deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 80% ),
+			linear-gradient( lightgray 20px, transparent 0 ),
+			linear-gradient( lightgray 20px, transparent 0 ),
+			linear-gradient( lightgray 20px, transparent 0 ),
+			linear-gradient( lightgray 20px, transparent 0 );
+
+		background-repeat: repeat-y;
+
+		background-size:
+			50px 100px, /* circle */
+			50px 200px, /* highlight */
+			150px 200px,
+			350px 200px,
+			350px 200px,
+			350px 200px;
+
+		background-position:
+			0 0, /* circle */
+			0 0, /* highlight */
+			120px 0,
+			120px 40px,
+			120px 80px,
+			120px 120px;
+
+		animation: shine 1s infinite;
+	}
+
+	@keyframes shine {
+		to {
+			background-position:
+				0 0,
+				100% 0, /* move highlight to right */
+				120px 0,
+				120px 40px,
+				120px 80px,
+				120px 120px;
+		}
+	}
+
+    .k-slider-horizontal {
+        display: inline-block;
+        float: left;
+        width: 450px;
+
+        height: 26px;
+
+
+    }
+
+    .k-slider {
+
+        margin-left: 3%;
+        margin-right: 3%;
+        margin-top: 1%;
+        margin-bottom: 5%;
+        display: inline-block;
+    }
+
+    .activeBtn {
+        background-color: #10c4b2;
+        color: #ffffff;
+    }
+    table,
+    th,
+    td {
+        border: 1px solid #929191;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+
+    th,
+    td {
+        padding: 5px;
+        text-align: left;
+    }
+</style>
+
+ <!-- ng-class="{'my-disable':true}" -->
+<!-- <div class="grid_12"  disable-contents="allDisabled" id="form"> -->
+<div class="grid_12">
+    <div class="grid_12">
+        <div class="panel panel-default container_12">
+            <div class="panel-heading" c-translate>Rekonsiliasi Obat</div>
+        </div>
+
+        <div class="grid_12" style="margin-top: 15px;">
+            <div class="panel panel-default container_12">
+                <div class="panel-heading" style="font-size: 12px;"><span>I. Saat Masuk</span>
+                    <span class="icon fa fa-chevron-circle-up" ng-show="!isSaatMasuk" style="right:10px" ng-click="showSaatMasuk()"></span>
+                    <span class="icon fa fa-chevron-circle-down" ng-show="isSaatMasuk" style="right:10px" ng-click="showSaatMasuk()"></span>
+                </div>
+                <div class="panel-body" ng-show="isSaatMasuk">
+                    <div class="grid_12" style="margin-top: 15px;">
+                        <table>
+                            <tr>
+                                <th style="width: 200px;">Nama Obat</th>
+                                <th style="width: 200px;">Dosis</th>
+                                <th style="width: 200px;">Frekuensi</th>
+                                <th style="width: 200px;">Cara Pemberian</th>
+                                <th style="width: 200px;">Tindak Lanjut Dokter Penerima</th>
+                                <th style="width: 200px;">Perubahan Aturan Pakai</th>
+                            </tr>
+                            <tr ng-repeat="list in listSaatMasuk | orderBy:'id'" style="margin-top: 10px;">
+                                <td>
+                                    <div class="grid_12" ng-repeat="jawab in list.namaobat">
+                                        <div ng-switch on="jawab.type">
+                                            <div class="grid_12" ng-switch-when="combobox">
+                                                <div class="grid_12 parentKeteranganFieldTambahan" style="margin-top: -10px;">
+                                                    <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[jawab.id]" k-data-text-field="'text'"
+                                                        k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                                        k-data-source="{{ jawab.dataList }}" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="grid_12" ng-repeat="jawab in list.dosis">
+                                        <div ng-switch on="jawab.type">
+                                            <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                                <div class="grid_12 parentKeteranganFieldTambahan" style="margin-top: -10px;">
+                                                    <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text" placeholder="{{jawab.caption}}" ng-value="{{jawab.value}}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="grid_12" ng-repeat="jawab in list.frekuensi">
+                                        <div ng-switch on="jawab.type">
+                                            <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                                <div class="grid_12 parentKeteranganFieldTambahan" style="margin-top: -10px;">
+                                                    <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text" placeholder="{{jawab.caption}}"
+                                                        ng-value="{{jawab.value}}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="grid_12" ng-repeat="jawab in list.carapemberian">
+                                        <div ng-switch on="jawab.type">
+                                            <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                                <div class="grid_12 parentKeteranganFieldTambahan" style="margin-top: -10px;">
+                                                    <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text" placeholder="{{jawab.caption}}"
+                                                        ng-value="{{jawab.value}}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="grid_12" ng-repeat="jawab in list.tindaklanjut">
+                                        <div ng-switch on="jawab.type">
+                                            <div class="grid_12" ng-switch-when="checkbox" style="margin-top: 5px;">
+                                                <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}" ng-model="item.obj[jawab.id]">
+                                                <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                                    &nbsp;{{jawab.nama}}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="grid_12" ng-repeat="jawab in list.perubahan">
+                                        <div ng-switch on="jawab.type">
+                                            <div class="grid_12" ng-switch-when="textarea">
+                                                <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox" ng-model="item.obj[jawab.id]"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid_12" style="margin-top: 15px;">
+            <div class="panel panel-default container_12">
+                <div class="panel-heading" style="font-size: 12px;"><span>II. Saat Transfer</span>
+                    <span class="icon fa fa-chevron-circle-up" ng-show="!isSaatTransfer" style="right:10px"
+                        ng-click="showSaatTransfer()"></span>
+                    <span class="icon fa fa-chevron-circle-down" ng-show="isSaatTransfer" style="right:10px"
+                        ng-click="showSaatTransfer()"></span>
+                </div>
+                <div class="panel-body" ng-show="isSaatTransfer">
+                    <div class="grid_12" style="margin-top: 15px;">
+                        <table>
+                            <tr>
+                                <th style="width: 200px;">Nama Obat</th>
+                                <th style="width: 200px;">Dosis</th>
+                                <th style="width: 200px;">Frekuensi</th>
+                                <th style="width: 200px;">Cara Pemberian</th>
+                                <th style="width: 200px;">Tindak Lanjut Dokter Penerima</th>
+                                <th style="width: 200px;">Perubahan Aturan Pakai</th>
+                            </tr>
+                            <tr ng-repeat="list in listSaatTransfer | orderBy:'id'" style="margin-top: 10px;">
+                                <td>
+                                    <div class="grid_12" ng-repeat="jawab in list.namaobat">
+                                        <div ng-switch on="jawab.type">
+                                            <div class="grid_12" ng-switch-when="combobox">
+                                                <div class="grid_12 parentKeteranganFieldTambahan" style="margin-top: -10px;">
+                                                    <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[jawab.id]"
+                                                        k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'"
+                                                        k-auto-bind="false" k-data-source="{{ jawab.dataList }}" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="grid_12" ng-repeat="jawab in list.dosis">
+                                        <div ng-switch on="jawab.type">
+                                            <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                                <div class="grid_12 parentKeteranganFieldTambahan" style="margin-top: -10px;">
+                                                    <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text"
+                                                        placeholder="{{jawab.caption}}" ng-value="{{jawab.value}}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="grid_12" ng-repeat="jawab in list.frekuensi">
+                                        <div ng-switch on="jawab.type">
+                                            <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                                <div class="grid_12 parentKeteranganFieldTambahan" style="margin-top: -10px;">
+                                                    <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text"
+                                                        placeholder="{{jawab.caption}}" ng-value="{{jawab.value}}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="grid_12" ng-repeat="jawab in list.carapemberian">
+                                        <div ng-switch on="jawab.type">
+                                            <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                                <div class="grid_12 parentKeteranganFieldTambahan" style="margin-top: -10px;">
+                                                    <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text"
+                                                        placeholder="{{jawab.caption}}" ng-value="{{jawab.value}}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="grid_12" ng-repeat="jawab in list.tindaklanjut">
+                                        <div ng-switch on="jawab.type">
+                                            <div class="grid_12" ng-switch-when="checkbox" style="margin-top: 5px;">
+                                                <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}" ng-model="item.obj[jawab.id]">
+                                                <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                                    &nbsp;{{jawab.nama}}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="grid_12" ng-repeat="jawab in list.perubahan">
+                                        <div ng-switch on="jawab.type">
+                                            <div class="grid_12" ng-switch-when="textarea">
+                                                <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                                                    ng-model="item.obj[jawab.id]"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid_12" style="margin-top: 15px;">
+            <div class="panel panel-default container_12">
+                <div class="panel-heading" style="font-size: 12px;"><span>III. Saat Keluar</span>
+                    <span class="icon fa fa-chevron-circle-up" ng-show="!isSaatKeluar" style="right:10px"
+                        ng-click="showSaatKeluar()"></span>
+                    <span class="icon fa fa-chevron-circle-down" ng-show="isSaatKeluar" style="right:10px"
+                        ng-click="showSaatKeluar()"></span>
+                </div>
+                <div class="panel-body" ng-show="isSaatKeluar">
+                    <div class="grid_12" style="margin-top: 15px;">
+                        <table>
+                            <tr>
+                                <th style="width: 200px;">Nama Obat</th>
+                                <th style="width: 200px;">Dosis</th>
+                                <th style="width: 200px;">Frekuensi</th>
+                                <th style="width: 200px;">Cara Pemberian</th>
+                                <th style="width: 200px;">Tindak Lanjut Dokter Penerima</th>
+                                <th style="width: 200px;">Perubahan Aturan Pakai</th>
+                            </tr>
+                            <tr ng-repeat="list in listSaatKeluar | orderBy:'id'" style="margin-top: 10px;">
+                                <td>
+                                    <div class="grid_12" ng-repeat="jawab in list.namaobat">
+                                        <div ng-switch on="jawab.type">
+                                            <div class="grid_12" ng-switch-when="combobox">
+                                                <div class="grid_12 parentKeteranganFieldTambahan" style="margin-top: -10px;">
+                                                    <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[jawab.id]"
+                                                        k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'"
+                                                        k-auto-bind="false" k-data-source="{{ jawab.dataList }}" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="grid_12" ng-repeat="jawab in list.dosis">
+                                        <div ng-switch on="jawab.type">
+                                            <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                                <div class="grid_12 parentKeteranganFieldTambahan" style="margin-top: -10px;">
+                                                    <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text"
+                                                        placeholder="{{jawab.caption}}" ng-value="{{jawab.value}}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="grid_12" ng-repeat="jawab in list.frekuensi">
+                                        <div ng-switch on="jawab.type">
+                                            <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                                <div class="grid_12 parentKeteranganFieldTambahan" style="margin-top: -10px;">
+                                                    <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text"
+                                                        placeholder="{{jawab.caption}}" ng-value="{{jawab.value}}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="grid_12" ng-repeat="jawab in list.carapemberian">
+                                        <div ng-switch on="jawab.type">
+                                            <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                                <div class="grid_12 parentKeteranganFieldTambahan" style="margin-top: -10px;">
+                                                    <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text"
+                                                        placeholder="{{jawab.caption}}" ng-value="{{jawab.value}}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="grid_12" ng-repeat="jawab in list.tindaklanjut">
+                                        <div ng-switch on="jawab.type">
+                                            <div class="grid_12" ng-switch-when="checkbox" style="margin-top: 5px;">
+                                                <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}" ng-model="item.obj[jawab.id]">
+                                                <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                                    &nbsp;{{jawab.nama}}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="grid_12" ng-repeat="jawab in list.perubahan">
+                                        <div ng-switch on="jawab.type">
+                                            <div class="grid_12" ng-switch-when="textarea">
+                                                <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                                                    ng-model="item.obj[jawab.id]"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid_12" style="margin-top: 15px;">
+            <div class="grid_8"></div>
+            <div class="grid_4">
+                <div class="grid_12">
+                    <label c-label item="item">Yang Melakukan Rekonsiliasi Obat</label>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_12">
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[423620]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                            k-data-source="listPegawai" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<br />
+<br />
+<div class="grid_12">
+    <div ng-include='"../app/module/EMR/TemplateButtonDinamis" '></div>
+
+</div>
