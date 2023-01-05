@@ -394,58 +394,63 @@
             "url": "https://tinyurl.com/api-create.php?url=" + APP_URL + "{{ $dataReport['suratJaminan']->noregistrasi }}" + "/pasien",
             "method": "GET",
             "timeout": 0,
-        }).done(function (response) {
-            $('#qrSEP').qrcode({
-                text: response,
-                height: 55,
-                width: 55
-            });
-        });
+            "success": function(response) {
+                $('#qrSEP').qrcode({
+                    text: response,
+                    height: 55,
+                    width: 55
+                });
+            }
+        })
         $.ajax({
             "url": "https://tinyurl.com/api-create.php?url=" + APP_URL + "{{ $dataReport['suratJaminan']->noregistrasi }}" + "/pasien",
             "method": "GET",
             "timeout": 0,
-        }).done(function (response) {
-            $('#qrSJPPasien').qrcode({
-                text: response,
-                height: 55,
-                width: 55
-            });
-        });
+            "success": function(response) {
+                $('#qrSJPPasien').qrcode({
+                    text: response,
+                    height: 55,
+                    width: 55
+                });
+            }
+        })
         $.ajax({
             "url": "https://tinyurl.com/api-create.php?url=" + APP_URL + "{{ $dataReport['suratJaminan']->noregistrasi }}" + "/dokter",
             "method": "GET",
             "timeout": 0,
-        }).done(function (response) {
-            $('#qrSJPDokter').qrcode({
-                text: response,
-                height: 55,
-                width: 55
-            });
-        });
+            "success": function(response) {
+                $('#qrSJPDokter').qrcode({
+                    text: response,
+                    height: 55,
+                    width: 55
+                });
+            }
+        })
         $.ajax({
             "url": "https://tinyurl.com/api-create.php?url=" + APP_URL + "{{ $dataReport['suratJaminan']->noregistrasi }}" + "/rs",
             "method": "GET",
             "timeout": 0,
-        }).done(function (response) {
-            $('#qrSJPRS').qrcode({
-                text: response,
-                height: 55,
-                width: 55
-            });
-        });
+            "success": function(response) {
+                $('#qrSJPRS').qrcode({
+                    text: response,
+                    height: 55,
+                    width: 55
+                });
+            }
+        })
         $.ajax({
             "url": "https://tinyurl.com/api-create.php?url=" + APP_URL + "{{ $dataReport['suratJaminan']->noregistrasi }}" + "/spri",
             "method": "GET",
             "timeout": 0,
-        }).done(function (response) {
-            $('#qrSPRI').qrcode({
-                text: response,
-                height: 55,
-                width: 55
-            });
-            window.print()
-        });
+            "success": function(response) {
+                $('#qrSPRI').qrcode({
+                    text: response,
+                    height: 55,
+                    width: 55
+                });
+                window.print()
+            }
+        })
     })
 </script>
 </html>
