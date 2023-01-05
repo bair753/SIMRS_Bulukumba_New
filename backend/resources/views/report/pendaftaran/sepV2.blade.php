@@ -45,7 +45,8 @@
 {{-- onLoad="window.print()" --}}
 <body style="background-color: #CCCCCC;margin: 0">
 <div align="left">
-    <table class="bayangprint" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0" width="{{$pageWidth}}">
+{{-- class="bayangprint" --}}
+    <table cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0" width="{{$pageWidth}}">
         <tbody>
             <tr>
                 <td style="padding:10px 30px 0px 30px;">
@@ -448,7 +449,7 @@
                     height: 55,
                     width: 55
                 });
-                window.print()
+                setTimeout(function(){ window.print() }, 1000);
             }
         })
     })
