@@ -85,8 +85,6 @@ body .ui-steps.steps-custom .ui-steps-item .ui-steps-title {
   -webkit-border-radius: 0px;
   border-radius: 5px;
   background: #f5f5f5;
-  // background: #ffffff;
-  //    border: #555555 1px solid;
   -moz-box-shadow: 0 0 4px 0 rgba(10, 27, 102, 0.418);
   -webkit-box-shadow: 0 0 4px 0 rgba(10, 27, 102, 0.418);
   box-shadow: 0 0 4px 0 rgba(10, 27, 102, 0.418);
@@ -100,23 +98,7 @@ body .ui-steps.steps-custom .ui-steps-item .ui-steps-title {
   background: #f5f5f5
 }
 
-//  .example-card:focus {
-//     // border: 1px solid #C9A8FD;
-//     outline: 0;
-//     -webkit-box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-//     -moz-box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-//     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-//     /* outline: 0 none; */
-//     background-color: #985edb; }
-// .example-card:active {
-//     // border: 1px solid #C9A8FD;
-//     outline: 0;
-//     -webkit-box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-//     -moz-box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-//     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-//     /* outline: 0 none; */
-//     background-color: #985edb; }
-
+ 
 .poliklinik-card {
   max-width: 100px;
   max-height: 100px;
@@ -167,4 +149,39 @@ body .ui-menu-close-item {
   -ms-transform: scale(3); /* IE 9 */
   -webkit-transform: scale(3); /* Safari 3-8 */
   transform: scale(3); 
+}
+.ui-button-icon-only .fa {
+  top: 50%;
+  left: 50%;
+  margin-top: -0.5em;
+  margin-left: -0.6em;
+}
+.ui-button-icon-only .fa, .ui-button-text-icon-left .fa, .ui-button-text-icon-right .fa {
+  position: absolute;
+  top: 50%;
+  margin-top: -0.5em;
+}
+body .ui-fluid .ui-button-icon-only {
+  /* width: auto; */
+  width: 2.357rem;
+  padding: 0.5rem 0;
+}
+
+.fa-fw {
+  width: 1.28571429em;
+  text-align: center;
+}
+.fa {
+  display: inline-block;
+  font: 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.ui-button-icon-left {
+  left: 0.5em;
+}
+.ui-widget, .ui-widget * {
+  box-sizing: border-box;
 }

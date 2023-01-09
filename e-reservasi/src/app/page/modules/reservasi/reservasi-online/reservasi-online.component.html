@@ -145,8 +145,8 @@
                 </mat-form-field> -->
                 </div>
               </div>
-              <div class="ui-g-12 ui-md-12 ui-lg-12">
-                <div class="ui-g-12 ui-md-12 ui-lg-3">
+              <div class="ui-g-12 ui-md-12 ui-lg-3">
+                <div class="ui-g-12 ui-md-12 ui-lg-12">
                   <mat-form-field appearance="fill">
                     <mat-label>No Telpon</mat-label>
                     <input matInput placeholder="No Telpon" formControlName="noTelpon">
@@ -154,11 +154,21 @@
                   </mat-form-field>
                 </div>
               </div>
+              <div class="ui-g-12 ui-md-12 ui-lg-6">
+                <div class="ui-g-12 ui-md-12 ui-lg-12">
+                  <mat-form-field appearance="fill">
+                    <mat-label>Alamat</mat-label>
+                    <input matInput placeholder="Desa, RT/RW, Kelurahan, Kecamatan, Kabupaten, Propinsi"
+                      formControlName="alamatLengkap">
+                    <mat-icon matSuffix>home</mat-icon>
+                  </mat-form-field>
+                </div>
+              </div>
             </div>
             <div class="ui-g-12" *ngIf="isLama">
               <div class="ui-g-12 ui-md-12 ui-lg-12">
                 <mat-form-field appearance="fill">
-                  <mat-label>No RM / NIK</mat-label>
+                  <mat-label>No RM atau NIK</mat-label>
                   <input matInput placeholder="No RM / NIK" formControlName="noCm">
                   <button mat-button *ngIf="formGroup.get('noCm').value" matSuffix mat-icon-button aria-label="Clear"
                     (click)="formGroup.get('noCm').setValue('')">
@@ -215,7 +225,6 @@
                 placeholder="Tgl Reservasi" formControlName="tglReservasi" (dateChange)="getSlotTgl( $event)">
               <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
               <mat-datepicker #dp3 disabled="false"></mat-datepicker>
-              <mat-hint>Mohon Pilih Dulu Tanggal Reservasi</mat-hint>
             </mat-form-field>
             <!-- <mat-form-field>
               <input matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate"  placeholder="Tgl Reservasi"
@@ -227,7 +236,7 @@
           <div class="ui-g-12 ui-md-12 ui-lg-3">
             <mat-form-field appearance="fill">
               <mat-label>Poliklinik </mat-label>
-              <mat-select formControlName="poliKlinik" (selectionChange)="getSlotRu($event)" [disabled]="!formGroup.get('tglReservasi').value">
+              <mat-select formControlName="poliKlinik" (selectionChange)="getSlotRu($event)">
                 <mat-option *ngFor="let ruang of listRuangan" [value]="ruang">
                   {{ruang.namaruangan}}
                 </mat-option>
@@ -253,7 +262,7 @@
           <div class="ui-g-12 ui-md-12 ui-lg-3">
             <mat-form-field appearance="fill">
               <mat-label>Dokter </mat-label>
-              <mat-select formControlName="dokter" (selectionChange)="getSlotDok($event)" [disabled]="!formGroup.get('poliKlinik').value">
+              <mat-select formControlName="dokter" (selectionChange)="getSlotDok($event)">
                 <mat-option *ngFor="let dok of listDokter" [value]="dok">
                   {{dok.namalengkap}}
                 </mat-option>
@@ -277,7 +286,7 @@
           <div class="ui-g-12 ui-md-12 ui-lg-3">
             <mat-form-field appearance="fill">
               <mat-label>Jam Reservasi </mat-label>
-              <mat-select formControlName="jamReservasi" [disabled]="!formGroup.get('dokter').value">
+              <mat-select formControlName="jamReservasi" (selectionChange)="setJam($event)">
                 <mat-option *ngFor="let jam of listJam" [value]="jam" [disabled]="jam.disable">
                   {{jam.jam}}
                 </mat-option>
@@ -289,7 +298,7 @@
           <div class="ui-g-12 ui-md-12 ui-lg-3">
             <mat-form-field appearance="fill">
               <mat-label>Tipe Pembayaran </mat-label>
-              <mat-select formControlName="tipePembayaran" (selectionChange)="changeTipeBayar($event)" [disabled]="!formGroup.get('jamReservasi').value">
+              <mat-select formControlName="tipePembayaran" (selectionChange)="changeTipeBayar($event)">
                 <mat-option *ngFor="let tipe of listTipePembayaran" [value]="tipe">
                   {{tipe.kelompokpasien}}
                 </mat-option>
@@ -633,16 +642,26 @@
                   [rowsPerPageOptions]="[5,10,20]" selectionMode="single" [(selection)]="selected"
                   [loading]="loadingHistory" loadingIcon="fa fa-spinner" (onRowSelect)="onRowSelect($event)"
                   scrollable="true" expandableRows="true">
-
-                  <p-column field="tanggalreservasi" header="Tanggal" [sortable]="true"></p-column>
-                  <p-column field="namaruangan" header="Poliklinik" [sortable]="true"></p-column>
-                  <p-column field="dokter" header="Dokter" [sortable]="true"></p-column>
-                  <p-column [style]="{'min-width':'100px','width':'100px'}">
+                  <p-column [style]="{'min-width':'50px','width':'50px'}">
                     <ng-template let-h="rowData" pTemplate="body">
-                      <button pButton type="button" (click)="cetakHistory(h)" icon="fa-print" label="Cetak"
+                      <button pButton type="button" (click)="cetakHistory(h)" icon="fa-print"
                         pTooltip="Lihat Bukti Reservasi" tooltipPosition="top"></button>
-                      <!-- <button pButton type="button" (click)="hapusHistory(h)" icon="fa-trash" pTooltip="Hapus Reservasi"
+                      <!-- <button pButton type="button" class="ui-button ui-button-danger" (click)="hapusHistory(h)" icon="fa-trash" pTooltip="Batal Reservasi"
                       tooltipPosition="top"></button> -->
+                    </ng-template>
+                  </p-column>
+                  <p-column field="tanggal" header="Tanggal" [sortable]="true" [style]="{'width':'150px'}"></p-column>
+                  <p-column field="jamreservasi" header="Waktu" [sortable]="true" [style]="{'width':'100px'}">
+                  </p-column>
+                  <p-column field="namaruangan" header="Poliklinik" [sortable]="true" [style]="{'width':'200px'}">
+                  </p-column>
+                  <p-column field="dokter" header="Dokter" [sortable]="true" [style]="{'width':'200px'}"></p-column>
+                  <p-column field="tanggalreservasi" header="Estimasi Dilayani" [sortable]="true"
+                    [style]="{'width':'150px'}"></p-column>
+                  <p-column [style]="{'min-width':'50px','width':'50px'}">
+                    <ng-template let-h="rowData" pTemplate="body">
+                      <button pButton type="button" class="ui-button ui-button-danger" (click)="hapusHistory(h)"
+                        icon="fa-trash" pTooltip="Batal Reservasi" tooltipPosition="top"></button>
                     </ng-template>
                   </p-column>
                 </p-dataTable>
@@ -729,8 +748,12 @@
         <!-- <img style="-webkit-user-select: none;cursor:pointer" (click)="popUpQR()" src="{{qrCode}}"> -->
       </div>
       <div class="ui-g-6 ui-md-6 ui-lg-6">
-        <div class="ui-g-12 ui-md-12 ui-lg-12"> <label for="input">Tgl Reservasi</label></div>
+        <div class="ui-g-12 ui-md-12 ui-lg-12"> <label for="input">Tgl Reservasi </label></div>
         <div class="ui-g-12 ui-md-12 ui-lg-12"> <label for="input" class="label-popup">{{tglReservasi}}</label></div>
+      </div>
+      <div class="ui-g-6 ui-md-6 ui-lg-6">
+        <div class="ui-g-12 ui-md-12 ui-lg-12"> <label for="input">Waktu </label></div>
+        <div class="ui-g-12 ui-md-12 ui-lg-12"> <label for="input" class="label-popup">{{jamR}}</label></div>
       </div>
       <div class="ui-g-6 ui-md-6 ui-lg-6">
         <div class="ui-g-12 ui-md-12 ui-lg-12"><label for="input">Poli Tujuan</label></div>
@@ -740,13 +763,24 @@
         <div class="ui-g-12 ui-md-12 ui-lg-12"> <label for="input">Dokter</label></div>
         <div class="ui-g-12 ui-md-12 ui-lg-12"> <label for="input" class="label-popup">{{dokter}}</label></div>
       </div>
+      <div class="ui-g-6 ui-md-6 ui-lg-6">
+        <div class="ui-g-12 ui-md-12 ui-lg-12"> <label for="input">Estimasi Dilayani</label></div>
+        <div class="ui-g-12 ui-md-12 ui-lg-12"> <label for="input" class="label-popup">{{Estimasi}}</label></div>
+      </div>
+      <div style="border: 2px;border-style: solid;" class="ui-g-6 ui-md-6 ui-lg-6">
+        <table>
+          <div class="ui-g-12 ui-md-12 ui-lg-12"> <label for="input">Dokumen yang harus dibawa</label></div>
+          <div class="ui-g-12 ui-md-12 ui-lg-12"> <label style="color:red;font-size:20px" for="input"
+              class="label-popup">Surat kontrol,Surat Rujukan,KTP, Kartu BPJS</label></div>
+        </table>
+      </div>
     </div>
 
     <div class="ui-g-12">
       <div class="ui-g-6 ui-md-6 ui-lg-11">
 
-        <span style="color:red;font-size:10px">* </span> <span style="font-size:10px;font-style:italic">Harap Check-in
-          30 menit sebelum jam reservasi</span>
+        <span style="color:red;font-size:20px">* </span> <span style="font-size:20px;font-style:italic;">Harap Datang
+          60 menit sebelum jam estimasi dilayani</span>
       </div>
 
     </div>

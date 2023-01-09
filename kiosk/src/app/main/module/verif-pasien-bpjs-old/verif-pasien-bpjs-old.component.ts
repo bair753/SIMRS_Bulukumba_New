@@ -1908,8 +1908,8 @@ export class VerifPasienBpjsOldComponent implements OnInit {
     if (this.isCetakDSKiosk == 'true') {
       this.service.get('http://127.0.0.1:1237/printvb/Pendaftaran?cetak-sep-new=1&norec=' + this.pasienDaftar.noregistrasi + '&view=false').subscribe(e => { });
     } else {
-      window.open(Configuration.get().apiBackend + 'medifirst2000/report/cetak-sep?noregistrasi='
-        + this.pasienDaftar.noregistrasi + '&kdprofile=21', '_blank');
+      window.open(Configuration.get().apiBackend + 'medifirst2000/report/cetak-sep-new?noregistrasi='
+        + this.pasienDaftar.noregistrasi + '&kdprofile=39', '_blank');
     }
     return
     if (this.dataSEP.nosep != '') {

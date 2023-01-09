@@ -2304,7 +2304,7 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                                         "data": null
                                     }
                                     medifirstService.postNonMessage("bridging/bpjs/tools", jsonSpri).then(function (dataKon) {
-                                        console.log(dataKon.data);
+                                        // console.log(dataKon.data);
                                         if(dataKon.data.metaData.code == 200) {
                                             for (let i = 0; i < dataKon.data.response.list.length; i++) {
                                                 const element = dataKon.data.response.list[i];
@@ -2319,10 +2319,12 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                                         }
                                     })
                                 } else {
-                                    var client = new HttpClient();
-                                    client.get('http://127.0.0.1:1237/printvb/Pendaftaran?cetak-sep-new=1&norec=' + noRegistrasis + '&view=false', function (response) {
-                                        // do something with response
-                                    });
+                                    var kdprofile = medifirstService.getProfile().id
+				                    window.open(baseTransaksi + "report/cetak-sep-new?noregistrasi="+ noRegistrasis +"&kdprofile="+kdprofile, "_blank"); 
+                                    // var client = new HttpClient();
+                                    // client.get('http://127.0.0.1:1237/printvb/Pendaftaran?cetak-sep-new=1&norec=' + noRegistrasis + '&view=false', function (response) {
+                                    //     // do something with response
+                                    // });
                                     // cetakSEP()
                                     // if(e.data.response.kontrol.noSurat != null) {
                                     //     cetakRencanaKontrol(e.data.response)
@@ -4153,10 +4155,12 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
 					'norec_pd': $scope.currentNorecPD ,
 				};
 				medifirstService.post("bridging/bpjs/save-rencana-kontrol2", data).then(function (z) {
-                    var client = new HttpClient();
-                    client.get('http://127.0.0.1:1237/printvb/Pendaftaran?cetak-sep-new=1&norec=' + noRegistrasis + '&view=false', function (response) {
-                        // do something with response
-                    });
+                    var kdprofile = medifirstService.getProfile().id
+                    window.open(baseTransaksi + "report/cetak-sep-new?noregistrasi="+ noRegistrasis +"&kdprofile="+kdprofile, "_blank");
+                    // var client = new HttpClient();
+                    // client.get('http://127.0.0.1:1237/printvb/Pendaftaran?cetak-sep-new=1&norec=' + noRegistrasis + '&view=false', function (response) {
+                    //     // do something with response
+                    // });
 				})
 
 			}

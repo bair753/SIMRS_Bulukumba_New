@@ -10408,4 +10408,33 @@ class EMRController  extends ApiController
         return $this->respond($dt);
     }
 
+    public function getDataComboPartObat(Request $request)
+    {
+        $kdprofile = $this->getDataKdProfile($request);
+        $idProfile = (int)$kdprofile;
+        $req = $request->all();
+
+        $dataObat = \DB::table('produk_m as pr')
+            ->JOIN('stokprodukdetail_t as spd', 'spd.objectprodukfk', '=', 'pr.id')
+            ->select('pr.id as value', 'pr.namaproduk as text')
+            ->where('pr.kdprofile', $idProfile)
+            ->where('pr.statusenabled', true)
+            ->where('spd.qtyproduk', '>', 0)
+            ->groupBy('pr.id', 'pr.namaproduk')
+            ->orderBy('pr.namaproduk');
+
+        if (
+            isset($req['filter']['filters'][0]['value']) &&
+            $req['filter']['filters'][0]['value'] != "" &&
+            $req['filter']['filters'][0]['value'] != "undefined"
+        ) {
+            $dataObat = $dataObat->where('pr.namaproduk', 'ilike', '%' . $req['filter']['filters'][0]['value'] . '%');
+        };
+
+        $dataObat = $dataObat->take(10);
+        $dataObat = $dataObat->get();
+
+        return $this->respond($dataObat);
+    }
+
 }

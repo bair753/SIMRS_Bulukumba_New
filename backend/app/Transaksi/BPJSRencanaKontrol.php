@@ -8,7 +8,7 @@
 
 namespace App\Transaksi;
 
-class BpjsRencanaKontrol extends Transaksi
+class BPJSRencanaKontrol extends Transaksi
 {
     protected $table ="bpjsrencanakontrol_t";
     protected $fillable = [];
