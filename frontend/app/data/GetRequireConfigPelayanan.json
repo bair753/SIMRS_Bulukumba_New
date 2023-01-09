@@ -3101,6 +3101,22 @@
         {
             "nameDep": "CPPTRanapCtrl",
             "urlDep": "module/EMR/CPPTRanapCtrl"
+        },
+        {
+            "nameDep": "PemberianEdukasiPasienCtrl",
+            "urlDep": "module/EMR/PemberianEdukasiPasienCtrl"
+        },
+        {
+            "nameDep": "RekonsiliasiObatCtrl",
+            "urlDep": "module/EMR/RekonsiliasiObatCtrl"
+        },
+        {
+            "nameDep": "TransferAntarUnitCtrl",
+            "urlDep": "module/EMR/TransferAntarUnitCtrl"
+        },
+        {
+            "nameDep": "RingkasanPulangCtrl",
+            "urlDep": "module/EMR/RingkasanPulangCtrl"
         }
     ]
 }

@@ -84,7 +84,7 @@ body .table-top-panel p{
   margin-top: 7px;
 }
 body .ui-state-active, body .ui-state-highlight {
-  /* background-color: #f08080; */
+  /* background-color: #34B56F; */
   color: #ffffff;
   }
 body .ui-state-error, body .ui-state-default.ui-state-error {
@@ -262,7 +262,7 @@ font-family: 'Comfortaa', cursive, 'OpenSans-Regular';
  
 color: #ffffff;
  
-background-color: #f08080;
+background-color: #34B56F;
  
 border: 1px solid transparent;
  
@@ -1380,7 +1380,7 @@ body .ui-fieldset {
 background: #ffffff; }
   body .ui-fieldset .ui-fieldset-legend {
     color: #ffffff;
-    background-color: #f08080;
+    background-color: #34B56F;
     margin-left: .75em;
     padding: 0.5em 1em;
     border-radius: 6px;
@@ -1435,7 +1435,7 @@ body .ui-accordion .ui-accordion-header {
   body .ui-accordion .ui-accordion-header:not(.ui-state-disabled).ui-state-active {
     background-color: #ffffff;
     color: #777777;
-    border-bottom: 1px solid #f08080;
+    border-bottom: 1px solid #34B56F;
     z-index: 1;
     -moz-border-radius: 0;
     -webkit-border-radius: 0;
@@ -1447,7 +1447,7 @@ body .ui-accordion .ui-accordion-header {
     body .ui-accordion .ui-accordion-header:not(.ui-state-disabled).ui-state-active span {
       color: #41abf2; }
     body .ui-accordion .ui-accordion-header:not(.ui-state-disabled).ui-state-active .fa {
-      color: #f08080;
+      color: #34B56F;
       }
   body .ui-accordion .ui-accordion-header .fa-caret-right {
     background: none;
@@ -2119,7 +2119,7 @@ body .ui-dialog {
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
   border-radius: 0; }
   body .ui-dialog .ui-dialog-titlebar {
-    background: #f08080;
+    background: #34B56F;
     color: #ffffff;
     padding: 0.5em 1em;
     }
@@ -2288,7 +2288,7 @@ body .ui-steps {
       overflow: hidden; }
       body .ui-steps .ui-steps-item .ui-menuitem-link .ui-steps-number {
         display: inline-block;
-        background-color: #f08080;
+        background-color: #34B56F;
         -moz-border-radius: 5px;
         -webkit-border-radius: 5px;
         border-radius: 5px;
@@ -2335,7 +2335,7 @@ body .ui-steps {
         border-color: #eaeaea;
         color: #858585; }
     body .ui-steps .ui-steps-item.ui-state-highlight .ui-steps-number {
-      background-color: #f08080;
+      background-color: #34B56F;
       /* color: #69707A; */
       /* border: 1px solid rgba(70, 77, 242, 0.2); */
       /* background: #ffffff; */
@@ -2510,7 +2510,7 @@ body .ui-tabmenu {
         body .ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem:not(.ui-state-active):not(.ui-state-disabled):hover .ui-menuitem-icon {
           color: #858585; }
       body .ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem.ui-state-active .ui-menuitem-link {
-        background-color: #f08080;
+        background-color: #34B56F;
         color: #ffffff;
         border-radius: 24px;
         /* border-radius: 6px; */
