@@ -264,7 +264,7 @@ export class ReservasiOnlineComponent implements OnInit {
           const element = e.libur[i];
           arr.push(element.tgllibur)
         }
-      }  
+      }
       this.myFilter = (d): boolean => {
         const day: number = d._d.getDay()
         if(arr.length>0){
@@ -275,7 +275,7 @@ export class ReservasiOnlineComponent implements OnInit {
             }
           }
         }
-      
+
         // Prevent Saturday and Sunday from being selected.
         // return day != 0 && day != 6 ? true : false;
        return day != 0  ? true : false;
@@ -295,7 +295,7 @@ export class ReservasiOnlineComponent implements OnInit {
     // })
 
     // $("#barcode").JsBarcode("Hi!");
-    // $("#barcode").barcode("1234567890128", "ean13");  
+    // $("#barcode").barcode("1234567890128", "ean13");
 
     // JsBarcode("#barcode", "Hi world!");
     // this.carService.getCarsLarge().then(cars => this.cars = cars);
@@ -308,7 +308,7 @@ export class ReservasiOnlineComponent implements OnInit {
       { label: 'Reservasi', icon: 'fa fa-fw fa-calendar' },
       { label: 'History', icon: 'fa fa-fw fa-history' },
       // { label: 'Slotting', icon: 'fa fa-fw fa fa-calendar-check-o' },
-      { label: 'E-Billing', icon: 'fa fa-fw fa-heartbeat' },
+      // { label: 'E-Billing', icon: 'fa fa-fw fa-heartbeat' },
       // { label: 'Bank Account', icon: 'fa fa-fw fa fa-bank' },
       { label: 'Panduan', icon: 'fa fa-fw fa-question-circle' },
       // { label: 'Denah', icon: 'fa fa-fw fa-map-marker' },
@@ -611,7 +611,7 @@ export class ReservasiOnlineComponent implements OnInit {
   }
   cetakHistory(selected) {
     this.kodeReservasi = selected.noreservasi
-    this.tglReservasi = selected.tanggal 
+    this.tglReservasi = selected.tanggal
     this.jamR =  selected.jamreservasi
     this.poliTujuan = selected.namaruangan
     this.dokter = selected.dokter
@@ -939,7 +939,7 @@ export class ReservasiOnlineComponent implements OnInit {
               this.messageService.warn('Perhatian', 'No Kartu harus di isi')
               return
             }
-          
+
             if(this.formGroup.get('noRujukan').value!=null && this.formGroup.get('noRujukan').value!='-' && this.formGroup.get('noRujukan').value!=''){
                 this.onCariNoRujukan(this.formGroup.get('noRujukan').value, valueIndex)
                 return
@@ -949,7 +949,7 @@ export class ReservasiOnlineComponent implements OnInit {
             }else{
                this.activeIndex = valueIndex
             }
-      
+
             // this.activeIndex = valueIndex
           }
         }, error => {
@@ -1004,10 +1004,10 @@ export class ReservasiOnlineComponent implements OnInit {
           this.messageService.error('Info','Masa berlaku rujukan berakhir')
         }
         this.messageService.info('Status Peserta', e.response.rujukan.peserta.statusPeserta.keterangan)
-        
+
         let AktifRuj = this.setBerlakuRujukan(e.response.rujukan.tglKunjungan)
         this.messageService.success('Rujukan Aktif sampai dengan '+AktifRuj, e.response.rujukan.noKunjungan)
-        
+
         this.activeIndex = valueIndex
       } else {
         // this.messageService.error('Rujukan', e.metaData.message)
@@ -1026,12 +1026,12 @@ export class ReservasiOnlineComponent implements OnInit {
             }
             this.messageService.info('Status Peserta', x.response.rujukan.peserta.statusPeserta.keterangan)
             let AktifRuj = this.setBerlakuRujukan(x.response.rujukan.tglKunjungan)
-            
+
             this.messageService.success('Rujukan Aktif sampai dengan '+AktifRuj, x.response.rujukan.noKunjungan)
             this.activeIndex = valueIndex
           } else {
             this.messageService.error('Rujukan', x.metaData.message)
-           
+
           }
         }, error => {
           // this.statusRujukanBerlaku = false
@@ -1090,7 +1090,7 @@ export class ReservasiOnlineComponent implements OnInit {
             this.activeIndex = valueIndex
           } else {
             this.messageService.error('Rujukan', x.metaData.message)
-           
+
           }
         }, error => {
           // this.statusRujukanBerlaku = false
@@ -1242,7 +1242,7 @@ export class ReservasiOnlineComponent implements OnInit {
     this.formGroup.get('jamReservasi').reset()
     this.formGroup.get('dokter').setValue('')
     this.formGroup.get('dokter').reset()
-   
+
     this.getListDokter()
   }
   getSlotDok(event) {
@@ -1262,7 +1262,7 @@ export class ReservasiOnlineComponent implements OnInit {
           this.messageService.info('Info', e.list.length+ ' Dokter tersedia di Poli ini')
           this.listDokter = e.list
         }
-      
+
       })
   }
   setJam(e){
@@ -1321,7 +1321,7 @@ export class ReservasiOnlineComponent implements OnInit {
         // let interval = res.slot.interval
         // let quota = res.slot.quota
         this.listJam = res.listjam;
-  
+
         if (this.listJam.length == 0)
           this.messageService.error('Maaf', 'Jadwal Reservasi Sudah Penuh, Coba dihari lain')
         else
