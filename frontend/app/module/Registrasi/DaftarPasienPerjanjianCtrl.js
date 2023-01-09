@@ -28,18 +28,18 @@ define(['initialize'], function (initialize) {
                     var row = rows[i];
                     var ismobilejkn = kendoGrid.dataItem(row).ismobilejkn;
                     if (ismobilejkn != null && ismobilejkn == '✔') {
-                        $(row.cells[9]).addClass("green");
-
-                    }else{
-                        $(row.cells[9]).addClass("red");
-                    }
-
-                    var ischeckin = kendoGrid.dataItem(row).ischeckin;
-                    if (ischeckin != null && ischeckin == '✔') {
                         $(row.cells[10]).addClass("green");
 
                     }else{
                         $(row.cells[10]).addClass("red");
+                    }
+
+                    var ischeckin = kendoGrid.dataItem(row).ischeckin;
+                    if (ischeckin != null && ischeckin == '✔') {
+                        $(row.cells[11]).addClass("green");
+
+                    }else{
+                        $(row.cells[11]).addClass("red");
                     }
 
 
@@ -88,6 +88,10 @@ define(['initialize'], function (initialize) {
 
                         template: "<span class='style-left'>{{formatTanggal('#: tanggalreservasi #')}}</span>",
                         width: 120
+                    }, {
+                        field: "jamreservasi",
+                        title: "Jam",
+                        width: 100
                     }, {
                         field: "namapasien",
                         title: "Nama Pasien",

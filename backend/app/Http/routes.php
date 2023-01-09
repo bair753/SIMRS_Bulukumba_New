@@ -1951,7 +1951,8 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
           Route::get('reservasionline/get-slotting-new','ReservasiOnline\ReservasiOnlineController@getSlottingByRuanganNew2');
           Route::get('reservasionline/get-data','ReservasiOnline\ReservasiOnlineController@getDataReservasi');
           Route::post('reservasionline/update-tglreservasi','ReservasiOnline\ReservasiOnlineController@updateTglReservasi');
-          
+          Route::get('reservasionline/cek-in-kiosk','ReservasiOnline\ReservasiOnlineController@cekINReservasi');
+          Route::get('reservasionline/get-combo-reservasi','ReservasiOnline\ReservasiOnlineController@getComboReserv');
           Route::get('reservasionline/get-slotting-rev','ReservasiOnline\ReservasiOnlineController@getSlottingByRuanganDokter');
           Route::get('reservasionline/get-dokter','ReservasiOnline\ReservasiOnlineController@getDokterByRuang');
         // });
