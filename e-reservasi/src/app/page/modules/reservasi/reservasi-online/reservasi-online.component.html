@@ -83,7 +83,7 @@
                 [color]="color"
                 [checked]="checked"
                 [disabled]="disabled">
-          
+
             </mat-slide-toggle> -->
 
                   <!-- <mat-form-field>
@@ -571,7 +571,7 @@
                   <input matInput placeholder="Pencarian" #gs>
                 </mat-form-field>
                 <!-- <div style="text-align: left;margin-left: 10px" class="ng-star-inserted"><i class="fa fa-search"
-                  style="margin:4px 4px 0px 0"></i><input pinputtext="" placeholder="Filter Data" 
+                  style="margin:4px 4px 0px 0"></i><input pinputtext="" placeholder="Filter Data"
                   style="width:auto" type="text" #gs class="ui-inputtext ui-corner-all ui-state-default ui-widget">
               </div> -->
               </div>
@@ -666,9 +666,9 @@
                         </div>
                       </div>
                       <div class="ui-g-6 ui-md-6 ui-lg-6">
-  
+
                         <img style="-webkit-user-select: none;" src="{{qrCode}}">
-         
+
                       </div>
                       <div class="ui-g-6 ui-md-6 ui-lg-6">
                         <div class="ui-g-12 ui-md-12 ui-lg-12"> <label for="input">Tgl Reservasi</label></div>
@@ -686,7 +686,7 @@
                         <div class="ui-g-12 ui-md-12 ui-lg-12"> <label for="input"
                             class="label-popup">{{dokter}}</label></div>
                       </div>
-                   
+
                     </div>
                     <div class="ui-g-12">
                       <div class="ui-g-12 ui-md-12 ui-lg-9"></div>
@@ -844,7 +844,7 @@
   </form>
 </div>
 
-<div *ngIf="activeItem.label == 'E-Billing' && !isBuktiReservasi">
+<!-- <div *ngIf="activeItem.label == 'E-Billing' && !isBuktiReservasi">
   <form [formGroup]="formPelayanan">
     <div class="card card-w-title" style="margin-top:10px" *ngIf="!isShowRiwayatRegis">
       <div class="card card-form-header">
@@ -907,22 +907,6 @@
                     <label for="input">: &nbsp;{{item.jenisPasien}}</label>
                   </div>
                 </div>
-                <!--   <div class="ui-g-12 ui-md-12 ui-lg-12">
-                  <div class="ui-g-6 ui-md-6 ui-lg-6">
-                    <label for="input" class="label-bold">Penjamin </label>
-                  </div>
-                  <div class="ui-g-6 ui-md-6 ui-lg-6">
-                    <label for="input">{{item.namarekanan}}</label>
-                  </div>
-                </div>
-                 <div class="ui-g-12 ui-md-12 ui-lg-12">
-                  <div class="ui-g-6 ui-md-6 ui-lg-6">
-                    <label for="input" class="label-bold">No SEP </label>
-                  </div>
-                  <div class="ui-g-6 ui-md-6 ui-lg-6">
-                    <label for="input">{{item.nosep}}</label>
-                  </div>
-                </div> -->
               </div>
               <div class="ui-g-6 ui-md-6 ui-lg-6">
                 <div class="ui-g-12 ui-md-12 ui-lg-12">
@@ -933,15 +917,6 @@
                     <label for="input">: &nbsp;{{item.ruangan}}</label>
                   </div>
                 </div>
-
-                <!-- <div class="ui-g-12 ui-md-12 ui-lg-12">
-                  <div class="ui-g-6 ui-md-6 ui-lg-6">
-                    <label for="input" class="label-bold">Kamar</label>
-                  </div>
-                  <div class="ui-g-6 ui-md-6 ui-lg-6">
-                    <label for="input">{{item.kamar}}</label>
-                  </div>
-                </div> -->
                 <div class="ui-g-12 ui-md-12 ui-lg-12" style="margin-top:-15px">
                   <div class="ui-g-6 ui-md-6 ui-lg-6">
                     <label for="input" class="label-bold">Kelas</label>
@@ -950,14 +925,6 @@
                     <label for="input">: &nbsp;{{item.kelasRawat}}</label>
                   </div>
                 </div>
-                <!-- <div class="ui-g-12 ui-md-12 ui-lg-12">
-                  <div class="ui-g-6 ui-md-6 ui-lg-6">
-                    <label for="input" class="label-bold">Dokter P.Jawab </label>
-                  </div>
-                  <div class="ui-g-6 ui-md-6 ui-lg-6">
-                    <label for="input">{{item.dokter}}</label>
-                  </div>
-                </div> -->
                 <div class="ui-g-12 ui-md-12 ui-lg-12" style="margin-top:-15px">
                   <div class="ui-g-6 ui-md-6 ui-lg-6">
                     <label for="input" class="label-bold">Tgl Masuk </label>
@@ -976,35 +943,7 @@
                 </div>
               </div>
               <div class="ui-g-12 ui-md-12 ui-lg-12">
-
-                <!-- <div class="ui-g-12 ui-md-12 ui-lg-4">
-                  <mat-form-field>
-                    <input matInput placeholder="Pencarian" #gs2>
-                  </mat-form-field>
-
-                </div> -->
                 <div class="ui-g-12 ui-md-12 ui-lg-12">
-                  <!-- <p-table [value]="dataSourceRincian" sortField="ruanganTindakan" sortMode="single" (onSort)="onSort()">
-                        <ng-template pTemplate="header">
-                            <tr>
-                                <th>Keterangan</th>
-                                <th>Jumlah</th>
-                                <th>Color</th>
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
-                            <tr class="ui-widget-header" *ngIf="rowGroupMetadata[rowData.ruanganTindakan].index === rowIndex">
-                                <td colspan="3">
-                                    <span style="font-weight:bold">{{rowData.ruanganTindakan}}</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>{{rowData.namaPelayanan}}</td>
-                                <td>{{rowData.jumlah}}</td>
-                                <td>{{rowData.total}}</td>
-                            </tr>
-                        </ng-template>
-                    </p-table> -->
                   <p-dataTable [globalFilter]="gs2" [value]="dataSourceRincian" [rows]="10" [paginator]="true"
                     [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]" selectionMode="single" [(selection)]="selected"
                     loadingIcon="fa fa-spinner" scrollable="true">
@@ -1083,13 +1022,6 @@
 
                 </p-dataTable>
               </div>
-              <!-- <div class="ui-g-12 ui-md-12 ui-lg-12">
-                <div class="ui-g-9 ui-md-9 ui-lg-11">
-                </div>
-                <div class="ui-g-3 ui-md-3 ui-lg-1">
-                  <button pButton type="button" (click)="copyNorek()" label="Copy NoRek" icon="fa fa-copy"></button>
-                </div>
-              </div> -->
             </div>
           </p-panel>
         </div>
@@ -1142,8 +1074,6 @@
                       <ng-template let-h="rowData" pTemplate="body">
                         <button pButton type="button" (click)="pilihNoregis(h)" icon="fa-check" pTooltip="Pilih Data"
                           tooltipPosition="top"></button>
-                        <!-- <button pButton type="button" (click)="hapusHistory(h)" icon="fa-trash" pTooltip="Hapus Reservasi"
-                                  tooltipPosition="top"></button> -->
                       </ng-template>
                     </p-column>
                   </p-dataTable>
@@ -1163,7 +1093,7 @@
     </div>
 
   </form>
-</div>
+</div> -->
 <div *ngIf="activeItem.label == 'Bank Account' && !isBuktiReservasi">
 
   <div class="card card-w-title" style="margin-top:10px" *ngIf="!isShowRiwayatRegis">
@@ -1200,13 +1130,6 @@
 
                 </p-dataTable>
               </div>
-              <!-- <div class="ui-g-12 ui-md-12 ui-lg-12">
-                <div class="ui-g-9 ui-md-9 ui-lg-11">
-                </div>
-                <div class="ui-g-3 ui-md-3 ui-lg-1">
-                  <button pButton type="button" (click)="copyNorek()" label="Copy NoRek" icon="fa fa-copy"></button>
-                </div>
-              </div> -->
             </div>
           </p-panel>
         </div>
