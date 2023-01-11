@@ -1848,6 +1848,13 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
               Route::get('registrasi/get-data-antrean', 'Registrasi\RegistrasiController@getDataAntrean');
               Route::post('jkn/save-checkin','ReservasiOnline\MyJKNV2Controller@saveCheckInAntrean_fix');
 
+               //** RIWAYAT APP LAMA *//
+               Route::get('registrasi/riwayat-registrasi-applama', 'Bridging\RiwayatAppLamaController@getDaftarRiwayatRegistrasiLama');
+               Route::get('registrasi/riwayat-pemeriksaan-applama', 'Bridging\RiwayatAppLamaController@getDaftarRiwayatPemeriksaan');
+               Route::get('registrasi/riwayat-catatanmedis-applama', 'Bridging\RiwayatAppLamaController@getDaftarRiwayatCatatanMedis');
+               Route::get('registrasi/riwayat-cppt-applama', 'Bridging\RiwayatAppLamaController@getDaftarRiwayatCPPT');
+             //** END RIWAYAT APP LAMA *//
+
 
         // });
         // Route::group(['prefix' => 'remunerasi'], function () {

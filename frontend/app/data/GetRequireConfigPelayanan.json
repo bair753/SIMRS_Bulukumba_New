@@ -3117,6 +3117,50 @@
         {
             "nameDep": "RingkasanPulangCtrl",
             "urlDep": "module/EMR/RingkasanPulangCtrl"
+        },
+        {
+            "nameDep": "HandOverCtrl",
+            "urlDep": "module/EMR/HandOverCtrl"
+        },
+        {
+            "nameDep": "CatatanPemberianDanPemantauanObatPasienCtrl",
+            "urlDep": "module/EMR/CatatanPemberianDanPemantauanObatPasienCtrl"
+        },
+        {
+            "nameDep": "TabTandaVitalCtrl",
+            "urlDep": "module/EMR/TabTandaVitalCtrl"
+        },
+        {
+            "nameDep": "GrafikTandaVitalCtrl",
+            "urlDep": "module/EMR/GrafikTandaVitalCtrl"
+        },
+        {
+            "nameDep": "GrafikTandaVital2Ctrl",
+            "urlDep": "module/EMR/GrafikTandaVital2Ctrl"
+        },
+        {
+            "nameDep": "GrafikTandaVital3Ctrl",
+            "urlDep": "module/EMR/GrafikTandaVital3Ctrl"
+        },
+        {
+            "nameDep": "GrafikTandaVital4Ctrl",
+            "urlDep": "module/EMR/GrafikTandaVital4Ctrl"
+        },
+        {
+            "nameDep": "GrafikTandaVital5Ctrl",
+            "urlDep": "module/EMR/GrafikTandaVital5Ctrl"
+        },
+        {
+            "nameDep": "GrafikTandaVital6Ctrl",
+            "urlDep": "module/EMR/GrafikTandaVital6Ctrl"
+        },
+        {
+            "nameDep": "GrafikTandaVital7Ctrl",
+            "urlDep": "module/EMR/GrafikTandaVital7Ctrl"
+        },
+        {
+            "nameDep": "GrafikTandaVital8Ctrl",
+            "urlDep": "module/EMR/GrafikTandaVital8Ctrl"
         }
     ]
 }
