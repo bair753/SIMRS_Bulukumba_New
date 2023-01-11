@@ -1,0 +1,95 @@
+<c-panel item="item" header="'TabTandaVital'" disabled>
+    <div class="panel panel-default container_12">
+        <div class="breadcrum detail" style='margin-top: 0px;'>
+            <div class="grid_2">
+                <a class="n1 default"
+                    ng-class="{'active': activeMenuTandavital == 'RekamMedis.AsesmenMedis.TabTandaVital.GrafikTandaVital'}"
+                    ng-click="nav('RekamMedis.AsesmenMedis.MenuTandavital.GrafikTandaVital')">Tab 1
+                </a>
+            </div>
+            <div class="grid_2">
+                <a class="n1 default"
+                    ng-class="{'active': activeMenuTandavital == 'RekamMedis.AsesmenMedis.TabTandaVital.GrafikTandaVital2'}"
+                    ng-click="nav('RekamMedis.AsesmenMedis.TabTandaVital.GrafikTandaVital2')">Tab 2
+                </a>
+            </div>
+            <div class="grid_2">
+                 <a class="n1 default"
+                    ng-class="{'active': activeMenuTandavital == 'RekamMedis.AsesmenMedis.TabTandaVital.GrafikTandaVital3'}"
+                    ng-click="nav('RekamMedis.AsesmenMedis.TabTandaVital.GrafikTandaVital3')">Tab 3
+                </a>
+            </div>
+            <div class="grid_2">
+                <a class="n1 default"
+                    ng-class="{'active': activeMenuTandavital == 'RekamMedis.AsesmenMedis.TabTandaVital.GrafikTandaVital4'}"
+                    ng-click="nav('RekamMedis.AsesmenMedis.TabTandaVital.GrafikTandaVital4')">Tab 4
+                </a>
+            </div>
+            <div class="grid_2">
+                <a class="n1 default"
+                    ng-class="{'active': activeMenuTandavital == 'RekamMedis.AsesmenMedis.TabTandaVital.GrafikTandaVital5'}"
+                    ng-click="nav('RekamMedis.AsesmenMedis.TabTandaVital.GrafikTandaVital5')">Tab 5
+                </a>
+            </div>
+            <div class="grid_2">
+                <a class="n1 default"
+                    ng-class="{'active': activeMenuTandavital == 'RekamMedis.AsesmenMedis.TabTandaVital.GrafikTandaVital6'}"
+                    ng-click="nav('RekamMedis.AsesmenMedis.TabTandaVital.GrafikTandaVital6')">Tab 6
+                </a>
+            </div>
+            <div class="grid_2">
+                <a class="n1 default"
+                    ng-class="{'active': activeMenuTandavital == 'RekamMedis.AsesmenMedis.TabTandaVital.GrafikTandaVital7'}"
+                    ng-click="nav('RekamMedis.AsesmenMedis.TabTandaVital.GrafikTandaVital7')">Tab 7
+                </a>
+            </div>
+            <div class="grid_2">
+                <a class="n1 default"
+                    ng-class="{'active': activeMenuTandavital == 'RekamMedis.AsesmenMedis.TabTandaVital.GrafikTandaVital8'}"
+                    ng-click="nav('RekamMedis.AsesmenMedis.TabTandaVital.GrafikTandaVital8')">Tab 8
+                </a>
+            </div>
+           <!--  <div class="grid_2">
+                <a class="n1 default"
+                    ng-class="{'active': activeMenuTandavital == 'RekamMedis.AsesmenMedis.MenuEWSDewasa.SkorEWSDewasa9'}"
+                    ng-click="nav('RekamMedis.AsesmenMedis.MenuEWSDewasa.SkorEWSDewasa9')">Tab 9
+                </a>
+            </div>
+            <div class="grid_2">
+                <a class="n1 default"
+                    ng-class="{'active': activeMenuTandavital == 'RekamMedis.AsesmenMedis.MenuEWSDewasa.SkorEWSDewasa10'}"
+                    ng-click="nav('RekamMedis.AsesmenMedis.MenuEWSDewasa.SkorEWSDewasa10')">Tab 10
+                </a>
+            </div>
+ -->
+        </div>
+    </div>
+</c-panel>
+<style type="text/css">
+    .active {
+        /* background-color: white !important; */
+        background-color: rgb(255, 64, 129) !important;
+        color: white !important;
+        display: block;
+        padding: 10px 0 20px;
+        font-weight: 600;
+    }
+
+    .breadcrum a.default {
+        background: white;
+    }
+
+    .breadcrum a:hover {
+        background: #41abf2;
+        color: white;
+        border-bottom: solid 5px rgb(255, 64, 129);
+    }
+
+    .breadcrum a {
+        color: rgb(63, 81, 181);
+        border-bottom: solid 5px rgb(255, 64, 129);
+        border-top: solid 1px #cccccc;
+        border-right: solid 1px #cccccc;
+    }
+</style>
+<div ui-view></div>

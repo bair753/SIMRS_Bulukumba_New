@@ -1848,6 +1848,13 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
               Route::get('registrasi/get-data-antrean', 'Registrasi\RegistrasiController@getDataAntrean');
               Route::post('jkn/save-checkin','ReservasiOnline\MyJKNV2Controller@saveCheckInAntrean_fix');
 
+               //** RIWAYAT APP LAMA *//
+               Route::get('registrasi/riwayat-registrasi-applama', 'Bridging\RiwayatAppLamaController@getDaftarRiwayatRegistrasiLama');
+               Route::get('registrasi/riwayat-pemeriksaan-applama', 'Bridging\RiwayatAppLamaController@getDaftarRiwayatPemeriksaan');
+               Route::get('registrasi/riwayat-catatanmedis-applama', 'Bridging\RiwayatAppLamaController@getDaftarRiwayatCatatanMedis');
+               Route::get('registrasi/riwayat-cppt-applama', 'Bridging\RiwayatAppLamaController@getDaftarRiwayatCPPT');
+             //** END RIWAYAT APP LAMA *//
+
 
         // });
         // Route::group(['prefix' => 'remunerasi'], function () {
@@ -1952,7 +1959,8 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
           Route::get('reservasionline/get-slotting-new','ReservasiOnline\ReservasiOnlineController@getSlottingByRuanganNew2');
           Route::get('reservasionline/get-data','ReservasiOnline\ReservasiOnlineController@getDataReservasi');
           Route::post('reservasionline/update-tglreservasi','ReservasiOnline\ReservasiOnlineController@updateTglReservasi');
-          
+          Route::get('reservasionline/cek-in-kiosk','ReservasiOnline\ReservasiOnlineController@cekINReservasi');
+          Route::get('reservasionline/get-combo-reservasi','ReservasiOnline\ReservasiOnlineController@getComboReserv');
           Route::get('reservasionline/get-slotting-rev','ReservasiOnline\ReservasiOnlineController@getSlottingByRuanganDokter');
           Route::get('reservasionline/get-dokter','ReservasiOnline\ReservasiOnlineController@getDokterByRuang');
         // });

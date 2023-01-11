@@ -5065,7 +5065,7 @@ class RegistrasiController extends ApiController
             // ->leftjoin('antrianpasiendiperiksa_t as apd','apd.noregistrasifk','=','pd.norec')
             ->select(DB::raw("pd.norec,pd.tglregistrasi,ps.nocm,pd.noregistrasi,ps.namapasien,pd.objectruanganlastfk,kp.kelompokpasien,ru.namaruangan,
                               pd.objectpegawaifk,pg.namalengkap as namadokter,pd.tglpulang,ru.objectdepartemenfk,
-			                  CASE when ru.objectdepartemenfk in (16,25,26) then 1 else 0 end as statusinap"))
+			                  CASE when ru.objectdepartemenfk in (16,25,26) then 1 else 0 end as statusinap,'SIMRS' AS keterangan"))
             ->where('pd.statusenabled',true)
             ->where('ps.kdprofile', (int)$kdProfile);
 
@@ -6073,7 +6073,8 @@ class RegistrasiController extends ApiController
                 'apr.notelepon','pm.namapasien','apr.namapasien','apr.objectkelompokpasienfk','kps.kelompokpasien',
                 'apr.tglinput','apr.nocmfk', 'pd.ischeckin', 'apd.norec as norec_apd', 'pd.norec as norec_pd', 'ru.prefixnoantrian',
                 DB::raw('(case when pm.namapasien is null then apr.namapasien else pm.namapasien end) as namapasien,
-                (case when apr.isconfirm=\'true\' then \'Confirm\' else \'Reservasi\' end) as status,apr.ismobilejkn,apd.noantrian,apr.jenis')
+                (case when apr.isconfirm=\'true\' then \'Confirm\' else \'Reservasi\' end) as status,apr.ismobilejkn,apd.noantrian,apr.jenis
+                ,apr.jamreservasi')
             )
             ->where('apr.noreservasi','<>','-')
             ->where('apr.statusenabled',true)

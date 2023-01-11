@@ -1,0 +1,2085 @@
+<style type="text/css">
+    fieldset {
+        border-radius: 5px;
+        border: 1px solid #228be6;
+    }
+
+    .k-slider-horizontal {
+        display: inline-block;
+        float: left;
+        width: 450px;
+
+        height: 26px;
+
+
+    }
+
+    .k-slider {
+
+        margin-left: 3%;
+        margin-right: 3%;
+        margin-top: 1%;
+        margin-bottom: 5%;
+        display: inline-block;
+    }
+
+    .activeBtn {
+        background-color: #10c4b2;
+        color: #ffffff;
+    }
+    table,
+    th,
+    td {
+        border: 1px solid #929191;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+    td {
+        padding: 5px;
+        text-align: left;
+    }
+    th {
+        padding: 5px;
+        text-align: center;
+    }
+    .clicks{
+        cursor: pointer;
+    }
+</style>
+
+ <!-- ng-class="{'my-disable':true}" -->
+<!-- <div class="grid_12"  disable-contents="allDisabled" id="form"> -->
+<div class="grid_12">
+    <div class="grid_12">
+        <div class="panel panel-default container_12">
+            <div class="panel-heading" c-translate>Catatan Pemberian dan Pemantauan Obat Pasien</div>
+        </div>
+
+        <div class="grid_12" style="margin-top: 10px;">
+            <div class="grid_12" style="margin-top: 10px;">
+                <div class="grid_12">
+                    <label c-label item="item">Ruang Rawat Awal</label>
+                </div>
+                <div class="grid_4">
+                    <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424100]" k-data-text-field="'text'"
+                        k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listRuangan" />
+                </div>
+            </div>
+        </div>
+
+        <div class="grid_12" style="margin-top: 10px;">
+            <table>
+                <tr>
+                    <th style="text-align: center;">No</th>
+                    <th style="text-align: center;">Nama Obat</th>
+                    <th style="text-align: center;">Dosis</th>
+                    <th style="text-align: center;">Rute</th>
+                    <th style="text-align: center;">Tgl Mulai</th>
+                    <th style="text-align: center;">Nama / TTD Dokter</th>
+                    <th style="text-align: center; width: 150px;">Waktu dan Frekuensi</th>
+                    <th style="text-align: center;">Informasi Benar</th>
+                    <th style="text-align: center;">Review Farmasi</th>
+                </tr>
+                <tr>
+                    <td colspan="9">
+                        <label c-label item="item">A. RESEP NON PARENTERAL</label>
+                    </td>
+                </tr>
+                <!-- 1 -->
+                <tr>
+                    <td style="text-align: center;">
+                        <label c-label item="item">1</label>
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424101]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listObat" />
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424102]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424103]"></textarea>
+                    </td>
+                    <td>
+                        <input style="width: 100%" k-ng-model="item.obj[424104]" kendo-datepicker placeholer="YYYY:MM:DD" k-format="'yyyy-MM-dd'" />
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424105]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                    </td>
+                    <td>
+                        <div class="grid_12" ng-repeat="list in listWaktuFrekuensi1 | orderBy:'id'">
+                            <div ng-repeat="jawab in list.detail | orderBy:'id'">
+                                <div ng-switch on="jawab.type">
+                                    <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                        <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text" placeholder="Hari Ke">
+                                    </div>
+                                    <div class="grid_3" ng-switch-when="checkbox" style="margin-top: 5px;">
+                                        <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}" ng-model="item.obj[jawab.id]">
+                                        <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                            &nbsp;{{ jawab.nama }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424121]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424122]"></textarea>
+                    </td>
+                </tr>
+                <!-- 1 -->
+                <!-- 2 -->
+                <tr>
+                    <td style="text-align: center;">
+                        <label c-label item="item">2</label>
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424123]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listObat" />
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424124]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424125]"></textarea>
+                    </td>
+                    <td>
+                        <input style="width: 100%" k-ng-model="item.obj[424126]" kendo-datepicker placeholer="YYYY:MM:DD"
+                            k-format="'yyyy-MM-dd'" />
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424127]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                    </td>
+                    <td>
+                        <div class="grid_12" ng-repeat="list in listWaktuFrekuensi2 | orderBy:'id'">
+                            <div ng-repeat="jawab in list.detail | orderBy:'id'">
+                                <div ng-switch on="jawab.type">
+                                    <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                        <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text" placeholder="Hari Ke">
+                                    </div>
+                                    <div class="grid_3" ng-switch-when="checkbox" style="margin-top: 5px;">
+                                        <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}"
+                                            ng-model="item.obj[jawab.id]">
+                                        <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                            &nbsp;{{ jawab.nama }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424143]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424144]"></textarea>
+                    </td>
+                </tr>
+                <!-- 2 -->
+                <!-- 3 -->
+                <tr>
+                    <td style="text-align: center;">
+                        <label c-label item="item">3</label>
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424145]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listObat" />
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424146]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424147]"></textarea>
+                    </td>
+                    <td>
+                        <input style="width: 100%" k-ng-model="item.obj[424148]" kendo-datepicker placeholer="YYYY:MM:DD"
+                            k-format="'yyyy-MM-dd'" />
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424149]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                    </td>
+                    <td>
+                        <div class="grid_12" ng-repeat="list in listWaktuFrekuensi3 | orderBy:'id'">
+                            <div ng-repeat="jawab in list.detail | orderBy:'id'">
+                                <div ng-switch on="jawab.type">
+                                    <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                        <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text" placeholder="Hari Ke">
+                                    </div>
+                                    <div class="grid_3" ng-switch-when="checkbox" style="margin-top: 5px;">
+                                        <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}"
+                                            ng-model="item.obj[jawab.id]">
+                                        <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                            &nbsp;{{ jawab.nama }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424165]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424166]"></textarea>
+                    </td>
+                </tr>
+                <!-- 3 -->
+                <!-- 4 -->
+                <tr>
+                    <td style="text-align: center;">
+                        <label c-label item="item">4</label>
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424167]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listObat" />
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424168]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424169]"></textarea>
+                    </td>
+                    <td>
+                        <input style="width: 100%" k-ng-model="item.obj[424170]" kendo-datepicker placeholer="YYYY:MM:DD"
+                            k-format="'yyyy-MM-dd'" />
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424171]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                    </td>
+                    <td>
+                        <div class="grid_12" ng-repeat="list in listWaktuFrekuensi4 | orderBy:'id'">
+                            <div ng-repeat="jawab in list.detail | orderBy:'id'">
+                                <div ng-switch on="jawab.type">
+                                    <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                        <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text" placeholder="Hari Ke">
+                                    </div>
+                                    <div class="grid_3" ng-switch-when="checkbox" style="margin-top: 5px;">
+                                        <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}"
+                                            ng-model="item.obj[jawab.id]">
+                                        <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                            &nbsp;{{ jawab.nama }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424187]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424188]"></textarea>
+                    </td>
+                </tr>
+                <!-- 4 -->
+                <!-- 5 -->
+                <tr>
+                    <td style="text-align: center;">
+                        <label c-label item="item">5</label>
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424189]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listObat" />
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424190]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424191]"></textarea>
+                    </td>
+                    <td>
+                        <input style="width: 100%" k-ng-model="item.obj[424192]" kendo-datepicker placeholer="YYYY:MM:DD"
+                            k-format="'yyyy-MM-dd'" />
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424193]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                    </td>
+                    <td>
+                        <div class="grid_12" ng-repeat="list in listWaktuFrekuensi5 | orderBy:'id'">
+                            <div ng-repeat="jawab in list.detail | orderBy:'id'">
+                                <div ng-switch on="jawab.type">
+                                    <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                        <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text" placeholder="Hari Ke">
+                                    </div>
+                                    <div class="grid_3" ng-switch-when="checkbox" style="margin-top: 5px;">
+                                        <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}"
+                                            ng-model="item.obj[jawab.id]">
+                                        <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                            &nbsp;{{ jawab.nama }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424209]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424210]"></textarea>
+                    </td>
+                </tr>
+                <!-- 5 -->
+                <!-- 6 -->
+                <tr>
+                    <td style="text-align: center;">
+                        <label c-label item="item">6</label>
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424211]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listObat" />
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424212]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424213]"></textarea>
+                    </td>
+                    <td>
+                        <input style="width: 100%" k-ng-model="item.obj[424214]" kendo-datepicker placeholer="YYYY:MM:DD"
+                            k-format="'yyyy-MM-dd'" />
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424215]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                    </td>
+                    <td>
+                        <div class="grid_12" ng-repeat="list in listWaktuFrekuensi6 | orderBy:'id'">
+                            <div ng-repeat="jawab in list.detail | orderBy:'id'">
+                                <div ng-switch on="jawab.type">
+                                    <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                        <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text" placeholder="Hari Ke">
+                                    </div>
+                                    <div class="grid_3" ng-switch-when="checkbox" style="margin-top: 5px;">
+                                        <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}"
+                                            ng-model="item.obj[jawab.id]">
+                                        <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                            &nbsp;{{ jawab.nama }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424231]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424232]"></textarea>
+                    </td>
+                </tr>
+                <!-- 6 -->
+                <!-- 7 -->
+                <tr>
+                    <td style="text-align: center;">
+                        <label c-label item="item">7</label>
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424233]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listObat" />
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424234]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424235]"></textarea>
+                    </td>
+                    <td>
+                        <input style="width: 100%" k-ng-model="item.obj[424236]" kendo-datepicker placeholer="YYYY:MM:DD"
+                            k-format="'yyyy-MM-dd'" />
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424237]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                    </td>
+                    <td>
+                        <div class="grid_12" ng-repeat="list in listWaktuFrekuensi7 | orderBy:'id'">
+                            <div ng-repeat="jawab in list.detail | orderBy:'id'">
+                                <div ng-switch on="jawab.type">
+                                    <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                        <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text" placeholder="Hari Ke">
+                                    </div>
+                                    <div class="grid_3" ng-switch-when="checkbox" style="margin-top: 5px;">
+                                        <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}"
+                                            ng-model="item.obj[jawab.id]">
+                                        <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                            &nbsp;{{ jawab.nama }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424253]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424254]"></textarea>
+                    </td>
+                </tr>
+                <!-- 7 -->
+                <!-- 8 -->
+                <tr>
+                    <td style="text-align: center;">
+                        <label c-label item="item">8</label>
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424255]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listObat" />
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424256]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424257]"></textarea>
+                    </td>
+                    <td>
+                        <input style="width: 100%" k-ng-model="item.obj[424258]" kendo-datepicker placeholer="YYYY:MM:DD"
+                            k-format="'yyyy-MM-dd'" />
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424259]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                    </td>
+                    <td>
+                        <div class="grid_12" ng-repeat="list in listWaktuFrekuensi8 | orderBy:'id'">
+                            <div ng-repeat="jawab in list.detail | orderBy:'id'">
+                                <div ng-switch on="jawab.type">
+                                    <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                        <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text" placeholder="Hari Ke">
+                                    </div>
+                                    <div class="grid_3" ng-switch-when="checkbox" style="margin-top: 5px;">
+                                        <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}"
+                                            ng-model="item.obj[jawab.id]">
+                                        <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                            &nbsp;{{ jawab.nama }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424275]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424276]"></textarea>
+                    </td>
+                </tr>
+                <!-- 8 -->
+                <!-- 9 -->
+                <tr>
+                    <td style="text-align: center;">
+                        <label c-label item="item">9</label>
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424277]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listObat" />
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424278]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424279]"></textarea>
+                    </td>
+                    <td>
+                        <input style="width: 100%" k-ng-model="item.obj[424280]" kendo-datepicker placeholer="YYYY:MM:DD"
+                            k-format="'yyyy-MM-dd'" />
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424281]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                    </td>
+                    <td>
+                        <div class="grid_12" ng-repeat="list in listWaktuFrekuensi9 | orderBy:'id'">
+                            <div ng-repeat="jawab in list.detail | orderBy:'id'">
+                                <div ng-switch on="jawab.type">
+                                    <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                        <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text" placeholder="Hari Ke">
+                                    </div>
+                                    <div class="grid_3" ng-switch-when="checkbox" style="margin-top: 5px;">
+                                        <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}"
+                                            ng-model="item.obj[jawab.id]">
+                                        <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                            &nbsp;{{ jawab.nama }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424297]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424298]"></textarea>
+                    </td>
+                </tr>
+                <!-- 9 -->
+                <!-- 10 -->
+                <tr>
+                    <td style="text-align: center;">
+                        <label c-label item="item">10</label>
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424299]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listObat" />
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424300]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424301]"></textarea>
+                    </td>
+                    <td>
+                        <input style="width: 100%" k-ng-model="item.obj[424302]" kendo-datepicker placeholer="YYYY:MM:DD"
+                            k-format="'yyyy-MM-dd'" />
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424303]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                    </td>
+                    <td>
+                        <div class="grid_12" ng-repeat="list in listWaktuFrekuensi10 | orderBy:'id'">
+                            <div ng-repeat="jawab in list.detail | orderBy:'id'">
+                                <div ng-switch on="jawab.type">
+                                    <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                        <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text" placeholder="Hari Ke">
+                                    </div>
+                                    <div class="grid_3" ng-switch-when="checkbox" style="margin-top: 5px;">
+                                        <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}"
+                                            ng-model="item.obj[jawab.id]">
+                                        <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                            &nbsp;{{ jawab.nama }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424319]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424320]"></textarea>
+                    </td>
+                </tr>
+                <!-- 10 -->
+                <!-- 11 -->
+                <tr>
+                    <td style="text-align: center;">
+                        <label c-label item="item">11</label>
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424321]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listObat" />
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424322]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424323]"></textarea>
+                    </td>
+                    <td>
+                        <input style="width: 100%" k-ng-model="item.obj[424324]" kendo-datepicker placeholer="YYYY:MM:DD"
+                            k-format="'yyyy-MM-dd'" />
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424325]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                    </td>
+                    <td>
+                        <div class="grid_12" ng-repeat="list in listWaktuFrekuensi11 | orderBy:'id'">
+                            <div ng-repeat="jawab in list.detail | orderBy:'id'">
+                                <div ng-switch on="jawab.type">
+                                    <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                        <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text" placeholder="Hari Ke">
+                                    </div>
+                                    <div class="grid_3" ng-switch-when="checkbox" style="margin-top: 5px;">
+                                        <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}"
+                                            ng-model="item.obj[jawab.id]">
+                                        <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                            &nbsp;{{ jawab.nama }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424341]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424342]"></textarea>
+                    </td>
+                </tr>
+                <!-- 11 -->
+                <!-- 12 -->
+                <tr>
+                    <td style="text-align: center;">
+                        <label c-label item="item">12</label>
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424343]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listObat" />
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424344]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424345]"></textarea>
+                    </td>
+                    <td>
+                        <input style="width: 100%" k-ng-model="item.obj[424346]" kendo-datepicker placeholer="YYYY:MM:DD"
+                            k-format="'yyyy-MM-dd'" />
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424347]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                    </td>
+                    <td>
+                        <div class="grid_12" ng-repeat="list in listWaktuFrekuensi12 | orderBy:'id'">
+                            <div ng-repeat="jawab in list.detail | orderBy:'id'">
+                                <div ng-switch on="jawab.type">
+                                    <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                        <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text" placeholder="Hari Ke">
+                                    </div>
+                                    <div class="grid_3" ng-switch-when="checkbox" style="margin-top: 5px;">
+                                        <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}"
+                                            ng-model="item.obj[jawab.id]">
+                                        <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                            &nbsp;{{ jawab.nama }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424363]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424364]"></textarea>
+                    </td>
+                </tr>
+                <!-- 12 -->
+                <!-- 13 -->
+                <tr>
+                    <td style="text-align: center;">
+                        <label c-label item="item">13</label>
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424365]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listObat" />
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424366]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424367]"></textarea>
+                    </td>
+                    <td>
+                        <input style="width: 100%" k-ng-model="item.obj[424368]" kendo-datepicker placeholer="YYYY:MM:DD"
+                            k-format="'yyyy-MM-dd'" />
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424369]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                    </td>
+                    <td>
+                        <div class="grid_12" ng-repeat="list in listWaktuFrekuensi13 | orderBy:'id'">
+                            <div ng-repeat="jawab in list.detail | orderBy:'id'">
+                                <div ng-switch on="jawab.type">
+                                    <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                        <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text" placeholder="Hari Ke">
+                                    </div>
+                                    <div class="grid_3" ng-switch-when="checkbox" style="margin-top: 5px;">
+                                        <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}"
+                                            ng-model="item.obj[jawab.id]">
+                                        <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                            &nbsp;{{ jawab.nama }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424385]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424386]"></textarea>
+                    </td>
+                </tr>
+                <!-- 13 -->
+                <!-- 14 -->
+                <tr>
+                    <td style="text-align: center;">
+                        <label c-label item="item">14</label>
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424387]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listObat" />
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424388]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424389]"></textarea>
+                    </td>
+                    <td>
+                        <input style="width: 100%" k-ng-model="item.obj[424390]" kendo-datepicker placeholer="YYYY:MM:DD"
+                            k-format="'yyyy-MM-dd'" />
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424391]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                    </td>
+                    <td>
+                        <div class="grid_12" ng-repeat="list in listWaktuFrekuensi14 | orderBy:'id'">
+                            <div ng-repeat="jawab in list.detail | orderBy:'id'">
+                                <div ng-switch on="jawab.type">
+                                    <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                        <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text" placeholder="Hari Ke">
+                                    </div>
+                                    <div class="grid_3" ng-switch-when="checkbox" style="margin-top: 5px;">
+                                        <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}"
+                                            ng-model="item.obj[jawab.id]">
+                                        <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                            &nbsp;{{ jawab.nama }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424407]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424408]"></textarea>
+                    </td>
+                </tr>
+                <!-- 14 -->
+                <!-- 15 -->
+                <tr>
+                    <td style="text-align: center;">
+                        <label c-label item="item">15</label>
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424409]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listObat" />
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424410]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424411]"></textarea>
+                    </td>
+                    <td>
+                        <input style="width: 100%" k-ng-model="item.obj[424412]" kendo-datepicker placeholer="YYYY:MM:DD"
+                            k-format="'yyyy-MM-dd'" />
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424413]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                    </td>
+                    <td>
+                        <div class="grid_12" ng-repeat="list in listWaktuFrekuensi15 | orderBy:'id'">
+                            <div ng-repeat="jawab in list.detail | orderBy:'id'">
+                                <div ng-switch on="jawab.type">
+                                    <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                        <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text" placeholder="Hari Ke">
+                                    </div>
+                                    <div class="grid_3" ng-switch-when="checkbox" style="margin-top: 5px;">
+                                        <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}"
+                                            ng-model="item.obj[jawab.id]">
+                                        <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                            &nbsp;{{ jawab.nama }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424429]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424430]"></textarea>
+                    </td>
+                </tr>
+                <!-- 15 -->
+                <!-- 16 -->
+                <tr>
+                    <td style="text-align: center;">
+                        <label c-label item="item">16</label>
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424431]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listObat" />
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424432]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424433]"></textarea>
+                    </td>
+                    <td>
+                        <input style="width: 100%" k-ng-model="item.obj[424434]" kendo-datepicker placeholer="YYYY:MM:DD"
+                            k-format="'yyyy-MM-dd'" />
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424435]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                    </td>
+                    <td>
+                        <div class="grid_12" ng-repeat="list in listWaktuFrekuensi16 | orderBy:'id'">
+                            <div ng-repeat="jawab in list.detail | orderBy:'id'">
+                                <div ng-switch on="jawab.type">
+                                    <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                        <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text" placeholder="Hari Ke">
+                                    </div>
+                                    <div class="grid_3" ng-switch-when="checkbox" style="margin-top: 5px;">
+                                        <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}"
+                                            ng-model="item.obj[jawab.id]">
+                                        <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                            &nbsp;{{ jawab.nama }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424451]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424452]"></textarea>
+                    </td>
+                </tr>
+                <!-- 16 -->
+                <!-- 0 -->
+                <td colspan="9">
+                    <label c-label item="item">B. RESEP PARENTERAL</label>
+                </td>
+                <!-- 0 -->
+                <!-- 1 -->
+                <tr>
+                    <td style="text-align: center;">
+                        <label c-label item="item">1</label>
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424453]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listObat" />
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424454]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424455]"></textarea>
+                    </td>
+                    <td>
+                        <input style="width: 100%" k-ng-model="item.obj[424456]" kendo-datepicker placeholer="YYYY:MM:DD"
+                            k-format="'yyyy-MM-dd'" />
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424457]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                    </td>
+                    <td>
+                        <div class="grid_12" ng-repeat="list in listWaktuFrekuensi17 | orderBy:'id'">
+                            <div ng-repeat="jawab in list.detail | orderBy:'id'">
+                                <div ng-switch on="jawab.type">
+                                    <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                        <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text" placeholder="Hari Ke">
+                                    </div>
+                                    <div class="grid_3" ng-switch-when="checkbox" style="margin-top: 5px;">
+                                        <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}"
+                                            ng-model="item.obj[jawab.id]">
+                                        <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                            &nbsp;{{ jawab.nama }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424473]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424474]"></textarea>
+                    </td>
+                </tr>
+                <!-- 1 -->
+                <!-- 2 -->
+                <tr>
+                    <td style="text-align: center;">
+                        <label c-label item="item">2</label>
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424475]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listObat" />
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424476]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424477]"></textarea>
+                    </td>
+                    <td>
+                        <input style="width: 100%" k-ng-model="item.obj[424478]" kendo-datepicker placeholer="YYYY:MM:DD"
+                            k-format="'yyyy-MM-dd'" />
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424479]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                    </td>
+                    <td>
+                        <div class="grid_12" ng-repeat="list in listWaktuFrekuensi18 | orderBy:'id'">
+                            <div ng-repeat="jawab in list.detail | orderBy:'id'">
+                                <div ng-switch on="jawab.type">
+                                    <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                        <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text" placeholder="Hari Ke">
+                                    </div>
+                                    <div class="grid_3" ng-switch-when="checkbox" style="margin-top: 5px;">
+                                        <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}"
+                                            ng-model="item.obj[jawab.id]">
+                                        <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                            &nbsp;{{ jawab.nama }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424495]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424496]"></textarea>
+                    </td>
+                </tr>
+                <!-- 2 -->
+                <!-- 3 -->
+                <tr>
+                    <td style="text-align: center;">
+                        <label c-label item="item">3</label>
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424497]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listObat" />
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424498]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424499]"></textarea>
+                    </td>
+                    <td>
+                        <input style="width: 100%" k-ng-model="item.obj[424500]" kendo-datepicker placeholer="YYYY:MM:DD"
+                            k-format="'yyyy-MM-dd'" />
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424501]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                    </td>
+                    <td>
+                        <div class="grid_12" ng-repeat="list in listWaktuFrekuensi19 | orderBy:'id'">
+                            <div ng-repeat="jawab in list.detail | orderBy:'id'">
+                                <div ng-switch on="jawab.type">
+                                    <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                        <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text" placeholder="Hari Ke">
+                                    </div>
+                                    <div class="grid_3" ng-switch-when="checkbox" style="margin-top: 5px;">
+                                        <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}"
+                                            ng-model="item.obj[jawab.id]">
+                                        <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                            &nbsp;{{ jawab.nama }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424517]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424518]"></textarea>
+                    </td>
+                </tr>
+                <!-- 3 -->
+                <!-- 4 -->
+                <tr>
+                    <td style="text-align: center;">
+                        <label c-label item="item">4</label>
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424519]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listObat" />
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424520]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424521]"></textarea>
+                    </td>
+                    <td>
+                        <input style="width: 100%" k-ng-model="item.obj[424522]" kendo-datepicker placeholer="YYYY:MM:DD"
+                            k-format="'yyyy-MM-dd'" />
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424523]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                    </td>
+                    <td>
+                        <div class="grid_12" ng-repeat="list in listWaktuFrekuensi20 | orderBy:'id'">
+                            <div ng-repeat="jawab in list.detail | orderBy:'id'">
+                                <div ng-switch on="jawab.type">
+                                    <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                        <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text" placeholder="Hari Ke">
+                                    </div>
+                                    <div class="grid_3" ng-switch-when="checkbox" style="margin-top: 5px;">
+                                        <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}"
+                                            ng-model="item.obj[jawab.id]">
+                                        <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                            &nbsp;{{ jawab.nama }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424539]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424530]"></textarea>
+                    </td>
+                </tr>
+                <!-- 4 -->
+                <!-- 5 -->
+                <tr>
+                    <td style="text-align: center;">
+                        <label c-label item="item">5</label>
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424541]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listObat" />
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424542]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424543]"></textarea>
+                    </td>
+                    <td>
+                        <input style="width: 100%" k-ng-model="item.obj[424544]" kendo-datepicker placeholer="YYYY:MM:DD"
+                            k-format="'yyyy-MM-dd'" />
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424545]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                    </td>
+                    <td>
+                        <div class="grid_12" ng-repeat="list in listWaktuFrekuensi21 | orderBy:'id'">
+                            <div ng-repeat="jawab in list.detail | orderBy:'id'">
+                                <div ng-switch on="jawab.type">
+                                    <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                        <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text" placeholder="Hari Ke">
+                                    </div>
+                                    <div class="grid_3" ng-switch-when="checkbox" style="margin-top: 5px;">
+                                        <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}"
+                                            ng-model="item.obj[jawab.id]">
+                                        <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                            &nbsp;{{ jawab.nama }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424561]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424562]"></textarea>
+                    </td>
+                </tr>
+                <!-- 5 -->
+                <!-- 6 -->
+                <tr>
+                    <td style="text-align: center;">
+                        <label c-label item="item">6</label>
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424563]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listObat" />
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424564]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424565]"></textarea>
+                    </td>
+                    <td>
+                        <input style="width: 100%" k-ng-model="item.obj[424566]" kendo-datepicker placeholer="YYYY:MM:DD"
+                            k-format="'yyyy-MM-dd'" />
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424567]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                    </td>
+                    <td>
+                        <div class="grid_12" ng-repeat="list in listWaktuFrekuensi22 | orderBy:'id'">
+                            <div ng-repeat="jawab in list.detail | orderBy:'id'">
+                                <div ng-switch on="jawab.type">
+                                    <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                        <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text" placeholder="Hari Ke">
+                                    </div>
+                                    <div class="grid_3" ng-switch-when="checkbox" style="margin-top: 5px;">
+                                        <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}"
+                                            ng-model="item.obj[jawab.id]">
+                                        <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                            &nbsp;{{ jawab.nama }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424583]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424584]"></textarea>
+                    </td>
+                </tr>
+                <!-- 6 -->
+                <!-- 7 -->
+                <tr>
+                    <td style="text-align: center;">
+                        <label c-label item="item">7</label>
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424585]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listObat" />
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424586]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424587]"></textarea>
+                    </td>
+                    <td>
+                        <input style="width: 100%" k-ng-model="item.obj[424588]" kendo-datepicker placeholer="YYYY:MM:DD"
+                            k-format="'yyyy-MM-dd'" />
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424589]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                    </td>
+                    <td>
+                        <div class="grid_12" ng-repeat="list in listWaktuFrekuensi23 | orderBy:'id'">
+                            <div ng-repeat="jawab in list.detail | orderBy:'id'">
+                                <div ng-switch on="jawab.type">
+                                    <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                        <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text" placeholder="Hari Ke">
+                                    </div>
+                                    <div class="grid_3" ng-switch-when="checkbox" style="margin-top: 5px;">
+                                        <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}"
+                                            ng-model="item.obj[jawab.id]">
+                                        <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                            &nbsp;{{ jawab.nama }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424605]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424606]"></textarea>
+                    </td>
+                </tr>
+                <!-- 7 -->
+                <!-- 8 -->
+                <tr>
+                    <td style="text-align: center;">
+                        <label c-label item="item">8</label>
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424607]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listObat" />
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424608]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424609]"></textarea>
+                    </td>
+                    <td>
+                        <input style="width: 100%" k-ng-model="item.obj[424610]" kendo-datepicker placeholer="YYYY:MM:DD"
+                            k-format="'yyyy-MM-dd'" />
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424611]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                    </td>
+                    <td>
+                        <div class="grid_12" ng-repeat="list in listWaktuFrekuensi24 | orderBy:'id'">
+                            <div ng-repeat="jawab in list.detail | orderBy:'id'">
+                                <div ng-switch on="jawab.type">
+                                    <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                        <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text" placeholder="Hari Ke">
+                                    </div>
+                                    <div class="grid_3" ng-switch-when="checkbox" style="margin-top: 5px;">
+                                        <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}"
+                                            ng-model="item.obj[jawab.id]">
+                                        <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                            &nbsp;{{ jawab.nama }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424627]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424628]"></textarea>
+                    </td>
+                </tr>
+                <!-- 8 -->
+                <!-- 9 -->
+                <tr>
+                    <td style="text-align: center;">
+                        <label c-label item="item">9</label>
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424629]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listObat" />
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424630]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424631]"></textarea>
+                    </td>
+                    <td>
+                        <input style="width: 100%" k-ng-model="item.obj[424632]" kendo-datepicker placeholer="YYYY:MM:DD"
+                            k-format="'yyyy-MM-dd'" />
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424633]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                    </td>
+                    <td>
+                        <div class="grid_12" ng-repeat="list in listWaktuFrekuensi25 | orderBy:'id'">
+                            <div ng-repeat="jawab in list.detail | orderBy:'id'">
+                                <div ng-switch on="jawab.type">
+                                    <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                        <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text" placeholder="Hari Ke">
+                                    </div>
+                                    <div class="grid_3" ng-switch-when="checkbox" style="margin-top: 5px;">
+                                        <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}"
+                                            ng-model="item.obj[jawab.id]">
+                                        <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                            &nbsp;{{ jawab.nama }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424649]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424650]"></textarea>
+                    </td>
+                </tr>
+                <!-- 9 -->
+                <!-- 10 -->
+                <tr>
+                    <td style="text-align: center;">
+                        <label c-label item="item">10</label>
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424651]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listObat" />
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424652]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424653]"></textarea>
+                    </td>
+                    <td>
+                        <input style="width: 100%" k-ng-model="item.obj[424654]" kendo-datepicker placeholer="YYYY:MM:DD"
+                            k-format="'yyyy-MM-dd'" />
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424655]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                    </td>
+                    <td>
+                        <div class="grid_12" ng-repeat="list in listWaktuFrekuensi26 | orderBy:'id'">
+                            <div ng-repeat="jawab in list.detail | orderBy:'id'">
+                                <div ng-switch on="jawab.type">
+                                    <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                        <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text" placeholder="Hari Ke">
+                                    </div>
+                                    <div class="grid_3" ng-switch-when="checkbox" style="margin-top: 5px;">
+                                        <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}"
+                                            ng-model="item.obj[jawab.id]">
+                                        <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                            &nbsp;{{ jawab.nama }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424671]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424672]"></textarea>
+                    </td>
+                </tr>
+                <!-- 10 -->
+                <!-- 11 -->
+                <tr>
+                    <td style="text-align: center;">
+                        <label c-label item="item">11</label>
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424673]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listObat" />
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424674]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424675]"></textarea>
+                    </td>
+                    <td>
+                        <input style="width: 100%" k-ng-model="item.obj[424676]" kendo-datepicker placeholer="YYYY:MM:DD"
+                            k-format="'yyyy-MM-dd'" />
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424677]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                    </td>
+                    <td>
+                        <div class="grid_12" ng-repeat="list in listWaktuFrekuensi27 | orderBy:'id'">
+                            <div ng-repeat="jawab in list.detail | orderBy:'id'">
+                                <div ng-switch on="jawab.type">
+                                    <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                        <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text" placeholder="Hari Ke">
+                                    </div>
+                                    <div class="grid_3" ng-switch-when="checkbox" style="margin-top: 5px;">
+                                        <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}"
+                                            ng-model="item.obj[jawab.id]">
+                                        <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                            &nbsp;{{ jawab.nama }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424693]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424694]"></textarea>
+                    </td>
+                </tr>
+                <!-- 11 -->
+                <!-- 0 -->
+                <tr>
+                    <td colspan="9">
+                        <label c-label item="item">C. CAIRAN INTRAVENA</label>
+                    </td>
+                </tr>
+                <!-- 0 -->
+                <!-- 1 -->
+                <tr>
+                    <td style="text-align: center;">
+                        <label c-label item="item">1</label>
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424695]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listObat" />
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424696]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424697]"></textarea>
+                    </td>
+                    <td>
+                        <input style="width: 100%" k-ng-model="item.obj[424698]" kendo-datepicker placeholer="YYYY:MM:DD"
+                            k-format="'yyyy-MM-dd'" />
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424699]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                    </td>
+                    <td>
+                        <div class="grid_12" ng-repeat="list in listWaktuFrekuensi28 | orderBy:'id'">
+                            <div ng-repeat="jawab in list.detail | orderBy:'id'">
+                                <div ng-switch on="jawab.type">
+                                    <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                        <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text" placeholder="Hari Ke">
+                                    </div>
+                                    <div class="grid_3" ng-switch-when="checkbox" style="margin-top: 5px;">
+                                        <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}"
+                                            ng-model="item.obj[jawab.id]">
+                                        <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                            &nbsp;{{ jawab.nama }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424715]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424716]"></textarea>
+                    </td>
+                </tr>
+                <!-- 1 -->
+                <!-- 2 -->
+                <tr>
+                    <td style="text-align: center;">
+                        <label c-label item="item">2</label>
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424717]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listObat" />
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424718]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424719]"></textarea>
+                    </td>
+                    <td>
+                        <input style="width: 100%" k-ng-model="item.obj[424720]" kendo-datepicker placeholer="YYYY:MM:DD"
+                            k-format="'yyyy-MM-dd'" />
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424721]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                    </td>
+                    <td>
+                        <div class="grid_12" ng-repeat="list in listWaktuFrekuensi29 | orderBy:'id'">
+                            <div ng-repeat="jawab in list.detail | orderBy:'id'">
+                                <div ng-switch on="jawab.type">
+                                    <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                        <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text" placeholder="Hari Ke">
+                                    </div>
+                                    <div class="grid_3" ng-switch-when="checkbox" style="margin-top: 5px;">
+                                        <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}"
+                                            ng-model="item.obj[jawab.id]">
+                                        <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                            &nbsp;{{ jawab.nama }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424737]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424738]"></textarea>
+                    </td>
+                </tr>
+                <!-- 2 -->
+                <!-- 3 -->
+                <tr>
+                    <td style="text-align: center;">
+                        <label c-label item="item">3</label>
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424739]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listObat" />
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424740]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424741]"></textarea>
+                    </td>
+                    <td>
+                        <input style="width: 100%" k-ng-model="item.obj[424742]" kendo-datepicker placeholer="YYYY:MM:DD"
+                            k-format="'yyyy-MM-dd'" />
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424743]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                    </td>
+                    <td>
+                        <div class="grid_12" ng-repeat="list in listWaktuFrekuensi30 | orderBy:'id'">
+                            <div ng-repeat="jawab in list.detail | orderBy:'id'">
+                                <div ng-switch on="jawab.type">
+                                    <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                        <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text" placeholder="Hari Ke">
+                                    </div>
+                                    <div class="grid_3" ng-switch-when="checkbox" style="margin-top: 5px;">
+                                        <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}"
+                                            ng-model="item.obj[jawab.id]">
+                                        <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                            &nbsp;{{ jawab.nama }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424759]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424760]"></textarea>
+                    </td>
+                </tr>
+                <!-- 3 -->
+                <!-- 4 -->
+                <tr>
+                    <td style="text-align: center;">
+                        <label c-label item="item">4</label>
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424761]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listObat" />
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424762]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424763]"></textarea>
+                    </td>
+                    <td>
+                        <input style="width: 100%" k-ng-model="item.obj[424764]" kendo-datepicker placeholer="YYYY:MM:DD"
+                            k-format="'yyyy-MM-dd'" />
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424765]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                    </td>
+                    <td>
+                        <div class="grid_12" ng-repeat="list in listWaktuFrekuensi31 | orderBy:'id'">
+                            <div ng-repeat="jawab in list.detail | orderBy:'id'">
+                                <div ng-switch on="jawab.type">
+                                    <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                        <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text" placeholder="Hari Ke">
+                                    </div>
+                                    <div class="grid_3" ng-switch-when="checkbox" style="margin-top: 5px;">
+                                        <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}"
+                                            ng-model="item.obj[jawab.id]">
+                                        <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                            &nbsp;{{ jawab.nama }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424781]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424782]"></textarea>
+                    </td>
+                </tr>
+                <!-- 4 -->
+                <!-- 5 -->
+                <tr>
+                    <td style="text-align: center;">
+                        <label c-label item="item">5</label>
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424783]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listObat" />
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424784]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424785]"></textarea>
+                    </td>
+                    <td>
+                        <input style="width: 100%" k-ng-model="item.obj[424786]" kendo-datepicker placeholer="YYYY:MM:DD"
+                            k-format="'yyyy-MM-dd'" />
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424787]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                    </td>
+                    <td>
+                        <div class="grid_12" ng-repeat="list in listWaktuFrekuensi32 | orderBy:'id'">
+                            <div ng-repeat="jawab in list.detail | orderBy:'id'">
+                                <div ng-switch on="jawab.type">
+                                    <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                        <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text" placeholder="Hari Ke">
+                                    </div>
+                                    <div class="grid_3" ng-switch-when="checkbox" style="margin-top: 5px;">
+                                        <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}"
+                                            ng-model="item.obj[jawab.id]">
+                                        <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                            &nbsp;{{ jawab.nama }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424803]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424804]"></textarea>
+                    </td>
+                </tr>
+                <!-- 5 -->
+                <!-- 6 -->
+                <tr>
+                    <td style="text-align: center;">
+                        <label c-label item="item">6</label>
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424805]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listObat" />
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424806]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424807]"></textarea>
+                    </td>
+                    <td>
+                        <input style="width: 100%" k-ng-model="item.obj[424808]" kendo-datepicker placeholer="YYYY:MM:DD"
+                            k-format="'yyyy-MM-dd'" />
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424809]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                    </td>
+                    <td>
+                        <div class="grid_12" ng-repeat="list in listWaktuFrekuensi33 | orderBy:'id'">
+                            <div ng-repeat="jawab in list.detail | orderBy:'id'">
+                                <div ng-switch on="jawab.type">
+                                    <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                        <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text" placeholder="Hari Ke">
+                                    </div>
+                                    <div class="grid_3" ng-switch-when="checkbox" style="margin-top: 5px;">
+                                        <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}"
+                                            ng-model="item.obj[jawab.id]">
+                                        <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                            &nbsp;{{ jawab.nama }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424825]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424826]"></textarea>
+                    </td>
+                </tr>
+                <!-- 6 -->
+                <!-- 7 -->
+                <tr>
+                    <td style="text-align: center;">
+                        <label c-label item="item">7</label>
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424827]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listObat" />
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424828]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424829]"></textarea>
+                    </td>
+                    <td>
+                        <input style="width: 100%" k-ng-model="item.obj[424830]" kendo-datepicker placeholer="YYYY:MM:DD"
+                            k-format="'yyyy-MM-dd'" />
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424831]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                    </td>
+                    <td>
+                        <div class="grid_12" ng-repeat="list in listWaktuFrekuensi34 | orderBy:'id'">
+                            <div ng-repeat="jawab in list.detail | orderBy:'id'">
+                                <div ng-switch on="jawab.type">
+                                    <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                        <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text" placeholder="Hari Ke">
+                                    </div>
+                                    <div class="grid_3" ng-switch-when="checkbox" style="margin-top: 5px;">
+                                        <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}"
+                                            ng-model="item.obj[jawab.id]">
+                                        <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                            &nbsp;{{ jawab.nama }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424847]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424848]"></textarea>
+                    </td>
+                </tr>
+                <!-- 7 -->
+                <!-- 8 -->
+                <tr>
+                    <td style="text-align: center;">
+                        <label c-label item="item">8</label>
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424849]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listObat" />
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424850]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424851]"></textarea>
+                    </td>
+                    <td>
+                        <input style="width: 100%" k-ng-model="item.obj[424852]" kendo-datepicker placeholer="YYYY:MM:DD"
+                            k-format="'yyyy-MM-dd'" />
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424853]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                    </td>
+                    <td>
+                        <div class="grid_12" ng-repeat="list in listWaktuFrekuensi35 | orderBy:'id'">
+                            <div ng-repeat="jawab in list.detail | orderBy:'id'">
+                                <div ng-switch on="jawab.type">
+                                    <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                        <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text" placeholder="Hari Ke">
+                                    </div>
+                                    <div class="grid_3" ng-switch-when="checkbox" style="margin-top: 5px;">
+                                        <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}"
+                                            ng-model="item.obj[jawab.id]">
+                                        <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                            &nbsp;{{ jawab.nama }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424869]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424870]"></textarea>
+                    </td>
+                </tr>
+                <!-- 8 -->
+                <!-- 9 -->
+                <tr>
+                    <td style="text-align: center;">
+                        <label c-label item="item">9</label>
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424871]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listObat" />
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424872]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424873]"></textarea>
+                    </td>
+                    <td>
+                        <input style="width: 100%" k-ng-model="item.obj[424874]" kendo-datepicker placeholer="YYYY:MM:DD"
+                            k-format="'yyyy-MM-dd'" />
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424875]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                    </td>
+                    <td>
+                        <div class="grid_12" ng-repeat="list in listWaktuFrekuensi36 | orderBy:'id'">
+                            <div ng-repeat="jawab in list.detail | orderBy:'id'">
+                                <div ng-switch on="jawab.type">
+                                    <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                        <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text" placeholder="Hari Ke">
+                                    </div>
+                                    <div class="grid_3" ng-switch-when="checkbox" style="margin-top: 5px;">
+                                        <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}"
+                                            ng-model="item.obj[jawab.id]">
+                                        <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                            &nbsp;{{ jawab.nama }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424891]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424892]"></textarea>
+                    </td>
+                </tr>
+                <!-- 9 -->
+                <!-- 10 -->
+                <tr>
+                    <td style="text-align: center;">
+                        <label c-label item="item">10</label>
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424893]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listObat" />
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424894]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424895]"></textarea>
+                    </td>
+                    <td>
+                        <input style="width: 100%" k-ng-model="item.obj[424896]" kendo-datepicker placeholer="YYYY:MM:DD"
+                            k-format="'yyyy-MM-dd'" />
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424897]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                    </td>
+                    <td>
+                        <div class="grid_12" ng-repeat="list in listWaktuFrekuensi37 | orderBy:'id'">
+                            <div ng-repeat="jawab in list.detail | orderBy:'id'">
+                                <div ng-switch on="jawab.type">
+                                    <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                        <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text" placeholder="Hari Ke">
+                                    </div>
+                                    <div class="grid_3" ng-switch-when="checkbox" style="margin-top: 5px;">
+                                        <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}"
+                                            ng-model="item.obj[jawab.id]">
+                                        <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                            &nbsp;{{ jawab.nama }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424913]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424914]"></textarea>
+                    </td>
+                </tr>
+                <!-- 10 -->
+                <!-- 11 -->
+                <tr>
+                    <td style="text-align: center;">
+                        <label c-label item="item">11</label>
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424915]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listObat" />
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424916]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424917]"></textarea>
+                    </td>
+                    <td>
+                        <input style="width: 100%" k-ng-model="item.obj[424918]" kendo-datepicker placeholer="YYYY:MM:DD"
+                            k-format="'yyyy-MM-dd'" />
+                    </td>
+                    <td>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[424919]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                    </td>
+                    <td>
+                        <div class="grid_12" ng-repeat="list in listWaktuFrekuensi38 | orderBy:'id'">
+                            <div ng-repeat="jawab in list.detail | orderBy:'id'">
+                                <div ng-switch on="jawab.type">
+                                    <div class="grid_12" ng-switch-when="textbox" style="margin-top: 10px;">
+                                        <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text" placeholder="Hari Ke">
+                                    </div>
+                                    <div class="grid_3" ng-switch-when="checkbox" style="margin-top: 5px;">
+                                        <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}"
+                                            ng-model="item.obj[jawab.id]">
+                                        <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                            &nbsp;{{ jawab.nama }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424935]"></textarea>
+                    </td>
+                    <td>
+                        <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[424936]"></textarea>
+                    </td>
+                </tr>
+                <!-- 11 -->
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<br />
+<br />
+<div class="grid_12">
+    <div ng-include='"../app/module/EMR/TemplateButtonDinamis" '></div>
+
+</div>
