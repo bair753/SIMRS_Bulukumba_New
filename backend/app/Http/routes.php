@@ -844,6 +844,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
           Route::get('farmasi/get-daftar-resep', 'Farmasi\FarmasiController@getDaftarResep');
           Route::get('farmasi/get-daftar-retur-obat', 'Farmasi\FarmasiController@getDaftarReturObat');
           Route::get('farmasi/get-daftar-paket-obat-pasien', 'Farmasi\FarmasiController@getDaftarPaketObatPasien');
+          Route::get('farmasi/get-jenis-billing', 'Farmasi\FarmasiController@getJenisBill');
 
           Route::get('farmasi/get-norec_bebas', 'Farmasi\PelayananObatBebasController@GetNorecResepBebas');
           Route::get('farmasi/get-detail-obat-bebas', 'Farmasi\PelayananObatBebasController@getDetailResepBebas');
@@ -2479,6 +2480,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
                 Route::post('sysadmin/master/delete-konversi-satuan', 'SysAdmin\Master\MasterController@hapusKonversiSatuan');
                 Route::post('sysadmin/master/save-statusenabled-rekanan', 'SysAdmin\Master\MasterController@UpdateStatusEnabledRekanan');
                 Route::post('sysadmin/master/save-data-rekanan', 'SysAdmin\Master\MasterController@saveDataRekanan');
+                Route::post('sysadmin/master/save-kelbil-produk', 'SysAdmin\Master\MasterController@updateKelompokBill');
 
                 Route::post('sysadmin/master/save-table-row','SysAdmin\Master\MasterController@saveTable');
                 Route::post('sysadmin/master/hapus-tarif-harganetto', 'SysAdmin\Master\MasterController@hapusHargaNettoByKelas');
@@ -2692,6 +2694,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
         Route::get('report/cetak-suratjaminanpelayanan','Report\ReportController@cetakSuratJaminanPelayanan');
         Route::get('report/cetak-pegawai','Report\ReportController@cetakPegawai');
         Route::get('report/cetak-surat-perintah-bayar','Report\ReportController@cetakSuratBayar');
+        Route::get('report/billing-detail','Report\ReportController@cetakBillingDetail');
 
         Route::get('viewer/get-list-antrian','Antrian\AntrianController@getListAntrian');
         Route::get('viewer/update-antrian','Antrian\AntrianController@updatePanggil');

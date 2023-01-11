@@ -132,6 +132,47 @@ class MasterController extends ApiController{
         return $this->setStatusCode($result['status'])->respond($result, $transMessage);
     }
 
+    public function updateKelompokBill(Request $request){
+        $kdProfile = (int) $this->getDataKdProfile($request);
+        DB::beginTransaction();
+        $data=$request['data'];
+        try {
+            foreach ($request['selected'] as $item){
+                $newKS = Produk::where('id',$item['id'])->where('kdprofile',$kdProfile)->first();
+                $newKS->objectjenisbillfk = $request['jenisbilling'];
+                $newKS->save();
+            }
+                // $dataOP = Produk::whereIn('id', $data['id'])
+                //     ->where('kdprofile',$kdProfile)
+                //     ->update([
+                //         'objectjenisbillfk' => $data['jenisbilling'],
+                // ]);
+
+            $transStatus = 'true';
+        }catch (\Exception $e) {
+            $transStatus = 'false';
+        }
+
+        if ($transStatus == 'true') {
+            $transMessage = "Simpan Berhasil";
+            DB::commit();
+            $result = array(
+                "status" => 201,
+                "message" => $transMessage,
+                "as" => 'ea@epic',
+            );
+        } else {
+            $transMessage = "Simpan Gagal";
+            DB::rollBack();
+            $result = array(
+                "status" => 400,
+                "message"  => $transMessage,
+                "as" => 'ea@epic',
+            );
+        }
+        return $this->setStatusCode($result['status'])->respond($result, $transMessage);
+    }
+
     public function saveDataProduk(Request $request){
         DB::beginTransaction();
         $data = $request->all();
