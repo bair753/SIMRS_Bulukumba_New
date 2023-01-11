@@ -175,20 +175,15 @@
             <table width="100%">
                 <tr>
                     <td width="25" align="center"><img class="normalTidakNormal"
-                            src="images/logo_rs/logokotamataram_small.png"></td>
-                    <td width="50" align="center"><label c-label real>
-                            <h1 style="color: black;text-align: center;font-size: 12px;font-family: tahoma;">PEMERINTAH
-                                KOTA MATARAM</h1><label c-label real>
-                                <h1 style="color: black;text-align: center;font-size: 12px;font-family: tahoma;">RUMAH
-                                    SAKIT UMUM DAERAH KOTA MATARAM</h1>
+                            src="images/logo_rs/logo-only.png"></td>
+                    <td width="75" align="center"><label c-label real>
+                            <h1 style="color: black;text-align: center;font-size: 12px;font-family: tahoma;">PEMERINTAH KABUPATEN PENUKAL ABAB LEMATANG ILIR</h1><label c-label real>
+                                <h1 style="color: black;text-align: center;font-size: 12px;font-family: tahoma;">RSUD H. A. SULTHAN DAENG RADJA BULUKUMBA</h1>
                             </label>
                         </label><label c-label real
-                            style="color: black;text-align: center;font-size: 10px;font-family: tahoma;">Jl. Bung Karno
-                            No. 3 Pagutan - Mataram Telp. (0370) 640774 Fax. (0370) 646928</label><label c-label real
-                            style="color: black;text-align: center;font-size: 10px;font-family: tahoma;">website:
-                            www.rsudmataram.com Email: rsud_mataram@mataramkota.go.id</label></td>
-                    <td width="25" align="center"><img class="normalTidakNormal"
-                            src="images/logo_rs/logorsudmataram_small.png"></td>
+                            style="color: black;text-align: center;font-size: 10px;font-family: tahoma;">Jl. Serikaya No.17, Caile, Kec. Ujung Bulu, Kabupaten Bulukumba, Sulawesi Selatan</label></td>
+                    <!-- <td width="25" align="center"><img class="normalTidakNormal"
+                            src="images/logo_rs/Cibinong_kcl.jpg"></td> -->
                 </tr>
             </table>
         </div>
@@ -656,3 +651,29 @@
     </div>
 </div>
 <!-- END POP UP CETAK SURAT RUJUKAN -->
+<div kendo-window="popupGridGambar" k-title="''" k-width="1132" k-visible="false"
+    k-on-open="win2visible = true" k-on-close="win2visible = false">
+    <div class="panel panel-default container_12" style="padding: 0px 10px;">
+        <div class="grid_12">
+            <div kendo-grid k-data-source="sourceGambar" k-groupable="'true'" k-selectable="'row'"
+                k-pageable="'true'" k-columns="columnGambar" k-sortable="'true'" k-ng-model="dataSelectedGambar"
+                ng-click="klg(dataSelectedGambar)">
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/ng-template" id="custom-confirm.html">
+    <md-dialog md-theme="default">
+        <md-dialog-content  class="md-dialog-content">
+        <h2 class="md-title">Informasi</h2>
+        <div class="md-dialog-content-body" style="text-align:center;">
+            <p>Pilih gambar yang ingin dilihat ?</p>
+        </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <button class="md-primary md-cancel-button md-button" ng-click="hasillab()">Lab</button>
+            <button class="md-primary md-cancel-button md-button" ng-click="hasilrad()">Radiologi</button>
+            <button class="md-primary md-cancel-button md-button" ng-click="hasilekg()">EKG</button>
+        </md-dialog-actions>
+    </md-dialog>
+</script>

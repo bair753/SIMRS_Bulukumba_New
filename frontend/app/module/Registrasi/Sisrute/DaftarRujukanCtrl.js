@@ -1,7 +1,7 @@
 define(['initialize'], function (initialize) {
     'use strict';
-    initialize.controller('DaftarRujukanCtrl', ['$q', '$scope', 'ModelItem', 'DateHelper', 'CacheHelper', '$state', 'MedifirstService',
-        function ($q, $scope, ModelItem, dateHelper, cacheHelper, $state, medifirstService) {
+    initialize.controller('DaftarRujukanCtrl', ['$q', '$scope', 'ModelItem', 'DateHelper', 'CacheHelper', '$state', 'MedifirstService', '$mdDialog',
+        function ($q, $scope, ModelItem, dateHelper, cacheHelper, $state, medifirstService, $mdDialog) {
             $scope.item = {};
             $scope.now = new Date();
             $scope.currentKeterangan = [];
@@ -114,6 +114,7 @@ define(['initialize'], function (initialize) {
                         { text: "Edit", click: edit, imageClass: "k-icon k-i-pencil" },
                         // { text: "Jawab Rujukan", click: jawabRujukan, imageClass: "k-icon k-i-download" },
                         { text: "Batal", click: batalRujuk, imageClass: "k-icon k-i-cancel" },
+                        { text: "Lihat Gambar", click: lihatGambar, imageClass: "k-icon k-i-save" },
                     ],
                     title: "",
                     width: "150px",
@@ -162,6 +163,63 @@ define(['initialize'], function (initialize) {
 
                 })
             }
+            function lihatGambar(e){
+                e.preventDefault();
+                var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+                $mdDialog.show({
+                    locals:{parm: dataItem},
+                    controller: function ($scope, $mdDialog, parm) {
+                        $scope.hasillab = function () {
+                            var json =  {
+                                "url": "/rujukan/images/list?NOMOR_RUJUKAN="+ parm.norujukan +"&JENIS_LAMPIRAN_GAMBAR=1",
+                                "method": "GET",
+                                "data": null
+                            }
+                            medifirstService.postNonMessage("bridging/sisrute/tools", json).then(function (e) {
+                                loadgambar(e.data.data);
+                            })
+                            $mdDialog.hide();
+                        };
+                        $scope.hasilrad = function () {
+                            var json =  {
+                                "url": "/rujukan/images/list?NOMOR_RUJUKAN="+ parm.norujukan +"&JENIS_LAMPIRAN_GAMBAR=2",
+                                "method": "GET",
+                                "data": null
+                            }
+                            medifirstService.postNonMessage("bridging/sisrute/tools", json).then(function (e) {
+                                loadgambar(e.data.data);
+                            })
+                            $mdDialog.hide();
+                        };
+                        $scope.hasilekg = function () {
+                            var json =  {
+                                "url": "/rujukan/images/list?NOMOR_RUJUKAN="+ parm.norujukan +"&JENIS_LAMPIRAN_GAMBAR=3",
+                                "method": "GET",
+                                "data": null
+                            }
+                            medifirstService.postNonMessage("bridging/sisrute/tools", json).then(function (e) {
+                                loadgambar(e.data.data);
+                            })
+                            $mdDialog.hide();
+                        };
+                    },
+                    templateUrl: 'custom-confirm.html',
+                });
+            }
+            function loadgambar(data) {
+                $scope.sourceGambar = new kendo.data.DataSource({
+                    data: data,
+                    pageSize: 10,
+                });
+                $scope.popupGridGambar.center().open();
+            }
+            $scope.columnGambar = [
+                { field: "NOMOR_RUJUKAN", title: "No Rujukan", width: "100px" },
+                { field: "NAME_FILE", title: "Nama File", width: "300px" },
+                { field: "TYPE", title: "format", width: "50px" },
+                { field: "LAMPIRAN_GAMBAR", title: "Lampiran Gambar", width: "180px" },
+                { field: "WAKTU_UPLOAD", title: "Waktu Upload", width: "100px" },
+            ];
             $scope.SearchData = function () {
                 LoadData();
             }
