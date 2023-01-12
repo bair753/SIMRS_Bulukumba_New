@@ -750,6 +750,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
 
           Route::get('emr/get-pegawai-parts','EMR\EMRController@getPegawaiParts');
           Route::post('emr/hapus-order-pelayananobatfarmasi', 'EMR\EMRController@hapusOrderResep');
+          Route::get('emr/get-diagnosa-pernoreg', 'EMR\EMRController@getDiagnosaPasienPerNoReg');
 
           Route::get('emr/get-daftar-obat-sering-diresepkan','EMR\EMRController@getObatSeringDiresepkanDokter');
           Route::get('emr/get-datacombo-part-kelompokpasien', 'EMR\EMRController@getDataComboKelompokPaisnePart');
@@ -2710,6 +2711,8 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
         Route::get('viewer/get-data-viewer','Antrian\AntrianController@getViewer');
         Route::get('viewer/get-setting-viewer','Antrian\AntrianController@getSettingViewer');
         Route::get('viewer/get-dipanggil','Antrian\AntrianController@getDipanggil');
+        Route::get('viewer/get-list-antrian-farmasi','Antrian\AntrianController@getListAntrianFarm');
+        Route::get('viewer/get-data-viewer-far','Antrian\AntrianController@getViewerFar');
 
        Route::post('get-token', 'Auth\LoginController@getTokens');
 

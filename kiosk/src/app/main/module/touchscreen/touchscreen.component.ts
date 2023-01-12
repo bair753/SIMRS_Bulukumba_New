@@ -133,7 +133,7 @@ export class TouchscreenComponent implements OnInit {
         if (this.isCetakDSKiosk == 'false') {
           window.open(Configuration.get().apiBackend + 'medifirst2000/report/cetak-antrian?norec='
             + response.noRec
-            + '&kdprofile=21', '_blank');
+            + '&kdprofile=39', '_blank');
         } else if (this.isCetakDSKiosk == 'android') {
           let loket = ''
           if (jenis == "A") {

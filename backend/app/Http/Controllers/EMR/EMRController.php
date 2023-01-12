@@ -6268,10 +6268,16 @@ class EMRController  extends ApiController
                 if ($request['departemenfk'] == 3) {
                     $dataSO->keteranganorder = 'Order Laboratorium';
                     $dataSO->objectkelompoktransaksifk = 93;
+                    if (isset($request['kddiagnosa']) && $request['kddiagnosa'] != 'undefined' && $request['kddiagnosa'] != '') {
+                        $dataSO->kddiagnosa = $request['kddiagnosa'];
+                    }
                 }
                 if ($request['departemenfk'] == 27) {
                     $dataSO->keteranganorder = 'Order Radiologi';
                     $dataSO->objectkelompoktransaksifk = 94;
+                    if (isset($request['kddiagnosa']) && $request['kddiagnosa'] != 'undefined' && $request['kddiagnosa'] != '') {
+                        $dataSO->kddiagnosa = $request['kddiagnosa'];
+                    }
                 }
                 if ($request['departemenfk'] == 25) {
                     $dataSO->keteranganorder = 'Pesan Jadwal Operasi';
@@ -10435,6 +10441,43 @@ class EMRController  extends ApiController
         $dataObat = $dataObat->get();
 
         return $this->respond($dataObat);
+    }
+
+    public function getDiagnosaPasienPerNoReg(Request $request)
+    {
+        $kdProfile = $this->getDataKdProfile($request);
+        $idProfile = (int) $kdProfile;
+
+        $get_history = \DB::table('antrianpasiendiperiksa_t AS apd')
+        ->select('apd.norec')
+        ->join('pasiendaftar_t as pd', 'pd.norec', '=', 'apd.noregistrasifk')
+        ->join('pasien_m AS ps', 'ps.id', '=', 'pd.nocmfk')
+        ->where('ps.nocm', $request->norm)
+            ->groupBy('apd.norec')
+            ->get();
+
+        $noreq = [];
+        foreach ($get_history as $item) {
+            $noreq[] = $item->norec;
+        }
+
+        $data = \DB::table('diagnosapasien_t AS dp')
+        ->select(
+            'dg.kddiagnosa',
+            \DB::raw('CONCAT(dg.kddiagnosa, \' - \',dg.namadiagnosa) AS namadiagnosa')
+        )
+            ->join('detaildiagnosapasien_t AS ddp', 'ddp.objectdiagnosapasienfk', '=', 'dp.norec')
+            ->join('diagnosa_m AS dg', 'dg.id', '=', 'ddp.objectdiagnosafk')
+            ->where('dp.kdprofile', $kdProfile)
+            ->whereIn('dp.noregistrasifk', $noreq)
+            ->groupBy('dg.kddiagnosa', 'namadiagnosa')
+            ->get();
+
+        $result = array(
+            'data' => $data,
+            'message' => 'r@hm@t',
+        );
+        return $this->respond($result);
     }
 
 }
