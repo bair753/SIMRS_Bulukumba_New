@@ -44,7 +44,8 @@ class BridgingSisruteController extends  ApiController
     public function getFaskes(Request $request) {
         // id & pass dari kemkes
         $id = $this->userSisrute();
-        $pass = md5( $this->passwordSisrute());
+        // $pass = md5( $this->passwordSisrute());
+        $pass = hash('sha256', $id . $this->passwordSisrute());
 
         // get Timestamp
         $dt = new \DateTime(null,new \DateTimeZone("UTC"));
@@ -102,8 +103,9 @@ class BridgingSisruteController extends  ApiController
     }
     public function getAlasanRujukan(Request $request) {
         // id & pass dari kemkes
-        $id = 3174260;
-        $pass = md5("12345");
+        $id = $this->userSisrute();
+        // $pass = md5( $this->passwordSisrute());
+        $pass = hash('sha256', $id . $this->passwordSisrute());
 
         // get Timestamp
         $dt = new \DateTime(null,new \DateTimeZone("UTC"));
@@ -161,7 +163,8 @@ class BridgingSisruteController extends  ApiController
     public function getDiagnosa(Request $request) {
         // id & pass dari kemkes
         $id = $this->userSisrute();
-        $pass = md5( $this->passwordSisrute());
+        // $pass = md5( $this->passwordSisrute());
+        $pass = hash('sha256', $id . $this->passwordSisrute());
 
         // get Timestamp
         $dt = new \DateTime(null,new \DateTimeZone("UTC"));
@@ -221,7 +224,8 @@ class BridgingSisruteController extends  ApiController
         $dataReq = $req['filter']['filters'][0]['value'];
         // id & pass dari kemkes
         $id = $this->userSisrute();
-        $pass = md5( $this->passwordSisrute());
+        // $pass = md5( $this->passwordSisrute());
+        $pass = hash('sha256', $id . $this->passwordSisrute());
 
         // get Timestamp
         $dt = new \DateTime(null,new \DateTimeZone("UTC"));
@@ -279,8 +283,8 @@ class BridgingSisruteController extends  ApiController
 
         // id & pass dari kemkes
         $id = $this->userSisrute();
-        $pass = md5( $this->passwordSisrute());
-
+        // $pass = md5( $this->passwordSisrute());
+        $pass = hash('sha256', $id . $this->passwordSisrute());
         // get Timestamp
         $dt = new \DateTime(null,new \DateTimeZone("UTC"));
         $timeStamp = $dt->getTimestamp();
@@ -335,7 +339,8 @@ class BridgingSisruteController extends  ApiController
 
         // id & pass dari kemkes
         $id = $this->userSisrute();
-        $pass = md5( $this->passwordSisrute());
+        // $pass = md5( $this->passwordSisrute());
+        $pass = hash('sha256', $id . $this->passwordSisrute());
 
         // get Timestamp
         $dt = new \DateTime(null,new \DateTimeZone("UTC"));
@@ -402,7 +407,8 @@ class BridgingSisruteController extends  ApiController
     public function postRujukan(Request $request) {
         // id & pass dari kemkes
         $id = $this->userSisrute();
-        $pass = md5( $this->passwordSisrute());
+        // $pass = md5( $this->passwordSisrute());
+        $pass = hash('sha256', $id . $this->passwordSisrute());
 
         // get Timestamp
         $dt = new \DateTime(null,new \DateTimeZone("UTC"));
@@ -460,7 +466,8 @@ class BridgingSisruteController extends  ApiController
     public function putRujukan(Request $request) {
         // id & pass dari kemkes
         $id = $this->userSisrute();
-        $pass = md5( $this->passwordSisrute());
+        // $pass = md5( $this->passwordSisrute());
+        $pass = hash('sha256', $id . $this->passwordSisrute());
 
         // get Timestamp
         $dt = new \DateTime(null,new \DateTimeZone("UTC"));
@@ -564,7 +571,8 @@ class BridgingSisruteController extends  ApiController
     public function jawabRujukan(Request $request) {
         // id & pass dari kemkes
         $id = $this->userSisrute();
-        $pass = md5( $this->passwordSisrute());
+        // $pass = md5( $this->passwordSisrute());
+        $pass = hash('sha256', $id . $this->passwordSisrute());
         // get Timestamp
         $dt = new \DateTime(null,new \DateTimeZone("UTC"));
         $timeStamp = $dt->getTimestamp();
@@ -633,7 +641,8 @@ class BridgingSisruteController extends  ApiController
     public function batalRujukan(Request $request) {
         // id & pass dari kemkes
         $id = $this->userSisrute();
-        $pass = md5( $this->passwordSisrute());
+        // $pass = md5( $this->passwordSisrute());
+        $pass = hash('sha256', $id . $this->passwordSisrute());
 
         // get Timestamp
         $dt = new \DateTime(null,new \DateTimeZone("UTC"));
@@ -701,7 +710,8 @@ class BridgingSisruteController extends  ApiController
     public function notifRujukan(Request $request) {
         // id & pass dari kemkes
         $id = $this->userSisrute();
-        $pass = md5( $this->passwordSisrute());
+        // $pass = md5( $this->passwordSisrute());
+        $pass = hash('sha256', $id . $this->passwordSisrute());
 
         // get Timestamp
         $dt = new \DateTime(null,new \DateTimeZone("UTC"));
@@ -789,6 +799,63 @@ class BridgingSisruteController extends  ApiController
             'pegawai'=> $pegawai,
             'message' => 'ramdanegie',
         );
+        return $this->respond($result);
+    }
+
+    public function SisruteTools(Request $request) {
+        // id & pass dari kemkes
+        $id = $this->userSisrute();
+        // $pass = md5( $this->passwordSisrute());
+        $pass = hash('sha256', $id . $this->passwordSisrute());
+
+        // get Timestamp
+        $dt = new \DateTime(null,new \DateTimeZone("UTC"));
+        $timeStamp = $dt->getTimestamp();
+
+        // generate signature
+        $key = $id."&".$timeStamp;
+        $signature = base64_encode(hash_hmac("sha256",utf8_encode($key), utf8_encode($pass),true));
+
+        $url = $this->getUrlSisrute() . $request['url'];
+        $method = $request['method']; // POST / PUT / DELETE
+
+        //region Format Data Send
+        //endregion
+        $postdata = "";
+        if ($request['data'] != null) {
+            $postdata = json_encode($request['data']);
+        }
+        $headers = [
+            "X-cons-id: ".$id,
+            "X-Timestamp: ".$timeStamp,
+            "X-signature: ".$signature,
+            "Content-type: application/json",
+            "Content-length: ".strlen($postdata)   
+        ];
+
+        // Gunakan curl untuk mengakses/merequest alamat api
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_HEADER, false);
+        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $method);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $postdata);
+
+        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+            $result= "cURL Error #:" . $err;
+        } else {
+            $result = (array) json_decode($response);
+        }
         return $this->respond($result);
     }
 }

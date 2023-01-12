@@ -8,14 +8,27 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
             $scope.isRouteLoading = false
             $scope.item.tglLahir = $scope.now
             $scope.item.tglRujukan = $scope.now
-            $scope.listJenisRujukan = [{ 'id': 1, 'name': 'Rawat Inap' }, { 'id': 2, 'name': 'Rawat Jalan' }, { 'id': 3, 'name': 'Parsial' }]
+            $scope.showmatneo = false
+            $scope.showkriteria = false
+            $scope.showkriteriarujukan = true
+            $scope.item.jeniskriteria = 1
+            $scope.listJenisRujukan = [
+                { 'id': 1, 'name': 'Rawat Jalan' }, 
+                { 'id': 2, 'name': 'Rawat Darurat/Inap' }, 
+                { 'id': 3, 'name': 'Parsial' },
+                { 'id': 6, 'name': 'Maternal' },
+                { 'id': 7, 'name': 'Neonatal' }
+            ]
             $scope.listNyeri = [{ 'id': 1, 'name': 'Tidak Nyeri', 'value': 0 }, { 'id': 2, 'name': 'Ringan', 'value': 1 },
             { 'id': 3, 'name': 'Sedang', 'value': 2 }, { 'id': 4, 'name': 'Berat', 'value': 3 }]
             $scope.showAndHide = function () {
                 $('#contentCariPasien').fadeToggle("fast", "linear");
             }
             $scope.isRujukan = false
-
+            $scope.listjeniskriteria = [
+                { 'id': 1, 'name': 'Kriteria Rujukan' }, 
+                { 'id': 2, 'name': 'Kriteria Khusus' },
+            ]
             getCombo()
 
 
@@ -45,7 +58,14 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                     //     $scope.listDiagnosa = datas
                     // }
 
-
+                    loadPELAYANAN()
+                    loadKRITERIA_RUJUKAN()
+                    loadKRITERIA_KHUSUS()
+                    loadSDM()
+                    loadKELAS_PERAWATAN()
+                    loadJENIS_PERAWATAN()
+                    loadALAT()
+                    loadSARANA()
                     getCache()
                 })
 
@@ -57,6 +77,125 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                 $scope.listFaskes = data;
             });
 
+            function loadPELAYANAN() {
+                var json =  {
+                    "url": "/rsonline/referensi/pelayanan",
+                    "method": "GET",
+                    "data": null
+                }
+                medifirstService.postNonMessage("bridging/sisrute/tools", json).then(function (e) {
+                    if (e.status === 200) {
+                        $scope.listPelayanan = e.data
+                    } else {
+                        $scope.listPelayanan = null
+                    }
+                })
+            }
+            function loadKRITERIA_RUJUKAN(Kddiagnosa) {
+                var json =  {
+                    "url": "/referensi/kriteria/rujukan?DIAGNOSA=" + Kddiagnosa,
+                    "method": "GET",
+                    "data": null
+                }
+                medifirstService.postNonMessage("bridging/sisrute/tools", json).then(function (e) {
+                    if (e.status === 200) {
+                        $scope.listKriteriarjn = e.data
+                    } else {
+                        $scope.listKriteriarjn = null
+                    }
+                })
+            }
+            function loadKRITERIA_KHUSUS() {
+                var json =  {
+                    "url": "/referensi/kriteria/khusus",
+                    "method": "GET",
+                    "data": null
+                }
+                medifirstService.postNonMessage("bridging/sisrute/tools", json).then(function (e) {
+                    if (e.status === 200) {
+                        $scope.listKriteriakhs = e.data
+                    } else {
+                        $scope.listKriteriakhs = null
+                    }
+                })
+            }
+            function loadSDM() {
+                var json =  {
+                    "url": "/rsonline/referensi/sdm",
+                    "method": "GET",
+                    "data": null
+                }
+                medifirstService.postNonMessage("bridging/sisrute/tools", json).then(function (e) {
+                    if (e.status === 200) {
+                        $scope.listRefsdm = e.data
+                    } else {
+                        $scope.listRefsdm = null
+                    }
+                })
+            }
+            function loadKELAS_PERAWATAN() {
+                var json =  {
+                    "url": " /rsonline/referensi/kelas",
+                    "method": "GET",
+                    "data": null
+                }
+                medifirstService.postNonMessage("bridging/sisrute/tools", json).then(function (e) {
+                    if (e.status === 200) {
+                        $scope.listRefkelasperawatan = e.data
+                    } else {
+                        $scope.listRefkelasperawatan = null
+                    }
+                })
+            }
+            function loadJENIS_PERAWATAN() {}
+            function loadALAT() {
+                var json =  {
+                    "url": " /rsonline/referensi/alkes",
+                    "method": "GET",
+                    "data": null
+                }
+                medifirstService.postNonMessage("bridging/sisrute/tools", json).then(function (e) {
+                    if (e.status === 200) {
+                        $scope.listRefalat = e.data
+                    } else {
+                        $scope.listRefalat = null
+                    }
+                })
+            }
+            function loadSARANA() {
+                var json =  {
+                    "url": "/rsonline/referensi/sarana",
+                    "method": "GET",
+                    "data": null
+                }
+                medifirstService.postNonMessage("bridging/sisrute/tools", json).then(function (e) {
+                    if (e.status === 200) {
+                        $scope.listRefSarana = e.data
+                    } else {
+                        $scope.listRefSarana = null
+                    }
+                })
+            }
+            function loadKRITERIA_MATNEO(Kddiagnosa) {
+                var json =  {
+                    "url": "/referensi/kriteria/matneo?DIAGNOSA=" + Kddiagnosa,
+                    "method": "GET",
+                    "data": null
+                }
+                medifirstService.postNonMessage("bridging/sisrute/tools", json).then(function (e) {
+                    if (e.status === 200) {
+                        $scope.listKriteriamt = e.data
+                    } else {
+                        $scope.listKriteriamt = null
+                    }
+                })
+            }
+
+            $scope.getRefwithdiagnosa = function(e) {
+                if (!e) return;
+                loadKRITERIA_RUJUKAN(e.KODE)
+                loadKRITERIA_MATNEO(e.KODE)
+            }
 
             function getCache() {
                 var cache = cacheHelper.get('cacheEditRujukan');
@@ -101,18 +240,19 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                     $scope.item.suhu = cache.KONDISI_UMUM.SUHU
                     $scope.item.pernapasan = cache.KONDISI_UMUM.PERNAPASAN
                     $scope.item.keadaanUmum = cache.KONDISI_UMUM.KEADAAN_UMUM
-                    if (cache.KONDISI_UMUM.NYERI.KODE == 0)
+                    if (cache.KONDISI_UMUM.NYERI.KODE == "0")
                         $scope.item.nyeri = 1
-                    else if (cache.KONDISI_UMUM.NYERI.KODE == 1)
+                    else if (cache.KONDISI_UMUM.NYERI.KODE == "1")
                         $scope.item.nyeri = 2
-                    else if (cache.KONDISI_UMUM.NYERI.KODE == 2)
+                    else if (cache.KONDISI_UMUM.NYERI.KODE == "2")
                         $scope.item.nyeri = 3
-                    else if (cache.KONDISI_UMUM.NYERI.KODE == 3)
+                    else if (cache.KONDISI_UMUM.NYERI.KODE == "3")
                         $scope.item.nyeri = 4
                     $scope.item.alergi = cache.KONDISI_UMUM.ALERGI
                     $scope.item.hasilLab = cache.PENUNJANG.LABORATORIUM
                     $scope.item.hasilRadiologi = cache.PENUNJANG.RADIOLOGI
-                    $scope.item.terapi = cache.PENUNJANG.TERAPI_ATAU_TINDAKAN
+                    $scope.item.terapi = cache.PENUNJANG.TERAPI
+                    $scope.item.tindkan = cache.PENUNJANG.TINDAKAN
 
                     cacheHelper.set('cacheEditRujukan', undefined)
                 }
@@ -204,6 +344,19 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                         },
                         "RUJUKAN": {
                             "JENIS_RUJUKAN": $scope.item.jenisRujukan,         // # Jenis Rujukan 1. Rawat Jalan, 2. Rawat Darurat/Inap, 3. Parsial
+                            "PELAYANAN" : $scope.item.peyalanan != undefined ? $scope.item.peyalanan.kode : null, //"LY012",     //# jenis rujukan = rawat jalan kode lihat di sumberdaya RefPelayanan
+                            "NOMOR_RUJUKAN_BPJS" : $scope.item.norujukanbpjs != undefined ? $scope.item.norujukanbpjs : null,
+                            "KRITERIA" : {  //# Hanya untuk jenis rujukan = rawat jalan
+                                "KRITERIA_RUJUKAN" : $scope.item.kriteriarjn != undefined ? $scope.item.kriteriarjn.KODE : null ,//"305",     //#jika kriteria khusus tidak ada, berdasarkan diagnosa
+                                "KRITERIA_KHUSUS" : $scope.item.kriteriakhs != undefined ? $scope.item.kriteriakhs.KODE : null ,//"1",     //#Kriteria Khusus
+                                "SDM" : $scope.item.refsdm != undefined ? $scope.item.refsdm.kode : null ,//"01",    //#Jika kriteria khusus dan kriteria rujukan tidak ada
+                                "PELAYANAN" : $scope.item.refpelayanan != undefined ? $scope.item.refpelayanan.KODE : null ,//"XXI",   //#Jika kriteria khusus dan kriteria rujukan tidak ada
+                                "KELAS_PERAWATAN" : $scope.item.refkelasperawatan != undefined ? $scope.item.refkelasperawatan.kode : null ,//"1",    //#Jika kriteria khusus dan kriteria rujukan tidak ada
+                                "JENIS_PERAWATAN" : $scope.item.refjenisperawatan != undefined ? $scope.item.refjenisperawatan.KODE : null ,//"21",    //#Jika kriteria khusus dan kriteria rujukan tidak ada
+                                "ALAT" : $scope.item.refalat != undefined ? $scope.item.refalat.kode : null ,//"AD",    //#Jika kriteria khusus dan kriteria rujukan tidak ada
+                                "SARANA" : $scope.item.refSarana != undefined ? $scope.item.refSarana.kode_sarana : null ,//"1",   //#Jika kriteria khusus dan kriteria rujukan tidak ada
+                                "KRITERIA_MATNEO" : $scope.item.kriteriakmt != undefined ? $scope.item.kriteriakmt.ID_KRITERIA : null ,//"14523"  //#Kriteria untuk maternal dan neonatal
+                            },
                             "TANGGAL": moment($scope.item.tglRujukan).format('YYYY-MM-DD HH:mm'), //# Tanggal Rujukan Format yyy-mm-dd hh:ii:ss
                             "FASKES_TUJUAN": $scope.item.faskes.KODE,
                             "ALASAN": $scope.item.alasanRujukan.KODE,                //  # Lihat Referensi Alasan Rujukan
@@ -232,7 +385,9 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                         "PENUNJANG": {
                             "LABORATORIUM": $scope.item.hasilLab != undefined ? $scope.item.hasilLab : '',//"WBC:11,2;HB:15,6;PLT:215;", //# Hasil Laboratorium format: parameter:hasil;
                             "RADIOLOGI": $scope.item.hasilRadiologi != undefined ? $scope.item.hasilRadiologi : '', //"EKG:Sinus Takikardi;Foto Thorax:Cor dan pulmo normal;", //# Hasil Radiologi format: tindakan:hasil;
-                            "TERAPI_ATAU_TINDAKAN": $scope.item.terapi != undefined ? $scope.item.terapi : ''// "TRP:LOADING NACL 0.9% 500 CC;INJ. RANITIDIN 50 MG;#TDK:TERPASANG INTUBASI ET NO 8 BATAS BIBIR 21CM;" # Terapi atau Tindakan yang diberikan format; TRP: Nama; #TDK: Nama;
+                            // "TERAPI_ATAU_TINDAKAN": $scope.item.terapi != undefined ? $scope.item.terapi : ''// "TRP:LOADING NACL 0.9% 500 CC;INJ. RANITIDIN 50 MG;#TDK:TERPASANG INTUBASI ET NO 8 BATAS BIBIR 21CM;" # Terapi atau Tindakan yang diberikan format; TRP: Nama; #TDK: Nama;
+                            "TERAPI":  $scope.item.terapi != undefined ? $scope.item.terapi : '', //"LOADING NACL 0.9% 500 CC;INJ. RANITIDIN 50 MG;",
+                            "TINDAKAN": $scope.item.tindakan != undefined ? $scope.item.tindakan : '', //"TERPASANG INTUBASI ET NO 8 BATAS BIBIR 21CM;"
                         }
                     }
 
@@ -243,38 +398,99 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
 
 
                     if ($scope.item.noRujukan == undefined) {
-                        managePhp.postData2('bridging/sisrute/rujukan/post', objSave).then(function (res) {
+                        $scope.isRouteLoading = true
+                        medifirstService.post('bridging/sisrute/rujukan/post', objSave).then(function (res) {
                             if (res.data.success == true) {
+                                $scope.isRouteLoading = false
                                 toastr.success(res.data.detail + ' No. ' + res.data.data.RUJUKAN.NOMOR, 'Success')
 
-
+                                $scope.item.noRujukan = res.data.data.RUJUKAN.NOMOR
+                                if($scope.txtfilehasillab != undefined && $scope.txtfilehasillab != null){
+                                    var json =  {
+                                        "url": "/rujukan/images/save",
+                                        "method": "POST",
+                                        "data": {
+                                            "NOMOR_RUJUKAN" : $scope.item.noRujukan,
+                                            "JENIS_LAMPIRAN_GAMBAR" : 1,
+                                            "FILE" : $scope.txtfilehasillab
+                                        }
+                                    }
+                                    $scope.isRouteLoading = true
+                                    medifirstService.postNonMessage("bridging/sisrute/tools", json).then(function (e) {
+                                        if (e.status === 200) {
+                                            toastr.success(e.data.data[0].LAMPIRAN_GAMBAR + " berhasil diupload");
+                                        } else {
+                                            toastr.warning('gagal upload hasil lab');
+                                        }
+                                        $scope.isRouteLoading = false
+                                    })
+                                }
+                                if($scope.txtfilehasilradiologi != undefined && $scope.txtfilehasilradiologi != null){
+                                    var json =  {
+                                        "url": "/rujukan/images/save",
+                                        "method": "POST",
+                                        "data": {
+                                            "NOMOR_RUJUKAN" : $scope.item.noRujukan,
+                                            "JENIS_LAMPIRAN_GAMBAR" : 2,
+                                            "FILE" : $scope.txtfilehasilradiologi
+                                        }
+                                    }
+                                    $scope.isRouteLoading = true
+                                    medifirstService.postNonMessage("bridging/sisrute/tools", json).then(function (e) {
+                                        if (e.status === 200) {
+                                            toastr.success(e.data.data[0].LAMPIRAN_GAMBAR + " berhasil diupload");
+                                        } else {
+                                            toastr.warning('gagal upload hasil radiologi');
+                                        }
+                                        $scope.isRouteLoading = false
+                                    })
+                                } 
+                                if($scope.txtfilehasilekg != undefined && $scope.txtfilehasilekg != null){
+                                    var json =  {
+                                        "url": "/rujukan/images/save",
+                                        "method": "POST",
+                                        "data": {
+                                            "NOMOR_RUJUKAN" : $scope.item.noRujukan,
+                                            "JENIS_LAMPIRAN_GAMBAR" : 3,
+                                            "FILE" : $scope.txtfilehasilekg
+                                        }
+                                    }
+                                    $scope.isRouteLoading = true
+                                    medifirstService.postNonMessage("bridging/sisrute/tools", json).then(function (e) {
+                                        if (e.status === 200) {
+                                            toastr.success(e.data.data[0].LAMPIRAN_GAMBAR + " berhasil diupload");
+                                        } else {
+                                            toastr.warning('gagal upload hasil ekg');
+                                        }
+                                        $scope.isRouteLoading = false
+                                    })
+                                } 
                                 // 2+2=5
                                 //Data-data untuk disimpan ke database
-                                var data = {
+                                // var data = {
 
-                                    nocm: $scope.item.noCm,
-                                    tglrujukan: moment($scope.item.tglRujukan).format('YYYY-MM-DD HH:mm'),
-                                    faskestujuan: $scope.item.faskes.KODE,
-                                    alasanrujukan: $scope.item.alasanRujukan.KODE,
-                                    alasantambahan: $scope.item.alasanTambahan != undefined ? $scope.item.alasanTambahan : '',
-                                    objectdiagnosafk: $scope.item.diagnosa.KODE,
-                                    dokter: $scope.item.dokter.noidentitas != null ? $scope.item.dokter.id : '-',
-                                    petugasperujuk: $scope.item.petugas.noidentitas != null ? $scope.item.petugas.id : '-',
-                                    norujukan: res.data.data.RUJUKAN.NOMOR,
+                                //     nocm: $scope.item.noCm,
+                                //     tglrujukan: moment($scope.item.tglRujukan).format('YYYY-MM-DD HH:mm'),
+                                //     faskestujuan: $scope.item.faskes.KODE,
+                                //     alasanrujukan: $scope.item.alasanRujukan.KODE,
+                                //     alasantambahan: $scope.item.alasanTambahan != undefined ? $scope.item.alasanTambahan : '',
+                                //     objectdiagnosafk: $scope.item.diagnosa.KODE,
+                                //     dokter: $scope.item.dokter.noidentitas != null ? $scope.item.dokter.id : '-',
+                                //     petugasperujuk: $scope.item.petugas.noidentitas != null ? $scope.item.petugas.id : '-',
+                                //     norujukan: res.data.data.RUJUKAN.NOMOR,
 
-                                }
+                                // }
 
-                                var objSave =
-                                {
-                                    datarujukan: data
+                                // var objSave =
+                                // {
+                                //     datarujukan: data
 
-                                }
-
-                                managePhp.postData2("rujukan-keluar/post-data-rujukan", objSave).then(function (e) {
-                                    debugger;
-                                    $scope.dataRujukan = e.data.data;
-                                    // LoadCetakan()
-                                });
+                                // }
+                                // medifirstService.post("rujukan-keluar/post-data-rujukan", objSave).then(function (e) {
+                                //     debugger;
+                                //     $scope.dataRujukan = e.data.data;
+                                //     // LoadCetakan()
+                                // });
                                 // 
 
 
@@ -287,37 +503,99 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                         var noRujukan = ''
                         if ($scope.item.noRujukan != undefined)
                             noRujukan = $scope.item.noRujukan
-                        managePhp.putData('bridging/sisrute/rujukan/put?nomor=' + noRujukan, objSave).then(function (res) {
+                        $scope.isRouteLoading = true
+                        medifirstService.put('bridging/sisrute/rujukan/put?nomor=' + noRujukan, objSave).then(function (res) {
                             if (res.data.success == true) {
+                                $scope.isRouteLoading = false
                                 toastr.success(res.data.detail + ' No. ' + res.data.data.RUJUKAN.NOMOR, 'Success')
 
+                                if($scope.txtfilehasillab != undefined && $scope.txtfilehasillab != null){
+                                    var json =  {
+                                        "url": "/rujukan/images/save",
+                                        "method": "POST",
+                                        "data": {
+                                            "NOMOR_RUJUKAN" : $scope.item.noRujukan,
+                                            "JENIS_LAMPIRAN_GAMBAR" : 1,
+                                            "FILE" : $scope.txtfilehasillab
+                                        }
+                                    }
+                                    $scope.isRouteLoading = true
+                                    medifirstService.postNonMessage("bridging/sisrute/tools", json).then(function (e) {
+                                        if (e.status === 200) {
+                                            toastr.success(e.data.data[0].LAMPIRAN_GAMBAR + " berhasil diupload");
+                                        } else {
+                                            toastr.warning('gagal upload hasil lab');
+                                        }
+                                        $scope.isRouteLoading = false
+                                    })
+                                }
+                                if($scope.txtfilehasilradiologi != undefined && $scope.txtfilehasilradiologi != null){
+                                    var json =  {
+                                        "url": "/rujukan/images/save",
+                                        "method": "POST",
+                                        "data": {
+                                            "NOMOR_RUJUKAN" : $scope.item.noRujukan,
+                                            "JENIS_LAMPIRAN_GAMBAR" : 2,
+                                            "FILE" : $scope.txtfilehasilradiologi
+                                        }
+                                    }
+                                    $scope.isRouteLoading = true
+                                    medifirstService.postNonMessage("bridging/sisrute/tools", json).then(function (e) {
+                                        if (e.status === 200) {
+                                            toastr.success(e.data.data[0].LAMPIRAN_GAMBAR + " berhasil diupload");
+                                        } else {
+                                            toastr.warning('gagal upload hasil radiologi');
+                                        }
+                                        $scope.isRouteLoading = false
+                                    })
+                                } 
+                                if($scope.txtfilehasilekg != undefined && $scope.txtfilehasilekg != null){
+                                    var json =  {
+                                        "url": "/rujukan/images/save",
+                                        "method": "POST",
+                                        "data": {
+                                            "NOMOR_RUJUKAN" : $scope.item.noRujukan,
+                                            "JENIS_LAMPIRAN_GAMBAR" : 3,
+                                            "FILE" : $scope.txtfilehasilekg
+                                        }
+                                    }
+                                    $scope.isRouteLoading = true
+                                    medifirstService.postNonMessage("bridging/sisrute/tools", json).then(function (e) {
+                                        if (e.status === 200) {
+                                            toastr.success(e.data.data[0].LAMPIRAN_GAMBAR + " berhasil diupload");
+                                        } else {
+                                            toastr.warning('gagal upload hasil ekg');
+                                        }
+                                        $scope.isRouteLoading = false
+                                    })
+                                } 
                                 // 2+2=5
                                 //Data-data untuk disipan ke database
-                                var data = {
+                                // var data = {
 
-                                    nocm: $scope.item.noCm,
-                                    tglrujukan: moment($scope.item.tglRujukan).format('YYYY-MM-DD HH:mm'),
-                                    faskestujuan: $scope.item.faskes.KODE,
-                                    alasanrujukan: $scope.item.alasanRujukan.KODE,
-                                    alasantambahan: $scope.item.alasanTambahan != undefined ? $scope.item.alasanTambahan : '',
-                                    objectdiagnosafk: $scope.item.diagnosa.KODE,
-                                    dokter: $scope.item.dokter.noidentitas != null ? $scope.item.dokter.noidentitas : '-',
-                                    petugasperujuk: $scope.item.petugas.noidentitas != null ? $scope.item.petugas.noidentitas : '-',
-                                    norujukan: res.data.data.RUJUKAN.NOMOR,
+                                //     nocm: $scope.item.noCm,
+                                //     tglrujukan: moment($scope.item.tglRujukan).format('YYYY-MM-DD HH:mm'),
+                                //     faskestujuan: $scope.item.faskes.KODE,
+                                //     alasanrujukan: $scope.item.alasanRujukan.KODE,
+                                //     alasantambahan: $scope.item.alasanTambahan != undefined ? $scope.item.alasanTambahan : '',
+                                //     objectdiagnosafk: $scope.item.diagnosa.KODE,
+                                //     dokter: $scope.item.dokter.noidentitas != null ? $scope.item.dokter.noidentitas : '-',
+                                //     petugasperujuk: $scope.item.petugas.noidentitas != null ? $scope.item.petugas.noidentitas : '-',
+                                //     norujukan: res.data.data.RUJUKAN.NOMOR,
 
-                                }
+                                // }
 
-                                var objSave =
-                                {
-                                    datarujukan: data
+                                // var objSave =
+                                // {
+                                //     datarujukan: data
 
-                                }
+                                // }
 
-                                managePhp.postData2("rujukan-keluar/post-data-rujukan", objSave).then(function (e) {
-                                    // debugger;
-                                    $scope.dataRujukan = e.data.data;
-                                    // LoadCetakan()
-                                });
+                                // medifirstService.post("rujukan-keluar/post-data-rujukan", objSave).then(function (e) {
+                                //     // debugger;
+                                //     $scope.dataRujukan = e.data.data;
+                                //     // LoadCetakan()
+                                // });
                             }
                         })
                     }
@@ -349,6 +627,86 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                 // $("#dialog").data("kendoWindow").open().maximize();
             }
 
+            $scope.$watch('item.jenisRujukan', function (e) {
+                if (e === undefined) return;
+                switch(e){
+                    case "1":
+                        $scope.showmatneo = false
+                        $scope.showkriteria = true
+                        break;
+                    case "6":
+                        $scope.showmatneo = true
+                        $scope.showkriteria = false
+                        break;
+                    case "7":
+                        $scope.showmatneo = true
+                        $scope.showkriteria = false
+                        break;
+                    default:
+                        $scope.showmatneo = false
+                        $scope.showkriteria = false
+                        break;
+                }
+            })
+            $scope.$watch('item.jeniskriteria', function (e) {
+                if (e === undefined) return;
+                switch(e){
+                    case "1":
+                        $scope.showkriteriarujukan = true
+                        break;
+                    case "2":
+                        $scope.showkriteriarujukan = false
+                        break;
+                }
+            })
+
+            var handleFileSelect = function (evt) {
+				
+                try{
+                    var files = evt.target.files;
+                    var file = files[0];
+                    var a = file.name;
+                    var b = file.type;
+    
+                    if (files && file) {
+                        var reader = new FileReader();
+    
+                        reader.onload = function (readerEvt) {
+                            var binaryString = readerEvt.target.result;
+                            var kirim = "data:"+ b +";base64," + btoa(binaryString);
+                            isikendatana(evt.target.id, kirim);
+                        };
+    
+                        reader.readAsBinaryString(file);
+                    } else {
+                        isikendatana(evt.target.id, null);
+                    }
+                }catch(e){
+                    isikendatana(evt.target.id, null);
+                }
+			};
+
+			if (window.File && window.FileReader && window.FileList && window.Blob) {
+				document.getElementById('filehasillab').addEventListener('change', handleFileSelect, false);
+				document.getElementById('filehasilradiologi').addEventListener('change', handleFileSelect, false);
+				document.getElementById('filehasilekg').addEventListener('change', handleFileSelect, false);
+			} else {
+				alert('The File APIs are not fully supported in this browser.');
+			}
+
+            function isikendatana(target, datana) {
+                switch(target){
+                    case "filehasillab":
+                        $scope.txtfilehasillab = datana;
+                        break;
+                    case "filehasilradiologi":
+                        $scope.txtfilehasilradiologi = datana;
+                        break;
+                    case "filehasilekg":
+                        $scope.txtfilehasilekg = datana;
+                        break;
+                }
+            }
         }
     ]);
 });

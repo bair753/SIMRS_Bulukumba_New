@@ -4512,12 +4512,14 @@ class TagihanController  extends ApiController
             ->join('ruangan_m as ru', 'ru.id', '=', 'pd.objectruanganlastfk')
             ->leftJoin('kelompokpasien_m as kp', 'kp.id', '=', 'pd.objectkelompokpasienlastfk')
             ->leftJoin('departemen_m as dept', 'dept.id', '=', 'ru.objectdepartemenfk')
+            ->leftJoin('pegawai_m as pg', 'pg.id', '=', 'pd.objectpegawaifk')
+            ->leftJoin('pemakaianasuransi_t as pa', 'pa.noregistrasifk', '=', 'pd.norec')
             // ->join('antrianpasiendiperiksa_t as apd', 'pd.norec', '=', 'apd.noregistrasifk')
             // ->join('pelayananpasien_t as pp', 'apd.norec', '=', 'pp.noregistrasifk')
             // ->leftjoin('strukpelayanan_t as sp', 'sp.norec', '=', 'pp.strukfk')
             // ->leftjoin('strukpelayananpenjamin_t as spp', 'spp.nostrukfk', '=', 'sp.norec')
-            ->select('pd.norec AS norec_pd','pd.tglregistrasi', 'p.nocm', 'pd.noregistrasi', 'ru.namaruangan', 'p.namapasien', 'kp.kelompokpasien',
-                'pd.tglpulang', 'pd.statuspasien','pd.nostruklastfk', 'pd.nosbmlastfk','pd.tglmeninggal','p.nosuratkematian',
+            ->select('pd.norec AS norec_pd','pd.tglregistrasi', 'p.nocm', 'pd.noregistrasi', 'ru.namaruangan', 'p.namapasien', 'kp.kelompokpasien','pa.nosep',
+                'pd.tglpulang', 'pd.statuspasien','pd.nostruklastfk', 'pd.nosbmlastfk','pd.tglmeninggal','p.nosuratkematian','pg.namalengkap as dpjp',
                 // 'spp.noverifikasi',
                 'dept.id as deptid',
                 'pd.tglclosing','pd.objectruanganlastfk','pd.objectkelasfk')
@@ -4645,6 +4647,8 @@ class TagihanController  extends ApiController
                 'deptid' => $pasienD->deptid,
                 'tglclosing' => $pasienD->tglclosing,
                 'nosuratkematian' => $pasienD->nosuratkematian,
+                'dpjp' => $pasienD->dpjp,
+                'nosep' => $pasienD->nosep,
                 'kelasid' => $pasienD->objectkelasfk,
                 'ruanganid' => $pasienD->objectruanganlastfk,
 //                'isPaid' => $pd->isBayar,

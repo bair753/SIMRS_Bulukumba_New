@@ -687,4 +687,23 @@ class FarmasiController extends ApiController
 
         return $this->respond($result);
     }
+
+    public function getJenisBill(Request $request) {
+        $kdProfile = $this->getDataKdProfile($request);
+        $idProfile = (int) $kdProfile;
+        $data = \DB::table('jenisbilling_m as jb')
+            ->select('id','jenisbilling')
+            ->where('jb.kdprofile', $idProfile);
+
+        $data = $data->where('jb.statusenabled',true);
+        $data = $data->orderBy('jb.id');
+        $data = $data->get();
+
+        $result = array(
+            'daftar' => $data,
+            'message' => 'as@epic',
+        );
+
+        return $this->respond($result);
+    }
 }
