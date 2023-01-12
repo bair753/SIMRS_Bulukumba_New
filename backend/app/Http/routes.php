@@ -750,6 +750,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
 
           Route::get('emr/get-pegawai-parts','EMR\EMRController@getPegawaiParts');
           Route::post('emr/hapus-order-pelayananobatfarmasi', 'EMR\EMRController@hapusOrderResep');
+          Route::get('emr/get-diagnosa-pernoreg', 'EMR\EMRController@getDiagnosaPasienPerNoReg');
 
           Route::get('emr/get-daftar-obat-sering-diresepkan','EMR\EMRController@getObatSeringDiresepkanDokter');
           Route::get('emr/get-datacombo-part-kelompokpasien', 'EMR\EMRController@getDataComboKelompokPaisnePart');

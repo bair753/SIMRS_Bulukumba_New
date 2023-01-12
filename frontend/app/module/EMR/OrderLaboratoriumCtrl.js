@@ -3,6 +3,7 @@ define(['initialize'], function (initialize) {
     initialize.controller('OrderLaboratoriumCtrl', ['$q', '$rootScope', '$scope', 'MedifirstService', '$state', 'CacheHelper', '$window',
         function ($q, $rootScope, $scope, medifirstService, $state, cacheHelper, $window) {
             $scope.item = {};
+            $scope.cc = {};
             $scope.dataVOloaded = true;
             $scope.now = new Date();
             $scope.item.tglPelayanan = $scope.now;
@@ -18,6 +19,7 @@ define(['initialize'], function (initialize) {
             $scope.header.DataNoregis = true
             var produkDef = []
             $scope.pilihLayanan = 0
+            $scope.PegawaiLogin2 = medifirstService.getPegawaiLogin()
 
             var detail = ''
 
@@ -70,8 +72,31 @@ define(['initialize'], function (initialize) {
                     })
                     //** */
                 }
-
+                var cacheRekamMedis = cacheHelper.get('cacheRekamMedis');
+                if (cacheRekamMedis != undefined) {
+                    $scope.cc.dokterdpjp = cacheRekamMedis[16]
+                    $scope.cc.iddpjp = cacheRekamMedis[17]
+                }
             }
+
+            medifirstService.get("radiologi/get-data-combo-labrad").then(function (dat) {
+                $scope.listDokter = dat.data.dokter;
+                var kelompokUser = medifirstService.getKelompokUser();
+
+                if (kelompokUser == 'dokter') {
+                    $scope.item.doktermeminta = { id: $scope.PegawaiLogin2.id, namalengkap: $scope.PegawaiLogin2.namaLengkap }
+                } else if ($scope.cc.dokterdpjp != null) {
+                    $scope.item.doktermeminta = { id: $scope.cc.iddpjp, namalengkap: $scope.cc.dokterdpjp }
+                }
+            })
+
+            loadDiagnosaPasien();
+            function loadDiagnosaPasien() {
+                medifirstService.get("emr/get-diagnosa-pernoreg?norm=" + $scope.item.noMr, false).then(function (data) {
+                    $scope.listDiagnosa = data.data.data;
+                });
+            }
+
             var urlHasilVansLab = ''
             medifirstService.get('sysadmin/settingdatafixed/get/urlHasilVansLab').then(function (dat) {
                 urlHasilVansLab = dat.data
@@ -612,6 +637,18 @@ define(['initialize'], function (initialize) {
                     alert("Pilih layanan terlebih dahulu!!")
                     return
                 }
+                if ($scope.item.doktermeminta == undefined) {
+                    toastr.warning("Dokter yang meminta harus diisi!!")
+                    return
+                }
+                // if ($scope.item.kddiagnosa == undefined) {
+                //     toastr.warning("Pilih Diagnosa terlebih dahulu!!")
+                //     return
+                // }
+                var kkdiagnosa = ''
+                if ($scope.item.kddiagnosa != undefined) {
+                    kkdiagnosa = $scope.item.kddiagnosa.kddiagnosa;
+                }
                 var arrobj = Object.keys($scope.item.layanan)
                 var data2 = []
                 for (var i = arrobj.length - 1; i >= 0; i--) {
@@ -641,7 +678,8 @@ define(['initialize'], function (initialize) {
                     objectruanganfk: namaRuanganFk,
                     objectruangantujuanfk: $scope.item.ruangantujuan.id,
                     departemenfk: 3,
-                    pegawaiorderfk: $scope.PegawaiLogin2.id,
+                    kddiagnosa: kkdiagnosa, //$scope.item.kddiagnosa.kddiagnosa,
+                    pegawaiorderfk: $scope.item.doktermeminta.id, //$scope.PegawaiLogin2.id,
                     keterangan: $scope.item.keterangan != undefined ? $scope.item.keterangan : null,
                     iscito: $scope.item.iscito != undefined && $scope.item.iscito == true ? $scope.item.iscito : false,
                     details: data2,
@@ -735,6 +773,7 @@ define(['initialize'], function (initialize) {
                     anHttpRequest.send(null);
                 }
             }
+
             $scope.back = function () {
                 $state.go('DaftarAntrianDokterRajal')
             }

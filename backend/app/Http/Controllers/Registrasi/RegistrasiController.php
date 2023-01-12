@@ -3529,6 +3529,22 @@ class RegistrasiController extends ApiController
                         return $this->setStatusCode($result['status'])->respond($result, $transMessage); 
                     }
                 }
+                
+                // Cek No BPJS
+                if (isset($request['pasien']['noBpjs']) && $request['pasien']['noBpjs'] != '-' && $request['pasien']['noBpjs'] != '') {
+                    $cek = Pasien::where('nobpjs', $request['pasien']['noBpjs'])->first();
+                    if (!empty($cek)) {
+                        $transMessage = "No BPJS sudah terdaftar sebagai " . $cek->namapasien . ' (' . $cek->nocm . ')';
+                        DB::rollBack();
+                        $result = array(
+                            "status" => 400,
+                            "message" => $transMessage,
+                            "as" => "er@epic"
+                        );
+                        return $this->setStatusCode($result['status'])->respond($result, $transMessage);
+                    }
+                }
+
 //				$newId2 = 720000;
 //				$newId = Pasien::where('id','>',(float)720000-1)
 //					->where('id','<',(float)10000000)
