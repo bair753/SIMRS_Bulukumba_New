@@ -1,4 +1,4 @@
-define(['initialize'], function (initialize) {
+define(['initialize', 'Configuration'], function (initialize, config) {
 	'use strict';
 	initialize.controller('RincianTagihanCtrl', ['MedifirstService', '$state', '$q', '$scope', '$window', '$mdDialog',
 		function (medifirstService, $state, $q, $scope, window, $mdDialog) {
@@ -631,6 +631,15 @@ define(['initialize'], function (initialize) {
 					//               });
 					//           	})
 					// }
+				});
+			}
+
+			$scope.CetakHtml = function () {
+				$scope.isRouteLoading = true;
+				var nama = medifirstService.getPegawaiLogin().namaLengkap;
+				medifirstService.get("tatarekening/detail-tagihan/" + $scope.item.noRegistrasi + '?jenisdata=bill').then(function (dat) {
+					$scope.isRouteLoading = false;
+					window.open(config.baseApiBackend + "report/billing-detail?noregistrasi=" + $scope.item.noRegistrasi +'&nama='+nama,  '_blank');
 				});
 			}
 
