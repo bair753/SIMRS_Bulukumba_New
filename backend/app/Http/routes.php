@@ -373,6 +373,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
               Route::put('bridging/sisrute/rujukan/jawab','Bridging\BridgingSisruteController@jawabRujukan');
               Route::put('bridging/sisrute/rujukan/batal','Bridging\BridgingSisruteController@batalRujukan');
               Route::put('bridging/sisrute/rujukan/notif','Bridging\BridgingSisruteController@notifRujukan');
+              Route::post('bridging/sisrute/tools', 'Bridging\BridgingSisruteController@SisruteTools');
 
             // });
             // Route::group(['prefix' => 'penunjang'], function () {
