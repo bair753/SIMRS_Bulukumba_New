@@ -75,7 +75,12 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                         <tr>
                             <td width="15%">
                                 <p align="left">
-                                    <img src="{{ asset('service/img/logo_grandmed.png') }}" style="width: 80px" border="0">
+                                    {{-- <img src="{{ asset('service/img/logo_grandmed.png') }}" style="width: 80px" border="0"> --}}
+                                    @if(stripos(\Request::url(), 'localhost') !== FALSE)
+                                        <img src="{{ asset('img/logo_only.png') }}" alt="" style="width: 90px;">
+                                    @else
+                                        <img src="{{ asset('service/img/logo_only.png') }}" alt="" style="width: 90px;">
+                                    @endif
                                 </p>
                             </td>
                             <td width="70%" align="center" style="padding-right:100px;">
