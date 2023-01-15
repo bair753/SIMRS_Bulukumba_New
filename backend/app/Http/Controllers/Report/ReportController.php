@@ -2977,7 +2977,7 @@ class ReportController extends ApiController{
             jb.jenisbilling,
             jb.id
         ORDER BY
-            jb.jenisbilling ASC
+            jb.jenisbilling DESC
         ";
         $billing = collect(DB::select($QueryTemp));
         $identitas = collect(DB::select($QueryIdentitas));
@@ -3010,6 +3010,40 @@ class ReportController extends ApiController{
             WHERE
                 pd.noregistrasi = '$registrasi'
                 AND jb.ID = '$idbilling' 
+            GROUP BY
+                pr.namaproduk,
+                pp.hargasatuan,
+                pp.jasa,
+                jb.jenisbilling 
+            ORDER BY
+            jb.jenisbilling ASC 
+            ) AS X 
+        "));
+        $data['total'] = $data[0]->total;
+        return $data;
+    }
+
+    public static function getTotalTagihan($registrasi){
+        $data = collect(DB::select("
+        SELECT
+            SUM(X.total) as total
+        FROM
+            (
+            SELECT
+                pr.namaproduk,
+                pp.hargasatuan,
+                SUM ( pp.jumlah ),
+                pp.jasa,
+                SUM (( pp.hargasatuan * pp.jumlah ) + CASE WHEN pp.jasa IS NOT NULL THEN pp.jasa ELSE 0 END ) AS total,
+                jb.jenisbilling 
+            FROM
+                pasiendaftar_t AS pd
+                INNER JOIN antrianpasiendiperiksa_t AS apd ON apd.noregistrasifk = pd.norec
+                INNER JOIN pelayananpasien_t AS pp ON pp.noregistrasifk = apd.norec
+                INNER JOIN produk_m AS pr ON pr.ID = pp.produkfk
+                LEFT JOIN jenisbilling_m AS jb ON jb.ID = pr.objectjenisbillfk 
+            WHERE
+                pd.noregistrasi = '$registrasi'
             GROUP BY
                 pr.namaproduk,
                 pp.hargasatuan,

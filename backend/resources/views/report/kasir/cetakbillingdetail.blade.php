@@ -354,6 +354,32 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                         @endforeach
                     </table>
                     <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                        {{-- @foreach ($pelayanan as $k) --}}
+                            @if(is_null($pelayanan[0]->jenisbilling))
+                                <tr>
+                                    <td width="25%"><font style="font-size: 11pt;" color="#000000;" > - </font></td>
+                                    <td width="75%"><font style="font-size: 11pt;" color="#000000" >: </font></td>
+                                </tr>
+                            @endif
+                        {{-- @endforeach --}}
+                        
+                    </table>
+                    <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                        @foreach ($pelayanan as $ply)
+                            @if (null == $ply->jenisbilling)
+                                <tr>
+                                    <td width="26%"><font style="font-size: 11pt;" color="#000000;" ></font></td>
+                                    <td width="30%"><font style="font-size: 11pt;" color="#000000" >{{ $ply->namaproduk }}</font></td>
+                                    <td width="5%"><font style="font-size: 11pt;" color="#000000" >:</font></td>
+                                    <td width="15%"><font style="font-size: 11pt;" color="#000000" >{{ $ply->hargasatuan }}</font></td>
+                                    <td width="10%"><font style="font-size: 11pt;" color="#000000" >{{ $ply->jumlah }}</font></td>
+                                    <td width="10%"><font style="font-size: 11pt;" color="#000000" >{{ $ply->jasa }}</font></td>
+                                    <td width="15%"><font style="font-size: 11pt;" color="#000000" >{{ $ply->total }}</font></td>
+                                </tr>
+                            @endif                            
+                        @endforeach
+                    </table>
+                    <table width="100%" cellspacing="0" cellpadding="0" border="0">
                         @php
                             $totalSP = App\Http\Controllers\Report\ReportController::getTotal($billing[0]->noregistrasi, 7);
                         @endphp
@@ -361,7 +387,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             <td align="right" width="25%"><font style="font-size: 11pt;" color="#000000;" >Total Obat & BHP : {{ $totalSP['total'] }} </font></td>
                         </tr>
                     </table>
-                    <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                    {{-- <table width="100%" cellspacing="0" cellpadding="0" border="0">
                         <tr>
                             <td width="25%"><font style="font-size: 11pt;" color="#000000;" ></font></td>
                             <td width="30%"><font style="font-size: 11pt;" color="#000000" >PPN Obat</font></td>
@@ -371,16 +397,19 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             <td width="10%"><font style="font-size: 11pt;" color="#000000" ></font></td>
                             <td width="15%"><font style="font-size: 11pt;" color="#000000" ></font></td>
                         </tr>
-                    </table>
-                    <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                    </table> --}}
+                    {{-- <table width="100%" cellspacing="0" cellpadding="0" border="0">
                         <tr>
                             <td align="right" width="25%"><font style="font-size: 11pt;" color="#000000;" >Total Obat Bersih : </font></td>
                         </tr>
-                    </table>
+                    </table> --}}
                     <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                        @php
+                            $total = App\Http\Controllers\Report\ReportController::getTotalTagihan($billing[0]->noregistrasi);
+                        @endphp
                         <tr>
                             <td width="90%"><font style="font-size: 11pt;" color="#000000;" >TOTAL TAGIHAN</font></td>
-                            <td width="10%"><font style="font-size: 11pt;" color="#000000" >: </font></td>
+                            <td width="10%"><font style="font-size: 11pt;" color="#000000" >: {{ $total['total'] }}</font></td>
                         </tr>
                         <tr>
                             <td width="90%"><font style="font-size: 11pt;" color="#000000;" >PPN</font></td>
