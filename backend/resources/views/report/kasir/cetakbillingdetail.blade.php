@@ -1,7 +1,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Resume Medis</title>
+    <title>Billing</title>
     <link rel="stylesheet" href="{{ asset('css/report/paper.css') }}">
     <link rel="stylesheet" href="{{ asset('css/report/table.css') }}">
     <link rel="stylesheet" href="{{ asset('css/report/tabel.css') }}">
@@ -96,7 +96,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                     <table width="100%" cellspacing="0" cellpadding="0">
                         <tr>
                             <td width="25%"><font style="font-size: 11pt;" color="#000000;" >No. Nota</font></td>
-                            <td width="75%"><font style="font-size: 11pt;" color="#000000" >: {{ $billing[0]->noregistrasi . ' / ' . $billing[0]->nocm }}</font></td>
+                            <td width="75%"><font style="font-size: 11pt;" color="#000000" >: {{ $billing[0]->nokwitansi }}</font></td>
                         </tr>
                         <tr>
                             <td width="25%"><font style="font-size: 11pt;" color="#000000;" >Bangsal / Kamar</font></td>
@@ -112,7 +112,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                         </tr>
                         <tr>
                             <td width="25%"><font style="font-size: 11pt;" color="#000000;" >Alamat Pasien</font></td>
-                            <td width="75%"><font style="font-size: 11pt;" color="#000000" >: </font></td>
+                            <td width="75%"><font style="font-size: 11pt;" color="#000000" >: {{ $identitas[0]->alamatlengkap }}</font></td>
                         </tr>
                         <tr>
                             <td width="25%"><font style="font-size: 11pt;" color="#000000;" >Dokter</font></td>
@@ -141,7 +141,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                 <td width="15%"><font style="font-size: 11pt;" color="#000000" >{{ $ply->hargasatuan }}</font></td>
                                 <td width="10%"><font style="font-size: 11pt;" color="#000000" >{{ $ply->jumlah }}</font></td>
                                 <td width="10%"><font style="font-size: 11pt;" color="#000000" >{{ $ply->jasa }}</font></td>
-                                <td width="15%"><font style="font-size: 11pt;" color="#000000" >{{ $ply->total }}</font></td>
+                                <td width="15%"><font style="font-size: 11pt;" color="#000000" >{{ number_format($ply->total , 2, '.', ',') }}</font></td>
                             </tr>
                         @endif                            
                     @endforeach
@@ -151,7 +151,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             $totalSP = App\Http\Controllers\Report\ReportController::getTotal($billing[0]->noregistrasi, 9);
                         @endphp
                         <tr>
-                            <td align="right" width="25%"><font style="font-size: 11pt;" color="#000000;" >Total Kamar Inap : {{ $totalSP['total'] }} </font></td>
+                            <td align="right" width="25%"><font style="font-size: 11pt;" color="#000000;" >Total Kamar Inap : {{ number_format($totalSP['total'], 2, '.', ',') }} </font></td>
                         </tr>
                     </table>
                     <table width="100%" cellspacing="0" cellpadding="0" border="0">
@@ -174,7 +174,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <td width="15%"><font style="font-size: 11pt;" color="#000000" >{{ $ply->hargasatuan }}</font></td>
                                     <td width="10%"><font style="font-size: 11pt;" color="#000000" >{{ $ply->jumlah }}</font></td>
                                     <td width="10%"><font style="font-size: 11pt;" color="#000000" >{{ $ply->jasa }}</font></td>
-                                    <td width="15%"><font style="font-size: 11pt;" color="#000000" >{{ $ply->total }}</font></td>
+                                    <td width="15%"><font style="font-size: 11pt;" color="#000000" >{{ number_format($ply->total , 2, '.', ',') }}</font></td>
                                 </tr>
                             @endif                            
                         @endforeach
@@ -184,7 +184,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             $totalSP = App\Http\Controllers\Report\ReportController::getTotal($billing[0]->noregistrasi, 1);
                         @endphp
                         <tr>
-                            <td align="right" width="25%"><font style="font-size: 11pt;" color="#000000;" >Total Dokter Spesialis : {{ $totalSP['total'] }} </font></td>
+                            <td align="right" width="25%"><font style="font-size: 11pt;" color="#000000;" >Total Dokter Spesialis : {{ number_format($totalSP['total'], 2, '.', ',') }} </font></td>
                         </tr>
                     </table>
                     <table width="100%" cellspacing="0" cellpadding="0" border="0">
@@ -203,7 +203,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <td width="15%"><font style="font-size: 11pt;" color="#000000" >{{ $ply->hargasatuan }}</font></td>
                                     <td width="10%"><font style="font-size: 11pt;" color="#000000" >{{ $ply->jumlah }}</font></td>
                                     <td width="10%"><font style="font-size: 11pt;" color="#000000" >{{ $ply->jasa }}</font></td>
-                                    <td width="15%"><font style="font-size: 11pt;" color="#000000" >{{ $ply->total }}</font></td>
+                                    <td width="15%"><font style="font-size: 11pt;" color="#000000" >{{ number_format($ply->total , 2, '.', ',') }}</font></td>
                                 </tr>
                             @endif                            
                         @endforeach
@@ -213,7 +213,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             $totalSP = App\Http\Controllers\Report\ReportController::getTotal($billing[0]->noregistrasi, 2);
                         @endphp
                         <tr>
-                            <td align="right" width="25%"><font style="font-size: 11pt;" color="#000000;" >Total Dokter Umum : {{ $totalSP['total'] }} </font></td>
+                            <td align="right" width="25%"><font style="font-size: 11pt;" color="#000000;" >Total Dokter Umum : {{ number_format($totalSP['total'], 2, '.', ',') }} </font></td>
                         </tr>
                     </table>
                     <table width="100%" cellspacing="0" cellpadding="0" border="0">
@@ -232,7 +232,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <td width="15%"><font style="font-size: 11pt;" color="#000000" >{{ $ply->hargasatuan }}</font></td>
                                     <td width="10%"><font style="font-size: 11pt;" color="#000000" >{{ $ply->jumlah }}</font></td>
                                     <td width="10%"><font style="font-size: 11pt;" color="#000000" >{{ $ply->jasa }}</font></td>
-                                    <td width="15%"><font style="font-size: 11pt;" color="#000000" >{{ $ply->total }}</font></td>
+                                    <td width="15%"><font style="font-size: 11pt;" color="#000000" >{{ number_format($ply->total , 2, '.', ',') }}</font></td>
                                 </tr>
                             @endif                            
                         @endforeach
@@ -242,7 +242,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             $totalSP = App\Http\Controllers\Report\ReportController::getTotal($billing[0]->noregistrasi, 3);
                         @endphp
                         <tr>
-                            <td align="right" width="25%"><font style="font-size: 11pt;" color="#000000;" >Total Dokter Konsultasi : {{ $totalSP['total'] }} </font></td>
+                            <td align="right" width="25%"><font style="font-size: 11pt;" color="#000000;" >Total Dokter Konsultasi : {{ number_format($totalSP['total'], 2, '.', ',') }} </font></td>
                         </tr>
                     </table>
                     <table width="100%" cellspacing="0" cellpadding="0" border="0">
@@ -261,7 +261,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <td width="15%"><font style="font-size: 11pt;" color="#000000" >{{ $ply->hargasatuan }}</font></td>
                                     <td width="10%"><font style="font-size: 11pt;" color="#000000" >{{ $ply->jumlah }}</font></td>
                                     <td width="10%"><font style="font-size: 11pt;" color="#000000" >{{ $ply->jasa }}</font></td>
-                                    <td width="15%"><font style="font-size: 11pt;" color="#000000" >{{ $ply->total }}</font></td>
+                                    <td width="15%"><font style="font-size: 11pt;" color="#000000" >{{ number_format($ply->total , 2, '.', ',') }}</font></td>
                                 </tr>
                             @endif                            
                         @endforeach
@@ -271,7 +271,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             $totalSP = App\Http\Controllers\Report\ReportController::getTotal($billing[0]->noregistrasi, 4);
                         @endphp
                         <tr>
-                            <td align="right" width="25%"><font style="font-size: 11pt;" color="#000000;" >Total Dokter Laboratorium : {{ $totalSP['total'] }} </font></td>
+                            <td align="right" width="25%"><font style="font-size: 11pt;" color="#000000;" >Total Dokter Laboratorium : {{ number_format($totalSP['total'], 2, '.', ',') }} </font></td>
                         </tr>
                     </table>
                     <table width="100%" cellspacing="0" cellpadding="0" border="0">
@@ -290,7 +290,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <td width="15%"><font style="font-size: 11pt;" color="#000000" >{{ $ply->hargasatuan }}</font></td>
                                     <td width="10%"><font style="font-size: 11pt;" color="#000000" >{{ $ply->jumlah }}</font></td>
                                     <td width="10%"><font style="font-size: 11pt;" color="#000000" >{{ $ply->jasa }}</font></td>
-                                    <td width="15%"><font style="font-size: 11pt;" color="#000000" >{{ $ply->total }}</font></td>
+                                    <td width="15%"><font style="font-size: 11pt;" color="#000000" >{{ number_format($ply->total , 2, '.', ',') }}</font></td>
                                 </tr>
                             @endif                            
                         @endforeach
@@ -300,7 +300,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             $totalSP = App\Http\Controllers\Report\ReportController::getTotal($billing[0]->noregistrasi, 5);
                         @endphp
                         <tr>
-                            <td align="right" width="25%"><font style="font-size: 11pt;" color="#000000;" >Total Perawatan : {{ $totalSP['total'] }} </font></td>
+                            <td align="right" width="25%"><font style="font-size: 11pt;" color="#000000;" >Total Perawatan : {{ number_format($totalSP['total'], 2, '.', ',') }} </font></td>
                         </tr>
                     </table>
                     <table width="100%" cellspacing="0" cellpadding="0" border="0">
@@ -319,7 +319,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <td width="15%"><font style="font-size: 11pt;" color="#000000" >{{ $ply->hargasatuan }}</font></td>
                                     <td width="10%"><font style="font-size: 11pt;" color="#000000" >{{ $ply->jumlah }}</font></td>
                                     <td width="10%"><font style="font-size: 11pt;" color="#000000" >{{ $ply->jasa }}</font></td>
-                                    <td width="15%"><font style="font-size: 11pt;" color="#000000" >{{ $ply->total }}</font></td>
+                                    <td width="15%"><font style="font-size: 11pt;" color="#000000" >{{ number_format($ply->total , 2, '.', ',') }}</font></td>
                                 </tr>
                             @endif                            
                         @endforeach
@@ -329,7 +329,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             $totalSP = App\Http\Controllers\Report\ReportController::getTotal($billing[0]->noregistrasi, 6);
                         @endphp
                         <tr>
-                            <td align="right" width="25%"><font style="font-size: 11pt;" color="#000000;" >Total Radiologi : {{ $totalSP['total'] }} </font></td>
+                            <td align="right" width="25%"><font style="font-size: 11pt;" color="#000000;" >Total Radiologi : {{ number_format($totalSP['total'], 2, '.', ',') }} </font></td>
                         </tr>
                     </table>
                     <table width="100%" cellspacing="0" cellpadding="0" border="0">
@@ -348,10 +348,18 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <td width="15%"><font style="font-size: 11pt;" color="#000000" >{{ $ply->hargasatuan }}</font></td>
                                     <td width="10%"><font style="font-size: 11pt;" color="#000000" >{{ $ply->jumlah }}</font></td>
                                     <td width="10%"><font style="font-size: 11pt;" color="#000000" >{{ $ply->jasa }}</font></td>
-                                    <td width="15%"><font style="font-size: 11pt;" color="#000000" >{{ $ply->total }}</font></td>
+                                    <td width="15%"><font style="font-size: 11pt;" color="#000000" >{{ number_format($ply->total , 2, '.', ',') }}</font></td>
                                 </tr>
                             @endif                            
                         @endforeach
+                    </table>
+                    <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                        @php
+                            $totalSP = App\Http\Controllers\Report\ReportController::getTotal($billing[0]->noregistrasi, 7);
+                        @endphp
+                        <tr>
+                            <td align="right" width="25%"><font style="font-size: 11pt;" color="#000000;" >Total Obat & BHP : {{ number_format($totalSP['total'], 2, '.', ',') }} </font></td>
+                        </tr>
                     </table>
                     <table width="100%" cellspacing="0" cellpadding="0" border="0">
                         {{-- @foreach ($pelayanan as $k) --}}
@@ -374,19 +382,12 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <td width="15%"><font style="font-size: 11pt;" color="#000000" >{{ $ply->hargasatuan }}</font></td>
                                     <td width="10%"><font style="font-size: 11pt;" color="#000000" >{{ $ply->jumlah }}</font></td>
                                     <td width="10%"><font style="font-size: 11pt;" color="#000000" >{{ $ply->jasa }}</font></td>
-                                    <td width="15%"><font style="font-size: 11pt;" color="#000000" >{{ $ply->total }}</font></td>
+                                    <td width="15%"><font style="font-size: 11pt;" color="#000000" >{{ number_format($ply->total , 2, '.', ',') }}</font></td>
                                 </tr>
                             @endif                            
                         @endforeach
                     </table>
-                    <table width="100%" cellspacing="0" cellpadding="0" border="0">
-                        @php
-                            $totalSP = App\Http\Controllers\Report\ReportController::getTotal($billing[0]->noregistrasi, 7);
-                        @endphp
-                        <tr>
-                            <td align="right" width="25%"><font style="font-size: 11pt;" color="#000000;" >Total Obat & BHP : {{ $totalSP['total'] }} </font></td>
-                        </tr>
-                    </table>
+                    
                     {{-- <table width="100%" cellspacing="0" cellpadding="0" border="0">
                         <tr>
                             <td width="25%"><font style="font-size: 11pt;" color="#000000;" ></font></td>
@@ -409,7 +410,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                         @endphp
                         <tr>
                             <td width="90%"><font style="font-size: 11pt;" color="#000000;" >TOTAL TAGIHAN</font></td>
-                            <td width="10%"><font style="font-size: 11pt;" color="#000000" >: {{ $total['total'] }}</font></td>
+                            <td width="10%"><font style="font-size: 11pt;" color="#000000" >: {{ number_format($total['total'] , 2, '.', ',') }}</font></td>
                         </tr>
                         <tr>
                             <td width="90%"><font style="font-size: 11pt;" color="#000000;" >PPN</font></td>
