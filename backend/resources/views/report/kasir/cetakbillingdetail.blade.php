@@ -113,10 +113,17 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             <td width="25%"><font style="font-size: 11pt;" color="#000000;" >No. Nota</font></td>
                             <td width="75%"><font style="font-size: 11pt;" color="#000000" >: {{ $billing[0]->nokwitansi }}</font></td>
                         </tr>
-                        <tr>
-                            <td width="25%"><font style="font-size: 11pt;" color="#000000;" >Bangsal / Kamar</font></td>
-                            <td width="75%"><font style="font-size: 11pt;" color="#000000" >: {{ $billing[0]->namakamar }}</font></td>
-                        </tr>
+                        @foreach ($billing as $item)
+                            @if ($item->namakamar != '-')
+                                <tr>
+                                    <td width="25%"><font style="font-size: 11pt;" color="#000000;" >Bangsal / Kamar</font></td>
+                                    <td width="75%"><font style="font-size: 11pt;" color="#000000" >: {{ $item->namakamar }}</font></td>
+                                </tr>
+                            @break
+                        @endif
+                            
+                        @endforeach
+                        
                         <tr>
                             <td width="25%"><font style="font-size: 11pt;" color="#000000;" >Tgl. Perawatan</font></td>
                             <td width="75%"><font style="font-size: 11pt;" color="#000000" >: {{ $billing[0]->tglregistrasi }} s.d. {{ $billing[0]->tglpulang }}</font></td>
@@ -133,10 +140,12 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             <td width="25%"><font style="font-size: 11pt;" color="#000000;" >Dokter</font></td>
                             <td width="75%"><font style="font-size: 11pt;" color="#000000" >: </font></td>
                         </tr>
-                        <tr>
-                            <td width="25%"><font style="font-size: 11pt;" color="#000000;" ></font></td>
-                            <td width="75%"><font style="font-size: 11pt;" color="#000000" > {{ $identitas[0]->dokterpj }}</font></td>
-                        </tr>
+                        @foreach ($identitas as $dokter)
+                            <tr>
+                                <td width="25%"><font style="font-size: 11pt;" color="#000000;" ></font></td>
+                                <td width="75%"><font style="font-size: 11pt;" color="#000000" > {{ $dokter->dokterpj }}</font></td>
+                            </tr>
+                        @endforeach                        
                         <tr>
                             <td width="25%"><font style="font-size: 11pt;" color="#000000;" >Registrasi</font></td>
                             <td width="75%"><font style="font-size: 11pt;" color="#000000" >: </font></td>
@@ -377,19 +386,20 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                         </tr>
                     </table>
                     <table width="100%" cellspacing="0" cellpadding="0" border="0">
-                        {{-- @foreach ($pelayanan as $k) --}}
-                            @if(is_null($pelayanan[0]->jenisbilling))
+                        @foreach ($pelayanan as $ply)
+                            @if(is_null($ply->jenisbilling))
                                 <tr>
                                     <td width="25%"><font style="font-size: 11pt;" color="#000000;" > - </font></td>
                                     <td width="75%"><font style="font-size: 11pt;" color="#000000" >: </font></td>
                                 </tr>
+                                @break
                             @endif
-                        {{-- @endforeach --}}
+                        @endforeach
                         
                     </table>
                     <table width="100%" cellspacing="0" cellpadding="0" border="0">
                         @foreach ($pelayanan as $ply)
-                            @if (null == $ply->jenisbilling)
+                            @if ($ply->jenisbilling == null)
                                 <tr>
                                     <td width="26%"><font style="font-size: 11pt;" color="#000000;" ></font></td>
                                     <td width="30%"><font style="font-size: 11pt;" color="#000000" >{{ $ply->namaproduk }}</font></td>
@@ -402,50 +412,45 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             @endif                            
                         @endforeach
                     </table>
-                    
-                    {{-- <table width="100%" cellspacing="0" cellpadding="0" border="0">
-                        <tr>
-                            <td width="25%"><font style="font-size: 11pt;" color="#000000;" ></font></td>
-                            <td width="30%"><font style="font-size: 11pt;" color="#000000" >PPN Obat</font></td>
-                            <td width="5%"><font style="font-size: 11pt;" color="#000000" >:</font></td>
-                            <td width="15%"><font style="font-size: 11pt;" color="#000000" ></font></td>
-                            <td width="10%"><font style="font-size: 11pt;" color="#000000" ></font></td>
-                            <td width="10%"><font style="font-size: 11pt;" color="#000000" ></font></td>
-                            <td width="15%"><font style="font-size: 11pt;" color="#000000" ></font></td>
-                        </tr>
-                    </table> --}}
-                    {{-- <table width="100%" cellspacing="0" cellpadding="0" border="0">
-                        <tr>
-                            <td align="right" width="25%"><font style="font-size: 11pt;" color="#000000;" >Total Obat Bersih : </font></td>
-                        </tr>
-                    </table> --}}
                     <table width="100%" cellspacing="0" cellpadding="0" border="0">
                         @php
                             $total = App\Http\Controllers\Report\ReportController::getTotalTagihan($billing[0]->noregistrasi);
                         @endphp
                         <tr>
-                            <td width="90%"><font style="font-size: 11pt;" color="#000000;" >TOTAL TAGIHAN</font></td>
-                            <td width="10%"><font style="font-size: 11pt;" color="#000000" >: {{ number_format($total['total'] , 2, '.', ',') }}</font></td>
+                            <td width="85%"><font style="font-size: 11pt;" color="#000000;" >TOTAL TAGIHAN</font></td>
+                            <td width="15%"><font style="font-size: 11pt;" color="#000000" >: {{ number_format($total['total'] , 2, '.', ',') }}</font></td>
                         </tr>
                         <tr>
-                            <td width="90%"><font style="font-size: 11pt;" color="#000000;" >PPN</font></td>
-                            <td width="10%"><font style="font-size: 11pt;" color="#000000" >: </font></td>
+                            <td width="85%"><font style="font-size: 11pt;" color="#000000;" >PPN</font></td>
+                            <td width="15%"><font style="font-size: 11pt;" color="#000000" >: </font></td>
                         </tr>
                         <tr>
-                            <td width="90%"><font style="font-size: 11pt;" color="#000000;" >TAGIHAN + PPN</font></td>
-                            <td width="10%"><font style="font-size: 11pt;" color="#000000" >: </font></td>
+                            <td width="85%"><font style="font-size: 11pt;" color="#000000;" >TAGIHAN + PPN</font></td>
+                            <td width="15%"><font style="font-size: 11pt;" color="#000000" >: {{ number_format($total['total'] , 2, '.', ',') }}</font></td>
                         </tr>
                         <tr>
-                            <td width="90%"><font style="font-size: 11pt;" color="#000000;" >DEPOSIT</font></td>
-                            <td width="10%"><font style="font-size: 11pt;" color="#000000" >: </font></td>
+                            <td width="85%"><font style="font-size: 11pt;" color="#000000;" >DEPOSIT</font></td>
+                            <td width="15%"><font style="font-size: 11pt;" color="#000000" >: </font></td>
                         </tr>
+                        @foreach ($billing as $bill)
+                            @if ( $bill->nokwitansi == null)
+                                <tr>
+                                    <td width="85%"><font style="font-size: 11pt;" color="#000000;" >BAYAR</font></td>
+                                    <td width="15%"><font style="font-size: 11pt;" color="#000000" >: </font></td>
+                                </tr>
+                                @break
+                            @else
+                                <tr>
+                                    <td width="85%"><font style="font-size: 11pt;" color="#000000;" >BAYAR</font></td>
+                                    <td width="15%"><font style="font-size: 11pt;" color="#000000" >: {{ number_format($total['total'] , 2, '.', ',') }}</font></td>
+                                </tr>
+                                @break
+                            @endif
+                        @endforeach
+                        
                         <tr>
-                            <td width="90%"><font style="font-size: 11pt;" color="#000000;" >BAYAR</font></td>
-                            <td width="10%"><font style="font-size: 11pt;" color="#000000" >: </font></td>
-                        </tr>
-                        <tr>
-                            <td width="90%"><font style="font-size: 11pt;" color="#000000;" >KEMBALI</font></td>
-                            <td width="10%"><font style="font-size: 11pt;" color="#000000" >: </font></td>
+                            <td width="85%"><font style="font-size: 11pt;" color="#000000;" >KEMBALI</font></td>
+                            <td width="15%"><font style="font-size: 11pt;" color="#000000" >: </font></td>
                         </tr>
                     </table>
                     <table width="100%" cellspacing="0" cellpadding="0" border="0">

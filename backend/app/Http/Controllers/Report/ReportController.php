@@ -2932,17 +2932,44 @@ class ReportController extends ApiController{
             namaproduk
         ";
         $QueryIdentitas = "
-        SELECT
+        SELECT DISTINCT
+            *
+        FROM (
+            SELECT
+                ps.tgllahir,
+                pg.namalengkap AS dokterpj,
+                alm.alamatlengkap 
+            FROM
+                pasiendaftar_t AS pd
+                INNER JOIN pasien_m AS ps ON ps.ID = pd.nocmfk
+                LEFT JOIN pegawai_m AS pg ON pg.ID = pd.objectpegawaifk
+                LEFT JOIN alamat_m AS alm ON alm.ID = ps.ID 
+            WHERE
+                pd.noregistrasi = '$noreg' 
+            GROUP BY
             ps.tgllahir,
-            pg.namalengkap as dokterpj,
+            pg.namalengkap,
             alm.alamatlengkap
-        FROM
-            pasiendaftar_t AS pd
-            INNER JOIN pasien_m as ps on ps.id = pd.nocmfk
-            LEFT JOIN pegawai_m as pg on pg.id = pd.objectpegawaifk
-            LEFT JOIN alamat_m as alm on alm.id = ps.id
-        WHERE
-            pd.noregistrasi = '$noreg'  
+
+        UNION ALL
+
+            SELECT
+                ps.tgllahir,
+                pg.namalengkap AS dokterpj,
+                alm.alamatlengkap 
+            FROM
+                pasiendaftar_t AS pd
+                INNER JOIN pasien_m AS ps ON ps.ID = pd.nocmfk
+                LEFT JOIN antrianpasiendiperiksa_t AS apd ON apd.noregistrasifk = pd.norec
+                LEFT JOIN pegawai_m AS pg ON pg.ID = apd.objectpegawaifk
+                LEFT JOIN alamat_m AS alm ON alm.ID = ps.ID 
+            WHERE
+                pd.noregistrasi = '$noreg' 
+            GROUP BY
+            ps.tgllahir,
+            pg.namalengkap,
+            alm.alamatlengkap
+        ) AS x  
         ";
         $QueryInstalasi = "
         SELECT DISTINCT
