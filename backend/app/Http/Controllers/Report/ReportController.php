@@ -1810,6 +1810,29 @@ class ReportController extends ApiController{
 
     }
 
+    public function cetakAdmin(Request $r) {
+        $kdProfile = (int)$r['kdprofile'];
+        $raw = collect(DB::select("
+            SELECT pd.tglregistrasi
+            FROM pasiendaftar_t AS pd
+            WHERE
+                pd.noregistrasi = '$r[reg]'
+        "))->first();
+        // if(!empty($raw)){
+        //     $raw->umur = $this->getAge($raw->tgllahir ,date('Y-m-d'));
+        // }else{
+        //     echo 'Data Tidak ada ';
+        //     return;
+        // }
+
+        $pageWidth = 950;
+        $now =  $this->getDateTime();
+
+        return view('report.pdf.infoadmin',
+            compact('raw', 'pageWidth','r','now'));
+
+    }
+
     public function cetakPasien(Request $r) {
         $kdProfile = (int)$r['kdprofile'];
         $raw = collect(DB::select("
@@ -1856,8 +1879,8 @@ class ReportController extends ApiController{
     }
 
     public static function getProfile(){
-        $res['namaprofile'] = 'Transmedic';
-        $res['alamat'] ='Jl. Cikutra Baru Raya No.28, Neglasari, Kec. Cibeunying Kaler, Kota Bandung, Jawa Barat 40124';
+        $res['namaprofile'] = 'RSUD H.A SULTHAN DG. RADJA';
+        $res['alamat'] ='Jl. Srikaya No. 17, Bulukumba, Sulawesi Selatan';
         return $res;
     }
 
@@ -2876,5 +2899,190 @@ class ReportController extends ApiController{
             $hasil = trim(static::penyebut($nilai));
         }
         return $hasil . " Rupiah";
+    }
+
+    public static function getUmurna($tgllahir, $tglregis) {
+        $data = DB::select(DB::raw("
+            SELECT
+            EXTRACT (YEAR FROM AGE('$tglregis', '$tgllahir' )) || ' Tahun ' as thnumur,
+            EXTRACT (MONTH  FROM AGE('$tglregis', '$tgllahir' )) || ' Bulan ' as blnumur, 
+            EXTRACT (DAY  FROM  AGE('$tglregis', '$tgllahir' )) || ' Hari' as hrumur
+        "));
+        $res['umurtahun'] = $data[0]->thnumur;
+        $res['umurbulan'] = $data[0]->blnumur;
+        $res['umurhari'] = $data[0]->hrumur;
+        return $res;
+    }
+
+    public function cetakBillingDetail(Request $r) {
+        $kdProfile = (int)$r['kdProfile'];
+        $noreg = $r['noregistrasi'];
+        $pageWidth = 950;
+        $QueryTemp = "
+        SELECT
+        *   
+        FROM
+            temp_billing_t 
+        WHERE
+	        noregistrasi = '$noreg' 
+            AND tglpelayanan IS NOT NULL 
+            AND namaproduk NOT IN ( 'Biaya Administrasi', 'Biaya Materai' ) 
+        ORDER BY
+            tglpelayanan,
+            namaproduk
+        ";
+        $QueryIdentitas = "
+        SELECT DISTINCT
+            *
+        FROM (
+            SELECT
+                ps.tgllahir,
+                pg.namalengkap AS dokterpj,
+                alm.alamatlengkap 
+            FROM
+                pasiendaftar_t AS pd
+                INNER JOIN pasien_m AS ps ON ps.ID = pd.nocmfk
+                LEFT JOIN pegawai_m AS pg ON pg.ID = pd.objectpegawaifk
+                LEFT JOIN alamat_m AS alm ON alm.ID = ps.ID 
+            WHERE
+                pd.noregistrasi = '$noreg' 
+            GROUP BY
+            ps.tgllahir,
+            pg.namalengkap,
+            alm.alamatlengkap
+
+        UNION ALL
+
+            SELECT
+                ps.tgllahir,
+                pg.namalengkap AS dokterpj,
+                alm.alamatlengkap 
+            FROM
+                pasiendaftar_t AS pd
+                INNER JOIN pasien_m AS ps ON ps.ID = pd.nocmfk
+                LEFT JOIN antrianpasiendiperiksa_t AS apd ON apd.noregistrasifk = pd.norec
+                LEFT JOIN pegawai_m AS pg ON pg.ID = apd.objectpegawaifk
+                LEFT JOIN alamat_m AS alm ON alm.ID = ps.ID 
+            WHERE
+                pd.noregistrasi = '$noreg' 
+            GROUP BY
+            ps.tgllahir,
+            pg.namalengkap,
+            alm.alamatlengkap
+        ) AS x  
+        ";
+        $QueryInstalasi = "
+        SELECT DISTINCT
+            dp.namadepartemen
+        FROM
+            pasiendaftar_t as pd
+            INNER JOIN antrianpasiendiperiksa_t as apd on apd.noregistrasifk = pd.norec
+            INNER JOIN ruangan_m as rg on rg.id = apd.objectruanganfk
+            INNER JOIN departemen_m as dp on dp.id = objectdepartemenfk
+        WHERE
+            noregistrasi = '$noreg' 
+        ";
+        $QueryPelayanan = "
+        SELECT
+            pr.namaproduk,
+            pp.hargasatuan,
+            sum(pp.jumlah) AS jumlah,
+            pp.jasa,
+            sum((pp.hargasatuan * pp.jumlah) + case when pp.jasa is not null then pp.jasa else 0 end) as total,
+            jb.id as id_jb,
+            jb.jenisbilling
+        FROM
+            pasiendaftar_t AS pd
+            INNER JOIN antrianpasiendiperiksa_t as apd on apd.noregistrasifk = pd.norec
+            INNER JOIN pelayananpasien_t as pp on pp.noregistrasifk = apd.norec
+            INNER JOIN produk_m as pr on pr.id = pp.produkfk
+            LEFT JOIN jenisbilling_m as jb on jb.id = pr.objectjenisbillfk
+        WHERE 
+            pd.noregistrasi = '$noreg'
+        GROUP BY
+            pr.namaproduk,
+            pp.hargasatuan,
+            pp.jasa,
+            jb.jenisbilling,
+            jb.id
+        ORDER BY
+            jb.jenisbilling DESC
+        ";
+        $billing = collect(DB::select($QueryTemp));
+        $identitas = collect(DB::select($QueryIdentitas));
+        $instalasi = collect(DB::select($QueryInstalasi));
+        $pelayanan = collect(DB::select($QueryPelayanan));
+        // return $billing;
+        return view('report.kasir.cetakbillingdetail',
+            compact('identitas', 'billing', 'instalasi', 'pelayanan', 'pageWidth','r'));
+    }
+
+    public static function getTotal($registrasi, $idbilling){
+        $data = collect(DB::select("
+        SELECT
+            SUM(X.total) as total
+        FROM
+            (
+            SELECT
+                pr.namaproduk,
+                pp.hargasatuan,
+                SUM ( pp.jumlah ),
+                pp.jasa,
+                SUM (( pp.hargasatuan * pp.jumlah ) + CASE WHEN pp.jasa IS NOT NULL THEN pp.jasa ELSE 0 END ) AS total,
+                jb.jenisbilling 
+            FROM
+                pasiendaftar_t AS pd
+                INNER JOIN antrianpasiendiperiksa_t AS apd ON apd.noregistrasifk = pd.norec
+                INNER JOIN pelayananpasien_t AS pp ON pp.noregistrasifk = apd.norec
+                INNER JOIN produk_m AS pr ON pr.ID = pp.produkfk
+                LEFT JOIN jenisbilling_m AS jb ON jb.ID = pr.objectjenisbillfk 
+            WHERE
+                pd.noregistrasi = '$registrasi'
+                AND jb.ID = '$idbilling' 
+            GROUP BY
+                pr.namaproduk,
+                pp.hargasatuan,
+                pp.jasa,
+                jb.jenisbilling 
+            ORDER BY
+            jb.jenisbilling ASC 
+            ) AS X 
+        "));
+        $data['total'] = $data[0]->total;
+        return $data;
+    }
+
+    public static function getTotalTagihan($registrasi){
+        $data = collect(DB::select("
+        SELECT
+            SUM(X.total) as total
+        FROM
+            (
+            SELECT
+                pr.namaproduk,
+                pp.hargasatuan,
+                SUM ( pp.jumlah ),
+                pp.jasa,
+                SUM (( pp.hargasatuan * pp.jumlah ) + CASE WHEN pp.jasa IS NOT NULL THEN pp.jasa ELSE 0 END ) AS total,
+                jb.jenisbilling 
+            FROM
+                pasiendaftar_t AS pd
+                INNER JOIN antrianpasiendiperiksa_t AS apd ON apd.noregistrasifk = pd.norec
+                INNER JOIN pelayananpasien_t AS pp ON pp.noregistrasifk = apd.norec
+                INNER JOIN produk_m AS pr ON pr.ID = pp.produkfk
+                LEFT JOIN jenisbilling_m AS jb ON jb.ID = pr.objectjenisbillfk 
+            WHERE
+                pd.noregistrasi = '$registrasi'
+            GROUP BY
+                pr.namaproduk,
+                pp.hargasatuan,
+                pp.jasa,
+                jb.jenisbilling 
+            ORDER BY
+            jb.jenisbilling ASC 
+            ) AS X 
+        "));
+        $data['total'] = $data[0]->total;
+        return $data;
     }
 }

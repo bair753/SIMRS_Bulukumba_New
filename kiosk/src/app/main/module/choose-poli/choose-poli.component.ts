@@ -102,12 +102,12 @@ export class ChoosePoliComponent implements OnInit {
       if (es2.status == true) {
         this.httpservice.post('medifirst2000/kiosk/save-antrian', antrian).subscribe(response => {
           let res: any
-          if (this.isCetakDSKiosk == 'true') {
+          if (this.isCetakDSKiosk == 'false') {
             this.http.get('http://127.0.0.1:1237/printvb/cetak-antrian?cetak=1&norec=' + response.noRec).subscribe(result => { })
           } else {
             window.open(Configuration.get().apiBackend + 'medifirst2000/report/cetak-antrian?norec='
               + response.noRec
-              + '&kdprofile=21', '_blank');
+              + '&kdprofile=39', '_blank');
           }
 
           window.history.back()
