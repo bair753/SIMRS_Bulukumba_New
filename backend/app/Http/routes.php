@@ -1945,7 +1945,8 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
           Route::get('reservasionline/get-pasien/{nocm}/{tgllahir}','ReservasiOnline\ReservasiOnlineController@getPasienByNoCmTglLahir');
           Route::get('reservasionline/get-libur','ReservasiOnline\ReservasiOnlineController@getLiburSlotting');
           Route::get('reservasionline/get-bank-account','ReservasiOnline\ReservasiOnlineController@getNomorRekening');
-          Route::post('reservasionline/save','ReservasiOnline\ReservasiOnlineController@saveReservasi');
+          // Route::post('reservasionline/save','ReservasiOnline\ReservasiOnlineController@saveReservasi');
+          Route::post('reservasionline/save','ReservasiOnline\ReservasiOnlineController@saveReservasi_15012023');
           Route::post('reservasionline/delete','ReservasiOnline\ReservasiOnlineController@deleteReservasi');
           Route::get('reservasionline/cek-reservasi-satu','ReservasiOnline\ReservasiOnlineController@cekReservasiDipoliYangSama');
           Route::get('reservasionline/get-slotting-by-ruangan-new/{kode}/{tgl}','ReservasiOnline\ReservasiOnlineController@getSlottingByRuanganNew');
