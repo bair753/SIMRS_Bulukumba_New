@@ -36,6 +36,11 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 			$scope.item.diskonTotalPersen = 0;
 			FormLoad();
 
+			var tarifPenggunaaEspay = ''
+            medifirstService.get('sysadmin/settingdatafixed/get/tarifPenggunaaEspay').then(function (dat) {
+                tarifPenggunaaEspay = dat.data
+            })
+
 			$scope.formatRupiah = function (value, currency) {
 				return currency + " " + parseFloat(value).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
 			}
@@ -816,6 +821,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 									"description": "Pembayaran tagihan pasien " + $scope.item.namaPasien,
 									"norec_pd": $scope.item.norec_pd,
 									"pegawaifk": medifirstService.getPegawaiLogin().id,
+									"tarifEspay": tarifPenggunaaEspay,
 								}
 								break;
 							case 'QR':
@@ -832,6 +838,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 									"type": typeEspay,
 									"norec_pd": $scope.item.norec_pd,
 									"pegawaifk": medifirstService.getPegawaiLogin().id,
+									"tarifEspay": tarifPenggunaaEspay,
 								}
 								break;
 						}

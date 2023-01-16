@@ -75,11 +75,12 @@ class BridgingESPAYController extends ApiController
     public function sendInvoice(Request $request) 
     {   
         $data = $request->all();
+        $totalpembayaran = (float)$data['amount'] + (float)$data['tarifEspay'];
         $dataSend = array (
             'rq_uuid' => $data['rq_uuid'],
             'rq_datetime' => $data['rq_datetime'],
             'order_id' => $data['order_id'],
-            'amount' => $data['amount'],
+            'amount' => $totalpembayaran,//$data['amount'],
             'ccy' => 'IDR',
             'comm_code' => $this->cmm_code,
             'remark1' => $data['remark1'],
@@ -103,7 +104,7 @@ class BridgingESPAYController extends ApiController
             $newPE->customer_phone = $dataSend['remark1'];
             $newPE->amount = $response->amount;
             $newPE->total_amount = $response->total_amount;
-            $newPE->fee = $response->fee;
+            $newPE->fee = $data['tarifEspay'];//$response->fee;
             $newPE->va_number = $response->va_number;
             $newPE->expired = $response->expired;
             $newPE->description = $data['description'];//$item->description;
@@ -149,13 +150,14 @@ class BridgingESPAYController extends ApiController
     public function qrPayment(Request $request)
     {
         $data = $request->all();
+        $totalpembayaran = (float)$data['amount'] + (float)$data['tarifEspay'];
         $dataSend = array (
             'rq_uuid' => $data['rq_uuid'],
             'rq_datetime' => $data['rq_datetime'],
             'comm_code' => $this->cmm_code,
             'product_code' => $data['product_code'],
             'order_id' => $data['order_id'],
-            'amount' => $data['amount'],
+            'amount' => $totalpembayaran,//$data['amount'],
             'key' => $this->key,
             'description' => $data['description'],
             'customer_id' => $data['customer_id'],
@@ -173,6 +175,7 @@ class BridgingESPAYController extends ApiController
             $newPE->order_id = $dataSend['order_id'];
             $newPE->customer_id = isset($dataSend['customer_id']) ? $dataSend['customer_id'] : null;
             $newPE->amount = $dataSend['amount'];
+            $newPE->fee = $data['tarifEspay'];
             $newPE->qr_link = $response->QRLink;
             $newPE->qr_code = $response->QRCode;
             $newPE->espayproduct_code = $dataSend['product_code'];
