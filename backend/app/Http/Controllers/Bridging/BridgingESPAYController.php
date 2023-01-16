@@ -174,7 +174,7 @@ class BridgingESPAYController extends ApiController
             $newPE->trx_id = $response->trx_id;
             $newPE->order_id = $dataSend['order_id'];
             $newPE->customer_id = isset($dataSend['customer_id']) ? $dataSend['customer_id'] : null;
-            $newPE->amount = $dataSend['amount'];
+            $newPE->amount = $data['amount'];//$dataSend['amount'];
             $newPE->fee = $data['tarifEspay'];
             $newPE->qr_link = $response->QRLink;
             $newPE->qr_code = $response->QRCode;
