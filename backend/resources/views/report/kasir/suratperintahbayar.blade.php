@@ -177,11 +177,11 @@
                         </tr>
                         <tr>
                             <td width="20%"><font style="font-size: 11pt;" color="#000000">Banyaknya uang</font></td>
-                            <td width="80%" colspan="3"><font style="font-size: 11pt;">:</font><font style="font-size: 11pt;font-weight: bold;font-style:italic;" color="#000000"> Rp. {{ number_format($dataReport['datas']->jumlahBayar,2, '.', ',') }}</font></td>
+                            <td width="80%" colspan="3"><font style="font-size: 11pt;">:</font><font style="font-size: 11pt;font-weight: bold;font-style:italic;" color="#000000"> Rp. {{ number_format($dataReport['datas']->jumlahbayar,2, '.', ',') }}</font></td>
                         </tr>
                         <tr>
                             <td width="20%"><font style="font-size: 11pt;" color="#000000">Terbilang</font></td>
-                            <td width="80%" colspan="3"><font style="font-size: 11pt;" color="#000000">: {{ strtoupper(App\Http\Controllers\Report\ReportController::terbilang($dataReport['datas']->jumlahBayar)) }}</font></td>
+                            <td width="80%" colspan="3"><font style="font-size: 11pt;" color="#000000">: {{ strtoupper(App\Http\Controllers\Report\ReportController::terbilang($dataReport['datas']->jumlahbayar)) }}</font></td>
                         </tr>
                     </table>
                 </td>

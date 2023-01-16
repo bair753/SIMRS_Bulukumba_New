@@ -2814,7 +2814,7 @@ class ReportController extends ApiController{
             ,ps.namapasien
             ,ep.amount
             ,ep.fee
-            ,(ep.amount + ep.fee) as jumlahBayar
+            ,(ep.amount + ep.fee) as jumlahbayar
             ,ps.namapasien || '/' || ps.nocm AS pasien
             ,ru.namaruangan
             ,pg.namalengkap
