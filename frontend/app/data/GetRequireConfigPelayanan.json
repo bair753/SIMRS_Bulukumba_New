@@ -3161,6 +3161,14 @@
         {
             "nameDep": "GrafikTandaVital8Ctrl",
             "urlDep": "module/EMR/GrafikTandaVital8Ctrl"
+        },
+        {
+            "nameDep": "PemberianEdukasiPasienGawatDaruratCtrl",
+            "urlDep": "module/EMR/PemberianEdukasiPasienGawatDaruratCtrl"
+        },
+        {
+            "nameDep": "HandOverGawatDaruratCtrl",
+            "urlDep": "module/EMR/HandOverGawatDaruratCtrl"
         }
     ]
 }
