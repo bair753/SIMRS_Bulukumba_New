@@ -293,12 +293,12 @@ export class PilihPoliComponent implements OnInit {
     } else {
       window.open(Configuration.get().apiBackend + 'medifirst2000/report/cetak-bukti-pendaftaran?noregistrasi='
         + this.item.noregistrasi
-        + '&kdprofile=21', '_blank');
+        + '&kdprofile=39', '_blank');
     }
 
     // this.service.get(Configuration.get().apiBackend + ' medifirst2000/report/cetak-bukti-pendaftaran?noregistrasi='
     //   + this.item.noregistrasi
-    //   + '&kdprofile=21').subscribe(response => { });
+    //   + '&kdprofile=39').subscribe(response => { });
   }
   changeClick() {
     let eks = false

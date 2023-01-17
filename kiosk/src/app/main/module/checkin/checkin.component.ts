@@ -186,7 +186,7 @@ export class CheckinComponent implements OnInit {
       window.open(Configuration.get().apiBackend + 'medifirst2000/report/cetak-bukti-pendaftaran?noregistrasi='
         + this.item.noregistrasi
         + '&noReservasi=' + this.item.noreservasi
-        + '&kdprofile=21', '_blank');
+        + '&kdprofile=39', '_blank');
     }
 
   }
