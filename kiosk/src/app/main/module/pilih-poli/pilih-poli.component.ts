@@ -265,7 +265,7 @@ export class PilihPoliComponent implements OnInit {
   nomorAntrian() {
 
     let petugas = '-'
-    if (this.isCetakDSKiosk == 'true') {
+    if (this.isCetakDSKiosk == 'false') {
       this.service.get('http://127.0.0.1:1237/printvb/Pendaftaran?cetak-buktipendaftaran=1&norec='
         + this.item.noregistrasi + '&petugas=' + petugas + '&view=false').subscribe(response => { });
     } else if (this.isCetakDSKiosk == 'android') {

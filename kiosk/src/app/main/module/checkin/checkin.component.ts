@@ -154,7 +154,7 @@ export class CheckinComponent implements OnInit {
     })
   }
   cetakBukti() {
-    if (this.isCetakDSKiosk == 'true') {
+    if (this.isCetakDSKiosk == 'false') {
       this.service.get('http://127.0.0.1:1237/printvb/Pendaftaran?cetak-buktipendaftaran-online=1&norec='
         + this.item.noregistrasi + '&view=false'
         + '&noReservasi=' + this.item.noreservasi).subscribe(response => {
