@@ -2008,7 +2008,7 @@ export class VerifPasienBpjsOldComponent implements OnInit {
     } else {
       window.open(Configuration.get().apiBackend + 'medifirst2000/report/cetak-bukti-pendaftaran?noregistrasi='
         + this.pasienDaftar.noregistrasi
-        + '&kdprofile=21', '_blank');
+        + '&kdprofile=39', '_blank');
     }
   }
 
