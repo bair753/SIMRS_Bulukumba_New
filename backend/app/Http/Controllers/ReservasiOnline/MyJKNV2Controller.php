@@ -42,9 +42,9 @@ class MyJKNV2Controller extends ApiController
     public function GetAntrean_fix(Request $request){
         $kdProfile = $this->getDataKdProfile($request);
         $userData = $request->all();
-        $request = $request->json()->all();
+        // $request = $request->json()->all();
         date_default_timezone_set('Asia/Jakarta'); // set timezone
-        \Log::info('REQUEST GetAntrean_fix : '. $request);
+        \Log::info('REQUEST GetAntrean_fix : '. json_encode($request));
         if (empty($request['nomorkartu'])) {
             $result = array("metadata" => array("message" => "Nomor Kartu Belum Diisi", "code" => 201));
             return $this->setStatusCode($result['metadata']['code'])->respond($result);
