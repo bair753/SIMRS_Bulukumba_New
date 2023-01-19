@@ -22,6 +22,7 @@
 // api buat my jkn v2
 // Route::group(['middleware' => 'cors', 'prefix' => 'new-api-bpjs'], function () {
   Route::get('/', 'ReservasiOnline\MyJKNV2Controller@jalurMasuk');
+  Route::post('/', 'ReservasiOnline\MyJKNV2Controller@jalurMasuk');
 // });
 
 //yang pasti
