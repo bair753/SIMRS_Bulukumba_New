@@ -1444,13 +1444,13 @@ class MyJKNV2Controller extends ApiController
     public function jalurMasuk(Request $request)
     {
         $url = $request['url'];
-        \Log::info($url);
+        \Log::info('jalur masuk :'.json_encode($request));
         switch ($url) {
             case 'auth':
                 return app('App\Http\Controllers\Auth\LoginController')->getTokens($request);
                 break;
             case 'ambilantrean':
-                return app('App\Http\Controllers\ReservasiOnline\MyJKNV2Controller')->GetAntrean_fix($request);
+                return $this->GetAntrean_fix($request);
                 break;
             case 'statusantrean':
                 return $this->GetStatusAntrian_fix($request);
