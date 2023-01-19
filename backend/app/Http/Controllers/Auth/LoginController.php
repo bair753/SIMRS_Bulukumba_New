@@ -448,7 +448,7 @@ class LoginController extends ApiController {
 
     public function getTokens(Request $request)
     {
-        \Log::info('login jkn  :'.json_encode($request));
+        \Log::info('login jkn  :'.json_encode($request->header()));
         if ($request->method() == 'POST') {
             $req =  $request->json()->all();
             $login = DB::table('loginuser_s')
