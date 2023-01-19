@@ -1444,7 +1444,7 @@ class MyJKNV2Controller extends ApiController
     public function jalurMasuk(Request $request)
     {
         $url = $request['url'];
-        \Log::info('jalur masuk :'.json_encode($request));
+        \Log::info('jalur masuk :'.json_encode($request->input()));
         switch ($url) {
             case 'auth':
                 return app('App\Http\Controllers\Auth\LoginController')->getTokens($request);
