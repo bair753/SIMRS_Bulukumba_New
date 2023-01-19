@@ -1444,6 +1444,7 @@ class MyJKNV2Controller extends ApiController
     public function jalurMasuk(Request $request)
     {
         $url = $request['url'];
+        \Log::info($url);
         switch ($url) {
             case 'auth':
                 return app('App\Http\Controllers\Auth\LoginController')->getTokens($request);
