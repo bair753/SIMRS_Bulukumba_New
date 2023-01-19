@@ -492,12 +492,13 @@ class LoginController extends ApiController {
                 "response"=> null,
                 "metadata"=> array(
                     "message" => 'Username atau password salah',
-                    "code" => 400,
+                    "code" => 201,
                 )
             );
             //endregion
         }
 
+        \Log::info(json_encode($result));
 
         return $this->setStatusCode($result['metadata']['code'])->respond($result);
     }
