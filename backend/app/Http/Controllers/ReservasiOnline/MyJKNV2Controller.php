@@ -386,6 +386,7 @@ class MyJKNV2Controller extends ApiController
         } catch (\Exception $e) {
             $transMessage = "Gagal Reservasi";
             $transStatus = 'false';
+            \Log::info($e->getMessage());
         }
 
         if ($transStatus == 'true') {
