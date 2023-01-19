@@ -1450,7 +1450,7 @@ class MyJKNV2Controller extends ApiController
                 return app('App\Http\Controllers\Auth\LoginController')->getTokens($request);
                 break;
             case 'ambilantrean':
-                return $this->GetAntrean_fix($request);
+                return app('App\Http\Controllers\ReservasiOnline\MyJKNV2Controller')->GetAntrean_fix($request);
                 break;
             case 'statusantrean':
                 return $this->GetStatusAntrian_fix($request);
