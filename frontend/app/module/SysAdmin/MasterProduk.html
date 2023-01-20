@@ -65,10 +65,17 @@
 		<div class="grid_12">
 			<div class="grid_12 borderBox">
 				<kendo-grid id="kGrid" options="mainGridOptions" k-data-source="dataSource" k-ng-model="dataSelected"
-					ng-click="klik(current)">
+					ng-click="klikGrid(dataSelected)">
 				</kendo-grid>
 			</div>
 		</div>
+		<!-- <div class="grid_12">
+            <div class="grid_12 borderBox">
+                <kendo-grid id="kGrids" data-source="dataGrid" options="mainGridOptions" k-selectable="'row'"
+                    k-sortable="'true'" class="max-height" k-resizable="'true'" k-ng-model="dataSelected"
+                    ng-click="klikGrid(dataSelected)"></kendo-grid>
+            </div>
+        </div> -->
 	</div>
 	<div class="grid_12">		
 		<div class="grid_4"></div>
