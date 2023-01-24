@@ -142,18 +142,58 @@ define(['initialize'], function (initialize) {
 			};
 
 			$scope.edit = function () {
-				if ($scope.item.idx == undefined) {
+				if ($scope.dataSelected.id == undefined) {
 					alert("Pilih 1 Data Untuk di edit!!")
 				} else {
-					$state.go("InputProduk", { idx: $scope.item.idx })
+					$state.go("InputProduk", { idx: $scope.dataSelected.id })
 				}
 			}
 
 			$scope.tambah = function () {
 				$state.go("InputProduk")
-			}				
+			}		
+			
+			$scope.selectedData2 = [];
+			$scope.onClick = function (e) {
+
+                var element = $(e.currentTarget);
+                var checked = element.is(':checked'),
+                    row = element.closest('tr'),
+                    grid = $("#kGrid").data("kendoGrid"),
+                    // grid = $("#grid").data("kendoGrid"),
+                    dataItem = grid.dataItem(row);
+
+                // $scope.selectedData[dataItem.noRec] = checked;
+                if (checked) {
+                    var result = $.grep($scope.selectedData2, function (e) {
+                        // return e.produkfk == dataItem.produkfk;
+                    });
+                    if (result.length == 0) {
+                        $scope.selectedData2.push(dataItem);
+                    } else {
+                        for (var i = 0; i < $scope.selectedData2.length; i++)
+                            // if ($scope.selectedData2[i].produkfk === dataItem.produkfk) {
+                            //     $scope.selectedData2.splice(i, 1);
+                            //     break;
+                            // }
+                        $scope.selectedData2.push(dataItem);
+                    }
+                    row.addClass("k-state-selected");
+                } else {
+                    for (var i = 0; i < $scope.selectedData2.length; i++)
+                        // if ($scope.selectedData2[i].produkfk === dataItem.produkfk) {
+                        //     $scope.selectedData2.splice(i, 1);
+                        //     break;
+                        // }
+                    row.removeClass("k-state-selected");
+                }
+            }
 
 			$scope.columnProduk = [
+				{
+                    "template": "<input type='checkbox' class='checkbox' ng-click='onClick($event)' />",
+                    "width": 40
+                },
 				{
 					"field": "no",
 					"title": "<h3 align=center>No.<h3>",
@@ -243,6 +283,33 @@ define(['initialize'], function (initialize) {
 			$scope.KelBPJS = function () {
 				$state.go('KelompokProdukBPJS')
 			}
+
+			$scope.popUpKelompokBill = function () {
+				// if ($scope.dataPasienSelected.noregistrasi == undefined) {
+				// 	toastr.error('Pilih Pasien dulu', 'Info');
+				// 	return
+				// }
+                medifirstService.get("farmasi/get-jenis-billing").then(function (data) {
+                    $scope.listJenisBill = data.data.daftar;
+                })
+                $scope.popupkelbill.center().open();
+			}
+
+			$scope.simpanKelBill = function () {
+                // var Produkfk = ''
+                // for (var i = $scope.selectedData2.length - 1; i >= 0; i--) {
+                //     Produkfk = Produkfk + ',' + $scope.selectedData2[i].id
+                // }
+
+				var objSave = {
+					"selected": $scope.selectedData2,
+					"jenisbilling": $scope.item.KelBilling.id					
+				}
+
+				medifirstService.post('sysadmin/master/save-kelbil-produk', objSave).then(function (e) {
+					init();
+				})
+            }
 		}
 	]);
 });

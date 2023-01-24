@@ -37,6 +37,7 @@ define(['initialize'], function (initialize) {
                 if ($scope.item.namaFaskes != undefined) {
                     nama = $scope.item.namaFaskes
                 }
+                $scope.isRouteLoading = true;
                 medifirstService.get("bridging/sisrute/referensi/faskes?"
                     + "query=" + nama
 

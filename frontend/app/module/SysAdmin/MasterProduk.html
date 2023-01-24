@@ -64,15 +64,24 @@
 		</div>
 		<div class="grid_12">
 			<div class="grid_12 borderBox">
-				<kendo-grid options="mainGridOptions" k-data-source="dataSource" k-ng-model="current"
-					ng-click="klik(current)">
+				<kendo-grid id="kGrid" options="mainGridOptions" k-data-source="dataSource" k-ng-model="dataSelected"
+					ng-click="klikGrid(dataSelected)">
 				</kendo-grid>
 			</div>
-
 		</div>
+		<!-- <div class="grid_12">
+            <div class="grid_12 borderBox">
+                <kendo-grid id="kGrids" data-source="dataGrid" options="mainGridOptions" k-selectable="'row'"
+                    k-sortable="'true'" class="max-height" k-resizable="'true'" k-ng-model="dataSelected"
+                    ng-click="klikGrid(dataSelected)"></kendo-grid>
+            </div>
+        </div> -->
 	</div>
 	<div class="grid_12">		
-		<div class="grid_6"></div>
+		<div class="grid_4"></div>
+		<div class="grid_2">
+			<button class="c-button" ng-click="popUpKelompokBill()">Kelompok Billing</button>
+		</div>
 		<div class="grid_2">
 			<button class="c-button" ng-click="KelBPJS()">Kelompok Produk BPJS</button>
 		</div>
@@ -82,5 +91,13 @@
 		<div class="grid_2">
 			<button class="c-button" ng-click="tambah()">Tambah</button>
 		</div>
+	</div>
+	<div kendo-window="popupkelbill" k-title="'Kelompok Billing'" k-width="400" k-height="120" k-visible="false" k-on-open="win2visible = true" k-on-close="win2visible = false">
+		<label c-label item="item " c-label-text="Kelompok Rincian Billing "></label>
+		 <input style="width: 100%;" kendo-combo-box k-ng-model="item.KelBilling" k-data-text-field="'jenisbilling'" k-data-value-field="'id'" k-filter="'contains'" k-auto-bind="false" k-data-source="listJenisBill" />
+		<div class="clear">
+		<button class="k-button" ng-click="simpanKelBill()" style="float:right;margin-top:4%">Simpan</button>
+		<!-- <button class="k-button" ng-click="buktiLayanan()" style="float:right;margin-top:4%" ng-show="showBuktiLayanan">Cetak Bukti Layanan</button> -->
+	 
 	</div>
 </div>

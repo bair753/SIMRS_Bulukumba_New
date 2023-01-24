@@ -3089,6 +3089,86 @@
         {
             "nameDep": "PersetujuanUmumRawatJalanCtrl",
             "urlDep": "module/EMR/PersetujuanUmumRawatJalanCtrl"
+        },
+        {
+            "nameDep": "PermintaanPemeriksaanPenunjangRanapCtrl",
+            "urlDep": "module/EMR/PermintaanPemeriksaanPenunjangRanapCtrl"
+        },
+        {
+            "nameDep": "HasilLaboratoriumCtrl",
+            "urlDep": "module/EMR/HasilLaboratoriumCtrl"
+        },
+        {
+            "nameDep": "CPPTRanapCtrl",
+            "urlDep": "module/EMR/CPPTRanapCtrl"
+        },
+        {
+            "nameDep": "PemberianEdukasiPasienCtrl",
+            "urlDep": "module/EMR/PemberianEdukasiPasienCtrl"
+        },
+        {
+            "nameDep": "RekonsiliasiObatCtrl",
+            "urlDep": "module/EMR/RekonsiliasiObatCtrl"
+        },
+        {
+            "nameDep": "TransferAntarUnitCtrl",
+            "urlDep": "module/EMR/TransferAntarUnitCtrl"
+        },
+        {
+            "nameDep": "RingkasanPulangCtrl",
+            "urlDep": "module/EMR/RingkasanPulangCtrl"
+        },
+        {
+            "nameDep": "HandOverCtrl",
+            "urlDep": "module/EMR/HandOverCtrl"
+        },
+        {
+            "nameDep": "CatatanPemberianDanPemantauanObatPasienCtrl",
+            "urlDep": "module/EMR/CatatanPemberianDanPemantauanObatPasienCtrl"
+        },
+        {
+            "nameDep": "TabTandaVitalCtrl",
+            "urlDep": "module/EMR/TabTandaVitalCtrl"
+        },
+        {
+            "nameDep": "GrafikTandaVitalCtrl",
+            "urlDep": "module/EMR/GrafikTandaVitalCtrl"
+        },
+        {
+            "nameDep": "GrafikTandaVital2Ctrl",
+            "urlDep": "module/EMR/GrafikTandaVital2Ctrl"
+        },
+        {
+            "nameDep": "GrafikTandaVital3Ctrl",
+            "urlDep": "module/EMR/GrafikTandaVital3Ctrl"
+        },
+        {
+            "nameDep": "GrafikTandaVital4Ctrl",
+            "urlDep": "module/EMR/GrafikTandaVital4Ctrl"
+        },
+        {
+            "nameDep": "GrafikTandaVital5Ctrl",
+            "urlDep": "module/EMR/GrafikTandaVital5Ctrl"
+        },
+        {
+            "nameDep": "GrafikTandaVital6Ctrl",
+            "urlDep": "module/EMR/GrafikTandaVital6Ctrl"
+        },
+        {
+            "nameDep": "GrafikTandaVital7Ctrl",
+            "urlDep": "module/EMR/GrafikTandaVital7Ctrl"
+        },
+        {
+            "nameDep": "GrafikTandaVital8Ctrl",
+            "urlDep": "module/EMR/GrafikTandaVital8Ctrl"
+        },
+        {
+            "nameDep": "PemberianEdukasiPasienGawatDaruratCtrl",
+            "urlDep": "module/EMR/PemberianEdukasiPasienGawatDaruratCtrl"
+        },
+        {
+            "nameDep": "HandOverGawatDaruratCtrl",
+            "urlDep": "module/EMR/HandOverGawatDaruratCtrl"
         }
     ]
 }

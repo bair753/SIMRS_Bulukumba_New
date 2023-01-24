@@ -31,7 +31,7 @@ use Webpatser\Uuid\Uuid;
 use App\Master\Ruangan;
 use App\Master\Alamat;
 use App\Transaksi\AntrianPasienRegistrasi;
-use App\Transaksi\BpjsRencanaKontrol;
+use App\Transaksi\BPJSRencanaKontrol;
 
 class BridgingBPJSV2Controller extends ApiController
 {
@@ -3212,16 +3212,16 @@ class BridgingBPJSV2Controller extends ApiController
         try {
             if ($request['tipe'] == 'delete') {
                 $transMessage = "Sukses ";
-                BpjsRencanaKontrol::where('nosuratkontrol', $request['nosuratkontrol'])->delete();
+                BPJSRencanaKontrol::where('nosuratkontrol', $request['nosuratkontrol'])->delete();
             } else {
                 $transMessage = "Sukses";
                 if ($request['tipe'] == 'insert') {
-                    $data1 = new BpjsRencanaKontrol();
+                    $data1 = new BPJSRencanaKontrol();
                     $data1->norec = $data1->generateNewId();
                     $data1->kdprofile = $kdProfile;
                     $data1->statusenabled = true;
                 } else {
-                    $data1 =  BpjsRencanaKontrol::where('nosuratkontrol', $request['nosuratkontrol'])->first();
+                    $data1 =  BPJSRencanaKontrol::where('nosuratkontrol', $request['nosuratkontrol'])->first();
                 }
                 $data1->nosuratkontrol = $request['nosuratkontrol'];
                 $data1->jnspelayanan = $request['jnspelayanan'];
@@ -3272,9 +3272,9 @@ class BridgingBPJSV2Controller extends ApiController
         $kdProfile = $this->getDataKdProfile($request);
         DB::beginTransaction();
         try {
-                $data1 =  BpjsRencanaKontrol::where('norec_pd', $request['norec_pd'])->first();
+                $data1 =  BPJSRencanaKontrol::where('norec_pd', $request['norec_pd'])->first();
                 if(empty($data1)) {
-                    $data1 = new BpjsRencanaKontrol();
+                    $data1 = new BPJSRencanaKontrol();
                     $data1->norec = $data1->generateNewId();
                     $data1->kdprofile = $kdProfile;
                     $data1->statusenabled = true;

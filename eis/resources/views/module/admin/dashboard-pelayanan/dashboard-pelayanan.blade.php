@@ -2114,7 +2114,7 @@
                     gdpData2[item.kdmap] = item.jumlah;
                 })
             }else{
-                gdpData2 = dataSource
+                gdpData2 = {27: 3}
             }
 
             $('#world-map-markers').vectorMap({

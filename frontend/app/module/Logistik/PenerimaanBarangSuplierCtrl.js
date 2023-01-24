@@ -1936,7 +1936,12 @@ define(['initialize'], function (initialize) {
                            $scope.isPenerimaanElogistic =false
                           
                         })
-                    }                
+                    }
+                    if (confirm('Apakah Anda Ingin Menambahkan Faktur Baru?') == true) {
+                        Kosongkan2();
+                    } else {
+                        window.history.back();
+                    }
                 },function error(e){
                     $scope.isPenerimaanElogistic =false
                 })
@@ -2191,6 +2196,42 @@ define(['initialize'], function (initialize) {
                     delete $scope.item.noFaktur
                 }
             };
+
+            function Kosongkan2() {
+                $scope.item.produk = ''
+                // $scope.item.asal =''
+                $scope.item.satuan = ''
+                $scope.item.nilaiKonversi = 0
+                $scope.item.hargaSatuan = 0
+                $scope.item.jumlah = 0
+                $scope.item.hargadiskon = 0
+                $scope.item.no = undefined
+                $scope.item.ppn = 0
+                $scope.item.hargaDiskon = 0
+                $scope.item.subTotaltxt = 0
+                $scope.item.jumlahdipakai = 0
+                $scope.item.Generate = false
+                $scope.item.noTerima = ''
+                $scope.item.asalproduk = ''
+                $scope.item.noFakturBlm = false
+                $scope.item.noFaktur = ''
+                $scope.item.namaRekanan = ''
+                $scope.item.keterangan1 = ''
+                $scope.item.ketTerima = ''
+                $scope.item.pegawaiPembuat = ''
+                $scope.item.noUsulan = ''
+                $scope.item.namaPengadaan = ''
+                $scope.item.noKontrak = ''
+                $scope.item.noOrder = ''
+                $scope.item.noFakturOtomatis = false
+                // console.log(data2);
+                for (var i = data2.length - 1; i >= 0; i--) {
+                    data2.splice(i, 1);
+                    $scope.dataGrid = new kendo.data.DataSource({
+                        data: data2
+                    });
+                }
+            }
             //***********************************
         }
     ]);

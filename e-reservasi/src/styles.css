@@ -1,6 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
 .ui-float-label {
   margin-top: 10px;
 }
@@ -1146,4 +1149,9 @@ mat-form-field.mat-form-field {
     -moz-transform: rotate(360deg);
     transform: rotate(360deg);
   }
+}
+body .ui-fluid .ui-button-icon-only {
+  /* width: auto; */
+  width: 2.357rem;
+  padding: 0.5rem 0;
 }

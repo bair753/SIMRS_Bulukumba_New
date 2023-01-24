@@ -22,6 +22,7 @@
 // api buat my jkn v2
 // Route::group(['middleware' => 'cors', 'prefix' => 'new-api-bpjs'], function () {
   Route::get('/', 'ReservasiOnline\MyJKNV2Controller@jalurMasuk');
+  Route::post('/', 'ReservasiOnline\MyJKNV2Controller@jalurMasuk');
 // });
 
 //yang pasti
@@ -373,6 +374,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
               Route::put('bridging/sisrute/rujukan/jawab','Bridging\BridgingSisruteController@jawabRujukan');
               Route::put('bridging/sisrute/rujukan/batal','Bridging\BridgingSisruteController@batalRujukan');
               Route::put('bridging/sisrute/rujukan/notif','Bridging\BridgingSisruteController@notifRujukan');
+              Route::post('bridging/sisrute/tools', 'Bridging\BridgingSisruteController@SisruteTools');
 
             // });
             // Route::group(['prefix' => 'penunjang'], function () {
@@ -628,6 +630,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
           // Route::post('emr/save-emr-dinamis', 'EMR\EMRController@SaveTransaksiEMR');
           Route::get('emr/get-emr-transaksi', 'EMR\EMRController@getEMRTransaksiRiwayat');
           Route::get('emr/get-emr-transaksi-detail', 'EMR\EMRController@getEMRTransaksiDetail');
+          Route::get('emr/get-datacombo-part-obat', 'EMR\EMRController@getDataComboPartObat');
           Route::get('emr/get-datacombo-part-pegawai', 'EMR\EMRController@getDataComboPegawaiPart');
           Route::get('emr/get-datacombo-part-bulan', 'EMR\EMRController@getDataComboBulanPart');
           Route::get('emr/get-datacombo-part-ruangan', 'EMR\EMRController@getDataComboRuanganPart');
@@ -748,6 +751,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
 
           Route::get('emr/get-pegawai-parts','EMR\EMRController@getPegawaiParts');
           Route::post('emr/hapus-order-pelayananobatfarmasi', 'EMR\EMRController@hapusOrderResep');
+          Route::get('emr/get-diagnosa-pernoreg', 'EMR\EMRController@getDiagnosaPasienPerNoReg');
 
           Route::get('emr/get-daftar-obat-sering-diresepkan','EMR\EMRController@getObatSeringDiresepkanDokter');
           Route::get('emr/get-datacombo-part-kelompokpasien', 'EMR\EMRController@getDataComboKelompokPaisnePart');
@@ -843,6 +847,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
           Route::get('farmasi/get-daftar-resep', 'Farmasi\FarmasiController@getDaftarResep');
           Route::get('farmasi/get-daftar-retur-obat', 'Farmasi\FarmasiController@getDaftarReturObat');
           Route::get('farmasi/get-daftar-paket-obat-pasien', 'Farmasi\FarmasiController@getDaftarPaketObatPasien');
+          Route::get('farmasi/get-jenis-billing', 'Farmasi\FarmasiController@getJenisBill');
 
           Route::get('farmasi/get-norec_bebas', 'Farmasi\PelayananObatBebasController@GetNorecResepBebas');
           Route::get('farmasi/get-detail-obat-bebas', 'Farmasi\PelayananObatBebasController@getDetailResepBebas');
@@ -1846,6 +1851,13 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
               Route::get('registrasi/get-data-antrean', 'Registrasi\RegistrasiController@getDataAntrean');
               Route::post('jkn/save-checkin','ReservasiOnline\MyJKNV2Controller@saveCheckInAntrean_fix');
 
+               //** RIWAYAT APP LAMA *//
+               Route::get('registrasi/riwayat-registrasi-applama', 'Bridging\RiwayatAppLamaController@getDaftarRiwayatRegistrasiLama');
+               Route::get('registrasi/riwayat-pemeriksaan-applama', 'Bridging\RiwayatAppLamaController@getDaftarRiwayatPemeriksaan');
+               Route::get('registrasi/riwayat-catatanmedis-applama', 'Bridging\RiwayatAppLamaController@getDaftarRiwayatCatatanMedis');
+               Route::get('registrasi/riwayat-cppt-applama', 'Bridging\RiwayatAppLamaController@getDaftarRiwayatCPPT');
+             //** END RIWAYAT APP LAMA *//
+
 
         // });
         // Route::group(['prefix' => 'remunerasi'], function () {
@@ -1934,7 +1946,8 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
           Route::get('reservasionline/get-pasien/{nocm}/{tgllahir}','ReservasiOnline\ReservasiOnlineController@getPasienByNoCmTglLahir');
           Route::get('reservasionline/get-libur','ReservasiOnline\ReservasiOnlineController@getLiburSlotting');
           Route::get('reservasionline/get-bank-account','ReservasiOnline\ReservasiOnlineController@getNomorRekening');
-          Route::post('reservasionline/save','ReservasiOnline\ReservasiOnlineController@saveReservasi');
+          // Route::post('reservasionline/save','ReservasiOnline\ReservasiOnlineController@saveReservasi');
+          Route::post('reservasionline/save','ReservasiOnline\ReservasiOnlineController@saveReservasi_15012023');
           Route::post('reservasionline/delete','ReservasiOnline\ReservasiOnlineController@deleteReservasi');
           Route::get('reservasionline/cek-reservasi-satu','ReservasiOnline\ReservasiOnlineController@cekReservasiDipoliYangSama');
           Route::get('reservasionline/get-slotting-by-ruangan-new/{kode}/{tgl}','ReservasiOnline\ReservasiOnlineController@getSlottingByRuanganNew');
@@ -1950,7 +1963,8 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
           Route::get('reservasionline/get-slotting-new','ReservasiOnline\ReservasiOnlineController@getSlottingByRuanganNew2');
           Route::get('reservasionline/get-data','ReservasiOnline\ReservasiOnlineController@getDataReservasi');
           Route::post('reservasionline/update-tglreservasi','ReservasiOnline\ReservasiOnlineController@updateTglReservasi');
-          
+          Route::get('reservasionline/cek-in-kiosk','ReservasiOnline\ReservasiOnlineController@cekINReservasi');
+          Route::get('reservasionline/get-combo-reservasi','ReservasiOnline\ReservasiOnlineController@getComboReserv');
           Route::get('reservasionline/get-slotting-rev','ReservasiOnline\ReservasiOnlineController@getSlottingByRuanganDokter');
           Route::get('reservasionline/get-dokter','ReservasiOnline\ReservasiOnlineController@getDokterByRuang');
         // });
@@ -2478,6 +2492,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
                 Route::post('sysadmin/master/delete-konversi-satuan', 'SysAdmin\Master\MasterController@hapusKonversiSatuan');
                 Route::post('sysadmin/master/save-statusenabled-rekanan', 'SysAdmin\Master\MasterController@UpdateStatusEnabledRekanan');
                 Route::post('sysadmin/master/save-data-rekanan', 'SysAdmin\Master\MasterController@saveDataRekanan');
+                Route::post('sysadmin/master/save-kelbil-produk', 'SysAdmin\Master\MasterController@updateKelompokBill');
 
                 Route::post('sysadmin/master/save-table-row','SysAdmin\Master\MasterController@saveTable');
                 Route::post('sysadmin/master/hapus-tarif-harganetto', 'SysAdmin\Master\MasterController@hapusHargaNettoByKelas');
@@ -2674,6 +2689,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
         Route::get('report/kegiatan-rawat-inap','Report\ReportController@getKegiatanRanap');
         Route::get('report/cetak-resume-medis','Report\ReportController@cetakResume');
         Route::get('report/cetak-dokter','Report\ReportController@cetakDokter');
+        Route::get('report/cetak-admin','Report\ReportController@cetakAdmin');
         Route::get('report/cetak-pasien','Report\ReportController@cetakPasien');
         Route::get('report/cetak-cppt','Report\ReportController@cetakCPPT');
         Route::get('report/cetak-cppt-ranap','Report\ReportController@cetakCPPTRanap');
@@ -2682,6 +2698,8 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
         Route::get('report/cetak-antrian','Report\ReportController@cetakAntrianKiosk');
         Route::get('report/cetak-bukti-pendaftaran','Report\ReportController@cetakBuktiPendaftaran');
         Route::get('report/cetak-sep','Report\ReportController@cetakSEP');
+        Route::get('report/cetak-sep-new','Report\ReportController@cetakSEPV2');
+        Route::get('report/ttd-digital/{noregistrasi}/{type}','Report\ReportController@ttdDigital');
         Route::get('report/cetak-anggaran','Report\ReportController@cetakRbaAnggaran_2021');
         Route::get('report/cetak-neraca','Report\ReportController@cetakNeraca');
         Route::get('report/cetak-labarugi','Report\ReportController@cetakLabaRugi');
@@ -2689,12 +2707,15 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
         Route::get('report/cetak-suratjaminanpelayanan','Report\ReportController@cetakSuratJaminanPelayanan');
         Route::get('report/cetak-pegawai','Report\ReportController@cetakPegawai');
         Route::get('report/cetak-surat-perintah-bayar','Report\ReportController@cetakSuratBayar');
+        Route::get('report/billing-detail','Report\ReportController@cetakBillingDetail');
 
         Route::get('viewer/get-list-antrian','Antrian\AntrianController@getListAntrian');
         Route::get('viewer/update-antrian','Antrian\AntrianController@updatePanggil');
         Route::get('viewer/get-data-viewer','Antrian\AntrianController@getViewer');
         Route::get('viewer/get-setting-viewer','Antrian\AntrianController@getSettingViewer');
         Route::get('viewer/get-dipanggil','Antrian\AntrianController@getDipanggil');
+        Route::get('viewer/get-list-antrian-farmasi','Antrian\AntrianController@getListAntrianFarm');
+        Route::get('viewer/get-data-viewer-far','Antrian\AntrianController@getViewerFar');
 
        Route::post('get-token', 'Auth\LoginController@getTokens');
 

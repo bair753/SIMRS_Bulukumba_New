@@ -1,0 +1,985 @@
+<style type="text/css">
+    fieldset {
+        border-radius: 5px;
+        border: 1px solid #228be6;
+    }
+
+    .k-slider-horizontal {
+        display: inline-block;
+        float: left;
+        width: 450px;
+
+        height: 26px;
+
+
+    }
+
+    .k-slider {
+
+        margin-left: 3%;
+        margin-right: 3%;
+        margin-top: 1%;
+        margin-bottom: 5%;
+        display: inline-block;
+    }
+
+    .activeBtn {
+        background-color: #10c4b2;
+        color: #ffffff;
+    }
+    table,
+    th,
+    td {
+        border: 1px solid #929191;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+    td {
+        padding: 5px;
+        text-align: left;
+    }
+    th {
+        padding: 5px;
+        text-align: center;
+    }
+    .clicks {
+        cursor: pointer;
+    }
+</style>
+
+ <!-- ng-class="{'my-disable':true}" -->
+<!-- <div class="grid_12"  disable-contents="allDisabled" id="form"> -->
+<div class="grid_12">
+    <div class="grid_12">
+        <div class="panel panel-default container_12">
+            <div class="panel-heading" c-translate>Pemberian Edukasi Pasien</div>
+        </div>
+
+        <div class="grid_12" style="margin-top: 10px;">
+            <fieldset style="margin-top: 10px;">
+                <div class="grid_12" ng-repeat="list in listEdukasiPasien | orderBy:'id'" style="margin-top: 10px;">
+                    <div ng-repeat="jawab in list.detail | orderBy:'id'" style="margin-top: 10px;">
+                        <div ng-switch on="jawab.type">
+                            <div class="grid_12" ng-switch-when="label" style="margin-top: 10px;">
+                                <div class="grid_12">
+                                    <label c-label item="item">{{ jawab.caption }}</label>
+                                </div>
+                            </div>
+                            <div class="grid_10" ng-switch-when="textbox">
+                                <div class="grid_12">
+                                    <label c-label item="item">{{jawab.caption}}</label>
+                                </div>
+                                <div class="grid_8 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text"
+                                        placeholder="{{jawab.caption}}" ng-value="{{jawab.value}}">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px">{{
+                                        jawab.satuan }}</label>
+                                </div>
+                            </div>
+                            <div class="grid_3" ng-switch-when="checkbox" style="margin-top: 5px;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}"
+                                    ng-model="item.obj[jawab.id]">
+                                <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                    &nbsp;{{jawab.nama}}</label>
+                            </div>
+                            <div class="grid_3 parentKeteranganFieldTambahan" ng-switch-when="textbox1"
+                                style="margin-top: -5px;">
+                                <input c-text-box type="text" filter="" class="k-textbox" ng-model="item.obj[jawab.id]" />
+                                <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px"></label>
+                            </div>
+                            <div class="grid_12" ng-switch-when="hr">
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="grid_12" style="margin-top: 10px;">
+            <fieldset style="margin-top: 10px;">
+                <legend><b>MATERI EDUKASI</b></legend>
+                <div class="grid_12" ng-repeat="list in listMateriEdukasi | orderBy:'id'" style="margin-top: 10px;">
+                    <div ng-repeat="jawab in list.detail | orderBy:'id'" style="margin-top: 10px;">
+                        <div ng-switch on="jawab.type">
+                            <div class="grid_12" ng-switch-when="label" style="margin-top: 10px;">
+                                <div class="grid_12">
+                                    <label c-label item="item">{{ jawab.caption }}</label>
+                                </div>
+                            </div>
+                            <div class="grid_10" ng-switch-when="textbox">
+                                <div class="grid_12">
+                                    <label c-label item="item">{{jawab.caption}}</label>
+                                </div>
+                                <div class="grid_8 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text"
+                                        placeholder="{{jawab.caption}}" ng-value="{{jawab.value}}">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px">{{
+                                        jawab.satuan }}</label>
+                                </div>
+                            </div>
+                            <div class="grid_3" ng-switch-when="checkbox" style="margin-top: 5px;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}"
+                                    ng-model="item.obj[jawab.id]">
+                                <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                    &nbsp;{{jawab.nama}}</label>
+                            </div>
+                            <div class="grid_3 parentKeteranganFieldTambahan" ng-switch-when="textbox1"
+                                style="margin-top: -5px;">
+                                <input c-text-box type="text" filter="" class="k-textbox" ng-model="item.obj[jawab.id]" />
+                                <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px"></label>
+                            </div>
+                            <div class="grid_12" ng-switch-when="hr">
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="grid_12" style="margin-top: 10px;">
+            <fieldset style="margin-top: 10px;">
+                <div class="grid_12" style="margin-top: 20px;">
+                    <table>
+                        <tr>
+                            <th style="text-align: center;width: 180px" rowspan="2">Tanggal/Jam</th>
+                            <th style="text-align: center;width: 180px" rowspan="2">Materi Edukasi</th>
+                            <th style="text-align: center;" colspan="2">Tanda Tangan dan Nama Jelas</th>
+                            <th style="text-align: center;" colspan="2">Verivikasi</th>
+                            <th style="text-align: center;width: 180px" rowspan="2">Tgl Re-Edukasi</th>
+                            <th style="width: 20px;" rowspan="2"></th>
+                        </tr>
+                        <tr>
+                            <th style="width: 200px;">Pasien/Keluarga</th>
+                            <th style="width: 200px;">Edukator</th>
+                            <th>Mengerti</th>
+                            <th>Tidak Mengerti</th>
+                        </tr>
+                        <!-- 1 -->
+                        <tr> <!-- 423291 -->
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[423291]" ng-disabled="item.obj2[423291]" kendo-datetimepicker placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <textarea style="width: 95%;height: 200px" cols="6" rows="5" c-text-area type="input" filter="'string'" class="k-textbox" ng-model="item.obj[423292]" ng-disabled="item.obj2[423292]"></textarea>
+                            </td>
+                            <td>
+                                <input class="k-textbox" ng-model="item.obj[423293]" type="text" ng-disabled="item.obj2[423293]">
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[423294]" ng-disabled="item.obj2[423294]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{423295}}" ng-model="item.obj[423295]" ng-disabled="item.obj2[423295]">
+                                <label class="k-checkbox-label" for="item.obj{{423295}}"> &nbsp;</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{423296}}" ng-model="item.obj[423296]" ng-disabled="item.obj2[423296]">
+                                <label class="k-checkbox-label" for="item.obj{{423296}}">&nbsp;</label>
+                            </td>
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[423297]" ng-disabled="item.obj2[423297]" kendo-datetimepicker placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <div class="grid_12" style="margin-top:20px" ng-show="show">
+                                    <label ng-click="tambah()" class="clicks"><img src="stylesheets/Addd.png" width="25" alt="Picture"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 1 -->
+                        <!-- 2 -->
+                        <tr ng-show="item.obj[423298]!=undefined">
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[423298]" ng-disabled="item.obj2[423298]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <textarea style="width: 95%;height: 200px" cols="6" rows="5" c-text-area type="input" filter="'string'"
+                                    class="k-textbox" ng-model="item.obj[423299]" ng-disabled="item.obj2[423299]"></textarea>
+                            </td>
+                            <td>
+                                <input class="k-textbox" ng-model="item.obj[423300]" type="text" ng-disabled="item.obj2[423300]">
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[423301]" ng-disabled="item.obj2[423301]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{423302}}" ng-model="item.obj[423302]"
+                                    ng-disabled="item.obj2[423302]">
+                                <label class="k-checkbox-label" for="item.obj{{423302}}"> &nbsp;</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{423303}}" ng-model="item.obj[423303]" ng-disabled="item.obj2[423303]">
+                                <label class="k-checkbox-label" for="item.obj{{423303}}">&nbsp;</label>
+                            </td>
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[423304]" ng-disabled="item.obj2[423304]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <div class="grid_12" style="margin-top:20px" ng-show="show">
+                                    <label ng-click="tambah()" class="clicks"><img src="stylesheets/Addd.png" width="25" alt="Picture"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 2 -->
+                        <!-- 3 -->
+                        <tr ng-show="item.obj[423305]!=undefined">
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[423305]" ng-disabled="item.obj2[423305]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <textarea style="width: 95%;height: 200px" cols="6" rows="5" c-text-area type="input" filter="'string'"
+                                    class="k-textbox" ng-model="item.obj[423306]" ng-disabled="item.obj2[423306]"></textarea>
+                            </td>
+                            <td>
+                                <input class="k-textbox" ng-model="item.obj[423307]" type="text" ng-disabled="item.obj2[423307]">
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[423308]" ng-disabled="item.obj2[423308]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{423309}}" ng-model="item.obj[423309]"
+                                    ng-disabled="item.obj2[423309]">
+                                <label class="k-checkbox-label" for="item.obj{{423309}}"> &nbsp;</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{423310}}" ng-model="item.obj[423310]"
+                                    ng-disabled="item.obj2[423310]">
+                                <label class="k-checkbox-label" for="item.obj{{423310}}">&nbsp;</label>
+                            </td>
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[423311]" ng-disabled="item.obj2[423311]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <div class="grid_12" style="margin-top:20px" ng-show="show">
+                                    <label ng-click="tambah()" class="clicks"><img src="stylesheets/Addd.png" width="25" alt="Picture"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 3 -->
+                        <!-- 4 -->
+                        <tr ng-show="item.obj[423312]!=undefined">
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[423312]" ng-disabled="item.obj2[423312]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <textarea style="width: 95%;height: 200px" cols="6" rows="5" c-text-area type="input" filter="'string'"
+                                    class="k-textbox" ng-model="item.obj[423313]" ng-disabled="item.obj2[423313]"></textarea>
+                            </td>
+                            <td>
+                                <input class="k-textbox" ng-model="item.obj[423314]" type="text" ng-disabled="item.obj2[423314]">
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[423315]" ng-disabled="item.obj2[423315]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{423316}}" ng-model="item.obj[423316]"
+                                    ng-disabled="item.obj2[423316]">
+                                <label class="k-checkbox-label" for="item.obj{{423316}}"> &nbsp;</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{423317}}" ng-model="item.obj[423317]"
+                                    ng-disabled="item.obj2[423317]">
+                                <label class="k-checkbox-label" for="item.obj{{423317}}">&nbsp;</label>
+                            </td>
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[423318]" ng-disabled="item.obj2[423318]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <div class="grid_12" style="margin-top:20px" ng-show="show">
+                                    <label ng-click="tambah()" class="clicks"><img src="stylesheets/Addd.png" width="25" alt="Picture"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 4 -->
+                        <!-- 5 -->
+                        <tr ng-show="item.obj[423319]!=undefined">
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[423319]" ng-disabled="item.obj2[423319]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <textarea style="width: 95%;height: 200px" cols="6" rows="5" c-text-area type="input" filter="'string'"
+                                    class="k-textbox" ng-model="item.obj[423320]" ng-disabled="item.obj2[423320]"></textarea>
+                            </td>
+                            <td>
+                                <input class="k-textbox" ng-model="item.obj[423321]" type="text" ng-disabled="item.obj2[423321]">
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[423322]" ng-disabled="item.obj2[423322]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{423323}}" ng-model="item.obj[423323]"
+                                    ng-disabled="item.obj2[423323]">
+                                <label class="k-checkbox-label" for="item.obj{{423323}}"> &nbsp;</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{423324}}" ng-model="item.obj[423324]"
+                                    ng-disabled="item.obj2[423324]">
+                                <label class="k-checkbox-label" for="item.obj{{423324}}">&nbsp;</label>
+                            </td>
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[423325]" ng-disabled="item.obj2[423325]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <div class="grid_12" style="margin-top:20px" ng-show="show">
+                                    <label ng-click="tambah()" class="clicks"><img src="stylesheets/Addd.png" width="25" alt="Picture"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 5 -->
+                        <!-- 6 -->
+                        <tr ng-show="item.obj[423326]!=undefined">
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[423326]" ng-disabled="item.obj2[423326]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <textarea style="width: 95%;height: 200px" cols="6" rows="5" c-text-area type="input" filter="'string'"
+                                    class="k-textbox" ng-model="item.obj[423327]" ng-disabled="item.obj2[423327]"></textarea>
+                            </td>
+                            <td>
+                                <input class="k-textbox" ng-model="item.obj[423328]" type="text" ng-disabled="item.obj2[423328]">
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[423329]" ng-disabled="item.obj2[423329]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{423330}}" ng-model="item.obj[423330]"
+                                    ng-disabled="item.obj2[423330]">
+                                <label class="k-checkbox-label" for="item.obj{{423330}}"> &nbsp;</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{423331}}" ng-model="item.obj[423331]"
+                                    ng-disabled="item.obj2[423331]">
+                                <label class="k-checkbox-label" for="item.obj{{423331}}">&nbsp;</label>
+                            </td>
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[423332]" ng-disabled="item.obj2[423332]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <div class="grid_12" style="margin-top:20px" ng-show="show">
+                                    <label ng-click="tambah()" class="clicks"><img src="stylesheets/Addd.png" width="25" alt="Picture"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 6 -->
+                        <!-- 7 -->
+                        <tr ng-show="item.obj[423333]!=undefined">
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[423333]" ng-disabled="item.obj2[423333]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <textarea style="width: 95%;height: 200px" cols="6" rows="5" c-text-area type="input" filter="'string'"
+                                    class="k-textbox" ng-model="item.obj[423334]" ng-disabled="item.obj2[423334]"></textarea>
+                            </td>
+                            <td>
+                                <input class="k-textbox" ng-model="item.obj[423335]" type="text" ng-disabled="item.obj2[423335]">
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[423336]" ng-disabled="item.obj2[423336]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{423337}}" ng-model="item.obj[423337]"
+                                    ng-disabled="item.obj2[423337]">
+                                <label class="k-checkbox-label" for="item.obj{{423337}}"> &nbsp;</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{423338}}" ng-model="item.obj[423338]"
+                                    ng-disabled="item.obj2[423338]">
+                                <label class="k-checkbox-label" for="item.obj{{423338}}">&nbsp;</label>
+                            </td>
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[423339]" ng-disabled="item.obj2[423339]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <div class="grid_12" style="margin-top:20px" ng-show="show">
+                                    <label ng-click="tambah()" class="clicks"><img src="stylesheets/Addd.png" width="25" alt="Picture"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 7 -->
+                        <!-- 8 -->
+                        <tr ng-show="item.obj[423340]!=undefined">
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[423340]" ng-disabled="item.obj2[423340]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <textarea style="width: 95%;height: 200px" cols="6" rows="5" c-text-area type="input" filter="'string'"
+                                    class="k-textbox" ng-model="item.obj[423341]" ng-disabled="item.obj2[423341]"></textarea>
+                            </td>
+                            <td>
+                                <input class="k-textbox" ng-model="item.obj[423342]" type="text" ng-disabled="item.obj2[423342]">
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[423343]" ng-disabled="item.obj2[423343]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{423344}}" ng-model="item.obj[423344]"
+                                    ng-disabled="item.obj2[423344]">
+                                <label class="k-checkbox-label" for="item.obj{{423344}}"> &nbsp;</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{423345}}" ng-model="item.obj[423345]"
+                                    ng-disabled="item.obj2[423345]">
+                                <label class="k-checkbox-label" for="item.obj{{423345}}">&nbsp;</label>
+                            </td>
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[423346]" ng-disabled="item.obj2[423346]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <div class="grid_12" style="margin-top:20px" ng-show="show">
+                                    <label ng-click="tambah()" class="clicks"><img src="stylesheets/Addd.png" width="25" alt="Picture"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 8 -->
+                        <!-- 9 -->
+                        <tr ng-show="item.obj[423347]!=undefined">
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[423347]" ng-disabled="item.obj2[423347]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <textarea style="width: 95%;height: 200px" cols="6" rows="5" c-text-area type="input" filter="'string'"
+                                    class="k-textbox" ng-model="item.obj[423348]" ng-disabled="item.obj2[423348]"></textarea>
+                            </td>
+                            <td>
+                                <input class="k-textbox" ng-model="item.obj[423349]" type="text" ng-disabled="item.obj2[423349]">
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[423350]" ng-disabled="item.obj2[423350]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{423351}}" ng-model="item.obj[423351]"
+                                    ng-disabled="item.obj2[423351]">
+                                <label class="k-checkbox-label" for="item.obj{{423351}}"> &nbsp;</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{423352}}" ng-model="item.obj[423352]"
+                                    ng-disabled="item.obj2[423352]">
+                                <label class="k-checkbox-label" for="item.obj{{423352}}">&nbsp;</label>
+                            </td>
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[423353]" ng-disabled="item.obj2[423353]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <div class="grid_12" style="margin-top:20px" ng-show="show">
+                                    <label ng-click="tambah()" class="clicks"><img src="stylesheets/Addd.png" width="25" alt="Picture"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 9 -->
+                        <!-- 10 -->
+                        <tr ng-show="item.obj[423354]!=undefined">
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[423354]" ng-disabled="item.obj2[423354]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <textarea style="width: 95%;height: 200px" cols="6" rows="5" c-text-area type="input" filter="'string'"
+                                    class="k-textbox" ng-model="item.obj[423355]" ng-disabled="item.obj2[423355]"></textarea>
+                            </td>
+                            <td>
+                                <input class="k-textbox" ng-model="item.obj[423356]" type="text" ng-disabled="item.obj2[423356]">
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[423357]" ng-disabled="item.obj2[423357]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{423358}}" ng-model="item.obj[423358]"
+                                    ng-disabled="item.obj2[423358]">
+                                <label class="k-checkbox-label" for="item.obj{{423358}}"> &nbsp;</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{423359}}" ng-model="item.obj[423359]"
+                                    ng-disabled="item.obj2[423359]">
+                                <label class="k-checkbox-label" for="item.obj{{423359}}">&nbsp;</label>
+                            </td>
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[423360]" ng-disabled="item.obj2[423360]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <div class="grid_12" style="margin-top:20px" ng-show="show">
+                                    <label ng-click="tambah()" class="clicks"><img src="stylesheets/Addd.png" width="25" alt="Picture"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 10 -->
+                        <!-- 11 -->
+                        <tr ng-show="item.obj[423361]!=undefined">
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[423361]" ng-disabled="item.obj2[423361]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <textarea style="width: 95%;height: 200px" cols="6" rows="5" c-text-area type="input" filter="'string'"
+                                    class="k-textbox" ng-model="item.obj[423362]" ng-disabled="item.obj2[423362]"></textarea>
+                            </td>
+                            <td>
+                                <input class="k-textbox" ng-model="item.obj[423363]" type="text" ng-disabled="item.obj2[423363]">
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[423364]" ng-disabled="item.obj2[423364]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{423365}}" ng-model="item.obj[423365]"
+                                    ng-disabled="item.obj2[423365]">
+                                <label class="k-checkbox-label" for="item.obj{{423365}}"> &nbsp;</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{423366}}" ng-model="item.obj[423366]"
+                                    ng-disabled="item.obj2[423366]">
+                                <label class="k-checkbox-label" for="item.obj{{423366}}">&nbsp;</label>
+                            </td>
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[423367]" ng-disabled="item.obj2[423367]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <div class="grid_12" style="margin-top:20px" ng-show="show">
+                                    <label ng-click="tambah()" class="clicks"><img src="stylesheets/Addd.png" width="25" alt="Picture"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 11 -->
+                        <!-- 12 -->
+                        <tr ng-show="item.obj[423368]!=undefined">
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[423368]" ng-disabled="item.obj2[423368]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <textarea style="width: 95%;height: 200px" cols="6" rows="5" c-text-area type="input" filter="'string'"
+                                    class="k-textbox" ng-model="item.obj[423369]" ng-disabled="item.obj2[423369]"></textarea>
+                            </td>
+                            <td>
+                                <input class="k-textbox" ng-model="item.obj[423370]" type="text" ng-disabled="item.obj2[423370]">
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[423371]" ng-disabled="item.obj2[423371]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{423372}}" ng-model="item.obj[423372]"
+                                    ng-disabled="item.obj2[423372]">
+                                <label class="k-checkbox-label" for="item.obj{{423372}}"> &nbsp;</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{423373}}" ng-model="item.obj[423373]"
+                                    ng-disabled="item.obj2[423373]">
+                                <label class="k-checkbox-label" for="item.obj{{423373}}">&nbsp;</label>
+                            </td>
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[423374]" ng-disabled="item.obj2[423374]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <div class="grid_12" style="margin-top:20px" ng-show="show">
+                                    <label ng-click="tambah()" class="clicks"><img src="stylesheets/Addd.png" width="25" alt="Picture"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 12 -->
+                        <!-- 13 -->
+                        <tr ng-show="item.obj[423375]!=undefined">
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[423375]" ng-disabled="item.obj2[423375]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <textarea style="width: 95%;height: 200px" cols="6" rows="5" c-text-area type="input" filter="'string'"
+                                    class="k-textbox" ng-model="item.obj[423376]" ng-disabled="item.obj2[423376]"></textarea>
+                            </td>
+                            <td>
+                                <input class="k-textbox" ng-model="item.obj[423377]" type="text" ng-disabled="item.obj2[423377]">
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[423378]" ng-disabled="item.obj2[423378]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{423379}}" ng-model="item.obj[423379]"
+                                    ng-disabled="item.obj2[423379]">
+                                <label class="k-checkbox-label" for="item.obj{{423379}}"> &nbsp;</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{423380}}" ng-model="item.obj[423380]"
+                                    ng-disabled="item.obj2[423380]">
+                                <label class="k-checkbox-label" for="item.obj{{423380}}">&nbsp;</label>
+                            </td>
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[423381]" ng-disabled="item.obj2[423381]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <div class="grid_12" style="margin-top:20px" ng-show="show">
+                                    <label ng-click="tambah()" class="clicks"><img src="stylesheets/Addd.png" width="25" alt="Picture"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 13 -->
+                        <!-- 14 -->
+                        <tr ng-show="item.obj[423382]!=undefined">
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[423382]" ng-disabled="item.obj2[423382]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <textarea style="width: 95%;height: 200px" cols="6" rows="5" c-text-area type="input" filter="'string'"
+                                    class="k-textbox" ng-model="item.obj[423383]" ng-disabled="item.obj2[423383]"></textarea>
+                            </td>
+                            <td>
+                                <input class="k-textbox" ng-model="item.obj[423384]" type="text" ng-disabled="item.obj2[423384]">
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[423385]" ng-disabled="item.obj2[423385]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{423386}}" ng-model="item.obj[423386]"
+                                    ng-disabled="item.obj2[423386]">
+                                <label class="k-checkbox-label" for="item.obj{{423386}}"> &nbsp;</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{423387}}" ng-model="item.obj[423387]"
+                                    ng-disabled="item.obj2[423387]">
+                                <label class="k-checkbox-label" for="item.obj{{423387}}">&nbsp;</label>
+                            </td>
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[423388]" ng-disabled="item.obj2[423388]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <div class="grid_12" style="margin-top:20px" ng-show="show">
+                                    <label ng-click="tambah()" class="clicks"><img src="stylesheets/Addd.png" width="25" alt="Picture"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 14 -->
+                        <!-- 15 -->
+                        <tr ng-show="item.obj[423389]!=undefined">
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[423389]" ng-disabled="item.obj2[423389]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <textarea style="width: 95%;height: 200px" cols="6" rows="5" c-text-area type="input" filter="'string'"
+                                    class="k-textbox" ng-model="item.obj[423390]" ng-disabled="item.obj2[423390]"></textarea>
+                            </td>
+                            <td>
+                                <input class="k-textbox" ng-model="item.obj[423391]" type="text" ng-disabled="item.obj2[423391]">
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[423392]" ng-disabled="item.obj2[423392]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{423393}}" ng-model="item.obj[423393]"
+                                    ng-disabled="item.obj2[423393]">
+                                <label class="k-checkbox-label" for="item.obj{{423393}}"> &nbsp;</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{423394}}" ng-model="item.obj[423394]"
+                                    ng-disabled="item.obj2[423394]">
+                                <label class="k-checkbox-label" for="item.obj{{423394}}">&nbsp;</label>
+                            </td>
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[423395]" ng-disabled="item.obj2[423395]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <div class="grid_12" style="margin-top:20px" ng-show="show">
+                                    <label ng-click="tambah()" class="clicks"><img src="stylesheets/Addd.png" width="25" alt="Picture"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 15 -->
+                        <!-- 16 -->
+                        <tr ng-show="item.obj[423396]!=undefined">
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[423396]" ng-disabled="item.obj2[423396]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <textarea style="width: 95%;height: 200px" cols="6" rows="5" c-text-area type="input" filter="'string'"
+                                    class="k-textbox" ng-model="item.obj[423397]" ng-disabled="item.obj2[423397]"></textarea>
+                            </td>
+                            <td>
+                                <input class="k-textbox" ng-model="item.obj[423398]" type="text" ng-disabled="item.obj2[423398]">
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[423399]" ng-disabled="item.obj2[423399]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{423400}}" ng-model="item.obj[423400]"
+                                    ng-disabled="item.obj2[423400]">
+                                <label class="k-checkbox-label" for="item.obj{{423400}}"> &nbsp;</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{423401}}" ng-model="item.obj[423401]"
+                                    ng-disabled="item.obj2[423401]">
+                                <label class="k-checkbox-label" for="item.obj{{423401}}">&nbsp;</label>
+                            </td>
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[423402]" ng-disabled="item.obj2[423402]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <div class="grid_12" style="margin-top:20px" ng-show="show">
+                                    <label ng-click="tambah()" class="clicks"><img src="stylesheets/Addd.png" width="25" alt="Picture"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 16 -->
+                        <!-- 17 -->
+                        <tr ng-show="item.obj[423403]!=undefined">
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[423403]" ng-disabled="item.obj2[423403]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <textarea style="width: 95%;height: 200px" cols="6" rows="5" c-text-area type="input" filter="'string'"
+                                    class="k-textbox" ng-model="item.obj[423404]" ng-disabled="item.obj2[423404]"></textarea>
+                            </td>
+                            <td>
+                                <input class="k-textbox" ng-model="item.obj[423405]" type="text" ng-disabled="item.obj2[423405]">
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[423406]" ng-disabled="item.obj2[423406]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{423407}}" ng-model="item.obj[423407]"
+                                    ng-disabled="item.obj2[423407]">
+                                <label class="k-checkbox-label" for="item.obj{{423407}}"> &nbsp;</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{423408}}" ng-model="item.obj[423408]"
+                                    ng-disabled="item.obj2[423408]">
+                                <label class="k-checkbox-label" for="item.obj{{423408}}">&nbsp;</label>
+                            </td>
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[423409]" ng-disabled="item.obj2[423409]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <div class="grid_12" style="margin-top:20px" ng-show="show">
+                                    <label ng-click="tambah()" class="clicks"><img src="stylesheets/Addd.png" width="25" alt="Picture"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 17 -->
+                        <!-- 18 -->
+                        <tr ng-show="item.obj[423410]!=undefined">
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[423410]" ng-disabled="item.obj2[423410]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <textarea style="width: 95%;height: 200px" cols="6" rows="5" c-text-area type="input" filter="'string'"
+                                    class="k-textbox" ng-model="item.obj[423411]" ng-disabled="item.obj2[423411]"></textarea>
+                            </td>
+                            <td>
+                                <input class="k-textbox" ng-model="item.obj[423412]" type="text" ng-disabled="item.obj2[423412]">
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[423413]" ng-disabled="item.obj2[423413]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{423414}}" ng-model="item.obj[423414]"
+                                    ng-disabled="item.obj2[423414]">
+                                <label class="k-checkbox-label" for="item.obj{{423414}}"> &nbsp;</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{423415}}" ng-model="item.obj[423415]"
+                                    ng-disabled="item.obj2[423415]">
+                                <label class="k-checkbox-label" for="item.obj{{423415}}">&nbsp;</label>
+                            </td>
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[423416]" ng-disabled="item.obj2[423416]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <div class="grid_12" style="margin-top:20px" ng-show="show">
+                                    <label ng-click="tambah()" class="clicks"><img src="stylesheets/Addd.png" width="25" alt="Picture"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 18 -->
+                        <!-- 19 -->
+                        <tr ng-show="item.obj[423417]!=undefined">
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[423417]" ng-disabled="item.obj2[423417]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <textarea style="width: 95%;height: 200px" cols="6" rows="5" c-text-area type="input" filter="'string'"
+                                    class="k-textbox" ng-model="item.obj[423418]" ng-disabled="item.obj2[423418]"></textarea>
+                            </td>
+                            <td>
+                                <input class="k-textbox" ng-model="item.obj[423419]" type="text" ng-disabled="item.obj2[423419]">
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[423420]" ng-disabled="item.obj2[423420]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{423421}}" ng-model="item.obj[423421]"
+                                    ng-disabled="item.obj2[423421]">
+                                <label class="k-checkbox-label" for="item.obj{{423421}}"> &nbsp;</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{423422}}" ng-model="item.obj[423422]"
+                                    ng-disabled="item.obj2[423422]">
+                                <label class="k-checkbox-label" for="item.obj{{423422}}">&nbsp;</label>
+                            </td>
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[423423]" ng-disabled="item.obj2[423423]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <div class="grid_12" style="margin-top:20px" ng-show="show">
+                                    <label ng-click="tambah()" class="clicks"><img src="stylesheets/Addd.png" width="25" alt="Picture"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 19 -->
+                        <!-- 20 -->
+                        <tr ng-show="item.obj[423424]!=undefined">
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[423424]" ng-disabled="item.obj2[423424]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <textarea style="width: 95%;height: 200px" cols="6" rows="5" c-text-area type="input" filter="'string'"
+                                    class="k-textbox" ng-model="item.obj[423425]" ng-disabled="item.obj2[423425]"></textarea>
+                            </td>
+                            <td>
+                                <input class="k-textbox" ng-model="item.obj[423426]" type="text" ng-disabled="item.obj2[423426]">
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[423427]" ng-disabled="item.obj2[423427]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{423428}}" ng-model="item.obj[423428]"
+                                    ng-disabled="item.obj2[423428]">
+                                <label class="k-checkbox-label" for="item.obj{{423428}}"> &nbsp;</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{423429}}" ng-model="item.obj[423429]"
+                                    ng-disabled="item.obj2[423429]">
+                                <label class="k-checkbox-label" for="item.obj{{423429}}">&nbsp;</label>
+                            </td>
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[423430]" ng-disabled="item.obj2[423430]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <div class="grid_12" style="margin-top:20px" ng-show="show">
+                                    <label ng-click="tambah()" class="clicks"><img src="stylesheets/Addd.png" width="25" alt="Picture"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 20 -->
+                        <!-- 21 -->
+                        <tr ng-show="item.obj[423431]!=undefined">
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[423431]" ng-disabled="item.obj2[423431]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <textarea style="width: 95%;height: 200px" cols="6" rows="5" c-text-area type="input" filter="'string'"
+                                    class="k-textbox" ng-model="item.obj[423432]" ng-disabled="item.obj2[423432]"></textarea>
+                            </td>
+                            <td>
+                                <input class="k-textbox" ng-model="item.obj[423433]" type="text" ng-disabled="item.obj2[423433]">
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[423434]" ng-disabled="item.obj2[423434]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{423435}}" ng-model="item.obj[423435]"
+                                    ng-disabled="item.obj2[423435]">
+                                <label class="k-checkbox-label" for="item.obj{{423435}}"> &nbsp;</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{423436}}" ng-model="item.obj[423436]"
+                                    ng-disabled="item.obj2[423436]">
+                                <label class="k-checkbox-label" for="item.obj{{423436}}">&nbsp;</label>
+                            </td>
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[423437]" ng-disabled="item.obj2[423437]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <div class="grid_12" style="margin-top:20px" ng-show="show">
+                                    <label ng-click="tambah()" class="clicks"><img src="stylesheets/Addd.png" width="25" alt="Picture"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 21 -->
+                    </table>
+                </div>
+            </fieldset>
+        </div>
+
+    </div>
+</div>
+
+<br />
+<br />
+<div class="grid_12">
+    <div ng-include='"../app/module/EMR/TemplateButtonDinamis" '></div>
+
+</div>

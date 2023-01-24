@@ -17231,6 +17231,466 @@
         "define": "RekamMedisCtrl"
       }
     ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.PermintaanPemeriksaanPenunjangRanap",
+    "url": "/PermintaanPemeriksaanPenunjangRanap",
+    "templateurl": "module/EMR/PermintaanPemeriksaanPenunjangRanap.html",
+    "controller": "PermintaanPemeriksaanPenunjangRanapCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.HasilLaboratorium",
+    "url": "/HasilLaboratorium",
+    "templateurl": "module/EMR/HasilLaboratorium.html",
+    "controller": "HasilLaboratoriumCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.CPPTRanap",
+    "url": "/CPPTRanap",
+    "templateurl": "module/EMR/CPPTRanap.html",
+    "controller": "CPPTRanapCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.PemberianEdukasiPasien",
+    "url": "/PemberianEdukasiPasien",
+    "templateurl": "module/EMR/PemberianEdukasiPasien.html",
+    "controller": "PemberianEdukasiPasienCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.RekonsiliasiObat",
+    "url": "/RekonsiliasiObat",
+    "templateurl": "module/EMR/RekonsiliasiObat.html",
+    "controller": "RekonsiliasiObatCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.TransferAntarUnit",
+    "url": "/TransferAntarUnit",
+    "templateurl": "module/EMR/TransferAntarUnit.html",
+    "controller": "TransferAntarUnitCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.RingkasanPulang",
+    "url": "/RingkasanPulang",
+    "templateurl": "module/EMR/RingkasanPulang.html",
+    "controller": "RingkasanPulangCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.HandOver",
+    "url": "/HandOver",
+    "templateurl": "module/EMR/HandOver.html",
+    "controller": "HandOverCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.CatatanPemberianDanPemantauanObatPasien",
+    "url": "/CatatanPemberianDanPemantauanObatPasien",
+    "templateurl": "module/EMR/CatatanPemberianDanPemantauanObatPasien.html",
+    "controller": "CatatanPemberianDanPemantauanObatPasienCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.TabTandaVital",
+    "url": "/TabTandaVital",
+    "templateurl": "module/EMR/TabTandaVital.html",
+    "controller": "TabTandaVitalCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.TabTandaVital.GrafikTandaVital",
+    "url": "/GrafikTandaVital",
+    "templateurl": "module/EMR/GrafikTandaVital.html",
+    "controller": "GrafikTandaVitalCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.TabTandaVital.GrafikTandaVital2",
+    "url": "/GrafikTandaVital2",
+    "templateurl": "module/EMR/GrafikTandaVital2.html",
+    "controller": "GrafikTandaVital2Ctrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.TabTandaVital.GrafikTandaVital3",
+    "url": "/GrafikTandaVital3",
+    "templateurl": "module/EMR/GrafikTandaVital3.html",
+    "controller": "GrafikTandaVital3Ctrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.TabTandaVital.GrafikTandaVital4",
+    "url": "/GrafikTandaVital4",
+    "templateurl": "module/EMR/GrafikTandaVital4.html",
+    "controller": "GrafikTandaVital4Ctrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.TabTandaVital.GrafikTandaVital5",
+    "url": "/GrafikTandaVital5",
+    "templateurl": "module/EMR/GrafikTandaVital5.html",
+    "controller": "GrafikTandaVital5Ctrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.TabTandaVital.GrafikTandaVital6",
+    "url": "/GrafikTandaVital6",
+    "templateurl": "module/EMR/GrafikTandaVital6.html",
+    "controller": "GrafikTandaVital6Ctrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.TabTandaVital.GrafikTandaVital7",
+    "url": "/GrafikTandaVital7",
+    "templateurl": "module/EMR/GrafikTandaVital7.html",
+    "controller": "GrafikTandaVital7Ctrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.TabTandaVital.GrafikTandaVital8",
+    "url": "/GrafikTandaVital8",
+    "templateurl": "module/EMR/GrafikTandaVital8.html",
+    "controller": "GrafikTandaVital8Ctrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.PemberianEdukasiPasienGawatDarurat",
+    "url": "/PemberianEdukasiPasienGawatDarurat",
+    "templateurl": "module/EMR/PemberianEdukasiPasienGawatDarurat.html",
+    "controller": "PemberianEdukasiPasienGawatDaruratCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.HandOverGawatDarurat",
+    "url": "/HandOverGawatDarurat",
+    "templateurl": "module/EMR/HandOverGawatDarurat.html",
+    "controller": "HandOverGawatDaruratCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
   }
   
   

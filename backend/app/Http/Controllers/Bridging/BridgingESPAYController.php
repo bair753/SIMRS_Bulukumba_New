@@ -29,6 +29,7 @@ class BridgingESPAYController extends ApiController
     protected $cmm_code;
     protected $key;
     protected $password;
+    protected $tarifEspay;
 
     public function __construct()
     {
@@ -38,6 +39,7 @@ class BridgingESPAYController extends ApiController
         $this->cmm_code = $this->settingDataFixed('MerchantCode_ESPAY', $this->getKdProfile());
         $this->key = $this->settingDataFixed('APIKey_ESPAY', $this->getKdProfile());
         $this->password = $this->settingDataFixed('Password_ESPAY', $this->getKdProfile());
+        $this->tarifEspay = $this->settingDataFixed('tarifPenggunaaEspay', $this->getKdProfile());
     }
 
     protected function getKdProfile()
@@ -75,11 +77,12 @@ class BridgingESPAYController extends ApiController
     public function sendInvoice(Request $request) 
     {   
         $data = $request->all();
+        $totalpembayaran = (float)$data['amount'] + (float)$data['tarifEspay'];
         $dataSend = array (
             'rq_uuid' => $data['rq_uuid'],
             'rq_datetime' => $data['rq_datetime'],
             'order_id' => $data['order_id'],
-            'amount' => $data['amount'],
+            'amount' => $totalpembayaran,//$data['amount'],
             'ccy' => 'IDR',
             'comm_code' => $this->cmm_code,
             'remark1' => $data['remark1'],
@@ -103,7 +106,7 @@ class BridgingESPAYController extends ApiController
             $newPE->customer_phone = $dataSend['remark1'];
             $newPE->amount = $response->amount;
             $newPE->total_amount = $response->total_amount;
-            $newPE->fee = $response->fee;
+            $newPE->fee = $data['tarifEspay'];//$response->fee;
             $newPE->va_number = $response->va_number;
             $newPE->expired = $response->expired;
             $newPE->description = $data['description'];//$item->description;
@@ -149,13 +152,14 @@ class BridgingESPAYController extends ApiController
     public function qrPayment(Request $request)
     {
         $data = $request->all();
+        $totalpembayaran = (float)$data['amount'] + (float)$data['tarifEspay'];
         $dataSend = array (
             'rq_uuid' => $data['rq_uuid'],
             'rq_datetime' => $data['rq_datetime'],
             'comm_code' => $this->cmm_code,
             'product_code' => $data['product_code'],
             'order_id' => $data['order_id'],
-            'amount' => $data['amount'],
+            'amount' => $totalpembayaran,//$data['amount'],
             'key' => $this->key,
             'description' => $data['description'],
             'customer_id' => $data['customer_id'],
@@ -172,7 +176,8 @@ class BridgingESPAYController extends ApiController
             $newPE->trx_id = $response->trx_id;
             $newPE->order_id = $dataSend['order_id'];
             $newPE->customer_id = isset($dataSend['customer_id']) ? $dataSend['customer_id'] : null;
-            $newPE->amount = $dataSend['amount'];
+            $newPE->amount = $data['amount'];//$dataSend['amount'];
+            $newPE->fee = $data['tarifEspay'];
             $newPE->qr_link = $response->QRLink;
             $newPE->qr_code = $response->QRCode;
             $newPE->espayproduct_code = $dataSend['product_code'];
@@ -269,7 +274,7 @@ class BridgingESPAYController extends ApiController
                         "error_code" => "0000",
                         "error_message"=> "Success",
                         "order_id"=> $findData->nostruk,
-                        "amount"=> $findData->totalharusdibayar,
+                        "amount"=> (float)$findData->totalharusdibayar + (float)$this->tarifEspay,
                         "ccy"=> "IDR",
                         "description"=> "Pembayaran tagihan pasien ". $findData->namapasien,
                         "trx_date"=> $findData->tglstruk,
@@ -284,7 +289,7 @@ class BridgingESPAYController extends ApiController
                         "error_code" => "0000",
                         "error_message"=> "Success",
                         "order_id"=> $findData->nostruk,
-                        "amount"=> $findData->totalharusdibayar,
+                        "amount"=> $findData->totalharusdibayar + (float)$this->tarifEspay,
                         "ccy"=> "IDR",
                         "description"=> "Pembayaran tagihan pasien ". $findData->namapasien,
                         "trx_date"=> $findData->tglstruk,

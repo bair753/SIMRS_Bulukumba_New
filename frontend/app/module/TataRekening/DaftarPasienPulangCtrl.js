@@ -176,7 +176,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
           "field": "namaPasien",
           "title": "Nama",
           "width": "120px"
-        },
+        },        
         {
           "field": "jenisAsuransi",
           "title": "Jenis Pasien",
@@ -193,6 +193,17 @@ define(['initialize', 'Configuration'], function (initialize, config) {
           "title": "Tanggal Pulang",
           "width": "80px",
           "template": "<span class='style-left'>{{formatTanggalJam('#: tanggalPulang #')}}</span>"
+        },
+        {
+          "field": "dpjp",
+          "title": "Dokter DPJP",
+          "width": "120px"
+        },
+        {
+          "field": "nosep",
+          "title": "No. SEP",
+          "width": "80px",
+          "template": '# if( nosep==null || nosep=="") {# - # } else {# #= nosep # #} #'
         },
         {
           "field": "tglmeninggal",

@@ -265,7 +265,7 @@ export class PilihPoliComponent implements OnInit {
   nomorAntrian() {
 
     let petugas = '-'
-    if (this.isCetakDSKiosk == 'true') {
+    if (this.isCetakDSKiosk == 'false') {
       this.service.get('http://127.0.0.1:1237/printvb/Pendaftaran?cetak-buktipendaftaran=1&norec='
         + this.item.noregistrasi + '&petugas=' + petugas + '&view=false').subscribe(response => { });
     } else if (this.isCetakDSKiosk == 'android') {
@@ -293,12 +293,12 @@ export class PilihPoliComponent implements OnInit {
     } else {
       window.open(Configuration.get().apiBackend + 'medifirst2000/report/cetak-bukti-pendaftaran?noregistrasi='
         + this.item.noregistrasi
-        + '&kdprofile=21', '_blank');
+        + '&kdprofile=39', '_blank');
     }
 
     // this.service.get(Configuration.get().apiBackend + ' medifirst2000/report/cetak-bukti-pendaftaran?noregistrasi='
     //   + this.item.noregistrasi
-    //   + '&kdprofile=21').subscribe(response => { });
+    //   + '&kdprofile=39').subscribe(response => { });
   }
   changeClick() {
     let eks = false
