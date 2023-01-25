@@ -29,6 +29,7 @@ class BridgingESPAYController extends ApiController
     protected $cmm_code;
     protected $key;
     protected $password;
+    protected $tarifEspay;
 
     public function __construct()
     {
@@ -38,6 +39,7 @@ class BridgingESPAYController extends ApiController
         $this->cmm_code = $this->settingDataFixed('MerchantCode_ESPAY', $this->getKdProfile());
         $this->key = $this->settingDataFixed('APIKey_ESPAY', $this->getKdProfile());
         $this->password = $this->settingDataFixed('Password_ESPAY', $this->getKdProfile());
+        $this->tarifEspay = $this->settingDataFixed('tarifPenggunaaEspay', $this->getKdProfile());
     }
 
     protected function getKdProfile()
@@ -272,7 +274,7 @@ class BridgingESPAYController extends ApiController
                         "error_code" => "0000",
                         "error_message"=> "Success",
                         "order_id"=> $findData->nostruk,
-                        "amount"=> $findData->totalharusdibayar,
+                        "amount"=> (float)$findData->totalharusdibayar + (float)$this->tarifEspay,
                         "ccy"=> "IDR",
                         "description"=> "Pembayaran tagihan pasien ". $findData->namapasien,
                         "trx_date"=> $findData->tglstruk,
@@ -287,7 +289,7 @@ class BridgingESPAYController extends ApiController
                         "error_code" => "0000",
                         "error_message"=> "Success",
                         "order_id"=> $findData->nostruk,
-                        "amount"=> $findData->totalharusdibayar,
+                        "amount"=> $findData->totalharusdibayar + (float)$this->tarifEspay,
                         "ccy"=> "IDR",
                         "description"=> "Pembayaran tagihan pasien ". $findData->namapasien,
                         "trx_date"=> $findData->tglstruk,

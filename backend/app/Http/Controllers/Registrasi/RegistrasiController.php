@@ -3517,7 +3517,7 @@ class RegistrasiController extends ApiController
             if($request['idpasien'] == '') {
                 if(isset($request['pasien']['noIdentitas']) && $request['pasien']['noIdentitas']!='-'
                     && $request['pasien']['noIdentitas']!=''){
-                    $cek = Pasien::where('noidentitas',$request['pasien']['noIdentitas'])->first();
+                    $cek = Pasien::where('noidentitas',$request['pasien']['noIdentitas'])->where('statusenabled',true)->where('kdprofile',$idProfile)->first();
                     if(!empty($cek)){
                     $transMessage = "NIK ini sudah terdaftar sebagai ".$cek->namapasien . ' ('.$cek->nocm.')';
                         DB::rollBack();
@@ -3532,7 +3532,7 @@ class RegistrasiController extends ApiController
                 
                 // Cek No BPJS
                 if (isset($request['pasien']['noBpjs']) && $request['pasien']['noBpjs'] != '-' && $request['pasien']['noBpjs'] != '') {
-                    $cek = Pasien::where('nobpjs', $request['pasien']['noBpjs'])->first();
+                    $cek = Pasien::where('nobpjs', $request['pasien']['noBpjs'])->where('statusenabled',true)->where('kdprofile',$idProfile)->first();
                     if (!empty($cek)) {
                         $transMessage = "No BPJS sudah terdaftar sebagai " . $cek->namapasien . ' (' . $cek->nocm . ')';
                         DB::rollBack();
@@ -6997,6 +6997,19 @@ class RegistrasiController extends ApiController
    $kdProfile = $this->getDataKdProfile($request);
         DB::beginTransaction();
 
+        $cekUdahDaftar=PasienDaftar::where('nocmfk', $request['pasien']['id'])
+        ->wherenull('tglpulang')
+        ->where('statusenabled',true)
+        ->count();
+        if($cekUdahDaftar > 0) {
+            $transMessage = 'Pasien Belum Dipulangkan';
+            $result = array(
+                'status' => 400,
+                'message'  => $transMessage,
+                'as' => 'ramdanegie',
+            );
+            return $this->setStatusCode($result['status'])->respond($result, $transMessage);
+        }
 
         if ($request['tglpulang']!= 'null'){
             $ddddd=PasienDaftar::where('norec', $request['noRecPasienDaftar'])
