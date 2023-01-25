@@ -1,7 +1,8 @@
 define(['initialize'], function (initialize) {
     'use strict';
-    initialize.controller('AsesmenMedisCtrl', ['$q', '$rootScope', '$scope', '$state', 'CacheHelper', 'MedifirstService', '$mdDialog',
-        function ($q, $rootScope, $scope, $state, cacheHelper, medifirstService, $mdDialog) {
+    initialize.controller('AsesmenMedisCtrl', ['$q', '$rootScope', '$timeout', '$scope', '$state', 'CacheHelper', 'MedifirstService', '$mdDialog',
+        function ($q, $rootScope, $timeout, $scope, $state, cacheHelper, medifirstService, $mdDialog) {
+
             $scope.item = {};
             $scope.dataVOloaded = true;
             $scope.now = new Date();
@@ -12,8 +13,12 @@ define(['initialize'], function (initialize) {
                 $rootScope.isShowNavAses = !$rootScope.isShowNavAses
                 // $scope.collapseEMR =1
             }
+
+
             let listData = []
-            cacheHelper.set('cacheNomorEMR', undefined);
+
+
+            // cacheHelper.set('cacheNomorEMR', undefined);
             var dataAsal = []
             var norec_apd = ''
             var norec_pd = ''
@@ -33,9 +38,9 @@ define(['initialize'], function (initialize) {
             var namaRuangan = ''
             var namaRuanganFk = ''
 
-            $scope.isRekamMedik = function() {
+            $scope.isRekamMedik = function () {
                 var kelompokUsr = medifirstService.getKelompokUser()
-                if(kelompokUsr == 'rekammedik')
+                if (kelompokUsr == 'rekammedik')
                     return true
                 else
                     return false
@@ -77,12 +82,31 @@ define(['initialize'], function (initialize) {
 
 
             }
+
+            $timeout(function () {
+
+                let urlT = window.location.href;
+                if (urlT.indexOf('CpptNewRJ') > -1) {
+                    $scope.showRiwayatEMR = true;
+
+                } else {
+                    $scope.showRiwayatEMR = false;
+                }
+            }, 1500);
+
+
+
+
+
             $rootScope.getRekamMedisCheck = function (bool) {
                 if (bool) {
+                    // muncul yang baru
                     paramSearch = 'noregistrasi=' + $scope.item.noregistrasi
                     init()
+
                 }
                 else {
+                    // muncul semua
                     paramSearch = 'nocm=' + $scope.item.noMr
                     init()
                 }
@@ -95,17 +119,35 @@ define(['initialize'], function (initialize) {
                 $scope.isRouteLoading = true
                 dataAsal = []
                 listData = []
+
+                console.log(paramSearch);
+
+                // adi buka default 
+                // let paramDefault = 'noregistrasi=' + $scope.item.noregistrasi;
+                // let paramDf = 'nocm=' + $scope.item.noMr;
+                // if (paramSearch == paramDefault) {
+                //     paramSearch = paramDf;
+                // } else {
+                //     paramSearch = paramDefault;
+                // }
+
                 // medifirstService.get("emr/get-emr-transaksi?nocm=" + $scope.item.noMr + "&jenisEmr=asesmen", true).then(function (dat) {
                 medifirstService.get("emr/get-emr-transaksi-detail-form?" + paramSearch + "&jenisEmr=asesmen", true).then(function (dat) {
                     $scope.isRouteLoading = false
                     dataAsal = dat.data.data
                     listData = dat.data.data
                     for (var i = 0; i < listData.length; i++) {
-                        if( listData[i].isverifikasi==true) {
-                            listData[i].isverifikasi='✔' 
-                        } else { 
-                            listData[i].isverifikasi ='✖' 
+                        if (listData[i].isverifikasi == true) {
+                            listData[i].isverifikasi = '✔'
+                        } else {
+                            listData[i].isverifikasi = '✖'
                         }
+
+                        let noreg = listData[i].noregistrasi
+                        if (noreg) {
+                            listData[i].noregistrasi = noreg.replace(/\s/g, '');
+                        }
+
                     }
                     $scope.dataDaftar = new kendo.data.DataSource({
                         data: listData,
@@ -125,7 +167,7 @@ define(['initialize'], function (initialize) {
                 $scope.treeSourceRuangan = [];
                 var mapemr = "&departemen=" + $scope.item.idDepartemen
                 // if($scope.item.idDepartemen == 18)
-                    mapemr += "&ruangan=" + $scope.item.idRuangan
+                mapemr += "&ruangan=" + $scope.item.idRuangan
                 medifirstService.get("emr/get-menu-rekam-medis-dynamic?namaemr=asesmen" + mapemr).then(function (e) {
                     var deptInap = [16, 35, 17]
                     var deptId = localStorage.getItem('departemenPengkajian');
@@ -153,7 +195,12 @@ define(['initialize'], function (initialize) {
                     $scope.mainTreeViewBedahOption = {
                         dataBound: function (e) {
                             $('span.k-in').each(function () {
-                                // if ($(this).text() == 'Check List RJ/IGD') { $(this).addClass('tandaan') }
+                                if ($(this).text() == 'Informed Consent Tindakan Operasi') { $(this).addClass('tandaan') }
+                                if ($(this).text() == 'Daftar pemberian obat pasien rawat inap') { $(this).addClass('tandaan') }
+                                // if ($(this).text() == 'Informed Consent Tindakan dan Pengobatan Resiko Tinggi') { $(this).addClass('tandaan') }
+                                // if ($(this).text() == 'Penolakan Tindakan Pemakaian Darah/Produk Darah') { $(this).addClass('tandaan') }
+                                // if ($(this).text() == 'Penolakan Tindakan dan Pengobatan Berisiko Tinggi') { $(this).addClass('tandaan') }    
+
                                 // if ($(this).text() == 'UPPER') { $(this).addClass('tandaan') }
                                 // if ($(this).text() == 'Surat Kontrol') { $(this).addClass('tandaan') }
                                 // if ($(this).text() == 'Penolakan Tindakan Medis') { $(this).addClass('tandaan') }
@@ -184,7 +231,34 @@ define(['initialize'], function (initialize) {
                     // var treeview = $("#treeview").data("kendoTreeView");
                     // .expandPath([2, 5])
                 })
+
+
+
+                //adi cek
+                // setTimeout(() =>{
+                //     if (window.location.href.indexOf('CpptNewRJ') > -1) {
+                //         $scope.showRiwayatEMR = true;
+                //         medifirstService.get("emr/get-emr-transaksi-detail-form?nocm=" + $scope.item.noMr + "&jenisEmr=asesmen").then(function (dat) {
+                //             let dataEmr = dat.data.data[0];
+                //             cacheHelper.set('cacheNomorEMR', undefined);
+                //             var arrStr = {
+                //                 0: dataEmr.noemr,
+                //                 1: dataEmr.norec_apd,
+                //                 2: dataEmr.noregistrasi,
+                //             }
+                //             cacheHelper.set('cacheNomorEMRr', arrStr);
+                //         })
+                //     } else {
+                //         $scope.showRiwayatEMR = false;
+                //     }    
+                // }, 1500);
+
+
+
             }
+
+
+
 
 
             $scope.back = function () {
@@ -192,13 +266,14 @@ define(['initialize'], function (initialize) {
                 $scope.showRiwayatEMR = false
             }
             $rootScope.showRiwayat = function () {
+                $state.go("RekamMedis.AsesmenMedis", $state.params);
                 $scope.showRiwayatEMR = false
             }
             $rootScope.loadRiwayat = function () {
                 // debugger
                 init()
             }
-            $scope.showRiwayatEMR = false
+            //$scope.showRiwayatEMR = false
             $scope.DaftarRawatInap = function () {
                 $state.go("RGFmdGFyQW50cmlhblN1c3RlclJhbmFw", {
                 })
@@ -214,7 +289,7 @@ define(['initialize'], function (initialize) {
                 }
                 var confirm = $mdDialog.confirm()
                     .title('Peringatan')
-                    .textContent('Yakin ingin memverifikasi data dengan No EMR '+$scope.dataSelected.noemr+' ?')
+                    .textContent('Yakin ingin memverifikasi data dengan No EMR ' + $scope.dataSelected.noemr + ' ?')
                     .ariaLabel('Lucky day')
                     .cancel('Tidak')
                     .ok('Ya')
@@ -222,9 +297,9 @@ define(['initialize'], function (initialize) {
                     medifirstService.post('emr/verifikasi-emr-norec', { norec: $scope.dataSelected.norec }).then(function (e) {
                         init()
                         medifirstService.postLogging('Verifikasi EMR', 'norec emrpasien_t', $scope.dataSelected.norec,
-                        'Verifikasi No EMR - ' + $scope.dataSelected.noemr + ' pada No Registrasi  '
-                        + $scope.item.noregistrasi + ' - Pasien : ' + $scope.item.namaPasien).then(function (res) {
-                        })
+                            'Verifikasi No EMR - ' + $scope.dataSelected.noemr + ' pada No Registrasi  '
+                            + $scope.item.noregistrasi + ' - Pasien : ' + $scope.item.namaPasien).then(function (res) {
+                            })
                     })
                 })
             }
@@ -233,6 +308,12 @@ define(['initialize'], function (initialize) {
                     toastr.error('Pilih data dulu')
                     return
                 }
+
+                cacheHelper.set('cacheNoregLain', '')
+                let noregl = $scope.dataSelected.noregistrasi
+                cacheHelper.set('cacheNoregLain', noregl)
+
+
                 cacheHelper.set('cacheNomorEMR', undefined);
                 $scope.showRiwayatEMR = true
                 $scope.myVar = 2
@@ -247,7 +328,8 @@ define(['initialize'], function (initialize) {
 
                 var arrStr = {
                     0: noemr2,
-                    1: $scope.dataSelected.norec
+                    1: $scope.dataSelected.norec,
+                    2: $scope.dataSelected.noregistrasi
                 }
                 cacheHelper.set('cacheNomorEMR', arrStr);
                 cacheHelper.set('cacheNOREC_EMR', arrStr);
@@ -279,6 +361,9 @@ define(['initialize'], function (initialize) {
 
             }
             $scope.create = function () {
+
+                cacheHelper.set('cacheNoregLain', '')
+
                 cacheHelper.set('cacheNomorEMR', undefined);
                 $scope.showRiwayatEMR = true
                 $scope.myVar = 2
@@ -471,7 +556,7 @@ define(['initialize'], function (initialize) {
                     "template": "<em class=\"k-button k-button-icon  k-secondary\" style=\"margin: 3px;padding-left: .4em;padding-right: .4em; margin-left: -3px;\" ng-click=\"listUserEMR('#=noemr#')\"> <span class=\"k-sprite fa fa-history\" title=\"History\" style=\"float: left;margin-top: 0.3em;padding-bottom: 2px;\"></span></em>",
                     attributes: {
                         style: "text-align: center;"
-                    } 
+                    }
                 },
                 {
                     "field": "tglregistrasi",
@@ -491,9 +576,9 @@ define(['initialize'], function (initialize) {
                 "width": "12%",
                 attributes: {
                     style: "text-align: center;"
-                } 
+                }
             }
-            if($scope.isRekamMedik())
+            if ($scope.isRekamMedik())
                 columngrid.push(gridRm)
 
             $scope.columnDaftar = {
@@ -501,34 +586,36 @@ define(['initialize'], function (initialize) {
                 selectable: 'row',
                 pageable: true,
                 columns: columngrid
-                    // [
-                        // {
-                        //     "field": "details",
-                        //     "title": "Form",
-                        //     "width": "300px",
-                        //     "template": "# for(var i=0; i < details.length;i++){# <button class=\"k-button custom-button\" style=\"margin:0 0 5px\">#= details[i].namaform #</button> #}#",
-                        // },
-                        // {
-                        //     "field": "noregistrasi",
-                        //     "title": "NoRegistrasi",
-                        //     "width":"150px",
-                        //     "template": "<span class='style-left'>#: noregistrasi #</span>"
-                        // },
-                        // {
-                        //     "field": "namaruangan",
-                        //     "title": "Nama Ruangan",
-                        //     "width":"150px",
-                        //     "template": "<span class='style-left'>#: namaruangan #</span>"
-                        // }
-                    // ]
+                // [
+                // {
+                //     "field": "details",
+                //     "title": "Form",
+                //     "width": "300px",
+                //     "template": "# for(var i=0; i < details.length;i++){# <button class=\"k-button custom-button\" style=\"margin:0 0 5px\">#= details[i].namaform #</button> #}#",
+                // },
+                // {
+                //     "field": "noregistrasi",
+                //     "title": "NoRegistrasi",
+                //     "width":"150px",
+                //     "template": "<span class='style-left'>#: noregistrasi #</span>"
+                // },
+                // {
+                //     "field": "namaruangan",
+                //     "title": "Nama Ruangan",
+                //     "width":"150px",
+                //     "template": "<span class='style-left'>#: namaruangan #</span>"
+                // }
+                // ]
 
 
             };
             $scope.data2 = function (dataItem) {
-                // for (var i = 0; i < dataItem.details.length; i++) {
-                //     dataItem.details[i].no = i+1
-
-                // }
+                cacheHelper.set('cacheNoregLain', '')
+                let noregl = dataItem.noregistrasi
+                cacheHelper.set('cacheNoregLain', noregl)
+                for (var i = 0; i < dataItem.details.length; i++) {
+                    dataItem.details[i].noregistrasi = dataItem.noregistrasi
+                }
                 // debugger
                 dataItem.details.sort(function (a, b) {
                     if (a.namaform < b.namaform) { return -1; }
@@ -549,9 +636,9 @@ define(['initialize'], function (initialize) {
 
                             "template": "# for(var i=0; i < details.length;i++){# <span class=\"button-details\" )\" >#= details[i].namaform #  <em class=\"k-button k-button-icon k-primary\""
                                 + " style=\" margin: 3px;padding-left: .4em;padding-right: .4em;\"  ng-click=\"asupKaForm('#=details[i].emrpasienfk#','#=details[i].reportdisplay#',"
-                                + "'#=details[i].emrfk#','#=details[i].norec#')\" > <span class=\"k-sprite k-icon k-i-search\">Details</span></em> <em class=\"k-button k-button-icon  k-primary \""
+                                + "'#=details[i].emrfk#','#=details[i].norec#','#=details[i].index#','#=details[i].noregistrasi#')\" > <span class=\"k-sprite k-icon k-i-search\">Details</span></em> <em class=\"k-button k-button-icon  k-primary \""
                                 + " style=\" margin: 3px;padding-left: .4em;padding-right: .4em; margin-left: -3px;\"  ng-click=\"hapusFormHiji('#=details[i].emrpasienfk#','#=details[i].reportdisplay#',"
-                                + "'#=details[i].emrfk#','#=details[i].norec#')\" > <span class=\"k-sprite fa fa-trash\" style=\"float: left;margin-top: 0.3em;padding-bottom: 2px;\"</span></em></span> #}#",
+                                + "'#=details[i].emrfk#','#=details[i].norec#','#=details[i].index#')\" > <span class=\"k-sprite fa fa-trash\" style=\"float: left;margin-top: 0.3em;padding-bottom: 2px;\"</span></em></span> #}#",
 
                             // "template": "# for(var i=0; i < details.length;i++){# <button class=\"k-button custom-button\" style=\"margin:0 0 5px\"  ng-click=\"asupKaForm('#=details[i].emrpasienfk#','#=details[i].reportdisplay#','#=details[i].emrfk#','#=details[i].norec#')\" >#= details[i].namaform #</button> #}#",
                         }
@@ -559,7 +646,7 @@ define(['initialize'], function (initialize) {
                     ]
                 }
             };
-            $scope.hapusFormHiji = function (noemr, reportdisplay, emrfk, norec) {
+            $scope.hapusFormHiji = function (noemr, reportdisplay, emrfk, norec, index) {
 
                 var noemr2 = '-'
                 if (noemr != undefined) {
@@ -575,16 +662,21 @@ define(['initialize'], function (initialize) {
                     .cancel('Tidak')
                     .ok('Ya')
                 $mdDialog.show(confirm).then(function () {
-                    $scope.hapusEMRDetail(noemr2, reportdisplay, emrfk, norec);
+                    $scope.hapusEMRDetail(noemr2, reportdisplay, emrfk, norec, index);
                 })
             }
-            $scope.hapusEMRDetail = function (noemr, reportdisplay, idemr, norec) {
+            $scope.hapusEMRDetail = function (noemr, reportdisplay, idemr, norec, index) {
+                if (index == 'tabindex') {
+                    toastr.error('Tidak bisa dihapus')
+                    return
+                }
                 var json = {
                     'noemr': noemr,
                     'reportdisplay': reportdisplay,
                     'idemr': idemr,
                     'norec': norec,
                     'idpegawai': medifirstService.getPegawaiLogin().id,
+                    'index': index === undefined ? null : index,
                 }
                 medifirstService.post('emr/disable-emr-details', json).then(function (e) {
                     cacheHelper.set('cacheNomorEMR', undefined);
@@ -596,7 +688,12 @@ define(['initialize'], function (initialize) {
                     init()
                 })
             }
-            $scope.asupKaForm = function (noemr, reportdisplay, emrfk, norec) {
+            $scope.asupKaForm = function (noemr, reportdisplay, emrfk, norec, index, noregistrasi) {
+
+                cacheHelper.set('cacheNoregLain', '')
+                let noregl = noregistrasi
+                cacheHelper.set('cacheNoregLain', noregl)
+
                 // var json = JSON.parse(selec)
                 cacheHelper.set('cacheNomorEMR', undefined);
                 // emrfk
@@ -609,22 +706,31 @@ define(['initialize'], function (initialize) {
                 if (noemr2 != '-')
                     noemr2.trim()
                 var url = "RekamMedis.AsesmenMedis.AsesmenMedisDetail"
-                if (reportdisplay != 'null')
+                if (reportdisplay != 'null') {
                     url = reportdisplay
-                $state.go(url, {
-                    namaEMR: emrfk,
-                    nomorEMR: noemr2
-                });
+                    if (index == null) {
+                        $state.go(url);
+                    } else {
+                        // $state.go(url,{index:index,idEMR:emrfk});
+                        $state.go(url, { index: 1, idEMR: emrfk });
+                    }
 
+                } else {
+                    $state.go(url, {
+                        namaEMR: emrfk,
+                        nomorEMR: noemr2
+                    });
+                }
                 var arrStr = {
                     0: noemr2,
-                    1: norec
+                    1: norec,
+                    2: noregistrasi,
                 }
                 cacheHelper.set('cacheNomorEMR', arrStr);
                 cacheHelper.set('cacheNOREC_EMR', arrStr);
             }
             $scope.listUserEMR = function (noemr) {
-                $scope.isRouteLoading = true;                  
+                $scope.isRouteLoading = true;
                 loadRiwayatEMR(noemr);
                 $scope.popUplistUserEMR.center().open();
                 var actions = $scope.popUplistUserEMR.options.actions;
@@ -637,29 +743,28 @@ define(['initialize'], function (initialize) {
                 });
                 $scope.popUplistUserEMR.close();
             }
-            function loadRiwayatEMR(noemr)
-            {                         
-                medifirstService.get("emr/riwayat-emr?noemr=" + noemr ).then(function (data) {
-                        $scope.isRouteLoading = false;                  
-                        var jumlahRawat = 0;
-                        var dRiwayatReg = data.data;
-                        console.log(dRiwayatReg)
-                        for (var i = 0; i < dRiwayatReg.length; i++) {
-                            dRiwayatReg[i].no = i + 1                           
-                        } 
-                        $scope.datalistUserEMR = new kendo.data.DataSource({
-                            data: dRiwayatReg,
-                            pageSize: 10,
-                            total: dRiwayatReg.length,
-                            serverPaging: false,
-                            schema: {
-                                model: {
-                                    fields: {
-                                    }
+            function loadRiwayatEMR(noemr) {
+                medifirstService.get("emr/riwayat-emr?noemr=" + noemr).then(function (data) {
+                    $scope.isRouteLoading = false;
+                    var jumlahRawat = 0;
+                    var dRiwayatReg = data.data;
+                    console.log(dRiwayatReg)
+                    for (var i = 0; i < dRiwayatReg.length; i++) {
+                        dRiwayatReg[i].no = i + 1
+                    }
+                    $scope.datalistUserEMR = new kendo.data.DataSource({
+                        data: dRiwayatReg,
+                        pageSize: 10,
+                        total: dRiwayatReg.length,
+                        serverPaging: false,
+                        schema: {
+                            model: {
+                                fields: {
                                 }
                             }
-                        });
+                        }
                     });
+                });
             }
 
             $scope.columnlistUserEMR = {
@@ -992,6 +1097,7 @@ define(['initialize'], function (initialize) {
                 var uid_select = e.node.dataset.uid
                 var idTree = '';
                 var urlTrue = null;
+                var tabIndex = null;
                 // for (var i = data3.length - 1; i >= 0; i--) {
                 //     if (uid_select == data3[i].uid) {
                 //         idTree = data3[i].id
@@ -1025,34 +1131,49 @@ define(['initialize'], function (initialize) {
                 // }
                 for (let i = 0; i < data3.length; i++) {
                     const element = data3[i];
-                    if(uid_select == element.uid){
+                    if (uid_select == element.uid) {
                         idTree = element.id
                         urlTrue = element.reportdisplay
+                        tabIndex = element.namaexternal
                         break
                     }
-                    if(element.child != undefined){
-                        for (let i2 = 0; i2 < element.child .length; i2++) {
-                            const element2 = element.child [i2];
-                            if(element2.uid == uid_select){
+                    if (element.child != undefined) {
+                        for (let i2 = 0; i2 < element.child.length; i2++) {
+                            const element2 = element.child[i2];
+                            if (element2.uid == uid_select) {
                                 idTree = element2.id
                                 urlTrue = element2.reportdisplay
+                                tabIndex = element2.namaexternal
                                 break
                             }
-                            if(element2.child!=undefined){
+                            if (element2.child != undefined) {
                                 for (let i3 = 0; i3 < element2.child.length; i3++) {
                                     const element3 = element2.child[i3];
-                                    if(element3.uid == uid_select){
+                                    if (element3.uid == uid_select) {
                                         idTree = element3.id
                                         urlTrue = element3.reportdisplay
+                                        tabIndex = element3.namaexternal
                                         break
                                     }
-                                    if(element3.child!=undefined){
+                                    if (element3.child != undefined) {
                                         for (let i4 = 0; i4 < element3.child.length; i4++) {
                                             const element4 = element3.child[i4];
-                                            if(element4.uid == uid_select){
+                                            if (element4.uid == uid_select) {
                                                 idTree = element4.id
                                                 urlTrue = element4.reportdisplay
+                                                tabIndex = element4.namaexternal
                                                 break
+                                            }
+                                            if (element4.child != undefined) {
+                                                for (let i5 = 0; i5 < element4.child.length; i5++) {
+                                                    const element5 = element4.child[i5];
+                                                    if (element5.uid == uid_select) {
+                                                        idTree = element5.id
+                                                        urlTrue = element5.reportdisplay
+                                                        tabIndex = element5.namaexternal
+                                                        break
+                                                    }
+                                                }
                                             }
                                         }
                                     }
@@ -1082,7 +1203,19 @@ define(['initialize'], function (initialize) {
                         6: $scope.header.notelepon,
                     }
                     // cacheHelper.set('RekamMedisIGDCtrl', arrStr);       
-                    $state.go(urlTrue);
+                    if (tabIndex == null) {
+                        $state.go(urlTrue);
+                    } else {
+                        $state.go(urlTrue, { index: 1, idEMR: idTree });
+                        if ($rootScope.loadEMRTab === undefined) {
+                            $rootScope.loadEMRTab = function (EMRFK) {
+                                loadPage(noemr, EMRFK)
+                            }
+                        }
+                        $rootScope.loadEMRTab(idTree)
+                        // $state.go(urlTrue,{index:1,idEMR:idTree});
+                    }
+
                 }
 
 
@@ -1090,6 +1223,26 @@ define(['initialize'], function (initialize) {
 
             }
             var timeoutPromise;
+
+            function loadPage(nomorEMR, EMRFK) {
+                medifirstService.get("emr/get-emr-transaksi-detail-index?noemr=" + nomorEMR + "&emrfk=" + EMRFK, true).then(function (dat) {
+                    if (dat.data.data.length > 0) {
+                        $scope.lisIndex = []
+                        for (let x = 0; x < dat.data.data.length; x++) {
+                            const element = dat.data.data[x];
+                            if (element.index != null) {
+                                $scope.lisIndex.push({ index: parseInt(element.index), url: $state.current.name })
+                            }
+                        }
+                    } else {
+                        $scope.lisIndex = []
+                        $scope.lisIndex = [{
+                            index: 1,
+                            url: $state.current.name
+                        }]
+                    }
+                })
+            }
 
             $scope.$watch('item.filter', function (newVal, oldVal) {
 
@@ -1122,11 +1275,11 @@ define(['initialize'], function (initialize) {
                     sama = false
                     for (let x = 0; x < arrGroup.length; x++) {
                         if (arrGroup[x].norec == result[i].norec) {
-                                                     sama = true;
+                            sama = true;
                         }
                     }
                     if (sama == false) {
-                        let data =arr[i]
+                        let data = arr[i]
                         arrGroup.push(data)
                     }
                 }
