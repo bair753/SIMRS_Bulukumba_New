@@ -155,7 +155,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
     $(function () {
         'use strict';
         $('#qrDokter').qrcode({
-            text: baseUrl + '/service/medifirst2000/report/cetak-dokter?reg=' + {{ $raw->noregistrasi }} ,
+            text: baseUrl + '/service/medifirst2000/report/data-dokter?reg=' + {{ $raw->pgid }} ,
             height: 75,
             width: 75
         });

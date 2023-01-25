@@ -1861,6 +1861,31 @@ class ReportController extends ApiController{
 
     }
 
+    public function dataDokter(Request $r) {
+        $kdProfile = (int)$r['kdprofile'];
+        $raw = collect(DB::select("
+        SELECT
+            pg.nip,
+            pg.nosip,
+            pg.namalengkap,
+            jk.jeniskelamin,
+            pg.tgllahir,
+            '' as tglresume
+        FROM
+            pegawai_m AS pg
+            LEFT JOIN jeniskelamin_m AS jk ON jk.ID = pg.objectjeniskelaminfk
+        WHERE
+            pg.id = '$r[reg]'
+        "))->first();
+
+        $pageWidth = 950;
+        $now =  $this->getDateTime();
+
+        return view('report.pdf.infodokter',
+            compact('raw', 'pageWidth','r','now'));
+
+    }
+
     public function cetakAdmin(Request $r) {
         $kdProfile = (int)$r['kdprofile'];
         $raw = collect(DB::select("
