@@ -222,12 +222,12 @@
         </div>
         <div class="row">
             @foreach($res['tt'] as $key => $v)
-            
+
                  <div class="col-md-12 col-xl-3 mytooltip tooltip-effect-5 tooltip-item" style="cursor: pointer" onclick="klikDetails({!! $v['idruangan'] !!},'{!! $v['namaruangan'] !!}')">
                     <span class="tooltip-content clearfix">
                     <span class="tooltip-text">Klik untuk melihat detail</span>
                     </span>
-               
+
                      @php
                      $color ='bg-isi2';
                      $text ='';
@@ -313,5 +313,21 @@
             }
         })
     }
+    function scrollTopBottom(){
+      $('html, body').animate({ scrollTop: $(document).height() - $(window).height() }, 15000, function() {
+        $(this).animate({ scrollTop: 0 }, 15000);
+    });
+    }
+    scrollTopBottom()
+
+
+    setInterval(function(){
+        scrollTopBottom()
+
+    }, 30000);
+      setTimeout(function(){
+             window.location.reload();
+
+    }, 120000);
 </script>
 @endsection

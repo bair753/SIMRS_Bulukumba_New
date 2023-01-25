@@ -6997,6 +6997,19 @@ class RegistrasiController extends ApiController
    $kdProfile = $this->getDataKdProfile($request);
         DB::beginTransaction();
 
+        $cekUdahDaftar=PasienDaftar::where('nocmfk', $request['pasien']['id'])
+        ->wherenull('tglpulang')
+        ->where('statusenabled',true)
+        ->count();
+        if($cekUdahDaftar > 0) {
+            $transMessage = 'Pasien Belum Dipulangkan';
+            $result = array(
+                'status' => 400,
+                'message'  => $transMessage,
+                'as' => 'ramdanegie',
+            );
+            return $this->setStatusCode($result['status'])->respond($result, $transMessage);
+        }
 
         if ($request['tglpulang']!= 'null'){
             $ddddd=PasienDaftar::where('norec', $request['noRecPasienDaftar'])

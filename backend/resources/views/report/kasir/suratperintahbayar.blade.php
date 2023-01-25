@@ -168,12 +168,20 @@
                             <td width="80%" colspan="3"><font style="font-size: 11pt;" color="#000000">: {{ $dataReport['datas']->espayproduct_name }}</font></td>
                         </tr>
                         <tr>
-                            <td width="20%"><font style="font-size: 11pt;" color="#000000">Banyaknya uang</font></td>
+                            <td width="20%"><font style="font-size: 11pt;" color="#000000">Total Tagihan</font></td>
                             <td width="80%" colspan="3"><font style="font-size: 11pt;">:</font><font style="font-size: 11pt;font-weight: bold;font-style:italic;" color="#000000"> Rp. {{ number_format($dataReport['datas']->amount,2, '.', ',') }}</font></td>
                         </tr>
                         <tr>
+                            <td width="20%"><font style="font-size: 11pt;" color="#000000">Biaya Admin</font></td>
+                            <td width="80%" colspan="3"><font style="font-size: 11pt;">:</font><font style="font-size: 11pt;font-weight: bold;font-style:italic;" color="#000000"> Rp. {{ number_format($dataReport['datas']->fee,2, '.', ',') }}</font></td>
+                        </tr>
+                        <tr>
+                            <td width="20%"><font style="font-size: 11pt;" color="#000000">Banyaknya uang</font></td>
+                            <td width="80%" colspan="3"><font style="font-size: 11pt;">:</font><font style="font-size: 11pt;font-weight: bold;font-style:italic;" color="#000000"> Rp. {{ number_format($dataReport['datas']->jumlahbayar,2, '.', ',') }}</font></td>
+                        </tr>
+                        <tr>
                             <td width="20%"><font style="font-size: 11pt;" color="#000000">Terbilang</font></td>
-                            <td width="80%" colspan="3"><font style="font-size: 11pt;" color="#000000">: {{ strtoupper(App\Http\Controllers\Report\ReportController::terbilang($dataReport['datas']->amount)) }}</font></td>
+                            <td width="80%" colspan="3"><font style="font-size: 11pt;" color="#000000">: {{ strtoupper(App\Http\Controllers\Report\ReportController::terbilang($dataReport['datas']->jumlahbayar)) }}</font></td>
                         </tr>
                     </table>
                 </td>

@@ -142,10 +142,10 @@ define(['initialize'], function (initialize) {
 			};
 
 			$scope.edit = function () {
-				if ($scope.item.idx == undefined) {
+				if ($scope.dataSelected.id == undefined) {
 					alert("Pilih 1 Data Untuk di edit!!")
 				} else {
-					$state.go("InputProduk", { idx: $scope.item.idx })
+					$state.go("InputProduk", { idx: $scope.dataSelected.id })
 				}
 			}
 

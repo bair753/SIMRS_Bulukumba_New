@@ -9,7 +9,7 @@ define(['initialize'], function (initialize) {
             Init();
 
             function Init() {
-                medifirstService.get("sysadmin/general/get-combo-ruangan?departemenfk=16", true).then(function (dat) {
+                medifirstService.get("sysadmin/general/get-combo-ruangan-inap", true).then(function (dat) {
                     $scope.listruanganinap = dat.data;
                 });
 

@@ -3161,6 +3161,26 @@
         {
             "nameDep": "GrafikTandaVital8Ctrl",
             "urlDep": "module/EMR/GrafikTandaVital8Ctrl"
+        },
+        {
+            "nameDep": "PemberianEdukasiPasienGawatDaruratCtrl",
+            "urlDep": "module/EMR/PemberianEdukasiPasienGawatDaruratCtrl"
+        },
+        {
+            "nameDep": "HandOverGawatDaruratCtrl",
+            "urlDep": "module/EMR/HandOverGawatDaruratCtrl"
+        },
+        {
+            "nameDep": "PernyataanPenolakanUntukDirujukCtrl",
+            "urlDep": "module/EMR/PernyataanPenolakanUntukDirujukCtrl"
+        },
+        {
+            "nameDep": "PermintaanRawatInapCtrl",
+            "urlDep": "module/EMR/PermintaanRawatInapCtrl"
+        },
+        {
+            "nameDep": "ImplementasiAsuhanKeperawatanGawatDaruratCtrl",
+            "urlDep": "module/EMR/ImplementasiAsuhanKeperawatanGawatDaruratCtrl"
         }
     ]
 }

@@ -154,7 +154,7 @@ export class CheckinComponent implements OnInit {
     })
   }
   cetakBukti() {
-    if (this.isCetakDSKiosk == 'true') {
+    if (this.isCetakDSKiosk == 'false') {
       this.service.get('http://127.0.0.1:1237/printvb/Pendaftaran?cetak-buktipendaftaran-online=1&norec='
         + this.item.noregistrasi + '&view=false'
         + '&noReservasi=' + this.item.noreservasi).subscribe(response => {
@@ -186,7 +186,7 @@ export class CheckinComponent implements OnInit {
       window.open(Configuration.get().apiBackend + 'medifirst2000/report/cetak-bukti-pendaftaran?noregistrasi='
         + this.item.noregistrasi
         + '&noReservasi=' + this.item.noreservasi
-        + '&kdprofile=21', '_blank');
+        + '&kdprofile=39', '_blank');
     }
 
   }

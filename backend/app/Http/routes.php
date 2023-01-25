@@ -22,6 +22,7 @@
 // api buat my jkn v2
 // Route::group(['middleware' => 'cors', 'prefix' => 'new-api-bpjs'], function () {
   Route::get('/', 'ReservasiOnline\MyJKNV2Controller@jalurMasuk');
+  Route::post('/', 'ReservasiOnline\MyJKNV2Controller@jalurMasuk');
 // });
 
 //yang pasti
@@ -2329,6 +2330,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
                 Route::get('sysadmin/general/get-combo-registrasi-general', 'SysAdmin\GeneralController@getComboRegGeneral');
                 Route::get('sysadmin/general/get-data-bynocm', 'SysAdmin\GeneralController@getPsnByNoCmGeneral');
                 Route::get('sysadmin/general/get-combo-ruangan', 'SysAdmin\GeneralController@getRuangan');
+                Route::get('sysadmin/general/get-combo-ruangan-inap', 'SysAdmin\GeneralController@getRuanganInap');
                 Route::get('sysadmin/general/get-combo-akomdasi', 'SysAdmin\GeneralController@getComboAkomodasi');
                 Route::get('sysadmin/general/get-combo-ruangan-general', 'SysAdmin\GeneralController@getComboRuanganGeneral');
                 Route::get('sysadmin/general/get-dokter-general', 'SysAdmin\GeneralController@getcomboDokterPart');

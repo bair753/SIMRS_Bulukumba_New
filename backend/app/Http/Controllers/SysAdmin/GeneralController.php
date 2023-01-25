@@ -5304,5 +5304,23 @@ class GeneralController extends ApiController
 
         return $this->respond($dataPenulis2);
     }
+    public function getRuanganInap(Request $request){
+        $kdProfile = (int) $this->getDataKdProfile($request);
+        $deptJalan = explode (',',$this->settingDataFixed('kdDepartemenRanapFix',  $kdProfile ));
+        $kdDepartemenRawatJalan = [];
+        foreach ($deptJalan as $item){
+            $kdDepartemenRawatJalan []=  (int)$item;
+        }
+       
+        $ruangan = DB::table('ruangan_m')
+            ->select('id','namaruangan','objectdepartemenfk')
+            ->where('kdprofile', $kdProfile)
+            ->where('statusenabled',true)
+            ->whereIn('objectdepartemenfk',$kdDepartemenRawatJalan);
+
+        $ruangan=$ruangan->get();
+
+        return $this->respond($ruangan);
+    }
 
 }
