@@ -3532,7 +3532,7 @@ class RegistrasiController extends ApiController
                 
                 // Cek No BPJS
                 if (isset($request['pasien']['noBpjs']) && $request['pasien']['noBpjs'] != '-' && $request['pasien']['noBpjs'] != '') {
-                    $cek = Pasien::where('nobpjs', $request['pasien']['noBpjs'])->first();
+                    $cek = Pasien::where('nobpjs', $request['pasien']['noBpjs'])->where('statusenabled',true)->where('kdprofile',$idProfile)->first();
                     if (!empty($cek)) {
                         $transMessage = "No BPJS sudah terdaftar sebagai " . $cek->namapasien . ' (' . $cek->nocm . ')';
                         DB::rollBack();
