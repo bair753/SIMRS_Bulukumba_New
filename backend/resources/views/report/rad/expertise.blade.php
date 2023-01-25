@@ -100,7 +100,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                     <table width="100%" cellspacing="10" cellpadding="0" border="0" style="border: 3px solid black;padding-bottom: 50px;">
                         <tr>
                             <td width="20%"><font style="font-size: 12pt;" color="#000000;" >Tanggal / No Foto</font></td>
-                            <td width="80%"><font style="font-size: 12pt;" color="#000000" >: {{ $raw->nofoto }} </font></td>
+                            <td width="80%"><font style="font-size: 12pt;" color="#000000" >: {{ $raw->tanggal }} / {{ $raw->nofoto }} </font></td>
                         </tr>
                         <tr>
                             <td width="20%"><font style="font-size: 12pt;" color="#000000;" >Klinis</font></td>
@@ -111,10 +111,15 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             <td width="80%"><font style="font-size: 12pt;" color="#000000" >: </font></td>
                         </tr>
                     </table>
-                    <table width="100%" height="800" cellspacing="0" cellpadding="0" border="0" style="border: 1px solid black;">
+                    <table width="100%" height="400" cellspacing="0" cellpadding="0" border="0" style="border: 1px solid black;">
+                        <tr>
+                            <td>
+                                <font style="font-size: 12pt;" color="#000000;" >{{ $raw->keterangan }}</font><br>
+                            </td>
+                        </tr>
                         <tr>
                             <td width="40%">
-
+                                
                             </td>
                             <td width="30%">
 
