@@ -1142,6 +1142,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                         $scope.noeditExpertise1 =true
                         $scope.norecHasilRadiologi = e.data[0].norec
                         $scope.item.nofoto = e.data[0].nofoto
+                        $scope.item.klinis = e.data[0].klinis
                         $scope.item.tglInput = e.data[0].tanggal == null ? new Date() :new Date(e.data[0].tanggal)
                         $scope.item.dokter = { id: e.data[0].pegawaifk, namalengkap: e.data[0].namalengkap }
                         $scope.item.keterangan = (e.data[0].keterangan == null) ? '' : e.data[0].keterangan.replace(/~/g, "\n")
@@ -1170,6 +1171,30 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 });
 
             }
+            $scope.LihatEkpertiseUsg = function () {
+                if ($scope.dataSelected == undefined) {
+                    window.messageContainer.error("Pilih Data Dulu!");
+                    return;
+                }
+                $scope.norecHasilRadiologiUsg = ''
+                $scope.item.namaPelayanan = $scope.dataSelected.namaproduk
+                $scope.item.dokters = $scope.dataSelected.dokter
+                $scope.noeditExpertise3 = false;
+                $scope.noeditExpertise4 = false;
+                medifirstService.get('radiologi/get-hasil-radiologi-usg?norec_pp=' + $scope.dataSelected.norec_pp + '&idproduk=' + $scope.dataSelected.produkfk).then(function (e) {
+                    if (e.data.length > 0) {
+                        $scope.noeditExpertise3 =true
+                        $scope.norecHasilRadiologiUsg = e.data[0].norec
+                        $scope.item.nofotoUsg = e.data[0].nofoto
+                        $scope.item.klinisUsg = e.data[0].klinis
+                        $scope.item.tglInputUsg = e.data[0].tanggal == null ? new Date() :new Date(e.data[0].tanggal)
+                        $scope.item.dokterUsg = { id: e.data[0].pegawaifk, namalengkap: e.data[0].namalengkap }
+                        $scope.item.keteranganUsg = (e.data[0].keterangan == null) ? '' : e.data[0].keterangan.replace(/~/g, "\n")
+                        $scope.noeditExpertise4 = $scope.pegawai.id != e.data[0].pegawaifk;
+                    }
+                    $scope.popUpEkpertiseUsg.center().open();
+                })
+            }
             $scope.cetakEks = function () {
 
                 if ($scope.norecHasilRadiologi != '') {
@@ -1177,7 +1202,19 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     var nama = medifirstService.getPegawaiLogin().namaLengkap
                     if (local != null) {
                         var profile = local.id;
-                        window.open(config.baseApiBackend + "report/cetak-ekspertise?norec=" + $scope.norecHasilRadiologi + '&kdprofile=' + profile
+                        window.open(config.baseApiBackend + "report/cetak-ekspertise-ctscan?norec=" + $scope.norecHasilRadiologi + '&kdprofile=' + profile
+                            + '&nama=' + nama, '_blank');
+                    }
+                }
+            }
+            $scope.cetakEksUsg = function () {
+
+                if ($scope.norecHasilRadiologiUsg != '') {
+                    var local = JSON.parse(localStorage.getItem('profile'))
+                    var nama = medifirstService.getPegawaiLogin().namaLengkap
+                    if (local != null) {
+                        var profile = local.id;
+                        window.open(config.baseApiBackend + "report/cetak-ekspertise-usg?norec=" + $scope.norecHasilRadiologiUsg + '&kdprofile=' + profile
                             + '&nama=' + nama, '_blank');
                     }
                 }
@@ -1293,17 +1330,28 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 
                 $scope.norecHasilRadiologi = ''
                 $scope.item.nofoto = undefined
+                $scope.item.klinis = undefined
                 $scope.item.tglInput = new Date()
                 $scope.item.dokter = undefined
                 $scope.item.keterangan = undefined
                 $scope.popUpEkpertise.close();
             }
 
+            $scope.BatalEkpertiseUsg = function () {
+                $scope.norecHasilRadiologiUsg = ''
+                $scope.item.nofotoUsg = undefined
+                $scope.item.klinisUsg = undefined
+                $scope.item.tglInputUsg = new Date()
+                $scope.item.dokterUsg = undefined
+                $scope.item.keteranganUsg = undefined
+                $scope.popUpEkpertiseUsg.close();
+            }
+
             $scope.SaveEkpertise = function () {
-                // if ($scope.item.nofoto == undefined) {
-                //     window.messageContainer.error("No Foto Tidak Boleh Kosong!");
-                //     return;
-                // }
+                if ($scope.item.nofoto == undefined) {
+                    window.messageContainer.error("No Foto Tidak Boleh Kosong!");
+                    return;
+                }
                 if ($scope.item.tglInput == undefined) {
                     window.messageContainer.error("Tanggal Tidak Boleh Kosong!");
                     return;
@@ -1318,7 +1366,8 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 }
                 var objSave = {
                     noregistrasi: $scope.item.noregistrasi,
-                    // nofoto: $scope.item.nofoto,
+                    nofoto: $scope.item.nofoto,
+                    klinis: $scope.item.klinis,
                     tglinput: moment($scope.item.tglInput).format('YYYY-MM-DD HH:mm'),
                     dokterid: $scope.item.dokter.id,
                     keterangan: ($scope.item.keterangan == null) ? '' : $scope.item.keterangan.replace(/\n/ig, '~'),
@@ -1330,6 +1379,49 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 }
                 $scope.hideExper = true
                 medifirstService.post('radiologi/save-hasil-radiologi', objSave).then(function (e) {
+                    init();
+                    $scope.hideExper = false
+                    $scope.popUpEkpertise.close()
+                    // var client = new HttpClient();
+                    // client.get('http://127.0.0.1:1237/printvb/bridging?cetak-pacs-report=1&jenis=report&norec=' + $scope.dataSelected.norec_pp + '&noorder=' + $scope.dataSelected.noorder + $scope.dataSelected.no + '&view=true', function (response) {
+                    //         // do something with response
+                    // });
+                }, function (error) {
+                    $scope.hideExper = false
+                })
+            }
+            $scope.SaveEkpertiseUsg = function () {
+                if ($scope.item.nofotoUsg == undefined) {
+                    window.messageContainer.error("No Foto Tidak Boleh Kosong!");
+                    return;
+                }
+                if ($scope.item.tglInputUsg == undefined) {
+                    window.messageContainer.error("Tanggal Tidak Boleh Kosong!");
+                    return;
+                }
+                if ($scope.item.dokterUsg == undefined) {
+                    window.messageContainer.error("Dokter Tidak Boleh Kosong!");
+                    return;
+                }
+                if ($scope.item.keteranganUsg == undefined) {
+                    window.messageContainer.error("Keterangan Tidak Boleh Kosong!");
+                    return;
+                }
+                var objSave = {
+                    noregistrasi: $scope.item.noregistrasi,
+                    nofotoUsg: $scope.item.nofotoUsg,
+                    klinisUsg: $scope.item.klinisUsg,
+                    tglinputUsg: moment($scope.item.tglInputUsg).format('YYYY-MM-DD HH:mm'),
+                    dokterUsgid: $scope.item.dokterUsg.id,
+                    keteranganUsg: ($scope.item.keteranganUsg == null) ? '' : $scope.item.keteranganUsg.replace(/\n/ig, '~'),
+                    pelayananpasienfk: $scope.dataSelected.norec_pp,
+                    norec_pd: norec_pd,
+                    norec_usg: $scope.norecHasilRadiologiUsg,
+                    tglpelayanan: $scope.dataSelected.tglpelayanan
+
+                }
+                $scope.hideExper = true
+                medifirstService.post('radiologi/save-hasil-radiologi-usg', objSave).then(function (e) {
                     init();
                     $scope.hideExper = false
                     $scope.popUpEkpertise.close()

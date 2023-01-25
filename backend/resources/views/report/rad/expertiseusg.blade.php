@@ -1,7 +1,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Ekspertise</title>
+    <title>Expertise</title>
     <link rel="stylesheet" href="{{ asset('css/report/paper.css') }}">
     <link rel="stylesheet" href="{{ asset('css/report/table.css') }}">
     <link rel="stylesheet" href="{{ asset('css/report/tabel.css') }}">
@@ -86,29 +86,23 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             </td>
                             <td width="20%" align="center" style="border:1px solid black;padding-bottom: 20px;">
                                 <font style="font-size: 22pt;" color="#000000" >RM</font><br>
-                                <font style="font-size: 12pt;" color="#000000" >23</font>
+                                <font style="font-size: 12pt;" color="#000000" >19</font>
                             </td>
                         </tr>
                     </table>
-                    <table width="100%" cellspacing="0" cellpadding="0" border="0">
-                        <tr>
-                            <td width="30%" align="center" style="background-color:black;padding:5px">
-                                <font style="font-size: 14pt;" color="white">HASIL CT SCAN</font><br>
-                            </td>                            
-                        </tr>
-                    </table>
+                    
                     <table width="100%" cellspacing="10" cellpadding="0" border="0" style="border: 3px solid black;padding-bottom: 50px;">
                         <tr>
-                            <td width="20%"><font style="font-size: 12pt;" color="#000000;" >Tanggal / No Foto</font></td>
-                            <td width="80%"><font style="font-size: 12pt;" color="#000000" >: {{ $raw->nofoto }} </font></td>
+                            <td width="22%"><font style="font-size: 12pt;" color="#000000;" >Tanggal / No Foto - USG </font></td>
+                            <td width="78%"><font style="font-size: 12pt;" color="#000000" >: {{ $raw->tanggal }} / {{ $raw->nofoto }} </font></td>
                         </tr>
                         <tr>
-                            <td width="20%"><font style="font-size: 12pt;" color="#000000;" >Klinis</font></td>
-                            <td width="80%"><font style="font-size: 12pt;" color="#000000" >: {{ $raw->klinis }}</font></td>
+                            <td width="22%"><font style="font-size: 12pt;" color="#000000;" >Klinis</font></td>
+                            <td width="78%"><font style="font-size: 12pt;" color="#000000" >: {{ $raw->klinis }}</font></td>
                         </tr>
                         <tr>
-                            <td width="20%"><font style="font-size: 12pt;" color="#000000;" >Dokter Pengirim</font></td>
-                            <td width="80%"><font style="font-size: 12pt;" color="#000000" >: </font></td>
+                            <td width="22%"><font style="font-size: 12pt;" color="#000000;" >Dokter Pengirim</font></td>
+                            <td width="78%"><font style="font-size: 12pt;" color="#000000" >: </font></td>
                         </tr>
                     </table>
                     <table width="100%" height="800" cellspacing="0" cellpadding="0" border="0" style="border: 1px solid black;">

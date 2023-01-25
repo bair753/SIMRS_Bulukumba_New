@@ -281,14 +281,14 @@
     <div class="grid_2">
         <div class="grid_12" style="margin-top: 2px">
             <button class="btnTemplate1" style="margin-left: 0;" ng-disabled="disableRad" ng-click="LihatEkpertise()"><i
-                    class="fa fa-list"></i> Ekspertise</button>
+                    class="fa fa-list"></i> Ekspertise CT Scan</button>
             <!-- <kendo-button class="c-button" ng-click="LihatEkpertise()"><span class="title">Ekspertise</span></kendo-button> -->
         </div>
     </div>
     <div class="grid_2">
         <div class="grid_12" style="margin-top: 2px">
             <button class="btnTemplate1" style="margin-left: 0;" ng-disabled="disableRad"
-                ng-click="CetakEkspertise()"><i class="fa fa-print"></i> Cetak Ekspertise</button>
+                ng-click="LihatEkpertiseUsg()"><i class="fa fa-print"></i>Ekspertise Foto dan USG</button>
             <!-- <kendo-button class="c-button" ng-click="LihatEkpertise()"><span class="title">Ekspertise</span></kendo-button> -->
         </div>
     </div>
@@ -386,21 +386,12 @@
 
 
 
-<div kendo-window="popUpEkpertise" k-title="'Masukan Ekspertise'" k-width="1200" k-visible="false"
+<div kendo-window="popUpEkpertise" k-title="'Masukan Ekspertise CT Scan'" k-width="1200" k-visible="false"
     k-on-open="win2visible = true" k-on-close="win2visible = false">
     <div class="panel panel-default container_12" style="padding: 0px 10px;">
         <fieldset>
             <legend>Ekspertise</legend>
-            <div class="grid_12">
-                <!-- <div class="grid_3">
-                    <div class="grid_12">
-                        <label c-label item="item">No Foto</label>
-                    </div>
-                    <div class="clear"></div>
-                    <div class="grid_12">
-                        <input c-text-box type="input" class="k-textbox" ng-model="item.nofoto" />
-                    </div>
-                </div> -->
+            <div class="grid_12">                
                 <div class="grid_3">
                     <div class="grid_12">
                         <label c-label item="item">Nama Pelayanan</label>
@@ -425,13 +416,29 @@
                     <div class="grid_12">
                         <label c-label item="item">Dokter</label>
                     </div>
-
                     <div class="grid_12">
                         <input style="width: 100%;" kendo-combo-box k-ng-model="item.dokter"
                             k-data-text-field="'namalengkap'" k-data-value-field="'id'" k-filter="'contains'"
                             k-auto-bind="false" k-data-source="listDokter" ng-disabled="noeditExpertise1"/>
                     </div>
-
+                </div>
+                <div class="grid_3">
+                    <div class="grid_12">
+                        <label c-label item="item">No Foto</label>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="grid_12">
+                        <input c-text-box type="input" class="k-textbox" ng-model="item.nofoto" />
+                    </div>
+                </div>
+                <div class="grid_3">
+                    <div class="grid_12">
+                        <label c-label item="item">Klinis</label>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="grid_12">
+                        <input c-text-box type="input" class="k-textbox" ng-model="item.klinis" />
+                    </div>
                 </div>
             </div>
             <div class="grid_12">
@@ -446,11 +453,11 @@
             </div>
         </fieldset>
         <div class="grid_8">
-            <input style="width: 65%;" kendo-combo-box k-ng-model="itemimg.gambar" k-data-text-field="'filename'"
+            <!-- <input style="width: 65%;" kendo-combo-box k-ng-model="itemimg.gambar" k-data-text-field="'filename'"
                 k-data-value-field="'norec'" k-filter="'contains'" k-auto-bind="false" k-data-source="listNamaGambar"
                 k-on-change='selectImage()' />
             <button style="margin-top: 4px;" class="k-button k-button-icontext k-primary k-grid-update"
-                ng-hide="hideExper" ng-click="CheckImage()"><span class="k-icon k-update"></span>Lihat Gambar</button>
+                ng-hide="hideExper" ng-click="CheckImage()"><span class="k-icon k-update"></span>Lihat Gambar</button> -->
         </div>
         <div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
             <button class="k-button k-button-icontext k-primary k-grid-update" ng-hide="hideExper"
@@ -458,6 +465,90 @@
             <button class="k-button k-button-icontext k-primary k-grid-update" ng-click="cetakEks()"><span
                     class="k-icon k-print"></span>Cetak</button>
             <button class="k-button  k-button-icontext" ng-click="BatalEkpertise()"><span
+                    class="k-icon k-cancel"></span>Batal</button>
+        </div>
+
+    </div>
+</div>
+<div kendo-window="popUpEkpertiseUsg" k-title="'Masukan Ekspertise USG dan Foto'" k-width="1200" k-visible="false"
+    k-on-open="win2visible = true" k-on-close="win2visible = false">
+    <div class="panel panel-default container_12" style="padding: 0px 10px;">
+        <fieldset>
+            <legend>Ekspertise</legend>
+            <div class="grid_12">                
+                <div class="grid_3">
+                    <div class="grid_12">
+                        <label c-label item="item">Nama Pelayanan</label>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="grid_12">
+                        <input c-text-box type="input" filter="'varchar'" class="k-textbox" disabled
+                            ng-model="item.namaPelayanan" />
+                    </div>
+                </div>
+                <div class="grid_3">
+                    <div class="grid_12">
+                        <label c-label item="item">Tanggal</label>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="grid_12 padDatePicker">
+                        <input style="width: 100%" k-ng-model="item.tglInputUsg" kendo-datetimepicker
+                            placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" />
+                    </div>
+                </div>
+                <div class="grid_3">
+                    <div class="grid_12">
+                        <label c-label item="item">Dokter</label>
+                    </div>
+                    <div class="grid_12">
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.dokterUsg"
+                            k-data-text-field="'namalengkap'" k-data-value-field="'id'" k-filter="'contains'"
+                            k-auto-bind="false" k-data-source="listDokter" ng-disabled="noeditExpertise3"/>
+                    </div>
+                </div>
+                <div class="grid_3">
+                    <div class="grid_12">
+                        <label c-label item="item">No Foto Usg</label>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="grid_12">
+                        <input c-text-box type="input" class="k-textbox" ng-model="item.nofotoUsg" />
+                    </div>
+                </div>
+                <div class="grid_3">
+                    <div class="grid_12">
+                        <label c-label item="item">Klinis</label>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="grid_12">
+                        <input c-text-box type="input" class="k-textbox" ng-model="item.klinisUsg" />
+                    </div>
+                </div>
+            </div>
+            <div class="grid_12">
+                <div class="grid_12">
+                    <label c-label item="item">Keterangan</label>
+                </div>
+                <div class="clear"></div>
+                <div class="grid_12">
+                    <textarea class="k-textbox" style="height: 300px; width: 100%;"
+                        ng-model="item.keteranganUsg" ng-disabled="noeditExpertise4"></textarea>
+                </div>
+            </div>
+        </fieldset>
+        <div class="grid_8">
+            <!-- <input style="width: 65%;" kendo-combo-box k-ng-model="itemimg.gambar" k-data-text-field="'filename'"
+                k-data-value-field="'norec'" k-filter="'contains'" k-auto-bind="false" k-data-source="listNamaGambar"
+                k-on-change='selectImage()' />
+            <button style="margin-top: 4px;" class="k-button k-button-icontext k-primary k-grid-update"
+                ng-hide="hideExper" ng-click="CheckImage()"><span class="k-icon k-update"></span>Lihat Gambar</button> -->
+        </div>
+        <div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
+            <button class="k-button k-button-icontext k-primary k-grid-update" ng-hide="hideExper"
+                ng-click="SaveEkpertiseUsg()"><span class="k-icon k-update"></span>Simpan</button>
+            <button class="k-button k-button-icontext k-primary k-grid-update" ng-click="cetakEksUsg()"><span
+                    class="k-icon k-print"></span>Cetak</button>
+            <button class="k-button  k-button-icontext" ng-click="BatalEkpertiseUsg()"><span
                     class="k-icon k-cancel"></span>Batal</button>
         </div>
 

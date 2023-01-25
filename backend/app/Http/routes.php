@@ -1114,7 +1114,8 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
           Route::get('laboratorium/get-hasil-lis',  'Bridging\BridgingPenunjangController@getHasilLIS');
           Route::get('laboratorium/get-laporan-tindakan-bank-darah', 'Laboratorium\LaboratoriumController@getLaporanTindakanBankDarah');
           Route::get('report/get-data-hasil-lab','Report\ReportController@cetakHasilLIS');
-          Route::get('report/cetak-ekspertise','Report\ReportController@cetakEkspertise');
+          Route::get('report/cetak-ekspertise-ctscan','Report\ReportController@cetakEkspertiseCtscan');
+          Route::get('report/cetak-ekspertise-usg','Report\ReportController@cetakEkspertiseUsg');
           Route::get('report/cetak-hasil-lab-histopatologi','Report\ReportController@cetakHispatologi');
           Route::get('report/cetak-resep-dokter','Report\ReportController@cetakResepDokter');
           Route::get('laboratorium/get-lap-kunjungan', 'Laboratorium\LaboratoriumController@getLaporanKunjungan');
@@ -1468,7 +1469,9 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
           Route::post('radiologi/delete-order-pelayanan', 'Radiologi\RadiologiController@deleteOrderPelayanan');
           Route::post('radiologi/delete-order-penunjang', 'Radiologi\RadiologiController@hapusOrderPenunjang');
           Route::post('radiologi/save-hasil-radiologi', 'Radiologi\RadiologiController@saveHasilRadiologi');
+          Route::post('radiologi/save-hasil-radiologi-usg', 'Radiologi\RadiologiController@saveHasilRadiologiUsg');
           Route::get('radiologi/get-hasil-radiologi', 'Radiologi\RadiologiController@getHasilRadiologi');
+          Route::get('radiologi/get-hasil-radiologi-usg', 'Radiologi\RadiologiController@getHasilRadiologiUsg');
           Route::get('radiologi/get-laporan-tindakan', 'Radiologi\RadiologiController@getLaporanTindakanRadiologi');
           Route::get('radiologi/get-norec-hasil-radiologi', 'Radiologi\RadiologiController@getNoRecRadiologi');
           Route::get('radiologi/get-ekspertise', 'Radiologi\RadiologiController@getEkspertise');

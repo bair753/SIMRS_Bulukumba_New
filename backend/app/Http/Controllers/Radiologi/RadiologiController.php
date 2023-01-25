@@ -129,13 +129,13 @@ class RadiologiController extends ApiController
                         'dp.namadepartemen', 'ps.id as psid', 'apd.norec as norec_apd', 'sp.norec as norec_sp', 'pp.norec as norec_pp',
                         'ru.objectdepartemenfk', 'so.noorder', 'ris.order_key as idbridging', 'apd.objectruanganfk','pp.iscito','pp.jasa','so.keteranganlainnya',
                         'ps.objectjeniskelaminfk','ps.tgllahir','sbm.nosbm','pmi.pmi',  'ris.order_cnt as nourutrad', // syamsu tambahan
-                        DB::raw("case when ris.order_key is not null then 'Sudah Dikirim' else '-' end as statusbridging,hr.norec as  hr_norec"))
+                        DB::raw("case when ris.order_key is not null then 'Sudah Dikirim' else '-' end as statusbridging,'' as hr_norec"))
                     ->where('pp.kdprofile',$idProfile)
                     ->where('ru.objectdepartemenfk', $this->settingDataFixed('KdDepartemenInstalasiRadiologi', $idProfile))
                     ->groupBy('ps.nocm', 'ps.namapasien', 'jk.jeniskelamin', 'pp.tglpelayanan', 'pp.produkfk', 'pr.namaproduk',
                         'pp.jumlah', 'pp.hargasatuan', 'pp.hargadiscount', 'sp.nostruk', 'pd.noregistrasi', 'ru.namaruangan',
                         'dp.namadepartemen', 'ps.id', 'apd.norec', 'sp.norec', 'pp.norec',
-                        'ru.objectdepartemenfk', 'so.noorder', 'ris.order_key', 'apd.objectruanganfk','pp.iscito','pp.jasa', 'hr.norec','sbm.nosbm','pmi.pmi','so.keteranganlainnya')
+                        'ru.objectdepartemenfk', 'so.noorder', 'ris.order_key', 'apd.objectruanganfk','pp.iscito','pp.jasa','sbm.nosbm','pmi.pmi','so.keteranganlainnya')
                    
                     ->orderBy('pp.tglpelayanan');
 
@@ -1793,7 +1793,7 @@ class RadiologiController extends ApiController
         DB::beginTransaction();
         try{
 
-            if (empty($request['norec'])) {
+            if ($request['norec'] == "") {
                 $dataSO = new HasilRadiologi();
                 $dataSO->norec = $dataSO->generateNewId();
                 $dataSO->kdprofile = $idProfile;
@@ -1801,6 +1801,12 @@ class RadiologiController extends ApiController
                 $dataSO->pelayananpasienfk = $request['pelayananpasienfk'];
                 $dataSO->noregistrasifk = $request['norec_pd'];
                 $dataSO->tanggal = $request['tglinput'];
+                $dataSO->statusenabled = true;
+                $dataSO->nofoto = $request['nofoto'];
+                $dataSO->klinis = $request['klinis'];
+                $dataSO->keterangan = $request['keterangan'];
+                $dataSO->status = 'CT Scan';
+                $dataSO->save();
 
                 // adding random time max 2 h 43 m
                 $start_time = date($request['tglpelayanan']);
@@ -1810,35 +1816,92 @@ class RadiologiController extends ApiController
                 $dataSO->tanggalreport = $new_time;
 
             } else {
-                $dataSO =  HasilRadiologi::where('norec',$request['norec'])->first();
+                // $dataSO =  HasilRadiologi::where('norec',$request['norec'])->first();
+                $dataSO = HasilRadiologi::where('norec',$request['norec'])
+                ->where('kdprofile', $idProfile)
+                ->update([
+                    'pegawaifk' => $request['dokterid'],
+                    'pelayananpasienfk' => $request['pelayananpasienfk'],
+                    'noregistrasifk' => $request['norec_pd'],
+                    'tanggal' => $request['tglinput'],
+                    'keterangan' => $request['keterangan'],
+                    'nofoto' => $request['nofoto'],
+                    'klinis' => $request['klinis']
+                ]);
             }
 
-            // if (!empty($request['norec'])){
-            //   $dataSO =  HasilRadiologi::where('norec',$request['norec'])->first();
-            // }
+            $transStatus = 'true';
+        } catch (\Exception $e) {
+            $transStatus = 'false';
 
-            // if (empty($dataSO)) {
-            //   if (!empty($request['pelayananpasienfk']) && !empty($request['norec_pd'])) {
-            //     $dataSO = HasilRadiologi::where('pelayananpasienfk', $request['pelayananpasienfk'])
-            //     ->where('noregistrasifk', $request['norec_pd'])->first();
-            //   }
-            // }
-            
-            // if (empty($dataSO)){
-            //   $dataSO = new HasilRadiologi();
-            //   $dataSO->norec = $dataSO->generateNewId();
-            //   $dataSO->kdprofile = $idProfile;
-            //   $dataSO->pegawaifk = $request['dokterid'];
-            //   $dataSO->pelayananpasienfk = $request['pelayananpasienfk'];
-            //   $dataSO->noregistrasifk = $request['norec_pd'];
-            // }            
+        }
 
-            $dataSO->statusenabled = true;
-            if(isset( $request['nofoto'])){
-                $dataSO->nofoto = $request['nofoto'];
+        if ($transStatus == 'true') {
+
+            $transMessage = "Simpan";
+            DB::commit();
+            $result = array(
+                "status" => 201,
+                "message" => $transMessage,
+                "strukorder" => $dataSO,
+                "as" => 'inhuman',
+            );
+
+        } else {
+            $transMessage = "Simpan  gagal!!";
+            DB::rollBack();
+            $result = array(
+                "status" => 400,
+                "message"  => $transMessage,
+//                "nokirim" => $dataSO,//$noResep,
+                "as" => 'inhuman',
+            );
+        }
+        return $this->setStatusCode($result['status'])->respond($result, $transMessage);
+    }
+
+    public function saveHasilRadiologiUsg(Request $request) {
+        $kdProfile = $this->getDataKdProfile($request);
+        $idProfile = (int) $kdProfile;
+        DB::beginTransaction();
+        try{
+
+            if ($request['norec'] == "") {
+                $dataSO = new HasilRadiologi();
+                $dataSO->norec = $dataSO->generateNewId();
+                $dataSO->kdprofile = $idProfile;
+                $dataSO->pegawaifk = $request['dokterUsgid'];
+                $dataSO->pelayananpasienfk = $request['pelayananpasienfk'];
+                $dataSO->noregistrasifk = $request['norec_pd'];
+                $dataSO->tanggal = $request['tglinputUsg'];
+                $dataSO->statusenabled = true;
+                $dataSO->nofoto = $request['nofotoUsg'];
+                $dataSO->klinis = $request['klinisUsg'];
+                $dataSO->keterangan = $request['keteranganUsg'];
+                $dataSO->status = 'Usg';
+                $dataSO->save();
+
+                // adding random time max 2 h 43 m
+                $start_time = date($request['tglpelayanan']);
+                $extra_time = sprintf("+%d hours +%s minutes", rand(0, 2), rand(0, 43));
+                $new_time = date("Y-m-d H:i:s", strtotime($extra_time, strtotime($start_time)));
+                // end adding random time max 2 h 43 m
+                $dataSO->tanggalreport = $new_time;
+
+            } else {
+                // $dataSO =  HasilRadiologi::where('norec',$request['norec'])->first();
+                $dataSO = HasilRadiologi::where('norec',$request['norec'])
+                ->where('kdprofile', $idProfile)
+                ->update([
+                    'pegawaifk' => $request['dokterUsgid'],
+                    'pelayananpasienfk' => $request['pelayananpasienfk'],
+                    'noregistrasifk' => $request['norec_pd'],
+                    'tanggal' => $request['tglinputUsg'],
+                    'keterangan' => $request['keteranganUsg'],
+                    'nofoto' => $request['nofotoUsg'],
+                    'klinis' => $request['klinisUsg']
+                ]);
             }
-            $dataSO->keterangan = $request['keterangan'];
-            $dataSO->save();
 
             $transStatus = 'true';
         } catch (\Exception $e) {
@@ -1888,6 +1951,20 @@ class RadiologiController extends ApiController
             //     ->where('map.idprodukfk',$request['idproduk'])
             //     ->get(); 
             // }
+        return $this->respond($data);
+    }
+
+    public function getHasilRadiologiUsg(Request $request) {
+        $kdProfile = $this->getDataKdProfile($request);
+        $idProfile = (int) $kdProfile;
+        $data = DB::table('hasilradiologi_t as ar')
+            ->leftjoin('pegawai_m as pg', 'pg.id', '=', 'ar.pegawaifk')
+            ->select('ar.*','pg.namalengkap')
+            ->where('ar.kdprofile', $idProfile)
+            ->where('ar.statusenabled',true)
+            ->where('ar.status','Usg')
+            ->where('ar.pelayananpasienfk',$request['norec_pp'])
+            ->get();
         return $this->respond($data);
     }
 

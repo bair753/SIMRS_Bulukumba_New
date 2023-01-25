@@ -633,11 +633,11 @@ class ReportController extends ApiController{
         //     compact('data','raw', 'pageWidth','r','footer','order_lab'));
 
     }
-    public function cetakEkspertise(Request $r) {
+    public function cetakEkspertiseCtscan(Request $r) {
         $kdProfile = (int)$r['kdprofile'];
         $raw = collect(DB::select("
             SELECT
-                so.nofoto,ps.nocm, ps.namapasien,ps.tgllahir,kp.kelompokpasien,
+                so.nofoto,ps.nocm, ps.namapasien,ps.tgllahir,kp.kelompokpasien,ps.noidentitas,so.klinis,
             ru.namaruangan, so.tanggal,jk.jeniskelamin,  
             CASE WHEN alm.alamatlengkap IS NULL THEN
                 '-' ELSE (
@@ -680,6 +680,57 @@ class ReportController extends ApiController{
         $pageWidth = 950;
 
         return view('report.rad.expertise',
+            compact('raw', 'pageWidth','r'));
+
+    }
+    public function cetakEkspertiseUsg(Request $r) {
+        $kdProfile = (int)$r['kdprofile'];
+        $raw = collect(DB::select("
+            SELECT
+                so.nofoto,ps.nocm, ps.namapasien,ps.tgllahir,kp.kelompokpasien,ps.noidentitas,so.klinis,
+            ru.namaruangan, so.tanggal,jk.jeniskelamin,  
+            CASE WHEN alm.alamatlengkap IS NULL THEN
+                '-' ELSE (
+                alm.alamatlengkap || ' ' || ds.namadesakelurahan || ' '|| kc.namakecamatan
+                || ' ' || kk.namakotakabupaten || ' '  || pro.namapropinsi )
+            END AS alamatlengkap,
+            pg.namalengkap as perujuk,pg2.namalengkap as dokterrad,
+            pr.namaproduk,so.keterangan,pd.noregistrasi,pg2.nippns,
+            pg2.id as pgid
+            FROM
+                hasilradiologi_t AS so
+            INNER JOIN pasiendaftar_t AS pd ON pd.norec = so.noregistrasifk
+            INNER JOIN pasien_m AS ps ON ps. ID = pd.nocmfk
+            INNER JOIN kelompokpasien_m AS kp ON kp. ID = pd.objectkelompokpasienlastfk
+            INNER JOIN ruangan_m AS ru ON ru. ID = pd.objectruanganlastfk
+            INNER JOIN pelayananpasien_t AS pp ON pp.norec = so.pelayananpasienfk
+            INNER JOIN produk_m AS pr ON pr.id = pp.produkfk
+            LEFT JOIN jeniskelamin_m AS jk ON jk. ID = ps.objectjeniskelaminfk
+            LEFT JOIN kelompokpasien_m AS kps ON kps. ID = pd.objectkelompokpasienlastfk
+            LEFT JOIN alamat_m AS alm ON alm.nocmfk = ps. ID
+            left join desakelurahan_m as ds on ds.id=alm.objectdesakelurahanfk
+            left join kotakabupaten_m as kk on kk.id=alm.objectkotakabupatenfk
+            left join kecamatan_m as kc on kc.id=alm.objectkecamatanfk
+            left join propinsi_m as pro on pro.id=alm.objectpropinsifk
+            LEFT JOIN pegawai_m AS pg ON pg. ID = pd.objectpegawaifk
+            LEFT JOIN pegawai_m AS pg2 ON pg2. ID = so.pegawaifk
+            WHERE
+                so.norec = '$r[norec]'
+            AND so.kdprofile = $kdProfile
+            AND so.statusenabled = TRUE
+            AND so.status = 'Usg'
+        "))->first();
+//        dd($raw);
+        if(!empty($raw)){
+            $raw->umur = $this->getAge($raw->tgllahir ,date('Y-m-d'));
+        }else{
+            echo 'Data Tidak ada ';
+            return;
+        }
+//        dd($raw);
+        $pageWidth = 950;
+
+        return view('report.rad.expertiseusg',
             compact('raw', 'pageWidth','r'));
 
     }
