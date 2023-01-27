@@ -645,7 +645,7 @@ class ReportController extends ApiController{
                 || ' ' || kk.namakotakabupaten || ' '  || pro.namapropinsi )
             END AS alamatlengkap,
             pg.namalengkap as perujuk,pg2.namalengkap as dokterrad,
-            pr.namaproduk,so.keterangan,pd.noregistrasi,pg2.nippns,
+            pr.namaproduk,replace(so.keterangan, '~', '<br>') as keterangan,pd.noregistrasi,pg2.nippns,
             pg2.id as pgid
             FROM
                 hasilradiologi_t AS so
@@ -695,7 +695,7 @@ class ReportController extends ApiController{
                 || ' ' || kk.namakotakabupaten || ' '  || pro.namapropinsi )
             END AS alamatlengkap,
             pg.namalengkap as perujuk,pg2.namalengkap as dokterrad,
-            pr.namaproduk,so.keterangan,pd.noregistrasi,pg2.nippns,
+            pr.namaproduk,replace(so.keterangan, '~', '<br>') as keterangan,pd.noregistrasi,pg2.nippns,
             pg2.id as pgid
             FROM
                 hasilradiologi_t AS so
