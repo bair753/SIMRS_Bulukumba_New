@@ -400,6 +400,13 @@ define(['initialize'], function (initialize) {
                         }
                     }
                 })
+                // $scope.item.obj[parseFloat($scope.listItem[index].id)] = new Date();
+                // $scope.listItem[index].inuse = true;
+            }
+
+            $scope.hapus = function (index) {
+                $scope.item.obj[parseFloat($scope.listItem[index].id)] = undefined;
+                $scope.listItem[index].inuse = false;
             }
 
             $scope.kembali = function () {
@@ -430,7 +437,7 @@ define(['initialize'], function (initialize) {
                     // });
 
                     medifirstService.postLogging('EMR', 'norec emrpasien_t', e.data.data.norec,
-                        'Asesmen Medis Gawat Darurat ' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
+                        'Catatan Perkembangan Pasien Terintegrasi Rawat Inap ' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
                         + $scope.cc.noregistrasi).then(function (res) {
                         })
 
