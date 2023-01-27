@@ -645,7 +645,7 @@ class ReportController extends ApiController{
                 || ' ' || kk.namakotakabupaten || ' '  || pro.namapropinsi )
             END AS alamatlengkap,
             pg.namalengkap as perujuk,pg2.namalengkap as dokterrad,
-            pr.namaproduk,replace(so.keterangan, '~', '<br>') as keterangan,pd.noregistrasi,pg2.nippns,
+            pr.namaproduk,replace(so.keterangan, '~', '<br>') as keterangan,pd.noregistrasi,pg2.nippns,pg3.namalengkap as dokterpengirim,
             pg2.id as pgid
             FROM
                 hasilradiologi_t AS so
@@ -664,6 +664,8 @@ class ReportController extends ApiController{
             left join propinsi_m as pro on pro.id=alm.objectpropinsifk
             LEFT JOIN pegawai_m AS pg ON pg. ID = pd.objectpegawaifk
             LEFT JOIN pegawai_m AS pg2 ON pg2. ID = so.pegawaifk
+            LEFT JOIN strukorder_t as sot on sot.noregistrasifk = pd.norec
+            LEFT JOIN pegawai_m as pg3 on pg3.id = sot.objectpegawaiorderfk
             WHERE
                 so.norec = '$r[norec]'
             AND so.kdprofile = $kdProfile
@@ -695,7 +697,7 @@ class ReportController extends ApiController{
                 || ' ' || kk.namakotakabupaten || ' '  || pro.namapropinsi )
             END AS alamatlengkap,
             pg.namalengkap as perujuk,pg2.namalengkap as dokterrad,
-            pr.namaproduk,replace(so.keterangan, '~', '<br>') as keterangan,pd.noregistrasi,pg2.nippns,
+            pr.namaproduk,replace(so.keterangan, '~', '<br>') as keterangan,pd.noregistrasi,pg2.nippns,pg3.namalengkap as dokterpengirim,
             pg2.id as pgid
             FROM
                 hasilradiologi_t AS so
@@ -714,6 +716,8 @@ class ReportController extends ApiController{
             left join propinsi_m as pro on pro.id=alm.objectpropinsifk
             LEFT JOIN pegawai_m AS pg ON pg. ID = pd.objectpegawaifk
             LEFT JOIN pegawai_m AS pg2 ON pg2. ID = so.pegawaifk
+            LEFT JOIN strukorder_t as sot on sot.noregistrasifk = pd.norec
+            LEFT JOIN pegawai_m as pg3 on pg3.id = sot.objectpegawaiorderfk
             WHERE
                 so.norec = '$r[norec]'
             AND so.kdprofile = $kdProfile

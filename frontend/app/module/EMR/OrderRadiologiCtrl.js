@@ -1298,7 +1298,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     var nama = medifirstService.getPegawaiLogin().namaLengkap
                     if (local != null) {
                         var profile = local.id;
-                        window.open(config.baseApiBackend + "report/cetak-ekspertise?norec=" + $scope.norecHasilRadiologi + '&kdprofile=' + profile
+                        window.open(config.baseApiBackend + "report/cetak-ekspertise-ctscan?norec=" + $scope.norecHasilRadiologi + '&kdprofile=' + profile
                             + '&nama=' + nama, '_blank');
                     }
 				}
