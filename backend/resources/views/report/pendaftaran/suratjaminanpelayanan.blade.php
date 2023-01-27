@@ -261,8 +261,8 @@
             "success": function(response) {
                 $('#qrPasien').qrcode({
                     text: response,
-                    height: 55,
-                    width: 55
+                    height: 75,
+                    width: 75
                 });
             }
         })
@@ -273,8 +273,8 @@
             "success": function(response) {
                 $('#qrDokter').qrcode({
                     text: response,
-                    height: 55,
-                    width: 55
+                    height: 75,
+                    width: 75
                 });
             }
         })
@@ -285,8 +285,8 @@
             "success": function(response) {
                 $('#qrPemberi').qrcode({
                     text: response,
-                    height: 55,
-                    width: 55
+                    height: 75,
+                    width: 75
                 });
                 setTimeout(function(){ window.print() }, 1000);
 
