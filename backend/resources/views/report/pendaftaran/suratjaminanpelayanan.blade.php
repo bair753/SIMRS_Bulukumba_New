@@ -169,7 +169,7 @@
                                     <font style="font-size: 11pt;" color="#000000">: {{ $datas->alamatlengkap }}</font>
                                 </td>
                                 <td width="15%">
-                                    <font style="font-size: 11pt;" color="#000000">Tgl Masuk</font>
+                                    <font style="font-size: 11pt;" color="#000000">Tgl Keluar</font>
                                 </td>
                                 <td width="35%">
                                     <font style="font-size: 11pt;" color="#000000">: &nbsp;&nbsp;&nbsp;&nbsp;</font>
