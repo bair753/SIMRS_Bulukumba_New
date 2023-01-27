@@ -9,14 +9,16 @@
     <link rel="stylesheet" href="{{ asset('css/table-v2.css') }}">
     <link rel="stylesheet" href="{{ asset('css/tabel.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.qr-code.js') }}"></script>
     @else
     <link rel="stylesheet" href="{{ asset('service/css/paper.css') }} ">
     <link rel="stylesheet" href="{{ asset('service/css/table-v2.css') }}">
     <link rel="stylesheet" href="{{ asset('service/css/tabel.css') }}">
     <link rel="stylesheet" href="{{ asset('service/css/style.css') }}">
+    <script src="{{ asset('service/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('service/js/jquery.qr-code.js') }}"></script>
     @endif
-    <script src="{{ asset('js/jquery.min.js') }}"></script>
-    <script src="{{ asset('js/jquery.qr-code.js') }}"></script>
 </head>
 <style type="text/css" media="print">
     @media print {
@@ -251,20 +253,44 @@
     var APP_URL = {!! json_encode(url('/')) !!}
     $(function () {
         'use strict';
-        $('#qrPasien').qrcode({
-            text: APP_URL + '/service/medifirst2000/report/cetak-suratjaminanpelayanan?noregistrasi=' + {{ $datas->noregistrasi }} ,
-            height: 75,
-            width: 75
-        });
-        $('#qrDokter').qrcode({
-            text: APP_URL + '/service/medifirst2000/report/cetak-pegawai?reg=' + {{ $datas->objectpegawaifk }} ,
-            height: 75,
-            width: 75
-        });
-        $('#qrPemberi').qrcode({
-            text: APP_URL + '/service/medifirst2000/report/cetak-suratjaminanpelayanan?noregistrasi=' + {{ $datas->noregistrasi }} ,
-            height: 75,
-            width: 75
-        });
+        var APP_URL = "http://simrs.rsudbulukumba.id/service/medifirst2000/report/ttd-digital/";
+        $.ajax({
+            "url": "https://tinyurl.com/api-create.php?url=" + APP_URL + "{{ $datas->noregistrasi }}" + "/pasien",
+            "method": "GET",
+            "timeout": 0,
+            "success": function(response) {
+                $('#qrPasien').qrcode({
+                    text: response,
+                    height: 55,
+                    width: 55
+                });
+            }
+        })
+        $.ajax({
+            "url": "https://tinyurl.com/api-create.php?url=" + APP_URL + "{{ $datas->noregistrasi }}" + "/dokter",
+            "method": "GET",
+            "timeout": 0,
+            "success": function(response) {
+                $('#qrDokter').qrcode({
+                    text: response,
+                    height: 55,
+                    width: 55
+                });
+            }
+        })
+        $.ajax({
+            "url": "https://tinyurl.com/api-create.php?url=" + APP_URL + "{{ $datas->noregistrasi }}" + "/rs",
+            "method": "GET",
+            "timeout": 0,
+            "success": function(response) {
+                $('#qrPemberi').qrcode({
+                    text: response,
+                    height: 55,
+                    width: 55
+                });
+                setTimeout(function(){ window.print() }, 1000);
+
+            }
+        })
     })
 </script>
