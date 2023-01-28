@@ -4807,4 +4807,24 @@ class ReservasiOnlineController extends ApiController
 
         return $this->setStatusCode($result['status'])->respond($result, $transMessage);
     }
+    public function getPasienByNoka($nokartu) {
+        $data = \DB::table('pasien_m as ps')
+            ->leftJOIN ('alamat_m as alm','alm.nocmfk','=','ps.id')
+            ->leftjoin ('pendidikan_m as pdd','ps.objectpendidikanfk','=','pdd.id')
+            ->leftjoin ('pekerjaan_m as pk','ps.objectpekerjaanfk','=','pk.id')
+            ->leftjoin ('jeniskelamin_m as jk','jk.id','=','ps.objectjeniskelaminfk')
+            ->select('ps.nocm','ps.id as nocmfk','ps.namapasien','ps.objectjeniskelaminfk','jk.jeniskelamin',
+                'alm.alamatlengkap','pdd.pendidikan','pk.pekerjaan','ps.noidentitas','ps.notelepon','ps.tempatlahir',
+                'ps.nobpjs',
+                DB::raw(" to_char ( ps.tgllahir,'yyyy-MM-dd') as tgllahir"))
+            ->where('ps.statusenabled',true)
+            ->where('ps.nobpjs','=',$nokartu)
+            ->get();
+
+        $result = array(
+            'data'=> $data,
+            'message' => 'ramdanegie',
+        );
+        return $this->respond($result);
+    }
 }

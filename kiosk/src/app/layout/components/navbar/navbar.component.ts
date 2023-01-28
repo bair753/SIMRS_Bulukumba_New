@@ -25,7 +25,7 @@ import { DOCUMENT } from '@angular/common';
 export class NavbarComponent implements OnInit, OnDestroy {
   public horizontalMenu: boolean;
   public hiddenMenu: boolean;
-
+  public isCetakDSKiosk: boolean = true;
   public coreConfig: any;
   public currentSkin: string;
   public prevSkin: string;
@@ -87,6 +87,17 @@ export class NavbarComponent implements OnInit, OnDestroy {
     public _translateService: TranslateService,
      @Inject(DOCUMENT) private document: any
   ) {
+    if(localStorage.getItem('isCetakDS') != null){
+      if(localStorage.getItem('isCetakDS')=='true'){
+        localStorage.setItem('isCetakDS', 'true')
+        this.isCetakDSKiosk = true
+      }
+      
+    }else{
+      if(this.isCetakDSKiosk ){
+        localStorage.setItem('isCetakDS', 'true')
+      }
+    }
     this._authenticationService.currentUser.subscribe(x => (this.currentUser = x));
 
     this.languageOptions = {
@@ -260,5 +271,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
     // this.openFullscreen()
+  }
+  handleChange(e) {
+     localStorage.setItem('isCetakDS',  e)
+    // let isChecked = e.checked;
   }
 }
