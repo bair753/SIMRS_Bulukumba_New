@@ -5,7 +5,8 @@ define(['initialize'], function (initialize) {
             // $scope.title = "Psikologi";
             // debugger;
 
-            $scope.activeMenuTandavital = 'RekamMedis.AsesmenMedis.TabTandaVital.GrafikTandaVital';
+            // $scope.activeMenuTandavital = 'RekamMedis.AsesmenMedis.TabTandaVital.GrafikTandaVital';
+            $scope.activeMenuTandavital = $rootScope.changeState.name;
             $scope.dataVOloaded = true;
             $rootScope.showMenu = true;
             $rootScope.showMenuDetail = false;

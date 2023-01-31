@@ -138,7 +138,7 @@ export class TouchscreenComponent implements OnInit {
       this.isSave = true
       this.httpService.post('medifirst2000/kiosk/save-antrian', antrian).subscribe(response => {
         this.isSave = false
-        if (localStorage.getItem('isCetakDS') == 'false') {
+        if (localStorage.getItem('isCetakDS') == 'web') {
           window.open(Configuration.get().apiBackend + 'medifirst2000/report/cetak-antrian?norec='
             + response.noRec
             + '&kdprofile=39', '_blank');
