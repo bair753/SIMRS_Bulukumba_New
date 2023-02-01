@@ -137,6 +137,7 @@ class MyJKNV2Controller extends ApiController
         }
   
         if($code != '200'){
+            \Log::info('Info Jadwal Dokter : '.json_encode($cek));
             $result = array("metadata"=>array("message" => "Pendaftaran ke Poli Ini Sedang Tutup", "code" => 201));
             return $this->setStatusCode($result['metadata']['code'])->respond($result);
         }else{
