@@ -2314,8 +2314,26 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                                                 }
                                             }
                                         } else {
-                                            toastr.error("Data SPRI tidak ditemukan !");
-                                            return
+                                        var jsonSpri = {
+                                            "url": `RencanaKontrol/ListRencanaKontrol/Bulan/${moment(new Date(new Date().setMonth(new Date().getMonth() -1))).format("MM")}/Tahun/${moment(new Date()).format("YYYY")}/Nokartu/${$scope.model.noKepesertaan}/filter/2`,
+                                            "method": "GET",
+                                            "data": null
+                                        }
+                                        medifirstService.postNonMessage("bridging/bpjs/tools", jsonSpri).then(function (dataKon) {
+                                            // console.log(dataKon.data);
+                                            if(dataKon.data.metaData.code == 200) {
+                                                for (let i = 0; i < dataKon.data.response.list.length; i++) {
+                                                    const element = dataKon.data.response.list[i];
+                                                    if(element.noSuratKontrol == $scope.model.skdp) {
+                                                        saveSPRILokal2(element, noRegistrasis);
+                                                        break;
+                                                    }
+                                                }
+                                            } else {
+                                                toastr.error("Data SPRI tidak ditemukan !");
+                                                return
+                                            }
+                                        })
                                         }
                                     })
                                 } else {
