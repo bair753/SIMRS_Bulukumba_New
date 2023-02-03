@@ -1390,7 +1390,7 @@ class ReportController extends ApiController{
         $tglAyeuna = date('Y-m-d H:i:s');
 
         $profile = collect(DB::select("
-            select * from profile_m where id = $kdProfile limit 1
+            select * from profile_m where id = 39 limit 1
         "))->first();
         $datas = collect(DB::select("
             SELECT pd.norec AS norec_pd
