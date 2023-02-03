@@ -25,6 +25,7 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
             $scope.isBatal = true;
             $scope.isKembali = true;
             $scope.isHidecopysep = true;
+            $scope.statusIdentifikasi = true;
             var cacheNoreg = '';
             var responData = "";
             var kdSpesialis = '';
@@ -1304,6 +1305,7 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                 medifirstService.get("bridging/bpjs/cek-sep?nosep=" + $scope.model.noSep).then(function (e) {
                     if (e.data.metaData.code === "200") {
                         if ($scope.model.noKepesertaan != e.data.response.peserta.noKartu){
+                            $scope.statusIdentifikasi = false;
                             toastr.error("No SEP tidak sesuai dengan identitas pasien!");
                             return;
                         }
@@ -1966,12 +1968,15 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                     toastr.error('No BPJS Terdeteksi Double, Sesuaikan No BPJS dengan pasiennya', 'Peringatan')
                     return;
                 }
+                if ($scope.statusIdentifikasi == false){
+                    toastr.error("No SEP tidak sesuai dengan identitas pasien!");
+                    return;
+                }
                 if ($scope.poliRujukanKode != undefined && $scope.item.pasien.kdinternal != $scope.poliRujukanKode) {
                     $scope.model.politujuankode = $scope.item.pasien.namaruangan
                     $scope.model.poliasalkode = $scope.poliRujukanNama
                     $scope.model.statuskunjungan = 2
-                }
-
+                }                
 
                 if ($scope.model.generateNoSEP) {
 
