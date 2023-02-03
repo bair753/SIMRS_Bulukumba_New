@@ -1138,6 +1138,7 @@ class MyJKNV2Controller extends ApiController
                     "code" => 200)
             );
         }else{
+            \Log::info('Save pasien baru antrol  :'.$e->getMessage(). ' '.$e->getLine());
             DB::rollBack();
             $result = array(
                 "metadata" => array(
