@@ -1094,7 +1094,7 @@ class MyJKNV2Controller extends ApiController
                 $objetoRequest ['namaKecamatan'] = $request['namakec'];
                 $objetoRequest ['kotaKabupaten'] = null;
                 $objetoRequest ['namaKotaKabupaten'] = $request['namadati2'];
-                $objetoRequest ['propinsi'] =  $propinsi->id;
+                $objetoRequest ['propinsi'] = !empty($propinsi) ? $propinsi->id:null;
                 $objetoRequest ['namapropinsi'] = $request['namaprop'];
                 $objetoRequest ['kodePos'] = null;
                 $objetoRequest ['penanggungjawab'] = null;
@@ -1113,7 +1113,11 @@ class MyJKNV2Controller extends ApiController
                 $objetoRequest ['isjkn'] = true;
                 $objetoRequest ['userData'] = $request['userData'];
                 $cek = app('App\Http\Controllers\Registrasi\RegistrasiController')->savePasienFix($objetoRequest);
-                $simpan = json_decode($cek->content(), true);
+                $simpan =$cek;// json_decode($cek->content(), true);
+              
+                if($simpan['response'] == null){
+                    $transStatus = 'false';
+                }
             }
 
             $transStatus = 'true';

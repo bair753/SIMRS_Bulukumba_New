@@ -3904,7 +3904,7 @@ class RegistrasiController extends ApiController
                             'code' => '200',
                         )
                 );
-                return $this->setStatusCode(200)->respond($result, "OK");
+                return $result;
             }else{
                 $result = array(
                     'status' => 201,
@@ -3924,7 +3924,7 @@ class RegistrasiController extends ApiController
                         "e"=>$e->getMessage(). ' '.$e->getLine(),
                         "message" => "Terjadi Kesalahan")
                 );
-                return $this->setStatusCode(201)->respond($result);
+                return $result;
             }else{
                 $result = array(
                     'status' => 400,
