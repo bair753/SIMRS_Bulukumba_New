@@ -775,6 +775,10 @@ class KiosKController extends ApiController
             }
         }
         $jamNow= date('H:i');
+        if($data10 == null){
+            $s['status'] = 'Kuota Ruangan belum di setting';
+            return $this->respond($s);
+        }
         $tutup =date('H:i',strtotime(  $data10['jamtutup']));
         $s['status'] = true;
         $s['countselfregis'] = $dataSelfReg;

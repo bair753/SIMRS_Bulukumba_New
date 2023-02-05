@@ -25,6 +25,7 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
             $scope.isBatal = true;
             $scope.isKembali = true;
             $scope.isHidecopysep = true;
+            $scope.statusIdentifikasi = true;
             var cacheNoreg = '';
             var responData = "";
             var kdSpesialis = '';
@@ -1303,6 +1304,11 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                 }
                 medifirstService.get("bridging/bpjs/cek-sep?nosep=" + $scope.model.noSep).then(function (e) {
                     if (e.data.metaData.code === "200") {
+                        if ($scope.model.noKepesertaan != e.data.response.peserta.noKartu){
+                            $scope.statusIdentifikasi = false;
+                            toastr.error("No SEP tidak sesuai dengan identitas pasien!");
+                            return;
+                        }
                         $scope.disableSEP = true;
                         var tglLahir = new Date(e.data.response.peserta.tglLahir);
                         $scope.model.noKepesertaan = $scope.noKartu = e.data.response.peserta.noKartu;
@@ -1962,12 +1968,15 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                     toastr.error('No BPJS Terdeteksi Double, Sesuaikan No BPJS dengan pasiennya', 'Peringatan')
                     return;
                 }
+                if ($scope.statusIdentifikasi == false){
+                    toastr.error("No SEP tidak sesuai dengan identitas pasien!");
+                    return;
+                }
                 if ($scope.poliRujukanKode != undefined && $scope.item.pasien.kdinternal != $scope.poliRujukanKode) {
                     $scope.model.politujuankode = $scope.item.pasien.namaruangan
                     $scope.model.poliasalkode = $scope.poliRujukanNama
                     $scope.model.statuskunjungan = 2
-                }
-
+                }                
 
                 if ($scope.model.generateNoSEP) {
 
@@ -2314,8 +2323,26 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                                                 }
                                             }
                                         } else {
-                                            toastr.error("Data SPRI tidak ditemukan !");
-                                            return
+                                        var jsonSpri = {
+                                            "url": `RencanaKontrol/ListRencanaKontrol/Bulan/${moment(new Date(new Date().setMonth(new Date().getMonth() -1))).format("MM")}/Tahun/${moment(new Date()).format("YYYY")}/Nokartu/${$scope.model.noKepesertaan}/filter/2`,
+                                            "method": "GET",
+                                            "data": null
+                                        }
+                                        medifirstService.postNonMessage("bridging/bpjs/tools", jsonSpri).then(function (dataKon) {
+                                            // console.log(dataKon.data);
+                                            if(dataKon.data.metaData.code == 200) {
+                                                for (let i = 0; i < dataKon.data.response.list.length; i++) {
+                                                    const element = dataKon.data.response.list[i];
+                                                    if(element.noSuratKontrol == $scope.model.skdp) {
+                                                        saveSPRILokal2(element, noRegistrasis);
+                                                        break;
+                                                    }
+                                                }
+                                            } else {
+                                                toastr.error("Data SPRI tidak ditemukan !");
+                                                return
+                                            }
+                                        })
                                         }
                                     })
                                 } else {

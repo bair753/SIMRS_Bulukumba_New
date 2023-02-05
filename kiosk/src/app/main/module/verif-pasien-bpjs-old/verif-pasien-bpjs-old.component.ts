@@ -77,8 +77,9 @@ export class VerifPasienBpjsOldComponent implements OnInit {
   buttonss: any[] = []
   model: any = {}
   showDPJP: boolean
-  listRadio: any[] = [{ name: 'PCare', id: 'pcare' }, { name: 'Rumah Sakit', id: 'rs' }, { name: 'Pasca Ranap', id: 'pasca' }, { name: 'Kontrol RJ', id: 'kontrol' }];
+  listRadio: any[] = [{ name: 'Puskesmas', id: 'pcare' }, { name: 'Rumah Sakit', id: 'rs' }, { name: 'Pasca Rawat Inap', id: 'pasca' }, { name: 'Kontrol Rawat Jalan', id: 'kontrol' }];
   isCetakDSKiosk: any = 'true'
+  noKartu:any=''
   constructor(private router: Router,
     private route: ActivatedRoute,
     private httpService: HttpService,
@@ -293,7 +294,7 @@ export class VerifPasienBpjsOldComponent implements OnInit {
       this.formGroup.get('noRujukan').setValue(cacheOnlineBPJS.nobpjs)
       this.noReservasi = cacheOnlineBPJS.noreservasi
       this.cacheHelper.set('cacheOnlineBPJS', undefined)
-      this.getNoRujukan()
+      // this.getNoRujukan()
     }
 
     this.formGroup.get('tujuanKunj').setValue(this.listTujuanKun[1])
@@ -468,7 +469,7 @@ export class VerifPasienBpjsOldComponent implements OnInit {
           element.rujukan.tglKunjungan = moment(new Date()).format('YYYY-MM-DD')
           this.item = element.rujukan;
           if (element.rujukan.peserta.mr.noMR != null)
-            this.getPasienByNoCM(element.rujukan.peserta.mr.noMR)
+            this.getPasienByNoCM(element.rujukan.peserta.mr.noMR,element.rujukan.peserta.noKartu)
           else
             element.rujukan.peserta.mr.noMR = '-'
           this.httpService.get('medifirst2000/kiosk/get-ruanganbykode/' + element.rujukan.poliRujukan.kode).subscribe(res => {
@@ -535,7 +536,7 @@ export class VerifPasienBpjsOldComponent implements OnInit {
     })
   }
 
-  cekPesertaByNoKartu(noKa) {
+  async cekPesertaByNoKartu(noKa) {
     this.showPasca = true
     if (this.formGroup.get('pCare') == null) {
       this.msgService.error('INFO', 'SILAHKAN PILIH ASAL FASKES');
@@ -546,13 +547,13 @@ export class VerifPasienBpjsOldComponent implements OnInit {
     if (this.formGroup.get('pCare').value == 'pasca') {
       jenis = 'pcare'
       this.showPasca = false;
-      this.httpService.get("medifirst2000/bridging/bpjs/get-no-peserta?nokartu=" + noKa + "&tglsep=" + moment(new Date()).format('YYYY-MM-DD')).subscribe(e => {
+      await this.httpService.get("medifirst2000/bridging/bpjs/get-no-peserta?nokartu=" + noKa + "&tglsep=" + moment(new Date()).format('YYYY-MM-DD')).subscribe(async e => {
         if (e.metaData.code === "200") {
           this.item1 = e.response.peserta;
 
           if (e.response.peserta.mr.noMR != null) {
 
-            this.getPasienByNoCM(e.response.peserta.mr.noMR)
+            await this.getPasienByNoCM(e.response.peserta.mr.noMR,e.response.peserta.noKartu)
             // if (e.response.peserta.mr.noMR.length == 1) {
             //   e.response.peserta.mr.noMR = "0000000" + e.response.peserta.mr.noMR
             // } else if (e.response.peserta.mr.noMR.length == 2) {
@@ -569,92 +570,92 @@ export class VerifPasienBpjsOldComponent implements OnInit {
             //   e.response.peserta.mr.noMR = "0" + e.response.peserta.mr.noMR
             // }
           } else {
-            this.msgService.error('SILAHKAN MENGAMBIL NO ANTRIAN', e.metaData.message);
+            this.msgService.error('INFO', e.metaData.message);
             this.isInfoPasien = false
             return
           }
-          this.getHistoriPelayananPesesta1(e.response.peserta.noKartu)
+          await this.getHistoryPasca(e.response.peserta.noKartu)
 
           this.isInfoPasien = true
           // this.msgService.info('Status Peserta', e.response.rujukan.peserta.statusPeserta.keterangan);
           if (e.response.peserta.statusPeserta.kode == 6) {
-            this.msgService.error('SILAHKAN MENGAMBIL NO ANTRIAN', e.metaData.message);
+            this.msgService.error('INFO', e.metaData.message);
             this.isInfoPasien = false
             return
           }
         } else {
           this.isInfoPasien = false
           // this.msgService.error('Error', e.metaData.message);
-          this.msgService.error('SILAHKAN MENGAMBIL NO ANTRIAN', e.metaData.message);
+          this.msgService.error('INFO', e.metaData.message);
           return
 
         }
       }, error => {
         this.isInfoPasien = false
-        this.msgService.error('SILAHKAN MENGAMBIL NO ANTRIAN', error);
+        this.msgService.error('INFO', error);
         return
       })
     } else if (this.formGroup.get('pCare').value == 'kontrol') {
       this.formGroup.get('assesmentPel').setValue(this.listAsses[5])
       jenis = 'pcare'
       this.showPasca = false;
-      this.httpService.get("medifirst2000/bridging/bpjs/get-no-peserta?nokartu=" + noKa + "&tglsep=" + moment(new Date()).format('YYYY-MM-DD')).subscribe(e => {
+      await  this.httpService.get("medifirst2000/bridging/bpjs/get-no-peserta?nokartu=" + noKa + "&tglsep=" + moment(new Date()).format('YYYY-MM-DD')).subscribe(async e => {
         if (e.metaData.code === "200") {
           this.item1 = e.response.peserta;
           if (e.response.peserta.mr.noMR != null) {
-            this.getPasienByNoCM(e.response.peserta.mr.noMR)
+            await this.getPasienByNoCM(e.response.peserta.mr.noMR,e.response.peserta.noKartu)
 
           } else {
-            this.msgService.error('SILAHKAN MENGAMBIL NO ANTRIAN', e.metaData.message);
+            this.msgService.error('INFO', e.metaData.message);
             this.isInfoPasien = false
             return
           }
-          this.getHistoriPelayananPesesta2(e.response.peserta.noKartu)
+          await this.getHistoriPelayananPesesta2(e.response.peserta.noKartu)
 
           this.isInfoPasien = true
           // this.msgService.info('Status Peserta', e.response.rujukan.peserta.statusPeserta.keterangan);
           if (e.response.peserta.statusPeserta.kode == 6) {
-            this.msgService.error('SILAHKAN MENGAMBIL NO ANTRIAN', e.metaData.message);
+            this.msgService.error('INFO', e.metaData.message);
             this.isInfoPasien = false
             return
           }
         } else {
           this.isInfoPasien = false
           // this.msgService.error('Error', e.metaData.message);
-          this.msgService.error('SILAHKAN MENGAMBIL NO ANTRIAN', e.metaData.message);
+          this.msgService.error('INFO', e.metaData.message);
           return
 
         }
       }, error => {
         this.isInfoPasien = false
-        this.msgService.error('SILAHKAN MENGAMBIL NO ANTRIAN', error);
+        this.msgService.error('INFO', error);
         return
       })
     } else {
-      this.httpService.get("medifirst2000/bridging/bpjs/get-rujukan-" + jenis + "-nokartu?nokartu=" + noKa).subscribe(e => {
+      await this.httpService.get("medifirst2000/bridging/bpjs/get-rujukan-" + jenis + "-nokartu?nokartu=" + noKa).subscribe(async e => {
         if (e.metaData.code === "200") {
           this.item = e.response.rujukan;
           if (e.response.rujukan.peserta.mr.noMR != null) {
-            this.getPasienByNoCM(e.response.rujukan.peserta.mr.noMR)
+            await  this.getPasienByNoCM(e.response.rujukan.peserta.mr.noMR,e.response.rujukan.peserta.noKartu)
             for (var i = this.listPoliTemp.length - 1; i >= 0; i--) {
               if (this.listPoliTemp[i].kditernal == this.item.poliRujukan.kode) {
-                this.getRuanganInternal(this.item.poliRujukan.kode)
+                await this.getRuanganInternal(this.item.poliRujukan.kode)
                 break
               } else {
-                this.getRuanganInternal(this.item.poliRujukan.kode)
+                await this.getRuanganInternal(this.item.poliRujukan.kode)
                 break
               }
             }
 
-            this.getDiagnosaByKode(this.item.diagnosa.kode)
+            await this.getDiagnosaByKode(this.item.diagnosa.kode)
             // get Dokter DPJP By Histori
-            this.getHistoriPelayananPesesta(e.response.rujukan.peserta.noKartu)
-            this.getMultiRujukan(e.response.rujukan.peserta.noKartu)
+            await  this.getHistoriPelayananPesesta(e.response.rujukan.peserta.noKartu)
+            await this.getMultiRujukan(e.response.rujukan.peserta.noKartu)
             // end Histori
 
             if (e.response.rujukan.peserta.statusPeserta.kode == 6) {
               this.isInfoPasien = false
-              this.msgService.error('SILAHKAN MENGAMBIL NO ANTRIAN', e.response.rujukan.peserta.statusPeserta.keterangan);
+              this.msgService.error('INFO', e.response.rujukan.peserta.statusPeserta.keterangan);
               return
             } else {
               this.isInfoPasien = true
@@ -665,11 +666,11 @@ export class VerifPasienBpjsOldComponent implements OnInit {
           }
         } else {
           this.isInfoPasien = false
-          this.msgService.error('SILAHKAN MENGAMBIL NO ANTRIAN', e.metaData.message);
+          this.msgService.error('INFO', e.metaData.message);
         }
       }, error => {
         this.isInfoPasien = false
-        this.msgService.error('SILAHKAN MENGAMBIL NO ANTRIAN', JSON.stringify(error));
+        this.msgService.error('INFO', JSON.stringify(error));
       })
     }
 
@@ -685,7 +686,7 @@ export class VerifPasienBpjsOldComponent implements OnInit {
       if (e.metaData.code === "200") {
         this.item = e.response.rujukan;
         if (e.response.rujukan.peserta.mr.noMR != null)
-          this.getPasienByNoCM(e.response.rujukan.peserta.mr.noMR)
+          this.getPasienByNoCM(e.response.rujukan.peserta.mr.noMR,e.response.rujukan.peserta.noKartu)
         for (var i = this.listPoliTemp.length - 1; i >= 0; i--) {
           if (this.listPoliTemp[i].kditernal == this.item.poliRujukan.kode) {
             this.getRuanganInternal(this.item.poliRujukan.kode)
@@ -734,18 +735,18 @@ export class VerifPasienBpjsOldComponent implements OnInit {
         this.msgService.info('Status Peserta', e.response.rujukan.peserta.statusPeserta.keterangan);
         if (e.response.rujukan.peserta.statusPeserta.kode == 6) {
           this.isInfoPasien = false
-          this.msgService.error('SILAHKAN MENGAMBIL NO ANTRIAN', e.response.rujukan.peserta.statusPeserta.keterangan);
+          this.msgService.error('INFO', e.response.rujukan.peserta.statusPeserta.keterangan);
           return
         }
         this.msgService.info('Status Peserta', e.response.rujukan.peserta.statusPeserta.keterangan);
       } else {
         this.isInfoPasien = false
-        this.msgService.error('SILAHKAN MENGAMBIL NO ANTRIAN', e.metaData.message);
+        this.msgService.error('INFO', e.metaData.message);
       }
 
     }, error => {
       this.isInfoPasien = false
-      this.msgService.error('SILAHKAN MENGAMBIL NO ANTRIAN', error);
+      this.msgService.error('INFO', error);
     })
   }
   getDiagnosaByKode(kode) {
@@ -843,16 +844,26 @@ export class VerifPasienBpjsOldComponent implements OnInit {
 
     })
   }
-  getPasienByNoCM(nocm) {
-    this.httpService.get('medifirst2000/reservasionline/get-pasien/' + nocm + '/null').subscribe(e => {
+  getPasienByNoCM(nocm,nokartu) {
+    // this.httpService.get('medifirst2000/reservasionline/get-pasien/' + nocm + '/null').subscribe(e => {
+    //   if (e.data.length > 0) {
+    //     this.pasien = e.data[0]
+    //   } else {
+    //     this.msgService.error('INFO', 'NO REKAM MEDIS TIDAK DITEMUKAN');
+    //     this.isInfoPasien = false
+    //     return
+    //   }
+    // })
+    this.httpService.get('medifirst2000/reservasionline/get-pasien-nokartu/' + nokartu).subscribe(e => {
       if (e.data.length > 0) {
         this.pasien = e.data[0]
       } else {
-        this.msgService.error('SILAHKAN MENGAMBIL NO ANTRIAN', '');
+        this.msgService.error('INFO', 'NO REKAM MEDIS TIDAK DITEMUKAN');
         this.isInfoPasien = false
         return
       }
     })
+    
   }
   getHistoriPelayananPesesta(noKartu) {
     // debugger
@@ -1066,10 +1077,10 @@ export class VerifPasienBpjsOldComponent implements OnInit {
       }
     })
   }
-  getHistoriPelayananPesesta1(noKartu) {
+  async getHistoryPasca(noKartu) {
     var status = false
 
-    this.httpService.get("medifirst2000/bridging/bpjs/monitoring/HistoriPelayanan/NoKartu/" + noKartu).subscribe(data => {
+   await this.httpService.get("medifirst2000/bridging/bpjs/monitoring/HistoriPelayanan/NoKartu/" + noKartu).subscribe(async data => {
       if (data.metaData.code == 200) {
         this.listHistori = data.response.histori;
         if (this.listHistori.length > 0) {
@@ -1078,7 +1089,7 @@ export class VerifPasienBpjsOldComponent implements OnInit {
               status = true
               this.noPascaRanap = this.listHistori[i].noSep
               var a = {
-                'nama': "RSUD DR H CHASAN BOESOIRIE",
+                'nama': Configuration.profile().namaPPK,
                 'kode': this.ppkPelayananRS
               }
               var b = {
@@ -1086,7 +1097,7 @@ export class VerifPasienBpjsOldComponent implements OnInit {
                 'nama': this.listHistori[i].diagnosa.split(' - ')[1]
               }
 
-              this.getDiagnosaByKode(this.listHistori[i].diagnosa.split(' - ')[0])
+              await this.getDiagnosaByKode(this.listHistori[i].diagnosa.split(' - ')[0])
 
               var c = {
                 'kode': "2"
@@ -1104,41 +1115,43 @@ export class VerifPasienBpjsOldComponent implements OnInit {
                 'pelayanan': c,
                 'poliRujukan': d,
               }
-              this.httpService.get("medifirst2000/bridging/bpjs/get-ref-dokter-dpjp?jenisPelayanan=" + 1
-                + "&tglPelayanan=" + moment(new Date()).format('YYYY-MM-DD') + "&kodeSpesialis=" + "").subscribe(data => {
-                  if (data.metaData.code == 200) {
-                    this.listDokter = [];
-                    // this.listDokter.push({ label: '-- Dokter Perujuk --', value: null });
-                    data.response.list.forEach(response => {
-                      this.listDokter.push({
-                        label: response.nama, value: {
-                          'kode': response.kode,
-                          'nama': response.nama
-                        }
-                      });
-                    });
-                    this.formGroup.get('dokterDPJP').setValue(this.listDokter[0])
-                    this.formGroup.get('dokterDPJPMelayani').setValue(this.listDokter[0])
-                    this.listDokterMelayani = [];
-                    this.buttons = [];
-                    this.listDokterMelayani.push({ label: '-- Dokter Melayani --', value: null });
-                    data.response.list.forEach(response => {
-                      this.listDokterMelayani.push({
-                        label: response.nama, value: {
-                          'kode': response.kode,
-                          'nama': response.nama
-                        }
-                      });
-                      this.buttons.push({
-                        label: response.nama, value: {
-                          'kode': response.kode,
-                          'nama': response.nama
-                        }
-                      });
-                    });
+              this.noKartu = this.listHistori[i].noKartu
+              await this.getNoSurat(this.noPascaRanap)
+              // await this.httpService.get("medifirst2000/bridging/bpjs/get-ref-dokter-dpjp?jenisPelayanan=" + 1
+              //   + "&tglPelayanan=" + moment(new Date()).format('YYYY-MM-DD') + "&kodeSpesialis=" + "").subscribe(async data => {
+              //     if (data.metaData.code == 200) {
+              //       this.listDokter = [];
+                 
+              //       data.response.list.forEach(response => {
+              //         this.listDokter.push({
+              //           label: response.nama, value: {
+              //             'kode': response.kode,
+              //             'nama': response.nama
+              //           }
+              //         });
+              //       });
+              //       this.formGroup.get('dokterDPJP').setValue(this.listDokter[0])
+              //       this.formGroup.get('dokterDPJPMelayani').setValue(this.listDokter[0])
+              //       this.listDokterMelayani = [];
+              //       this.buttons = [];
+              //       this.listDokterMelayani.push({ label: '-- Dokter Melayani --', value: null });
+              //       data.response.list.forEach(response => {
+              //         this.listDokterMelayani.push({
+              //           label: response.nama, value: {
+              //             'kode': response.kode,
+              //             'nama': response.nama
+              //           }
+              //         });
+              //         this.buttons.push({
+              //           label: response.nama, value: {
+              //             'kode': response.kode,
+              //             'nama': response.nama
+              //           }
+              //         });
+              //       });
 
-                  }
-                });
+              //     }
+              //   });
               break
             }
 
@@ -1160,7 +1173,7 @@ export class VerifPasienBpjsOldComponent implements OnInit {
         this.listHistori = data.response.histori;
         if (this.listHistori.length > 0) {
           for (let i = 0; i < this.listHistori.length; i++) {
-            if (this.listHistori[i].ppkPelayanan == "RSUD DR H CHASAN BOESOIRIE") {
+            if (this.listHistori[i].ppkPelayanan == Configuration.profile().namaPPK) {
 
 
               if (this.listHistori[i].jnsPelayanan == "2") {
@@ -1168,7 +1181,7 @@ export class VerifPasienBpjsOldComponent implements OnInit {
                 this.noPascaRanap = this.listHistori[i].noRujukan
                 var a = {
                   'asalRujukan': "2",
-                  'nama': "RSUD DR H CHASAN BOESOIRIE",
+                  'nama': Configuration.profile().namaPPK,
                   'kode': this.listHistori[i].noRujukan.substring(0, 8)
                 }
                 var b = {
@@ -1200,6 +1213,7 @@ export class VerifPasienBpjsOldComponent implements OnInit {
                   'pelayanan': c,
                   'poliRujukan': d,
                 }
+                this.noKartu = this.listHistori[i].noKartu
                 this.getNoSurat(this.listHistori[i].noSep)
                 var rujukanPCARE = {
                   "url": "Rujukan/" + this.listHistori[i].noRujukan,
@@ -1282,22 +1296,45 @@ export class VerifPasienBpjsOldComponent implements OnInit {
       }
     })
   }
-  getNoSurat(nosep) {
+  async getNoSurat(nosep) {
     var now = moment(new Date()).format('YYYY-MM-DD')
+    let bulan :any= new Date().getMonth() + 1
+
+    if(bulan.toString().length == 1){
+      bulan ='0'+bulan.toString()
+    }
+    // var dataSend = {
+    //   "url": "RencanaKontrol/ListRencanaKontrol/tglAwal/" + now + "/tglAkhir/" + now + "/filter/2",
+    //   "method": "GET",
+    //   "data": null
+    // }
     var dataSend = {
-      "url": "RencanaKontrol/ListRencanaKontrol/tglAwal/" + now + "/tglAkhir/" + now + "/filter/2",
+      "url": "RencanaKontrol/ListRencanaKontrol/Bulan/"+bulan+"/Tahun/"+new Date().getFullYear()+"/Nokartu/"+this.noKartu+"/filter/2",
       "method": "GET",
       "data": null
     }
     var status = false
-    this.httpService.postNonMessage("medifirst2000/bridging/bpjs/tools", dataSend).subscribe(e => {
+   await this.httpService.postNonMessage("medifirst2000/bridging/bpjs/tools", dataSend).subscribe(async e => {
       if (e.metaData.code == 200) {
         if (e.response.list != null && e.response.list.length > 0) {
 
           for (let x = 0; x < e.response.list.length; x++) {
             const element = e.response.list[x];
-            if (element.noSepAsalKontrol == nosep) {
+            if(element.tglRencanaKontrol == now){
+            // if (element.noSepAsalKontrol == nosep) {
               status = true
+                // change nomor rujukan ke sep asal apabila tujuan kontrol
+                if(this.formGroup.get('pCare').value == 'kontrol') {
+                  var jsonsep = {
+                    "url": "SEP/" + e.response.list[x].noSepAsalKontrol,
+                    "method": "GET",
+                    "data": null
+                  }
+                 await this.httpService.postNonMessage('medifirst2000/bridging/bpjs/tools', jsonsep).subscribe(async ressep => {
+                   await this.changeNoRujukanSepAsal(ressep.response.noRujukan);
+                  })
+                }
+
               this.msgService.success('INFO', 'No Surat Kontrol Terisi Otomatis');
               this.formGroup.get('noSKDP').setValue(e.response.list[x].noSuratKontrol)
               this.formGroup.get('dokterDPJP').setValue(
@@ -1307,7 +1344,10 @@ export class VerifPasienBpjsOldComponent implements OnInit {
                     { kode: e.response.list[x].kodeDokter, nama: e.response.list[x].namaDokter }
                 }
               )
-              this.formGroup.get('assesmentPel').setValue(this.listAsses[1])
+              this.formGroup.get('assesmentPel').setValue(this.listAsses[5])
+              if (this.formGroup.get('pCare').value == 'pasca') {
+                this.formGroup.get('assesmentPel').setValue('')
+              }
               this.listDokter = [];
               this.listDokter.push({ label: '-- Dokter --', value: null });
 
@@ -1324,7 +1364,7 @@ export class VerifPasienBpjsOldComponent implements OnInit {
               })
               this.tests = e.response.list[x].namaPoliTujuan
               this.test = e.response.list[x].namaDokter
-              this.httpService.get('medifirst2000/kiosk/get-ruanganbykode/' + e.response.list[x].poliTujuan).subscribe(res => {
+              await  this.httpService.get('medifirst2000/kiosk/get-ruanganbykode/' + e.response.list[x].poliTujuan).subscribe(res => {
                 if (res.data != null) {
                   this.formGroup.get('poliTujuan').setValue(
                     {
@@ -1342,7 +1382,7 @@ export class VerifPasienBpjsOldComponent implements OnInit {
                 }
               })
 
-              this.httpService.get("medifirst2000/bridging/bpjs/get-ref-dokter-dpjp?jenisPelayanan=" + 2
+              await this.httpService.get("medifirst2000/bridging/bpjs/get-ref-dokter-dpjp?jenisPelayanan=" + 2
                 + "&tglPelayanan=" + moment(new Date()).format('YYYY-MM-DD') + "&kodeSpesialis=" + e.response.list[x].poliTujuan).subscribe(data => {
                   if (data.metaData.code == 200) {
                     this.buttons = [];
@@ -1632,8 +1672,8 @@ export class VerifPasienBpjsOldComponent implements OnInit {
       'objectruanganfk': this.formGroup.get('poliTujuan').value.value.kodeinternal, //this.pasienDaftar.idruangan,
       'objectdepartemenfk': this.formGroup.get('poliTujuan').value.value.objectdepartemenfk, //this.pasienDaftar.objectdepartemenfk,
       'objectkelasfk': 6,//nonkelas
-      'objectkelompokpasienlastfk': 2,//umum
-      'objectrekananfk': 2552,//bpjs
+      'objectkelompokpasienlastfk': Configuration.profile().kdKelompokBPJS,//umum
+      'objectrekananfk': Configuration.profile().kdRekananBPJS,//bpjs
       'tipelayanan': this.eksekutif != undefined ? this.eksekutif : 1,//reguler
       'objectpegawaifk': this.kodeDokter,
       'noregistrasi': '',
@@ -1795,17 +1835,17 @@ export class VerifPasienBpjsOldComponent implements OnInit {
       'alamatlengkap': '',
       'objecthubunganpesertafk': 1,//Peserta
       'objectjeniskelaminfk': this.pasien.objectjeniskelaminfk,
-      'kdinstitusiasal': 1,
-      'kdpenjaminpasien': 1,
+      'kdinstitusiasal': Configuration.profile().kdRekananBPJS,
+      'kdpenjaminpasien': Configuration.profile().kdRekananBPJS,
       'objectkelasdijaminfk': kelas,
       'namapeserta': this.item.peserta.nama,
-      'nikinstitusiasal': 1,
+      'nikinstitusiasal': Configuration.profile().kdRekananBPJS,
       'noasuransi': this.item.peserta.noKartu,
       'alamat': '',
       'nocmfkpasien': this.pasien.nocmfk,
       'noidentitas': this.item.peserta.nik,
-      'qasuransi': 2,
-      'kelompokpasien': 2,
+      'qasuransi': Configuration.profile().kdKelompokBPJS,
+      'kelompokpasien': Configuration.profile().kdKelompokBPJS,
       'tgllahir': moment(new Date(this.item.peserta.tglLahir)).format('YYYY-MM-DD'),
       'jenispeserta': this.item.peserta.jenisPeserta.keterangan,
       'kdprovider': this.item.provPerujuk.kode,
@@ -1905,7 +1945,8 @@ export class VerifPasienBpjsOldComponent implements OnInit {
     })
   }
   cetakSep() {
-    if (this.isCetakDSKiosk == 'true') {
+
+    if (localStorage.getItem('isCetakDS') == 'true') {
       this.service.get('http://127.0.0.1:1237/printvb/Pendaftaran?cetak-sep-new=1&norec=' + this.pasienDaftar.noregistrasi + '&view=false').subscribe(e => { });
     } else {
       window.open(Configuration.get().apiBackend + 'medifirst2000/report/cetak-sep-new?noregistrasi='
@@ -1980,10 +2021,10 @@ export class VerifPasienBpjsOldComponent implements OnInit {
   cetakAntrian() {
     let petugas = '-'
 
-    if (this.isCetakDSKiosk == 'false') {
+    if (localStorage.getItem('isCetakDS') == 'true') {
       this.service.get('http://127.0.0.1:1237/printvb/Pendaftaran?cetak-buktipendaftaran=1&norec='
         + this.pasienDaftar.noregistrasi + '&petugas=' + petugas + '&view=false').subscribe(response => { });
-    } else if (this.isCetakDSKiosk == 'android') {
+    } else if (localStorage.getItem('isCetakDS') == 'android') {
       this.httpService.get("medifirst2000/report/get-cetak-bukti-pendaftaran?noregistrasi="
         + this.pasienDaftar.noregistrasi
       ).subscribe(e => {
@@ -2008,7 +2049,7 @@ export class VerifPasienBpjsOldComponent implements OnInit {
     } else {
       window.open(Configuration.get().apiBackend + 'medifirst2000/report/cetak-bukti-pendaftaran?noregistrasi='
         + this.pasienDaftar.noregistrasi
-        + '&kdprofile=39', '_blank');
+        + '&kdprofile=21', '_blank');
     }
   }
 
@@ -2018,6 +2059,7 @@ export class VerifPasienBpjsOldComponent implements OnInit {
       kdinternal = event
     }
     console.log(kdinternal);
+    this.buttons = []
     this.httpService.get("medifirst2000/bridging/bpjs/get-ref-dokter-dpjp?jenisPelayanan=" + 2
       + "&tglPelayanan=" + moment(new Date()).format('YYYY-MM-DD') + "&kodeSpesialis=" + event.value.kode).subscribe(data => {
         if (data.metaData.code == 200) {
@@ -2087,6 +2129,43 @@ export class VerifPasienBpjsOldComponent implements OnInit {
       size: 'xl',
       windowClass: 'modal modal-success'
     });
+  }
+
+  changeNoRujukanSepAsal(norujukan) {
+    var rujukanPCARE = {
+      "url": "Rujukan/" + norujukan,
+      "method": "GET",
+      "data": null
+    }
+    this.httpService.postNonMessage("medifirst2000/bridging/bpjs/tools", rujukanPCARE).subscribe(e => {
+      if (e.metaData.code === "200") {
+        this.item.tglKunjungan = e.response.rujukan.tglKunjungan
+        this.item.noKunjungan = e.response.rujukan.noKunjungan
+        this.item.provPerujuk = {
+          'asalRujukan': "1",
+          'nama': e.response.rujukan.provPerujuk.nama,
+          'kode': e.response.rujukan.provPerujuk.kode
+        }
+
+      }
+    })
+    var rujukanRS = {
+      "url": "Rujukan/RS/" + norujukan,
+      "method": "GET",
+      "data": null
+    }
+    this.httpService.postNonMessage("medifirst2000/bridging/bpjs/tools", rujukanRS).subscribe(e => {
+      if (e.metaData.code === "200") {
+        this.item.tglKunjungan = e.response.rujukan.tglKunjungan
+        this.item.noKunjungan = e.response.rujukan.noKunjungan
+        this.item.provPerujuk = {
+          'asalRujukan': "2",
+          'nama': e.response.rujukan.provPerujuk.nama,
+          'kode': e.response.rujukan.provPerujuk.kode
+        }
+
+      }
+    })
   }
   //jQUERY
 }

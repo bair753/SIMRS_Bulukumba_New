@@ -52,7 +52,24 @@
   </div>
   <ul class="nav navbar-nav align-items-center ml-auto">
     <!-- Language selection -->
-    <li ngbDropdown class="nav-item dropdown dropdown-language">
+    <li ngbDropdown class="nav-item dropdown dropdown-language mr-2 mt-1">
+      <!-- <p style="font-size: 11px;margin:0">DS</p> -->
+      <div class="custom-control custom-control-primary custom-switch"  placement="bottom"
+      ngbTooltip="Cetak Melalui Desktop Service">
+        <input
+          type="checkbox"
+          class="custom-control-input"
+          id="collapse-sidebar-switch"
+          [(ngModel)]="isCetakDSKiosk"
+          (change)="handleChange(isCetakDSKiosk)" 
+        />
+        <label class="custom-control-label" for="collapse-sidebar-switch"></label>
+      </div>
+      <!-- <p-inputSwitch [(ngModel)]="isCetakDSKiosk" pTooltip="Cetak Melalui Desktop Service"
+      (onChange)="handleChange($event)" 
+      ></p-inputSwitch> -->
+    </li>
+    <li ngbDropdown class="nav-item dropdown dropdown-language mr-2">
         <div style="text-align: right;">
           <a style="color: #6e6b7b;padding: 5px;cursor: pointer" class="">
               <i class="fa fa-expand fa-fw text"  (click)="openFullscreen()" *ngIf="!isFullscreen"></i>

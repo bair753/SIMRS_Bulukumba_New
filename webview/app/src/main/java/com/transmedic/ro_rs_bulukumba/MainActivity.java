@@ -15,7 +15,7 @@ import android.webkit.WebViewClient;
 import com.transmedic.ro_rs_bulukumba.R;
 
 public class MainActivity extends AppCompatActivity {
-    String url ="http://36.93.88.126/e-reservasi/#/reservasi";
+    String url ="https://simrs.rsudbulukumba.id/e-reservasi/#/reservasi";
     @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {

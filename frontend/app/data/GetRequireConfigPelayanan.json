@@ -3181,6 +3181,18 @@
         {
             "nameDep": "ImplementasiAsuhanKeperawatanGawatDaruratCtrl",
             "urlDep": "module/EMR/ImplementasiAsuhanKeperawatanGawatDaruratCtrl"
+        },
+        {
+            "nameDep": "AsesmenLanjutanRisikoJatuhDewasaCtrl",
+            "urlDep": "module/EMR/AsesmenLanjutanRisikoJatuhDewasaCtrl"
+        },
+        {
+            "nameDep": "PersetujuanTindakanHemodialisaCtrl",
+            "urlDep": "module/EMR/PersetujuanTindakanHemodialisaCtrl"
+        },
+        {
+            "nameDep": "AsuhanMedisPeritonealDialisisCtrl",
+            "urlDep": "module/EMR/AsuhanMedisPeritonealDialisisCtrl"
         }
     ]
 }

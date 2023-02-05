@@ -91,11 +91,19 @@ export class TouchscreenComponent implements OnInit {
     this.httpService.get('medifirst2000/kiosk/get-combo-setting').subscribe(resps => {
       this.isAktifSlotRuangan = resps.isAktifSlotRuanganKiosk
       this.isCetakDSKiosk = resps.isCetakDSKiosk
-      localStorage.setItem('isCetakDS', this.isCetakDSKiosk)
+      if (localStorage.getItem('isCetakDS') == null) {
+        localStorage.setItem('isCetakDS', this.isCetakDSKiosk)
+      } else {
+        this.isCetakDSKiosk = localStorage.getItem('isCetakDS')
+      }
     }, error => {
       this.isAktifSlotRuangan = 'false'
       this.isCetakDSKiosk = 'true'
-      localStorage.setItem('isCetakDS', this.isCetakDSKiosk)
+      if (localStorage.getItem('isCetakDS') == null) {
+        localStorage.setItem('isCetakDS', this.isCetakDSKiosk)
+      } else {
+        this.isCetakDSKiosk = localStorage.getItem('isCetakDS')
+      }
     })
     // this._knowledgeBaseService.onDatatablessChanged.pipe(takeUntil(this._unsubscribeAll)).subscribe(response => {
     //   this.data = response;
@@ -130,11 +138,11 @@ export class TouchscreenComponent implements OnInit {
       this.isSave = true
       this.httpService.post('medifirst2000/kiosk/save-antrian', antrian).subscribe(response => {
         this.isSave = false
-        if (this.isCetakDSKiosk == 'web') {
+        if (localStorage.getItem('isCetakDS') == 'web') {
           window.open(Configuration.get().apiBackend + 'medifirst2000/report/cetak-antrian?norec='
             + response.noRec
             + '&kdprofile=39', '_blank');
-        } else if (this.isCetakDSKiosk == 'android') {
+          } else if (localStorage.getItem('isCetakDS') == 'android') {
           let loket = ''
           if (jenis == "A") {
             loket = "Loket 1";

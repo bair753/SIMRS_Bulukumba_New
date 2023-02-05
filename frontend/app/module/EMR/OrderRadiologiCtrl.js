@@ -540,7 +540,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     $scope.item.nofoto = re.data.data.nofoto;
                     $scope.item.namalengkap = re.data.data.namalengkap;
                     $scope.item.tglInput = re.data.data.tanggal;
-                    $scope.item.keterangan = re.data.data.keterangan;
+                    $scope.item.keterangan = re.data.data.keterangan.replace(/~/g, "\n");
                     $scope.popUpEkpertise.center().open();
 
 
@@ -1298,7 +1298,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     var nama = medifirstService.getPegawaiLogin().namaLengkap
                     if (local != null) {
                         var profile = local.id;
-                        window.open(config.baseApiBackend + "report/cetak-ekspertise?norec=" + $scope.norecHasilRadiologi + '&kdprofile=' + profile
+                        window.open(config.baseApiBackend + "report/cetak-ekspertise-ctscan?norec=" + $scope.norecHasilRadiologi + '&kdprofile=' + profile
                             + '&nama=' + nama, '_blank');
                     }
 				}

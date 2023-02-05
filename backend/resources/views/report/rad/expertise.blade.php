@@ -108,27 +108,24 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                         </tr>
                         <tr>
                             <td width="20%"><font style="font-size: 12pt;" color="#000000;" >Dokter Pengirim</font></td>
-                            <td width="80%"><font style="font-size: 12pt;" color="#000000" >: </font></td>
+                            <td width="80%"><font style="font-size: 12pt;" color="#000000" >: {{ $raw->dokterpengirim }}</font></td>
                         </tr>
                     </table>
-                    <table width="100%" height="400" cellspacing="0" cellpadding="0" border="0" style="border: 1px solid black;">
+                    <table width="100%" cellspacing="0" cellpadding="0" border="0" style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;">
                         <tr>
                             <td>
-                                <font style="font-size: 12pt;" color="#000000;" >{{ $raw->keterangan }}</font><br>
+                                <font style="font-size: 12pt;" color="#000000;" >{!! $raw->keterangan !!}</font><br>
                             </td>
                         </tr>
+                       
+                    </table>
+                    <table width="100%" cellspacing="0" cellpadding="0" border="0" style="border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;">
                         <tr>
-                            <td width="40%">
-                                
-                            </td>
-                            <td width="30%">
-
-                            </td>
-                            <td width="30%" align="center">
-                                <font style="font-size: 12pt;" color="#000000;" >BTK,SS</font><br>
-                                <div style="text-align: center" id="qrDokter"></div>
+                            <td align="right">
+                                <font style="font-size: 12pt;padding-right: 125px" color="#000000;" >BTK,SS</font><br>
+                                <div style="text-align: right;padding-right: 110px;" id="qrDokter"></div>
                                 <font style="font-size: 12pt;font-weight: bold;text-decoration: underline;" color="#000000;" >( {{ $raw->dokterrad }} )</font><br>
-                                <font style="font-size: 12pt;font-weight: bold;font-style: italic;" color="#000000;" >Spesialis Radiologi</font><br>
+                                <font style="font-size: 12pt;font-weight: bold;font-style: italic;padding-right: 80px;" color="#000000;" >Spesialis Radiologi</font><br>
                             </td>
                         </tr>
                     </table>
