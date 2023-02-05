@@ -611,7 +611,7 @@ export class ReservasiOnlineComponent implements OnInit {
   }
   cetakHistory(selected) {
     this.kodeReservasi = selected.noreservasi
-    this.tglReservasi = selected.tanggal
+    this.tglReservasi = selected.tanggalreservasi
     this.jamR =  selected.jamreservasi
     this.poliTujuan = selected.namaruangan
     this.dokter = selected.dokter
