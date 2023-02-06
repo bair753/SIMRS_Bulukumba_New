@@ -1885,6 +1885,7 @@ class BridgingBPJSV2Controller extends ApiController
                         INNER JOIN ruangan_m AS ru ON ru. ID = kmr.objectruanganfk
                         WHERE tt.statusenabled = TRUE
                         AND kmr.statusenabled = TRUE
+                        AND ru.statusenabled = TRUE
                         $paramRuangan
                         $paramKelas
                         GROUP BY 
