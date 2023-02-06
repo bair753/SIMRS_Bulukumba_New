@@ -3904,7 +3904,7 @@ class RegistrasiController extends ApiController
                             'code' => '200',
                         )
                 );
-                return $this->setStatusCode(200)->respond($result, "OK");
+                return $result;
             }else{
                 $result = array(
                     'status' => 201,
@@ -3924,7 +3924,7 @@ class RegistrasiController extends ApiController
                         "e"=>$e->getMessage(). ' '.$e->getLine(),
                         "message" => "Terjadi Kesalahan")
                 );
-                return $this->setStatusCode(201)->respond($result);
+                return $result;
             }else{
                 $result = array(
                     'status' => 400,
@@ -6373,7 +6373,8 @@ class RegistrasiController extends ApiController
             ->join('detaildiagnosapasien_t as ddp', 'ddp.objectdiagnosapasienfk', '=', 'dp.norec')
             ->leftJoin('diagnosa_m as dg', 'dg.id', '=', 'ddp.objectdiagnosafk')
             ->leftJoin('jenisdiagnosa_m as jd', 'jd.id', '=', 'ddp.objectjenisdiagnosafk')
-            ->where('pd.kdprofile', (int)$kdProfile);
+            ->where('pd.kdprofile', (int)$kdProfile)
+            ->orderBy('ddp.tglinputdiagnosa');
 
         if (isset($request['noReg']) && $request['noReg'] != "" && $request['noReg'] != "undefined") {
             $data = $data->where('pd.noregistrasi', '=', $request['noReg']);

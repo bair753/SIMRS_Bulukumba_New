@@ -17760,6 +17760,75 @@
         "define": "RekamMedisCtrl"
       }
     ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.AsesmenLanjutanRisikoJatuhDewasa",
+    "url": "/AsesmenLanjutanRisikoJatuhDewasa",
+    "templateurl": "module/EMR/AsesmenLanjutanRisikoJatuhDewasa.html",
+    "controller": "AsesmenLanjutanRisikoJatuhDewasaCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.PersetujuanTindakanHemodialisa",
+    "url": "/PersetujuanTindakanHemodialisa",
+    "templateurl": "module/EMR/PersetujuanTindakanHemodialisa.html",
+    "controller": "PersetujuanTindakanHemodialisaCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.AsuhanMedisPeritonealDialisis",
+    "url": "/AsuhanMedisPeritonealDialisis",
+    "templateurl": "module/EMR/AsuhanMedisPeritonealDialisis.html",
+    "controller": "AsuhanMedisPeritonealDialisisCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
   }
   
   
