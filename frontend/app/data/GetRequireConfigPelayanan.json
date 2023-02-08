@@ -3201,6 +3201,10 @@
         {
             "nameDep": "PengkajianHarianPeritonealDialisisCtrl",
             "urlDep": "module/EMR/PengkajianHarianPeritonealDialisisCtrl"
+        },
+        {
+            "nameDep": "MenuIndexCtrl",
+            "urlDep": "module/EMR/MenuIndexCtrl"
         }
     ]
 }
