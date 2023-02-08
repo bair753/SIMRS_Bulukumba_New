@@ -3,7 +3,7 @@ define(['initialize'], function (initialize) {
     initialize.controller('RencanaAsuhanPasienTerintegrasiCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
         function ($q, $rootScope, $scope, ModelItem, $state, cacheHelper, dateHelper, medifirstService) {
 
-
+            var paramsIndex = $state.params.index ? parseInt($state.params.index) : null
             $scope.noCM = $state.params.noCM;
             $scope.tombolSimpanVis = true
             $scope.noRecPap = cacheHelper.get('noRecPap');
@@ -81,15 +81,6 @@ define(['initialize'], function (initialize) {
                 nomorEMR = cacheNomorEMR[0]
                 $scope.cc.norec_emr = nomorEMR
             }
-
-            // $scope.listBioPsiko = [
-            //     {
-            //         "id": 1,
-            //         "detail": [
-            //             { "id": 422219, "nama": "", "caption": "Masalah psikologi", "type": "label", "dataList": "", "satuan": "" }
-            //         ]
-            //     }
-            // ];
 
             var chacePeriode = cacheHelper.get('cacheRekamMedis');
             if (chacePeriode != undefined) {
@@ -210,7 +201,7 @@ define(['initialize'], function (initialize) {
                 })
 
                 for (var i = 0; i <= dataLoad.length - 1; i++) {
-                    if (parseFloat($scope.cc.emrfk) == dataLoad[i].emrfk) {
+                    if (parseFloat($scope.cc.emrfk) == dataLoad[i].emrfk && paramsIndex == dataLoad[i].index) {
 
                         if (dataLoad[i].type == "textbox") {
                             $scope.item.obj[dataLoad[i].emrdfk] = dataLoad[i].value
@@ -289,7 +280,7 @@ define(['initialize'], function (initialize) {
                 }
                 medifirstService.post('emr/save-emr-dinamis', jsonSave).then(function (e) {
                     medifirstService.postLogging('EMR', 'norec emrpasien_t', e.data.data.norec,
-                    'Asesmen Awal Keperawatan I G D'+ ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
+                    'Rencana Asuhan Pasien Terintegrasi (Care Plan) '+ ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
                     + $scope.cc.noregistrasi).then(function (res) {
                     })
                     $rootScope.loadRiwayat()

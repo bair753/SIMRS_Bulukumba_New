@@ -17325,8 +17325,8 @@
     ]
   },
   {
-    "name": "RekamMedis.AsesmenMedis.RekonsiliasiObat",
-    "url": "/RekonsiliasiObat",
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.RekonsiliasiObat",
+    "url": "/RekonsiliasiObat/:index/:idEMR",
     "templateurl": "module/EMR/RekonsiliasiObat.html",
     "controller": "RekonsiliasiObatCtrl",
     "deps": [
@@ -17812,6 +17812,75 @@
     "url": "/AsuhanMedisPeritonealDialisis",
     "templateurl": "module/EMR/AsuhanMedisPeritonealDialisis.html",
     "controller": "AsuhanMedisPeritonealDialisisCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.PengkajianHarianHemodialisis",
+    "url": "/PengkajianHarianHemodialisis",
+    "templateurl": "module/EMR/PengkajianHarianHemodialisis.html",
+    "controller": "PengkajianHarianHemodialisisCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex",
+    "url": "/MenuIndex",
+    "templateurl": "module/EMR/MenuIndex.html",
+    "controller": "MenuIndexCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.PengkajianHarianPeritonealDialisis",
+    "url": "/PengkajianHarianPeritonealDialisis",
+    "templateurl": "module/EMR/PengkajianHarianPeritonealDialisis.html",
+    "controller": "PengkajianHarianPeritonealDialisisCtrl",
     "deps": [
       {
         "module": "Services",

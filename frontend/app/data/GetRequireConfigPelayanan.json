@@ -3193,6 +3193,14 @@
         {
             "nameDep": "AsuhanMedisPeritonealDialisisCtrl",
             "urlDep": "module/EMR/AsuhanMedisPeritonealDialisisCtrl"
+        },
+        {
+            "nameDep": "PengkajianHarianHemodialisisCtrl",
+            "urlDep": "module/EMR/PengkajianHarianHemodialisisCtrl"
+        },
+        {
+            "nameDep": "PengkajianHarianPeritonealDialisisCtrl",
+            "urlDep": "module/EMR/PengkajianHarianPeritonealDialisisCtrl"
         }
     ]
 }
