@@ -17164,8 +17164,8 @@
     ]
   },
   {
-    "name": "RekamMedis.AsesmenMedis.ImplementasiAsuhanKeperawatan",
-    "url": "/ImplementasiAsuhanKeperawatan",
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.ImplementasiAsuhanKeperawatan",
+    "url": "/ImplementasiAsuhanKeperawatan/:index/:idEMR",
     "templateurl": "module/EMR/ImplementasiAsuhanKeperawatan.html",
     "controller": "ImplementasiAsuhanKeperawatanCtrl",
     "deps": [
@@ -17739,8 +17739,8 @@
     ]
   },
   {
-    "name": "RekamMedis.AsesmenMedis.ImplementasiAsuhanKeperawatanGawatDarurat",
-    "url": "/ImplementasiAsuhanKeperawatanGawatDarurat",
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.ImplementasiAsuhanKeperawatanGawatDarurat",
+    "url": "/ImplementasiAsuhanKeperawatanGawatDarurat/:index/:idEMR",
     "templateurl": "module/EMR/ImplementasiAsuhanKeperawatanGawatDarurat.html",
     "controller": "ImplementasiAsuhanKeperawatanGawatDaruratCtrl",
     "deps": [
