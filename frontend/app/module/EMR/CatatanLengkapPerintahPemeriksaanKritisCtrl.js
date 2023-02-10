@@ -1,6 +1,6 @@
 define(['initialize'], function (initialize) {
     'use strict';
-    initialize.controller('HasilLaboratoriumCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
+    initialize.controller('CatatanLengkapPerintahPemeriksaanKritisCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
         function ($q, $rootScope, $scope, ModelItem, $state, cacheHelper, dateHelper, medifirstService) {
 
 
@@ -14,10 +14,34 @@ define(['initialize'], function (initialize) {
             $scope.cc = {};
             var nomorEMR = '-';
             var norecEMR = '';
-            $scope.cc.emrfk = 290025;
+            $scope.cc.emrfk = 290052;
             var dataLoad = [];
-            $scope.isCetak = true;
+            $scope.isCetak = false;
+            $scope.show = true;
             $scope.allDisabled = false;
+            $scope.listItem = [
+                { id: 429400, inuse: true },
+                { id: 429405 },
+                { id: 429410 },
+                { id: 429415 },
+                { id: 429420 },
+                { id: 429425 },
+                { id: 429430 },
+                { id: 429435 },
+                { id: 429440 },
+                { id: 429445 },
+                { id: 429450 },
+                { id: 429455 },
+                { id: 429460 },
+                { id: 429465 },
+                { id: 429470 },
+                { id: 429475 },
+                { id: 429480 },
+                { id: 429485 },
+                { id: 429490 },
+                { id: 429495 },
+                { id: 429500 }
+            ];
             var pegawaiInputDetail  = '';
             var cacheNomorEMR = cacheHelper.get('cacheNomorEMR');
             var cacheNoREC = cacheHelper.get('cacheNOREC_EMR');
@@ -66,6 +90,10 @@ define(['initialize'], function (initialize) {
                 $scope.listDiagnosaSecondary = data;
             });
 
+            medifirstService.getPart("sysadmin/general/get-datacombo-jenispegawai-cppt", true, true, 20).then(function (data) {
+                $scope.listJenisPegawai = data;
+            });
+
             $scope.cetakPdf = function () {
                 if (norecEMR == '') return
                 var client = new HttpClient();
@@ -104,7 +132,7 @@ define(['initialize'], function (initialize) {
                 var nocmfk = null;
                 var noregistrasifk = $state.params.noRec;
                 var status = "t";
-                $scope.item.obj[422900] = $scope.now;
+                $scope.item.obj[429400] = $scope.now;
                 // medifirstService.get("emr/get-antrian-pasien-norec/" + noregistrasifk).then(function (e) {
                 //     var antrianPasien = e.data.result;
                 //     $scope.item.obj[421300] = new Date(moment(antrianPasien.tglregistrasi).format('YYYY-MM-DD HH:mm'));
@@ -305,9 +333,65 @@ define(['initialize'], function (initialize) {
                             }
 
                         } 
-                    
                     })
                 })
+            }
+
+            function saveTosDipake(id) {
+                if (nomorEMR != '-') {
+                    let json = {
+                        noemr: nomorEMR,
+                        emrfk: $scope.cc.emrfk,
+                        id: id,
+                        value: moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
+                    }
+                    medifirstService.postNonMessage("emr/save-status-dipake", json).then(function (dat) {
+                    })
+                }
+            }
+
+            $scope.tambah = function (index) {
+                // let details = []
+                // for (let i = 0; i < $scope.listItem.length; i++) {
+                //     const element = $scope.listItem[i];
+                //     if (element.inuse == undefined) {
+                //         details.push(element.id)
+                //     }
+                // }
+                // let json = {
+                //     noemr: nomorEMR,
+                //     emrfk: $scope.cc.emrfk,
+                //     details: details
+                // }
+                // medifirstService.postNonMessage("emr/get-status-dipake", json).then(function (dat) {
+                //     let result = dat.data.data
+                //     for (let j = 0; j < $scope.listItem.length; j++) {
+                //         const element = $scope.listItem[j];
+                //         for (let x = 0; x < result.length; x++) {
+                //             const element2 = result[x];
+                //             if (element.id == element2.emrdfk) {
+                //                 element.inuse = true
+                //             }
+                //         }
+                //     }
+
+                //     for (let j = 0; j < $scope.listItem.length; j++) {
+                //         const element2 = $scope.listItem[j];
+                //         if (element2.inuse == undefined) {
+                //             $scope.item.obj[parseInt(element2.id)] = new Date()
+                //             element2.inuse = true
+                //             saveTosDipake(element2.id)
+                //             break
+                //         }
+                //     }
+                // })
+                $scope.item.obj[parseFloat($scope.listItem[index].id)] = new Date();
+                $scope.listItem[index].inuse = true;
+            }
+
+            $scope.hapus = function (index) {
+                $scope.item.obj[parseFloat($scope.listItem[index].id)] = undefined;
+                $scope.listItem[index].inuse = false;
             }
 
             $scope.kembali = function () {
@@ -338,7 +422,7 @@ define(['initialize'], function (initialize) {
                     // });
 
                     medifirstService.postLogging('EMR', 'norec emrpasien_t', e.data.data.norec,
-                        'Hasil Laboratorium ' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
+                        'Catatan Lengkap Perintah Lisan / Melalui Telepon / Pelaporan Hasil Pemeriksaan Kritis ' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
                         + $scope.cc.noregistrasi).then(function (res) {
                         })
 

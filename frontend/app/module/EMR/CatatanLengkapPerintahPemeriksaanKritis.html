@@ -1,0 +1,868 @@
+<style type="text/css">
+    fieldset {
+        border-radius: 5px;
+        border: 1px solid #228be6;
+    }
+
+    .k-slider-horizontal {
+        display: inline-block;
+        float: left;
+        width: 450px;
+
+        height: 26px;
+
+
+    }
+
+    .k-slider {
+
+        margin-left: 3%;
+        margin-right: 3%;
+        margin-top: 1%;
+        margin-bottom: 5%;
+        display: inline-block;
+    }
+
+    .activeBtn {
+        background-color: #10c4b2;
+        color: #ffffff;
+    }
+    table,
+    th,
+    td {
+        border: 1px solid #929191;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+    td {
+        padding: 5px;
+        text-align: left;
+    }
+    th {
+        padding: 5px;
+        text-align: center;
+    }
+    .clicks {
+        cursor: pointer;
+    }
+</style>
+
+ <!-- ng-class="{'my-disable':true}" -->
+<!-- <div class="grid_12"  disable-contents="allDisabled" id="form"> -->
+<div class="grid_12">
+    <div class="grid_12">
+        <div class="panel panel-default container_12">
+            <div class="panel-heading" c-translate>Catatan Lengkap Perintah Lisan / Melalui Telepon / Pelaporan Hasil Pemeriksaan Kritis</div>
+        </div>
+
+        <div class="grid_12" style="margin-top: 10px;">
+            <fieldset style="margin-top: 10px;">
+                <div class="grid_12" style="margin-top: 20px;">
+                    <table>
+                        <tr>
+                            <th style="text-align: center;width: 20px">No</th>
+                            <th style="text-align: center;width: 200px">Tanggal/Jam</th>
+                            <th style="text-align: center;width: 400px">Isi Perintah</th>
+                            <th style="text-align: center;width: 200px">Pemberi Perintah</th>
+                            <th style="text-align: center;width: 200px">Penerima Perintah</th>
+                            <th style="text-align: center;width: 200px">Pelaksana Perintah</th>
+                            <th style="width: 20px !important;"></th>
+                        </tr>
+                        <!-- 1 -->
+                        <tr> <!-- 429400 -->
+                            <td style="text-align: center;">
+                                1
+                            </td>
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[429400]" ng-disabled="item.obj2[429400]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <textarea style="width: 100%;" cols="6" rows="5" c-text-area type="input" filter="'string'"
+                                    class="k-textbox" ng-model="item.obj[429401]" ng-disabled="item.obj2[429401]" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429402]" ng-disabled="item.obj2[429402]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429403]" ng-disabled="item.obj2[429403]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429404]" ng-disabled="item.obj2[429404]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <div class="grid_12" style="margin-top:20px" ng-show="show">
+                                    <label ng-click="tambah(1)" class="clicks"><img src="stylesheets/Addd.png" width="25" alt="Picture"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 1 -->
+                        <!-- 2 -->
+                        <tr ng-show="item.obj[429405]!=undefined">
+                            <td style="text-align: center;">
+                                2
+                            </td>
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[429405]" ng-disabled="item.obj2[429405]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <textarea style="width: 100%;" cols="6" rows="5" c-text-area type="input" filter="'string'"
+                                    class="k-textbox" ng-model="item.obj[429406]" ng-disabled="item.obj2[429406]" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429407]" ng-disabled="item.obj2[429407]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429408]" ng-disabled="item.obj2[429408]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429409]" ng-disabled="item.obj2[429409]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <div class="grid_12" style="margin-top:20px" ng-show="show">
+                                    <label ng-click="tambah(2)" class="clicks"><img src="stylesheets/Addd.png" width="25" alt="Picture"></label>
+                                    <label ng-click="hapus(1)" class="clicks"><img src="stylesheets/cancel.png" width="25" alt="Picture"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 2 -->
+                        <!-- 3 -->
+                        <tr ng-show="item.obj[429410]!=undefined">
+                            <td style="text-align: center;">
+                                3
+                            </td>
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[429410]" ng-disabled="item.obj2[429410]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <textarea style="width: 100%;" cols="6" rows="5" c-text-area type="input" filter="'string'"
+                                    class="k-textbox" ng-model="item.obj[429411]" ng-disabled="item.obj2[429411]" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429412]" ng-disabled="item.obj2[429412]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429413]" ng-disabled="item.obj2[429413]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429414]" ng-disabled="item.obj2[429414]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <div class="grid_12" style="margin-top:20px" ng-show="show">
+                                    <label ng-click="tambah(3)" class="clicks"><img src="stylesheets/Addd.png" width="25" alt="Picture"></label>
+                                    <label ng-click="hapus(2)" class="clicks"><img src="stylesheets/cancel.png" width="25"
+                                            alt="Picture"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 3 -->
+                        <!-- 4 -->
+                        <tr ng-show="item.obj[429415]!=undefined">
+                            <td style="text-align: center;">
+                                4
+                            </td>
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[429415]" ng-disabled="item.obj2[429415]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <textarea style="width: 100%;" cols="6" rows="5" c-text-area type="input" filter="'string'" class="k-textbox"
+                                    ng-model="item.obj[429416]" ng-disabled="item.obj2[429416]" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429417]" ng-disabled="item.obj2[429417]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429418]" ng-disabled="item.obj2[429418]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429419]" ng-disabled="item.obj2[429419]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <div class="grid_12" style="margin-top:20px" ng-show="show">
+                                    <label ng-click="tambah(4)" class="clicks"><img src="stylesheets/Addd.png" width="25" alt="Picture"></label>
+                                    <label ng-click="hapus(3)" class="clicks"><img src="stylesheets/cancel.png" width="25"
+                                            alt="Picture"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 4 -->
+                        <!-- 5 -->
+                        <tr ng-show="item.obj[429420]!=undefined">
+                            <td style="text-align: center;">
+                                5
+                            </td>
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[429420]" ng-disabled="item.obj2[429420]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <textarea style="width: 100%;" cols="6" rows="5" c-text-area type="input" filter="'string'" class="k-textbox"
+                                    ng-model="item.obj[429421]" ng-disabled="item.obj2[429421]" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429422]" ng-disabled="item.obj2[429422]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429423]" ng-disabled="item.obj2[429423]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429424]" ng-disabled="item.obj2[429424]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <div class="grid_12" style="margin-top:20px" ng-show="show">
+                                    <label ng-click="tambah(5)" class="clicks"><img src="stylesheets/Addd.png" width="25" alt="Picture"></label>
+                                    <label ng-click="hapus(4)" class="clicks"><img src="stylesheets/cancel.png" width="25"
+                                            alt="Picture"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 5 -->
+                        <!-- 6 -->
+                        <tr ng-show="item.obj[429425]!=undefined">
+                            <td style="text-align: center;">
+                                6
+                            </td>
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[429425]" ng-disabled="item.obj2[429425]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <textarea style="width: 100%;" cols="6" rows="5" c-text-area type="input" filter="'string'" class="k-textbox"
+                                    ng-model="item.obj[429426]" ng-disabled="item.obj2[429426]" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429427]" ng-disabled="item.obj2[429427]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429428]" ng-disabled="item.obj2[429428]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429429]" ng-disabled="item.obj2[429429]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <div class="grid_12" style="margin-top:20px" ng-show="show">
+                                    <label ng-click="tambah(6)" class="clicks"><img src="stylesheets/Addd.png" width="25" alt="Picture"></label>
+                                    <label ng-click="hapus(5)" class="clicks"><img src="stylesheets/cancel.png" width="25"
+                                            alt="Picture"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 6 -->
+                        <!-- 7 -->
+                        <tr ng-show="item.obj[429430]!=undefined">
+                            <td style="text-align: center;">
+                                7
+                            </td>
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[429430]" ng-disabled="item.obj2[429430]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <textarea style="width: 100%;" cols="6" rows="5" c-text-area type="input" filter="'string'" class="k-textbox"
+                                    ng-model="item.obj[429431]" ng-disabled="item.obj2[429431]" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429432]" ng-disabled="item.obj2[429432]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429433]" ng-disabled="item.obj2[429433]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429434]" ng-disabled="item.obj2[429434]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <div class="grid_12" style="margin-top:20px" ng-show="show">
+                                    <label ng-click="tambah(7)" class="clicks"><img src="stylesheets/Addd.png" width="25" alt="Picture"></label>
+                                    <label ng-click="hapus(6)" class="clicks"><img src="stylesheets/cancel.png" width="25"
+                                            alt="Picture"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 7 -->
+                        <!-- 8 -->
+                        <tr ng-show="item.obj[429435]!=undefined">
+                            <td style="text-align: center;">
+                                8
+                            </td>
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[429435]" ng-disabled="item.obj2[429435]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <textarea style="width: 100%;" cols="6" rows="5" c-text-area type="input" filter="'string'" class="k-textbox"
+                                    ng-model="item.obj[429436]" ng-disabled="item.obj2[429436]" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429437]" ng-disabled="item.obj2[429437]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429438]" ng-disabled="item.obj2[429438]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429439]" ng-disabled="item.obj2[429439]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <div class="grid_12" style="margin-top:20px" ng-show="show">
+                                    <label ng-click="tambah(8)" class="clicks"><img src="stylesheets/Addd.png" width="25" alt="Picture"></label>
+                                    <label ng-click="hapus(7)" class="clicks"><img src="stylesheets/cancel.png" width="25"
+                                            alt="Picture"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 8 -->
+                        <!-- 9 -->
+                        <tr ng-show="item.obj[429440]!=undefined">
+                            <td style="text-align: center;">
+                                9
+                            </td>
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[429440]" ng-disabled="item.obj2[429440]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <textarea style="width: 100%;" cols="6" rows="5" c-text-area type="input" filter="'string'" class="k-textbox"
+                                    ng-model="item.obj[429441]" ng-disabled="item.obj2[429441]" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429442]" ng-disabled="item.obj2[429442]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429443]" ng-disabled="item.obj2[429443]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429444]" ng-disabled="item.obj2[429444]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <div class="grid_12" style="margin-top:20px" ng-show="show">
+                                    <label ng-click="tambah(9)" class="clicks"><img src="stylesheets/Addd.png" width="25" alt="Picture"></label>
+                                    <label ng-click="hapus(8)" class="clicks"><img src="stylesheets/cancel.png" width="25"
+                                            alt="Picture"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 9 -->
+                        <!-- 10 -->
+                        <tr ng-show="item.obj[429445]!=undefined">
+                            <td style="text-align: center;">
+                                10
+                            </td>
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[429445]" ng-disabled="item.obj2[429445]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <textarea style="width: 100%;" cols="6" rows="5" c-text-area type="input" filter="'string'" class="k-textbox"
+                                    ng-model="item.obj[429446]" ng-disabled="item.obj2[429446]" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429447]" ng-disabled="item.obj2[429447]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429448]" ng-disabled="item.obj2[429448]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429449]" ng-disabled="item.obj2[429449]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <div class="grid_12" style="margin-top:20px" ng-show="show">
+                                    <label ng-click="tambah(10)" class="clicks"><img src="stylesheets/Addd.png" width="25" alt="Picture"></label>
+                                    <label ng-click="hapus(9)" class="clicks"><img src="stylesheets/cancel.png" width="25"
+                                            alt="Picture"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 10 -->
+                        <!-- 11 -->
+                        <tr ng-show="item.obj[429450]!=undefined">
+                            <td style="text-align: center;">
+                                11
+                            </td>
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[429450]" ng-disabled="item.obj2[429450]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <textarea style="width: 100%;" cols="6" rows="5" c-text-area type="input" filter="'string'" class="k-textbox"
+                                    ng-model="item.obj[429451]" ng-disabled="item.obj2[429451]" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429452]" ng-disabled="item.obj2[429452]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429453]" ng-disabled="item.obj2[429453]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429454]" ng-disabled="item.obj2[429454]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <div class="grid_12" style="margin-top:20px" ng-show="show">
+                                    <label ng-click="tambah(11)" class="clicks"><img src="stylesheets/Addd.png" width="25" alt="Picture"></label>
+                                    <label ng-click="hapus(10)" class="clicks"><img src="stylesheets/cancel.png" width="25"
+                                            alt="Picture"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 11 -->
+                        <!-- 12 -->
+                        <tr ng-show="item.obj[429455]!=undefined">
+                            <td style="text-align: center;">
+                                12
+                            </td>
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[429455]" ng-disabled="item.obj2[429455]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <textarea style="width: 100%;" cols="6" rows="5" c-text-area type="input" filter="'string'" class="k-textbox"
+                                    ng-model="item.obj[429456]" ng-disabled="item.obj2[429456]" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429457]" ng-disabled="item.obj2[429457]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429458]" ng-disabled="item.obj2[429458]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429459]" ng-disabled="item.obj2[429459]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <div class="grid_12" style="margin-top:20px" ng-show="show">
+                                    <label ng-click="tambah(12)" class="clicks"><img src="stylesheets/Addd.png" width="25"
+                                            alt="Picture"></label>
+                                    <label ng-click="hapus(11)" class="clicks"><img src="stylesheets/cancel.png" width="25"
+                                            alt="Picture"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 12 -->
+                        <!-- 13 -->
+                        <tr ng-show="item.obj[429460]!=undefined">
+                            <td style="text-align: center;">
+                                13
+                            </td>
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[429460]" ng-disabled="item.obj2[429460]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <textarea style="width: 100%;" cols="6" rows="5" c-text-area type="input" filter="'string'" class="k-textbox"
+                                    ng-model="item.obj[429461]" ng-disabled="item.obj2[429461]" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429462]" ng-disabled="item.obj2[429462]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429463]" ng-disabled="item.obj2[429463]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429464]" ng-disabled="item.obj2[429464]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <div class="grid_12" style="margin-top:20px" ng-show="show">
+                                    <label ng-click="tambah(13)" class="clicks"><img src="stylesheets/Addd.png" width="25"
+                                            alt="Picture"></label>
+                                    <label ng-click="hapus(12)" class="clicks"><img src="stylesheets/cancel.png" width="25"
+                                            alt="Picture"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 13 -->
+                        <!-- 14 -->
+                        <tr ng-show="item.obj[429465]!=undefined">
+                            <td style="text-align: center;">
+                                14
+                            </td>
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[429465]" ng-disabled="item.obj2[429465]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <textarea style="width: 100%;" cols="6" rows="5" c-text-area type="input" filter="'string'" class="k-textbox"
+                                    ng-model="item.obj[429466]" ng-disabled="item.obj2[429466]" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429467]" ng-disabled="item.obj2[429467]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429468]" ng-disabled="item.obj2[429468]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429469]" ng-disabled="item.obj2[429469]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <div class="grid_12" style="margin-top:20px" ng-show="show">
+                                    <label ng-click="tambah(14)" class="clicks"><img src="stylesheets/Addd.png" width="25"
+                                            alt="Picture"></label>
+                                    <label ng-click="hapus(13)" class="clicks"><img src="stylesheets/cancel.png" width="25"
+                                            alt="Picture"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 14 -->
+                        <!-- 15 -->
+                        <tr ng-show="item.obj[429470]!=undefined">
+                            <td style="text-align: center;">
+                                15
+                            </td>
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[429470]" ng-disabled="item.obj2[429470]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <textarea style="width: 100%;" cols="6" rows="5" c-text-area type="input" filter="'string'" class="k-textbox"
+                                    ng-model="item.obj[429471]" ng-disabled="item.obj2[429471]" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429472]" ng-disabled="item.obj2[429472]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429473]" ng-disabled="item.obj2[429473]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429474]" ng-disabled="item.obj2[429474]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <div class="grid_12" style="margin-top:20px" ng-show="show">
+                                    <label ng-click="tambah(15)" class="clicks"><img src="stylesheets/Addd.png" width="25"
+                                            alt="Picture"></label>
+                                    <label ng-click="hapus(14)" class="clicks"><img src="stylesheets/cancel.png" width="25"
+                                            alt="Picture"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 15 -->
+                        <!-- 16 -->
+                        <tr ng-show="item.obj[429475]!=undefined">
+                            <td style="text-align: center;">
+                                16
+                            </td>
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[429475]" ng-disabled="item.obj2[429475]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <textarea style="width: 100%;" cols="6" rows="5" c-text-area type="input" filter="'string'" class="k-textbox"
+                                    ng-model="item.obj[429476]" ng-disabled="item.obj2[429476]" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429477]" ng-disabled="item.obj2[429477]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429478]" ng-disabled="item.obj2[429478]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429479]" ng-disabled="item.obj2[429479]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <div class="grid_12" style="margin-top:20px" ng-show="show">
+                                    <label ng-click="tambah(16)" class="clicks"><img src="stylesheets/Addd.png" width="25"
+                                            alt="Picture"></label>
+                                    <label ng-click="hapus(15)" class="clicks"><img src="stylesheets/cancel.png" width="25"
+                                            alt="Picture"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 16 -->
+                        <!-- 17 -->
+                        <tr ng-show="item.obj[429480]!=undefined">
+                            <td style="text-align: center;">
+                                17
+                            </td>
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[429480]" ng-disabled="item.obj2[429480]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <textarea style="width: 100%;" cols="6" rows="5" c-text-area type="input" filter="'string'" class="k-textbox"
+                                    ng-model="item.obj[429481]" ng-disabled="item.obj2[429481]" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429482]" ng-disabled="item.obj2[429482]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429483]" ng-disabled="item.obj2[429483]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429484]" ng-disabled="item.obj2[429484]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <div class="grid_12" style="margin-top:20px" ng-show="show">
+                                    <label ng-click="tambah(17)" class="clicks"><img src="stylesheets/Addd.png" width="25"
+                                            alt="Picture"></label>
+                                    <label ng-click="hapus(16)" class="clicks"><img src="stylesheets/cancel.png" width="25"
+                                            alt="Picture"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 17 -->
+                        <!-- 18 -->
+                        <tr ng-show="item.obj[429485]!=undefined">
+                            <td style="text-align: center;">
+                                18
+                            </td>
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[429485]" ng-disabled="item.obj2[429485]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <textarea style="width: 100%;" cols="6" rows="5" c-text-area type="input" filter="'string'" class="k-textbox"
+                                    ng-model="item.obj[429486]" ng-disabled="item.obj2[429486]" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429487]" ng-disabled="item.obj2[429487]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429488]" ng-disabled="item.obj2[429488]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429489]" ng-disabled="item.obj2[429489]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <div class="grid_12" style="margin-top:20px" ng-show="show">
+                                    <label ng-click="tambah(18)" class="clicks"><img src="stylesheets/Addd.png" width="25"
+                                            alt="Picture"></label>
+                                    <label ng-click="hapus(17)" class="clicks"><img src="stylesheets/cancel.png" width="25"
+                                            alt="Picture"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 18 -->
+                        <!-- 19 -->
+                        <tr ng-show="item.obj[429490]!=undefined">
+                            <td style="text-align: center;">
+                                19
+                            </td>
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[429490]" ng-disabled="item.obj2[429490]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <textarea style="width: 100%;" cols="6" rows="5" c-text-area type="input" filter="'string'" class="k-textbox"
+                                    ng-model="item.obj[429491]" ng-disabled="item.obj2[429491]" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429492]" ng-disabled="item.obj2[429492]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429493]" ng-disabled="item.obj2[429493]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429494]" ng-disabled="item.obj2[429494]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <div class="grid_12" style="margin-top:20px" ng-show="show">
+                                    <label ng-click="tambah(19)" class="clicks"><img src="stylesheets/Addd.png" width="25"
+                                            alt="Picture"></label>
+                                    <label ng-click="hapus(18)" class="clicks"><img src="stylesheets/cancel.png" width="25"
+                                            alt="Picture"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 19 -->
+                        <!-- 20 -->
+                        <tr ng-show="item.obj[429495]!=undefined">
+                            <td style="text-align: center;">
+                                20
+                            </td>
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[429495]" ng-disabled="item.obj2[429495]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <textarea style="width: 100%;" cols="6" rows="5" c-text-area type="input" filter="'string'" class="k-textbox"
+                                    ng-model="item.obj[429496]" ng-disabled="item.obj2[429496]" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429497]" ng-disabled="item.obj2[429497]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429498]" ng-disabled="item.obj2[429498]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429499]" ng-disabled="item.obj2[429499]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <div class="grid_12" style="margin-top:20px" ng-show="show">
+                                    <label ng-click="tambah(20)" class="clicks"><img src="stylesheets/Addd.png" width="25"
+                                            alt="Picture"></label>
+                                    <label ng-click="hapus(19)" class="clicks"><img src="stylesheets/cancel.png" width="25"
+                                            alt="Picture"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 20 -->
+                        <!-- 21 -->
+                        <tr ng-show="item.obj[429500]!=undefined">
+                            <td style="text-align: center;">
+                                21
+                            </td>
+                            <td>
+                                <input style="width: 100%" k-ng-model="item.obj[429500]" ng-disabled="item.obj2[429500]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                            </td>
+                            <td>
+                                <textarea style="width: 100%;" cols="6" rows="5" c-text-area type="input" filter="'string'" class="k-textbox"
+                                    ng-model="item.obj[429501]" ng-disabled="item.obj2[429501]" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429502]" ng-disabled="item.obj2[429502]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429503]" ng-disabled="item.obj2[429503]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429504]" ng-disabled="item.obj2[429504]"
+                                    k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                    k-data-source="listPegawai" />
+                            </td>
+                            <td>
+                                <div class="grid_12" style="margin-top:20px" ng-show="show">
+                                    <!-- <label ng-click="tambah(11)" class="clicks"><img src="stylesheets/Addd.png" width="25"
+                                            alt="Picture"></label> -->
+                                    <label ng-click="hapus(20)" class="clicks"><img src="stylesheets/cancel.png" width="25"
+                                            alt="Picture"></label>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 21 -->
+                    </table>
+                </div>
+            </fieldset>
+        </div>
+
+    </div>
+</div>
+
+<br />
+<br />
+<div class="grid_12">
+    <div ng-include='"../app/module/EMR/TemplateButtonDinamis" '></div>
+
+</div>

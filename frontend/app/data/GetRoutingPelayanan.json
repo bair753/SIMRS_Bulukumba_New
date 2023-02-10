@@ -17898,6 +17898,52 @@
         "define": "RekamMedisCtrl"
       }
     ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.CatatanLengkapPerintahPemeriksaanKritis",
+    "url": "/CatatanLengkapPerintahPemeriksaanKritis",
+    "templateurl": "module/EMR/CatatanLengkapPerintahPemeriksaanKritis.html",
+    "controller": "CatatanLengkapPerintahPemeriksaanKritisCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.AsesmenKeperawatanPasienTerminal",
+    "url": "/AsesmenKeperawatanPasienTerminal",
+    "templateurl": "module/EMR/AsesmenKeperawatanPasienTerminal.html",
+    "controller": "AsesmenKeperawatanPasienTerminalCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
   }
   
   

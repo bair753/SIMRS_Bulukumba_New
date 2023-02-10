@@ -3205,6 +3205,14 @@
         {
             "nameDep": "MenuIndexCtrl",
             "urlDep": "module/EMR/MenuIndexCtrl"
+        },
+        {
+            "nameDep": "CatatanLengkapPerintahPemeriksaanKritisCtrl",
+            "urlDep": "module/EMR/CatatanLengkapPerintahPemeriksaanKritisCtrl"
+        },
+        {
+            "nameDep": "AsesmenKeperawatanPasienTerminalCtrl",
+            "urlDep": "module/EMR/AsesmenKeperawatanPasienTerminalCtrl"
         }
     ]
 }
