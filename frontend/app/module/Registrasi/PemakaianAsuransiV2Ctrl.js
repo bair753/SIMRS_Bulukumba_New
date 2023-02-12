@@ -25,7 +25,6 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
             $scope.isBatal = true;
             $scope.isKembali = true;
             $scope.isHidecopysep = true;
-            $scope.statusIdentifikasi = true;
             var cacheNoreg = '';
             var responData = "";
             var kdSpesialis = '';
@@ -1305,7 +1304,6 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                 medifirstService.get("bridging/bpjs/cek-sep?nosep=" + $scope.model.noSep).then(function (e) {
                     if (e.data.metaData.code === "200") {
                         if ($scope.model.noKepesertaan != e.data.response.peserta.noKartu){
-                            $scope.statusIdentifikasi = false;
                             toastr.error("No SEP tidak sesuai dengan identitas pasien!");
                             return;
                         }
@@ -1767,11 +1765,11 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                     namaProviders = "-";
                 }
 
-                medifirstService.get("registrasi/get-asuransipasienbynocm?nocm="
-                    + $scope.item.pasien.nocm)
-                    .then(function (f) {
-                        $scope.cekTableAsuransiPas = f.data.data[0];
-                    });
+                // medifirstService.get("registrasi/get-asuransipasienbynocm?nocm="
+                //     + $scope.item.pasien.nocm)
+                //     .then(function (f) {
+                //         $scope.cekTableAsuransiPas = f.data.data[0];
+                //     });
 
                 // debugger
                 var id_AsPasien = "";
@@ -1968,55 +1966,64 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                     toastr.error('No BPJS Terdeteksi Double, Sesuaikan No BPJS dengan pasiennya', 'Peringatan')
                     return;
                 }
-                if ($scope.statusIdentifikasi == false){
-                    toastr.error("No SEP tidak sesuai dengan identitas pasien!");
-                    return;
-                }
                 if ($scope.poliRujukanKode != undefined && $scope.item.pasien.kdinternal != $scope.poliRujukanKode) {
                     $scope.model.politujuankode = $scope.item.pasien.namaruangan
                     $scope.model.poliasalkode = $scope.poliRujukanNama
                     $scope.model.statuskunjungan = 2
-                }                
+                } 
 
-                if ($scope.model.generateNoSEP) {
+               
+                        if ($scope.model.generateNoSEP) {
 
-                    if (statusBridgingTemporary == 'false') {
-
-                        if ($scope.poliRujukanKode != undefined && $scope.item.pasien.kdinternal != $scope.poliRujukanKode) {
-                            var confirm = $mdDialog.confirm()
-                                .title('Informasi')
-                                .textContent('Pasien Kontrol ? Jika ya maka poli yg dikirim ke BPJS = ' + $scope.item.pasien.namaruangan
-                                    + ', jika tidak maka ' + $scope.poliRujukanNama)
-                                .ariaLabel('Lucky day')
-                                .cancel('Tidak')
-                                .ok('Ya')
-                            $mdDialog.show(confirm).then(function (e) {
-                                // alert('COnfirm')
-
-
-                                $scope.generateSEP();
-                            }, function () {
-                                // alert('cancel')
-
-                                $scope.item.pasien.kdinternal = $scope.poliRujukanKode
-                                $scope.item.pasien.namaruangan = $scope.poliRujukanNama
-                                $scope.generateSEP();
-                            });
-
+                            if (statusBridgingTemporary == 'false') {
+        
+                                if ($scope.poliRujukanKode != undefined && $scope.item.pasien.kdinternal != $scope.poliRujukanKode) {
+                                    var confirm = $mdDialog.confirm()
+                                        .title('Informasi')
+                                        .textContent('Pasien Kontrol ? Jika ya maka poli yg dikirim ke BPJS = ' + $scope.item.pasien.namaruangan
+                                            + ', jika tidak maka ' + $scope.poliRujukanNama)
+                                        .ariaLabel('Lucky day')
+                                        .cancel('Tidak')
+                                        .ok('Ya')
+                                    $mdDialog.show(confirm).then(function (e) {
+                                        // alert('COnfirm')
+        
+        
+                                        $scope.generateSEP();
+                                    }, function () {
+                                        // alert('cancel')
+        
+                                        $scope.item.pasien.kdinternal = $scope.poliRujukanKode
+                                        $scope.item.pasien.namaruangan = $scope.poliRujukanNama
+                                        $scope.generateSEP();
+                                    });
+        
+                                } else {
+                                    $scope.generateSEP();
+                                }
+        
+                            } else {
+                                /*
+                                * dummy SEP
+                                */
+                                $scope.createDummySEP()
+        
+                            }
                         } else {
-                            $scope.generateSEP();
+                            medifirstService.get("bridging/bpjs/cek-sep?nosep=" + $scope.model.noSep).then(function (e) {
+                                if (e.data.metaData.code === "200") {
+                                    if ($scope.model.noKepesertaan != e.data.response.peserta.noKartu){
+                                        toastr.error("No SEP tidak sesuai dengan identitas pasien!");
+                                        return;
+                                    }
+                                    $scope.SimpanNonGenerate('manual');
+                                }else{
+                                    toastr.error(e.data.metaData.message);
+                                }
+                               
+                            });   
                         }
-
-                    } else {
-                        /*
-                        * dummy SEP
-                        */
-                        $scope.createDummySEP()
-
-                    }
-                } else {
-                    $scope.SimpanNonGenerate('manual');
-                }
+                          
             }
             $scope.createDummySEP = function () {
                 if ($scope.model.noSep == '' || $scope.model.noSep == undefined) {

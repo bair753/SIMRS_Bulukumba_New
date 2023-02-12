@@ -266,9 +266,9 @@ define(['initialize'], function (initialize) {
                     ).then(function (data) {
                         window.history.back();
                     })
-                    // medifirstService.postNonMessage('bridging/bpjs/aplicaresws/update-tt-by-ruangan', { 'idruangan': $scope.item.pasien.objectruanganlastfk, 'idkelas': $scope.item.pasien.objectkelasfk }).then(function (xx) { })
+                    medifirstService.postNonMessage('bridging/bpjs/aplicaresws/update-tt-by-ruangan', { 'idruangan': $scope.item.pasien.objectruanganlastfk, 'idkelas': $scope.item.pasien.objectkelasfk }).then(function (xx) { })
 
-                    // medifirstService.postNonMessage('bridging/bpjs/aplicaresws/update-tt-by-ruangan', { 'idruangan': ruanganId, 'idkelas': kelasId }).then(function (xx) { })
+                    medifirstService.postNonMessage('bridging/bpjs/aplicaresws/update-tt-by-ruangan', { 'idruangan': ruanganId, 'idkelas': kelasId }).then(function (xx) { })
                     //##end                                         
                 })
 

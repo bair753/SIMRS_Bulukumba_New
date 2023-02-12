@@ -3,7 +3,7 @@ define(['initialize'], function (initialize) {
     initialize.controller('ImplementasiAsuhanKeperawatanCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
         function ($q, $rootScope, $scope, ModelItem, $state, cacheHelper, dateHelper, medifirstService) {
 
-
+            var paramsIndex = $state.params.index ? parseInt($state.params.index) : null
             var isNotClick = true;
             $scope.noCM = $state.params.noCM;
             $scope.tombolSimpanVis = true;
@@ -241,35 +241,6 @@ define(['initialize'], function (initialize) {
                     medifirstService.get("emr/get-emr-transaksi-detail?noemr=" + nomorEMR + "&emrfk=" + $scope.cc.emrfk, true).then(function (dat) {
                         $scope.item.obj = []
                         $scope.item.obj2 = []
-                        if (cacheEMR_CTRS != undefined) {
-
-                            // SET DARI SKOR CTRS
-                            medifirstService.get("emr/get-emr-transaksi-detail?noemr=" + cacheEMR_CTRS + "&emrfk=" + $scope.cc.emrfk, true).then(function (datss) {
-                                var dataNA = datss.data.data
-                                var skorsss = 0
-                                for (var i = 0; i <= dataNA.length - 1; i++) {
-                                    if (dataNA[i].type == "checkbox" && dataNA[i].value == '1') {
-                                        if (dataNA[i].reportdisplay != null) {
-                                            skorsss = skorsss + parseFloat(dataNA[i].reportdisplay)
-                                        }
-
-                                    }
-
-                                }
-                                $scope.item.obj[4189] = skorsss
-                                if (skorsss <= 10) {
-                                    $scope.item.obj[4190] = true
-                                }
-                                if (skorsss > 10) {
-                                    $scope.item.obj[4191] = true
-                                }
-
-                                   // *** disable Input *//
-                                    setTimeout(function(){medifirstService.setDisableAllInputElement()  }, 3000);
-                                    // *** disable Input *//
-
-                            })
-                        }
                         dataLoad = dat.data.data
                         medifirstService.get("emr/get-vital-sign?noregistrasi=" + $scope.cc.noregistrasi + "&objectidawal=4241&objectidakhir=4246&idemr=147", true).then(function (datas) {
                         if (datas.data.data.length>0){
@@ -282,7 +253,7 @@ define(['initialize'], function (initialize) {
                     })
                         
                         for (var i = 0; i <= dataLoad.length - 1; i++) {
-                            if (parseFloat($scope.cc.emrfk) == dataLoad[i].emrfk) {
+                            if (parseFloat($scope.cc.emrfk) == dataLoad[i].emrfk && paramsIndex == dataLoad[i].index) {
 
                                 if (dataLoad[i].type == "textbox") {
                                     $scope.item.obj[dataLoad[i].emrdfk] = dataLoad[i].value
@@ -420,7 +391,7 @@ define(['initialize'], function (initialize) {
                     arrSave.push({ id: arrobj[i], values: $scope.item.obj[parseInt(arrobj[i])] })
                 }
                 $scope.cc.jenisemr = 'asesmen'
-
+                $scope.cc.index = $state.params.index
                 var jsonSave = {
                     head: $scope.cc,
                     data: arrSave
@@ -432,7 +403,7 @@ define(['initialize'], function (initialize) {
                     // });
 
                     medifirstService.postLogging('EMR', 'norec emrpasien_t', e.data.data.norec,
-                        'Asesmen Medis Gawat Darurat ' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
+                        'Implementasi Asuhan Keperawatan ' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
                         + $scope.cc.noregistrasi).then(function (res) {
                         })
 

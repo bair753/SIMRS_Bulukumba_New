@@ -1,9 +1,9 @@
 define(['initialize'], function (initialize) {
     'use strict';
-    initialize.controller('ImplementasiAsuhanKeperawatanGawatDaruratCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
+    initialize.controller('CatatanLengkapPerintahPemeriksaanKritisCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
         function ($q, $rootScope, $scope, ModelItem, $state, cacheHelper, dateHelper, medifirstService) {
 
-            var paramsIndex = $state.params.index ? parseInt($state.params.index) : null
+
             var isNotClick = true;
             $scope.noCM = $state.params.noCM;
             $scope.tombolSimpanVis = true;
@@ -14,35 +14,33 @@ define(['initialize'], function (initialize) {
             $scope.cc = {};
             var nomorEMR = '-';
             var norecEMR = '';
-            $scope.cc.emrfk = 290045;
+            $scope.cc.emrfk = 290052;
             var dataLoad = [];
-            $scope.isCetak = true;
+            $scope.isCetak = false;
             $scope.show = true;
             $scope.allDisabled = false;
             $scope.listItem = [
-                { id: 428000, inuse: true },
-                { id: 428003 },
-                { id: 428006 },
-                { id: 428009 },
-                { id: 428012 },
-                { id: 428015 },
-                { id: 428018 },
-                { id: 428021 },
-                { id: 428024 },
-                { id: 428027 },
-                { id: 428030 },
-                { id: 428033 },
-                { id: 428036 },
-                { id: 428039 },
-                { id: 428042 },
-                { id: 428045 },
-                { id: 428048 },
-                { id: 428051 },
-                { id: 428054 },
-                { id: 428057 },
-                { id: 428060 },
-                { id: 428063 },
-                { id: 428066 }
+                { id: 429400, inuse: true },
+                { id: 429405 },
+                { id: 429410 },
+                { id: 429415 },
+                { id: 429420 },
+                { id: 429425 },
+                { id: 429430 },
+                { id: 429435 },
+                { id: 429440 },
+                { id: 429445 },
+                { id: 429450 },
+                { id: 429455 },
+                { id: 429460 },
+                { id: 429465 },
+                { id: 429470 },
+                { id: 429475 },
+                { id: 429480 },
+                { id: 429485 },
+                { id: 429490 },
+                { id: 429495 },
+                { id: 429500 }
             ];
             var pegawaiInputDetail  = '';
             var cacheNomorEMR = cacheHelper.get('cacheNomorEMR');
@@ -134,7 +132,7 @@ define(['initialize'], function (initialize) {
                 var nocmfk = null;
                 var noregistrasifk = $state.params.noRec;
                 var status = "t";
-                $scope.item.obj[428000] = $scope.now;
+                $scope.item.obj[429400] = $scope.now;
                 // medifirstService.get("emr/get-antrian-pasien-norec/" + noregistrasifk).then(function (e) {
                 //     var antrianPasien = e.data.result;
                 //     $scope.item.obj[421300] = new Date(moment(antrianPasien.tglregistrasi).format('YYYY-MM-DD HH:mm'));
@@ -282,7 +280,7 @@ define(['initialize'], function (initialize) {
                     })
                         
                         for (var i = 0; i <= dataLoad.length - 1; i++) {
-                            if (parseFloat($scope.cc.emrfk) == dataLoad[i].emrfk && paramsIndex == dataLoad[i].index) {
+                            if (parseFloat($scope.cc.emrfk) == dataLoad[i].emrfk) {
 
                                 if (dataLoad[i].type == "textbox") {
                                     $scope.item.obj[dataLoad[i].emrdfk] = dataLoad[i].value
@@ -335,21 +333,6 @@ define(['initialize'], function (initialize) {
                             }
 
                         } 
-                        // *** disable Input *//
-                        //setTimeout(function(){medifirstService.setDisableAllInputElement()  }, 2000);
-                        // *** disable Input *//
-
-                        //  if( $scope.cc.norec_emr !='-' && pegawaiInputDetail !='' && pegawaiInputDetail !=null){
-                        //     if(pegawaiInputDetail != medifirstService.getPegawaiLogin().id){
-                        //         $scope.allDisabled =true
-                        //         toastr.warning('Hanya Bisa melihat data','Peringatan')
-                        //         return
-                        //     }
-                        // }
-
-                    
-                   
-                    
                     })
                 })
             }
@@ -367,41 +350,48 @@ define(['initialize'], function (initialize) {
                 }
             }
 
-            $scope.tambah = function () {
-                let details = []
-                for (let i = 0; i < $scope.listItem.length; i++) {
-                    const element = $scope.listItem[i];
-                    if (element.inuse == undefined) {
-                        details.push(element.id)
-                    }
-                }
-                let json = {
-                    noemr: nomorEMR,
-                    emrfk: $scope.cc.emrfk,
-                    details: details
-                }
-                medifirstService.postNonMessage("emr/get-status-dipake", json).then(function (dat) {
-                    let result = dat.data.data
-                    for (let j = 0; j < $scope.listItem.length; j++) {
-                        const element = $scope.listItem[j];
-                        for (let x = 0; x < result.length; x++) {
-                            const element2 = result[x];
-                            if (element.id == element2.emrdfk) {
-                                element.inuse = true
-                            }
-                        }
-                    }
+            $scope.tambah = function (index) {
+                // let details = []
+                // for (let i = 0; i < $scope.listItem.length; i++) {
+                //     const element = $scope.listItem[i];
+                //     if (element.inuse == undefined) {
+                //         details.push(element.id)
+                //     }
+                // }
+                // let json = {
+                //     noemr: nomorEMR,
+                //     emrfk: $scope.cc.emrfk,
+                //     details: details
+                // }
+                // medifirstService.postNonMessage("emr/get-status-dipake", json).then(function (dat) {
+                //     let result = dat.data.data
+                //     for (let j = 0; j < $scope.listItem.length; j++) {
+                //         const element = $scope.listItem[j];
+                //         for (let x = 0; x < result.length; x++) {
+                //             const element2 = result[x];
+                //             if (element.id == element2.emrdfk) {
+                //                 element.inuse = true
+                //             }
+                //         }
+                //     }
 
-                    for (let j = 0; j < $scope.listItem.length; j++) {
-                        const element2 = $scope.listItem[j];
-                        if (element2.inuse == undefined) {
-                            $scope.item.obj[parseInt(element2.id)] = new Date()
-                            element2.inuse = true
-                            saveTosDipake(element2.id)
-                            break
-                        }
-                    }
-                })
+                //     for (let j = 0; j < $scope.listItem.length; j++) {
+                //         const element2 = $scope.listItem[j];
+                //         if (element2.inuse == undefined) {
+                //             $scope.item.obj[parseInt(element2.id)] = new Date()
+                //             element2.inuse = true
+                //             saveTosDipake(element2.id)
+                //             break
+                //         }
+                //     }
+                // })
+                $scope.item.obj[parseFloat($scope.listItem[index].id)] = new Date();
+                $scope.listItem[index].inuse = true;
+            }
+
+            $scope.hapus = function (index) {
+                $scope.item.obj[parseFloat($scope.listItem[index].id)] = undefined;
+                $scope.listItem[index].inuse = false;
             }
 
             $scope.kembali = function () {
@@ -420,7 +410,7 @@ define(['initialize'], function (initialize) {
                     arrSave.push({ id: arrobj[i], values: $scope.item.obj[parseInt(arrobj[i])] })
                 }
                 $scope.cc.jenisemr = 'asesmen'
-                $scope.cc.index = $state.params.index
+
                 var jsonSave = {
                     head: $scope.cc,
                     data: arrSave
@@ -432,7 +422,7 @@ define(['initialize'], function (initialize) {
                     // });
 
                     medifirstService.postLogging('EMR', 'norec emrpasien_t', e.data.data.norec,
-                        'Implementasi Asuhan Keperawatan ' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
+                        'Catatan Lengkap Perintah Lisan / Melalui Telepon / Pelaporan Hasil Pemeriksaan Kritis ' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
                         + $scope.cc.noregistrasi).then(function (res) {
                         })
 

@@ -3193,6 +3193,26 @@
         {
             "nameDep": "AsuhanMedisPeritonealDialisisCtrl",
             "urlDep": "module/EMR/AsuhanMedisPeritonealDialisisCtrl"
+        },
+        {
+            "nameDep": "PengkajianHarianHemodialisisCtrl",
+            "urlDep": "module/EMR/PengkajianHarianHemodialisisCtrl"
+        },
+        {
+            "nameDep": "PengkajianHarianPeritonealDialisisCtrl",
+            "urlDep": "module/EMR/PengkajianHarianPeritonealDialisisCtrl"
+        },
+        {
+            "nameDep": "MenuIndexCtrl",
+            "urlDep": "module/EMR/MenuIndexCtrl"
+        },
+        {
+            "nameDep": "CatatanLengkapPerintahPemeriksaanKritisCtrl",
+            "urlDep": "module/EMR/CatatanLengkapPerintahPemeriksaanKritisCtrl"
+        },
+        {
+            "nameDep": "AsesmenKeperawatanPasienTerminalCtrl",
+            "urlDep": "module/EMR/AsesmenKeperawatanPasienTerminalCtrl"
         }
     ]
 }

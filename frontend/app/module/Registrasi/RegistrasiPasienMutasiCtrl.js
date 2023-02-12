@@ -380,6 +380,7 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                     }
 
 
+                    medifirstService.postNonMessage('bridging/bpjs/aplicaresws/update-tt-by-ruangan' ,{'idruangan':$scope.item.ruangan.id,'idkelas':kelasId}).then(function(xx){})
                     if (e.data.status == 201) {
                         $scope.isSimpan = true;
                         $scope.isNext = false;
@@ -399,7 +400,6 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                     } else {
                         window.history.back();
                     }
-                      medifirstService.postNonMessage('bridging/bpjs/aplicaresws/update-tt-by-ruangan' ,{'idruangan':$scope.item.ruangan.id,'idkelas':kelasId}).then(function(xx){})
 
                 }, function (error) {
                     // throw error;
