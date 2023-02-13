@@ -3,7 +3,7 @@ define(['initialize'], function (initialize) {
     initialize.controller('MenuIndexCtrl', ['$rootScope', '$scope', '$state', 'CacheHelper', 'MedifirstService',
         function ($rootScope, $scope, $state, cacheHelper, medifirstService) {
             $scope.activeMenuTransfer = $state.current.name + $state.params.index;
-
+            console.log($scope.activeMenuTransfer);
             $scope.dataVOloaded = true;
             $rootScope.showMenu = true;
             $rootScope.showMenuDetail = false;

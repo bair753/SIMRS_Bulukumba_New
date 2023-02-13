@@ -3213,6 +3213,26 @@
         {
             "nameDep": "AsesmenKeperawatanPasienTerminalCtrl",
             "urlDep": "module/EMR/AsesmenKeperawatanPasienTerminalCtrl"
+        },
+        {
+            "nameDep": "PenolakanOperasiCtrl",
+            "urlDep": "module/EMR/PenolakanOperasiCtrl"
+        },
+        {
+            "nameDep": "PersetujuanOperasiCtrl",
+            "urlDep": "module/EMR/PersetujuanOperasiCtrl"
+        },
+        {
+            "nameDep": "PenolakanPemakaianDarahDanProdukDarahCtrl",
+            "urlDep": "module/EMR/PenolakanPemakaianDarahDanProdukDarahCtrl"
+        },
+        {
+            "nameDep": "PersetujuanPemakaianDarahDanProdukDarahCtrl",
+            "urlDep": "module/EMR/PersetujuanPemakaianDarahDanProdukDarahCtrl"
+        },
+        {
+            "nameDep": "SirsOnlineBedCtrl",
+            "urlDep": "module/Bridging/SirsOnlineBedCtrl"
         }
     ]
 }

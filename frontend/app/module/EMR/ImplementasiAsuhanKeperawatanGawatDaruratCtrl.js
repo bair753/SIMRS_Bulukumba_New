@@ -432,7 +432,7 @@ define(['initialize'], function (initialize) {
                     // });
 
                     medifirstService.postLogging('EMR', 'norec emrpasien_t', e.data.data.norec,
-                        'Implementasi Asuhan Keperawatan ' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
+                        'Implementasi Asuhan Keperawatan Gawat Darurat' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
                         + $scope.cc.noregistrasi).then(function (res) {
                         })
 

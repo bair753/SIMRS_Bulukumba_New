@@ -17944,6 +17944,118 @@
         "define": "RekamMedisCtrl"
       }
     ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.PenolakanOperasi",
+    "url": "/PenolakanOperasi",
+    "templateurl": "module/EMR/PenolakanOperasi.html",
+    "controller": "PenolakanOperasiCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.PersetujuanOperasi",
+    "url": "/PersetujuanOperasi",
+    "templateurl": "module/EMR/PersetujuanOperasi.html",
+    "controller": "PersetujuanOperasiCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.PenolakanPemakaianDarahDanProdukDarah",
+    "url": "/PenolakanPemakaianDarahDanProdukDarah",
+    "templateurl": "module/EMR/PenolakanPemakaianDarahDanProdukDarah.html",
+    "controller": "PenolakanPemakaianDarahDanProdukDarahCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.PersetujuanPemakaianDarahDanProdukDarah",
+    "url": "/PersetujuanPemakaianDarahDanProdukDarah",
+    "templateurl": "module/EMR/PersetujuanPemakaianDarahDanProdukDarah.html",
+    "controller": "PersetujuanPemakaianDarahDanProdukDarahCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "SirsOnlineBed",
+    "url": "/U2lyc09ubGluZQ==Bed",
+    "templateurl": "module/Bridging/SirsOnlineBed.html",
+    "controller": "SirsOnlineBedCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      }
+    ]
   }
   
   

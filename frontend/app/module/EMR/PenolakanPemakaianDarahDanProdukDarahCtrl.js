@@ -1,6 +1,6 @@
 define(['initialize'], function (initialize) {
     'use strict';
-    initialize.controller('RingkasanPulangCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
+    initialize.controller('PenolakanPemakaianDarahDanProdukDarahCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
         function ($q, $rootScope, $scope, ModelItem, $state, cacheHelper, dateHelper, medifirstService) {
 
 
@@ -14,7 +14,7 @@ define(['initialize'], function (initialize) {
             $scope.cc = {};
             var nomorEMR = '-';
             var norecEMR = '';
-            $scope.cc.emrfk = 290030;
+            $scope.cc.emrfk = 290056;
             var dataLoad = [];
             $scope.isCetak = false;
             $scope.allDisabled = false;
@@ -58,42 +58,13 @@ define(['initialize'], function (initialize) {
                 $scope.listKelas = data
             })
 
-            medifirstService.getPart("emr/get-datacombo-part-diagnosa", true, true, 10).then(function (data) {
+            medifirstService.getPart("sysadmin/general/get-datacombo-icd10", true, true, 10).then(function (data) {
                 $scope.listDiagnosa = data;
             });
 
-            medifirstService.getPart("emr/get-datacombo-icd10-secondary", true, true, 10).then(function (data) {
+            medifirstService.getPart("sysadmin/general/get-datacombo-icd10-secondary", true, true, 10).then(function (data) {
                 $scope.listDiagnosaSecondary = data;
             });
-
-            medifirstService.getPart("emr/get-datacombo-icd10-secondary", true, true, 10).then(function(data) {
-                $scope.listICD10 = data
-            });
-
-            medifirstService.getPart("emr/get-datacombo-part-diagnosa-tindakan", true, true, 10).then(function(data) {
-                $scope.listICD9 = data;
-            });
-
-            $scope.listPulang = [
-                {
-                    "id": 1,
-                    "detail": [
-                        { "id": 423803, "caption": "Riwayat Kesehatan", "type": "textarea", "dataList": "" },
-                        { "id": 423804, "caption": "Indikasi di Rawat", "type": "textarea", "dataList": "" },
-                        { "id": 423805, "caption": "Diagnosis", "type": "textarea", "dataList": "" },
-                        { "id": 423806, "caption": "ICD 10", "type": "combobox", "dataList": "listICD10" },
-                        { "id": 423807, "caption": "Komorbiditas Lain", "type": "textarea", "dataList": "" },
-                        { "id": 423808, "caption": "ICD 10", "type": "combobox", "dataList": "listICD10" },
-                        { "id": 423809, "caption": "Pemeriksaan Fisik", "type": "textarea", "dataList": "" },
-                        { "id": 423810, "caption": "Pemeriksaan Diagnostik", "type": "textarea", "dataList": "" },
-                        { "id": 423811, "caption": "Tindakan yang Telah Dikerjakan", "type": "textarea", "dataList": "" },
-                        { "id": 423812, "caption": "ICD 9-CM", "type": "combobox", "dataList": "listICD9" },
-                        { "id": 423813, "caption": "Obat yang Diberikan", "type": "textarea", "dataList": "" },
-                        { "id": 423814, "caption": "Kondisi Pasien", "type": "textarea", "dataList": "" },
-                        { "id": 423815, "caption": "Tindak Lanjut", "type": "textarea", "dataList": "" }
-                    ]
-                },
-            ];
 
             $scope.cetakPdf = function () {
                 if (norecEMR == '') return
@@ -133,31 +104,34 @@ define(['initialize'], function (initialize) {
                 var nocmfk = null;
                 var noregistrasifk = $state.params.noRec;
                 var status = "t";
+                $scope.item.obj[429883] = $scope.now;
                 medifirstService.get("emr/get-antrian-pasien-norec/" + noregistrasifk).then(function (e) {
                     var antrianPasien = e.data.result;
-                    $scope.item.obj[423801] = new Date(moment(antrianPasien.tglregistrasi).format('YYYY-MM-DD HH:mm'));
-                    if (antrianPasien.iddpjp != null && antrianPasien.dokterdpjp != null) {
-                        $scope.item.obj[423819] = {
+                    $scope.item.obj[429879] = $scope.cc.namapasien;
+                    // $scope.item.obj[429783] = new Date(moment(antrianPasien.tgllahir).format('YYYY-MM-DD'));
+                    $scope.item.obj[429880] = $scope.cc.umur;
+                    $scope.item.obj[429881] = antrianPasien.jeniskelamin;
+                    $scope.item.obj[429882] = antrianPasien.alamatlengkap;
+                    if (antrianPasien.dokterdpjp != null && antrianPasien.iddpjp != null) {
+                        $scope.item.obj[429850] = {
                             value: antrianPasien.iddpjp,
                             text: antrianPasien.dokterdpjp
                         }
                     }
-                    if (antrianPasien.objectruanganfk != null && antrianPasien.namaruangan != null) {
-                        $scope.item.obj[423800] = {
-                            value: antrianPasien.objectruanganfk,
-                            text: antrianPasien.namaruangan
-                        }
-                    }
-                    $scope.item.obj[423817] = antrianPasien.namapasien;
-                    $scope.item.obj[423816] = $scope.now;
+                    // if (antrianPasien.namaruangan != null && antrianPasien.objectruanganfk != null) {
+                    //     $scope.item.obj[427954] = {
+                    //         value: antrianPasien.objectruanganfk,
+                    //         text: antrianPasien.namaruangan
+                    //     }
+                    // }
                 })
                 
                 // medifirstService.get("emr/get-vital-sign?noregistrasi=" + $scope.cc.noregistrasi + "&objectidawal=4241&objectidakhir=4246&idemr=147", true).then(function (datas) {
                 //     if (datas.data.data.length>0){
-                //         $scope.item.obj[4228]=datas.data.data[0].value
-                //         $scope.item.obj[4229]=datas.data.data[3].value
-                //         $scope.item.obj[4230]=datas.data.data[4].value
-                //         $scope.item.obj[4231]=datas.data.data[5].value
+                //         $scope.item.obj[421302] = datas.data.data[1].value; // Tekanan Darah
+                //         $scope.item.obj[421303] = datas.data.data[5].value; // Nadi
+                //         $scope.item.obj[421304] = datas.data.data[4].value; // Suhu
+                //         $scope.item.obj[421305] = datas.data.data[6].value; // Napas
                 //     }
                 // })
             } else {
@@ -234,35 +208,6 @@ define(['initialize'], function (initialize) {
                             }
                         }
                     }
-                    if (cacheEMR_TRIASE_PRIMER != undefined) {
-                        medifirstService.get("emr/get-emr-transaksi-detail?noemr=" + cacheEMR_TRIASE_PRIMER + "&emrfk=" + $scope.cc.emrfk, true).then(function (dat) {
-                            var dataNA = dat.data.data
-                            for (var i = 0; i <= dataNA.length - 1; i++) {
-                                if (dataNA[i].emrdfk == '9044') {
-                                    if (dataNA[i].value == '1') {
-                                        $scope.activeTriaseStatus = 'merah'
-                                    }
-                                }
-                                if (dataNA[i].emrdfk == '9050') {
-                                    if (dataNA[i].value == '1') {
-                                        $scope.activeTriaseStatus = 'kuning'
-                                    }
-                                }
-                                if (dataNA[i].emrdfk == '9052') {
-                                    if (dataNA[i].value == '1') {
-                                        $scope.activeTriaseStatus = 'hijau'
-                                    }
-                                }
-                                if (dataNA[i].emrdfk == '9055') {
-                                    if (dataNA[i].value == '1') {
-                                        $scope.activeTriaseStatus = 'hitam'
-                                    }
-                                }
-
-                            }
-
-                        })
-                    }
                     if(nomorEMR!='-'){
                     cacheHelper.set('cacheEMR_igd', nomorEMR)
                 }
@@ -323,7 +268,9 @@ define(['initialize'], function (initialize) {
                                     }
                                     $scope.item.obj[dataLoad[i].emrdfk] = chekedd
                                 }
-
+                                if (dataLoad[i].type == "radio") {
+                                    $scope.item.obj[dataLoad[i].emrdfk] = dataLoad[i].value
+                                }
                                 if (dataLoad[i].type == "datetime") {
                                     $scope.item.obj[dataLoad[i].emrdfk] = new Date(dataLoad[i].value)
                                 }
@@ -352,20 +299,18 @@ define(['initialize'], function (initialize) {
                             }
 
                         }
-                        // *** disable Input *//
-                        //setTimeout(function(){medifirstService.setDisableAllInputElement()  }, 2000);
-                        // *** disable Input *//
 
-                        //  if( $scope.cc.norec_emr !='-' && pegawaiInputDetail !='' && pegawaiInputDetail !=null){
-                        //     if(pegawaiInputDetail != medifirstService.getPegawaiLogin().id){
-                        //         $scope.allDisabled =true
-                        //         toastr.warning('Hanya Bisa melihat data','Peringatan')
-                        //         return
-                        //     }
-                        // }
+                        var arrobj = Object.keys($scope.item.obj)
+                        for (let l = 0; l < $scope.listItem.length; l++) {
+                            const element = $scope.listItem[l];
+                            for (let m = 0; m < arrobj.length; m++) {
+                                const element2 = arrobj[m];
+                                if (element.id == element2) {
+                                    element.inuse = true
+                                }
+                            }
 
-                    
-                   
+                        } 
                     
                     })
                 })
@@ -399,7 +344,7 @@ define(['initialize'], function (initialize) {
                     // });
 
                     medifirstService.postLogging('EMR', 'norec emrpasien_t', e.data.data.norec,
-                        'Asesmen Medis Gawat Darurat ' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
+                        'Penolakan Pemakaian Darah Dan Produk Darah ' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
                         + $scope.cc.noregistrasi).then(function (res) {
                         })
 
@@ -410,6 +355,81 @@ define(['initialize'], function (initialize) {
                     cacheHelper.set('cacheNomorEMR', arrStr);
                 });
             }
+
+            $scope.listPemberiInformasi = [
+                {
+                    "id": 1,
+                    "jenisinfo": "Diagnosa",
+                    "detail": [
+                        { "id": 429853, "caption": "", "type": "textarea" },
+                        { "id": 429854, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "jenisinfo": "Tindakan kedokteran",
+                    "detail": [
+                        { "id": 429855, "caption": "", "type": "textarea" },
+                        { "id": 429856, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 3,
+                    "jenisinfo": "Indikasi pemberian transfusi",
+                    "detail": [
+                        { "id": 429857, "caption": "", "type": "textarea" },
+                        { "id": 429858, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 4,
+                    "jenisinfo": "Tata cara pemberian transfusi",
+                    "detail": [
+                        { "id": 429859, "caption": "", "type": "textarea" },
+                        { "id": 429860, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 5,
+                    "jenisinfo": "Tujuan pemberian transfusi",
+                    "detail": [
+                        { "id": 429861, "caption": "", "type": "textarea" },
+                        { "id": 429862, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 6,
+                    "jenisinfo": "Risiko & Komplikasi",
+                    "detail": [
+                        { "id": 429863, "caption": "", "type": "textarea" },
+                        { "id": 429864, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 7,
+                    "jenisinfo": "Prognosis",
+                    "detail": [
+                        { "id": 429865, "caption": "", "type": "textarea" },
+                        { "id": 429866, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "jenisinfo": "Alternatif dan risiko (Pilihan pengobatan / penatalaksanaan)",
+                    "detail": [
+                        { "id": 429867, "caption": "", "type": "textarea" },
+                        { "id": 429868, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 9,
+                    "jenisinfo": "Lain-lain",
+                    "detail": [
+                        { "id": 429869, "caption": "", "type": "textarea" },
+                        { "id": 429870, "caption": "", "type": "checkbox" }
+                    ]
+                }
+            ];
 
         }
     ]);
