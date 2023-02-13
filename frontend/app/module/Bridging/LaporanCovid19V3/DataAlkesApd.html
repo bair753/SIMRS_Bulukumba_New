@@ -1,0 +1,103 @@
+<style type="text/css">
+    .style-center {
+        display: inline-block;
+        text-align: center;
+        width: 100%;
+    }
+
+    .style-right {
+        display: inline-block;
+        text-align: right;
+        width: 100%;
+    }
+
+    .style-left {
+        display: inline-block;
+        text-align: left;
+        width: 100%;
+    }
+
+    .k-treeview .k-item {
+        background-color: #f9f9f9 !important;
+    }
+
+    .k-checkbox-label:before {
+        margin: 1px 0px 0px 6px;
+    }
+    
+	.k-grid .k-grid-header .k-header .k-link {
+		height: auto;
+	}
+
+	.k-grid .k-grid-header .k-header {
+		white-space: normal;
+	}
+
+	.k-grid .k-grid-header .k-header {
+		text-align: center;
+	}
+
+    fieldset {
+        border-radius: 5px;
+    }
+
+    .height-auto .k-grid-content {
+        max-height: initial;
+    }
+</style>
+<div ng-show="dataVOloaded">
+	<div class="grid_12">
+        <div class="headerBox">
+            <h1 style="color: white;"><b>Logistik</b></h1>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <br>
+    <!-- baris 1 -->
+    <div class="grid_12">
+        <div class="grid_12 borderBox">
+            <kendo-grid id="kGrid" 
+            k-groupable="'true'" 
+            data-source="dataDaftarAPD" 
+            options="columnDaftarAPD" 
+            k-pageable="'true'"
+            k-sortable="'true'" 
+            k-resizable="'true'" 
+            k-selectable="'row'" 
+            k-ng-model="dataAPDSelected"
+            ng-click="klikGrid(dataAPDSelected)"
+            ng-dblclick="klikedit(dataAPDSelected)"
+            class="height-auto"></kendo-grid>
+        </div>
+    </div>
+    <!-- end baris 1 -->
+</div>
+<div kendo-window="popUp" k-title="'Form Logistik'" k-width="500" k-visible="false" k-on-open="win2visible = true" k-on-close="win2visible = false">
+    <div class="grid_12">
+        <div class="grid_12" style="padding-top: 10px;">
+            <label c-label>Kebutuhan</label>
+            <input style="width: 100%; " 
+            kendo-combo-box 
+            k-ng-model="item.kebutuhan" 
+            k-data-text-field="'kebutuhan'" 
+            k-filter="'contains'"
+            k-data-value-field="'id_kebutuhan'" 
+            k-auto-bind="false"
+            k-data-source="listkebutuhan" />
+        </div>
+        <div class="grid_12" style="padding-top: 10px;">
+            <label c-label>Jumlah Eksisting</label>
+            <input style="width: 100%" type="number" ng-model="item.jumlah_eksisting" class="k-textbox" placeholder="Jumlah" />
+        </div>
+        <div class="grid_12" style="padding-top: 10px;">
+            <label c-label>Jumlah</label>
+            <input style="width: 100%" type="number" ng-model="item.jumlah" class="k-textbox" placeholder="Jumlah" />
+        </div>
+        <div class="grid_12" style="padding-top: 10px;">
+            <label c-label>Jumlah diterima</label>
+            <input style="width: 100%" type="number" ng-model="item.jumlah_diterima" class="k-textbox" placeholder="Jumlah" />
+        </div>
+        <button class="k-button" ng-click="simpanformlogistik()" ng-show="isSimpan" style="float:right;margin-top:4%">Simpan</button>
+        <button class="k-button" ng-click="updateformlogistik()" ng-show="!isSimpan" style="float:right;margin-top:4%">Update</button>
+    </div>
+</div>

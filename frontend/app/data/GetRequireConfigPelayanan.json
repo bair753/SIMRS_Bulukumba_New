@@ -3233,6 +3233,26 @@
         {
             "nameDep": "SirsOnlineBedCtrl",
             "urlDep": "module/Bridging/SirsOnlineBedCtrl"
+        },
+        {
+            "nameDep": "DataPasienCtrl",
+            "urlDep": "module/Bridging/LaporanCovid19V3/DataPasienCtrl"
+        },
+        {
+            "nameDep": "DataAlkesApdCtrl",
+            "urlDep": "module/Bridging/LaporanCovid19V3/DataAlkesApdCtrl"
+        },
+        {
+            "nameDep": "NakesTerinfeksiCtrl",
+            "urlDep": "module/Bridging/LaporanCovid19V3/NakesTerinfeksiCtrl"
+        },
+        {
+            "nameDep": "OksigenasiCtrl",
+            "urlDep": "module/Bridging/LaporanCovid19V3/OksigenasiCtrl"
+        },
+        {
+            "nameDep": "PemeriksaanPCRNakesCtrl",
+            "urlDep": "module/Bridging/LaporanCovid19V3/PemeriksaanPCRNakesCtrl"
         }
     ]
 }

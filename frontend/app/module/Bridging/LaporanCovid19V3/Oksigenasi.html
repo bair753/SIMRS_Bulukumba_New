@@ -1,0 +1,230 @@
+<style type="text/css">
+    .style-center {
+        display: inline-block;
+        text-align: center;
+        width: 100%;
+    }
+
+    .style-right {
+        display: inline-block;
+        text-align: right;
+        width: 100%;
+    }
+
+    .style-left {
+        display: inline-block;
+        text-align: left;
+        width: 100%;
+    }
+
+    .k-treeview .k-item {
+        background-color: #f9f9f9 !important;
+    }
+
+    .k-checkbox-label:before {
+        margin: 1px 0px 0px 6px;
+    }
+    
+	.k-grid .k-grid-header .k-header .k-link {
+		height: auto;
+	}
+
+	.k-grid .k-grid-header .k-header {
+		white-space: normal;
+	}
+
+	.k-grid .k-grid-header .k-header {
+		text-align: center;
+	}
+
+    fieldset {
+        border-radius: 5px;
+    }
+
+    .height-auto .k-grid-content {
+        max-height: initial;
+    }
+
+    .header-label {
+        font-family: 'Comfortaa', cursive, 'OpenSans-Regular';
+        font-weight: 400;
+        color: #41abf2;
+        font-size: 1.37em;
+    }
+</style>
+
+<div ng-show="dataVOloaded">
+	<div class="grid_12">
+        <div class="headerBox">
+            <h1 style="color: white;"><b>Rekap Data Harian Oksigenasi</b></h1>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <br>
+    <!-- baris 1 -->
+    <div class="grid_12">
+        <div class="grid_12 borderBox containerBorderBox">
+            <!-- Periode Pulang -->
+            <div class="grid_12">
+                <!-- AwalPeriode -->
+                <div class="grid_2">
+                    <label c-label item="item" c-label-text="Filter Tanggal"></label>
+                    <input style="width: 100%" k-ng-model="item.periodeAwal"  kendo-datetimepicker placeholer="yyyy-MM-dd" k-format="'yyyy-MM-dd'" parsedate="yyyy-MM-dd" />
+                </div>
+                <!-- Button Search -->
+                <div class="grid_1">
+                    <div class="grid_12">
+                        <label>&nbsp;</label>
+                    </div>
+
+                    <div class="grid_12">
+                        <button class="btnTemplate1" style="margin-left: 0;" ng-click="SearchData()">Cari</button>
+                    </div>
+                </div>
+            </div>
+            <!-- End Periode Pulang -->
+        </div>
+    </div>
+    <!-- end baris 1 -->
+    <!-- baris 2 -->
+    <div class="grid_12">
+        <div class="grid_12 ">
+            <div class="borderBox">
+                <kendo-grid id="kGrid" 
+                k-groupable="'true'" 
+                data-source="dataDaftarOksigen" 
+                options="columnDaftarOksigen" 
+                k-pageable="'true'"
+                k-sortable="'true'" 
+                k-resizable="'true'" 
+                k-selectable="'row'" 
+                k-ng-model="dataOksigenSelected"
+                ng-click="klikGrid(dataOksigenSelected)"
+                ng-dblclick="klikedit(dataOksigenSelected)"
+                class="height-auto"></kendo-grid>
+            </div>
+        </div>
+    </div>
+     <!-- end baris 2 -->
+</div>
+
+<!-- loading -->
+<div class="grid_12">
+    <div ng-include='"../app/template/Shared/TemplateLoading"'></div>
+</div>
+
+<!-- popUp -->
+<div kendo-window="popUp" k-title="'Laporan Pemeriksaan Swab PCR untuk Nakes'" k-width="1115" k-visible="false" k-on-open="win2visible = true" k-on-close="win2visible = false">
+    <div class="container_12">
+        <div class="grid_12">
+            <div class="grid_6">
+                <div class="grid_4">
+                    <label c-label style="margin-top: 6px;">Tanggal</label>
+                </div>
+                <div class="grid_8">
+                    <input style="width: 100%" k-ng-model="item.tanggal"  kendo-datetimepicker placeholer="yyyy-MM-dd" k-format="'yyyy-MM-dd'" parsedate="yyyy-MM-dd" />
+                </div>
+            </div>
+        </div>
+        <div class="grid_6">
+            <div class="grid_12">
+                <label class="header-label">Pemakaian</label>
+            </div>
+            <div class="grid_12" style="padding-top: 10px;">
+                <div class="grid_12">
+                    <div class="grid_4">
+                        <label c-label style="margin-top: 6px;">Oksigen Cair</label>
+                    </div>
+                    <div class="grid_8">
+                        <input style="width: 100%" type="number" ng-model="item.p_cair" class="k-textbox" placeholder="Jumlah" />
+                    </div>
+                    <!-- <div class="grid_4">
+                        <input style="width: 100%; " 
+                        kendo-combo-box 
+                        k-ng-model="item.list_p_cair" 
+                        k-data-text-field="'nama'" 
+                        k-filter="'contains'"
+                        k-data-value-field="'id'" 
+                        k-auto-bind="false"
+                        k-data-source="listmeterkubik" />
+                    </div> -->
+                </div>
+                <div class="grid_12">
+                    <div class="grid_4">
+                        <label c-label style="margin-top: 6px;">Tabung Kecil 1m3 (tabung)</label>
+                    </div>
+                    <div class="grid_8">
+                        <input style="width: 100%" type="number" ng-model="item.p_tabung_kecil" class="k-textbox" placeholder="Jumlah Tabung" />
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_4">
+                        <label c-label style="margin-top: 6px;">Tabung Sedang 2m3 (tabung)</label>
+                    </div>
+                    <div class="grid_8">
+                        <input style="width: 100%" type="number" ng-model="item.p_tabung_sedang" class="k-textbox" placeholder="Jumlah Tabung" />
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_4">
+                        <label c-label style="margin-top: 6px;">Tabung Besar 6m3 (tabung)</label>
+                    </div>
+                    <div class="grid_8">
+                        <input style="width: 100%" type="number" ng-model="item.p_tabung_besar" class="k-textbox" placeholder="Jumlah Tabung" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grid_6">
+            <div class="grid_12">
+                <label class="header-label">Ketersediaan</label>
+            </div>
+            <div class="grid_12" style="padding-top: 10px;">
+                <div class="grid_12">
+                    <div class="grid_4">
+                        <label c-label style="margin-top: 6px;">Oksigen Cair</label>
+                    </div>
+                    <div class="grid_8">
+                        <input style="width: 100%" type="number" ng-model="item.k_isi_cair" class="k-textbox" placeholder="Jumlah" />
+                    </div>
+                    <!-- <div class="grid_4">
+                        <input style="width: 100%;" 
+                        kendo-combo-box 
+                        k-ng-model="item.list_k_isi_cair" 
+                        k-data-text-field="'nama'" 
+                        k-filter="'contains'"
+                        k-data-value-field="'id'" 
+                        k-auto-bind="false"
+                        k-data-source="listmeterkubik" />
+                    </div> -->
+                </div>
+                <div class="grid_12">
+                    <div class="grid_4">
+                        <label c-label style="margin-top: 6px;">Tabung Kecil 1m3 (tabung)</label>
+                    </div>
+                    <div class="grid_8">
+                        <input style="width: 100%" type="number" ng-model="item.k_isi_tabung_kecil" class="k-textbox" placeholder="Jumlah Tabung" />
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_4">
+                        <label c-label style="margin-top: 6px;">Tabung Sedang 2m3 (tabung)</label>
+                    </div>
+                    <div class="grid_8">
+                        <input style="width: 100%" type="number" ng-model="item.k_isi_tabung_sedang" class="k-textbox" placeholder="Jumlah Tabung" />
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_4">
+                        <label c-label style="margin-top: 6px;">Tabung Besar 6m3 (tabung)</label>
+                    </div>
+                    <div class="grid_8">
+                        <input style="width: 100%" type="number" ng-model="item.k_isi_tabung_besar" class="k-textbox" placeholder="Jumlah Tabung" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <button class="k-button" ng-click="simpanformoksigen()" style="float:right;margin-top:4%">Simpan</button>
+    </div>
+</div>

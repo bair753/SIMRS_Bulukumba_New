@@ -18056,6 +18056,106 @@
         "define": "MedifirstService"
       }
     ]
+  },
+  {
+    "name": "DataPasien",
+    "url": "/RGF0YVBhc2llbg==",
+    "templateurl": "module/Bridging/LaporanCovid19V3/DataPasien.html",
+    "controller": "DataPasienCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      }
+    ]
+  },
+  {
+    "name": "DataAlkesApd",
+    "url": "/RGF0YUFsa2VzQXBk",
+    "templateurl": "module/Bridging/LaporanCovid19V3/DataAlkesApd.html",
+    "controller": "DataAlkesApdCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      }
+    ]
+  },
+  {
+    "name": "NakesTerinfeksi",
+    "url": "/TmFrZXNUZXJpbmZla3Np",
+    "templateurl": "module/Bridging/LaporanCovid19V3/NakesTerinfeksi.html",
+    "controller": "NakesTerinfeksiCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      }
+    ]
+  },
+  {
+    "name": "Oksigenasi",
+    "url": "/T2tzaWdlbmFzaQ==",
+    "templateurl": "module/Bridging/LaporanCovid19V3/Oksigenasi.html",
+    "controller": "OksigenasiCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      }
+    ]
+  },
+  {
+    "name": "PemeriksaanPCRNakes",
+    "url": "/UGVtZXJpa3NhYW5QQ1JOYWtlcw==",
+    "templateurl": "module/Bridging/LaporanCovid19V3/PemeriksaanPCRNakes.html",
+    "controller": "PemeriksaanPCRNakesCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      }
+    ]
   }
   
   

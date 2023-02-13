@@ -616,22 +616,24 @@ class BridgingSiranapV2Controller  extends ApiController
     }
 
     function getHeadersCovid($kdProfile){
-        if($kdProfile==16){
-            $user = '3673004';//banten
-            $password ='S!rs2020!!';//
-        }else if($kdProfile==17){
-            $user = '2171066S';//galang
-            $password ='S1Rs2020!!';//
-        }else if($kdProfile==18){
-            $user = '3171900S'; //wisma
-            $password ='S1Rs2020!!';//
-        }else if($kdProfile==21){
-            $user = '3201046'; //cbn
-            $password ='S!rs2020!!';//
-        }else if($kdProfile==25){
-            $user = '8271016'; //ternate
-            $password ='S!rs2020!!';//
-        }
+        // if($kdProfile==16){
+        //     $user = '3673004';//banten
+        //     $password ='S!rs2020!!';//
+        // }else if($kdProfile==17){
+        //     $user = '2171066S';//galang
+        //     $password ='S1Rs2020!!';//
+        // }else if($kdProfile==18){
+        //     $user = '3171900S'; //wisma
+        //     $password ='S1Rs2020!!';//
+        // }else if($kdProfile==21){
+        //     $user = '3201046'; //cbn
+        //     $password ='S!rs2020!!';//
+        // }else if($kdProfile==25){
+        //     $user = '8271016'; //ternate
+        //     $password ='S!rs2020!!';//
+        // }
+        $user = '1809R101';
+        $password = 'S!rs2020!!';
 
         date_default_timezone_set('UTC');
         $tStamp = strval(time()-strtotime('1970-01-01 00:00:00'));

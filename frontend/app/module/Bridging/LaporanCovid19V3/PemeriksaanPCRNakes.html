@@ -1,0 +1,504 @@
+<style type="text/css">
+    .style-center {
+        display: inline-block;
+        text-align: center;
+        width: 100%;
+    }
+
+    .style-right {
+        display: inline-block;
+        text-align: right;
+        width: 100%;
+    }
+
+    .style-left {
+        display: inline-block;
+        text-align: left;
+        width: 100%;
+    }
+
+    .k-treeview .k-item {
+        background-color: #f9f9f9 !important;
+    }
+
+    .k-checkbox-label:before {
+        margin: 1px 0px 0px 6px;
+    }
+    
+	.k-grid .k-grid-header .k-header .k-link {
+		height: auto;
+	}
+
+	.k-grid .k-grid-header .k-header {
+		white-space: normal;
+	}
+
+	.k-grid .k-grid-header .k-header {
+		text-align: center;
+	}
+
+    fieldset {
+        border-radius: 5px;
+    }
+
+    .height-auto .k-grid-content {
+        max-height: initial;
+    }
+
+    .header-label {
+        font-family: 'Comfortaa', cursive, 'OpenSans-Regular';
+        font-weight: 400;
+        color: #41abf2;
+        font-size: 1.37em;
+    }
+</style>
+
+<div ng-show="dataVOloaded">
+	<div class="grid_12">
+        <div class="headerBox">
+            <h1 style="color: white;"><b>Rekap Pemeriksaan PCR Untuk Nakes</b></h1>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <br>
+     <!-- baris 1 -->
+    <div class="grid_12">
+        <div class="grid_12 borderBox containerBorderBox">
+            <!-- Periode Pulang -->
+            <div class="grid_12">
+                <!-- AwalPeriode -->
+                <div class="grid_2">
+                    <label c-label item="item" c-label-text="Filter Tanggal"></label>
+                    <input style="width: 100%" k-ng-model="item.periodeAwal"  kendo-datetimepicker placeholer="yyyy-MM-dd" k-format="'yyyy-MM-dd'" parsedate="yyyy-MM-dd" />
+                </div>
+                <!-- Button Search -->
+                <div class="grid_1">
+                    <div class="grid_12">
+                        <label>&nbsp;</label>
+                    </div>
+
+                    <div class="grid_12">
+                        <button class="btnTemplate1" style="margin-left: 0;" ng-click="SearchData()">Cari</button>
+                    </div>
+                </div>
+            </div>
+            <!-- End Periode Pulang -->
+        </div>
+    </div>
+    <!-- end baris 1 -->
+    <!-- baris 2 -->
+    <div class="grid_12">
+        <div class="grid_12 ">
+            <div class="borderBox">
+                <kendo-grid id="kGrid" 
+                k-groupable="'true'" 
+                data-source="dataDaftarPCRNakes" 
+                options="columnDaftarPCRNakes" 
+                k-pageable="'true'"
+                k-sortable="'true'" 
+                k-resizable="'true'" 
+                k-selectable="'row'" 
+                k-ng-model="dataPCRNakesSelected"
+                ng-click="klikGrid(dataPCRNakesSelected)"
+                ng-dblclick="klikedit(dataPCRNakesSelected)"
+                class="height-auto"></kendo-grid>
+            </div>
+        </div>
+    </div>
+     <!-- end baris 2 -->
+</div>
+
+<!-- loading -->
+<div class="grid_12">
+    <div ng-include='"../app/template/Shared/TemplateLoading"'></div>
+</div>
+
+<!-- popUp -->
+<div kendo-window="popUp" k-title="'Laporan Pemeriksaan Swab PCR untuk Nakes'" k-width="1115" k-visible="false" k-on-open="win2visible = true" k-on-close="win2visible = false">
+    <div class="container_12">
+        <div class="grid_12">
+            <div class="grid_6">
+                <div class="grid_4">
+                    <label c-label style="margin-top: 6px;">Tanggal</label>
+                </div>
+                <div class="grid_8">
+                    <input style="width: 100%" k-ng-model="item.tanggal"  kendo-datetimepicker placeholer="yyyy-MM-dd" k-format="'yyyy-MM-dd'" parsedate="yyyy-MM-dd" />
+                </div>
+            </div>
+        </div>
+        <div class="grid_6">
+            <div class="grid_12">
+                <label class="header-label">Dokter Umum</label>
+            </div>
+            <div class="grid_12" style="padding-top: 10px;">
+                <div class="grid_12">
+                    <div class="grid_4">
+                        <label c-label style="margin-top: 6px;">Jumlah Tenaga</label>
+                    </div>
+                    <div class="grid_8">
+                        <input style="width: 100%" type="number" ng-model="item.jumlah_dokter_umum" class="k-textbox" placeholder="Jumlah" />
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_4">
+                        <label c-label style="margin-top: 6px;">Yang Sudah Diperiksa Swab PCR</label>
+                    </div>
+                    <div class="grid_8">
+                        <input style="width: 100%" type="number" ng-model="item.sudah_dokter_umum" class="k-textbox" placeholder="Jumlah" />
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_4">
+                        <label c-label style="margin-top: 6px;">Hasil PCR Terkonfirmasi</label>
+                    </div>
+                    <div class="grid_8">
+                        <input style="width: 100%" type="number" ng-model="item.hasil_dokter_umum" class="k-textbox" placeholder="Jumlah" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grid_6">
+            <div class="grid_12">
+                <label class="header-label">Dokter Spesialis</label>
+            </div>
+            <div class="grid_12" style="padding-top: 10px;">
+                <div class="grid_12">
+                    <div class="grid_4">
+                        <label c-label style="margin-top: 6px;">Jumlah Tenaga</label>
+                    </div>
+                    <div class="grid_8">
+                        <input style="width: 100%" type="number" ng-model="item.jumlah_dokter_spesialis" class="k-textbox" placeholder="Jumlah" />
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_4">
+                        <label c-label style="margin-top: 6px;">Yang Sudah Diperiksa Swab PCR</label>
+                    </div>
+                    <div class="grid_8">
+                        <input style="width: 100%" type="number" ng-model="item.sudah_dokter_spesialis" class="k-textbox" placeholder="Jumlah" />
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_4">
+                        <label c-label style="margin-top: 6px;">Hasil PCR Terkonfirmasi</label>
+                    </div>
+                    <div class="grid_8">
+                        <input style="width: 100%" type="number" ng-model="item.hasil_dokter_spesialis" class="k-textbox" placeholder="Jumlah" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grid_6">
+            <div class="grid_12">
+                <label class="header-label">Dokter Gigi</label>
+            </div>
+            <div class="grid_12" style="padding-top: 10px;">
+                <div class="grid_12">
+                    <div class="grid_4">
+                        <label c-label style="margin-top: 6px;">Jumlah Tenaga</label>
+                    </div>
+                    <div class="grid_8">
+                        <input style="width: 100%" type="number" ng-model="item.jumlah_dokter_gigi" class="k-textbox" placeholder="Jumlah" />
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_4">
+                        <label c-label style="margin-top: 6px;">Yang Sudah Diperiksa Swab PCR</label>
+                    </div>
+                    <div class="grid_8">
+                        <input style="width: 100%" type="number" ng-model="item.sudah_dokter_gigi" class="k-textbox" placeholder="Jumlah" />
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_4">
+                        <label c-label style="margin-top: 6px;">Hasil PCR Terkonfirmasi</label>
+                    </div>
+                    <div class="grid_8">
+                        <input style="width: 100%" type="number" ng-model="item.hasil_dokter_gigi" class="k-textbox" placeholder="Jumlah" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grid_6">
+            <div class="grid_12">
+                <label class="header-label">Residen</label>
+            </div>
+            <div class="grid_12" style="padding-top: 10px;">
+                <div class="grid_12">
+                    <div class="grid_4">
+                        <label c-label style="margin-top: 6px;">Jumlah Tenaga</label>
+                    </div>
+                    <div class="grid_8">
+                        <input style="width: 100%" type="number" ng-model="item.jumlah_residen" class="k-textbox" placeholder="Jumlah" />
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_4">
+                        <label c-label style="margin-top: 6px;">Yang Sudah Diperiksa Swab PCR</label>
+                    </div>
+                    <div class="grid_8">
+                        <input style="width: 100%" type="number" ng-model="item.sudah_residen" class="k-textbox" placeholder="Jumlah" />
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_4">
+                        <label c-label style="margin-top: 6px;">Hasil PCR Terkonfirmasi</label>
+                    </div>
+                    <div class="grid_8">
+                        <input style="width: 100%" type="number" ng-model="item.hasil_residen" class="k-textbox" placeholder="Jumlah" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grid_6">
+            <div class="grid_12">
+                <label class="header-label">Perawat</label>
+            </div>
+            <div class="grid_12" style="padding-top: 10px;">
+                <div class="grid_12">
+                    <div class="grid_4">
+                        <label c-label style="margin-top: 6px;">Jumlah Tenaga</label>
+                    </div>
+                    <div class="grid_8">
+                        <input style="width: 100%" type="number" ng-model="item.jumlah_perawat" class="k-textbox" placeholder="Jumlah" />
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_4">
+                        <label c-label style="margin-top: 6px;">Yang Sudah Diperiksa Swab PCR</label>
+                    </div>
+                    <div class="grid_8">
+                        <input style="width: 100%" type="number" ng-model="item.sudah_perawat" class="k-textbox" placeholder="Jumlah" />
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_4">
+                        <label c-label style="margin-top: 6px;">Hasil PCR Terkonfirmasi</label>
+                    </div>
+                    <div class="grid_8">
+                        <input style="width: 100%" type="number" ng-model="item.hasil_perawat" class="k-textbox" placeholder="Jumlah" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grid_6">
+            <div class="grid_12">
+                <label class="header-label">Bidan</label>
+            </div>
+            <div class="grid_12" style="padding-top: 10px;">
+                <div class="grid_12">
+                    <div class="grid_4">
+                        <label c-label style="margin-top: 6px;">Jumlah Tenaga</label>
+                    </div>
+                    <div class="grid_8">
+                        <input style="width: 100%" type="number" ng-model="item.jumlah_bidan" class="k-textbox" placeholder="Jumlah" />
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_4">
+                        <label c-label style="margin-top: 6px;">Yang Sudah Diperiksa Swab PCR</label>
+                    </div>
+                    <div class="grid_8">
+                        <input style="width: 100%" type="number" ng-model="item.sudah_bidan" class="k-textbox" placeholder="Jumlah" />
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_4">
+                        <label c-label style="margin-top: 6px;">Hasil PCR Terkonfirmasi</label>
+                    </div>
+                    <div class="grid_8">
+                        <input style="width: 100%" type="number" ng-model="item.hasil_bidan" class="k-textbox" placeholder="Jumlah" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grid_6">
+            <div class="grid_12">
+                <label class="header-label">Apoteker</label>
+            </div>
+            <div class="grid_12" style="padding-top: 10px;">
+                <div class="grid_12">
+                    <div class="grid_4">
+                        <label c-label style="margin-top: 6px;">Jumlah Tenaga</label>
+                    </div>
+                    <div class="grid_8">
+                        <input style="width: 100%" type="number" ng-model="item.jumlah_apoteker" class="k-textbox" placeholder="Jumlah" />
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_4">
+                        <label c-label style="margin-top: 6px;">Yang Sudah Diperiksa Swab PCR</label>
+                    </div>
+                    <div class="grid_8">
+                        <input style="width: 100%" type="number" ng-model="item.sudah_apoteker" class="k-textbox" placeholder="Jumlah" />
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_4">
+                        <label c-label style="margin-top: 6px;">Hasil PCR Terkonfirmasi</label>
+                    </div>
+                    <div class="grid_8">
+                        <input style="width: 100%" type="number" ng-model="item.hasil_apoteker" class="k-textbox" placeholder="Jumlah" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grid_6">
+            <div class="grid_12">
+                <label class="header-label">Radiografer</label>
+            </div>
+            <div class="grid_12" style="padding-top: 10px;">
+                <div class="grid_12">
+                    <div class="grid_4">
+                        <label c-label style="margin-top: 6px;">Jumlah Tenaga</label>
+                    </div>
+                    <div class="grid_8">
+                        <input style="width: 100%" type="number" ng-model="item.jumlah_radiografer" class="k-textbox" placeholder="Jumlah" />
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_4">
+                        <label c-label style="margin-top: 6px;">Yang Sudah Diperiksa Swab PCR</label>
+                    </div>
+                    <div class="grid_8">
+                        <input style="width: 100%" type="number" ng-model="item.sudah_radiografer" class="k-textbox" placeholder="Jumlah" />
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_4">
+                        <label c-label style="margin-top: 6px;">Hasil PCR Terkonfirmasi</label>
+                    </div>
+                    <div class="grid_8">
+                        <input style="width: 100%" type="number" ng-model="item.hasil_radiografer" class="k-textbox" placeholder="Jumlah" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grid_6">
+            <div class="grid_12">
+                <label class="header-label">Analis Lab</label>
+            </div>
+            <div class="grid_12" style="padding-top: 10px;">
+                <div class="grid_12">
+                    <div class="grid_4">
+                        <label c-label style="margin-top: 6px;">Jumlah Tenaga</label>
+                    </div>
+                    <div class="grid_8">
+                        <input style="width: 100%" type="number" ng-model="item.jumlah_analis_lab" class="k-textbox" placeholder="Jumlah" />
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_4">
+                        <label c-label style="margin-top: 6px;">Yang Sudah Diperiksa Swab PCR</label>
+                    </div>
+                    <div class="grid_8">
+                        <input style="width: 100%" type="number" ng-model="item.sudah_analis_lab" class="k-textbox" placeholder="Jumlah" />
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_4">
+                        <label c-label style="margin-top: 6px;">Hasil PCR Terkonfirmasi</label>
+                    </div>
+                    <div class="grid_8">
+                        <input style="width: 100%" type="number" ng-model="item.hasil_analis_lab" class="k-textbox" placeholder="Jumlah" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grid_6">
+            <div class="grid_12">
+                <label class="header-label">Co-Ass</label>
+            </div>
+            <div class="grid_12" style="padding-top: 10px;">
+                <div class="grid_12">
+                    <div class="grid_4">
+                        <label c-label style="margin-top: 6px;">Jumlah Tenaga</label>
+                    </div>
+                    <div class="grid_8">
+                        <input style="width: 100%" type="number" ng-model="item.jumlah_co_ass" class="k-textbox" placeholder="Jumlah" />
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_4">
+                        <label c-label style="margin-top: 6px;">Yang Sudah Diperiksa Swab PCR</label>
+                    </div>
+                    <div class="grid_8">
+                        <input style="width: 100%" type="number" ng-model="item.sudah_co_ass" class="k-textbox" placeholder="Jumlah" />
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_4">
+                        <label c-label style="margin-top: 6px;">Hasil PCR Terkonfirmasi</label>
+                    </div>
+                    <div class="grid_8">
+                        <input style="width: 100%" type="number" ng-model="item.hasil_co_ass" class="k-textbox" placeholder="Jumlah" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grid_6">
+            <div class="grid_12">
+                <label class="header-label">Internship</label>
+            </div>
+            <div class="grid_12" style="padding-top: 10px;">
+                <div class="grid_12">
+                    <div class="grid_4">
+                        <label c-label style="margin-top: 6px;">Jumlah Tenaga</label>
+                    </div>
+                    <div class="grid_8">
+                        <input style="width: 100%" type="number" ng-model="item.jumlah_internship" class="k-textbox" placeholder="Jumlah" />
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_4">
+                        <label c-label style="margin-top: 6px;">Yang Sudah Diperiksa Swab PCR</label>
+                    </div>
+                    <div class="grid_8">
+                        <input style="width: 100%" type="number" ng-model="item.sudah_internship" class="k-textbox" placeholder="Jumlah" />
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_4">
+                        <label c-label style="margin-top: 6px;">Hasil PCR Terkonfirmasi</label>
+                    </div>
+                    <div class="grid_8">
+                        <input style="width: 100%" type="number" ng-model="item.hasil_internship" class="k-textbox" placeholder="Jumlah" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grid_6">
+            <div class="grid_12">
+                <label class="header-label">Nakes Lainnya</label>
+            </div>
+            <div class="grid_12" style="padding-top: 10px;">
+                <div class="grid_12">
+                    <div class="grid_4">
+                        <label c-label style="margin-top: 6px;">Jumlah Tenaga</label>
+                    </div>
+                    <div class="grid_8">
+                        <input style="width: 100%" type="number" ng-model="item.jumlah_nakes_lainnya" class="k-textbox" placeholder="Jumlah" />
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_4">
+                        <label c-label style="margin-top: 6px;">Yang Sudah Diperiksa Swab PCR</label>
+                    </div>
+                    <div class="grid_8">
+                        <input style="width: 100%" type="number" ng-model="item.sudah_nakes_lainnya" class="k-textbox" placeholder="Jumlah" />
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_4">
+                        <label c-label style="margin-top: 6px;">Hasil PCR Terkonfirmasi</label>
+                    </div>
+                    <div class="grid_8">
+                        <input style="width: 100%" type="number" ng-model="item.hasil_nakes_lainnya" class="k-textbox" placeholder="Jumlah" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <button class="k-button" ng-click="simpanformpcrnakes()" ng-show="isSimpan" style="float:right;margin-top:4%">Simpan</button>
+    </div>
+</div>

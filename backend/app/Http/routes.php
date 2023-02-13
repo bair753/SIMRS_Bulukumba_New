@@ -353,6 +353,13 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
               Route::post('bridging/bpjs/save-data-mappingdkoterbpjs','Bridging\BridgingBPJSV2Controller@saveMappingDokterBpjsDokterRs');
               Route::get('bridging/bpjs/get-data-mappingdkoterbpjs', 'Bridging\BridgingBPJSV2Controller@getDaftarMappingDokterBpjsToDokterRs');
               Route::post('bridging/bpjs/hapus-data-mappingdkoterbpjs','Bridging\BridgingBPJSV2Controller@saveHapusMappingDokterBpjsDokterRs');
+
+              Route::post('bridging/kemenkes/tools', 'Bridging\BridgingSirsOnlineV3Controller@kemenkesTools');
+              Route::get('bridging/kemenkes/get-data-pasien', 'Bridging\BridgingSirsOnlineV3Controller@getDataPasien');
+              Route::get('bridging/kemenkes/get-data-pasien-reg', 'Bridging\BridgingSirsOnlineV3Controller@getDataPasienbyTglreg');
+              Route::post('bridging/kemenkes/save-id-bridging', 'Bridging\BridgingSirsOnlineV3Controller@saveIdBridging');
+              Route::post('bridging/kemenkes/tools/login', 'Bridging\BridgingSirsOnlineV3Controller@LoginBearAuth');
+              Route::post('bridging/kemenkes/tools/inserttemp', 'Bridging\BridgingSirsOnlineV3Controller@insertTemp');
               
             // });
             // Route::group(['prefix' => 'farmasi'], function () {

@@ -1,0 +1,597 @@
+<style type="text/css">
+    .style-center {
+        display: inline-block;
+        text-align: center;
+        width: 100%;
+    }
+
+    .style-right {
+        display: inline-block;
+        text-align: right;
+        width: 100%;
+    }
+
+    .style-left {
+        display: inline-block;
+        text-align: left;
+        width: 100%;
+    }
+
+    .k-treeview .k-item {
+        background-color: #f9f9f9 !important;
+    }
+
+    .k-checkbox-label:before {
+        margin: 1px 0px 0px 6px;
+    }
+    
+	.k-grid .k-grid-header .k-header .k-link {
+		height: auto;
+	}
+
+	.k-grid .k-grid-header .k-header {
+		white-space: normal;
+	}
+
+	.k-grid .k-grid-header .k-header {
+		text-align: center;
+	}
+
+    fieldset {
+        border-radius: 5px;
+    }
+
+    .height-auto .k-grid-content {
+        max-height: initial;
+    }
+</style>
+
+<div ng-show="dataVOloaded">
+	<div class="grid_12">
+        <div class="headerBox">
+            <h1 style="color: white;"><b>Data Pasien</b></h1>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <br/>
+    <!-- baris 1 -->
+    <div class="grid_12">
+        <div class="grid_12 borderBox containerBorderBox">
+
+            <!-- Periode Pulang -->
+            <div class="grid_12">
+
+                <div class="grid_4">
+                    <!-- AwalPeriode -->
+                    <div class="grid_6 padDatePicker">
+                        <label c-label item="item" c-label-text="Filter Tanggal Masuk"></label>
+                        <input style="width: 100%" k-ng-model="pencarian.periodeAwal"  kendo-datetimepicker placeholer="yyyy-MM-dd" k-format="'yyyy-MM-dd'" parsedate="yyyy-MM-dd" />
+                    </div>
+
+                    <!-- AkhirPeriode -->
+                    <div class="grid_6 padDatePicker">
+                        <label>&nbsp;&nbsp;&nbsp;</label>
+                        <input style="width: 100%" k-ng-model="pencarian.periodeAkhir"  kendo-datetimepicker k-max="now" placeholer="yyyy-MM-dd" k-format="'yyyy-MM-dd'" parsedate="yyyy-MM-dd" />
+                    </div>
+                    
+                </div>
+                <div class="grid_2" style="margin-top: 2px;">
+                    <label c-label item="item" c-label-text="Ruangan"></label>
+                    <input style="width: 100%;" kendo-combo-box k-ng-model="item.ruangan"
+                        k-data-text-field="'namaruangan'" k-data-value-field="'id'" k-filter="'contains'"
+                        k-auto-bind="false" k-data-source="listRuangan" />
+                </div>
+                <div class="grid_2" style="margin-top: 2px;">
+                    <label c-label item="item" c-label-text="No RM"></label>
+                    <input c-text-box type="input" filter="" class="k-textbox" ng-model="item.norm" />
+                </div>
+                <div class="grid_2" style="margin-top: 2px;">
+                    <label c-label item="item" c-label-text="Nama Pasien"></label>
+                    <input c-text-box type="input" filter="" class="k-textbox" ng-model="item.namapasien" />
+                </div>
+
+                <!-- Button Search -->
+                <div class="grid_1">
+                    <div class="grid_12">
+                        <label>&nbsp;</label>
+                    </div>
+
+                    <div class="grid_12">
+                        <button class="btnTemplate1" style="margin-left: 0;" ng-click="SearchData()">Cari</button>
+                    </div>
+                </div>
+                
+            </div>
+
+        </div>
+    </div>
+    <!-- end baris 1 -->
+
+    <!-- baris 2 -->
+    <div class="grid_12">
+        <div class="headerBox">
+            <p>Daftar Pasien</p>
+        </div>
+        <div class="grid_12">
+            <div id="kGrid"  
+            kendo-grid
+            k-data-source="dataDaftarPasien" 
+            options="columnDaftarPasien"
+            k-selectable="'row'" 
+            k-sortable="'true'"
+            k-ng-model="dataPasienSelected"
+            ng-click="klikGrid(dataPasienSelected)"
+            class="height-auto">
+            </div>
+        </div>
+    </div>
+    <!-- end baris 2 -->
+
+    <!-- baris 3 -->
+    <div class="grid_12" style="padding-bottom: 50px;">
+        <div class="grid_2">
+            <button class="btnTemplate1" style="margin: 0;" ng-click="update()"><i class="fa fa-paper-plane" aria-hidden="true"></i> Update</button>
+        </div>
+        <div class="grid_2">
+            <button class="btnTemplate1" style="margin: 0;" ng-click="diagnosa()"><i class="fa fa-asterisk" aria-hidden="true"></i> Diagnosa</button>
+        </div>
+        <div class="grid_2">
+            <button class="btnTemplate1" style="margin: 0;" ng-click="terapi()"><i class="fa fa-thermometer-quarter" aria-hidden="true"></i> Terapi</button>
+        </div>
+        <div class="grid_2">
+            <button class="btnTemplate1" style="margin: 0;" ng-click="lab()"><i class="fa fa-flask" aria-hidden="true"></i> Pemeriksaan Lab</button>
+        </div>
+        <div class="grid_2">
+            <button class="btnTemplate1" style="margin: 0;" ng-click="keluar()"><i class="fa fa-share" aria-hidden="true"></i> Status Keluar</button>
+        </div>
+        <div class="grid_2">
+            <button class="btnTemplate1" style="margin: 0;" ng-click="komorbid()"><i class="fa fa-tint" aria-hidden="true"></i> Jenis Komorbid</button>
+        </div>
+        <div class="grid_2">
+            <button class="btnTemplate1" style="margin: 0;" ng-click="vaksin()"><i class="fa fa-ticket" aria-hidden="true"></i> Detail Vaksinasi</button>
+        </div>
+    </div>
+    <!-- end baris 3 -->
+</div>
+
+<!-- loading -->
+<div class="grid_12">
+    <div ng-include='"../app/template/Shared/TemplateLoading"'></div>
+</div>
+
+<div kendo-window="updateSirs" k-title="'Kirim Data'" k-width="551" k-visible="false" k-on-open="win2visible = true" k-on-close="win2visible = false">
+    <div class="grid_12">
+        <div class="grid_12" style="padding-top: 10px;">
+            <label c-label>Nama Pasien</label>
+            <input style="width: 100%" type="text" ng-model="item.namapasien" class="k-textbox" disabled />
+        </div>
+        <div class="grid_12" style="padding-top: 10px;">
+            <label c-label>Asal Pasien</label>
+            <input style="width: 100%; " 
+                kendo-combo-box 
+                k-ng-model="item.asalpasien" 
+                k-data-text-field="'nama'" 
+                k-filter="'contains'"
+                k-data-value-field="'id'" 
+                k-auto-bind="false"
+                k-data-source="listasalpasien" />
+        </div>
+        <div class="grid_12" style="padding-top: 10px;">
+            <label c-label>Pekerjaan</label>
+            <input style="width: 100%; " 
+                kendo-combo-box 
+                k-ng-model="item.pekerjaan" 
+                k-data-text-field="'nama'" 
+                k-filter="'contains'"
+                k-data-value-field="'id'" 
+                k-auto-bind="false"
+                k-data-source="listpekerjaan" />
+        </div>
+        <div class="grid_12" style="padding-top: 10px;">
+            <label c-label>Jenis Pasien</label>
+            <input style="width: 100%; " 
+                kendo-combo-box 
+                k-ng-model="item.jenispasien" 
+                k-data-text-field="'nama'" 
+                k-filter="'contains'"
+                k-data-value-field="'id'" 
+                k-auto-bind="false"
+                k-data-source="listjenispasien"
+                k-on-change="onchagejenispasien(item.jenispasien)" />
+        </div>
+        <div class="grid_12" style="padding-top: 10px;">
+            <label c-label>Status Pasien</label>
+            <input style="width: 100%; " 
+                kendo-combo-box 
+                k-ng-model="item.statuspasien" 
+                k-data-text-field="'nama'" 
+                k-filter="'contains'"
+                k-data-value-field="'id'" 
+                k-auto-bind="false"
+                k-data-source="liststatuspasien" />
+        </div>
+        <div class="grid_12" style="padding-top: 10px;">
+            <label c-label>Tanggal Onset Gejala</label>
+            <input style="width: 100%" k-ng-model="item.tglonsetgejala"  kendo-datepicker placeholer="yyyy-MM-dd" k-format="'yyyy-MM-dd'" parsedate="yyyy-MM-dd" />
+        </div>
+        <div class="grid_12" style="padding-top: 10px;">
+            <label c-label>Gejala Covid 19</label>
+            <input style="width: 100%; " 
+                kendo-combo-box 
+                k-ng-model="item.kelompokgejala" 
+                k-data-text-field="'nama'" 
+                k-filter="'contains'"
+                k-data-value-field="'id'" 
+                k-auto-bind="false"
+                k-data-source="listkelompokgejala" 
+                k-on-change="onchagekelompokgejala(item.kelompokgejala)" />
+        </div>
+        <div class="grid_12" style="padding-top: 10px;" ng-show="showgejala">
+            <div class="container_12">
+                <div ng-repeat="data in checkgejala | orderBy:'id'" class="grid_6">
+                    <input type="checkbox" class="k-checkbox" id="item.gejala{{data.id}}" ng-model="item.gejala[data.id]">
+                    <label class="k-checkbox-label" for="item.gejala{{data.id}}">&nbsp; {{data.nama}}</label>
+                </div>
+            </div>
+        </div>
+        <div class="grid_12" style="padding-top: 15px;">
+            <label c-label>Co Insiden</label>
+            <input style="width: 100%; " 
+                kendo-combo-box 
+                k-ng-model="item.coinsiden" 
+                k-data-text-field="'nama'" 
+                k-filter="'contains'"
+                k-data-value-field="'id'" 
+                k-auto-bind="false"
+                k-data-source="listcoinsiden" />
+        </div>
+        <div class="grid_12" style="padding-top: 10px;" ng-show="showoksigen">
+            <label c-label>Alat Oksigen</label>
+            <input style="width: 100%; " 
+                kendo-combo-box 
+                k-ng-model="item.alatoksigen" 
+                k-data-text-field="'nama'" 
+                k-filter="'contains'"
+                k-data-value-field="'id'" 
+                k-auto-bind="false"
+                k-data-source="listalatoksigen" />
+        </div>
+        <div class="grid_12" style="padding-top: 10px;">
+            <label c-label>Status Rawat</label>
+            <input style="width: 100%; " 
+                kendo-combo-box 
+                k-ng-model="item.statusrawat" 
+                k-data-text-field="'nama'" 
+                k-filter="'contains'"
+                k-data-value-field="'id'" 
+                k-auto-bind="false"
+                k-data-source="liststatusrawat"
+                ng-disabled="statusrawatdis" />
+        </div>
+        <!-- <div class="grid_12" style="padding-top: 10px;">
+            <label c-label>Vaksinasi</label>
+            <input style="width: 100%; " 
+                kendo-combo-box 
+                k-ng-model="item.vaksinasi" 
+                k-data-text-field="'nama'" 
+                k-filter="'contains'"
+                k-data-value-field="'id'" 
+                k-auto-bind="false"
+                k-data-source="listvaksinasi" />
+        </div> -->
+        <div class="grid_12" style="padding-top: 10px;">
+            <label c-label>Penyintas</label>
+            <input style="width: 100%; " 
+                kendo-combo-box 
+                k-ng-model="item.penyitas" 
+                k-data-text-field="'nama'" 
+                k-filter="'contains'"
+                k-data-value-field="'id'" 
+                k-auto-bind="false"
+                k-data-source="listpenyitas" />
+        </div>
+        <button class="k-button" ng-click="kirimdatakesirs()" style="float:right;margin-top:4%">Kirim</button>
+    </div>
+</div>
+<div kendo-window="diagnosaSirs" k-title="'Diagnosa Pasien Covid 19'" k-width="696" k-visible="false" k-on-open="win2visible = true" k-on-close="win2visible = false">
+    <div class="grid_12">
+        <div class="grid_12" style="padding-top: 10px;">
+            <label c-label>Nama Pasien</label>
+            <input style="width: 100%" type="text" ng-model="item.namapasien" class="k-textbox" disabled />
+        </div>
+        <div class="grid_12" style="padding-top: 10px;">
+            <label c-label>Diagnosa</label>
+            <input style="width: 100%; " 
+                kendo-combo-box 
+                k-ng-model="item.diagnosa" 
+                k-data-text-field="'kodeNama'" 
+                k-filter="'contains'"
+                k-data-value-field="'kdDiagnosa'" 
+                k-auto-bind="false"
+                k-data-source="listDiagnosa" />
+        </div>
+        <div class="grid_12" style="padding-top: 10px;">
+            <label c-label>Jenis Diagnosa</label>
+            <input style="width: 100%; " 
+                kendo-combo-box 
+                k-ng-model="item.jenisdiagnosa" 
+                k-data-text-field="'nama'" 
+                k-filter="'contains'"
+                k-data-value-field="'id'" 
+                k-auto-bind="false"
+                k-data-source="listjenisdiagnosa" />
+        </div>
+        <div class="grid_12" style="padding-top: 10px;">
+            <div class="headerBox">
+                <p>Daftar Diagnosa</p>
+            </div>
+            <div class="grid_12">
+                <div id="kGrid"  
+                kendo-grid
+                k-data-source="dataDiagnosa" 
+                options="columnDiagnosa"
+                k-selectable="'row'" 
+                k-sortable="'true'"
+                k-ng-model="dataDiagnosaSelected"
+                ng-click="KlikDiagnosa(dataDiagnosaSelected)"
+                class="height-auto">
+                </div>
+            </div>
+        </div>
+        <button class="k-button" ng-click="simpandiagnosadatakesirs()" style="float:right;margin-top:4%">Simpan</button>
+    </div>
+</div>
+<div kendo-window="komorbidSirs" k-title="'Komorbid Pasien Covid 19'" k-width="696" k-visible="false" k-on-open="win2visible = true" k-on-close="win2visible = false">
+    <div class="grid_12">
+        <div class="grid_12" style="padding-top: 10px;">
+            <label c-label>Nama Pasien</label>
+            <input style="width: 100%" type="text" ng-model="item.namapasien" class="k-textbox" disabled />
+        </div>
+        <div class="grid_12" style="padding-top: 10px;">
+            <label c-label>Komorbid</label>
+            <input style="width: 100%; " 
+                kendo-combo-box 
+                k-ng-model="item.komorbid" 
+                k-data-text-field="'nama'" 
+                k-filter="'contains'"
+                k-data-value-field="'id'" 
+                k-auto-bind="false"
+                k-data-source="listkomorbid" />
+        </div>
+        <div class="grid_12" style="padding-top: 10px;">
+            <div class="headerBox">
+                <p>Daftar Komorbid</p>
+            </div>
+            <div class="grid_12">
+                <div id="kGrid"  
+                kendo-grid
+                k-data-source="dataKomorbid" 
+                options="columnKomorbid"
+                k-selectable="'row'" 
+                k-sortable="'true'"
+                k-ng-model="dataKomorbidSelected"
+                ng-click="KlikKomorbid(dataKomorbidSelected)"
+                class="height-auto">
+                </div>
+            </div>
+        </div>
+        <button class="k-button" ng-click="simpankomorbiddatakesirs()" style="float:right;margin-top:4%">Simpan</button>
+    </div>
+</div>
+<div kendo-window="terapiSirs" k-title="'Pemberian Terapi Pasien Covid 19'" k-width="696" k-visible="false" k-on-open="win2visible = true" k-on-close="win2visible = false">
+    <div class="grid_12">
+        <div class="grid_12" style="padding-top: 10px;">
+            <label c-label>Nama Pasien</label>
+            <input style="width: 100%" type="text" ng-model="item.namapasien" class="k-textbox" disabled />
+        </div>
+        <div class="grid_12" style="padding-top: 10px;">
+            <label c-label>Terapi</label>
+            <input style="width: 100%; " 
+            kendo-combo-box 
+            k-ng-model="item.terapi" 
+            k-data-text-field="'nama'" 
+            k-filter="'contains'"
+            k-data-value-field="'id'" 
+            k-auto-bind="false"
+            k-data-source="listterapi" />
+        </div>
+        <div class="grid_12" style="padding-top: 10px;">
+            <label c-label>Jumlah</label>
+            <input style="width: 100%" type="number" ng-model="item.jumlahterapi" class="k-textbox" />
+        </div>
+        <div class="grid_12" style="padding-top: 10px;">
+            <div class="headerBox">
+                <p>Daftar Terapi</p>
+            </div>
+            <div class="grid_12">
+                <div id="kGrid"  
+                kendo-grid
+                k-data-source="dataTerapi" 
+                options="columnTerapi"
+                k-selectable="'row'" 
+                k-sortable="'true'"
+                k-ng-model="dataTerapiSelected"
+                ng-click="KlikTerapi(dataTerapiSelected)"
+                class="height-auto">
+                </div>
+            </div>
+        </div>
+        <button class="k-button" ng-click="simpanterapidatakesirs()" style="float:right;margin-top:4%">Simpan</button>
+    </div>
+</div>
+<div kendo-window="vaksinSirs" k-title="'Vaksin Pasien Covid 19'" k-width="696" k-visible="false" k-on-open="win2visible = true" k-on-close="win2visible = false">
+    <div class="grid_12">
+        <div class="grid_12" style="padding-top: 10px;">
+            <label c-label>Nama Pasien</label>
+            <input style="width: 100%" type="text" ng-model="item.namapasien" class="k-textbox" disabled />
+        </div>
+        <div class="grid_12" style="padding-top: 10px;">
+            <label c-label>Dosis Vaksin</label>
+            <input style="width: 100%; " 
+            kendo-combo-box 
+            k-ng-model="item.dosisvaksin" 
+            k-data-text-field="'nama'" 
+            k-filter="'contains'"
+            k-data-value-field="'id'" 
+            k-auto-bind="false"
+            k-data-source="listdosisvaksin" />
+        </div>
+        <div class="grid_12" style="padding-top: 10px;">
+            <label c-label>Nama Vaksin</label>
+            <input style="width: 100%; " 
+            kendo-combo-box 
+            k-ng-model="item.namavaksin" 
+            k-data-text-field="'nama'" 
+            k-filter="'contains'"
+            k-data-value-field="'id'" 
+            k-auto-bind="false"
+            k-data-source="listnamavaksin" />
+        </div>
+        <div class="grid_12" style="padding-top: 10px;">
+            <div class="headerBox">
+                <p>Daftar Vaksin</p>
+            </div>
+            <div class="grid_12">
+                <div id="kGrid"  
+                kendo-grid
+                k-data-source="dataVaksin" 
+                options="columnVaksin"
+                k-selectable="'row'" 
+                k-sortable="'true'"
+                k-ng-model="dataVaksinSelected"
+                ng-click="KlikVaksin(dataVaksinSelected)"
+                class="height-auto">
+                </div>
+            </div>
+        </div>
+        <button class="k-button" ng-click="simpanvaksindatakesirs()" style="float:right;margin-top:4%">Simpan</button>
+    </div>
+</div>
+<div kendo-window="labSirs" k-title="'Pemeriksaan Lab. Pasien Covid 19'" k-width="696" k-visible="false" k-on-open="win2visible = true" k-on-close="win2visible = false">
+    <div class="grid_12">
+        <div class="grid_12" style="padding-top: 10px;">
+            <label c-label>Nama Pasien</label>
+            <input style="width: 100%" type="text" ng-model="item.namapasien" class="k-textbox" disabled />
+        </div>
+        <div class="grid_12" style="padding-top: 10px;">
+            <label c-label>Jenis Pemeriksaan</label>
+            <input style="width: 100%; " 
+            kendo-combo-box 
+            k-ng-model="item.jenispemeriksaan" 
+            k-data-text-field="'nama'" 
+            k-filter="'contains'"
+            k-data-value-field="'id'" 
+            k-auto-bind="false"
+            k-data-source="listjenispemeriksaan" />
+        </div>
+        <div class="grid_12" style="padding-top: 10px;">
+            <label c-label>Hasil Pemeriksaan</label>
+            <input style="width: 100%; " 
+            kendo-combo-box 
+            k-ng-model="item.hasilpemeriksaan" 
+            k-data-text-field="'nama'" 
+            k-filter="'contains'"
+            k-data-value-field="'id'" 
+            k-auto-bind="false"
+            k-data-source="listhasilpemeriksaan" />
+        </div>
+        <div class="grid_12" style="padding-top: 10px;">
+            <label c-label>Tgl Hasil</label>
+            <input style="width: 100%" k-ng-model="item.tglhasilpemeriksaan"  kendo-datetimepicker placeholer="yyyy-MM-dd" k-format="'yyyy-MM-dd'" parsedate="yyyy-MM-dd" />
+        </div>
+        <div class="grid_12" style="padding-top: 10px;">
+            <div class="headerBox">
+                <p>Daftar Lab</p>
+            </div>
+            <div class="grid_12">
+                <div id="kGrid"  
+                kendo-grid
+                k-data-source="dataLab" 
+                options="columnLab"
+                k-selectable="'row'" 
+                k-sortable="'true'"
+                k-ng-model="dataLabSelected"
+                ng-click="KlikLab(dataLabSelected)"
+                class="height-auto">
+                </div>
+            </div>
+        </div>
+        <button class="k-button" ng-click="simpanlabdatakesirs()" style="float:right;margin-top:4%">Simpan</button>
+    </div>
+</div>
+<div kendo-window="keluarSirs" k-title="'Status Keluar'" k-width="500" k-visible="false" k-on-open="win2visible = true" k-on-close="win2visible = false">
+    <div class="grid_12">
+        <div class="grid_12" style="padding-top: 10px;">
+            <label c-label>Nama Pasien</label>
+            <input style="width: 100%" type="text" ng-model="item.namapasien" class="k-textbox" disabled />
+        </div>
+        <div class="grid_12" style="padding-top: 10px;">
+            <label c-label>Tanggal Keluar</label>
+            <input style="width: 100%" k-ng-model="item.tglkeluar"  kendo-datetimepicker placeholer="yyyy-MM-dd" k-format="'yyyy-MM-dd'" parsedate="yyyy-MM-dd" />
+        </div>
+        <div class="grid_12" style="padding-top: 10px;">
+            <label c-label>Status Keluar</label>
+            <input style="width: 100%; " 
+            kendo-combo-box 
+            k-ng-model="item.statuskeluar" 
+            k-data-text-field="'nama'" 
+            k-filter="'contains'"
+            k-data-value-field="'id'" 
+            k-auto-bind="false"
+            k-data-source="liststatuskeluar"
+            k-on-change="onchagestatuskeluar(item.statuskeluar)" />
+        </div>
+        <div ng-show="sebabkematian">
+            <div class="grid_12" style="padding-top: 10px;">
+                <label c-label>Sebab Meninggal</label>
+                <input style="width: 100%; " 
+                kendo-combo-box 
+                k-ng-model="item.penyebabkematian" 
+                k-data-text-field="'nama'" 
+                k-filter="'contains'"
+                k-data-value-field="'id'" 
+                k-auto-bind="false"
+                k-data-source="listpenyebabkematian"
+                k-on-change="onchagepenyebabkematian(item.penyebabkematian)" />
+            </div>
+            <div ng-show="sebabkomorbid">
+                <div class="grid_12" style="padding-top: 10px;">
+                    <label c-label>Komorbid / Co-Insiden</label>
+                    <input style="width: 100%; " 
+                    kendo-combo-box 
+                    k-ng-model="item.komorbidcoinsiden" 
+                    k-data-text-field="'nama'" 
+                    k-filter="'contains'"
+                    k-data-value-field="'id'" 
+                    k-auto-bind="false"
+                    k-data-source="listkomorbidcoinsiden" />
+                </div>
+            </div>
+            <div class="grid_12" style="padding-top: 10px;">
+                <label c-label>Status pasien saat meninggal</label>
+                <input style="width: 100%; " 
+                kendo-combo-box 
+                k-ng-model="item.statuspasienmeninggal" 
+                k-data-text-field="'deskripsi'" 
+                k-filter="'contains'"
+                k-data-value-field="'id'" 
+                k-auto-bind="false"
+                k-data-source="liststatuspasienmeninggal" />
+            </div>
+            <div ng-show="!sebabkomorbid">
+                <div class="grid_12" style="padding-top: 10px;">
+                    <label c-label>Sebab Kematian Langsung</label>
+                    <input style="width: 100%; " 
+                    kendo-combo-box 
+                    k-ng-model="item.penyebabkematianlangsung" 
+                    k-data-text-field="'description'" 
+                    k-filter="'contains'"
+                    k-data-value-field="'id'" 
+                    k-auto-bind="false"
+                    k-data-source="listpenyebabkematianlangsung" />
+                </div>
+            </div>
+        </div>
+        <button class="k-button" ng-click="simpankeluardatakesirs()" style="float:right;margin-top:4%">Simpan</button>
+    </div>
+</div>
