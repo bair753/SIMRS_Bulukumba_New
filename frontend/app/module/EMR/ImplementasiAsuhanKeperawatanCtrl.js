@@ -291,6 +291,9 @@ define(['initialize'], function (initialize) {
 
                                 }
                                 pegawaiInputDetail = dataLoad[i].pegawaifk
+                            } else {
+                                $scope.item.obj[422550] = $scope.now;
+                                
                             }
 
                         }
@@ -304,7 +307,7 @@ define(['initialize'], function (initialize) {
                                     element.inuse = true
                                 }
                             }
-
+                            
                         } 
                         // *** disable Input *//
                         //setTimeout(function(){medifirstService.setDisableAllInputElement()  }, 2000);
@@ -365,7 +368,7 @@ define(['initialize'], function (initialize) {
 
                     for (let j = 0; j < $scope.listItem.length; j++) {
                         const element2 = $scope.listItem[j];
-                        if (element2.inuse == undefined) {
+                        if ($scope.item.obj[parseInt(element2.id)] == undefined) {
                             $scope.item.obj[parseInt(element2.id)] = new Date()
                             element2.inuse = true
                             saveTosDipake(element2.id)
