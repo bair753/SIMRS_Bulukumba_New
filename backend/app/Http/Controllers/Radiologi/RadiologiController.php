@@ -1866,7 +1866,7 @@ class RadiologiController extends ApiController
         DB::beginTransaction();
         try{
 
-            if ($request['norec'] == "") {
+            if ($request['norec_usg'] == "") {
                 $dataSO = new HasilRadiologi();
                 $dataSO->norec = $dataSO->generateNewId();
                 $dataSO->kdprofile = $idProfile;
@@ -1890,7 +1890,7 @@ class RadiologiController extends ApiController
 
             } else {
                 // $dataSO =  HasilRadiologi::where('norec',$request['norec'])->first();
-                $dataSO = HasilRadiologi::where('norec',$request['norec'])
+                $dataSO = HasilRadiologi::where('norec',$request['norec_usg'])
                 ->where('kdprofile', $idProfile)
                 ->update([
                     'pegawaifk' => $request['dokterUsgid'],
