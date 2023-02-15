@@ -1,6 +1,6 @@
 define(['initialize'], function (initialize) {
     'use strict';
-    initialize.controller('PernyataanPenolakanUntukDirujukCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
+    initialize.controller('PenolakanTidakMelanjutkanTindakanCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
         function ($q, $rootScope, $scope, ModelItem, $state, cacheHelper, dateHelper, medifirstService) {
 
 
@@ -14,9 +14,9 @@ define(['initialize'], function (initialize) {
             $scope.cc = {};
             var nomorEMR = '-';
             var norecEMR = '';
-            $scope.cc.emrfk = 290043;
+            $scope.cc.emrfk = 290058;
             var dataLoad = [];
-            $scope.isCetak = true;
+            $scope.isCetak = false;
             $scope.allDisabled = false;
             var pegawaiInputDetail  = '';
             var cacheNomorEMR = cacheHelper.get('cacheNomorEMR');
@@ -112,15 +112,15 @@ define(['initialize'], function (initialize) {
                 var nocmfk = null;
                 var noregistrasifk = $state.params.noRec;
                 var status = "t";
-                $scope.item.obj[427911] = $scope.now;
+                $scope.item.obj[429961] = $scope.now;
                 medifirstService.get("emr/get-antrian-pasien-norec/" + noregistrasifk).then(function (e) {
                     var antrianPasien = e.data.result;
-                    $scope.item.obj[427907] = $scope.cc.namapasien;
-                    $scope.item.obj[427908] = new Date(moment(antrianPasien.tgllahir).format('YYYY-MM-DD'));
-                    $scope.item.obj[427909] = antrianPasien.jeniskelamin;
-                    $scope.item.obj[427910] = antrianPasien.nocm;
+                    $scope.item.obj[429957] = $scope.cc.namapasien;
+                    $scope.item.obj[429958] = new Date(moment(antrianPasien.tgllahir).format('YYYY-MM-DD'));
+                    $scope.item.obj[429959] = antrianPasien.jeniskelamin;
+                    $scope.item.obj[429960] = antrianPasien.nocm;
                     if (antrianPasien.dokterdpjp != null && antrianPasien.iddpjp != null) {
-                        $scope.item.obj[427913] = {
+                        $scope.item.obj[429963] = {
                             value: antrianPasien.iddpjp,
                             text: antrianPasien.dokterdpjp
                         }
@@ -345,7 +345,7 @@ define(['initialize'], function (initialize) {
                     // });
 
                     medifirstService.postLogging('EMR', 'norec emrpasien_t', e.data.data.norec,
-                        'Pernyataan Penolakan Untuk Dirujuk ' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
+                        'Penolakan Tidak Melanjutkan Tindakan / Pengobatan ' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
                         + $scope.cc.noregistrasi).then(function (res) {
                         })
 

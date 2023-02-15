@@ -52,7 +52,7 @@
 <div class="grid_12">
     <div class="grid_12">
         <div class="panel panel-default container_12">
-            <div class="panel-heading" c-translate>Pernyataan Penolakan Untuk Dirujuk</div>
+            <div class="panel-heading" c-translate>Penolakan / Tidak Malenjutkan Tindakan / Pengobatan</div>
         </div>
 
         <div class="grid_12" style="margin-top: 10px;">
@@ -65,7 +65,7 @@
                         <label item="item">Nama</label>
                     </div>
                     <div class="grid_6">
-                        <input c-text-box type="text" filter="" class="k-textbox" ng-model="item.obj[427900]" />
+                        <input c-text-box type="text" filter="" class="k-textbox" ng-model="item.obj[429950]" />
                     </div>
                 </div>
                 <div class="grid_12" style="margin-top: 10px;">
@@ -73,7 +73,7 @@
                         <label item="item">Tanggal Lahir</label>
                     </div>
                     <div class="grid_6">
-                        <input style="width: 100%" k-ng-model="item.obj[427901]" kendo-datepicker placeholer="YYYY:MM:DD" k-format="'yyyy-MM-dd'" />
+                        <input style="width: 100%" k-ng-model="item.obj[429951]" kendo-datepicker placeholer="YYYY:MM:DD" k-format="'yyyy-MM-dd'" />
                     </div>
                 </div>
                 <div class="grid_12" style="margin-top: 10px;">
@@ -81,13 +81,13 @@
                         <label item="item">Jenis Kelamin</label>
                     </div>
                     <div class="grid_2">
-                        <md-radio-group ng-model="item.obj[427902]">
+                        <md-radio-group ng-model="item.obj[429952]">
                             <md-radio-button value="Laki-laki" class="md-primary">Laki-laki
                             </md-radio-button>
                         </md-radio-group>
                     </div>
                     <div class="grid_2">
-                        <md-radio-group ng-model="item.obj[427902]">
+                        <md-radio-group ng-model="item.obj[429952]">
                             <md-radio-button value="Perempuan" class="md-primary">Perempuan
                             </md-radio-button>
                         </md-radio-group>
@@ -99,7 +99,7 @@
                     </div>
                     <div class="grid_6">
                         <textarea cols="6" rows="6" c-text-area type="input" filter="'string'" class="k-textbox"
-                            ng-model="item.obj[427903]"></textarea>
+                            ng-model="item.obj[429953]"></textarea>
                     </div>
                 </div>
                 <div class="grid_12" style="margin-top: 10px;">
@@ -107,7 +107,7 @@
                         <label item="item">Bukti Diri/KTP</label>
                     </div>
                     <div class="grid_6">
-                        <input c-text-box type="text" filter="" class="k-textbox" ng-model="item.obj[427904]" />
+                        <input c-text-box type="text" filter="" class="k-textbox" ng-model="item.obj[429954]" />
                     </div>
                 </div>
                 <div class="grid_12" style="margin-top: 10px;">
@@ -115,10 +115,10 @@
                 </div>
                 <div class="grid_12" style="margin-top: 10px;">
                     <div class="grid_12">
-                        <label c-label item="item">MENOLAK UNTUK DIRUJUK KE</label>
+                        <label c-label item="item">PENOLAKAN / TIDAK MELANJUTKAN TINDAKAN / PENGOBATAN</label>
                     </div>
                     <div class="grid_6">
-                        <input c-text-box type="text" filter="" class="k-textbox" ng-model="item.obj[427905]" />
+                        <input c-text-box type="text" filter="" class="k-textbox" ng-model="item.obj[429955]" />
                     </div>
                 </div>
                 <div class="grid_12" style="margin-top: 10px;">
@@ -126,7 +126,7 @@
                         <label item="item">Terhadap :</label>
                     </div>
                     <div ng-repeat="list in listTerhadap | orderBy:'id'" class="grid_2">
-                        <md-radio-group ng-model="item.obj[427906]">
+                        <md-radio-group ng-model="item.obj[429956]">
                             <md-radio-button value="{{ list.name }}" class="md-primary">{{ list.name }}
                             </md-radio-button>
                         </md-radio-group>
@@ -137,7 +137,7 @@
                         <label item="item">Nama</label>
                     </div>
                     <div class="grid_6">
-                        <input c-text-box type="text" filter="" class="k-textbox" ng-model="item.obj[427907]" />
+                        <input c-text-box type="text" filter="" class="k-textbox" ng-model="item.obj[429957]" />
                     </div>
                 </div>
                 <div class="grid_12" style="margin-top: 10px;">
@@ -145,7 +145,7 @@
                         <label item="item">Tanggal Lahir</label>
                     </div>
                     <div class="grid_6">
-                        <input style="width: 100%" k-ng-model="item.obj[427908]" kendo-datepicker placeholer="YYYY:MM:DD"
+                        <input style="width: 100%" k-ng-model="item.obj[429958]" kendo-datepicker placeholer="YYYY:MM:DD"
                             k-format="'yyyy-MM-dd'" />
                     </div>
                 </div>
@@ -154,13 +154,13 @@
                         <label item="item">Jenis Kelamin</label>
                     </div>
                     <div class="grid_2">
-                        <md-radio-group ng-model="item.obj[427909]">
+                        <md-radio-group ng-model="item.obj[429959]">
                             <md-radio-button value="LAKI-LAKI" class="md-primary">Laki-laki
                             </md-radio-button>
                         </md-radio-group>
                     </div>
                     <div class="grid_2">
-                        <md-radio-group ng-model="item.obj[427909]">
+                        <md-radio-group ng-model="item.obj[429959]">
                             <md-radio-button value="PEREMPUAN" class="md-primary">Perempuan
                             </md-radio-button>
                         </md-radio-group>
@@ -171,15 +171,15 @@
                         <label item="item">Nomor Rekam Medis</label>
                     </div>
                     <div class="grid_6">
-                        <input c-text-box type="text" filter="" class="k-textbox" ng-model="item.obj[427910]" />
+                        <input c-text-box type="text" filter="" class="k-textbox" ng-model="item.obj[429960]" />
                     </div>
                 </div>
                 <div class="grid_12" style="margin-top: 10px;">
                     <p>
-                        Meskipun saya memahami perlunya dan manfaat tindakan tersebut sebagaimana telah dijelaskan seperti diatas kepada saya, termasuk risiko dan komplikasi yang akan timbul. 
+                        Meskipun saya memahami perlunya dan manfaat tindakan / pengobatan tersebut sebagaimana telah dijelaskan seperti di atas kepada saya, termasuk risiko dan komplikasi yang mungkin timbul.
                     </p>
                     <p>
-                        Saya bertanggung jawab secara penuh atas segala akibat yang mungkin timbul sebagai akibat tidak dilakukannya tindakan rujukan tersebut.
+                        Saya bertanggung jawab secara penuh atas segala akibat yang mungkin timbul sebagai akibat tidak dilakukannya tindakan / pengobatan tersebut.
                     </p>
                 </div>
                 <div class="grid_12" style="margin-top: 10px;">
@@ -187,7 +187,7 @@
                         <label item="item">Bulukumba</label>
                     </div>
                     <div class="grid_4">
-                        <input style="width: 100%" k-ng-model="item.obj[427911]" kendo-datetimepicker placeholer="YYYY:MM:DD HH:MM"
+                        <input style="width: 100%" k-ng-model="item.obj[429961]" kendo-datetimepicker placeholer="YYYY:MM:DD HH:MM"
                             k-format="'yyyy-MM-dd HH:mm'" />
                     </div>
                 </div>
@@ -197,16 +197,16 @@
                             <label item="item">Yang membuat pernyataan</label>
                         </div>
                         <div class="grid_12">
-                            <input c-text-box type="text" filter="" class="k-textbox" ng-model="item.obj[427912]" />
+                            <input c-text-box type="text" filter="" class="k-textbox" ng-model="item.obj[429962]" />
                         </div>
                     </div>
                     <div class="grid_4"></div>
                     <div class="grid_4">
                         <div class="grid_12">
-                            <label item="item">Yang menerangkan</label>
+                            <label item="item">Yang menjelaskan</label>
                         </div>
                         <div class="grid_12">
-                            <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[427913]" k-data-text-field="'text'"
+                            <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429963]" k-data-text-field="'text'"
                                 k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
                         </div>
                     </div>
@@ -222,7 +222,7 @@
                                     <label item="item">Nama</label>
                                 </div>
                                 <div class="grid_12">
-                                    <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[427914]" k-data-text-field="'text'"
+                                    <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[429964]" k-data-text-field="'text'"
                                         k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
                                 </div>
                             </div>
@@ -231,7 +231,7 @@
                                     <label item="item">Umur</label>
                                 </div>
                                 <div class="grid_12">
-                                    <input c-text-box type="text" filter="" class="k-textbox" ng-model="item.obj[427915]" />
+                                    <input c-text-box type="text" filter="" class="k-textbox" ng-model="item.obj[429965]" />
                                 </div>
                             </div>
                             <div class="grid_12" style="margin-top: 10px;">
@@ -239,7 +239,7 @@
                                     <label item="item">Jabatan</label>
                                 </div>
                                 <div class="grid_12">
-                                    <input c-text-box type="text" filter="" class="k-textbox" ng-model="item.obj[427916]" />
+                                    <input c-text-box type="text" filter="" class="k-textbox" ng-model="item.obj[429966]" />
                                 </div>
                             </div>
                         </div>
@@ -254,7 +254,7 @@
                                     <label item="item">Nama</label>
                                 </div>
                                 <div class="grid_12">
-                                    <input c-text-box type="text" filter="" class="k-textbox" ng-model="item.obj[427917]" />
+                                    <input c-text-box type="text" filter="" class="k-textbox" ng-model="item.obj[429967]" />
                                 </div>
                             </div>
                             <div class="grid_12" style="margin-top: 10px;">
@@ -262,7 +262,7 @@
                                     <label item="item">Umur</label>
                                 </div>
                                 <div class="grid_12">
-                                    <input c-text-box type="text" filter="" class="k-textbox" ng-model="item.obj[427918]" />
+                                    <input c-text-box type="text" filter="" class="k-textbox" ng-model="item.obj[429968]" />
                                 </div>
                             </div>
                             <div class="grid_12" style="margin-top: 10px;">
@@ -270,7 +270,7 @@
                                     <label item="item">Hubungan dengan pasien</label>
                                 </div>
                                 <div class="grid_12">
-                                    <input c-text-box type="text" filter="" class="k-textbox" ng-model="item.obj[427919]" />
+                                    <input c-text-box type="text" filter="" class="k-textbox" ng-model="item.obj[429969]" />
                                 </div>
                             </div>
                         </div>

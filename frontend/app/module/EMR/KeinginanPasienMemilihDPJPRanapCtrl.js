@@ -1,6 +1,6 @@
 define(['initialize'], function (initialize) {
     'use strict';
-    initialize.controller('PernyataanPenolakanUntukDirujukCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
+    initialize.controller('KeinginanPasienMemilihDPJPRanapCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
         function ($q, $rootScope, $scope, ModelItem, $state, cacheHelper, dateHelper, medifirstService) {
 
 
@@ -14,9 +14,9 @@ define(['initialize'], function (initialize) {
             $scope.cc = {};
             var nomorEMR = '-';
             var norecEMR = '';
-            $scope.cc.emrfk = 290043;
+            $scope.cc.emrfk = 290059;
             var dataLoad = [];
-            $scope.isCetak = true;
+            $scope.isCetak = false;
             $scope.allDisabled = false;
             var pegawaiInputDetail  = '';
             var cacheNomorEMR = cacheHelper.get('cacheNomorEMR');
@@ -76,10 +76,12 @@ define(['initialize'], function (initialize) {
 
             $scope.listTerhadap = [
                 { "id": 1, "name": "Diri saya sendiri" },
-                { "id": 2, "name": "Istri" },
-                { "id": 3, "name": "Anak" },
-                { "id": 4, "name": "Ayah" },
-                { "id": 5, "name": "Ibu" }
+                { "id": 2, "name": "Suami"},
+                { "id": 3, "name": "Istri" },
+                { "id": 4, "name": "Anak" },
+                { "id": 5, "name": "Ayah" },
+                { "id": 6, "name": "Ibu" },
+                { "id": 7, "name": "Wali Penanggung Jawab" }
             ]
 
             var cacheEMR_TRIASE_PRIMER = cacheHelper.get('cacheEMR_TRIASE_PRIMER');
@@ -112,17 +114,23 @@ define(['initialize'], function (initialize) {
                 var nocmfk = null;
                 var noregistrasifk = $state.params.noRec;
                 var status = "t";
-                $scope.item.obj[427911] = $scope.now;
+                $scope.item.obj[429982] = $scope.now;
                 medifirstService.get("emr/get-antrian-pasien-norec/" + noregistrasifk).then(function (e) {
                     var antrianPasien = e.data.result;
-                    $scope.item.obj[427907] = $scope.cc.namapasien;
-                    $scope.item.obj[427908] = new Date(moment(antrianPasien.tgllahir).format('YYYY-MM-DD'));
-                    $scope.item.obj[427909] = antrianPasien.jeniskelamin;
-                    $scope.item.obj[427910] = antrianPasien.nocm;
-                    if (antrianPasien.dokterdpjp != null && antrianPasien.iddpjp != null) {
-                        $scope.item.obj[427913] = {
-                            value: antrianPasien.iddpjp,
-                            text: antrianPasien.dokterdpjp
+                    $scope.item.obj[429975] = $scope.cc.namapasien;
+                    $scope.item.obj[429978] = new Date(moment(antrianPasien.tgllahir).format('YYYY-MM-DD'));
+                    $scope.item.obj[429976] = antrianPasien.jeniskelamin;
+                    $scope.item.obj[429977] = antrianPasien.nocm;
+                    if (antrianPasien.namakelas != null && antrianPasien.objectkelasfk != null) {
+                        $scope.item.obj[429980] = {
+                            value: antrianPasien.objectkelasfk,
+                            text: antrianPasien.namakelas
+                        }
+                    }
+                    if (antrianPasien.namaruangan != null && antrianPasien.objectruanganfk != null) {
+                        $scope.item.obj[429979] = {
+                            value: antrianPasien.objectruanganfk,
+                            text: antrianPasien.namaruangan
                         }
                     }
                 })
@@ -345,7 +353,7 @@ define(['initialize'], function (initialize) {
                     // });
 
                     medifirstService.postLogging('EMR', 'norec emrpasien_t', e.data.data.norec,
-                        'Pernyataan Penolakan Untuk Dirujuk ' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
+                        'Keinginan Pasien Memilih DPJP Rawat Inap ' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
                         + $scope.cc.noregistrasi).then(function (res) {
                         })
 

@@ -3253,6 +3253,14 @@
         {
             "nameDep": "PemeriksaanPCRNakesCtrl",
             "urlDep": "module/Bridging/LaporanCovid19V3/PemeriksaanPCRNakesCtrl"
+        },
+        {
+            "nameDep": "PenolakanTidakMelanjutkanTindakanCtrl",
+            "urlDep": "module/EMR/PenolakanTidakMelanjutkanTindakanCtrl"
+        },
+        {
+            "nameDep": "KeinginanPasienMemilihDPJPRanapCtrl",
+            "urlDep": "module/EMR/KeinginanPasienMemilihDPJPRanapCtrl"
         }
     ]
 }
