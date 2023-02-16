@@ -1946,7 +1946,7 @@ export class VerifPasienBpjsOldComponent implements OnInit {
   }
   cetakSep() {
 
-    if (localStorage.getItem('isCetakDS') == 'true') {
+    if (localStorage.getItem('isCetakDS') == 'false') {
       this.service.get('http://127.0.0.1:1237/printvb/Pendaftaran?cetak-sep-new=1&norec=' + this.pasienDaftar.noregistrasi + '&view=false').subscribe(e => { });
     } else {
       window.open(Configuration.get().apiBackend + 'medifirst2000/report/cetak-sep-new?noregistrasi='
