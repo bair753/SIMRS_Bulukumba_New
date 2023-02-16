@@ -879,7 +879,7 @@ define(['initialize'], function (initialize) {
 
             $scope.simpanVerifikasi = function () {
                 if ($scope.item.dokterVerif == undefined) {
-                    toastr.error('Dokter Verifikasi harus di isi')
+                    toastr.error('Verifikator harus di isi')
                     return
                 }
                 var dataPost = [];
