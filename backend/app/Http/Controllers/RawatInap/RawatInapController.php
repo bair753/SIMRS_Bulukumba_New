@@ -225,6 +225,13 @@ class RawatInapController extends ApiController
             $nama = " AND ps.namapasien ilike '%".  $filter['nama']."%'";
 //            $data = $data->where('ps.namapasien', 'ilike', '%' . $filter['nama'] . '%');
         }
+        $dokId = '';
+        if (isset($filter['dokId']) && $filter['dokId'] != "" && $filter['dokId'] != "undefined") {
+            $dokId = " AND pg.id = " . $filter['dokId'];
+//            $data = $data->where('ps.namapasien', 'ilike', '%' . $filter['nama'] . '%');
+        }
+        
+        
 
         $data =DB::select(DB::raw("select * from
                 (select pd.tglregistrasi,  ps.id as nocmfk,  ps.nocm,  pd.noregistrasi,  ps.namapasien,  ps.tgllahir, 
@@ -253,10 +260,11 @@ class RawatInapController extends ApiController
                  where pd.statusenabled = true and pd.kdprofile = $idProfile
                 --and dept.id in (16,  17,  35) 
                 and pd.tglpulang is null --and pd.noregistrasi='1808010084'
-                $ruangId $noreg $norm $nama
+                $ruangId $noreg $norm $nama $dokId
                 
                  --order by ru.namaruangan asc
                  ) as x where x.rownum=1")
+                 
         );
 //        if(count($data) > 0){
 //            foreach ( $data  as $item){
@@ -265,6 +273,7 @@ class RawatInapController extends ApiController
 //                }
 //            }
 //        }
+        
         return $this->respond($data);
     }
     public function getDokters(Request $request){

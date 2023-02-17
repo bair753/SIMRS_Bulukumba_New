@@ -12,8 +12,18 @@ define(['initialize'], function (initialize) {
             $scope.isRouteLoading = false;
             $rootScope.isOpen = true;
             $scope.cboUbahDokter = true;
+            $scope.itema.isDokter = true;
 
             $scope.pegawai = ModelItem.getPegawai();
+            $scope.cekDokter = function (bool) {
+                if (bool) {
+                    $scope.item.isDokter = true
+                    loadData()
+                } else {
+                    $scope.item.isDokter = false
+                    loadData()
+                }
+            }
             loadCombo()
             loadData()
             // loadData()
@@ -59,6 +69,12 @@ define(['initialize'], function (initialize) {
                 if ($scope.itema.noRegistrasi != undefined) {
                     var noRegistrasi = "&noreg=" + $scope.itema.noRegistrasi
                 }
+                var dokId = ""
+                if ($scope.itema.isDokter == true) {
+                    if ($scope.pegawai.id != undefined) {
+                        var dokId = "&dokId=" + $scope.pegawai.id
+                    }
+                }
                 // var dokId=""
                 // if ($scope.pegawai.id != undefined){
                 //    var dokId = "&dokId=" +$scope.pegawai.id
@@ -73,7 +89,7 @@ define(['initialize'], function (initialize) {
                         "&norm=" + nocm +
                         "&noreg=" + noRegistrasi +
                         "&nama=" + nama
-                        + ruangId),
+                        + dokId + ruangId),
                 ]).then(function (data) {
                     $scope.isRouteLoading = false;
                     var datas = data[0].data;

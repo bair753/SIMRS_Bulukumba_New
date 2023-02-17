@@ -48,7 +48,7 @@
                     <input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="itema.noCm"
                         ng-keypress="($event.which == 13)? SearchEnter():itema.noCm" />
                 </div>
-                <div class="grid_2" style="margin-top:5px">
+                <div class="grid_1" style="margin-top:5px">
                     <label c-label real>No Registrasi</label>
                     <input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="itema.noRegistrasi"
                         ng-keypress="($event.which == 13)? SearchEnter():itema.noRegistrasi" />
@@ -69,7 +69,12 @@
                         k-auto-bind="false" k-data-source="listRuangan" />
                     <!--<input style="width: 100%;" kendo-combo-box k-ng-model="item.Ruangan" k-data-text-field="'namaRuangan'" k-data-value-field="'id'" k-filter="'contains'" k-auto-bind="false" k-data-source="ruangans"/>-->
                 </div>
-                <div class="grid_1" style="margin-top:5px">
+                <div class="grid_1" style="margin-top: 20px; margin-left: 10px;">
+                    <input type="checkbox" class="k-checkbox" id="isDokter" ng-model="itema.isDokter" value="true" ng-click="cekDokter(item.isDokter)">
+                    <label class="k-checkbox-label" for="isDokter"><b>Pasien Dokter</b></label>
+                </div>
+                <div class="grid_1" style="margin-top:5px;
+                margin-left: -10px;">
                     <label c-label c-label-text=""></label>
                     <em style="margin-top:6px;" ng-click='findData()' id="iconButton" data-role="button"
                         class="k-button k-button-icon" role="button" aria-disabled="false" tabindex="0"><span
