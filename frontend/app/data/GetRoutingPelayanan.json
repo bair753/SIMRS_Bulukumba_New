@@ -18202,6 +18202,98 @@
         "define": "RekamMedisCtrl"
       }
     ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.PulangAtasPermintaanSendiri",
+    "url": "/PulangAtasPermintaanSendiri",
+    "templateurl": "module/EMR/PulangAtasPermintaanSendiri.html",
+    "controller": "PulangAtasPermintaanSendiriCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.TransferAntarUnitGawatDarurat",
+    "url": "/TransferAntarUnitGawatDarurat",
+    "templateurl": "module/EMR/TransferAntarUnitGawatDarurat.html",
+    "controller": "TransferAntarUnitGawatDaruratCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.ChecklistPersiapanRujukanPasien",
+    "url": "/ChecklistPersiapanRujukanPasien",
+    "templateurl": "module/EMR/ChecklistPersiapanRujukanPasien.html",
+    "controller": "ChecklistPersiapanRujukanPasienCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.PersetujuanRawatInapHCU",
+    "url": "/PersetujuanRawatInapHCU",
+    "templateurl": "module/EMR/PersetujuanRawatInapHCU.html",
+    "controller": "PersetujuanRawatInapHCUCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
   }
   
   

@@ -10480,4 +10480,47 @@ class EMRController  extends ApiController
         return $this->respond($result);
     }
 
+    public function getDataComboKamarPart(Request $request)
+    {
+        $kdProfile = $this->getDataKdProfile($request);
+        $idProfile = (int) $kdProfile;
+        $req = $request->all();
+        $dataProduk = \DB::table('kamar_m')
+        ->select('id as value', 'namakamar as text')
+        ->where('statusenabled', true)
+        ->where('kdprofile', $idProfile)
+        ->orderBy('id');
+        if (
+            isset($req['filter']['filters'][0]['value']) &&
+            $req['filter']['filters'][0]['value'] != "" &&
+            $req['filter']['filters'][0]['value'] != "undefined"
+        ) {
+            $dataProduk = $dataProduk->where('namakamar', 'ilike', '%' . $req['filter']['filters'][0]['value'] . '%');
+        };
+        $dataProduk = $dataProduk->take(10);
+        $dataProduk = $dataProduk->get();
+
+        return $this->respond($dataProduk);
+    }
+
+    public function getNoBedByKamar(Request $request)
+    {
+        $kdProfile = $this->getDataKdProfile($request);
+        $data = \DB::table('tempattidur_m as tt')
+            ->join('statusbed_m as sb', 'sb.id', '=', 'tt.objectstatusbedfk')
+            ->join('kamar_m as km', 'km.id', '=', 'tt.objectkamarfk')
+            ->select('tt.id as value', 'sb.statusbed', 'tt.reportdisplay as text')
+            ->where('tt.objectkamarfk', $request['idKamar'])
+            ->where('km.statusenabled', true)
+            ->where('tt.statusenabled', true)
+            ->where('tt.kdprofile', (int)$kdProfile)
+            ->get();
+
+        $result = array(
+            'bed' => $data,
+            'message' => 'epic',
+        );
+        return $this->respond($result);
+    }
+
 }

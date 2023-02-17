@@ -3261,6 +3261,22 @@
         {
             "nameDep": "KeinginanPasienMemilihDPJPRanapCtrl",
             "urlDep": "module/EMR/KeinginanPasienMemilihDPJPRanapCtrl"
+        },
+        {
+            "nameDep": "PulangAtasPermintaanSendiriCtrl",
+            "urlDep": "module/EMR/PulangAtasPermintaanSendiriCtrl"
+        },
+        {
+            "nameDep": "TransferAntarUnitGawatDaruratCtrl",
+            "urlDep": "module/EMR/TransferAntarUnitGawatDaruratCtrl"
+        },
+        {
+            "nameDep": "ChecklistPersiapanRujukanPasienCtrl",
+            "urlDep": "module/EMR/ChecklistPersiapanRujukanPasienCtrl"
+        },
+        {
+            "nameDep": "PersetujuanRawatInapHCUCtrl",
+            "urlDep": "module/EMR/PersetujuanRawatInapHCUCtrl"
         }
     ]
 }
