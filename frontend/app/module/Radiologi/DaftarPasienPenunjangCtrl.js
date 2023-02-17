@@ -215,7 +215,7 @@ define(['initialize'], function (initialize) {
                 },
                 {
                     "field": "nocm",
-                    "title": "No MR",
+                    "title": "No RM",
                     "width": "70px",
                 },
                 {

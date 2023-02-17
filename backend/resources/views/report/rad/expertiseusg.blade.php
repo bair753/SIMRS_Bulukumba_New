@@ -64,37 +64,36 @@ $noreg = $r['noregistrasi'];
 $d = App\Http\Controllers\Report\ReportController::getProfile();
 @endphp
  <!-- onload="window.print()" -->
-<body style="background-color: #CCCCCC" >
-
+<body style="background-color: white" >
 <div align="center">
-    <table class="bayangprint" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0" width="{{$pageWidth}}" style="padding:25px">
+    <table class="bayangprint" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" width="{{$pageWidth}}" style="padding-right:25px;padding-left:80px;padding-top:25px;padding-bottom:25px">
         <tbody>
             <tr>
                 <td>
-                    <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                    <table width="100%" cellspacing="0" cellpadding="0">
                         <tr>
-                            <td width="30%" align="center" style="border: 1px solid black;padding-bottom: 20px;">
-                                <font style="font-size: 12pt;" color="#000000">RSUD H.A SULTHAN DG. RADJA</font><br>
+                            <td width="27%" align="center" style="border-top: 3px solid black;border-left: 3px solid black;border-right: 3px solid black;padding-bottom: 20px;">
+                                <font style="font-size: 12pt;" color="#000000"><b>RSUD H.A SULTHAN DG. RADJA</b></font><br>
                                 <font style="font-size: 10pt;" color="#000000">JL. SERIKAYA NO. 17 BULUKUMBA 92512</font><br>
                                 <font style="font-size: 10pt;" color="#000000">TELP : (0413) 81292</font>
                             </td>
-                            <td width="40%" align="left" style="padding-left:5px;border-top: 1px solid black;border-bottom: 1px solid black;padding-bottom: 20px;">
-                                <font style="font-size: 12pt;" color="#000000">NO RM &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : {{ $raw->nocm }}</font><br>
-                                <font style="font-size: 12pt;" color="#000000">NAMA LENGKAP &nbsp;: {{ $raw->namapasien }}</font><br>
-                                <font style="font-size: 12pt;" color="#000000">TANGGAL LAHIR &nbsp;: {{ $raw->tgllahir }}</font><br>
-                                <font style="font-size: 12pt;" color="#000000">NIK &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ $raw->noidentitas }}</font>
+                            <td width="40%" align="left" style="padding-left:5px;border-top: 3px solid black;border-bottom: 1px solid black;padding-bottom: 20px;border-right: 3px solid black;">
+                                <font style="font-size: 12pt;" color="#000000">NO RM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ $raw->nocm }}</font><br>
+                                <font style="font-size: 12pt;" color="#000000">NAMA LENGKAP&nbsp;&nbsp;: {{ $raw->namapasien }}</font><br>
+                                <font style="font-size: 12pt;" color="#000000">TANGGAL LAHIR&nbsp; : {{ $raw->tgllahir }}</font><br>
+                                <font style="font-size: 12pt;" color="#000000">NIK&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ $raw->noidentitas }}</font>
                             </td>
-                            <td width="20%" align="center" style="border:1px solid black;padding-bottom: 20px;">
-                                <font style="font-size: 22pt;" color="#000000" >RM</font><br>
-                                <font style="font-size: 12pt;" color="#000000" >19</font>
+                            <td width="8%" align="center" style="border:1px solid black;padding-bottom: 20px;border-top: 3px solid black;border-right: 3px solid black;background-color:black">
+                                <font style="font-size: 22pt; " color="white">RM</font><br>
+                                <font style="font-size: 22pt;" color="white" >19</font>
                             </td>
                         </tr>
                     </table>
                     
-                    <table width="100%" cellspacing="10" cellpadding="0" border="0" style="border: 3px solid black;padding-bottom: 50px;">
-                        <tr>
+                    <table width="100%" cellspacing="10" cellpadding="0" style="border: 3px solid black;padding-bottom: 20px;">
+                        <tr >
                             <td width="22%"><font style="font-size: 12pt;" color="#000000;" >Tanggal / No Foto - USG </font></td>
-                            <td width="78%"><font style="font-size: 12pt;" color="#000000" >: {{ $raw->tanggal }} / {{ $raw->nofoto }} </font></td>
+                            <td width="78%"><font style="font-size: 12pt;" color="#000000" >: {{ date('d-m-Y H:i', strtotime($raw->tanggal)) }} / {{ $raw->nofoto }} </font></td>
                         </tr>
                         <tr>
                             <td width="22%"><font style="font-size: 12pt;" color="#000000;" >Klinis</font></td>
@@ -105,21 +104,21 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             <td width="78%"><font style="font-size: 12pt;" color="#000000" >: {{ $raw->dokterpengirim }}</font></td>
                         </tr>
                     </table>
-                    <table width="100%" cellspacing="0" cellpadding="0" border="0" style="border-top: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;">
+                    <table width="100%" cellspacing="0" cellpadding="0" style="border-left: 3px solid black;border-right: 3px solid black;">
                         <tr>
-                            <td>
-                                <font style="font-size: 12pt;" color="#000000;" >{!! $raw->keterangan !!}</font><br>
+                            <td style="padding-left: 20px;padding-top:20px">
+                                <font style="font-size: 12pt;" color="#000000;">{!! $raw->keterangan !!}</font><br><br>
                             </td>
                         </tr>
                        
                     </table>
-                    <table width="100%" cellspacing="0" cellpadding="0" border="0"  style="border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;">
+                    <table width="100%" cellspacing="0" cellpadding="0" style="border-left: 3px solid black;border-right: 3px solid black;border-bottom: 3px solid black;" >
                         <tr>
                             <td align="right">
-                                <font style="font-size: 12pt;padding-right: 125px" color="#000000;" >BTK,SS</font><br>
-                                <div style="text-align: right;padding-right: 110px;" id="qrDokter"></div>
-                                <font style="font-size: 12pt;font-weight: bold;text-decoration: underline;" color="#000000;" >( {{ $raw->dokterrad }} )</font><br>
-                                <font style="font-size: 12pt;font-weight: bold;font-style: italic;padding-right: 80px;" color="#000000;" >Spesialis Radiologi</font><br>
+                                <font style="text-align: right;padding-right: 50px; font-size:14pt">BTK,SS</font><br>
+                                <div style="text-align: right;padding-right: 50px; font-size:14pt" id="qrDokter"></div>
+                                <font style="text-align: right;padding-right: 50px; font-size:14pt">( {{ $raw->dokterrad }} )</font><br>
+                                <font style="text-align: right;padding-right: 50px; font-size:14pt">Spesialis Radiologi</font><br><br>
                             </td>
                         </tr>
                     </table>
