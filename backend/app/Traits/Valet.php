@@ -365,7 +365,7 @@ Trait Valet {
         $err = curl_error($curl);
 
         curl_close($curl);
-
+        // dd($response);
         if ($err) {
             // return $this->setStatusCode(500)->respond([], $err);
             $result = "Terjadi Kesalahan #:" . $err;
