@@ -161,7 +161,7 @@ class BridgingSiranapV2Controller  extends ApiController
         // return $this->respond(   $resss);
         curl_setopt_array($curl, array(
 //                CURLOPT_PORT => $this->getPortBrigdingBPJS(),
-            CURLOPT_URL=>  "http://sirs.yankes.kemkes.go.id/sirsservice/ranap",
+            CURLOPT_URL=>  "https://sirs.yankes.kemkes.go.id/sirsservice/ranap",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -223,7 +223,7 @@ class BridgingSiranapV2Controller  extends ApiController
         $xrsid = $this->kodeRS; # ID Rumah Sakit #
         $xpass = md5( $this->passwordRS ); # Password #
 
-        $strURLSiranap = "http://sirs.yankes.kemkes.go.id/sirsservice/sisrute/hapusdata/$xrsid/$kode_tipe_pasien/$kode_kelas_ruang";
+        $strURLSiranap = "https://sirs.yankes.kemkes.go.id/sirsservice/sisrute/hapusdata/$xrsid/$kode_tipe_pasien/$kode_kelas_ruang";
 
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $strURLSiranap);
@@ -632,7 +632,7 @@ class BridgingSiranapV2Controller  extends ApiController
         //     $user = '8271016'; //ternate
         //     $password ='S!rs2020!!';//
         // }
-        $user = '1809R101';
+        $user = '7302016';
         $password = 'S!rs2020!!';
 
         date_default_timezone_set('UTC');
@@ -650,6 +650,8 @@ class BridgingSiranapV2Controller  extends ApiController
     {
         $kdProfile = $this->getDataKdProfile($request);
         $headers =  $this->getHeadersCovid($kdProfile);
+        // return $headers;
+        // dd($headers);
         if($method == 'post'){
             $now = date('Y-m-d');
             if(isset($request['tgl'])){
@@ -732,7 +734,7 @@ WHERE X.rownum = 1"))->first();
             );
             $dataJsonSend = json_encode ($arr);
         }
-        $url = "http://sirs.kemkes.go.id/fo/index.php/LapV2/PasienMasuk";
+        $url = "https://sirs.kemkes.go.id/fo/index.php/LapV2/PasienMasuk";
         $response = $this->sendBridgingCurl($headers , $dataJsonSend, $url, $methods);
    
         return $this->respond($response);
@@ -916,7 +918,7 @@ WHERE X.rownum = 1"))->first();
             );
             $dataJsonSend = json_encode ($arr);
         }
-        $url = "http://sirs.kemkes.go.id/fo/index.php/LapV2/PasienDirawatKomorbid";
+        $url = "https://sirs.kemkes.go.id/fo/index.php/LapV2/PasienDirawatKomorbid";
         $response = $this->sendBridgingCurl($headers , $dataJsonSend, $url ,$methods);
      
         return $this->respond($response);
@@ -1096,7 +1098,7 @@ WHERE X.rownum = 1"))->first();
             );
             $dataJsonSend = json_encode ($arr);
         }
-        $url = "http://sirs.kemkes.go.id/fo/index.php/LapV2/PasienDirawatTanpaKomorbid";
+        $url = "https://sirs.kemkes.go.id/fo/index.php/LapV2/PasienDirawatTanpaKomorbid";
         $response = $this->sendBridgingCurl($headers , $dataJsonSend, $url,$methods);
         return $this->respond($response);
     }
@@ -1309,7 +1311,7 @@ WHERE X.rownum = 1"))->first();
             );
             $dataJsonSend = json_encode ($arr);
         }
-        $url = "http://sirs.kemkes.go.id/fo/index.php/LapV2/PasienKeluar";
+        $url = "https://sirs.kemkes.go.id/fo/index.php/LapV2/PasienKeluar";
         $response = $this->sendBridgingCurl($headers , $dataJsonSend, $url,$methods);
      
    
@@ -1321,7 +1323,7 @@ WHERE X.rownum = 1"))->first();
         $headers =  $this->getHeadersCovid($kdProfile);
         $dataJsonSend = null;
         $methods ='GET';
-        $url = "http://sirs.kemkes.go.id/fo/index.php/Referensi/tempat_tidur";
+        $url = "https://sirs.kemkes.go.id/fo/index.php/Referensi/tempat_tidur";
         $response = $this->sendBridgingCurl($headers , $dataJsonSend, $url,$methods);
         return $this->respond($response);
     }
@@ -1331,7 +1333,7 @@ WHERE X.rownum = 1"))->first();
         $headers =  $this->getHeadersCovid($kdProfile);
         $dataJsonSend = null;
         $methods ='GET';
-        $url = "http://sirs.kemkes.go.id/fo/index.php/Referensi/usia_meninggal_probable";
+        $url = "https://sirs.kemkes.go.id/fo/index.php/Referensi/usia_meninggal_probable";
         $response = $this->sendBridgingCurl($headers , $dataJsonSend, $url,$methods);
         return $this->respond($response);
     }
@@ -1411,10 +1413,10 @@ WHERE X.rownum = 1"))->first();
                 );
                 $tt [] =   $arr;
                 $dataJsonSend = json_encode ($arr);
-                $url = "http://sirs.kemkes.go.id/fo/index.php/Fasyankes";
+                $url = "https://sirs.kemkes.go.id/fo/index.php/Fasyankes";
                 $response = $this->sendBridgingCurl($headers , $dataJsonSend, $url,$methods);
                 if( stripos($response->fasyankes[0]->message, 'PUT') !== FALSE){
-                    $url = "http://sirs.kemkes.go.id/fo/index.php/Fasyankes";
+                    $url = "https://sirs.kemkes.go.id/fo/index.php/Fasyankes";
                     $response = $this->sendBridgingCurl($headers , $dataJsonSend, $url,'PUT');
                 }
 //                return $this->respond($response);
@@ -1450,13 +1452,13 @@ WHERE X.rownum = 1"))->first();
                 );
                 $tt [] =   $arr;
                 $dataJsonSend = json_encode ($arr);
-                $url = "http://sirs.kemkes.go.id/fo/index.php/Fasyankes";
+                $url = "https://sirs.kemkes.go.id/fo/index.php/Fasyankes";
                 $response = $this->sendBridgingCurl($headers , $dataJsonSend, $url,$methods);
 //                return $this->respond($response);
             }
             return $this->respond(  $response);
         }
-        $url = "http://sirs.kemkes.go.id/fo/index.php/Fasyankes";
+        $url = "https://sirs.kemkes.go.id/fo/index.php/Fasyankes";
         $response = $this->sendBridgingCurl($headers , $dataJsonSend, $url,$methods);
 
         return $this->respond($response);
@@ -1468,7 +1470,7 @@ WHERE X.rownum = 1"))->first();
         $headers =  $this->getHeadersCovid($kdProfile);
         $dataJsonSend = null;
         $methods ='GET';
-        $url = "http://sirs.kemkes.go.id/fo/index.php/Referensi/kebutuhan_sdm";
+        $url = "https://sirs.kemkes.go.id/fo/index.php/Referensi/kebutuhan_sdm";
         $response = $this->sendBridgingCurl($headers , $dataJsonSend, $url,$methods);
         return $this->respond($response);
     }
@@ -1495,7 +1497,7 @@ WHERE X.rownum = 1"))->first();
                     "jumlah_diterima"=> "0"
                 );
                 $dataJsonSend = json_encode ($arr);
-                $url = "http://sirs.kemkes.go.id/fo/index.php/Fasyankes/sdm";
+                $url = "https://sirs.kemkes.go.id/fo/index.php/Fasyankes/sdm";
                 $response = $this->sendBridgingCurl($headers , $dataJsonSend, $url,$methods);
                 return $this->respond($response);
             }
@@ -1528,12 +1530,12 @@ WHERE X.rownum = 1"))->first();
                     "jumlah_diterima"=> "0"
                 );
                 $dataJsonSend = json_encode ($arr);
-                $url = "http://sirs.kemkes.go.id/fo/index.php/Fasyankes/sdm";
+                $url = "https://sirs.kemkes.go.id/fo/index.php/Fasyankes/sdm";
                 $response = $this->sendBridgingCurl($headers , $dataJsonSend, $url,$methods);
                 return $this->respond($response);
             }
         }
-        $url = "http://sirs.kemkes.go.id/fo/index.php/Fasyankes/sdm";
+        $url = "https://sirs.kemkes.go.id/fo/index.php/Fasyankes/sdm";
         $response = $this->sendBridgingCurl($headers , $dataJsonSend, $url,$methods);
         return $this->respond($response);
     }
@@ -1544,7 +1546,7 @@ WHERE X.rownum = 1"))->first();
         $headers =  $this->getHeadersCovid($kdProfile);
         $dataJsonSend = null;
         $methods ='GET';
-        $url = "http://sirs.kemkes.go.id/fo/index.php/Referensi/kebutuhan_apd";
+        $url = "https://sirs.kemkes.go.id/fo/index.php/Referensi/kebutuhan_apd";
         $response = $this->sendBridgingCurl($headers , $dataJsonSend, $url,$methods);
         return $this->respond($response);
     }
@@ -1580,7 +1582,7 @@ WHERE X.rownum = 1"))->first();
             );
             $dataJsonSend = json_encode ($arr);
         }
-        $url = "http://sirs.kemkes.go.id/fo/index.php/Fasyankes/apd";
+        $url = "https://sirs.kemkes.go.id/fo/index.php/Fasyankes/apd";
         $response = $this->sendBridgingCurl($headers , $dataJsonSend, $url,$methods);
         return $this->respond($response);
 
@@ -1673,7 +1675,7 @@ WHERE X.rownum = 1"))->first();
         // return $this->respond(   $arr);
         curl_setopt_array($curl, array(
 //                CURLOPT_PORT => $this->getPortBrigdingBPJS(),
-            CURLOPT_URL=>  "http://sirs.yankes.kemkes.go.id/sirsservice/ranap",
+            CURLOPT_URL=>  "https://sirs.yankes.kemkes.go.id/sirsservice/ranap",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
