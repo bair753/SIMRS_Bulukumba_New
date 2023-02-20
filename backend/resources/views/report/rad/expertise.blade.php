@@ -67,7 +67,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
 <body style="background-color: #CCCCCC" >
 
 <div align="center">
-    <table class="bayangprint" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" width="{{$pageWidth}}" style="padding-right:25px;padding-left:80px;padding-top:25px;padding-bottom:25px">
+    <table class="bayangprint" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" width="{{$pageWidth}}" style="padding-right:25px;padding-left:80px;padding-top:110px;padding-bottom:25px">
         <tbody>
             <tr>
                 <td>
@@ -121,11 +121,20 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                     </table>
                     <table width="100%" cellspacing="0" cellpadding="0" style="border-left: 3px solid black;border-right: 3px solid black;border-bottom: 3px solid black;" >
                         <tr>
-                            <td align="right">
+                            {{-- <td align="right">
                                 <font style="text-align: right;padding-right: 50px; font-size:14pt">BTK,SS</font><br>
                                 <div style="text-align: right;padding-right: 50px; font-size:14pt" id="qrDokter"></div>
                                 <font style="text-align: right;padding-right: 50px; font-size:14pt">( {{ $raw->dokterrad }} )</font><br>
                                 <font style="text-align: right;padding-right: 50px; font-size:14pt">Spesialis Radiologi</font><br><br>
+                            </td> --}}
+                            <td style="background-color:#FFF" width="35%">
+                                
+                            </td>
+                            <td style="background-color:#FFF" width="65%" align="center">
+                                <font style="padding-right: 50px; font-size:14pt">BTK,SS</font><br>
+                                <div style="padding-right: 50px; font-size:20pt" id="qrDokter"></div>
+                                <font style="padding-right: 50px; font-size:14pt"><u>( {{ $raw->dokterrad }} )</u></font><br>
+                                <font style="padding-right: 50px; font-size:14pt">Spesialis Radiologi</font><br><br>
                             </td>
                         </tr>
                     </table>

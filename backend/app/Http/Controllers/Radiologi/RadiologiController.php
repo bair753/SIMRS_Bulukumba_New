@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Radiologi;
 
 use App\Http\Controllers\ApiController;
 use App\Master\JenisPetugasPelaksana;
+use App\Master\LoginUser;
 use App\Master\Produk;
 use App\Transaksi\AntrianPasienDiperiksa;
 use App\Transaksi\HasilPemeriksaan;
@@ -843,6 +844,10 @@ class RadiologiController extends ApiController
     public function getComboRegs(Request $request){
         $kdProfile = $this->getDataKdProfile($request);
         $idProfile = (int) $kdProfile;
+        $cekUser = LoginUser::where('id', $request['userData']['id'])->first();
+
+        $kelompokUser = \DB::table('kelompokuser_s as ku')->where('id', $cekUser['objectkelompokuserfk'])->first();
+
         $dataInstalasi = \DB::table('departemen_m as dp')
 //            ->whereIn('dp.id', array(3, 14, 16, 17, 18, 19, 24, 25, 26, 27, 28, 35))
             ->where('dp.kdprofile', $idProfile)
@@ -862,8 +867,9 @@ class RadiologiController extends ApiController
             ->orderBy('dept.namadepartemen')
             ->get();
 
-
-        $dataDokter = \DB::table('pegawai_m as ru')
+    
+        if($kelompokUser->kelompokuser == 'radiologi'){
+            $dataDokter = \DB::table('pegawai_m as ru')
             ->where('ru.kdprofile', $idProfile)
             ->where('ru.id', 101228)
             ->orWhere('ru.id', 101344)
@@ -888,6 +894,15 @@ class RadiologiController extends ApiController
             // ->where('ru.objectjenispegawaifk', 1)
             ->orderBy('ru.namalengkap')
             ->get();
+        }else{
+            $dataDokter = \DB::table('pegawai_m as ru')
+            ->where('ru.kdprofile', $idProfile)
+            ->where('ru.statusenabled', true)
+            ->where('ru.objectjenispegawaifk', 1)
+            ->orderBy('ru.namalengkap')
+            ->get();
+        }
+        
         foreach ($dataInstalasi as $item) {
             $detail = [];
             foreach ($dataRuangan as $item2) {
