@@ -16,7 +16,7 @@ define(['initialize'], function (initialize) {
             $scope.cc.emrfk = 149
             var dataLoad = []
             var pegawaiInputDetail= ''
-            $scope.isCetak = true
+            $scope.isCetak = false
             var norecEMR = ''
             var cacheNomorEMR = cacheHelper.get('cacheNomorEMR');
             var cacheNoREC = cacheHelper.get('cacheNOREC_EMR');
@@ -707,7 +707,7 @@ define(['initialize'], function (initialize) {
                 }
                 medifirstService.post('emr/save-emr-dinamis', jsonSave).then(function (e) {
                     medifirstService.postLogging('EMR', 'norec emrpasien_t', e.data.data.norec,
-                    'Asesmen Awal Keperawatan I G D'+ ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
+                    'Asesmen Awal Keperawatan IGD'+ ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
                     + $scope.cc.noregistrasi).then(function (res) {
                     })
                     $rootScope.loadRiwayat()

@@ -3277,6 +3277,10 @@
         {
             "nameDep": "PersetujuanRawatInapHCUCtrl",
             "urlDep": "module/EMR/PersetujuanRawatInapHCUCtrl"
+        },
+        {
+            "nameDep": "AsesmenNeonatusCtrl",
+            "urlDep": "module/EMR/AsesmenNeonatusCtrl"
         }
     ]
 }
