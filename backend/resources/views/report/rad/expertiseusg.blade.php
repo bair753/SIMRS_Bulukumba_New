@@ -66,7 +66,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
  <!-- onload="window.print()" -->
 <body style="background-color: white" >
 <div align="center">
-    <table class="bayangprint" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" width="{{$pageWidth}}" style="padding-right:25px;padding-left:80px;padding-top:110px;padding-bottom:25px">
+    <table cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" width="{{$pageWidth}}" style="padding-right:25px;padding-left:80px;padding-top:110px;padding-bottom:25px">
         <tbody>
             <tr>
                 <td>
@@ -112,7 +112,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                         </tr>
                        
                     </table>
-                    <table width="100%" cellspacing="0" cellpadding="0" style="border-left: 3px solid black;border-right: 3px solid black;border-bottom: 3px solid black;" >
+                    <table width="100%" cellspacing="0" cellpadding="0" style="border-left: 3px solid black;border-right: 3px solid black;border-bottom: 3px solid black;padding-top:150px" >
                         <tr>
                             {{-- <td align="right">
                                 <div style="background-color: #bbb" class="justify-content-align">

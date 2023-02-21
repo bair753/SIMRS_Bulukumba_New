@@ -122,6 +122,7 @@ define(['initialize'], function (initialize) {
                     .then(function (x) {
                         $scope.listProdukCek = x.data.details
                         produkDef = x.data.details
+                        console.log($scope.listProdukCek);
                         // $scope.listLayanan = x;
                         // $scope.item.layanan = '';
                         // $scope.item.hargaTindakan = '';

@@ -268,15 +268,17 @@
                                     <label><b> {{pilihLayanan}}</b> Layanan terpilih </label>
                                 </div> -->
                                 <div class="grid_12" ng-repeat="list in listProdukCek | orderBy:'id'"
-                                    style="padding: 10px;">
-                                    <b>{{list.detailjenisproduk}}</b>
-                                    <div class="grid_12" style="padding-top: 5px;">
-                                        <div ng-repeat="jawab in list.details | orderBy:'namaproduk'">
-                                            <div class="grid_4">
-                                                <md-checkbox ng-model="item.layanan[jawab.id]"
-                                                    aria-label="{{jawab.namaproduk}}"  ng-click="getTotal(jawab,bool)">
-                                                    {{jawab.namaproduk}}
-                                                </md-checkbox>
+                                    ng-style="{{list.details.length > 0 ? 'padding: 10px':''}}">
+                                    <div ng-if="list.details.length > 0">
+                                        <b>{{list.detailjenisproduk}}</b>
+                                        <div class="grid_12" style="padding-top: 5px;">
+                                            <div ng-repeat="jawab in list.details | orderBy:'namaproduk'">
+                                                <div class="grid_4">
+                                                    <md-checkbox ng-model="item.layanan[jawab.id]"
+                                                        aria-label="{{jawab.namaproduk}}"  ng-click="getTotal(jawab,bool)">
+                                                        {{jawab.namaproduk}}
+                                                    </md-checkbox>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
