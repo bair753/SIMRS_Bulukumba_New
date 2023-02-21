@@ -16,7 +16,7 @@ define(['initialize'], function (initialize) {
             $scope.cc.emrfk = 290008;
             var dataLoad = []
             var pegawaiInputDetail= ''
-            $scope.isCetak = true
+            $scope.isCetak = false
             var norecEMR = ''
             var cacheNomorEMR = cacheHelper.get('cacheNomorEMR');
             var cacheNoREC = cacheHelper.get('cacheNOREC_EMR');

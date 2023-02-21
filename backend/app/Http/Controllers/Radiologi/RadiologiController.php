@@ -867,29 +867,16 @@ class RadiologiController extends ApiController
             ->orderBy('dept.namadepartemen')
             ->get();
 
-    
+        $pegawaiRadiologi = explode(',', $this->settingDataFixed('kdVerifikatorRadiologi', $idProfile));
+        $kdPegawaiRadiologi = [];
+        foreach ($pegawaiRadiologi as $item) {
+            $kdPegawaiRadiologi[] = (int)$item;
+        }
+        
         if($kelompokUser->kelompokuser == 'radiologi'){
             $dataDokter = \DB::table('pegawai_m as ru')
             ->where('ru.kdprofile', $idProfile)
-            ->where('ru.id', 101228)
-            ->orWhere('ru.id', 101344)
-            ->orWhere('ru.id', 101298)
-            ->orWhere('ru.id', 101299)
-            ->orWhere('ru.id', 101353)
-            ->orWhere('ru.id', 101323)
-            ->orWhere('ru.id', 101315)
-            ->orWhere('ru.id', 101342)
-            ->orWhere('ru.id', 101452)
-            ->orWhere('ru.id', 101447)
-            ->orWhere('ru.id', 101501)
-            ->orWhere('ru.id', 101598)
-            ->orWhere('ru.id', 102014)
-            ->orWhere('ru.id', 102015)
-            ->orWhere('ru.id', 102017)
-            ->orWhere('ru.id', 101545)
-            ->orWhere('ru.id', 101445)
-            ->orWhere('ru.id', 102016)
-            ->orWhere('ru.id', 102018)
+            ->whereIn('ru.id', $kdPegawaiRadiologi)
             ->where('ru.statusenabled', true)
             // ->where('ru.objectjenispegawaifk', 1)
             ->orderBy('ru.namalengkap')
