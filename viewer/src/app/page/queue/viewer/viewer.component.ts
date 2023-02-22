@@ -31,12 +31,12 @@ export class ViewerComponent implements OnInit {
   videoSource: any[] = [
     // {
     //   name: 'LOKAL', url: "assets/tv/jasmed.mp4",
-    //   // 'https://video.detik.com/trans7/smil:trans7.smil/playlist.m3u', 
+    //   // 'https://video.detik.com/trans7/smil:trans7.smil/playlist.m3u',
     //   type: 'dpHls'
     // },
     // {
     //   name: 'TRANS 7', url: "assets/tv/playlist.m3u8",
-    //   // 'https://video.detik.com/trans7/smil:trans7.smil/playlist.m3u', 
+    //   // 'https://video.detik.com/trans7/smil:trans7.smil/playlist.m3u',
     //   type: 'dpHls'
     // },
     { name: 'CNN', url: 'https://live.cnnindonesia.com/livecnn/smil:cnntv.smil/playlist.m3u', type: 'dpHls' },
@@ -53,18 +53,18 @@ export class ViewerComponent implements OnInit {
     channel: this.videoSource[0]
   }
   pilihVideo: any
-  // videoSource: any 
+  // videoSource: any
   videoItems = [
     {
       name: 'Video one',
-      src: 'https://video.detik.com/trans7/smil:trans7.smil/playlist.m3u',
-      type: 'application/x-mpegURL'
+      src: 'https://www.youtube.com/watch?v=buLCcLcSd9w',
+      type: 'video/mp4'
     },
-    {
-      name: 'Video one',
-      src: 'https://video.detik.com/trans7/smil:trans7.smil/playlist.m3u',
-      type: 'application/x-mpegURL'
-    },
+    // {
+    //   name: 'Video one',
+    //   src: 'https://video.detik.com/trans7/smil:trans7.smil/playlist.m3u',
+    //   type: 'application/x-mpegURL'
+    // },
   ];
   activeIndex = 0;
   currentVideo = this.videoItems[this.activeIndex];
@@ -874,7 +874,7 @@ export class ViewerComponent implements OnInit {
       })[0];
       // Create an utterance object
       var utterance = new SpeechSynthesisUtterance(nomor);
-      // Set utterance properties 
+      // Set utterance properties
       utterance.voice = voice;
       utterance.lang  = 'id-ID';
       // utterance.text = document.querySelector("textarea").value;
@@ -967,14 +967,14 @@ export class ViewerComponent implements OnInit {
         this.handleDoubleClick()
       });
     } else {
-      // if timeout doesn't exist, we know it's first click 
+      // if timeout doesn't exist, we know it's first click
       // treat as single click until further notice
       this.setClickTimeout(() =>
         this.handleSingleClick()
       );
     }
   }
-  // sets the click timeout and takes a callback 
+  // sets the click timeout and takes a callback
   // for what operations you want to complete when
   // the click timeout completes
   public setClickTimeout(callback) {

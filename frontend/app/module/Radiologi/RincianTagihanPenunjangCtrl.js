@@ -256,7 +256,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     },
                     {
                         "field": "dokter",
-                        "title": "Dokter",
+                        "title": "Verifikator",
                         "width": "140px",
                     },
                     {

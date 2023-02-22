@@ -48,6 +48,14 @@ define(['initialize'], function (initialize) {
                 });
             }
 
+            $scope.cetakPdfAsesmenAwalMedisRanap = function () {
+                if (norecEMR == '') return
+                var client = new HttpClient();
+                client.get('http://127.0.0.1:1237/printvb/e-rekammedis?cetak-emr-asesmen-awal-keperawatan-igd&id=' + $scope.cc.nocm + '&emr=' + norecEMR + '&view=true', function (response) {
+                    // do something with response
+                });
+            }
+
             medifirstService.getPart('emr/get-datacombo-part-dokter', true, true, 20).then(function (data) {
                 $scope.listDokter = data
             })
