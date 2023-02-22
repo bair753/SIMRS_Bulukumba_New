@@ -47,13 +47,17 @@ define(['initialize'], function (initialize) {
                     // do something with response
                 });
             }
-
             $scope.cetakPdfAsesmenAwalMedisRanap = function () {
                 if (norecEMR == '') return
-                var client = new HttpClient();
-                client.get('http://127.0.0.1:1237/printvb/e-rekammedis?cetak-emr-asesmen-awal-keperawatan-igd&id=' + $scope.cc.nocm + '&emr=' + norecEMR + '&view=true', function (response) {
-                    // do something with response
-                });
+
+                var local = JSON.parse(localStorage.getItem('profile'));
+                var nama = medifirstService.getPegawaiLogin().namalengkap;
+                console.log(config.baseApiBackend);
+                window.open(config.baseApiBackend + 'report/cetak-asesmen-awal-medis-ranap?nocm='
+                    + $scope.cc.nocm + '&norec_apd=' + $scope.cc.norec + '&emr=' + norecEMR
+                    + '&emrfk=' + $scope.cc.emrfk
+                    + '&kdprofile=' + local.id
+                    + '&nama=' + nama, '_blank');
             }
 
             medifirstService.getPart('emr/get-datacombo-part-dokter', true, true, 20).then(function (data) {
