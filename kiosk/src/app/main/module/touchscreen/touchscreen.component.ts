@@ -44,6 +44,9 @@ export class TouchscreenComponent implements OnInit {
     'assets/images/slider/06.jpg',
     'assets/images/slider/08.jpg',
   ];
+  public listVideo: any[] = [
+    'assets/video/video.mp4'
+  ];
   public carouselImages: CarouselImages = {
     one: 'assets/images/slider/01.jpg',
     two: 'assets/images/slider/02.jpg',

@@ -81,7 +81,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             <td width="40%" align="left" style="padding-left:5px;border-top: 3px solid black;border-bottom: 1px solid black;padding-bottom: 20px;border-right: 3px solid black;">
                                 <font style="font-size: 12pt;" color="#000000">NO RM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ $raw->nocm }}</font><br>
                                 <font style="font-size: 12pt;" color="#000000">NAMA LENGKAP&nbsp;&nbsp;: {{ $raw->namapasien }}</font><br>
-                                <font style="font-size: 12pt;" color="#000000">TANGGAL LAHIR&nbsp; : {{ $raw->tgllahir }}</font><br>
+                                <font style="font-size: 12pt;" color="#000000">TANGGAL LAHIR&nbsp; : {{ date('d-m-Y', strtotime($raw->tgllahir)) }}</font><br>
                                 <font style="font-size: 12pt;" color="#000000">NIK&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ $raw->noidentitas }}</font>
                             </td>
                             <td width="8%" align="center" style="border:1px solid black;padding-bottom: 20px;border-top: 3px solid black;border-right: 3px solid black;background-color:black">

@@ -917,7 +917,7 @@ export class ViewerComponent implements OnInit {
     var year = (yy < 1000) ? yy + 1900 : yy;
 
     var tgl = (thisDay + ', ' + day + ' ' + months[month] + ' ' + year);
-    var jam = (h + ":" + m + ":" + s + " WIB");
+    var jam = (h + ":" + m + ":" + s + " WITA");
     // $("#timer").html(tgl + ' ' + jam);
     // setTimeout(function () {this.getdate() }, 1000);
     var el: HTMLElement = document.getElementById('timer');
