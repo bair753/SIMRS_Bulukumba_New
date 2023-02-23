@@ -116,11 +116,20 @@ define(['initialize'], function (initialize) {
             });
 
             $scope.Save = function () {
+                var oneDay = 24*60*60*1000;
+                var convertkeluar = new Date($scope.item.tglKeluar);
+                var convertmasuk = new Date($scope.item.pasien.tglregistrasi);
 
+                var diffDays = Math.round(Math.round((convertkeluar.getTime() - convertmasuk.getTime()) / (oneDay)));
 
                 if (!$scope.item.statusKeluar) {
                     messageContainer.error('Status keluar belum di pilih');
                     return;
+                    
+                } else if (diffDays < 0) {
+                    messageContainer.error('Tanggal keluar lebih kecil dari tanggal registrasi');
+                    return;
+                    
                 } else if ($scope.item.statusKeluar.id === 2) {
                     $scope.SavePindah()
                 } else {
@@ -335,6 +344,7 @@ define(['initialize'], function (initialize) {
                     tglmeninggal: moment($scope.item.tglMeninggal).format('YYYY-MM-DD HH:mm:ss'),
                     // tglpulang: moment($scope.item.tglRencanaKeluar).format('YYYY-MM-DD hh:mm:ss'), #yg egi
                     tglpulang: moment($scope.item.tglKeluar).format('YYYY-MM-DD HH:mm:ss'),
+                    
                     norec_pd: $scope.currentNorecPD,
                     objectstatuskeluarrencanafk: statusKeluarId,
                     nocmfk: $scope.item.pasien.nocmfk,
@@ -342,6 +352,7 @@ define(['initialize'], function (initialize) {
                     keterangankematian: PenyebabKematianText
 
                 }
+                console.log(tglPulang);
                 var antrianpasiendiperiksa = {
                     objectruanganlastfk: $scope.item.pasien.objectruanganlastfk,
                     norec_apd: $scope.item.pasien.norec_apd,
