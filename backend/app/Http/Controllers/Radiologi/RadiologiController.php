@@ -873,7 +873,13 @@ class RadiologiController extends ApiController
             $kdPegawaiRadiologi[] = (int)$item;
         }
         
-        if($kelompokUser->kelompokuser == 'radiologi'){
+        if($kelompokUser->kelompokuser == 'radiologi' 
+        or $cekUser['objectpegawaifk'] == '101298'
+        or $cekUser['objectpegawaifk'] == '101228' 
+        or $cekUser['objectpegawaifk'] == '101344' 
+        or $cekUser['objectpegawaifk'] == '102016' 
+        or $cekUser['objectpegawaifk'] == '102018')
+        {
             $dataDokter = \DB::table('pegawai_m as ru')
             ->where('ru.kdprofile', $idProfile)
             ->whereIn('ru.id', $kdPegawaiRadiologi)

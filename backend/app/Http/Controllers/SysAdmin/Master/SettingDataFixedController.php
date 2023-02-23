@@ -93,7 +93,7 @@ class SettingDataFixedController extends ApiController
             $newDF->kdprofile = $kdProfile;
             $newDF->statusenabled = true;
         }else{
-            $newDF =  SettingDataFixed::where('id',$request['datafixed']['iddatafixed'])-where('kdprofile', $kdProfile)->first();
+            $newDF =  SettingDataFixed::where('id',$request['datafixed']['iddatafixed'])->where('kdprofile', $kdProfile)->first();
         }
         $newDF->kodeexternal = str_limit( $request['datafixed']['kodeexternal'],10);
         $newDF->namaexternal = $request['datafixed']['namaexternal'];
