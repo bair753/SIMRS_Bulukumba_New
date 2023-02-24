@@ -120,13 +120,13 @@ define(['initialize'], function (initialize) {
                 var convertkeluar = new Date($scope.item.tglKeluar);
                 var convertmasuk = new Date($scope.item.pasien.tglregistrasi);
 
-                var diffDays = Math.round(Math.round((convertkeluar.getTime() - convertmasuk.getTime()) / (oneDay)));
+                var hitungselisih = Math.round(Math.round((convertkeluar.getTime() - convertmasuk.getTime()) / (oneDay)));
 
                 if (!$scope.item.statusKeluar) {
                     messageContainer.error('Status keluar belum di pilih');
                     return;
                     
-                } else if (diffDays < 0) {
+                } else if (hitungselisih < 0) {
                     messageContainer.error('Tanggal keluar lebih kecil dari tanggal registrasi');
                     return;
                     
@@ -352,7 +352,7 @@ define(['initialize'], function (initialize) {
                     keterangankematian: PenyebabKematianText
 
                 }
-                console.log(tglPulang);
+                // console.log(tglPulang);
                 var antrianpasiendiperiksa = {
                     objectruanganlastfk: $scope.item.pasien.objectruanganlastfk,
                     norec_apd: $scope.item.pasien.norec_apd,
