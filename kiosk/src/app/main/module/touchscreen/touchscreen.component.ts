@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { ToastService } from 'app/main/components/toasts/toasts.service';
 import { ToastrService } from 'ngx-toastr';
+import { PlyrComponent } from 'ngx-plyr';
 import { HttpService } from '../httpService';
 import { HttpClient } from '@angular/common/http';
 import { Configuration } from '../config';
@@ -37,6 +38,21 @@ export class TouchscreenComponent implements OnInit {
 
   @ViewChild("scanBarcode") nameBarcode: ElementRef;
   now: any = moment(new Date()).format('DD MMM, YYYY')
+  @ViewChild(PlyrComponent)
+  // or get it from plyrInit event
+  public plyr: PlyrComponent;
+  public player: Plyr;
+  public plyrOptions = { tooltips: { controls: true }, autoplay: true, loop: { active: true } };
+
+  // video Sources
+  public videoSources: Plyr.Source[] = [
+    {
+      src:
+        'assets/video/video1-muted.mp4',
+      type: 'video/mp4',
+      size: 576
+    },
+  ];
   // private
   private _unsubscribeAll: Subject<any>;
   public listImage: any[] = [

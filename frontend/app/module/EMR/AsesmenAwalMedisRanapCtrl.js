@@ -318,6 +318,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 $scope.item.obj2 = []
                 $scope.item.obj[422271] = $scope.now
                 dataLoad = dat.data.data
+                console.log($scope.item.obj);
 
                 medifirstService.get("emr/get-vital-sign?noregistrasi=" + $scope.cc.noregistrasi + "&objectidawal=4241&objectidakhir=4246&idemr=147", true).then(function (datas) {
                     $scope.item.obj[422204] = datas.data.data[1].value; // Tekanan Darah

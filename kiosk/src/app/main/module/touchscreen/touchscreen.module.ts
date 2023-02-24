@@ -13,6 +13,7 @@ import { knowledgeBaseCategoryService } from 'app/main/pages/kb/knowledge-base-c
 import { knowledgeBaseService } from 'app/main/pages/kb/knowledge-base/knowledge-base.service';
 import { CardSnippetModule } from '@core/components/card-snippet/card-snippet.module';
 import { ToastrModule } from 'ngx-toastr';
+import { PlyrModule } from 'ngx-plyr';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { ToastrModule } from 'ngx-toastr';
     NgSelectModule,
     FormsModule,
     CardSnippetModule,
-    ToastrModule
+    ToastrModule,
+    PlyrModule
   ],
   providers: [knowledgeBaseService, knowledgeBaseCategoryService, knowledgeBaseQuestionService]
 })

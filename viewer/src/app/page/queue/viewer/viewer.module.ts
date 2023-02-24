@@ -9,6 +9,7 @@ import { VgControlsModule } from '@videogular/ngx-videogular/controls';
 import { VgOverlayPlayModule } from '@videogular/ngx-videogular/overlay-play';
 import { VgBufferingModule } from '@videogular/ngx-videogular/buffering';
 import { DPlayerModule } from 'angular-dplayer';
+import { PlyrModule } from 'ngx-plyr';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { DPlayerModule } from 'angular-dplayer';
     VgControlsModule,
     VgOverlayPlayModule,
     VgBufferingModule,
-    DPlayerModule
+    DPlayerModule,
+    PlyrModule
   ]
 })
 export class ViewerModule { }

@@ -14,9 +14,8 @@
               <h4 class="card-title">Hai, Selamat Datang</h4>
               <!-- <h6 class="card-subtitle text-muted">Support card subtitle</h6> -->
             </div>
-              <video autoplay loop>
-                <source src="assets/video/video1-muted.mp4" type="video/mp4"/>
-              </video>
+            <div plyr plyrTitle="Video" [plyrPlaysInline]="true" [plyrSources]="videoSources"
+                [plyrOptions]="plyrOptions"></div>
             <!-- <div class="card-body">
               <ngb-carousel *ngIf="listImage">
                 <ng-template ngbSlide *ngFor="let items of listImage">

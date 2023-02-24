@@ -1,6 +1,6 @@
 
 
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { VgApiService } from '@videogular/ngx-videogular/core';
 import { DPlayerService } from 'angular-dplayer';
 import { StreamState } from 'src/app/interfaces/stream-state';
@@ -10,12 +10,30 @@ import { SocketService } from 'src/app/service/socket.service';
 import Terbilang from 'terbilang-ts'
 import { Howl, Howler } from 'howler';
 import { Config } from 'src/app/guard';
+import { PlyrComponent } from 'ngx-plyr';
+
 @Component({
   selector: 'app-viewer',
   templateUrl: './viewer.component.html',
-  styleUrls: ['./viewer.component.scss']
+  styleUrls: ['./viewer.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ViewerComponent implements OnInit {
+    @ViewChild(PlyrComponent)
+  // or get it from plyrInit event
+  public plyr: PlyrComponent;
+  public player: Plyr;
+  public plyrOptions = { tooltips: { controls: true }, autoplay: true, loop: { active: true } };
+
+  // video Sources
+  public videoSources: Plyr.Source[] = [
+    {
+      src:
+        'assets/video/video1-muted.mp4',
+      type: 'video/mp4',
+      size: 1080
+    },
+  ];
   dateNow: any = new Date()
   jamSekarang: any;
   isLogin:boolean =true
