@@ -16,7 +16,8 @@ define(['initialize', 'Configuration'], function (initialize, config) {
             $scope.cc.emrfk = 290018;
             var dataLoad = []
             var pegawaiInputDetail= ''
-            $scope.isCetak = true
+            $scope.isCetak = false
+            $scope.isCetakV = true
             var norecEMR = ''
             var cacheNomorEMR = cacheHelper.get('cacheNomorEMR');
             var cacheNoREC = cacheHelper.get('cacheNOREC_EMR');
@@ -47,7 +48,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     // do something with response
                 });
             }
-            $scope.cetakPdfAsesmenAwalMedisRanap = function () {
+            $scope.cetakBlade = function () {
                 if (norecEMR == '') return
 
                 var local = JSON.parse(localStorage.getItem('profile'));
@@ -419,7 +420,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 }
                 medifirstService.post('emr/save-emr-dinamis', jsonSave).then(function (e) {
                     medifirstService.postLogging('EMR', 'norec emrpasien_t', e.data.data.norec,
-                    'Asesmen Awal Keperawatan I G D'+ ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
+                    'Asesmen Awal Medis Rawat Inap '+ ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
                     + $scope.cc.noregistrasi).then(function (res) {
                     })
                     $rootScope.loadRiwayat()
