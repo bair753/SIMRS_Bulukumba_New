@@ -964,13 +964,13 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 //     return
                 // }
                 if ($scope.item.layanan == undefined || $scope.item.layanan.length == 0) {
-                    alert("Pilih layanan terlebih dahulu!!")
+                    toastr.warning("Pilih layanan terlebih dahulu!!")
                     return
                 }
-                // if ($scope.item.kddiagnosa == undefined) {
-                //     toastr.warning("Pilih Diagnosa terlebih dahulu!!")
-                //     return
-                // }
+                if ($scope.item.kddiagnosa == undefined) {
+                    toastr.warning("Pilih Diagnosa terlebih dahulu!!")
+                    return
+                }
                 if ($scope.item.doktermeminta == undefined) {
                     toastr.warning("Dokter yang meminta harus diisi!!")
                     return
