@@ -1268,7 +1268,7 @@ class ReportController extends ApiController{
         $kdProfile = (int)$request['kdprofile'];
         $profile = collect(DB::select
         ("
-                select * from profile_m where id = $kdProfile limit 1
+                select * from profile_m where id = 39 limit 1
             "))->first();
 
         $registrasi = DB::table('pasiendaftar_t AS pd')
@@ -1331,7 +1331,7 @@ class ReportController extends ApiController{
 
         $profile = collect(DB::select
         ("
-                select * from profile_m where id = $kdProfile limit 1
+                select * from profile_m where id = 39 limit 1
             "))->first();
 
         $registrasi = collect(DB::select("

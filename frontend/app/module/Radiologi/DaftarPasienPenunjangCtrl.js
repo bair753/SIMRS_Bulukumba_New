@@ -74,8 +74,8 @@ define(['initialize'], function (initialize) {
                 var tglAkhir = moment($scope.item.tglAkhir).format('YYYY-MM-DD HH:mm:ss');
                 $scope.isRouteLoading = true;
                 medifirstService.get("radiologi/get-daftar-pasien-penunjang?" +
-                    "tglAwal=" + tglAwal +
-                    "&tglAkhir=" + tglAkhir +
+                    // "tglAwal=" + tglAwal +
+                    // "&tglAkhir=" + tglAkhir +
                     reg +
                     rm +
                     nm +
