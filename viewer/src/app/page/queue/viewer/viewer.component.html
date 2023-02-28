@@ -70,8 +70,10 @@ color: #777777;">
                             <!-- <div class="container6 " > -->
                             <div class="video-player-wrapper">
                                 <!-- dpHls -->
-                                <div plyr plyrTitle="Video" [plyrPlaysInline]="true" [plyrSources]="videoSources"
-                                    [plyrOptions]="plyrOptions"></div>
+                                <d-player dpHls preload="auto" #player [video]="{url: pilihVideo}" [loop]='true'
+                                    [volume]="0" [screenshot]="true"></d-player>
+                                <!-- <div plyr plyrTitle="Video" [plyrPlaysInline]="true" [plyrSources]="videoSources"
+                                    [plyrOptions]="plyrOptions"></div> -->
 
                             </div>
                         </p-scrollPanel>
