@@ -367,13 +367,13 @@ define(['initialize'], function (initialize) {
                         columns: [
                             {
                                 field: "saldoawal",
-                                title: "Jumlah",
+                                title: "QTY",
                                 width: "80px",
                                 template: "<span class='style-right'>{{formatRupiah('#: saldoawal #', '')}}</span>"
                             },
                             {
                                 field: "hargasatuan",
-                                title: "Harga Satuan",
+                                title: "Jumlah",
                                 width: "120px",
                                 template: "<span class='style-right'>{{formatRupiah('#: hargasatuan #', '')}}</span>"
                             },
@@ -389,12 +389,12 @@ define(['initialize'], function (initialize) {
                         ]
                     },
                     {
-                        title: "Jumlah Penerimaan/Pengadaan",
+                        title: "Barang Masuk",
                         headerAttributes: { style: "text-align : center" },
                         columns: [
                             {
                                 field: "qtyterima",
-                                title: "Jumlah",
+                                title: "QTY",
                                 width: "80px",
                                 template: "<span class='style-right'>{{formatRupiah('#: qtyterima #', '')}}</span>"
                             },
@@ -406,7 +406,7 @@ define(['initialize'], function (initialize) {
                             },
                             {
                                 field: "hargasatuan",
-                                title: "Harga Satuan",
+                                title: "Jumlah",
                                 width: "120px",
                                 template: "<span class='style-right'>{{formatRupiah('#: hargasatuan #', '')}}</span>"
                             },
@@ -422,12 +422,12 @@ define(['initialize'], function (initialize) {
                         ]
                     },
                     {
-                        title: "Jumlah Pengeluaran",
+                        title: "Pemakaian",
                         headerAttributes: { style: "text-align : center" },
                         columns: [
                             {
                                 field: "qtykeluar",
-                                title: "Jumlah",
+                                title: "QTY",
                                 width: "80px",
                                 template: "<span class='style-right'>{{formatRupiah('#: qtykeluar #', '')}}</span>"
                             },
@@ -439,7 +439,7 @@ define(['initialize'], function (initialize) {
                             },
                             {
                                 field: "hargasatuan",
-                                title: "Harga Satuan",
+                                title: "Jumlah",
                                 width: "120px",
                                 template: "<span class='style-right'>{{formatRupiah('#: hargasatuan #', '')}}</span>"
                             },
@@ -460,13 +460,13 @@ define(['initialize'], function (initialize) {
                         columns: [
                             {
                                 field: "saldoakhir",
-                                title: "Jumlah",
+                                title: "QTY",
                                 width: "80px",
                                 template: "<span class='style-right'>{{formatRupiah('#: saldoakhir #', '')}}</span>"
                             },
                             {
                                 field: "hargasatuan",
-                                title: "Harga Satuan",
+                                title: "Jumlah",
                                 width: "120px",
                                 template: "<span class='style-right'>{{formatRupiah('#: hargasatuan #', '')}}</span>"
                             },
