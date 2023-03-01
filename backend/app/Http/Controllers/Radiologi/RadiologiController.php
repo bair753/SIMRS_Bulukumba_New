@@ -2767,4 +2767,22 @@ class RadiologiController extends ApiController
         return $this->respond($dataTea);
     }
 
+    public function getDataStrukOrder(Request $request) {
+        $kdProfile = $this->getDataKdProfile($request);
+        $idProfile = (int)$kdProfile;
+
+        $data = \DB::table('strukorder_t as so')
+        ->where('statusenabled', true)
+        ->where('kdprofile', $idProfile)
+        ->where('noorder', $request['noorder'])
+        ->get();
+
+        $result = array(
+            'data' => $data,
+            'status' => 200
+        );
+
+        return $this->respond($result);
+    }
+
 }
