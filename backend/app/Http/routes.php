@@ -1492,6 +1492,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
           Route::get('radiologi/get-detail-verifikasi', 'Radiologi\RadiologiController@getDetailVerifLabRad');
           Route::get('radiologi/get-pelayananpasien-radiologi','Radiologi\RadiologiController@getPelayananRad');
           Route::get('radiologi/get-rincian-pelayanan-radiologi', 'Radiologi\RadiologiController@getRiwayatTindakanRadiologi');
+          Route::get('radiologi/get-diagnosa-klinis-order', 'Radiologi\RadiologiController@getDataStrukOrder');
 
           Route::get('radiologi/images/pacs/{filename}/{ext}', function ($filename, $ext) {
             $path = storage_path('images/pacs/'.$filename.'.'.$ext);

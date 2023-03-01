@@ -963,18 +963,22 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 //     alert("Pilih layanan terlebih dahulu!!")
                 //     return
                 // }
-                if ($scope.item.layanan == undefined || $scope.item.layanan.length == 0) {
-                    toastr.warning("Pilih layanan terlebih dahulu!!")
-                    return
-                }
-                if ($scope.item.kddiagnosa == undefined) {
-                    toastr.warning("Pilih Diagnosa terlebih dahulu!!")
-                    return
-                }
                 if ($scope.item.doktermeminta == undefined) {
                     toastr.warning("Dokter yang meminta harus diisi!!")
                     return
                 }
+                if ($scope.item.klinis == undefined) {
+                    toastr.warning("Diagnosa klinis harus diisi!!")
+                    return
+                }
+                if ($scope.item.layanan == undefined || $scope.item.layanan.length == 0) {
+                    toastr.warning("Pilih layanan terlebih dahulu!!")
+                    return
+                }
+                // if ($scope.item.kddiagnosa == undefined) {
+                //     toastr.warning("Pilih Diagnosa terlebih dahulu!!")
+                //     return
+                // }
                 var kkdiagnosa = ''
                 if ($scope.item.kddiagnosa != undefined) {
                     kkdiagnosa = $scope.item.kddiagnosa.kddiagnosa;
@@ -1007,7 +1011,8 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     objectruanganfk: namaRuanganFk,
                     objectruangantujuanfk: $scope.item.ruangantujuan.id,
                     departemenfk: 27,
-                    kddiagnosa: kkdiagnosa,//$scope.item.kddiagnosa.kddiagnosa,
+                    // kddiagnosa: kkdiagnosa,//$scope.item.kddiagnosa.kddiagnosa,
+                    kddiagnosa: $scope.item.klinis != undefined ? $scope.item.klinis : '-',
                     pegawaiorderfk: $scope.item.doktermeminta.id, //$scope.PegawaiLogin2.id,
                     keterangan: $scope.item.keterangan != undefined ? $scope.item.keterangan : null,
                     iscito: $scope.item.iscito != undefined && $scope.item.iscito == true ? $scope.item.iscito : false,
