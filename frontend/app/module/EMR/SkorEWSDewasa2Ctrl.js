@@ -91,7 +91,7 @@ define(['initialize'], function (initialize) {
                         $scope.listUrinOutput.push({ id: element.id })
                     }
                     // ARRAY GEJALA
-                    if (element.kodeexternal == 'lajurespirasi') {
+                    if (element.kodeexternal == 'pernapasan') {
                         for (let z = 0; z < arrayGejala.length; z++) {
                             const element2 = arrayGejala[z];
                             if (element2.namaexternal == element.namaexternal) {
