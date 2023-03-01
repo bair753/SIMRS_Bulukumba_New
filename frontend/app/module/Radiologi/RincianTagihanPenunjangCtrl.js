@@ -1165,6 +1165,12 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                         $scope.cekhasilrad = true;
                         $scope.itemimg.img = "./images/noimage.png"
                         window.messageContainer.error("Belum Ada Ekspertise.");
+
+                        // Get Diagnosa Klinis 
+                        medifirstService.get('radiologi/get-diagnosa-klinis-order?noorder=' + $scope.dataSelected.noorder).then(function(resp) {
+                            var dataSO = resp.data.data
+                            $scope.item.klinis = dataSO[0].kddiagnosa != null ? dataSO[0].kddiagnosa : '-';
+                        })
                     }
                 }).error(function (err) {
                     $scope.item.img = "./images/noimage.png"
