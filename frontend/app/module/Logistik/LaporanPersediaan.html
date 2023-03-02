@@ -34,19 +34,22 @@
                         k-data-text-field="'namaruangan'" k-data-value-field="'id'" k-filter="'contains'"
                         k-auto-bind="false" k-data-source="listRuangan" />
                 </div>
-            </div>
-            <div class="grid_4" style="margin-top:5px;">
+            </div>-->
+            <div class="grid_8" style="margin-top:5px;">
                 <div class="grid_12">
-                    <label c-label item="item">Detail Jenis Produk</label>
+                    <label c-label item="item">Jenis Produk</label>
                 </div>
 
                 <div class="grid_12">
                     <select kendo-multi-select k-options="selectOptionsDetailJenis" k-data-source="listDetailJenis"
                         k-data-text-field="'detailjenisproduk'" k-data-value-field="'id'"
-                        k-ng-model="selectedDetailJenis" \>
+                        k-ng-model="selectedDetailJenis">
                     </select>
+                    <!-- <input style="width: 100%;" kendo-combo-box k-options="selectOptionsDetailJenis" 
+                    k-data-source="listDetailJenis" k-data-text-field="'detailjenisproduk'"
+                    k-data-value-field="'id'" k-ng-model="item.selectedDetailJenis"  /> -->
                 </div>
-            </div> -->
+            </div> 
             <div class="grid_4" style="margin-top:5px;">
                 <div class="grid_12">
                     <label c-label item="item" c-label-text="Produk"></label>
