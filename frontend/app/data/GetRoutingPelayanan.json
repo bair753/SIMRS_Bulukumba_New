@@ -17279,8 +17279,8 @@
     ]
   },
   {
-    "name": "RekamMedis.AsesmenMedis.CPPTRanap",
-    "url": "/CPPTRanap",
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.CPPTRanap",
+    "url": "/CPPTRanap/:index/:idEMR",
     "templateurl": "module/EMR/CPPTRanap.html",
     "controller": "CPPTRanapCtrl",
     "deps": [
