@@ -9013,8 +9013,10 @@ class EMRController  extends ApiController
         $dataReq = $request->all();
 
         $head = $dataReq['head'];
-        $data = $dataReq['data'];
-
+        $data = [];
+        if (isset($dataReq['data']) && count($dataReq['data']) > 0) {
+            $data = $dataReq['data'];
+        }
         //        foreach ($data as $itm){
         //            $dtdt[] = $itm;
         //        }
@@ -9060,7 +9062,8 @@ class EMRController  extends ApiController
                 $EMRPASIENDETAILIMG = [];
             } else {
                 $EMR = EMRPasien::where('noemr', $head['norec_emr'])
-                ->where('noregistrasifk', $head['noregistrasi'])
+                // ->where('noregistrasifk', $head['noregistrasi'])
+                ->where('nocm', $head['nocm'])
                 ->where('kdprofile', $kdProfile)
                     ->first();
                 $noemr = $EMR->noemr;
@@ -9084,6 +9087,19 @@ class EMRController  extends ApiController
                         ->orderBy('emrdfk')
                         ->get();
                 }
+                if ((!empty($EMR) && isset($head['nocm'])) && trim($EMR->nocm) != $head['nocm']) {
+                    $transMessage = "Kesalahan loading data..!";
+                    DB::rollBack();
+                    $result = array(
+                        "status" => 400,
+                        "message" => $transMessage,
+                        "as" => 'as@epic',
+                    );
+                    return $this->setStatusCode($result['status'])->respond($result, $transMessage);
+                }
+
+
+
 
                 //                $EMRDelete = EMRPasienD::where('emrpasienfk', $noemr)
                 //                ->where('emrfk', $head['emrfk'])
@@ -9091,16 +9107,16 @@ class EMRController  extends ApiController
             }
 
             //VALIDASI JIKA NOREGISTRASI BEDA //
-            if ((!empty($EMR) && isset($head['noregistrasi'])) && trim($EMR->noregistrasifk) != $head['noregistrasi']) {
-                $transMessage = "Kesalahan loading data..!";
-                DB::rollBack();
-                $result = array(
-                    "status" => 400,
-                    "message" => $transMessage,
-                    "as" => 'as@epic',
-                );
-                return $this->setStatusCode($result['status'])->respond($result, $transMessage);
-            }
+            // if((!empty($EMR) && isset($head['noregistrasi']) )&& trim($EMR->noregistrasifk) != $head['noregistrasi']){
+            //     $transMessage = "Kesalahan loading data..!";
+            //     DB::rollBack();
+            //     $result = array(
+            //         "status" => 400,
+            //         "message" => $transMessage,
+            //         "as" => 'as@epic',
+            //     );
+            //     return $this->setStatusCode($result['status'])->respond($result, $transMessage);
+            // }
 
 
             $EMR->noemr = $noemr;
@@ -9130,7 +9146,11 @@ class EMRController  extends ApiController
             if (isset($head['namaruangan'])) {
                 $EMR->namaruangan = $head['namaruangan'];
             } else {
-                $EMR->namaruangan = "Triage Gawat Darurat";
+                if (isset($head['isascvd']) && $head['isascvd'] != '') {
+                    $EMR->namaruangan = "POLI ASCVD";
+                } else {
+                    $EMR->namaruangan = "Triage Gawat Darurat";
+                }
             }
             if (isset($head['tgllahir'])) {
                 $EMR->tgllahir = $head['tgllahir'];
@@ -9152,6 +9172,12 @@ class EMRController  extends ApiController
             }
 
             $EMR->tglemr = $this->getDateTime()->format('Y-m-d H:i:s');
+            if (isset($head['statusmandiri']) && $head['statusmandiri'] == 'skriningmandiri') {
+                $EMR->isskriningmandiri = true;
+            }
+            if (isset($head['isascvd']) && $head['isascvd'] != '') {
+                $EMR->isascvd = $head['isascvd'];
+            }
             $EMR->save();
 
             $norec_EMR = $EMR->noemr;
@@ -9183,6 +9209,7 @@ class EMRController  extends ApiController
                 $sama = 0;
                 foreach ($EMRPASIENDETAIL as $emrupdate) {
                     $sama = 0;
+
                     if ($emrupdate->emrdfk == $emrdfk && $idx == $emrupdate->index) {
                         $sama =  1;
                         if ($emrupdate->value != $valueemr) {
@@ -9194,9 +9221,11 @@ class EMRController  extends ApiController
                 }
 
                 if ($sama ==  2) {
+
                     $EMRPasienDUpdatekeun = EMRPasienD::where('emrpasienfk', $norec_EMR)
                         ->where('emrfk', $head['emrfk'])
                         ->where('emrdfk', $emrdfk)
+                        ->where('index', $idx)
                         ->where('kdprofile', $kdProfile)
                         ->where('statusenabled', 1)
                         ->update([
@@ -9331,6 +9360,7 @@ class EMRController  extends ApiController
                     }
                 }
             }
+
             $transStatus = 'true';
         } catch (\Exception $e) {
             $transStatus = 'false';
@@ -9352,16 +9382,17 @@ class EMRController  extends ApiController
             );
             $this->saveEMRBackup($data, $head, $norec_EMR, $kdProfile);
         } else {
+            \Storage::disk('local')->put('log_emr' . date('YmdHis') . '.json', json_encode($dataReq));
             $transMessage = $transMessage . " Gagal!!";
             DB::rollBack();
             $result = array(
                 "status" => 400,
                 "data" => $data,
-                "e" => $e->getMessage() . ' ' . $e->getLine(),
-                //                "keys" => $keys,
-                //                "dtdt" => $dtdt,
+                'e' => $e->getMessage() . ' ' . $e->getLine(),
                 "as" => 'as@epic',
             );
+
+            \Log::info($e->getMessage() . ' ' . $e->getLine() . '-' . json_encode($dataReq));
         }
 
         return $this->setStatusCode($result['status'])->respond($result, $transMessage);

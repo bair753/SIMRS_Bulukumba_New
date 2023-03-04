@@ -13409,10 +13409,13 @@ public function getLaporanPersediaan_v4_2 (Request $request) {
         $tglAyeuna = date('Y-m-d 23:59');
         $bulanlalu = $request['blnLalu'];
         $namaproduk = $request['nmproduk'];
+        $jenisProduk = $request['djp'];
  
  //        $tglresepBlnIni = 'O/' . date('ym', strtotime($tglAwal));
-        
- 
+    $jProduk =''; 
+    if(isset($request['djp']) && $request['djp']!="" && $request['djp']!="undefined"){
+        $jProduk = 'and pr.objectdetailjenisprodukfk = '.$request['djp'];
+    }
         $data = DB::select(DB::raw("
         
         select x.id,x.namaproduk,sum(x.saldoawal) as saldoawal,sum(x.qtyterima) as qtyterima,sum(x.qtykeluar) as qtykeluar,sum(x.saldoakhir) as saldoakhir, 
@@ -13427,7 +13430,7 @@ public function getLaporanPersediaan_v4_2 (Request $request) {
                         inner join produk_m as pr on pr.id = cp.produkfk
                         LEFT JOIN satuanstandar_m AS ss ON ss.id = pr.objectsatuanstandarfk
                         LEFT JOIN asalproduk_m AS ap ON ap.id = case when cp.asalprodukfk = 1 then 16 else cp.asalprodukfk end 
-                        where cp.bulanclosing = '$bulanlalu'
+                        where cp.bulanclosing = '$bulanlalu' 
                         and cp.kdprofile = 21
                         and cp.statusenabled = TRUE
                         and pr.statusenabled = TRUE
@@ -13444,7 +13447,7 @@ public function getLaporanPersediaan_v4_2 (Request $request) {
                         INNER JOIN produk_m pr on pr.id=spd.objectprodukfk
                         INNER JOIN asalproduk_m ap on ap.id=case when spd.objectasalprodukfk = 1 then 16 else spd.objectasalprodukfk end 
                         LEFT JOIN satuanstandar_m AS ss ON ss.id = pr.objectsatuanstandarfk
-                        where sp.tglstruk between '$tglAwal' and '$tglAkhir'
+                        where sp.tglstruk between '$tglAwal' and '$tglAkhir' $jProduk
                         and sp.objectkelompoktransaksifk=35
                         and sp.statusenabled = TRUE
                         and pr.statusenabled = TRUE
@@ -13462,7 +13465,7 @@ public function getLaporanPersediaan_v4_2 (Request $request) {
                  INNER JOIN produk_m as pr on pr.id = ppr.objectprodukfk
                  INNER JOIN asalproduk_m ap on ap.id=case when spd.objectasalprodukfk  = 1 then 16 else spd.objectasalprodukfk  end 
                  LEFT JOIN satuanstandar_m AS ss ON ss.id = pr.objectsatuanstandarfk
-                 WHERE  sr.tglretur BETWEEN '$tglAwal' and '$tglAkhir'
+                 WHERE sr.tglretur BETWEEN '$tglAwal' and '$tglAkhir' $jProduk
                  AND sr.statusenabled = true 
                  and pr.statusenabled = TRUE
             
@@ -13491,7 +13494,7 @@ public function getLaporanPersediaan_v4_2 (Request $request) {
             LEFT JOIN pasiendaftar_t pd on pd.norec=apd.noregistrasifk
             LEFT JOIN pasien_m ps on ps.id=pd.nocmfk
             where pp.isobat='t'
-            and pp.tglpelayanan between '$tglAwal' and '$tglAkhir'
+            and pp.tglpelayanan between '$tglAwal' and '$tglAkhir' $jProduk
             and pr.statusenabled = TRUE) as x
             group by x.norec,x.id,x.namaproduk, x.hargasatuan,x.asalproduk,x.apid,x.satuanstandar
  
@@ -13505,7 +13508,7 @@ public function getLaporanPersediaan_v4_2 (Request $request) {
             INNER JOIN produk_m pr on pr.id=spd.objectprodukfk
             INNER JOIN asalproduk_m ap on ap.id=case when spd.objectasalprodukfk = 1 then 16 else spd.objectasalprodukfk end 
             LEFT JOIN satuanstandar_m AS ss ON ss.id = pr.objectsatuanstandarfk
-            where sp.tglstruk between '$tglAwal' and '$tglAkhir'
+            where sp.tglstruk between '$tglAwal' and '$tglAkhir' $jProduk
             and substring(sp.nostruk,1,2)='OB'
             and spd.objectprodukfk <> 10013803
             and sp.statusenabled = TRUE
@@ -13525,7 +13528,7 @@ public function getLaporanPersediaan_v4_2 (Request $request) {
             LEFT JOIN satuanstandar_m AS ss ON ss.id = pr.objectsatuanstandarfk
             WHERE sk.kdprofile = 21 and sk.jenispermintaanfk = 1
             and sk.statusenabled = TRUE and kp.qtyproduk > 0
-            and sk.tglkirim BETWEEN '$tglAwal' and '$tglAkhir'
+            and sk.tglkirim BETWEEN '$tglAwal' and '$tglAkhir' $jProduk
             and pr.statusenabled = TRUE
  
             union all
@@ -13543,7 +13546,7 @@ public function getLaporanPersediaan_v4_2 (Request $request) {
             LEFT JOIN asalproduk_m AS ap ON ap.id = case when spdo.objectasalprodukfk = 1 then 16 else spdo.objectasalprodukfk end 
             where sc.kdprofile = 21
             and sc.statusenabled = true
-            and sc.tglclosing BETWEEN '$tglAwal' and '$tglAkhir' 
+            and sc.tglclosing BETWEEN '$tglAwal' and '$tglAkhir' $jProduk
             and spdo.qtyproduksystem <> spdo.qtyprodukreal
             and pr.statusenabled = TRUE
  
@@ -13560,7 +13563,7 @@ public function getLaporanPersediaan_v4_2 (Request $request) {
                  INNER JOIN produk_m as pr on pr.id = ppr.produkfk
                  INNER JOIN asalproduk_m ap on ap.id=case when spd.objectasalprodukfk  = 1 then 16 else spd.objectasalprodukfk  end 
                  LEFT JOIN satuanstandar_m AS ss ON ss.id = pr.objectsatuanstandarfk
-                 WHERE  sr.tglretur BETWEEN '$tglAwal' and '$tglAkhir'
+                 WHERE  sr.tglretur BETWEEN '$tglAwal' and '$tglAkhir' $jProduk
                  AND sr.statusenabled = true
                  and pr.statusenabled = TRUE
  
@@ -14010,6 +14013,7 @@ public function getLaporanPersediaan_v4_2 (Request $request) {
         $bulanlalu = $request['blnLalu'];
         $namaproduk = $request['nmproduk'];
         $idproduk = $request['idproduk'];
+        $listDetailJenis = $request['listDetailJenis'];
 
         
 
@@ -14023,7 +14027,8 @@ public function getLaporanPersediaan_v4_2 (Request $request) {
                 INNER JOIN produk_m pr on pr.id=spd.objectprodukfk
                 INNER JOIN asalproduk_m ap on ap.id=spd.objectasalprodukfk
                 LEFT JOIN satuanstandar_m AS ss ON ss.id = pr.objectsatuanstandarfk
-                where sp.tglstruk between '$tglAwal' and '$tglAkhir' 
+                where sp.objectdetailjenisprodukfk = $listDetailJenis
+                where sp.tglstruk between '$tglAwal' and '$tglAkhir'
                 and sp.objectkelompoktransaksifk=35
                 and sp.statusenabled = TRUE
                  and pr.id = $idproduk

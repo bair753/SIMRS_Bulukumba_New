@@ -3,7 +3,7 @@ define(['initialize'], function (initialize) {
     initialize.controller('CPPTRanapCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
         function ($q, $rootScope, $scope, ModelItem, $state, cacheHelper, dateHelper, medifirstService) {
 
-
+            var paramsIndex = $state.params.index ? parseInt($state.params.index) : null
             var isNotClick = true;
             $scope.noCM = $state.params.noCM;
             $scope.tombolSimpanVis = true;
@@ -280,7 +280,7 @@ define(['initialize'], function (initialize) {
                     })
                         
                         for (var i = 0; i <= dataLoad.length - 1; i++) {
-                            if (parseFloat($scope.cc.emrfk) == dataLoad[i].emrfk) {
+                            if (parseFloat($scope.cc.emrfk) == dataLoad[i].emrfk && paramsIndex == dataLoad[i].index) {
 
                                 if (dataLoad[i].type == "textbox") {
                                     $scope.item.obj[dataLoad[i].emrdfk] = dataLoad[i].value
@@ -366,42 +366,24 @@ define(['initialize'], function (initialize) {
             }
 
             $scope.tambah = function () {
-                let details = []
-                for (let i = 0; i < $scope.listItem.length; i++) {
-                    const element = $scope.listItem[i];
-                    if (element.inuse == undefined) {
-                        details.push(element.id)
+                for (let j = 0; j < $scope.listItem.length; j++) {
+                    const element = $scope.listItem[j];
+                    if ($scope.item.obj[element.id] === undefined) {
+                        element.inuse = undefined;
+                    } else {
+                        element.inuse = true;
                     }
                 }
-                let json = {
-                    noemr: nomorEMR,
-                    emrfk: $scope.cc.emrfk,
-                    details: details
-                }
-                medifirstService.postNonMessage("emr/get-status-dipake", json).then(function (dat) {
-                    let result = dat.data.data
-                    for (let j = 0; j < $scope.listItem.length; j++) {
-                        const element = $scope.listItem[j];
-                        for (let x = 0; x < result.length; x++) {
-                            const element2 = result[x];
-                            if (element.id == element2.emrdfk) {
-                                element.inuse = true
-                            }
-                        }
-                    }
 
-                    for (let j = 0; j < $scope.listItem.length; j++) {
-                        const element2 = $scope.listItem[j];
-                        if (element2.inuse == undefined) {
-                            $scope.item.obj[parseInt(element2.id)] = new Date()
-                            element2.inuse = true
-                            saveTosDipake(element2.id)
-                            break
-                        }
+                for (let j = 0; j < $scope.listItem.length; j++) {
+                    const element2 = $scope.listItem[j];
+                    if (element2.inuse == undefined) {
+                        $scope.item.obj[parseInt(element2.id)] = new Date()
+                        element2.inuse = true
+                        saveTosDipake(element2.id)
+                        break
                     }
-                })
-                // $scope.item.obj[parseFloat($scope.listItem[index].id)] = new Date();
-                // $scope.listItem[index].inuse = true;
+                }
             }
 
             $scope.hapus = function (index) {
@@ -425,7 +407,7 @@ define(['initialize'], function (initialize) {
                     arrSave.push({ id: arrobj[i], values: $scope.item.obj[parseInt(arrobj[i])] })
                 }
                 $scope.cc.jenisemr = 'asesmen'
-
+                $scope.cc.index = $state.params.index
                 var jsonSave = {
                     head: $scope.cc,
                     data: arrSave

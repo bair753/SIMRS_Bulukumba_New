@@ -511,6 +511,7 @@ define(['initialize'], function (initialize) {
                 medifirstService.get("logistik-stok/get-data-laporan-persediaan-detail-v3?" +          
                     "&tglawal=" + tglAwal +
                     "&tglakhir=" + tglAkhir +
+                    "&djp=" + listDetailJenis +
                     "&idproduk=" + $scope.item.idProdukDetail , true).then(function (dat) {
                         var datas = dat.data.tr
                         for (let i = 0; i < datas.length; i++) {
