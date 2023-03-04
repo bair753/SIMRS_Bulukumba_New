@@ -510,7 +510,7 @@
 
             $scope.tglemr = dataLoad[i].tgl
         }
-        console.log($scope.item.obj[3150219])
+        console.log($scope.obj);
     })
 
     $(document).ready(function () {
