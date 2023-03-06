@@ -812,20 +812,43 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 var userLogin = medifirstService.getPegawaiLogin();
                 if ($scope.item.statusorder == 'Verifikasi' || $scope.item.statusorder == 'Packaging' || $scope.item.statusorder == 'Selesai' || $scope.item.statusorder == 'Sudah Di Ambil') {
                     var Norec = $scope.item.norecresep;
+                    var local = JSON.parse(localStorage.getItem('profile'));
                     var stt = 'false'
-                    if (confirm('View Label? ')) {
+                    if (Norec == undefined) {
                         // Save it!
+                        toastr.error('Pilih data dulu')
                         stt = 'true';
+                        return;
                     } else {
                         // Do nothing!
                         stt = 'false'
+                        var local = JSON.parse(localStorage.getItem('profile'));
+                        var nama = medifirstService.getPegawaiLogin().namalengkap;
+                        console.log(config.baseApiBackend);
+                        window.open(config.baseApiBackend + 'report/cetak-labelkecil-apotik?norec='
+                        + Norec +'&kdprofile=' + local.id + '&userlogin=' + userLogin.namaLengkap, '_blank');
                     }
-                    var client = new HttpClient();
-                    client.get('http://127.0.0.1:1237/printvb/farmasi?cetak-LabelFarmasiKecil=' + Norec + '&view=' + stt + '&user=' + userLogin.userLogin, function (response) {
-                        // aadc=response;
-                    });
                 }
             }
+
+            // $scope.cetakLabeKecil = function () {
+            //     var userLogin = medifirstService.getPegawaiLogin();
+            //     if ($scope.item.statusorder == 'Verifikasi' || $scope.item.statusorder == 'Packaging' || $scope.item.statusorder == 'Selesai' || $scope.item.statusorder == 'Sudah Di Ambil') {
+            //         var Norec = $scope.item.norecresep;
+            //         var stt = 'false'
+            //         if (confirm('View Label? ')) {
+            //             // Save it!
+            //             stt = 'true';
+            //         } else {
+            //             // Do nothing!
+            //             stt = 'false'
+            //         }
+            //         var client = new HttpClient();
+            //         client.get('http://127.0.0.1:1237/printvb/farmasi?cetak-LabelFarmasiKecil=' + Norec + '&view=' + stt + '&user=' + userLogin.userLogin, function (response) {
+            //             // aadc=response;
+            //         });
+            //     }
+            // }
 
             $scope.cetakLabelRekap = function () {
                 var Norec = $scope.item.norecresep;
@@ -1135,22 +1158,30 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 // }
             ];
 
-            $scope.cetakLabelRekapRajal = function () {
+            $scope.cetakLabelRekapApotik = function () {
                 var userLogin = medifirstService.getPegawaiLogin();
                 if ($scope.item.statusorder == 'Verifikasi' || $scope.item.statusorder == 'Packaging' || $scope.item.statusorder == 'Selesai' || $scope.item.statusorder == 'Sudah Di Ambil') {
                     var Norec = $scope.item.norecresep;
+                    var local = JSON.parse(localStorage.getItem('profile'));
                     var stt = 'false'
-                    if (confirm('View Label? ')) {
+                    if (Norec == undefined) {
                         // Save it!
+                        toastr.error('Pilih data dulu')
                         stt = 'true';
+                        return;
                     } else {
                         // Do nothing!
                         stt = 'false'
+                        var local = JSON.parse(localStorage.getItem('profile'));
+                        var nama = medifirstService.getPegawaiLogin().namalengkap;
+                        console.log(config.baseApiBackend);
+                        window.open(config.baseApiBackend + 'report/cetak-labelrekap-apotik?norec='
+                        + Norec +'&kdprofile=' + local.id + '&userlogin=' + userLogin.namaLengkap, '_blank');
                     }
-                    var client = new HttpClient();
-                    client.get('http://127.0.0.1:1237/printvb/farmasi?cetak-labelrekap-rajal=' + Norec + '&view=' + stt + '&user=' + userLogin.namaLengkap, function (response) {
-                        // aadc=response;
-                    });
+                    // var client = new HttpClient();
+                    // client.get('http://127.0.0.1:1237/printvb/farmasi?cetak-labelrekap-rajal=' + Norec + '&view=' + stt + '&user=' + userLogin.namaLengkap, function (response) {
+                    //     // aadc=response;
+                    // });
                 }
             }
 
