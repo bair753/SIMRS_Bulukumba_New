@@ -9025,7 +9025,7 @@ class EMRController  extends ApiController
 
         DB::beginTransaction();
         try {
-            $idx = null;
+            $idx = $head['index'];
             if (isset($head['index'])) {
                 $idx = $head['index'];
             }

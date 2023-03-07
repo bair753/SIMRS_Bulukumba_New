@@ -242,6 +242,12 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 						"template": '# if( ismobilejkn==true) {# ✔ # } else {# - #} #'
 					},
 					{
+						"field": "statusschedule",
+						"title": "Sirudal",
+						"width": "80px",
+						"template": '# if(statusschedule != `` && statusschedule != `Kios-K`) {# ✔ # } else {# - #} #'
+					},
+					{
 						"field": "statusjkn",
 						"title": "Status JKN",
 						"width": "80px"
