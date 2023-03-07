@@ -4,6 +4,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
     initialize.controller('CpptDinamisDetailCtrl', ['$rootScope', '$scope', '$state', 'CacheHelper', 'MedifirstService',
         function ($rootScope, $scope, $state, cacheHelper, medifirstService) {
 
+            var paramsIndex = $state.params.index ? parseInt($state.params.index) : null
             $scope.item = {};
             $scope.cc = {};
             $scope.show = {};
@@ -587,6 +588,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                         arrSave.push({ id: arrobj[i], values: $scope.item.obj[parseInt(arrobj[i])] })
                 }
                 $scope.cc.jenisemr = 'cppt'
+                $scope.cc.index = $state.params.index
                 var jsonSave = {
                     head: $scope.cc,
 
