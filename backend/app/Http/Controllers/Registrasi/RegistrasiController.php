@@ -6535,8 +6535,7 @@ class RegistrasiController extends ApiController
                 'jpl.jenispelayanan','pa.objectdiagnosafk as iddiagnosabpjs','ps.nobpjs','jks.jeniskelamin', 'pa.tglcreate',
                 DB::raw("pd.ismobilejkn,
                 case when pd.ismobilejkn = true then 
-                (case when pd.ischeckin = true  then 'Sudah Checkin' else 'Belum Checkin' end) else '-' end as statusjkn,apd.nojkn,
-                case when pd.ismobilejkn = true then pd.statusschedule else '-' end as statusschedule"))
+                (case when pd.ischeckin = true  then 'Sudah Checkin' else 'Belum Checkin' end) else '-' end as statusjkn"), 'pd.statusschedule as statusschedule')
             ->whereNull('br.norec')
             ->where('pd.statusenabled', true)
             ->where('pd.kdprofile', (int)$kdProfile);
