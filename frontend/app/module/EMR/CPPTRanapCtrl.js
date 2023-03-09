@@ -19,6 +19,7 @@ define(['initialize'], function (initialize) {
             $scope.isCetak = true;
             $scope.show = true;
             $scope.allDisabled = false;
+            var pegawaiLogin = medifirstService.getPegawaiLogin()
             $scope.listItem = [
                 { id: 423050, inuse: true },
                 { id: 423058 },
@@ -317,6 +318,9 @@ define(['initialize'], function (initialize) {
                                     $scope.item.obj[dataLoad[i].emrdfk] = { value: res[0], text: res[1] }
 
                                 }
+                                if(pegawaiLogin.id!= dataLoad[i].pegawaifk){
+                                    $scope.item.obj2[dataLoad[i].emrdfk] = true
+                                }
                                 pegawaiInputDetail = dataLoad[i].pegawaifk
                             }
 
@@ -385,11 +389,16 @@ define(['initialize'], function (initialize) {
                     }
                 }
             }
+                $scope.hapus = function (index) {
+                    var yakin = confirm("Apakah anda yakin akan menghapus?");
+                    if (yakin) {
+                        $scope.item.obj[parseFloat($scope.listItem[index].id)] = undefined;
+                        $scope.listItem[index].inuse = false;
+                    } else {
+                        return
+                    }
 
-            $scope.hapus = function (index) {
-                $scope.item.obj[parseFloat($scope.listItem[index].id)] = undefined;
-                $scope.listItem[index].inuse = false;
-            }
+                }
 
             $scope.kembali = function () {
                 $rootScope.showRiwayat()

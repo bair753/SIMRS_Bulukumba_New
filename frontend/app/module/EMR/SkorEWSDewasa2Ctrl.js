@@ -2,7 +2,8 @@ define(['initialize'], function (initialize) {
     'use strict';
     initialize.controller('SkorEWSDewasa2Ctrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
         function ($q, $rootScope, $scope, ModelItem, $state, cacheHelper, dateHelper, medifirstService) {
-
+            
+            var paramsIndex = $state.params.index ? parseInt($state.params.index) : null
             var isNotClick = true;
             $scope.noCM = $state.params.noCM;
             $scope.tombolSimpanVis = true
@@ -732,6 +733,7 @@ define(['initialize'], function (initialize) {
                     arrSave.push({ id: arrobj[i], values: $scope.item.obj[parseInt(arrobj[i])] })
                 }
                 $scope.cc.jenisemr = 'asesmen'
+                $scope.cc.index = $state.params.index
                 var jsonSave = {
                     head: $scope.cc,
                     data: arrSave
