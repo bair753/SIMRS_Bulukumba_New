@@ -1176,12 +1176,11 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 								window.messageContainer.error(e.data.metaData.message);
 							}
 						})
-						loadData();
-						$scope.item.pembatalan = "";
-						$scope.item.alasanBatal = "";
-						$scope.item.ruanganBatal = "";
-
 					})
+					loadData();
+					$scope.item.pembatalan = "";
+					$scope.item.alasanBatal = "";
+					$scope.item.ruanganBatal = "";
 				});
 				$scope.winDialog.close();
 			}

@@ -5,21 +5,42 @@
         hasil laboratorium
     </title>
 
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.qr-code.js') }}"></script>
     @if(stripos(\Request::url(), 'localhost') !== FALSE)
-    <link rel="stylesheet" href="{{ asset('css/paper.css') }} ">
-    <link rel="stylesheet" href="{{ asset('css/table-v2.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/tabel.css') }}">
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('css/report/paper.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/report/table.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/report/tabel.css') }}">
+        <script src="{{ asset('js/jquery.min.js') }}"></script>
+        <script src="{{ asset('js/jquery.qr-code.js') }}"></script>
+        <!-- angular -->
+        <script src="{{ asset('js/angular/angular.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/angular/angular-route.min.js') }}" type="text/javascript"></script>
+        <script type="text/javascript" src="{{ asset('js/angular/angular-animate.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/angular/angular-aria.min.js') }}"></script>
+        <script src="{{ asset('js/angular/angular-material.js') }}" type="text/javascript"></script>
     @else
-    <link rel="stylesheet" href="{{ asset('service/css/paper.css') }} ">
-    <link rel="stylesheet" href="{{ asset('service/css/table-v2.css') }}">
-    <link rel="stylesheet" href="{{ asset('service/css/tabel.css') }}">
+
+        <link rel="stylesheet" href="{{ asset('service/css/report/paper.css') }}">
+        <link rel="stylesheet" href="{{ asset('service/css/report/table.css') }}">
+        <link rel="stylesheet" href="{{ asset('service/css/report/tabel.css') }}">
+        <script src="{{ asset('service/js/jquery.min.js') }}"></script>
+        <script src="{{ asset('service/js/jquery.qr-code.js') }}"></script>
+        <link href="{{ asset('service/css/style.css') }}" rel="stylesheet">
+        <!-- angular -->
+        <script src="{{ asset('service/js/angular/angular.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('service/js/angular/angular-route.min.js') }}" type="text/javascript"></script>
+        <script type="text/javascript" src="{{ asset('service/js/angular/angular-animate.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('service/js/angular/angular-aria.min.js') }}"></script>
+        <script src="{{ asset('service/js/angular/angular-material.js') }}" type="text/javascript"></script>
     @endif
 
 </head>
 <style type="text/css" media="print">
     @media print {
         @page {
-            size: auto;
+            size: A4;
             margin: 0;
             /* size: portrait; */
         }
@@ -39,7 +60,7 @@
 </style>
 <style>
     tr td {
-        padding: 1px 2px 1px 2px;
+        padding: 1px 5px 1px 2px;
     }
 
     .borderss {
@@ -82,7 +103,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
 
 <body style="background-color: #CCCCCC">
     <div align="center">
-        <table class="bayangprint" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0" width="{{$pageWidth}}" style="padding:25px">
+        <table cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0" width="{{$pageWidth}}" style="padding-right:25px;padding-left:80px;padding-top:80px;padding-bottom:25px;">
             <tbody>
                 <tr>
                     <td>
@@ -101,20 +122,20 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             <tr>
                                 <td align="left">
                                     <font style="font-size: 12pt;font-weight: 600;letter-spacing: 2px;" color="#000000">
-                                        <b>{{ $profile->namalengkap }}</b>
+                                        <b>&nbsp;&nbsp;&nbsp;&nbsp;{{ $profile->namalengkap }}</b>
                                     </font>
                                 </td>
                             <tr>
                                 <td align="left">
                                     <font style="font-size: 12pt;font-weight: 600;letter-spacing: 2px;" color="#000000">
-                                        <b>INSTALASI LABORATORIUM KLINIK</b>
+                                        <b>&nbsp;&nbsp;&nbsp;&nbsp;INSTALASI LABORATORIUM KLINIK</b>
                                     </font>
                                 </td>
                             </tr>
                             <tr>
                                 <td align="left">
-                                    <font style="font-size: 12pt;font-weight: 600;letter-spacing: 2px;" color="#000000">
-                                        <b>{{ $profile->alamatlengkap }}</b>
+                                    <font style="font-size: 10pt;font-weight: 600;letter-spacing: 2px;" color="#000000">
+                                        <b>&nbsp;&nbsp;&nbsp;&nbsp;{{ $profile->alamatlengkap }}</b>
                                     </font>
                                 </td>
                             </tr>
@@ -187,12 +208,12 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                 <td>
                                     <font style="font-size: 11pt" color="#000000">: {{ $datas[0]->namapasien }}</font>
                                 </td>
-                                <td>
+                                {{-- <td>
                                     <font style="font-size: 11pt" color="#000000">Tanggal Lahir </font>
                                 </td>
                                 <td>
                                     <font style="font-size: 11pt" color="#000000">: {!! $datas[0]->tgllahirs !!}</font>
-                                </td>
+                                </td> --}}
                                 {{-- <td>
                                     <font style="font-size: 11pt" color="#000000">Tipe/Penjamin Pasien</font>
                                 </td>
@@ -202,31 +223,24 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             </tr>
                             <tr>
                                 <td>
-                                    <font style="font-size: 11pt" color="#000000">Umur</font>
+                                    <font style="font-size: 11pt" color="#000000">Jenis Kelamin</font>
                                 </td>
                                 <td>
-                                    <font style="font-size: 11pt" color="#000000">: {{ $datas[0]->umur }} / {{ $datas[0]->jeniskelamin }}</font>
+                                    <font style="font-size: 11pt" color="#000000">: {!! $datas[0]->jeniskelamin !!}</font>
                                 </td>
                                 <td>
                                     <font style="font-size: 11pt" color="#000000">Dokter Penanggung Jawab</font>
                                 </td>
                                 <td>
                                     <font style="font-size: 11pt" color="#000000">: {{ $r['doketr'] }}</font>
-                                    {{-- <font style="font-size: 11pt" color="#000000">: {{ $datas[0]->dpjp }}</font> --}}
                                 </td>
-                                {{-- <td>
-                                    <font style="font-size: 11pt" color="#000000">Tanggal/Jam Terima</font>
-                                </td>
-                                <td>
-                                    <font style="font-size: 11pt" color="#000000">: {!! date_format(date_create( $datas[0]->tglorder),"d-m-Y H:i:s") !!}</font>
-                                </td> --}}
                             </tr>
                             <tr>
                                 <td>
-                                    <font style="font-size: 11pt" color="#000000">Alamat </font>
+                                    <font style="font-size: 11pt" color="#000000">Umur </font>
                                 </td>
                                 <td>
-                                    <font style="font-size: 11pt" color="#000000">: {!! $datas[0]->tgllahirs !!}</font>
+                                    <font style="font-size: 11pt" color="#000000">: {!! $datas[0]->umur !!}</font>
                                 </td>
                                 <td>
                                     <font style="font-size: 11pt" color="#000000">Ruangan Perujuk </font>
@@ -234,12 +248,28 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                 <td>
                                     <font style="font-size: 11pt" color="#000000">: {{ $datas[0]->ruanganperejuk }}</font>
                                 </td>
-                                {{-- <td>
-                                    <font style="font-size: 11pt" color="#000000">Tanggal/Jam Ambil Sample</font>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <font style="font-size: 11pt" color="#000000">Tanggal Lahir</font>
                                 </td>
                                 <td>
-                                    <font style="font-size: 11pt" color="#000000">: {!! date_format(date_create( $datas[0]->tglambilsampel),"d-m-Y H:i:s") !!}</font>
-                                </td> --}}
+                                    <font style="font-size: 11pt" color="#000000">: {!! $datas[0]->tgllahirs !!}</font>
+                                </td>
+                                <td>
+                                    <font style="font-size: 11pt" color="#000000">Tanggal/Jam Keluar Hasil</font>
+                                </td>
+                                <td>
+                                    <font style="font-size: 11pt" color="#000000">: {!! date_format(date_create( $datas[0]->tglakhir),"d-m-Y H:i:s") !!}</font>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <font style="font-size: 11pt" color="#000000">Alamat </font>
+                                </td>
+                                <td>
+                                    <font style="font-size: 11pt" color="#000000">: {!! $datas[0]->alamatlengkap !!}</font>
+                                </td>
                             </tr>
                             <tr>
                                 <td>
@@ -248,55 +278,9 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                 <td>
                                     <font style="font-size: 11pt" color="#000000">: {{ $datas[0]->kelompokpasien }} &nbsp; / &nbsp; {{ $datas[0]->namarekanan }}</font>
                                 </td>
-                                <td>
-                                    <font style="font-size: 11pt" color="#000000">Tanggal/Jam Keluar Hasil</font>
-                                </td>
-                                <td>
-                                    <font style="font-size: 11pt" color="#000000">: {!! date_format(date_create( $datas[0]->tglakhir),"d-m-Y H:i:s") !!}</font>
-                                </td>
-                                {{-- <td>
-                                    <font style="font-size: 9pt" color="#000000">Tanggal/Jam Pemeriksaan</font>
-                                </td>
-                                <td>
-                                    <font style="font-size: 9pt" color="#000000">: {!! date_format(date_create( $datas[0]->tglperiksa),"d-m-Y H:i:s") !!}</font>
-                                </td> --}}
                             </tr>
                             <tr>
-                                {{-- <td>
-                                    <font style="font-size: 9pt" color="#000000">No. Registrasi</font>
-                                </td>
-                                <td>
-                                    <font style="font-size: 9pt" color="#000000">: {{ $datas[0]->noregistrasi }}</font>
-                                </td> --}}
-                                {{-- <td>
-                                    <font style="font-size: 9pt" color="#000000">Tanggal/Jam Selesai</font>
-                                </td>
-                                <td>
-                                    <font style="font-size: 9pt" color="#000000">: {!! date_format(date_create( $datas[0]->tglselesaiperiksa),"d-m-Y H:i:s") !!}</font>
-                                </td> --}}
                             </tr>
-                            {{-- <tr>
-                                <td>
-                                    <font style="font-size: 9pt" color="#000000">Dokter Pengirim</font>
-                                </td>
-                                <td>
-                                    <font style="font-size: 9pt" color="#000000">: {{ $datas[0]->pengorder }}</font>
-                                </td>
-                                <td>
-                                    <font style="font-size: 9pt" color="#000000">Petugas Laboratorium</font>
-                                </td>
-                                <td>
-                                    <font style="font-size: 9pt" color="#000000">: {{ $datas[0]->analislab }}</font>
-                                </td>
-                            </tr> --}}
-                            {{-- <tr>
-                                <td>
-                                    <font style="font-size: 9pt" color="#000000">Diagnosa</font>
-                                </td>
-                                <td>
-                                    <font style="font-size: 9pt" color="#000000">: {{ $datas[0]->diagnosaprabedah }}</font>
-                                </td>
-                            </tr> --}}
                         </table>
                         <hr>
                     </td>
@@ -314,9 +298,6 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                 <td style="text-align:center;">
                                     <font style="font-size: 11pt" color="#000000">Hasil</font>
                                 </td>
-                                {{-- <td style="text-align:center;">
-                                    <font style="font-size: 11pt" color="#000000">Nilai Kritsis</font>
-                                </td> --}}                                
                                 <td style="text-align:center;">
                                     <font style="font-size: 11pt" color="#000000">Nilai Rujukan</font>
                                 </td>
@@ -353,9 +334,6 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
                                 </td>
                                 @endif
-                                {{-- <td style="text-align:center;">
-                                    <font style="font-size: 10pt" color="#FF0000">{{ $data->nilaikritis }}</font>
-                                </td> --}}
                                 <td style="text-align:center;">
                                     <font style="font-size: 10pt" color="#000000">{{ $data->nilaitext }}</font>
                                 </td>
@@ -375,11 +353,11 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                     </td>
                 </tr>
                 <tr>
-                    <td style="padding-top:20px">
+                    <td style="padding-top:20px;">
                         <table width="100%" cellspacing="0" cellpadding="0" border="0">
                             <tr>
-                                <td>
-                                    {{-- <font style="font-size: 8pt;" color="#000000">Kesan : </font> --}}
+                                <td style="text-align:left">
+                                    <font style="font-size: 8pt;" color="#000000">Nama Pemeriksa</font>
                                 </td>
                                 <td style="text-align:center">
                                     <font style="font-size: 8pt;" color="#000000">Penanggung Jawab</font>
@@ -387,56 +365,60 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             </tr>
                             <tr>
                                 <td style="padding-bottom:30px;">
-                                    {{-- <font style="font-size: 8pt;" color="#000000">{{ $datas[0]->kesan }}</font> --}}
                                 </td>
                                 <td style="padding-bottom:30px;"></td>
                             </tr>
-                            {{-- <tr>
-                                <td>
-                                    <font style="font-size: 8pt;" color="#000000">Saran : </font>
-                                </td>
-                            </tr> --}}
                             <tr>
                                 <td style="padding-bottom:15px;">
-                                    {{-- <font style="font-size: 8pt;" color="#000000">{{ $datas[0]->saran }}</font> --}}
                                 </td>
                                 <td style="padding-bottom:15px;"></td>
                             </tr>
                             <tr>
-                                <td>{{ $datas[0]->tat }}</td>
                                 <td></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $data->dokter }}</font>
+                                </td>
+                                <td style="text-align:center">
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['doketr'] }}</font>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                            </tr>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                            <tr>
+                                <td>{{ $datas[0]->tat }}</td>
                             </tr>
                             <tr>
                                 <td>
                                     <font style="font-size: 8pt;font-style:italic;" color="#000000">Printed by: {{ $r['strIdPegawai'] . " " . date('d/m/Y H:i:s') }}</font>
                                 </td>
-                                <td style="text-align:center">
-                                    {{-- <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $datas[0]->dokter }}</font> --}}
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['doketr'] }}</font>
-                                </td>
                             </tr>
                         </table>
                     </td>
                 </tr>
-                {{-- <tr>
-                <td style="padding-top:50px">
-                    <table width="100%" cellspacing="0" cellpadding="0" border="0">
-                        <tr>
-                            <td style="text-align:center;border-top:1px solid #000000;">
-                                <font style="font-size: 14pt;" color="#000000" >
-                                "HIGH QUALITY CARE IS OUR PRIORITY"
-                                </font>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr> --}}
             </tbody>
         </table>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous">
         document.addEventListener('contextmenu', function(e) {
             e.preventDefault();
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            window.print();
         });
     </script>
 </body>
