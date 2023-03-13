@@ -9,6 +9,7 @@ use App\Master\Ruangan;
 use App\Traits\Valet;
 use App\Transaksi\HasilLaboratorium;
 use App\Web\Profile;
+use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use DB;
@@ -1143,6 +1144,8 @@ class ReportController extends ApiController{
     public function cetakResepDokter(Request $r) {
         $kdProfile = (int)$r['kodeprofile'];
         $noorder = $r['noorder'];
+        $noemr = $r['noemr'];
+        $alamatpasien = $r['alamatpasien'];
         $norec = $r['norec'];
         $nocm = $r['nocm'];
         $qtybagi = 1;
@@ -1165,6 +1168,13 @@ class ReportController extends ApiController{
             left join kelompokpasien_m AS kp ON kp.id = pd.objectkelompokpasienlastfk
             where st.noorder = '$noorder'
         "))->first();
+        $detailpasien = \DB::table('emrpasiend_t as emrdp')
+        ->where('emrdp.statusenabled', true)
+            ->where('emrdp.kdprofile', $kdProfile)
+            ->where('emrdp.emrpasienfk', 'MR2303/00003828')->get();
+        $tinggibadan = $r['tinggibadan'];
+        $beratbadan = $r['beratbadan'];
+
         $detel = [];
         $details = \DB::select(DB::raw("select ot.rke,pm.namaproduk,ot.dosis,pm.kekuatan ,ot.jumlah*$qtybagi as jumlah, ot.aturanpakai from strukorder_t st
             inner join orderpelayanan_t ot on ot.strukorderfk = st.norec 
@@ -1175,7 +1185,7 @@ class ReportController extends ApiController{
             // $raw->umur = $this->getAge($raw->tgllahir ,date('Y-m-d'));
         }else if (empty($raw)){
             $raw = collect(DB::select("
-                select pm2.nocm ,to_char(pm2.tgllahir,'dd-mm-yyyy') as tgllahir,age(pm2.tgllahir) as umur ,jm.jeniskelamin ,pm2.namapasien ,pm3.namalengkap, rm.namaruangan, to_char(s.tglresep ,'dd-mm-yyyy MM:ss') as tglorder,pm3.nosip, kp.kelompokpasien
+                select pm2.nocm ,to_char(pm2.tgllahir,'dd-mm-yyyy') as tgllahir,age(pm2.tgllahir) as umur ,jm.jeniskelamin ,pm2.namapasien,pm2.alamatrmh as alamatpasien, pm3.namalengkap, rm.namaruangan, to_char(s.tglresep ,'dd-mm-yyyy MM:ss') as tglorder,pm3.nosip, kp.kelompokpasien
                 from strukresep_t s
                 inner join antrianpasiendiperiksa_t at2 on at2.norec = s.pasienfk 
                 inner join pasiendaftar_t pt on pt.norec = at2.noregistrasifk 
@@ -1195,11 +1205,10 @@ class ReportController extends ApiController{
             echo 'Data Tidak ada ';
             return;
         }
-//        dd($raw);
         $pageWidth = 550;
 
         return view('report.apotik.resepdokter',
-            compact('raw', 'pageWidth','r','details','profile'));
+            compact('raw', 'pageWidth','r','details','profile', 'alamatpasien', 'tinggibadan', 'beratbadan'));
     }
 
     public function cetakAntrianKiosk(Request $request) {
