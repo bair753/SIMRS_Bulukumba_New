@@ -163,7 +163,7 @@ define(['initialize'], function (initialize) {
 
 
                     // ARRAY GEJALA 
-                    if (element.kodeexternal == 'suplemen') {
+                    if (element.kodeexternal == 'urine') {
                         for (let z = 0; z < arraySkala.length; z++) {
                             const element2 = arraySkala[z];
                             if (element2.namaexternal == element.namaexternal) {
@@ -198,7 +198,7 @@ define(['initialize'], function (initialize) {
                     //END ARRAY GEJALA
 
                     // ARRAY tekanandarah 
-                    if (element.kodeexternal == 'tekanandarah') {
+                    if (element.kodeexternal == 'tekanansistolik') {
                         for (let z = 0; z < arrayTekananDaarah.length; z++) {
                             const element2 = arrayTekananDaarah[z];
                             if (element2.namaexternal == element.namaexternal) {
@@ -233,7 +233,7 @@ define(['initialize'], function (initialize) {
                     //END ARRAY tekanandarah
 
                     // ARRAY laju 
-                    if (element.kodeexternal == 'laju') {
+                    if (element.kodeexternal == 'nadi') {
                         for (let z = 0; z < arrayLaju.length; z++) {
                             const element2 = arrayLaju[z];
                             if (element2.namaexternal == element.namaexternal) {

@@ -91,7 +91,7 @@
                 <td colspan="2" style="font-size:6pt;">&nbsp;&nbsp;&nbsp;&nbsp;<b>{{ $item->namaproduk }}</b></td>
             </tr>
             <tr>
-                <td colspan="2" style="font-size:6pt;">&nbsp;&nbsp;&nbsp;&nbsp;<b>{{ $item->aturanpakai }} {{ $item->keteranganpakai }}</b></td>
+                <td colspan="2" style="font-size:6pt;">&nbsp;&nbsp;&nbsp;&nbsp;<b>{{ $item->aturanpakai }} {{ $item->keteranganpakai }}</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $item->pagi == '-' ? '' : $item->pagi.' - ' }}{{ $item->siang == '-' ? '' : $item->siang.' - ' }}{{ $item->sore == '-' ? '' : $item->sore.' - ' }}{{ $item->malam == '-' ? '' : $item->malam }}</td>
             </tr>
             <tr>
                 <td colspan="2" style="text-align: center; font-size:6pt;">.</td>
