@@ -373,6 +373,11 @@ define(['initialize'], function (initialize) {
                         "width": "100px"
                     },
                     {
+                        "field": "nosep",
+                        "title": "No SEP",
+                        "width": "100px",
+                    },
+                    {
                         "field": "kddiagnosa",
                         "title": "Kode Diagnosa",
                         "width": "100px",

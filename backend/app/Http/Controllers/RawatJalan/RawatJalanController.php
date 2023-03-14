@@ -450,7 +450,8 @@ class RawatJalanController extends ApiController
                 'ru.ipaddress',
                 'ps.iskompleks',
                 'apd.residencefk',
-                'pg2.namalengkap as residence'
+                'pg2.namalengkap as residence',
+                'pa.nosep as nosep'
                 // ,DB::raw('case when pp.noregistrasifk is null then \'false\' else \'true\' end as statuslayanan'))
                 ,
                 DB::raw("

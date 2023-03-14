@@ -5,6 +5,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
             $scope.title = "Resep elektronik";
             $scope.dataVOloaded = true;
             $scope.item = {};
+            var nomorEMR = '-'
             $rootScope.isOpen = true;
             FormLoad();
             // $scope.item.namaPasien = "";
@@ -1186,13 +1187,25 @@ define(['initialize', 'Configuration'], function (initialize, config) {
             }
 
             $scope.cetakResepDokter = function(){
+                medifirstService.get("emr/get-vital-sign?noregistrasi=" + $scope.item.noregistrasi + "&objectidawal=4241&objectidakhir=4246&idemr=147", true).then(function (datas) {
+                $scope.showRiwayatEMR = false
+                $scope.myVar = 1
+                
+                var tinggibadan = datas.data.data[3].value;
+                var beratbadan = datas.data.data[4].value;
+
                 var local = JSON.parse(localStorage.getItem('profile'));
+
+                var alamatpasien = $scope.item.alamatlengkap;
                 var profile = local.id;
+                var user = medifirstService.getPegawaiLogin();
+
                 if ($scope.item.noorder == null){
                     toastr.error("PILIH NO ORDER !!")
                     return;
                 }else{
                     var stt = 1
+                    
                     if (confirm('Cetak Resep Dengan Qty Setengahnya ? ')) {
                         // Save it!
                         stt = "1/2";
@@ -1201,10 +1214,13 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                         stt = 1
                     }
                     window.open(config.baseApiBackend + "report/cetak-resep-dokter?noorder=" + $scope.item.noorder + "&norec=" + $scope.item.norecresep 
-                    + "&nocm=" + $scope.item.nocm + '&kodeprofile=' + profile + '&qtybagi=' + stt);
+                    + "&nocm=" + $scope.item.nocm + '&kodeprofile=' + profile + '&qtybagi=' + stt + '&alamatpasien=' + alamatpasien + '&tinggibadan=' + tinggibadan + '&beratbadan=' + beratbadan + '&user=' + user.namaLengkap);
                     // // window.open(config.baseApiBackend + "report/cetak-hasil-lab-histopatologi?norec=" + $scope.dataSelected.norec_pp + '&kdprofile=' + profile
                     //     + '&user=' + user + '&jenis=his', '_blank');
                 }
+                })
+    
+                
             }
             $scope.grab = {
                 lokasiPengirim :  medifirstService.getProfile().alamatlengkap,

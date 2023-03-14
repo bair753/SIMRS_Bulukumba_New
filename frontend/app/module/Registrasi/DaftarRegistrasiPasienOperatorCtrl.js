@@ -245,7 +245,8 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 						"field": "statusschedule",
 						"title": "Sirudal",
 						"width": "80px",
-						"template": '# if(statusschedule != `Kios-K`) {# ✔ # } else {# - #} #'
+						// "template": '# if(statusschedule != `Kios-K`) {# ✔ # } else {# - #} #'
+						"template": '# if( statusschedule==false) {# ✔ # } else {# - #} #'
 					},
 					{
 						"field": "statusjkn",
@@ -1183,6 +1184,10 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 					$scope.item.ruanganBatal = "";
 				});
 				$scope.winDialog.close();
+				loadData();
+					$scope.item.pembatalan = "";
+					$scope.item.alasanBatal = "";
+					$scope.item.ruanganBatal = "";
 			}
 
 			$scope.batalBatal = function () {
