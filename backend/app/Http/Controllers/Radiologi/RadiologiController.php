@@ -1999,10 +1999,14 @@ class RadiologiController extends ApiController
         $kdProfile = (int) $this->getDataKdProfile($request);
         $tglAwal = $request['tglAwal'];
         $tglAkhir = $request['tglAkhir'];
+        $instalasiid = $request['instalasiId'];
+        $ruid = $request['ruanganId'];
+
         $paramKlp = '';
         $paramDk = '';
         $idDokter = '';
         $dokid = '';
+        $instalasiid = '';
         $ruid = '';
 
 //        if(isset($request['dokid']) && $request['dokid']!="" && $request['dokid']!="undefined"){
@@ -2017,8 +2021,16 @@ class RadiologiController extends ApiController
 //            $kpid = ' and pd.objectkelompokpasienlastfk='.$request['kpid'];
 //        }
 
-        if(isset($request['ruid']) && $request['ruid']!="" && $request['ruid']!="undefined"){
-            $ruid = ' and rg.id = '.$request['ruid'];
+        // if(isset($request['ruid']) && $request['ruid']!="" && $request['ruid']!="undefined"){
+        //     $ruid = ' and rg.id = '.$request['ruid'];
+        // }
+
+        if(isset($request['instalasiId']) && $request['instalasiId']!="" && $request['instalasiId']!="undefined"){
+            $instalasiid = ' and dept.id = '.$request['instalasiId'];
+        }
+
+        if(isset($request['ruanganId']) && $request['ruanganId']!="" && $request['ruanganId']!="undefined"){
+            $ruid = ' and rg.id = '.$request['ruanganId'];
         }
 
         if (isset($request['KpArr']) && $request['KpArr']!="" && $request['KpArr']!="undefined"){
@@ -2068,9 +2080,10 @@ class RadiologiController extends ApiController
                 INNER JOIN pasien_m AS ps ON ps.id = pd.nocmfk
                 INNER JOIN jeniskelamin_m AS jk ON jk.id = ps.objectjeniskelaminfk
                 INNER JOIN ruangan_m AS rg ON rg.id = pd.objectruanganlastfk
+                LEFT JOIN departemen_m AS dept ON dept.id = rg.objectdepartemenfk
                 LEFT JOIN kelompokpasien_m AS klp ON klp.id = pd.objectkelompokpasienlastfk
                 LEFT JOIN produk_m AS pro ON pro.id = pp.produkfk
-                LEFT JOIN strukorder_t AS so ON so.norec = apd.objectstrukorderfk
+                INNER JOIN strukorder_t AS so ON so.norec = apd.objectstrukorderfk
                 LEFT JOIN ruangan_m AS ru1 ON ru1.id = so.objectruanganfk
                 LEFT JOIN ruangan_m AS ru2 ON ru2.id = apd.objectruanganasalfk
                 LEFT JOIN batalregistrasi_t AS br ON br.pasiendaftarfk = pd.norec
@@ -2080,6 +2093,7 @@ class RadiologiController extends ApiController
                 WHERE pd.kdprofile = $kdProfile AND pd.statusenabled = true AND apd.objectruanganfk = 576
                       AND pro.namaproduk IS NOT NULL AND br.norec IS NULL
                       AND pp.tglpelayanan BETWEEN '$tglAwal' AND '$tglAkhir'
+                      $instalasiid
                       $ruid
                       $dokid
                       $paramKlp

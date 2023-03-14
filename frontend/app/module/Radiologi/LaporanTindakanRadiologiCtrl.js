@@ -28,20 +28,36 @@ define(['initialize'], function (initialize) {
                     placeholder: "Pilih Kelompok Pasien",
                     dataTextField: "kelompokpasien",
                     dataValueField: "id",
-                    // dataSource:{
-                    //     data: $scope.listRuangan
-                    // },
+                    dataSource:{
+                        data: $scope.listRuangan
+                    },
                     autoBind: false,
 
                 };
             });
-            // loadCombo()
-            // function loadCombo() {
-            //     medifirstService.get("registrasi/laporan/get-combo-box-laporan-pengunjung")
-            //         .then(function (data) {
-            //             $scope.listRuangans = data.data.ruangan
-            //         })
-            // }
+
+            $scope.getIsiComboRuangan = function () {
+                //debugger;
+                $scope.listRuangan = $scope.item.instalasi.ruangan
+              }
+              
+            loadCombo()
+            function loadCombo() {
+                medifirstService.get("registrasi/laporan/get-combo-box-laporan-pengunjung")
+                    .then(function (data) {
+                        
+                        $scope.listRuangans = data.data.ruangan
+                    })
+                medifirstService.get("tatarekening/get-combo-detail-regis", false).then(function (dat) {
+                    $scope.listDepartemen = dat.data.departemen;
+                    dataLogin = medifirstService.getUserLogin();
+                })
+                    $scope.listStatus = [{ "id": "1", "namaExternal": "Semua" }, { "id": "2", "namaExternal": "Belum Verifikasi" }, { "id": "3", "namaExternal": "Verifikasi" }, { "id": "4", "namaExternal": "Lunas" }]
+                medifirstService.getPart('sysadmin/general/get-combo-pegawai', true, 10).then(function (e) {
+                    $scope.listDataPegawai = e;
+                    $scope.listDataPegawais = e;
+                })
+            }
             loadFirst()
             function loadFirst() {
                 var chacePeriode = cacheHelper.get('RegistrasiPasienLamaRevCtrl');
@@ -49,6 +65,16 @@ define(['initialize'], function (initialize) {
                     var arrPeriode = chacePeriode.split('~');
                     $scope.item.periodeAwal = new Date(arrPeriode[0]);
                     $scope.item.periodeAkhir = new Date(arrPeriode[1]);
+                    if (chacePeriode[6] != undefined) {
+                        // LoadData()
+                        $scope.listDepartemen = [chacePeriode[6]]
+                        $scope.item.instalasi = chacePeriode[6]
+                      }
+                      if (chacePeriode[5] != undefined) {
+                        $scope.listRuangan = [chacePeriode[5]]
+                        $scope.item.ruangan = chacePeriode[5]
+                      }
+                    
 
                 } else {
                     $scope.item.periodeAwal = moment($scope.now).format('YYYY-MM-DD 00:00');
@@ -57,13 +83,14 @@ define(['initialize'], function (initialize) {
                 medifirstService.get("registrasi/daftar-registrasi/get-data-combo-operator", false).then(function (data) {
                     $scope.listDokter = data.data.dokter;
                     $scope.listDokters = data.data.dokter;
+                    $scope.listDepartemen = dat.data.departemen;
                     $scope.selectOptionsDokter = {
                         placeholder: "Pilih Dokter Pemeriksa",
                         dataTextField: "namalengkap",
                         dataValueField: "id",
-                        // dataSource:{
-                        //     data: $scope.listRuangan
-                        // },
+                        dataSource:{
+                            data: $scope.listRuangan
+                        },
                         autoBind: false,
     
                     };
@@ -117,6 +144,19 @@ define(['initialize'], function (initialize) {
                     }
                     listKelompokPasien = a.slice(1, a.length)
                 }
+                var tempInstalasiId = "";
+                var tempInstalasiIdArr = {};
+                if ($scope.item.instalasi != undefined) {
+                tempInstalasiId = $scope.item.instalasi.id;
+                tempInstalasiIdArr = { id: $scope.item.instalasi.id, departemen: $scope.item.instalasi.departemen }
+                }
+
+                var namaruangan = ""
+                if ($scope.item.ruangan != undefined) {
+                    namaruangan = "&ruanganId=" + $scope.item.ruangan.id
+                }
+
+                
                 
                 var listDokterPemeriksa = ""
                 if ($scope.listDokterMulti.length != 0) {
@@ -132,6 +172,8 @@ define(['initialize'], function (initialize) {
                 }
 
                 medifirstService.get("radiologi/get-laporan-tindakan?tglAwal=" + tglAwal + "&tglAkhir=" + tglAkhir 
+                    + "&instalasiId=" + tempInstalasiId 
+                    + "&ruanganId=" + namaruangan 
                     + "&KpArr=" + listKelompokPasien
                     + "&dkArr="+ listDokterPemeriksa + idDokter).then(function (data) {
                         $scope.isRouteLoading = false;
