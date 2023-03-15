@@ -870,10 +870,11 @@ define(['initialize'], function (initialize) {
             }
 
             $scope.HapusResep = function () {
-                $scope.isRouteLoading = true;
+                $scope.isRouteLoading = false;
                  // ** VALIDASI CLOSING STOK 
                  if (statusPosting == true) {
-                    window.messageContainer.error('Data Stok Sudah Diclosing Tidak Bisa Hapus Resep!')
+                    // window.messageContainer.error('Data Stok Sudah Diclosing Tidak Bisa Hapus Resep!')
+                    window.messageContainer.error('Silahkan pilih salah satu no registrasi resep yang akan dihapus!')
                     return;
                 }
                 // **  VALIDASI CLOSING STOK 
@@ -895,7 +896,7 @@ define(['initialize'], function (initialize) {
                 //     return;
                 // } else {
                     var stt = 'false'
-                    if (confirm('Hapus resep? ')) {
+                    if (confirm('Hapus resep? Resep akan terhapus dengan no registrasi yang sama!!')) {
                         // Save it!
                         stt = 'true';
                     } else {
@@ -905,6 +906,9 @@ define(['initialize'], function (initialize) {
                         stt = 'false'
                     }
                     var objDelete = { norec: $scope.dataSelected.norec_resep }
+
+                    console.log($scope.dataSelected);
+                    
                     medifirstService.post('farmasi/save-hapus-pelayananobat', objDelete).then(function (e) {
                         $scope.isRouteLoading = false;
                         LoadCache();
