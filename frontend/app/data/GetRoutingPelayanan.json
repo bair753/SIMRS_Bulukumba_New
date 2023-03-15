@@ -17946,8 +17946,8 @@
     ]
   },
   {
-    "name": "RekamMedis.AsesmenMedis.PenolakanOperasi",
-    "url": "/PenolakanOperasi",
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.PenolakanOperasi",
+    "url": "/PenolakanOperasi/:index/:idEMR",
     "templateurl": "module/EMR/PenolakanOperasi.html",
     "controller": "PenolakanOperasiCtrl",
     "deps": [
@@ -17969,10 +17969,56 @@
     ]
   },
   {
-    "name": "RekamMedis.AsesmenMedis.PersetujuanOperasi",
-    "url": "/PersetujuanOperasi",
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.PenolakanOperasiRanap",
+    "url": "/PenolakanOperasiRanap/:index/:idEMR",
+    "templateurl": "module/EMR/PenolakanOperasiRanap.html",
+    "controller": "PenolakanOperasiRanapCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.PersetujuanOperasi",
+    "url": "/PersetujuanOperasi/:index/:idEMR",
     "templateurl": "module/EMR/PersetujuanOperasi.html",
     "controller": "PersetujuanOperasiCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.PersetujuanOperasiRanap",
+    "url": "/PersetujuanOperasiRanap/:index/:idEMR",
+    "templateurl": "module/EMR/PersetujuanOperasiRanap.html",
+    "controller": "PersetujuanOperasiRanapCtrl",
     "deps": [
       {
         "module": "Services",
@@ -18300,6 +18346,30 @@
     "url": "/AsesmenNeonatus",
     "templateurl": "module/EMR/AsesmenNeonatus.html",
     "controller": "AsesmenNeonatusCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  }
+
+  {
+    "name": "RekamMedis.AsesmenMedis.AsesmenNeonatusRanap",
+    "url": "/AsesmenNeonatusRanap",
+    "templateurl": "module/EMR/AsesmenNeonatusRanap.html",
+    "controller": "AsesmenNeonatusRanapCtrl",
     "deps": [
       {
         "module": "Services",

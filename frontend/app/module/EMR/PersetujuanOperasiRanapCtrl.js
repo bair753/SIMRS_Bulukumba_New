@@ -1,6 +1,6 @@
 define(['initialize'], function (initialize) {
     'use strict';
-    initialize.controller('PenolakanOperasiCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
+    initialize.controller('PersetujuanOperasiCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
         function ($q, $rootScope, $scope, ModelItem, $state, cacheHelper, dateHelper, medifirstService) {
 
             var paramsIndex = $state.params.index ? parseInt($state.params.index) : null
@@ -14,7 +14,7 @@ define(['initialize'], function (initialize) {
             $scope.cc = {};
             var nomorEMR = '-';
             var norecEMR = '';
-            $scope.cc.emrfk = 290054;
+            $scope.cc.emrfk = 290068;
             var dataLoad = [];
             $scope.isCetak = false;
             $scope.allDisabled = false;
@@ -104,15 +104,15 @@ define(['initialize'], function (initialize) {
                 var nocmfk = null;
                 var noregistrasifk = $state.params.noRec;
                 var status = "t";
-                $scope.item.obj[429786] = $scope.now;
+                $scope.item.obj[429836] = $scope.now;
                 medifirstService.get("emr/get-antrian-pasien-norec/" + noregistrasifk).then(function (e) {
                     var antrianPasien = e.data.result;
-                    $scope.item.obj[429782] = $scope.cc.namapasien;
-                    $scope.item.obj[429783] = new Date(moment(antrianPasien.tgllahir).format('YYYY-MM-DD'));
-                    $scope.item.obj[429784] = antrianPasien.jeniskelamin;
-                    $scope.item.obj[429785] = antrianPasien.alamatlengkap;
+                    $scope.item.obj[429832] = $scope.cc.namapasien;
+                    $scope.item.obj[429833] = new Date(moment(antrianPasien.tgllahir).format('YYYY-MM-DD'));
+                    $scope.item.obj[429834] = antrianPasien.jeniskelamin;
+                    $scope.item.obj[429835] = antrianPasien.alamatlengkap;
                     if (antrianPasien.dokterdpjp != null && antrianPasien.iddpjp != null) {
-                        $scope.item.obj[429790] = {
+                        $scope.item.obj[429840] = {
                             value: antrianPasien.iddpjp,
                             text: antrianPasien.dokterdpjp
                         }
@@ -332,7 +332,7 @@ define(['initialize'], function (initialize) {
                 }
                 $scope.cc.jenisemr = 'asesmen'
                 $scope.cc.index = $state.params.index
-                
+
                 var jsonSave = {
                     head: $scope.cc,
                     data: arrSave
@@ -344,7 +344,7 @@ define(['initialize'], function (initialize) {
                     // });
 
                     medifirstService.postLogging('EMR', 'norec emrpasien_t', e.data.data.norec,
-                        'Penolakan Operasi / Prosedur Invasif ' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
+                        'Persetujuan Operasi / Prosedur Invasif ' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
                         + $scope.cc.noregistrasi).then(function (res) {
                         })
 
@@ -361,88 +361,88 @@ define(['initialize'], function (initialize) {
                     "id": 1,
                     "jenisinfo": "Diagnosa (WD & DD)",
                     "detail": [
-                        { "id": 429753, "caption": "", "type": "textarea" },
-                        { "id": 429754, "caption": "", "type": "checkbox" }
+                        { "id": 429803, "caption": "", "type": "textarea" },
+                        { "id": 429804, "caption": "", "type": "checkbox" }
                     ]
                 },
                 {
                     "id": 2,
                     "jenisinfo": "Dasar Diagnosis",
                     "detail": [
-                        { "id": 429755, "caption": "", "type": "textarea" },
-                        { "id": 429756, "caption": "", "type": "checkbox" }
+                        { "id": 429805, "caption": "", "type": "textarea" },
+                        { "id": 429806, "caption": "", "type": "checkbox" }
                     ]
                 },
                 {
                     "id": 3,
                     "jenisinfo": "Tindakan Kedokteran",
                     "detail": [
-                        { "id": 429757, "caption": "", "type": "textarea" },
-                        { "id": 429758, "caption": "", "type": "checkbox" }
+                        { "id": 429807, "caption": "", "type": "textarea" },
+                        { "id": 429808, "caption": "", "type": "checkbox" }
                     ]
                 },
                 {
                     "id": 4,
                     "jenisinfo": "Indikasi Tindakan",
                     "detail": [
-                        { "id": 429759, "caption": "", "type": "textarea" },
-                        { "id": 429760, "caption": "", "type": "checkbox" }
+                        { "id": 429809, "caption": "", "type": "textarea" },
+                        { "id": 429810, "caption": "", "type": "checkbox" }
                     ]
                 },
                 {
                     "id": 5,
                     "jenisinfo": "Tata Cara (Uraian singkat prosedur dan tahapan penting)",
                     "detail": [
-                        { "id": 429761, "caption": "", "type": "textarea" },
-                        { "id": 429762, "caption": "", "type": "checkbox" }
+                        { "id": 429811, "caption": "", "type": "textarea" },
+                        { "id": 429812, "caption": "", "type": "checkbox" }
                     ]
                 },
                 {
                     "id": 6,
                     "jenisinfo": "Tujuan Tindakan",
                     "detail": [
-                        { "id": 429763, "caption": "", "type": "textarea" },
-                        { "id": 429764, "caption": "", "type": "checkbox" }
+                        { "id": 429813, "caption": "", "type": "textarea" },
+                        { "id": 429814, "caption": "", "type": "checkbox" }
                     ]
                 },
                 {
                     "id": 7,
                     "jenisinfo": "Risiko Tindakan",
                     "detail": [
-                        { "id": 429765, "caption": "", "type": "textarea" },
-                        { "id": 429766, "caption": "", "type": "checkbox" }
+                        { "id": 429815, "caption": "", "type": "textarea" },
+                        { "id": 429816, "caption": "", "type": "checkbox" }
                     ]
                 },
                 {
                     "id": 8,
                     "jenisinfo": "Komplikasi",
                     "detail": [
-                        { "id": 429767, "caption": "", "type": "textarea" },
-                        { "id": 429768, "caption": "", "type": "checkbox" }
+                        { "id": 429817, "caption": "", "type": "textarea" },
+                        { "id": 429818, "caption": "", "type": "checkbox" }
                     ]
                 },
                 {
                     "id": 9,
                     "jenisinfo": "Prognosis (Prognosis vital prognosis fungsi, dan Prognosis Penyembuhan)",
                     "detail": [
-                        { "id": 429769, "caption": "", "type": "textarea" },
-                        { "id": 429770, "caption": "", "type": "checkbox" }
+                        { "id": 429819, "caption": "", "type": "textarea" },
+                        { "id": 429820, "caption": "", "type": "checkbox" }
                     ]
                 },
                 {
                     "id": 10,
                     "jenisinfo": "Alternatif & Resiko (Profil Pengobatan / tatalaksana)",
                     "detail": [
-                        { "id": 429771, "caption": "", "type": "textarea" },
-                        { "id": 429772, "caption": "", "type": "checkbox" }
+                        { "id": 429821, "caption": "", "type": "textarea" },
+                        { "id": 429822, "caption": "", "type": "checkbox" }
                     ]
                 },
                 {
                     "id": 11,
                     "jenisinfo": "Hal lain yang akan dilakukan untuk menyelamatkan pasien (Perluasan tindakan Konsultasi selama tindakan & Resultasi)",
                     "detail": [
-                        { "id": 429773, "caption": "", "type": "textarea" },
-                        { "id": 429774, "caption": "", "type": "checkbox" }
+                        { "id": 429823, "caption": "", "type": "textarea" },
+                        { "id": 429824, "caption": "", "type": "checkbox" }
                     ]
                 }
             ];
