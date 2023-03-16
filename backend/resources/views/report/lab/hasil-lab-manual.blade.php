@@ -294,7 +294,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                 </tr>
                 <tr>
                     <td>
-                        <table width="100%" cellspacing="0" cellpadding="0" class="garishalus">
+                        <table width="100%" cellspacing="0" cellpadding="0" class="garishalus" style="">
                             <tr>
                                 <td style="text-align:center;">
                                     <font style="font-size: 11pt" color="#000000">No</font>
@@ -361,40 +361,45 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                 </tr>
                 <tr>
                     <td style="padding-top:20px;">
-                        <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                        <table width="100%" cellspacing="0" cellpadding="0" border="0" style="text-align:center">
                             <tr>
-                                <td style="text-align:left">
+                                <td style="align-items: center">
                                     <font style="font-size: 8pt;" color="#000000">Nama Pemeriksa</font>
                                 </td>
-                                <td style="text-align:center">
+                                <td style="align-items: center">
                                     <font style="font-size: 8pt;" color="#000000">Penanggung Jawab</font>
                                 </td>
                             </tr>
                             <tr>
-                                <td style="padding-bottom:10px;">
-                                </td>
+                                <td style="padding-bottom:10px;"></td>
                                 <td style="padding-bottom:10px;"></td>
                             </tr>
                             <tr>
-                                <td style="padding-bottom:10px;">
+                                <td style="align-items: center">
                                     <div id="qrcodeNamaPemeriksa"></div>
                                 </td>
-                                <td style="padding-bottom:10px;">
+                                <td style="align-items: center">
                                     <div id="qrcodePenanggungJawab"></div>
                                 </td>
                             </tr>
                             <tr>
                                 <td></td>
+                                <td></td>
                             </tr>
                             <tr>
-                                <td>
-                                    {{ $data->dokter }}
+                                <td style="align-items: center">
                                     <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['pemeriksa'] }}</font>
                                 </td>
-                                <td style="text-align:center">
+                                <td style="align-items: center">
                                     <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['doketr'] }}</font>
                                 </td>
                             </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table>
                             <tr>
                                 <td></td>
                             </tr>
@@ -422,23 +427,17 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
             </tbody>
         </table>
     </div>
-    
     <script>
         jQuery('#qrcodeNamaPemeriksa').qrcode({
-            // width	: 256,
-			// height	: 256,
-            render	: "table",
-            text	: "Tanda Tangan Digital Oleh " + "{{ $data->dokter }}"
+            width	: 100,
+			height	: 100,
+            text	: "Tanda Tangan Digital Oleh " + "{{ $r['pemeriksa'] }}"
         });	
-
         jQuery('#qrcodePenanggungJawab').qrcode({
-            // width	: 256,
-			// height	: 256,
-            render	: "table",
+            width	: 100,
+			height	: 100,
             text	: "Tanda Tangan Digital Oleh " + "{{ $r['doketr'] }}"
         });
-    </script>
-    <script>
         $(document).ready(function () {
             window.print();
         });
