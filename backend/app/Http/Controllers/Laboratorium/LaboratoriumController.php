@@ -1234,6 +1234,14 @@ class LaboratoriumController extends ApiController
 
         return $detail;
     }
+    
+    public function getPemeriksa(Request $request) {
+        $kdProfile = $this->getDataKdProfile($request);
+        $idProfile = (int) $kdProfile;
+        $detail = DB::select(DB::raw("select id,namalengkap from pegawai_m WHERE objectjenispegawaifk='29'"));
+
+        return $detail;
+    }
 
     public function saveAntrianPasienDarah(Request $request){
         $kdProfile = $this->getDataKdProfile($request);

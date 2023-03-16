@@ -388,7 +388,8 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             </tr>
                             <tr>
                                 <td>
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $data->dokter }}</font>
+                                    {{ $data->dokter }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['pemeriksa'] }}</font>
                                 </td>
                                 <td style="text-align:center">
                                     <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['doketr'] }}</font>

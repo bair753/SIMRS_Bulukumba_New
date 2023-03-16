@@ -80,7 +80,15 @@
                     </div>
                 </div>
                 <!-- <div class="grid_2"></div> -->
-                <div class="grid_3">
+                <div class="grid_4">
+                    <div class="grid_12">
+                       <label c-label item="item" c-label-text="Pemeriksa" real></label>
+                    </div>
+                     <div class="grid_12">
+                       <input kendo-combo-box k-ng-model="item.DataPemeriksa" k-data-text-field="'namalengkap'" k-data-value-field="'id'" k-filter="'contains'" k-auto-bind="false" k-data-source="ListDataPemeriksa" />
+                   </div>
+               </div>
+                <div class="grid_4">
                      <div class="grid_12">
                         <label c-label item="item" c-label-text="Dokter" real></label>
                      </div>
@@ -88,7 +96,9 @@
                         <input kendo-combo-box k-ng-model="item.DataPegawai" k-data-text-field="'namalengkap'" k-data-value-field="'id'" k-filter="'contains'" k-auto-bind="false" k-data-source="ListDataPegawai" />
                     </div>
                 </div>
-                <div class="grid_6">
+            </div>
+            <div class="grid_12">
+                <div class="grid_12">
                     <div class="grid_3" style="margin-top: 10px">
                         <button class="btnTemplate1" ng-click="simpan()" ng-show="IsSave"><i class="fa fa-save"></i>Simpan</button>
                     </div>
@@ -96,10 +106,10 @@
                     <div class="grid_3" style="margin-top: 10px">
                         <button class="btnTemplate1" ng-click="cetakhtml()"><i class="fa fa-print"></i>Cetak</button>
                     </div>
-                    <div class="grid_3" style="margin-top: 10px">
+                    <div class="grid_4" style="margin-top: 10px">
                         <button class="btnTemplate1" ng-click="cetakSurat()"><i class="fa fa-print"></i>Cetak Surat Keterangan</button>
                     </div>
-                    <div class="grid_3" style="margin-top: 10px">
+                    <div class="grid_2" style="margin-top: 10px">
                         <button class="btnTemplate1 cancel" ng-click="kembali()"><i
                                 class="fa fa-refresh"></i>Kembali</button>
                     </div>
