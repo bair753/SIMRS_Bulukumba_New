@@ -12,8 +12,11 @@
         <link rel="stylesheet" href="{{ asset('css/report/paper.css') }}">
         <link rel="stylesheet" href="{{ asset('css/report/table.css') }}">
         <link rel="stylesheet" href="{{ asset('css/report/tabel.css') }}">
+        
         <script src="{{ asset('js/jquery.min.js') }}"></script>
         <script src="{{ asset('js/jquery.qr-code.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/qrcode/src/jquery.qrcode.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/qrcode/src/qrcode.js') }}"></script>
         <!-- angular -->
         <script src="{{ asset('js/angular/angular.min.js') }}" type="text/javascript"></script>
         <script src="{{ asset('js/angular/angular-route.min.js') }}" type="text/javascript"></script>
@@ -27,6 +30,8 @@
         <link rel="stylesheet" href="{{ asset('service/css/report/tabel.css') }}">
         <script src="{{ asset('service/js/jquery.min.js') }}"></script>
         <script src="{{ asset('service/js/jquery.qr-code.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/qrcode/src/jquery.qrcode.js') }}"></script>
+        <script type="text/javascript" src=".{{ asset('js/qrcode/src/qrcode.js') }}"></script>
         <link href="{{ asset('service/css/style.css') }}" rel="stylesheet">
         <!-- angular -->
         <script src="{{ asset('service/js/angular/angular.min.js') }}" type="text/javascript"></script>
@@ -102,6 +107,8 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
 <!-- onload="window.print()"  -->
 
 <body style="background-color: #CCCCCC">
+    
+    <div id="qrcode"></div>
     <div align="center">
         <table cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0" width="{{$pageWidth}}" style="padding-right:25px;padding-left:80px;padding-top:80px;padding-bottom:25px;">
             <tbody>
@@ -364,14 +371,17 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                 </td>
                             </tr>
                             <tr>
-                                <td style="padding-bottom:30px;">
+                                <td style="padding-bottom:10px;">
                                 </td>
-                                <td style="padding-bottom:30px;"></td>
+                                <td style="padding-bottom:10px;"></td>
                             </tr>
                             <tr>
-                                <td style="padding-bottom:15px;">
+                                <td style="padding-bottom:10px;">
+                                    <div id="qrcodeNamaPemeriksa"></div>
                                 </td>
-                                <td style="padding-bottom:15px;"></td>
+                                <td style="padding-bottom:10px;">
+                                    <div id="qrcodePenanggungJawab"></div>
+                                </td>
                             </tr>
                             <tr>
                                 <td></td>
@@ -411,9 +421,20 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
             </tbody>
         </table>
     </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous">
-        document.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
+    
+    <script>
+        jQuery('#qrcodeNamaPemeriksa').qrcode({
+            // width	: 256,
+			// height	: 256,
+            render	: "table",
+            text	: "Tanda Tangan Digital Oleh " + "{{ $data->dokter }}"
+        });	
+
+        jQuery('#qrcodePenanggungJawab').qrcode({
+            // width	: 256,
+			// height	: 256,
+            render	: "table",
+            text	: "Tanda Tangan Digital Oleh " + "{{ $r['doketr'] }}"
         });
     </script>
     <script>

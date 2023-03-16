@@ -6059,6 +6059,29 @@
     ]
   },
   {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.PenilaianEWS",
+    "url": "/PenilaianEWS/:index/:idEMR",
+    "templateurl": "module/EMR/PenilaianEWS.html",
+    "controller": "PenilaianEWSCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
     "name": "RekamMedis.AsesmenMedis.MenuEWSDewasa.SkorEWSDewasa3",
     "url": "/SkorEWSDewasa3",
     "templateurl": "module/EMR/SkorEWSDewasa3.html",

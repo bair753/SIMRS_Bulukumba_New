@@ -906,6 +906,10 @@
             "urlDep": "module/EMR/SkorEWSDewasaCtrl"
         },
         {
+            "nameDep": "PenilaianEWSCtrl",
+            "urlDep": "module/EMR/PenilaianEWSCtrl"
+        },
+        {
             "nameDep": "SkorEWSAnakCtrl",
             "urlDep": "module/EMR/SkorEWSAnakCtrl"
         },
