@@ -618,7 +618,7 @@ class LaboratoriumController extends ApiController
         if(isset($request['idUmur']) && $request['idUmur']!='undefined' && $request['idUmur']!=''&& $request['idUmur']!='-'){
             $jenis = $jenis->where('djp.kelompokumurfk','=',$request['idUmur']);
         }
-        $jenis=  $jenis->limit(50);
+        // $jenis=  $jenis->limit(50);
         $jenis=  $jenis->get();
         $result =  array(
             'data' => $jenis,
@@ -1231,6 +1231,14 @@ class LaboratoriumController extends ApiController
         $kdProfile = $this->getDataKdProfile($request);
         $idProfile = (int) $kdProfile;
         $detail = DB::select(DB::raw("select id,namalengkap from pegawai_m WHERE objectjenispegawaifk='1'"));
+
+        return $detail;
+    }
+    
+    public function getPemeriksa(Request $request) {
+        $kdProfile = $this->getDataKdProfile($request);
+        $idProfile = (int) $kdProfile;
+        $detail = DB::select(DB::raw("select id,namalengkap from pegawai_m WHERE objectjenispegawaifk='29'"));
 
         return $detail;
     }

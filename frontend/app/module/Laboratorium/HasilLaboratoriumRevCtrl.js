@@ -626,9 +626,14 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 {
                     alert("Pilih terlebih dahulu dookter nya!!")
                     return;
-                }else{
-                dokter = $scope.item.DataPegawai
                 }
+                if($scope.item.DataPemeriksa == undefined)
+                {
+                    alert("Pilih terlebih dahulu dookter nya!!")
+                    return;
+                }
+                dokter = $scope.item.DataPegawai
+                pemeriksa = $scope.item.DataPemeriksa
                 // medifirstService.get("laboratorium/get-riwayat-bayar?norec=" + $scope.norecAPD ).then(function (data) {
                 //     if(data.data.data[0].nostruklastfk == null )
                 //     {
@@ -640,7 +645,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 var client = new HttpClient();
                  client.get('http://127.0.0.1:1237/printvb/bridging?cetak-hasil-lab=1&norec=' + $scope.norecAPD 
                             + '&objectjeniskelaminfk=' + $scope.item.objectjeniskelaminfk + '&umur=' + $scope.item.umurDay
-                            + '&strIdPegawai=' + user.namaLengkap + '&strNorecPP=' + $scope.item.norecPP + '&view='+ stt + '&doketr=' + dokter.namalengkap +'&catatan=' + $scope.item.catatan, function (response) {
+                            + '&strIdPegawai=' + user.namaLengkap + '&strNorecPP=' + $scope.item.norecPP + '&view='+ stt + '&doketr=' + dokter.namalengkap + '&pemeriksa=' + pemeriksa.namalengkap +'&catatan=' + $scope.item.catatan, function (response) {
 
                 }); 
                 // client.get('http://127.0.0.1:1237/printvb/bridging?cetak-hasil-lab=' + $scope.dataSbnSelected.noregistrasi + $scope.dataSbnSelected.norec_sp + '&idPegawai=' + $scope.pegawai.namaLengkap + '&STD=' + sudahTerimaDari + '&view=' + stt, function (response) {                    
@@ -653,6 +658,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 
             $scope.cetakSurat = function () {
                 var dokter ="";
+                var pemeriksa ="";
                 var user = medifirstService.getPegawaiLogin(); 
                 var stt = 'false'
                 if (confirm('View Surat Keterangan Laboratorium? ')) {
@@ -671,7 +677,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 
                 client.get('http://127.0.0.1:1237/printvb/bridging?cetak-suratketerangan-lab=1&norec=' + $scope.norecAPD 
                             + '&objectjeniskelaminfk=' + $scope.item.objectjeniskelaminfk + '&umur=' + $scope.item.umurDay
-                            + '&strIdPegawai=' + user.namaLengkap + '&strNorecPP=' + $scope.item.norecPP + '&view='+ stt + '&doketr=' + dokter.namalengkap +'&catatan=' + $scope.item.catatan, function (response) {
+                            + '&strIdPegawai=' + user.namaLengkap + '&strNorecPP=' + $scope.item.norecPP + '&view='+ stt + '&doketr=' + dokter.namalengkap + '&pemeriksa=' + pemeriksa.namalengkap +'&catatan=' + $scope.item.catatan, function (response) {
 
                 }); 
                 // client.get('http://127.0.0.1:1237/printvb/bridging?cetak-hasil-lab=' + $scope.dataSbnSelected.noregistrasi + $scope.dataSbnSelected.norec_sp + '&idPegawai=' + $scope.pegawai.namaLengkap + '&STD=' + sudahTerimaDari + '&view=' + stt, function (response) {                    
@@ -684,19 +690,28 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 $scope.ListDataPegawai = data;
             });
 
+            medifirstService.getPart("laboratorium/get-combo-pemeriksa-lab").then(function (data) {
+                $scope.ListDataPemeriksa = data;
+            });
+
             $scope.cetakhtml = function () {
                 var dokter = "";
+                var pemeriksa = "";
                 var user = medifirstService.getPegawaiLogin();
                 var catatan = $scope.item.catatan == undefined ? "" : $scope.item.catatan;
                 if ($scope.item.DataPegawai == undefined) {
-                    alert("Pilih terlebih dahulu dokter nya!!")
+                    alert("Pilih terlebih dahulu dokternya!!")
                     return;
-                } else {
-                    dokter = $scope.item.DataPegawai
+                } 
+                if ($scope.item.DataPemeriksa == undefined) {
+                    alert("Pilih terlebih dahulu pemeriksanya!!")
+                    return;
                 }
+                    dokter = $scope.item.DataPegawai
+                    pemeriksa = $scope.item.DataPemeriksa
                 window.open(config.baseApiBackend + 'report/cetak-hasil-lab-manual?norec=&norec=' + $scope.norecAPD
                 + '&objectjeniskelaminfk=' + $scope.item.objectjeniskelaminfk + '&umur=' + $scope.item.umurDay
-                + '&strIdPegawai=' + user.namaLengkap + '&strNorecPP=' + $scope.item.norecPP + '&doketr=' + dokter.namalengkap + '&catatan=' + catatan,"_blank");
+                + '&strIdPegawai=' + user.namaLengkap + '&strNorecPP=' + $scope.item.norecPP  + '&doketr=' + dokter.namalengkap + '&pemeriksa=' + pemeriksa.namalengkap + '&catatan=' + catatan,"_blank");
             }
 
            

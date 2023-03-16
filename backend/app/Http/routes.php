@@ -1129,6 +1129,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
           Route::get('report/cetak-resep-dokter','Report\ReportController@cetakResepDokter');
           Route::get('laboratorium/get-lap-kunjungan', 'Laboratorium\LaboratoriumController@getLaporanKunjungan');
           Route::get('laboratorium/get-combo-dokter-lab','Laboratorium\LaboratoriumController@getDokter');
+          Route::get('laboratorium/get-combo-pemeriksa-lab','Laboratorium\LaboratoriumController@getPemeriksa');
 
 
         Route::get('laboratorium/get-combo-map-lab','Laboratorium\LaboratoriumController@getComboMapLab');
