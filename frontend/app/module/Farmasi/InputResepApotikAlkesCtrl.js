@@ -1835,7 +1835,7 @@ define(['initialize'], function (initialize) {
                     strukresep: strukresep,
                     pelayananpasien: data2//$scope.dataGrid._data
                 }
-
+                confirm('Yakin ingin menyimpan? sebelum menyimpan harap perhatikan resep obat dengan baik!');
                 $scope.tombolSimpanVis = false;
                 medifirstService.post('farmasi/save-pelayananobat', objSave).then(function (e) {
                     $scope.tombolSimpanVis = true;

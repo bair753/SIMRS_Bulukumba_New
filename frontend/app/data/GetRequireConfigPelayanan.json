@@ -3219,8 +3219,16 @@
             "urlDep": "module/EMR/PenolakanOperasiCtrl"
         },
         {
+            "nameDep": "PenolakanOperasiRanapCtrl",
+            "urlDep": "module/EMR/PenolakanOperasiRanapCtrl"
+        },
+        {
             "nameDep": "PersetujuanOperasiCtrl",
             "urlDep": "module/EMR/PersetujuanOperasiCtrl"
+        },
+        {
+            "nameDep": "PersetujuanOperasiRanapCtrl",
+            "urlDep": "module/EMR/PersetujuanOperasiRanapCtrl"
         },
         {
             "nameDep": "PenolakanPemakaianDarahDanProdukDarahCtrl",
@@ -3281,6 +3289,10 @@
         {
             "nameDep": "AsesmenNeonatusCtrl",
             "urlDep": "module/EMR/AsesmenNeonatusCtrl"
+        }
+        {
+            "nameDep": "AsesmenNeonatusRanapCtrl",
+            "urlDep": "module/EMR/AsesmenNeonatusRanapCtrl"
         }
     ]
 }
