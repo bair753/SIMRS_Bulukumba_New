@@ -18363,8 +18363,7 @@
         "define": "RekamMedisCtrl"
       }
     ]
-  }
-
+  },
   {
     "name": "RekamMedis.AsesmenMedis.AsesmenNeonatusRanap",
     "url": "/AsesmenNeonatusRanap",
@@ -18388,6 +18387,6 @@
       }
     ]
   }
-  
+
   
 ] 

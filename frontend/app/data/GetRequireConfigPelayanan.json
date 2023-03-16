@@ -3289,7 +3289,7 @@
         {
             "nameDep": "AsesmenNeonatusCtrl",
             "urlDep": "module/EMR/AsesmenNeonatusCtrl"
-        }
+        },
         {
             "nameDep": "AsesmenNeonatusRanapCtrl",
             "urlDep": "module/EMR/AsesmenNeonatusRanapCtrl"
