@@ -1199,6 +1199,12 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                         $scope.noeditExpertise4 = $scope.pegawai.id != e.data[0].pegawaifk;
                     }
                     $scope.popUpEkpertiseUsg.center().open();
+
+                    // Get Diagnosa Klinis 
+                    medifirstService.get('radiologi/get-diagnosa-klinis-order?noorder=' + $scope.dataSelected.noorder).then(function(resp) {
+                        var dataSO = resp.data.data
+                        $scope.item.klinisUsg = dataSO[0].kddiagnosa != null ? dataSO[0].kddiagnosa : '-';
+                    })
                 })
             }
             $scope.cetakEks = function () {
