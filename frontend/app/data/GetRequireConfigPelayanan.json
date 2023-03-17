@@ -3297,6 +3297,10 @@
         {
             "nameDep": "AsesmenNeonatusRanapCtrl",
             "urlDep": "module/EMR/AsesmenNeonatusRanapCtrl"
+        },
+        {
+            "nameDep": "PartografCtrl",
+            "urlDep": "module/EMR/PartografCtrl"
         }
     ]
 }
