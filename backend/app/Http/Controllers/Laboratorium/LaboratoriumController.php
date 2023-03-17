@@ -9,6 +9,7 @@
 
 namespace App\Http\Controllers\Laboratorium;
 
+use App\Master\SettingDataFixed;
 use App\Http\Controllers\ApiController;
 use App\Master\JenisPetugasPelaksana;
 use App\Master\Produk;
@@ -1238,9 +1239,16 @@ class LaboratoriumController extends ApiController
     public function getPemeriksa(Request $request) {
         $kdProfile = $this->getDataKdProfile($request);
         $idProfile = (int) $kdProfile;
-        $detail = DB::select(DB::raw("select id,namalengkap from pegawai_m WHERE objectjenispegawaifk='29'"));
+        $pemeriksa = SettingDataFixed::where('id', 1583)->first();
+        $pemeriksa = explode(',', $pemeriksa->nilaifield);
 
-        return $detail;
+        $dataPemeriksa = \DB::table('pegawai_m as pg')
+            ->select('id', 'namalengkap')
+            ->where('pg.kdprofile',$idProfile )
+            ->whereIn('pg.id', $pemeriksa)
+            ->where('pg.statusenabled',true)
+            ->get();
+        return $dataPemeriksa;
     }
 
     public function saveAntrianPasienDarah(Request $request){
