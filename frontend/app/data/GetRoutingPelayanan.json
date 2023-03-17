@@ -17440,8 +17440,8 @@
     ]
   },
   {
-    "name": "RekamMedis.AsesmenMedis.CatatanPemberianDanPemantauanObatPasien",
-    "url": "/CatatanPemberianDanPemantauanObatPasien",
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.CatatanPemberianDanPemantauanObatPasien",
+    "url": "/CatatanPemberianDanPemantauanObatPasien/:index/:idEMR",
     "templateurl": "module/EMR/CatatanPemberianDanPemantauanObatPasien.html",
     "controller": "CatatanPemberianDanPemantauanObatPasienCtrl",
     "deps": [
