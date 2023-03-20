@@ -10412,12 +10412,19 @@ class EMRController  extends ApiController
 
     public function getIcd10Secondary(Request $request)
     {
+        $kdProfile = (int) $this->getDataKdProfile($request);
         $req = $request->all();
+        // $icdIX = \DB::table('diagnosa_m as dg')
+        // ->leftJoin('detaildiagnosapasien_t as ddp', 'ddp.objectdiagnosafk', '=', 'dg.id')
+        // ->select('dg.id as value', 'dg.kddiagnosa', 'dg.namadiagnosa as text')
+        // ->where('dg.statusenabled', true)
+        //     ->where('ddp.objectjenisdiagnosafk', '=', 2) // Jenis diagnosa secondary
+        //     ->orderBy('dg.kddiagnosa');
+
         $icdIX = \DB::table('diagnosa_m as dg')
-        ->leftJoin('detaildiagnosapasien_t as ddp', 'ddp.objectdiagnosafk', '=', 'dg.id')
-        ->select('dg.id as value', 'dg.kddiagnosa', 'dg.namadiagnosa as text')
-        ->where('dg.statusenabled', true)
-            ->where('ddp.objectjenisdiagnosafk', '=', 2) // Jenis diagnosa secondary
+            ->select('dg.id as value', 'dg.kddiagnosa', 'dg.namadiagnosa as text')
+            ->where('dg.kdprofile', $kdProfile)
+            ->where('dg.statusenabled', true)
             ->orderBy('dg.kddiagnosa');
 
         if (

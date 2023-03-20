@@ -699,12 +699,16 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 var pemeriksa = "";
                 var user = medifirstService.getPegawaiLogin();
                 var catatan = $scope.item.catatan == undefined ? "" : $scope.item.catatan;
+                if ($scope.item.DataPemeriksa == undefined) {
+                    alert("Pilih terlebih dahulu pemeriksanya!!")
+                    return;
+                }
                 if ($scope.item.DataPegawai == undefined) {
                     alert("Pilih terlebih dahulu dokternya!!")
                     return;
-                } 
-                if ($scope.item.DataPemeriksa == undefined) {
-                    alert("Pilih terlebih dahulu pemeriksanya!!")
+                }   
+                if ($scope.item.catatan == undefined) {
+                    alert("Isi terlebih dahulu catatannya!!")
                     return;
                 }
                     dokter = $scope.item.DataPegawai

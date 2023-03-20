@@ -97,33 +97,7 @@
                     </div>
                 </div>
             </div>
-            <div class="grid_12">
-                <div class="grid_12">
-                    <div class="grid_3" style="margin-top: 10px">
-                        <button class="btnTemplate1" ng-click="simpan()" ng-show="IsSave"><i class="fa fa-save"></i>Simpan</button>
-                    </div>
-                    
-                    <div class="grid_3" style="margin-top: 10px">
-                        <button class="btnTemplate1" ng-click="cetakhtml()"><i class="fa fa-print"></i>Cetak</button>
-                    </div>
-                    <div class="grid_4" style="margin-top: 10px">
-                        <button class="btnTemplate1" ng-click="cetakSurat()"><i class="fa fa-print"></i>Cetak Surat Keterangan</button>
-                    </div>
-                    <div class="grid_2" style="margin-top: 10px">
-                        <button class="btnTemplate1 cancel" ng-click="kembali()"><i
-                                class="fa fa-refresh"></i>Kembali</button>
-                    </div>
-
-                    <!-- <div class="grid_2"> -->
-                        <!-- <div class="grid_14">
-                            <label c-label item="item" c-label-text="Catatan"></label>
-                        </div>
-                        <div class="grid_14">
-                            <input c-text-box type="input" class="k-textbox" ng-model="item.catatan"  style="text-align: left;"/>
-                        </div> -->
-                    <!-- </div> -->
-                </div>
-            </div>
+            
       <!-- <div class="grid_1"> -->
             <div class="grid_12" >
                 <label c-label item="item" c-label-text="Catatan"></label>
@@ -137,6 +111,33 @@
         
                 1000/{{item.catatan ? item.catatan.length : 0}}
           </div>
+          <div class="grid_12">
+            <div class="grid_12">
+                <div class="grid_3" style="margin-top: 10px">
+                    <button class="btnTemplate1" ng-click="simpan()" ng-show="IsSave"><i class="fa fa-save"></i>Simpan</button>
+                </div>
+                
+                <div class="grid_3" style="margin-top: 10px">
+                    <button class="btnTemplate1" ng-click="cetakhtml()"><i class="fa fa-print"></i>Cetak</button>
+                </div>
+                <div class="grid_4" style="margin-top: 10px">
+                    <button class="btnTemplate1" ng-click="cetakSurat()"><i class="fa fa-print"></i>Cetak Surat Keterangan</button>
+                </div>
+                <div class="grid_2" style="margin-top: 10px">
+                    <button class="btnTemplate1 cancel" ng-click="kembali()"><i
+                            class="fa fa-refresh"></i>Kembali</button>
+                </div>
+
+                <!-- <div class="grid_2"> -->
+                    <!-- <div class="grid_14">
+                        <label c-label item="item" c-label-text="Catatan"></label>
+                    </div>
+                    <div class="grid_14">
+                        <input c-text-box type="input" class="k-textbox" ng-model="item.catatan"  style="text-align: left;"/>
+                    </div> -->
+                <!-- </div> -->
+            </div>
+        </div>
   </fieldset>
             <!-- <input c-text-box type="input" class="k-textbox" ng-model="item.catatan"  style="text-align: left;"/> -->
         </div>
