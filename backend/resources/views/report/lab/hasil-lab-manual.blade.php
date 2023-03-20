@@ -361,6 +361,22 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                 </tr>
                 <tr>
                     <td style="padding-top:20px;">
+                        <table width="100%" cellspacing="0" cellpadding="0" class="garishalus" style="">
+                            <tr>
+                                <td style="text-align:center;">
+                                    <font style="font-size: 11pt" color="#000000"><b>Catatan</b></font>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left;">
+                                    <font style="font-size: 11pt; padding-left:20px" color="#000000">{{ $r['catatan'] }}</font>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding-top:20px;">
                         <table width="100%" cellspacing="0" cellpadding="0" border="0" style="text-align:center">
                             <tr>
                                 <td style="align-items: center">

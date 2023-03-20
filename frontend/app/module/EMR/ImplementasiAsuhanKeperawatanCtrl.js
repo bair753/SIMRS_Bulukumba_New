@@ -291,10 +291,11 @@ define(['initialize'], function (initialize) {
 
                                 }
                                 pegawaiInputDetail = dataLoad[i].pegawaifk
-                            } else {
-                                $scope.item.obj[422550] = $scope.now;
+                            } 
+                            // else {
+                            //     $scope.item.obj[422550] = $scope.now;
                                 
-                            }
+                            // }
 
                         }
 

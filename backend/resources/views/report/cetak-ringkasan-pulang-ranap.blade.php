@@ -12,6 +12,8 @@
         <link rel="stylesheet" href="{{ asset('css/report/tabel.css') }}">
         <script src="{{ asset('js/jquery.min.js') }}"></script>
         <script src="{{ asset('js/jquery.qr-code.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/qrcode/src/jquery.qrcode.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/qrcode/src/qrcode.js') }}"></script>
         <link href="{{ asset('css/style.css') }}" rel="stylesheet">
         <!-- angular -->
         <script src="{{ asset('js/angular/angular.min.js') }}" type="text/javascript"></script>
@@ -25,6 +27,8 @@
         <link rel="stylesheet" href="{{ asset('service/css/report/tabel.css') }}">
         <script src="{{ asset('service/js/jquery.min.js') }}"></script>
         <script src="{{ asset('service/js/jquery.qr-code.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/qrcode/src/jquery.qrcode.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/qrcode/src/qrcode.js') }}"></script>
         <link href="{{ asset('service/css/style.css') }}" rel="stylesheet">
         <!-- angular -->
         <script src="{{ asset('service/js/angular/angular.min.js') }}" type="text/javascript"></script>
@@ -313,8 +317,7 @@
           <span>Pasien</span>
         </div>
         <br>
-        <br>
-        <br>
+        <div id="qrcodePasien" style="text-align: center"></div>
         <br>
         <div style="text-align: center">
           <span>( @{{ item.obj[423817] }} )</span>
@@ -325,8 +328,7 @@
           <span>Keluarga Pasien</span>
         </div>
         <br>
-        <br>
-        <br>
+        <div id="qrcodeKeluargaPasien" style="text-align: center"></div>
         <br>
         <div style="text-align: center">
           <span>( @{{ item.obj[423818] }} )</span>
@@ -337,8 +339,7 @@
           <span>DPJP</span>
         </div>
         <br>
-        <br>
-        <br>
+        <div id="qrcodeDPJP" style="text-align: center"></div>
         <br>
         <div style="text-align: center">
           <span>( @{{ item.obj[423819] }} )</span>
@@ -511,10 +512,30 @@
             $scope.tglemr = dataLoad[i].tgl
         }
         console.log($scope.obj);
-    })
 
+        var pasien = $scope.item.obj[423818];
+        var keluargapasien = $scope.item.obj[423817];
+        var dpjp = $scope.item.obj[423819];
+
+        jQuery('#qrcodeKeluargaPasien').qrcode({
+            width	: 100,
+			      height	: 100,
+            text	: "Tanda Tangan Digital Oleh " + pasien
+        });	
+        jQuery('#qrcodePasien').qrcode({
+            width	: 100,
+			      height	: 100,
+            text	: "Tanda Tangan Digital Oleh " + keluargapasien
+        });
+        jQuery('#qrcodeDPJP').qrcode({
+            width	: 100,
+			      height	: 100,
+            text	: "Tanda Tangan Digital Oleh " + dpjp
+        });	
+    })
     $(document).ready(function () {
         window.print();
     });
 </script>
+
 </html>

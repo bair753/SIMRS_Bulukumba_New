@@ -17232,6 +17232,7 @@
       }
     ]
   },
+  
   {
     "name": "RekamMedis.AsesmenMedis.PersetujuanUmumRawatJalan",
     "url": "/PersetujuanUmumRawatJalan",
@@ -17417,8 +17418,8 @@
     ]
   },
   {
-    "name": "RekamMedis.AsesmenMedis.HandOver",
-    "url": "/HandOver",
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.HandOver",
+    "url": "/HandOver/:index/:idEMR",
     "templateurl": "module/EMR/HandOver.html",
     "controller": "HandOverCtrl",
     "deps": [
@@ -17693,8 +17694,8 @@
     ]
   },
   {
-    "name": "RekamMedis.AsesmenMedis.HandOverGawatDarurat",
-    "url": "/HandOverGawatDarurat",
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.HandOverGawatDarurat",
+    "url": "/HandOverGawatDarurat/:index/:idEMR",
     "templateurl": "module/EMR/HandOverGawatDarurat.html",
     "controller": "HandOverGawatDaruratCtrl",
     "deps": [
@@ -18415,6 +18416,29 @@
     "url": "/Partograf/:index/:idEMR",
     "templateurl": "module/EMR/Partograf.html",
     "controller": "PartografCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.RingkasanPasienMasukdanKeluarRanap",
+    "url": "/RingkasanPasienMasukdanKeluarRanap",
+    "templateurl": "module/EMR/RingkasanPasienMasukdanKeluarRanap.html",
+    "controller": "RingkasanPasienMasukdanKeluarRanapCtrl",
     "deps": [
       {
         "module": "Services",

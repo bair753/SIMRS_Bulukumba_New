@@ -3301,6 +3301,11 @@
         {
             "nameDep": "PartografCtrl",
             "urlDep": "module/EMR/PartografCtrl"
+        },
+        {
+            "nameDep": "RingkasanPasienMasukdanKeluarRanapCtrl",
+            "urlDep": "module/EMR/RingkasanPasienMasukdanKeluarRanapCtrl"
         }
+        
     ]
 }
