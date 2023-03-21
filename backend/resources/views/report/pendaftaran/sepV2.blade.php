@@ -390,7 +390,7 @@
 <script type="text/javascript">
     $(function () {
         'use strict';
-        var APP_URL = "http://simrs.rsudbulukumba.id/service/medifirst2000/report/ttd-digital/";
+        var APP_URL = "http://10.10.10.12/service/medifirst2000/report/ttd-digital/";
         $.ajax({
             "url": "https://tinyurl.com/api-create.php?url=" + APP_URL + "{{ $dataReport['suratJaminan']->noregistrasi }}" + "/pasien",
             "method": "GET",
