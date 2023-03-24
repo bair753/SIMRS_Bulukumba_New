@@ -4059,6 +4059,13 @@ class TagihanController  extends ApiController
                         );
                 }
             }
+            if ($request['tglpulang'] != '' ) {
+                $updatePD= PasienDaftar::where('noregistrasi', $request['noregistrasi'])
+                        ->update([
+                                'tglpulang' => $request['tglpulang'],                                
+                            ]
+                        );
+            }
             $transStatus = 'true';
         } catch (\Exception $e) {
             $transStatus = 'false';

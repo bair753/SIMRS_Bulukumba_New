@@ -554,6 +554,7 @@ define(['initialize'], function (initialize) {
 					$scope.item.cekTglRegis = false;
 					$scope.item.cekTglMasuk = false;
 					$scope.item.cekTglKeluar = false;
+					$scope.item.cekTglPulang = false;
 				}
 			}
 			$scope.batalUbahTanggal = function () {
@@ -576,6 +577,10 @@ define(['initialize'], function (initialize) {
 				if ($scope.item.cekTglKeluar) {
 					tglkeluars = moment($scope.item.tglKeluars).format('YYYY-MM-DD HH:mm:ss')
 				}
+				var tglpulangs = "";
+				if ($scope.item.cekTglPulang) {
+					tglpulangs = moment($scope.item.tglpulangs).format('YYYY-MM-DD HH:mm:ss')
+				}
 
 				var dataJson = {
 					noregistrasi: $scope.item.noRegistrasi,
@@ -584,7 +589,8 @@ define(['initialize'], function (initialize) {
 					norec_apd: $scope.currentRowData.norec,
 					tglregistrasi: tglregistrasis,
 					tglmasuk: tglmasuks,
-					tglkeluar: tglkeluars
+					tglkeluar: tglkeluars,
+					tglpulang: tglpulangs
 				}
 				medifirstService.post('tatarekening/ubah-tgl-detailregistrasi',dataJson).then(function (e) {
 					if (e.status = 201) {
