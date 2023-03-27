@@ -1,4 +1,4 @@
-define(['initialize'], function (initialize) {
+define(['initialize', 'Configuration'], function (initialize, config) {
     'use strict';
     initialize.controller('KonsultasiDokterCtrl', ['$q', '$scope', '$state', 'MedifirstService', '$timeout', 'CacheHelper','$rootScope',
         function ($q, $scope, $state, medifirstService, $timeout, cacheHelper,$rootScope) {
@@ -12,6 +12,7 @@ define(['initialize'], function (initialize) {
             var cookie = document.cookie.split(';')
             var kelompokUser = cookie[0].split('=')
             var paramSearch =''
+            
             var getCache = cacheHelper.get('cacheRekamMedis')
             if (getCache != undefined) {
                 $scope.nocm = getCache[0]
@@ -111,6 +112,32 @@ define(['initialize'], function (initialize) {
                     $scope.popUpJawab.close()
                     
                 });
+            }
+
+            $scope.CetakJawab = function () {
+                // var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+                // $scope.item.norec = dataItem.norec
+                // $scope.item.ruanganAsalJawab = dataItem.ruanganasal
+                // $scope.item.ruanganTujuanJawab =  dataItem.ruangantujuan
+                // $scope.item.dokterJawab  =dataItem.namalengkap 
+                // $scope.item.keteranganJawab  = dataItem.keteranganorder
+
+                if ($scope.item.jawaban == '') return
+
+                var local = JSON.parse(localStorage.getItem('profile'));
+                var nama = medifirstService.getPegawaiLogin().namalengkap;
+                console.log($scope.pegawaiLogin.namaLengkap);
+                window.open(config.baseApiBackend + 'report/cetak-konsul-dokter?nocm='
+                    + $scope.nocm
+                    + '&emr=' + $scope.item.norec
+                    + '&ruanganasal=' + $scope.item.ruanganAsalJawab
+                    + '&ruangantujuan=' + $scope.item.ruanganTujuanJawab
+                    + '&daridokter=' + $scope.pegawaiLogin.namaLengkap
+                    + '&untukdokter=' + $scope.item.dokterJawab
+                    + '&keteranganjawab=' + $scope.item.keteranganJawab
+                    + '&jawaban=' + $scope.item.jawaban
+                    + '&kdprofile=' + local.id
+                    + '&nama=' + nama, '_blank');
             }
             function editData(e) {
                 e.preventDefault();

@@ -2728,6 +2728,8 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
         Route::get('report/cetak-asesmen-awal-medis-ranap', 'Report\ReportController@asesmenAwalMedisRanap');
         Route::get('report/cetak-labelrekap-apotik', 'Report\ReportController@labelRekapApotik');
         Route::get('report/cetak-labelkecil-apotik', 'Report\ReportController@labelLabelKecilApotik');
+        Route::get('report/cetak-ringkasan-pasien-masuk-keluar', 'Report\ReportController@ringkasanPasienMasukKeluar');
+        Route::get('report/cetak-konsul-dokter', 'Report\ReportController@konsulDokter');
 
         Route::get('viewer/get-list-antrian','Antrian\AntrianController@getListAntrian');
         Route::get('viewer/update-antrian','Antrian\AntrianController@updatePanggil');
