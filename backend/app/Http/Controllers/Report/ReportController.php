@@ -687,6 +687,7 @@ class ReportController extends ApiController{
 
     }
     public function cetakEkspertiseUsg(Request $r) {
+        $norec = $r['norec'];
         $kdProfile = (int)$r['kdprofile'];
         $raw = collect(DB::select("
             SELECT
@@ -720,12 +721,10 @@ class ReportController extends ApiController{
             LEFT JOIN strukorder_t as sot on sot.norec = pp.strukorderfk
             LEFT JOIN pegawai_m as pg3 on pg3.id = sot.objectpegawaiorderfk
             WHERE
-                so.norec = '$r[norec]'
+                so.norec = '$norec'
             AND so.kdprofile = $kdProfile
             AND so.statusenabled = TRUE
-            AND so.status = 'Usg'
         "))->first();
-//        dd($raw);
         if(!empty($raw)){
             $raw->umur = $this->getAge($raw->tgllahir ,date('Y-m-d'));
         }else{
