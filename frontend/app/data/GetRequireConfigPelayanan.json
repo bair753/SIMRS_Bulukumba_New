@@ -3305,6 +3305,10 @@
         {
             "nameDep": "RingkasanPasienMasukdanKeluarRanapCtrl",
             "urlDep": "module/EMR/RingkasanPasienMasukdanKeluarRanapCtrl"
+        },
+        {
+            "nameDep": "CPPTGawatDaruratCtrl",
+            "urlDep": "module/EMR/CPPTGawatDaruratCtrl"
         }
         
     ]

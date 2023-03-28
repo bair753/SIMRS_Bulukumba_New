@@ -489,9 +489,9 @@ define(['initialize'], function (initialize) {
 
                 medifirstService.get("emr/get-vital-sign?noregistrasi=" + $scope.cc.noregistrasi + "&objectidawal=4241&objectidakhir=4246&idemr=147", true).then(function (datas) {
                     $scope.item.obj[420943] = datas.data.data[1].value; // Tekanan Darah
-                    $scope.item.obj[420944] = datas.data.data[5].value; // Nadi
-                    $scope.item.obj[420945] = datas.data.data[4].value; // Suhu
-                    $scope.item.obj[420946] = datas.data.data[6].value; // Napas
+                    $scope.item.obj[420944] = datas.data.data[8].value; // Nadi
+                    $scope.item.obj[420945] = datas.data.data[6].value; // Suhu
+                    $scope.item.obj[420946] = datas.data.data[11].value; // Napas
                 })
 
                 var noregistrasifk = $state.params.noRec;
