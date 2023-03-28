@@ -651,12 +651,20 @@
             </div>
             <div class="grid_12" style="margin-top: 10px;">
                 <fieldset style="margin-top: 10px;">
+                    
                     <div class="grid_6" style="margin-top: 10px;">
                         <div class="grid_12">
                             <label c-label item="item">Diagnosa Kebidanan</label>
                             <input type="text" class="k-textbox" ng-model="item.obj[31100444]">
                         </div>                      
                     </div>
+                    <div class="grid_6" style="margin-top: 10px;">
+                        <div class="grid_12">
+                            <label c-label item="item">DPJP</label>
+                            <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[31100446]" k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listDokter" />
+                        </div>                      
+                    </div>
+                    <div class="grid_6" style="margin-top: 10px;"></div>
                     <div class="grid_6" style="margin-top: 10px;">
                         <div class="grid_12">
                             <label c-label item="item">Bulukumba,</label>
