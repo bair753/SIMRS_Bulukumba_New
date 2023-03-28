@@ -8,7 +8,7 @@ export class Configuration {
     }
     else if (window.location.hostname.indexOf('localhost') > -1) {
       return {
-        apiBackend: 'http://localhost:8005/service/',
+        apiBackend: 'http://localhost:9300/service/',
         headerToken: 'X-AUTH-TOKEN',
       }
     } else {

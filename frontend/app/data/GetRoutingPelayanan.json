@@ -18479,6 +18479,52 @@
         "define": "RekamMedisCtrl"
       }
     ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.LaporanPersalinanIGD",
+    "url": "/LaporanPersalinanIGD/:index/:idEMR",
+    "templateurl": "module/EMR/LaporanPersalinanIGD.html",
+    "controller": "LaporanPersalinanIGDCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.LaporanPersalinanRanap",
+    "url": "/LaporanPersalinanRanap/:index/:idEMR",
+    "templateurl": "module/EMR/LaporanPersalinanRanap.html",
+    "controller": "LaporanPersalinanRanapCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
   }
 
   

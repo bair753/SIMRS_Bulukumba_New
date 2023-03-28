@@ -3309,6 +3309,14 @@
         {
             "nameDep": "CPPTGawatDaruratCtrl",
             "urlDep": "module/EMR/CPPTGawatDaruratCtrl"
+        },
+        {
+            "nameDep": "LaporanPersalinanIGDCtrl",
+            "urlDep": "module/EMR/LaporanPersalinanIGDCtrl"
+        },
+        {
+            "nameDep": "LaporanPersalinanRanapCtrl",
+            "urlDep": "module/EMR/LaporanPersalinanRanapCtrl"
         }
         
     ]
