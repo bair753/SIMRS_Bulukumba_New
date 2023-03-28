@@ -58,11 +58,11 @@ define(['initialize'], function (initialize) {
                 var detail = []
                 var arrayGejala = []
                 var arrayGejalaNeg = []
+                var arraySuhu = []
                 var arraySkala = []
                 var arrayTekananDaarah = []
                 var arrayLaju = []
                 var arrayKesadaran = []
-                var arraySuhu = []
                 var sama = false
                 for (let i = 0; i < datas.length; i++) {
                     const element = datas[i];
@@ -161,6 +161,40 @@ define(['initialize'], function (initialize) {
                     }
                     //END ARRAY GEJALA
 
+                    // ARRAY suhu 
+                    if (element.kodeexternal == 'suhu') {
+                        for (let z = 0; z < arraySuhu.length; z++) {
+                            const element2 = arraySuhu[z];
+                            if (element2.namaexternal == element.namaexternal) {
+                                detail.push(element)
+                                element2.details = detail
+                                sama = true
+                            }
+                        }
+                        if (sama == false) {
+                            var datax = {
+                                caption: element.caption,
+                                cbotable: element.cbotable,
+                                child: [],
+                                emrfk: element.emrfk,
+                                headfk: element.headfk,
+                                id: element.id,
+                                kdprofile: element.kdprofile,
+                                kodeexternal: element.kodeexternal,
+                                namaemr: element.namaemr,
+                                namaexternal: element.namaexternal,
+                                nourut: element.nourut,
+                                reportdisplay: element.reportdisplay,
+                                satuan: element.satuan,
+                                statusenabled: element.statusenabled,
+                                style: element.style,
+                                type: element.type,
+
+                            }
+                            arraySuhu.push(datax)
+                        }
+                    }
+                    //END ARRAY suhu
 
                     // ARRAY GEJALA 
                     if (element.kodeexternal == 'urine') {
@@ -302,40 +336,7 @@ define(['initialize'], function (initialize) {
                     }
                     //END ARRAY 
 
-                    // ARRAY suhu 
-                    if (element.kodeexternal == 'suhu') {
-                        for (let z = 0; z < arraySuhu.length; z++) {
-                            const element2 = arraySuhu[z];
-                            if (element2.namaexternal == element.namaexternal) {
-                                detail.push(element)
-                                element2.details = detail
-                                sama = true
-                            }
-                        }
-                        if (sama == false) {
-                            var datax = {
-                                caption: element.caption,
-                                cbotable: element.cbotable,
-                                child: [],
-                                emrfk: element.emrfk,
-                                headfk: element.headfk,
-                                id: element.id,
-                                kdprofile: element.kdprofile,
-                                kodeexternal: element.kodeexternal,
-                                namaemr: element.namaemr,
-                                namaexternal: element.namaexternal,
-                                nourut: element.nourut,
-                                reportdisplay: element.reportdisplay,
-                                satuan: element.satuan,
-                                statusenabled: element.statusenabled,
-                                style: element.style,
-                                type: element.type,
-
-                            }
-                            arraySuhu.push(datax)
-                        }
-                    }
-                    //END ARRAY suhu
+                    
                 }
 
                 // ARRAY GEJALA
@@ -370,6 +371,21 @@ define(['initialize'], function (initialize) {
                 }
                 $scope.listData2 = arrayGejalaNeg
                 //END ARRAY GEJALA
+
+                var gejalaKosongKeun7 = []
+                for (let k = 0; k < arraySuhu.length; k++) {
+                    const element = arraySuhu[k];
+                    for (let l = 0; l < datas.length; l++) {
+                        const element2 = datas[l];
+                        if (element2.namaexternal == element.namaexternal) {
+                            gejalaKosongKeun7.push(element2)
+                            element.details = gejalaKosongKeun7
+                        } else {
+                            gejalaKosongKeun7 = []
+                        }
+                    }
+                }
+                $scope.listData7 = arraySuhu
 
                 var gejalaKosongKeun3 = []
                 for (let k = 0; k < arraySkala.length; k++) {
@@ -436,20 +452,7 @@ define(['initialize'], function (initialize) {
                 $scope.listData6 = arrayKesadaran
 
 
-                var gejalaKosongKeun7 = []
-                for (let k = 0; k < arraySuhu.length; k++) {
-                    const element = arraySuhu[k];
-                    for (let l = 0; l < datas.length; l++) {
-                        const element2 = datas[l];
-                        if (element2.namaexternal == element.namaexternal) {
-                            gejalaKosongKeun7.push(element2)
-                            element.details = gejalaKosongKeun7
-                        } else {
-                            gejalaKosongKeun7 = []
-                        }
-                    }
-                }
-                $scope.listData7 = arraySuhu
+                
             })
             var chekedd = false
             var chacePeriode = cacheHelper.get('cacheNomorEMR');
