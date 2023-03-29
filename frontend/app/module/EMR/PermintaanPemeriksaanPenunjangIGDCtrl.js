@@ -1,6 +1,6 @@
 define(['initialize'], function (initialize) {
     'use strict';
-    initialize.controller('PermintaanPemeriksaanPenunjangCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
+    initialize.controller('PermintaanPemeriksaanPenunjangIGDCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
         function ($q, $rootScope, $scope, ModelItem, $state, cacheHelper, dateHelper, medifirstService) {
 
             var paramsIndex = $state.params.index ? parseInt($state.params.index) : null
@@ -14,31 +14,31 @@ define(['initialize'], function (initialize) {
             $scope.cc = {};
             var nomorEMR = '-';
             var norecEMR = '';
-            $scope.cc.emrfk = 290014;
+            $scope.cc.emrfk = 290080;
             var dataLoad = [];
             $scope.isCetak = true;
             $scope.show = true;
             $scope.allDisabled = false;
             $scope.listItem = [
-                { id: 421500, inuse: true },
-                { id: 421504 },
-                { id: 421508 },
-                { id: 421512 },
-                { id: 421516 },
-                { id: 421520 },
-                { id: 421524 },
-                { id: 421528 },
-                { id: 421532 },
-                { id: 421536 },
-                { id: 421540 },
-                { id: 421544 },
-                { id: 421548 },
-                { id: 421552 },
-                { id: 421556 },
-                { id: 421560 },
-                { id: 421564 },
-                { id: 421568 },
-                { id: 421572 }
+                { id: 422900, inuse: true },
+                { id: 422904 },
+                { id: 422908 },
+                { id: 422912 },
+                { id: 422916 },
+                { id: 422920 },
+                { id: 422924 },
+                { id: 422928 },
+                { id: 422932 },
+                { id: 422936 },
+                { id: 422940 },
+                { id: 422944 },
+                { id: 422948 },
+                { id: 422952 },
+                { id: 422956 },
+                { id: 422960 },
+                { id: 422964 },
+                { id: 422968 },
+                { id: 422972 }
             ];
             var pegawaiInputDetail  = '';
             var cacheNomorEMR = cacheHelper.get('cacheNomorEMR');
@@ -126,7 +126,7 @@ define(['initialize'], function (initialize) {
                 var nocmfk = null;
                 var noregistrasifk = $state.params.noRec;
                 var status = "t";
-                $scope.item.obj[421500] = $scope.now;
+                $scope.item.obj[422900] = $scope.now;
                 // medifirstService.get("emr/get-antrian-pasien-norec/" + noregistrasifk).then(function (e) {
                 //     var antrianPasien = e.data.result;
                 //     $scope.item.obj[421300] = new Date(moment(antrianPasien.tglregistrasi).format('YYYY-MM-DD HH:mm'));

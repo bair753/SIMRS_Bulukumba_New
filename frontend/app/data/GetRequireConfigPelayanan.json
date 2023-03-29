@@ -3333,6 +3333,18 @@
         {
             "nameDep": "AsesmenPraBedahRanapCtrl",
             "urlDep": "module/EMR/AsesmenPraBedahRanapCtrl"
+        },
+        {
+            "nameDep": "PermintaanPemeriksaanPenunjangIGDCtrl",
+            "urlDep": "module/EMR/PermintaanPemeriksaanPenunjangIGDCtrl"
+        },
+        {
+            "nameDep": "CheckListKeselamatanPasienDiKamarRequestIGDCtrl",
+            "urlDep": "module/EMR/CheckListKeselamatanPasienDiKamarRequestIGDCtrl"
+        },
+        {
+            "nameDep": "CheckListKeselamatanPasienDiKamarRequestRanapCtrl",
+            "urlDep": "module/EMR/CheckListKeselamatanPasienDiKamarRequestRanapCtrl"
         }
         
     ]
