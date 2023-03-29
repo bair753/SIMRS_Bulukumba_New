@@ -20,7 +20,7 @@ export class Config {
 	}
 }
 var lokal = {
-  
+
 	apiBackend: "http://localhost:8005/",
 	apiNotif: "http://127.0.0.1:8005/",
 	socketIO: "http://127.0.0.1:8881",

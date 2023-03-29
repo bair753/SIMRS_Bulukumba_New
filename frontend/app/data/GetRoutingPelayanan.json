@@ -17021,8 +17021,8 @@
     ]
   },
   {
-    "name": "RekamMedis.AsesmenMedis.PermintaanPemeriksaanPenunjang",
-    "url": "/PermintaanPemeriksaanPenunjang",
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.PermintaanPemeriksaanPenunjang",
+    "url": "/PermintaanPemeriksaanPenunjang/:index/:idEMR",
     "templateurl": "module/EMR/PermintaanPemeriksaanPenunjang.html",
     "controller": "PermintaanPemeriksaanPenunjangCtrl",
     "deps": [
@@ -17257,8 +17257,8 @@
     ]
   },
   {
-    "name": "RekamMedis.AsesmenMedis.PermintaanPemeriksaanPenunjangRanap",
-    "url": "/PermintaanPemeriksaanPenunjangRanap",
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.PermintaanPemeriksaanPenunjangRanap",
+    "url": "/PermintaanPemeriksaanPenunjangRanap/:index/:idEMR",
     "templateurl": "module/EMR/PermintaanPemeriksaanPenunjangRanap.html",
     "controller": "PermintaanPemeriksaanPenunjangRanapCtrl",
     "deps": [
@@ -18525,7 +18525,169 @@
         "define": "RekamMedisCtrl"
       }
     ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.PermintaanKonselingGiziIGD",
+    "url": "/PermintaanKonselingGiziIGD/:index/:idEMR",
+    "templateurl": "module/EMR/PermintaanKonselingGiziIGD.html",
+    "controller": "PermintaanKonselingGiziIGDCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.PermintaanKonselingGiziRanap",
+    "url": "/PermintaanKonselingGiziRanap/:index/:idEMR",
+    "templateurl": "module/EMR/PermintaanKonselingGiziRanap.html",
+    "controller": "PermintaanKonselingGiziRanapCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.AsesmenPraBedahIGD",
+    "url": "/AsesmenPraBedahIGD/:index/:idEMR",
+    "templateurl": "module/EMR/AsesmenPraBedahIGD.html",
+    "controller": "AsesmenPraBedahIGDCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.AsesmenPraBedahRanap",
+    "url": "/AsesmenPraBedahRanap/:index/:idEMR",
+    "templateurl": "module/EMR/AsesmenPraBedahRanap.html",
+    "controller": "AsesmenPraBedahRanapCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.PermintaanPemeriksaanPenunjangIGD",
+    "url": "/PermintaanPemeriksaanPenunjangIGD/:index/:idEMR",
+    "templateurl": "module/EMR/PermintaanPemeriksaanPenunjangIGD.html",
+    "controller": "PermintaanPemeriksaanPenunjangIGDCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.CheckListKeselamatanPasienDiKamarRequestIGD",
+    "url": "/CheckListKeselamatanPasienDiKamarRequestIGD/:index/:idEMR",
+    "templateurl": "module/EMR/CheckListKeselamatanPasienDiKamarRequestIGD.html",
+    "controller": "CheckListKeselamatanPasienDiKamarRequestIGDCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.CheckListKeselamatanPasienDiKamarRequestRanap",
+    "url": "/CheckListKeselamatanPasienDiKamarRequestRanap/:index/:idEMR",
+    "templateurl": "module/EMR/CheckListKeselamatanPasienDiKamarRequestRanap.html",
+    "controller": "CheckListKeselamatanPasienDiKamarRequestRanapCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
   }
+
 
   
 ] 
