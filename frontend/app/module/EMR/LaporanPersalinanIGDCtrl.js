@@ -353,7 +353,7 @@ define(['initialize'], function (initialize) {
                     // });
 
                     medifirstService.postLogging('EMR', 'norec emrpasien_t', e.data.data.norec,
-                        'Persetujuan Rawat Inap Di HCU/ICU/CVCU/NICU/CIPU ' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
+                        'Laporan Persalinan IGD ' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
                         + $scope.cc.noregistrasi).then(function (res) {
                         })
 

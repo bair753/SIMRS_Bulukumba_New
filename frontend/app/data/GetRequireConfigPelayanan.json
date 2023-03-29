@@ -3317,6 +3317,22 @@
         {
             "nameDep": "LaporanPersalinanRanapCtrl",
             "urlDep": "module/EMR/LaporanPersalinanRanapCtrl"
+        },
+        {
+            "nameDep": "PermintaanKonselingGiziIGDCtrl",
+            "urlDep": "module/EMR/PermintaanKonselingGiziIGDCtrl"
+        },
+        {
+            "nameDep": "PermintaanKonselingGiziRanapCtrl",
+            "urlDep": "module/EMR/PermintaanKonselingGiziRanapCtrl"
+        },
+        {
+            "nameDep": "AsesmenPraBedahIGDCtrl",
+            "urlDep": "module/EMR/AsesmenPraBedahIGDCtrl"
+        },
+        {
+            "nameDep": "AsesmenPraBedahRanapCtrl",
+            "urlDep": "module/EMR/AsesmenPraBedahRanapCtrl"
         }
         
     ]

@@ -18525,6 +18525,98 @@
         "define": "RekamMedisCtrl"
       }
     ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.PermintaanKonselingGiziIGD",
+    "url": "/PermintaanKonselingGiziIGD/:index/:idEMR",
+    "templateurl": "module/EMR/PermintaanKonselingGiziIGD.html",
+    "controller": "PermintaanKonselingGiziIGDCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.PermintaanKonselingGiziRanap",
+    "url": "/PermintaanKonselingGiziRanap/:index/:idEMR",
+    "templateurl": "module/EMR/PermintaanKonselingGiziRanap.html",
+    "controller": "PermintaanKonselingGiziRanapCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.AsesmenPraBedahIGD",
+    "url": "/AsesmenPraBedahIGD/:index/:idEMR",
+    "templateurl": "module/EMR/AsesmenPraBedahIGD.html",
+    "controller": "AsesmenPraBedahIGDCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.AsesmenPraBedahRanap",
+    "url": "/AsesmenPraBedahRanap/:index/:idEMR",
+    "templateurl": "module/EMR/AsesmenPraBedahRanap.html",
+    "controller": "AsesmenPraBedahRanapCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
   }
 
   
