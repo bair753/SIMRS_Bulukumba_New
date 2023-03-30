@@ -1789,6 +1789,7 @@ class RawatJalanController extends ApiController
                 } else {
                     // update data monitoring task id jika status kirim true
                     if ($request['statuskirim']) {
+                        $monitoring->waktu = $request['waktu'];
                         $monitoring->statuskirim = $request['statuskirim'];
                         $monitoring->save();
                     }
@@ -1996,6 +1997,72 @@ class RawatJalanController extends ApiController
                 'as' => 'ea@epic',
             );
         }
+        return $this->setStatusCode($result['status'])->respond($result, $transMessage);
+    }
+    public function getComboAntrol(Request $request){
+        $kdProfile = $this->getDataKdProfile($request);
+        $idProfile = (int) $kdProfile;
+       
+        $deptJalan = explode (',',$this->settingDataFixed('kdDepartemenRawatJalanFix',$idProfile));
+        $kdDepartemenRawatJalan = [];
+        foreach ($deptJalan as $item){
+            $kdDepartemenRawatJalan []=  (int)$item;
+        }
+        $ruanganRajal = \DB::table('ruangan_m as ru')
+            ->where('ru.kdprofile',$idProfile)
+            ->where('statusenabled',true)
+            ->wherein('ru.objectdepartemenfk', $kdDepartemenRawatJalan)
+            ->orderBy('ru.namaruangan')
+            ->get();
+
+    
+
+        $dataKelompok = \DB::table('kelompokpasien_m as ru')
+           ->where('ru.statusenabled', true)
+           ->orderBy('ru.kelompokpasien')
+           ->get();
+
+        $result = array(
+            'kelompokpasien' => $dataKelompok,
+            'ruanganRajal' => $ruanganRajal,
+            'message' => 'as@epic',
+        );
+        return $this->respond($result);
+    }
+    public function disabledMonitoringTaksId(Request $request){
+        $kdProfile = $this->getDataKdProfile($request);
+      
+        DB::beginTransaction();
+        try {
+
+          
+            $monitoring = MonitoringTaksId::where('noregistrasifk', $request['noregistrasifk'])
+            ->where('kdprofile', $kdProfile)
+            ->update(['statusenabled'=> false]);
+
+            $transStatus = true;
+            $transMessage = "Simpan Berhasil";
+        } catch (\Exception $e) {
+            $transStatus = false;
+            $transMessage = "Simpan Gagal";
+        }
+
+        if ($transStatus) {
+            DB::commit();
+            $result = array(
+                "status" => 201,
+                "message" => $transMessage,
+                "as" => 'hs@epic'
+            );
+        } else {
+            DB::rollBack();
+            $result = array(
+                "status" => 400,
+                "message" => $transMessage,
+                "as" => 'hs@epic'
+            );
+        }
+
         return $this->setStatusCode($result['status'])->respond($result, $transMessage);
     }
 }
