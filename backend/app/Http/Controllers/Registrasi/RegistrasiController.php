@@ -684,6 +684,8 @@ class RegistrasiController extends ApiController
                 'pd.objectkelompokpasienlastfk','kps.kelompokpasien','pd.objectrekananfk','rk.namarekanan',
                 'jpl.kodeinternal as objectjenispelayananfk','jpl.jenispelayanan','pd.objectpegawaifk','pg.namalengkap as dokter','ru.objectdepartemenfk',
                 'tt.reportdisplay',
+                'pg.kddokterbpjs',
+                'ru.noruangan as kdruanganbpjs',
                 DB::raw('case when ru.objectdepartemenfk in (16,35,17) then \'true\'
                 when ru.objectdepartemenfk =45 then \'edelweis\' else \'false\' end as israwatinap'))
             ->where('pd.norec', $request['norecPD'])
