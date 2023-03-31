@@ -106,8 +106,12 @@
                     <div
                         style="display:flex;justify-content:space-between;align-content:center;align-items:center;padding:.5rem;">
                         <figure style="width:60px;margin:0 auto;">
-                            <img src="{{ asset('img/logo_only.png') }}"
-                                alt="" style="width:100%;height:100%;object-fit:contain">
+                            @if(stripos(\Request::url(), 'localhost') !== FALSE)
+                                <img src="{{ asset('img/logo_only.png') }}" alt="" style="width: 60px;">
+                            @else
+                                <img src="{{ asset('service/img/logo_only.png') }}" alt="" style="width: 60px;">
+                            @endif
+                                
                         </figure>
                         <div class="detail">
                             <strong style="font-size: 7pt">{!! $res['profile']->namalengkap !!}</strong> <br>
@@ -152,7 +156,7 @@
                 <td style="border:none" colspan='3'>Pukul : @{{ item.obj[422202] | toDate | date:'HH:mm' }}</td>
             </tr>
             <tr>
-                <td width='25px' height="60px" colspan='2' valign="top">Keluhan Saat ini</td>
+                <td width='25px' colspan='2' valign="top">Keluhan Saat ini</td>
                 <td colspan="8">@{{ item.obj['keluhan_saat_ini'] }}</td>
             </tr>
             <tr style="border-bottom:1px solid #000">
@@ -257,7 +261,7 @@
                     Menggunakan metode : @{{ item.obj[422256] ? item.obj[422256] : '.......' }}</td>
             </tr>
             <tr style='border:1px solid #000;height:0px'>
-                <td colspan='2' height="50px" valign="top">Pengkajian Fungsional</td>
+                <td colspan='2'  valign="top">Pengkajian Fungsional</td>
                 <td colspan='8'>@{{ item.obj['pengkajian_fungsional'] }}</td>
             </tr>
             <tr style='border:1px solid #000'>
@@ -274,11 +278,11 @@
                 <td colspan='2' valign="top">Diagnosis Banding</td>
                 <td colspan='8'>@{{ item.obj['diagnosis_banding'] }}</td>
             </tr>
-            <tr style="height:50px">
+            <tr>
                 <td rowspan="2" colspan='2' valign="top">Rencana Asuhan</td>
                 <td colspan='8' valign="top">Anjuran Pemeriksaan Penunjang: @{{ item.obj['anjuran_pemeriksaan_penunjang'] }}</td>
             </tr>
-            <tr style="height:50px">
+            <tr>
                 <td colspan=8 valign="top">Terapi Tindakan: @{{ item.obj['terapi_tindakan'] }}</td>
             </tr>
             <tr style='border:1px solid #000;'>
@@ -299,7 +303,7 @@
                 <td colspan=5 valign="top">
                     Bulukumba, @{{item.obj[422271] | toDate | date:'dd MMMM yyyy'}} Pukul : @{{item.obj[422271] | toDate | date:'HH:mm'}}.WITA <br>Dokter Penanggung Jawab Pelayanan : @{{ item.obj[422272] }}
                 </td>
-                <td colspan=5 valign="top">Tanda Tangan</td>
+                <td colspan=5 valign="top">Tanda Tangan<div id="qrcodeDPJP" style="text-align: center"></div></td>
             </tr>
         </table>
     </div>
@@ -480,6 +484,13 @@
         $scope.item.obj['terapi_tindakan'] = terapi_tindakan;
         $scope.item.obj['konsul'] = konsulll;
         $scope.item.obj['perencanaan_pulang'] = perencanaan_pulang;
+
+        var dpjp = $scope.item.obj[422272];
+        jQuery('#qrcodeDPJP').qrcode({
+            width	: 100,
+			height	: 100,
+            text	: "Tanda Tangan Digital Oleh " + dpjp
+        });	
     })
 
     angular.filter('toDate', function() {
@@ -487,8 +498,8 @@
         return new Date(items);
         };
     });
-    // $(document).ready(function () {
-    //     window.print();
-    // });
+    $(document).ready(function () {
+        window.print();
+    });
 </script>
 </html>
