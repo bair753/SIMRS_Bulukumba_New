@@ -545,13 +545,13 @@ define(['initialize'], function (initialize) {
                     }
 
                 }
-                //  if( $scope.cc.norec_emr !='-' && pegawaiInputDetail !='' && pegawaiInputDetail !=null){
-                //     if(pegawaiInputDetail != medifirstService.getPegawaiLogin().id){
-                //         $scope.allDisabled =true
-                //         // toastr.warning('Hanya Bisa melihat data','Peringatan')
-                //         // return
-                //     }
-                // }
+                 if( $scope.cc.norec_emr !='-' && pegawaiInputDetail !='' && pegawaiInputDetail !=null){
+                    if(pegawaiInputDetail != medifirstService.getPegawaiLogin().id){
+                        $scope.allDisabled =true
+                        toastr.warning('Hanya Bisa melihat data','Peringatan')
+                        return
+                    }
+                }
             })
 
             $scope.kembali = function () {
