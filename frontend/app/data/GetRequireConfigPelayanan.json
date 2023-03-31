@@ -3345,6 +3345,14 @@
         {
             "nameDep": "CheckListKeselamatanPasienDiKamarRequestRanapCtrl",
             "urlDep": "module/EMR/CheckListKeselamatanPasienDiKamarRequestRanapCtrl"
+        },
+        {
+            "nameDep": "LaporanOperasiIGDCtrl",
+            "urlDep": "module/EMR/LaporanOperasiIGDCtrl"
+        },
+        {
+            "nameDep": "LaporanOperasiRanapCtrl",
+            "urlDep": "module/EMR/LaporanOperasiRanapCtrl"
         }
         
     ]
