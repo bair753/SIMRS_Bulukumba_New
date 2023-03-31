@@ -487,12 +487,12 @@ define(['initialize'], function (initialize) {
                 $scope.item.obj[421096] = $scope.now
                 dataLoad = dat.data.data
 
-                medifirstService.get("emr/get-vital-sign?noregistrasi=" + $scope.cc.noregistrasi + "&objectidawal=4241&objectidakhir=4246&idemr=147", true).then(function (datas) {
-                    $scope.item.obj[420943] = datas.data.data[1].value; // Tekanan Darah
-                    $scope.item.obj[420944] = datas.data.data[8].value; // Nadi
-                    $scope.item.obj[420945] = datas.data.data[6].value; // Suhu
-                    $scope.item.obj[420946] = datas.data.data[11].value; // Napas
-                })
+                // medifirstService.get("emr/get-vital-sign?noregistrasi=" + $scope.cc.noregistrasi + "&objectidawal=4241&objectidakhir=4246&idemr=147", true).then(function (datas) {
+                //     $scope.item.obj[420943] = datas.data.data[1].value; 
+                //     $scope.item.obj[420944] = datas.data.data[8].value; 
+                //     $scope.item.obj[420945] = datas.data.data[6].value; 
+                //     $scope.item.obj[420946] = datas.data.data[11].value; 
+                // })
 
                 var noregistrasifk = $state.params.noRec;
                 var status = "t";
