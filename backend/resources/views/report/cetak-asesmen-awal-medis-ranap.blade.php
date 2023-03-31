@@ -106,7 +106,7 @@
                     <div
                         style="display:flex;justify-content:space-between;align-content:center;align-items:center;padding:.5rem;">
                         <figure style="width:60px;margin:0 auto;">
-                            <img src="https://assets.pikiran-rakyat.com/crop/0x0:0x0/x/photo/2022/04/12/266343779.png"
+                            <img src="{{ asset('img/logo_only.png') }}"
                                 alt="" style="width:100%;height:100%;object-fit:contain">
                         </figure>
                         <div class="detail">
@@ -466,9 +466,8 @@
         var diagnosis_banding = $scope.item.obj[422262].replace(/(?:\r\n|\r|\n)/g, ', ');
         var anjuran_pemeriksaan_penunjang = $scope.item.obj[422263].replace(/(?:\r\n|\r|\n)/g, ', ');
         var terapi_tindakan = $scope.item.obj[422265].replace(/(?:\r\n|\r|\n)/g, ', ');
-        var konsul = $scope.item.obj[422266].replace(/(?:\r\n|\r|\n)/g, ', ');
+        var konsulll = $scope.item.obj[422266].replace(/(?:\r\n|\r|\n)/g, ', ');
         var perencanaan_pulang = $scope.item.obj[422270].replace(/(?:\r\n|\r|\n)/g, ', ');
-        console.log('422209' in $scope.item.obj);
 
         $scope.item.obj['keluhan_saat_ini'] = keluhan_saat_ini;
         $scope.item.obj['general'] = general;
@@ -479,7 +478,7 @@
         $scope.item.obj['diagnosis_banding'] = diagnosis_banding;
         $scope.item.obj['anjuran_pemeriksaan_penunjang'] = anjuran_pemeriksaan_penunjang;
         $scope.item.obj['terapi_tindakan'] = terapi_tindakan;
-        $scope.item.obj['konsul'] = konsul;
+        $scope.item.obj['konsul'] = konsulll;
         $scope.item.obj['perencanaan_pulang'] = perencanaan_pulang;
     })
 
@@ -488,8 +487,8 @@
         return new Date(items);
         };
     });
-    $(document).ready(function () {
-        window.print();
-    });
+    // $(document).ready(function () {
+    //     window.print();
+    // });
 </script>
 </html>
