@@ -95,7 +95,11 @@
             <tr>
                 <td rowspan="4" colspan="2">
                     <figure style="width:80px;margin:0 auto;">
-                        <img src="{{ asset('img/logo_only.png') }}" alt="" style="width:100%;height:100%;object-fit:contain">
+                        @if(stripos(\Request::url(), 'localhost') !== FALSE)
+                                <img src="{{ asset('img/logo_only.png') }}" alt="" style="width: 60px;">
+                            @else
+                                <img src="{{ asset('service/img/logo_only.png') }}" alt="" style="width: 60px;">
+                            @endif
                     </figure>
                 </td>
                 <td rowspan="4" colspan="4" style="text-align:center;width:38%">
