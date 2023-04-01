@@ -58,7 +58,7 @@
                     </div>
                     <div class="grid_12">
                         <input style="width: 80%;" kendo-combo-box k-ng-model="item.obj[423800]" k-data-text-field="'text'"
-                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listRuangan" />
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listRuangan" ng-disabled="item.obj[423800]" />
                     </div>
                 </div>
                 <div class="grid_4" style="margin-top: 10px;">
@@ -66,7 +66,7 @@
                         <label c-label item="item">Tanggal Masuk</label>
                     </div>
                     <div class="grid_12">
-                        <input style="width: 80%" k-ng-model="item.obj[423801]" kendo-datetimepicker placeholer="YYYY:MM:DD HH:MM" k-format="'yyyy-MM-dd HH:mm'" />
+                        <input style="width: 80%" k-ng-model="item.obj[423801]" kendo-datetimepicker placeholer="YYYY:MM:DD HH:MM" k-format="'yyyy-MM-dd HH:mm'" ng-disabled="item.obj[423801]" />
                     </div>
                 </div>
                 <div class="grid_4" style="margin-top: 10px;">
@@ -74,7 +74,7 @@
                         <label c-label item="item">Tanggal Keluar</label>
                     </div>
                     <div class="grid_12">
-                        <input style="width: 80%" k-ng-model="item.obj[423802]" kendo-datetimepicker placeholer="YYYY:MM:DD HH:MM" k-format="'yyyy-MM-dd HH:mm'" />
+                        <input style="width: 80%" k-ng-model="item.obj[423802]" kendo-datetimepicker placeholer="YYYY:MM:DD HH:MM" k-format="'yyyy-MM-dd HH:mm'" ng-disabled="item.obj[423802]" />
                     </div>
                 </div>
             </fieldset>
@@ -94,7 +94,7 @@
                                 </div>
                                 <div class="grid_12 parentKeteranganFieldTambahan" style="margin-top: -10px;">
                                     <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text" placeholder="{{jawab.caption}}"
-                                        ng-value="{{jawab.value}}">
+                                        ng-value="{{jawab.value}}" ng-disabled="item.obj[jawab.id]">
                                 </div>
                             </div>
                             <div class="grid_8" ng-switch-when="textarea" style="margin-top: 10px;">
@@ -103,7 +103,7 @@
                                 </div>
                                 <div class="grid_12">
                                     <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
-                                        ng-model="item.obj[jawab.id]"></textarea>
+                                        ng-model="item.obj[jawab.id]" ng-disabled="item.obj[jawab.id]"></textarea>
                                 </div>
                             </div>
                             <div class="grid_8" ng-switch-when="combobox" style="margin-top: 10px;">
@@ -112,7 +112,7 @@
                                 </div>
                                 <div class="grid_12">
                                     <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[jawab.id]" k-data-text-field="'text'"
-                                        k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="{{ jawab.dataList }}" />
+                                        k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="{{ jawab.dataList }}" ng-disabled="item.obj[jawab.id]" />
                                 </div>
                             </div>
                         </div>
@@ -130,7 +130,7 @@
                             <label c-label item="item">Bulukumba</label>
                         </div>
                         <div class="grid_12" style="margin-top: 5px;">
-                            <input style="width: 100%" k-ng-model="item.obj[423816]" kendo-datetimepicker placeholer="YYYY:MM:DD HH:MM" k-format="'yyyy-MM-dd HH:mm'" />
+                            <input style="width: 100%" k-ng-model="item.obj[423816]" kendo-datetimepicker placeholer="YYYY:MM:DD HH:MM" k-format="'yyyy-MM-dd HH:mm'" ng-disabled="item.obj[423816]" />
                         </div>
                     </div>
                 </div>
@@ -140,7 +140,7 @@
                             <label c-label item="item">Pasien</label>
                         </div>
                         <div class="grid_12" style="margin-top: 5px;">
-                            <input class="k-textbox" ng-model="item.obj[423817]" type="text">
+                            <input class="k-textbox" ng-model="item.obj[423817]" type="text" ng-disabled="item.obj[423817]">
                         </div>
                     </div>
                     <div class="grid_4">
@@ -148,7 +148,7 @@
                             <label c-label item="item">Keluarga Pasien</label>
                         </div>
                         <div class="grid_12" style="margin-top: 5px;">
-                            <input class="k-textbox" ng-model="item.obj[423818]" type="text">
+                            <input class="k-textbox" ng-model="item.obj[423818]" type="text" ng-disabled="item.obj[423818]">
                         </div>
                     </div>
                     <div class="grid_4">
@@ -157,7 +157,7 @@
                         </div>
                         <div class="grid_12">
                             <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[423819]" k-data-text-field="'text'"
-                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" ng-disabled="item.obj[423819]"/>
                         </div>
                     </div>
                 </div>

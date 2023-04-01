@@ -13,7 +13,6 @@ define(['initialize'], function (initialize) {
             $scope.cc = {};
             var nomorEMR = '-';
             $scope.cc.emrfk = 290070;
-            $scope.now = new Date();
             var dataLoad = []
             $scope.listData1 = []
             $scope.listData2 = []
@@ -30,8 +29,7 @@ define(['initialize'], function (initialize) {
             $scope.listUrinOutput = []
             $scope.loading = true
 
-            $scope.listTanggal = []
-            $scope.listJam = []
+
             medifirstService.getPart('emr/get-datacombo-part-dokter', true, true, 20).then(function (data) {
                 $scope.listDokter = data
             })
@@ -54,404 +52,6 @@ define(['initialize'], function (initialize) {
                 //         if (element.namaexternal == 'kemampuanbekerja')
                 //             $scope.listData3.push({ id: element.id, skor: element.reportdisplay, nama: element.caption })
                 //     }
-                var datas = e.data.kolom4
-                var detail = []
-                var arrayGejala = []
-                var arrayGejalaNeg = []
-                var arraySuhu = []
-                var arraySkala = []
-                var arrayTekananDaarah = []
-                var arrayLaju = []
-                var arrayKesadaran = []
-                var sama = false
-                for (let i = 0; i < datas.length; i++) {
-                    const element = datas[i];
-                    sama = false
-                    if (element.kodeexternal == 'tanggal') {
-                        $scope.listTanggal.push({ id: element.id })
-                    }
-                    if (element.kodeexternal == 'jam') {
-                        $scope.listJam.push({ id: element.id })
-                    }
-                    if (element.kodeexternal == 'skor') {
-                        $scope.listSkor.push({ id: element.id })
-                    }
-                    if (element.kodeexternal == 'nama') {
-                        $scope.listNama.push({ id: element.id })
-                    }
-                    if (element.kodeexternal == 'paraf') {
-                        $scope.listParaf.push({ id: element.id })
-                    }
-                    if (element.kodeexternal == 'gds') {
-                        $scope.listGDS.push({ id: element.id })
-                    }
-                    if (element.kodeexternal == 'skornyeri') {
-                        $scope.listSkorNyeri.push({ id: element.id })
-                    }
-                    if (element.kodeexternal == 'urinoutput') {
-                        $scope.listUrinOutput.push({ id: element.id })
-                    }
-                    // ARRAY GEJALA
-                    if (element.kodeexternal == 'pernapasan') {
-                        for (let z = 0; z < arrayGejala.length; z++) {
-                            const element2 = arrayGejala[z];
-                            if (element2.namaexternal == element.namaexternal) {
-                                detail.push(element)
-                                element2.details = detail
-                                sama = true
-                            }
-                        }
-                        if (sama == false) {
-                            var datax = {
-                                caption: element.caption,
-                                cbotable: element.cbotable,
-                                child: [],
-                                emrfk: element.emrfk,
-                                headfk: element.headfk,
-                                id: element.id,
-                                kdprofile: element.kdprofile,
-                                kodeexternal: element.kodeexternal,
-                                namaemr: element.namaemr,
-                                namaexternal: element.namaexternal,
-                                nourut: element.nourut,
-                                reportdisplay: element.reportdisplay,
-                                satuan: element.satuan,
-                                statusenabled: element.statusenabled,
-                                style: element.style,
-                                type: element.type,
-
-                            }
-                            arrayGejala.push(datax)
-                        }
-                    }
-                    //END ARRAY GEJALA
-
-                    // ARRAY GEJALA 
-                    if (element.kodeexternal == 'saturasi') {
-                        for (let z = 0; z < arrayGejalaNeg.length; z++) {
-                            const element2 = arrayGejalaNeg[z];
-                            if (element2.namaexternal == element.namaexternal) {
-                                detail.push(element)
-                                element2.details = detail
-                                sama = true
-                            }
-                        }
-                        if (sama == false) {
-                            var datax = {
-                                caption: element.caption,
-                                cbotable: element.cbotable,
-                                child: [],
-                                emrfk: element.emrfk,
-                                headfk: element.headfk,
-                                id: element.id,
-                                kdprofile: element.kdprofile,
-                                kodeexternal: element.kodeexternal,
-                                namaemr: element.namaemr,
-                                namaexternal: element.namaexternal,
-                                nourut: element.nourut,
-                                reportdisplay: element.reportdisplay,
-                                satuan: element.satuan,
-                                statusenabled: element.statusenabled,
-                                style: element.style,
-                                type: element.type,
-
-                            }
-                            arrayGejalaNeg.push(datax)
-                        }
-                    }
-                    //END ARRAY GEJALA
-
-                    // ARRAY suhu 
-                    if (element.kodeexternal == 'suhu') {
-                        for (let z = 0; z < arraySuhu.length; z++) {
-                            const element2 = arraySuhu[z];
-                            if (element2.namaexternal == element.namaexternal) {
-                                detail.push(element)
-                                element2.details = detail
-                                sama = true
-                            }
-                        }
-                        if (sama == false) {
-                            var datax = {
-                                caption: element.caption,
-                                cbotable: element.cbotable,
-                                child: [],
-                                emrfk: element.emrfk,
-                                headfk: element.headfk,
-                                id: element.id,
-                                kdprofile: element.kdprofile,
-                                kodeexternal: element.kodeexternal,
-                                namaemr: element.namaemr,
-                                namaexternal: element.namaexternal,
-                                nourut: element.nourut,
-                                reportdisplay: element.reportdisplay,
-                                satuan: element.satuan,
-                                statusenabled: element.statusenabled,
-                                style: element.style,
-                                type: element.type,
-
-                            }
-                            arraySuhu.push(datax)
-                        }
-                    }
-                    //END ARRAY suhu
-
-                    // ARRAY GEJALA 
-                    if (element.kodeexternal == 'urine') {
-                        for (let z = 0; z < arraySkala.length; z++) {
-                            const element2 = arraySkala[z];
-                            if (element2.namaexternal == element.namaexternal) {
-                                detail.push(element)
-                                element2.details = detail
-                                sama = true
-                            }
-                        }
-                        if (sama == false) {
-                            var datax = {
-                                caption: element.caption,
-                                cbotable: element.cbotable,
-                                child: [],
-                                emrfk: element.emrfk,
-                                headfk: element.headfk,
-                                id: element.id,
-                                kdprofile: element.kdprofile,
-                                kodeexternal: element.kodeexternal,
-                                namaemr: element.namaemr,
-                                namaexternal: element.namaexternal,
-                                nourut: element.nourut,
-                                reportdisplay: element.reportdisplay,
-                                satuan: element.satuan,
-                                statusenabled: element.statusenabled,
-                                style: element.style,
-                                type: element.type,
-
-                            }
-                            arraySkala.push(datax)
-                        }
-                    }
-                    //END ARRAY GEJALA
-
-                    // ARRAY tekanandarah 
-                    if (element.kodeexternal == 'tekanansistolik') {
-                        for (let z = 0; z < arrayTekananDaarah.length; z++) {
-                            const element2 = arrayTekananDaarah[z];
-                            if (element2.namaexternal == element.namaexternal) {
-                                detail.push(element)
-                                element2.details = detail
-                                sama = true
-                            }
-                        }
-                        if (sama == false) {
-                            var datax = {
-                                caption: element.caption,
-                                cbotable: element.cbotable,
-                                child: [],
-                                emrfk: element.emrfk,
-                                headfk: element.headfk,
-                                id: element.id,
-                                kdprofile: element.kdprofile,
-                                kodeexternal: element.kodeexternal,
-                                namaemr: element.namaemr,
-                                namaexternal: element.namaexternal,
-                                nourut: element.nourut,
-                                reportdisplay: element.reportdisplay,
-                                satuan: element.satuan,
-                                statusenabled: element.statusenabled,
-                                style: element.style,
-                                type: element.type,
-
-                            }
-                            arrayTekananDaarah.push(datax)
-                        }
-                    }
-                    //END ARRAY tekanandarah
-
-                    // ARRAY laju 
-                    if (element.kodeexternal == 'nadi') {
-                        for (let z = 0; z < arrayLaju.length; z++) {
-                            const element2 = arrayLaju[z];
-                            if (element2.namaexternal == element.namaexternal) {
-                                detail.push(element)
-                                element2.details = detail
-                                sama = true
-                            }
-                        }
-                        if (sama == false) {
-                            var datax = {
-                                caption: element.caption,
-                                cbotable: element.cbotable,
-                                child: [],
-                                emrfk: element.emrfk,
-                                headfk: element.headfk,
-                                id: element.id,
-                                kdprofile: element.kdprofile,
-                                kodeexternal: element.kodeexternal,
-                                namaemr: element.namaemr,
-                                namaexternal: element.namaexternal,
-                                nourut: element.nourut,
-                                reportdisplay: element.reportdisplay,
-                                satuan: element.satuan,
-                                statusenabled: element.statusenabled,
-                                style: element.style,
-                                type: element.type,
-
-                            }
-                            arrayLaju.push(datax)
-                        }
-                    }
-                    //END ARRAY laju
-
-                    // ARRAY arrayKesadaran 
-                    if (element.kodeexternal == 'kesadaran') {
-                        for (let z = 0; z < arrayKesadaran.length; z++) {
-                            const element2 = arrayKesadaran[z];
-                            if (element2.namaexternal == element.namaexternal) {
-                                detail.push(element)
-                                element2.details = detail
-                                sama = true
-                            }
-                        }
-                        if (sama == false) {
-                            var datax = {
-                                caption: element.caption,
-                                cbotable: element.cbotable,
-                                child: [],
-                                emrfk: element.emrfk,
-                                headfk: element.headfk,
-                                id: element.id,
-                                kdprofile: element.kdprofile,
-                                kodeexternal: element.kodeexternal,
-                                namaemr: element.namaemr,
-                                namaexternal: element.namaexternal,
-                                nourut: element.nourut,
-                                reportdisplay: element.reportdisplay,
-                                satuan: element.satuan,
-                                statusenabled: element.statusenabled,
-                                style: element.style,
-                                type: element.type,
-
-                            }
-                            arrayKesadaran.push(datax)
-                        }
-                    }
-                    //END ARRAY 
-
-                    
-                }
-
-                // ARRAY GEJALA
-                var gejalaKosongKeun = []
-                for (let k = 0; k < arrayGejala.length; k++) {
-                    const element = arrayGejala[k];
-                    for (let l = 0; l < datas.length; l++) {
-                        const element2 = datas[l];
-                        if (element2.namaexternal == element.namaexternal) {
-                            gejalaKosongKeun.push(element2)
-                            element.details = gejalaKosongKeun
-                        } else {
-                            gejalaKosongKeun = []
-                        }
-                    }
-                }
-                $scope.listData1 = arrayGejala
-
-                // ARRAY GEJALA
-                var gejalaKosongKeun2 = []
-                for (let k = 0; k < arrayGejalaNeg.length; k++) {
-                    const element = arrayGejalaNeg[k];
-                    for (let l = 0; l < datas.length; l++) {
-                        const element2 = datas[l];
-                        if (element2.namaexternal == element.namaexternal) {
-                            gejalaKosongKeun2.push(element2)
-                            element.details = gejalaKosongKeun2
-                        } else {
-                            gejalaKosongKeun2 = []
-                        }
-                    }
-                }
-                $scope.listData2 = arrayGejalaNeg
-                //END ARRAY GEJALA
-
-                var gejalaKosongKeun7 = []
-                for (let k = 0; k < arraySuhu.length; k++) {
-                    const element = arraySuhu[k];
-                    for (let l = 0; l < datas.length; l++) {
-                        const element2 = datas[l];
-                        if (element2.namaexternal == element.namaexternal) {
-                            gejalaKosongKeun7.push(element2)
-                            element.details = gejalaKosongKeun7
-                        } else {
-                            gejalaKosongKeun7 = []
-                        }
-                    }
-                }
-                $scope.listData7 = arraySuhu
-
-                var gejalaKosongKeun3 = []
-                for (let k = 0; k < arraySkala.length; k++) {
-                    const element = arraySkala[k];
-                    for (let l = 0; l < datas.length; l++) {
-                        const element2 = datas[l];
-                        if (element2.namaexternal == element.namaexternal) {
-                            gejalaKosongKeun3.push(element2)
-                            element.details = gejalaKosongKeun3
-                        } else {
-                            gejalaKosongKeun3 = []
-                        }
-                    }
-                }
-                $scope.listData3 = arraySkala
-                //END ARRAY GEJALA
-
-                //END ARRAY GEJALA
-
-                var gejalaKosongKeun4 = []
-                for (let k = 0; k < arrayTekananDaarah.length; k++) {
-                    const element = arrayTekananDaarah[k];
-                    for (let l = 0; l < datas.length; l++) {
-                        const element2 = datas[l];
-                        if (element2.namaexternal == element.namaexternal) {
-                            gejalaKosongKeun4.push(element2)
-                            element.details = gejalaKosongKeun4
-                        } else {
-                            gejalaKosongKeun4 = []
-                        }
-                    }
-                }
-                $scope.listData4 = arrayTekananDaarah
-                //END ARRAY GEJALA
-
-                var gejalaKosongKeun5 = []
-                for (let k = 0; k < arrayLaju.length; k++) {
-                    const element = arrayLaju[k];
-                    for (let l = 0; l < datas.length; l++) {
-                        const element2 = datas[l];
-                        if (element2.namaexternal == element.namaexternal) {
-                            gejalaKosongKeun5.push(element2)
-                            element.details = gejalaKosongKeun5
-                        } else {
-                            gejalaKosongKeun5 = []
-                        }
-                    }
-                }
-                $scope.listData5 = arrayLaju
-
-                var gejalaKosongKeun6 = []
-                for (let k = 0; k < arrayKesadaran.length; k++) {
-                    const element = arrayKesadaran[k];
-                    for (let l = 0; l < datas.length; l++) {
-                        const element2 = datas[l];
-                        if (element2.namaexternal == element.namaexternal) {
-                            gejalaKosongKeun6.push(element2)
-                            element.details = gejalaKosongKeun6
-                        } else {
-                            gejalaKosongKeun6 = []
-                        }
-                    }
-                }
-                $scope.listData6 = arrayKesadaran
-
-
                 
             })
             var chekedd = false
@@ -466,6 +66,16 @@ define(['initialize'], function (initialize) {
                     $scope.item.obj2 = []
                     $scope.item.obj[17419]={ text: $scope.cc.dokterdpjp, value: $scope.cc.iddpjp }
                     $scope.item.obj[17421]={text: $scope.cc.namaruangan, value: $scope.cc.objectruanganfk}
+                    
+                    $scope.item.obj[31100811] = Number($scope.item.obj[31100797]) + 2;
+                    $scope.item.obj[31100812] = 4;
+                    $scope.item.obj[31100813] = 2;
+                    $scope.item.obj[31100814] = 4;
+                    $scope.item.obj[31100815] = 8;
+                    $scope.item.obj[31100816] = 2;
+                    $scope.item.obj[31100817] = 4;
+                    
+
                     dataLoad = dat.data.data
                     for (var i = 0; i <= dataLoad.length - 1; i++) {
                         if (parseFloat($scope.cc.emrfk) == dataLoad[i].emrfk && paramsIndex == dataLoad[i].index) {
@@ -571,159 +181,6 @@ define(['initialize'], function (initialize) {
             //     $scope.item.obj[206477] = {id:datas.id, text:datas.namadiagnosa}
             // })  
 
-
-            $scope.skor1 = 0
-            $scope.skor2 = 0
-            $scope.skor3 = 0
-            $scope.skor4 = 0
-            $scope.skor5 = 0
-            $scope.skor6 = 0
-            $scope.skor7 = 0
-            $scope.skor8 = 0
-            $scope.skor9 = 0
-            $scope.skor10 = 0
-            $scope.skor11 = 0
-            $scope.skor12 = 0
-            $scope.skor13 = 0
-            $scope.getSkor = function (stat) {
-
-                var arrobj = Object.keys($scope.item.obj)
-                var arrSave = []
-                for (var i = arrobj.length - 1; i >= 0; i--) {
-                    if (arrobj[i] == stat.id) {
-                        if ($scope.item.obj[parseFloat(arrobj[i])] == true) {
-                            if (stat.reportdisplay == null)
-                                break
-                            if (stat.satuan == 1)
-                                $scope.skor1 = $scope.skor1 + parseFloat(stat.reportdisplay)
-                            if (stat.satuan == 2)
-                                $scope.skor2 = $scope.skor2 + parseFloat(stat.reportdisplay)
-                            if (stat.satuan == 3)
-                                $scope.skor3 = $scope.skor3 + parseFloat(stat.reportdisplay)
-                            if (stat.satuan == 4)
-                                $scope.skor4 = $scope.skor4 + parseFloat(stat.reportdisplay)
-                            if (stat.satuan == 5)
-                                $scope.skor5 = $scope.skor5 + parseFloat(stat.reportdisplay)
-                            if (stat.satuan == 6)
-                                $scope.skor6 = $scope.skor6 + parseFloat(stat.reportdisplay)
-                            if (stat.satuan == 7)
-                                $scope.skor7 = $scope.skor7 + parseFloat(stat.reportdisplay)
-                            if (stat.satuan == 8)
-                                $scope.skor8 = $scope.skor8 + parseFloat(stat.reportdisplay)
-                            if (stat.satuan == 9)
-                                $scope.skor9 = $scope.skor9 + parseFloat(stat.reportdisplay)
-                            if (stat.satuan == 10)
-                                $scope.skor10 = $scope.skor10 + parseFloat(stat.reportdisplay)
-                            if (stat.satuan == 11)
-                                $scope.skor11 = $scope.skor11 + parseFloat(stat.reportdisplay)
-                            if (stat.satuan == 12)
-                                $scope.skor12 = $scope.skor12 + parseFloat(stat.reportdisplay)
-                            if (stat.satuan == 13)
-                                $scope.skor13 = $scope.skor13 + parseFloat(stat.reportdisplay)
-
-                            break
-                        } 
-
-                        else {
-                            if (stat.reportdisplay == null)
-                                break
-                            if (stat.satuan == 1)
-                                $scope.skor1 = $scope.skor1 - parseFloat(stat.reportdisplay)
-                            if (stat.satuan == 2)
-                                $scope.skor2 = $scope.skor2 - parseFloat(stat.reportdisplay)
-                            if (stat.satuan == 3)
-                                $scope.skor3 = $scope.skor3 - parseFloat(stat.reportdisplay)
-                            if (stat.satuan == 4)
-                                $scope.skor4 = $scope.skor4 - parseFloat(stat.reportdisplay)
-                            if (stat.satuan == 5)
-                                $scope.skor5 = $scope.skor5 - parseFloat(stat.reportdisplay)
-                            if (stat.satuan == 6)
-                                $scope.skor6 = $scope.skor6 - parseFloat(stat.reportdisplay)
-                            if (stat.satuan == 7)
-                                $scope.skor7 = $scope.skor7 - parseFloat(stat.reportdisplay)
-                            if (stat.satuan == 8)
-                                $scope.skor8 = $scope.skor8 - parseFloat(stat.reportdisplay)
-                            if (stat.satuan == 9)
-                                $scope.skor9 = $scope.skor9 - parseFloat(stat.reportdisplay)
-                            if (stat.satuan == 10)
-                                $scope.skor10 = $scope.skor10 - parseFloat(stat.reportdisplay)
-                            if (stat.satuan == 11)
-                                $scope.skor11 = $scope.skor11 - parseFloat(stat.reportdisplay)
-                            if (stat.satuan == 12)
-                                $scope.skor12 = $scope.skor12 - parseFloat(stat.reportdisplay)
-                            if (stat.satuan == 13)
-                                $scope.skor13 = $scope.skor13 - parseFloat(stat.reportdisplay)
-                        }
-                    }
-                }
-                // if $scope.skor1=0 
-                    
-                        // if($scope.skor1  != 0){
-                        //      $scope.item.obj[206437] = $scope.skor1
-                        // }
-                        // if($scope.skor2  != 0){
-                        //      $scope.item.obj[206438] = $scope.skor2
-                        // }
-                    
-                $scope.item.obj[17380] = $scope.skor1
-                $scope.item.obj[17381] = $scope.skor2
-                $scope.item.obj[17382] = $scope.skor3
-                $scope.item.obj[17383] = $scope.skor4
-                $scope.item.obj[17384] = $scope.skor5
-                $scope.item.obj[17385] = $scope.skor6
-                $scope.item.obj[17386] = $scope.skor7
-                $scope.item.obj[17387] = $scope.skor8
-                $scope.item.obj[17388] = $scope.skor9
-                $scope.item.obj[17389] = $scope.skor10
-                $scope.item.obj[17390] = $scope.skor11
-                $scope.item.obj[17391] = $scope.skor12
-                $scope.item.obj[17392] = $scope.skor13
-            }
-            $scope.getSkor2 = function (stat) {
-
-                var arrobj = Object.keys($scope.item.obj)
-                var arrSave = []
-                for (var i = arrobj.length - 1; i >= 0; i--) {
-                    if (arrobj[i] == stat.id) {
-                        if ($scope.item.obj[parseFloat(arrobj[i])] == true) {
-                            $scope.totalSkor2 = $scope.totalSkor2 + parseFloat(stat.descNilai)
-                            break
-                        } else {
-                            $scope.totalSkor2 = $scope.totalSkor2 - parseFloat(stat.descNilai)
-                            break
-                        }
-
-
-                    } else {
-
-                    }
-                }
-                $scope.item.obj[3152] = $scope.totalSkor + $scope.totalSkor2
-                setSkorAkhir($scope.item.obj[3152])
-            }
-            function setSkorAkhir(total) {
-
-                if (total < 7) {
-                    $scope.item.obj[3149] = true
-                    $scope.item.obj[3150] = false
-                    $scope.item.obj[3151] = false
-                }
-
-                if (total >= 7 && total <= 14) {
-                    $scope.item.obj[3149] = false
-                    $scope.item.obj[3150] = true
-                    $scope.item.obj[3151] = false
-                }
-
-                if (total > 14) {
-                    $scope.item.obj[3149] = false
-                    $scope.item.obj[3150] = false
-                    $scope.item.obj[3151] = true
-                }
-
-
-
-            }
             $scope.kembali = function () {
                 $rootScope.showRiwayat()
             }
@@ -733,6 +190,8 @@ define(['initialize'], function (initialize) {
                 var arrobj = Object.keys($scope.item.obj)
                 var arrSave = []
                 for (var i = arrobj.length - 1; i >= 0; i--) {
+                    if ($scope.item.obj[parseInt(arrobj[i])] instanceof Date)
+                        $scope.item.obj[parseInt(arrobj[i])] = moment($scope.item.obj[parseInt(arrobj[i])]).format('YYYY-MM-DD HH:mm')
                     arrSave.push({ id: arrobj[i], values: $scope.item.obj[parseInt(arrobj[i])] })
                 }
                 $scope.cc.jenisemr = 'asesmen'
@@ -747,7 +206,7 @@ define(['initialize'], function (initialize) {
                     //     nomorEMR : e.data.data.noemr 
                     // });
                     medifirstService.postLogging('EMR', 'norec emrpasien_t', e.data.data.norec,  
-                    'Skor Early Warning System Dewasa2 ' + ' dengan No EMR - ' +e.data.data.noemr +  ' pada No Registrasi ' 
+                    'Penilaian EWS ' + ' dengan No EMR - ' +e.data.data.noemr +  ' pada No Registrasi ' 
                     + $scope.cc.noregistrasi).then(function (res) {
                     })
 
@@ -760,4 +219,16 @@ define(['initialize'], function (initialize) {
 
         }
     ]);
+    initialize.directive('disableContents', function() {
+        return {
+            compile: function(tElem, tAttrs) {
+                var inputs = tElem.find('input');
+                var inputsArea = tElem.find('textarea');
+                inputs.attr('ng-disabled', tAttrs['disableContents']);
+                inputsArea.attr('ng-disabled', tAttrs['disableContents']);
+                for (var i = 0; i < inputs.length; i++) {
+                }
+            }
+        }
+    });
 });

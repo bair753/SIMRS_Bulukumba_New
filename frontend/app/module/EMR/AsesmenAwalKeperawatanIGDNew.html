@@ -42,7 +42,8 @@
     }
 </style>
 
-<div class="grid_12"  disable-contents="allDisabled" >
+<!-- <div class="grid_12"  disable-contents="allDisabled" > -->
+<div class="grid_12">  
     <div class="grid_12">
         <div class="panel panel-default container_12">
             <div class="panel-heading" c-translate>Asesmen Awal Keperawatan IGD</div>
@@ -1109,8 +1110,8 @@
                             <label c-label item="item">Perawat Penanggung Jawab Asuhan</label>
                         </div>
                         <div class="grid_12">
-                            <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[420862]" k-data-text-field="'text'"
-                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                            <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[420862]" ng-disabled="item.obj[420862]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai"/>
                         </div>
                     </div>
                     <div class="grid_4"></div>
