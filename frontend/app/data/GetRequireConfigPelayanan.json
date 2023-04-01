@@ -3353,6 +3353,10 @@
         {
             "nameDep": "LaporanOperasiRanapCtrl",
             "urlDep": "module/EMR/LaporanOperasiRanapCtrl"
+        },
+        {
+            "nameDep": "BayiSepsisCtrl",
+            "urlDep": "module/EMR/BayiSepsisCtrl"
         }
         
     ]
