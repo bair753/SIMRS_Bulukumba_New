@@ -13,7 +13,6 @@ define(['initialize'], function (initialize) {
             $scope.cc = {};
             var nomorEMR = '-';
             $scope.cc.emrfk = 290070;
-            $scope.now = new Date();
             var dataLoad = []
             $scope.listData1 = []
             $scope.listData2 = []
@@ -191,6 +190,8 @@ define(['initialize'], function (initialize) {
                 var arrobj = Object.keys($scope.item.obj)
                 var arrSave = []
                 for (var i = arrobj.length - 1; i >= 0; i--) {
+                    if ($scope.item.obj[parseInt(arrobj[i])] instanceof Date)
+                        $scope.item.obj[parseInt(arrobj[i])] = moment($scope.item.obj[parseInt(arrobj[i])]).format('YYYY-MM-DD HH:mm')
                     arrSave.push({ id: arrobj[i], values: $scope.item.obj[parseInt(arrobj[i])] })
                 }
                 $scope.cc.jenisemr = 'asesmen'
@@ -218,4 +219,16 @@ define(['initialize'], function (initialize) {
 
         }
     ]);
+    initialize.directive('disableContents', function() {
+        return {
+            compile: function(tElem, tAttrs) {
+                var inputs = tElem.find('input');
+                var inputsArea = tElem.find('textarea');
+                inputs.attr('ng-disabled', tAttrs['disableContents']);
+                inputsArea.attr('ng-disabled', tAttrs['disableContents']);
+                for (var i = 0; i < inputs.length; i++) {
+                }
+            }
+        }
+    });
 });

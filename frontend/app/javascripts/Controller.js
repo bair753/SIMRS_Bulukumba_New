@@ -203,6 +203,12 @@ define(['Service', 'Configuration'], function (Service, conf) {
             }
             return menu;
         }
+        $rootScope.disabled_ALL_BTN = function(bool) {
+            $(':button').prop('disabled', bool); // Disable all the buttons
+        };
+        setTimeout(() => {
+            $rootScope.disabled_ALL_BTN(false)
+        }, 3000);
         // $scope.$watch('autoLogin', function (e) {
         //     if (e !== true) return;
         //     var userName = "sdm";

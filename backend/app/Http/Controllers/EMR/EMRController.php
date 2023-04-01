@@ -10362,6 +10362,7 @@ class EMRController  extends ApiController
             ->where('emrdp.kdprofile', $kdProfile)
             ->where('emrdp.emrpasienfk', $request['noemr'])
             ->where('emrdp.emrfk', $request['emrfk'])
+            ->orderBy('emrdp.index')
             ->groupBy('emrdp.index');
 
 

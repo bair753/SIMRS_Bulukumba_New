@@ -3,8 +3,8 @@ define(['Configuration'], function (config) {
     var urlData = config.baseApiBackend;
 
     var apiService = angular.module('ApiService', []);
-    apiService.service('ApiService', ['$mdDialog', '$q', '$http',
-        function ($mdDialog, $q, $http) {
+    apiService.service('ApiService', ['$mdDialog', '$q', '$http', '$rootScope',
+        function ($mdDialog, $q, $http, $rootScope) {
             return {
 
                 get: function (obj) {
@@ -78,7 +78,9 @@ define(['Configuration'], function (config) {
                         },
                         data: data
                     }
+                    $rootScope.disabled_ALL_BTN(true) 
                     $http(req).then(function successCallback(response, a, b) {
+                        $rootScope.disabled_ALL_BTN(false) 
                         /*var msg = response.headers("x-message");
                         window.messageContainer.log(msg);*/
 
@@ -87,6 +89,7 @@ define(['Configuration'], function (config) {
 
                         deffer.resolve(response);
                     }, function errorCallback(response) {
+                        $rootScope.disabled_ALL_BTN(false) 
                         //var msgError = response.headers("x-message");
 
                         if (response.data != null) {
