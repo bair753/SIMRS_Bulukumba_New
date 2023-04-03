@@ -3357,6 +3357,10 @@
         {
             "nameDep": "BayiSepsisCtrl",
             "urlDep": "module/EMR/BayiSepsisCtrl"
+        },
+        {
+            "nameDep": "LembarPascaResusitasiCtrl",
+            "urlDep": "module/EMR/LembarPascaResusitasiCtrl"
         }
         
     ]

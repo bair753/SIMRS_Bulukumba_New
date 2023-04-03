@@ -1191,8 +1191,8 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 $scope.showRiwayatEMR = false
                 $scope.myVar = 1
                 
-                var tinggibadan = datas.data.data[3].value;
-                var beratbadan = datas.data.data[4].value;
+                var tinggibadan = "....";
+                var beratbadan = "....";
 
                 var local = JSON.parse(localStorage.getItem('profile'));
 
@@ -1204,15 +1204,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     toastr.error("PILIH NO ORDER !!")
                     return;
                 }else{
-                    var stt = 1
-                    
-                    if (confirm('Cetak Resep Dengan Qty Setengahnya ? ')) {
-                        // Save it!
-                        stt = "1/2";
-                    } else {
-                        // Do nothing!
-                        stt = 1
-                    }
+                    var stt = 1;
                     window.open(config.baseApiBackend + "report/cetak-resep-dokter?noorder=" + $scope.item.noorder + "&norec=" + $scope.item.norecresep 
                     + "&nocm=" + $scope.item.nocm + '&kodeprofile=' + profile + '&qtybagi=' + stt + '&alamatpasien=' + alamatpasien + '&tinggibadan=' + tinggibadan + '&beratbadan=' + beratbadan + '&user=' + user.namaLengkap);
                     // // window.open(config.baseApiBackend + "report/cetak-hasil-lab-histopatologi?norec=" + $scope.dataSelected.norec_pp + '&kdprofile=' + profile
