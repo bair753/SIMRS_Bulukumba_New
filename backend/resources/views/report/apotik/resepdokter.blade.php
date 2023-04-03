@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="{{ asset('css/report/tabel.css') }}">
         <script src="{{ asset('js/jquery.min.js') }}"></script>
         <script src="{{ asset('js/jquery.qr-code.js') }}"></script>
+        
         <!-- angular -->
         <script src="{{ asset('js/angular/angular.min.js') }}" type="text/javascript"></script>
         <script src="{{ asset('js/angular/angular-route.min.js') }}" type="text/javascript"></script>
@@ -23,8 +24,10 @@
         <link rel="stylesheet" href="{{ asset('service/css/report/paper.css') }}">
         <link rel="stylesheet" href="{{ asset('service/css/report/table.css') }}">
         <link rel="stylesheet" href="{{ asset('service/css/report/tabel.css') }}">
-        <script src="{{ asset('service/js/jquery.min.js') }}"></script>
-        <script src="{{ asset('service/js/jquery.qr-code.js') }}"></script>
+        {{-- <script src="{{ asset('service/js/jquery.min.js') }}"></script>
+        <script src="{{ asset('service/js/jquery.qr-code.js') }}"></script> --}}
+        <script src="{{ asset('js/jquery.min.js') }}"></script>
+        <script src="{{ asset('js/jquery.qr-code.js') }}"></script>
         <link href="{{ asset('service/css/style.css') }}" rel="stylesheet">
         <!-- angular -->
         <script src="{{ asset('service/js/angular/angular.min.js') }}" type="text/javascript"></script>
@@ -86,9 +89,11 @@
                                                                         <tr>
                                                                             <td width="105">
                                                                                 <p align="left">
-                                                                                    <img src="{{ asset('img/logo_t.png') }}"
-                                                                                        style="width: 80px"
-                                                                                        border="0" />
+                                                                                    @if(stripos(\Request::url(), 'localhost') !== FALSE)
+                                                                                        <img src="{{ asset('img/logo_only.png') }}" alt="" style="width: 80px;">
+                                                                                    @else
+                                                                                        <img src="{{ asset('service/img/logo_only.png') }}" alt="" style="width: 80px;">
+                                                                                    @endif
                                                                                 </p>
                                                                             </td>
                                                                             <td align="center">
@@ -152,11 +157,15 @@
                                                         <td height="5" width="16%">
                                                             <font size="1">Tanggal / Jam</font>
                                                         </td>
+                                                        {{-- <div id="qrcodeDPJP" style="text-align: center"></div> --}}
                                                         <td height="5">
                                                             <font size="1">:</font>
                                                         </td>
                                                         <td height="5">
                                                             <font size="1">{{ $raw->tglorder }} </font>
+                                                        </td>
+                                                        <td rowspan="7" height="5">
+                                                            <font size="1"><div id="qrcodeDPJP" style="text-align: center"></div> </font>
                                                         </td>
                                                     </tr>
 
@@ -616,6 +625,10 @@
                                         });
                                     </script> --}}
                                     <script>
+                                        var dpjp = "{{ $raw->namalengkap}}";
+                                    </script>
+                                    <script>
+                                        // var dpjp = $raw->namalengkap;
                                         const showcek = document.querySelector("#showcek");
                                         const textcek = document.querySelector("#textcek");
                                         showcek.addEventListener("change",(event)=>{
@@ -624,6 +637,11 @@
                                             textcek.style.display = "block";
                                             }
                                         });
+                                        jQuery('#qrcodeDPJP').qrcode({
+                                        width	: 70,
+                                            height	: 70,
+                                        text	: "Tanda Tangan Digital Oleh " + dpjp
+                                    });	
                                     </script>
 </body>
 
