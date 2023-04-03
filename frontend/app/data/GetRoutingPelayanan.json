@@ -18778,6 +18778,75 @@
         "define": "RekamMedisCtrl"
       }
     ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.VerifikasiPraOperasi",
+    "url": "/VerifikasiPraOperasi/:index/:idEMR",
+    "templateurl": "module/EMR/VerifikasiPraOperasi.html",
+    "controller": "VerifikasiPraOperasiCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.AsesmenLanjutanRisikoJatuhDewasaRanap",
+    "url": "/AsesmenLanjutanRisikoJatuhDewasaRanap",
+    "templateurl": "module/EMR/AsesmenLanjutanRisikoJatuhDewasaRanap.html",
+    "controller": "AsesmenLanjutanRisikoJatuhDewasaRanapCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.AsesmenPraInduksi",
+    "url": "/AsesmenPraInduksi/:index/:idEMR",
+    "templateurl": "module/EMR/AsesmenPraInduksi.html",
+    "controller": "AsesmenPraInduksiCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
   }
 
 
