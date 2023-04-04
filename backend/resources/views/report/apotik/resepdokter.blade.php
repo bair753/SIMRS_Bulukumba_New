@@ -24,10 +24,8 @@
         <link rel="stylesheet" href="{{ asset('service/css/report/paper.css') }}">
         <link rel="stylesheet" href="{{ asset('service/css/report/table.css') }}">
         <link rel="stylesheet" href="{{ asset('service/css/report/tabel.css') }}">
-        {{-- <script src="{{ asset('service/js/jquery.min.js') }}"></script>
-        <script src="{{ asset('service/js/jquery.qr-code.js') }}"></script> --}}
-        <script src="{{ asset('js/jquery.min.js') }}"></script>
-        <script src="{{ asset('js/jquery.qr-code.js') }}"></script>
+        <script src="{{ asset('service/js/jquery.min.js') }}"></script>
+        <script src="{{ asset('service/js/jquery.qr-code.js') }}"></script>
         <link href="{{ asset('service/css/style.css') }}" rel="stylesheet">
         <!-- angular -->
         <script src="{{ asset('service/js/angular/angular.min.js') }}" type="text/javascript"></script>
