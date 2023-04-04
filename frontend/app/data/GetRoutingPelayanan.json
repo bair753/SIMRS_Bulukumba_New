@@ -18847,6 +18847,52 @@
         "define": "RekamMedisCtrl"
       }
     ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.LaporanOperasiRajal",
+    "url": "/LaporanOperasiRajal/:index/:idEMR",
+    "templateurl": "module/EMR/LaporanOperasiRajal.html",
+    "controller": "LaporanOperasiRajalCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.PersetujuanOperasiRajal",
+    "url": "/PersetujuanOperasiRajal/:index/:idEMR",
+    "templateurl": "module/EMR/PersetujuanOperasiRajal.html",
+    "controller": "PersetujuanOperasiRajalCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
   }
 
 
