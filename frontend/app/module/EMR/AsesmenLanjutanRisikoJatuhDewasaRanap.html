@@ -1,0 +1,965 @@
+<style type="text/css">
+    fieldset {
+        border-radius: 5px;
+        border: 1px solid #228be6;
+    }
+
+    .k-slider-horizontal {
+        display: inline-block;
+        float: left;
+        width: 450px;
+
+        height: 26px;
+
+
+    }
+
+    .k-slider {
+
+        margin-left: 3%;
+        margin-right: 3%;
+        margin-top: 1%;
+        margin-bottom: 5%;
+        display: inline-block;
+    }
+
+    .activeBtn {
+        background-color: #10c4b2;
+        color: #ffffff;
+    }
+    table,
+    th,
+    td {
+        border: 1px solid #929191;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+    td {
+        padding: 5px;
+        text-align: left;
+    }
+    th {
+        padding: 5px;
+        text-align: center;
+    }
+    .clicks{
+        cursor: pointer;
+    }
+</style>
+
+ <!-- ng-class="{'my-disable':true}" -->
+<!-- <div class="grid_12"  disable-contents="allDisabled" id="form"> -->
+<div class="grid_12">
+    <div class="grid_12">
+        <div class="panel panel-default container_12">
+            <div class="panel-heading" c-translate>Asesmen Lanjutan Risiko Jatuh Pasien Dewasa Rawat Inap</div>
+        </div>
+        
+        <div class="grid_12" style="margin-top: 10px;">
+            <!-- Start Tanda Vital -->
+            <fieldset style="margin-top: 10px; ">
+                <legend><b>Skala MORSE</b></legend>
+                <div class="grid_12" style="margin-top: 20px">
+                    <table style="width:100%;color: #4c5356;">
+                        <tr>
+                            <th style="width: 150px;text-align: center;" rowspan="2">Faktor Risiko</th>
+                            <th style="text-align: center;" colspan="7">Tanggal/Jam</th>
+                        </tr>
+                        <tr ng-repeat="list in listTglTable1 | orderBy:'id'">
+                            <th style="text-align: center;width: 70px;">Skor</th>
+                            <td ng-repeat="jawab in list.detail | orderBy:'id'">
+                                <div ng-switch on="jawab.type">
+                                    <div class="grid_12" ng-switch-when="datetime">
+                                        <input style="width: 100%" k-ng-model="item.obj[jawab.id]" kendo-datetimepicker placeholer="yyyy-MM-dd HH:mm"
+                                            k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="7" style="text-align: start;">Riwayat Jatuh (1 tahun terakhir)</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label c-label item="item">Ya</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <label c-label item="item">25</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428106}}" ng-model="item.obj[428106]"
+                                    ng-click="getSkorParameter(25, 428106)">
+                                <label class="k-checkbox-label" for="item.obj{{428106}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428107}}" ng-model="item.obj[428107]"
+                                    ng-click="getSkorParameter2(25, 428107)">
+                                <label class="k-checkbox-label" for="item.obj{{428107}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428108}}" ng-model="item.obj[428108]"
+                                    ng-click="getSkorParameter3(25, 428108)">
+                                <label class="k-checkbox-label" for="item.obj{{428108}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428109}}" ng-model="item.obj[428109]"
+                                    ng-click="getSkorParameter4(25, 428109)">
+                                <label class="k-checkbox-label" for="item.obj{{428109}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428110}}" ng-model="item.obj[428110]"
+                                    ng-click="getSkorParameter5(25, 428110)">
+                                <label class="k-checkbox-label" for="item.obj{{428110}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428111}}" ng-model="item.obj[428111]"
+                                    ng-click="getSkorParameter6(25, 428111)">
+                                <label class="k-checkbox-label" for="item.obj{{428111}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label c-label item="item">Tidak</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <label c-label item="item">0</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428112}}" ng-model="item.obj[428112]"
+                                    ng-click="getSkorParameter(0, 428112)">
+                                <label class="k-checkbox-label" for="item.obj{{428112}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428113}}" ng-model="item.obj[428113]"
+                                    ng-click="getSkorParameter2(0, 428113)">
+                                <label class="k-checkbox-label" for="item.obj{{428113}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428114}}" ng-model="item.obj[428114]"
+                                    ng-click="getSkorParameter3(0, 428114)">
+                                <label class="k-checkbox-label" for="item.obj{{428114}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428115}}" ng-model="item.obj[428115]"
+                                    ng-click="getSkorParameter4(0, 428115)">
+                                <label class="k-checkbox-label" for="item.obj{{428115}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428116}}" ng-model="item.obj[428116]"
+                                    ng-click="getSkorParameter5(0, 428116)">
+                                <label class="k-checkbox-label" for="item.obj{{428116}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428117}}" ng-model="item.obj[428117]"
+                                    ng-click="getSkorParameter6(0, 428117)">
+                                <label class="k-checkbox-label" for="item.obj{{428117}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="7" style="text-align: start;">Diagnoa Sekunder (>= 2 Diagnosa Medis)</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label c-label item="item">Ya</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <label c-label item="item">15</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428118}}" ng-model="item.obj[428118]"
+                                    ng-click="getSkorParameter(15, 428118)">
+                                <label class="k-checkbox-label" for="item.obj{{428118}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428119}}" ng-model="item.obj[428119]"
+                                    ng-click="getSkorParameter2(15, 428119)">
+                                <label class="k-checkbox-label" for="item.obj{{428119}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428120}}" ng-model="item.obj[428120]"
+                                    ng-click="getSkorParameter3(15, 428120)">
+                                <label class="k-checkbox-label" for="item.obj{{428120}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428121}}" ng-model="item.obj[428121]"
+                                    ng-click="getSkorParameter4(15, 428121)">
+                                <label class="k-checkbox-label" for="item.obj{{428121}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428122}}" ng-model="item.obj[428122]"
+                                    ng-click="getSkorParameter5(15, 428122)">
+                                <label class="k-checkbox-label" for="item.obj{{428122}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428123}}" ng-model="item.obj[428123]"
+                                    ng-click="getSkorParameter6(15, 428123)">
+                                <label class="k-checkbox-label" for="item.obj{{428123}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label c-label item="item">Tidak</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <label c-label item="item">0</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428124}}" ng-model="item.obj[428124]"
+                                    ng-click="getSkorParameter(0, 428124)">
+                                <label class="k-checkbox-label" for="item.obj{{428124}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428125}}" ng-model="item.obj[428125]"
+                                    ng-click="getSkorParameter2(0, 428125)">
+                                <label class="k-checkbox-label" for="item.obj{{428125}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428126}}" ng-model="item.obj[428126]"
+                                    ng-click="getSkorParameter3(0, 428126)">
+                                <label class="k-checkbox-label" for="item.obj{{428126}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428127}}" ng-model="item.obj[428127]"
+                                    ng-click="getSkorParameter4(0, 428127)">
+                                <label class="k-checkbox-label" for="item.obj{{428127}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428128}}" ng-model="item.obj[428128]"
+                                    ng-click="getSkorParameter5(0, 428128)">
+                                <label class="k-checkbox-label" for="item.obj{{428128}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428129}}" ng-model="item.obj[428129]"
+                                    ng-click="getSkorParameter6(0, 428129)">
+                                <label class="k-checkbox-label" for="item.obj{{428129}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="7" style="text-align: start;">Alat Bantu</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label c-label item="item">Berpegangan pada perabot</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <label c-label item="item">30</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428130}}" ng-model="item.obj[428130]"
+                                    ng-click="getSkorParameter(30, 428130)">
+                                <label class="k-checkbox-label" for="item.obj{{428130}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428131}}" ng-model="item.obj[428131]"
+                                    ng-click="getSkorParameter2(30, 428131)">
+                                <label class="k-checkbox-label" for="item.obj{{428131}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428132}}" ng-model="item.obj[428132]"
+                                    ng-click="getSkorParameter3(30, 428132)">
+                                <label class="k-checkbox-label" for="item.obj{{428132}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428133}}" ng-model="item.obj[428133]"
+                                    ng-click="getSkorParameter4(30, 428133)">
+                                <label class="k-checkbox-label" for="item.obj{{428133}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428134}}" ng-model="item.obj[428134]"
+                                    ng-click="getSkorParameter5(30, 428134)">
+                                <label class="k-checkbox-label" for="item.obj{{428134}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428135}}" ng-model="item.obj[428135]"
+                                    ng-click="getSkorParameter6(30, 428135)">
+                                <label class="k-checkbox-label" for="item.obj{{428135}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label c-label item="item">Tongkat/alat penopang</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <label c-label item="item">15</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428136}}" ng-model="item.obj[428136]"
+                                    ng-click="getSkorParameter(15, 428136)">
+                                <label class="k-checkbox-label" for="item.obj{{428136}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428137}}" ng-model="item.obj[428137]"
+                                    ng-click="getSkorParameter2(15, 428137)">
+                                <label class="k-checkbox-label" for="item.obj{{428137}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428138}}" ng-model="item.obj[428138]"
+                                    ng-click="getSkorParameter3(15, 428138)">
+                                <label class="k-checkbox-label" for="item.obj{{428138}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428139}}" ng-model="item.obj[428139]"
+                                    ng-click="getSkorParameter4(15, 428139)">
+                                <label class="k-checkbox-label" for="item.obj{{428139}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428140}}" ng-model="item.obj[428140]"
+                                    ng-click="getSkorParameter5(15, 428140)">
+                                <label class="k-checkbox-label" for="item.obj{{428140}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428141}}" ng-model="item.obj[428141]"
+                                    ng-click="getSkorParameter6(15, 428141)">
+                                <label class="k-checkbox-label" for="item.obj{{428141}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label c-label item="item">Tidak ada/kursi roda/perawat/tirah baring</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <label c-label item="item">0</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428142}}" ng-model="item.obj[428142]"
+                                    ng-click="getSkorParameter(0, 428142)">
+                                <label class="k-checkbox-label" for="item.obj{{428142}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428143}}" ng-model="item.obj[428143]"
+                                    ng-click="getSkorParameter2(0, 428143)">
+                                <label class="k-checkbox-label" for="item.obj{{428143}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428144}}" ng-model="item.obj[428144]"
+                                    ng-click="getSkorParameter3(0, 428144)">
+                                <label class="k-checkbox-label" for="item.obj{{428144}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428145}}" ng-model="item.obj[428145]"
+                                    ng-click="getSkorParameter4(0, 428145)">
+                                <label class="k-checkbox-label" for="item.obj{{428145}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428146}}" ng-model="item.obj[428146]"
+                                    ng-click="getSkorParameter5(0, 428146)">
+                                <label class="k-checkbox-label" for="item.obj{{428146}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428147}}" ng-model="item.obj[428147]"
+                                    ng-click="getSkorParameter6(0, 428147)">
+                                <label class="k-checkbox-label" for="item.obj{{428147}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="7" style="text-align: start;">Terpasang Infus</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label c-label item="item">Ya</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <label c-label item="item">20</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428148}}" ng-model="item.obj[428148]"
+                                    ng-click="getSkorParameter(20, 428148)">
+                                <label class="k-checkbox-label" for="item.obj{{428148}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428149}}" ng-model="item.obj[428149]"
+                                    ng-click="getSkorParameter2(20, 428149)">
+                                <label class="k-checkbox-label" for="item.obj{{428149}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428150}}" ng-model="item.obj[428150]"
+                                    ng-click="getSkorParameter3(20, 428150)">
+                                <label class="k-checkbox-label" for="item.obj{{428150}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428151}}" ng-model="item.obj[428151]"
+                                    ng-click="getSkorParameter4(20, 428151)">
+                                <label class="k-checkbox-label" for="item.obj{{428151}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428152}}" ng-model="item.obj[428152]"
+                                    ng-click="getSkorParameter5(20, 428152)">
+                                <label class="k-checkbox-label" for="item.obj{{428152}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428153}}" ng-model="item.obj[428153]"
+                                    ng-click="getSkorParameter6(20, 428153)">
+                                <label class="k-checkbox-label" for="item.obj{{428153}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label c-label item="item">Tidak</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <label c-label item="item">0</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428154}}" ng-model="item.obj[428154]"
+                                    ng-click="getSkorParameter(0, 428154)">
+                                <label class="k-checkbox-label" for="item.obj{{428154}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428155}}" ng-model="item.obj[428155]"
+                                    ng-click="getSkorParameter2(0, 428155)">
+                                <label class="k-checkbox-label" for="item.obj{{428155}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428156}}" ng-model="item.obj[428156]"
+                                    ng-click="getSkorParameter3(0, 428156)">
+                                <label class="k-checkbox-label" for="item.obj{{428156}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428157}}" ng-model="item.obj[428157]"
+                                    ng-click="getSkorParameter4(0, 428157)">
+                                <label class="k-checkbox-label" for="item.obj{{428157}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428158}}" ng-model="item.obj[428158]"
+                                    ng-click="getSkorParameter5(0, 428158)">
+                                <label class="k-checkbox-label" for="item.obj{{428158}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428159}}" ng-model="item.obj[428159]"
+                                    ng-click="getSkorParameter6(0, 428159)">
+                                <label class="k-checkbox-label" for="item.obj{{428159}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="7" style="text-align: start;">Gaya berjalan</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label c-label item="item">Terganggu</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <label c-label item="item">20</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428160}}" ng-model="item.obj[428160]"
+                                    ng-click="getSkorParameter(20, 428160)">
+                                <label class="k-checkbox-label" for="item.obj{{428160}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428161}}" ng-model="item.obj[428161]"
+                                    ng-click="getSkorParameter2(20, 428161)">
+                                <label class="k-checkbox-label" for="item.obj{{428161}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428162}}" ng-model="item.obj[428162]"
+                                    ng-click="getSkorParameter3(20, 428162)">
+                                <label class="k-checkbox-label" for="item.obj{{428162}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428163}}" ng-model="item.obj[428163]"
+                                    ng-click="getSkorParameter4(20, 428163)">
+                                <label class="k-checkbox-label" for="item.obj{{428163}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428164}}" ng-model="item.obj[428164]"
+                                    ng-click="getSkorParameter5(20, 428164)">
+                                <label class="k-checkbox-label" for="item.obj{{428164}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428165}}" ng-model="item.obj[428165]"
+                                    ng-click="getSkorParameter6(20, 428165)">
+                                <label class="k-checkbox-label" for="item.obj{{428165}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label c-label item="item">Lemah</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <label c-label item="item">10</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428166}}" ng-model="item.obj[428166]"
+                                    ng-click="getSkorParameter(10, 428166)">
+                                <label class="k-checkbox-label" for="item.obj{{428166}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428167}}" ng-model="item.obj[428167]"
+                                    ng-click="getSkorParameter2(10, 428167)">
+                                <label class="k-checkbox-label" for="item.obj{{428167}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428168}}" ng-model="item.obj[428168]"
+                                    ng-click="getSkorParameter3(10, 428168)">
+                                <label class="k-checkbox-label" for="item.obj{{428168}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428169}}" ng-model="item.obj[428169]"
+                                    ng-click="getSkorParameter4(10, 428169)">
+                                <label class="k-checkbox-label" for="item.obj{{428169}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428170}}" ng-model="item.obj[428170]"
+                                    ng-click="getSkorParameter5(10, 428170)">
+                                <label class="k-checkbox-label" for="item.obj{{428170}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428171}}" ng-model="item.obj[428171]"
+                                    ng-click="getSkorParameter6(10, 428171)">
+                                <label class="k-checkbox-label" for="item.obj{{428171}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label c-label item="item">Normal/tirah baring/immobilisasi</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <label c-label item="item">0</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428172}}" ng-model="item.obj[428172]"
+                                    ng-click="getSkorParameter(0, 428172)">
+                                <label class="k-checkbox-label" for="item.obj{{428172}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428173}}" ng-model="item.obj[428173]"
+                                    ng-click="getSkorParameter2(0, 428173)">
+                                <label class="k-checkbox-label" for="item.obj{{428173}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428174}}" ng-model="item.obj[428174]"
+                                    ng-click="getSkorParameter3(0, 428174)">
+                                <label class="k-checkbox-label" for="item.obj{{428174}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428175}}" ng-model="item.obj[428175]"
+                                    ng-click="getSkorParameter4(0, 428175)">
+                                <label class="k-checkbox-label" for="item.obj{{428175}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428176}}" ng-model="item.obj[428176]"
+                                    ng-click="getSkorParameter5(0, 428176)">
+                                <label class="k-checkbox-label" for="item.obj{{428176}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428177}}" ng-model="item.obj[428177]"
+                                    ng-click="getSkorParameter6(0, 428177)">
+                                <label class="k-checkbox-label" for="item.obj{{428177}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="7" style="text-align: start;">Status Mental</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label c-label item="item">Sering lupa akan keterbatasan yang dimiliki</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <label c-label item="item">15</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428178}}" ng-model="item.obj[428178]"
+                                    ng-click="getSkorParameter(15, 428178)">
+                                <label class="k-checkbox-label" for="item.obj{{428178}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428179}}" ng-model="item.obj[428179]"
+                                    ng-click="getSkorParameter2(15, 428179)">
+                                <label class="k-checkbox-label" for="item.obj{{428179}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428180}}" ng-model="item.obj[428180]"
+                                    ng-click="getSkorParameter3(15, 428180)">
+                                <label class="k-checkbox-label" for="item.obj{{428180}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428181}}" ng-model="item.obj[428181]"
+                                    ng-click="getSkorParameter4(15, 428181)">
+                                <label class="k-checkbox-label" for="item.obj{{428181}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428182}}" ng-model="item.obj[428182]"
+                                    ng-click="getSkorParameter5(15, 428182)">
+                                <label class="k-checkbox-label" for="item.obj{{428182}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428183}}" ng-model="item.obj[428183]"
+                                    ng-click="getSkorParameter6(15, 428183)">
+                                <label class="k-checkbox-label" for="item.obj{{428183}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label c-label item="item">Sadar akan kemampuan diri sendiri</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <label c-label item="item">0</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428184}}" ng-model="item.obj[428184]"
+                                    ng-click="getSkorParameter(0, 428184)">
+                                <label class="k-checkbox-label" for="item.obj{{428184}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428185}}" ng-model="item.obj[428185]"
+                                    ng-click="getSkorParameter2(0, 428185)">
+                                <label class="k-checkbox-label" for="item.obj{{428185}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428186}}" ng-model="item.obj[428186]"
+                                    ng-click="getSkorParameter3(0, 428186)">
+                                <label class="k-checkbox-label" for="item.obj{{428186}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428187}}" ng-model="item.obj[428187]"
+                                    ng-click="getSkorParameter4(0, 428187)">
+                                <label class="k-checkbox-label" for="item.obj{{428187}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428188}}" ng-model="item.obj[428188]"
+                                    ng-click="getSkorParameter5(0, 428188)">
+                                <label class="k-checkbox-label" for="item.obj{{428188}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{428189}}" ng-model="item.obj[428189]"
+                                    ng-click="getSkorParameter6(0, 428189)">
+                                <label class="k-checkbox-label" for="item.obj{{428189}}">
+                                    <!-- &nbsp;{{jawab.nama}} -->
+                                </label>
+                            </td>
+                        </tr>
+                        <tr ng-repeat="list in listTotalSkor | orderBy:'id'">
+                            <th style="text-align: center;width: 70px;" colspan="2">Total</th>
+                            <td ng-repeat="jawab in list.detail | orderBy:'id'">
+                                <div ng-switch on="jawab.type">
+                                    <div class="grid_12" ng-switch-when="textbox">
+                                        <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_12">
+                        <label c-label item="item">Hasil Skrinning</label>
+                    </div>
+                    <div class="grid_8">
+                        <textarea cols="6" rows="5" c-text-area type="input" filter="'string'"
+                            class="k-textbox" ng-model="item.obj[428196]"></textarea>
+                    </div>
+                </div>
+                <hr>
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_12">
+                        <label c-label item="item">Saran</label>
+                    </div>
+                    <div class="grid_8">
+                        <textarea cols="6" rows="5" c-text-area type="input" filter="'string'" class="k-textbox"
+                            ng-model="item.obj[428198]"></textarea>
+                    </div>
+                </div>
+                <hr>
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_8">
+                        <div class="grid_12" style="margin-top: 10px;">
+                            <label c-label item="item">Kategori :</label>
+                        </div>
+                        <div class="grid_12" style="margin-top: 10px;">
+                            <label c-label item="item">Risiko Tinggi >= 45 (Pasang gelang dan penandaan warna kuning)</label>
+                        </div>
+                        <div class="grid_12" style="margin-top: 10px;">
+                            <label c-label item="item">Risiko Sedang = 25 - 44</label>
+                        </div>
+                        <div class="grid_12" style="margin-top: 10px;">
+                            <label c-label item="item">Risiko Rendah = 0 - 25</label>
+                        </div>
+                    </div>
+                    <div class="grid_4">
+                        <div class="grid_12">
+                            <label c-label item="item">Perawat</label>
+                        </div>
+                        <div class="grid_12">
+                            <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[428199]" 
+                                k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false"
+                                k-data-source="listPegawai" />
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="panel panel-default container_12" style="margin-top: 30px;">
+            <div class="panel-heading" c-translate>Intervensi Risiko Jatuh Dewasa</div>
+        </div>
+
+        <div class="grid_12" style="margin-top: 10px;">
+            <fieldset style="margin-top: 10px;">
+                <legend><b>Skala MORSE</b></legend>
+                <div class="grid_12" style="margin-top: 10px;">
+                    <table style="width:100%;color: #4c5356;">
+                        <tr>
+                            <th style="width: 15px;text-align: center;">No</th>
+                            <th style="width: 150px;text-align: center;">Risiko Rendah dan Sedang</th>
+                            <td ng-repeat="list in listTglTable2 | orderBy:'id'">
+                                <div ng-switch on="list.type">
+                                    <div class="grid_12" ng-switch-when="datetime">
+                                        <input style="width: 100%" k-ng-model="item.obj[list.id]" kendo-datetimepicker placeholer="yyyy-MM-dd HH:mm"
+                                            k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr ng-repeat="list in listRisikoRendahSedang | orderBy:'id'">
+                            <td style="text-align: center;">{{ list.id }}</td>
+                            <td ng-repeat="jawab in list.detail | orderBy:'id'">
+                                <div ng-switch on="jawab.type">
+                                    <div class="grid_12" ng-switch-when="label">
+                                        <label c-label item="item">{{ jawab.caption }}</label>
+                                    </div>
+                                    <div class="grid_12" ng-switch-when="checkbox" style="text-align: center;">
+                                        <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}" ng-model="item.obj[jawab.id]">
+                                        <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                            <!-- &nbsp;{{jawab.nama}} -->
+                                        </label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="text-align: center;" colspan="2">Nama & tanda tangan perawar</th>
+                            <td ng-repeat="list in listNamaPerawat | orderBy:'id'">
+                                <div ng-switch on="list.type">
+                                    <div class="grid_12" ng-switch-when="combobox">
+                                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[list.id]" k-data-text-field="'text'"
+                                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="grid_12" style="margin-top: 20px;">
+                    <table style="width:100%;color: #4c5356;">
+                        <tr>
+                            <th style="width: 15px;text-align: center;">No</th>
+                            <th style="width: 150px;text-align: center;">Risiko Tinggi</th>
+                            <td ng-repeat="list in listTglTable3 | orderBy:'id'">
+                                <div ng-switch on="list.type">
+                                    <div class="grid_12" ng-switch-when="datetime">
+                                        <input style="width: 100%" k-ng-model="item.obj[list.id]" kendo-datetimepicker
+                                            placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr ng-repeat="list in listRisikoTinggi | orderBy:'id'">
+                            <td style="text-align: center;">{{ list.id }}</td>
+                            <td ng-repeat="jawab in list.detail | orderBy:'id'">
+                                <div ng-switch on="jawab.type">
+                                    <div class="grid_12" ng-switch-when="label">
+                                        <label c-label item="item">{{ jawab.caption }}</label>
+                                    </div>
+                                    <div class="grid_12" ng-switch-when="checkbox" style="text-align: center;">
+                                        <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}"
+                                            ng-model="item.obj[jawab.id]">
+                                        <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                            <!-- &nbsp;{{jawab.nama}} -->
+                                        </label>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="text-align: center;" colspan="2">Nama & tanda tangan perawar</th>
+                            <td ng-repeat="list in listNamaPerawat2 | orderBy:'id'">
+                                <div ng-switch on="list.type">
+                                    <div class="grid_12" ng-switch-when="combobox">
+                                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[list.id]"
+                                            k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'"
+                                            k-auto-bind="false" k-data-source="listPegawai" />
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </fieldset>
+        </div>
+
+    </div>
+</div>
+
+<br />
+<br />
+<div class="grid_12">
+    <div ng-include='"../app/module/EMR/TemplateButtonDinamis" '></div>
+
+</div>

@@ -3361,6 +3361,26 @@
         {
             "nameDep": "LembarPascaResusitasiCtrl",
             "urlDep": "module/EMR/LembarPascaResusitasiCtrl"
+        },
+        {
+            "nameDep": "VerifikasiPraOperasiCtrl",
+            "urlDep": "module/EMR/VerifikasiPraOperasiCtrl"
+        },
+        {
+            "nameDep": "AsesmenLanjutanRisikoJatuhDewasaRanapCtrl",
+            "urlDep": "module/EMR/AsesmenLanjutanRisikoJatuhDewasaRanapCtrl"
+        },
+        {
+            "nameDep": "AsesmenPraInduksiCtrl",
+            "urlDep": "module/EMR/AsesmenPraInduksiCtrl"
+        },
+        {
+            "nameDep": "LaporanOperasiRajalCtrl",
+            "urlDep": "module/EMR/LaporanOperasiRajalCtrl"
+        },
+        {
+            "nameDep": "PersetujuanOperasiRajalCtrl",
+            "urlDep": "module/EMR/PersetujuanOperasiRajalCtrl"
         }
         
     ]

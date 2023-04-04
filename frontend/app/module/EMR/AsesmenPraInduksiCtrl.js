@@ -1,6 +1,6 @@
 define(['initialize'], function (initialize) {
     'use strict';
-    initialize.controller('PersetujuanOperasiCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
+    initialize.controller('AsesmenPraInduksiCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
         function ($q, $rootScope, $scope, ModelItem, $state, cacheHelper, dateHelper, medifirstService) {
 
             var paramsIndex = $state.params.index ? parseInt($state.params.index) : null
@@ -14,7 +14,7 @@ define(['initialize'], function (initialize) {
             $scope.cc = {};
             var nomorEMR = '-';
             var norecEMR = '';
-            $scope.cc.emrfk = 290055;
+            $scope.cc.emrfk = 290090;
             var dataLoad = [];
             $scope.isCetak = false;
             $scope.allDisabled = false;
@@ -58,13 +58,9 @@ define(['initialize'], function (initialize) {
                 $scope.listKelas = data
             })
 
-            medifirstService.getPart("sysadmin/general/get-datacombo-icd10", true, true, 10).then(function (data) {
-                $scope.listDiagnosa = data;
-            });
-
-            medifirstService.getPart("sysadmin/general/get-datacombo-icd10-secondary", true, true, 10).then(function (data) {
-                $scope.listDiagnosaSecondary = data;
-            });
+            medifirstService.getPart('emr/get-datacombo-part-kamar', true, true, 20).then(function(data) {
+                $scope.listKamar = data
+            })
 
             $scope.cetakPdf = function () {
                 if (norecEMR == '') return
@@ -73,6 +69,23 @@ define(['initialize'], function (initialize) {
                     // do something with response
                 });
             }
+
+            $scope.listRuanganInsentif = [
+                { "id": 1, "name": "HCU" },
+                { "id": 2, "name": "ICU" },
+                { "id": 3, "name": "CVCU" },
+                { "id": 4, "name": "NICU" },
+                { "id": 5, "name": "PICU" }
+            ]
+
+            $scope.listTerhadap = [
+                { "id": 1, "name": "Saya sendiri" },
+                { "id": 2, "name": "Suami"},
+                { "id": 3, "name": "Istri" },
+                { "id": 4, "name": "Anak" },
+                { "id": 5, "name": "Ayah" },
+                { "id": 6, "name": "Ibu" }
+            ]
 
             var cacheEMR_TRIASE_PRIMER = cacheHelper.get('cacheEMR_TRIASE_PRIMER');
             var cacheEMR_CTRS = cacheHelper.get('cacheEMR_CTRS');
@@ -104,25 +117,22 @@ define(['initialize'], function (initialize) {
                 var nocmfk = null;
                 var noregistrasifk = $state.params.noRec;
                 var status = "t";
-                $scope.item.obj[429836] = $scope.now;
+                $scope.item.obj[430167] = $scope.now;
                 medifirstService.get("emr/get-antrian-pasien-norec/" + noregistrasifk).then(function (e) {
                     var antrianPasien = e.data.result;
-                    $scope.item.obj[429832] = $scope.cc.namapasien;
-                    $scope.item.obj[429833] = new Date(moment(antrianPasien.tgllahir).format('YYYY-MM-DD'));
-                    $scope.item.obj[429834] = antrianPasien.jeniskelamin;
-                    $scope.item.obj[429835] = antrianPasien.alamatlengkap;
-                    if (antrianPasien.dokterdpjp != null && antrianPasien.iddpjp != null) {
-                        $scope.item.obj[429840] = {
-                            value: antrianPasien.iddpjp,
-                            text: antrianPasien.dokterdpjp
+                    $scope.item.obj[31100873] = $scope.cc.namapasien;
+                    $scope.item.obj[430169] = $scope.cc.namapasien;
+                    $scope.item.obj[31100874] = new Date(moment(antrianPasien.tgllahir).format('YYYY-MM-DD'));
+                    $scope.item.obj[430161] = antrianPasien.jeniskelamin;
+                    $scope.item.obj[430162] = antrianPasien.alamatlengkap
+                    $scope.item.obj[430166] = antrianPasien.nocm;
+                    if (antrianPasien.namaruangan != null && antrianPasien.objectruanganfk != null) {
+                        $scope.item.obj[430163] = {
+                            value: antrianPasien.objectruanganfk,
+                            text: antrianPasien.namaruangan
                         }
                     }
-                    // if (antrianPasien.namaruangan != null && antrianPasien.objectruanganfk != null) {
-                    //     $scope.item.obj[427954] = {
-                    //         value: antrianPasien.objectruanganfk,
-                    //         text: antrianPasien.namaruangan
-                    //     }
-                    // }
+                    $scope.item.obj[423817] = antrianPasien.namapasien;
                 })
                 
                 // medifirstService.get("emr/get-vital-sign?noregistrasi=" + $scope.cc.noregistrasi + "&objectidawal=4241&objectidakhir=4246&idemr=147", true).then(function (datas) {
@@ -255,7 +265,7 @@ define(['initialize'], function (initialize) {
                     })
                         
                         for (var i = 0; i <= dataLoad.length - 1; i++) {
-                            if (parseFloat($scope.cc.emrfk) == dataLoad[i].emrfk  && paramsIndex == dataLoad[i].index) {
+                            if (parseFloat($scope.cc.emrfk) == dataLoad[i].emrfk && paramsIndex == dataLoad[i].index) {
 
                                 if (dataLoad[i].type == "textbox") {
                                     $scope.item.obj[dataLoad[i].emrdfk] = dataLoad[i].value
@@ -331,7 +341,7 @@ define(['initialize'], function (initialize) {
                     arrSave.push({ id: arrobj[i], values: $scope.item.obj[parseInt(arrobj[i])] })
                 }
                 $scope.cc.jenisemr = 'asesmen'
-                $scope.cc.index = $state.params.index
+                $scope.cc.index = $state.params.index;
 
                 var jsonSave = {
                     head: $scope.cc,
@@ -344,7 +354,7 @@ define(['initialize'], function (initialize) {
                     // });
 
                     medifirstService.postLogging('EMR', 'norec emrpasien_t', e.data.data.norec,
-                        'Persetujuan Operasi / Prosedur Invasif IGD' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
+                        'Asesmen Pra Induksi ' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
                         + $scope.cc.noregistrasi).then(function (res) {
                         })
 
@@ -356,96 +366,16 @@ define(['initialize'], function (initialize) {
                 });
             }
 
-            $scope.listPemberiInformasi = [
-                {
-                    "id": 1,
-                    "jenisinfo": "Diagnosa (WD & DD)",
-                    "detail": [
-                        { "id": 429803, "caption": "", "type": "textarea" },
-                        { "id": 429804, "caption": "", "type": "checkbox" }
-                    ]
-                },
-                {
-                    "id": 2,
-                    "jenisinfo": "Dasar Diagnosis",
-                    "detail": [
-                        { "id": 429805, "caption": "", "type": "textarea" },
-                        { "id": 429806, "caption": "", "type": "checkbox" }
-                    ]
-                },
-                {
-                    "id": 3,
-                    "jenisinfo": "Tindakan Kedokteran",
-                    "detail": [
-                        { "id": 429807, "caption": "", "type": "textarea" },
-                        { "id": 429808, "caption": "", "type": "checkbox" }
-                    ]
-                },
-                {
-                    "id": 4,
-                    "jenisinfo": "Indikasi Tindakan",
-                    "detail": [
-                        { "id": 429809, "caption": "", "type": "textarea" },
-                        { "id": 429810, "caption": "", "type": "checkbox" }
-                    ]
-                },
-                {
-                    "id": 5,
-                    "jenisinfo": "Tata Cara (Uraian singkat prosedur dan tahapan penting)",
-                    "detail": [
-                        { "id": 429811, "caption": "", "type": "textarea" },
-                        { "id": 429812, "caption": "", "type": "checkbox" }
-                    ]
-                },
-                {
-                    "id": 6,
-                    "jenisinfo": "Tujuan Tindakan",
-                    "detail": [
-                        { "id": 429813, "caption": "", "type": "textarea" },
-                        { "id": 429814, "caption": "", "type": "checkbox" }
-                    ]
-                },
-                {
-                    "id": 7,
-                    "jenisinfo": "Risiko Tindakan",
-                    "detail": [
-                        { "id": 429815, "caption": "", "type": "textarea" },
-                        { "id": 429816, "caption": "", "type": "checkbox" }
-                    ]
-                },
-                {
-                    "id": 8,
-                    "jenisinfo": "Komplikasi",
-                    "detail": [
-                        { "id": 429817, "caption": "", "type": "textarea" },
-                        { "id": 429818, "caption": "", "type": "checkbox" }
-                    ]
-                },
-                {
-                    "id": 9,
-                    "jenisinfo": "Prognosis (Prognosis vital prognosis fungsi, dan Prognosis Penyembuhan)",
-                    "detail": [
-                        { "id": 429819, "caption": "", "type": "textarea" },
-                        { "id": 429820, "caption": "", "type": "checkbox" }
-                    ]
-                },
-                {
-                    "id": 10,
-                    "jenisinfo": "Alternatif & Resiko (Profil Pengobatan / tatalaksana)",
-                    "detail": [
-                        { "id": 429821, "caption": "", "type": "textarea" },
-                        { "id": 429822, "caption": "", "type": "checkbox" }
-                    ]
-                },
-                {
-                    "id": 11,
-                    "jenisinfo": "Hal lain yang akan dilakukan untuk menyelamatkan pasien (Perluasan tindakan Konsultasi selama tindakan & Resultasi)",
-                    "detail": [
-                        { "id": 429823, "caption": "", "type": "textarea" },
-                        { "id": 429824, "caption": "", "type": "checkbox" }
-                    ]
-                }
-            ];
+            $scope.dapatkanTt = function(data) {
+                if (data === undefined) return;
+                if (data.value === undefined) return;
+
+                var kamarId = data.value;
+                medifirstService.get("emr/get-nobedbykamar?idKamar=" + kamarId)
+                    .then(function (a) {
+                        $scope.listBed = a.data.bed;
+                    })
+            }
 
         }
     ]);

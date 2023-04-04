@@ -108,7 +108,8 @@ define(['initialize'], function (initialize) {
                 { "id": 2, "name": "Istri" },
                 { "id": 3, "name": "Anak" },
                 { "id": 4, "name": "Ayah" },
-                { "id": 5, "name": "Ibu" }
+                { "id": 5, "name": "Ibu" },
+                { "id": 6, "name": "Suami" }
             ]
 
             $scope.cetakPdf = function () {
