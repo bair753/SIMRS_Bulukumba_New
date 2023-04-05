@@ -5,6 +5,7 @@ define(['initialize'], function (initialize) {
             var norecAPD = $state.params.noRec;
             $scope.item = {};
             $scope.dataVOloaded = true;
+            $scope.datauserlogin = medifirstService.getUserLogin();
             $scope.now = new Date();
             $scope.item.rke = 1;
             $scope.item.tglresep = $scope.now;
@@ -193,6 +194,13 @@ define(['initialize'], function (initialize) {
                         $scope.hideSimpan =true;
                     }
                 });
+
+                medifirstService.get("sysadmin/menu/svc-modul?get=loginuser&id=" + $scope.datauserlogin.id).then(function (data) {
+					// $scope.item.idlogin = data.data.loginuser[0].luid;
+					// $scope.item.namaUser = data.data.loginuser[0].namauser;					
+					$scope.item.kelompokUserHakAkses = { id: data.data.loginuser[0].kuid, kelompokuser: data.data.loginuser[0].kelompokuser };
+					// $scope.dataGrid = data.data.loginuser[0].data;
+				})
               
                 // medifirstService.get('emr/get-pegawai-parts?id=' + medifirstService.getPegawaiLogin().id).then(function (e) {
                 //     $scope.listPenulisResep.add(e.data[0])
@@ -536,6 +544,10 @@ define(['initialize'], function (initialize) {
             }
 
             $scope.tambah = function () {
+                if ($scope.item.kelompokUserHakAkses.kelompokuser != 'dokter') {
+                    toastr.error('Akun bukan Dokter',' Mohon hubungi IT!')
+                    return
+                }
                 if(statusTambah == false){
                     return
                 }
