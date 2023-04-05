@@ -2211,6 +2211,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
           Route::get('sysadmin/get-mapping-ruanganpelayananmutu', 'SysAdmin\SysAdminController@getMappingRuanganToPelayananMutu');
           Route::post('sysadmin/save-map-ruangan-to-pelayananmutu', 'SysAdmin\SysAdminController@saveMapRuanganToPelayananMutu');
           Route::post('sysadmin/delete-map-ruangan-to-pelayananmutu', 'SysAdmin\SysAdminController@DeleteMapRuanganToPelayananMutu');
+          Route::post('sysadmin/store-notif', 'SysAdmin\GeneralController@storeNotif');
 
           Route::get('sysadmin/get-combo-mapemr', 'SysAdmin\SysAdminController@getComboMappingEMR');
           Route::get('sysadmin/get-mapping-emr', 'SysAdmin\SysAdminController@getMappingEMR');
