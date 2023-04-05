@@ -3381,6 +3381,14 @@
         {
             "nameDep": "PersetujuanOperasiRajalCtrl",
             "urlDep": "module/EMR/PersetujuanOperasiRajalCtrl"
+        },
+        {
+            "nameDep": "CheckListDanObservasiTransfusiDarahRanapCtrl",
+            "urlDep": "module/EMR/CheckListDanObservasiTransfusiDarahRanapCtrl"
+        },
+        {
+            "nameDep": "FormulirPermintaanDarahRanapCtrl",
+            "urlDep": "module/EMR/FormulirPermintaanDarahRanapCtrl"
         }
         
     ]
