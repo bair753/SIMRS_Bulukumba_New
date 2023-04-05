@@ -32,6 +32,7 @@ use DB;
 
 use App\Transaksi\IdentifikasiPasien;
 use App\Transaksi\PasienDaftar;
+use App\Transaksi\ListNotif;
 
 class GeneralController extends ApiController
 {
@@ -5321,6 +5322,66 @@ class GeneralController extends ApiController
         $ruangan=$ruangan->get();
 
         return $this->respond($ruangan);
+    }
+    public function storeNotif(Request $request){
+        try {
+            if( $request['method'] =='save'){
+                $cek = ListNotif::where('norec_trans',$request['norec'])->first();
+                if(empty($cek)){
+                    $gl = $request['tgl'];
+                    // $hari = $this->hari_ini($gl);
+                    $da =  new ListNotif();
+                    $da->norec_trans = $request['norec'];
+                    $da->judul = $request['judul'];
+                    $da->jenis = $request['jenis'];
+                    $da->kelompokuser = $request['kelompokUser'];
+                    $da->kelompokuserfk = $request['idKelompokUser'];
+                    $da->ruangantujuanfk = $request['idRuanganTujuan'];
+                    $da->ruangantujuan = $request['ruanganTujuan'];
+                    $da->ruanganasalfk = $request['idRuanganAsal'];
+                    $da->ruanganasal = $request['ruanganAsal'];
+                    $da->pegawaifk = $request['idPegawai'];
+                    $da->keterangan = $request['pesanNotifikasi'];
+                    $da->tgl = $gl;
+                    $da->tgl_string =  $request['tgl_string'];//$hari.', '.$this->getDateIndo($gl);
+                    $da->statusenabled = true;
+                    $da->save();
+    
+                  
+                }
+          
+            }
+            if( $request['method'] =='delete'){
+                $cek = ListNotif::where('norec_trans',$request['norec'])->update(['statusenabled' =>false]);
+              
+            }
+            if( $request['method'] =='get'){
+                $cek =  ListNotif::where('statusenabled',true)->orderBy('tgl','desc')->limit(10)->get();
+         
+            }
+           
+            $transStatus = true;
+        } catch (\Exception $e) {
+            $transStatus = false;
+        }
+
+        if ($transStatus) {
+            $transMessage = "Sukses";
+            DB::commit();
+            $result = array(
+                "status" => 201,
+                "message" => '@',
+                "data" => $cek,
+            );
+        } else {
+            $transMessage = $e->getMessage().' '.$e->getLine();
+            DB::rollBack();
+            $result = array(
+                "status" => 201,
+                "message" => $transMessage
+            );
+        }
+        return $this->respond($result);
     }
 
 }

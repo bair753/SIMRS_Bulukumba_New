@@ -1,7 +1,7 @@
 define(['initialize'], function (initialize) {
     'use strict';
-    initialize.controller('InputResepApotikOrderRevCtrl', ['$q', '$rootScope', '$scope', 'MedifirstService', '$state', 'CacheHelper', '$mdDialog',
-        function ($q, $rootScope, $scope, medifirstService, $state, cacheHelper, $mdDialog) {
+    initialize.controller('InputResepApotikOrderRevCtrl', ['$q', '$rootScope', '$scope', 'MedifirstService', '$state', 'CacheHelper', '$mdDialog','DateHelper',
+        function ($q, $rootScope, $scope, medifirstService, $state, cacheHelper, $mdDialog, dateHelper) {
             var norecAPD = $state.params.noRec;
             $scope.item = {};
             $scope.dataVOloaded = true;
@@ -1122,6 +1122,7 @@ define(['initialize'], function (initialize) {
                         })
                     // $scope.item.resep = e.data.noresep.noorder
                     //  $scope.hideSimpan =false
+                    sendNotification(e.data)
                     init();
                     $scope.batal();
                     $scope.disabledRuangan = false
@@ -1979,6 +1980,29 @@ define(['initialize'], function (initialize) {
                     }
                 })
             }
+        }
+
+        function sendNotification(e) {
+            var body = {
+                norec: e.noresep.norec,
+                judul: 'Ada order baru #' + e.noresep.noorder,
+                jenis: 'E-Resep',
+                pesanNotifikasi: '',
+                idRuanganAsal: $scope.item.idRuangan,
+                idRuanganTujuan: $scope.item.ruangan.id,
+                ruanganAsal: $scope.item.namaRuangan,
+                ruanganTujuan: $scope.item.ruangan.namaruangan,
+                kelompokUser: null,//medifirstService.getKelompokUser()
+                idKelompokUser: null,
+                idPegawai: medifirstService.getPegawai().id,
+                dataArray: [],
+                urlForm: 'ResepElektronik',
+                params: null,
+                namaFungsiFrontEnd: null,
+                tgl: $scope.item.tglresep,
+                tgl_string: dateHelper.getTanggalJamFormatted($scope.item.tglresep),
+            }
+            medifirstService.sendSocket("sendNotification", body);
         }
 
            //** BATAS SUCI */
