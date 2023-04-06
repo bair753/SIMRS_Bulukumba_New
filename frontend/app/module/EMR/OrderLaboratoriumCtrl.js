@@ -720,7 +720,7 @@ define(['initialize'], function (initialize) {
                     //         }
                     //     }
                     // }
-                    // sendNotification(e.data)
+                    sendNotification(e.data)
                     init();
                     $scope.BatalOrder();
 
@@ -1165,28 +1165,30 @@ define(['initialize'], function (initialize) {
                 delete $scope.paket.jenisPelaksana
                 delete $scope.paket.namaPaket
             }
-            // function sendNotification(e) {
-            //     var body = {
-            //         norec: e.strukorder.norec,
-            //         judul: 'Ada order baru #' + e.strukorder.noorder,
-            //         jenis: 'Order Laboratorium',
-            //         pesanNotifikasi: '',
-            //         idRuanganAsal: e.strukorder.objectruanganfk,
-            //         idRuanganTujuan: e.strukorder.objectruangantujuanfk,
-            //         ruanganAsal: $scope.item.namaRuangan,
-            //         ruanganTujuan: $scope.item.ruangantujuan.namaruangan,
-            //         kelompokUser: null,//medifirstService.getKelompokUser()
-            //         idKelompokUser: null,
-            //         idPegawai: medifirstService.getPegawai().id,
-            //         dataArray: [],
-            //         urlForm: 'DaftarOrderPenunjang',
-            //         params: null,
-            //         namaFungsiFrontEnd: null,
-            //         tgl: e.strukorder.tglorder,
-            //         tgl_string: $scope.now.toLocaleDateString(),
-            //     }
-            //     medifirstService.sendSocket("sendNotification", body);
-            // }
+
+            function sendNotification(e) {
+                var body = {
+                    norec: e.strukorder.norec,
+                    judul: 'Ada order baru #' + e.strukorder.noorder,
+                    jenis: 'Order Laboratorium',
+                    pesanNotifikasi: '',
+                    idRuanganAsal: e.strukorder.objectruanganfk,
+                    idRuanganTujuan: e.strukorder.objectruangantujuanfk,
+                    ruanganAsal: $scope.item.namaRuangan,
+                    ruanganTujuan: $scope.item.ruangantujuan.namaruangan,
+                    kelompokUser: null, //medifirstService.getKelompokUser(),
+                    idKelompokUser: null,
+                    idPegawai: medifirstService.getPegawai().id,
+                    dataArray: [],
+                    urlForm: 'DaftarOrderPenunjang',
+                    params: null,
+                    namaFungsiFrontEnd: null,
+                    tgl: e.strukorder.tglorder,
+                    tgl_string: moment($scope.now).format('DD MMMM YYYY'),
+                }
+                medifirstService.sendSocket("sendNotification", body);
+            }
+
             //***********************************
 
         }
