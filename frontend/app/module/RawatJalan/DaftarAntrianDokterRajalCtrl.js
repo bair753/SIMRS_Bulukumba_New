@@ -1,7 +1,8 @@
-define(['initialize'], function (initialize) {
+define(['initialize', 'Configuration'], function (initialize, config) {
     'use strict';
     initialize.controller('DaftarAntrianDokterRajalCtrl', ['SaveToWindow', '$rootScope', '$scope', 'ModelItem', '$state', 'DateHelper', 'socket', '$mdDialog', '$window', 'CetakHelper', 'MedifirstService', 'CacheHelper', '$q',
         function (saveToWindow, $rootScope, $scope, ModelItem, $state, dateHelper, socket, $mdDialog, window, cetakHelper, medifirstService, cacheHelper, $q) {
+            var baseTransaksi = config.baseApiBackend; 
             $scope.dataVOloaded = true;
             $scope.now = new Date();
             $scope.item = {};
@@ -1668,9 +1669,18 @@ define(['initialize'], function (initialize) {
                     { field: "pengonsul", title: "Pengonsul", width: 120 },
                     { field: "keteranganorder", title: "Keterangan", width: 120 },
                     { field: "status", title: "Status", width: 120 },
-                    { command: [{ name: "edit", text: "Verifikasi", click: verif }], title: "&nbsp;", width: 120 }
+                    { command: [{ name: "edit", text: "Verifikasi", click: verif }], title: "&nbsp;", width: 120 },
+                    { command: [{ name: "download", text: "Download", click: DownloadBerkas }], title: "&nbsp;", width: 120 }
                 ],
             };
+            function DownloadBerkas(e) 
+            {
+                e.preventDefault();
+				var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+
+                var strBACKEND = baseTransaksi.replace('service/medifirst2000/', '')
+                window.open(strBACKEND + "service/storage/berkaspasien/download?file=" + dataItem.file);
+            }
             function verif(e) {
                 e.preventDefault();
                 var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
