@@ -1165,6 +1165,7 @@ define(['initialize'], function (initialize) {
                 delete $scope.paket.jenisPelaksana
                 delete $scope.paket.namaPaket
             }
+
             function sendNotification(e) {
                 var body = {
                     norec: e.strukorder.norec,
@@ -1175,7 +1176,7 @@ define(['initialize'], function (initialize) {
                     idRuanganTujuan: e.strukorder.objectruangantujuanfk,
                     ruanganAsal: $scope.item.namaRuangan,
                     ruanganTujuan: $scope.item.ruangantujuan.namaruangan,
-                    kelompokUser: null,//medifirstService.getKelompokUser()
+                    kelompokUser: null, //medifirstService.getKelompokUser(),
                     idKelompokUser: null,
                     idPegawai: medifirstService.getPegawai().id,
                     dataArray: [],
@@ -1183,10 +1184,11 @@ define(['initialize'], function (initialize) {
                     params: null,
                     namaFungsiFrontEnd: null,
                     tgl: e.strukorder.tglorder,
-                    tgl_string: $scope.now.toLocaleDateString(),
+                    tgl_string: moment($scope.now).format('DD MMMM YYYY'),
                 }
                 medifirstService.sendSocket("sendNotification", body);
             }
+
             //***********************************
 
         }

@@ -690,6 +690,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
           Route::get('emr/get-riwayat-perawatan-pasien', 'EMR\EMRController@getDaftarRiwayatRegistrasiPHR');
           Route::get('emr/get-emr-transaksi-detail-img', 'EMR\EMRController@getEMRTransaksiImage');
           Route::get('emr/get-nobedbykamar', 'EMR\EMRController@getNoBedByKamar');
+          Route::get('emr/get-asisten-operasi', 'EMR\EMRController@getAsistenOperasi');
 
            Route::post('emr/get-status-dipake', 'EMR\EMRController@getStatusDipake');
           Route::post('emr/save-status-dipake', 'EMR\EMRController@saveStatusDipake');

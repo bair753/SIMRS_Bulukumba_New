@@ -5356,7 +5356,12 @@ class GeneralController extends ApiController
               
             }
             if( $request['method'] =='get'){
-                $cek =  ListNotif::where('statusenabled',true)->orderBy('tgl','desc')->limit(10)->get();
+                $currentDate = date('Y-m-d', strtotime('now'));
+                // $cek =  ListNotif::where('statusenabled',true)->orderBy('tgl','desc')->get();
+                $cek = ListNotif::where('statusenabled', true)
+                    ->where('tgl', '>=', $currentDate.' 00:00:00')
+                    ->orderBy('tgl', 'desc')
+                    ->get();
          
             }
            

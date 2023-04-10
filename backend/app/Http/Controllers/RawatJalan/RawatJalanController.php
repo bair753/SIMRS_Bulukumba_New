@@ -1153,12 +1153,13 @@ class RawatJalanController extends ApiController
                 'pg.id as pegawaifk',
                 'so.objectruangantujuanfk',
                 'so.objectruanganfk',
-                'apd.norec as norec_apd'
+                'apd.norec as norec_apd',
+                'so.file'
             )
             ->where('so.kdprofile', $idProfile)
             ->where('so.statusenabled', true)
             ->wherenull('apd.norec')
-            ->where('so.objectkelompoktransaksifk', $kelTrans->id)
+            // ->where('so.objectkelompoktransaksifk', $kelTrans->id)
             ->orderBy('so.tglorder', 'desc');
         if (isset($request['norecpd']) && $request['norecpd'] != '') {
             $data = $data->where('pd.norec', $request['norecpd']);
