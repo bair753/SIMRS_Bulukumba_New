@@ -18893,8 +18893,122 @@
         "define": "RekamMedisCtrl"
       }
     ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.PersetujuanKolonoskopi",
+    "url": "/PersetujuanKolonoskopi/:index/:idEMR",
+    "templateurl": "module/EMR/PersetujuanKolonoskopi.html",
+    "controller": "PersetujuanKolonoskopiCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.SuratRujukan",
+    "url": "/SuratRujukan",
+    "templateurl": "module/EMR/SuratRujukan.html",
+    "controller": "SuratRujukanCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.PernyataanPersetujuanDirujuk",
+    "url": "/PernyataanPersetujuanDirujuk",
+    "templateurl": "module/EMR/PernyataanPersetujuanDirujuk.html",
+    "controller": "PernyataanPersetujuanDirujukCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.PernyataanBersediaBerlakuUmum",
+    "url": "/PernyataanBersediaBerlakuUmum",
+    "templateurl": "module/EMR/PernyataanBersediaBerlakuUmum.html",
+    "controller": "PernyataanBersediaBerlakuUmumCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.PernyataanPindahRuang",
+    "url": "/PernyataanPindahRuang",
+    "templateurl": "module/EMR/PernyataanPindahRuang.html",
+    "controller": "PernyataanPindahRuangCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
   }
 
 
-  
 ] 
