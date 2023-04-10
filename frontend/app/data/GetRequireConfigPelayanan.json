@@ -3409,6 +3409,10 @@
         {
             "nameDep": "FormulirPermintaanDarahRanapCtrl",
             "urlDep": "module/EMR/FormulirPermintaanDarahRanapCtrl"
+        },
+        {
+            "nameDep": "EKGRanapCtrl",
+            "urlDep": "module/EMR/EKGRanapCtrl"
         }
         
     

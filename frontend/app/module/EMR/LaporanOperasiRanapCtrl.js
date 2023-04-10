@@ -46,10 +46,6 @@ define(['initialize'], function (initialize) {
                 $scope.listDokter = data
             })
 
-            medifirstService.getPart('emr/get-asisten-operasi', true, true, 20).then(function (data) {
-                $scope.listAsisten = data
-            })
-
             medifirstService.getPart('emr/get-datacombo-part-pegawai', true, true, 20).then(function (data) {
                 $scope.listPegawai = data
             })

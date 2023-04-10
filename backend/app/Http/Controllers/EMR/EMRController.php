@@ -1965,6 +1965,11 @@ class EMRController  extends ApiController
         return $this->respond($result);
     }
 
+    public function saveimageEKG(Request $request)
+    {
+        return $request->all();
+    }
+
     public function saveOrderKonsul(Request $request){
         $kdProfile = (int) $this->getDataKdProfile($request);
         $uploadBerkasPasien = $request->file('filePasien');
@@ -10569,21 +10574,6 @@ class EMRController  extends ApiController
             'message' => 'epic',
         );
         return $this->respond($result);
-    }
-
-    public function getAsistenOperasi(Request $request) {
-        $kdProfile = $this->getDataKdProfile($request);
-        $idProfile = (int) $kdProfile;
-        $pemeriksa = SettingDataFixed::where('id', 1584)->first();
-        $pemeriksa = explode(',', $pemeriksa->nilaifield);
-
-        $dataAsistenOperasi = \DB::table('pegawai_m as pg')
-            ->select('id as value', 'namalengkap as text')
-            ->where('pg.kdprofile',$idProfile)
-            ->whereIn('pg.id', $pemeriksa)
-            ->where('pg.statusenabled',true)
-            ->get();
-        return $dataAsistenOperasi;
     }
 
 }

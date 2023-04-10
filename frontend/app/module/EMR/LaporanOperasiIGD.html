@@ -65,10 +65,10 @@
                     <div class="grid_12">
                         <label c-label item="item">Nama Asisten</label>
                     </div>
-                    <!-- <div class="grid_12">
+                    <div class="grid_12">
                         <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[31100531]" ng-disable="item.obj[31100531]" k-data-text-field="'text'"
                             k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listDokter" />
-                    </div> -->
+                    </div>
                 </div>
                 <div class="grid_6"></div>
                 <div class="grid_6">
@@ -86,19 +86,19 @@
                         <label c-label item="item">Asisten II</label>
                     </div>
                     <div class="grid_12">
-                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[31100533]" ng-disable="item.obj[31100533]" 
-                        k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listAsisten" />
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[31100533]" ng-disable="item.obj[31100533]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listDokter" />
                     </div>
                 </div>
                 <div class="grid_6"></div>
                 <div class="grid_6">
-                    <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_12">
                         <label c-label item="item">Nama Perawat</label>
                     </div>
-                    <!-- <div class="grid_12">
+                    <div class="grid_12">
                         <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[31100534]" ng-disable="item.obj[31100534]" k-data-text-field="'text'"
                             k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
-                    </div> -->
+                    </div>
                 </div>
                 <div class="grid_6"></div>
                 <div class="grid_6">
@@ -107,7 +107,7 @@
                     </div>
                     <div class="grid_12">
                         <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[31100535]" ng-disable="item.obj[31100535]" k-data-text-field="'text'"
-                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listAsisten" />
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
                     </div>
                 </div>
                 <div class="grid_6"></div>
@@ -117,7 +117,7 @@
                     </div>
                     <div class="grid_12">
                         <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[31100536]" ng-disable="item.obj[31100536]" k-data-text-field="'text'"
-                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listAsisten" />
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
                     </div>
                 </div>
             </fieldset>
@@ -328,7 +328,7 @@
                             <label c-label item="item">Tanggal Operasi</label>
                         </div>
                         <div class="grid_12">
-                            <input style="width: 90%" k-ng-model="item.obj[31100564]" kendo-datepicker placeholer="YYYY:MM:DD"
+                            <input style="width: 90%" k-ng-model="item.obj[31100564]" kendo-datetimepicker placeholer="YYYY:MM:DD"
                                 k-format="'yyyy-MM-dd'" />
                         </div>
                     </div>                      
@@ -340,7 +340,7 @@
                         </div>
                         <div class="grid_12">
                             <input style="width: 90%" k-ng-model="item.obj[31100565]" kendo-datetimepicker placeholer="HH:MM"
-                                k-format="'yyyy-MM-dd HH:mm'" />
+                                k-format="'HH:mm'" />
                         </div>
                     </div>                      
                 </div>
@@ -351,7 +351,7 @@
                         </div>
                         <div class="grid_12">
                             <input style="width: 90%" k-ng-model="item.obj[31100566]" kendo-datetimepicker placeholer="HH:MM"
-                                k-format="'yyyy-MM-dd HH:mm'" />
+                                k-format="'HH:mm'" />
                         </div>
                     </div>                      
                 </div>
@@ -361,8 +361,8 @@
                             <label c-label item="item">Lama Operasi Berlangsung</label>
                         </div>
                         <div class="grid_12">
-                            <input style="width: 90%" k-ng-model="item.obj[31100567]" kendo-datetimepicker placeholer="YYYY:MM:DD"
-                                k-format="'yyyy-MM-dd'" />
+                            <input style="width: 90%" k-ng-model="item.obj[31100567]" kendo-datetimepicker placeholer="HH:MM"
+                                k-format="'HH:mm'" />
                         </div>
                     </div>                      
                 </div>
