@@ -1967,6 +1967,8 @@ class EMRController  extends ApiController
 
     public function saveOrderKonsul(Request $request){
         $kdProfile = (int) $this->getDataKdProfile($request);
+        $uploadBerkasPasien = $request->file('filePasien');
+        $path = 'BerkasPasien';
         DB::beginTransaction();
         try {
             $dataPD = PasienDaftar::where('norec', $request['norec_pd'])->where('kdprofile', $kdProfile)->first();
@@ -1979,7 +1981,14 @@ class EMRController  extends ApiController
             } else {
                 $dataSO = StrukOrder::where('norec', $request['norec_so'])->where('kdprofile', $kdProfile)->first();
                 $noOrder = $dataSO->noorder;
-            }
+            }            
+            if(empty($request->file('filePasien'))){
+                $dataSO->file = null;
+            } else {
+                $extension = $uploadBerkasPasien->getClientOriginalExtension();
+                $filename ='Photo'.'_'.date('YmdHis').'.'.$extension;
+                $dataSO->file = $path.'/'.$filename;
+            }            
             $dataSO->nocmfk = $dataPD->nocmfk;
             $dataSO->isdelivered = 1;
             $dataSO->noorder = $noOrder;
@@ -10560,6 +10569,21 @@ class EMRController  extends ApiController
             'message' => 'epic',
         );
         return $this->respond($result);
+    }
+
+    public function getAsistenOperasi(Request $request) {
+        $kdProfile = $this->getDataKdProfile($request);
+        $idProfile = (int) $kdProfile;
+        $pemeriksa = SettingDataFixed::where('id', 1584)->first();
+        $pemeriksa = explode(',', $pemeriksa->nilaifield);
+
+        $dataAsistenOperasi = \DB::table('pegawai_m as pg')
+            ->select('id as value', 'namalengkap as text')
+            ->where('pg.kdprofile',$idProfile)
+            ->whereIn('pg.id', $pemeriksa)
+            ->where('pg.statusenabled',true)
+            ->get();
+        return $dataAsistenOperasi;
     }
 
 }

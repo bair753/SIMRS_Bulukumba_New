@@ -1,10 +1,11 @@
 define(['initialize'], function (initialize) {
     'use strict';
-    initialize.controller('InputResepApotikOrderRevCtrl', ['$q', '$rootScope', '$scope', 'MedifirstService', '$state', 'CacheHelper', '$mdDialog',
-        function ($q, $rootScope, $scope, medifirstService, $state, cacheHelper, $mdDialog) {
+    initialize.controller('InputResepApotikOrderRevCtrl', ['$q', '$rootScope', '$scope', 'MedifirstService', '$state', 'CacheHelper', '$mdDialog','DateHelper',
+        function ($q, $rootScope, $scope, medifirstService, $state, cacheHelper, $mdDialog, dateHelper) {
             var norecAPD = $state.params.noRec;
             $scope.item = {};
             $scope.dataVOloaded = true;
+            $scope.datauserlogin = medifirstService.getUserLogin();
             $scope.now = new Date();
             $scope.item.rke = 1;
             $scope.item.tglresep = $scope.now;
@@ -193,6 +194,13 @@ define(['initialize'], function (initialize) {
                         $scope.hideSimpan =true;
                     }
                 });
+
+                medifirstService.get("sysadmin/menu/svc-modul?get=loginuser&id=" + $scope.datauserlogin.id).then(function (data) {
+					// $scope.item.idlogin = data.data.loginuser[0].luid;
+					// $scope.item.namaUser = data.data.loginuser[0].namauser;					
+					$scope.item.kelompokUserHakAkses = { id: data.data.loginuser[0].kuid, kelompokuser: data.data.loginuser[0].kelompokuser };
+					// $scope.dataGrid = data.data.loginuser[0].data;
+				})
               
                 // medifirstService.get('emr/get-pegawai-parts?id=' + medifirstService.getPegawaiLogin().id).then(function (e) {
                 //     $scope.listPenulisResep.add(e.data[0])
@@ -536,6 +544,10 @@ define(['initialize'], function (initialize) {
             }
 
             $scope.tambah = function () {
+                if ($scope.item.kelompokUserHakAkses.kelompokuser != 'dokter') {
+                    toastr.error('Akun bukan Dokter',' Mohon hubungi IT!')
+                    return
+                }
                 if(statusTambah == false){
                     return
                 }
@@ -1110,6 +1122,7 @@ define(['initialize'], function (initialize) {
                         })
                     // $scope.item.resep = e.data.noresep.noorder
                     //  $scope.hideSimpan =false
+                    sendNotification(e.data)
                     init();
                     $scope.batal();
                     $scope.disabledRuangan = false
@@ -1967,6 +1980,29 @@ define(['initialize'], function (initialize) {
                     }
                 })
             }
+        }
+
+        function sendNotification(e) {
+            var body = {
+                norec: e.noresep.norec,
+                judul: 'Ada order baru #' + e.noresep.noorder,
+                jenis: 'E-Resep',
+                pesanNotifikasi: '',
+                idRuanganAsal: $scope.item.idRuangan,
+                idRuanganTujuan: $scope.item.ruangan.id,
+                ruanganAsal: $scope.item.namaRuangan,
+                ruanganTujuan: $scope.item.ruangan.namaruangan,
+                kelompokUser: null,//medifirstService.getKelompokUser()
+                idKelompokUser: null,
+                idPegawai: medifirstService.getPegawai().id,
+                dataArray: [],
+                urlForm: 'ResepElektronik',
+                params: null,
+                namaFungsiFrontEnd: null,
+                tgl: $scope.item.tglresep,
+                tgl_string: dateHelper.getTanggalJamFormatted($scope.item.tglresep),
+            }
+            medifirstService.sendSocket("sendNotification", body);
         }
 
            //** BATAS SUCI */

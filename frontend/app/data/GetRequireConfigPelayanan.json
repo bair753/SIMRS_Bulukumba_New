@@ -3401,6 +3401,14 @@
         {
             "nameDep": "PernyataanPindahRuangCtrl",
             "urlDep": "module/EMR/PernyataanPindahRuangCtrl"
+        },
+        {
+            "nameDep": "CheckListDanObservasiTransfusiDarahRanapCtrl",
+            "urlDep": "module/EMR/CheckListDanObservasiTransfusiDarahRanapCtrl"
+        },
+        {
+            "nameDep": "FormulirPermintaanDarahRanapCtrl",
+            "urlDep": "module/EMR/FormulirPermintaanDarahRanapCtrl"
         }
         
     

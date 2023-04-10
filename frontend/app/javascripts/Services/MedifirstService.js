@@ -4,7 +4,7 @@ define(['Configuration'], function (config) {
 
     var medifirst2000Service = angular.module('MedifirstService', ['ngResource', 'ApiService', 'Services']);
 
-    medifirst2000Service.service('MedifirstService', ['ApiService','$mdDialog', function (r,$mdDialog) {
+    medifirst2000Service.service('MedifirstService', ['ApiService','$mdDialog','socket', function (r,$mdDialog,socket) {
         return {
             /** standar API service */
             get: function (url) {
@@ -273,6 +273,20 @@ define(['Configuration'], function (config) {
                 return r.postNonMessage({
                     url: api + url
                 },data)
+            },
+            sendSocket: function(name, body) {
+                socket.emit('get-server-socket', {
+                    "name": name,
+                    "body": body
+                });
+            },
+            getSocket: function() {
+                return new Promise((resolve,reject) => {
+                     socket.on('set-server-socket', function (data) {
+                         resolve(JSON.parse(data))
+                     })
+                 })
+              
             },
             getApi: function (url){
                 let api = baseApiBackend;

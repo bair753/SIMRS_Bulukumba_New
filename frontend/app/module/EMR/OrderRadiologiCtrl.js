@@ -1054,6 +1054,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                             }
                         }
                     }
+                    sendNotification(e.data)
                     init();
                     $scope.BatalOrder();
 
@@ -1309,6 +1310,29 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 				}
 				$scope.popUpEkpertise.close();
 			}
+
+            function sendNotification(e) {
+                var body = {
+                    norec: e.strukorder.norec,
+                    judul: 'Ada order baru #' + e.strukorder.noorder,
+                    jenis: 'Order Laboratorium',
+                    pesanNotifikasi: '',
+                    idRuanganAsal: e.strukorder.objectruanganfk,
+                    idRuanganTujuan: e.strukorder.objectruangantujuanfk,
+                    ruanganAsal: $scope.item.namaRuangan,
+                    ruanganTujuan: $scope.item.ruangantujuan.namaruangan,
+                    kelompokUser: null, //medifirstService.getKelompokUser(),
+                    idKelompokUser: null,
+                    idPegawai: medifirstService.getPegawai().id,
+                    dataArray: [],
+                    urlForm: 'DaftarOrderPenunjang',
+                    params: null,
+                    namaFungsiFrontEnd: null,
+                    tgl: e.strukorder.tglorder,
+                    tgl_string: moment($scope.now).format('DD MMMM YYYY'),
+                }
+                medifirstService.sendSocket("sendNotification", body);
+            }
         }
     ]);
 });

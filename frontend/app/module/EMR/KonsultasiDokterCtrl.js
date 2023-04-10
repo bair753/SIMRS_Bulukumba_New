@@ -2,6 +2,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
     'use strict';
     initialize.controller('KonsultasiDokterCtrl', ['$q', '$scope', '$state', 'MedifirstService', '$timeout', 'CacheHelper','$rootScope',
         function ($q, $scope, $state, medifirstService, $timeout, cacheHelper,$rootScope) {
+            var baseTransaksi = config.baseApiBackend; 
             $scope.isRouteLoading = false;
             $scope.now = new Date()
             $scope.item = {
@@ -218,22 +219,64 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     toastr.error("Pilih Dokter terlebih dahulu!")
                     return
                 }
-                var objSave = {
-                    norec_so: $scope.item.norec != undefined ? $scope.item.norec : '',
-                    norec_pd: $scope.norecPd,
-                    pegawaifk: $scope.item.dokter.id,
-                    objectruanganasalfk: $scope.item.ruanganAsal.id,
-                    objectruangantujuanfk: $scope.item.ruanganTujuan.id,
-                    keterangan: $scope.item.keterangan != undefined ? $scope.item.keterangan : '',
+                // const file = document.getElementById("filePasien").files[0];
+                // var objSave = {
+                //     norec_so: $scope.item.norec != undefined ? $scope.item.norec : '',
+                //     norec_pd: $scope.norecPd,
+                //     pegawaifk: $scope.item.dokter.id,
+                //     objectruanganasalfk: $scope.item.ruanganAsal.id,
+                //     objectruangantujuanfk: $scope.item.ruanganTujuan.id,
+                //     keterangan: $scope.item.keterangan != undefined ? $scope.item.keterangan : '',
+                //     filepasien: file != undefined ? file : '',
+                // }
+                // medifirstService.post( 'emr/post-konsultasi',objSave).then(function (e) {
+                //     clear()
+                //     init();
+                //     medifirstService.postLogging('Konsultasi', 'Norec strukorder_t', e.data.strukorder.norec, 'Menu Dokter').then(function (res) {
+                //     })
+                // });
+
+                const url = baseTransaksi + 'emr/post-konsultasi'
+                const file = document.getElementById("filePasien").files[0];
+                var formData = new FormData();
+                formData.append("filePasien", file);
+                formData.append("norec_so", $scope.item.norec != undefined ? $scope.item.norec : '');
+                formData.append("norec_pd", $scope.norecPd);
+                formData.append("pegawaifk", $scope.item.dokter.id);
+                formData.append("objectruanganasalfk", $scope.item.ruanganAsal.id);
+                formData.append("objectruangantujuanfk", $scope.item.ruanganTujuan.id);
+                formData.append("keterangan", $scope.item.keterangan != undefined ? $scope.item.keterangan : '');
+                var arr = document.cookie.split(';')
+                var authorization;
+                for (var i = 0; i < arr.length; i++) {
+                    var element = arr[i].split('=');
+                    if (element[0].indexOf('authorization') > 0) {
+                        authorization = element[1];
+                    }
                 }
-                medifirstService.post( 'emr/post-konsultasi',objSave).then(function (e) {
+
+                fetch(url, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-AUTH-TOKEN': authorization
+                    }
+				})
+                .then(response => {
+                // Handle response here
+                response.json()
+                })
+                .then(result => {
                     clear()
                     init();
                     medifirstService.postLogging('Konsultasi', 'Norec strukorder_t', e.data.strukorder.norec, 'Menu Dokter').then(function (res) {
                     })
+                })
+                .catch((error) => {
                 });
             };
             function clear() {
+                document.getElementById("formFile").reset()
                 delete $scope.item.norec
                 delete $scope.item.ruanganTujuan
                 delete $scope.item.keterangan
