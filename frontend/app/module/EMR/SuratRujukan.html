@@ -1,0 +1,219 @@
+<style type="text/css">
+    fieldset {
+        border-radius: 5px;
+        border: 1px solid #228be6;
+    }
+
+    .k-slider-horizontal {
+        display: inline-block;
+        float: left;
+        width: 450px;
+
+        height: 26px;
+
+
+    }
+
+    .k-slider {
+
+        margin-left: 3%;
+        margin-right: 3%;
+        margin-top: 1%;
+        margin-bottom: 5%;
+        display: inline-block;
+    }
+
+    .activeBtn {
+        background-color: #10c4b2;
+        color: #ffffff;
+    }
+    table,
+    th,
+    td {
+        border: 1px solid #929191;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+
+    th,
+    td {
+        padding: 5px;
+        text-align: left;
+    }
+</style>
+
+<!-- ng-class="{'my-disable':true}" -->
+<!-- <div class="grid_12"  disable-contents="allDisabled" id="form"> -->
+<div class="grid_12">
+    <div class="grid_12">
+        <div class="panel panel-default container_12">
+            <div class="panel-heading" c-translate>Surat Rujukan</div>
+        </div>
+        <fieldset>
+            <div class="grid_12" style="margin-top: 10px;">
+                <fieldset style="margin-top: 10px;">
+                    <div class="grid_12" style="margin-top: 10px;">
+                        <div class="grid_4">
+                            <label c-label item="item">Tanggal</label>
+                        </div>
+                        <div class="grid_6">
+                            <input style="width: 100%" k-ng-model="item.obj[31101130]" kendo-datepicker placeholer="YYYY:MM:DD" k-format="'yyyy-MM-dd'" ng-disable="item.obj[31101130]" />
+                        </div>
+                    </div>
+                    <div class="grid_12">
+                        <div class="grid_4">
+                            <label c-label item="item">No. Rujukan</label>
+                        </div>
+                        <div class="grid_6" style="margin-top: 5px;">
+                            <input class="k-textbox" ng-model="item.obj[31101131]" type="text" ng-disable="item.obj[31101131]">
+                        </div>
+                    </div>
+                    <div class="grid_12">
+                        <div class="grid_4">
+                            <label c-label item="item">Faskes Asal Rujukan</label>
+                        </div>
+                        <div class="grid_6" style="margin-top: 5px;">
+                            <input class="k-textbox" ng-model="item.obj[31101132]" type="text" ng-disable="item.obj[31101132]">
+                        </div>
+                    </div>
+                    <div class="grid_12" style="margin-top: 10px;">
+                        <div class="grid_4">
+                            <label c-label item="item">Alamat dan Telp.</label>
+                        </div>
+                        <div class="grid_6" style="margin-top: 10px;">
+                            <textarea cols="6" rows="4" c-text-area type="input" filter="'string'" class="k-textbox" ng-model="item.obj[31101133]" />
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="grid_12" style="margin-top: 20px;"></div>
+                <fieldset style="margin-top: 10px;">
+                    <div class="grid_12" style="margin-top: 10px;">
+                        <div class="grid_12">
+                            <label item="item">
+                                Kepada TS Yang Terhormat :
+                            </label>
+                        </div>
+                    </div>
+                    <div class="grid_12" style="margin-top: 10px;">
+                        <div class="grid_12">
+                            <label c-label item="item">Faskes Tujuan :</label>
+                        </div>
+                        <div class="grid_12" style="margin-top: 5px;">
+                            <input class="k-textbox" ng-model="item.obj[31101134]" type="text" ng-disable="item.obj[31101134]">
+                        </div>
+                    </div>
+                    <div class="grid_12" style="margin-top: 10px;">
+                        <div class="grid_12">
+                            <label c-label item="item">Spesialis Tujuan :</label>
+                        </div>
+                        <div class="grid_12" style="margin-top: 5px;">
+                            <input class="k-textbox" ng-model="item.obj[31101135]" type="text" ng-disable="item.obj[31101135]">
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="grid_12" style="margin-top: 20px;"></div>
+                <fieldset style="margin-top: 10px;">
+                    <div class="grid_12" style="margin-top: 10px;">
+                        <div class="grid_12">
+                            <label item="item">
+                                Mohon pemeriksaan dan penanganan lebih lanjut dari pasien berikut :
+                            </label>
+                        </div>
+                    </div>
+                    <div class="grid_12" ng-repeat="list in listPasien | orderBy:'id'" style="margin-top: 10px;">
+                        <div ng-repeat="jawab in list.detail | orderBy:'id'">
+                            <div ng-switch on="jawab.type">
+                                <div class="grid_12" ng-switch-when="label" style="margin-top: 10px;">
+                                    <label c-label item="item">{{ jawab.caption }}</label>
+                                </div>
+                                <div class="grid_8" ng-switch-when="date">
+                                    <div class="grid_12">
+                                        <label c-label item="item">{{jawab.caption}}</label>
+                                    </div>
+                                    <div class="grid_12">
+                                        <input style="width: 100%" k-ng-model="item.obj[jawab.id]" kendo-datepicker
+                                            placeholer="YYYY:MM:DD" k-format="'yyyy-MM-dd'" />
+                                    </div>
+                                </div>
+                                <div class="grid_8" ng-switch-when="datetime">
+                                    <div class="grid_12">
+                                        <label c-label item="item">{{jawab.caption}}</label>
+                                    </div>
+                                    <div class="grid_12">
+                                        <input style="width: 80%" k-ng-model="item.obj[jawab.id]" kendo-datetimepicker
+                                            placeholer="YYYY:MM:DD HH:MM" k-format="'yyyy-MM-dd HH:mm'" />
+                                    </div>
+                                </div>
+                                <div class="grid_8" ng-switch-when="textbox">
+                                    <div class="grid_12">
+                                        <label c-label item="item">{{jawab.caption}}</label>
+                                    </div>
+                                    <div class="grid_12">
+                                        <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text"
+                                            placeholder="{{jawab.caption}}" ng-value="{{jawab.value}}">
+                                    </div>
+                                </div>
+                                <div class="grid_3" ng-switch-when="checkbox" style="margin-top: 5px;">
+                                    <div class="grid_12">
+                                        <label c-label item="item">{{jawab.caption}}</label>
+                                    </div>
+                                    <div class="grid_12">
+                                        <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}"
+                                            ng-model="item.obj[jawab.id]">
+                                        <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                            &nbsp;{{jawab.nama}}</label>
+                                    </div>
+                                </div>
+                                <div class="grid_8" ng-switch-when="textarea">
+                                    <div class="grid_12">
+                                        <label c-label item="item">{{jawab.caption}}</label>
+                                    </div>
+                                    <div class="grid_12">
+                                        <textarea cols="6" rows="6" c-text-area type="input" filter="'string'" class="k-textbox"
+                                            ng-model="item.obj[jawab.id]" />
+                                    </div>
+                                </div>
+                                <div class="grid_8" ng-switch-when="combobox">
+                                    <div class="grid_12">
+                                        <label c-label item="item">{{jawab.caption}}</label>
+                                    </div>
+                                    <div class="grid_12">
+                                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[jawab.id]"
+                                            k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'"
+                                            k-auto-bind="false" k-data-source="{{jawab.dataList}}" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="grid_12" style="margin-top: 30px;">
+                    <div class="grid_12">
+                        <label item="item">
+                            Demikian surat rujukan ini, atas perhatian dan bantuannya kami sampaikan terima kasih.
+                        </label>
+                    </div>
+                </div>
+                <div class="grid_12" style="margin-top: 30px;">
+                    <div class="grid_8"></div>
+                    <div class="grid_4">
+                        <div class="grid_12">
+                            <label c-label item="item">Yang Merujuk,</label>
+                        </div>
+                        <div class="grid_12">
+                            <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[31101144]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</div>
+
+<br />
+<br />
+<div class="grid_12">
+    <div ng-include='"../app/module/EMR/TemplateButtonDinamis" '></div>
+
+</div>

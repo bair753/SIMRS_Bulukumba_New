@@ -3383,6 +3383,26 @@
             "urlDep": "module/EMR/PersetujuanOperasiRajalCtrl"
         },
         {
+            "nameDep": "PersetujuanKolonoskopiCtrl",
+            "urlDep": "module/EMR/PersetujuanKolonoskopiCtrl"
+        },
+        {
+            "nameDep": "SuratRujukanCtrl",
+            "urlDep": "module/EMR/SuratRujukanCtrl"
+        },
+        {
+            "nameDep": "PernyataanPersetujuanDirujukCtrl",
+            "urlDep": "module/EMR/PernyataanPersetujuanDirujukCtrl"
+        },
+        {
+            "nameDep": "PernyataanBersediaBerlakuUmumCtrl",
+            "urlDep": "module/EMR/PernyataanBersediaBerlakuUmumCtrl"
+        },
+        {
+            "nameDep": "PernyataanPindahRuangCtrl",
+            "urlDep": "module/EMR/PernyataanPindahRuangCtrl"
+        },
+        {
             "nameDep": "CheckListDanObservasiTransfusiDarahRanapCtrl",
             "urlDep": "module/EMR/CheckListDanObservasiTransfusiDarahRanapCtrl"
         },
@@ -3391,5 +3411,6 @@
             "urlDep": "module/EMR/FormulirPermintaanDarahRanapCtrl"
         }
         
+    
     ]
 }
