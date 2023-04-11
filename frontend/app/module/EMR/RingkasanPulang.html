@@ -82,8 +82,8 @@
 
         <div class="grid_12" style="margin-top: 10px;">
             <fieldset style="margin-top: 10px;">
-                <div class="grid_12" ng-repeat="list in listPulang | orderBy:'id'" style="margin-top: 10px;">
-                    <div ng-repeat="jawab in list.detail | orderBy:'id'">
+                <div class="grid_12" ng-repeat="list in listPulang" style="margin-top: 10px;">
+                    <div ng-repeat="jawab in list.detail">
                         <div ng-switch on="jawab.type">
                             <div class="grid_12" ng-switch-when="label" style="margin-top: 10px;">
                                 <label c-label item="item">{{ jawab.caption }}</label>

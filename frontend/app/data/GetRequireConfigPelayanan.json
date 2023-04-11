@@ -3417,6 +3417,14 @@
         {
             "nameDep": "AsesmenNyeriRanapCtrl",
             "urlDep": "module/EMR/AsesmenNyeriRanapCtrl"
+        },
+        {
+            "nameDep": "EvaluasiAwalMPPRanapCtrl",
+            "urlDep": "module/EMR/EvaluasiAwalMPPRanapCtrl"
+        },
+        {
+            "nameDep": "CatatanImplementasiMPPRanapCtrl",
+            "urlDep": "module/EMR/CatatanImplementasiMPPRanapCtrl"
         }
         
     
