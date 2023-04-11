@@ -19146,6 +19146,52 @@
         "define": "RekamMedisCtrl"
       }
     ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.MonitoringTandaVitalRanap",
+    "url": "/MonitoringTandaVitalRanap/:index/:idEMR",
+    "templateurl": "module/EMR/MonitoringTandaVitalRanap.html",
+    "controller": "MonitoringTandaVitalRanapCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.MonitoringTandaVitalNicu",
+    "url": "/MonitoringTandaVitalNicu/:index/:idEMR",
+    "templateurl": "module/EMR/MonitoringTandaVitalNicu.html",
+    "controller": "MonitoringTandaVitalNicuCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
   }
 
 

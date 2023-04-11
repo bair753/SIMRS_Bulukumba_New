@@ -3425,6 +3425,14 @@
         {
             "nameDep": "CatatanImplementasiMPPRanapCtrl",
             "urlDep": "module/EMR/CatatanImplementasiMPPRanapCtrl"
+        },
+        {
+            "nameDep": "MonitoringTandaVitalRanapCtrl",
+            "urlDep": "module/EMR/MonitoringTandaVitalRanapCtrl"
+        },
+        {
+            "nameDep": "MonitoringTandaVitalNicuCtrl",
+            "urlDep": "module/EMR/MonitoringTandaVitalNicuCtrl"
         }
         
     
