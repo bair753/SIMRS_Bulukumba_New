@@ -3413,6 +3413,10 @@
         {
             "nameDep": "EKGRanapCtrl",
             "urlDep": "module/EMR/EKGRanapCtrl"
+        },
+        {
+            "nameDep": "AsesmenNyeriRanapCtrl",
+            "urlDep": "module/EMR/AsesmenNyeriRanapCtrl"
         }
         
     
