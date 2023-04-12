@@ -3433,6 +3433,18 @@
         {
             "nameDep": "MonitoringTandaVitalNicuCtrl",
             "urlDep": "module/EMR/MonitoringTandaVitalNicuCtrl"
+        },
+        {
+            "nameDep": "TransferAntarUnitRajalCtrl",
+            "urlDep": "module/EMR/TransferAntarUnitRajalCtrl"
+        },
+        {
+            "nameDep": "PermintaanRawatJalanCtrl",
+            "urlDep": "module/EMR/PermintaanRawatJalanCtrl"
+        },
+        {
+            "nameDep": "AsesmenPraAnestesiRanapCtrl",
+            "urlDep": "module/EMR/AsesmenPraAnestesiRanapCtrl"
         }
         
     

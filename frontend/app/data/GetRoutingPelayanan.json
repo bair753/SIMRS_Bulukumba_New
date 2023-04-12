@@ -19192,6 +19192,75 @@
         "define": "RekamMedisCtrl"
       }
     ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.TransferAntarUnitRajal",
+    "url": "/TransferAntarUnitRajal",
+    "templateurl": "module/EMR/TransferAntarUnitRajal.html",
+    "controller": "TransferAntarUnitRajalCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.PermintaanRawatJalan",
+    "url": "/PermintaanRawatJalan",
+    "templateurl": "module/EMR/PermintaanRawatJalan.html",
+    "controller": "PermintaanRawatJalanCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.AsesmenPraAnestesiRanap",
+    "url": "/AsesmenPraAnestesiRanap/:index/:idEMR",
+    "templateurl": "module/EMR/AsesmenPraAnestesiRanap.html",
+    "controller": "AsesmenPraAnestesiRanapCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
   }
 
 
