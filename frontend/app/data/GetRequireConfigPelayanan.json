@@ -3445,6 +3445,10 @@
         {
             "nameDep": "AsesmenPraAnestesiRanapCtrl",
             "urlDep": "module/EMR/AsesmenPraAnestesiRanapCtrl"
+        },
+        {
+            "nameDep": "PengkajianDanIntervensiUlangNyeriRanapCtrl",
+            "urlDep": "module/EMR/PengkajianDanIntervensiUlangNyeriRanapCtrl"
         }
         
     
