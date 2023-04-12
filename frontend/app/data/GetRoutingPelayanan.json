@@ -17372,8 +17372,8 @@
     ]
   },
   {
-    "name": "RekamMedis.AsesmenMedis.TransferAntarUnit",
-    "url": "/TransferAntarUnit",
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.TransferAntarUnit",
+    "url": "/TransferAntarUnit/:index/:idEMR",
     "templateurl": "module/EMR/TransferAntarUnit.html",
     "controller": "TransferAntarUnitCtrl",
     "deps": [
@@ -18297,8 +18297,8 @@
     ]
   },
   {
-    "name": "RekamMedis.AsesmenMedis.TransferAntarUnitGawatDarurat",
-    "url": "/TransferAntarUnitGawatDarurat",
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.TransferAntarUnitGawatDarurat",
+    "url": "/TransferAntarUnitGawatDarurat/:index/:idEMR",
     "templateurl": "module/EMR/TransferAntarUnitGawatDarurat.html",
     "controller": "TransferAntarUnitGawatDaruratCtrl",
     "deps": [
@@ -19194,8 +19194,8 @@
     ]
   },
   {
-    "name": "RekamMedis.AsesmenMedis.TransferAntarUnitRajal",
-    "url": "/TransferAntarUnitRajal",
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.TransferAntarUnitRajal",
+    "url": "/TransferAntarUnitRajal/:index/:idEMR",
     "templateurl": "module/EMR/TransferAntarUnitRajal.html",
     "controller": "TransferAntarUnitRajalCtrl",
     "deps": [
