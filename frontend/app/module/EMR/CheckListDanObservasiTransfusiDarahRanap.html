@@ -1,0 +1,480 @@
+<style type="text/css">
+    fieldset {
+        border-radius: 5px;
+        border: 1px solid #228be6;
+    }
+
+    .k-slider-horizontal {
+        display: inline-block;
+        float: left;
+        width: 450px;
+
+        height: 26px;
+
+
+    }
+
+    .k-slider {
+
+        margin-left: 3%;
+        margin-right: 3%;
+        margin-top: 1%;
+        margin-bottom: 5%;
+        display: inline-block;
+    }
+
+    .activeBtn {
+        background-color: #10c4b2;
+        color: #ffffff;
+    }
+    table,
+    th,
+    td {
+        border: 1px solid #929191;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+
+    th,
+    td {
+        padding: 5px;
+        text-align: left;
+    }
+</style>
+
+ <!-- ng-class="{'my-disable':true}" -->
+<!-- <div class="grid_12"  disable-contents="allDisabled" id="form"> -->
+<div class="grid_12">
+    <div class="grid_12">
+        <div class="panel panel-default container_12">
+            <div class="panel-heading" c-translate>Check List Dan Observasi Transfusi Darah Rawat Inap</div>
+        </div>
+
+        <div class="grid_12">
+            <fieldset style="margin-top: 10px;">
+                <div class="grid_6">
+                    <div class="grid_12">
+                        <label c-label item="item" style="margin-top: 10px;">Tanggal dan Pukul</label>
+                    </div>
+                    <div class="grid_12">
+                        <input k-ng-model="item.obj[31101376]" kendo-datetimepicker placeholer="HH:MM"
+                                k-format="'yyyy-MM-dd HH:mm'" />
+                    </div>
+                </div>
+                <div class="grid_6">
+                    <div class="grid_12">
+                        <label c-label item="item" style="margin-top: 10px;">Ruangan</label>
+                    </div>
+                    <div class="grid_12">
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[31101377]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listRuangan" />
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="grid_12">
+            <fieldset style="margin-top: 10px;">
+                <div class="grid_12">
+                    <div class="grid_12">
+                        <label c-label item="item" style="margin-top: 10px;">Bila SESUAI, maka dilanjutkan ke pernyataan berikut :</label>
+                    </div>
+                    <div class="grid_12">
+                        <label c-label item="item" style="margin-top: 10px;">Bila TIDAK SESUAI? Cross check kembali ke bank darah RSUD H. Andi Sulthan Daeng Radja</label>
+                    </div>
+                </div>
+
+            </fieldset>
+        </div>
+
+        <div class="grid_12" style="margin-top: 10px;">
+            <fieldset style="margin-top: 10px;">
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_12">
+                        <div class="grid_12">
+                            <label c-label item="item">Jenis Darah</label>
+                        </div>
+                        <div class="grid_12" style="margin-top: 10px">
+                            <div class="grid_3">
+                                <input type="checkbox" class="k-checkbox" ng-model="item.obj[31101378]" id="item.obj[31101378]">
+                                <label class="k-checkbox-label" for="item.obj[31101378]">&nbsp;Whole blood</label> 
+                            </div>
+                            <div class="grid_3">
+                                &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="k-checkbox" ng-model="item.obj[31101379]" id="item.obj[31101379]">
+                                <label class="k-checkbox-label" for="item.obj[31101379]">&nbsp;PRC</label>
+                            </div>
+                            <div class="grid_3">
+                                &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="k-checkbox" ng-model="item.obj[31101380]" id="item.obj[31101380]">
+                                <label class="k-checkbox-label" for="item.obj[31101380]">&nbsp;Trombosit</label>
+                            </div>
+                            <div class="grid_3">
+                                &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="k-checkbox" ng-model="item.obj[31101381]" id="item.obj[31101381]">
+                                <label class="k-checkbox-label" for="item.obj[31101381]">&nbsp;FFP</label>
+                            </div>
+                        </div>
+                    </div>                       
+                </div>
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_12">
+                        <div class="grid_12">
+                            <label c-label item="item">Jumlah Kebutuhan Darah</label>
+                        </div>
+                        <div class="grid_12" style="margin-top: 10px">
+                            <div class="grid_6">
+                                <input type="checkbox" class="k-checkbox" ng-model="item.obj[31101382]" id="item.obj[31101382]">
+                                <label class="k-checkbox-label" for="item.obj[31101382]">&nbsp;BAG / CC</label> 
+                            </div>   
+                        </div>
+                    </div>                       
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="grid_12" style="margin-top: 10px;">
+            <fieldset style="margin-top: 10px;">
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_12">
+                        <div class="grid_12">
+                            <label c-label item="item">Golongan Darah</label>
+                        </div>
+                        <div class="grid_12" style="margin-top: 10px">
+                            <div class="grid_3">
+                                <input type="checkbox" class="k-checkbox" ng-model="item.obj[31101383]" id="item.obj[31101383]">
+                                <label class="k-checkbox-label" for="item.obj[31101383]">&nbsp;A</label> 
+                            </div>
+                            <div class="grid_3">
+                                &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="k-checkbox" ng-model="item.obj[31101384]" id="item.obj[31101384]">
+                                <label class="k-checkbox-label" for="item.obj[31101384]">&nbsp;B</label>
+                            </div>
+                            <div class="grid_3">
+                                &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="k-checkbox" ng-model="item.obj[31101385]" id="item.obj[31101385]">
+                                <label class="k-checkbox-label" for="item.obj[31101385]">&nbsp;O</label>
+                            </div>
+                            <div class="grid_3">
+                                &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="k-checkbox" ng-model="item.obj[31101386]" id="item.obj[31101386]">
+                                <label class="k-checkbox-label" for="item.obj[31101386]">&nbsp;AB</label>
+                            </div>
+                        </div>
+                    </div>                       
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="grid_12" style="margin-top: 10px;">
+            <fieldset style="margin-top: 10px;">
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_12">
+                        <div class="grid_12">
+                            <table style="border: 1;">
+                                <tr>
+                                    <th>Nomor</th>
+                                    <th>Nomor Kantong Darah</th>
+                                    <th>Tanggal Kadaluarsa</th>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>
+                                        <input type="text" class="k-textbox" ng-model="item.obj[31101387]">
+                                    </td>
+                                    <td>
+                                        <input k-ng-model="item.obj[31101388]" kendo-datetimepicker placeholer="HH:MM"
+                                        k-format="'yyyy-MM-dd HH:mm'" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>
+                                        <input type="text" class="k-textbox" ng-model="item.obj[31101389]">
+                                    </td>
+                                    <td>
+                                        <input k-ng-model="item.obj[31101390]" kendo-datetimepicker placeholer="HH:MM"
+                                        k-format="'yyyy-MM-dd HH:mm'" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>
+                                        <input type="text" class="k-textbox" ng-model="item.obj[31101391]">
+                                    </td>
+                                    <td>
+                                        <input k-ng-model="item.obj[31101392]" kendo-datetimepicker placeholer="HH:MM"
+                                        k-format="'yyyy-MM-dd HH:mm'" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>
+                                        <input type="text" class="k-textbox" ng-model="item.obj[31101393]">
+                                    </td>
+                                    <td>
+                                        <input k-ng-model="item.obj[31101394]" kendo-datetimepicker placeholer="HH:MM"
+                                        k-format="'yyyy-MM-dd HH:mm'" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>
+                                        <input type="text" class="k-textbox" ng-model="item.obj[31101395]">
+                                    </td>
+                                    <td>
+                                        <input k-ng-model="item.obj[31101396]" kendo-datetimepicker placeholer="HH:MM"
+                                        k-format="'yyyy-MM-dd HH:mm'" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>                       
+                </div>
+                <div class="grid_12">
+                    <div class="grid_12">
+                        <label c-label item="item" style="margin-top: 10px;">Petugas Yang Melakukan Pengecekan</label>
+                    </div>
+                </div>
+                <div class="grid_6">
+                    <div class="grid_12">
+                        <label c-label item="item" style="margin-top: 10px;">Petugas 1</label>
+                    </div>
+                    <div class="grid_12">
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[31101397]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                    </div>
+                </div>
+                <div class="grid_6">
+                    <div class="grid_12">
+                        <label c-label item="item" style="margin-top: 10px;">Petugas 2</label>
+                    </div>
+                    <div class="grid_12">
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[31101398]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="grid_12">
+            <fieldset style="margin-top: 10px;">
+                <legend><b>CATATAN PERKEMBANGAN</b></legend>
+                <div class="grid_12">
+                    <div class="grid_12">
+                        <label c-label item="item" style="margin-top: 10px;">Tanggal dan Jam</label>
+                    </div>
+                    <div class="grid_12">
+                        <input k-ng-model="item.obj[31101399]" kendo-datetimepicker placeholer="HH:MM"
+                                k-format="'yyyy-MM-dd HH:mm'" />
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_12">
+                        <label c-label item="item" style="margin-top: 10px;">TD</label>
+                    </div>
+                    <div class="grid_6">
+                        <input type="text" class="k-textbox" ng-model="item.obj[31101400]">
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_12">
+                        <label c-label item="item" style="margin-top: 10px;">Nadi</label>
+                    </div>
+                    <div class="grid_6">
+                        <input type="text" class="k-textbox" ng-model="item.obj[31101401]">
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_12">
+                        <label c-label item="item" style="margin-top: 10px;">Suhu</label>
+                    </div>
+                    <div class="grid_6">
+                        <input type="text" class="k-textbox" ng-model="item.obj[31101402]">
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_12">
+                        <label c-label item="item" style="margin-top: 10px;">Pernapasan</label>
+                    </div>
+                    <div class="grid_6">
+                        <input type="text" class="k-textbox" ng-model="item.obj[31101403]">
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_12">
+                        <label c-label item="item" style="margin-top: 10px;">Pre Transfusi</label>
+                    </div>
+                    <div class="grid_6">
+                        <input type="text" class="k-textbox" ng-model="item.obj[31101404]">
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_12">
+                        <label c-label item="item" style="margin-top: 10px;">Post Transfusi</label>
+                    </div>
+                    <div class="grid_6">
+                        <input type="text" class="k-textbox" ng-model="item.obj[31101405]">
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_12">
+                        <label c-label item="item" style="margin-top: 10px;">Reaksi Transfusi</label>
+                    </div>
+                    <div class="grid_6">
+                        <input type="text" class="k-textbox" ng-model="item.obj[31101406]">
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_12">
+                        <label c-label item="item" style="margin-top: 10px;">Perbedaan Kondisi Pasien</label>
+                    </div>
+                    <div class="grid_6">
+                        <input type="text" class="k-textbox" ng-model="item.obj[31101407]">
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_12">
+                        <label c-label item="item" style="margin-top: 10px;">Nama dan Tanda Tangan</label>
+                    </div>
+                    <div class="grid_6">
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[31101408]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="grid_12">
+            <fieldset style="margin-top: 10px;">
+                <legend><b>CATATAN :</b></legend>
+                <div class="grid_12">
+                    <div class="grid_12">
+                        <label c-label item="item" style="margin-top: 10px;">1.	Observasi reaksi cepat	:	- 15 menit pertama dan kedua</label>
+                    </div>
+                    <div class="grid_12">
+                        <label c-label item="item" style="margin-top: 10px;">2.	Observasi reaksi lambat	:	- 60 menit kemudian dan selanjutnya tiap pergantian shift sampai 24 jam pasca transfusi</label>
+                    </div>
+                </div>
+
+            </fieldset>
+        </div>
+
+        <div class="grid_12">
+            <fieldset style="margin-top: 10px;">
+                <legend><b>REAKSI TRANSFUSI</b></legend>
+                <div class="grid_12">
+                    <div class="grid_12">
+                        <label c-label item="item" style="margin-top: 10px;">1.	Reaksi Cepat (terjadi selama transfuse atau dalam 24 jam setelah transfuse)</label>
+                    </div>
+                    <div class="grid_12" style="margin-top: 10px;">
+                        <label item="item">&nbsp;&nbsp;&nbsp; a.	Reaksi ringan</label>
+                    </div>
+                    <div class="grid_12" style="margin-top: 10px;">
+                        <label item="item">&nbsp;&nbsp;&nbsp; b.	Reaksi sedang – berat</label>
+                    </div>
+                </div>
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_12">
+                        <div class="grid_12">
+                            <div class="grid_12" style="margin-top: 10px">
+                                <input type="checkbox" class="k-checkbox" ng-model="item.obj[31101409]" id="item.obj[31101409]">
+                                <label class="k-checkbox-label" for="item.obj[31101409]">&nbsp;Gejala gelisah, lemah pruritis, palpasi, sispnea ringan dan nyeri kepala</label> 
+                            </div>
+                            <div class="grid_12" style="margin-top: 10px">
+                                <input type="checkbox" class="k-checkbox" ng-model="item.obj[31101410]" id="item.obj[31101410]">
+                                <label class="k-checkbox-label" for="item.obj[31101410]">&nbsp;Urtikaria, demam, takikardia, kaku otot</label>
+                            </div>
+                            <div class="grid_12" style="margin-top: 10px">
+                                <input type="checkbox" class="k-checkbox" ng-model="item.obj[31101411]" id="item.obj[31101411]">
+                                <label class="k-checkbox-label" for="item.obj[31101411]">&nbsp;Demam, lemah, hipotensi (turun ≥ 20% tekanan darah sistolik), takikardia (naik ≥ 20%), Hemoglobinuria dan perdarahan yang tidak jelas</label>
+                            </div>
+                        </div>
+                    </div>                       
+                </div>
+                <div class="grid_12">
+                    <div class="grid_12">
+                        <label c-label item="item" style="margin-top: 10px;">2.	Reaksi Lambat timbul 5-10 hari setelah transfuse</label>
+                    </div>
+                </div>
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_12">
+                        <div class="grid_12">
+                            <div class="grid_12" style="margin-top: 10px">
+                                <input type="checkbox" class="k-checkbox" ng-model="item.obj[31101412]" id="item.obj[31101412]">
+                                <label class="k-checkbox-label" for="item.obj[31101412]">&nbsp;Reaksi hemolitik lambat	: Gejala dan tanda demam, anemia, ikterik dan hemoglobinuria</label> 
+                            </div>
+                            <div class="grid_12" style="margin-top: 10px">
+                                <input type="checkbox" class="k-checkbox" ng-model="item.obj[31101413]" id="item.obj[31101413]">
+                                <label class="k-checkbox-label" for="item.obj[31101413]">&nbsp;Purpur pasca transfuse : Timbul perdarahan dan adanya trombositopenia berat, akut trombosit < 100.000/uL, hitung trombosit ≤ 50.000/uL dan perdarahan yang tidak terlihat dengan hitung trombosit	20.000/uL</label>
+                            </div>
+                            <div class="grid_12" style="margin-top: 10px">
+                                <input type="checkbox" class="k-checkbox" ng-model="item.obj[31101414]" id="item.obj[31101414]">
+                                <label class="k-checkbox-label" for="item.obj[31101414]">&nbsp;Penyakit graft-versus-host : Gejala demam, rash kulit dan deskuamasi, diare, hepatitis, pansitopenia, biasanya timbul 10-12 hari setelah transfuse. Tidak ada terapi spesifik, tetapi hanya bersifat suportif</label>
+                            </div>
+                            <div class="grid_12" style="margin-top: 10px">
+                                <input type="checkbox" class="k-checkbox" ng-model="item.obj[31101415]" id="item.obj[31101415]">
+                                <label class="k-checkbox-label" for="item.obj[31101415]">&nbsp;	Kelebihan besi ditandai gagal organ (jantung dan hati), kadar Fe Serum dan femitin meningkat lebih dari normal</label>
+                            </div>
+                            <div class="grid_12" style="margin-top: 10px">
+                                <input type="checkbox" class="k-checkbox" ng-model="item.obj[31101416]" id="item.obj[31101416]">
+                                <label class="k-checkbox-label" for="item.obj[31101416]">&nbsp;Infeksi yang berisiko terjadi akibat transfuse adalah Hepatitis B dan C, HIV, CMV, Malaria, Sifilis, Bruselosis, Tipanosoiasis </label>
+                            </div>
+                        </div>
+                    </div>                       
+                </div>
+
+                <div class="grid_12">
+                    <div class="grid_12">
+                        <label c-label item="item" style="margin-top: 10px;">3.	Penanganan Reaksi Transfusi</label>
+                    </div>
+                </div>
+
+                <div class="grid_12">
+                    <div class="grid_12" style="margin-top: 10px">
+                        <label item="item" style="margin-top: 10px;">a.	Hentikan segera pemberian transfusi</label>
+                    </div>
+                </div>
+
+                <div class="grid_12">
+                    <div class="grid_12" style="margin-top: 10px">
+                        <label item="item" style="margin-top: 10px;">b.	Pertahankan infus dengan pemberian NaCl 0.9%</label>
+                    </div>
+                </div>
+
+                <div class="grid_12">
+                    <div class="grid_12" style="margin-top: 10px">
+                        <label item="item" style="margin-top: 10px;">c.	Periksa ulang : Label darah donor, surat permintaan transfusi, identifikasi penderita</label>
+                    </div>
+                </div>
+
+                <div class="grid_12">
+                    <div class="grid_12" style="margin-top: 10px">
+                        <label item="item" style="margin-top: 10px;">d.	Segera lapor terjadinya reaksi transfusi pada dokter jaga, petugas Bank Darah Rumah Sakit</label>
+                    </div>
+                </div>
+
+                <div class="grid_12">
+                    <div class="grid_12" style="margin-top: 10px">
+                        <label item="item" style="margin-top: 10px;">e.	Kirim minimal 10 cc darah penderita tanpa antikoagulan bersama-sama dengan sisa darah ke laboratorium untuk penelitian reaksi transfusi</label>
+                    </div>
+                </div>
+
+                <div class="grid_12">
+                    <div class="grid_12" style="margin-top: 10px">
+                        <label item="item" style="margin-top: 10px;">f.	Tamping urin penderita 24 jam</label>
+                    </div>
+                </div>
+
+                <div class="grid_12">
+                    <div class="grid_12" style="margin-top: 10px">
+                        <label item="item" style="margin-top: 10px;">g.	Kirim urin penderita untuk evaluasi sebab-sebab terjadinya reaksi transfusi dan penentuan prognosis</label>
+                    </div>
+                </div>
+
+            </fieldset>
+        </div>
+
+    </div>
+</div>
+
+<br />
+<br />
+<div class="grid_12">
+    <div ng-include='"../app/module/EMR/TemplateButtonDinamis" '></div>
+
+</div>

@@ -46,10 +46,6 @@ define(['initialize'], function (initialize) {
                 $scope.listDokter = data
             })
 
-            medifirstService.getPart('emr/get-asisten-operasi', true, true, 20).then(function (data) {
-                $scope.listAsisten = data
-            })
-
             medifirstService.getPart('emr/get-datacombo-part-pegawai', true, true, 20).then(function (data) {
                 $scope.listPegawai = data
             })
@@ -538,6 +534,7 @@ define(['initialize'], function (initialize) {
                 for (var i = arrobj.length - 1; i >= 0; i--) {
                     if ($scope.item.obj[parseInt(arrobj[i])] instanceof Date)
                         $scope.item.obj[parseInt(arrobj[i])] = moment($scope.item.obj[parseInt(arrobj[i])]).format('YYYY-MM-DD HH:mm')
+                     // $scope.item.obj[parseInt(arrobj[i])] = moment($scope.item.obj[parseInt(arrobj[i])]).format('HH:mm')
                     arrSave.push({ id: arrobj[i], values: $scope.item.obj[parseInt(arrobj[i])] })
                 }
                 $scope.cc.jenisemr = 'asesmen'

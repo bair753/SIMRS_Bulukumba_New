@@ -1,6 +1,6 @@
 define(['initialize'], function (initialize) {
     'use strict';
-    initialize.controller('TransferAntarUnitGawatDaruratCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
+    initialize.controller('TransferAntarUnitRajalCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
         function ($q, $rootScope, $scope, ModelItem, $state, cacheHelper, dateHelper, medifirstService) {
 
             var paramsIndex = $state.params.index ? parseInt($state.params.index) : null
@@ -13,7 +13,7 @@ define(['initialize'], function (initialize) {
             $scope.SkorJatuhAnak = [];
             $scope.cc = {}
             var nomorEMR = '-'
-            $scope.cc.emrfk = 290061;
+            $scope.cc.emrfk = 290109;
             var dataLoad = []
             var pegawaiInputDetail= ''
             $scope.isCetak = false
@@ -315,7 +315,7 @@ define(['initialize'], function (initialize) {
                 }
                 medifirstService.post('emr/save-emr-dinamis', jsonSave).then(function (e) {
                     medifirstService.postLogging('EMR', 'norec emrpasien_t', e.data.data.norec,
-                    'Transfer Antar Unit Gawat Darurat'+ ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
+                    'Transfer Antar Unit Rawat Jalan'+ ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
                     + $scope.cc.noregistrasi).then(function (res) {
                     })
                     $rootScope.loadRiwayat()

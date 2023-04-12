@@ -1,6 +1,6 @@
-define(['initialize'], function (initialize) {
+define(['initialize', 'Configuration'], function (initialize, config) {
     'use strict';
-    initialize.controller('TransferAntarUnitGawatDaruratCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
+    initialize.controller('AsesmenNyeriRanapCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
         function ($q, $rootScope, $scope, ModelItem, $state, cacheHelper, dateHelper, medifirstService) {
 
             var paramsIndex = $state.params.index ? parseInt($state.params.index) : null
@@ -13,10 +13,11 @@ define(['initialize'], function (initialize) {
             $scope.SkorJatuhAnak = [];
             $scope.cc = {}
             var nomorEMR = '-'
-            $scope.cc.emrfk = 290061;
+            $scope.cc.emrfk = 290102;
             var dataLoad = []
             var pegawaiInputDetail= ''
             $scope.isCetak = false
+            $scope.isCetakV = true
             var norecEMR = ''
             var cacheNomorEMR = cacheHelper.get('cacheNomorEMR');
             var cacheNoREC = cacheHelper.get('cacheNOREC_EMR');
@@ -46,6 +47,18 @@ define(['initialize'], function (initialize) {
                 client.get('http://127.0.0.1:1237/printvb/e-rekammedis?cetak-emr-asesmen-awal-keperawatan-igd&id=' + $scope.cc.nocm + '&emr=' + norecEMR + '&view=true', function (response) {
                     // do something with response
                 });
+            }
+            $scope.cetakBlade = function () {
+                if (norecEMR == '') return
+
+                var local = JSON.parse(localStorage.getItem('profile'));
+                var nama = medifirstService.getPegawaiLogin().namalengkap;
+                console.log(config.baseApiBackend);
+                window.open(config.baseApiBackend + 'report/cetak-asesmen-awal-medis-ranap?nocm='
+                    + $scope.cc.nocm + '&norec_apd=' + $scope.cc.norec + '&emr=' + norecEMR
+                    + '&emrfk=' + $scope.cc.emrfk
+                    + '&kdprofile=' + local.id
+                    + '&nama=' + nama, '_blank');
             }
 
             medifirstService.getPart('emr/get-datacombo-part-dokter', true, true, 20).then(function (data) {
@@ -82,36 +95,129 @@ define(['initialize'], function (initialize) {
                 $scope.cc.norec_emr = nomorEMR
             }
 
-            $scope.listRuanganTransfer = [
+            $scope.listBioPsiko = [
                 {
                     "id": 1,
                     "detail": [
-                        { "id": 430020, "nama": "", "caption": "Ruangan Asal", "type": "combobox", "dataList": "listRuangan", "satuan": "" },
-                        { "id": 430021, "nama": "", "caption": "Ruangan Tujuan", "type": "combobox", "dataList": "listRuangan", "satuan": "" },
-                        { "id": 430022, "nama": "", "caption": "Petugas Ruangan Tujuan yang Dihubungi", "type": "combobox", "dataList": "listPegawai", "satuan": "" },
-                        { "id": 430023, "nama": "", "caption": "Tanggal/Jam", "type": "datetime", "dataList": "", "satuan": "" }
+                        { "id": 422219, "nama": "", "caption": "Masalah psikologi", "type": "label", "dataList": "", "satuan": "" },
+                        { "id": 422220, "nama": "Tidak", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 422221, "nama": "Ya, Sebutkan", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 422222, "nama": "", "caption": "", "type": "textbox1", "dataList": "", "satuan": "" },
+                        { "id": 422223, "nama": "", "caption": "Masalah sosial", "type": "label", "dataList": "", "satuan": "" },
+                        { "id": 422224, "nama": "Tidak", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 422225, "nama": "Ya, Sebutkan", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 422226, "nama": "", "caption": "", "type": "textbox1", "dataList": "", "satuan": "" },
+                        { "id": 422227, "nama": "", "caption": "Masalah cultura/bahasa", "type": "label", "dataList": "", "satuan": "" },
+                        { "id": 422228, "nama": "Tidak", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 422229, "nama": "Ya, Sebutkan", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 422230, "nama": "", "caption": "", "type": "textbox1", "dataList": "", "satuan": "" },
+                        { "id": 422231, "nama": "", "caption": "Masalah spiritual", "type": "label", "dataList": "", "satuan": "" },
+                        { "id": 422232, "nama": "Tidak", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 422233, "nama": "Ya, Sebutkan", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 422234, "nama": "", "caption": "", "type": "textbox1", "dataList": "", "satuan": "" }
                     ]
                 }
             ];
 
-            $scope.listRiwayatPenyakit = [
+            $scope.listEkonomi = [
                 {
                     "id": 1,
                     "detail": [
-                        { "id": 430024, "nama": "", "caption": "Tanggal Masuk RS", "type": "datetime", "dataList": "", "satuan": "" },
-                        { "id": 430025, "nama": "", "caption": "Tanggal Transfer", "type": "datetime", "dataList": "", "satuan": "" },
-                        { "id": 430026, "nama": "", "caption": "Indikasi pasien masuk dirawat", "type": "textbox", "dataList": "", "satuan": "" },
-                        { "id": 430027, "nama": "", "caption": "Riwayat kesehatan", "type": "textarea", "dataList": "", "satuan": "" },
-                        { "id": 430028, "nama": "", "caption": "Pemeriksaan fisik", "type": "textbox", "dataList": "", "satuan": "" },
-                        { "id": 430029, "nama": "", "caption": "Pemeriksaan diagnostik", "type": "textbox", "dataList": "", "satuan": "" },
-                        { "id": 430030, "nama": "", "caption": "Diagnosis", "type": "textarea", "dataList": "", "satuan": "" },
-                        { "id": 430031, "nama": "", "caption": "Prosedur atau tindakan yang dilakukan", "type": "textarea", "dataList": "", "satuan": "" },
-                        { "id": 430032, "nama": "", "caption": "Obat yang diberikan", "type": "textarea", "dataList": "", "satuan": "" },
-                        { "id": 430033, "nama": "", "caption": "Kategori Pasien Transfer", "type": "label", "dataList": "", "satuan": "" },
-                        { "id": 430034, "nama": "Level 0", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-                        { "id": 430035, "nama": "Level 1", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-                        { "id": 430036, "nama": "Level 2", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-                        { "id": 430037, "nama": "Level 3", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" }
+                        { "id": 422235, "nama": "PNS", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 422236, "nama": "TNI/POLRI", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 422237, "nama": "Pegawai Swasta", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 422238, "nama": "Wiraswasta", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 422239, "nama": "Petani/Nelayan", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 422240, "nama": "Lain-lain", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 422241, "nama": "", "caption": "", "type": "textbox1", "dataList": "", "satuan": "" }
+                    ]
+                }
+            ];
+
+            $scope.listRiwayatKesehatanPasien = [
+                {
+                    "id": 1,
+                    "detail": [
+                        { "id": 422242, "nama": "", "caption": "Riwayat Penyakit Sebelumnya", "type": "textarea", "dataList": "", "satuan": "" },
+                        { "id": 422243, "nama": "", "caption": "", "type": "hr", "dataList": "", "satuan": "" },
+                        { "id": 422244, "nama": "", "caption": "Riwayat Penyakit Sekarang", "type": "textarea", "dataList": "", "satuan": "" }
+                    ]
+                }
+            ];
+
+            $scope.listAlergi = [
+                {
+                    "id": 1,
+                    "detail": [
+                        { "id": 422245, "nama": "Tidak", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 422246, "nama": "Ya, Sebutkan :", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 422247, "nama": "", "caption": "", "type": "textbox1", "dataList": "", "satuan": "" }
+                    ]
+                }
+            ];
+
+            $scope.listRiwayatPenggunaanObat = [
+                {
+                    "id": 1,
+                    "detail": [
+                        { "id": 422248, "nama": "Tidak", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 422249, "nama": "Ya, sebutkan :", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 422250, "nama": "", "caption": "", "type": "textbox1", "dataList": "", "satuan": "" }
+                    ]
+                }
+            ];
+
+            $scope.listAsesmenNyeri = [
+                {
+                    "id": 1,
+                    "detail": [
+                        { "id": 422251, "nama": "Tidak Nyeri", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 422252, "nama": "Nyeri, menggunakan metode :", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 422253, "nama": "", "caption": "", "type": "textbox1", "dataList": "", "satuan": "" }
+                    ]
+                }
+            ];
+
+            $scope.listRisikoJatuh = [
+                {
+                    "id": 1,
+                    "detail": [
+                        { "id": 422254, "nama": "Tidak", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 422255, "nama": "Ya, menggunakan metode :", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 422256, "nama": "", "caption": "", "type": "textbox1", "dataList": "", "satuan": "" }
+                    ]
+                }
+            ];
+
+            $scope.listRisikoNutrional = [
+                {
+                    "id": 1,
+                    "detail": [
+                        { "id": 422258, "nama": "Tidak", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 422259, "nama": "Ya, Sebutkan :", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 422260, "nama": "", "caption": "", "type": "textbox1", "dataList": "", "satuan": "" }
+                    ]
+                }
+            ];
+
+            $scope.listRencanaAsuhan = [
+                {
+                    "id": 1,
+                    "detail": [
+                        { "id": 422263, "nama": "", "caption": "Anjuran Pemeriksaan Penunjang", "type": "textarea", "dataList": "", "satuan": "" },
+                        { "id": 422264, "nama": "", "caption": "", "type": "hr", "dataList": "", "satuan": "" },
+                        { "id": 422265, "nama": "", "caption": "Terapi Tindakan", "type": "textarea", "dataList": "", "satuan": "" }
+                    ]
+                }
+            ];
+
+            $scope.listKebutuhanEdukasi = [
+                {
+                    "id": 1,
+                    "detail": [
+                        { "id": 422267, "nama": "Tidak", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 422268, "nama": "Ya, sebutkan :", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 422269, "nama": "", "caption": "", "type": "textbox1", "dataList": "", "satuan": "" }
                     ]
                 }
             ];
@@ -211,9 +317,9 @@ define(['initialize'], function (initialize) {
             medifirstService.get("emr/get-emr-transaksi-detail?noemr=" + nomorEMR + "&emrfk=" + $scope.cc.emrfk, true).then(function (dat) {
                 $scope.item.obj = []
                 $scope.item.obj2 = []
-                $scope.item.obj[430077] = $scope.now
-                $scope.item.obj[430023] = $scope.now
+                $scope.item.obj[422271] = $scope.now
                 dataLoad = dat.data.data
+                console.log($scope.item.obj);
 
                 // medifirstService.get("emr/get-vital-sign?noregistrasi=" + $scope.cc.noregistrasi + "&objectidawal=4241&objectidakhir=4246&idemr=147", true).then(function (datas) {
                 //     $scope.item.obj[422204] = datas.data.data[1].value; // Tekanan Darah
@@ -226,11 +332,11 @@ define(['initialize'], function (initialize) {
                 var status = "t";
                 medifirstService.get("emr/get-antrian-pasien-norec/" + noregistrasifk).then(function (e) {
                     var antrianPasien = e.data.result;
-                    $scope.item.obj[430024] = new Date(moment(antrianPasien.tglregistrasi).format('YYYY-MM-DD HH:mm'));
-                    if (antrianPasien.objectruanganfk != null && antrianPasien.namaruangan != null) {
-                        $scope.item.obj[430020] = {
-                            value: antrianPasien.objectruanganfk,
-                            text: antrianPasien.namaruangan
+                    $scope.item.obj[422202] = new Date(moment(antrianPasien.tglregistrasi).format('YYYY-MM-DD HH:mm'));
+                    if (antrianPasien.iddpjp != null && antrianPasien.dokterdpjp != null) {
+                        $scope.item.obj[421150] = {
+                            value: antrianPasien.iddpjp,
+                            text: antrianPasien.dokterdpjp
                         }
                     }
                 })
@@ -315,7 +421,7 @@ define(['initialize'], function (initialize) {
                 }
                 medifirstService.post('emr/save-emr-dinamis', jsonSave).then(function (e) {
                     medifirstService.postLogging('EMR', 'norec emrpasien_t', e.data.data.norec,
-                    'Transfer Antar Unit Gawat Darurat'+ ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
+                    'Asesmen Nyeri Rawat Inap '+ ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
                     + $scope.cc.noregistrasi).then(function (res) {
                     })
                     $rootScope.loadRiwayat()

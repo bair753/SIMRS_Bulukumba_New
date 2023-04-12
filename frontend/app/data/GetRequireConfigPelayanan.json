@@ -3409,6 +3409,42 @@
         {
             "nameDep": "FormulirPermintaanDarahRanapCtrl",
             "urlDep": "module/EMR/FormulirPermintaanDarahRanapCtrl"
+        },
+        {
+            "nameDep": "EKGRanapCtrl",
+            "urlDep": "module/EMR/EKGRanapCtrl"
+        },
+        {
+            "nameDep": "AsesmenNyeriRanapCtrl",
+            "urlDep": "module/EMR/AsesmenNyeriRanapCtrl"
+        },
+        {
+            "nameDep": "EvaluasiAwalMPPRanapCtrl",
+            "urlDep": "module/EMR/EvaluasiAwalMPPRanapCtrl"
+        },
+        {
+            "nameDep": "CatatanImplementasiMPPRanapCtrl",
+            "urlDep": "module/EMR/CatatanImplementasiMPPRanapCtrl"
+        },
+        {
+            "nameDep": "MonitoringTandaVitalRanapCtrl",
+            "urlDep": "module/EMR/MonitoringTandaVitalRanapCtrl"
+        },
+        {
+            "nameDep": "MonitoringTandaVitalNicuCtrl",
+            "urlDep": "module/EMR/MonitoringTandaVitalNicuCtrl"
+        },
+        {
+            "nameDep": "TransferAntarUnitRajalCtrl",
+            "urlDep": "module/EMR/TransferAntarUnitRajalCtrl"
+        },
+        {
+            "nameDep": "PermintaanRawatJalanCtrl",
+            "urlDep": "module/EMR/PermintaanRawatJalanCtrl"
+        },
+        {
+            "nameDep": "AsesmenPraAnestesiRanapCtrl",
+            "urlDep": "module/EMR/AsesmenPraAnestesiRanapCtrl"
         }
         
     

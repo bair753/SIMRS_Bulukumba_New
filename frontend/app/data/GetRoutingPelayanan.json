@@ -17372,8 +17372,8 @@
     ]
   },
   {
-    "name": "RekamMedis.AsesmenMedis.TransferAntarUnit",
-    "url": "/TransferAntarUnit",
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.TransferAntarUnit",
+    "url": "/TransferAntarUnit/:index/:idEMR",
     "templateurl": "module/EMR/TransferAntarUnit.html",
     "controller": "TransferAntarUnitCtrl",
     "deps": [
@@ -18297,8 +18297,8 @@
     ]
   },
   {
-    "name": "RekamMedis.AsesmenMedis.TransferAntarUnitGawatDarurat",
-    "url": "/TransferAntarUnitGawatDarurat",
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.TransferAntarUnitGawatDarurat",
+    "url": "/TransferAntarUnitGawatDarurat/:index/:idEMR",
     "templateurl": "module/EMR/TransferAntarUnitGawatDarurat.html",
     "controller": "TransferAntarUnitGawatDaruratCtrl",
     "deps": [
@@ -19037,6 +19037,213 @@
     "url": "/FormulirPermintaanDarahRanap/:index/:idEMR",
     "templateurl": "module/EMR/FormulirPermintaanDarahRanap.html",
     "controller": "FormulirPermintaanDarahRanapCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.EKGRanap",
+    "url": "/EKGRanap/:index/:idEMR",
+    "templateurl": "module/EMR/EKGRanap.html",
+    "controller": "EKGRanapCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.AsesmenNyeriRanap",
+    "url": "/AsesmenNyeriRanap/:index/:idEMR",
+    "templateurl": "module/EMR/AsesmenNyeriRanap.html",
+    "controller": "AsesmenNyeriRanapCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.EvaluasiAwalMPPRanap",
+    "url": "/EvaluasiAwalMPPRanap/:index/:idEMR",
+    "templateurl": "module/EMR/EvaluasiAwalMPPRanap.html",
+    "controller": "EvaluasiAwalMPPRanapCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.CatatanImplementasiMPPRanap",
+    "url": "/CatatanImplementasiMPPRanap/:index/:idEMR",
+    "templateurl": "module/EMR/CatatanImplementasiMPPRanap.html",
+    "controller": "CatatanImplementasiMPPRanapCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.MonitoringTandaVitalRanap",
+    "url": "/MonitoringTandaVitalRanap/:index/:idEMR",
+    "templateurl": "module/EMR/MonitoringTandaVitalRanap.html",
+    "controller": "MonitoringTandaVitalRanapCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.MonitoringTandaVitalNicu",
+    "url": "/MonitoringTandaVitalNicu/:index/:idEMR",
+    "templateurl": "module/EMR/MonitoringTandaVitalNicu.html",
+    "controller": "MonitoringTandaVitalNicuCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.TransferAntarUnitRajal",
+    "url": "/TransferAntarUnitRajal/:index/:idEMR",
+    "templateurl": "module/EMR/TransferAntarUnitRajal.html",
+    "controller": "TransferAntarUnitRajalCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.PermintaanRawatJalan",
+    "url": "/PermintaanRawatJalan",
+    "templateurl": "module/EMR/PermintaanRawatJalan.html",
+    "controller": "PermintaanRawatJalanCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.AsesmenPraAnestesiRanap",
+    "url": "/AsesmenPraAnestesiRanap/:index/:idEMR",
+    "templateurl": "module/EMR/AsesmenPraAnestesiRanap.html",
+    "controller": "AsesmenPraAnestesiRanapCtrl",
     "deps": [
       {
         "module": "Services",
