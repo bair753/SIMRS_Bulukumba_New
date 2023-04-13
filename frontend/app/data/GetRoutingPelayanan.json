@@ -19263,6 +19263,121 @@
     ]
   },
   {
+    "name": "RekamMedis.AsesmenMedis.PelimpahanTanggungjawabDPJP",
+    "url": "/PelimpahanTanggungjawabDPJP",
+    "templateurl": "module/EMR/PelimpahanTanggungjawabDPJP.html",
+    "controller": "PelimpahanTanggungjawabDPJPCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.PernyataanSerahTerimaJenazah",
+    "url": "/PernyataanSerahTerimaJenazah",
+    "templateurl": "module/EMR/PernyataanSerahTerimaJenazah.html",
+    "controller": "PernyataanSerahTerimaJenazahCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.PersetujuanPengobatanRisikoTinggi",
+    "url": "/PersetujuanPengobatanRisikoTinggi",
+    "templateurl": "module/EMR/PersetujuanPengobatanRisikoTinggi.html",
+    "controller": "PersetujuanPengobatanRisikoTinggiCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.PenundaanPelayanan",
+    "url": "/PenundaanPelayanan",
+    "templateurl": "module/EMR/PenundaanPelayanan.html",
+    "controller": "PenundaanPelayananCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.PenolakanAnestesiSedasi",
+    "url": "/PenolakanAnestesiSedasi",
+    "templateurl": "module/EMR/PenolakanAnestesiSedasi.html",
+    "controller": "PenolakanAnestesiSedasiCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
     "name": "RekamMedis.AsesmenMedis.MenuIndex.PengkajianDanIntervensiUlangNyeriRanap",
     "url": "/PengkajianDanIntervensiUlangNyeriRanap/:index/:idEMR",
     "templateurl": "module/EMR/PengkajianDanIntervensiUlangNyeriRanap.html",

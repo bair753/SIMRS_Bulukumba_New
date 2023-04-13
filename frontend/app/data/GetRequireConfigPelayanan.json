@@ -3447,6 +3447,26 @@
             "urlDep": "module/EMR/AsesmenPraAnestesiRanapCtrl"
         },
         {
+            "nameDep": "PelimpahanTanggungjawabDPJPCtrl",
+            "urlDep": "module/EMR/PelimpahanTanggungjawabDPJPCtrl"
+        },
+        {
+            "nameDep": "PernyataanSerahTerimaJenazahCtrl",
+            "urlDep": "module/EMR/PernyataanSerahTerimaJenazahCtrl"
+        },
+        {
+            "nameDep": "PersetujuanPengobatanRisikoTinggiCtrl",
+            "urlDep": "module/EMR/PersetujuanPengobatanRisikoTinggiCtrl"
+        },
+        {
+            "nameDep": "PenundaanPelayananCtrl",
+            "urlDep": "module/EMR/PenundaanPelayananCtrl"
+        },
+        {
+            "nameDep": "PenolakanAnestesiSedasiCtrl",
+            "urlDep": "module/EMR/PenolakanAnestesiSedasiCtrl"
+        },
+        {
             "nameDep": "PengkajianDanIntervensiUlangNyeriRanapCtrl",
             "urlDep": "module/EMR/PengkajianDanIntervensiUlangNyeriRanapCtrl"
         },
@@ -3454,6 +3474,8 @@
             "nameDep": "PenolakanOperasiRajalCtrl",
             "urlDep": "module/EMR/PenolakanOperasiRajalCtrl"
         }
+
+
         
     
     ]
