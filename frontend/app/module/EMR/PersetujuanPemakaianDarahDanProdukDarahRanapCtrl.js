@@ -1,6 +1,6 @@
 define(['initialize'], function (initialize) {
     'use strict';
-    initialize.controller('PersetujuanPemakaianDarahDanProdukDarahCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
+    initialize.controller('PersetujuanPemakaianDarahDanProdukDarahRanapCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
         function ($q, $rootScope, $scope, ModelItem, $state, cacheHelper, dateHelper, medifirstService) {
 
 
@@ -14,7 +14,7 @@ define(['initialize'], function (initialize) {
             $scope.cc = {};
             var nomorEMR = '-';
             var norecEMR = '';
-            $scope.cc.emrfk = 290057;
+            $scope.cc.emrfk = 290117;
             var dataLoad = [];
             $scope.isCetak = false;
             $scope.allDisabled = false;
@@ -344,7 +344,7 @@ define(['initialize'], function (initialize) {
                     // });
 
                     medifirstService.postLogging('EMR', 'norec emrpasien_t', e.data.data.norec,
-                        'Persetujuan Pemakaian Darah Dan Produk Darah IGD' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
+                        'Persetujuan Pemakaian Darah Dan Produk Darah Rawat Inap' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
                         + $scope.cc.noregistrasi).then(function (res) {
                         })
 

@@ -17326,8 +17326,8 @@
     ]
   },
   {
-    "name": "RekamMedis.AsesmenMedis.PemberianEdukasiPasien",
-    "url": "/PemberianEdukasiPasien",
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.PemberianEdukasiPasien",
+    "url": "/PemberianEdukasiPasien/:index/:idEMR",
     "templateurl": "module/EMR/PemberianEdukasiPasien.html",
     "controller": "PemberianEdukasiPasienCtrl",
     "deps": [
@@ -17671,8 +17671,8 @@
     ]
   },
   {
-    "name": "RekamMedis.AsesmenMedis.PemberianEdukasiPasienGawatDarurat",
-    "url": "/PemberianEdukasiPasienGawatDarurat",
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.PemberianEdukasiPasienGawatDarurat",
+    "url": "/PemberianEdukasiPasienGawatDarurat/:index/:idEMR",
     "templateurl": "module/EMR/PemberianEdukasiPasienGawatDarurat.html",
     "controller": "PemberianEdukasiPasienGawatDaruratCtrl",
     "deps": [
@@ -19405,6 +19405,52 @@
     "url": "/PenolakanOperasiRajal/:index/:idEMR",
     "templateurl": "module/EMR/PenolakanOperasiRajal.html",
     "controller": "PenolakanOperasiRajalCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.PersetujuanPemakaianDarahDanProdukDarahRanap",
+    "url": "/PersetujuanPemakaianDarahDanProdukDarahRanap",
+    "templateurl": "module/EMR/PersetujuanPemakaianDarahDanProdukDarahRanap.html",
+    "controller": "PersetujuanPemakaianDarahDanProdukDarahRanapCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.AsesmenPasienDenganPenyakitMenularRanap",
+    "url": "/AsesmenPasienDenganPenyakitMenularRanap/:index/:idEMR",
+    "templateurl": "module/EMR/AsesmenPasienDenganPenyakitMenularRanap.html",
+    "controller": "AsesmenPasienDenganPenyakitMenularRanapCtrl",
     "deps": [
       {
         "module": "Services",
