@@ -19284,6 +19284,29 @@
         "define": "RekamMedisCtrl"
       }
     ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.PenolakanOperasiRajal",
+    "url": "/PenolakanOperasiRajal/:index/:idEMR",
+    "templateurl": "module/EMR/PenolakanOperasiRajal.html",
+    "controller": "PenolakanOperasiRajalCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
   }
 
 

@@ -3449,6 +3449,10 @@
         {
             "nameDep": "PengkajianDanIntervensiUlangNyeriRanapCtrl",
             "urlDep": "module/EMR/PengkajianDanIntervensiUlangNyeriRanapCtrl"
+        },
+        {
+            "nameDep": "PenolakanOperasiRajalCtrl",
+            "urlDep": "module/EMR/PenolakanOperasiRajalCtrl"
         }
         
     
