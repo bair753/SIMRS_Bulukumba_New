@@ -67,13 +67,14 @@ define(['initialize'], function (initialize) {
                     $scope.item.obj[17419]={ text: $scope.cc.dokterdpjp, value: $scope.cc.iddpjp }
                     $scope.item.obj[17421]={text: $scope.cc.namaruangan, value: $scope.cc.objectruanganfk}
                     
-                    $scope.item.obj[31100811] = Number($scope.item.obj[31100797]) + 2;
-                    $scope.item.obj[31100812] = 4;
-                    $scope.item.obj[31100813] = 2;
-                    $scope.item.obj[31100814] = 4;
-                    $scope.item.obj[31100815] = 8;
-                    $scope.item.obj[31100816] = 2;
-                    $scope.item.obj[31100817] = 4;
+                    // $scope.item.obj[31100811] = Number($scope.item.obj[31100797]);
+                    $scope.item.obj[31100811] = '';
+                    $scope.item.obj[31100812] = '';
+                    $scope.item.obj[31100813] = '';
+                    $scope.item.obj[31100814] = '';
+                    $scope.item.obj[31100815] = '';
+                    $scope.item.obj[31100816] = '';
+                    $scope.item.obj[31100817] = '';
                     
 
                     dataLoad = dat.data.data
@@ -127,6 +128,9 @@ define(['initialize'], function (initialize) {
                             }
 
                             if (dataLoad[i].type == "datetime") {
+                                $scope.item.obj[dataLoad[i].emrdfk] = new Date(dataLoad[i].value)
+                            }
+                            if (dataLoad[i].type == "time") {
                                 $scope.item.obj[dataLoad[i].emrdfk] = new Date(dataLoad[i].value)
                             }
                             if (dataLoad[i].type == "combobox") {
@@ -191,7 +195,7 @@ define(['initialize'], function (initialize) {
                 var arrSave = []
                 for (var i = arrobj.length - 1; i >= 0; i--) {
                     if ($scope.item.obj[parseInt(arrobj[i])] instanceof Date)
-                        $scope.item.obj[parseInt(arrobj[i])] = moment($scope.item.obj[parseInt(arrobj[i])]).format('YYYY-MM-DD HH:mm')
+                        // $scope.item.obj[parseInt(arrobj[i])] = moment($scope.item.obj[parseInt(arrobj[i])]).format('YYYY-MM-DD HH:mm')
                     arrSave.push({ id: arrobj[i], values: $scope.item.obj[parseInt(arrobj[i])] })
                 }
                 $scope.cc.jenisemr = 'asesmen'
