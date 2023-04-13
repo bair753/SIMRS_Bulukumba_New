@@ -3473,6 +3473,14 @@
         {
             "nameDep": "PenolakanOperasiRajalCtrl",
             "urlDep": "module/EMR/PenolakanOperasiRajalCtrl"
+        },
+        {
+            "nameDep": "PersetujuanPemakaianDarahDanProdukDarahRanapCtrl",
+            "urlDep": "module/EMR/PersetujuanPemakaianDarahDanProdukDarahRanapCtrl"
+        },
+        {
+            "nameDep": "AsesmenPasienDenganPenyakitMenularRanapCtrl",
+            "urlDep": "module/EMR/AsesmenPasienDenganPenyakitMenularRanapCtrl"
         }
 
 
