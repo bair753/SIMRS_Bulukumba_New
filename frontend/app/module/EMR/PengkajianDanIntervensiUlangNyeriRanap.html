@@ -1,0 +1,161 @@
+<style type="text/css">
+    fieldset {
+        border-radius: 5px;
+        border: 1px solid #228be6;
+    }
+
+    .k-slider-horizontal {
+        display: inline-block;
+        float: left;
+        width: 450px;
+
+        height: 26px;
+
+
+    }
+
+    .k-slider {
+
+        margin-left: 3%;
+        margin-right: 3%;
+        margin-top: 1%;
+        margin-bottom: 5%;
+        display: inline-block;
+    }
+
+    .activeBtn {
+        background-color: #10c4b2;
+        color: #ffffff;
+    }
+    table,
+    th,
+    td {
+        border: 1px solid #929191;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+
+    th,
+    td {
+        padding: 5px;
+        text-align: left;
+    }
+</style>
+
+ <!-- ng-class="{'my-disable':true}" -->
+<!-- <div class="grid_12"  disable-contents="allDisabled" id="form"> -->
+<div class="grid_12">
+    <div class="grid_12">
+        <div class="panel panel-default container_12">
+            <div class="panel-heading" c-translate>Pengkajian Dan Intervensi Ulang Nyeri Rawat Inap</div>
+        </div>
+
+        <div class="grid_12" style="margin-top: 10px;">
+            <fieldset style="margin-top: 10px;">
+                <div class="grid_12">
+                    <div class="grid_12">
+                        <table style="border: 1;">
+                            <tr>
+                                <th>Skor nyeri</th>
+                                <th>Pasero-mc caffery opioid-induced selation scale (POSS)</th>
+                                <th>Intervensi non farmakologi</th>
+                                <th>Pengkajian ulang</th>
+                            </tr>
+                            <tr>
+                                <th>0 : tidak ada nyeri<br>
+                                    1-3: nyeri ringan<br>
+                                    4-6: nyeri sedang<br>
+                                    7-10: nyeri berat
+                                    </th>
+                                <th>4: somnolent, minimal/tidak respon terhadap rangsangan fisik<br>
+                                    3: sering mengantuk, bisa di bangunkan, mudah tertidur saat sedang bicara<br>
+                                    2: agak mengantuk, mudah dibangunkan<br>
+                                    1: bangun dan sadar<br>
+                                    S: tidur, mudah di bangunkan
+                                    </th>
+                                <th>1: dingin<br>
+                                    2: panas<br>
+                                    3: posisi<br>
+                                    4: pijat<br>
+                                    5: music<br>
+                                    6: TENS<br>
+                                    7: relaksasi & pernafasan
+                                    </th>
+                                <th>1.	15 menit setelah intervensi obat injeksi<br>
+                                    2.	1 jam setelah intervensi obat oral/lainya<br>
+                                    3.	1 x /shift bila skor nyeri  1-3<br>
+                                    4.	Setiap 3 jam bila skor nyeri 4-6<br>
+                                    5.	Setiap 1 jam bila skor nyeri 7-10<br>
+                                    6.	Hentikan bila skor nyeri 0
+                                    </th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="grid_12" style="margin-top: 10px;">
+            <fieldset style="margin-top: 10px;">
+                <div class="grid_12">
+                    <div class="grid_12">
+                        <table style="border: 1;">
+                            <tr>
+                                <th rowspan="2" style="font-size: 7pt;">Tgl/Jam</th>
+                                <th rowspan="2" style="font-size: 7pt;">Skor Nyeri</th>
+                                <th rowspan="2" style="font-size: 7pt;">Tekanan Darah</th>
+                                <th rowspan="2" style="font-size: 7pt;">Nadi</th>
+                                <th rowspan="2" style="font-size: 7pt;">Suhu</th>
+                                <th rowspan="2" style="font-size: 7pt;">Pernafasan</th>
+                                <th colspan="2" style="font-size: 7pt;">Perawat/Bidan</th>
+                                <th rowspan="2" style="font-size: 7pt;">Tgl/Jam</th>
+                                <th colspan="3" style="font-size: 7pt;">Intervensi Farmakologi</th>
+                                <th rowspan="2" style="font-size: 7pt;">Intervensi Non Farmakologi</th>
+                                <th colspan="2" style="font-size: 7pt;">Perawat/Bidan</th>
+                                <th rowspan="2" style="font-size: 7pt;">Waktu Kaji Ulang</th>
+                            </tr>
+                            <tr>
+                                <th style="font-size: 7pt;">Paraf</th>
+                                <th style="font-size: 7pt;">Paraf</th>
+                                <th style="font-size: 7pt;">Nama Obat</th>
+                                <th style="font-size: 7pt;">Dosis & Frekuensi</th>
+                                <th style="font-size: 7pt;">Rule</th>
+                                <th style="font-size: 7pt;">Paraf</th>
+                                <th style="font-size: 7pt;">Paraf</th>
+                            </tr>
+
+                            <tr>
+                                <td><input k-ng-model="item.obj[31101878]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" /></td>
+                                <td><input class="k-textbox" ng-model="item.obj[31101879]" type="text"></td>
+                                <td><input class="k-textbox" ng-model="item.obj[31101880]" type="text"></td>
+                                <td><input class="k-textbox" ng-model="item.obj[31101881]" type="text"></td>
+                                <td><input class="k-textbox" ng-model="item.obj[31101882]" type="text"></td>
+                                <td><input class="k-textbox" ng-model="item.obj[31101883]" type="text"></td>
+                                <td><input kendo-combo-box k-ng-model="item.obj[31101884]" k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" /></td>
+                                <td><input kendo-combo-box k-ng-model="item.obj[31101885]" k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" /></td>
+                                <td><input k-ng-model="item.obj[31101886]" kendo-datetimepicker
+                                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" /></td>
+                                <td><input kendo-combo-box k-ng-model="item.obj[31101887]" k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listObat" /></td>
+                                <td><input class="k-textbox" ng-model="item.obj[31101888]" type="text"></td>
+                                <td><input class="k-textbox" ng-model="item.obj[31101889]" type="text"></td>
+                                <td><input class="k-textbox" ng-model="item.obj[31101890]" type="text"></td>
+                                <td><input kendo-combo-box k-ng-model="item.obj[31101891]" k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" /></td>
+                                <td><input kendo-combo-box k-ng-model="item.obj[31101892]" k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" /></td>
+                                <td><input class="k-textbox" ng-model="item.obj[31101893]" type="text"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+    </div>
+</div>
+
+<br />
+<br />
+<div class="grid_12">
+    <div ng-include='"../app/module/EMR/TemplateButtonDinamis" '></div>
+
+</div>

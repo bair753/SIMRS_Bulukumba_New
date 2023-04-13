@@ -1,6 +1,6 @@
 define(['initialize'], function (initialize) {
     'use strict';
-    initialize.controller('LaporanOperasiIGDCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
+    initialize.controller('PengkajianDanIntervensiUlangNyeriRanapCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
         function ($q, $rootScope, $scope, ModelItem, $state, cacheHelper, dateHelper, medifirstService) {
 
             var paramsIndex = $state.params.index ? parseInt($state.params.index) : null
@@ -14,7 +14,7 @@ define(['initialize'], function (initialize) {
             $scope.cc = {};
             var nomorEMR = '-';
             var norecEMR = '';
-            $scope.cc.emrfk = 290083;
+            $scope.cc.emrfk = 290113;
             var dataLoad = [];
             $scope.isCetak = true;
             $scope.allDisabled = false;
@@ -64,6 +64,10 @@ define(['initialize'], function (initialize) {
 
             medifirstService.getPart("emr/get-datacombo-icd10-secondary", true, true, 10).then(function (data) {
                 $scope.listDiagnosaSecondary = data;
+            });
+
+            medifirstService.getPart("emr/get-datacombo-part-obat", true, true, 20).then(function (data) {
+                $scope.listObat = data;
             });
 
             $scope.listDataPasien = [
@@ -533,7 +537,7 @@ define(['initialize'], function (initialize) {
                 var arrSave = []
                 for (var i = arrobj.length - 1; i >= 0; i--) {
                     if ($scope.item.obj[parseInt(arrobj[i])] instanceof Date)
-                        // $scope.item.obj[parseInt(arrobj[i])] = moment($scope.item.obj[parseInt(arrobj[i])]).format('YYYY-MM-DD HH:mm')
+                        $scope.item.obj[parseInt(arrobj[i])] = moment($scope.item.obj[parseInt(arrobj[i])]).format('YYYY-MM-DD HH:mm')
                      // $scope.item.obj[parseInt(arrobj[i])] = moment($scope.item.obj[parseInt(arrobj[i])]).format('HH:mm')
                     arrSave.push({ id: arrobj[i], values: $scope.item.obj[parseInt(arrobj[i])] })
                 }
@@ -551,7 +555,7 @@ define(['initialize'], function (initialize) {
                     // });
 
                     medifirstService.postLogging('EMR', 'norec emrpasien_t', e.data.data.norec,
-                        'Laporan Operasi IGD ' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
+                        'Pengkajian Dan Intervensi Ulang Nyeri Rawat Inap ' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
                         + $scope.cc.noregistrasi).then(function (res) {
                         })
 

@@ -180,7 +180,8 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 $scope.isRouteLoading = true;
                  medifirstService.get( "emr/get-combo").then(function (e) {
                     $scope.listDokter = e.data.dokter
-                    $scope.listRuangan = e.data.ruangkonsulnonpenunjang; //e.data.ruangankonsul
+                   // $scope.listRuangan = e.data.ruangkonsulnonpenunjang; //e.data.ruangankonsul
+                    $scope.listRuangan = e.data.ruangan;
                 })
 
                 $q.all([

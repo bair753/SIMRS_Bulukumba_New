@@ -533,7 +533,7 @@ define(['initialize'], function (initialize) {
                 var arrSave = []
                 for (var i = arrobj.length - 1; i >= 0; i--) {
                     if ($scope.item.obj[parseInt(arrobj[i])] instanceof Date)
-                        $scope.item.obj[parseInt(arrobj[i])] = moment($scope.item.obj[parseInt(arrobj[i])]).format('YYYY-MM-DD HH:mm')
+                        // $scope.item.obj[parseInt(arrobj[i])] = moment($scope.item.obj[parseInt(arrobj[i])]).format('YYYY-MM-DD HH:mm')
                      // $scope.item.obj[parseInt(arrobj[i])] = moment($scope.item.obj[parseInt(arrobj[i])]).format('HH:mm')
                     arrSave.push({ id: arrobj[i], values: $scope.item.obj[parseInt(arrobj[i])] })
                 }

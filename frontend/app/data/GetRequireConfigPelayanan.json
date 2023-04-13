@@ -3465,6 +3465,10 @@
         {
             "nameDep": "PenolakanAnestesiSedasiCtrl",
             "urlDep": "module/EMR/PenolakanAnestesiSedasiCtrl"
+        },
+        {
+            "nameDep": "PengkajianDanIntervensiUlangNyeriRanapCtrl",
+            "urlDep": "module/EMR/PengkajianDanIntervensiUlangNyeriRanapCtrl"
         }
 
 
