@@ -1224,6 +1224,7 @@ class InaCbgController   extends ApiController
                 'lamarawatnaikkelas' => $lamarawatnaikkelass,
                 'statusrawatintensiv' =>$statusrawatintensiv,
                 'lamarawatintensiv' =>$lamarawatintensivaa,
+                'pembayar' => "peserta",
             );
         }
         return $this->respond($data);

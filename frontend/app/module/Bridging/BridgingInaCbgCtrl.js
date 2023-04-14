@@ -914,10 +914,12 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 						// }
 						var upgrade_class_ind = 0
 						var upgrade_class_class = ''
+						var upgrade_class_payor = ''
 						var add_payment_pct = 0
 						if (data2[i].nokelasdijamin > data2[i].nokelasdaftar && data2[i].deptid == 16 && data2[i].namakelasdaftar != 'Non Kelas') {
 							upgrade_class_ind = 1
 							upgrade_class_class = data2[i].namakelasdaftar
+							upgrade_class_payor = "peserta"
 							add_payment_pct = 0
 						}
 						if (data2[i].namaruangan == 'NHCU' || data2[i].namaruangan == 'ICU' || data2[i].namaruangan == 'ICCU') {
@@ -984,6 +986,7 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 							"upgrade_class_ind": upgrade_class_ind,    //"1",    
 							"upgrade_class_class": upgrade_class_class,    //"vip",    
 							"upgrade_class_los": '',    //"5",    
+							"upgrade_class_payor": upgrade_class_payor,
 							"add_payment_pct": '',    //"35",    
 							"birth_weight": '',    //"0",    
 							"discharge_status": discharge_status,    //"1",    
@@ -2051,6 +2054,7 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 									"upgrade_class_ind": dataSave[i].upgrade_class_ind,    //"1",    
 									"upgrade_class_class": dataSave[i].upgrade_class_class,    //"vip",    
 									"upgrade_class_los": dataSave[i].upgrade_class_los,    //"5",    
+									"upgrade_class_payor": dataSave[i].upgrade_class_payor,    //"5",    
 									"add_payment_pct": "75",//dataSave[i].add_payment_pct ,    //"35",    
 									"birth_weight": $scope.dataPasienSelected.beratbadan,//dataSave[i].birth_weight ,    //"0",    
 									"discharge_status": dataSave[i].discharge_status,    //"1",    
@@ -2364,6 +2368,7 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 											"upgrade_class_ind": resp.statusnaikkelas,    //"1",    dataSave[i].upgrade_class_ind ,
 											"upgrade_class_class": resp.kelastertinggi,//dataSave[i].upgrade_class_class ,    //"vip",    
 											"upgrade_class_los": resp.lamarawatnaikkelas,//dataSave[i].upgrade_class_los ,    //"5",    
+											"upgrade_class_payor": resp.pembayar,    //"5",    
 											"add_payment_pct": "75",//dataSave[i].add_payment_pct ,    //"35",    
 											"birth_weight": $scope.dataPasienSelected.beratbadan,//dataSave[i].birth_weight ,    //"0",    
 											"discharge_status": dataSave[i].discharge_status,    //"1",    
