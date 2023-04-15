@@ -3481,6 +3481,10 @@
         {
             "nameDep": "AsesmenPasienDenganPenyakitMenularRanapCtrl",
             "urlDep": "module/EMR/AsesmenPasienDenganPenyakitMenularRanapCtrl"
+        },
+        {
+            "nameDep": "ChecklistFibrinolitikCtrl",
+            "urlDep": "module/EMR/ChecklistFibrinolitikCtrl"
         }
 
 
