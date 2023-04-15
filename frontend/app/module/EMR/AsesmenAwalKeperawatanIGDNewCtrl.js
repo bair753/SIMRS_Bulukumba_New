@@ -1,4 +1,4 @@
-define(['initialize'], function (initialize) {
+define(['initialize', 'Configuration'], function (initialize, config) {
     'use strict';
     initialize.controller('AsesmenAwalKeperawatanIGDNewCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
         function ($q, $rootScope, $scope, ModelItem, $state, cacheHelper, dateHelper, medifirstService) {
@@ -16,7 +16,7 @@ define(['initialize'], function (initialize) {
             $scope.cc.emrfk = 149
             var dataLoad = []
             var pegawaiInputDetail= ''
-            $scope.isCetak = false
+            $scope.isCetak = true
             var norecEMR = ''
             var cacheNomorEMR = cacheHelper.get('cacheNomorEMR');
             var cacheNoREC = cacheHelper.get('cacheNOREC_EMR');
@@ -40,12 +40,42 @@ define(['initialize'], function (initialize) {
                     anHttpRequest.send(null);
                 }
             }
-            $scope.cetakPdf = function () {
+            $scope.cetakBlade = function () {
+
+                if($scope.item.obj[420634] == undefined){
+                    toastr.warning('Alamat Pengantar tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[420864] == undefined){
+                    toastr.warning('Keluhan Saat Ini tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[420800] == undefined){
+                    toastr.warning('Masalah Keperawatan tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[420718] == undefined){
+                    toastr.warning('Riwayat Penyakit Sebelumnya tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[420719] == undefined){
+                    toastr.warning('Riwayat Penyakit Sekarang tidak boleh kosong','Peringatan')
+                    return
+                }
+                
                 if (norecEMR == '') return
-                var client = new HttpClient();
-                client.get('http://127.0.0.1:1237/printvb/e-rekammedis?cetak-emr-asesmen-awal-keperawatan-igd&id=' + $scope.cc.nocm + '&emr=' + norecEMR + '&view=true', function (response) {
-                    // do something with response
-                });
+
+                var local = JSON.parse(localStorage.getItem('profile'));
+                var nama = medifirstService.getPegawaiLogin().namalengkap;
+                window.open(config.baseApiBackend + 'report/cetak-asesmen-awal-keperawatan-igd?nocm='
+                    + $scope.cc.nocm + '&norec_apd=' + $scope.cc.norec + '&emr=' + norecEMR
+                    + '&emrfk=' + $scope.cc.emrfk
+                    + '&kdprofile=' + local.id
+                    + '&nama=' + nama, '_blank');
             }
 
             medifirstService.getPart('emr/get-datacombo-part-dokter', true, true, 20).then(function (data) {
@@ -206,7 +236,7 @@ define(['initialize'], function (initialize) {
                         { "id": 420725, "nama": "", "caption": "Aterm/Premature/Spontan/Tindakan", "type": "textbox", "dataList": "", "satuan": "" },
                         { "id": 420726, "nama": "", "caption": "Oleh", "type": "textbox", "dataList": "", "satuan": "" },
                         { "id": 420727, "nama": "", "caption": "BB Lahir", "type": "textbox", "dataList": "", "satuan": "kg" },
-                        { "id": 420728, "nama": "", "caption": "Pankang Badan Lahir", "type": "textbox", "dataList": "", "satuan": "cm" },
+                        { "id": 420728, "nama": "", "caption": "Panjang Badan Lahir", "type": "textbox", "dataList": "", "satuan": "cm" },
                         { "id": 420729, "nama": "", "caption": "Lingkar Kepala", "type": "textbox", "dataList": "", "satuan": "cm" },
                         { "id": 420730, "nama": "", "caption": "Imunisasi", "type": "label", "dataList": "", "satuan": "" },
                         { "id": 420731, "nama": "BCG", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },

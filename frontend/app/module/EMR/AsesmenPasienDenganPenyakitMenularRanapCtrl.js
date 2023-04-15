@@ -1,9 +1,9 @@
-define(['initialize', 'Configuration'], function (initialize, config) {
+define(['initialize'], function (initialize) {
     'use strict';
-    initialize.controller('AsesmenAwalMedisPasienGawatDaruratCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
+    initialize.controller('AsesmenPasienDenganPenyakitMenularRanapCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
         function ($q, $rootScope, $scope, ModelItem, $state, cacheHelper, dateHelper, medifirstService) {
 
-
+            var paramsIndex = $state.params.index ? parseInt($state.params.index) : null
             $scope.noCM = $state.params.noCM;
             $scope.tombolSimpanVis = true
             $scope.noRecPap = cacheHelper.get('noRecPap');
@@ -13,10 +13,10 @@ define(['initialize', 'Configuration'], function (initialize, config) {
             $scope.SkorJatuhAnak = [];
             $scope.cc = {}
             var nomorEMR = '-'
-            $scope.cc.emrfk = 290008;
+            $scope.cc.emrfk = 290116;
             var dataLoad = []
             var pegawaiInputDetail= ''
-            $scope.isCetak = true
+            $scope.isCetak = false
             var norecEMR = ''
             var cacheNomorEMR = cacheHelper.get('cacheNomorEMR');
             var cacheNoREC = cacheHelper.get('cacheNOREC_EMR');
@@ -40,66 +40,12 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     anHttpRequest.send(null);
                 }
             }
-            // $scope.cetakPdf = function () {
-            //     if (norecEMR == '') return
-            //     var client = new HttpClient();
-            //     client.get('http://127.0.0.1:1237/printvb/e-rekammedis?cetak-emr-asesmen-awal-keperawatan-igd&id=' + $scope.cc.nocm + '&emr=' + norecEMR + '&view=true', function (response) {
-            //         // do something with response
-            //     });
-            // }
-
-            $scope.cetakBlade = function () {
-
-                if($scope.item.obj[420942] == undefined){
-                    toastr.warning('Keluhan Saat Ini tidak boleh kosong','Peringatan')
-                    return
-                }
-
-                if($scope.item.obj[420956] == undefined){
-                    toastr.warning('General tidak boleh kosong','Peringatan')
-                    return
-                }
-
-                if($scope.item.obj[420957] == undefined){
-                    toastr.warning('Lokalis tidak boleh kosong','Peringatan')
-                    return
-                }
-
-                if($scope.item.obj[420982] == undefined){
-                    toastr.warning('Riwayat Penyakit Sebelumnya tidak boleh kosong','Peringatan')
-                    return
-                }
-
-                if($scope.item.obj[420984] == undefined){
-                    toastr.warning('Riwayat Penyakit Sekarang tidak boleh kosong','Peringatan')
-                    return
-                }
-
-                if($scope.item.obj[421099] == undefined){
-                    toastr.warning('Diagnosa Medis tidak boleh kosong','Peringatan')
-                    return
-                }
-
-                if($scope.item.obj[421100] == undefined){
-                    toastr.warning('Pemeriksaan Penunjang tidak boleh kosong','Peringatan')
-                    return
-                }
-
-                if($scope.item.obj[421082] == undefined){
-                    toastr.warning('Terapi Pulang tidak boleh kosong','Peringatan')
-                    return
-                }
-
+            $scope.cetakPdf = function () {
                 if (norecEMR == '') return
-
-                var local = JSON.parse(localStorage.getItem('profile'));
-                var nama = medifirstService.getPegawaiLogin().namalengkap;
-                console.log(config.baseApiBackend);
-                window.open(config.baseApiBackend + 'report/cetak-asesmen-awal-medis-igd?nocm='
-                    + $scope.cc.nocm + '&norec_apd=' + $scope.cc.norec + '&emr=' + norecEMR
-                    + '&emrfk=' + $scope.cc.emrfk
-                    + '&kdprofile=' + local.id
-                    + '&nama=' + nama, '_blank');
+                var client = new HttpClient();
+                client.get('http://127.0.0.1:1237/printvb/e-rekammedis?cetak-emr-asesmen-awal-keperawatan-igd&id=' + $scope.cc.nocm + '&emr=' + norecEMR + '&view=true', function (response) {
+                    // do something with response
+                });
             }
 
             medifirstService.getPart('emr/get-datacombo-part-dokter', true, true, 20).then(function (data) {
@@ -556,7 +502,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 })
 
                 for (var i = 0; i <= dataLoad.length - 1; i++) {
-                    if (parseFloat($scope.cc.emrfk) == dataLoad[i].emrfk) {
+                    if (parseFloat($scope.cc.emrfk) == dataLoad[i].emrfk && paramsIndex == dataLoad[i].index) {
 
                         if (dataLoad[i].type == "textbox") {
                             $scope.item.obj[dataLoad[i].emrdfk] = dataLoad[i].value
@@ -628,13 +574,14 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     arrSave.push({ id: arrobj[i], values: $scope.item.obj[parseInt(arrobj[i])] })
                 }
                 $scope.cc.jenisemr = 'asesmen'
+                $scope.cc.index = $state.params.index;
                 var jsonSave = {
                     head: $scope.cc,
                     data: arrSave
                 }
                 medifirstService.post('emr/save-emr-dinamis', jsonSave).then(function (e) {
                     medifirstService.postLogging('EMR', 'norec emrpasien_t', e.data.data.norec,
-                    'Asesmen Awal Medis Pasien Gawat Darurat'+ ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
+                    'Asesmen Pasien Dengan Penyakit Menular Rawat Inap'+ ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
                     + $scope.cc.noregistrasi).then(function (res) {
                     })
                     $rootScope.loadRiwayat()
