@@ -67,15 +67,6 @@ define(['initialize'], function (initialize) {
                     $scope.item.obj[17419]={ text: $scope.cc.dokterdpjp, value: $scope.cc.iddpjp }
                     $scope.item.obj[17421]={text: $scope.cc.namaruangan, value: $scope.cc.objectruanganfk}
                     
-                    // $scope.item.obj[31100811] = Number($scope.item.obj[31100797]);
-                    $scope.item.obj[31100811] = '';
-                    $scope.item.obj[31100812] = '';
-                    $scope.item.obj[31100813] = '';
-                    $scope.item.obj[31100814] = '';
-                    $scope.item.obj[31100815] = '';
-                    $scope.item.obj[31100816] = '';
-                    $scope.item.obj[31100817] = '';
-                    
 
                     dataLoad = dat.data.data
                     for (var i = 0; i <= dataLoad.length - 1; i++) {
@@ -153,6 +144,249 @@ define(['initialize'], function (initialize) {
                         }
 
                     }
+                    $scope.item.obj[31100797] = 0;
+                    $scope.item.obj[31100798] = 0;
+                    $scope.item.obj[31100799] = 0;
+                    $scope.item.obj[31100800] = 0;
+                    $scope.item.obj[31100801] = 0;
+                    $scope.item.obj[31100802] = 0;
+                    $scope.item.obj[31100803] = 0;
+
+                    $scope.item.obj[31100811] = 
+                    Number($scope.item.obj[31100594]) + 
+                    Number($scope.item.obj[31100601]) + 
+                    Number($scope.item.obj[31100608]) + 
+                    Number($scope.item.obj[31100615]) + 
+                    Number($scope.item.obj[31100622]) + 
+                    Number($scope.item.obj[31100629]) + 
+                    Number($scope.item.obj[31100636]) + 
+                    Number($scope.item.obj[31100643]) + 
+                    Number($scope.item.obj[31100650]) + 
+                    Number($scope.item.obj[31100657]) + 
+                    Number($scope.item.obj[31100664]) + 
+                    Number($scope.item.obj[31100671]) + 
+                    Number($scope.item.obj[31100678]) + 
+                    Number($scope.item.obj[31100685]) + 
+                    Number($scope.item.obj[31100692]) + 
+                    Number($scope.item.obj[31100699]) + 
+                    Number($scope.item.obj[31100706]) + 
+                    Number($scope.item.obj[31100713]) + 
+                    Number($scope.item.obj[31100720]) + 
+                    Number($scope.item.obj[31100727]) + 
+                    Number($scope.item.obj[31100734]) + 
+                    Number($scope.item.obj[31100741]) +
+                    Number($scope.item.obj[31100748]) +
+                    Number($scope.item.obj[31100755]) +
+                    Number($scope.item.obj[31100762]) +
+                    Number($scope.item.obj[31100769]) +
+                    Number($scope.item.obj[31100776]) +
+                    Number($scope.item.obj[31100783]) +
+                    Number($scope.item.obj[31100797]) +
+                    Number($scope.item.obj[31100804]);
+
+                    console.log($scope.item.obj[31100804]);
+
+                    console.log($scope.item.obj);
+
+
+                    $scope.item.obj[31100812] = 
+                    Number($scope.item.obj[31100595]) +
+                    Number($scope.item.obj[31100602]) +
+                    Number($scope.item.obj[31100609]) +
+                    Number($scope.item.obj[31100615]) +
+                    Number($scope.item.obj[31100623]) +
+                    Number($scope.item.obj[31100630]) +
+                    Number($scope.item.obj[31100637]) +
+                    Number($scope.item.obj[31100644]) +
+                    Number($scope.item.obj[31100651]) +
+                    Number($scope.item.obj[31100658]) +
+                    Number($scope.item.obj[31100665]) +
+                    Number($scope.item.obj[31100672]) +
+                    Number($scope.item.obj[31100679]) +
+                    Number($scope.item.obj[31100686]) +
+                    Number($scope.item.obj[31100693]) +
+                    Number($scope.item.obj[31100700]) +
+                    Number($scope.item.obj[31100707]) +
+                    Number($scope.item.obj[31100714]) +
+                    Number($scope.item.obj[31100721]) +
+                    Number($scope.item.obj[31100728]) +
+                    Number($scope.item.obj[31100735]) +
+                    Number($scope.item.obj[31100742]) +
+                    Number($scope.item.obj[31100749]) +
+                    Number($scope.item.obj[31100756]) +
+                    Number($scope.item.obj[31100763]) +
+                    Number($scope.item.obj[31100770]) +
+                    Number($scope.item.obj[31100777]) +
+                    Number($scope.item.obj[31100784]) +
+                    Number($scope.item.obj[31100791]) +
+                    Number($scope.item.obj[31100798]) +
+                    Number($scope.item.obj[31100805]);
+
+                    $scope.item.obj[31100813] = 
+                    Number($scope.item.obj[31100596]) +
+                    Number($scope.item.obj[31100603]) +
+                    Number($scope.item.obj[31100610]) +
+                    Number($scope.item.obj[31100617]) +
+                    Number($scope.item.obj[31100624]) +
+                    Number($scope.item.obj[31100631]) +
+                    Number($scope.item.obj[31100638]) +
+                    Number($scope.item.obj[31100645]) +
+                    Number($scope.item.obj[31100652]) +
+                    Number($scope.item.obj[31100659]) +
+                    Number($scope.item.obj[31100666]) +
+                    Number($scope.item.obj[31100673]) +
+                    Number($scope.item.obj[31100680]) +
+                    Number($scope.item.obj[31100687]) +
+                    Number($scope.item.obj[31100694]) +
+                    Number($scope.item.obj[31100701]) +
+                    Number($scope.item.obj[31100708]) +
+                    Number($scope.item.obj[31100715]) +
+                    Number($scope.item.obj[31100722]) +
+                    Number($scope.item.obj[31100729]) +
+                    Number($scope.item.obj[31100736]) +
+                    Number($scope.item.obj[31100743]) +
+                    Number($scope.item.obj[31100750]) +
+                    Number($scope.item.obj[31100757]) +
+                    Number($scope.item.obj[31100764]) +
+                    Number($scope.item.obj[31100771]) +
+                    Number($scope.item.obj[31100778]) +
+                    Number($scope.item.obj[31100785]) +
+                    Number($scope.item.obj[31100792]) +
+                    Number($scope.item.obj[31100799]) +
+                    Number($scope.item.obj[31100806]);
+
+                    $scope.item.obj[31100814] = 
+                    Number($scope.item.obj[31100597]) +
+                    Number($scope.item.obj[31100604]) +
+                    Number($scope.item.obj[31100611]) +
+                    Number($scope.item.obj[31100618]) +
+                    Number($scope.item.obj[31100625]) +
+                    Number($scope.item.obj[31100632]) +
+                    Number($scope.item.obj[31100639]) +
+                    Number($scope.item.obj[31100646]) +
+                    Number($scope.item.obj[31100653]) +
+                    Number($scope.item.obj[31100660]) +
+                    Number($scope.item.obj[31100667]) +
+                    Number($scope.item.obj[31100674]) +
+                    Number($scope.item.obj[31100681]) +
+                    Number($scope.item.obj[31100688]) +
+                    Number($scope.item.obj[31100695]) +
+                    Number($scope.item.obj[31100702]) +
+                    Number($scope.item.obj[31100709]) +
+                    Number($scope.item.obj[31100716]) +
+                    Number($scope.item.obj[31100723]) +
+                    Number($scope.item.obj[31100730]) +
+                    Number($scope.item.obj[31100737]) +
+                    Number($scope.item.obj[31100744]) +
+                    Number($scope.item.obj[31100751]) +
+                    Number($scope.item.obj[31100758]) +
+                    Number($scope.item.obj[31100765]) +
+                    Number($scope.item.obj[31100772]) +
+                    Number($scope.item.obj[31100779]) +
+                    Number($scope.item.obj[31100786]) +
+                    Number($scope.item.obj[31100793]) +
+                    Number($scope.item.obj[31100800]) +
+                    Number($scope.item.obj[31100807]);
+
+                    $scope.item.obj[31100815] = 
+                    Number($scope.item.obj[31100598]) +
+                    Number($scope.item.obj[31100605]) +
+                    Number($scope.item.obj[31100612]) +
+                    Number($scope.item.obj[31100619]) +
+                    Number($scope.item.obj[31100626]) +
+                    Number($scope.item.obj[31100633]) +
+                    Number($scope.item.obj[31100640]) +
+                    Number($scope.item.obj[31100647]) +
+                    Number($scope.item.obj[31100654]) +
+                    Number($scope.item.obj[31100661]) +
+                    Number($scope.item.obj[31100668]) +
+                    Number($scope.item.obj[31100675]) +
+                    Number($scope.item.obj[31100682]) +
+                    Number($scope.item.obj[31100689]) +
+                    Number($scope.item.obj[31100696]) +
+                    Number($scope.item.obj[31100703]) +
+                    Number($scope.item.obj[31100710]) +
+                    Number($scope.item.obj[31100717]) +
+                    Number($scope.item.obj[31100724]) +
+                    Number($scope.item.obj[31100731]) +
+                    Number($scope.item.obj[31100738]) +
+                    Number($scope.item.obj[31100745]) +
+                    Number($scope.item.obj[31100752]) +
+                    Number($scope.item.obj[31100759]) +
+                    Number($scope.item.obj[31100766]) +
+                    Number($scope.item.obj[31100773]) +
+                    Number($scope.item.obj[31100780]) +
+                    Number($scope.item.obj[31100787]) +
+                    Number($scope.item.obj[31100794]) +
+                    Number($scope.item.obj[31100801]) +
+                    Number($scope.item.obj[31100808]);
+
+                    $scope.item.obj[31100816] = 
+                    Number($scope.item.obj[31100599]) +
+                    Number($scope.item.obj[31100606]) +
+                    Number($scope.item.obj[31100613]) +
+                    Number($scope.item.obj[31100620]) +
+                    Number($scope.item.obj[31100627]) +
+                    Number($scope.item.obj[31100634]) +
+                    Number($scope.item.obj[31100641]) +
+                    Number($scope.item.obj[31100648]) +
+                    Number($scope.item.obj[31100655]) +
+                    Number($scope.item.obj[31100662]) +
+                    Number($scope.item.obj[31100669]) +
+                    Number($scope.item.obj[31100676]) +
+                    Number($scope.item.obj[31100683]) +
+                    Number($scope.item.obj[31100690]) +
+                    Number($scope.item.obj[31100697]) +
+                    Number($scope.item.obj[31100704]) +
+                    Number($scope.item.obj[31100711]) +
+                    Number($scope.item.obj[31100718]) +
+                    Number($scope.item.obj[31100725]) +
+                    Number($scope.item.obj[31100732]) +
+                    Number($scope.item.obj[31100739]) +
+                    Number($scope.item.obj[31100746]) +
+                    Number($scope.item.obj[31100753]) +
+                    Number($scope.item.obj[31100760]) +
+                    Number($scope.item.obj[31100767]) +
+                    Number($scope.item.obj[31100774]) +
+                    Number($scope.item.obj[31100781]) +
+                    Number($scope.item.obj[31100788]) +
+                    Number($scope.item.obj[31100795]) +
+                    Number($scope.item.obj[31100802]) +
+                    Number($scope.item.obj[31100809]);
+
+                    $scope.item.obj[31100817] = 
+                    Number($scope.item.obj[31100600]) +
+                    Number($scope.item.obj[31100607]) +
+                    Number($scope.item.obj[31100614]) +
+                    Number($scope.item.obj[31100621]) +
+                    Number($scope.item.obj[31100628]) +
+                    Number($scope.item.obj[31100635]) +
+                    Number($scope.item.obj[31100642]) +
+                    Number($scope.item.obj[31100649]) +
+                    Number($scope.item.obj[31100656]) +
+                    Number($scope.item.obj[31100663]) +
+                    Number($scope.item.obj[31100670]) +
+                    Number($scope.item.obj[31100677]) +
+                    Number($scope.item.obj[31100684]) +
+                    Number($scope.item.obj[31100691]) +
+                    Number($scope.item.obj[31100698]) +
+                    Number($scope.item.obj[31100705]) +
+                    Number($scope.item.obj[31100712]) +
+                    Number($scope.item.obj[31100719]) +
+                    Number($scope.item.obj[31100726]) +
+                    Number($scope.item.obj[31100733]) +
+                    Number($scope.item.obj[31100740]) +
+                    Number($scope.item.obj[31100747]) +
+                    Number($scope.item.obj[31100754]) +
+                    Number($scope.item.obj[31100761]) +
+                    Number($scope.item.obj[31100768]) +
+                    Number($scope.item.obj[31100775]) +
+                    Number($scope.item.obj[31100782]) +
+                    Number($scope.item.obj[31100789]) +
+                    Number($scope.item.obj[31100796]) +
+                    Number($scope.item.obj[31100803]) +
+                    Number($scope.item.obj[31100810]);
+                    
                 })
             }
 
@@ -195,7 +429,7 @@ define(['initialize'], function (initialize) {
                 var arrSave = []
                 for (var i = arrobj.length - 1; i >= 0; i--) {
                     if ($scope.item.obj[parseInt(arrobj[i])] instanceof Date)
-                        // $scope.item.obj[parseInt(arrobj[i])] = moment($scope.item.obj[parseInt(arrobj[i])]).format('YYYY-MM-DD HH:mm')
+                        $scope.item.obj[parseInt(arrobj[i])] = moment($scope.item.obj[parseInt(arrobj[i])]).format('YYYY-MM-DD HH:mm')
                     arrSave.push({ id: arrobj[i], values: $scope.item.obj[parseInt(arrobj[i])] })
                 }
                 $scope.cc.jenisemr = 'asesmen'

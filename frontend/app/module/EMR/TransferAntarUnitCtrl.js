@@ -228,10 +228,10 @@ define(['initialize'], function (initialize) {
                     var antrianPasien = e.data.result;
                     $scope.item.obj[423704] = new Date(moment(antrianPasien.tglregistrasi).format('YYYY-MM-DD HH:mm'));
                     if (antrianPasien.objectruanganfk != null && antrianPasien.namaruangan != null) {
-                        $scope.item.obj[423700] = {
-                            value: antrianPasien.objectruanganfk,
-                            text: antrianPasien.namaruangan
-                        }
+                        // $scope.item.obj[423700] = {
+                        //     value: antrianPasien.objectruanganfk,
+                        //     text: antrianPasien.namaruangan
+                        // }
                     }
                 })
 
