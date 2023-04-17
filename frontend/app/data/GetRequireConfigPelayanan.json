@@ -3485,10 +3485,11 @@
         {
             "nameDep": "ChecklistFibrinolitikCtrl",
             "urlDep": "module/EMR/ChecklistFibrinolitikCtrl"
+        },
+        {
+            "nameDep": "HiperbilirubinCtrl",
+            "urlDep": "module/EMR/HiperbilirubinCtrl"
         }
-
-
-        
     
     ]
 }
