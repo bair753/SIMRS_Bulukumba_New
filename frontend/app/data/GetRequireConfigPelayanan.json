@@ -3489,6 +3489,10 @@
         {
             "nameDep": "HiperbilirubinCtrl",
             "urlDep": "module/EMR/HiperbilirubinCtrl"
+        },
+        {
+            "nameDep": "LembarKerjaKelainanPernafasanNeonatusCtrl",
+            "urlDep": "module/EMR/LembarKerjaKelainanPernafasanNeonatusCtrl"
         }
     
     ]
