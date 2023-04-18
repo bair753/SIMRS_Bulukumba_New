@@ -181,6 +181,7 @@ define(['initialize'], function (initialize) {
                     Number($scope.item.obj[31100769] ?? 0) +
                     Number($scope.item.obj[31100776] ?? 0) +
                     Number($scope.item.obj[31100783] ?? 0) +
+                    Number($scope.item.obj[31100790] ?? 0) +
                     Number($scope.item.obj[31100797] == 'A' ? 0 : 0) +
                     Number($scope.item.obj[31100804] ?? 0);
 

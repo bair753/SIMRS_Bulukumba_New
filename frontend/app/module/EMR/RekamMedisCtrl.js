@@ -23,6 +23,7 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
             // norec Antrian Etateh
             medifirstService.get('emr/get-antrian-pasien-norec/' + $state.params.noRec).then(function (e) {
                 var result = e.data.result
+                console.log(result);
                 result.umur = dateHelper.CountAge(new Date(result.tgllahir), new Date(result.tglregistrasi));
                 var bln = result.umur.month,
                     thn = result.umur.year,
@@ -43,7 +44,7 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
 
                 $scope.header = result
                 if (result.foto == null)
-                    $scope.header.image = "../app/images/avatar.jpg"
+                    $scope.header.image = "images/emr/mask_2.svg"
                 else
                     $scope.header.image = result.foto
                 localStorage.setItem('usiaPengkajian', JSON.stringify(setUsiaPengkajian));
