@@ -215,6 +215,17 @@ class RawatInapController extends ApiController
         $kdProfile = $this->getDataKdProfile($request);
         $idProfile = (int) $kdProfile;
         $filter = $request->all();
+
+        $MapRuanganRanap = \DB::table('maploginusertoruangan_s as mlu')
+            ->JOIN('ruangan_m as ru', 'ru.id', '=', 'mlu.objectruanganfk')
+            ->select('ru.id', 'ru.namaruangan')
+            ->where('mlu.kdprofile', (int)$kdProfile)
+            ->where('ru.objectdepartemenfk', 16)
+            ->where('mlu.objectloginuserfk', $request['userData']['id'])
+            ->get();
+
+        // return $MapRuanganRanap;
+
         $MapRuanganRanap = \DB::table('maploginusertoruangan_s as mlu')
             ->JOIN('ruangan_m as ru', 'ru.id', '=', 'mlu.objectruanganfk')
             ->select('ru.id')
