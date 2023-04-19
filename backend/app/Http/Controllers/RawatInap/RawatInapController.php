@@ -215,9 +215,23 @@ class RawatInapController extends ApiController
         $kdProfile = $this->getDataKdProfile($request);
         $idProfile = (int) $kdProfile;
         $filter = $request->all();
+        $MapRuanganRanap = \DB::table('maploginusertoruangan_s as mlu')
+            ->JOIN('ruangan_m as ru', 'ru.id', '=', 'mlu.objectruanganfk')
+            ->select('ru.id')
+            ->where('mlu.kdprofile', (int)$kdProfile)
+            ->where('ru.objectdepartemenfk', 16)
+            ->where('mlu.objectloginuserfk', $request['userData']['id'])
+            ->get();
+        $mapranap = [];
+        foreach ($MapRuanganRanap as $itemRanap){
+            $mapranap []=  (int)$itemRanap->id;
+        }
+        
         $ruangId = '';
         if (isset($filter['ruangId']) && $filter['ruangId'] != "" && $filter['ruangId'] != "undefined") {
             $ruangId = ' AND ru.id = ' . $filter['ruangId'];
+        } else {
+            $ruangId = ' AND ru.id IN ('.collect($mapranap)->implode(',').')';
         }
         $noreg = '';
         if (isset($filter['noreg']) && $filter['noreg'] != "" && $filter['noreg'] != "undefined") {
