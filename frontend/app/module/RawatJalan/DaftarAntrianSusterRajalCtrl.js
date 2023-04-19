@@ -80,8 +80,8 @@ define(['initialize'], function (initialize) {
 
                 medifirstService.get("rawatjalan/get-data-combo-dokter", false).then(function (data) {
                     var datas = []
-                    for (let i = 0; i < data.data.ruanganRajal.length; i++) {
-                        const element = data.data.ruanganRajal[i];
+                    for (let i = 0; i < data.data.MapRuanganRajal.length; i++) {
+                        const element = data.data.MapRuanganRajal[i];
                         datas.push({ id: element.id, namaruangan: element.namaruangan })
                     }
                     $scope.listRuangan = datas
