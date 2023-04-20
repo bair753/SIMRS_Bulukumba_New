@@ -342,6 +342,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
               Route::get('bridging/inacbg/get-data-combo-ina', 'Bridging\InaCbgController@getDataComboIna');
            
               Route::post('bridging/inacbg/save-proposi-bridging-inacbg','Bridging\InaCbgController@saveProposiBridgingINACBG');
+              Route::post('bridging/inacbg/save-proposi-bridging-inacbg-multi','Bridging\InaCbgController@saveProposiBridgingINACBGMulti');
               Route::post('bridging/inacbg/get-daftar-pasien-statusnaikkelas','Bridging\InaCbgController@getStatusNaikKelas');
               Route::post('bridging/inacbg/save-informasi-tanggungan','Bridging\InaCbgController@saveInformasiTanggungan');
               Route::post('bridging/inacbg/save-status','Bridging\InaCbgController@saveStatus');

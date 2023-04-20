@@ -4317,6 +4317,271 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 
 			}
 
+			$scope.grouping2 = function () { 
+				$scope.isRouteLoading = true;
+				var datass = []
+				var tarifrs = []
+				for (let i = 0; i < data2.length; i++) {
+					const element = data2[i];
+					datass.push({ noreg: element.norec, namakelas: element.namakelas, nosep: element.nosep, deptid: element.deptid })
+				}
+				medifirstService.postNonMessage('bridging/inacbg/get-daftar-pasien-statusnaikkelas', { data: datass }).then(function (e) {
+					var resp = e.data
+					var dt1 = {}
+					var dt2 = []
+					for (var i = dataSave.length - 1; i >= 0; i--) {
+						for (var z = resp.length - 1; z >= 0; z--) {
+							const element = resp[z];
+							if (dataSave[i].nomor_sep == element.nosep) {//$scope.dataPasienSelected.nosep) {
+								dt1 = {
+									"metadata": {
+										"method": "set_claim_data",
+										"nomor_sep": dataSave[i].nomor_sep
+									},
+									"data": {
+										"nomor_sep": dataSave[i].nomor_sep,    //"0901R001TEST0001",    
+										"nomor_kartu": dataSave[i].nomor_kartu,    //"233333",    
+										"tgl_masuk": dataSave[i].tgl_masuk,    //"2017-11-20 12:55:00",    
+										"tgl_pulang": dataSave[i].tgl_pulang,    //"2017-12-01 09:55:00",    
+										"jenis_rawat": dataSave[i].jenis_rawat,    //"1",    
+										"kelas_rawat": dataSave[i].kelas_rawat,    //"1",    
+										"adl_sub_acute": dataSave[i].adl_sub_acute,    //"15",    
+										"adl_chronic": dataSave[i].adl_chronic,    //"12",    
+										"icu_indikator": element.statusrawatintensiv,// resp.statusrawatintensiv,//dataSave[i].icu_indikator ,    //"1",    
+										"icu_los": element.lamarawatintensiv,//dataSave[i].icu_los ,    //"2",    
+										"ventilator_hour": dataSave[i].ventilator_hour,    //"5",    
+										"upgrade_class_ind": element.statusnaikkelas,//dataSave[i].upgrade_class_ind ,    //"1",    
+										"upgrade_class_class": element.kelastertinggi,//dataSave[i].upgrade_class_class ,    //"vip",    
+										"upgrade_class_los": element.lamarawatnaikkelas,//dataSave[i].upgrade_class_los ,    //"5",    
+										"upgrade_class_payor": element.pembayar,    //"5",    
+										"add_payment_pct": "75",//dataSave[i].add_payment_pct ,    //"35",    
+										"birth_weight": '',//,$scope.dataPasienSelected.beratbadan,//dataSave[i].birth_weight ,    //"0",    
+										"discharge_status": dataSave[i].discharge_status,    //"1",    
+										"diagnosa": dataSave[i].diagnosa,    //"S71.0#A00.1",    
+										"procedure": dataSave[i].procedure,    //"81.52#88.38",    
+										"tarif_rs": {
+											"prosedur_non_bedah": dataSave[i].tarif_rs.prosedur_non_bedah,    //"300000",      
+											"prosedur_bedah": dataSave[i].tarif_rs.prosedur_bedah,    //"20000000",      
+											"konsultasi": dataSave[i].tarif_rs.konsultasi,    //"300000",      
+											"tenaga_ahli": dataSave[i].tarif_rs.tenaga_ahli,    //"200000",      
+											"keperawatan": dataSave[i].tarif_rs.keperawatan,    // "80000",      
+											"penunjang": dataSave[i].tarif_rs.penunjang,    //"1000000",      
+											"radiologi": dataSave[i].tarif_rs.radiologi,    //"500000",      
+											"laboratorium": dataSave[i].tarif_rs.laboratorium,    //"600000",      
+											"pelayanan_darah": dataSave[i].tarif_rs.pelayanan_darah,    //"150000",      
+											"rehabilitasi": dataSave[i].tarif_rs.rehabilitasi,    //"100000",      
+											"kamar": dataSave[i].tarif_rs.kamar,    //"6000000",      
+											"rawat_intensif": dataSave[i].tarif_rs.rawat_intensif,    //"2500000",      
+											"obat": dataSave[i].tarif_rs.obat,    //"2000000",  
+											"obat_kronis": dataSave[i].tarif_rs.obat_kronis,
+											"obat_kemoterapi": dataSave[i].tarif_rs.obat_kemoterapi,
+											"alkes": dataSave[i].tarif_rs.alkes,    //"500000",      
+											"bmhp": dataSave[i].tarif_rs.bmhp,    //"400000",      
+											"sewa_alat": dataSave[i].tarif_rs.sewa_alat,    //"210000"    
+										},
+										"tarif_poli_eks": dataSave[i].tarif_poli_eks,    //"100000",    
+										"nama_dokter": dataSave[i].nama_dokter,    //"RUDY, DR",    
+										"kode_tarif": dataSave[i].kode_tarif,    //"AP",    
+										"payor_id": dataSave[i].payor_id,    //"3",    
+										"payor_cd": dataSave[i].payor_cd,    //"JKN",    
+										"cob_cd": dataSave[i].cob_cd,    //"0001",    
+										"coder_nik": dataSave[i].coder_nik    //"123123123123"  
+									}
+								}
+								dt2.push(dt1)
+
+								var listTarifRS =[{namatarif:'Prosedur Non Bedah' ,tarif:dataSave[i].tarif_rs.prosedur_non_bedah},
+									{namatarif:'Tenaga Ahli' ,tarif:dataSave[i].tarif_rs.tenaga_ahli},
+									{namatarif:'Radiologi' ,tarif:dataSave[i].tarif_rs.radiologi},
+									{namatarif:'Rehabilitasi' ,tarif:dataSave[i].tarif_rs.rehabilitasi},
+									{namatarif:'Obat' ,tarif:dataSave[i].tarif_rs.obat},
+									{namatarif:'Alkes' ,tarif:dataSave[i].tarif_rs.alkes},
+									{namatarif:'Prosedur Bedah' ,tarif:dataSave[i].tarif_rs.prosedur_bedah},
+									{namatarif:'Keperawatan' ,tarif:dataSave[i].tarif_rs.keperawatan},
+									{namatarif:'Laboratorium' ,tarif:dataSave[i].tarif_rs.laboratorium},
+									{namatarif:'Kamar/Akomodasi' ,tarif:dataSave[i].tarif_rs.kamar},
+									{namatarif:'Obat Kronis' ,tarif:dataSave[i].tarif_rs.obat_kronis},
+									{namatarif:'BMHP' ,tarif:dataSave[i].tarif_rs.bmhp},
+									{namatarif:'Konsultasi' ,tarif:dataSave[i].tarif_rs.konsultasi},
+									{namatarif:'Penunjang' ,tarif:dataSave[i].tarif_rs.penunjang},					//
+									{namatarif:'Pelayanan Darah' ,tarif:dataSave[i].tarif_rs.pelayanan_darah},
+									{namatarif:'Rawat Intensif' ,tarif:dataSave[i].tarif_rs.rawat_intensif},
+									{namatarif:'Obat Kemoterapi' ,tarif:dataSave[i].tarif_rs.obat_kemoterapi},
+									{namatarif:'Sewa Alat' ,tarif:dataSave[i].tarif_rs.sewa_alat}
+								]
+								tarifrs[dataSave[i].nomor_sep] = listTarifRS
+							}
+						}
+					}
+
+					var objData = {
+						"data": dt2
+					}
+					medifirstService.postNonMessage('bridging/inacbg/save-bridging-inacbg', objData).then(function (e) {
+						var dt1 = {}
+						var dt2 = []
+
+						for (var i = resp.length - 1; i >= 0; i--) {
+							dt1 = {
+								"metadata": {
+									"method": "grouper",
+									"stage": "1"
+								},
+								"data": {
+									// "nomor_sep": dataSave[i].nomor_sep 
+									"nomor_sep": resp[i].nosep// $scope.dataPasienSelected.nosep
+								}
+							}
+							dt2.push(dt1)
+						}
+
+						var objData = {
+							"data": dt2
+						}
+
+						medifirstService.postNonMessage('bridging/inacbg/save-bridging-inacbg', objData).then(function (e) {
+							// simpan response ke database
+							responData = e.data.dataresponse;
+							let arrStatus =[]
+							var proporsiPush = []
+							var norecpdPush = []
+							for (let x = 0; x < responData.length; x++) { 
+								const elementRes = responData[x];
+								toastr.info(elementRes.dataresponse.metadata.message, 'INACBG');
+								toastr.info(elementRes.dataresponse.response.cbg.description, 'INACBG');
+
+								if (elementRes.dataresponse.response.cbg.description == "ERROR: MALE WITH GROUPING CRITERIA NOT MET") {
+									toastr.info('JENIS KELAMIN SALAH ATAU DIAGNOSA TIDAK SESUAI JENIS KELAMIN', 'INACBG');
+								}
+
+								for (var i = resp.length - 1; i >= 0; i--) { 
+									const element = resp[i]
+									if (elementRes.datarequest.data.nomor_sep == element.nosep) {
+										// save status
+										if(elementRes.datarequest.metadata.method == 'grouper'
+											&& elementRes.dataresponse.metadata.code == 200  ){
+											arrStatus.push(
+												{
+													nosep:elementRes.datarequest.data.nomor_sep,
+													statusklaim: elementRes.datarequest.metadata.method,
+													norec: element.norec_pd
+												})
+										}
+
+										var totaldijamin = "";
+										var hakkelas = "";
+										var biayanaikkelas = "0";
+										var totalTarifRS = 0;
+										if (element.deptid != "16") { 
+											totaldijamin = elementRes.dataresponse.tarif_alt[2].tarif_inacbg
+										} else {
+											if (elementRes.dataresponse.metadata.code != 400) {
+												hakkelas = elementRes.dataresponse.response.kelas
+												if (hakkelas == "kelas_1") {
+													totaldijamin = elementRes.dataresponse.tarif_alt[0].tarif_inacbg
+												} else if (hakkelas == "kelas_2") {
+													totaldijamin = elementRes.dataresponse.tarif_alt[1].tarif_inacbg
+												} else if (hakkelas == "kelas_3") {
+													totaldijamin = elementRes.dataresponse.tarif_alt[2].tarif_inacbg
+												}
+												// if($scope.dataPasienSelected.namakelas!=$scope.dataPasienSelected.namakelasdaftar){
+
+												if (element.statusnaikkelas != '0') {
+													biayanaikkelas = elementRes.dataresponse.response.add_payment_amt
+													if (biayanaikkelas < 0) {
+														biayanaikkelas = 0
+													}
+												}
+											}
+										}
+
+										
+										for (var j = 0; j < tarifrs[element.nosep].length; j++) {
+											totalTarifRS = parseFloat(tarifrs[element.nosep][j].tarif )+ totalTarifRS
+										}
+										var dataproposi = {
+											"noregistrasifk": element.norec_pd,
+											"totalDijamin": totaldijamin,
+											"biayaNaikkelas": biayanaikkelas,
+											"totalbiayars": totalTarifRS,
+										}
+										proporsiPush.push(dataproposi)
+										norecpdPush.push(element.norec_pd)
+									}
+								}
+							}
+
+							if(arrStatus.length > 0) {
+								medifirstService.post('bridging/inacbg/save-status', {'data':arrStatus}).then(function (z) {})
+							}
+
+							medifirstService.post('bridging/inacbg/save-proposi-bridging-inacbg-multi', { 'proporsi': proporsiPush, 'noregistrasifk': norecpdPush }).then(function (e) {
+								//ini untuk proposional kan utang per tindakan
+								loadData()
+							})
+							
+						})
+					})
+				})
+			}
+
+			$scope.claim_final2 = function () {
+
+				var dt1 = {}
+				var dt2 = []
+				for (var i = dataSave.length - 1; i >= 0; i--) {
+					dt1 = {
+						"metadata": {
+							"method": "claim_final"
+						},
+						"data": {
+							"nomor_sep": dataSave[i].nomor_sep,      
+							"coder_nik": coderNIK,
+						}
+					}
+					dt2.push(dt1)
+				}
+
+				var objData = {
+					"data": dt2
+				}
+				medifirstService.post('bridging/inacbg/save-bridging-inacbg', objData).then(function (e) {
+					// response oke saja
+					responData = e.data.dataresponse;
+					let response = e.data.dataresponse
+					let arrStatus =[]
+					for (var i = 0; i < response.length; i++) {
+						const element = response[i]
+						if(element.datarequest.metadata.method == 'claim_final'
+							 && element.dataresponse.metadata.code == 200  ){
+							arrStatus.push(
+								{
+									nosep:element.datarequest.data.nomor_sep,
+									statusklaim: element.datarequest.metadata.method 
+								})
+						}
+					}
+					if(arrStatus.length>0){
+
+						for (var i = 0; i < data2.length; i++) {
+							const elem = data2[i]
+							for (var ii = 0; ii < arrStatus.length; ii++) {
+								const elem2 = arrStatus[ii]
+								if(elem.nosep == elem2.nosep){
+									elem2.norec = elem.norec
+								}
+							}
+						}
+
+						medifirstService.post('bridging/inacbg/save-status', {'data':arrStatus}).then(function (z) {
+							loadData();	
+						})
+					}
+					toastr.info(responData[0].dataresponse.metadata.message, 'INACBG');
+				})
+
+			}
+
 			// END ################
 
 		}
