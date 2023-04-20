@@ -18,8 +18,9 @@ define(['initialize'], function (initialize) {
             // $scope.kodeRuangan = $state.params.kodeRuangan;
             // $scope.isCalling = false;
             $scope.pegawai = ModelItem.getPegawai();
-            loadCombo()
+            
             loadData()
+            loadCombo()
             // loadData()
 
             $scope.SearchEnter = function () {
@@ -42,10 +43,12 @@ define(['initialize'], function (initialize) {
                     // $scope.item.tglpulang = $scope.now;                 
                 }
                 medifirstService.get("rawatinap/get-data-combo-dokter", false).then(function (data) {
-                    $scope.listRuangan = data.data.ruanganRanap;
+                    $scope.listRuangan = data.data.MapRuanganRanap;
+                    // $scope.itema.ruangan = $scope.listRuangan[0];
                 });
             }
             function loadData() {
+                // loadCombo();
                 $scope.isRouteLoading = true;
                 // var tglAwal = moment($scope.item.periodeAwal).format('YYYY-MM-DD HH:mm:ss');
                 // var tglAkhir = moment($scope.item.periodeAkhir).format('YYYY-MM-DD HH:mm:ss');

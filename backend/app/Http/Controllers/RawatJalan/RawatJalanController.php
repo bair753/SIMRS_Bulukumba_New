@@ -107,6 +107,14 @@ class RawatJalanController extends ApiController
             ->orderBy('ru.namaruangan')
             ->get();
 
+        $MapRuanganRajal = \DB::table('maploginusertoruangan_s as mlu')
+            ->JOIN('ruangan_m as ru', 'ru.id', '=', 'mlu.objectruanganfk')
+            ->select('ru.id', 'ru.namaruangan')
+            ->where('mlu.kdprofile', (int)$kdProfile)
+            ->wherein('ru.objectdepartemenfk', [18,24])
+            ->where('mlu.objectloginuserfk', $request['userData']['id'])
+            ->get();
+
         $ruanganRanap = \DB::table('ruangan_m as ru')
             ->where('ru.kdprofile', $idProfile)
             ->where('statusenabled', true)
@@ -182,6 +190,7 @@ class RawatJalanController extends ApiController
             'dept' => $dept,
             'ruanganRajal' => $ruanganRajal,
             'ruanganRanap' => $ruanganRanap,
+            'MapRuanganRajal' => $MapRuanganRajal,
             'deptrirj' => $deptRajalInap,
             'ruanganall' => $dataRuangan,
             //            'pembatalan' => $pembatalan,
@@ -383,6 +392,19 @@ class RawatJalanController extends ApiController
         $kdProfile = $this->getDataKdProfile($request);
         $idProfile = (int) $kdProfile;
         $filter = $request->all();
+
+        $MapRuanganRajal = \DB::table('maploginusertoruangan_s as mlu')
+            ->JOIN('ruangan_m as ru', 'ru.id', '=', 'mlu.objectruanganfk')
+            ->select('ru.id')
+            ->where('mlu.kdprofile', (int)$kdProfile)
+            ->wherein('ru.objectdepartemenfk', [18,24])
+            ->where('mlu.objectloginuserfk', $request['userData']['id'])
+            ->get();
+        $maprajal = [];
+        foreach ($MapRuanganRajal as $itemRajal){
+            $maprajal []=  (int)$itemRajal->id;
+        }
+
         $data = \DB::table('antrianpasiendiperiksa_t as apd')
             ->join('pasiendaftar_t as pd', 'pd.norec', '=', 'apd.noregistrasifk')
             // ->leftjoin('batalregistrasi_t as br','br.pasiendaftarfk','=','pd.norec')
@@ -479,7 +501,10 @@ class RawatJalanController extends ApiController
         }
         if (isset($filter['ruangId']) && $filter['ruangId'] != "" && $filter['ruangId'] != "undefined") {
             $data = $data->where('ru.id', '=', $filter['ruangId']);
+        }else {
+            $data = $data->wherein('ru.id', $maprajal);
         }
+
         if (isset($filter['dokId']) && $filter['dokId'] != "" && $filter['dokId'] != "undefined") {
             $data = $data->where('pg.id', '=', $filter['dokId']);
         }

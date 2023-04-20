@@ -3485,10 +3485,23 @@
         {
             "nameDep": "ChecklistFibrinolitikCtrl",
             "urlDep": "module/EMR/ChecklistFibrinolitikCtrl"
+        },
+        {
+            "nameDep": "HiperbilirubinCtrl",
+            "urlDep": "module/EMR/HiperbilirubinCtrl"
+        },
+        {
+            "nameDep": "LembarKerjaKelainanPernafasanNeonatusCtrl",
+            "urlDep": "module/EMR/LembarKerjaKelainanPernafasanNeonatusCtrl"
+        },
+        {
+            "nameDep": "PenilaianPEWSCtrl",
+            "urlDep": "module/EMR/PenilaianPEWSCtrl"
+        },
+        {
+            "nameDep": "PenolakanRawatInapHCUCtrl",
+            "urlDep": "module/EMR/PenolakanRawatInapHCUCtrl"
         }
-
-
-        
     
     ]
 }

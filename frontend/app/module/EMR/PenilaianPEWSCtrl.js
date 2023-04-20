@@ -1,6 +1,6 @@
 define(['initialize'], function (initialize) {
     'use strict';
-    initialize.controller('PenilaianEWSCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
+    initialize.controller('PenilaianPEWSCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
         function ($q, $rootScope, $scope, ModelItem, $state, cacheHelper, dateHelper, medifirstService) {
             
             var paramsIndex = $state.params.index ? parseInt($state.params.index) : null
@@ -12,7 +12,7 @@ define(['initialize'], function (initialize) {
             $scope.totalSkor2 = 0;
             $scope.cc = {};
             var nomorEMR = '-';
-            $scope.cc.emrfk = 290070;
+            $scope.cc.emrfk = 290125;
             var dataLoad = []
             $scope.listData1 = []
             $scope.listData2 = []
@@ -445,7 +445,7 @@ define(['initialize'], function (initialize) {
                     //     nomorEMR : e.data.data.noemr 
                     // });
                     medifirstService.postLogging('EMR', 'norec emrpasien_t', e.data.data.norec,  
-                    'Penilaian EWS ' + ' dengan No EMR - ' +e.data.data.noemr +  ' pada No Registrasi ' 
+                    'Penilaian PEWS ' + ' dengan No EMR - ' +e.data.data.noemr +  ' pada No Registrasi ' 
                     + $scope.cc.noregistrasi).then(function (res) {
                     })
 

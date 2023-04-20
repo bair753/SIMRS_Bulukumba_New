@@ -116,6 +116,14 @@ class RawatInapController extends ApiController
             ->orderBy('ru.namaruangan')
             ->get();
 
+        $MapRuanganRanap = \DB::table('maploginusertoruangan_s as mlu')
+            ->JOIN('ruangan_m as ru', 'ru.id', '=', 'mlu.objectruanganfk')
+            ->select('ru.id', 'ru.namaruangan')
+            ->where('mlu.kdprofile', (int)$kdProfile)
+            ->where('ru.objectdepartemenfk', 16)
+            ->where('mlu.objectloginuserfk', $request['userData']['id'])
+            ->get();
+
         $ruanganRanap = \DB::table('ruangan_m as ru')
             ->where('statusenabled',true)
             ->wherein('ru.objectdepartemenfk', [16,17,35])
@@ -193,6 +201,7 @@ class RawatInapController extends ApiController
             'ruanganRanap' => $ruanganRanap,
             'deptrirj' => $deptRajalInap,
             'ruanganall' => $dataRuangan,
+            'MapRuanganRanap' => $MapRuanganRanap,
 //            'pembatalan' => $pembatalan,
 //            'jenisdiagnosa'=> $jenisDiagnosa,
 //            'diagnosa'=> $Diagnosa,
@@ -206,9 +215,34 @@ class RawatInapController extends ApiController
         $kdProfile = $this->getDataKdProfile($request);
         $idProfile = (int) $kdProfile;
         $filter = $request->all();
+
+        $MapRuanganRanap = \DB::table('maploginusertoruangan_s as mlu')
+            ->JOIN('ruangan_m as ru', 'ru.id', '=', 'mlu.objectruanganfk')
+            ->select('ru.id', 'ru.namaruangan')
+            ->where('mlu.kdprofile', (int)$kdProfile)
+            ->where('ru.objectdepartemenfk', 16)
+            ->where('mlu.objectloginuserfk', $request['userData']['id'])
+            ->get();
+
+        // return $MapRuanganRanap;
+
+        $MapRuanganRanap = \DB::table('maploginusertoruangan_s as mlu')
+            ->JOIN('ruangan_m as ru', 'ru.id', '=', 'mlu.objectruanganfk')
+            ->select('ru.id')
+            ->where('mlu.kdprofile', (int)$kdProfile)
+            ->where('ru.objectdepartemenfk', 16)
+            ->where('mlu.objectloginuserfk', $request['userData']['id'])
+            ->get();
+        $mapranap = [];
+        foreach ($MapRuanganRanap as $itemRanap){
+            $mapranap []=  (int)$itemRanap->id;
+        }
+        
         $ruangId = '';
         if (isset($filter['ruangId']) && $filter['ruangId'] != "" && $filter['ruangId'] != "undefined") {
             $ruangId = ' AND ru.id = ' . $filter['ruangId'];
+        } else {
+            $ruangId = ' AND ru.id IN ('.collect($mapranap)->implode(',').')';
         }
         $noreg = '';
         if (isset($filter['noreg']) && $filter['noreg'] != "" && $filter['noreg'] != "undefined") {
@@ -231,8 +265,6 @@ class RawatInapController extends ApiController
 //            $data = $data->where('ps.namapasien', 'ilike', '%' . $filter['nama'] . '%');
         }
         
-        
-
         $data =DB::select(DB::raw("select * from
                 (select pd.tglregistrasi,  ps.id as nocmfk,  ps.nocm,  pd.noregistrasi,  ps.namapasien,  ps.tgllahir, 
                  jk.jeniskelamin,  apd.objectruanganfk,  ru.objectdepartemenfk,ru.namaruangan,  kls.id as idkelas,kls.namakelas,  kp.kelompokpasien,  rek.namarekanan, 
