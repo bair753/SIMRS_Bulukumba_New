@@ -82,6 +82,7 @@ define(['initialize'], function (initialize) {
                 }
                 medifirstService.get("registrasi/daftar-registrasi/get-data-combo-operator", false).then(function (data) {
                     $scope.listDokter = data.data.dokter;
+                    $scope.listProduk = data.data.produk;
                     $scope.listDokters = data.data.dokter;
                     $scope.listDepartemen = dat.data.departemen;
                     $scope.selectOptionsDokter = {
@@ -132,6 +133,11 @@ define(['initialize'], function (initialize) {
                 if ($scope.item.dokterDpjp != undefined) {
                     var idDokter = "&idDokter=" + $scope.item.dokterDpjp.id
                 }
+
+                var idProduk = ""
+                if ($scope.item.produk != undefined) {
+                    var idProduk = "&idProduk=" + $scope.item.produk.id
+                }
                 var listKelompokPasien = ""
                 if ($scope.item.listKelompokPasienMulti.length != 0) {
                     var a = ""
@@ -156,6 +162,11 @@ define(['initialize'], function (initialize) {
                     namaruangan = "&ruanganId=" + $scope.item.ruangan.id
                 }
 
+                var idproduk = ""
+                if ($scope.item.produk != undefined) {
+                    idproduk = "&produkId=" + $scope.item.produk.id
+                }
+
                 
                 
                 var listDokterPemeriksa = ""
@@ -174,6 +185,7 @@ define(['initialize'], function (initialize) {
                 medifirstService.get("radiologi/get-laporan-tindakan?tglAwal=" + tglAwal + "&tglAkhir=" + tglAkhir 
                     + "&instalasiId=" + tempInstalasiId 
                     + "&ruanganId=" + namaruangan 
+                    + idProduk 
                     + "&KpArr=" + listKelompokPasien
                     + "&dkArr="+ listDokterPemeriksa + idDokter).then(function (data) {
                         $scope.isRouteLoading = false;

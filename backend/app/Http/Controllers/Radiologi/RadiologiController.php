@@ -2000,6 +2000,7 @@ class RadiologiController extends ApiController
         $tglAwal = $request['tglAwal'];
         $tglAkhir = $request['tglAkhir'];
         $instalasiid = $request['instalasiId'];
+        $produkid = $request['idProduk'];
         $ruid = $request['ruanganId'];
 
         $paramKlp = '';
@@ -2007,6 +2008,7 @@ class RadiologiController extends ApiController
         $idDokter = '';
         $dokid = '';
         $instalasiid = '';
+        $produkid = '';
         $ruid = '';
 
 //        if(isset($request['dokid']) && $request['dokid']!="" && $request['dokid']!="undefined"){
@@ -2015,6 +2017,9 @@ class RadiologiController extends ApiController
 
         if(isset($request['idDokter']) && $request['idDokter']!="" && $request['idDokter']!="undefined"){
             $dokid = ' and pg.id = '.$request['idDokter'];
+        }
+        if(isset($request['idProduk']) && $request['idProduk']!="" && $request['idProduk']!="undefined"){
+            $produkid = ' and pro.id = '.$request['idProduk'];
         }
 
 //        if(isset($request['kpid']) && $request['kpid']!="" && $request['kpid']!="undefined"){
@@ -2091,7 +2096,7 @@ class RadiologiController extends ApiController
                 INNER JOIN pegawai_m AS pg1 ON pg1.id = ppp.objectpegawaifk
                 LEFT JOIN hasilradiologi_t AS hr ON hr.pelayananpasienfk = pp.norec AND hr.statusenabled = true
                 WHERE pd.kdprofile = $kdProfile AND pd.statusenabled = true AND apd.objectruanganfk = 576
-                      AND pro.namaproduk IS NOT NULL AND br.norec IS NULL
+                      AND pro.namaproduk IS NOT NULL $produkid AND br.norec IS NULL 
                       AND pp.tglpelayanan BETWEEN '$tglAwal' AND '$tglAkhir'
                       $instalasiid
                       $ruid
