@@ -4318,6 +4318,15 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 			}
 
 			$scope.grouping2 = function () { 
+				if(!$scope.item.status) {
+					toastr.error("Hanya bisa grouping dengan status klaim !");
+					return
+				} else {
+					if($scope.item.status.id != "new_claim"){
+						toastr.error("Hanya bisa grouping dengan status klaim !");
+						return
+					}
+				}
 				$scope.isRouteLoading = true;
 				var datass = []
 				var tarifrs = []
@@ -4526,6 +4535,16 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 			}
 
 			$scope.claim_final2 = function () {
+
+				if(!$scope.item.status) {
+					toastr.error("Hanya bisa final claim dengan status Grouping !");
+					return
+				} else {
+					if($scope.item.status.id != "grouper"){
+						toastr.error("Hanya bisa final claim dengan status Grouping !");
+						return
+					}
+				}
 
 				var dt1 = {}
 				var dt2 = []
