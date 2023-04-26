@@ -1251,7 +1251,7 @@ class LaboratoriumController extends ApiController
         $pemeriksa = explode(',', $pemeriksa->nilaifield);
 
         $dataPemeriksa = \DB::table('pegawai_m as pg')
-            ->select('id', 'namalengkap')
+            ->select('pg.id as id', 'pg.namalengkap as namalengkap')
             ->where('pg.kdprofile',$idProfile )
             ->whereIn('pg.id', $pemeriksa)
             ->where('pg.statusenabled',true)

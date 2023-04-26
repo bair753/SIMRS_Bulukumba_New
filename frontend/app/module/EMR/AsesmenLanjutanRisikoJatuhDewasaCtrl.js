@@ -133,7 +133,7 @@ define(['initialize'], function (initialize) {
                 {
                     "id": 3,
                     "detail": [
-                        { "id": 428220, "caption": "Pastikan roda tempat tidur tidak terkunci", "type": "label" },
+                        { "id": 428220, "caption": "Pastikan roda tempat tidur terkunci", "type": "label" },
                         { "id": 428221, "caption": "", "type": "checkbox" },
                         { "id": 428222, "caption": "", "type": "checkbox" },
                         { "id": 428223, "caption": "", "type": "checkbox" },

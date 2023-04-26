@@ -6774,6 +6774,11 @@ class RegistrasiController extends ApiController
             ->orderBy('jp.jenispelayanan')
             ->get();
 
+        $dataProduk = \DB::table('produk_m as pr')
+            ->where('pr.statusenabled', true)
+            ->orderBy('pr.namaproduk')
+            ->get();
+
 
         $result = array(
             'departemen' => $dataDepartemen,
@@ -6794,6 +6799,7 @@ class RegistrasiController extends ApiController
             'pegawaiLogin' => $dataPegawai->namalengkap,
             'jeniskelamin' => $dataJenisKelamin,
             'jenispelayanan' => $jenisPelayanan,
+            'produk' => $dataProduk,
             'message' => 'as@epic',
         );
 
