@@ -881,7 +881,7 @@ class LaboratoriumController extends ApiController
    public function getHasilLabManual(Request $r){
         $umur =$r['umur'];
         $data = DB::select(DB::raw("SELECT pp.noregistrasifk as norec_apd,djp.detailjenisproduk,pp.produkfk,prd.namaproduk  ,maps.detailpemeriksaan,maps.memohasil,
-                maps.nourutdetail,maps.satuanstandarfk,ss.satuanstandar,nn.nilaitext,nn.tipedata,nn.nilaimin,nn.nilaimax,hh.hasil,
+                maps.nourutdetail,maps.satuanstandarfk,ss.satuanstandar,nn.nilaitext,nn.tipedata,nn.nilaimin,nn.nilaimax,hh.hasil,hh.objectpemeriksafk,pg1.namalengkap as pemeriksa,hh.objectdokterfk,pg2.namalengkap as dokter,hh.catatan,
                 maps.id as map_id,hh.norec as norec_hasil,maps.nourutjenispemeriksaan,maps.nourutdetail,pp.norec as norecPP,nn.nilaimin || '-' || nn.nilaimax as nilainormalstr,
                 hh.flag,nn.id as idnn,maps2.jeniskelaminfk
                 FROM pelayananpasien_t  as pp
@@ -893,9 +893,12 @@ class LaboratoriumController extends ApiController
                 and maps2.kelompokumurfk in (select id from kelompokumur_m  kuu where $umur BETWEEN kuu.umurmin and kuu.umurmax) 
                 inner join nilainormal_m  as nn on nn.id = maps2.nilainormalfk
                 left join satuanstandar_m  as ss on ss.id = maps.satuanstandarfk
+                
                 left join hasillaboratorium_t  as hh on hh.norecpelayanan  = pp.norec 
                 and pp.noregistrasifk=hh.noregistrasifk
                  and maps.detailpemeriksaan =hh.detailpemeriksaan 
+                left join pegawai_m as pg1 on pg1.id = hh.objectpemeriksafk
+                left join pegawai_m as pg2 on pg2.id = hh.objectdokterfk
                 where   pp.norec in ($r[norec])  
                 order by  maps.nourutjenispemeriksaan,maps.nourutdetail asc"));
         $result =  array(
@@ -931,7 +934,9 @@ class LaboratoriumController extends ApiController
                             [
                                 'hasil' => $value['hasil'],
                                 'flag' => $value['flag'],
-                            
+                                'objectpemeriksafk' => $request['pemeriksa'],
+                                'objectdokterfk' => $request['dokter'],
+                                'catatan' => $request['catatan']
                             ]
                         );
                 }else
@@ -948,6 +953,9 @@ class LaboratoriumController extends ApiController
                     $h->flag = $value['flag'];
                     $h->detailpemeriksaan = $value['detailpemeriksaan'];
                     $h->norecpelayanan = $value['norecpelayanan'];
+                    $h->objectpemeriksafk = $request['pemeriksa'];
+                    $h->objectdokterfk = $request['dokter'];
+                    $h->catatan = $request['catatan'];
                     $h->save();
                 }
     

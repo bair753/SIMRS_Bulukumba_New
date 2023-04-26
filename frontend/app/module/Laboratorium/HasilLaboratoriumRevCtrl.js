@@ -188,6 +188,9 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     '&objectjeniskelaminfk=' + $scope.item.objectjeniskelaminfk + '&umur=' + $scope.item.umurDay + '&norec=' + $scope.item.norecPP ).then(function (data) {
                         // var sourceGrid = []
                         $scope.isRouteLoading = false;
+                        $scope.item.DataPemeriksa = {namalengkap: data.data.data[0].pemeriksa, id: data.data.data[0].objectpemeriksafk}
+                        $scope.item.DataPegawai = {namalengkap: data.data.data[0].dokter, id: data.data.data[0].objectdokterfk}
+                        $scope.item.catatan = data.data.data[0].catatan;
                         if (data.statResponse == true && data.data.data.length > 0) {
                             // sourceGrid = data.data.data
 
@@ -553,7 +556,10 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 
                 if (dataArray.length !== 0) {
                     var objSave = {
-                        "hasil": dataArray
+                        "hasil": dataArray,
+                        "pemeriksa": $scope.item.DataPemeriksa.id,
+                        "dokter": $scope.item.DataPegawai.id,
+                        "catatan": $scope.item.catatan ? $scope.item.catatan : '-' 
                     }
                     medifirstService.post('laboratorium/save-hasil-lab-manual', objSave).then(function (e) {
                         $scope.result();
