@@ -19399,6 +19399,98 @@
         "define": "RekamMedisCtrl"
       }
     ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MelepasBantuanHidupDasar",
+    "url": "/MelepasBantuanHidupDasar",
+    "templateurl": "module/EMR/MelepasBantuanHidupDasar.html",
+    "controller": "MelepasBantuanHidupDasarCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.PerawatanNeonatus",
+    "url": "/PerawatanNeonatus",
+    "templateurl": "module/EMR/PerawatanNeonatus.html",
+    "controller": "PerawatanNeonatusCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.PerawatanAsfiksia",
+    "url": "/PerawatanAsfiksia",
+    "templateurl": "module/EMR/PerawatanAsfiksia.html",
+    "controller": "PerawatanAsfiksiaCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.PerawatanHipoglikemi",
+    "url": "/PerawatanHipoglikemi",
+    "templateurl": "module/EMR/PerawatanHipoglikemi.html",
+    "controller": "PerawatanHipoglikemiCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
   }
 
 

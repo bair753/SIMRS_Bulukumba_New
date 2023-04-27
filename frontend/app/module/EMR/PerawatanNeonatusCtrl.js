@@ -1,6 +1,6 @@
 define(['initialize'], function (initialize) {
     'use strict';
-    initialize.controller('PersetujuanPengobatanRisikoTinggiCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
+    initialize.controller('PerawatanNeonatusCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
         function ($q, $rootScope, $scope, ModelItem, $state, cacheHelper, dateHelper, medifirstService) {
 
             var paramsIndex = $state.params.index ? parseInt($state.params.index) : null
@@ -14,7 +14,7 @@ define(['initialize'], function (initialize) {
             $scope.cc = {};
             var nomorEMR = '-';
             var norecEMR = '';
-            $scope.cc.emrfk = 290107;
+            $scope.cc.emrfk = 290119;
             var dataLoad = [];
             $scope.isCetak = false;
             $scope.allDisabled = false;
@@ -356,79 +356,201 @@ define(['initialize'], function (initialize) {
                 });
             }
 
-            $scope.listPemberiInformasi = [
+            $scope.listPemberiPerawatan = [
                 {
                     "id": 1,
-                    "jenisinfo": "Diagnosa",
+                    "jenisinfo": "Riwayat keluarga ikterus, anemia, splenektomi, sferositosis, defisiensi glukosa 6-fosfat dehidrogenase (G6PD)",
                     "detail": [
-                        { "id": 31103103, "caption": "", "type": "textarea" },
-                        { "id": 31103104, "caption": "", "type": "checkbox" }
+                        { "id": 31103353, "caption": "", "type": "checkbox" },
+                        { "id": 31103354, "caption": "", "type": "checkbox" }
                     ]
                 },
                 {
                     "id": 2,
-                    "jenisinfo": "Tindakan Kedokteran",
+                    "jenisinfo": "Riwayat keluarga dengan penyakit hati, menandakan kemungkinan galaktosemia, defisiensi alfa-1-antiripsin, tirosinosis, hipermetioninemia, penyakit Gilbert, sindrom Crigler-Najjar tipe 1 dan II, atau fibrosis kistik",
                     "detail": [
-                        { "id": 31103105, "caption": "", "type": "textarea" },
-                        { "id": 31103106, "caption": "", "type": "checkbox" }
+                        { "id": 31103355, "caption": "", "type": "checkbox" },
+                        { "id": 31103356, "caption": "", "type": "checkbox" }
                     ]
                 },
                 {
                     "id": 3,
-                    "jenisinfo": "Indikasi pemberian transfusi",
+                    "jenisinfo": "Riwayat saudara dengan ikterus atau anemia, mengarahkan pada kemungkinan inkompatibilitas golongan darah atau breast-milk jaundice",
                     "detail": [
-                        { "id": 31103107, "caption": "", "type": "textarea" },
-                        { "id": 31103108, "caption": "", "type": "checkbox" }
+                        { "id": 31103357, "caption": "", "type": "checkbox" },
+                        { "id": 31103358, "caption": "", "type": "checkbox" }
                     ]
                 },
                 {
                     "id": 4,
-                    "jenisinfo": "Tata cara pemberian transfusi",
+                    "jenisinfo": "Menanyakan golongan darah dan rhesus dari Ibu",
                     "detail": [
-                        { "id": 31103109, "caption": "", "type": "textarea" },
-                        { "id": 31103110, "caption": "", "type": "checkbox" }
+                        { "id": 31103359, "caption": "", "type": "checkbox" },
+                        { "id": 31103360, "caption": "", "type": "checkbox" }
                     ]
                 },
                 {
                     "id": 5,
-                    "jenisinfo": "Tujuan pemberian transfusi",
+                    "jenisinfo": "Riwayat sakit selama kehamilan, menandakan kemungkinan infeksi virus atau toksoplasma",
                     "detail": [
-                        { "id": 31103111, "caption": "", "type": "textarea" },
-                        { "id": 31103112, "caption": "", "type": "checkbox" }
+                        { "id": 31103361, "caption": "", "type": "checkbox" },
+                        { "id": 31103362, "caption": "", "type": "checkbox" }
                     ]
                 },
                 {
                     "id": 6,
-                    "jenisinfo": "Risiko & Komplikasi",
+                    "jenisinfo": "Riwayat obat-obatan yang dikonsumsi ibu, yang berpotensi menggeser ikatan bilirubin dengan albumin (sulfonamida) atau mengakibatkan hemolisis pada bayi dengan defisiensi G6PD (sulfonamida, nitrofurantoin, antimalaria)",
                     "detail": [
-                        { "id": 31103113, "caption": "", "type": "textarea" },
-                        { "id": 31103114, "caption": "", "type": "checkbox" }
+                        { "id": 31103363, "caption": "", "type": "checkbox" },
+                        { "id": 31103364, "caption": "", "type": "checkbox" }
                     ]
                 },
                 {
                     "id": 7,
-                    "jenisinfo": "Prognosis",
+                    "jenisinfo": "Riwayat persalinan traumatik yang berpotensi menyebabkan perdarahan atau hemolisis. Bayi asfiksia dapat mengalami hiperbilirubinemia yang disebabkan ketidakmampuan hati memetabolisme bilirubin atau akibat perdarahan intrakranial.",
                     "detail": [
-                        { "id": 31103115, "caption": "", "type": "textarea" },
-                        { "id": 31103116, "caption": "", "type": "checkbox" }
+                        { "id": 31103365, "caption": "", "type": "checkbox" },
+                        { "id": 31103366, "caption": "", "type": "checkbox" }
                     ]
                 },
                 {
                     "id": 8,
-                    "jenisinfo": "Alternatif & risiko (Pilihan pengobatan/ penatalaksanaan)",
+                    "jenisinfo": "Pemberian nutrisi parenteral total dapat menyebabkan hiperbilirubinemia direk berkepanjangan",
                     "detail": [
-                        { "id": 31103117, "caption": "", "type": "textarea" },
-                        { "id": 31103118, "caption": "", "type": "checkbox" }
+                        { "id": 31103367, "caption": "", "type": "checkbox" },
+                        { "id": 31103368, "caption": "", "type": "checkbox" }
                     ]
                 },
                 {
                     "id": 9,
-                    "jenisinfo": "Lain - Lain",
+                    "jenisinfo": "Pemberian ASI",
                     "detail": [
-                        { "id": 31103119, "caption": "", "type": "textarea" },
-                        { "id": 31103120, "caption": "", "type": "checkbox" }
+                        { "id": 31103369, "caption": "", "type": "checkbox" },
+                        { "id": 31103370, "caption": "", "type": "checkbox" }
                     ]
-                }
+                },
+            ];
+
+            $scope.listPemberiPerawatan2 = [
+                {
+                    "id": 1,
+                    "jenisinfo": "Golongan darah dan rhesus",
+                    "detail": [
+                        { "id": 31103371, "caption": "", "type": "checkbox" },
+                        { "id": 31103372, "caption": "", "type": "checkbox" }
+                    ]
+                },
+            ];
+
+            $scope.listPemberiPerawatan3 = [
+                {
+                    "id": 1,
+                    "jenisinfo": "TSH",
+                    "detail": [
+                        { "id": 31103373, "caption": "", "type": "checkbox" },
+                        { "id": 31103374, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "jenisinfo": "G6PD",
+                    "detail": [
+                        { "id": 31103375, "caption": "", "type": "checkbox" },
+                        { "id": 31103376, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 3,
+                    "jenisinfo": "Bilirubin neonatus (Bilirubin total, bilirubin direk, bilirubin indirek)",
+                    "detail": [
+                        { "id": 31103377, "caption": "", "type": "checkbox" },
+                        { "id": 31103378, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 4,
+                    "jenisinfo": "Plot pada grafik nomogram untuk penentuan risiko hiperbirubinemia sesuai usia gestasi (Grafik 1 terlampir)",
+                    "detail": [
+                        { "id": 31103379, "caption": "", "type": "checkbox" },
+                        { "id": 31103380, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 5,
+                    "jenisinfo": "Plot pada grafik panduan sinar terapi untuk bayi sesuai usia gestasi (Grafik 2 terlampir)",
+                    "detail": [
+                        { "id": 31103381, "caption": "", "type": "checkbox" },
+                        { "id": 31103382, "caption": "", "type": "checkbox" }
+                    ]
+                },
+            ];
+
+            $scope.listPemberiPerawatan4 = [
+                {
+                    "id": 1,
+                    "jenisinfo": "Persiapan alat (alat fototerapi, pelindung mata, plester, tempat tidur bayi)",
+                    "detail": [
+                        { "id": 31103383, "caption": "", "type": "checkbox" },
+                        { "id": 31103384, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "jenisinfo": "Bayi dalam keadaan telanjang, kecuali penutup mata dan popok",
+                    "detail": [
+                        { "id": 31103385, "caption": "", "type": "checkbox" },
+                        { "id": 31103386, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 3,
+                    "jenisinfo": "Monitor kebutuhan cairan setiap hari dan perhatikan balans cairan",
+                    "detail": [
+                        { "id": 31103387, "caption": "", "type": "checkbox" },
+                        { "id": 31103388, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 4,
+                    "jenisinfo": "Menyusui dibatasi hingga 30 menit bila kadar bilirubin  tinggi untuk meminimalisir periode terpisah dari sinar",
+                    "detail": [
+                        { "id": 31103389, "caption": "", "type": "checkbox" },
+                        { "id": 31103390, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 5,
+                    "jenisinfo": "Pastikan alat fototerapi dimatikan saat pengambilan  darah untuk menilai kadar bilirubin",
+                    "detail": [
+                        { "id": 31103391, "caption": "", "type": "checkbox" },
+                        { "id": 31103392, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 6,
+                    "jenisinfo": "Catat tanggal dan jam mulai pemasangan fototerapi",
+                    "detail": [
+                        { "id": 31103393, "caption": "", "type": "checkbox" },
+                        { "id": 31103394, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 7,
+                    "jenisinfo": "Observasi adanya efek samping",
+                    "detail": [
+                        { "id": 31103395, "caption": "", "type": "checkbox" },
+                        { "id": 31103396, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "jenisinfo": "Pengkajian ulang klinis dan/atau laboratorium",
+                    "detail": [
+                        { "id": 31103397, "caption": "", "type": "checkbox" },
+                        { "id": 31103398, "caption": "", "type": "checkbox" }
+                    ]
+                },
+               
             ];
 
         }

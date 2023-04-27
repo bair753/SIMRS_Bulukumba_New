@@ -1,6 +1,6 @@
 define(['initialize'], function (initialize) {
     'use strict';
-    initialize.controller('PersetujuanPengobatanRisikoTinggiCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
+    initialize.controller('PerawatanAsfiksiaCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
         function ($q, $rootScope, $scope, ModelItem, $state, cacheHelper, dateHelper, medifirstService) {
 
             var paramsIndex = $state.params.index ? parseInt($state.params.index) : null
@@ -14,7 +14,7 @@ define(['initialize'], function (initialize) {
             $scope.cc = {};
             var nomorEMR = '-';
             var norecEMR = '';
-            $scope.cc.emrfk = 290107;
+            $scope.cc.emrfk = 290122;
             var dataLoad = [];
             $scope.isCetak = false;
             $scope.allDisabled = false;
@@ -356,79 +356,310 @@ define(['initialize'], function (initialize) {
                 });
             }
 
-            $scope.listPemberiInformasi = [
+            $scope.listPemberiPerawatan = [
                 {
                     "id": 1,
-                    "jenisinfo": "Diagnosa",
+                    "jenisinfo": "Primi tua",
                     "detail": [
-                        { "id": 31103103, "caption": "", "type": "textarea" },
-                        { "id": 31103104, "caption": "", "type": "checkbox" }
+                        { "id": 31103453, "caption": "", "type": "checkbox" },
+                        { "id": 31103454, "caption": "", "type": "checkbox" }
                     ]
                 },
                 {
                     "id": 2,
-                    "jenisinfo": "Tindakan Kedokteran",
+                    "jenisinfo": "Perdarahan pada trimester 2 atau 3",
                     "detail": [
-                        { "id": 31103105, "caption": "", "type": "textarea" },
-                        { "id": 31103106, "caption": "", "type": "checkbox" }
+                        { "id": 31103455, "caption": "", "type": "checkbox" },
+                        { "id": 31103456, "caption": "", "type": "checkbox" }
                     ]
                 },
                 {
                     "id": 3,
-                    "jenisinfo": "Indikasi pemberian transfusi",
+                    "jenisinfo": "Hipertensi pada kehamilan",
                     "detail": [
-                        { "id": 31103107, "caption": "", "type": "textarea" },
-                        { "id": 31103108, "caption": "", "type": "checkbox" }
+                        { "id": 31103457, "caption": "", "type": "checkbox" },
+                        { "id": 31103458, "caption": "", "type": "checkbox" }
                     ]
                 },
                 {
                     "id": 4,
-                    "jenisinfo": "Tata cara pemberian transfusi",
+                    "jenisinfo": "Konsumsi obat-obatan",
                     "detail": [
-                        { "id": 31103109, "caption": "", "type": "textarea" },
-                        { "id": 31103110, "caption": "", "type": "checkbox" }
+                        { "id": 31103459, "caption": "", "type": "checkbox" },
+                        { "id": 31103460, "caption": "", "type": "checkbox" }
                     ]
                 },
                 {
                     "id": 5,
-                    "jenisinfo": "Tujuan pemberian transfusi",
+                    "jenisinfo": "Diabetes melitus",
                     "detail": [
-                        { "id": 31103111, "caption": "", "type": "textarea" },
-                        { "id": 31103112, "caption": "", "type": "checkbox" }
+                        { "id": 31103461, "caption": "", "type": "checkbox" },
+                        { "id": 31103462, "caption": "", "type": "checkbox" }
                     ]
                 },
                 {
                     "id": 6,
-                    "jenisinfo": "Risiko & Komplikasi",
+                    "jenisinfo": "Penyakit kronis pada ibu (TB, penyakit jantung, hipertensi kronis))",
                     "detail": [
-                        { "id": 31103113, "caption": "", "type": "textarea" },
-                        { "id": 31103114, "caption": "", "type": "checkbox" }
+                        { "id": 31103463, "caption": "", "type": "checkbox" },
+                        { "id": 31103464, "caption": "", "type": "checkbox" }
                     ]
                 },
                 {
                     "id": 7,
-                    "jenisinfo": "Prognosis",
+                    "jenisinfo": "Kehamilan grande multipara",
                     "detail": [
-                        { "id": 31103115, "caption": "", "type": "textarea" },
-                        { "id": 31103116, "caption": "", "type": "checkbox" }
+                        { "id": 31103465, "caption": "", "type": "checkbox" },
+                        { "id": 31103466, "caption": "", "type": "checkbox" }
                     ]
                 },
                 {
                     "id": 8,
-                    "jenisinfo": "Alternatif & risiko (Pilihan pengobatan/ penatalaksanaan)",
+                    "jenisinfo": "Korioamnionitis (bila ada 1-2 gejala klinis seperti berikut, seperti KPD > 18 jam, lekosit > 15.000/mm3, CRP > 9, ibu ada riwayat demam suhu > 38 oC)",
                     "detail": [
-                        { "id": 31103117, "caption": "", "type": "textarea" },
-                        { "id": 31103118, "caption": "", "type": "checkbox" }
+                        { "id": 31103467, "caption": "", "type": "checkbox" },
+                        { "id": 31103468, "caption": "", "type": "checkbox" }
                     ]
                 },
                 {
                     "id": 9,
-                    "jenisinfo": "Lain - Lain",
+                    "jenisinfo": "Riwayat kematian janin sebelumnya",
                     "detail": [
-                        { "id": 31103119, "caption": "", "type": "textarea" },
-                        { "id": 31103120, "caption": "", "type": "checkbox" }
+                        { "id": 31103469, "caption": "", "type": "checkbox" },
+                        { "id": 31103470, "caption": "", "type": "checkbox" }
+                    ]
+                },
+              
+             
+            ];
+
+            $scope.listPemberiPerawatan2 = [
+                {
+                    "id": 1,
+                    "jenisinfo": "Pola denyut jantung meragukan pada kardiotokografi",
+                    "detail": [
+                        { "id": 31103471, "caption": "", "type": "checkbox" },
+                        { "id": 31103472, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "jenisinfo": "Presentasi abnormal",
+                    "detail": [
+                        { "id": 31103473, "caption": "", "type": "checkbox" },
+                        { "id": 31103474, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 3,
+                    "jenisinfo": "Prolaps tali pusat",
+                    "detail": [
+                        { "id": 31103475, "caption": "", "type": "checkbox" },
+                        { "id": 31103476, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 4,
+                    "jenisinfo": "Perdarahan antepartum",
+                    "detail": [
+                        { "id": 31103477, "caption": "", "type": "checkbox" },
+                        { "id": 31103478, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 5,
+                    "jenisinfo": "Kelahiran forsep",
+                    "detail": [
+                        { "id": 31103479, "caption": "", "type": "checkbox" },
+                        { "id": 31103480, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 6,
+                    "jenisinfo": "Kelahiran vakum",
+                    "detail": [
+                        { "id": 31103481, "caption": "", "type": "checkbox" },
+                        { "id": 31103482, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 7,
+                    "jenisinfo": "Penerapan anestesi umum pada ibu",
+                    "detail": [
+                        { "id": 31103483, "caption": "", "type": "checkbox" },
+                        { "id": 31103484, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "jenisinfo": "Seksio sesaria emergensi",
+                    "detail": [
+                        { "id": 31103485, "caption": "", "type": "checkbox" },
+                        { "id": 31103486, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 9,
+                    "jenisinfo": "Kala 2 memanjang",
+                    "detail": [
+                        { "id": 31103487, "caption": "", "type": "checkbox" },
+                        { "id": 31103488, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 10,
+                    "jenisinfo": "Ketuban bercampur mekonium",
+                    "detail": [
+                        { "id": 31103489, "caption": "", "type": "checkbox" },
+                        { "id": 31103490, "caption": "", "type": "checkbox" }
                     ]
                 }
+
+            ];
+
+            $scope.listPemberiPerawatan3 = [
+                {
+                    "id": 1,
+                    "jenisinfo": "Skor APGAR menit ke-5 adalah < 5",
+                    "detail": [
+                        { "id": 31103491, "caption": "", "type": "checkbox" },
+                        { "id": 31103492, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "jenisinfo": "Menilai skor asfiksia dengan skor Thompson (skor terlampir)",
+                    "detail": [
+                        { "id": 31103493, "caption": "", "type": "checkbox" },
+                        { "id": 31103494, "caption": "", "type": "checkbox" }
+                    ]
+                }
+
+
+            ];
+
+            $scope.listPemberiPerawatan4 = [
+                {
+                    "id": 1,
+                    "jenisinfo": "Pemeriksaan darah lengkap, IT ratio",
+                    "detail": [
+                        { "id": 31103495, "caption": "", "type": "checkbox" },
+                        { "id": 31103496, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "jenisinfo": "Glukosa darah",
+                    "detail": [
+                        { "id": 31103497, "caption": "", "type": "checkbox" },
+                        { "id": 31103498, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 3,
+                    "jenisinfo": "Marker infeksi (CRP, procalcitonin)",
+                    "detail": [
+                        { "id": 31103499, "caption": "", "type": "checkbox" },
+                        { "id": 31103500, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 4,
+                    "jenisinfo": "Analisa gas darah",
+                    "detail": [
+                        { "id": 31103501, "caption": "", "type": "checkbox" },
+                        { "id": 31103502, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 5,
+                    "jenisinfo": "Elektrolit",
+                    "detail": [
+                        { "id": 31103503, "caption": "", "type": "checkbox" },
+                        { "id": 31103504, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 6,
+                    "jenisinfo": "Fungsi ginjal (Ureum, creatinin)",
+                    "detail": [
+                        { "id": 31103505, "caption": "", "type": "checkbox" },
+                        { "id": 31103506, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 7,
+                    "jenisinfo": "Fungsi hepar (SGOT, SGPT, Laktat)",
+                    "detail": [
+                        { "id": 31103507, "caption": "", "type": "checkbox" },
+                        { "id": 31103508, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "jenisinfo": "Diagnosis asfiksia dengan HIE berdasarkan kriteria: a. Bukti asidosis metabolik atau campuran pH <7.0 pada pemeriksaan darah talit pusat, atau defisit basa 16 mmol/L dalam 60 menit pertama,    b. Nilai agar <6 pada menit ke 10,    c. Manifestasi neurologis (seperti kejang, hipotonia, atau koma),    d. Disfungsi multiorgan (seperti gangguan kardiovaskular, gastrointestinal, hematologi, respirasi, atau renal)",
+                    "detail": [
+                        { "id": 31103509, "caption": "", "type": "checkbox" },
+                        { "id": 31103510, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 9,
+                    "jenisinfo": "HIE ditegakkan bila didapatkan minimal 2 kriteria pada fasilitas lengkap, dan minimal 1 pada fasilitas terbatas",
+                    "detail": [
+                        { "id": 31103511, "caption": "", "type": "checkbox" },
+                        { "id": 31103512, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 10,
+                    "jenisinfo": "Mempertahankan fungsi pernafasan tetap baik dan SaO2 stabil 90-94% disertai hasil AGD yang baik",
+                    "detail": [
+                        { "id": 31103513, "caption": "", "type": "checkbox" },
+                        { "id": 31103514, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 11,
+                    "jenisinfo": "Mempertahankan fungsi pernafasan tetap baik dan SaO2 stabil 90-94% , tanpa disertai pemeriksaan AGD karena keterbatasan alat AGD",
+                    "detail": [
+                        { "id": 31103515, "caption": "", "type": "checkbox" },
+                        { "id": 31103516, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 12,
+                    "jenisinfo": "Memantau dan mempertahankan suhu tubuh 35-36,5 oC",
+                    "detail": [
+                        { "id": 31103517, "caption": "", "type": "checkbox" },
+                        { "id": 31103518, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 13,
+                    "jenisinfo": "Koreksi dan mempertahankan elektrolit dan glukosa",
+                    "detail": [
+                        { "id": 31103519, "caption": "", "type": "checkbox" },
+                        { "id": 31103520, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 14,
+                    "jenisinfo": "Koreksi hipovolemia",
+                    "detail": [
+                        { "id": 31103521, "caption": "", "type": "checkbox" },
+                        { "id": 31103522, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 15,
+                    "jenisinfo": "Saat merujuk dipertahankan suhu 34°C–35°C (inkubator tidak dinyalakan dan tidak dipeluk ibu (KMC)",
+                    "detail": [
+                        { "id": 31103523, "caption": "", "type": "checkbox" },
+                        { "id": 31103524, "caption": "", "type": "checkbox" }
+                    ]
+                }
+               
             ];
 
         }

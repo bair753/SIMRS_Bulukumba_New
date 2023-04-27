@@ -3469,9 +3469,23 @@
         {
             "nameDep": "PengkajianDanIntervensiUlangNyeriRanapCtrl",
             "urlDep": "module/EMR/PengkajianDanIntervensiUlangNyeriRanapCtrl"
+        },
+        {
+            "nameDep": "MelepasBantuanHidupDasarCtrl",
+            "urlDep": "module/EMR/MelepasBantuanHidupDasarCtrl"
+        },
+        {
+            "nameDep": "PerawatanNeonatusCtrl",
+            "urlDep": "module/EMR/PerawatanNeonatusCtrl"
+        },
+        {
+            "nameDep": "PerawatanAsfiksiaCtrl",
+            "urlDep": "module/EMR/PerawatanAsfiksiaCtrl"
+        },
+        {
+            "nameDep": "PerawatanHipoglikemiCtrl",
+            "urlDep": "module/EMR/PerawatanHipoglikemiCtrl"
         }
-
-
         
     
     ]
