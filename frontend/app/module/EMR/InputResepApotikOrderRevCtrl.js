@@ -175,19 +175,19 @@ define(['initialize'], function (initialize) {
                     // $scope.listRoute = dat.data.route;
                     $scope.listAturanPakai = dat.data.signa;
                     $scope.listJenisRacikan = dat.data.jenisracikan;
-                    if ($scope.item.departemen == 25){
-                        $scope.item.ruangan = dat.data.ruanganfarmasi[0];
-                    } else if ($scope.item.departemen == 24){
-                        $scope.item.ruangan = dat.data.ruanganfarmasi[1];
-                    } else if ($scope.item.departemen == 18 && $scope.item.jenispelayanan == 2){
-                        $scope.item.ruangan = dat.data.ruanganfarmasi[4];
-                    } else if ($scope.item.departemen == 18){
-                        $scope.item.ruangan = dat.data.ruanganfarmasi[2];
-                    } else if ($scope.item.departemen == 16){
-                        $scope.item.ruangan = dat.data.ruanganfarmasi[3];
-                    } else {
-                        $scope.item.ruangan = dat.data.ruanganfarmasi[4];
-                    }
+                    // if ($scope.item.departemen == 25){
+                    //     $scope.item.ruangan = dat.data.ruanganfarmasi[0];
+                    // } else if ($scope.item.departemen == 24){
+                    //     $scope.item.ruangan = dat.data.ruanganfarmasi[1];
+                    // } else if ($scope.item.departemen == 18 && $scope.item.jenispelayanan == 2){
+                    //     $scope.item.ruangan = dat.data.ruanganfarmasi[4];
+                    // } else if ($scope.item.departemen == 18){
+                    //     $scope.item.ruangan = dat.data.ruanganfarmasi[2];
+                    // } else if ($scope.item.departemen == 16){
+                    //     $scope.item.ruangan = dat.data.ruanganfarmasi[3];
+                    // } else {
+                    //     $scope.item.ruangan = dat.data.ruanganfarmasi[4];
+                    // }
                     $scope.item.jenisKemasan = dat.data.jeniskemasan[1];
 
                     if($scope.item.penulisResep.jenispegawai.id != 1){
@@ -547,6 +547,10 @@ define(['initialize'], function (initialize) {
                 if ($scope.item.kelompokUserHakAkses.kelompokuser != 'dokter') {
                     toastr.error('Akun bukan Dokter',' Mohon hubungi IT!')
                     return
+                }
+                if ($scope.item.ruangan == undefined) {
+                    toastr.error("Pilih Ruangan terlebih dahulu!!")
+                    return;
                 }
                 if(statusTambah == false){
                     return
@@ -1068,6 +1072,11 @@ define(['initialize'], function (initialize) {
 
             }
             $scope.simpan = function () {
+                if ($scope.item.ruangan == undefined) {
+                    toastr.error("Pilih Ruangan terlebih dahulu!!")
+                    return;
+                }
+
                 if (data2.length == 0) {
                     alert("Pilih Produk terlebih dahulu!!")
                     return

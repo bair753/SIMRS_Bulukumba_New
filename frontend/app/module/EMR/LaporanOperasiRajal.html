@@ -54,7 +54,7 @@
             <fieldset style="margin-top: 10px;">
                 <div class="grid_6">
                     <div class="grid_12">
-                        <label c-label item="item">Dokter DPJP</label>
+                        <label c-label item="item">Nama DPJP</label>
                     </div>
                     <div class="grid_12">
                         <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[31100530]" ng-disable="item.obj[31100530]" k-data-text-field="'text'"
@@ -189,21 +189,24 @@
                 </div>
                 <div class="grid_12" style="margin-top: 10px;">
                     <div class="grid_12">
-                        <div class="grid_12">
+                        <div class="grid_12 ">
                             <label c-label item="item">Intake</label>
                         </div>
                         <div class="grid_12" style="margin-top: 10px">
-                            <div class="grid_4">
+                            <div class="grid_4 parentKeteranganFieldTambahan">
                                 <input type="checkbox" class="k-checkbox" ng-model="item.obj[31100544]" id="item.obj[31100544]">
-                                <label class="k-checkbox-label" for="item.obj[31100544]">&nbsp;Kristaloid (cc)</label> 
+                                <label class="k-checkbox-label" for="item.obj[31100544]">&nbsp;Kristaloid</label> 
+                                <input class="k-textbox" ng-model="item.obj[32103414]" type="text" placeholder="cc">
                             </div>
                             <div class="grid_4">
                                 &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="k-checkbox" ng-model="item.obj[31100545]" id="item.obj[31100545]">
-                                <label class="k-checkbox-label" for="item.obj[31100545]">&nbsp;Expander (cc)</label>
+                                <label class="k-checkbox-label" for="item.obj[31100545]">&nbsp;Expander</label>
+                                <input class="k-textbox" ng-model="item.obj[32103415]" type="text" placeholder="cc">
                             </div>
                             <div class="grid_4">
                                 &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="k-checkbox" ng-model="item.obj[31100546]" id="item.obj[31100546]">
-                                <label class="k-checkbox-label" for="item.obj[31100546]">&nbsp;Darah (cc)</label>
+                                <label class="k-checkbox-label" for="item.obj[31100546]">&nbsp;Darah</label>
+                                <input class="k-textbox" ng-model="item.obj[32103416]" type="text" placeholder="cc">
                             </div>
                         </div>
                     </div>                       
@@ -216,15 +219,18 @@
                         <div class="grid_12" style="margin-top: 10px">
                             <div class="grid_4">
                                 <input type="checkbox" class="k-checkbox" ng-model="item.obj[31100547]" id="item.obj[31100547]">
-                                <label class="k-checkbox-label" for="item.obj[31100547]">&nbsp;Darah (cc)</label> 
+                                <label class="k-checkbox-label" for="item.obj[31100547]">&nbsp;Darah</label> 
+                                <input class="k-textbox" ng-model="item.obj[32103417]" type="text" placeholder="cc">
                             </div>
                             <div class="grid_4">
                                 &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="k-checkbox" ng-model="item.obj[31100548]" id="item.obj[31100548]">
-                                <label class="k-checkbox-label" for="item.obj[31100548]">&nbsp;Urine (cc)</label>
+                                <label class="k-checkbox-label" for="item.obj[31100548]">&nbsp;Urine</label>
+                                <input class="k-textbox" ng-model="item.obj[32103418]" type="text" placeholder="cc">
                             </div>
                             <div class="grid_4">
                                 &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="k-checkbox" ng-model="item.obj[31100549]" id="item.obj[31100549]">
-                                <label class="k-checkbox-label" for="item.obj[31100549]">&nbsp;Lain-lain (cc)</label>
+                                <label class="k-checkbox-label" for="item.obj[31100549]">&nbsp;Lain-lain</label>
+                                <input class="k-textbox" ng-model="item.obj[32103419]" type="text" placeholder="cc">
                             </div>
                         </div>
                     </div>                       
@@ -317,7 +323,7 @@
                 </div>
                 <div class="grid_12" style="margin-top: 10px;">
                     <div class="grid_12">
-                        <label c-label item="item">No. Alat yang Dipasang</label>
+                        <label c-label item="item">No. Alat yang Dipasang (implan)</label>
                         <textarea style="width: 100%;height: 80px" cols="3" rows="2" c-text-area type="input" filter="'string'" class="k-textbox" ng-model="item.obj[31100563]"></textarea>
                     </div>                      
                 </div>
