@@ -19405,6 +19405,25 @@
     "url": "/MelepasBantuanHidupDasar",
     "templateurl": "module/EMR/MelepasBantuanHidupDasar.html",
     "controller": "MelepasBantuanHidupDasarCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
     "name": "RekamMedis.AsesmenMedis.MenuIndex.PenolakanOperasiRajal",
     "url": "/PenolakanOperasiRajal/:index/:idEMR",
     "templateurl": "module/EMR/PenolakanOperasiRajal.html",
@@ -19432,6 +19451,25 @@
     "url": "/PerawatanNeonatus",
     "templateurl": "module/EMR/PerawatanNeonatus.html",
     "controller": "PerawatanNeonatusCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
     "name": "RekamMedis.AsesmenMedis.PersetujuanPemakaianDarahDanProdukDarahRanap",
     "url": "/PersetujuanPemakaianDarahDanProdukDarahRanap",
     "templateurl": "module/EMR/PersetujuanPemakaianDarahDanProdukDarahRanap.html",
@@ -19459,6 +19497,25 @@
     "url": "/PerawatanAsfiksia",
     "templateurl": "module/EMR/PerawatanAsfiksia.html",
     "controller": "PerawatanAsfiksiaCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
     "name": "RekamMedis.AsesmenMedis.MenuIndex.AsesmenPasienDenganPenyakitMenularRanap",
     "url": "/AsesmenPasienDenganPenyakitMenularRanap/:index/:idEMR",
     "templateurl": "module/EMR/AsesmenPasienDenganPenyakitMenularRanap.html",
@@ -19486,6 +19543,25 @@
     "url": "/PerawatanHipoglikemi",
     "templateurl": "module/EMR/PerawatanHipoglikemi.html",
     "controller": "PerawatanHipoglikemiCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
     "name": "RekamMedis.AsesmenMedis.MenuIndex.ChecklistFibrinolitik",
     "url": "/ChecklistFibrinolitik/:index/:idEMR",
     "templateurl": "module/EMR/ChecklistFibrinolitik.html",
