@@ -6775,6 +6775,7 @@ class RegistrasiController extends ApiController
             ->get();
 
         $dataProduk = \DB::table('produk_m as pr')
+            ->whereIn('pr.objectdetailjenisprodukfk', array(1497,2013,2015,2016))
             ->where('pr.statusenabled', true)
             ->orderBy('pr.namaproduk')
             ->get();

@@ -1,4 +1,4 @@
-define(['initialize'], function (initialize) {
+define(['initialize', 'Configuration'], function (initialize, config) {
     'use strict';
     initialize.controller('LaporanOperasiRanapCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
         function ($q, $rootScope, $scope, ModelItem, $state, cacheHelper, dateHelper, medifirstService) {
@@ -240,12 +240,45 @@ define(['initialize'], function (initialize) {
                 }
             ]
 
+            // $scope.cetakPdf = function () {
+            //     if (norecEMR == '') return
+            //     var client = new HttpClient();
+            //     client.get('http://127.0.0.1:1237/printvb/e-rekammedis?cetak-emr-asesmen-awal-medis-igd&id=' + $scope.cc.nocm + '&emr=' + norecEMR + '&view=true', function (response) {
+            //         // do something with response
+            //     });
+            // }
+
             $scope.cetakPdf = function () {
+
+                if($scope.item.obj[31100543] == undefined){
+                    toastr.warning('Diagnose Pasca Operatif tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100550] == undefined){
+                    toastr.warning('Prosedur Tindakan yang Dilakukan tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100563] == undefined){
+                    toastr.warning('No. Alat yang Dipasang tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100568] == undefined){
+                    toastr.warning('Laporan/Tindakan Operasi tidak boleh kosong','Peringatan')
+                    return
+                }
+                
                 if (norecEMR == '') return
-                var client = new HttpClient();
-                client.get('http://127.0.0.1:1237/printvb/e-rekammedis?cetak-emr-asesmen-awal-medis-igd&id=' + $scope.cc.nocm + '&emr=' + norecEMR + '&view=true', function (response) {
-                    // do something with response
-                });
+
+                var local = JSON.parse(localStorage.getItem('profile'));
+                var nama = medifirstService.getPegawaiLogin().namalengkap;
+                window.open(config.baseApiBackend + 'report/cetak-laporan-operasi?nocm='
+                    + $scope.cc.nocm + '&norec_apd=' + $scope.cc.norec + '&emr=' + norecEMR
+                    + '&emrfk=' + $scope.cc.emrfk
+                    + '&kdprofile=' + local.id
+                    + '&nama=' + nama, '_blank');
             }
 
             var cacheEMR_TRIASE_PRIMER = cacheHelper.get('cacheEMR_TRIASE_PRIMER');
