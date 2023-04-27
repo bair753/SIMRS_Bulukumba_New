@@ -3485,8 +3485,51 @@
         {
             "nameDep": "PerawatanHipoglikemiCtrl",
             "urlDep": "module/EMR/PerawatanHipoglikemiCtrl"
+        },
+        {
+            "nameDep": "PenolakanOperasiRajalCtrl",
+            "urlDep": "module/EMR/PenolakanOperasiRajalCtrl"
+        },
+        {
+            "nameDep": "PersetujuanPemakaianDarahDanProdukDarahRanapCtrl",
+            "urlDep": "module/EMR/PersetujuanPemakaianDarahDanProdukDarahRanapCtrl"
+        },
+        {
+            "nameDep": "AsesmenPasienDenganPenyakitMenularRanapCtrl",
+            "urlDep": "module/EMR/AsesmenPasienDenganPenyakitMenularRanapCtrl"
+        },
+        {
+            "nameDep": "ChecklistFibrinolitikCtrl",
+            "urlDep": "module/EMR/ChecklistFibrinolitikCtrl"
+        },
+        {
+            "nameDep": "HiperbilirubinCtrl",
+            "urlDep": "module/EMR/HiperbilirubinCtrl"
+        },
+        {
+            "nameDep": "LembarKerjaKelainanPernafasanNeonatusCtrl",
+            "urlDep": "module/EMR/LembarKerjaKelainanPernafasanNeonatusCtrl"
+        },
+        {
+            "nameDep": "PenilaianPEWSCtrl",
+            "urlDep": "module/EMR/PenilaianPEWSCtrl"
+        },
+        {
+            "nameDep": "PenolakanRawatInapHCUCtrl",
+            "urlDep": "module/EMR/PenolakanRawatInapHCUCtrl"
+        },
+        {
+            "nameDep": "CheckListSerahTerimaBayiSaatDipulangkanCtrl",
+            "urlDep": "module/EMR/CheckListSerahTerimaBayiSaatDipulangkanCtrl"
+        },
+        {
+            "nameDep": "MonitoringDehidrasiPadaNeonatusCtrl",
+            "urlDep": "module/EMR/MonitoringDehidrasiPadaNeonatusCtrl"
+        },
+        {
+            "nameDep": "ObservasiKeseimbanganCairanCtrl",
+            "urlDep": "module/EMR/ObservasiKeseimbanganCairanCtrl"
         }
-        
     
     ]
 }

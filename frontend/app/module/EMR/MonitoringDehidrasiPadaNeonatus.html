@@ -1,0 +1,335 @@
+<style type="text/css">
+    fieldset {
+        border-radius: 5px;
+        border: 1px solid #228be6;
+    }
+
+    .k-slider-horizontal {
+        display: inline-block;
+        float: left;
+        width: 450px;
+
+        height: 26px;
+
+
+    }
+
+    .k-slider {
+
+        margin-left: 3%;
+        margin-right: 3%;
+        margin-top: 1%;
+        margin-bottom: 5%;
+        display: inline-block;
+    }
+
+    .activeBtn {
+        background-color: #10c4b2;
+        color: #ffffff;
+    }
+    table,
+    th,
+    td {
+        border: 1px solid #929191;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+
+    th,
+    td {
+        padding: 5px;
+        text-align: left;
+    }
+</style>
+
+ <!-- ng-class="{'my-disable':true}" -->
+<!-- <div class="grid_12"  disable-contents="allDisabled" id="form"> -->
+<div class="grid_12">
+    <div class="grid_12">
+        <div class="panel panel-default container_12">
+            <div class="panel-heading" c-translate>Monitoring Dehidrasi Pada Neonatus</div>
+        </div>
+
+        <div class="grid_12" style="margin-top: 10px;">
+            <fieldset style="margin-top: 10px;">
+                <div class="grid_6">
+                    <div class="grid_12">
+                        <label c-label item="item">Tanggal/Jam</label>
+                    </div>
+                    <div class="grid_12">
+                        <input style="width: 90%" k-ng-model="item.obj[32103420]" kendo-datetimepicker placeholer="YYYY:MM:DD HH:mm"
+                                k-format="'yyyy-MM-dd HH:mm'" />
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="grid_12" style="margin-top: 10px;">
+            <fieldset style="margin-top: 10px;">
+                <legend><b>Anamnesis</b></legend>
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_12" style="margin-top: 10px;">
+                        <div class="grid_8"><label item="item">-	Riwayat banyaknya intake makanan / minum dibanding sebelumnya:</label></div>
+                        <div class="grid_4"><input type="text" class="k-textbox" ng-model="item.obj[32103421]"></div>    
+                    </div>
+                    <div class="grid_12" style="margin-top: 10px;">
+                        <div class="grid_8"><label item="item">-	Jumlah dan frekuensi BAB :</label></div>
+                        <div class="grid_4"><input type="text" class="k-textbox" ng-model="item.obj[32103422]"></div>    
+                    </div>
+                    <div class="grid_12" style="margin-top: 10px;">
+                        <div class="grid_8"><label item="item">-	Jumlah dan frekuensi BAK :</label></div>
+                        <div class="grid_4"><input type="text" class="k-textbox" ng-model="item.obj[32103423]"></div>    
+                    </div>
+                    <div class="grid_12" style="margin-top: 10px;">
+                        <div class="grid_8"><label item="item">-	Faktor risiko adanya kehilangan cairan :</label></div>
+                        <div class="grid_4"><input type="text" class="k-textbox" ng-model="item.obj[32103424]"></div>    
+                    </div>
+                    <div class="grid_12" style="margin-top: 10px;">
+                        <div class="grid_4">Muntah</div>
+                        <div class="grid_4">
+                            <input type="checkbox" class="k-checkbox" ng-model="item.obj[32103425]" id="item.obj[32103425]">
+                            <label class="k-checkbox-label" for="item.obj[32103425]">&nbsp;Ya</label>
+                        </div>
+                        <div class="grid_4">
+                            <input type="checkbox" class="k-checkbox" ng-model="item.obj[32103426]" id="item.obj[32103426]">
+                            <label class="k-checkbox-label" for="item.obj[32103426]">&nbsp;Tidak</label>
+                        </div> 
+                    </div>
+                    <div class="grid_12" style="margin-top: 10px;">
+                        <div class="grid_4">Diare</div>
+                        <div class="grid_4">
+                            <input type="checkbox" class="k-checkbox" ng-model="item.obj[32103427]" id="item.obj[32103427]">
+                            <label class="k-checkbox-label" for="item.obj[32103427]">&nbsp;Ya</label>
+                        </div>
+                        <div class="grid_4">
+                            <input type="checkbox" class="k-checkbox" ng-model="item.obj[32103428]" id="item.obj[32103428]">
+                            <label class="k-checkbox-label" for="item.obj[32103428]">&nbsp;Tidak</label>
+                        </div> 
+                    </div>
+                    <div class="grid_12 parentKeteranganFieldTambahan" style="margin-top: 10px;">
+                        <div class="grid_8"><label item="item">-	Berat badan terakhir sebelum terjadi dehidrasi (berat badan 2 minggu terakhir) : </label></div>
+                        <div class="grid_4"><input type="text" class="k-textbox" ng-model="item.obj[32103429]"></div>    
+                        <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px">kg</label>
+                    </div>
+                    <div class="grid_12" style="margin-top: 10px;">
+                        <label item="item">-	Adanya faktor risiko dehidrasi berat dan gangguan elektrolik seperti:</label>
+                    </div>
+                    <div class="grid_12" style="margin-top: 10px;">
+                        <table style="border: none;">
+                            <tr>
+                                <th style="text-align: center;"></th>
+                                <th style="text-align: center;">Ya</th>
+                                <th style="text-align: center;">Tidak</th>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;">Cyistic fibrosis</td>
+                                <td style="text-align: center;"><input type="checkbox" class="k-checkbox" ng-model="item.obj[32103430]" id="item.obj[32103430]">
+                                    <label class="k-checkbox-label" for="item.obj[32103430]">&nbsp;</label> </td>
+                                <td style="text-align: center;"><input type="checkbox" class="k-checkbox" ng-model="item.obj[32103431]" id="item.obj[32103431]">
+                                    <label class="k-checkbox-label" for="item.obj[32103431]">&nbsp;</label> </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;">Gangguan pada saluran kencing</td>
+                                <td style="text-align: center;"><input type="checkbox" class="k-checkbox" ng-model="item.obj[32103432]" id="item.obj[32103432]">
+                                    <label class="k-checkbox-label" for="item.obj[32103432]">&nbsp;</label> </td>
+                                <td style="text-align: center;"><input type="checkbox" class="k-checkbox" ng-model="item.obj[32103433]" id="item.obj[32103433]">
+                                    <label class="k-checkbox-label" for="item.obj[32103433]">&nbsp;</label> </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;">Penggunaan obat seperti obat diuretik</td>
+                                <td style="text-align: center;"><input type="checkbox" class="k-checkbox" ng-model="item.obj[32103434]" id="item.obj[32103434]">
+                                    <label class="k-checkbox-label" for="item.obj[32103434]">&nbsp;</label> </td>
+                                <td style="text-align: center;"><input type="checkbox" class="k-checkbox" ng-model="item.obj[32103435]" id="item.obj[32103435]">
+                                    <label class="k-checkbox-label" for="item.obj[32103435]">&nbsp;</label> </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;">Penggunaan obat seperti obat diuretik</td>
+                                <td style="text-align: center;"><input type="checkbox" class="k-checkbox" ng-model="item.obj[32103436]" id="item.obj[32103436]">
+                                    <label class="k-checkbox-label" for="item.obj[32103436]">&nbsp;</label> </td>
+                                <td style="text-align: center;"><input type="checkbox" class="k-checkbox" ng-model="item.obj[32103437]" id="item.obj[32103437]">
+                                    <label class="k-checkbox-label" for="item.obj[32103437]">&nbsp;</label> </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;">Adanya kelaian gastrointestinal</td>
+                                <td style="text-align: center;"><input type="checkbox" class="k-checkbox" ng-model="item.obj[32103438]" id="item.obj[32103438]">
+                                    <label class="k-checkbox-label" for="item.obj[32103438]">&nbsp;</label> </td>
+                                <td style="text-align: center;"><input type="checkbox" class="k-checkbox" ng-model="item.obj[32103439]" id="item.obj[32103439]">
+                                    <label class="k-checkbox-label" for="item.obj[32103439]">&nbsp;</label> </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;">Penggunaan obat seperti obat diuretik</td>
+                                <td style="text-align: center;"><input type="checkbox" class="k-checkbox" ng-model="item.obj[32103440]" id="item.obj[32103440]">
+                                    <label class="k-checkbox-label" for="item.obj[32103440]">&nbsp;</label> </td>
+                                <td style="text-align: center;"><input type="checkbox" class="k-checkbox" ng-model="item.obj[32103441]" id="item.obj[32103441]">
+                                    <label class="k-checkbox-label" for="item.obj[32103441]">&nbsp;</label> </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;" colspan="3">(gangguan saluran cerna atas
+                                    <input type="checkbox" class="k-checkbox" ng-model="item.obj[32103442]" id="item.obj[32103442]">
+                                    <label class="k-checkbox-label" for="item.obj[32103442]">&nbsp;ileostomy</label> 
+                                    <input type="checkbox" class="k-checkbox" ng-model="item.obj[32103443]" id="item.obj[32103443]">
+                                    <label class="k-checkbox-label" for="item.obj[32103443]">&nbsp;colostomy</label> 
+                                    <input type="checkbox" class="k-checkbox" ng-model="item.obj[32103444]" id="item.obj[32103444]">
+                                    <label class="k-checkbox-label" for="item.obj[32103444]">&nbsp;penyakit hirschprung</label> 
+                                    )</td>
+                                
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="grid_12" style="margin-top: 10px;">
+            <fieldset style="margin-top: 10px;">
+                <legend><b>Pemeriksaan Fisik</b></legend>
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_6">Kesadaran</div>
+                    <div class="grid_6"><input type="text" class="k-textbox" ng-model="item.obj[32103445]" placeholder="Kesadaran"></div>                    
+                </div>
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_6">Berat Badan</div>
+                    <div class="grid_6"><input type="text" class="k-textbox" ng-model="item.obj[32103446]" placeholder="Berat Badan"></div>                    
+                </div>
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_6">CRT</div>
+                    <div class="grid_6"><input type="text" class="k-textbox" ng-model="item.obj[32103447]" placeholder="CRT"></div>                    
+                </div>
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_6">Turgor Kulit</div>
+                    <div class="grid_6"><input type="text" class="k-textbox" ng-model="item.obj[32103448]" placeholder="Turgor Kulit"></div>                    
+                </div>
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_6">HR</div>
+                    <div class="grid_6"><input type="text" class="k-textbox" ng-model="item.obj[32103449]" placeholder="HR"></div>                    
+                </div>
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_6">P</div>
+                    <div class="grid_6"><input type="text" class="k-textbox" ng-model="item.obj[32103450]" placeholder="P"></div>                    
+                </div>
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_6">S</div>
+                    <div class="grid_6"><input type="text" class="k-textbox" ng-model="item.obj[32103451]" placeholder="S"></div>                    
+                </div>
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_6">Membrane Mukosa</div>
+                    <div class="grid_6"><input type="text" class="k-textbox" ng-model="item.obj[32103452]" placeholder="Membrane Mukosa"></div>                    
+                </div>
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_6">Jaringan Periorbital</div>
+                    <div class="grid_6"><input type="text" class="k-textbox" ng-model="item.obj[32103453]" placeholder="Jaringan Periorbital"></div>                    
+                </div>
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_6">Fontanel anterior (UUB)</div>
+                    <div class="grid_6"><input type="text" class="k-textbox" ng-model="item.obj[32103454]" placeholder="Fontanel anterior (UUB)"></div>                    
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="grid_12" style="margin-top: 10px;">
+            <fieldset style="margin-top: 10px;">
+                <legend><b>Pemeriksaan Penunjang</b></legend>
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_6"><input type="checkbox" class="k-checkbox" ng-model="item.obj[32103455]" id="item.obj[32103455]">
+                        <label class="k-checkbox-label" for="item.obj[32103455]">&nbsp;</label> Pemeriksaan darah lengkap</div>
+                    <div class="grid_6"><input type="text" class="k-textbox" ng-model="item.obj[32103456]" placeholder="Pemeriksaan darah lengkap"></div>                    
+                </div>
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_6"><input type="checkbox" class="k-checkbox" ng-model="item.obj[32103457]" id="item.obj[32103457]">
+                        <label class="k-checkbox-label" for="item.obj[32103457]">&nbsp;</label> Elektrolit</div>
+                    <div class="grid_6"><input type="text" class="k-textbox" ng-model="item.obj[32103458]" placeholder="Elektrolit"></div>                    
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="grid_12" style="margin-top: 10px;">
+            <fieldset style="margin-top: 10px;">
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_12" style="margin-top: 10px;">
+                        <div class="grid_8"><label item="item">Rencana kontrol di FKTP/ Poli Anak (tanggal & waktu):</label></div>
+                        <div class="grid_4"><input style="width: 100%" k-ng-model="item.obj[32103459]" kendo-datetimepicker
+                            placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'"
+                            parsedate="yyyy-MM-dd HH:mm" /></div>    
+                    </div>
+                    <div class="grid_12" style="margin-top: 10px;">
+                        <label item="item">Cara pemberian cairan di rumah jika terjadi dehidrasi kembali:</label>
+                    </div>
+                    <div class="grid_12" style="margin-top: 10px; font-size: 9px;">
+                        <label item="item">
+                            &nbsp;&nbsp;&nbsp;&nbsp; a.	Jika anak masih mendapatkan ASI, nasihati ibu untuk menyusui anaknya lebih sering dan lebih lama pada setiap pemberian ASI. <br> 
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Jika anak mendapatkan ASI ekslusif, beri larutan oralit atau air matang sebagai tambahan ASI dengan menggunakan sendok. <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Setelah diare berhenti, lanjutkan kembali ASI ekslusif pada anak, sesuai dengan umur anak.
+                        </label>
+                    </div>
+                    <div class="grid_12" style="margin-top: 10px; font-size: 9px;">
+                        <label item="item">
+                            &nbsp;&nbsp;&nbsp;&nbsp; b.	Pada anak yang tidak mendapatkan ASI ekslusif, beri satu atau lebih cairan di bawah ini:<br> 
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. Larutan oralit<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2. Cairan rumah tangga (seperti sup,air tajin, dan kuah sayuran) <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. Air matang
+                        </label>
+                    </div>
+                    <div class="grid_12" style="margin-top: 10px;">
+                        <label item="item">Untuk mencegah terjadinya dehidrasi, nasihat ibu untuk memberi cairan tambahan sebanyak yang anak pada minum:</label>
+                    </div>
+                    <div class="grid_12" style="margin-top: 10px; font-size: 9px;">
+                        <label item="item">
+                            &nbsp;&nbsp;&nbsp;&nbsp; 1. Untuk anak-anak berumur < 2 tahun, beri  ± 50-100 ml setiap kali anak BAB
+                        </label>
+                    </div>
+                    <div class="grid_12" style="margin-top: 10px; font-size: 9px;">
+                        <label item="item">
+                            &nbsp;&nbsp;&nbsp;&nbsp; 2. Untuk anak-anak berumur 2 tahun atau lebih, beri ± 100-200 ml setiap kali anak BAB.
+                        </label>
+                    </div>
+                    <div class="grid_12" style="margin-top: 10px;">
+                        <label item="item">Ajari ibu untuk memberi anak sedikit demi sedikit dengan menggunakan cangkir. Jika anak muntah, tunggu 10 menit dan berikan kembali dengan lambat. ibu harus terus memberi cairantambahan sampai diare anak berhenti.</label>
+                    </div>
+                    <br>
+                    <div class="grid_12" style="margin-top: 10px;">
+                        <label item="item">Ajari ibu untuk menyiapkan larutan oralit dan beri 6 bungkus oralit untuk di bawa pulang.</label>
+                    </div>
+                    <div class="grid_12" style="margin-top: 10px;">
+                        <label item="item">Lanjutkan pemberian makan</label>
+                    </div>
+                    <div class="grid_12" style="margin-top: 10px;">
+                        <label item="item">Edukasi tanda bahaya</label>
+                    </div>
+                    <div class="grid_12" style="margin-top: 10px; font-size: 9px;">
+                        <label item="item">
+                            &nbsp;&nbsp;&nbsp;&nbsp; 1	Nasihati ibu untuk membawa anaknya kembali jika anaknya bertambah parah
+                        </label>
+                    </div>
+                    <div class="grid_12" style="margin-top: 10px; font-size: 9px;">
+                        <label item="item">
+                            &nbsp;&nbsp;&nbsp;&nbsp; 2	Tidak bisa minum / menyusu / malas minum
+                        </label>
+                    </div>
+                    <div class="grid_12" style="margin-top: 10px; font-size: 9px;">
+                        <label item="item">
+                            &nbsp;&nbsp;&nbsp;&nbsp; 3	Timbul demam / kejang
+                        </label>
+                    </div>
+                    <div class="grid_12" style="margin-top: 10px; font-size: 9px;">
+                        <label item="item">
+                            &nbsp;&nbsp;&nbsp;&nbsp; 4	Darah dalam tinja
+                        </label>
+                    </div>
+                    <div class="grid_12" style="margin-top: 10px; font-size: 9px;">
+                        <label item="item">
+                            &nbsp;&nbsp;&nbsp;&nbsp; 5	Jika anak tidak menunjukan salah satu tanda-tanda ini namun tetap tidak menunjukkan perbaikan, nasihati ibu untuk kunjungan ulang pada hari ke 5.
+                        </label>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+    </div>
+</div>
+
+<br />
+<br />
+<div class="grid_12">
+    <div ng-include='"../app/module/EMR/TemplateButtonDinamis" '></div>
+
+</div>

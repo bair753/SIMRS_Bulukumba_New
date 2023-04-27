@@ -1,4 +1,4 @@
-define(['initialize'], function (initialize) {
+define(['initialize', 'Configuration'], function (initialize, config) {
     'use strict';
     initialize.controller('AsesmenAwalMedisPasienGawatDaruratCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
         function ($q, $rootScope, $scope, ModelItem, $state, cacheHelper, dateHelper, medifirstService) {
@@ -16,7 +16,7 @@ define(['initialize'], function (initialize) {
             $scope.cc.emrfk = 290008;
             var dataLoad = []
             var pegawaiInputDetail= ''
-            $scope.isCetak = false
+            $scope.isCetak = true
             var norecEMR = ''
             var cacheNomorEMR = cacheHelper.get('cacheNomorEMR');
             var cacheNoREC = cacheHelper.get('cacheNOREC_EMR');
@@ -40,12 +40,66 @@ define(['initialize'], function (initialize) {
                     anHttpRequest.send(null);
                 }
             }
-            $scope.cetakPdf = function () {
+            // $scope.cetakPdf = function () {
+            //     if (norecEMR == '') return
+            //     var client = new HttpClient();
+            //     client.get('http://127.0.0.1:1237/printvb/e-rekammedis?cetak-emr-asesmen-awal-keperawatan-igd&id=' + $scope.cc.nocm + '&emr=' + norecEMR + '&view=true', function (response) {
+            //         // do something with response
+            //     });
+            // }
+
+            $scope.cetakBlade = function () {
+
+                if($scope.item.obj[420942] == undefined){
+                    toastr.warning('Keluhan Saat Ini tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[420956] == undefined){
+                    toastr.warning('General tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[420957] == undefined){
+                    toastr.warning('Lokalis tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[420982] == undefined){
+                    toastr.warning('Riwayat Penyakit Sebelumnya tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[420984] == undefined){
+                    toastr.warning('Riwayat Penyakit Sekarang tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[421099] == undefined){
+                    toastr.warning('Diagnosa Medis tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[421100] == undefined){
+                    toastr.warning('Pemeriksaan Penunjang tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[421082] == undefined){
+                    toastr.warning('Terapi Pulang tidak boleh kosong','Peringatan')
+                    return
+                }
+
                 if (norecEMR == '') return
-                var client = new HttpClient();
-                client.get('http://127.0.0.1:1237/printvb/e-rekammedis?cetak-emr-asesmen-awal-keperawatan-igd&id=' + $scope.cc.nocm + '&emr=' + norecEMR + '&view=true', function (response) {
-                    // do something with response
-                });
+
+                var local = JSON.parse(localStorage.getItem('profile'));
+                var nama = medifirstService.getPegawaiLogin().namalengkap;
+                console.log(config.baseApiBackend);
+                window.open(config.baseApiBackend + 'report/cetak-asesmen-awal-medis-igd?nocm='
+                    + $scope.cc.nocm + '&norec_apd=' + $scope.cc.norec + '&emr=' + norecEMR
+                    + '&emrfk=' + $scope.cc.emrfk
+                    + '&kdprofile=' + local.id
+                    + '&nama=' + nama, '_blank');
             }
 
             medifirstService.getPart('emr/get-datacombo-part-dokter', true, true, 20).then(function (data) {

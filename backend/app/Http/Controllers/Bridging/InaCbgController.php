@@ -1224,6 +1224,7 @@ class InaCbgController   extends ApiController
                 'lamarawatnaikkelas' => $lamarawatnaikkelass,
                 'statusrawatintensiv' =>$statusrawatintensiv,
                 'lamarawatintensiv' =>$lamarawatintensivaa,
+                'pembayar' => "peserta",
             );
         }
         return $this->respond($data);
@@ -1368,6 +1369,80 @@ class InaCbgController   extends ApiController
         }
 
         // return 'sukses';
+        return $this->setStatusCode($result['status'])->respond($result, $transMessage);
+    }
+    public function saveProposiBridgingINACBGMulti(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+
+            $delete = DB::table('hasilgrouping_t')
+            ->whereIn("noregistrasifk", $request['noregistrasifk'])
+            ->delete();
+
+            $totalpertindakan = PelayananPasien::select('pelayananpasien_t.norec', 'pasiendaftar_t.norec AS norec_pd', 
+                DB::raw('CASE WHEN hargasatuan <> 0 THEN hargasatuan * jumlah ELSE 0 END AS totalbiayapertindakan'),
+                'pelayananpasien_t.noregistrasifk', 'pelayananpasien_t.piutangpenjamin')
+            ->join("antrianpasiendiperiksa_t", "pelayananpasien_t.noregistrasifk", "=", "antrianpasiendiperiksa_t.norec")
+            ->join("pasiendaftar_t", "antrianpasiendiperiksa_t.noregistrasifk", "=", "pasiendaftar_t.norec")
+            ->whereIn("pasiendaftar_t.norec", $request['noregistrasifk'])
+            ->get();
+
+            foreach($request['proporsi'] as $item){
+                
+                $noregistrasifk = $item['noregistrasifk'];
+                $totaldijamin = $item['totalDijamin'];
+                $biayanaikkelas = $item['biayaNaikkelas'];
+                $TotalBiayaRS = $item['totalbiayars'];
+                
+                $cases = [];
+                $ids = [];
+                $params = [];
+                foreach ($totalpertindakan as $item2) {
+                    if($item['noregistrasifk'] == $item2->norec_pd) {
+                        $proporsipertindakan = ((float)$totaldijamin/(float)$TotalBiayaRS)*(float)$item2->totalbiayapertindakan;
+                        $cases[] = "WHEN '{$item2->norec}' then ". $proporsipertindakan;
+                        $ids[] = "'".$item2->norec."'";
+                    }
+                }
+                $ids = implode(',', $ids);
+                $cases = implode(' ', $cases);
+
+                if (!empty($ids)) {
+                    DB::update("UPDATE pelayananpasien_t SET piutangpenjamin = CASE norec {$cases} END WHERE norec in ({$ids})");
+                }
+
+                $new = new HasilGrouping();
+                $new->norec =  $new->generateNewId();
+                $new->noregistrasifk = $noregistrasifk;
+                $new->totalbiayars = $TotalBiayaRS;
+                $new->totalpiutangpenjamin = $totaldijamin;
+                $new->biayanaikkelas = $biayanaikkelas;
+                $new->save();
+            }
+
+            $transStatus = 'true';
+            $transMessage = "Simpan Proposi Berhasil...! ";
+        } catch (\Exception $e) {
+            $transStatus = 'false';
+            $transMessage = "Gagal Simpan Data ...! ";
+        }
+
+        if ($transStatus != 'false') {
+            DB::commit();
+            $result = array(
+                "status" => 201,
+                "message" => $transMessage,
+            );
+        } else {
+            DB::rollBack();
+            $result = array(
+                "status" => 400,
+                "e" => $e->getMessage(),
+                "message" => $transMessage,
+            );
+        }
+
         return $this->setStatusCode($result['status'])->respond($result, $transMessage);
     }
     public function getDaftarPasienRev(Request $request)

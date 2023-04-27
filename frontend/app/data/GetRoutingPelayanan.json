@@ -17326,8 +17326,8 @@
     ]
   },
   {
-    "name": "RekamMedis.AsesmenMedis.PemberianEdukasiPasien",
-    "url": "/PemberianEdukasiPasien",
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.PemberianEdukasiPasien",
+    "url": "/PemberianEdukasiPasien/:index/:idEMR",
     "templateurl": "module/EMR/PemberianEdukasiPasien.html",
     "controller": "PemberianEdukasiPasienCtrl",
     "deps": [
@@ -17671,8 +17671,8 @@
     ]
   },
   {
-    "name": "RekamMedis.AsesmenMedis.PemberianEdukasiPasienGawatDarurat",
-    "url": "/PemberianEdukasiPasienGawatDarurat",
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.PemberianEdukasiPasienGawatDarurat",
+    "url": "/PemberianEdukasiPasienGawatDarurat/:index/:idEMR",
     "templateurl": "module/EMR/PemberianEdukasiPasienGawatDarurat.html",
     "controller": "PemberianEdukasiPasienGawatDaruratCtrl",
     "deps": [
@@ -19405,6 +19405,10 @@
     "url": "/MelepasBantuanHidupDasar",
     "templateurl": "module/EMR/MelepasBantuanHidupDasar.html",
     "controller": "MelepasBantuanHidupDasarCtrl",
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.PenolakanOperasiRajal",
+    "url": "/PenolakanOperasiRajal/:index/:idEMR",
+    "templateurl": "module/EMR/PenolakanOperasiRajal.html",
+    "controller": "PenolakanOperasiRajalCtrl",
     "deps": [
       {
         "module": "Services",
@@ -19428,6 +19432,10 @@
     "url": "/PerawatanNeonatus",
     "templateurl": "module/EMR/PerawatanNeonatus.html",
     "controller": "PerawatanNeonatusCtrl",
+    "name": "RekamMedis.AsesmenMedis.PersetujuanPemakaianDarahDanProdukDarahRanap",
+    "url": "/PersetujuanPemakaianDarahDanProdukDarahRanap",
+    "templateurl": "module/EMR/PersetujuanPemakaianDarahDanProdukDarahRanap.html",
+    "controller": "PersetujuanPemakaianDarahDanProdukDarahRanapCtrl",
     "deps": [
       {
         "module": "Services",
@@ -19451,6 +19459,10 @@
     "url": "/PerawatanAsfiksia",
     "templateurl": "module/EMR/PerawatanAsfiksia.html",
     "controller": "PerawatanAsfiksiaCtrl",
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.AsesmenPasienDenganPenyakitMenularRanap",
+    "url": "/AsesmenPasienDenganPenyakitMenularRanap/:index/:idEMR",
+    "templateurl": "module/EMR/AsesmenPasienDenganPenyakitMenularRanap.html",
+    "controller": "AsesmenPasienDenganPenyakitMenularRanapCtrl",
     "deps": [
       {
         "module": "Services",
@@ -19474,6 +19486,171 @@
     "url": "/PerawatanHipoglikemi",
     "templateurl": "module/EMR/PerawatanHipoglikemi.html",
     "controller": "PerawatanHipoglikemiCtrl",
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.ChecklistFibrinolitik",
+    "url": "/ChecklistFibrinolitik/:index/:idEMR",
+    "templateurl": "module/EMR/ChecklistFibrinolitik.html",
+    "controller": "ChecklistFibrinolitikCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.Hiperbilirubin",
+    "url": "/Hiperbilirubin",
+    "templateurl": "module/EMR/Hiperbilirubin.html",
+    "controller": "HiperbilirubinCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.LembarKerjaKelainanPernafasanNeonatus",
+    "url": "/LembarKerjaKelainanPernafasanNeonatus",
+    "templateurl": "module/EMR/LembarKerjaKelainanPernafasanNeonatus.html",
+    "controller": "LembarKerjaKelainanPernafasanNeonatusCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.PenilaianPEWS",
+    "url": "/PenilaianPEWS/:index/:idEMR",
+    "templateurl": "module/EMR/PenilaianPEWS.html",
+    "controller": "PenilaianPEWSCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.PenolakanRawatInapHCU",
+    "url": "/PenolakanRawatInapHCU",
+    "templateurl": "module/EMR/PenolakanRawatInapHCU.html",
+    "controller": "PenolakanRawatInapHCUCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.CheckListSerahTerimaBayiSaatDipulangkan",
+    "url": "/CheckListSerahTerimaBayiSaatDipulangkan",
+    "templateurl": "module/EMR/CheckListSerahTerimaBayiSaatDipulangkan.html",
+    "controller": "CheckListSerahTerimaBayiSaatDipulangkanCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.MonitoringDehidrasiPadaNeonatus",
+    "url": "/MonitoringDehidrasiPadaNeonatus/:index/:idEMR",
+    "templateurl": "module/EMR/MonitoringDehidrasiPadaNeonatus.html",
+    "controller": "MonitoringDehidrasiPadaNeonatusCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.ObservasiKeseimbanganCairan",
+    "url": "/ObservasiKeseimbanganCairan/:index/:idEMR",
+    "templateurl": "module/EMR/ObservasiKeseimbanganCairan.html",
+    "controller": "ObservasiKeseimbanganCairanCtrl",
     "deps": [
       {
         "module": "Services",

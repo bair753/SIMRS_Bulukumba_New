@@ -2348,7 +2348,8 @@ class MasterController extends ApiController{
             ->leftJoin('departemen_m as dp','dp.id','=','p.objectdepartemenfk')
             ->leftJoin('detailgolonganproduk_m as dg','dg.id','=','p.objectdetailgolonganprodukfk')
             ->leftJoin('detailjenisproduk_m as dj','dj.id','=','p.objectdetailjenisprodukfk')
-            ->where('p.kdprofile',$kdProfile);
+            ->where('p.kdprofile',$kdProfile)
+            ->where('p.statusenabled', true);
 
 
         if(isset($filter['kdProduk']) && !empty($filter['kdProduk'])){

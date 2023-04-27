@@ -342,6 +342,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
               Route::get('bridging/inacbg/get-data-combo-ina', 'Bridging\InaCbgController@getDataComboIna');
            
               Route::post('bridging/inacbg/save-proposi-bridging-inacbg','Bridging\InaCbgController@saveProposiBridgingINACBG');
+              Route::post('bridging/inacbg/save-proposi-bridging-inacbg-multi','Bridging\InaCbgController@saveProposiBridgingINACBGMulti');
               Route::post('bridging/inacbg/get-daftar-pasien-statusnaikkelas','Bridging\InaCbgController@getStatusNaikKelas');
               Route::post('bridging/inacbg/save-informasi-tanggungan','Bridging\InaCbgController@saveInformasiTanggungan');
               Route::post('bridging/inacbg/save-status','Bridging\InaCbgController@saveStatus');
@@ -691,6 +692,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
           Route::get('emr/get-riwayat-perawatan-pasien', 'EMR\EMRController@getDaftarRiwayatRegistrasiPHR');
           Route::get('emr/get-emr-transaksi-detail-img', 'EMR\EMRController@getEMRTransaksiImage');
           Route::get('emr/get-nobedbykamar', 'EMR\EMRController@getNoBedByKamar');
+          Route::get('emr/get-asisten-operasi', 'EMR\EMRController@getAsistenOperasi');
 
            Route::post('emr/get-status-dipake', 'EMR\EMRController@getStatusDipake');
           Route::post('emr/save-status-dipake', 'EMR\EMRController@saveStatusDipake');
@@ -2736,6 +2738,9 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
         Route::get('report/cetak-ringkasan-pasien-masuk-keluar', 'Report\ReportController@ringkasanPasienMasukKeluar');
         Route::get('report/cetak-konsul-dokter', 'Report\ReportController@konsulDokter');
         Route::get('report/cetak-catatan-pemberian-dan-pemantuan-obat-pasien', 'Report\ReportController@catatanPemberiandanPemantauanObatPasien');
+        Route::get('report/cetak-asesmen-awal-keperawatan-igd', 'Report\ReportController@asesmenAwalKeperawatanIGD');
+        Route::get('report/cetak-asesmen-awal-medis-igd', 'Report\ReportController@asesmenAwalMedisIGD');
+        Route::get('report/cetak-laporan-operasi', 'Report\ReportController@laporanOperasi');
 
         Route::get('viewer/get-list-antrian','Antrian\AntrianController@getListAntrian');
         Route::get('viewer/update-antrian','Antrian\AntrianController@updatePanggil');

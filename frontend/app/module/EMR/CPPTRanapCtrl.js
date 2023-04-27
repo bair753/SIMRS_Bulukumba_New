@@ -41,7 +41,7 @@ define(['initialize'], function (initialize) {
                 { id: 423186 },
                 { id: 423194 },
                 { id: 423202 },
-                { id: 423220 }
+                { id: 423210 }
             ];
             var pegawaiInputDetail  = '';
             var cacheNomorEMR = cacheHelper.get('cacheNomorEMR');

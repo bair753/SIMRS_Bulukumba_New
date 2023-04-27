@@ -344,7 +344,7 @@ define(['initialize'], function (initialize) {
                     // });
 
                     medifirstService.postLogging('EMR', 'norec emrpasien_t', e.data.data.norec,
-                        'Penolakan Operasi / Prosedur Invasif ' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
+                        'Penolakan Operasi / Prosedur Invasif IGD' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
                         + $scope.cc.noregistrasi).then(function (res) {
                         })
 

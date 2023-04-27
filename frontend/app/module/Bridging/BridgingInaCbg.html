@@ -424,10 +424,10 @@
 				<button class="btnTemplate1"  ng-click="new_claim2()">New Claim</button>
 			</div>
 			<div class="grid_2" >
-				<button class="btnTemplate1"  ng-click="grouping()">Grouping</button>
+				<button class="btnTemplate1"  ng-click="grouping2()">Grouping</button>
 			</div>
 			<div class="grid_2" >
-				<button class="btnTemplate1"  ng-click="claim_final()">Final Klaim</button>
+				<button class="btnTemplate1"  ng-click="claim_final2()">Final Klaim</button>
 			</div>
 			<div class="grid_2" >
 				<button class="btnTemplate1"  ng-click="send_claim_individual()">Kirim Klaim Online</button>
@@ -917,7 +917,7 @@
 					<div ng-repeat="stat in listBerkas | orderBy:'id'">
 						<div class="grid_12">
 							<md-radio-group ng-model="item.berkas">
-								<md-radio-button value="{{stat.id}}" class="md-primary" style="padding: padding: 3px;"   ng-class="{'classUpload': stat.isupload == true}">{{stat.namaberkas}}
+								<md-radio-button value="{{stat.id}}" class="md-primary" style="padding: 3px;"   ng-class="{'classUpload': stat.isupload == true}">{{stat.namaberkas}}
 									<!-- <span style="color:rgb(250,250,250);margin-left: 200px"  >  **Sudah Upload** </span> -->
 								</md-radio-button>
 
@@ -1008,7 +1008,7 @@
 									 </md-radio-button>
 		
 								 </md-radio-group>
-							 
+								
 							 </div>
 						 </div>
 						</div>
@@ -1027,7 +1027,7 @@
 									 </md-radio-button>
 		
 								 </md-radio-group>
-							 
+								
 							 </div>
 						 </div>
 						</div>
@@ -1046,7 +1046,7 @@
 									 </md-radio-button>
 		
 								 </md-radio-group>
-							 
+								
 							 </div>
 						 </div>
 						</div>
@@ -1065,7 +1065,7 @@
 									 </md-radio-button>
 		
 								 </md-radio-group>
-							 
+								
 							 </div>
 						 </div>
 						</div>
@@ -1084,7 +1084,7 @@
 									 </md-radio-button>
 		
 								 </md-radio-group>
-							 
+								
 							 </div>
 						 </div>
 						</div>
@@ -1103,7 +1103,7 @@
 									 </md-radio-button>
 		
 								 </md-radio-group>
-							 
+								
 							 </div>
 						 </div>
 						</div>

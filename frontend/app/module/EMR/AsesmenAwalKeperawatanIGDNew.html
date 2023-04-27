@@ -210,7 +210,7 @@
                 </div>
                 <div class="grid_12">
                     <div class="grid_12">
-                        <label c-label item="item">Brething</label>
+                        <label c-label item="item">Breathing</label>
                     </div>
                     <div class="grid_6">
                         <div class="grid_12">
@@ -280,7 +280,7 @@
                     </div>
                     <div class="grid_6 parentKeteranganFieldTambahan">
                         <input class="k-textbox" ng-model="item.obj[420646]" type="text" placeholder="Suhu">
-                        <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px">C</label>
+                        <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px">°C</label>
                     </div>
                 </div>
                 <div class="grid_12" style="margin-top: 5px;">
@@ -1132,6 +1132,24 @@
 <br>
 <br>
 <div class="grid_12">
-    <div ng-include='"../app/module/EMR/TemplateButtonDinamis" '></div>
+    <div class="grid_3"></div>
+<div class="grid_9">
+    <div class="grid_2" ng-show="isCetakV"  >
+    </div>
+    <div class="grid_6"  ng-show="!isRiwayat && !isCetak && !isCetakV">
+    </div>
+    <div class="grid_2" style="margin-top: 22px" ng-show='tombolSimpanVis'>
+        <button class="btnTemplate1" ng-click="Save()"><i class="fa fa-save"></i>Simpan</button>
+    </div>
+    <div class="grid_2" style="margin-top: 22px">
+        <button class="btnTemplate1" ng-click="Batal()"><i class="fa fa-refresh"></i>Batal</button>
+    </div>
+    <div class="grid_2" style="margin-top: 22px">
+        <button class="btnTemplate1 cancel" ng-click="kembali()"><i class="fa fa-arrow-left"></i>Kembali</button>
+    </div>
+    <div class="grid_2" ng-show="isCetak"  style="margin-top: 22px">
+        <button class="btnTemplate1" ng-click="cetakBlade()"><i class="fa fa-print"></i>Cetak</button>
+    </div>
+</div>
 
 </div>
