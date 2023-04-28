@@ -19859,6 +19859,29 @@
         "define": "RekamMedisCtrl"
       }
     ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.PemberianMakanAwal2000mg",
+    "url": "/PemberianMakanAwal2000mg/:index/:idEMR",
+    "templateurl": "module/EMR/PemberianMakanAwal2000mg.html",
+    "controller": "PemberianMakanAwal2000mgCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
   }
 
 

@@ -3549,6 +3549,10 @@
         {
             "nameDep": "PemberianMakanAwal1500mgCtrl",
             "urlDep": "module/EMR/PemberianMakanAwal1500mgCtrl"
+        },
+        {
+            "nameDep": "PemberianMakanAwal2000mgCtrl",
+            "urlDep": "module/EMR/PemberianMakanAwal2000mgCtrl"
         }
     
     ]
