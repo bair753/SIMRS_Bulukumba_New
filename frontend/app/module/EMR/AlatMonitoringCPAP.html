@@ -1,0 +1,285 @@
+<style type="text/css">
+    fieldset {
+        border-radius: 5px;
+        border: 1px solid #228be6;
+    }
+
+    .k-slider-horizontal {
+        display: inline-block;
+        float: left;
+        width: 450px;
+
+        height: 26px;
+ 
+
+    }
+
+    .k-slider {
+
+        margin-left: 3%;
+        margin-right: 3%;
+        margin-top: 1%;
+        margin-bottom: 5%;
+        display: inline-block;
+    }
+
+    .activeBtn {
+        background-color: #10c4b2;
+        color: #ffffff;
+    }
+    table,
+    th,
+    td {
+        border: 1px solid #929191;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+
+    th,
+    td {
+        padding: 5px;
+        text-align: left;
+    }
+</style>
+
+<!-- <div class="grid_12"  disable-contents="allDisabled" > -->
+<div class="grid_12">
+    <div class="grid_12">
+        <div class="panel panel-default container_12">
+            <div class="panel-heading" c-translate>Alat Monitoring CPAP</div>
+        </div>
+
+        <div class="grid_12">    
+            <div class="grid_12">
+                <fieldset style="margin-top: 10px; ">
+                    <div class="grid_12" style="margin-top: 10px;"> 
+                        <div class="grid_12">
+                            <div class="grid_12">
+                                <label c-label item="item">Tanggal</label>
+                            </div>
+                            <div class="grid_6">
+                                <input style="width: 90%" k-ng-model="item.obj[32103929]" kendo-datetimepicker placeholer="YYYY:MM:DD HH:MM"
+                                    k-format="'yyyy-MM-dd HH:mm'" />
+                            </div>
+                            <div class="grid_12" style="margin-top: 10px;">
+                                <label c-label item="item">Lengkapi table dibawah setiap 4 jam. Isi dengan angka atau memberi tanda “X” bila sudah dilakukan</label>
+                            </div>
+                        </div>                    
+                    </div>
+                    <div class="grid_12" style="margin-top: 10px;">
+                        <table>
+                            <tr>
+                                <th style="text-align: center;">Waktu</th>
+                                <th>
+                                    <input style="width: 90%" k-ng-model="item.obj[32103930]" kendo-timepicker placeholer="HH:MM"
+                                    k-format="'HH:mm'" />
+                                </th>
+                                <th>
+                                    <input style="width: 90%" k-ng-model="item.obj[32103931]" kendo-timepicker placeholer="HH:MM"
+                                    k-format="'HH:mm'" />
+                                </th>
+                                <th>
+                                    <input style="width: 90%" k-ng-model="item.obj[32103932]" kendo-timepicker placeholer="HH:MM"
+                                    k-format="'HH:mm'" />
+                                </th>
+                                <th>
+                                    <input style="width: 90%" k-ng-model="item.obj[32103933]" kendo-timepicker placeholer="HH:MM"
+                                    k-format="'HH:mm'" />
+                                </th>
+                                <th>
+                                    <input style="width: 90%" k-ng-model="item.obj[32103934]" kendo-timepicker placeholer="HH:MM"
+                                    k-format="'HH:mm'" />
+                                </th>
+                                <th>
+                                    <input style="width: 90%" k-ng-model="item.obj[32103935]" kendo-timepicker placeholer="HH:MM"
+                                    k-format="'HH:mm'" />
+                                </th>
+                                <th>
+                                    <input style="width: 90%" k-ng-model="item.obj[32103936]" kendo-timepicker placeholer="HH:MM"
+                                    k-format="'HH:mm'" />
+                                </th>
+                                <th>
+                                    <input style="width: 90%" k-ng-model="item.obj[32103937]" kendo-timepicker placeholer="HH:MM"
+                                    k-format="'HH:mm'" />
+                                </th>
+                                <th style="text-align: center;">Catatan</th>
+                                
+                            </tr>
+                            <tr>
+                                <td>Laju Pernapasan</td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103938]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103939]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103940]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103941]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103942]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103943]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103944]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103945]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103946]" /></td>
+                            </tr>
+                            <tr>
+                                <td>Saturasi O2. Bila dibawah target, naikan aliran 1 L</td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103947]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103948]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103949]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103950]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103951]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103952]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103953]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103954]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103955]" /></td>
+                            </tr>
+                            <tr>
+                                <td>Nasopharynx suctioned dengan ukuran 8 or 6 Fr</td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103956]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103957]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103958]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103959]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103960]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103961]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103962]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103963]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103964]" /></td>
+                            </tr>
+                            <tr>
+                                <td>Prongs tidak menekan septum hidung</td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103965]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103966]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103967]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103968]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103969]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103970]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103971]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103972]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103973]" /></td>
+                            </tr>
+                            <tr>
+                                <td>Jarak 2 mm antara pangkal prong dan hidung</td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103974]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103975]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103976]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103977]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103978]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103979]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103980]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103981]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103982]" /></td>
+                            </tr>
+                            <tr>
+                                <td>Tidak ada kerusakan kulit sekitar lubang hidung/td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103983]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103984]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103985]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103986]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103987]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103988]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103989]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103990]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103991]" /></td>
+                            </tr>
+                            <tr>
+                                <td>Ubah-ubah posisi bayi supaya bayi terstimulasi</td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103992]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103993]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103994]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103995]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103996]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103997]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103998]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32103999]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32104000]" /></td>
+                            </tr>
+                            <tr>
+                                <td>Level air dipertahankan pada <input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32104001]" /> cm</td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32104002]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32104003]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32104004]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32104005]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32104006]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32104007]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32104008]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32104009]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32104010]" /></td>
+                            </tr>
+                            <tr>
+                                <td>Selang dibersihkan dari pengembunan</td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32104011]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32104012]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32104013]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32104014]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32104015]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32104016]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32104017]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32104018]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32104019]" /></td>
+                            </tr>
+                            <tr>
+                                <td>Selang dibersihkan dari pengembunan</td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32104020]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32104021]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32104022]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32104023]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32104024]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32104025]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32104026]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32104027]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32104028]" /></td>
+                            </tr>
+                            <tr>
+                                <td>Tidak ada kebocoran</td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32104029]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32104030]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32104031]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32104032]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32104033]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32104034]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32104035]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32104036]" /></td>
+                                <td><input c-text-box type="input" filter="'char'" class="k-textbox" ng-model="item.obj[32104037]" /></td>
+                            </tr>
+                            <tr>
+                                <td colspan="10">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj[32104038]" ng-model="item.obj[32104038]">
+                                    <label class="k-checkbox-label" for="item.obj[32104038]">
+                                        &nbsp;Nasal prongs diberikan setiap hari dengan 2% asam asetat atau chlorin</label>
+                                    </td>
+                            </tr>
+                        </table>                
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+
+    </div>
+</div>
+<br>
+<br>
+<div class="grid_12">
+    <div class="grid_3"></div>
+<div class="grid_9">
+    <div class="grid_2" ng-show="isCetakV"  >
+       
+    </div>
+    <div class="grid_6"  ng-show="!isRiwayat && !isCetak && !isCetakV">
+    </div>
+    <div class="grid_2" style="margin-top: 22px" ng-show='tombolSimpanVis'>
+        <button class="btnTemplate1" ng-click="Save()"><i class="fa fa-save"></i>Simpan</button>
+    </div>
+    <div class="grid_2" style="margin-top: 22px" ng-show="isRiwayat">
+        <button class="btnTemplate1" ng-click="Riwayat()"><i class="fa fa-th-list"></i>Riwayat</button>
+    </div>
+    <div class="grid_2" style="margin-top: 22px">
+        <button class="btnTemplate1" ng-click="Batal()"><i class="fa fa-refresh"></i>Batal</button>
+    </div>
+    <div class="grid_2" style="margin-top: 22px">
+        <button class="btnTemplate1 cancel" ng-click="kembali()"><i class="fa fa-arrow-left"></i>Kembali</button>
+    </div>
+    <div class="grid_2" ng-show="isCetak"  style="margin-top: 22px">
+        <button class="btnTemplate1" ng-click="cetakBlade()"><i class="fa fa-print"></i>Cetak</button>
+    </div>
+     <!-- <div class="grid_2" ng-show="isCetakV"  style="margin-top: 22px">
+        <button class="btnTemplate1" ng-click="cetakBlade()"><i class="fa fa-print"></i>Cetak View</button>
+    </div> -->
+</div>
+
+</div>

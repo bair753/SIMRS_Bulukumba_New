@@ -19746,6 +19746,75 @@
     ]
   },
   {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.PemantauanCPAPDst",
+    "url": "/PemantauanCPAPDst/:index/:idEMR",
+    "templateurl": "module/EMR/PemantauanCPAPDst.html",
+    "controller": "PemantauanCPAPDstCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.AlatMonitoringCPAP",
+    "url": "/AlatMonitoringCPAP/:index/:idEMR",
+    "templateurl": "module/EMR/AlatMonitoringCPAP.html",
+    "controller": "AlatMonitoringCPAPCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.PerawatHiportermiPadaNeonatus",
+    "url": "/PerawatHiportermiPadaNeonatus/:index/:idEMR",
+    "templateurl": "module/EMR/PerawatHiportermiPadaNeonatus.html",
+    "controller": "PerawatHiportermiPadaNeonatusCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
     "name": "RekamMedis.AsesmenMedis.MenuIndex.PemberianMakanAwal1000mg",
     "url": "/PemberianMakanAwal1000mg/:index/:idEMR",
     "templateurl": "module/EMR/PemberianMakanAwal1000mg.html",
@@ -19773,6 +19842,29 @@
     "url": "/PemberianMakanAwal1500mg/:index/:idEMR",
     "templateurl": "module/EMR/PemberianMakanAwal1500mg.html",
     "controller": "PemberianMakanAwal1500mgCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.PemberianMakanAwal2000mg",
+    "url": "/PemberianMakanAwal2000mg/:index/:idEMR",
+    "templateurl": "module/EMR/PemberianMakanAwal2000mg.html",
+    "controller": "PemberianMakanAwal2000mgCtrl",
     "deps": [
       {
         "module": "Services",
