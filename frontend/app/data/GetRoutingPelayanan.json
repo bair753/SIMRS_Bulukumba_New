@@ -19744,6 +19744,7 @@
         "define": "RekamMedisCtrl"
       }
     ]
+<<<<<<< .mine
   },
   {
     "name": "RekamMedis.AsesmenMedis.MenuIndex.PemantauanCPAPDst",
@@ -19813,6 +19814,77 @@
         "define": "RekamMedisCtrl"
       }
     ]
+=======
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.PemberianMakanAwal1000mg",
+    "url": "/PemberianMakanAwal1000mg/:index/:idEMR",
+    "templateurl": "module/EMR/PemberianMakanAwal1000mg.html",
+    "controller": "PemberianMakanAwal1000mgCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.PemberianMakanAwal1500mg",
+    "url": "/PemberianMakanAwal1500mg/:index/:idEMR",
+    "templateurl": "module/EMR/PemberianMakanAwal1500mg.html",
+    "controller": "PemberianMakanAwal1500mgCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> .theirs
   }
 
 

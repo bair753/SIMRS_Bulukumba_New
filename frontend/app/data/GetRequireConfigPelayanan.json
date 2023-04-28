@@ -3529,6 +3529,7 @@
         {
             "nameDep": "ObservasiKeseimbanganCairanCtrl",
             "urlDep": "module/EMR/ObservasiKeseimbanganCairanCtrl"
+<<<<<<< .mine
         },
         {
             "nameDep": "PemantauanCPAPDstCtrl",
@@ -3541,6 +3542,20 @@
         {
             "nameDep": "PerawatHiportermiPadaNeonatusCtrl",
             "urlDep": "module/EMR/PerawatHiportermiPadaNeonatusCtrl"
+=======
+        },
+        {
+            "nameDep": "PemberianMakanAwal1000mgCtrl",
+            "urlDep": "module/EMR/PemberianMakanAwal1000mgCtrl"
+        },
+        {
+            "nameDep": "PemberianMakanAwal1500mgCtrl",
+            "urlDep": "module/EMR/PemberianMakanAwal1500mgCtrl"
+
+
+
+
+>>>>>>> .theirs
         }
     
     ]
