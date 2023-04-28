@@ -1,0 +1,466 @@
+<style type="text/css">
+    fieldset {
+        border-radius: 5px;
+        border: 1px solid #228be6;
+    }
+
+    .k-slider-horizontal {
+        display: inline-block;
+        float: left;
+        width: 450px;
+
+        height: 26px;
+ 
+
+    }
+
+    .k-slider {
+
+        margin-left: 3%;
+        margin-right: 3%;
+        margin-top: 1%;
+        margin-bottom: 5%;
+        display: inline-block;
+    }
+
+    .activeBtn {
+        background-color: #10c4b2;
+        color: #ffffff;
+    }
+    table,
+    th,
+    td {
+        border: 1px solid #929191;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+
+    th,
+    td {
+        padding: 5px;
+        text-align: left;
+    }
+</style>
+
+<!-- <div class="grid_12"  disable-contents="allDisabled" > -->
+<div class="grid_12">
+    <div class="grid_12">
+        <div class="panel panel-default container_12">
+            <div class="panel-heading" c-translate>Perawat Hiportermi Pada Neonatus</div>
+        </div>
+
+        <div class="grid_12" style="margin-top: 10px;">
+            <fieldset style="margin-top: 10px;">
+                <div class="grid_12">
+                    <div class="grid_12">
+                        <div class="grid_12">
+                            <label c-label item="item">Tanggal/Jam</label>
+                        </div>
+                        <div class="grid_6">
+                            <input style="width: 100%" k-ng-model="item.obj[32104046]" kendo-datetimepicker
+                                placeholer="YYYY:MM:DD HH:MM" k-format="'yyyy-MM-dd HH:mm'" />
+                        </div>
+                    </div>
+                </div>
+            
+            </fieldset>
+        </div>
+
+        <div class="grid_12" style="margin-top: 10px;">
+            <fieldset style="margin-top: 10px;">
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_12">
+                        <div class="grid_12" style="margin-top: 10px;">
+                            <div class="grid_8">
+                                <label c-label item="item">Hasil anammnesis faktor risiko penyebab   hipotermi neonatal:</label>
+                            </div>
+                            <div class="grid_2">
+                                <label c-label item="item">Ya</label>
+                            </div>
+                            <div class="grid_2">
+                                <label c-label item="item">Tidak</label>
+                            </div> 
+                        </div>
+
+                        <div class="grid_12" style="margin-top: 10px;">
+                            <div class="grid_8">
+                                <label item="item">-	Bayi preterm dan bayi kecil</label>
+                            </div>
+                            <div class="grid_2">
+                                <input type="checkbox" class="k-checkbox" id="item.obj[32104047]" ng-model="item.obj[32104047]">
+                                <label class="k-checkbox-label" for="item.obj[32104047]"></label>
+                            </div>
+                            <div class="grid_2">
+                                <input type="checkbox" class="k-checkbox" id="item.obj[32104048]" ng-model="item.obj[32104048]">
+                                <label class="k-checkbox-label" for="item.obj[32104048]"></label>
+                            </div> 
+                        </div>
+
+                        <div class="grid_12" style="margin-top: 10px;">
+                            <div class="grid_8">
+                                <label item="item">-	Bayi dengan kelainan bawaan</label>
+                                <label style="font-size: 8px;">(khususnya dengan penutupan kulit yang tidak sempurna seperti meningomielokel, gastroskisis, omfalokel)</label>
+                            </div>
+                            <div class="grid_2">
+                                <input type="checkbox" class="k-checkbox" id="item.obj[32104049]" ng-model="item.obj[32104049]">
+                                <label class="k-checkbox-label" for="item.obj[32104049]"></label>
+                            </div>
+                            <div class="grid_2">
+                                <input type="checkbox" class="k-checkbox" id="item.obj[32104050]" ng-model="item.obj[32104050]">
+                                <label class="k-checkbox-label" for="item.obj[32104050]"></label>
+                            </div> 
+                        </div>
+
+                        <div class="grid_12" style="margin-top: 10px;">
+                            <div class="grid_8">
+                                <label item="item">-	BBL dengan gangguan saraf sentral (seperti perdarahan intrakranial, obat-obatan, asfiksia)</label>
+                            </div>
+                            <div class="grid_2">
+                                <input type="checkbox" class="k-checkbox" id="item.obj[32104051]" ng-model="item.obj[32104051]">
+                                <label class="k-checkbox-label" for="item.obj[32104051]"></label>
+                            </div>
+                            <div class="grid_2">
+                                <input type="checkbox" class="k-checkbox" id="item.obj[32104052]" ng-model="item.obj[32104052]">
+                                <label class="k-checkbox-label" for="item.obj[32104052]"></label>
+                            </div> 
+                        </div>
+
+                        <div class="grid_12" style="margin-top: 10px;">
+                            <div class="grid_8">
+                                <label item="item">-	Bayi dengan sepsis</label>
+                            </div>
+                            <div class="grid_2">
+                                <input type="checkbox" class="k-checkbox" id="item.obj[32104053]" ng-model="item.obj[32104053]">
+                                <label class="k-checkbox-label" for="item.obj[32104053]"></label>
+                            </div>
+                            <div class="grid_2">
+                                <input type="checkbox" class="k-checkbox" id="item.obj[32104054]" ng-model="item.obj[32104054]">
+                                <label class="k-checkbox-label" for="item.obj[32104054]"></label>
+                            </div> 
+                        </div>
+
+                        <div class="grid_12" style="margin-top: 10px;">
+                            <div class="grid_8">
+                                <label item="item">-	Bayi dengan tindakan resusitasi yang lama</label>
+                            </div>
+                            <div class="grid_2">
+                                <input type="checkbox" class="k-checkbox" id="item.obj[32104055]" ng-model="item.obj[32104055]">
+                                <label class="k-checkbox-label" for="item.obj[32104055]"></label>
+                            </div>
+                            <div class="grid_2">
+                                <input type="checkbox" class="k-checkbox" id="item.obj[32104056]" ng-model="item.obj[32104056]">
+                                <label class="k-checkbox-label" for="item.obj[32104056]"></label>
+                            </div> 
+                        </div>
+
+                        <div class="grid_12" style="margin-top: 10px;">
+                            <div class="grid_8">
+                                <label item="item">-	Bayi IUGR	</label>
+                            </div>
+                            <div class="grid_2">
+                                <input type="checkbox" class="k-checkbox" id="item.obj[32104057]" ng-model="item.obj[32104057]">
+                                <label class="k-checkbox-label" for="item.obj[32104057]"></label>
+                            </div>
+                            <div class="grid_2">
+                                <input type="checkbox" class="k-checkbox" id="item.obj[32104058]" ng-model="item.obj[32104058]">
+                                <label class="k-checkbox-label" for="item.obj[32104058]"></label>
+                            </div> 
+                        </div>
+                    </div>                       
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="grid_12" style="margin-top: 10px;">
+            <fieldset style="margin-top: 10px;">
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_12">
+                        <div class="grid_12" style="margin-top: 10px;">
+                            <div class="grid_8">
+                                <label c-label item="item">Hasil pemeriksaan fisis pada neonatus</label>
+                            </div>
+                            <div class="grid_2">
+                                <label c-label item="item">Ya</label>
+                            </div>
+                            <div class="grid_2">
+                                <label c-label item="item">Tidak</label>
+                            </div> 
+                        </div>
+
+                        <div class="grid_12" style="margin-top: 10px;">
+                            <div class="grid_8">
+                                <label item="item">-	Akrosianosis, kulit dingin, bercak-bercak, atau  pucat</label>
+                            </div>
+                            <div class="grid_2">
+                                <input type="checkbox" class="k-checkbox" id="item.obj[32104059]" ng-model="item.obj[32104059]">
+                                <label class="k-checkbox-label" for="item.obj[32104059]"></label>
+                            </div>
+                            <div class="grid_2">
+                                <input type="checkbox" class="k-checkbox" id="item.obj[32104060]" ng-model="item.obj[32104060]">
+                                <label class="k-checkbox-label" for="item.obj[32104060]"></label>
+                            </div> 
+                        </div>
+
+                        <div class="grid_12" style="margin-top: 10px;">
+                            <div class="grid_8">
+                                <label item="item">-	Hipoglikemi</label>
+                            </div>
+                            <div class="grid_2">
+                                <input type="checkbox" class="k-checkbox" id="item.obj[32104061]" ng-model="item.obj[32104061]">
+                                <label class="k-checkbox-label" for="item.obj[32104061]"></label>
+                            </div>
+                            <div class="grid_2">
+                                <input type="checkbox" class="k-checkbox" id="item.obj[32104062]" ng-model="item.obj[32104062]">
+                                <label class="k-checkbox-label" for="item.obj[32104062]"></label>
+                            </div> 
+                        </div>
+
+                        <div class="grid_12" style="margin-top: 10px;">
+                            <div class="grid_8">
+                                <label item="item">-	Hiperglikemi sementara</label>
+                            </div>
+                            <div class="grid_2">
+                                <input type="checkbox" class="k-checkbox" id="item.obj[32104063]" ng-model="item.obj[32104063]">
+                                <label class="k-checkbox-label" for="item.obj[32104063]"></label>
+                            </div>
+                            <div class="grid_2">
+                                <input type="checkbox" class="k-checkbox" id="item.obj[32104064]" ng-model="item.obj[32104064]">
+                                <label class="k-checkbox-label" for="item.obj[32104064]"></label>
+                            </div> 
+                        </div>
+
+                        <div class="grid_12" style="margin-top: 10px;">
+                            <div class="grid_8">
+                                <label item="item">-	Bradikardia</label>
+                            </div>
+                            <div class="grid_2">
+                                <input type="checkbox" class="k-checkbox" id="item.obj[32104065]" ng-model="item.obj[32104065]">
+                                <label class="k-checkbox-label" for="item.obj[32104065]"></label>
+                            </div>
+                            <div class="grid_2">
+                                <input type="checkbox" class="k-checkbox" id="item.obj[32104066]" ng-model="item.obj[32104066]">
+                                <label class="k-checkbox-label" for="item.obj[32104066]"></label>
+                            </div> 
+                        </div>
+
+                        <div class="grid_12" style="margin-top: 10px;">
+                            <div class="grid_8">
+                                <label item="item">-	Takipnea, gelisah, napas dangkal dan tidak   teratur</label>
+                            </div>
+                            <div class="grid_2">
+                                <input type="checkbox" class="k-checkbox" id="item.obj[32104067]" ng-model="item.obj[32104067]">
+                                <label class="k-checkbox-label" for="item.obj[32104067]"></label>
+                            </div>
+                            <div class="grid_2">
+                                <input type="checkbox" class="k-checkbox" id="item.obj[32104068]" ng-model="item.obj[32104068]">
+                                <label class="k-checkbox-label" for="item.obj[32104068]"></label>
+                            </div> 
+                        </div>
+
+                        <div class="grid_12" style="margin-top: 10px;">
+                            <div class="grid_8">
+                                <label item="item">-	Distres pernapasan, apnea, hipoksemia,  asidosis metabolik</label>
+                            </div>
+                            <div class="grid_2">
+                                <input type="checkbox" class="k-checkbox" id="item.obj[32104069]" ng-model="item.obj[32104069]">
+                                <label class="k-checkbox-label" for="item.obj[32104069]"></label>
+                            </div>
+                            <div class="grid_2">
+                                <input type="checkbox" class="k-checkbox" id="item.obj[32104070]" ng-model="item.obj[32104070]">
+                                <label class="k-checkbox-label" for="item.obj[32104070]"></label>
+                            </div> 
+                        </div>
+
+                        <div class="grid_12" style="margin-top: 10px;">
+                            <div class="grid_8">
+                                <label item="item">-	Letargi, hipotonus</label>
+                            </div>
+                            <div class="grid_2">
+                                <input type="checkbox" class="k-checkbox" id="item.obj[32104071]" ng-model="item.obj[32104071]">
+                                <label class="k-checkbox-label" for="item.obj[32104071]"></label>
+                            </div>
+                            <div class="grid_2">
+                                <input type="checkbox" class="k-checkbox" id="item.obj[32104072]" ng-model="item.obj[32104072]">
+                                <label class="k-checkbox-label" for="item.obj[32104072]"></label>
+                            </div> 
+                        </div>
+
+                        <div class="grid_12" style="margin-top: 10px;">
+                            <div class="grid_8">
+                                <label item="item">-	Menangis lemah, tidak mau menyusu</label>
+                            </div>
+                            <div class="grid_2">
+                                <input type="checkbox" class="k-checkbox" id="item.obj[32104073]" ng-model="item.obj[32104073]">
+                                <label class="k-checkbox-label" for="item.obj[32104073]"></label>
+                            </div>
+                            <div class="grid_2">
+                                <input type="checkbox" class="k-checkbox" id="item.obj[32104074]" ng-model="item.obj[32104074]">
+                                <label class="k-checkbox-label" for="item.obj[32104074]"></label>
+                            </div> 
+                        </div>
+
+                        <div class="grid_12" style="margin-top: 10px;">
+                            <div class="grid_8">
+                                <label item="item">-	Berat badan turun</label>
+                            </div>
+                            <div class="grid_2">
+                                <input type="checkbox" class="k-checkbox" id="item.obj[32104075]" ng-model="item.obj[32104075]">
+                                <label class="k-checkbox-label" for="item.obj[32104075]"></label>
+                            </div>
+                            <div class="grid_2">
+                                <input type="checkbox" class="k-checkbox" id="item.obj[32104076]" ng-model="item.obj[32104076]">
+                                <label class="k-checkbox-label" for="item.obj[32104076]"></label>
+                            </div> 
+                        </div>
+                    </div>                       
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="grid_12" style="margin-top: 10px;">
+            <fieldset style="margin-top: 10px;">
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_12">
+                        <div class="grid_12" style="margin-top: 10px;">
+                            <div class="grid_8">
+                                <label c-label item="item">Melakukan Pemeriksaan Suhu:</label>
+                            </div>
+                            <div class="grid_2">
+                                <label c-label item="item">Ya</label>
+                            </div>
+                            <div class="grid_2">
+                                <label c-label item="item">Tidak</label>
+                            </div> 
+                        </div>
+
+                        <div class="grid_12" style="margin-top: 10px;">
+                            <div class="grid_8">
+                                <label item="item">-	Hipotermia ringan (antara 36,0-36,4°C)</label>
+                            </div>
+                            <div class="grid_2">
+                                <input type="checkbox" class="k-checkbox" id="item.obj[32104077]" ng-model="item.obj[32104077]">
+                                <label class="k-checkbox-label" for="item.obj[32104077]"></label>
+                            </div>
+                            <div class="grid_2">
+                                <input type="checkbox" class="k-checkbox" id="item.obj[32104078]" ng-model="item.obj[32104078]">
+                                <label class="k-checkbox-label" for="item.obj[32104078]"></label>
+                            </div> 
+                        </div>
+
+                        <div class="grid_12" style="margin-top: 10px;">
+                            <div class="grid_8">
+                                <label item="item">-	Hipotermia sedang (antara 32-35,9°C)</label>
+                            </div>
+                            <div class="grid_2">
+                                <input type="checkbox" class="k-checkbox" id="item.obj[32104079]" ng-model="item.obj[32104079]">
+                                <label class="k-checkbox-label" for="item.obj[32104079]"></label>
+                            </div>
+                            <div class="grid_2">
+                                <input type="checkbox" class="k-checkbox" id="item.obj[32104080]" ng-model="item.obj[32104080]">
+                                <label class="k-checkbox-label" for="item.obj[32104080]"></label>
+                            </div> 
+                        </div>
+
+                        <div class="grid_12" style="margin-top: 10px;">
+                            <div class="grid_8">
+                                <label item="item">-	Hipotermia berat (< 32°C)</label>
+                            </div>
+                            <div class="grid_2">
+                                <input type="checkbox" class="k-checkbox" id="item.obj[32104081]" ng-model="item.obj[32104081]">
+                                <label class="k-checkbox-label" for="item.obj[32104081]"></label>
+                            </div>
+                            <div class="grid_2">
+                                <input type="checkbox" class="k-checkbox" id="item.obj[32104082]" ng-model="item.obj[32104082]">
+                                <label class="k-checkbox-label" for="item.obj[32104082]"></label>
+                            </div> 
+                        </div>
+                    </div>                       
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="grid_12" style="margin-top: 10px;">
+            <fieldset style="margin-top: 10px;">
+                <legend><b>Tuliskan pada rekam medis tatalaksana yang sesuai untuk hipotermi</b></legend>
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_12">
+                        <div class="grid_12" style="margin-top: 10px;">
+                            <label c-label item="item">Penatalaksanaan Hipotermi ringan:</label>
+                        </div>
+
+                        <div class="grid_12" style="margin-top: 10px;">
+                            <label item="item">&nbsp;&nbsp;&nbsp; -	Kontak kulit ke kulit pada suhu ruangan yang hangat (setidaknya 25°C)</label>
+                        </div>
+                        <div class="grid_12" style="margin-top: 10px;">
+                            <label item="item">&nbsp;&nbsp;&nbsp; -	Gunakan topi pada kepala neonatus</label>
+                        </div>
+                        <div class="grid_12" style="margin-top: 10px;">
+                            <label item="item">&nbsp;&nbsp;&nbsp; -	Tutupi ibu dan neonatus dengan selimut hangat</label>
+                        </div>
+                    </div> 
+                    
+                    <div class="grid_12">
+                        <div class="grid_12" style="margin-top: 10px;">
+                            <label c-label item="item">Penatalaksanaan Hipotermi sedang:</label>
+                        </div>
+
+                        <div class="grid_12" style="margin-top: 10px;">
+                            <label item="item">&nbsp;&nbsp;&nbsp; - Letakkan dibawah pemancar panas Pada  inkubator yang sudah dihangatkan</label>
+                        </div>
+                        <div class="grid_12" style="margin-top: 10px;">
+                            <label item="item">&nbsp;&nbsp;&nbsp; -	Pada matras yang berisi air hangat (contoh: KanBed)</label>
+                        </div>
+                        <div class="grid_12" style="margin-top: 10px;">
+                            <label item="item">&nbsp;&nbsp;&nbsp; -	Jika tidak ada peralatan yang tersedia atau neonatus stabil secara klinis, maka lakukan kontak kulit ke kulit dengan ibu pada ruangan dengan suhu hangat (setidaknya 25°C)</label>
+                        </div>
+                    </div> 
+
+                    <div class="grid_12">
+                        <div class="grid_12" style="margin-top: 10px;">
+                            <label c-label item="item">Penatalaksanaan Hipotermi berat:</label>
+                        </div>
+
+                        <div class="grid_12" style="margin-top: 10px;">
+                            <label item="item">&nbsp;&nbsp;&nbsp; - Gunakan inkubator yang sudah dihangatkan (diatur 1- 1,5°C lebih tinggi dibanding suhu tubuh neonatus) dan harus disesuaikan dengan meningkatnya suhu neonatus (harus selalu dipantau)</label>
+                        </div>
+                        <div class="grid_12" style="margin-top: 10px;">
+                            <label item="item">&nbsp;&nbsp;&nbsp; -	Jika tidak ada peratalan yang tersedia, lakukan kontak kulit ke kulit atau ruangan yang hangat atau boks bayi yang hangat dapat digunakan</label>
+                        </div>
+                    </div> 
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="grid_12" style="margin-top: 10px;">
+            <fieldset style="margin-top: 10px;">
+                <legend><b>Tuliskan pada resume medis:</b></legend>
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_12">
+                        <div class="grid_12" style="margin-top: 10px;">
+                            <label item="item">•	Pemeriksaan lanjutan di FKTP </label>
+                        </div>
+                    </div>
+                    
+                    <div class="grid_12">
+                        <div class="grid_12" style="margin-top: 10px;">
+                            <label item="item">•	Cara mengatasi/mencegah terjadinya hipotermi</label>
+                        </div>
+                    </div> 
+
+                    <div class="grid_12">
+                        <div class="grid_12" style="margin-top: 10px;">
+                            <label item="item">•	Edukasi tanda bahaya pada neonatus  pasca rawat dengan hipotermi</label>
+                        </div>
+                    </div> 
+                </div>
+            </fieldset>
+        </div>
+
+    </div>
+</div>
+<br>
+<br>
+<div class="grid_12">
+    <div ng-include='"../app/module/EMR/TemplateButtonDinamis" '></div>
+
+</div>

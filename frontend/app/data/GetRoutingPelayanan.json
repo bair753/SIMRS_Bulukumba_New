@@ -19744,6 +19744,75 @@
         "define": "RekamMedisCtrl"
       }
     ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.PemantauanCPAPDst",
+    "url": "/PemantauanCPAPDst/:index/:idEMR",
+    "templateurl": "module/EMR/PemantauanCPAPDst.html",
+    "controller": "PemantauanCPAPDstCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.AlatMonitoringCPAP",
+    "url": "/AlatMonitoringCPAP/:index/:idEMR",
+    "templateurl": "module/EMR/AlatMonitoringCPAP.html",
+    "controller": "AlatMonitoringCPAPCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.PerawatHiportermiPadaNeonatus",
+    "url": "/PerawatHiportermiPadaNeonatus/:index/:idEMR",
+    "templateurl": "module/EMR/PerawatHiportermiPadaNeonatus.html",
+    "controller": "PerawatHiportermiPadaNeonatusCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
   }
 
 

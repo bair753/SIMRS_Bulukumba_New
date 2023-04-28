@@ -3529,6 +3529,18 @@
         {
             "nameDep": "ObservasiKeseimbanganCairanCtrl",
             "urlDep": "module/EMR/ObservasiKeseimbanganCairanCtrl"
+        },
+        {
+            "nameDep": "PemantauanCPAPDstCtrl",
+            "urlDep": "module/EMR/PemantauanCPAPDstCtrl"
+        },
+        {
+            "nameDep": "AlatMonitoringCPAPCtrl",
+            "urlDep": "module/EMR/AlatMonitoringCPAPCtrl"
+        },
+        {
+            "nameDep": "PerawatHiportermiPadaNeonatusCtrl",
+            "urlDep": "module/EMR/PerawatHiportermiPadaNeonatusCtrl"
         }
     
     ]
