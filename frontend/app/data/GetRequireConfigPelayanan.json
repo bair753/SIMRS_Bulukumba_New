@@ -3471,6 +3471,22 @@
             "urlDep": "module/EMR/PengkajianDanIntervensiUlangNyeriRanapCtrl"
         },
         {
+            "nameDep": "MelepasBantuanHidupDasarCtrl",
+            "urlDep": "module/EMR/MelepasBantuanHidupDasarCtrl"
+        },
+        {
+            "nameDep": "PerawatanNeonatusCtrl",
+            "urlDep": "module/EMR/PerawatanNeonatusCtrl"
+        },
+        {
+            "nameDep": "PerawatanAsfiksiaCtrl",
+            "urlDep": "module/EMR/PerawatanAsfiksiaCtrl"
+        },
+        {
+            "nameDep": "PerawatanHipoglikemiCtrl",
+            "urlDep": "module/EMR/PerawatanHipoglikemiCtrl"
+        },
+        {
             "nameDep": "PenolakanOperasiRajalCtrl",
             "urlDep": "module/EMR/PenolakanOperasiRajalCtrl"
         },
@@ -3513,6 +3529,14 @@
         {
             "nameDep": "ObservasiKeseimbanganCairanCtrl",
             "urlDep": "module/EMR/ObservasiKeseimbanganCairanCtrl"
+        },
+        {
+            "nameDep": "PemberianMakanAwal1000mgCtrl",
+            "urlDep": "module/EMR/PemberianMakanAwal1000mgCtrl"
+        },
+        {
+            "nameDep": "PemberianMakanAwal1500mgCtrl",
+            "urlDep": "module/EMR/PemberianMakanAwal1500mgCtrl"
         }
     
     ]

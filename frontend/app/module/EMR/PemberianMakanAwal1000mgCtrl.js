@@ -1,6 +1,6 @@
 define(['initialize'], function (initialize) {
     'use strict';
-    initialize.controller('PersetujuanPengobatanRisikoTinggiCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
+    initialize.controller('PemberianMakanAwal1000mgCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
         function ($q, $rootScope, $scope, ModelItem, $state, cacheHelper, dateHelper, medifirstService) {
 
             var paramsIndex = $state.params.index ? parseInt($state.params.index) : null
@@ -14,7 +14,7 @@ define(['initialize'], function (initialize) {
             $scope.cc = {};
             var nomorEMR = '-';
             var norecEMR = '';
-            $scope.cc.emrfk = 290107;
+            $scope.cc.emrfk = 290130;
             var dataLoad = [];
             $scope.isCetak = false;
             $scope.allDisabled = false;
@@ -46,6 +46,10 @@ define(['initialize'], function (initialize) {
                 $scope.listDokter = data
             })
 
+            medifirstService.getPart('emr/get-asisten-operasi', true, true, 20).then(function (data) {
+                $scope.listAsisten = data
+            })
+
             medifirstService.getPart('emr/get-datacombo-part-pegawai', true, true, 20).then(function (data) {
                 $scope.listPegawai = data
             })
@@ -58,20 +62,54 @@ define(['initialize'], function (initialize) {
                 $scope.listKelas = data
             })
 
-            medifirstService.getPart("sysadmin/general/get-datacombo-icd10", true, true, 10).then(function (data) {
+            medifirstService.getPart("emr/get-datacombo-part-diagnosa", true, true, 10).then(function (data) {
                 $scope.listDiagnosa = data;
             });
 
-            medifirstService.getPart("sysadmin/general/get-datacombo-icd10-secondary", true, true, 10).then(function (data) {
+            medifirstService.getPart("emr/get-datacombo-icd10-secondary", true, true, 10).then(function (data) {
                 $scope.listDiagnosaSecondary = data;
             });
 
+
+            // $scope.cetakPdf = function () {
+            //     if (norecEMR == '') return
+            //     var client = new HttpClient();
+            //     client.get('http://127.0.0.1:1237/printvb/e-rekammedis?cetak-emr-asesmen-awal-medis-igd&id=' + $scope.cc.nocm + '&emr=' + norecEMR + '&view=true', function (response) {
+            //         // do something with response
+            //     });
+            // }
+
             $scope.cetakPdf = function () {
+
+                if($scope.item.obj[31100543] == undefined){
+                    toastr.warning('Diagnose Pasca Operatif tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100550] == undefined){
+                    toastr.warning('Prosedur Tindakan yang Dilakukan tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100563] == undefined){
+                    toastr.warning('No. Alat yang Dipasang tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100568] == undefined){
+                    toastr.warning('Laporan/Tindakan Operasi tidak boleh kosong','Peringatan')
+                    return
+                }
+                
                 if (norecEMR == '') return
-                var client = new HttpClient();
-                client.get('http://127.0.0.1:1237/printvb/e-rekammedis?cetak-emr-asesmen-awal-medis-igd&id=' + $scope.cc.nocm + '&emr=' + norecEMR + '&view=true', function (response) {
-                    // do something with response
-                });
+
+                var local = JSON.parse(localStorage.getItem('profile'));
+                var nama = medifirstService.getPegawaiLogin().namalengkap;
+                window.open(config.baseApiBackend + 'report/cetak-laporan-operasi?nocm='
+                    + $scope.cc.nocm + '&norec_apd=' + $scope.cc.norec + '&emr=' + norecEMR
+                    + '&emrfk=' + $scope.cc.emrfk
+                    + '&kdprofile=' + local.id
+                    + '&nama=' + nama, '_blank');
             }
 
             var cacheEMR_TRIASE_PRIMER = cacheHelper.get('cacheEMR_TRIASE_PRIMER');
@@ -104,35 +142,43 @@ define(['initialize'], function (initialize) {
                 var nocmfk = null;
                 var noregistrasifk = $state.params.noRec;
                 var status = "t";
-                $scope.item.obj[31103133] = $scope.now; //bulukumba. tgl dan jam
                 medifirstService.get("emr/get-antrian-pasien-norec/" + noregistrasifk).then(function (e) {
                     var antrianPasien = e.data.result;
-                    $scope.item.obj[31103129] = $scope.cc.namapasien;
-                    $scope.item.obj[31103130] = new Date(moment(antrianPasien.tgllahir).format('YYYY-MM-DD'));
-                    $scope.item.obj[31103131] = antrianPasien.jeniskelamin;
-                    $scope.item.obj[31103132] = antrianPasien.alamatlengkap;
-                    if (antrianPasien.dokterdpjp != null && antrianPasien.iddpjp != null) {
-                        $scope.item.obj[31103135] = {
+                    $scope.item.obj[422700] = antrianPasien.namapasien;
+                    $scope.item.obj[422701] = antrianPasien.nocm;
+                    $scope.item.obj[422704] = new Date(moment(antrianPasien.tgllahir).format('YYYY-MM-DD'));
+                    $scope.item.obj[422707] = antrianPasien.alamatlengkap;
+                    if (antrianPasien.jeniskelamin == 'PEREMPUAN') {
+                        $scope.item.obj[422702] = false;
+                        $scope.item.obj[422703] = true;
+                    } else {
+                        $scope.item.obj[422702] = true;
+                        $scope.item.obj[422703] = false;
+                    }
+                    $scope.item.obj[422724] = new Date(moment(antrianPasien.tglregistrasi).format('YYYY-MM-DD HH:mm'));
+                    if (antrianPasien.iddpjp != null && antrianPasien.dokterdpjp != null) {
+                        $scope.item.obj[422790] = {
                             value: antrianPasien.iddpjp,
                             text: antrianPasien.dokterdpjp
                         }
                     }
-                    // if (antrianPasien.namaruangan != null && antrianPasien.objectruanganfk != null) {
-                    //     $scope.item.obj[427954] = {
-                    //         value: antrianPasien.objectruanganfk,
-                    //         text: antrianPasien.namaruangan
-                    //     }
-                    // }
+                    if (antrianPasien.objectruanganfk != null && antrianPasien.namaruangan != null) {
+                        $scope.item.obj[422723] = {
+                            value: antrianPasien.objectruanganfk,
+                            text: antrianPasien.namaruangan
+                        }
+                    }
+                    $scope.item.obj[422788] = $scope.now;
                 })
                 
-                // medifirstService.get("emr/get-vital-sign?noregistrasi=" + $scope.cc.noregistrasi + "&objectidawal=4241&objectidakhir=4246&idemr=147", true).then(function (datas) {
-                //     if (datas.data.data.length>0){
-                //         $scope.item.obj[421302] = datas.data.data[1].value; // Tekanan Darah
-                //         $scope.item.obj[421303] = datas.data.data[5].value; // Nadi
-                //         $scope.item.obj[421304] = datas.data.data[4].value; // Suhu
-                //         $scope.item.obj[421305] = datas.data.data[6].value; // Napas
-                //     }
-                // })
+                medifirstService.get("emr/get-vital-sign?noregistrasi=" + $scope.cc.noregistrasi + "&objectidawal=4241&objectidakhir=4246&idemr=147", true).then(function (datas) {
+                    if (datas.data.data.length>0){
+                        // $scope.item.obj[4228]=datas.data.data[0].value
+                        // $scope.item.obj[4229]=datas.data.data[3].value
+                        // $scope.item.obj[4230]=datas.data.data[4].value
+                        // $scope.item.obj[4231]=datas.data.data[5].value
+                    }
+                })
             } else {
                 var chekedd = false
                 //medifirstService.get("emr/get-emr-transaksi-detail?noemr="+$state.params.nomorEMR, true).then(function(dat){
@@ -207,6 +253,35 @@ define(['initialize'], function (initialize) {
                             }
                         }
                     }
+                    if (cacheEMR_TRIASE_PRIMER != undefined) {
+                        medifirstService.get("emr/get-emr-transaksi-detail?noemr=" + cacheEMR_TRIASE_PRIMER + "&emrfk=" + $scope.cc.emrfk, true).then(function (dat) {
+                            var dataNA = dat.data.data
+                            for (var i = 0; i <= dataNA.length - 1; i++) {
+                                if (dataNA[i].emrdfk == '9044') {
+                                    if (dataNA[i].value == '1') {
+                                        $scope.activeTriaseStatus = 'merah'
+                                    }
+                                }
+                                if (dataNA[i].emrdfk == '9050') {
+                                    if (dataNA[i].value == '1') {
+                                        $scope.activeTriaseStatus = 'kuning'
+                                    }
+                                }
+                                if (dataNA[i].emrdfk == '9052') {
+                                    if (dataNA[i].value == '1') {
+                                        $scope.activeTriaseStatus = 'hijau'
+                                    }
+                                }
+                                if (dataNA[i].emrdfk == '9055') {
+                                    if (dataNA[i].value == '1') {
+                                        $scope.activeTriaseStatus = 'hitam'
+                                    }
+                                }
+
+                            }
+
+                        })
+                    }
                     if(nomorEMR!='-'){
                     cacheHelper.set('cacheEMR_igd', nomorEMR)
                 }
@@ -255,7 +330,7 @@ define(['initialize'], function (initialize) {
                     })
                         
                         for (var i = 0; i <= dataLoad.length - 1; i++) {
-                            if (parseFloat($scope.cc.emrfk) == dataLoad[i].emrfk  && paramsIndex == dataLoad[i].index) {
+                            if (parseFloat($scope.cc.emrfk) == dataLoad[i].emrfk && paramsIndex == dataLoad[i].index) {
 
                                 if (dataLoad[i].type == "textbox") {
                                     $scope.item.obj[dataLoad[i].emrdfk] = dataLoad[i].value
@@ -267,9 +342,7 @@ define(['initialize'], function (initialize) {
                                     }
                                     $scope.item.obj[dataLoad[i].emrdfk] = chekedd
                                 }
-                                if (dataLoad[i].type == "radio") {
-                                    $scope.item.obj[dataLoad[i].emrdfk] = dataLoad[i].value
-                                }
+
                                 if (dataLoad[i].type == "datetime") {
                                     $scope.item.obj[dataLoad[i].emrdfk] = new Date(dataLoad[i].value)
                                 }
@@ -298,19 +371,6 @@ define(['initialize'], function (initialize) {
                             }
 
                         }
-
-                        var arrobj = Object.keys($scope.item.obj)
-                        for (let l = 0; l < $scope.listItem.length; l++) {
-                            const element = $scope.listItem[l];
-                            for (let m = 0; m < arrobj.length; m++) {
-                                const element2 = arrobj[m];
-                                if (element.id == element2) {
-                                    element.inuse = true
-                                }
-                            }
-
-                        } 
-                    
                     })
                 })
             }
@@ -331,8 +391,8 @@ define(['initialize'], function (initialize) {
                     arrSave.push({ id: arrobj[i], values: $scope.item.obj[parseInt(arrobj[i])] })
                 }
                 $scope.cc.jenisemr = 'asesmen'
-                $scope.cc.index = $state.params.index
-                
+                $scope.cc.index = $state.params.index;
+
                 var jsonSave = {
                     head: $scope.cc,
                     data: arrSave
@@ -344,7 +404,7 @@ define(['initialize'], function (initialize) {
                     // });
 
                     medifirstService.postLogging('EMR', 'norec emrpasien_t', e.data.data.norec,
-                        'Penolakan Operasi / Prosedur Invasif ' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
+                        'Pemberian Makan Awal 1000-1500 gram' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
                         + $scope.cc.noregistrasi).then(function (res) {
                         })
 
@@ -356,80 +416,128 @@ define(['initialize'], function (initialize) {
                 });
             }
 
-            $scope.listPemberiInformasi = [
+            $scope.listInfo1 = [
                 {
-                    "id": 1,
-                    "jenisinfo": "Diagnosa",
-                    "detail": [
-                        { "id": 31103103, "caption": "", "type": "textarea" },
-                        { "id": 31103104, "caption": "", "type": "checkbox" }
+                    id: 1,
+                    detail: [
+                        { id: 1000952, caption: 'HARI 1 :', type: 'label' },
+                        { id: 1000953, caption: '00 cc/kg/hr', type: 'label' },
+                        { id: 1000954, caption: '80 cc/kg/hr', type: 'label' },
+                        { id: 1000955, caption: 'D10', type: 'label' },
+                        { id: 1000956, caption: '80 cc/kg/hr', type: 'label' },
                     ]
                 },
                 {
-                    "id": 2,
-                    "jenisinfo": "Tindakan Kedokteran",
-                    "detail": [
-                        { "id": 31103105, "caption": "", "type": "textarea" },
-                        { "id": 31103106, "caption": "", "type": "checkbox" }
+                    id: 2,
+                    detail: [
+                        { id: 1000957, caption: 'HARI 2 :', type: 'label' },
+                        { id: 1000958, caption: '10 cc/kg/hr', type: 'label' },
+                        { id: 1000959, caption: '90 cc/kg/hr', type: 'label' },
+                        { id: 1000960, caption: 'D10', type: 'label' },
+                        { id: 1000961, caption: '100 cc/kg/hr', type: 'label' },
                     ]
                 },
                 {
-                    "id": 3,
-                    "jenisinfo": "Indikasi pemberian transfusi",
-                    "detail": [
-                        { "id": 31103107, "caption": "", "type": "textarea" },
-                        { "id": 31103108, "caption": "", "type": "checkbox" }
+                    id: 3,
+                    detail: [
+                        { id: 1000962, caption: 'HARI 3 :', type: 'label' },
+                        { id: 1000963, caption: '20 cc/kg/hr', type: 'label' },
+                        { id: 1000964, caption: '100 cc/kg/hr', type: 'label' },
+                        { id: 1000965, caption: 'D10 1/5 NS', type: 'label' },
+                        { id: 1000966, caption: '120 cc/kg/hr', type: 'label' },
                     ]
                 },
                 {
-                    "id": 4,
-                    "jenisinfo": "Tata cara pemberian transfusi",
-                    "detail": [
-                        { "id": 31103109, "caption": "", "type": "textarea" },
-                        { "id": 31103110, "caption": "", "type": "checkbox" }
+                    id: 4,
+                    detail: [
+                        { id: 1000967, caption: 'HARI 4 :', type: 'label' },
+                        { id: 1000968, caption: '30 cc/kg/hr', type: 'label' },
+                        { id: 1000969, caption: '110 cc/kg/hr', type: 'label' },
+                        { id: 1000970, caption: 'D10 1/5 NS', type: 'label' },
+                        { id: 1000971, caption: '140 cc/kg/hr', type: 'label' },
                     ]
                 },
                 {
-                    "id": 5,
-                    "jenisinfo": "Tujuan pemberian transfusi",
-                    "detail": [
-                        { "id": 31103111, "caption": "", "type": "textarea" },
-                        { "id": 31103112, "caption": "", "type": "checkbox" }
+                    id: 5,
+                    detail: [
+                        { id: 1000972, caption: 'HARI 5 :', type: 'label' },
+                        { id: 1000973, caption: '40 cc/kg/hr', type: 'label' },
+                        { id: 1000974, caption: '100 cc/kg/hr', type: 'label' },
+                        { id: 1000975, caption: 'D10 1/5 NS', type: 'label' },
+                        { id: 1000976, caption: '140 cc/kg/hr', type: 'label' },
                     ]
                 },
                 {
-                    "id": 6,
-                    "jenisinfo": "Risiko & Komplikasi",
-                    "detail": [
-                        { "id": 31103113, "caption": "", "type": "textarea" },
-                        { "id": 31103114, "caption": "", "type": "checkbox" }
+                    id: 6,
+                    detail: [
+                        { id: 1000977, caption: 'HARI 6 :', type: 'label' },
+                        { id: 1000978, caption: '50 cc/kg/hr', type: 'label' },
+                        { id: 1000979, caption: '90 cc/kg/hr', type: 'label' },
+                        { id: 1000980, caption: 'D10 1/5 NS', type: 'label' },
+                        { id: 1000981, caption: '140 cc/kg/hr', type: 'label' },
                     ]
                 },
                 {
-                    "id": 7,
-                    "jenisinfo": "Prognosis",
-                    "detail": [
-                        { "id": 31103115, "caption": "", "type": "textarea" },
-                        { "id": 31103116, "caption": "", "type": "checkbox" }
+                    id: 7,
+                    detail: [
+                        { id: 1000982, caption: 'HARI 7 :', type: 'label' },
+                        { id: 1000983, caption: '70 cc/kg/hr', type: 'label' },
+                        { id: 1000984, caption: '80 cc/kg/hr', type: 'label' },
+                        { id: 1000985, caption: 'D10 1/5 NS', type: 'label' },
+                        { id: 1000986, caption: '150 cc/kg/hr', type: 'label' },
                     ]
                 },
                 {
-                    "id": 8,
-                    "jenisinfo": "Alternatif & risiko (Pilihan pengobatan/ penatalaksanaan)",
-                    "detail": [
-                        { "id": 31103117, "caption": "", "type": "textarea" },
-                        { "id": 31103118, "caption": "", "type": "checkbox" }
+                    id: 8,
+                    detail: [
+                        { id: 1000987, caption: 'HARI 8 :', type: 'label' },
+                        { id: 1000988, caption: '90 cc/kg/hr', type: 'label' },
+                        { id: 1000989, caption: '60 cc/kg/hr', type: 'label' },
+                        { id: 1000990, caption: 'D10 1/5 NS', type: 'label' },
+                        { id: 1000991, caption: '150 cc/kg/hr', type: 'label' },
                     ]
                 },
                 {
-                    "id": 9,
-                    "jenisinfo": "Lain - Lain",
-                    "detail": [
-                        { "id": 31103119, "caption": "", "type": "textarea" },
-                        { "id": 31103120, "caption": "", "type": "checkbox" }
+                    id: 9,
+                    detail: [
+                        { id: 1000992, caption: 'HARI 9 :', type: 'label' },
+                        { id: 1000993, caption: '110 cc/kg/hr', type: 'label' },
+                        { id: 1000994, caption: '40 cc/kg/hr', type: 'label' },
+                        { id: 1000995, caption: 'D10 1/5 NS', type: 'label' },
+                        { id: 1000996, caption: '150 cc/kg/hr', type: 'label' },
                     ]
-                }
-            ];
+                },
+                {
+                    id: 10,
+                    detail: [
+                        { id: 1000997, caption: 'HARI 10 :', type: 'label' },
+                        { id: 1000998, caption: '130 cc/kg/hr', type: 'label' },
+                        { id: 1000999, caption: '20 cc/kg/hr', type: 'label' },
+                        { id: 1001000, caption: 'D10 1/5 NS', type: 'label' },
+                        { id: 1001001, caption: '150 cc/kg/hr', type: 'label' },
+                    ]
+                },
+                {
+                    id: 11,
+                    detail: [
+                        { id: 1001002, caption: 'HARI 11 :', type: 'label' },
+                        { id: 1001003, caption: '150 cc/kg/hr', type: 'label' },
+                        { id: 1001004, caption: 'OFF', type: 'label' },
+                        { id: 1001005, caption: 'D10 1/5 NS', type: 'label' },
+                        { id: 1001006, caption: '150 cc/kg/hr', type: 'label' },
+                    ]
+                },
+                {
+                    id: 12,
+                    detail: [
+                        { id: 1001007, caption: 'HARI 12 :', type: 'label' },
+                        { id: 1001008, caption: 'LEMBAR PEMELIHARAAN', type: 'label' },
+                        { id: 1001009, caption: 'OFF', type: 'label' },
+                        { id: 1001010, caption: 'D10 1/5 NS', type: 'label' },
+                        { id: 1001011, caption: '150 cc/kg/hr', type: 'label' },
+                    ]
+                },
+            ]
 
         }
     ]);

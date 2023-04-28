@@ -1,6 +1,6 @@
 define(['initialize'], function (initialize) {
     'use strict';
-    initialize.controller('PersetujuanPengobatanRisikoTinggiCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
+    initialize.controller('PerawatanHipoglikemiCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
         function ($q, $rootScope, $scope, ModelItem, $state, cacheHelper, dateHelper, medifirstService) {
 
             var paramsIndex = $state.params.index ? parseInt($state.params.index) : null
@@ -14,7 +14,7 @@ define(['initialize'], function (initialize) {
             $scope.cc = {};
             var nomorEMR = '-';
             var norecEMR = '';
-            $scope.cc.emrfk = 290107;
+            $scope.cc.emrfk = 290124;
             var dataLoad = [];
             $scope.isCetak = false;
             $scope.allDisabled = false;
@@ -356,81 +356,168 @@ define(['initialize'], function (initialize) {
                 });
             }
 
-            $scope.listPemberiInformasi = [
+            $scope.listPemberiPerawatan = [
                 {
                     "id": 1,
-                    "jenisinfo": "Diagnosa",
+                    "jenisinfo": "Bayi dari ibu diabetes",
                     "detail": [
-                        { "id": 31103103, "caption": "", "type": "textarea" },
-                        { "id": 31103104, "caption": "", "type": "checkbox" }
+                        { "id": 31103563, "caption": "", "type": "checkbox" },
+                        { "id": 31103564, "caption": "", "type": "checkbox" }
                     ]
                 },
                 {
                     "id": 2,
-                    "jenisinfo": "Tindakan Kedokteran",
+                    "jenisinfo": "Bayi besar masa kehamilan",
                     "detail": [
-                        { "id": 31103105, "caption": "", "type": "textarea" },
-                        { "id": 31103106, "caption": "", "type": "checkbox" }
+                        { "id": 31103565, "caption": "", "type": "checkbox" },
+                        { "id": 31103566, "caption": "", "type": "checkbox" }
                     ]
                 },
                 {
                     "id": 3,
-                    "jenisinfo": "Indikasi pemberian transfusi",
+                    "jenisinfo": "Bayi kecil masa kehamilan (KMK)",
                     "detail": [
-                        { "id": 31103107, "caption": "", "type": "textarea" },
-                        { "id": 31103108, "caption": "", "type": "checkbox" }
+                        { "id": 31103567, "caption": "", "type": "checkbox" },
+                        { "id": 31103568, "caption": "", "type": "checkbox" }
                     ]
                 },
                 {
                     "id": 4,
-                    "jenisinfo": "Tata cara pemberian transfusi",
+                    "jenisinfo": "Bayi kurang bulan dan lewat waktu",
                     "detail": [
-                        { "id": 31103109, "caption": "", "type": "textarea" },
-                        { "id": 31103110, "caption": "", "type": "checkbox" }
+                        { "id": 31103569, "caption": "", "type": "checkbox" },
+                        { "id": 31103570, "caption": "", "type": "checkbox" }
                     ]
                 },
                 {
                     "id": 5,
-                    "jenisinfo": "Tujuan pemberian transfusi",
+                    "jenisinfo": "Bayi sakit atau stress",
                     "detail": [
-                        { "id": 31103111, "caption": "", "type": "textarea" },
-                        { "id": 31103112, "caption": "", "type": "checkbox" }
+                        { "id": 31103571, "caption": "", "type": "checkbox" },
+                        { "id": 31103572, "caption": "", "type": "checkbox" }
                     ]
                 },
                 {
                     "id": 6,
-                    "jenisinfo": "Risiko & Komplikasi",
+                    "jenisinfo": "Bayi puasa",
                     "detail": [
-                        { "id": 31103113, "caption": "", "type": "textarea" },
-                        { "id": 31103114, "caption": "", "type": "checkbox" }
+                        { "id": 31103573, "caption": "", "type": "checkbox" },
+                        { "id": 31103574, "caption": "", "type": "checkbox" }
                     ]
                 },
                 {
                     "id": 7,
-                    "jenisinfo": "Prognosis",
+                    "jenisinfo": "Bayi dengan polisitemia",
                     "detail": [
-                        { "id": 31103115, "caption": "", "type": "textarea" },
-                        { "id": 31103116, "caption": "", "type": "checkbox" }
+                        { "id": 31103575, "caption": "", "type": "checkbox" },
+                        { "id": 31103576, "caption": "", "type": "checkbox" }
                     ]
-                },
+                },  
                 {
                     "id": 8,
-                    "jenisinfo": "Alternatif & risiko (Pilihan pengobatan/ penatalaksanaan)",
+                    "jenisinfo": "Bayi dengan eritroblastosis",
                     "detail": [
-                        { "id": 31103117, "caption": "", "type": "textarea" },
-                        { "id": 31103118, "caption": "", "type": "checkbox" }
+                        { "id": 31103577, "caption": "", "type": "checkbox" },
+                        { "id": 31103578, "caption": "", "type": "checkbox" }
                     ]
                 },
                 {
                     "id": 9,
-                    "jenisinfo": "Lain - Lain",
+                    "jenisinfo": "Obat-obat yang dikonsumsi ibu, misalnya steroid",
                     "detail": [
-                        { "id": 31103119, "caption": "", "type": "textarea" },
-                        { "id": 31103120, "caption": "", "type": "checkbox" }
+                        { "id": 31103579, "caption": "", "type": "checkbox" },
+                        { "id": 31103580, "caption": "", "type": "checkbox" }
                     ]
                 }
+              
+             
             ];
 
+            $scope.listPemberiPerawatan2 = [
+                {
+                    "id": 1,
+                    "jenisinfo": "Jitteriness",
+                    "detail": [
+                        { "id": 31103581, "caption": "", "type": "checkbox" },
+                        { "id": 31103582, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "jenisinfo": "Rewel/gelisah",
+                    "detail": [
+                        { "id": 31103583, "caption": "", "type": "checkbox" },
+                        { "id": 31103584, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 3,
+                    "jenisinfo": "Hypotonia",
+                    "detail": [
+                        { "id": 31103585, "caption": "", "type": "checkbox" },
+                        { "id": 31103586, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 4,
+                    "jenisinfo": "Tangis highpitch",
+                    "detail": [
+                        { "id": 31103587, "caption": "", "type": "checkbox" },
+                        { "id": 31103588, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 5,
+                    "jenisinfo": "Tangis lemah",
+                    "detail": [
+                        { "id": 31103589, "caption": "", "type": "checkbox" },
+                        { "id": 31103590, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 6,
+                    "jenisinfo": "Sianosis",
+                    "detail": [
+                        { "id": 31103591, "caption": "", "type": "checkbox" },
+                        { "id": 31103592, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 7,
+                    "jenisinfo": "Kejang atau tremor",
+                    "detail": [
+                        { "id": 31103593, "caption": "", "type": "checkbox" },
+                        { "id": 31103594, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "jenisinfo": "Letargi, gangguan menghisap",
+                    "detail": [
+                        { "id": 31103595, "caption": "", "type": "checkbox" },
+                        { "id": 31103596, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 9,
+                    "jenisinfo": "Apnea, takipnea",
+                    "detail": [
+                        { "id": 31103597, "caption": "", "type": "checkbox" },
+                        { "id": 31103598, "caption": "", "type": "checkbox" }
+                    ]
+                },
+                {
+                    "id": 10,
+                    "jenisinfo": "Hipotermia",
+                    "detail": [
+                        { "id": 31103599, "caption": "", "type": "checkbox" },
+                        { "id": 31103600, "caption": "", "type": "checkbox" }
+                    ]
+                },
+
+            ];
+
+        
         }
     ]);
     initialize.directive('disableContents', function() {

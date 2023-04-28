@@ -19401,10 +19401,56 @@
     ]
   },
   {
+    "name": "RekamMedis.AsesmenMedis.MelepasBantuanHidupDasar",
+    "url": "/MelepasBantuanHidupDasar",
+    "templateurl": "module/EMR/MelepasBantuanHidupDasar.html",
+    "controller": "MelepasBantuanHidupDasarCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
     "name": "RekamMedis.AsesmenMedis.MenuIndex.PenolakanOperasiRajal",
     "url": "/PenolakanOperasiRajal/:index/:idEMR",
     "templateurl": "module/EMR/PenolakanOperasiRajal.html",
     "controller": "PenolakanOperasiRajalCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.PerawatanNeonatus",
+    "url": "/PerawatanNeonatus",
+    "templateurl": "module/EMR/PerawatanNeonatus.html",
+    "controller": "PerawatanNeonatusCtrl",
     "deps": [
       {
         "module": "Services",
@@ -19447,10 +19493,56 @@
     ]
   },
   {
+    "name": "RekamMedis.AsesmenMedis.PerawatanAsfiksia",
+    "url": "/PerawatanAsfiksia",
+    "templateurl": "module/EMR/PerawatanAsfiksia.html",
+    "controller": "PerawatanAsfiksiaCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
     "name": "RekamMedis.AsesmenMedis.MenuIndex.AsesmenPasienDenganPenyakitMenularRanap",
     "url": "/AsesmenPasienDenganPenyakitMenularRanap/:index/:idEMR",
     "templateurl": "module/EMR/AsesmenPasienDenganPenyakitMenularRanap.html",
     "controller": "AsesmenPasienDenganPenyakitMenularRanapCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.PerawatanHipoglikemi",
+    "url": "/PerawatanHipoglikemi",
+    "templateurl": "module/EMR/PerawatanHipoglikemi.html",
+    "controller": "PerawatanHipoglikemiCtrl",
     "deps": [
       {
         "module": "Services",
@@ -19635,6 +19727,52 @@
     "url": "/ObservasiKeseimbanganCairan/:index/:idEMR",
     "templateurl": "module/EMR/ObservasiKeseimbanganCairan.html",
     "controller": "ObservasiKeseimbanganCairanCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.PemberianMakanAwal1000mg",
+    "url": "/PemberianMakanAwal1000mg/:index/:idEMR",
+    "templateurl": "module/EMR/PemberianMakanAwal1000mg.html",
+    "controller": "PemberianMakanAwal1000mgCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.PemberianMakanAwal1500mg",
+    "url": "/PemberianMakanAwal1500mg/:index/:idEMR",
+    "templateurl": "module/EMR/PemberianMakanAwal1500mg.html",
+    "controller": "PemberianMakanAwal1500mgCtrl",
     "deps": [
       {
         "module": "Services",
