@@ -19744,7 +19744,6 @@
         "define": "RekamMedisCtrl"
       }
     ]
-<<<<<<< .mine
   },
   {
     "name": "RekamMedis.AsesmenMedis.MenuIndex.PemantauanCPAPDst",
@@ -19814,7 +19813,6 @@
         "define": "RekamMedisCtrl"
       }
     ]
-=======
   },
   {
     "name": "RekamMedis.AsesmenMedis.MenuIndex.PemberianMakanAwal1000mg",
@@ -19861,30 +19859,6 @@
         "define": "RekamMedisCtrl"
       }
     ]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> .theirs
   }
 
 
