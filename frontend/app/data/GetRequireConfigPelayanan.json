@@ -3529,6 +3529,14 @@
         {
             "nameDep": "ObservasiKeseimbanganCairanCtrl",
             "urlDep": "module/EMR/ObservasiKeseimbanganCairanCtrl"
+        },
+        {
+            "nameDep": "PemberianMakanAwal1000mgCtrl",
+            "urlDep": "module/EMR/PemberianMakanAwal1000mgCtrl"
+        },
+        {
+            "nameDep": "PemberianMakanAwal1500mgCtrl",
+            "urlDep": "module/EMR/PemberianMakanAwal1500mgCtrl"
         }
     
     ]
