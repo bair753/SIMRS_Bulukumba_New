@@ -224,32 +224,29 @@ define(['initialize'], function (initialize) {
             $scope.Save = function () {
                 var arrobj = Object.keys($scope.item.obj);
                 var arrobjImg = Object.keys($scope.item.objImg);
+                var arrSaveImg = [];
                 var arrSave = [];         
                 
-                const url = medifirstService.post('emr/post-imageEKG');
-                const file = document.getElementById("fileEKG").files[0];
-                var formData = new FormData();
-                formData.append("fileEKG", file);
-                var authorization;
-                var arrobjImg = document.cookie.split(';')
-
-                for (var i = 0; i < arrobjImg.length; i++) {
-                    var element = arrobjImg[i].split('=');
-                    if (element[0].indexOf('authorization') > 0) {
-                        authorization = element[1];
-                    }
+                // const url = medifirstService.post('emr/post-imageEKG');
+                // const file = document.getElementById("fileEKG").files[0];
+                // var formData = new FormData();
+                // formData.append("fileEKG", file);
+                // var authorization;
+                var arrobjImg = Object.keys($scope.item.objImg)
+                for (var i = arrobjImg.length - 1; i >= 0; i--) {
+                    arrSaveImg.push({ id: arrobjImg[i], values: $scope.item.objImg[parseInt(arrobjImg[i])] })
                 }
 
-                fetch(url, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'X-AUTH-TOKEN': authorization
-                    }
-				})
-                .then(response => {
-                response.json()
-                });
+                // fetch(url, {
+                //     method: 'POST',
+                //     body: formData,
+                //     headers: {
+                //         'X-AUTH-TOKEN': authorization
+                //     }
+				// })
+                // .then(response => {
+                // response.json()
+                // });
 
                 for (var i = arrobj.length - 1; i >= 0; i--) {
                     if ($scope.item.obj[parseInt(arrobj[i])] instanceof Date)
@@ -261,7 +258,8 @@ define(['initialize'], function (initialize) {
                 $scope.cc.jenisemr = 'asesmen'
                 var jsonSave = {
                     head: $scope.cc,
-                    data: arrSave
+                    data: arrSave,
+                    dataimg: arrSaveImg
                 }
                 medifirstService.post('emr/save-emr-dinamis', jsonSave).then(function (e) {
 
