@@ -1219,7 +1219,6 @@ define(['initialize'], function (initialize) {
                     // }
                     //END ARRAY GEJALA
 
-
                 }
                 // ARRAY GEJALA
                 var gejalaKosongKeun = []
