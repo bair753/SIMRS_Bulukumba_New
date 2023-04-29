@@ -19882,6 +19882,29 @@
         "define": "RekamMedisCtrl"
       }
     ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.PenandaanLokasiOperasi",
+    "url": "/PenandaanLokasiOperasi",
+    "templateurl": "module/EMR/PenandaanLokasiOperasi.html",
+    "controller": "PenandaanLokasiOperasiCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
   }
 
 
