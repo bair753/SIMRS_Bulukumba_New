@@ -1,0 +1,146 @@
+<style type="text/css">
+    fieldset {
+        border-radius: 5px;
+        border: 1px solid #228be6;
+    }
+
+    .k-slider-horizontal {
+        display: inline-block;
+        float: left;
+        width: 450px;
+
+        height: 26px;
+
+
+    }
+
+    .k-slider {
+
+        margin-left: 3%;
+        margin-right: 3%;
+        margin-top: 1%;
+        margin-bottom: 5%;
+        display: inline-block;
+    }
+
+    .activeBtn {
+        background-color: #10c4b2;
+        color: #ffffff;
+    }
+    table,
+    th,
+    td {
+        border: 1px solid #929191;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+
+    th,
+    td {
+        padding: 5px;
+        text-align: left;
+    }
+
+    .mt-1 {
+        margin-top: 10px;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+</style>
+
+<!-- ng-class="{'my-disable':true}" -->
+<!-- <div class="grid_12"  disable-contents="allDisabled" id="form"> -->
+<div class="grid_12">
+    <div class="grid_12">
+        <div class="panel panel-default container_12">
+            <div class="panel-heading" c-translate> Penandaan Lokasi Operasi </div>
+        </div>
+
+        <div class="grid_12 mt-1">
+            <fieldset class="mt-1">
+                <div class="grid_6 mt-1">
+                    <div class="grid_12">
+                        <label item="item">Prosedur</label>
+                    </div>
+                    <div class="grid_12">
+                        <input class="k-textbox" ng-model="item.obj[32104083]" type="text">
+                    </div>
+                </div>
+                <div class="grid_6 mt-1">
+                    <div class="grid_12">
+                        <label item="item">Tanggal Prosedur</label>
+                    </div>
+                    <div class="grid_12">
+                        <input style="width: 100%" k-ng-model="item.obj[32104084]" kendo-datetimepicker placeholer="yyyy-MM-dd HH:mm" 
+                                k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                    </div>
+                </div>
+                <hr>
+                <div class="grid_12">
+                    <div class="grid_12">
+                        <div class="grid_12" style="width: 700px; height: 850px; margin: auto; float: none;position: relative;z-index: 1;border: solid;">
+                            <div id="iframe">
+                            <canvas id="signature_1" width="700px" height="850px"></canvas>
+                            <input class="k-textbox" ng-model="item.ttd1" type="hidden" >
+                            </div>
+                        </div>
+                        <div class="grid_12" style="margin-top: -860px;">
+                            <img class="normalTidakNormal" src="images/emr/lokasioperasi.jpg" ng-model="item.obj[32104083]" style="width: 700px; height: 850px;">
+                        </div>
+                    </div>
+                    <div class="grid_12" style="text-align:center">
+                        <button class="k-button batal btnKoneng" style="margin-top: 10px" ng-click="batalTTd('signature_1')">Reset</button>
+                        <!-- <button class="k-button clear btnKoneng" style="margin-top: 20px"  ng-click="wakom('signature_3')">Sign Pad</button> -->
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="mt-1">
+                <div class="grid_12 mt-1">
+                    <div class="grid_12">
+                        <label c-label item="item">Saya menyatakan bahwa lokasi operasi yang telah ditetapkan pada diagram adalah benar</label>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="mt-1">
+                <div class="grid_6 mt-1">
+                    <div class="grid_12">
+                        <label item="item">Nama Pasien</label>
+                    </div>
+                    <div class="grid_12">
+                        <input class="k-textbox" ng-model="item.obj[32104086]" type="text">
+                    </div>
+                </div>
+                <div class="grid_6 mt-1">
+                    <div class="grid_12">
+                        <label item="item">Nama Dokter</label>
+                    </div>
+                    <div class="grid_12">
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[32104087]" ng-disable="item.obj[32104087]" k-data-text-field="'text'"
+                                                    k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listDokter" />
+                    </div>
+                </div>
+                <div class="grid_6 mt-1">
+                    <div class="grid_12">
+                        <label item="item">Tanggal</label>
+                    </div>
+                    <div class="grid_12">
+                        <input style="width: 100%" k-ng-model="item.obj[32104088]" kendo-datepicker placeholer="yyyy-MM-dd" 
+                                k-format="'yyyy-MM-dd'"/>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+    </div>
+</div>
+
+<br />
+<br />
+<div class="grid_12">
+    <div ng-include='"../app/module/EMR/TemplateButtonDinamis" '></div>
+
+</div>

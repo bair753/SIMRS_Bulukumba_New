@@ -3553,6 +3553,10 @@
         {
             "nameDep": "PemberianMakanAwal2000mgCtrl",
             "urlDep": "module/EMR/PemberianMakanAwal2000mgCtrl"
+        },
+        {
+            "nameDep": "PenandaanLokasiOperasiCtrl",
+            "urlDep": "module/EMR/PenandaanLokasiOperasiCtrl"
         }
     
     ]
