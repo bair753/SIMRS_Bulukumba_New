@@ -108,7 +108,7 @@
 
 					<div class="grid_12">
 							<!-- <input style="width: 100%;" kendo-combo-box k-ng-model="item.kelompokpasien" k-data-text-field="'kelompokpasien'" k-data-value-field="'id'" k-filter="'contains'" k-auto-bind="false" k-data-source="listKelompokPasien" /> -->
-							<select ng-show="listKelompokPasien.length" kendo-multi-select  ng-disabled="true"  k-options="selectOptionsKelompok"  
+							<select ng-show="listKelompokPasien.length" kendo-multi-select  ng-disabled="false"  k-options="selectOptionsKelompok"  
 							k-filter="'contains'"  k-data-source="listKelompokPasien" k-ng-model="item.kelompokpasien"></select>
 						<!-- ng-disabled="true" -->
 					</div>
@@ -460,8 +460,17 @@
 				<button class="btnTemplate1"  ng-click="Detail()">Detail Tagihan</button>
 			</div>
 			<div class="grid_2" >
-				<button class="btnTemplate1"  ng-click="uploadKelengkapan()">Kelengkapan Dokumen</button>
+				<button class="btnTemplate1" ng-click="uploadKelengkapan()">Kelengkapan Dokumen</button>
 			</div>
+			<div class="grid_2">
+				<button class="btnTemplate1" ng-click="cetakSEPL3()">Cetak SEP</button>
+			</div>
+			<div class="grid_2">
+				<button class="btnTemplate1" ng-click="cetakBilling()">Billing</button>
+			</div>
+			<!-- <div class="grid_2">
+				<button class="btnTemplate1" ng-click="cetakResepDokter()">Cetak Resep</button>
+			</div> -->
 			<!-- <div class="grid_2" >
 				<button class="btnTemplate1"  ng-click="editKlaimm()">Edit Klaim Masal</button>
 			</div>
@@ -1129,6 +1138,24 @@
 				</div>
 			</div>
 		</div>
+
+		<div kendo-window="popUpDaftarResep" k-title="'Daftar Resep'" k-visible="false" k-width="1000" k-height="600">
+			<div class="panel panel-default container_12">
+					<div class="grid_12 ">
+							<div kendo-grid k-data-source="dataDaftarResepDokter" k-selectable="'row'" k-columns="columnDaftarResepDokter"
+									k-pageable="'true'" k-sortable="'true'" k-ng-model="dataSelectedResep"
+									ng-click="klikPopUpAPD(dataSelectedResep)">
+	
+							</div>
+					</div>
+					<div class="grid_12">
+							<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
+									<button class="k-button  k-button-icontext" ng-click="cetakResep()"><span
+													class="k-icon k-i-plus-circle"></span>Cetak</button>
+							</div>
+					</div>
+			</div>
+	</div>
 
 </div>
 
