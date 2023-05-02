@@ -20,6 +20,9 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 			$scope.item.jmlRows = 50
 			$scope.jmlRujukanMasuk = 0
 			$scope.jmlRujukanKeluar = 0
+			var ppkRumahSakit = ""
+			var namappkRumahSakit = ""
+			var statusBridgingTemporary = 'false'
 			var responData = "";
 			var data2 = []
 			var dataSave = []
@@ -77,6 +80,22 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 					$scope.listDokter = data.data.dokter;
 					$scope.listDokter2 = data.data.dokter;
 				})
+
+				medifirstService.get("registrasi/get-combo-pemakaian-asuransi", true)
+					.then(function (dat) {
+							$scope.listAsalRujukan = dat.data.asalrujukan;
+							$scope.listKelompokPasien = dat.data.kelompokpasien;
+							$scope.sourceHubunganPasien = dat.data.hubunganpeserta;
+							$scope.sourceKelompokPasien = dat.data.kelompokpasien;
+							// $scope.sourceRekanan= dat.data.rekanan;
+							$scope.sourceKelasDitanggung = dat.data.kelas;
+							$scope.sourceAsalRujukan = dat.data.asalrujukan;
+							$scope.litKelasNaik = []
+							ppkRumahSakit = dat.data.kodePPKRujukan;
+							namappkRumahSakit = dat.data.namaPPKRujukan;
+							statusBridgingTemporary = dat.data.statusBridgingTemporary;
+
+					});
 				// $scope.listStatus = manageKasir.getStatus();
 			}
 			$scope.popupMerge = function () {
@@ -4600,6 +4619,171 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 				})
 
 			}
+
+			$scope.cetakSEPL3 = function () {
+				if ($scope.dataPasienSelected.noregistrasi == undefined) {
+					toastr.error('Pilih Pasien Terlebih dahulu!!!')
+					return;
+				}
+
+				if ($scope.dataPasienSelected.nosep == undefined) {
+					toastr.error('Pasien tidak memiliki no SEP!!!')
+					return;
+				}
+
+				if ($scope.dataPasienSelected.noregistrasi != "") {
+
+						// //##save identifikasi sep
+						// medifirstService.get("operator/identifikasi-sep?norec_pd="
+						//     + $scope.cacheNorecPD
+						// ).then(function (data) {
+						//     var datas = data.data;
+						// })
+						// //##end
+
+
+						if (statusBridgingTemporary == 'false') {
+								medifirstService.get("bridging/bpjs/cek-sep?nosep=" + $scope.dataPasienSelected.nosep).then(function (e) {
+										if (e.data.metaData.code === "200" || e.data.metaData.code === "404") {
+
+												// if ($scope.model.rawatInap == true) { 
+												// 		var jsonSpri = {
+												// 				"url": `RencanaKontrol/ListRencanaKontrol/Bulan/${moment(new Date()).format("MM")}/Tahun/${moment(new Date()).format("YYYY")}/Nokartu/${$scope.model.noKepesertaan}/filter/2`,
+												// 				"method": "GET",
+												// 				"data": null
+												// 		}
+												// 		medifirstService.postNonMessage("bridging/bpjs/tools", jsonSpri).then(function (dataKon) {
+												// 				// console.log(dataKon.data);
+												// 				if(dataKon.data.metaData.code == 200) {
+												// 						for (let i = 0; i < dataKon.data.response.list.length; i++) {
+												// 								const element = dataKon.data.response.list[i];
+												// 								if(element.noSuratKontrol == $scope.model.skdp) {
+												// 										saveSPRILokal2(element, $scope.dataPasienSelected.noregistrasi);
+												// 										break;
+												// 								}
+												// 						}
+												// 				} else {
+												// 				var jsonSpri = {
+												// 						"url": `RencanaKontrol/ListRencanaKontrol/Bulan/${moment(new Date(new Date().setMonth(new Date().getMonth() -1))).format("MM")}/Tahun/${moment(new Date()).format("YYYY")}/Nokartu/${$scope.model.noKepesertaan}/filter/2`,
+												// 						"method": "GET",
+												// 						"data": null
+												// 				}
+												// 				medifirstService.postNonMessage("bridging/bpjs/tools", jsonSpri).then(function (dataKon) {
+												// 						// console.log(dataKon.data);
+												// 						if(dataKon.data.metaData.code == 200) {
+												// 								for (let i = 0; i < dataKon.data.response.list.length; i++) {
+												// 										const element = dataKon.data.response.list[i];
+												// 										if(element.noSuratKontrol == $scope.model.skdp) {
+												// 												saveSPRILokal2(element, $scope.dataPasienSelected.noregistrasi);
+												// 												break;
+												// 										}
+												// 								}
+												// 						} else {
+												// 								toastr.error("Data SPRI tidak ditemukan !");
+												// 								return
+												// 						}
+												// 				})
+												// 				}
+												// 		})
+												// } else {
+														var kdprofile = medifirstService.getProfile().id
+														window.open(baseTransaksi + "report/cetak-sep-new?noregistrasi="+ $scope.dataPasienSelected.noregistrasi +"&kdprofile="+kdprofile, "_blank"); 
+														// var client = new HttpClient();
+														// client.get('http://127.0.0.1:1237/printvb/Pendaftaran?cetak-sep-new=1&norec=' + noRegistrasis + '&view=false', function (response) {
+														//     // do something with response
+														// });
+														// cetakSEP()
+														// if(e.data.response.kontrol.noSurat != null) {
+														//     cetakRencanaKontrol(e.data.response)
+														// }
+												// }
+												
+										} else {
+												window.messageContainer.error('SEP tidak ada atau tidak sesuai dengan Vclaim mohon dicek kembali !');
+										}
+								});
+						} else {
+								var client = new HttpClient();
+								client.get('http://127.0.0.1:1237/printvb/Pendaftaran?cetak-sep-new=1&norec=' + $scope.dataPasienSelected.noregistrasi + '&view=false', function (response) {
+										// do something with response
+								});
+
+						}
+
+				}
+		}
+
+		$scope.cetakBilling = function () {
+			if ($scope.dataPasienSelected.noregistrasi == undefined) {
+				toastr.error('Pilih Pasien Terlebih dahulu!!!')
+				return;
+			}
+			$scope.isRouteLoading = true;
+			medifirstService.get("tatarekening/detail-tagihan/" + $scope.dataPasienSelected.noregistrasi + '?jenisdata=bill').then(function (dat) {
+				$scope.isRouteLoading = false;
+				var NoStruk = $scope.dataRincianTagihan;
+				var struk = "";
+				var kwitansi = "";
+				var stt = 'false'
+				if (confirm('View Rincian Biaya? ')) {
+					// Save it!
+					stt = 'true';
+				} else {
+					// Do nothing!
+					stt = 'false'
+				}
+				var user = medifirstService.getPegawaiLogin();
+				// if ($scope.item.jenisPasien != "BPJS") {
+				// medifirstService.get("tatarekening/get-data-login-cetakan").then(function (e) {
+					var client = new HttpClient();
+					client.get('http://127.0.0.1:1237/printvb/kasir?cetak-RincianBiaya=1&strNoregistrasi=' + $scope.dataPasienSelected.noregistrasi + '&strNoStruk=' + struk + '&strNoKwitansi=' + kwitansi + '&strIdPegawai=' + user.namaLengkap + '&view=' + stt, function (response) {
+						// do something with response
+					});
+				// })
+				// }else{
+				// 	medifirstService.get("tatarekening/get-data-login-cetakan").then(function (e) {
+				//              	var client = new HttpClient(); 
+				//               client.get('http://127.0.0.1:1237/printvb/kasir?cetak-RekapBiaya=1&strNoregistrasi=' + $scope.item.noRegistrasi + '&strNoStruk=' + struk + '&strNoKwitansi=' + kwitansi +  '&strIdPegawai='+ e.data[0].namalengkap + '&view=' + stt, function(response) {
+				//                   // do something with response
+				//               });
+				//           	})
+				// }
+			});
+		}
+
+		$scope.cetakResepDokter = function(){
+			if ($scope.dataPasienSelected.noregistrasi == undefined) {
+				toastr.error('Pilih Pasien Terlebih dahulu!!!')
+				return;
+			}
+			
+			$scope.popUpDaftarResep.center().open();
+			
+	}
+
+	$scope.columnDaftarResepDokter = {
+		columns: [
+			{
+				'field': 'no',
+				'title': 'No',
+				'width': '50px'
+			},
+			{
+				'field': 'noorder',
+				'title': 'No Pesanan',
+				'width': '150px'
+			},
+			{
+				'field': 'tglorder',
+				'title': 'Tanggal Order',
+				'width': '150px'
+			}
+		]
+	}
+
+	function cetakResep (e) {
+		e.preventDefault();
+	}
 
 			// END ################
 
