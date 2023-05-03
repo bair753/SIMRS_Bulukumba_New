@@ -366,7 +366,7 @@ class PelayananResepController extends ApiController
         $kdProfile = $this->getDataKdProfile($request);
         $idProfile = (int) $kdProfile;
         $data = \DB::table('resepdokter_t as rd')
-            ->where('nopesanan', $request['nopesanan'])
+            ->where('nopesanan', $request['noorder'])
             ->where('kdprofile', $idProfile)
             ->get();
         // if (count($persenHargaJualProduk) == 0){
