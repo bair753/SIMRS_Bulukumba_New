@@ -31,6 +31,7 @@ use DB;
 
 use App\Transaksi\StrukOrder;
 use App\Transaksi\StrukResep;
+use App\Transaksi\ResepDokter;
 use App\Master\Pegawai;
 use App\Master\LoginUser;
 use App\Transaksi\PelayananPasien;
@@ -625,6 +626,9 @@ class PelayananResepController extends ApiController
         $kdProfile = $this->getDataKdProfile($request);
         $idProfile = (int) $kdProfile;
         $dataLogin = $request->all();
+        $petugas = Pegawai::where('statusenabled',true)
+            // ->where('objectjenispegawaifk',1)
+            ->get();
         $dataPenulis = Pegawai::where('statusenabled',true)
             ->where('objectjenispegawaifk',1)
             ->get();
@@ -819,6 +823,7 @@ class PelayananResepController extends ApiController
             'produk' => $dataProdukResult,
             'produk1' => $dataProdukResult1,
             'penulisresep' =>   $dataPenulis2,
+            'petugas' => $petugas,
             'ruangan' => $dataRuangan,
             'ruanganfarmasi' => $dataRuanganFamasi,
             'jeniskemasan' => $dataJenisKemasan,
@@ -3167,6 +3172,86 @@ class PelayananResepController extends ApiController
                 "status" => 400,
                 "message"  => $transMessage,
                 "as" => 'ea@epic',
+            );
+        }
+        return $this->setStatusCode($result['status'])->respond($result, $transMessage);
+    }
+
+    public function SaveResepObat(Request $request){
+        $kdProfile = (int) $this->getDataKdProfile($request);
+        DB::beginTransaction();
+        try {
+            $data = ResepDokter::where('nopesanan', $request['nopesanan'])->where('kdprofile', $kdProfile)->first();
+            // return $data;
+            if (empty($data)) {
+                $resepDokter = new ResepDokter();
+                $resepDokter->norec = $resepDokter->generateNewId();
+                $resepDokter->kdprofile = $kdProfile;
+                $resepDokter->statusenabled = true;
+                $resepDokter->riwayatalergi = $request['riwayatalergi'];
+                $resepDokter->jampengkajian = $request['jampengkajian'];
+                $resepDokter->petugaspengkajian = $request['pengkajian'];
+                $resepDokter->jampenyiapanobat = $request['jampenyiapanobat'];
+                $resepDokter->penyiapanobat = $request['penyiapanobat'];
+                $resepDokter->jamdispening = $request['jamdispening'];;
+                $resepDokter->dispening = $request['dispening'];;
+                $resepDokter->jamserah = $request['jamserahinformasi'];
+                $resepDokter->serahinformasi = $request['serahinformasi'];
+                $resepDokter->penulisanresep = $request['penulisresep'];
+                $resepDokter->obat = $request['obat'];
+                $resepDokter->dosis = $request['dosis'];
+                $resepDokter->waktufrekuensi = $request['waktufrekuensi'];;
+                $resepDokter->rute = $request['rute'];;
+                $resepDokter->pasien = $request['pasien'];;
+                $resepDokter->duplikasiterapi = $request['duplikasiterapi'];;
+                $resepDokter->interaksiobat = $request['interaksiobat'];;
+                $resepDokter->nopesanan = $request['nopesanan'];
+                $resepDokter->save();
+            } else {
+                $resepDokter = ResepDokter::where('nopesanan', $request['nopesanan'])->where('kdprofile', $kdProfile)
+                ->update([
+                    'riwayatalergi' => $request['riwayatalergi'],
+                    'jampengkajian' => $request['jampengkajian'],
+                    'petugaspengkajian' => $request['pengkajian'],
+                    'jampenyiapanobat' => $request['jampenyiapanobat'],
+                    'penyiapanobat' => $request['penyiapanobat'],
+                    'jamdispening' => $request['jamdispening'],
+                    'dispening' => $request['dispening'],
+                    'jamserah' => $request['jamserahinformasi'],
+                    'serahinformasi' => $request['serahinformasi'],
+                    'penulisanresep' => $request['penulisresep'],
+                    'obat' => $request['obat'],
+                    'dosis' => $request['dosis'],
+                    'waktufrekuensi' => $request['waktufrekuensi'],
+                    'rute' => $request['rute'],
+                    'pasien' => $request['pasien'],
+                    'duplikasiterapi' => $request['duplikasiterapi'],
+                    'interaksiobat' => $request['interaksiobat'],
+                    'nopesanan' => $request['nopesanan']
+                ]);
+            }
+        
+            $transStatus = 'true';
+        } catch (\Exception $e) {
+            $transStatus = 'false';
+        }
+
+        if ($transStatus == 'true') {
+            $transMessage = 'Sukses';
+            DB::commit();
+            $result = array(
+                "status" => 201,
+                "message" => $transMessage,
+                // "strukorder" => $dataSO,
+                "as" => 'inhuman',
+            );
+        } else {
+            $transMessage = "Simpan Gagal";
+            DB::rollBack();
+            $result = array(
+                "status" => 400,
+                "message" => $transMessage,
+                "as" => 'inhuman',
             );
         }
         return $this->setStatusCode($result['status'])->respond($result, $transMessage);

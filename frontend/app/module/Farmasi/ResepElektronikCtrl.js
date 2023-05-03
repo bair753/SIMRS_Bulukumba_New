@@ -21,6 +21,10 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     $scope.listRuangan = e.data.ruanganpelayanan
                     $scope.listRuanganDepo = e.data.ruanganfarmasi
                 })
+
+                medifirstService.get('farmasi/get-datacombo').then(function (e) {
+                    $scope.listpetugas = e.data.petugas
+                })
             }
               var onDataBound = function (e) {
                 var kendoGrid = $("#kGrid").data("kendoGrid"); // get the grid widget
@@ -1186,6 +1190,52 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 }
             }
 
+            $scope.resepDokter = function (){
+                $scope.popUpFormulir.center().open();
+            }
+
+            $scope.saveResep = function (){
+                if ($scope.item.pengkajian == undefined){
+                    toastr.error("Petugas ada yang belum di input !!")
+                    return;
+                }
+                if ($scope.item.penyiapanObat == undefined){
+                    toastr.error("Petugas ada yang belum di input !!")
+                    return;
+                }
+                if ($scope.item.dispening == undefined){
+                    toastr.error("Petugas ada yang belum di input !!")
+                    return;
+                }
+                if ($scope.item.serahInformasi == undefined){
+                    toastr.error("Petugas ada yang belum di input !!")
+                    return;
+                }
+                var objSave = {
+					nopesanan: $scope.item.noorder,
+					riwayatalergi: $scope.item.riwayatAlergi != undefined ? $scope.item.riwayatAlergi : '',
+					jampengkajian: moment($scope.item.jamPengkajian).format('YYYY-MM-DD'),
+					pengkajian: $scope.item.pengkajian.id,
+					jampenyiapanobat: moment($scope.item.jamPenyiapanObat).format('YYYY-MM-DD'),
+					penyiapanobat: $scope.item.penyiapanObat.id,
+					jamdispening: moment($scope.item.jamDispening).format('YYYY-MM-DD'),
+					dispening: $scope.item.dispening.id,
+					jamserahinformasi: moment($scope.item.jamSerahInformasi).format('YYYY-MM-DD'),
+                    serahinformasi: $scope.item.serahInformasi.id,
+                    penulisresep: $scope.item.penulisResep != undefined ? $scope.item.penulisResep : false,
+                    obat: $scope.item.obat != undefined ? $scope.item.obat : false,
+                    dosis: $scope.item.dosis != undefined ? $scope.item.dosis : false,
+                    waktufrekuensi: $scope.item.waktuFrekuensi != undefined ? $scope.item.waktuFrekuensi : false,
+                    rute: $scope.item.rute != undefined ? $scope.item.rute : false,
+                    pasien: $scope.item.pasien != undefined ? $scope.item.pasien : false,
+                    duplikasiterapi: $scope.item.duplikasiTerapi != undefined ? $scope.item.duplikasiTerapi : false,
+                    interaksiobat: $scope.item.interaksiObat != undefined ? $scope.item.interaksiObat : false,
+				}
+                medifirstService.post('farmasi/save-resep-obat', objSave).then(function (e) {
+
+                })
+            }
+
             $scope.cetakResepDokter = function(){
                 medifirstService.get("emr/get-vital-sign?noregistrasi=" + $scope.item.noregistrasi + "&objectidawal=4241&objectidakhir=4246&idemr=147", true).then(function (datas) {
                 $scope.showRiwayatEMR = false
@@ -1193,7 +1243,6 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 
                 var tinggibadan = "....";
                 var beratbadan = "....";
-
                 var local = JSON.parse(localStorage.getItem('profile'));
 
                 var alamatpasien = $scope.item.alamatlengkap;
