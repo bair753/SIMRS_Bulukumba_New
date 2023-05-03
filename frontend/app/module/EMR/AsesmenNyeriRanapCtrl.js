@@ -385,6 +385,34 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     }
 
                 }
+
+                $scope.item.obj[31101445] = 
+                Number($scope.item.obj[31101440] ?? 0) + 
+                Number($scope.item.obj[31101441] ?? 0) + 
+                Number($scope.item.obj[31101442] ?? 0) + 
+                Number($scope.item.obj[31101443] ?? 0) + 
+                Number($scope.item.obj[31101444] ?? 0);
+
+                $scope.item.obj[31101452] = 
+                Number($scope.item.obj[31101447] ?? 0) + 
+                Number($scope.item.obj[31101448] ?? 0) + 
+                Number($scope.item.obj[31101449] ?? 0) + 
+                Number($scope.item.obj[31101450] ?? 0) + 
+                Number($scope.item.obj[31101451] ?? 0);
+
+                $scope.item.obj[31101466] = 
+                Number($scope.item.obj[31101454] ?? 0) + 
+                Number($scope.item.obj[31101455] ?? 0) + 
+                Number($scope.item.obj[31101456] ?? 0) + 
+                Number($scope.item.obj[31101457] ?? 0) +
+                Number($scope.item.obj[31101458] ?? 0) + 
+                Number($scope.item.obj[31101459] ?? 0) + 
+                Number($scope.item.obj[31101460] ?? 0) + 
+                Number($scope.item.obj[31101461] ?? 0) +
+                Number($scope.item.obj[31101462] ?? 0) + 
+                Number($scope.item.obj[31101463] ?? 0) + 
+                Number($scope.item.obj[31101464] ?? 0) + 
+                Number($scope.item.obj[31101465] ?? 0);
                 //  if( $scope.cc.norec_emr !='-' && pegawaiInputDetail !='' && pegawaiInputDetail !=null){
                 //     if(pegawaiInputDetail != medifirstService.getPegawaiLogin().id){
                 //         $scope.allDisabled =true
