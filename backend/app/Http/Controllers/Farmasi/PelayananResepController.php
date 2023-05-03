@@ -362,6 +362,24 @@ class PelayananResepController extends ApiController
         return $this->respond($result);
     }
 
+    public function getCekResep(Request $request) {
+        $kdProfile = $this->getDataKdProfile($request);
+        $idProfile = (int) $kdProfile;
+        $data = \DB::table('resepdokter_t as rd')
+            ->where('nopesanan', $request['nopesanan'])
+            ->where('kdprofile', $idProfile)
+            ->get();
+        // if (count($persenHargaJualProduk) == 0){
+        //     return $this->respond(array(
+        //         'Error' => 'Setting persenhargajualproduk_m dulu',
+        //         'message' => 'as@epic',
+        //     ));
+        // }
+        // return count($data);       
+
+        return $this->respond(count($data));
+    }
+
     public function DeletePelayananObat(Request $request) {
         $kdProfile = $this->getDataKdProfile($request);
         $idProfile = (int) $kdProfile;
@@ -625,10 +643,7 @@ class PelayananResepController extends ApiController
     public function getDataCombo(Request $request) {
         $kdProfile = $this->getDataKdProfile($request);
         $idProfile = (int) $kdProfile;
-        $dataLogin = $request->all();
-        $petugas = Pegawai::where('statusenabled',true)
-            // ->where('objectjenispegawaifk',1)
-            ->get();
+        $dataLogin = $request->all();        
         $dataPenulis = Pegawai::where('statusenabled',true)
             ->where('objectjenispegawaifk',1)
             ->get();
@@ -823,7 +838,6 @@ class PelayananResepController extends ApiController
             'produk' => $dataProdukResult,
             'produk1' => $dataProdukResult1,
             'penulisresep' =>   $dataPenulis2,
-            'petugas' => $petugas,
             'ruangan' => $dataRuangan,
             'ruanganfarmasi' => $dataRuanganFamasi,
             'jeniskemasan' => $dataJenisKemasan,
