@@ -84,7 +84,7 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 				medifirstService.get("registrasi/get-combo-pemakaian-asuransi", true)
 					.then(function (dat) {
 							$scope.listAsalRujukan = dat.data.asalrujukan;
-							$scope.listKelompokPasien = dat.data.kelompokpasien;
+							// $scope.listKelompokPasien = dat.data.kelompokpasien;
 							$scope.sourceHubunganPasien = dat.data.hubunganpeserta;
 							$scope.sourceKelompokPasien = dat.data.kelompokpasien;
 							// $scope.sourceRekanan= dat.data.rekanan;
