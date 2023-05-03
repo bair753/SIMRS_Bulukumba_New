@@ -26,6 +26,7 @@ use App\Transaksi\StrukOrder;
 use App\Transaksi\StrukResep;
 use App\Transaksi\OrderPelayanan;
 use App\Master\LoginUser;
+use App\Master\Pegawai;
 
 
 
@@ -105,8 +106,13 @@ class FarmasiController extends ApiController
             ->orderBy('ru.namaruangan')
             ->get();
 
+        $petugas = Pegawai::where('statusenabled',true)
+            // ->where('objectjenispegawaifk',1)
+            ->get();
+
         $result = array(
-            'departemen' => $dataDepartemen,
+            'departemen' => $dataDepartemen,            
+            'petugas' => $petugas,
             'kelompokpasien' =>   $dataKelompok,
             'ruangan' => $dataRuangan,
             'jeniskelamin' => $dataJenisKelamin,
