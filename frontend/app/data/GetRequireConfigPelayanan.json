@@ -3557,6 +3557,14 @@
         {
             "nameDep": "PenandaanLokasiOperasiCtrl",
             "urlDep": "module/EMR/PenandaanLokasiOperasiCtrl"
+        },
+        {
+            "nameDep": "LaporanHarianPengunjungCtrl",
+            "urlDep": "module/Registrasi/Laporan/LaporanHarianPengunjungCtrl"
+        },
+        {
+            "nameDep": "LaporanHarianMordibtasCtrl",
+            "urlDep": "module/Registrasi/Laporan/LaporanHarianMordibtasCtrl"
         }
     
     ]

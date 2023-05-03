@@ -19905,6 +19905,46 @@
         "define": "RekamMedisCtrl"
       }
     ]
+  },
+  {
+    "name": "LaporanHarianPengunjung",
+    "url": "/TGFwb3JhbkhhcmlhblBlbmd1bmp1bmc=",
+    "templateurl": "module/Registrasi/Laporan/LaporanHarianPengunjung.html",
+    "controller": "LaporanHarianPengunjungCtrl",
+    "deps": [    
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      }
+    ]
+  },
+  {
+    "name": "LaporanHarianMordibtas",
+    "url": "/TGFwb3Jhbkhhcmlhbk1vcmRpYnRhcw==",
+    "templateurl": "module/Registrasi/Laporan/LaporanHarianMordibtas.html",
+    "controller": "LaporanHarianMordibtasCtrl",
+    "deps": [    
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      }
+    ]
   }
 
 
