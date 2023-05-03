@@ -1191,29 +1191,33 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 $scope.popUpFormulir.center().open();
             }
 
-            var reseppengkajian = 0;
-            var reseppenyiapanObat = 0;
-            var resepdispeningian = 0;
-            var resepserahInformasi = 0;
-
+            
             $scope.saveResep = function (){
                 if ($scope.item.pengkajian == undefined){
-                    reseppengkajian = 1;
+                    var reseppengkajian = 1;
+                }else{
+                    var reseppengkajian = $scope.item.pengkajian.id;
                 }
                 if ($scope.item.penyiapanObat == undefined){
-                    reseppenyiapanObat = 1;
+                    var reseppenyiapanObat = 1;
+                }else{
+                    var reseppenyiapanObat = $scope.item.penyiapanObat.id;
                 }
                 if ($scope.item.dispening == undefined){
-                    resepdispeningian = 1;
+                    var resepdispeningian = 1;
+                }else{
+                    var resepdispeningian = $scope.item.dispening.id;
                 }
                 if ($scope.item.serahInformasi == undefined){
-                    resepserahInformasi = 1;
+                    var resepserahInformasi = 1;
+                }else{
+                    var resepserahInformasi = $scope.item.serahInformasi.id;
                 }
                 var objSave = {
 					nopesanan: $scope.item.noorder,
 					riwayatalergi: $scope.item.riwayatAlergi != undefined ? $scope.item.riwayatAlergi : '',
 					jampengkajian: moment($scope.item.jamPengkajian).format('YYYY-MM-DD'),
-					pengkajian: resepserahInformasi,
+					pengkajian: reseppengkajian,
 					jampenyiapanobat: moment($scope.item.jamPenyiapanObat).format('YYYY-MM-DD'),
 					penyiapanobat: reseppenyiapanObat,
 					jamdispening: moment($scope.item.jamDispening).format('YYYY-MM-DD'),
