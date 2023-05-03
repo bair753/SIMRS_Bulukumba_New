@@ -468,9 +468,9 @@
 			<div class="grid_2">
 				<button class="btnTemplate1" ng-click="cetakBilling()">Billing</button>
 			</div>
-			<!-- <div class="grid_2">
+			<div class="grid_2">
 				<button class="btnTemplate1" ng-click="cetakResepDokter()">Cetak Resep</button>
-			</div> -->
+			</div>
 			<!-- <div class="grid_2" >
 				<button class="btnTemplate1"  ng-click="editKlaimm()">Edit Klaim Masal</button>
 			</div>
@@ -1141,12 +1141,17 @@
 
 		<div kendo-window="popUpDaftarResep" k-title="'Daftar Resep'" k-visible="false" k-width="1000" k-height="600">
 			<div class="panel panel-default container_12">
-					<div class="grid_12 ">
+					<!-- <div class="grid_12 ">
 							<div kendo-grid k-data-source="dataDaftarResepDokter" k-selectable="'row'" k-columns="columnDaftarResepDokter"
 									k-pageable="'true'" k-sortable="'true'" k-ng-model="dataSelectedResep"
 									ng-click="klikPopUpAPD(dataSelectedResep)">
 	
 							</div>
+					</div> -->
+					<div class="grid_12">
+								  <kendo-grid id="kGrid" data-source="patienGrids"  k-groupable="'true'" k-selectable="'row'" options="arrColumnGridResepElektronik"
+								k-sortable="'true'" k-ng-model="item" ng-click="KlikGrids(item)" ng-dblclick="detailVerif()">
+						</kendo-grid>
 					</div>
 					<div class="grid_12">
 							<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
