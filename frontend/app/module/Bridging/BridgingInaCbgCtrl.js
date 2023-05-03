@@ -5105,6 +5105,91 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 		
 	}
 
+		$scope.konsulDokter = function(){
+			if ($scope.dataPasienSelected.noregistrasi == undefined) {
+				toastr.error('Pilih Pasien Terlebih dahulu!!!')
+				return;
+			}
+
+			medifirstService.get("emr/get-order-konsul?noregistrasi=" + $scope.dataPasienSelected.noregistrasi
+				// medifirstService.get("lab-radiologi/get-rincian-pelayanan?objectdepartemenfk=" + departemenfk + "&noregistrasi=" +   $scope.item.noregistrasi
+				, true).then(function (dat) {
+					$scope.dataDaftadKonsulDokter = {
+						data: dat.data.data,
+						_data: dat.data.data,
+						// pageSize: 10,
+						selectable: true,
+						refresh: true,
+						total: dat.data.data.length,
+						serverPaging: false,
+						aggregate: [
+								{ field: 'total', aggregate: 'sum' },
+						]
+
+				};
+				}, function (error) {
+						$scope.isLoading = false;
+				});
+			
+			$scope.popUpDaftarKonsulDokter.center().open();
+			
+		}	
+
+		$scope.columnDaftadKonsulDokter = {
+			columns: [
+					{
+							"field": "tglorder",
+							"title": "Tgl Konsul",
+							"width": "90px",
+					},                   
+					{
+							"field": "ruanganasal",
+							"title": "Ruangan Asal",
+							"width": "160px"
+					},
+					{
+							"field": "ruangantujuan",
+							"title": "Ruangan Tujuan",
+							"width": "160px"
+					},
+					{
+							"field": "pengonsul",
+							"title": "Pengonsul",
+							"width": "160px",
+					},
+					{
+							"field": "namalengkap",
+							"title": "Dokter",
+							"width": "160px",
+					},
+			],
+			sortable: {
+					mode: "single",
+					allowUnsort: false,
+			}
+		}
+
+			$scope.cetakKonsulDokter = function () {
+				if ($scope.dataSelectedKonsulDokter.keteranganlainnya == undefined) {
+					toastr.error('Jawaban belum tersedia!!!')
+					return;
+				}
+
+				var local = JSON.parse(localStorage.getItem('profile'));
+				var nama = medifirstService.getPegawaiLogin();
+				window.open(baseTransaksi + 'report/cetak-konsul-dokter?nocm='
+						+ $scope.dataPasienSelected.nocm
+						+ '&emr=' + $scope.dataSelectedKonsulDokter.norec
+						+ '&ruanganasal=' + $scope.dataSelectedKonsulDokter.ruanganasal
+						+ '&ruangantujuan=' + $scope.dataSelectedKonsulDokter.ruangantujuan
+						+ '&daridokter=' + nama.namaLengkap
+						+ '&untukdokter=' + $scope.dataSelectedKonsulDokter.namalengkap
+						+ '&keteranganjawab=' + $scope.dataSelectedKonsulDokter.keteranganorder
+						+ '&jawaban=' + $scope.dataSelectedKonsulDokter.keteranganlainnya
+						+ '&kdprofile=' + local.id
+						+ '&nama=' + nama, '_blank');
+		}
+
 			// END ################
 
 		}
