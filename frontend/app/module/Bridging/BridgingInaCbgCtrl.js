@@ -1,8 +1,8 @@
 define(['initialize', 'Configuration'], function (initialize,configuration) {
 	'use strict';
 	    var baseTransaksi = configuration.baseApiBackend;
-	initialize.controller('BridgingInaCbgCtrl', ['$mdDialog', '$timeout', '$state', '$q', '$rootScope', '$scope', 'CacheHelper', 'DateHelper', 'MedifirstService',
-		function ($mdDialog, $timeout, $state, $q, $rootScope, $scope, cacheHelper, dateHelper, medifirstService) {
+	initialize.controller('BridgingInaCbgCtrl', ['$mdDialog', '$timeout', '$state', '$q', '$rootScope', '$scope', 'ModelItem', 'CacheHelper', 'DateHelper', 'MedifirstService',
+		function ($mdDialog, $timeout, $state, $q, $rootScope, $scope, ModelItem, cacheHelper, DateHelper, medifirstService) {
 
 			$scope.dataVOloaded = true;
 			$scope.now = new Date();
@@ -4756,34 +4756,170 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 				toastr.error('Pilih Pasien Terlebih dahulu!!!')
 				return;
 			}
+
+			medifirstService.get('farmasi/get-daftar-order?tglAwal=' +  moment($scope.item.periodeAwal).format('YYYY-MM-DD') + '&tglAkhir=' + moment($scope.item.periodeAkhir).format('YYYY-MM-DD') + '&nocm=' + $scope.dataPasienSelected.nocm + '&namaPasien=' + $scope.dataPasienSelected.namapasien).then(function (e) {
+				for (var i = 0; i < e.data.length; i++) {
+					e.data[i].no = i + 1
+					var tanggal = $scope.now;
+                        var tanggalLahir = new Date(e.data[i].tgllahir);
+                        var umur = DateHelper.CountAge(tanggalLahir, tanggal);
+                        e.data[i].umur = umur.year + ' thn ' + umur.month + ' bln ' + umur.day + ' hari'
+                        //itungUsia(dat.data[i].tgllahir)
+                        if (e.data[i].noorder == e.data[i].noresep) {
+                            if (e.data[i].statusorder == 'Menunggu')
+                                e.data[i].statusorder = 'Verifikasi'
+                        }
+                        if (e.data[i].checkreseppulang == '1') {
+                            e.data[i].cekreseppulang = '✔'
+                        } else {
+                            e.data[i].cekreseppulang = '-'
+                        }
+                        if (e.data[i].isambilobat == true) {
+                            e.data[i].isambilobat = "✔"                            
+                        }else{
+                            e.data[i].isambilobat = "✘"
+                        }
+                        if (e.data[i].isordergrab == true) {
+                            e.data[i].statusgrab = "Sudah Order"                            
+                        }else{
+                            e.data[i].statusgrab = "-"
+                        }
+                        if (e.data[i].iskurir == true) {
+                            e.data[i].iskurir = "✔"                            
+                        }else{
+                            e.data[i].iskurir = "✘"
+                        }
+
+                    }
+                    $scope.isRouteLoading = false
+                    e.data.sort(function (a, b) {
+                        if (a.noantri < b.noantri) { return -1; }
+                        if (a.noantri > b.noantri) { return 1; }
+                        return 0;
+                    })
+				$scope.patienGrids = new kendo.data.DataSource({
+					//data: ModelItem.beforePost(e.data.data, true),
+					data: ModelItem.beforePost(e.data, true),
+					group: $scope.group
+				});
+			});
 			
 			$scope.popUpDaftarResep.center().open();
-			
-	}
+		}
 
-	$scope.columnDaftarResepDokter = {
+		$scope.klikGridS = function (dataSelected) {
+			$scope.dataSelected = dataSelected;
+		}
+
+	$scope.arrColumnGridResepElektronik = {
+		dataBound: onDataBound,
+		toolbar: ["excel"],
+		excel: {
+			fileName: "Data Resep Elektronik",
+			allPages: true,
+		},
+		// filterable: {
+		//     extra: false,
+		//     operators: {
+		//         string: {
+		//             contains: "Contains",
+		//             startswith: "Starts with"
+		//         }
+		//     }
+		// },
+		selectable: 'row',
+		scrollable: true,
+
+		pageable: true,
+		groupable: true,  
 		columns: [
-			{
-				'field': 'no',
-				'title': 'No',
-				'width': '50px'
-			},
-			{
-				'field': 'noorder',
-				'title': 'No Pesanan',
-				'width': '150px'
-			},
-			{
-				'field': 'tglorder',
-				'title': 'Tanggal Order',
-				'width': '150px'
-			}
-		]
-	}
+		{
+			"field": "noorder",
+			"title": "No Pesanan",
+			"width": "60px",
 
-	function cetakResep (e) {
-		e.preventDefault();
-	}
+
+		}, {
+			"field": "nocm",
+			"title": "No Rekam Medis",
+			"width": "60px",
+
+
+		}, {
+			"field": "namapasien",
+			"title": "Nama Pasien",
+			"width": "100px",
+
+		}, {
+			"field": "jeniskelamin",
+			"title": "Jenis Kelamin",
+			"width": "60px",
+
+		}, {
+			"field": "namaruanganrawat",
+			"title": "Ruang Rawat",
+			"width": "100px",
+
+		}, {
+			template: "#= new moment(new Date(tglorder)).format('DD-MM-YYYY HH:mm:ss') #",
+			"field": "strukOrder.tglOrder",
+			"title": "Tanggal/Jam Masuk",
+			"width": "100px",
+
+		}, {
+			"field": "namalengkap",
+			"title": "Dokter",
+			"width": "100px",
+
+		}, {
+			"field": "kelompokpasien",
+			"title": "Tipe Pasien",
+			"width": "60px",
+
+		}, {
+			hidden: true,
+			"field": "namaruangan",
+			"width": "70px",
+			"title": "Depo",
+			aggregates: ["count"],
+			groupHeaderTemplate: "Ruangan #= value # "
+
+		}, {
+			"field": "statusorder",
+			"title": "Status",
+			"width": "60px",
+
+		},		
+		{
+			hidden: true,
+			"field": "jenis",
+			"width": "70px",
+			"title": "Jenis",
+			aggregates: ["count"],
+			groupHeaderTemplate: " #= value # "
+
+		},]
+	};
+
+		$scope.cetakResep = function () {
+			medifirstService.get("farmasi/get-resep-dokter?noorder=" +  $scope.item.noorder, true).then(function (datas) {
+				if(datas.data == 0){
+					toastr.error("Ada data yang belum di input !!")
+					return;
+				}else{
+					var tinggibadan = "....";
+					var beratbadan = "....";
+					var local = JSON.parse(localStorage.getItem('profile'));
+
+					var alamatpasien = $scope.item.alamatlengkap;
+					var profile = local.id;
+					var user = medifirstService.getPegawaiLogin();
+					var stt = 1;
+					window.open(baseTransaksi+ "report/cetak-resep-dokter?noorder=" + $scope.item.noorder + "&norec=" + $scope.item.norecresep 
+					+ "&nocm=" + $scope.item.nocm + '&kodeprofile=' + profile + '&qtybagi=' + stt + '&alamatpasien=' + alamatpasien + '&tinggibadan=' + tinggibadan + '&beratbadan=' + beratbadan + '&user=' + user.namaLengkap);	
+				}
+			})
+		}
 
 			// END ################
 
