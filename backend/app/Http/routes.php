@@ -340,6 +340,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
               Route::get('bridging/inacbg/get-list-berkas','Bridging\InaCbgController@getListBerkas');
               Route::get('bridging/inacbg/get-status-berkas','Bridging\InaCbgController@getStatusUpload');
               Route::get('bridging/inacbg/get-data-combo-ina', 'Bridging\InaCbgController@getDataComboIna');
+              Route::get('bridging/inacbg/get-rincial-pelayanan', 'Bridging\InaCbgController@getRincianPelayanan');
            
               Route::post('bridging/inacbg/save-proposi-bridging-inacbg','Bridging\InaCbgController@saveProposiBridgingINACBG');
               Route::post('bridging/inacbg/save-proposi-bridging-inacbg-multi','Bridging\InaCbgController@saveProposiBridgingINACBGMulti');

@@ -4921,6 +4921,107 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 			})
 		}
 
+		$scope.hasilLab = function(){
+			if ($scope.dataPasienSelected.noregistrasi == undefined) {
+				toastr.error('Pilih Pasien Terlebih dahulu!!!')
+				return;
+			}
+
+			medifirstService.get("bridging/inacbg/get-rincial-pelayanan?noregistrasi=" + $scope.dataPasienSelected.noregistrasi + '&idDept=3'
+				// medifirstService.get("lab-radiologi/get-rincian-pelayanan?objectdepartemenfk=" + departemenfk + "&noregistrasi=" +   $scope.item.noregistrasi
+				, true).then(function (dat) {
+					$scope.dataDaftarHasilLab = {
+						data: dat.data.data,
+						_data: dat.data.data,
+						// pageSize: 10,
+						selectable: true,
+						refresh: true,
+						total: dat.data.data.length,
+						serverPaging: false,
+						aggregate: [
+								{ field: 'total', aggregate: 'sum' },
+						]
+
+				};
+				}, function (error) {
+						$scope.isLoading = false;
+				});
+			
+			$scope.popUpDaftarHasilLab.center().open();
+			
+		}	
+
+		$scope.columnDaftarHasilLab = {
+			columns: [
+					{
+							"field": "tglpelayanan",
+							"title": "Tgl Pelayanan",
+							"width": "90px",
+					},                   
+					{
+							"field": "namaruangan",
+							"title": "Ruangan",
+							"width": "120px"
+					},
+					{
+							"field": "namaproduk",
+							"title": "Layanan",
+							"width": "160px",
+					},
+					{
+							"field": "jumlah",
+							"title": "Qty",
+							"width": "40px",
+					},
+			],
+			sortable: {
+					mode: "single",
+					allowUnsort: false,
+			}
+	}
+
+	$scope.cetakHasilLab = function () {
+		var jeniskelaminfk = $scope.dataPasienSelected.objectjeniskelaminfk
+		var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+		var firstDate = new Date($scope.dataPasienSelected.tgllahir);
+		var secondDate = new Date($scope.dataPasienSelected.tglregistrasi);
+		var umurHari = Math.round(Math.abs((firstDate - secondDate) / oneDay));
+		$scope.isRouteLoading = true;
+		medifirstService.get("laboratorium/get-hasil-lab-manual?norec_apd=" + $scope.dataSelectedHasilLab.norec_apd +
+				"&objectjeniskelaminfk=" + jeniskelaminfk + "&umur=" + umurHari + "&norec='" + $scope.dataSelectedHasilLab.norec_pp + "'" ).then(function (data) {
+						// var sourceGrid = []
+						$scope.isRouteLoading = false;
+						$scope.item.DataPemeriksa = {namalengkap: data.data.data[0].pemeriksa, id: data.data.data[0].objectpemeriksafk}
+						$scope.item.DataPegawai = {namalengkap: data.data.data[0].dokter, id: data.data.data[0].objectdokterfk}
+						$scope.item.catatan = data.data.data[0].catatan;
+
+						var dokter = "";
+						var pemeriksa = "";
+						var user = medifirstService.getPegawaiLogin();
+						if ($scope.item.DataPemeriksa == undefined) {
+								alert("Pilih terlebih dahulu pemeriksanya!!")
+								return;
+						}
+						if ($scope.item.DataPegawai == undefined) {
+								alert("Pilih terlebih dahulu dokternya!!")
+								return;
+						} 
+						dokter = $scope.item.DataPegawai
+						pemeriksa = $scope.item.DataPemeriksa
+						window.open(baseTransaksi + "report/cetak-hasil-lab-manual?norec=&norec=" 
+						+ $scope.dataSelectedHasilLab.norec_apd
+						+ "&objectjeniskelaminfk=" + jeniskelaminfk
+						+ "&umur=" + umurHari
+						+ "&strIdPegawai=" + user.namaLengkap 
+						+ "&strNorecPP='" + $scope.dataSelectedHasilLab.norec_pp + "'"
+						+ "&doketr=" + dokter.namalengkap 
+						+ "&pemeriksa=" + pemeriksa.namalengkap 
+						+ "&catatan=" + $scope.item.catatan
+						,"_blank");
+		});
+		
+	}
+
 			// END ################
 
 		}
