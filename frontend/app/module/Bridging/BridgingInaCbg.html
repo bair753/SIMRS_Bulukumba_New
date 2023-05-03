@@ -469,7 +469,10 @@
 				<button class="btnTemplate1" ng-click="cetakBilling()">Billing</button>
 			</div>
 			<div class="grid_2">
-				<button class="btnTemplate1" ng-click="cetakResepDokter()">Cetak Resep</button>
+				<button class="btnTemplate1" ng-click="hasilLab()">Cetak Hasil Lab</button>
+			</div>
+			<div class="grid_2">
+				<button class="btnTemplate1" ng-click="hasilRad()">Cetak Hasil Radiologi</button>
 			</div>
 			<!-- <div class="grid_2" >
 				<button class="btnTemplate1"  ng-click="editKlaimm()">Edit Klaim Masal</button>
@@ -1139,28 +1142,36 @@
 			</div>
 		</div>
 
-		<div kendo-window="popUpDaftarResep" k-title="'Daftar Resep'" k-visible="false" k-width="1000" k-height="600">
+		<div kendo-window="popUpDaftarHasilLab" k-title="'Daftar Hasil Laboratorium'" k-visible="false" k-width="1000" k-height="400">
 			<div class="panel panel-default container_12">
-					<!-- <div class="grid_12 ">
-							<div kendo-grid k-data-source="dataDaftarResepDokter" k-selectable="'row'" k-columns="columnDaftarResepDokter"
-									k-pageable="'true'" k-sortable="'true'" k-ng-model="dataSelectedResep"
-									ng-click="klikPopUpAPD(dataSelectedResep)">
-	
-							</div>
-					</div> -->
-					<div class="grid_12">
-								  <kendo-grid id="kGrid" data-source="patienGrids"  k-groupable="'true'" k-selectable="'row'" options="arrColumnGridResepElektronik"
-								k-sortable="'true'" k-ng-model="item" ng-click="KlikGrids(item)" ng-dblclick="detailVerif()">
-						</kendo-grid>
-					</div>
+				<div class="grid_12 headerBox">
+					<kendo-grid id="kGrids" data-source="dataDaftarHasilLab" options="columnDaftarHasilLab" k-selectable="'row'" k-sortable="'true'"
+							k-resizable="'true'" k-ng-model="dataSelectedHasilLab" ng-click="klikGridHasilLab(dataSelectedHasilLab)"></kendo-grid>
+			</div>
 					<div class="grid_12">
 							<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
-									<button class="k-button  k-button-icontext" ng-click="cetakResep()"><span
-													class="k-icon k-i-plus-circle"></span>Cetak</button>
+									<button class="k-button  k-button-icontext" ng-click="cetakHasilLab()">Cetak</button>
 							</div>
 					</div>
 			</div>
-	</div>
+		</div>
+
+		<div kendo-window="popUpDaftarHasilRad" k-title="'Daftar Hasil Radiologi'" k-visible="false" k-width="1000" k-height="400">
+			<div class="panel panel-default container_12">
+				<div class="grid_12 headerBox">
+					<kendo-grid id="kGrids" data-source="dataDaftarHasilRad" options="columnDaftarHasilRad" k-selectable="'row'" k-sortable="'true'"
+							k-resizable="'true'" k-ng-model="dataSelectedHasilRad" ng-click="klikGridHasilRad(dataSelectedHasilRad)"></kendo-grid>
+			</div>
+					<div class="grid_12">
+							<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
+									<button class="k-button  k-button-icontext" ng-click="cetakCtscan()">Cetak CT Scan</button>
+							</div>
+							<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
+								<button class="k-button  k-button-icontext" ng-click="cetakUsg()">Cetak Foto dan USG</button>
+						</div>
+					</div>
+			</div>
+		</div>
 
 </div>
 
