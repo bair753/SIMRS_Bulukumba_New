@@ -1191,34 +1191,35 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 $scope.popUpFormulir.center().open();
             }
 
+            var reseppengkajian = 0;
+            var reseppenyiapanObat = 0;
+            var resepdispeningian = 0;
+            var resepserahInformasi = 0;
+
             $scope.saveResep = function (){
                 if ($scope.item.pengkajian == undefined){
-                    toastr.error("Petugas ada yang belum di input !!")
-                    return;
+                    reseppengkajian = 1;
                 }
                 if ($scope.item.penyiapanObat == undefined){
-                    toastr.error("Petugas ada yang belum di input !!")
-                    return;
+                    reseppenyiapanObat = 1;
                 }
                 if ($scope.item.dispening == undefined){
-                    toastr.error("Petugas ada yang belum di input !!")
-                    return;
+                    resepdispeningian = 1;
                 }
                 if ($scope.item.serahInformasi == undefined){
-                    toastr.error("Petugas ada yang belum di input !!")
-                    return;
+                    resepserahInformasi = 1;
                 }
                 var objSave = {
 					nopesanan: $scope.item.noorder,
 					riwayatalergi: $scope.item.riwayatAlergi != undefined ? $scope.item.riwayatAlergi : '',
 					jampengkajian: moment($scope.item.jamPengkajian).format('YYYY-MM-DD'),
-					pengkajian: $scope.item.pengkajian.id,
+					pengkajian: resepserahInformasi,
 					jampenyiapanobat: moment($scope.item.jamPenyiapanObat).format('YYYY-MM-DD'),
-					penyiapanobat: $scope.item.penyiapanObat.id,
+					penyiapanobat: reseppenyiapanObat,
 					jamdispening: moment($scope.item.jamDispening).format('YYYY-MM-DD'),
-					dispening: $scope.item.dispening.id,
+					dispening: resepdispeningian,
 					jamserahinformasi: moment($scope.item.jamSerahInformasi).format('YYYY-MM-DD'),
-                    serahinformasi: $scope.item.serahInformasi.id,
+                    serahinformasi: resepserahInformasi,
                     penulisresep: $scope.item.penulisResep != undefined ? $scope.item.penulisResep : false,
                     obat: $scope.item.obat != undefined ? $scope.item.obat : false,
                     dosis: $scope.item.dosis != undefined ? $scope.item.dosis : false,
@@ -1236,10 +1237,10 @@ define(['initialize', 'Configuration'], function (initialize, config) {
             $scope.cetakResepDokter = function(){
                 medifirstService.get("farmasi/get-resep-dokter?noorder=" +  $scope.item.noorder, true).then(function (datas) {
                     // datas;
-                    if(datas.data == 0){
-                        toastr.error("Ada data yang belum di input !!")
-                        return;
-                    }else{
+                    // if(datas.data == 0){
+                    //     toastr.error("Ada data yang belum di input !!")
+                    //     return;
+                    // }else{
                         medifirstService.get("emr/get-vital-sign?noregistrasi=" + $scope.item.noregistrasi + "&objectidawal=4241&objectidakhir=4246&idemr=147", true).then(function (datas) {
                             $scope.showRiwayatEMR = false
                             $scope.myVar = 1
@@ -1263,7 +1264,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                                 //     + '&user=' + user + '&jenis=his', '_blank');
                             }
                             })
-                    }
+                    // }
                 }) 
             }
             $scope.grab = {
