@@ -20,9 +20,6 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 medifirstService.get('farmasi/get-datacombo_dp').then(function (e) {
                     $scope.listRuangan = e.data.ruanganpelayanan
                     $scope.listRuanganDepo = e.data.ruanganfarmasi
-                })
-
-                medifirstService.get('farmasi/get-datacombo').then(function (e) {
                     $scope.listpetugas = e.data.petugas
                 })
             }
@@ -1225,7 +1222,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     penulisresep: $scope.item.penulisResep != undefined ? $scope.item.penulisResep : false,
                     obat: $scope.item.obat != undefined ? $scope.item.obat : false,
                     dosis: $scope.item.dosis != undefined ? $scope.item.dosis : false,
-                    waktufrekuensi: $scope.item.waktuFrekuensi != undefined ? $scope.item.waktuFrekuensi : false,
+                    waktufrekuensi: $scope.item.waktuFrekuensi != undefined ? $scope.item.dosis : false,
                     rute: $scope.item.rute != undefined ? $scope.item.rute : false,
                     pasien: $scope.item.pasien != undefined ? $scope.item.pasien : false,
                     duplikasiterapi: $scope.item.duplikasiTerapi != undefined ? $scope.item.duplikasiTerapi : false,
@@ -1237,31 +1234,37 @@ define(['initialize', 'Configuration'], function (initialize, config) {
             }
 
             $scope.cetakResepDokter = function(){
-                medifirstService.get("emr/get-vital-sign?noregistrasi=" + $scope.item.noregistrasi + "&objectidawal=4241&objectidakhir=4246&idemr=147", true).then(function (datas) {
-                $scope.showRiwayatEMR = false
-                $scope.myVar = 1
-                
-                var tinggibadan = "....";
-                var beratbadan = "....";
-                var local = JSON.parse(localStorage.getItem('profile'));
-
-                var alamatpasien = $scope.item.alamatlengkap;
-                var profile = local.id;
-                var user = medifirstService.getPegawaiLogin();
-
-                if ($scope.item.noorder == null){
-                    toastr.error("PILIH NO ORDER !!")
-                    return;
-                }else{
-                    var stt = 1;
-                    window.open(config.baseApiBackend + "report/cetak-resep-dokter?noorder=" + $scope.item.noorder + "&norec=" + $scope.item.norecresep 
-                    + "&nocm=" + $scope.item.nocm + '&kodeprofile=' + profile + '&qtybagi=' + stt + '&alamatpasien=' + alamatpasien + '&tinggibadan=' + tinggibadan + '&beratbadan=' + beratbadan + '&user=' + user.namaLengkap);
-                    // // window.open(config.baseApiBackend + "report/cetak-hasil-lab-histopatologi?norec=" + $scope.dataSelected.norec_pp + '&kdprofile=' + profile
-                    //     + '&user=' + user + '&jenis=his', '_blank');
-                }
-                })
-    
-                
+                medifirstService.get("farmasi/get-resep-dokter?noorder=" +  $scope.item.noorder, true).then(function (datas) {
+                    // datas;
+                    if(datas.data == 0){
+                        toastr.error("Ada data yang belum di input !!")
+                        return;
+                    }else{
+                        medifirstService.get("emr/get-vital-sign?noregistrasi=" + $scope.item.noregistrasi + "&objectidawal=4241&objectidakhir=4246&idemr=147", true).then(function (datas) {
+                            $scope.showRiwayatEMR = false
+                            $scope.myVar = 1
+                            
+                            var tinggibadan = "....";
+                            var beratbadan = "....";
+                            var local = JSON.parse(localStorage.getItem('profile'));
+            
+                            var alamatpasien = $scope.item.alamatlengkap;
+                            var profile = local.id;
+                            var user = medifirstService.getPegawaiLogin();
+            
+                            if ($scope.item.noorder == null){
+                                toastr.error("PILIH NO ORDER !!")
+                                return;
+                            }else{
+                                var stt = 1;
+                                window.open(config.baseApiBackend + "report/cetak-resep-dokter?noorder=" + $scope.item.noorder + "&norec=" + $scope.item.norecresep 
+                                + "&nocm=" + $scope.item.nocm + '&kodeprofile=' + profile + '&qtybagi=' + stt + '&alamatpasien=' + alamatpasien + '&tinggibadan=' + tinggibadan + '&beratbadan=' + beratbadan + '&user=' + user.namaLengkap);
+                                // // window.open(config.baseApiBackend + "report/cetak-hasil-lab-histopatologi?norec=" + $scope.dataSelected.norec_pp + '&kdprofile=' + profile
+                                //     + '&user=' + user + '&jenis=his', '_blank');
+                            }
+                            })
+                    }
+                }) 
             }
             $scope.grab = {
                 lokasiPengirim :  medifirstService.getProfile().alamatlengkap,
