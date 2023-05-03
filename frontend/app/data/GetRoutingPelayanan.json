@@ -19945,6 +19945,52 @@
         "define": "MedifirstService"
       }
     ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.SuratKeteranganKematianRajal",
+    "url": "/SuratKeteranganKematianRajal",
+    "templateurl": "module/EMR/SuratKeteranganKematianRajal.html",
+    "controller": "SuratKeteranganKematianRajalCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.SuratKeteranganKematianRanap",
+    "url": "/SuratKeteranganKematianRanap",
+    "templateurl": "module/EMR/SuratKeteranganKematianRanap.html",
+    "controller": "SuratKeteranganKematianRanapCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
   }
 
 

@@ -3565,6 +3565,14 @@
         {
             "nameDep": "LaporanHarianMordibtasCtrl",
             "urlDep": "module/Registrasi/Laporan/LaporanHarianMordibtasCtrl"
+        },
+        {
+            "nameDep": "SuratKeteranganKematianRajalCtrl",
+            "urlDep": "module/EMR/SuratKeteranganKematianRajalCtrl"
+        },
+        {
+            "nameDep": "SuratKeteranganKematianRanapCtrl",
+            "urlDep": "module/EMR/SuratKeteranganKematianRanapCtrl"
         }
     
     ]
