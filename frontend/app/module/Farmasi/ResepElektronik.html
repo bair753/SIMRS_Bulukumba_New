@@ -195,8 +195,8 @@
         </c-button>
     </div>
     <div class="grid_2">
-        <c-button style="width: 100%; padding:0px, margin:0px;" item="item" position="'right'" click="cetakResepDokter">
-            <span class="title"><label c-label c-label-text='CetakResepDokter' font-size="13"></label></span>
+        <c-button style="width: 100%; padding:0px, margin:0px;" item="item" position="'right'" click="resepDokter">
+            <span class="title"><label c-label c-label-text='cetakResepDokter' font-size="13"></label></span>
         </c-button>
     </div>
      <div class="grid_2">
@@ -547,6 +547,162 @@
                 </div>
              
             </div>
+        </div>
+    </div>
+    <div kendo-window="popUpFormulir" k-title="'Formulir Resep Dokter'" k-width="650" k-visible="false" k-on-open="win2visible = true" k-on-close="win2visible = false">
+        <div class="panel panel-default container_12" style="padding: 0px 10px;">
+            <fieldset>
+                <legend><label c-label item="item">Formulir Resep</label></legend>
+                <div class="grid_12">
+                    <div class="grid_4">
+                        <label c-label c-label-text="riwayatAlergi" real></label>
+                    </div>
+                    <div class="grid_6">
+                        <textarea style="margin-top: 5px;" ng-model="item.riwayatAlergi"></textarea>
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_1">
+                        <label c-label c-label-text="Jam" real></label>
+                    </div>
+                    <div class="grid_3">
+                        <input style="width: 100%" k-ng-model="item.jamPengkajian" kendo-timepicker placeholer="Jam Pengkajian" k-format="'HH:mm'" parsedate="HH:mm" />
+                    </div>
+                    <div class="grid_3" style="margin-top: 15px;">
+                        <label c-label item="item">Pengkajian & Klarifikasi</label>
+                    </div>                    
+                    <div class="grid_5">
+                        <!-- <input class="k-textbox" ng-model="item.keadaanDatang" type="text" placeholder=""> -->
+                        <input kendo-combo-box k-ng-model="item.pengkajian"
+                            k-data-text-field="'namalengkap'" k-data-value-field="'id'" k-filter="'contains'"
+                            k-auto-bind="false" k-data-source="listpetugas" />
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_1">
+                        <label c-label c-label-text="Jam" real></label>
+                    </div>
+                    <div class="grid_3">
+                        <input style="width: 100%" k-ng-model="item.jamPenyiapanObat" kendo-timepicker placeholer="Jam Penyiapan Obat" k-format="'HH:mm'" parsedate="HH:mm" />
+                    </div>
+                    <div class="grid_3" style="margin-top: 15px;">
+                        <label c-label item="item">Penyiapan Obat</label>
+                    </div>                    
+                    <div class="grid_5">
+                        <!-- <input class="k-textbox" ng-model="item.keadaanDatang" type="text" placeholder=""> -->
+                        <input kendo-combo-box k-ng-model="item.penyiapanObat"
+                            k-data-text-field="'namalengkap'" k-data-value-field="'id'" k-filter="'contains'"
+                            k-auto-bind="false" k-data-source="listpetugas" />
+                    </div>                    
+                </div>
+                <div class="grid_12">
+                    <div class="grid_1">
+                        <label c-label c-label-text="Jam" real></label>
+                    </div>
+                    <div class="grid_3">
+                        <input style="width: 100%" k-ng-model="item.jamDispening" kendo-timepicker placeholer="Jam Dispening" k-format="'HH:mm'" parsedate="HH:mm" />
+                    </div>
+                    <div class="grid_3" style="margin-top: 15px;">
+                        <label c-label item="item">Dispening</label>
+                    </div>                    
+                    <div class="grid_5">
+                        <!-- <input class="k-textbox" ng-model="item.keadaanDatang" type="text" placeholder=""> -->
+                        <input kendo-combo-box k-ng-model="item.dispening"
+                            k-data-text-field="'namalengkap'" k-data-value-field="'id'" k-filter="'contains'"
+                            k-auto-bind="false" k-data-source="listpetugas" />
+                    </div>                    
+                </div>
+                <div class="grid_12">
+                    <div class="grid_1">
+                        <label c-label c-label-text="Jam" real></label>
+                    </div>
+                    <div class="grid_3">
+                        <input style="width: 100%" k-ng-model="item.jamSerahInformasi" kendo-timepicker placeholer="Jam Serah Informasi" k-format="'HH:mm'" parsedate="HH:mm" />
+                    </div>
+                    <div class="grid_3" style="margin-top: 15px;">
+                        <label c-label item="item">Serah & Informasi</label>
+                    </div>                    
+                    <div class="grid_5">
+                        <!-- <input class="k-textbox" ng-model="item.keadaanDatang" type="text" placeholder=""> -->
+                        <input kendo-combo-box k-ng-model="item.serahInformasi"
+                            k-data-text-field="'namalengkap'" k-data-value-field="'id'" k-filter="'contains'"
+                            k-auto-bind="false" k-data-source="listpetugas" />
+                    </div>                    
+                </div>
+                <div class="grid_12">
+                    <div class="grid_6" style="margin-top:5px">
+                        <div class="grid_12">
+                            <input type="checkbox" class="k-checkbox" id="isPenulisResep" ng-model="item.penulisResep" value="true">
+                            <label class="k-checkbox-label" for="isPenulisResep"><b>Benar dan Jelas Penulisan Resep</b></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_6" style="margin-top:5px">
+                        <div class="grid_12">
+                            <input type="checkbox" class="k-checkbox" id="isObat" ng-model="item.obat" value="true">
+                            <label class="k-checkbox-label" for="isObat"><b>Benar Obat</b></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_6" style="margin-top:5px">
+                        <div class="grid_12">
+                            <input type="checkbox" class="k-checkbox" id="isDosis" ng-model="item.dosis" value="true">
+                            <label class="k-checkbox-label" for="isDosis"><b>Benar Dosis</b></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_6" style="margin-top:5px">
+                        <div class="grid_12">
+                            <input type="checkbox" class="k-checkbox" id="isWaktuFrekuensi" ng-model="item.waktuFrekuensi" value="true">
+                            <label class="k-checkbox-label" for="isWaktuFrekuensi"><b>Benar Waktu dan Frekuensi</b></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_6" style="margin-top:5px">
+                        <div class="grid_12">
+                            <input type="checkbox" class="k-checkbox" id="isRute" ng-model="item.rute" value="true">
+                            <label class="k-checkbox-label" for="isRute"><b>Benar Rute</b></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_6" style="margin-top:5px">
+                        <div class="grid_12">
+                            <input type="checkbox" class="k-checkbox" id="isPasien" ng-model="item.pasien" value="true">
+                            <label class="k-checkbox-label" for="isPasien"><b>Benar Pasien</b></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_6" style="margin-top:5px">
+                        <div class="grid_12">
+                            <input type="checkbox" class="k-checkbox" id="isDuplikasiTerapi" ng-model="item.duplikasiTerapi" value="true">
+                            <label class="k-checkbox-label" for="isDuplikasiTerapi"><b>Tidak Ada Duplikasi Terapi</b></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_6" style="margin-top:5px">
+                        <div class="grid_12">
+                            <input type="checkbox" class="k-checkbox" id="isInteraksiObat" ng-model="item.interaksiObat" value="true">
+                            <label class="k-checkbox-label" for="isInteraksiObat"><b>Tidak Ada Interaksi Obat</b></label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            
+            <div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
+                <button class="k-button k-button-icontext k-primary k-grid-update" ng-click="cetakResepDokter()">Cetak Resep Dokter</button>
+                <button class="k-button k-button-icontext k-primary k-grid-update" ng-click="saveResep()"><span
+                    class="k-icon k-update"></span>Simpan</button>
+                <button class="k-button  k-button-icontext" ng-click="batalFormulir()"><span
+                        class="k-icon k-cancel"></span>Batal</button>
+            </div>
+    
         </div>
     </div>
 

@@ -268,7 +268,10 @@
                                                             <font size="1">:</font>
                                                         </td>
                                                         <td height="5">
-                                                            <font size="1"><input type="checkbox" name="" id=""> Tidak</font>
+                                                            {{-- <font size="1"><input type="checkbox" name="sebutkan" id="showcek" checked> YA, Sebutkan</font> --}}
+                                                            <font size="1">
+                                                                {{ $isi->riwayatalergi }}
+                                                            </font>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -280,7 +283,7 @@
                                                         </td>
                                                         <td height="5" width="10%">
                                                             <font size="1">
-                                                                {{ $alamatpasien == null ? '-' : $alamatpasien }}
+                                                                {{ $raw->alamatlengkap }}
                                                             </font>
                                                         </td>
                                                         <td height="5" width="16%">
@@ -289,10 +292,10 @@
                                                         <td height="5">
                                                             <font size="1"></font>
                                                         </td>
-                                                        <td height="5">
+                                                        {{-- <td height="5">
                                                             <font size="1"><input type="checkbox" name="sebutkan" id="showcek" checked> YA, Sebutkan</font>
                                                             <textarea name="" id="textcek" cols="30" rows="2"></textarea>
-                                                        </td>
+                                                        </td> --}}
                                                     </tr>
                                                     <tr>
                                                         <td height="5" width="15%">
@@ -414,32 +417,32 @@
                                                     <tr style="text-align:center;">
                                                         <td height="10"
                                                             style="border-left:solid 1.0pt; border-bottom:solid 1.0pt;">
-                                                            <font size="1" size="1">Jam ......</font>
+                                                            <font size="1" size="1">Jam {{ $isi->jampengkajian }}</font>
                                                         </td>
                                                         <td height="10" style="border-bottom:solid 1.0pt;">
-                                                            <font size="1" size="1">Petugas ......</font>
+                                                            <font size="1" size="1">Petugas {{ $isi->petugaspengkajian }}</font>
                                                         </td>
                                                         <td height="10"
                                                             style="border-left:solid 1.0pt; border-bottom:solid 1.0pt;">
-                                                            <font size="1" size="1">Jam ......</font>
+                                                            <font size="1" size="1">Jam {{ $isi->jampenyiapanobat }}</font>
                                                         </td>
                                                         <td height="10" style="border-bottom:solid 1.0pt;">
-                                                            <font size="1" size="1">Petugas ......</font>
+                                                            <font size="1" size="1">Petugas {{ $isi->penyiapanobat }}</font>
                                                         </td>
                                                         <td height="10"
                                                             style="border-left:solid 1.0pt; border-bottom:solid 1.0pt;">
-                                                            <font size="1" size="1">Jam ......</font>
+                                                            <font size="1" size="1">Jam {{ $isi->jamdispening }}</font>
                                                         </td>
                                                         <td height="10" style="border-bottom:solid 1.0pt;">
-                                                            <font size="1" size="1">Petugas ......</font>
+                                                            <font size="1" size="1">Petugas {{ $isi->dispening }}</font>
                                                         </td>
                                                         <td height="10"
                                                             style="border-left:solid 1.0pt; border-bottom:solid 1.0pt;">
-                                                            <font size="1" size="1">Jam ......</font>
+                                                            <font size="1" size="1">Jam {{ $isi->jamserah }}</font>
                                                         </td>
                                                         <td height="10"
                                                             style="border-bottom:solid 1.0pt; border-right:solid 1.0pt;">
-                                                            <font size="1" size="1">Petugas ......</font>
+                                                            <font size="1" size="1">Petugas .{{ $isi->serahinformasi }}</font>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -473,12 +476,21 @@
                                                         <td height="5" style="padding-left:3pt; padding-bottom:3pt; border-right:solid 1.0pt;">
                                                             <font size="1">1. Benar Dan Jelas Penulisan Resep</font>
                                                         </td>
-                                                        <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                                                            <font size="1"><input type="checkbox" name="" id=""></font>
-                                                        </td>
-                                                        <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                                                            <font size="1"><input type="checkbox" name="" id=""></font>
-                                                        </td>
+                                                        @if ($isi->penulisanresep == 't')
+                                                            <td height="5" style="text-align: center; border-right:solid 1.0pt;">
+                                                                <font size="1"><input type="checkbox" checked name="" id=""></font>
+                                                            </td>
+                                                            <td height="5" style="text-align: center; border-right:solid 1.0pt;">
+                                                                <font size="1"><input type="checkbox" name="" id=""></font>
+                                                            </td>
+                                                        @else
+                                                            <td height="5" style="text-align: center; border-right:solid 1.0pt;">
+                                                                <font size="1"><input type="checkbox" name="" id=""></font>
+                                                            </td>
+                                                            <td height="5" style="text-align: center; border-right:solid 1.0pt;">
+                                                                <font size="1"><input type="checkbox" checked name="" id=""></font>
+                                                            </td>
+                                                        @endif
                                                         <td height="5" style="border-right:solid 1.0pt; padding-left:3pt; ">
                                                             <font size="1"><i>(Situation, Background, Assesment, Recommendation)</i></font>
                                                         </td>
@@ -487,12 +499,21 @@
                                                         <td height="5" style="padding-left:3pt; padding-bottom:3pt; border-right:solid 1.0pt;">
                                                             <font size="1">2. Benar Obat</font>
                                                         </td>
-                                                        <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                                                            <font size="1"><input type="checkbox" name="" id=""></font>
-                                                        </td>
-                                                        <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                                                            <font size="1"><input type="checkbox" name="" id=""></font>
-                                                        </td>
+                                                        @if ($isi->obat == 't')
+                                                            <td height="5" style="text-align: center; border-right:solid 1.0pt;">
+                                                                <font size="1"><input type="checkbox" checked name="" id=""></font>
+                                                            </td>
+                                                            <td height="5" style="text-align: center; border-right:solid 1.0pt;">
+                                                                <font size="1"><input type="checkbox" name="" id=""></font>
+                                                            </td>
+                                                        @else
+                                                            <td height="5" style="text-align: center; border-right:solid 1.0pt;">
+                                                                <font size="1"><input type="checkbox" name="" id=""></font>
+                                                            </td>
+                                                            <td height="5" style="text-align: center; border-right:solid 1.0pt;">
+                                                                <font size="1"><input type="checkbox" checked name="" id=""></font>
+                                                            </td>
+                                                        @endif                                                        
                                                         <td height="5" style="border-right:solid 1.0pt; padding-left:3pt; ">
                                                             <font size="1"></font>
                                                         </td>
@@ -501,12 +522,21 @@
                                                         <td height="5" style="padding-left:3pt; padding-bottom:3pt; border-right:solid 1.0pt;">
                                                             <font size="1">3. Benar Dosis</font>
                                                         </td>
-                                                        <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                                                            <font size="1"><input type="checkbox" name="" id=""></font>
-                                                        </td>
-                                                        <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                                                            <font size="1"><input type="checkbox" name="" id=""></font>
-                                                        </td>
+                                                        @if ($isi->dosis == 't')
+                                                            <td height="5" style="text-align: center; border-right:solid 1.0pt;">
+                                                                <font size="1"><input type="checkbox" checked name="" id=""></font>
+                                                            </td>
+                                                            <td height="5" style="text-align: center; border-right:solid 1.0pt;">
+                                                                <font size="1"><input type="checkbox" name="" id=""></font>
+                                                            </td>
+                                                        @else
+                                                            <td height="5" style="text-align: center; border-right:solid 1.0pt;">
+                                                                <font size="1"><input type="checkbox" name="" id=""></font>
+                                                            </td>
+                                                            <td height="5" style="text-align: center; border-right:solid 1.0pt;">
+                                                                <font size="1"><input type="checkbox" checked name="" id=""></font>
+                                                            </td>                                                            
+                                                        @endif                                                        
                                                         <td height="5" style="border-right:solid 1.0pt; padding-left:3pt; ">
                                                             <font size="1">Tanggal : {{ date('d-m-Y', strtotime($raw->tglorder)) }}</font>
                                                         </td>
@@ -518,12 +548,22 @@
                                                         <td height="5" style="padding-left:3pt; padding-bottom:3pt; border-right:solid 1.0pt;">
                                                             <font size="1">4. Benar Waktu Dan Frekuensi</font>
                                                         </td>
-                                                        <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                                                            <font size="1"><input type="checkbox" name="" id=""></font>
-                                                        </td>
-                                                        <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                                                            <font size="1"><input type="checkbox" name="" id=""></font>
-                                                        </td>
+                                                        @if ($isi->waktufrekuensi == 't')
+                                                            <td height="5" style="text-align: center; border-right:solid 1.0pt;">
+                                                                <font size="1"><input type="checkbox" checked name="" id=""></font>
+                                                            </td>
+                                                            <td height="5" style="text-align: center; border-right:solid 1.0pt;">
+                                                                <font size="1"><input type="checkbox" name="" id=""></font>
+                                                            </td>
+                                                        @else
+                                                            <td height="5" style="text-align: center; border-right:solid 1.0pt;">
+                                                                <font size="1"><input type="checkbox" name="" id=""></font>
+                                                            </td>
+                                                            <td height="5" style="text-align: center; border-right:solid 1.0pt;">
+                                                                <font size="1"><input type="checkbox" checked name="" id=""></font>
+                                                            </td>
+                                                        @endif
+                                                        
                                                         <td height="5" style="border-right:solid 1.0pt; padding-left:3pt; ">
                                                             <font size="1">Jam : {{ date('H:i', strtotime($raw->tglorder)) }}</font>
                                                         </td>
@@ -535,12 +575,22 @@
                                                         <td height="5" style="padding-left:3pt; padding-bottom:3pt; border-right:solid 1.0pt;">
                                                             <font size="1">5. Benar Rute</font>
                                                         </td>
-                                                        <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                                                            <font size="1"><input type="checkbox" name="" id=""></font>
-                                                        </td>
-                                                        <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                                                            <font size="1"><input type="checkbox" name="" id=""></font>
-                                                        </td>
+                                                        @if ($isi->rute == 't')
+                                                            <td height="5" style="text-align: center; border-right:solid 1.0pt;">
+                                                                <font size="1"><input type="checkbox" checked name="" id=""></font>
+                                                            </td>
+                                                            <td height="5" style="text-align: center; border-right:solid 1.0pt;">
+                                                                <font size="1"><input type="checkbox" name="" id=""></font>
+                                                            </td>
+                                                        @else
+                                                            <td height="5" style="text-align: center; border-right:solid 1.0pt;">
+                                                                <font size="1"><input type="checkbox" name="" id=""></font>
+                                                            </td>
+                                                            <td height="5" style="text-align: center; border-right:solid 1.0pt;">
+                                                                <font size="1"><input type="checkbox" checked name="" id=""></font>
+                                                            </td>
+                                                        @endif
+                                                        
                                                         <td height="5" style="border-right:solid 1.0pt; padding-left:3pt; ">
                                                             <font size="1"></font>
                                                         </td>
@@ -549,28 +599,45 @@
                                                         <td height="5" style="padding-left:3pt; padding-bottom:3pt; border-right:solid 1.0pt;">
                                                             <font size="1">6. Benar Pasien</font>
                                                         </td>
-                                                        <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                                                            <font size="1"><input type="checkbox" name="" id=""></font>
-                                                        </td>
-                                                        <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                                                            <font size="1"><input type="checkbox" name="" id=""></font>
-                                                        </td>
+                                                        @if ($isi->pasien == 't')
+                                                            <td height="5" style="text-align: center; border-right:solid 1.0pt;">
+                                                                <font size="1"><input type="checkbox" checked name="" id=""></font>
+                                                            </td>
+                                                            <td height="5" style="text-align: center; border-right:solid 1.0pt;">
+                                                                <font size="1"><input type="checkbox" name="" id=""></font>
+                                                            </td>  
+                                                        @else
+                                                            <td height="5" style="text-align: center; border-right:solid 1.0pt;">
+                                                                <font size="1"><input type="checkbox" name="" id=""></font>
+                                                            </td>
+                                                            <td height="5" style="text-align: center; border-right:solid 1.0pt;">
+                                                                <font size="1"><input type="checkbox" checked name="" id=""></font>
+                                                            </td>
+                                                        @endif
+                                                        
                                                         <td height="5" style="border-right:solid 1.0pt; padding-left:3pt; ">
                                                             <font size="1">Petugas Farmasi : </font>
                                                         </td>
-                                                        
-                                                        
                                                     </tr>
                                                     <tr>
                                                         <td height="5" style="padding-left:3pt; padding-bottom:3pt; border-right:solid 1.0pt;">
                                                             <font size="1">7. Tidak Ada Duplikasi Terapi</font>
                                                         </td>
-                                                        <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                                                            <font size="1"><input type="checkbox" name="" id=""></font>
-                                                        </td>
-                                                        <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                                                            <font size="1"><input type="checkbox" name="" id=""></font>
-                                                        </td>
+                                                        @if ($isi->duplikasiterapi == 't')
+                                                            <td height="5" style="text-align: center; border-right:solid 1.0pt;">
+                                                                <font size="1"><input type="checkbox" checked name="" id=""></font>
+                                                            </td>
+                                                            <td height="5" style="text-align: center; border-right:solid 1.0pt;">
+                                                                <font size="1"><input type="checkbox" name="" id=""></font>
+                                                            </td>
+                                                        @else
+                                                            <td height="5" style="text-align: center; border-right:solid 1.0pt;">
+                                                                <font size="1"><input type="checkbox" name="" id=""></font>
+                                                            </td>
+                                                            <td height="5" style="text-align: center; border-right:solid 1.0pt;">
+                                                                <font size="1"><input type="checkbox" checked name="" id=""></font>
+                                                            </td>
+                                                        @endif                                                        
                                                         <td height="5" style="border-right:solid 1.0pt; padding-left:3pt; ">
                                                             <font size="1"></font>
                                                         </td>
@@ -580,12 +647,22 @@
                                                         <td height="5" style="padding-left:3pt; padding-bottom:3pt; border-right:solid 1.0pt;">
                                                             <font size="1">8. Tidak Ada Interaksi Obat</font>
                                                         </td>
-                                                        <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                                                            <font size="1"><input type="checkbox" name="" id=""></font>
-                                                        </td>
-                                                        <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                                                            <font size="1"><input type="checkbox" name="" id=""></font>
-                                                        </td>
+                                                        @if ($isi->interaksiobat == 't')
+                                                            <td height="5" style="text-align: center; border-right:solid 1.0pt;">
+                                                                <font size="1"><input type="checkbox" checked name="" id=""></font>
+                                                            </td>
+                                                            <td height="5" style="text-align: center; border-right:solid 1.0pt;">
+                                                                <font size="1"><input type="checkbox" name="" id=""></font>
+                                                            </td>
+                                                        @else
+                                                            <td height="5" style="text-align: center; border-right:solid 1.0pt;">
+                                                                <font size="1"><input type="checkbox" name="" id=""></font>
+                                                            </td>
+                                                            <td height="5" style="text-align: center; border-right:solid 1.0pt;">
+                                                                <font size="1"><input type="checkbox" checked name="" id=""></font>
+                                                            </td>
+                                                        @endif
+                                                        
                                                         <td height="5" style="padding-left:3pt; text-align:center; border-right:solid 1.0pt;">
                                                             <font size="1"></font>
                                                         </td>

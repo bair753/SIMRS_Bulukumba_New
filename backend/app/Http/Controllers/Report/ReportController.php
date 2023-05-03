@@ -1157,9 +1157,10 @@ class ReportController extends ApiController{
                 select * from profile_m where id = $kdProfile limit 1
             "));
         $raw = collect(DB::select("
-            select pm2.nocm ,to_char(pm2.tgllahir,'dd-mm-yyyy') as tgllahir,age(pm2.tgllahir) as umur ,jm.jeniskelamin ,pm2.namapasien ,pm3.namalengkap, rm.namaruangan, 
+            select pm2.nocm ,to_char(pm2.tgllahir,'dd-mm-yyyy') as tgllahir,age(pm2.tgllahir) as umur ,jm.jeniskelamin ,pm2.namapasien ,pm3.namalengkap, rm.namaruangan,alm.alamatlengkap, 
             to_char(st.tglorder,'dd-mm-yyyy MM:ss') as tglorder,pm3.nosip, kp.kelompokpasien from strukorder_t st
             inner join pasien_m pm2 on pm2.id = st.nocmfk
+            left join alamat_m as alm ON alm.nocmfk = pm2.id
             inner join jeniskelamin_m jm on jm.id = pm2.objectjeniskelaminfk
             inner join pegawai_m pm3 on pm3.id = st.objectpegawaiorderfk
             inner join ruangan_m rm on rm.id = st.objectruanganfk 
@@ -1167,6 +1168,7 @@ class ReportController extends ApiController{
             left join kelompokpasien_m AS kp ON kp.id = pd.objectkelompokpasienlastfk
             where st.noorder = '$noorder'
         "))->first();
+        // return $raw->alamatlengkap;
         $detailpasien = \DB::table('emrpasiend_t as emrdp')
         ->where('emrdp.statusenabled', true)
             ->where('emrdp.kdprofile', $kdProfile)
@@ -1184,11 +1186,12 @@ class ReportController extends ApiController{
             // $raw->umur = $this->getAge($raw->tgllahir ,date('Y-m-d'));
         }else if (empty($raw)){
             $raw = collect(DB::select("
-                select pm2.nocm ,to_char(pm2.tgllahir,'dd-mm-yyyy') as tgllahir,age(pm2.tgllahir) as umur ,jm.jeniskelamin ,pm2.namapasien,pm2.alamatrmh as alamatpasien, pm3.namalengkap, rm.namaruangan, to_char(s.tglresep ,'dd-mm-yyyy MM:ss') as tglorder,pm3.nosip, kp.kelompokpasien
+                select pm2.nocm ,to_char(pm2.tgllahir,'dd-mm-yyyy') as tgllahir,age(pm2.tgllahir) as umur ,jm.jeniskelamin ,pm2.namapasien,alm.alamatlengkap, pm3.namalengkap, rm.namaruangan, to_char(s.tglresep ,'dd-mm-yyyy MM:ss') as tglorder,pm3.nosip, kp.kelompokpasien
                 from strukresep_t s
                 inner join antrianpasiendiperiksa_t at2 on at2.norec = s.pasienfk 
                 inner join pasiendaftar_t pt on pt.norec = at2.noregistrasifk 
-                inner join pasien_m pm2 on pm2.id = pt.nocmfk 
+                inner join pasien_m pm2 on pm2.id = pt.nocmfk
+                left join alamat_m as alm ON alm.nocmfk = pm2.id
                 inner join jeniskelamin_m jm on jm.id = pm2.objectjeniskelaminfk
                 inner join pegawai_m pm3 on pm3.id = s.penulisresepfk 
                 inner join ruangan_m rm on rm.id = s.ruanganfk 
@@ -1204,10 +1207,36 @@ class ReportController extends ApiController{
             echo 'Data Tidak ada ';
             return;
         }
+        $isi = collect(DB::select("
+        SELECT rd.riwayatalergi,
+            to_char( rd.jampengkajian, 'HH:mm') as jampengkajian,
+            pg1.namalengkap as petugaspengkajian,
+            to_char( rd.jampenyiapanobat, 'HH:mm') as jampenyiapanobat,
+            pg2.namalengkap as penyiapanobat,
+            to_char( rd.jamdispening, 'HH:mm') as jamdispening,
+            pg3.namalengkap as dispening,
+            to_char( rd.jamserah, 'HH:mm') as jamserah,
+            pg4.namalengkap as serahinformasi,
+            rd.penulisanresep,
+            rd.obat,
+            rd.dosis,
+            rd.waktufrekuensi,
+            rd.rute,
+            rd.pasien,
+            rd.duplikasiterapi,
+            rd.interaksiobat
+        FROM
+            resepdokter_t as rd
+            INNER JOIN pegawai_m as pg1 on pg1.id = rd.petugaspengkajian
+            INNER JOIN pegawai_m as pg2 on pg2.id = rd.penyiapanobat
+            INNER JOIN pegawai_m as pg3 on pg3.id = rd.dispening
+            INNER JOIN pegawai_m as pg4 on pg4.id = rd.serahinformasi
+        WHERE nopesanan = '$noorder'
+        "))->first();
         $pageWidth = 550;
 
         return view('report.apotik.resepdokter',
-            compact('raw', 'pageWidth','r','details','profile', 'alamatpasien', 'tinggibadan', 'beratbadan'));
+            compact('raw', 'pageWidth','r','details','profile', 'alamatpasien', 'tinggibadan', 'beratbadan', 'isi'));
     }
 
     public function cetakAntrianKiosk(Request $request) {
