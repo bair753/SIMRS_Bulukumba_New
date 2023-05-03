@@ -2289,7 +2289,7 @@ class InaCbgController   extends ApiController
                 DB::raw("pp.norec AND hr.statusenabled = true "))
             // ->leftJOIN('ris_order as ris', 'ris.order_no', '=',
                 // DB::raw('so.noorder AND ris.order_code=pp.produkfk'))
-            ->select('ps.nocm', 'ps.namapasien', 'jk.jeniskelamin', 'pp.tglpelayanan', 'pp.produkfk', 'pr.namaproduk',
+            ->select('ps.nocm', 'hr.norec as norecHasilRadiologi', 'ps.namapasien', 'jk.jeniskelamin', 'pp.tglpelayanan', 'pp.produkfk', 'pr.namaproduk',
                 'pp.jumlah', 'pp.hargasatuan', 'pp.hargadiscount', 'sp.nostruk', 'pd.noregistrasi', 'ru.namaruangan',
                 'dp.namadepartemen', 'ps.id as psid', 'apd.norec as norec_apd', 'sp.norec as norec_sp', 'pp.norec as norec_pp',
                 'ru.objectdepartemenfk', 'so.noorder', 'ris.order_key as idbridging', 'apd.objectruanganfk','pp.iscito','pp.jasa','so.keteranganlainnya',
@@ -2297,7 +2297,7 @@ class InaCbgController   extends ApiController
                 DB::raw("case when ris.order_key is not null then 'Sudah Dikirim' else '-' end as statusbridging,'' as hr_norec"))
             ->where('pp.kdprofile',$idProfile)
             ->where('ru.objectdepartemenfk', $request['idDept'])
-            ->groupBy('ps.nocm', 'ps.namapasien', 'jk.jeniskelamin', 'pp.tglpelayanan', 'pp.produkfk', 'pr.namaproduk',
+            ->groupBy('ps.nocm', 'ps.namapasien', 'hr.norec', 'jk.jeniskelamin', 'pp.tglpelayanan', 'pp.produkfk', 'pr.namaproduk',
                 'pp.jumlah', 'pp.hargasatuan', 'pp.hargadiscount', 'sp.nostruk', 'pd.noregistrasi', 'ru.namaruangan',
                 'dp.namadepartemen', 'ps.id', 'apd.norec', 'sp.norec', 'pp.norec',
                 'ru.objectdepartemenfk', 'so.noorder', 'ris.order_key', 'apd.objectruanganfk','pp.iscito','pp.jasa','sbm.nosbm','pmi.pmi','so.keteranganlainnya')

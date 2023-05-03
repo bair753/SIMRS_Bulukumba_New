@@ -4949,7 +4949,37 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 			
 			$scope.popUpDaftarHasilLab.center().open();
 			
-		}	
+		}
+		
+		$scope.hasilRad = function(){
+			if ($scope.dataPasienSelected.noregistrasi == undefined) {
+				toastr.error('Pilih Pasien Terlebih dahulu!!!')
+				return;
+			}
+
+			medifirstService.get("bridging/inacbg/get-rincial-pelayanan?noregistrasi=" + $scope.dataPasienSelected.noregistrasi + '&idDept=27'
+				// medifirstService.get("lab-radiologi/get-rincian-pelayanan?objectdepartemenfk=" + departemenfk + "&noregistrasi=" +   $scope.item.noregistrasi
+				, true).then(function (dat) {
+					$scope.dataDaftarHasilRad = {
+						data: dat.data.data,
+						_data: dat.data.data,
+						// pageSize: 10,
+						selectable: true,
+						refresh: true,
+						total: dat.data.data.length,
+						serverPaging: false,
+						aggregate: [
+								{ field: 'total', aggregate: 'sum' },
+						]
+
+				};
+				}, function (error) {
+						$scope.isLoading = false;
+				});
+			
+			$scope.popUpDaftarHasilRad.center().open();
+			
+		}
 
 		$scope.columnDaftarHasilLab = {
 			columns: [
@@ -4978,6 +5008,59 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 					mode: "single",
 					allowUnsort: false,
 			}
+	}
+
+	$scope.columnDaftarHasilRad = {
+		columns: [
+				{
+						"field": "tglpelayanan",
+						"title": "Tgl Pelayanan",
+						"width": "90px",
+				},                   
+				{
+						"field": "namaruangan",
+						"title": "Ruangan",
+						"width": "120px"
+				},
+				{
+						"field": "namaproduk",
+						"title": "Layanan",
+						"width": "160px",
+				},
+				{
+						"field": "jumlah",
+						"title": "Qty",
+						"width": "40px",
+				},
+		],
+		sortable: {
+				mode: "single",
+				allowUnsort: false,
+		}
+	}
+
+	$scope.cetakCtscan = function () {
+		// if ($scope.norecHasilRadiologi != '') {
+			var local = JSON.parse(localStorage.getItem('profile'))
+			var nama = medifirstService.getPegawaiLogin().namaLengkap
+			if (local != null) {
+				var profile = local.id;
+				window.open(baseTransaksi + "report/cetak-ekspertise-ctscan?norec=" + $scope.dataSelectedHasilRad.norecHasilRadiologi + '&kdprofile=' + profile
+					+ '&nama=' + nama, '_blank');
+			}
+		// }
+	}
+
+	$scope.cetakUsg = function () {
+		// if ($scope.norecHasilRadiologiUsg != '') {
+			var local = JSON.parse(localStorage.getItem('profile'))
+			var nama = medifirstService.getPegawaiLogin().namaLengkap
+			if (local != null) {
+				var profile = local.id;
+				window.open(baseTransaksi + "report/cetak-ekspertise-usg?norec=" + $scope.dataSelectedHasilRad.norecHasilRadiologi + '&kdprofile=' + profile
+					+ '&nama=' + nama, '_blank');
+			}
+		// }
 	}
 
 	$scope.cetakHasilLab = function () {
