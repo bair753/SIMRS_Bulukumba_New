@@ -2315,4 +2315,40 @@ class InaCbgController   extends ApiController
         return $this->respond($result);
     }
 
+    public function getLaporanOperasi(Request $request) {
+        $kdProfile = $this->getDataKdProfile($request);
+        $idProfile = (int) $kdProfile;
+        $data = DB::select(DB::raw("
+        SELECT
+            emrdp.emrpasienfk,
+            emrdp.emrfk,
+            emr.reportdisplay,
+            emrp.norec,
+            emr.caption AS namaform 
+        FROM
+            emrpasiend_t AS emrdp
+            INNER JOIN emrpasien_t AS emrp ON emrp.noemr = emrdp.emrpasienfk
+            INNER JOIN emr_t AS emr ON emr.ID = emrdp.emrfk 
+        WHERE
+            emrdp.kdprofile = $idProfile 
+            AND emrdp.statusenabled = TRUE 
+            AND emrp.noregistrasifk = '2304004422' 
+            AND emrp.jenisemr ILIKE '%asesmen%' 
+            AND emrdp.emrpasienfk = 'MR2304/00010408'
+            AND emrdp.emrfk = '290084'
+        GROUP BY
+            emrdp.emrpasienfk,
+            emrdp.emrfk,
+            emrp.norec,
+            emr.caption,
+            emr.reportdisplay")
+        );
+        
+        // $result =array(
+        //     'data' => $pelayanan,
+        //     'message' => 'Inhuman'
+        // );
+        return $this->respond($data);
+    }
+
 }
