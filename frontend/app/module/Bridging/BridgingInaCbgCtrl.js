@@ -5243,6 +5243,367 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 						+ '&nama=' + nama, '_blank');
 		}
 
+		
+		$scope.asesmenAwalKeperIGD = function(){
+			if ($scope.dataPasienSelected.noregistrasi == undefined) {
+				toastr.error('Pilih Pasien Terlebih dahulu!!!')
+				return;
+			}
+			var emrfk = [149] // emrfk Asesmen Awal Keperawatan IGD
+
+			medifirstService.get("bridging/inacbg/get-emr-pasien?noregistrasi=" + $scope.dataPasienSelected.noregistrasi + '&emrfk=' + emrfk
+				// medifirstService.get("lab-radiologi/get-rincian-pelayanan?objectdepartemenfk=" + departemenfk + "&noregistrasi=" +   $scope.item.noregistrasi
+				, true).then(function (dat) {
+					$scope.dataDaftadAsesmenAwalKeperIGD = {
+						data: dat.data.data,
+						_data: dat.data.data,
+						// pageSize: 10,
+						selectable: true,
+						refresh: true,
+						total: dat.data.data.length,
+						serverPaging: false,
+						aggregate: [
+								{ field: 'total', aggregate: 'sum' },
+						]
+
+				};
+				}, function (error) {
+						$scope.isLoading = false;
+				});
+			
+			$scope.popUpDaftarAsesmenAwalKeperIGD.center().open();
+			
+		}	
+
+		$scope.columnDaftadAsesmenAwalKeperIGD = {
+			columns: [
+					{
+							"field": "tglemr",
+							"title": "Tgl EMR",
+							"width": "90px",
+					},                   
+					{
+							"field": "emrpasienfk",
+							"title": "No EMR",
+							"width": "160px"
+					},
+					{
+							"field": "namaform",
+							"title": "Nama EMR",
+							"width": "160px"
+					},
+			],
+			sortable: {
+					mode: "single",
+					allowUnsort: false,
+			}
+		}
+
+			$scope.cetakAsesmenAwalKeperIGD = function () {
+				if ($scope.dataSelectedAsesmenAwalKeperIGD.emrpasienfk == undefined) {
+					toastr.error('Data belum dipilih!!!')
+					return;
+				}
+
+				var local = JSON.parse(localStorage.getItem('profile'));
+				var nama = medifirstService.getPegawaiLogin();
+				window.open(baseTransaksi + 'report/cetak-asesmen-awal-keperawatan-igd?nocm='
+				+ $scope.dataSelectedAsesmenAwalKeperIGD.nocm 
+				+ '&norec_apd=' + $scope.dataSelectedAsesmenAwalKeperIGD.norec_apd 
+				+ '&emr=' + $scope.dataSelectedAsesmenAwalKeperIGD.norec 
+				+ '&emrfk=' + $scope.dataSelectedAsesmenAwalKeperIGD.emrfk
+				+ '&kdprofile=' + local.id
+				+ '&nama=' + nama, '_blank');
+		}
+
+		$scope.catatanPemberianObat = function(){
+			if ($scope.dataPasienSelected.noregistrasi == undefined) {
+				toastr.error('Pilih Pasien Terlebih dahulu!!!')
+				return;
+			}
+			var emrfk = [290032] // emrfk Catatan Pemberian dan Pemantauan Obat Pasien
+
+			medifirstService.get("bridging/inacbg/get-emr-pasien?noregistrasi=" + $scope.dataPasienSelected.noregistrasi + '&emrfk=' + emrfk
+				// medifirstService.get("lab-radiologi/get-rincian-pelayanan?objectdepartemenfk=" + departemenfk + "&noregistrasi=" +   $scope.item.noregistrasi
+				, true).then(function (dat) {
+					$scope.dataDaftadCatatanPemberianObat = {
+						data: dat.data.data,
+						_data: dat.data.data,
+						// pageSize: 10,
+						selectable: true,
+						refresh: true,
+						total: dat.data.data.length,
+						serverPaging: false,
+						aggregate: [
+								{ field: 'total', aggregate: 'sum' },
+						]
+
+				};
+				}, function (error) {
+						$scope.isLoading = false;
+				});
+			
+			$scope.popUpDaftarCatatanPemberianObat.center().open();
+			
+		}	
+
+		$scope.columnDaftadCatatanPemberianObat = {
+			columns: [
+					{
+							"field": "tglemr",
+							"title": "Tgl EMR",
+							"width": "90px",
+					},                   
+					{
+							"field": "emrpasienfk",
+							"title": "No EMR",
+							"width": "160px"
+					},
+					{
+							"field": "namaform",
+							"title": "Nama EMR",
+							"width": "160px"
+					},
+			],
+			sortable: {
+					mode: "single",
+					allowUnsort: false,
+			}
+		}
+
+			$scope.cetakCatatanPemberianObat = function () {
+				if ($scope.dataSelectedCatatanPemberianObat.emrpasienfk == undefined) {
+					toastr.error('Data belum dipilih!!!')
+					return;
+				}
+
+				var local = JSON.parse(localStorage.getItem('profile'));
+				var nama = medifirstService.getPegawaiLogin();
+				window.open(baseTransaksi + 'report/cetak-catatan-pemberian-dan-pemantuan-obat-pasien?nocm='
+				+ $scope.dataSelectedCatatanPemberianObat.nocm 
+				+ '&norec_apd=' + $scope.dataSelectedCatatanPemberianObat.norec_apd 
+				+ '&emr=' + $scope.dataSelectedCatatanPemberianObat.norec 
+				+ '&emrfk=' + $scope.dataSelectedCatatanPemberianObat.emrfk
+				+ '&kdprofile=' + local.id
+				+ '&nama=' + nama, '_blank');
+		}
+
+		$scope.observasiTransfusi = function(){
+			if ($scope.dataPasienSelected.noregistrasi == undefined) {
+				toastr.error('Pilih Pasien Terlebih dahulu!!!')
+				return;
+			}
+			var emrfk = [290093] // emrfk Check List dan Observasi Transfusi Darah
+
+			medifirstService.get("bridging/inacbg/get-emr-pasien?noregistrasi=" + $scope.dataPasienSelected.noregistrasi + '&emrfk=' + emrfk
+				// medifirstService.get("lab-radiologi/get-rincian-pelayanan?objectdepartemenfk=" + departemenfk + "&noregistrasi=" +   $scope.item.noregistrasi
+				, true).then(function (dat) {
+					$scope.dataDaftadObservasiTransfusi = {
+						data: dat.data.data,
+						_data: dat.data.data,
+						// pageSize: 10,
+						selectable: true,
+						refresh: true,
+						total: dat.data.data.length,
+						serverPaging: false,
+						aggregate: [
+								{ field: 'total', aggregate: 'sum' },
+						]
+
+				};
+				}, function (error) {
+						$scope.isLoading = false;
+				});
+			
+			$scope.popUpDaftarObservasiTransfusi.center().open();
+			
+		}	
+
+		$scope.columnDaftadObservasiTransfusi = {
+			columns: [
+					{
+							"field": "tglemr",
+							"title": "Tgl EMR",
+							"width": "90px",
+					},                   
+					{
+							"field": "emrpasienfk",
+							"title": "No EMR",
+							"width": "160px"
+					},
+					{
+							"field": "namaform",
+							"title": "Nama EMR",
+							"width": "160px"
+					},
+			],
+			sortable: {
+					mode: "single",
+					allowUnsort: false,
+			}
+		}
+
+			$scope.cetakObservasiTransfusi = function () {
+				if ($scope.dataSelectedObservasiTransfusi.emrpasienfk == undefined) {
+					toastr.error('Data belum dipilih!!!')
+					return;
+				}
+
+				var local = JSON.parse(localStorage.getItem('profile'));
+				var nama = medifirstService.getPegawaiLogin();
+				window.open(baseTransaksi + 'report/cetak-transfusi-darah?nocm='
+				+ $scope.dataSelectedObservasiTransfusi.nocm 
+				+ '&norec_apd=' + $scope.dataSelectedObservasiTransfusi.norec_apd 
+				+ '&emr=' + $scope.dataSelectedObservasiTransfusi.norec 
+				+ '&emrfk=' + $scope.dataSelectedObservasiTransfusi.emrfk
+				+ '&kdprofile=' + local.id
+				+ '&nama=' + nama, '_blank');
+		}
+
+		$scope.ringkasanPulang = function(){
+			if ($scope.dataPasienSelected.noregistrasi == undefined) {
+				toastr.error('Pilih Pasien Terlebih dahulu!!!')
+				return;
+			}
+			var emrfk = [290030] // emrfk Ringkasan Pulang
+
+			medifirstService.get("bridging/inacbg/get-emr-pasien?noregistrasi=" + $scope.dataPasienSelected.noregistrasi + '&emrfk=' + emrfk
+				// medifirstService.get("lab-radiologi/get-rincian-pelayanan?objectdepartemenfk=" + departemenfk + "&noregistrasi=" +   $scope.item.noregistrasi
+				, true).then(function (dat) {
+					$scope.dataDaftadRingkasanPulang = {
+						data: dat.data.data,
+						_data: dat.data.data,
+						// pageSize: 10,
+						selectable: true,
+						refresh: true,
+						total: dat.data.data.length,
+						serverPaging: false,
+						aggregate: [
+								{ field: 'total', aggregate: 'sum' },
+						]
+
+				};
+				}, function (error) {
+						$scope.isLoading = false;
+				});
+			
+			$scope.popUpDaftarRingkasanPulang.center().open();
+			
+		}	
+
+		$scope.columnDaftadRingkasanPulang = {
+			columns: [
+					{
+							"field": "tglemr",
+							"title": "Tgl EMR",
+							"width": "90px",
+					},                   
+					{
+							"field": "emrpasienfk",
+							"title": "No EMR",
+							"width": "160px"
+					},
+					{
+							"field": "namaform",
+							"title": "Nama EMR",
+							"width": "160px"
+					},
+			],
+			sortable: {
+					mode: "single",
+					allowUnsort: false,
+			}
+		}
+
+			$scope.cetakRingkasanPulang = function () {
+				if ($scope.dataSelectedRingkasanPulang.emrpasienfk == undefined) {
+					toastr.error('Data belum dipilih!!!')
+					return;
+				}
+
+				var local = JSON.parse(localStorage.getItem('profile'));
+				var nama = medifirstService.getPegawaiLogin();
+				window.open(baseTransaksi + 'report/cetak-asesmen-ringkasan-pulang-ranap?nocm='
+				+ $scope.dataSelectedRingkasanPulang.nocm 
+				+ '&norec_apd=' + $scope.dataSelectedRingkasanPulang.norec_apd 
+				+ '&emr=' + $scope.dataSelectedRingkasanPulang.norec 
+				+ '&emrfk=' + $scope.dataSelectedRingkasanPulang.emrfk
+				+ '&kdprofile=' + local.id
+				+ '&nama=' + nama, '_blank');
+		}
+
+		$scope.suretKematian = function(){
+			if ($scope.dataPasienSelected.noregistrasi == undefined) {
+				toastr.error('Pilih Pasien Terlebih dahulu!!!')
+				return;
+			}
+			var emrfk = [290138,290139] // emrfk Surat Kematian Ranap Rajal
+
+			medifirstService.get("bridging/inacbg/get-emr-pasien?noregistrasi=" + $scope.dataPasienSelected.noregistrasi + '&emrfk=' + emrfk
+				// medifirstService.get("lab-radiologi/get-rincian-pelayanan?objectdepartemenfk=" + departemenfk + "&noregistrasi=" +   $scope.item.noregistrasi
+				, true).then(function (dat) {
+					$scope.dataDaftadSuketKematian = {
+						data: dat.data.data,
+						_data: dat.data.data,
+						// pageSize: 10,
+						selectable: true,
+						refresh: true,
+						total: dat.data.data.length,
+						serverPaging: false,
+						aggregate: [
+								{ field: 'total', aggregate: 'sum' },
+						]
+
+				};
+				}, function (error) {
+						$scope.isLoading = false;
+				});
+			
+			$scope.popUpDaftarSuketKematian.center().open();
+			
+		}	
+
+		$scope.columnDaftadSuketKematian = {
+			columns: [
+					{
+							"field": "tglemr",
+							"title": "Tgl EMR",
+							"width": "90px",
+					},                   
+					{
+							"field": "emrpasienfk",
+							"title": "No EMR",
+							"width": "160px"
+					},
+					{
+							"field": "namaform",
+							"title": "Nama EMR",
+							"width": "160px"
+					},
+			],
+			sortable: {
+					mode: "single",
+					allowUnsort: false,
+			}
+		}
+
+			$scope.cetakSuketKematian = function () {
+				if ($scope.dataSelectedSuketKematian.emrpasienfk == undefined) {
+					toastr.error('Data belum dipilih!!!')
+					return;
+				}
+
+				var local = JSON.parse(localStorage.getItem('profile'));
+				var nama = medifirstService.getPegawaiLogin();
+				window.open(baseTransaksi + 'report/cetak-suket-kematian?nocm='
+				+ $scope.dataSelectedSuketKematian.nocm 
+				+ '&norec_apd=' + $scope.dataSelectedSuketKematian.norec_apd 
+				+ '&emr=' + $scope.dataSelectedSuketKematian.norec 
+				+ '&emrfk=' + $scope.dataSelectedSuketKematian.emrfk
+				+ '&kdprofile=' + local.id
+				+ '&nama=' + nama, '_blank');
+		}
+
 			// END ################
 
 		}
