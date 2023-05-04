@@ -3573,6 +3573,10 @@
         {
             "nameDep": "SuratKeteranganKematianRanapCtrl",
             "urlDep": "module/EMR/SuratKeteranganKematianRanapCtrl"
+        },
+        {
+            "nameDep": "PemberianMakanAwalPenurunanCairanCtrl",
+            "urlDep": "module/EMR/PemberianMakanAwalPenurunanCairanCtrl"
         }
     
     ]

@@ -19991,6 +19991,29 @@
         "define": "RekamMedisCtrl"
       }
     ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.PemberianMakanAwalPenurunanCairan",
+    "url": "/PemberianMakanAwalPenurunanCairan/:index/:idEMR",
+    "templateurl": "module/EMR/PemberianMakanAwalPenurunanCairan.html",
+    "controller": "PemberianMakanAwalPenurunanCairanCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
   }
 
 
