@@ -5039,6 +5039,59 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 		}
 	}
 
+	$scope.laporanOperasi = function(){
+		if ($scope.dataPasienSelected.noregistrasi == undefined) {
+			toastr.error('Pilih Pasien Terlebih dahulu!!!')
+			return;
+		}
+
+		medifirstService.get("bridging/inacbg/get-rincian-operasi?noregistrasi=" + $scope.dataPasienSelected.noregistrasi, true).then(function (dat) {
+				$scope.dataDaftarHasilOperasi = {
+					data: dat.data,
+					_data: dat.data,
+					// pageSize: 10,
+					selectable: true,
+					refresh: true,
+					total: dat.data.length,
+					serverPaging: false,
+					aggregate: [
+							{ field: 'total', aggregate: 'sum' },
+					]
+
+			};
+			}, function (error) {
+					$scope.isLoading = false;
+			});
+		
+		$scope.popUpLaporanOperasi.center().open();
+		
+	}
+
+	$scope.columnDaftarHasilOperasi = {
+		columns: [
+				{
+						"field": "emrpasienfk",
+						"title": "no emr",
+						"width": "90px",
+				},                   
+				{
+						"field": "namaform",
+						"title": "nama Form",
+						"width": "120px"
+				},
+		],
+		sortable: {
+				mode: "single",
+				allowUnsort: false,
+		}
+	}
+
+	$scope.cetakLaporanOperasi = function () {
+		var local = JSON.parse(localStorage.getItem('profile'));
+		var nama = medifirstService.getPegawaiLogin().namalengkap;
+		window.open(baseTransaksi + 'report/cetak-laporan-operasi?nocm='+ $scope.dataPasienSelected.nocm + '&emr=' + $scope.dataSelectedHasilOpr.norec + '&emrfk=' + $scope.dataSelectedHasilOpr.emrfk + '&kdprofile=' + local.id + '&nama=' + nama, '_blank');
+	}
+
 	$scope.cetakCtscan = function () {
 		// if ($scope.norecHasilRadiologi != '') {
 			var local = JSON.parse(localStorage.getItem('profile'))

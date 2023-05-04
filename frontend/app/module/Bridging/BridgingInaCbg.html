@@ -477,6 +477,9 @@
 			<div class="grid_2">
 				<button class="btnTemplate1" ng-click="konsulDokter()">Cetak Konsul Dokter</button>
 			</div>
+			<div class="grid_2">
+				<button class="btnTemplate1" ng-click="laporanOperasi()">Cetak Laporan Operasi</button>
+			</div>
 			<!-- <div class="grid_2" >
 				<button class="btnTemplate1"  ng-click="editKlaimm()">Edit Klaim Masal</button>
 			</div>
@@ -1186,6 +1189,20 @@
 							<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
 									<button class="k-button  k-button-icontext" ng-click="cetakKonsulDokter()">Cetak</button>
 							</div>
+					</div>
+			</div>
+		</div>
+
+		<div kendo-window="popUpLaporanOperasi" k-title="'Daftar Laporan Operasi'" k-visible="false" k-width="1000" k-height="400">
+			<div class="panel panel-default container_12">
+				<div class="grid_12 headerBox">
+					<kendo-grid id="kGrids" data-source="dataDaftarHasilOperasi" options="columnDaftarHasilOperasi" k-selectable="'row'" k-sortable="'true'"
+							k-resizable="'true'" k-ng-model="dataSelectedHasilOpr" ng-click="klikGridHasilOpr(dataSelectedHasilOpr)"></kendo-grid>
+			</div>
+					<div class="grid_12">
+						<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
+								<button class="k-button  k-button-icontext" ng-click="cetakLaporanOperasi()">Cetak</button>
+						</div>
 					</div>
 			</div>
 		</div>
