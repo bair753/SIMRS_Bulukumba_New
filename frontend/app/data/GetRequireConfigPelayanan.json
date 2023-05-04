@@ -3573,6 +3573,18 @@
         {
             "nameDep": "SuratKeteranganKematianRanapCtrl",
             "urlDep": "module/EMR/SuratKeteranganKematianRanapCtrl"
+        },
+        {
+            "nameDep": "PemberianMakanAwalPenurunanCairanCtrl",
+            "urlDep": "module/EMR/PemberianMakanAwalPenurunanCairanCtrl"
+        },
+        {
+            "nameDep": "MonitoringPMK1Ctrl",
+            "urlDep": "module/EMR/MonitoringPMK1Ctrl"
+        },
+        {
+            "nameDep": "MonitoringPMK2Ctrl",
+            "urlDep": "module/EMR/MonitoringPMK2Ctrl"
         }
     
     ]

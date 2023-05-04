@@ -2875,7 +2875,15 @@ class ReportController extends ApiController{
         ORDER BY
             DATA.nourutjenispemeriksaan ASC
         "));
-        
+        if (count($datas) == 0) {
+            echo '
+                <script language="javascript">
+                    window.alert("Hasil belum ada / hasil tidak ditemukan");
+                    window.close()
+                </script>
+            ';
+            die;
+        }
         // dd(substr($datas[0]->hasil,0,1));
         foreach ($datas as $data) {
             if ($data->flag == 'Y') {
@@ -2904,10 +2912,7 @@ class ReportController extends ApiController{
             // 'user' => $user,
             'datas' => $data,
         );
-        if (count($datas) == 0) {
-            echo 'Data Tidak ada';
-            die;
-        }
+        
         return view(
             'report.lab.hasil-lab-manual',
             compact('datas', 'header', 'pageWidth', 'r', 'profile')

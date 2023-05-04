@@ -1,0 +1,1599 @@
+<style type="text/css">
+    fieldset {
+        border-radius: 5px;
+        border: 1px solid #228be6;
+    }
+
+    .k-slider-horizontal {
+        display: inline-block;
+        float: left;
+        width: 450px;
+
+        height: 26px;
+
+
+    }
+
+    .k-slider {
+
+        margin-left: 3%;
+        margin-right: 3%;
+        margin-top: 1%;
+        margin-bottom: 5%;
+        display: inline-block;
+    }
+
+    .activeBtn {
+        background-color: #10c4b2;
+        color: #ffffff;
+    }
+    table,
+    th,
+    td {
+        border: 1px solid #929191;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+
+    th,
+    td {
+        padding: 5px;
+        text-align: left;
+    }
+
+    .mt-1 {
+        margin-top: 10px;
+    }
+
+    .mt {
+        margin-top: 10px;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+</style>
+
+ <!-- ng-class="{'my-disable':true}" -->
+<!-- <div class="grid_12"  disable-contents="allDisabled" id="form"> -->
+<div class="grid_12">
+    <div class="grid_12">
+        <div class="panel panel-default container_12">
+            <div class="panel-heading" c-translate> Pemberian Makan Awal Dan Penurunan Cairan IV Pada Neonatus Lebih Dari 2500 Gram Dari Hari Perawatan 1-12 </div>
+        </div>
+
+        <div class="grid_12 mt-1">
+            <fieldset class="mt-1">
+                <div class="grid_12 mt-1">
+                    <table>
+                        <tr>
+                            <td colspan="3">
+                                <label c-label item="item">BB</label>
+                                <input type="text" class="k-textbox" ng-model="item.obj[32104178]">
+                            </td>
+                            <td colspan="2">
+                                <label c-label item="item">BB MASUK</label>
+                                <input type="text" class="k-textbox" ng-model="item.obj[32104179]">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="text-center">HARI LAHIR/HARI RAWAT</th>
+                            <th class="text-center">VOLUME MINUM</th>
+                            <th class="text-center">VOLUME CAIRAN IV</th>
+                            <th class="text-center">JENIS CAIRAN</th>
+                            <th class="text-center">TOTAL VOLUME CAIRAN</th>
+                        </tr>
+                        <tr ng-repeat="list in listInfo1 | orderBy:'id'">
+                            <td ng-repeat="jawab in list.detail | orderBy:'id'" ng-switch on="jawab.type">
+                                <div class="grid_12 text-center" ng-switch-when="label">
+                                    <label item="item">{{ jawab.caption }}</label>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="grid_12 mt-1">
+                    <table>
+                        <tr>
+                            <td>
+                                <label c-label item="item">% PERUBAHAN DARI BB LAHIR : *</label>
+                                <input type="text" class="k-textbox" ng-model="item.obj[32104240]">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label item="item">- 	‘Volume minum’ merupakan jumlah volume minimal yang diberikan. Selalu bisa naik volume susu ke total volume cairan</label> <br>
+                                <label item="item">- 	Gunakan BB lahir atau BB saat masuk yang sampai BB lebih besar</label> <br>
+                                <label item="item">- 	Kalau bayi turun berat badan (BB), gunakan BB tertinggi untuk penghitungan</label> <br>
+                                <label item="item">- 	Pemberian minum harus dimulai pada hari kedua, jika RR ≤ 80</label> <br>
+                                <label item="item">- 	Bayi harus menghentikan cairan infus dan mencapai nutrisi oral 100% pada hari ke-7</label> <br>
+                                <label item="item">- 	ASI adalah yang terbaik. Gunakan ASI Perah atau Formula 20 Kkal/ 30 cc sampai pemberian minum 150 cc/kg/hr</label> <br>
+                                <label item="item">- 	Pindah ke lembar pemeliharaan pemberian minum saat minum bayi mencapai 150 cc/kg/hr</label> <br>
+                                <br>
+                                <label item="item"><i>(Jk neonatus mengalami intoleransi atau tanda NEC (lihat dibawah) dan pemberian minum lanjutan tertunda, jelaskan masalah pada kolom “komentar” dan gunakan lembar “pemberian minum awal” kedua sesuai kebutuhan perbaiki hari rawat pada kolom pertama)</i></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label item="item">
+                                    Kunci – DOB : Hari lahir; HD : Hari rawat; * %Perubahan dari BB lahir = (BW-AW/BW)* 100 dimana BW adalah berat lahir dan AW adalah berat saat masuk; D10 : Dextrose 10%; NS : Normal Saline atau 154 mEq/L solution
+                                </label>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </fieldset>
+        </div>
+        <div class="grid_12 mt-1">
+            <fieldset class="mt-1">
+                <div class="grid_12 mt-1" style="min-width: 1000px;overflow: auto;">
+                    <table id="frozen" style="width: 250%;color: #4c5356;">
+                        <tr>
+                            <th class="text-center" rowspan="2">HARI RAWAT INFANT</th>
+                            <th class="text-center"></th>
+                            <th class="text-center">A</th>
+                            <th class="text-center">B</th>
+                            <th class="text-center"></th>
+                            <th class="text-center">C</th>
+                            <th class="text-center"></th>
+                            <th class="text-center"></th>
+                            <th class="text-center"></th>
+                            <th class="text-center"></th>
+                            <th class="text-center"></th>
+                        </tr>
+                        <tr>
+                            <th class="text-center">Tgl hari ini (d/m/y)</th>
+                            <th class="text-center">Berat Badan (kg)</th>
+                            <th class="text-center">Volume minum perhari (cc/kg/hr)</th>
+                            <th class="text-center">Volume minum setiap 2 jam (A*B)/12</th>
+                            <th class="text-center">Volume cairan IV Per hari (cc/kg/hr)</th>
+                            <th class="text-center">Volume cairan per jam (A*B)/12</th>
+                            <th class="text-center">Jenis Minuman (Asi atau Formula)</th>
+                            <th class="text-center">MINUMAN DIBERIKAN PERHARI (Lingkari setiap minum diberikan)</th>
+                            <th class="text-center">Tanda Intoleransi (Distensi; Muntahan empedu atau susu; feces berdarah)</th>
+                            <th class="text-center" style="width: 250px;">Komentar</th>
+                        </tr>
+                        <!-- 1 -->
+                        <tr>
+                            <td class="text-center">Hari 1</td>
+                            <td>
+                                <div class="grid_12">
+                                    <input style="width: 100%" k-ng-model="item.obj[32104241]" kendo-datepicker placeholer="yyyy-MM-dd" k-format="'yyyy-MM-dd'" parsedate="yyyy-MM-dd" />
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104242]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104243]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104244]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px">cc</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104245]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104246]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px">cc</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_6">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104247}}" ng-model="item.obj[32104247]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104247}}">&nbsp;ASI</label>
+                                </div>
+                                <div class="grid_6">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104248}}" ng-model="item.obj[32104248]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104248}}">&nbsp;F</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104249}}" ng-model="item.obj[32104249]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104249}}">&nbsp;1</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104250}}" ng-model="item.obj[32104250]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104250}}">&nbsp;2</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104251}}" ng-model="item.obj[32104251]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104251}}">&nbsp;3</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104252}}" ng-model="item.obj[32104252]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104252}}">&nbsp;4</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104253}}" ng-model="item.obj[32104253]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104253}}">&nbsp;5</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104254}}" ng-model="item.obj[32104254]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104254}}">&nbsp;6</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104255}}" ng-model="item.obj[32104255]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104255}}">&nbsp;7</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104256}}" ng-model="item.obj[32104256]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104256}}">&nbsp;8</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104257}}" ng-model="item.obj[32104257]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104257}}">&nbsp;9</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104258}}" ng-model="item.obj[32104258]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104258}}">&nbsp;10</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104259}}" ng-model="item.obj[32104259]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104259}}">&nbsp;11</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104260}}" ng-model="item.obj[32104260]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104260}}">&nbsp;12</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_4">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104261}}" ng-model="item.obj[32104261]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104261}}">&nbsp;Dis</label>
+                                </div>
+                                <div class="grid_4">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104262}}" ng-model="item.obj[32104262]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104262}}">&nbsp;M - emp su</label>
+                                </div>
+                                <div class="grid_4">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104263}}" ng-model="item.obj[32104263]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104263}}">&nbsp;D</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12">
+                                    <textarea cols="6" rows="4" class="k-textbox" ng-model="item.obj[32104264]"></textarea>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 1 -->
+                        <!-- 2 -->
+                        <tr>
+                            <td class="text-center">Hari 2</td>
+                            <td>
+                                <div class="grid_12">
+                                    <input style="width: 100%" k-ng-model="item.obj[32104265]" kendo-datepicker placeholer="yyyy-MM-dd" k-format="'yyyy-MM-dd'" parsedate="yyyy-MM-dd" />
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104266]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104267]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104268]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px">cc</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104269]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104270]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px">cc</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_6">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104271}}" ng-model="item.obj[32104271]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104271}}">&nbsp;ASI</label>
+                                </div>
+                                <div class="grid_6">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104272}}" ng-model="item.obj[32104272]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104272}}">&nbsp;F</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104273}}" ng-model="item.obj[32104273]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104273}}">&nbsp;1</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104274}}" ng-model="item.obj[32104274]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104274}}">&nbsp;2</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104275}}" ng-model="item.obj[32104275]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104275}}">&nbsp;3</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104276}}" ng-model="item.obj[32104276]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104276}}">&nbsp;4</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104277}}" ng-model="item.obj[32104277]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104277}}">&nbsp;5</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104278}}" ng-model="item.obj[32104278]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104278}}">&nbsp;6</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104279}}" ng-model="item.obj[32104279]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104279}}">&nbsp;7</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104280}}" ng-model="item.obj[32104280]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104280}}">&nbsp;8</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104281}}" ng-model="item.obj[32104281]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104281}}">&nbsp;9</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104282}}" ng-model="item.obj[32104282]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104282}}">&nbsp;10</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104283}}" ng-model="item.obj[32104283]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104283}}">&nbsp;11</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104284}}" ng-model="item.obj[32104284]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104284}}">&nbsp;12</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_4">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104285}}" ng-model="item.obj[32104285]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104285}}">&nbsp;Dis</label>
+                                </div>
+                                <div class="grid_4">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104286}}" ng-model="item.obj[32104286]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104286}}">&nbsp;M - emp su</label>
+                                </div>
+                                <div class="grid_4">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104287}}" ng-model="item.obj[32104287]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104287}}">&nbsp;D</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12">
+                                    <textarea cols="6" rows="4" class="k-textbox" ng-model="item.obj[32104288]"></textarea>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 2 -->
+                        <!-- 3 -->
+                        <tr>
+                            <td class="text-center">Hari 3</td>
+                            <td>
+                                <div class="grid_12">
+                                    <input style="width: 100%" k-ng-model="item.obj[32104289]" kendo-datepicker placeholer="yyyy-MM-dd" k-format="'yyyy-MM-dd'" parsedate="yyyy-MM-dd" />
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104290]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104291]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104292]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px">cc</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104293]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104294]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px">cc</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_6">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104295}}" ng-model="item.obj[32104295]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104295}}">&nbsp;ASI</label>
+                                </div>
+                                <div class="grid_6">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104296}}" ng-model="item.obj[32104296]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104296}}">&nbsp;F</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104297}}" ng-model="item.obj[32104297]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104297}}">&nbsp;1</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104298}}" ng-model="item.obj[32104298]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104298}}">&nbsp;2</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104299}}" ng-model="item.obj[32104299]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104299}}">&nbsp;3</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104300}}" ng-model="item.obj[32104300]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104300}}">&nbsp;4</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104301}}" ng-model="item.obj[32104301]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104301}}">&nbsp;5</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104302}}" ng-model="item.obj[32104302]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104302}}">&nbsp;6</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104303}}" ng-model="item.obj[32104303]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104303}}">&nbsp;7</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104304}}" ng-model="item.obj[32104304]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104304}}">&nbsp;8</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104305}}" ng-model="item.obj[32104305]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104305}}">&nbsp;9</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104306}}" ng-model="item.obj[32104306]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104306}}">&nbsp;10</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104307}}" ng-model="item.obj[32104307]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104307}}">&nbsp;11</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104308}}" ng-model="item.obj[32104308]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104308}}">&nbsp;12</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_4">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104309}}" ng-model="item.obj[32104309]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104309}}">&nbsp;Dis</label>
+                                </div>
+                                <div class="grid_4">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104310}}" ng-model="item.obj[32104310]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104310}}">&nbsp;M - emp su</label>
+                                </div>
+                                <div class="grid_4">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104311}}" ng-model="item.obj[32104311]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104311}}">&nbsp;D</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12">
+                                    <textarea cols="6" rows="4" class="k-textbox" ng-model="item.obj[32104312]"></textarea>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 3 -->
+                        <!-- 4 -->
+                        <tr>
+                            <td class="text-center">Hari 4</td>
+                            <td>
+                                <div class="grid_12">
+                                    <input style="width: 100%" k-ng-model="item.obj[32104313]" kendo-datepicker placeholer="yyyy-MM-dd" k-format="'yyyy-MM-dd'" parsedate="yyyy-MM-dd" />
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104314]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104315]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104316]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px">cc</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104317]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104318]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px">cc</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_6">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104319}}" ng-model="item.obj[32104319]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104319}}">&nbsp;ASI</label>
+                                </div>
+                                <div class="grid_6">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104320}}" ng-model="item.obj[32104320]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104320}}">&nbsp;F</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104321}}" ng-model="item.obj[32104321]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104321}}">&nbsp;1</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104322}}" ng-model="item.obj[32104322]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104322}}">&nbsp;2</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104323}}" ng-model="item.obj[32104323]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104323}}">&nbsp;3</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104324}}" ng-model="item.obj[32104324]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104324}}">&nbsp;4</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104325}}" ng-model="item.obj[32104325]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104325}}">&nbsp;5</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104326}}" ng-model="item.obj[32104326]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104326}}">&nbsp;6</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104327}}" ng-model="item.obj[32104327]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104327}}">&nbsp;7</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104328}}" ng-model="item.obj[32104328]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104328}}">&nbsp;8</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104329}}" ng-model="item.obj[32104329]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104329}}">&nbsp;9</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104330}}" ng-model="item.obj[32104330]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104330}}">&nbsp;10</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104331}}" ng-model="item.obj[32104331]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104331}}">&nbsp;11</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104332}}" ng-model="item.obj[32104332]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104332}}">&nbsp;12</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_4">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104333}}" ng-model="item.obj[32104333]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104333}}">&nbsp;Dis</label>
+                                </div>
+                                <div class="grid_4">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104334}}" ng-model="item.obj[32104334]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104334}}">&nbsp;M - emp su</label>
+                                </div>
+                                <div class="grid_4">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104335}}" ng-model="item.obj[32104335]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104335}}">&nbsp;D</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12">
+                                    <textarea cols="6" rows="4" class="k-textbox" ng-model="item.obj[32104336]"></textarea>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 4 -->
+                        <!-- 5 -->
+                        <tr>
+                            <td class="text-center">Hari 5</td>
+                            <td>
+                                <div class="grid_12">
+                                    <input style="width: 100%" k-ng-model="item.obj[32104337]" kendo-datepicker placeholer="yyyy-MM-dd" k-format="'yyyy-MM-dd'" parsedate="yyyy-MM-dd" />
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104338]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104339]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104340]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px">cc</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104341]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104342]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px">cc</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_6">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104343}}" ng-model="item.obj[32104343]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104343}}">&nbsp;ASI</label>
+                                </div>
+                                <div class="grid_6">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104344}}" ng-model="item.obj[32104344]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104344}}">&nbsp;F</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104345}}" ng-model="item.obj[32104345]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104345}}">&nbsp;1</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104346}}" ng-model="item.obj[32104346]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104346}}">&nbsp;2</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104347}}" ng-model="item.obj[32104347]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104347}}">&nbsp;3</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104348}}" ng-model="item.obj[32104348]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104348}}">&nbsp;4</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104349}}" ng-model="item.obj[32104349]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104349}}">&nbsp;5</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104350}}" ng-model="item.obj[32104350]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104350}}">&nbsp;6</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104351}}" ng-model="item.obj[32104351]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104351}}">&nbsp;7</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104352}}" ng-model="item.obj[32104352]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104352}}">&nbsp;8</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104353}}" ng-model="item.obj[32104353]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104353}}">&nbsp;9</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104354}}" ng-model="item.obj[32104354]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104354}}">&nbsp;10</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104355}}" ng-model="item.obj[32104355]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104355}}">&nbsp;11</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104356}}" ng-model="item.obj[32104356]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104356}}">&nbsp;12</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_4">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104357}}" ng-model="item.obj[32104357]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104357}}">&nbsp;Dis</label>
+                                </div>
+                                <div class="grid_4">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104358}}" ng-model="item.obj[32104358]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104358}}">&nbsp;M - emp su</label>
+                                </div>
+                                <div class="grid_4">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104359}}" ng-model="item.obj[32104359]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104359}}">&nbsp;D</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12">
+                                    <textarea cols="6" rows="4" class="k-textbox" ng-model="item.obj[32104360]"></textarea>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 5 -->
+                        <!-- 6 -->
+                        <tr>
+                            <td class="text-center">Hari 6</td>
+                            <td>
+                                <div class="grid_12">
+                                    <input style="width: 100%" k-ng-model="item.obj[32104361]" kendo-datepicker placeholer="yyyy-MM-dd" k-format="'yyyy-MM-dd'" parsedate="yyyy-MM-dd" />
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104362]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104363]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104364]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px">cc</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104365]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104366]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px">cc</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_6">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104367}}" ng-model="item.obj[32104367]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104367}}">&nbsp;ASI</label>
+                                </div>
+                                <div class="grid_6">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104368}}" ng-model="item.obj[32104368]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104368}}">&nbsp;F</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104369}}" ng-model="item.obj[32104369]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104369}}">&nbsp;1</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104370}}" ng-model="item.obj[32104370]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104370}}">&nbsp;2</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104371}}" ng-model="item.obj[32104371]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104371}}">&nbsp;3</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104372}}" ng-model="item.obj[32104372]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104372}}">&nbsp;4</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104373}}" ng-model="item.obj[32104373]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104373}}">&nbsp;5</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104374}}" ng-model="item.obj[32104374]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104374}}">&nbsp;6</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104375}}" ng-model="item.obj[32104375]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104375}}">&nbsp;7</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104376}}" ng-model="item.obj[32104376]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104376}}">&nbsp;8</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104377}}" ng-model="item.obj[32104377]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104377}}">&nbsp;9</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104378}}" ng-model="item.obj[32104378]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104378}}">&nbsp;10</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104379}}" ng-model="item.obj[32104379]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104379}}">&nbsp;11</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104380}}" ng-model="item.obj[32104380]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104380}}">&nbsp;12</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_4">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104381}}" ng-model="item.obj[32104381]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104381}}">&nbsp;Dis</label>
+                                </div>
+                                <div class="grid_4">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104382}}" ng-model="item.obj[32104382]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104382}}">&nbsp;M - emp su</label>
+                                </div>
+                                <div class="grid_4">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104383}}" ng-model="item.obj[32104383]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104383}}">&nbsp;D</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12">
+                                    <textarea cols="6" rows="4" class="k-textbox" ng-model="item.obj[32104384]"></textarea>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 6 -->
+                        <!-- 7 -->
+                        <tr>
+                            <td class="text-center">Hari 7</td>
+                            <td>
+                                <div class="grid_12">
+                                    <input style="width: 100%" k-ng-model="item.obj[32104385]" kendo-datepicker placeholer="yyyy-MM-dd" k-format="'yyyy-MM-dd'" parsedate="yyyy-MM-dd" />
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104386]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104387]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104388]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px">cc</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104389]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104390]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px">cc</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_6">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104391}}" ng-model="item.obj[32104391]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104391}}">&nbsp;ASI</label>
+                                </div>
+                                <div class="grid_6">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104392}}" ng-model="item.obj[32104392]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104392}}">&nbsp;F</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104393}}" ng-model="item.obj[32104393]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104393}}">&nbsp;1</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104394}}" ng-model="item.obj[32104394]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104394}}">&nbsp;2</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104395}}" ng-model="item.obj[32104395]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104395}}">&nbsp;3</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104396}}" ng-model="item.obj[32104396]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104396}}">&nbsp;4</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104397}}" ng-model="item.obj[32104397]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104397}}">&nbsp;5</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104398}}" ng-model="item.obj[32104398]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104398}}">&nbsp;6</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104399}}" ng-model="item.obj[32104399]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104399}}">&nbsp;7</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104400}}" ng-model="item.obj[32104400]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104400}}">&nbsp;8</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104401}}" ng-model="item.obj[32104401]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104401}}">&nbsp;9</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104402}}" ng-model="item.obj[32104402]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104402}}">&nbsp;10</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104403}}" ng-model="item.obj[32104403]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104403}}">&nbsp;11</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104404}}" ng-model="item.obj[32104404]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104404}}">&nbsp;12</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_4">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104405}}" ng-model="item.obj[32104405]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104405}}">&nbsp;Dis</label>
+                                </div>
+                                <div class="grid_4">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104406}}" ng-model="item.obj[32104406]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104406}}">&nbsp;M - emp su</label>
+                                </div>
+                                <div class="grid_4">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104407}}" ng-model="item.obj[32104407]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104407}}">&nbsp;D</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12">
+                                    <textarea cols="6" rows="4" class="k-textbox" ng-model="item.obj[32104408]"></textarea>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 7 -->
+                        <!-- 8 -->
+                        <tr>
+                            <td class="text-center">Hari 8</td>
+                            <td>
+                                <div class="grid_12">
+                                    <input style="width: 100%" k-ng-model="item.obj[32104409]" kendo-datepicker placeholer="yyyy-MM-dd" k-format="'yyyy-MM-dd'" parsedate="yyyy-MM-dd" />
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104410]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104411]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104412]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px">cc</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104413]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104414]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px">cc</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_6">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104415}}" ng-model="item.obj[32104415]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104415}}">&nbsp;ASI</label>
+                                </div>
+                                <div class="grid_6">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104416}}" ng-model="item.obj[32104416]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104416}}">&nbsp;F</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104417}}" ng-model="item.obj[32104417]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104417}}">&nbsp;1</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104418}}" ng-model="item.obj[32104418]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104418}}">&nbsp;2</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104419}}" ng-model="item.obj[32104419]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104419}}">&nbsp;3</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104420}}" ng-model="item.obj[32104420]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104420}}">&nbsp;4</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104421}}" ng-model="item.obj[32104421]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104421}}">&nbsp;5</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104422}}" ng-model="item.obj[32104422]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104422}}">&nbsp;6</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104423}}" ng-model="item.obj[32104423]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104423}}">&nbsp;7</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104424}}" ng-model="item.obj[32104424]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104424}}">&nbsp;8</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104425}}" ng-model="item.obj[32104425]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104425}}">&nbsp;9</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104426}}" ng-model="item.obj[32104426]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104426}}">&nbsp;10</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104427}}" ng-model="item.obj[32104427]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104427}}">&nbsp;11</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104428}}" ng-model="item.obj[32104428]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104428}}">&nbsp;12</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_4">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104429}}" ng-model="item.obj[32104429]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104429}}">&nbsp;Dis</label>
+                                </div>
+                                <div class="grid_4">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104430}}" ng-model="item.obj[32104430]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104430}}">&nbsp;M - emp su</label>
+                                </div>
+                                <div class="grid_4">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104431}}" ng-model="item.obj[32104431]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104431}}">&nbsp;D</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12">
+                                    <textarea cols="6" rows="4" class="k-textbox" ng-model="item.obj[32104432]"></textarea>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 8 -->
+                        <!-- 9 -->
+                        <tr>
+                            <td class="text-center">Hari 9</td>
+                            <td>
+                                <div class="grid_12">
+                                    <input style="width: 100%" k-ng-model="item.obj[32104433]" kendo-datepicker placeholer="yyyy-MM-dd" k-format="'yyyy-MM-dd'" parsedate="yyyy-MM-dd" />
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104434]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104435]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104436]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px">cc</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104437]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104438]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px">cc</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_6">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104439}}" ng-model="item.obj[32104439]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104439}}">&nbsp;ASI</label>
+                                </div>
+                                <div class="grid_6">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104440}}" ng-model="item.obj[32104440]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104440}}">&nbsp;F</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104441}}" ng-model="item.obj[32104441]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104441}}">&nbsp;1</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104442}}" ng-model="item.obj[32104442]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104442}}">&nbsp;2</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104443}}" ng-model="item.obj[32104443]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104443}}">&nbsp;3</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104444}}" ng-model="item.obj[32104444]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104444}}">&nbsp;4</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104445}}" ng-model="item.obj[32104445]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104445}}">&nbsp;5</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104446}}" ng-model="item.obj[32104446]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104446}}">&nbsp;6</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104447}}" ng-model="item.obj[32104447]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104447}}">&nbsp;7</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104448}}" ng-model="item.obj[32104448]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104448}}">&nbsp;8</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104449}}" ng-model="item.obj[32104449]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104449}}">&nbsp;9</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104450}}" ng-model="item.obj[32104450]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104450}}">&nbsp;10</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104451}}" ng-model="item.obj[32104451]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104451}}">&nbsp;11</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104452}}" ng-model="item.obj[32104452]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104452}}">&nbsp;12</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_4">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104453}}" ng-model="item.obj[32104453]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104453}}">&nbsp;Dis</label>
+                                </div>
+                                <div class="grid_4">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104454}}" ng-model="item.obj[32104454]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104454}}">&nbsp;M - emp su</label>
+                                </div>
+                                <div class="grid_4">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104455}}" ng-model="item.obj[32104455]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104455}}">&nbsp;D</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12">
+                                    <textarea cols="6" rows="4" class="k-textbox" ng-model="item.obj[32104456]"></textarea>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 9 -->
+                        <!-- 10 -->
+                        <tr>
+                            <td class="text-center">Hari 10</td>
+                            <td>
+                                <div class="grid_12">
+                                    <input style="width: 100%" k-ng-model="item.obj[32104457]" kendo-datepicker placeholer="yyyy-MM-dd" k-format="'yyyy-MM-dd'" parsedate="yyyy-MM-dd" />
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104458]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104459]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104460]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px">cc</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104461]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104462]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px">cc</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_6">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104463}}" ng-model="item.obj[32104463]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104463}}">&nbsp;ASI</label>
+                                </div>
+                                <div class="grid_6">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104464}}" ng-model="item.obj[32104464]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104464}}">&nbsp;F</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104465}}" ng-model="item.obj[32104465]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104465}}">&nbsp;1</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104466}}" ng-model="item.obj[32104466]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104466}}">&nbsp;2</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104467}}" ng-model="item.obj[32104467]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104467}}">&nbsp;3</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104468}}" ng-model="item.obj[32104468]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104468}}">&nbsp;4</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104469}}" ng-model="item.obj[32104469]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104469}}">&nbsp;5</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104470}}" ng-model="item.obj[32104470]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104470}}">&nbsp;6</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104471}}" ng-model="item.obj[32104471]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104471}}">&nbsp;7</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104472}}" ng-model="item.obj[32104472]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104472}}">&nbsp;8</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104473}}" ng-model="item.obj[32104473]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104473}}">&nbsp;9</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104474}}" ng-model="item.obj[32104474]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104474}}">&nbsp;10</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104475}}" ng-model="item.obj[32104475]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104475}}">&nbsp;11</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104476}}" ng-model="item.obj[32104476]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104476}}">&nbsp;12</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_4">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104477}}" ng-model="item.obj[32104477]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104477}}">&nbsp;Dis</label>
+                                </div>
+                                <div class="grid_4">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104478}}" ng-model="item.obj[32104478]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104478}}">&nbsp;M - emp su</label>
+                                </div>
+                                <div class="grid_4">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104479}}" ng-model="item.obj[32104479]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104479}}">&nbsp;D</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12">
+                                    <textarea cols="6" rows="4" class="k-textbox" ng-model="item.obj[32104480]"></textarea>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 10 -->
+                        <!-- 11 -->
+                        <tr>
+                            <td class="text-center">Hari 11</td>
+                            <td>
+                                <div class="grid_12">
+                                    <input style="width: 100%" k-ng-model="item.obj[32104481]" kendo-datepicker placeholer="yyyy-MM-dd" k-format="'yyyy-MM-dd'" parsedate="yyyy-MM-dd" />
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104482]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104483]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104484]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px">cc</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104485]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104486]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px">cc</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_6">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104487}}" ng-model="item.obj[32104487]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104487}}">&nbsp;ASI</label>
+                                </div>
+                                <div class="grid_6">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104488}}" ng-model="item.obj[32104488]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104488}}">&nbsp;F</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104489}}" ng-model="item.obj[32104489]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104489}}">&nbsp;1</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104490}}" ng-model="item.obj[32104490]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104490}}">&nbsp;2</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104491}}" ng-model="item.obj[32104491]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104491}}">&nbsp;3</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104492}}" ng-model="item.obj[32104492]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104492}}">&nbsp;4</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104493}}" ng-model="item.obj[32104493]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104493}}">&nbsp;5</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104494}}" ng-model="item.obj[32104494]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104494}}">&nbsp;6</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104495}}" ng-model="item.obj[32104495]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104495}}">&nbsp;7</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104496}}" ng-model="item.obj[32104496]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104496}}">&nbsp;8</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104497}}" ng-model="item.obj[32104497]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104497}}">&nbsp;9</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104498}}" ng-model="item.obj[32104498]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104498}}">&nbsp;10</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104499}}" ng-model="item.obj[32104499]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104499}}">&nbsp;11</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104500}}" ng-model="item.obj[32104500]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104500}}">&nbsp;12</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_4">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104501}}" ng-model="item.obj[32104501]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104501}}">&nbsp;Dis</label>
+                                </div>
+                                <div class="grid_4">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104502}}" ng-model="item.obj[32104502]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104502}}">&nbsp;M - emp su</label>
+                                </div>
+                                <div class="grid_4">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104503}}" ng-model="item.obj[32104503]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104503}}">&nbsp;D</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12">
+                                    <textarea cols="6" rows="4" class="k-textbox" ng-model="item.obj[32104504]"></textarea>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 11 -->
+                        <!-- 12 -->
+                        <tr>
+                            <td class="text-center">Hari 12</td>
+                            <td>
+                                <div class="grid_12">
+                                    <input style="width: 100%" k-ng-model="item.obj[32104505]" kendo-datepicker placeholer="yyyy-MM-dd" k-format="'yyyy-MM-dd'" parsedate="yyyy-MM-dd" />
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104506]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104507]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104508]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px">cc</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104509]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px"></label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12 parentKeteranganFieldTambahan">
+                                    <input class="k-textbox" ng-model="item.obj[32104510]" type="text">
+                                    <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px">cc</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_6">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104511}}" ng-model="item.obj[32104511]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104511}}">&nbsp;ASI</label>
+                                </div>
+                                <div class="grid_6">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104512}}" ng-model="item.obj[32104512]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104512}}">&nbsp;F</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104513}}" ng-model="item.obj[32104513]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104513}}">&nbsp;1</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104514}}" ng-model="item.obj[32104514]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104514}}">&nbsp;2</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104515}}" ng-model="item.obj[32104515]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104515}}">&nbsp;3</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104516}}" ng-model="item.obj[32104516]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104516}}">&nbsp;4</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104517}}" ng-model="item.obj[32104517]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104517}}">&nbsp;5</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104518}}" ng-model="item.obj[32104518]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104518}}">&nbsp;6</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104519}}" ng-model="item.obj[32104519]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104519}}">&nbsp;7</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104520}}" ng-model="item.obj[32104520]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104520}}">&nbsp;8</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104521}}" ng-model="item.obj[32104521]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104521}}">&nbsp;9</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104522}}" ng-model="item.obj[32104522]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104522}}">&nbsp;10</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104523}}" ng-model="item.obj[32104523]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104523}}">&nbsp;11</label>
+                                </div>
+                                <div class="grid_1">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104524}}" ng-model="item.obj[32104524]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104524}}">&nbsp;12</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_4">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104525}}" ng-model="item.obj[32104525]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104525}}">&nbsp;Dis</label>
+                                </div>
+                                <div class="grid_4">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104526}}" ng-model="item.obj[32104526]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104526}}">&nbsp;M - emp su</label>
+                                </div>
+                                <div class="grid_4">
+                                    <input type="checkbox" class="k-checkbox" id="item.obj{{32104527}}" ng-model="item.obj[32104527]">
+                                    <label class="k-checkbox-label" for="item.obj{{32104527}}">&nbsp;D</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="grid_12">
+                                    <textarea cols="6" rows="4" class="k-textbox" ng-model="item.obj[32104528]"></textarea>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- 12 -->
+                    </table>
+                </div>
+                <div class="grid_12 mt-1">
+                    <img class="normalTidakNormal" src="images/emr/pemberianmakanawal.png" ng-model="item.obj[32104529]" style="width: 1100px;">
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</div>
+
+<br />
+<br />
+<div class="grid_12">
+    <div ng-include='"../app/module/EMR/TemplateButtonDinamis" '></div>
+
+</div>
