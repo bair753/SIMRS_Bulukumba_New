@@ -55,7 +55,7 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 				}
 				medifirstService.get("bridging/inacbg/get-data-combo-ina", false).then(function (data) {
 					$scope.listDepartemen = data.data.departemen;
-					// $scope.listKelompokPasien = data.data.kelompokpasien;
+					$scope.listKelompokPasien = data.data.kelompokpasien;
 					$scope.selectOptionsKelompok = {
                         placeholder: "Pilih Kelompok...",
                         dataTextField: "kelompokpasien",
