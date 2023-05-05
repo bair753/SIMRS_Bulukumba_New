@@ -18803,8 +18803,8 @@
     ]
   },
   {
-    "name": "RekamMedis.AsesmenMedis.AsesmenLanjutanRisikoJatuhDewasaRanap",
-    "url": "/AsesmenLanjutanRisikoJatuhDewasaRanap",
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.AsesmenLanjutanRisikoJatuhDewasaRanap",
+    "url": "/AsesmenLanjutanRisikoJatuhDewasaRanap/:index/:idEMR",
     "templateurl": "module/EMR/AsesmenLanjutanRisikoJatuhDewasaRanap.html",
     "controller": "AsesmenLanjutanRisikoJatuhDewasaRanapCtrl",
     "deps": [
