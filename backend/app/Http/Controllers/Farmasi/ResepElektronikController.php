@@ -93,13 +93,14 @@ class ResepElektronikController extends ApiController
                         kp.kelompokpasien,apd.norec AS norec_apd,pd.tglregistrasi,ps.tgllahir,kl.namakelas,kl. ID AS klid,so.tglambilorder,
                         sr.noresep,aa.noantri AS aanoantri,aa.jenis AS aajenis,sr.norec AS norecresep,sr.noresep,so.nourutruangan AS noruangan,
                         so.isreseppulang as checkreseppulang,so.isambilobat,so.no_hp as nohp,so.alamat_kirim AS alamatlengkap,so.isordergrab,
-                        so.iskurir, pd.statusschedule as noreservasi
+                        so.iskurir, pd.statusschedule as noreservasi, rd.*
                  FROM strukorder_t AS so
                  INNER JOIN pasien_m AS ps ON ps.id = so.nocmfk
                  INNER JOIN alamat_m AS alm ON ps.id = alm.nocmfk
                  INNER JOIN jeniskelamin_m AS jk ON jk.id = ps.objectjeniskelaminfk
                  INNER JOIN ruangan_m AS ru ON ru.id = so.objectruanganfk
                  INNER JOIN ruangan_m AS ru2 ON ru2.id = so.objectruangantujuanfk
+                 LEFT JOIN resepdokter_t AS rd ON rd.nopesanan = so.noorder
                  LEFT JOIN pegawai_m AS pg ON pg.id = so.objectpegawaiorderfk
                  LEFT JOIN strukresep_t AS sr ON sr.orderfk = so.norec
                  LEFT JOIN antrianapotik_t AS aa ON aa.noresep = sr.noresep
@@ -125,8 +126,8 @@ class ResepElektronikController extends ApiController
                          sr.namalengkapambilresep AS namapengambilorder,pd.norec AS noregistrasifk,pd.noregistrasi,kp.kelompokpasien,
                          apd.norec AS norec_apd,pd.tglregistrasi,ps.tgllahir,kl.namakelas,kl. ID AS klid,sr.tglambilresep AS tglambilorder,
                          sr.noresep,aa.noantri AS aanoantri,aa.jenis AS aajenis,sr.norec AS norecresep,sr.noresep,NULL AS noruangan,
-                         sr.isreseppulang as checkreseppulang,null as isambilobat,ps.nohp,alm.alamatlengkap, null as isordergrab,
-                         null as iskurir, '' as noreservasi
+                         sr.isreseppulang as checkreseppulang,null as isambilobat,ps.nohp,alm.alamatlengkap, null as isordergrab, 
+                         null as iskurir, '' as noreservasi, rd.*
                 FROM strukresep_t AS sr
                 INNER JOIN antrianpasiendiperiksa_t AS apd ON apd.norec = sr.pasienfk
                 INNER JOIN pasiendaftar_t AS pd ON pd.norec = apd.noregistrasifk
@@ -136,6 +137,7 @@ class ResepElektronikController extends ApiController
                 INNER JOIN ruangan_m AS ru ON ru.id = apd.objectruanganfk
                 INNER JOIN ruangan_m AS ru2 ON ru2.id = sr.ruanganfk
                 INNER JOIN departemen_m AS dp ON dp.id = ru.objectdepartemenfk
+                LEFT JOIN resepdokter_t AS rd ON rd.nopesanan = sr.noresep
                 LEFT JOIN pegawai_m AS pg ON pg.id = sr.penulisresepfk
                 LEFT JOIN antrianapotik_t AS aa ON aa.noresep = sr.noresep
                 INNER JOIN kelas_m AS kl ON kl.id = pd.objectkelasfk
@@ -195,7 +197,24 @@ class ResepElektronikController extends ApiController
                 'alamatlengkap' => $item->alamatlengkap,
                 'isordergrab' => $item->isordergrab,
                 'iskurir' => $item->iskurir,
-                'noreservasi' => $item->noreservasi
+                'noreservasi' => $item->noreservasi,
+                'riwayatalergi' => $item->riwayatalergi,
+                'jampengkajian' => $item->jampengkajian,
+                'petugaspengkajian' => $item->petugaspengkajian,
+                'jampenyiapanobat' => $item->jampenyiapanobat,
+                'penyiapanobat' => $item->penyiapanobat,
+                'jamdispening' => $item->jamdispening,
+                'dispening' => $item->dispening,
+                'jamserah' => $item->jamserah,
+                'serahinformasi' => $item->serahinformasi,
+                'penulisanresep' => $item->penulisanresep,
+                'obat' => $item->obat,
+                'dosis' => $item->dosis,
+                'waktufrekuensi' => $item->waktufrekuensi,
+                'rute' => $item->rute,
+                'pasien' => $item->pasien,
+                'duplikasiterapi' => $item->duplikasiterapi,
+                'interaksiobat' => $item->interaksiobat
             );
         }
 

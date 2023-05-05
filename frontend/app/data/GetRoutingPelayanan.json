@@ -17786,8 +17786,8 @@
     ]
   },
   {
-    "name": "RekamMedis.AsesmenMedis.AsesmenLanjutanRisikoJatuhDewasa",
-    "url": "/AsesmenLanjutanRisikoJatuhDewasa",
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.AsesmenLanjutanRisikoJatuhDewasa",
+    "url": "/AsesmenLanjutanRisikoJatuhDewasa/:index/:idEMR",
     "templateurl": "module/EMR/AsesmenLanjutanRisikoJatuhDewasa.html",
     "controller": "AsesmenLanjutanRisikoJatuhDewasaCtrl",
     "deps": [
