@@ -353,7 +353,7 @@ define(['initialize'], function (initialize) {
                     // });
 
                     medifirstService.postLogging('EMR', 'norec emrpasien_t', e.data.data.norec,
-                        'Pulang Dengan Permintaan Sendiri ' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
+                        'Pulang Atas Permintaan Sendiri ' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
                         + $scope.cc.noregistrasi).then(function (res) {
                         })
 
