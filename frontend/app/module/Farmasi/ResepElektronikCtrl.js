@@ -1189,6 +1189,35 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 
             $scope.resepDokter = function (){
                 $scope.popUpFormulir.center().open();
+                $scope.item.riwayatAlergi = $scope.item.riwayatalergi;
+                $scope.item.jamPengkajian = $scope.item.jampengkajian;
+                $scope.item.pengkajian = {
+                    id: $scope.item.petugaspengkajian,
+                    namalengkap: $scope.item.petugaspengkajian,
+                };
+                $scope.item.jamPenyiapanObat = $scope.item.jampenyiapanobat;
+                $scope.item.penyiapanObat = {
+                    id: $scope.item.penyiapanobat,
+                    namalengkap: $scope.item.penyiapanobat,
+                };
+                $scope.item.jamDispening = $scope.item.jamdispening;
+                $scope.item.dispening = {
+                    id: $scope.item.dispening,
+                    namalengkap: $scope.item.dispening,
+                };
+                $scope.item.jamSerahInformasi = $scope.item.jamserah;
+                $scope.item.serahInformasi = {
+                    id: $scope.item.serahinformasi,
+                    namalengkap: $scope.item.serahinformasi,
+                };
+                $scope.item.penulisResep = $scope.item.penulisanresep;
+                $scope.item.obat = $scope.item.obat;
+                $scope.item.dosis = $scope.item.dosis;
+                $scope.item.waktuFrekuensi = $scope.item.waktufrekuensi;
+                $scope.item.rute = $scope.item.rute;
+                $scope.item.pasien = $scope.item.pasien;
+                $scope.item.duplikasiTerapi = $scope.item.duplikasiterapi;
+                $scope.item.interaksiObat = $scope.item.interaksiobat;
             }
 
             

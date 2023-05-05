@@ -17786,8 +17786,8 @@
     ]
   },
   {
-    "name": "RekamMedis.AsesmenMedis.AsesmenLanjutanRisikoJatuhDewasa",
-    "url": "/AsesmenLanjutanRisikoJatuhDewasa",
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.AsesmenLanjutanRisikoJatuhDewasa",
+    "url": "/AsesmenLanjutanRisikoJatuhDewasa/:index/:idEMR",
     "templateurl": "module/EMR/AsesmenLanjutanRisikoJatuhDewasa.html",
     "controller": "AsesmenLanjutanRisikoJatuhDewasaCtrl",
     "deps": [
@@ -18803,8 +18803,8 @@
     ]
   },
   {
-    "name": "RekamMedis.AsesmenMedis.AsesmenLanjutanRisikoJatuhDewasaRanap",
-    "url": "/AsesmenLanjutanRisikoJatuhDewasaRanap",
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.AsesmenLanjutanRisikoJatuhDewasaRanap",
+    "url": "/AsesmenLanjutanRisikoJatuhDewasaRanap/:index/:idEMR",
     "templateurl": "module/EMR/AsesmenLanjutanRisikoJatuhDewasaRanap.html",
     "controller": "AsesmenLanjutanRisikoJatuhDewasaRanapCtrl",
     "deps": [
