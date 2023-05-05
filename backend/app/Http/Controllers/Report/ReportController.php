@@ -1208,14 +1208,10 @@ class ReportController extends ApiController{
             return;
         }
         $isi = collect(DB::select("
-        SELECT rd.riwayatalergi,
-            to_char( rd.jampengkajian, 'HH:mm') as jampengkajian,
+        SELECT rd.riwayatalergi,rd.jampengkajian,rd.jampenyiapanobat,rd.jamdispening,rd.jamserah,
             pg1.namalengkap as petugaspengkajian,
-            to_char( rd.jampenyiapanobat, 'HH:mm') as jampenyiapanobat,
             pg2.namalengkap as penyiapanobat,
-            to_char( rd.jamdispening, 'HH:mm') as jamdispening,
             pg3.namalengkap as dispening,
-            to_char( rd.jamserah, 'HH:mm') as jamserah,
             pg4.namalengkap as serahinformasi,
             rd.penulisanresep,
             rd.obat,
@@ -1227,10 +1223,10 @@ class ReportController extends ApiController{
             rd.interaksiobat
         FROM
             resepdokter_t as rd
-            INNER JOIN pegawai_m as pg1 on pg1.id = rd.petugaspengkajian
-            INNER JOIN pegawai_m as pg2 on pg2.id = rd.penyiapanobat
-            INNER JOIN pegawai_m as pg3 on pg3.id = rd.dispening
-            INNER JOIN pegawai_m as pg4 on pg4.id = rd.serahinformasi
+            LEFT JOIN pegawai_m as pg1 on pg1.id = rd.petugaspengkajian
+            LEFT JOIN pegawai_m as pg2 on pg2.id = rd.penyiapanobat
+            LEFT JOIN pegawai_m as pg3 on pg3.id = rd.dispening
+            LEFT JOIN pegawai_m as pg4 on pg4.id = rd.serahinformasi
         WHERE nopesanan = '$noorder'
         "))->first();
         $pageWidth = 550;
