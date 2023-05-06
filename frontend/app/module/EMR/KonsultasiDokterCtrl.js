@@ -123,22 +123,18 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 // $scope.item.dokterJawab  =dataItem.namalengkap 
                 // $scope.item.keteranganJawab  = dataItem.keteranganorder
 
-                if ($scope.item.jawaban == '') return
+                if ($scope.item.jawaban == ''){
+                    toastr.error("Jawaban konsul belum ada");
+                    return
+                } 
 
                 var local = JSON.parse(localStorage.getItem('profile'));
                 var nama = medifirstService.getPegawaiLogin().namalengkap;
                 console.log($scope.pegawaiLogin.namaLengkap);
                 window.open(config.baseApiBackend + 'report/cetak-konsul-dokter?nocm='
                     + $scope.nocm
-                    + '&emr=' + $scope.item.norec
-                    + '&ruanganasal=' + $scope.item.ruanganAsalJawab
-                    + '&ruangantujuan=' + $scope.item.ruanganTujuanJawab
-                    + '&daridokter=' + $scope.pegawaiLogin.namaLengkap
-                    + '&untukdokter=' + $scope.item.dokterJawab
-                    + '&keteranganjawab=' + $scope.item.keteranganJawab
-                    + '&jawaban=' + $scope.item.jawaban
                     + '&kdprofile=' + local.id
-                    + '&nama=' + nama, '_blank');
+                    + '&emr=' + $scope.item.norec, '_blank');
             }
             function editData(e) {
                 e.preventDefault();

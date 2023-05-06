@@ -5233,14 +5233,7 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 				window.open(baseTransaksi + 'report/cetak-konsul-dokter?nocm='
 						+ $scope.dataPasienSelected.nocm
 						+ '&emr=' + $scope.dataSelectedKonsulDokter.norec
-						+ '&ruanganasal=' + $scope.dataSelectedKonsulDokter.ruanganasal
-						+ '&ruangantujuan=' + $scope.dataSelectedKonsulDokter.ruangantujuan
-						+ '&daridokter=' + nama.namaLengkap
-						+ '&untukdokter=' + $scope.dataSelectedKonsulDokter.namalengkap
-						+ '&keteranganjawab=' + $scope.dataSelectedKonsulDokter.keteranganorder
-						+ '&jawaban=' + $scope.dataSelectedKonsulDokter.keteranganlainnya
-						+ '&kdprofile=' + local.id
-						+ '&nama=' + nama, '_blank');
+						+ '&kdprofile=' + local.id, '_blank');
 		}
 
 		

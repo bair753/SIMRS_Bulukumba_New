@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Report;
 
 
 use App\Http\Controllers\ApiController;
+use App\Master\KelompokTransaksi;
 use App\Master\Ruangan;
 use App\Traits\Valet;
 use App\Transaksi\HasilLaboratorium;
@@ -3616,32 +3617,33 @@ class ReportController extends ApiController{
 
     public function konsulDokter(Request $request)
     {
-        $res = array($request->all());
         $norec = $request['emr'];
-        $kdProfile = (int) $request['kdprofile'];
-        $data = DB::table('pasien_m')->where('nocm', $request->nocm)->where('statusenabled', 't')->select(
-            'nocm as norm',
-            'namapasien as namalengkap',
-            'tgllahir',
-            'noidentitas'
-            )->first();
-        
-        $datadaridokter = DB::table('pegawai_m')
-        ->join('unitkerjapegawai_m', 'pegawai_m.objectunitkerjafk', '=', 'unitkerjapegawai_m.id')->select('unitkerjapegawai_m.namaexternal')
-        ->where('namalengkap', $request->daridokter)->get();
+        $kdProfile = $request['kdprofile'];
 
-        $datauntukdokter = DB::table('pegawai_m')
-        ->join('unitkerjapegawai_m', 'pegawai_m.objectunitkerjafk', '=', 'unitkerjapegawai_m.id')->select('unitkerjapegawai_m.namaexternal')
-        ->where('namalengkap', $request->untukdokter)->get();
-    
+        $kelTrans = KelompokTransaksi::where('kelompoktransaksi', 'KONSULTASI DOKTER')->first();
+        $data = \DB::table('strukorder_t as so')
+            ->Join('pasiendaftar_t as pd', 'pd.norec', '=', 'so.noregistrasifk')
+            ->Join('pasien_m as ps', 'ps.id', '=', 'pd.nocmfk')
+            ->leftJoin('ruangan_m as ru', 'ru.id', '=', 'so.objectruanganfk')
+            ->leftJoin('ruangan_m as rutuju', 'rutuju.id', '=', 'so.objectruangantujuanfk')
+            ->leftJoin('pegawai_m as pg', 'pg.id', '=', 'so.objectpegawaiorderfk')
+            ->leftJoin('pegawai_m as pet', 'pet.id', '=', 'so.objectpetugasfk')
+            ->leftJoin('antrianpasiendiperiksa_t as apd', 'apd.objectstrukorderfk', '=', 'so.norec')
+            ->select('so.norec', 'so.noorder', 'so.tglorder', 'ru.namaruangan as ruanganasal', 'pg.namalengkap', 
+                'rutuju.namaruangan as ruangantujuan', 'pet.namalengkap as pengonsul',
+                'pd.noregistrasi', 'pd.tglregistrasi', 'ps.nocm', 'so.keteranganorder', 'pd.norec as norec_pd',
+                'ps.namapasien', 'ps.tgllahir', 'ps.noidentitas', 'pg.id as pegawaifk', 'so.objectruangantujuanfk', 'so.objectruanganfk', 'apd.norec as norec_apd',
+                'so.keteranganlainnya')
+            ->where('so.kdprofile',$kdProfile)
+            ->where('so.norec',$norec)
+            ->where('so.statusenabled', true)
+            ->where('so.objectkelompoktransaksifk', $kelTrans->id)
+            ->orderBy('so.tglorder', 'desc')->first();
 
-        $res['profile'] = Profile::where('id', $request['kdprofile'])->first();
+        $res['profile'] = Profile::where('id', $kdProfile)->first();
+        $res['data'] = $data;
 
-        $res['d'] = $data;
-
-        // dd($res);
-
-        return view('report.cetak-konsul-dokter', compact('res', 'datadaridokter', 'datauntukdokter'));
+        return view('report.cetak-konsul-dokter', compact('res'));
     }
 
     public function catatanPemberiandanPemantauanObatPasien(Request $request) {
