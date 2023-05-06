@@ -418,7 +418,7 @@
                                                         <td height="10"
                                                             style="border-left:solid 1.0pt; border-bottom:solid 1.0pt;">
                                                             
-                                                            <font size="1" size="1">Jam : {{ date('H:i', strtotime( $isi->jampengkajian)) }}</font>
+                                                            <font size="1" size="1">Jam : {{ $isi->jampengkajian != null ? date('H:i', strtotime( $isi->jampengkajian)) : '-' }}</font>
                                                         </td>
                                                         <td height="10" style="border-bottom:solid 1.0pt;">
                                                             <font size="1" size="1">Petugas : {{ $isi->petugaspengkajian }}</font>
@@ -426,7 +426,7 @@
                                                         <td height="10"
                                                             style="border-left:solid 1.0pt; border-bottom:solid 1.0pt;">
                                                             
-                                                            <font size="1" size="1">Jam : {{ date('H:i', strtotime( $isi->jampenyiapanobat)) }}</font>
+                                                            <font size="1" size="1">Jam : {{ $isi->jampenyiapanobat != null ? date('H:i', strtotime( $isi->jampenyiapanobat)) : '-' }}</font>
                                                         </td>
                                                         <td height="10" style="border-bottom:solid 1.0pt;">
                                                             
@@ -435,7 +435,7 @@
                                                         <td height="10"
                                                             style="border-left:solid 1.0pt; border-bottom:solid 1.0pt;">
                                                             
-                                                            <font size="1" size="1">Jam : {{ date('H:i', strtotime( $isi->jamdispening)) }}</font>
+                                                            <font size="1" size="1">Jam : {{ $isi->jamdispening != null ? date('H:i', strtotime( $isi->jamdispening)) : '-' }}</font>
                                                         </td>
                                                         <td height="10" style="border-bottom:solid 1.0pt;">
                                                             <font size="1" size="1">Petugas : {{ $isi->dispening }}</font>
@@ -443,7 +443,7 @@
                                                         <td height="10"
                                                             style="border-left:solid 1.0pt; border-bottom:solid 1.0pt;">
                                                             
-                                                            <font size="1" size="1">Jam : {{ date('H:i', strtotime( $isi->jamserah)) }}</font>
+                                                            <font size="1" size="1">Jam : {{ $isi->jamserah != null ? date('H:i', strtotime( $isi->jamserah)) : '-' }}</font>
                                                         </td>
                                                         <td height="10"
                                                             style="border-bottom:solid 1.0pt; border-right:solid 1.0pt;">
