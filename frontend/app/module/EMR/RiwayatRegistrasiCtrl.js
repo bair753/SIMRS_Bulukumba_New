@@ -82,8 +82,9 @@ define(['initialize'], function (initialize) {
                     noReg = "&noReg=" + $scope.item.noregistrasi;
                 }
 
-                medifirstService.get("registrasi/daftar-riwayat-registrasi?" + rm + pasien).then(function (data) {
-                    medifirstService.get("registrasi/riwayat-registrasi-applama?" + rm + noReg + pasien).then(function (dat) {
+                medifirstService.get("registrasi/daftar-registrasi/get-daftar-registrasi-pasien?" + rm + pasien + noReg).then(function (data) {
+                    medifirstService.get("registrasi/daftar-registrasi/get-daftar-registrasi-pasien?" + rm + noReg + pasien
+                    ).then(function (dat) {
                         $scope.isRouteLoading = false;
                         var jumlahRawat2 = 0;
                         var dRiwayatRegLama = dat.data;
@@ -205,10 +206,16 @@ define(['initialize'], function (initialize) {
                     },
                     {
                         "field": "namaruangan",
-                        "title": "Ruanganan Layanan",
+                        "title": "Ruangan Layanan",
                         "width": "150px",
                         "template": "<span class='style-left'>#: namaruangan #</span>"
                     },
+                    {
+                        "field": "namadokter",
+                        "title": "Nama Dokter",
+                        "width": "150px",
+                        "template": "<span class='style-left'>#: namadokter #</span>"
+                    }, 
                     {
                         "field": "kelompokpasien",
                         "title": "Kelompok Pasien",
@@ -216,28 +223,34 @@ define(['initialize'], function (initialize) {
                         "template": "<span class='style-left'>#: kelompokpasien #</span>"
                     },
                     {
-                        "field": "namadokter",
-                        "title": "Nama Dokter",
+                        "field": "namakelas",
+                        "title": "Kelas",
                         "width": "150px",
-                        "template": "<span class='style-left'>#: namadokter #</span>"
+                        "template": "<span class='style-left'>#: namakelas #</span>"
                     },
                     {
-                        "field": "keterangan",
-                        "title": "Keterangan",
+                        "field": "namarekanan",
+                        "title": "Penjamin",
                         "width": "150px",
-                        "template": "<span class='style-left'>#: keterangan #</span>"
-                    },                                                           
-                    {
-                        "command": [
-                            {
-                                text: "Pemeriksaan",
-                                click: catatanMedik,                                
-                                imageClass: "fa fa-medkit",
-                            }                           
-                        ],
-                        title: "",
-                        width: 280,
+                        "template": "<span class='style-left'>#: namarekanan #</span>"
                     },
+                     
+                    {
+                        "field": "tglpulang",
+                        "title": "Tgl Pulang",
+                        "width": "80px",
+                    },                                                       
+                    // {
+                    //     "command": [
+                    //         {
+                    //             text: "Pemeriksaan",
+                    //             click: catatanMedik,                                
+                    //             imageClass: "fa fa-medkit",
+                    //         }                           
+                    //     ],
+                    //     title: "",
+                    //     width: 280,
+                    // },
                 ]
             };
 
