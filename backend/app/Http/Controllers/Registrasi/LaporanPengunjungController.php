@@ -75,6 +75,7 @@ class LaporanPengunjungController extends ApiController
             ->leftjoin ('statusperkawinan_m as sp','sp.id','=','objectstatusperkawinanfk')
             ->leftjoin ('pegawai_m as pg','pg.id','=','pd.objectdokterpemeriksafk')
             ->join ('ruangan_m as rg','rg.id','=','apd.objectruanganfk')
+            ->join ('departemen_m as dpm','dpm.id','=','rg.objectdepartemenfk')
             // ->leftjoin ('diagnosapasien_t as dp','dp.noregistrasifk','=','apd.norec')
             ->leftJoin('kelompokpasien_m as klp','klp.id','=','pd.objectkelompokpasienlastfk')
             // ->leftJoin('detaildiagnosapasien_t as ddp','ddp.objectdiagnosapasienfk', '=','dp.norec')
@@ -107,6 +108,9 @@ class LaporanPengunjungController extends ApiController
         }
         if (isset($request['kotaKab']) && $request['kotaKab'] != "" && $request['kotaKab'] != "undefined") {
             $data = $data->Where('kkb.id', '=', $request['kotaKab'])	;
+        }
+        if (isset($request['departemen']) && $request['departemen'] != "" && $request['departemen'] != "undefined") {
+            $data = $data->Where('dpm.id', '=', $request['departemen'])	;
         }
 
         $data =  $data ->get();
@@ -166,6 +170,13 @@ class LaporanPengunjungController extends ApiController
     }
     public function getDataCombo(Request $request)
     {
+        $kdProfile = (int) $this->getDataKdProfile($request);
+        $deptPelayanan = explode (',',$this->settingDataFixed('kdDepartemenPelayanan',$kdProfile));
+        $kdDepartemenRawatPelayanan = [];
+        foreach ($deptPelayanan as $itemPelayanan){
+            $kdDepartemenRawatPelayanan []=  (int)$itemPelayanan;
+        }
+
         $ruangan= \DB::table('ruangan_m')
             ->select('id','namaruangan')
             ->where('statusenabled',true)
@@ -176,7 +187,39 @@ class LaporanPengunjungController extends ApiController
             ->where('objectjenispegawaifk',true)
             ->get();
 
+        $dataInstalasi = \DB::table('departemen_m as dp')
+            ->whereIn('dp.id',$kdDepartemenRawatPelayanan)
+            ->where('dp.statusenabled', true)
+            ->where('dp.kdprofile', $kdProfile)
+            ->orderBy('dp.namadepartemen')
+            ->get();
+
+        $dataRuangan = \DB::table('ruangan_m as ru')
+            ->where('ru.statusenabled', true)
+            ->where('ru.kdprofile', $kdProfile)
+            ->orderBy('ru.namaruangan')
+            ->get();
+
+        foreach ($dataInstalasi as $item) {
+                $detail = [];
+                foreach ($dataRuangan as $item2) {
+                    if ($item->id == $item2->objectdepartemenfk) {
+                        $detail[] = array(
+                            'id' => $item2->id,
+                            'ruangan' => $item2->namaruangan,
+                        );
+                    }
+                }
+    
+                $dataDepartemen[] = array(
+                    'id' => $item->id,
+                    'departemen' => $item->namadepartemen,
+                    'ruangan' => $detail,
+                );
+            }
+
             $result = array(
+            'departemen' => $dataDepartemen,
             'ruangan' => $ruangan,
             'dokter' => $dokter,
             'message' => 'ramdanegie',
