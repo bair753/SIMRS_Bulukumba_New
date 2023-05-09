@@ -543,7 +543,7 @@
             
         }
 
-        var diagnose_pasca_operatif = $scope.item.obj[31100541].replace(/(?:\r\n|\r|\n)/g, ', ');
+        var diagnose_pasca_operatif = $scope.item.obj[31100543].replace(/(?:\r\n|\r|\n)/g, ', ');
         var prosedur_tindakan_yang_dilakukan = $scope.item.obj[31100550].replace(/(?:\r\n|\r|\n)/g, ', ');
         var alat_yang_dipasang = $scope.item.obj[31100563].replace(/(?:\r\n|\r|\n)/g, ', ');
         var tindakan_operasi = $scope.item.obj[31100568].replace(/(?:\r\n|\r|\n)/g, ', ');

@@ -20005,6 +20005,29 @@
         "define": "RekamMedisCtrl"
       }
     ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.AsuhanPerioperatifTerintegrasi",
+    "url": "/AsuhanPerioperatifTerintegrasi/:index/:idEMR",
+    "templateurl": "module/EMR/AsuhanPerioperatifTerintegrasi.html",
+    "controller": "AsuhanPerioperatifTerintegrasiCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
   }
     ]
   },

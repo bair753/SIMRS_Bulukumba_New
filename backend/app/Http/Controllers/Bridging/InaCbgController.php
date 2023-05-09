@@ -2318,37 +2318,27 @@ class InaCbgController   extends ApiController
     public function getLaporanOperasi(Request $request) {
         $kdProfile = $this->getDataKdProfile($request);
         $idProfile = (int) $kdProfile;
-        $data = DB::select(DB::raw("
-        SELECT
-            emrdp.emrpasienfk,
-            emrdp.emrfk,
-            emr.reportdisplay,
-            emrp.norec,
-            emr.caption AS namaform 
-        FROM
-            emrpasiend_t AS emrdp
-            INNER JOIN emrpasien_t AS emrp ON emrp.noemr = emrdp.emrpasienfk
-            INNER JOIN emr_t AS emr ON emr.ID = emrdp.emrfk 
-        WHERE
-            emrdp.kdprofile = $idProfile 
-            AND emrdp.statusenabled = TRUE 
-            AND emrp.noregistrasifk = '2304004422' 
-            AND emrp.jenisemr ILIKE '%asesmen%' 
-            AND emrdp.emrpasienfk = 'MR2304/00010408'
-            AND emrdp.emrfk = '290084'
-        GROUP BY
-            emrdp.emrpasienfk,
-            emrdp.emrfk,
-            emrp.norec,
-            emr.caption,
-            emr.reportdisplay")
+
+        $data = \DB::table('emrpasiend_t AS emrdp')
+        ->join('emrpasien_t AS emrp', 'emrp.noemr', '=', 'emrdp.emrpasienfk')
+        ->join('emr_t AS emr', 'emr.id', '=', 'emrdp.emrfk')
+        ->select('emrdp.emrpasienfk', 'emrdp.index', 'emrp.tglemr', 'emrp.nocm', 'emr.caption AS namaform', 'emrp.norec_apd', 'emrdp.emrfk', 'emrp.norec')
+        ->where('emrdp.kdprofile', $idProfile)
+        ->where('emrdp.statusenabled', true)
+        ->where('emrp.statusenabled', true)
+        ->where('emrp.noregistrasifk', $request['noregistrasi'])
+        // ->where('emrdp.emrfk', $request['emrfk'])
+        ->groupBy('emrdp.emrpasienfk', 'emrdp.index', 'emrdp.emrfk', 'emrp.norec', 'emr.caption');
+
+        $emrfk = explode(',', $request['emrfk']);
+        $data = $data->whereIn('emrdp.emrfk', $emrfk);
+        $data = $data->get();
+
+        $result = array(
+            'data' => $data,
+            'message' => 'Mutan'
         );
-        
-        // $result =array(
-        //     'data' => $pelayanan,
-        //     'message' => 'Inhuman'
-        // );
-        return $this->respond($data);
+        return $this->respond($result);
     }
 
     public function getDaftarAsesmenPasien(Request $request) {

@@ -3649,6 +3649,7 @@ class ReportController extends ApiController{
     public function catatanPemberiandanPemantauanObatPasien(Request $request) {
         $nocm = $request['nocm'];
         $norec = $request['emr'];
+        $index = $request['index'];
         $kdProfile = (int) $request['kdprofile'];
 
         $data = DB::select(DB::raw(
@@ -3689,6 +3690,7 @@ class ReportController extends ApiController{
                     AND ep.kdprofile = '$kdProfile' 
                 AND epd.statusenabled = TRUE 
                 and epd.emrfk = $request[emrfk]
+                and epd.index = $index
                 and pa.statusenabled = TRUE
                 
                 ORDER BY
@@ -3867,12 +3869,14 @@ class ReportController extends ApiController{
     public function laporanOperasi(Request $request) {
         $nocm = $request['nocm'];
         $norec = $request['emr'];
+        $index = $request['index'];
         $kdProfile = (int) $request['kdprofile'];
 
         $data = DB::select(DB::raw(
             "
             SELECT
                 epd.emrdfk,
+                epd.index,
                 ep.noemr,
                 ed.TYPE,
                 pa.namapasien,
@@ -3907,13 +3911,13 @@ class ReportController extends ApiController{
                     AND ep.kdprofile = '$kdProfile' 
                 AND epd.statusenabled = TRUE 
                 and epd.emrfk = $request[emrfk]
+                and epd.index = $index
                 and pa.statusenabled = TRUE
                 
                 ORDER BY
                 ed.nourut
                 "
         ));
-        // dd($data);
         foreach ($data as $z) {
             if ($z->type == "datetime") {
                 $z->value = date('Y-m-d H:i:s', strtotime($z->value));
@@ -3936,6 +3940,7 @@ class ReportController extends ApiController{
     public function transfusiDarah(Request $request) {
         $nocm = $request['nocm'];
         $norec = $request['emr'];
+        $index = $request['index'];
         $kdProfile = (int) $request['kdprofile'];
 
         $data = DB::select(DB::raw(
@@ -3976,6 +3981,7 @@ class ReportController extends ApiController{
                     AND ep.kdprofile = '$kdProfile' 
                 AND epd.statusenabled = TRUE 
                 and epd.emrfk = $request[emrfk]
+                and epd.index = $index
                 and pa.statusenabled = TRUE
                 
                 ORDER BY
