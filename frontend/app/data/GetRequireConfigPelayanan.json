@@ -3573,7 +3573,14 @@
         {
             "nameDep": "SuratKeteranganKematianRanapCtrl",
             "urlDep": "module/EMR/SuratKeteranganKematianRanapCtrl"
+        },
+        {
+            "nameDep": "PermintaanPelayananKerohanianCtrl",
+            "urlDep": "module/EMR/PermintaanPelayananKerohanianCtrl"
+        },
+        {
+            "nameDep": "PemberianMinumRutin1000Ctrl",
+            "urlDep": "module/EMR/PemberianMinumRutin1000Ctrl"
         }
-    
     ]
 }
