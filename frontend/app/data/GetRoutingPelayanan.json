@@ -17710,8 +17710,8 @@
     ]
   },
   {
-    "name": "RekamMedis.AsesmenMedis.AsesmenLanjutanRisikoJatuhDewasa",
-    "url": "/AsesmenLanjutanRisikoJatuhDewasa",
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.AsesmenLanjutanRisikoJatuhDewasa",
+    "url": "/AsesmenLanjutanRisikoJatuhDewasa/:index/:idEMR",
     "templateurl": "module/EMR/AsesmenLanjutanRisikoJatuhDewasa.html",
     "controller": "AsesmenLanjutanRisikoJatuhDewasaCtrl",
     "deps": [
@@ -18727,8 +18727,8 @@
     ]
   },
   {
-    "name": "RekamMedis.AsesmenMedis.AsesmenLanjutanRisikoJatuhDewasaRanap",
-    "url": "/AsesmenLanjutanRisikoJatuhDewasaRanap",
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.AsesmenLanjutanRisikoJatuhDewasaRanap",
+    "url": "/AsesmenLanjutanRisikoJatuhDewasaRanap/:index/:idEMR",
     "templateurl": "module/EMR/AsesmenLanjutanRisikoJatuhDewasaRanap.html",
     "controller": "AsesmenLanjutanRisikoJatuhDewasaRanapCtrl",
     "deps": [
@@ -19936,7 +19936,76 @@
       },
       {
         "define": "RekamMedisCtrl"
+      },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.PemberianMakanAwalPenurunanCairan",
+    "url": "/PemberianMakanAwalPenurunanCairan/:index/:idEMR",
+    "templateurl": "module/EMR/PemberianMakanAwalPenurunanCairan.html",
+    "controller": "PemberianMakanAwalPenurunanCairanCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
       }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.MonitoringPMK1",
+    "url": "/MonitoringPMK1/:index/:idEMR",
+    "templateurl": "module/EMR/MonitoringPMK1.html",
+    "controller": "MonitoringPMK1Ctrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.MonitoringPMK2",
+    "url": "/MonitoringPMK2/:index/:idEMR",
+    "templateurl": "module/EMR/MonitoringPMK2.html",
+    "controller": "MonitoringPMK2Ctrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  }
     ]
   },
   {

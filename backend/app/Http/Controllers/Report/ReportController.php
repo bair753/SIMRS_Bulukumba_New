@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Report;
 
 
 use App\Http\Controllers\ApiController;
+use App\Master\KelompokTransaksi;
 use App\Master\Ruangan;
 use App\Traits\Valet;
 use App\Transaksi\HasilLaboratorium;
@@ -1208,14 +1209,10 @@ class ReportController extends ApiController{
             return;
         }
         $isi = collect(DB::select("
-        SELECT rd.riwayatalergi,
-            to_char( rd.jampengkajian, 'HH:mm') as jampengkajian,
+        SELECT rd.riwayatalergi,rd.jampengkajian,rd.jampenyiapanobat,rd.jamdispening,rd.jamserah,
             pg1.namalengkap as petugaspengkajian,
-            to_char( rd.jampenyiapanobat, 'HH:mm') as jampenyiapanobat,
             pg2.namalengkap as penyiapanobat,
-            to_char( rd.jamdispening, 'HH:mm') as jamdispening,
             pg3.namalengkap as dispening,
-            to_char( rd.jamserah, 'HH:mm') as jamserah,
             pg4.namalengkap as serahinformasi,
             rd.penulisanresep,
             rd.obat,
@@ -1227,10 +1224,10 @@ class ReportController extends ApiController{
             rd.interaksiobat
         FROM
             resepdokter_t as rd
-            INNER JOIN pegawai_m as pg1 on pg1.id = rd.petugaspengkajian
-            INNER JOIN pegawai_m as pg2 on pg2.id = rd.penyiapanobat
-            INNER JOIN pegawai_m as pg3 on pg3.id = rd.dispening
-            INNER JOIN pegawai_m as pg4 on pg4.id = rd.serahinformasi
+            LEFT JOIN pegawai_m as pg1 on pg1.id = rd.petugaspengkajian
+            LEFT JOIN pegawai_m as pg2 on pg2.id = rd.penyiapanobat
+            LEFT JOIN pegawai_m as pg3 on pg3.id = rd.dispening
+            LEFT JOIN pegawai_m as pg4 on pg4.id = rd.serahinformasi
         WHERE nopesanan = '$noorder'
         "))->first();
         $pageWidth = 550;
@@ -2875,7 +2872,15 @@ class ReportController extends ApiController{
         ORDER BY
             DATA.nourutjenispemeriksaan ASC
         "));
-        
+        if (count($datas) == 0) {
+            echo '
+                <script language="javascript">
+                    window.alert("Hasil belum ada / hasil tidak ditemukan");
+                    window.close()
+                </script>
+            ';
+            die;
+        }
         // dd(substr($datas[0]->hasil,0,1));
         foreach ($datas as $data) {
             if ($data->flag == 'Y') {
@@ -2904,10 +2909,7 @@ class ReportController extends ApiController{
             // 'user' => $user,
             'datas' => $data,
         );
-        if (count($datas) == 0) {
-            echo 'Data Tidak ada';
-            die;
-        }
+        
         return view(
             'report.lab.hasil-lab-manual',
             compact('datas', 'header', 'pageWidth', 'r', 'profile')
@@ -3615,32 +3617,33 @@ class ReportController extends ApiController{
 
     public function konsulDokter(Request $request)
     {
-        $res = array($request->all());
         $norec = $request['emr'];
-        $kdProfile = (int) $request['kdprofile'];
-        $data = DB::table('pasien_m')->where('nocm', $request->nocm)->where('statusenabled', 't')->select(
-            'nocm as norm',
-            'namapasien as namalengkap',
-            'tgllahir',
-            'noidentitas'
-            )->first();
-        
-        $datadaridokter = DB::table('pegawai_m')
-        ->join('unitkerjapegawai_m', 'pegawai_m.objectunitkerjafk', '=', 'unitkerjapegawai_m.id')->select('unitkerjapegawai_m.namaexternal')
-        ->where('namalengkap', $request->daridokter)->get();
+        $kdProfile = $request['kdprofile'];
 
-        $datauntukdokter = DB::table('pegawai_m')
-        ->join('unitkerjapegawai_m', 'pegawai_m.objectunitkerjafk', '=', 'unitkerjapegawai_m.id')->select('unitkerjapegawai_m.namaexternal')
-        ->where('namalengkap', $request->untukdokter)->get();
-    
+        $kelTrans = KelompokTransaksi::where('kelompoktransaksi', 'KONSULTASI DOKTER')->first();
+        $data = \DB::table('strukorder_t as so')
+            ->Join('pasiendaftar_t as pd', 'pd.norec', '=', 'so.noregistrasifk')
+            ->Join('pasien_m as ps', 'ps.id', '=', 'pd.nocmfk')
+            ->leftJoin('ruangan_m as ru', 'ru.id', '=', 'so.objectruanganfk')
+            ->leftJoin('ruangan_m as rutuju', 'rutuju.id', '=', 'so.objectruangantujuanfk')
+            ->leftJoin('pegawai_m as pg', 'pg.id', '=', 'so.objectpegawaiorderfk')
+            ->leftJoin('pegawai_m as pet', 'pet.id', '=', 'so.objectpetugasfk')
+            ->leftJoin('antrianpasiendiperiksa_t as apd', 'apd.objectstrukorderfk', '=', 'so.norec')
+            ->select('so.norec', 'so.noorder', 'so.tglorder', 'ru.namaruangan as ruanganasal', 'pg.namalengkap', 
+                'rutuju.namaruangan as ruangantujuan', 'pet.namalengkap as pengonsul',
+                'pd.noregistrasi', 'pd.tglregistrasi', 'ps.nocm', 'so.keteranganorder', 'pd.norec as norec_pd',
+                'ps.namapasien', 'ps.tgllahir', 'ps.noidentitas', 'pg.id as pegawaifk', 'so.objectruangantujuanfk', 'so.objectruanganfk', 'apd.norec as norec_apd',
+                'so.keteranganlainnya')
+            ->where('so.kdprofile',$kdProfile)
+            ->where('so.norec',$norec)
+            ->where('so.statusenabled', true)
+            ->where('so.objectkelompoktransaksifk', $kelTrans->id)
+            ->orderBy('so.tglorder', 'desc')->first();
 
-        $res['profile'] = Profile::where('id', $request['kdprofile'])->first();
+        $res['profile'] = Profile::where('id', $kdProfile)->first();
+        $res['data'] = $data;
 
-        $res['d'] = $data;
-
-        // dd($res);
-
-        return view('report.cetak-konsul-dokter', compact('res', 'datadaridokter', 'datauntukdokter'));
+        return view('report.cetak-konsul-dokter', compact('res'));
     }
 
     public function catatanPemberiandanPemantauanObatPasien(Request $request) {

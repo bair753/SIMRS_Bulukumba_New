@@ -417,32 +417,37 @@
                                                     <tr style="text-align:center;">
                                                         <td height="10"
                                                             style="border-left:solid 1.0pt; border-bottom:solid 1.0pt;">
-                                                            <font size="1" size="1">Jam {{ $isi->jampengkajian }}</font>
+                                                            
+                                                            <font size="1" size="1">Jam : {{ $isi->jampengkajian != null ? date('H:i', strtotime( $isi->jampengkajian)) : '-' }}</font>
                                                         </td>
                                                         <td height="10" style="border-bottom:solid 1.0pt;">
-                                                            <font size="1" size="1">Petugas {{ $isi->petugaspengkajian }}</font>
+                                                            <font size="1" size="1">Petugas : {{ $isi->petugaspengkajian }}</font>
                                                         </td>
                                                         <td height="10"
                                                             style="border-left:solid 1.0pt; border-bottom:solid 1.0pt;">
-                                                            <font size="1" size="1">Jam {{ $isi->jampenyiapanobat }}</font>
+                                                            
+                                                            <font size="1" size="1">Jam : {{ $isi->jampenyiapanobat != null ? date('H:i', strtotime( $isi->jampenyiapanobat)) : '-' }}</font>
                                                         </td>
                                                         <td height="10" style="border-bottom:solid 1.0pt;">
-                                                            <font size="1" size="1">Petugas {{ $isi->penyiapanobat }}</font>
+                                                            
+                                                            <font size="1" size="1">Petugas : {{ $isi->penyiapanobat }}</font>
                                                         </td>
                                                         <td height="10"
                                                             style="border-left:solid 1.0pt; border-bottom:solid 1.0pt;">
-                                                            <font size="1" size="1">Jam {{ $isi->jamdispening }}</font>
+                                                            
+                                                            <font size="1" size="1">Jam : {{ $isi->jamdispening != null ? date('H:i', strtotime( $isi->jamdispening)) : '-' }}</font>
                                                         </td>
                                                         <td height="10" style="border-bottom:solid 1.0pt;">
-                                                            <font size="1" size="1">Petugas {{ $isi->dispening }}</font>
+                                                            <font size="1" size="1">Petugas : {{ $isi->dispening }}</font>
                                                         </td>
                                                         <td height="10"
                                                             style="border-left:solid 1.0pt; border-bottom:solid 1.0pt;">
-                                                            <font size="1" size="1">Jam {{ $isi->jamserah }}</font>
+                                                            
+                                                            <font size="1" size="1">Jam : {{ $isi->jamserah != null ? date('H:i', strtotime( $isi->jamserah)) : '-' }}</font>
                                                         </td>
                                                         <td height="10"
                                                             style="border-bottom:solid 1.0pt; border-right:solid 1.0pt;">
-                                                            <font size="1" size="1">Petugas .{{ $isi->serahinformasi }}</font>
+                                                            <font size="1" size="1">Petugas : {{ $isi->serahinformasi }}</font>
                                                         </td>
                                                     </tr>
                                                 </tbody>

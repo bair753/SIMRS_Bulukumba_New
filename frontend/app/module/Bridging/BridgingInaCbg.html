@@ -466,7 +466,10 @@
 				<button class="btnTemplate1" ng-click="cetakSEPL3()">Cetak SEP</button>
 			</div>
 			<div class="grid_2">
-				<button class="btnTemplate1" ng-click="cetakBilling()">Billing</button>
+				<button class="btnTemplate1" ng-click="cetakBilling()">Cetak Billing</button>
+			</div>
+			<div class="grid_2">
+				<button class="btnTemplate1" ng-click="cetakResepDokter()">Cetak Resep</button>
 			</div>
 			<div class="grid_2">
 				<button class="btnTemplate1" ng-click="hasilLab()">Cetak Hasil Lab</button>
@@ -476,6 +479,24 @@
 			</div>
 			<div class="grid_2">
 				<button class="btnTemplate1" ng-click="konsulDokter()">Cetak Konsul Dokter</button>
+			</div>
+			<div class="grid_2">
+				<button class="btnTemplate1" ng-click="laporanOperasi()">Cetak Laporan Operasi</button>
+			</div>
+			<div class="grid_2">
+				<button class="btnTemplate1" ng-click="asesmenAwalKeperIGD()">Cetak Asesmen Awal Keper IGD</button>
+			</div>
+			<div class="grid_2">
+				<button class="btnTemplate1" ng-click="catatanPemberianObat()">Cetak Catatan Pemberian Obat</button>
+			</div>
+			<div class="grid_2">
+				<button class="btnTemplate1" ng-click="observasiTransfusi()">Cetak Observasi Transfusi Darah</button>
+			</div>
+			<div class="grid_2">
+				<button class="btnTemplate1" ng-click="ringkasanPulang()">Cetak Ringkasan Pulang</button>
+			</div>
+			<div class="grid_2">
+				<button class="btnTemplate1" ng-click="suretKematian()">Cetak Surat Kematian</button>
 			</div>
 			<!-- <div class="grid_2" >
 				<button class="btnTemplate1"  ng-click="editKlaimm()">Edit Klaim Masal</button>
@@ -1144,6 +1165,21 @@
 				</div>
 			</div>
 		</div>
+		<div kendo-window="popUpDaftarResep" k-title="'Daftar Resep'" k-visible="false" k-width="1000" k-height="600">
+			<div class="panel panel-default container_12">
+				<div class="grid_12">
+					<kendo-grid id="kGrid" data-source="patienGrids"  k-groupable="'true'" k-selectable="'row'" options="arrColumnGridResepElektronik"
+					k-sortable="'true'" k-ng-model="item" ng-click="KlikGrids(item)" ng-dblclick="detailVerif()">
+					</kendo-grid>
+				</div>
+				<div class="grid_12">
+					<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
+							<button class="k-button  k-button-icontext" ng-click="cetakResep()"><span
+											class="k-icon k-i-plus-circle"></span>Cetak</button>
+					</div>
+				</div>
+			</div>
+		</div>
 
 		<div kendo-window="popUpDaftarHasilLab" k-title="'Daftar Hasil Laboratorium'" k-visible="false" k-width="1000" k-height="400">
 			<div class="panel panel-default container_12">
@@ -1189,6 +1225,91 @@
 					</div>
 			</div>
 		</div>
+
+		<div kendo-window="popUpLaporanOperasi" k-title="'Daftar Laporan Operasi'" k-visible="false" k-width="1000" k-height="400">
+			<div class="panel panel-default container_12">
+				<div class="grid_12 headerBox">
+					<kendo-grid id="kGrids" data-source="dataDaftarHasilOperasi" options="columnDaftarHasilOperasi" k-selectable="'row'" k-sortable="'true'"
+							k-resizable="'true'" k-ng-model="dataSelectedHasilOpr" ng-click="klikGridHasilOpr(dataSelectedHasilOpr)"></kendo-grid>
+			</div>
+					<div class="grid_12">
+						<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
+								<button class="k-button  k-button-icontext" ng-click="cetakLaporanOperasi()">Cetak</button>
+						</div>
+					</div>
+			</div>
+		</div>
+
+		<div kendo-window="popUpDaftarAsesmenAwalKeperIGD" k-title="'Daftar Asesmen Awal Keperawatan IGD'" k-visible="false" k-width="1000" k-height="400">
+			<div class="panel panel-default container_12">
+				<div class="grid_12 headerBox">
+					<kendo-grid id="kGrids" data-source="dataDaftadAsesmenAwalKeperIGD" options="columnDaftadAsesmenAwalKeperIGD" k-selectable="'row'" k-sortable="'true'"
+							k-resizable="'true'" k-ng-model="dataSelectedAsesmenAwalKeperIGD" ng-click="klikGridAsesmenAwalKeperIGD(dataSelectedAsesmenAwalKeperIGD)"></kendo-grid>
+				</div>
+					<div class="grid_12">
+							<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
+									<button class="k-button  k-button-icontext" ng-click="cetakAsesmenAwalKeperIGD()">Cetak</button>
+							</div>
+					</div>
+			</div>
+		</div>
+
+		<div kendo-window="popUpDaftarCatatanPemberianObat" k-title="'Daftar Catatan dan Pemantauan Obat Pasien'" k-visible="false" k-width="1000" k-height="400">
+			<div class="panel panel-default container_12">
+				<div class="grid_12 headerBox">
+					<kendo-grid id="kGrids" data-source="dataDaftadCatatanPemberianObat" options="columnDaftadCatatanPemberianObat" k-selectable="'row'" k-sortable="'true'"
+							k-resizable="'true'" k-ng-model="dataSelectedCatatanPemberianObat" ng-click="klikGridCatatanPemberianObat(dataSelectedCatatanPemberianObat)"></kendo-grid>
+				</div>
+					<div class="grid_12">
+							<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
+									<button class="k-button  k-button-icontext" ng-click="cetakCatatanPemberianObat()">Cetak</button>
+							</div>
+					</div>
+			</div>
+		</div>
+
+		<div kendo-window="popUpDaftarObservasiTransfusi" k-title="'Daftar Check List dan Observasi Transfusi Darah'" k-visible="false" k-width="1000" k-height="400">
+			<div class="panel panel-default container_12">
+				<div class="grid_12 headerBox">
+					<kendo-grid id="kGrids" data-source="dataDaftadObservasiTransfusi" options="columnDaftadObservasiTransfusi" k-selectable="'row'" k-sortable="'true'"
+							k-resizable="'true'" k-ng-model="dataSelectedObservasiTransfusi" ng-click="klikGridObservasiTransfusi(dataSelectedObservasiTransfusi)"></kendo-grid>
+				</div>
+					<div class="grid_12">
+							<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
+									<button class="k-button  k-button-icontext" ng-click="cetakObservasiTransfusi()">Cetak</button>
+							</div>
+					</div>
+			</div>
+		</div>
+
+		<div kendo-window="popUpDaftarRingkasanPulang" k-title="'Daftar Ringkasan Pulang'" k-visible="false" k-width="1000" k-height="400">
+			<div class="panel panel-default container_12">
+				<div class="grid_12 headerBox">
+					<kendo-grid id="kGrids" data-source="dataDaftadRingkasanPulang" options="columnDaftadRingkasanPulang" k-selectable="'row'" k-sortable="'true'"
+							k-resizable="'true'" k-ng-model="dataSelectedRingkasanPulang" ng-click="klikGridRingkasanPulang(dataSelectedRingkasanPulang)"></kendo-grid>
+				</div>
+					<div class="grid_12">
+							<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
+									<button class="k-button  k-button-icontext" ng-click="cetakRingkasanPulang()">Cetak</button>
+							</div>
+					</div>
+			</div>
+		</div>
+
+		<div kendo-window="popUpDaftarSuketKematian" k-title="'Daftar Surat Keterangan Kematian'" k-visible="false" k-width="1000" k-height="400">
+			<div class="panel panel-default container_12">
+				<div class="grid_12 headerBox">
+					<kendo-grid id="kGrids" data-source="dataDaftadSuketKematian" options="columnDaftadSuketKematian" k-selectable="'row'" k-sortable="'true'"
+							k-resizable="'true'" k-ng-model="dataSelectedSuketKematian" ng-click="klikGridSuketKematian(dataSelectedSuketKematian)"></kendo-grid>
+				</div>
+					<div class="grid_12">
+							<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
+									<button class="k-button  k-button-icontext" ng-click="cetakSuketKematian()">Cetak</button>
+							</div>
+					</div>
+			</div>
+		</div>
+
 
 </div>
 

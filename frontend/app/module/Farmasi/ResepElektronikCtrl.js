@@ -1189,41 +1189,51 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 
             $scope.resepDokter = function (){
                 $scope.popUpFormulir.center().open();
+                $scope.item.riwayatAlergi = $scope.item.riwayatalergi;
+
+                $scope.item.jamPengkajian = $scope.item.jampengkajian;
+                $scope.item.pengkajian = {
+                    id: $scope.item.petugaspengkajian,
+                    namalengkap: $scope.item.petugaspengkajian,
+                };
+                $scope.item.jamPenyiapanObat = $scope.item.jampenyiapanobat;
+                $scope.item.penyiapanObat = {
+                    id: $scope.item.penyiapanobat,
+                    namalengkap: $scope.item.penyiapanobat,
+                };
+                $scope.item.jamDispening = $scope.item.jamdispening;
+                $scope.item.dispening = {
+                    id: $scope.item.dispening,
+                    namalengkap: $scope.item.dispening,
+                };
+                $scope.item.jamSerahInformasi = $scope.item.jamserah;
+                $scope.item.serahInformasi = {
+                    id: $scope.item.serahinformasi,
+                    namalengkap: $scope.item.serahinformasi,
+                };
+                $scope.item.penulisResep = $scope.item.penulisanresep;
+                $scope.item.obat = $scope.item.obat;
+                $scope.item.dosis = $scope.item.dosis;
+                $scope.item.waktuFrekuensi = $scope.item.waktufrekuensi;
+                $scope.item.rute = $scope.item.rute;
+                $scope.item.pasien = $scope.item.pasien;
+                $scope.item.duplikasiTerapi = $scope.item.duplikasiterapi;
+                $scope.item.interaksiObat = $scope.item.interaksiobat;
             }
 
             
             $scope.saveResep = function (){
-                if ($scope.item.pengkajian == undefined){
-                    var reseppengkajian = 1;
-                }else{
-                    var reseppengkajian = $scope.item.pengkajian.id;
-                }
-                if ($scope.item.penyiapanObat == undefined){
-                    var reseppenyiapanObat = 1;
-                }else{
-                    var reseppenyiapanObat = $scope.item.penyiapanObat.id;
-                }
-                if ($scope.item.dispening == undefined){
-                    var resepdispeningian = 1;
-                }else{
-                    var resepdispeningian = $scope.item.dispening.id;
-                }
-                if ($scope.item.serahInformasi == undefined){
-                    var resepserahInformasi = 1;
-                }else{
-                    var resepserahInformasi = $scope.item.serahInformasi.id;
-                }
                 var objSave = {
 					nopesanan: $scope.item.noorder,
 					riwayatalergi: $scope.item.riwayatAlergi != undefined ? $scope.item.riwayatAlergi : '',
-					jampengkajian: moment($scope.item.jamPengkajian).format('YYYY-MM-DD'),
-					pengkajian: reseppengkajian,
-					jampenyiapanobat: moment($scope.item.jamPenyiapanObat).format('YYYY-MM-DD'),
-					penyiapanobat: reseppenyiapanObat,
-					jamdispening: moment($scope.item.jamDispening).format('YYYY-MM-DD'),
-					dispening: resepdispeningian,
-					jamserahinformasi: moment($scope.item.jamSerahInformasi).format('YYYY-MM-DD'),
-                    serahinformasi: resepserahInformasi,
+                    jampengkajian: $scope.item.jamPengkajian != undefined ? moment($scope.item.jamPengkajian).format('YYYY-MM-DD HH:mm') : null,
+					pengkajian: $scope.item.pengkajian != undefined ? $scope.item.pengkajian.id : null,
+                    jampenyiapanobat: $scope.item.jamPenyiapanObat != undefined ? moment($scope.item.jamPenyiapanObat).format('YYYY-MM-DD HH:mm') : null,
+					penyiapanobat: $scope.item.penyiapanObat != undefined ? $scope.item.penyiapanObat.id : null,
+                    jamdispening: $scope.item.jamDispening != undefined ? moment($scope.item.jamDispening).format('YYYY-MM-DD HH:mm') : null,
+					dispening: $scope.item.serahInformasi != undefined ? $scope.item.serahInformasi.id : null,
+                    jamserahinformasi: $scope.item.jamSerahInformasi != undefined ? moment($scope.item.jamSerahInformasi).format('YYYY-MM-DD HH:mm') : null,
+                    serahinformasi: $scope.item.dispening != undefined ? $scope.item.dispening.id : null,
                     penulisresep: $scope.item.penulisResep != undefined ? $scope.item.penulisResep : false,
                     obat: $scope.item.obat != undefined ? $scope.item.obat : false,
                     dosis: $scope.item.dosis != undefined ? $scope.item.dosis : false,

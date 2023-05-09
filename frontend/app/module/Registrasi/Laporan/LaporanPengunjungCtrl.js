@@ -33,6 +33,7 @@ define(['initialize'], function (initialize) {
                     .then(function (data) {
                         $scope.listRuangans = data.data.ruangan
                         $scope.listDokter = data.data.dokter
+                        $scope.listDepartemen = data.data.departemen
                     })
 
                 medifirstService.get("sysadmin/general/get-combo-address")
@@ -94,9 +95,14 @@ define(['initialize'], function (initialize) {
                     dokter = "&dokter=" + $scope.item.dokter.id
                 }
 
-                var kotaKab = ""
+                // var kotaKab = ""
+                // if ($scope.item.kabupaten != undefined) {
+                //     kotaKab = "&kotaKab=" + $scope.item.kabupaten.id
+                // }
+
+                var departemen = ""
                 if ($scope.item.kabupaten != undefined) {
-                    kotaKab = "&kotaKab=" + $scope.item.kabupaten.id
+                    departemen = "&departemen=" + $scope.item.departemen.id
                 }
 
                 medifirstService.get("registrasi/laporan/get-data-lap-pengunjung?" +
@@ -105,7 +111,7 @@ define(['initialize'], function (initialize) {
                     rm +
                     pasien +
                     namaruangan +
-                    dokter + kotaKab)
+                    dokter + departemen)
                     .then(function (data) {
                         $scope.isRouteLoading = false;
                         for (var i = 0; i < data.data.length; i++) {

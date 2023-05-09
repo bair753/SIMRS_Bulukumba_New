@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ringkasan Pulang Rawat Inap</title>
+    <title>Surat Konsul Dokter</title>
 
     @if (stripos(\Request::url(), 'localhost') !== false)
         <link rel="stylesheet" href="{{ asset('css/report/paper.css') }}">
@@ -205,25 +205,25 @@
                             <tr>
                                 <td class="f-s-15 bold  text-top" style="width: 100px">No. RM</td>
                                 <td class="f-s-15 bold  text-top">:</td>
-                                <td class="f-s-15 bold text-top"><b>{{ $res['d']->norm }}</b></td>
+                                <td class="f-s-15 bold text-top"><b>{{ $res['data']->nocm }}</b></td>
                             </tr>
                             <tr>
                                 <td class="f-s-15 bold  text-top">Nama</td>
                                 <td class="f-s-15 bold  text-top">:</td>
-                                <td class="f-s-15 bold  text-top"><b>{{ $res['d']->namalengkap }}</b>
+                                <td class="f-s-15 bold  text-top"><b>{{ $res['data']->namapasien }}</b>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="f-s-15 bold  text-top">Tgl Lahir</td>
                                 <td class="f-s-15 bold  text-top">:</td>
                                 <td class="f-s-15 bold  text-top">
-                                    <b>{!! date('d-m-Y', strtotime($res['d']->tgllahir)) !!}</b>
+                                    <b>{!! date('d-m-Y', strtotime($res['data']->tgllahir)) !!}</b>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="f-s-15 bold  text-top">NIK</td>
                                 <td class="f-s-15 bold  text-top">:</td>
-                                <td class="f-s-15 bold  text-top"><b>{{ $res['d']->noidentitas }}</b>
+                                <td class="f-s-15 bold  text-top"><b>{{ $res['data']->noidentitas }}</b>
                                 </td>
                             </tr>
                         </table>
@@ -250,10 +250,10 @@
                             <tr>
                                 <td style="padding-left: 5px;padding-top:30px;">
                                     <span class="f-s-15">Dari Dokter </span><span> :
-                                    </span><span>{{ $res[0]['daridokter'] }}</span>
+                                    </span><span>{{ $res['data']->pengonsul }}</span>
                                 </td>
                                 <td style="padding-left: 5px;padding-top:30px;">
-                                    <span class="f-s-15">Ahli </span><span> : </span><span>{{ isset($datadaridokter[0]->namaexternal) ? $datadaridokter[0]->namaexternal : 'Belum diset' }}</span>
+                                    <span class="f-s-15">Ahli </span><span> : </span><span>Belum Diset</span>
                                 </td>
                             </tr>
                         </table>
@@ -263,10 +263,10 @@
                             <tr>
                                 <td style="padding-left: 5px;padding-top:30px;">
                                     <span class="f-s-15">Untuk Dokter </span><span> :
-                                    </span><span>{{ $res[0]['untukdokter'] }}</span>
+                                    </span><span>{{ $res['data']->namalengkap }}</span>
                                 </td>
                                 <td style="padding-left: 5px;padding-top:30px;">
-                                    <span class="f-s-15">Ahli </span><span> : </span><span>{{ isset($datauntukdokter[0]->namaexternal) ? $datauntukdokter[0]->namaexternal : 'Belum diset' }}</span>
+                                    <span class="f-s-15">Ahli </span><span> : </span><span>Belum Diset</span>
                                 </td>
                             </tr>
                         </table>
@@ -280,31 +280,15 @@
                             <tr>
                                 <td style="padding-left: 5px;padding-top:10px;padding-bottom:10px;">
                                     <span class="f-s-15">Tanggal </span><span> :
-                                    </span><span><?php echo date("d-m-Y"); ?></span>
+                                    </span><span>{!! date('d-m-Y', strtotime($res['data']->tglorder)) !!}</span>
                                 </td>
                                 <td style="padding-left: 5px;padding-top:10px;padding-bottom:10px;">
-                                    <span class="f-s-15">Jam </span><span> : </span><span><?php echo date("H:i"); ?></span>
+                                    <span class="f-s-15">Jam </span><span> : </span><span>{!! date('H:i', strtotime($res['data']->tglorder)) !!}</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="2" style="padding-left: 5px;padding-bottom:30px;">
-                                    <span class="f-s-15">{{ $res[0]['keteranganjawab'] }}</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="padding-left: 5px;padding-top:10px;">
-                                    
-                                </td>
-                                <td style="padding-left: 5px;padding-top:10px;padding-bottom:10px;">
-                                    <center><span class="f-s-15">Tanda tangan</center>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="padding-left: 5px;padding-top:10px;">
-                                    
-                                </td>
-                                <td style="padding-left: 5px;padding-top:10px;padding-bottom:10px;">
-                                   
+                                    <span class="f-s-15">{{ $res['data']->keteranganorder }}</span>
                                 </td>
                             </tr>
                             <tr>
@@ -315,6 +299,31 @@
                                     <center><span class="f-s-15">Bulukumba, <?php echo date("d-m-Y"); ?></center>
                                 </td>
                             </tr>
+                            <tr>
+                                <td style="padding-left: 5px;padding-top:10px;">
+                                    
+                                </td>
+                                <td style="padding-left: 5px;padding-bottom:10px;">
+                                    <center><span class="f-s-15">Tanda tangan</center>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding-left: 5px;padding-top:10px;">
+                                    
+                                </td>
+                                <td style="padding-left: 5px;padding-top:10px;padding-bottom:10px;">
+                                    <center><span class="f-s-15"><div id="qrcodePengonsul" style="text-align: center"></div></center>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding-left: 5px;padding-top:10px;">
+                                    
+                                </td>
+                                <td style="padding-left: 5px;padding-top:10px;padding-bottom:10px;">
+                                    <center><span class="f-s-15">({{ $res['data']->pengonsul }})</center>
+                                </td>
+                            </tr>
+                            
                         </table>
                     </div>
                 </td>
@@ -339,23 +348,7 @@
                             </tr>
                             <tr>
                                 <td colspan="2" style="padding-left: 5px;padding-bottom:30px;padding-right: 5px;">
-                                    <span class="f-s-15">{{ $res[0]['jawaban'] }}</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="padding-left: 5px;padding-top:10px;">
-                                    
-                                </td>
-                                <td style="padding-left: 5px;padding-top:10px;padding-bottom:10px;">
-                                    <center><span class="f-s-15">Tanda tangan</center>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="padding-left: 5px;padding-top:10px;">
-                                    
-                                </td>
-                                <td style="padding-left: 5px;padding-top:10px;padding-bottom:10px;">
-                                   
+                                    <span class="f-s-15">{{ $res['data']->keteranganlainnya }}</span>
                                 </td>
                             </tr>
                             <tr>
@@ -366,6 +359,31 @@
                                     <center><span class="f-s-15">Bulukumba, <?php echo date("d-m-Y"); ?></center>
                                 </td>
                             </tr>
+                            <tr>
+                                <td style="padding-left: 5px;padding-top:5px;">
+                                    
+                                </td>
+                                <td style="padding-left: 5px;padding-bottom:10px;">
+                                    <center><span class="f-s-15">Tanda tangan</center>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding-left: 5px;padding-top:10px;">
+                                    
+                                </td>
+                                <td style="padding-left: 5px;padding-top:10px;padding-bottom:10px;">
+                                    <center><span class="f-s-15"><div id="qrcodeDokterJawab" style="text-align: center"></div></center>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding-left: 5px;padding-top:10px;">
+                                    
+                                </td>
+                                <td style="padding-left: 5px;padding-top:10px;padding-bottom:10px;">
+                                    <center><span class="f-s-15">({{ $res['data']->namalengkap }})</center>
+                                </td>
+                            </tr>
+                            
                         </table>
                     </div>
                 </td>
@@ -375,6 +393,21 @@
     </section>
 </body>
 <script>
+    var pengonsul = {!! json_encode($res['data']->pengonsul )!!};
+    var dokterjawab = {!! json_encode($res['data']->namalengkap )!!};
+
+        jQuery('#qrcodePengonsul').qrcode({
+            width	: 100,
+			height	: 100,
+            text	: "Tanda Tangan Digital Oleh " + pengonsul
+        });	
+
+        jQuery('#qrcodeDokterJawab').qrcode({
+            width	: 100,
+			height	: 100,
+            text	: "Tanda Tangan Digital Oleh " + dokterjawab
+        });
+
     $(document).ready(function () {
         window.print();
     });

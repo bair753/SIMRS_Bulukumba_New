@@ -1,0 +1,470 @@
+<style type="text/css">
+    fieldset {
+        border-radius: 5px;
+        border: 1px solid #228be6;
+    }
+
+    .k-slider-horizontal {
+        display: inline-block;
+        float: left;
+        width: 450px;
+
+        height: 26px;
+
+
+    }
+
+    .k-slider {
+
+        margin-left: 3%;
+        margin-right: 3%;
+        margin-top: 1%;
+        margin-bottom: 5%;
+        display: inline-block;
+    }
+
+    .activeBtn {
+        background-color: #10c4b2;
+        color: #ffffff;
+    }
+    table,
+    th,
+    td {
+        border: 1px solid #929191;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+
+    th,
+    td {
+        padding: 5px;
+        text-align: left;
+    }
+</style>
+
+ <!-- ng-class="{'my-disable':true}" -->
+<!-- <div class="grid_12"  disable-contents="allDisabled" id="form"> -->
+<div class="grid_12">
+    <div class="grid_12">
+        <div class="panel panel-default container_12">
+            <div class="panel-heading" c-translate>Monitoring PMK 2</div>
+        </div>
+
+        <div class="grid_12" style="margin-top: 10px;">
+            <fieldset style="margin-top: 10px;">
+                <div class="grid_12 mt-1" style="min-width: 1000px;overflow: auto;">
+                    <table>
+                    <tr>
+                            <th>Mulai PMK</th>
+                            <th>Selesai PMK</th>
+                            <th>Lama PMK</th>
+                            <th colspan="2">Suhu Bayi (°C)</th>
+                            <th colspan="2">Frekuensi Nadi</th>
+                            <th colspan="2">Frekuensi Nafas</th>
+                            <th>Berat Badan Harian (gram)</th>
+                            <th>Komentar</th>
+                        </tr>
+
+                        <tr>
+                            <td rowspan="3"><input style="width: 90%" k-ng-model="item.obj[32104610]" kendo-timepicker placeholer="HH:MM"
+                                k-format="'HH:mm'" /></td>
+                            <td rowspan="3"><input style="width: 90%" k-ng-model="item.obj[32104611]" kendo-timepicker placeholer="HH:MM"
+                                k-format="'HH:mm'" /></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104612]"></td>
+                            <td>B:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104613]"></td>
+                            <td>B:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104614]"></td>
+                            <td>B:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104615]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104616]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104617]"></td>
+                        </tr>
+
+                        <tr>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104618]"></td>
+                            <td>D:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104619]"></td>
+                            <td>D:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104620]"></td>
+                            <td>D:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104621]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104622]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104623]"></td>
+                        </tr>
+
+                        <tr>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104624]"></td>
+                            <td>A:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104625]"></td>
+                            <td>A:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104626]"></td>
+                            <td>A:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104627]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104628]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104629]"></td>
+                        </tr>
+
+                        <tr>
+                            <td rowspan="3"><input style="width: 90%" k-ng-model="item.obj[32104630]" kendo-timepicker placeholer="HH:MM"
+                                k-format="'HH:mm'" /></td>
+                            <td rowspan="3"><input style="width: 90%" k-ng-model="item.obj[32104631]" kendo-timepicker placeholer="HH:MM"
+                                k-format="'HH:mm'" /></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104632]"></td>
+                            <td>B:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104633]"></td>
+                            <td>B:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104634]"></td>
+                            <td>B:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104635]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104636]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104637]"></td>
+                        </tr>
+
+                        <tr>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104638]"></td>
+                            <td>D:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104639]"></td>
+                            <td>D:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104640]"></td>
+                            <td>D:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104641]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104642]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104643]"></td>
+                        </tr>
+
+                        <tr>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104644]"></td>
+                            <td>A:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104645]"></td>
+                            <td>A:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104646]"></td>
+                            <td>A:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104647]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104648]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104649]"></td>
+                        </tr>
+
+                        <tr>
+                            <td rowspan="3"><input style="width: 90%" k-ng-model="item.obj[32104650]" kendo-timepicker placeholer="HH:MM"
+                                k-format="'HH:mm'" /></td>
+                            <td rowspan="3"><input style="width: 90%" k-ng-model="item.obj[32104651]" kendo-timepicker placeholer="HH:MM"
+                                k-format="'HH:mm'" /></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104652]"></td>
+                            <td>B:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104653]"></td>
+                            <td>B:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104654]"></td>
+                            <td>B:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104655]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104656]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104657]"></td>
+                        </tr>
+
+                        <tr>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104658]"></td>
+                            <td>D:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104659]"></td>
+                            <td>D:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104660]"></td>
+                            <td>D:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104661]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104662]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104663]"></td>
+                        </tr>
+
+                        <tr>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104664]"></td>
+                            <td>A:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104665]"></td>
+                            <td>A:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104666]"></td>
+                            <td>A:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104667]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104668]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104669]"></td>
+                        </tr>
+
+                        <!-- sampai sini -->
+
+                        <tr>
+                            <td rowspan="3"><input style="width: 90%" k-ng-model="item.obj[32104670]" kendo-timepicker placeholer="HH:MM"
+                                k-format="'HH:mm'" /></td>
+                            <td rowspan="3"><input style="width: 90%" k-ng-model="item.obj[32104671]" kendo-timepicker placeholer="HH:MM"
+                                k-format="'HH:mm'" /></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104672]"></td>
+                            <td>B:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104673]"></td>
+                            <td>B:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104674]"></td>
+                            <td>B:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104675]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104676]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104677]"></td>
+                        </tr>
+
+                        <tr>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104678]"></td>
+                            <td>D:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104679]"></td>
+                            <td>D:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104680]"></td>
+                            <td>D:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104681]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104682]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104683]"></td>
+                        </tr>
+
+                        <tr>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104684]"></td>
+                            <td>A:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104685]"></td>
+                            <td>A:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104686]"></td>
+                            <td>A:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104687]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104688]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104689]"></td>
+                        </tr>
+
+                        <tr>
+                            <td rowspan="3"><input style="width: 90%" k-ng-model="item.obj[32104690]" kendo-timepicker placeholer="HH:MM"
+                                k-format="'HH:mm'" /></td>
+                            <td rowspan="3"><input style="width: 90%" k-ng-model="item.obj[32104691]" kendo-timepicker placeholer="HH:MM"
+                                k-format="'HH:mm'" /></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104692]"></td>
+                            <td>B:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104693]"></td>
+                            <td>B:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104694]"></td>
+                            <td>B:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104695]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104696]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104697]"></td>
+                        </tr>
+
+                        <tr>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104698]"></td>
+                            <td>D:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104699]"></td>
+                            <td>D:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104700]"></td>
+                            <td>D:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104701]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104702]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104703]"></td>
+                        </tr>
+
+                        <tr>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104704]"></td>
+                            <td>A:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104705]"></td>
+                            <td>A:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104706]"></td>
+                            <td>A:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104707]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104708]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104709]"></td>
+                        </tr>
+
+                        <tr>
+                            <td rowspan="3"><input style="width: 90%" k-ng-model="item.obj[32104710]" kendo-timepicker placeholer="HH:MM"
+                                k-format="'HH:mm'" /></td>
+                            <td rowspan="3"><input style="width: 90%" k-ng-model="item.obj[32104711]" kendo-timepicker placeholer="HH:MM"
+                                k-format="'HH:mm'" /></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104712]"></td>
+                            <td>B:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104713]"></td>
+                            <td>B:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104714]"></td>
+                            <td>B:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104715]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104716]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104717]"></td>
+                        </tr>
+
+                        <tr>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104718]"></td>
+                            <td>D:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104719]"></td>
+                            <td>D:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104720]"></td>
+                            <td>D:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104721]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104722]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104723]"></td>
+                        </tr>
+
+                        <tr>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104724]"></td>
+                            <td>A:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104725]"></td>
+                            <td>A:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104726]"></td>
+                            <td>A:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104727]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104728]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104729]"></td>
+                        </tr>
+
+                        <tr>
+                            <td rowspan="3"><input style="width: 90%" k-ng-model="item.obj[32104730]" kendo-timepicker placeholer="HH:MM"
+                                k-format="'HH:mm'" /></td>
+                            <td rowspan="3"><input style="width: 90%" k-ng-model="item.obj[32104731]" kendo-timepicker placeholer="HH:MM"
+                                k-format="'HH:mm'" /></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104732]"></td>
+                            <td>B:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104733]"></td>
+                            <td>B:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104734]"></td>
+                            <td>B:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104735]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104736]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104737]"></td>
+                        </tr>
+
+                        <tr>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104738]"></td>
+                            <td>D:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104739]"></td>
+                            <td>D:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104740]"></td>
+                            <td>D:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104741]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104742]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104743]"></td>
+                        </tr>
+
+                        <tr>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104744]"></td>
+                            <td>A:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104745]"></td>
+                            <td>A:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104746]"></td>
+                            <td>A:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104747]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104748]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104749]"></td>
+                        </tr>
+
+                        <tr>
+                            <td rowspan="3"><input style="width: 90%" k-ng-model="item.obj[32104750]" kendo-timepicker placeholer="HH:MM"
+                                k-format="'HH:mm'" /></td>
+                            <td rowspan="3"><input style="width: 90%" k-ng-model="item.obj[32104751]" kendo-timepicker placeholer="HH:MM"
+                                k-format="'HH:mm'" /></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104752]"></td>
+                            <td>B:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104753]"></td>
+                            <td>B:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104754]"></td>
+                            <td>B:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104755]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104756]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104757]"></td>
+                        </tr>
+
+                        <tr>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104758]"></td>
+                            <td>D:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104759]"></td>
+                            <td>D:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104760]"></td>
+                            <td>D:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104761]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104762]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104763]"></td>
+                        </tr>
+
+                        <tr>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104764]"></td>
+                            <td>A:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104765]"></td>
+                            <td>A:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104766]"></td>
+                            <td>A:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104767]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104768]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104769]"></td>
+                        </tr>
+
+                        <tr>
+                            <td rowspan="3"><input style="width: 90%" k-ng-model="item.obj[32104770]" kendo-timepicker placeholer="HH:MM"
+                                k-format="'HH:mm'" /></td>
+                            <td rowspan="3"><input style="width: 90%" k-ng-model="item.obj[32104771]" kendo-timepicker placeholer="HH:MM"
+                                k-format="'HH:mm'" /></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104772]"></td>
+                            <td>B:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104773]"></td>
+                            <td>B:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104774]"></td>
+                            <td>B:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104775]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104776]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104777]"></td>
+                        </tr>
+
+                        <tr>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104778]"></td>
+                            <td>D:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104779]"></td>
+                            <td>D:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104780]"></td>
+                            <td>D:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104781]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104782]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104783]"></td>
+                        </tr>
+
+                        <tr>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104784]"></td>
+                            <td>A:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104785]"></td>
+                            <td>A:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104786]"></td>
+                            <td>A:</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104787]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104788]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32104789]"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="11">Before (B) | During (D) | After (A)</td>
+                        </tr>
+                    </table>
+                </div>
+            </fieldset>
+        </div>
+
+    </div>
+</div>
+
+<br />
+<br />
+<div class="grid_12">
+    <div class="grid_3"></div>
+<div class="grid_9">
+    <div class="grid_2" ng-show="isCetakV"  >
+       
+    </div>
+    <div class="grid_6"  ng-show="!isRiwayat && !isCetak && !isCetakV">
+    </div>
+    <div class="grid_2" style="margin-top: 22px" ng-show='tombolSimpanVis'>
+        <button class="btnTemplate1" ng-click="Save()"><i class="fa fa-save"></i>Simpan</button>
+    </div>
+    <div class="grid_2" style="margin-top: 22px" ng-show="isRiwayat">
+        <button class="btnTemplate1" ng-click="Riwayat()"><i class="fa fa-th-list"></i>Riwayat</button>
+    </div>
+    <div class="grid_2" style="margin-top: 22px">
+        <button class="btnTemplate1" ng-click="Batal()"><i class="fa fa-refresh"></i>Batal</button>
+    </div>
+    <div class="grid_2" style="margin-top: 22px">
+        <button class="btnTemplate1 cancel" ng-click="kembali()"><i class="fa fa-arrow-left"></i>Kembali</button>
+    </div>
+    <div class="grid_2" ng-show="isCetak"  style="margin-top: 22px">
+        <button class="btnTemplate1" ng-click="cetakPdf()"><i class="fa fa-print"></i>Cetak</button>
+    </div>
+     <div class="grid_2" ng-show="isCetakV"  style="margin-top: 22px">
+        <button class="btnTemplate1" ng-click="cetakBlade()"><i class="fa fa-print"></i>Cetak View</button>
+    </div>
+</div>
+
+</div>
