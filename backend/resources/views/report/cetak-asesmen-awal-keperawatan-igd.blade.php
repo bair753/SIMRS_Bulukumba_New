@@ -304,9 +304,9 @@
                 <td colspan="2" style="border:none;">: Nafas</td>
                 <td colspan="2" style="border:none;">: @{{ item.obj[420638] ? item.obj[420638] : '' }} x/m</td>
                 <td style="border:none;"></td>
-                <td colspan="4" style="border:none;">Pola penafasan </td>
-                <td colspan="2" style="border:none;">>@{{ item.obj[420639] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Normal</td>
-                <td colspan="2" style="border:none;">>@{{ item.obj[420640] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Tidak, </td>
+                <td colspan="4" style="border:none;">Pola pernafasan </td>
+                <td colspan="2" style="border:none;">@{{ item.obj[420639] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Normal</td>
+                <td colspan="2" style="border:none;">@{{ item.obj[420640] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Tidak, </td>
                 <td colspan="3" style="border:none;">Jelaskan: @{{ item.obj[420641] ? item.obj[420641] : '' }}</td>
             </tr>
             <tr height="18px">

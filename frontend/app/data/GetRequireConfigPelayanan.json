@@ -3575,6 +3575,14 @@
             "urlDep": "module/EMR/SuratKeteranganKematianRanapCtrl"
         },
         {
+            "nameDep": "PermintaanPelayananKerohanianCtrl",
+            "urlDep": "module/EMR/PermintaanPelayananKerohanianCtrl"
+        },
+        {
+            "nameDep": "PemberianMinumRutin1000Ctrl",
+            "urlDep": "module/EMR/PemberianMinumRutin1000Ctrl"
+        },
+        {
             "nameDep": "PemberianMakanAwalPenurunanCairanCtrl",
             "urlDep": "module/EMR/PemberianMakanAwalPenurunanCairanCtrl"
         },
@@ -3585,7 +3593,10 @@
         {
             "nameDep": "MonitoringPMK2Ctrl",
             "urlDep": "module/EMR/MonitoringPMK2Ctrl"
+        },
+        {
+            "nameDep": "AsuhanPerioperatifTerintegrasiCtrl",
+            "urlDep": "module/EMR/AsuhanPerioperatifTerintegrasiCtrl"
         }
-    
     ]
 }

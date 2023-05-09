@@ -3814,7 +3814,7 @@
       }
     ]
   },
-  { 
+  {
     "name": "RekamMedis.AsesmenMedis.AsesmenMedisDetail",
     "url": "/AsesmenMedisDetail/:namaEMR/:nomorEMR",
     "templateurl": "module/EMR/AsesmenMedisDetail.html",
@@ -4213,7 +4213,6 @@
     "templateurl": "module/Radiologi/HasilRadiologi.html",
     "controller": "HasilRadiologiCtrl",
     "deps": [
-    
       {
         "module": "Services",
         "define": "Service"
@@ -4234,7 +4233,6 @@
     "templateurl": "module/Registrasi/Laporan/LaporanPengunjung.html",
     "controller": "LaporanPengunjungCtrl",
     "deps": [
-    
       {
         "module": "Services",
         "define": "Service"
@@ -4255,7 +4253,6 @@
     "templateurl": "module/Registrasi/Laporan/LaporanSummary.html",
     "controller": "LaporanSummaryCtrl",
     "deps": [
-    
       {
         "module": "Services",
         "define": "Service"
@@ -4275,7 +4272,7 @@
     "url": "/TGFwb3JhblBlbmd1bmp1bmdQZW1lcmlrc2Fhbg==",
     "templateurl": "module/Registrasi/Laporan/LaporanPengunjungPemeriksaan.html",
     "controller": "LaporanPengunjungPemeriksaanCtrl",
-    "deps": [    
+    "deps": [
       {
         "module": "Services",
         "define": "Service"
@@ -4295,7 +4292,7 @@
     "url": "/TGFwb3JhblBlbmd1bmp1bmdQZW1lcmlrc2Fhbg==V",
     "templateurl": "module/Registrasi/Laporan/LaporanPengunjungTindakan.html",
     "controller": "LaporanPengunjungTindakanCtrl",
-    "deps": [    
+    "deps": [
       {
         "module": "Services",
         "define": "Service"
@@ -4946,7 +4943,7 @@
       {
         "define": "RekamMedisCtrl"
       }
-    ]                 
+    ]
   },
   {
     "name": "RekamMedis.AsesmenMedis.MenuObservasiFisik.ObservasiFisik",
@@ -5039,7 +5036,6 @@
         "define": "RekamMedisCtrl"
       }
     ]
-            
   },
   {
     "name": "RekamMedis.AsesmenMedis.AsesmenPerawatJiwaRemaja",
@@ -5108,8 +5104,7 @@
       {
         "define": "RekamMedisCtrl"
       }
-    ]        
-                
+    ]
   },
   {
     "name": "RekamMedis.AsesmenMedis.SerahTerimaPasien",
@@ -5156,7 +5151,6 @@
         "define": "RekamMedisCtrl"
       }
     ]
-            
   },
   {
     "name": "RekamMedis.AsesmenMedis.AsesmenPerawatJiwaRemaja",
@@ -5225,8 +5219,7 @@
       {
         "define": "RekamMedisCtrl"
       }
-    ]        
-                
+    ]
   },
   {
     "name": "RekamMedis.AsesmenMedis.SerahTerimaPasien",
@@ -5250,7 +5243,7 @@
         "define": "RekamMedisCtrl"
       }
     ]
-  },           
+  },
   {
     "name": "LaporanPasienPulangRev",
     "url": "/TGFwb3JhblBhc2llblB1bGFuZ1Jldg=",
@@ -5290,7 +5283,6 @@
         "define": "MedifirstService"
       }
     ]
-        
   },
   {
     "name": "LaporanKegiatan",
@@ -5310,7 +5302,7 @@
         "module": "MedifirstService",
         "define": "MedifirstService"
       }
-    ]    
+    ]
   },
   {
     "name": "RekamMedis.AsesmenMedis.MenuTransfer.FormulirTransfer",
@@ -5426,7 +5418,6 @@
         "define": "RekamMedisCtrl"
       }
     ]
-             
   },
   {
     "name": "InputCheklisApd",
@@ -5469,7 +5460,7 @@
       {
         "define": "RekamMedisCtrl"
       }
-    ]            
+    ]
   },
   {
     "name": "RekamMedis.PengkajianMedisNew.AsesmenMedisRJ",
@@ -5493,7 +5484,7 @@
         "define": "RekamMedisCtrl"
       }
     ]
-  }, 
+  },
   {
     "name": "RekamMedis.AsesmenMedis.AsesmenAwalKeperawatanPsikogeriatri",
     "url": "/AsesmenAwalKeperawatanPsikogeriatri",
@@ -5516,7 +5507,7 @@
         "define": "RekamMedisCtrl"
       }
     ]
-  }, 
+  },
   {
     "name": "RekamMedis.AsesmenMedis.AsuhanGizi",
     "url": "/AsuhanGizi",
@@ -5539,7 +5530,7 @@
         "define": "RekamMedisCtrl"
       }
     ]
-  }, 
+  },
   {
     "name": "RekamMedis.AsesmenMedis.AsuhanGiziAnak",
     "url": "/AsuhanGiziAnak",
@@ -5562,7 +5553,6 @@
         "define": "RekamMedisCtrl"
       }
     ]
-   
   },
   {
     "name": "InformasiTanggungan",
@@ -5583,7 +5573,6 @@
         "define": "MedifirstService"
       }
     ]
-    
   },
   {
     "name": "RekamMedis.AsesmenMedis.ImplementasiBunuhDiri",
@@ -5676,10 +5665,7 @@
         "define": "RekamMedisCtrl"
       }
     ]
-
-  
   },
-  
   {
     "name": "RGFmdGFyUml3YXlhdFBhc2llbg==",
     "url": "/RGFmdGFyUml3YXlhdFBhc2llbg==",
@@ -5925,7 +5911,7 @@
       {
         "define": "RekamMedisCtrl"
       }
-    ] 
+    ]
   },
   {
     "name": "RekamMedis.AsesmenMedis.AsesmenPerawatJiwaRemajaRI",
@@ -6011,7 +5997,6 @@
         "module": "MedifirstService",
         "define": "MedifirstService"
       }
-      
     ]
   },
   {
@@ -6032,7 +6017,6 @@
         "module": "MedifirstService",
         "define": "MedifirstService"
       }
-      
     ]
   },
   {
@@ -6378,7 +6362,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -6402,7 +6385,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -6426,7 +6408,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -6588,7 +6569,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -6750,7 +6730,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -6897,7 +6876,6 @@
     "templateurl": "module/Registrasi/Laporan/LaporanDemografiRI.html",
     "controller": "LaporanDemografiRICtrl",
     "deps": [
-    
       {
         "module": "Services",
         "define": "Service"
@@ -6918,7 +6896,6 @@
     "templateurl": "module/Registrasi/Laporan/TargetDanRealisasiKunjungan.html",
     "controller": "TargetDanRealisasiKunjunganCtrl",
     "deps": [
-    
       {
         "module": "Services",
         "define": "Service"
@@ -6939,7 +6916,6 @@
     "templateurl": "module/Registrasi/Laporan/IndikatorPelayananTahun.html",
     "controller": "IndikatorPelayananTahunCtrl",
     "deps": [
-    
       {
         "module": "Services",
         "define": "Service"
@@ -6952,7 +6928,7 @@
         "module": "MedifirstService",
         "define": "MedifirstService"
       }
-    ]  
+    ]
   },
   {
     "name": "LaporanTop10Diagnosis",
@@ -7055,7 +7031,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -7148,7 +7123,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -7308,7 +7282,7 @@
         "define": "MedifirstService"
       }
     ]
-	},
+  },
   {
     "name": "RekamMedis.AsesmenMedis.MenuRestrain",
     "url": "/MenuRestrain",
@@ -7330,7 +7304,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -7907,8 +7880,8 @@
         "define": "RekamMedisCtrl"
       }
     ]
- },
- {
+  },
+  {
     "name": "RekamMedis.AsesmenMedis.MenuEdukasi",
     "url": "/MenuEdukasi",
     "templateurl": "module/EMR/MenuEdukasi.html",
@@ -7929,7 +7902,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -7953,7 +7925,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -7977,7 +7948,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -8001,7 +7971,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -8025,7 +7994,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -8049,7 +8017,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -8073,7 +8040,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -8211,7 +8177,7 @@
       },
       {
         "define": "RekamMedisCtrl"
-      } 
+      }
     ]
   },
   {
@@ -8235,7 +8201,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -8259,7 +8224,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -8536,7 +8500,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -8560,7 +8523,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -8676,7 +8638,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -8700,7 +8661,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -8724,7 +8684,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -8748,7 +8707,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -8771,9 +8729,8 @@
       },
       {
         "define": "RekamMedisCtrl"
-      } 
+      }
     ]
-
   },
   {
     "name": "RekamMedis.AsesmenMedis.AsesmenGigiDanMulut",
@@ -9025,7 +8982,7 @@
       },
       {
         "define": "RekamMedisCtrl"
-      } 
+      }
     ]
   },
   {
@@ -9048,7 +9005,7 @@
       },
       {
         "define": "RekamMedisCtrl"
-      } 
+      }
     ]
   },
   {
@@ -9118,7 +9075,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -9507,7 +9463,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -9646,7 +9601,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -9897,7 +9851,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -10105,7 +10058,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -10175,7 +10127,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -10337,7 +10288,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -10499,7 +10449,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -10617,7 +10566,7 @@
       }
     ]
   },
-   {
+  {
     "name": "DaftarTransdataBatching",
     "url": "/RGFmdGFyVHJhbnNkYXRhQmF0Y2hpbmc=",
     "templateurl": "module/TataRekening/DaftarTransdataBatching.html",
@@ -10658,7 +10607,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -10705,7 +10653,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -10775,7 +10722,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -10799,7 +10745,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -10869,7 +10814,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -10962,7 +10906,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -10986,7 +10929,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -11010,7 +10952,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -11243,7 +11184,7 @@
       }
     ]
   },
-  { 
+  {
     "name": "RekamMedis.AsesmenUmum.AsesmenUmumDetail",
     "url": "/AsesmenUmumDetail/:namaEMR/:nomorEMR",
     "templateurl": "module/EMR/AsesmenUmumDetail.html",
@@ -11356,7 +11297,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -11516,7 +11456,6 @@
         "define": "RekamMedisCtrl"
       }
     ]
-             
   },
   {
     "name": "RekamMedis.AsesmenUmum.SuratRawatUmum",
@@ -11608,7 +11547,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -11632,7 +11570,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -11656,7 +11593,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -11956,7 +11892,7 @@
       {
         "define": "RekamMedisCtrl"
       }
-    ] 
+    ]
   },
   {
     "name": "RekamMedis.AsesmenMedis.MenuAsesmenPraAnestesi.AsesmenPraAnestesi3",
@@ -11979,7 +11915,7 @@
       {
         "define": "RekamMedisCtrl"
       }
-    ] 
+    ]
   },
   {
     "name": "RekamMedis.AsesmenUmum.AsesmenMedisInapUmum",
@@ -12025,7 +11961,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -12049,7 +11984,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -12423,7 +12357,7 @@
         "define": "MedifirstService"
       }
     ]
-  },  
+  },
   {
     "name": "RekamMedis.AsesmenUmum.FormulirScrenningCovid",
     "url": "/FormulirScrenningCovid",
@@ -12616,7 +12550,6 @@
     "templateurl": "module/Registrasi/Laporan/LaporanPasienDPJP.html",
     "controller": "LaporanPasienDPJPCtrl",
     "deps": [
-    
       {
         "module": "Services",
         "define": "Service"
@@ -12637,7 +12570,6 @@
     "templateurl": "module/Registrasi/Laporan/TindakanTahunanLab.html",
     "controller": "TindakanTahunanLabCtrl",
     "deps": [
-    
       {
         "module": "Services",
         "define": "Service"
@@ -12650,7 +12582,7 @@
         "module": "MedifirstService",
         "define": "MedifirstService"
       }
-    ]  
+    ]
   },
   {
     "name": "LaporanPasienMeninggal",
@@ -12658,7 +12590,6 @@
     "templateurl": "module/Jenazah/LaporanPasienMeninggal.html",
     "controller": "LaporanPasienMeninggalCtrl",
     "deps": [
-    
       {
         "module": "Services",
         "define": "Service"
@@ -12678,7 +12609,7 @@
     "url": "/TGFwb3JhblBhc2llblJhd2F0SmFsYW5QZXJEb2t0ZXJQZW1lcmlrc2FDdHJs",
     "templateurl": "module/Registrasi/Laporan/LaporanPasienRawatJalanPerDokterPemeriksa.html",
     "controller": "LaporanPasienRawatJalanPerDokterPemeriksaCtrl",
-    "deps": [    
+    "deps": [
       {
         "module": "Services",
         "define": "Service"
@@ -12742,7 +12673,6 @@
     "templateurl": "module/Jenazah/LaporanPemulasaranJenazah.html",
     "controller": "LaporanPemulasaranJenazahCtrl",
     "deps": [
-    
       {
         "module": "Services",
         "define": "Service"
@@ -12783,7 +12713,6 @@
     "templateurl": "module/Laboratorium/LaporanLabKunjungandanPemeriksaan.html",
     "controller": "LaporanLabKunjungandanPemeriksaanCtrl",
     "deps": [
-    
       {
         "module": "Services",
         "define": "Service"
@@ -12798,7 +12727,7 @@
       }
     ]
   },
-  { 
+  {
     "name": "SirsOnline",
     "url": "/U2lyc09ubGluZQ==",
     "templateurl": "module/Bridging/SirsOnline.html",
@@ -12904,7 +12833,6 @@
     "templateurl": "module/Registrasi/Laporan/LaporanMutuRJ.html",
     "controller": "LaporanMutuRJCtrl",
     "deps": [
-    
       {
         "module": "Services",
         "define": "Service"
@@ -12945,7 +12873,6 @@
     "templateurl": "module/Registrasi/Laporan/LaporanMutuRad.html",
     "controller": "LaporanMutuRadCtrl",
     "deps": [
-    
       {
         "module": "Services",
         "define": "Service"
@@ -12989,7 +12916,6 @@
     "templateurl": "module/Registrasi/Laporan/LaporanPemakaianDarah.html",
     "controller": "LaporanPemakaianDarahCtrl",
     "deps": [
-    
       {
         "module": "Services",
         "define": "Service"
@@ -13196,7 +13122,7 @@
       }
     ]
   },
-  { 
+  {
     "name": "RekamMedis.Hemodialisa.HemodialisaDetail",
     "url": "/HemodialisaDetail/:namaEMR/:nomorEMR",
     "templateurl": "module/EMR/HemodialisaDetail.html",
@@ -14024,7 +13950,7 @@
       }
     ]
   },
-   {
+  {
     "name": "RekamMedis.AsesmenMedis.PengkajianLanjutanUlangTerminal",
     "url": "/PengkajianLanjutanUlangTerminal",
     "templateurl": "module/EMR/PengkajianLanjutanUlangTerminal.html",
@@ -14438,7 +14364,7 @@
       }
     ]
   },
-  { 
+  {
     "name": "RekamMedis.PengkajianMedisNew.PengkajianMedisNewDetail",
     "url": "/PengkajianMedisNewDetail/:namaEMR/:nomorEMR",
     "templateurl": "module/EMR/PengkajianMedisNewDetail.html",
@@ -14507,7 +14433,7 @@
       }
     ]
   },
-   {
+  {
     "name": "InforTanggunganSementara",
     "url": "/InforTanggunganSementara",
     "templateurl": "module/Bridging/InforTanggunganSementara.html",
@@ -14548,7 +14474,7 @@
       {
         "define": "RekamMedisCtrl"
       }
-    ]  
+    ]
   },
   {
     "name": "RekamMedis.ClinicalPathway.CPCovid19AnakGejalaSedang",
@@ -14571,7 +14497,7 @@
       {
         "define": "RekamMedisCtrl"
       }
-    ]  
+    ]
   },
   {
     "name": "RekamMedis.ClinicalPathway.CPCovid19Hipertensi",
@@ -14594,7 +14520,7 @@
       {
         "define": "RekamMedisCtrl"
       }
-    ]  
+    ]
   },
   {
     "name": "CPCovid19Hipertensi",
@@ -14614,7 +14540,7 @@
         "module": "MedifirstService",
         "define": "MedifirstService"
       }
-    ]  
+    ]
   },
   {
     "name": "CPCovid19AnakGejalaSedang",
@@ -14637,7 +14563,7 @@
       {
         "define": "RekamMedisCtrl"
       }
-    ]  
+    ]
   },
   {
     "name": "CPCovidAnakDgnGejalaRingan",
@@ -14660,7 +14586,7 @@
       {
         "define": "RekamMedisCtrl"
       }
-    ]  
+    ]
   },
   {
     "name": "CPHead.CPCovid19Hipertensi",
@@ -14683,7 +14609,7 @@
       {
         "define": "CPHeadCtrl"
       }
-    ]  
+    ]
   },
   {
     "name": "CPHead.CPCovid19AnakGejalaSedang",
@@ -14709,7 +14635,7 @@
       {
         "define": "CPHeadCtrl"
       }
-    ]  
+    ]
   },
   {
     "name": "CPHead.CPCovidAnakDgnGejalaRingan",
@@ -14732,7 +14658,7 @@
       {
         "define": "CPHeadCtrl"
       }
-    ]  
+    ]
   },
   {
     "name": "CPHead",
@@ -14775,7 +14701,7 @@
       {
         "define": "CPHeadCtrl"
       }
-    ]  
+    ]
   },
   {
     "name": "CPHead.CP_Z51_1_C50_9",
@@ -14798,7 +14724,7 @@
       {
         "define": "CPHeadCtrl"
       }
-    ]  
+    ]
   },
   {
     "name": "CPHead.ClinicalPathwayDetail",
@@ -14821,7 +14747,7 @@
       {
         "define": "CPHeadCtrl"
       }
-    ]  
+    ]
   },
   {
     "name": "CPHead.CP_D24",
@@ -14844,7 +14770,7 @@
       {
         "define": "CPHeadCtrl"
       }
-    ]  
+    ]
   },
   {
     "name": "CPHead.CP_I21_4_E11_9",
@@ -14867,7 +14793,7 @@
       {
         "define": "CPHeadCtrl"
       }
-    ]  
+    ]
   },
   {
     "name": "CPHead.CP_M17",
@@ -14890,7 +14816,7 @@
       {
         "define": "CPHeadCtrl"
       }
-    ]  
+    ]
   },
   {
     "name": "CPHead.CP_K35_3",
@@ -14913,7 +14839,7 @@
       {
         "define": "CPHeadCtrl"
       }
-    ]  
+    ]
   },
   {
     "name": "CPHead.CP_G91_9_J40",
@@ -14936,7 +14862,7 @@
       {
         "define": "CPHeadCtrl"
       }
-    ]  
+    ]
   },
   {
     "name": "CPHead.CP_R55",
@@ -14959,7 +14885,7 @@
       {
         "define": "CPHeadCtrl"
       }
-    ]  
+    ]
   },
   {
     "name": "RekapMonitoringKlaim",
@@ -15048,7 +14974,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -15451,7 +15376,6 @@
     "templateurl": "module/Registrasi/Laporan/LaporanMutuNew.html",
     "controller": "LaporanMutuNewCtrl",
     "deps": [
-    
       {
         "module": "Services",
         "define": "Service"
@@ -15507,7 +15431,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -15600,7 +15523,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-      
     ]
   },
   {
@@ -15851,9 +15773,9 @@
       {
         "define": "RekamMedisCtrl"
       }
-    ]  
+    ]
   },
-  { 
+  {
     "name": "RekamMedis.AsesmenPDR.AsesmenPDRDetail",
     "url": "/AsesmenPDRDetail/:namaEMR/:nomorEMR",
     "templateurl": "module/EMR/AsesmenPDRDetail.html",
@@ -15920,9 +15842,9 @@
       {
         "define": "RekamMedisCtrl"
       }
-    ]  
+    ]
   },
-  { 
+  {
     "name": "RekamMedis.AsesmenPemantauanKlinis.AsesmenPemantauanKlinisDetail",
     "url": "/AsesmenPemantauanKlinisDetail/:namaEMR/:nomorEMR",
     "templateurl": "module/EMR/AsesmenPemantauanKlinisDetail.html",
@@ -15945,7 +15867,7 @@
       }
     ]
   },
-   {
+  {
     "name": "BIOSTools",
     "url": "/BIOSTools",
     "templateurl": "module/Bridging/BIOSTools.html",
@@ -16007,7 +15929,7 @@
       }
     ]
   },
-   {
+  {
     "name": "BPJSTools.RencanaKontrol",
     "url": "/RencanaKontrol",
     "templateurl": "module/Registrasi/RencanaKontrol.html",
@@ -16122,7 +16044,7 @@
       }
     ]
   },
-   {
+  {
     "name": "RekamMedis.AsesmenCovid.TriaseGawatDarurat",
     "url": "/TriaseGawatDarurat",
     "templateurl": "module/EMR/TriaseGawatDarurat.html",
@@ -16145,7 +16067,7 @@
       }
     ]
   },
-   {
+  {
     "name": "RekamMedis.AsesmenCovid.PengkajianGawatDarurat",
     "url": "/PengkajianGawatDarurat",
     "templateurl": "module/EMR/PengkajianGawatDarurat.html",
@@ -16191,7 +16113,7 @@
       }
     ]
   },
-   {
+  {
     "name": "RekamMedis.AsesmenCovid.SurvilensCovid",
     "url": "/SurvilensCovid",
     "templateurl": "module/EMR/SurvilensCovid.html",
@@ -16235,7 +16157,7 @@
       {
         "define": "RekamMedisCtrl"
       }
-    ]  
+    ]
   },
   {
     "name": "RekamMedis.AsesmenCovid.Covid19EWS",
@@ -16283,7 +16205,7 @@
       }
     ]
   },
-    { 
+  {
     "name": "RekamMedis.AsesmenCovid.AsesmenCovidDetail",
     "url": "/AsesmenCovidDetail/:namaEMR/:nomorEMR",
     "templateurl": "module/EMR/AsesmenCovidDetail.html",
@@ -16329,7 +16251,7 @@
       }
     ]
   },
-   {
+  {
     "name": "RekamMedis.AsesmenCovid.PemberianObat",
     "url": "/PemberianObat",
     "templateurl": "module/EMR/PemberianObat.html",
@@ -16375,7 +16297,7 @@
       }
     ]
   },
-   {
+  {
     "name": "RekamMedis.AsesmenCovid.FormulirPemberianInformasi",
     "url": "/FormulirPemberianInformasi",
     "templateurl": "module/EMR/FormulirPemberianInformasi.html",
@@ -16398,7 +16320,7 @@
       }
     ]
   },
-   {
+  {
     "name": "RekamMedis.AsesmenCovid.PersetujuanTindakanMedis",
     "url": "/PersetujuanTindakanMedis",
     "templateurl": "module/EMR/PersetujuanTindakanMedis.html",
@@ -16444,7 +16366,7 @@
       }
     ]
   },
-   {
+  {
     "name": "RekamMedis.AsesmenCovid.CPPTCovid",
     "url": "/CPPTCovid",
     "templateurl": "module/EMR/CPPTCovid.html",
@@ -16467,7 +16389,7 @@
       }
     ]
   },
-   {
+  {
     "name": "RekamMedis.AsesmenCovid.FormMiniTriase",
     "url": "/FormMiniTriase",
     "templateurl": "module/EMR/FormMiniTriase.html",
@@ -16488,7 +16410,7 @@
       {
         "define": "RekamMedisCtrl"
       }
-    ]  
+    ]
   },
   {
     "name": "RekamMedis.AsesmenCovid.FormCeklisPsikolog",
@@ -16511,7 +16433,7 @@
       {
         "define": "RekamMedisCtrl"
       }
-    ]  
+    ]
   },
   {
     "name": "RekamMedis.AsesmenCovid.FormPoli",
@@ -16534,7 +16456,7 @@
       {
         "define": "RekamMedisCtrl"
       }
-    ]  
+    ]
   },
   {
     "name": "DTOTools",
@@ -16555,7 +16477,8 @@
         "define": "MedifirstService"
       }
     ]
-  },{
+  },
+  {
     "name": "DTOTools.DTOFaskes",
     "url": "/DTOFaskes",
     "templateurl": "module/Bridging/DTOFaskes.html",
@@ -16577,7 +16500,8 @@
         "define": "DTOToolsCtrl"
       }
     ]
-  },{
+  },
+  {
     "name": "DTOTools.DTOLab",
     "url": "/DTOLab",
     "templateurl": "module/Bridging/DTOLab.html",
@@ -16599,7 +16523,8 @@
         "define": "DTOToolsCtrl"
       }
     ]
-  },{
+  },
+  {
     "name": "DTOTools.DTOOrang",
     "url": "/DTOOrang",
     "templateurl": "module/Bridging/DTOOrang.html",
@@ -16621,7 +16546,8 @@
         "define": "DTOToolsCtrl"
       }
     ]
-  },{
+  },
+  {
     "name": "DTOTools.DTOTestLab",
     "url": "/DTOTestLab",
     "templateurl": "module/Bridging/DTOTestLab.html",
@@ -16706,7 +16632,6 @@
         "define": "MedifirstService"
       }
     ]
-  
   },
   {
     "name": "RekamMedis.InputResepApotikAlkes",
@@ -17232,7 +17157,6 @@
       }
     ]
   },
-  
   {
     "name": "RekamMedis.AsesmenMedis.PersetujuanUmumRawatJalan",
     "url": "/PersetujuanUmumRawatJalan",
@@ -19911,7 +19835,7 @@
     "url": "/TGFwb3JhbkhhcmlhblBlbmd1bmp1bmc=",
     "templateurl": "module/Registrasi/Laporan/LaporanHarianPengunjung.html",
     "controller": "LaporanHarianPengunjungCtrl",
-    "deps": [    
+    "deps": [
       {
         "module": "Services",
         "define": "Service"
@@ -19931,7 +19855,7 @@
     "url": "/TGFwb3Jhbkhhcmlhbk1vcmRpYnRhcw==",
     "templateurl": "module/Registrasi/Laporan/LaporanHarianMordibtas.html",
     "controller": "LaporanHarianMordibtasCtrl",
-    "deps": [    
+    "deps": [
       {
         "module": "Services",
         "define": "Service"
@@ -19992,6 +19916,27 @@
       }
     ]
   },
+  {
+    "name": "RekamMedis.AsesmenMedis.PermintaanPelayananKerohanian",
+    "url": "/PermintaanPelayananKerohanian",
+    "templateurl": "module/EMR/PermintaanPelayananKerohanian.html",
+    "controller": "PermintaanPelayananKerohanianCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      },
   {
     "name": "RekamMedis.AsesmenMedis.MenuIndex.PemberianMakanAwalPenurunanCairan",
     "url": "/PemberianMakanAwalPenurunanCairan/:index/:idEMR",
@@ -20060,7 +20005,53 @@
         "define": "RekamMedisCtrl"
       }
     ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.AsuhanPerioperatifTerintegrasi",
+    "url": "/AsuhanPerioperatifTerintegrasi/:index/:idEMR",
+    "templateurl": "module/EMR/AsuhanPerioperatifTerintegrasi.html",
+    "controller": "AsuhanPerioperatifTerintegrasiCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
   }
-
-
-] 
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.PemberianMinumRutin1000",
+    "url": "/PemberianMinumRutin1000/:index/:idEMR",
+    "templateurl": "module/EMR/PemberianMinumRutin1000.html",
+    "controller": "PemberianMinumRutin1000Ctrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  }
+]

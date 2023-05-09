@@ -1,6 +1,6 @@
-define(['initialize', 'Configuration'], function (initialize, config) {
+define(['initialize'], function (initialize) {
     'use strict';
-    initialize.controller('CheckListDanObservasiTransfusiDarahRanapCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
+    initialize.controller('PermintaanPelayananKerohanianCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
         function ($q, $rootScope, $scope, ModelItem, $state, cacheHelper, dateHelper, medifirstService) {
 
             var paramsIndex = $state.params.index ? parseInt($state.params.index) : null
@@ -14,7 +14,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
             $scope.cc = {};
             var nomorEMR = '-';
             var norecEMR = '';
-            $scope.cc.emrfk = 290093;
+            $scope.cc.emrfk = 290131;
             var dataLoad = [];
             $scope.isCetak = true;
             $scope.allDisabled = false;
@@ -66,164 +66,72 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 $scope.listDiagnosaSecondary = data;
             });
 
-            $scope.listWaktuPendaftaran = [
+            
+            $scope.listNama = [
                 {
                     "id": 1,
                     "detail": [
-                        { "id": 422800, "nama": "", "caption": "Tanggal/Jam", "type": "datetime", "dataList": "" },
-                        { "id": 422801, "nama": "", "caption": "Ruangan Rawat/Poliklinik", "type": "combobox", "dataList": "listRuangan" },
-                        { "id": 422802, "nama": "", "caption": "Kelas", "type": "combobox", "dataList": "listKelas" }
+                        { "id": 31103680, "nama": "", "caption": "Nama Pasien :", "type": "textbox"},
+                        { "id": 31103681, "nama": "", "caption": "Umur :", "type": "textbox" },
+                        { "id": 31103682, "nama": "", "caption": "Alamat :", "type": "textarea" },
+                        { "id": 31103683, "nama": "", "caption": "Ruangan:", "type" : "combobox", "dataList": "listRuangan"},
                     ]
                 }
             ];
 
-            $scope.listAtaUmumPasien = [
+            
+            $scope.listKerohanian = [
                 {
                     "id": 1,
                     "detail": [
-                        { "id": 422803, "nama": "", "caption": "No RM", "type": "textbox", "dataList": "" },
-                        { "id": 422804, "nama": "", "caption": "Nama Pasien", "type": "textbox", "dataList": "" },
-                        { "id": 422805, "nama": "", "caption": "Tanggal Lahir", "type": "date", "dataList": "" },
-                        { "id": 422806, "nama": "", "caption": "Penanggung Jawab", "type": "label", "dataList": "" },
-                        { "id": 422807, "nama": "", "caption": "Nama", "type": "textbox", "dataList": "" },
-                        { "id": 422808, "nama": "", "caption": "Jenis Kelamin", "type": "label", "dataList": "" },
-                        { "id": 422809, "nama": "Laki-laki", "caption": "", "type": "checkbox", "dataList": "" },
-                        { "id": 422810, "nama": "Perempuan", "caption": "", "type": "checkbox", "dataList": "" },
-                        { "id": 422811, "nama": "", "caption": "Tanggal Lahir", "type": "date", "dataList": "" },
-                        { "id": 422812, "nama": "", "caption": "Hubungan dengan pasien", "type": "textbox", "dataList": "" },
-                        { "id": 422813, "nama": "", "caption": "Alamat Tempat Tinggal", "type": "textarea", "dataList": "" },
-                        { "id": 422814, "nama": "", "caption": "No Telepon/HP", "type": "textbox", "dataList": "" }
+                        { "id": 31103688, "caption": "", "type": "textarea" },
+                        { "id": 31103689, "caption": "", "type": "textarea" },
+                        { "id": 31103690, "caption": "", "type": "textarea" },
                     ]
-                }
+                },
+                {
+                    "id": 2,
+                    "detail": [
+                        { "id": 31103691, "caption": "", "type": "textarea" },
+                        { "id": 31103692, "caption": "", "type": "textarea" },
+                        { "id": 31103693, "caption": "", "type": "textarea" },
+                    ]
+                },
+                {
+                    "id": 3,
+                    "detail": [
+                        { "id": 31103694, "caption": "", "type": "textarea" },
+                        { "id": 31103695, "caption": "", "type": "textarea" },
+                        { "id": 31103696, "caption": "", "type": "textarea" },
+                    ]
+                },
+                {
+                    "id": 4,
+                    "detail": [
+                        { "id": 31103697, "caption": "", "type": "textarea" },
+                        { "id": 31103698, "caption": "", "type": "textarea" },
+                        { "id": 31103699, "caption": "", "type": "textarea" },
+                    ]
+                },
+                {
+                    "id": 5,
+                    "detail": [
+                        { "id": 31103700, "caption": "", "type": "textarea" },
+                        { "id": 31103701, "caption": "", "type": "textarea" },
+                        { "id": 31103702, "caption": "", "type": "textarea" },
+                    ]
+                },
+               
             ];
 
-            $scope.listPersetujuanPengobatan = [
-                {
-                    "id": 1,
-                    "detail": [
-                        {
-                            "id": 422815, "nama": "", "caption": "Saya mengetahui bahwa saya memiliki kondisi yang membutuhkan perawatan medis, saya mengizinkan dokter dan profesional lainnya untuk melakukan prosedur diagnostik dan untuk memberikan pengobatan medis seperti yang diperlukan dalam penilaian profesional mereka.Prosedur diagnostik dan perawatan medis, tidak terbatas pada electrocadiograms, x-ray, tes darah, terapi fisik, pemberian obat dan pemeriksaan lainnya. Prosedur yang saya berikan tidak termasuk persetujuan untuk prosedur / tindakan invasif(misalnya operasi) ataupun tindakan yang mempunyai resiko tinggi.", "type": "label", "dataList": "" }
-                    ]
-                }
-            ];
-
-            $scope.listHasilTidakDiharapkan = [
-                {
-                    "id": 1,
-                    "detail": [
-                        {
-                            "id": 422816, "nama": "", "caption": "Saya sadar bahwa praktik kedokteran dan bedah bukanlah ilmu pasti dan saya mengakui bahwa tidak ada jaminan atas hasil apapun, terhadap perawatan prosedur atau pemeriksaan apapun yang dilakukan kepada saya.", "type": "label", "dataList": ""
-                        }
-                    ]
-                }
-            ];
-
-            $scope.listPersetujuanPelepasanInformasi = [
-                {
-                    "id": 1,
-                    "detail": [
-                        { "id": 422817, "nama": "", "caption": "-", "type": "label1", "dataList": "" },
-                        {
-                            "id": 422818, "nama": "", "caption": "Saya memahami informasi yang ada di dalam diri saya, termasuk diagnostik, hasil laboratorium dan hasil tes diagnostik yang akan digunakan untuk perawatan medis, akan dijamin kerahasiannya oleh rumah sakit.", "type": "label", "dataList": "" },
-                        { "id": 422819, "nama": "", "caption": "-", "type": "label1", "dataList": "" },
-                        {
-                            "id": 422820, "nama": "", "caption": "Saya memberi wewenang kepada rumah sakit untuk memberikan informasi tentang rahasia kedokteran saya bila diperlukan untuk memproses klaim asuransi namun tidak terbatas pada BPJS, asuransi kesehatan lainnya, perusahaan dan atau lembaga pemerintah lainnya.", "type": "label", "dataList": "" },
-                        { "id": 422821, "nama": "", "caption": "-", "type": "label1", "dataList": "" },
-                        {
-                            "id": 422822, "nama": "", "caption": " Saya memberi wewenang kepada RSUD H. Andi Sulthan Daeng Radja untuk memberikan informasi tentang diagnosis, hasil pelayanan dan pengobatan saya kepada anggota keluarga saya dan kepada: ", "type": "label", "dataList": "" },
-                        { "id": 422823, "nama": "", "caption": "1.", "type": "textbox", "dataList": "" },
-                        { "id": 422824, "nama": "", "caption": "2.", "type": "textbox", "dataList": "" },
-                        { "id": 422825, "nama": "", "caption": "3.", "type": "textbox", "dataList": "" }
-                    ]
-                }
-            ];
-
-            $scope.listKeinginanPrivasi = [
-                {
-                    "id": 1,
-                    "detail": [
-                        { "id": 422826, "nama": "", "caption": "-", "type": "label1", "dataList": "" },
-                        {
-                            "id": 422827, "nama": "", "caption": " Saya mengijinkan/tidak mengizinkan (coret yang tidak perlu) rumah sakit memberi akses bagi keluarga dan handai taulan serta orang-orang yang akan menengok/ menemui saya.", "type": "label", "dataList": ""
-                        },
-                        { "id": 422828, "nama": "", "caption": "-", "type": "label1", "dataList": "" },
-                        {
-                            "id": 422829, "nama": "", "caption": " Sebutkan nama/profesi bila ada permintaan khusus) ;", "type": "label", "dataList": ""
-                        },
-                        { "id": 422830, "nama": "", "caption": "1.", "type": "textbox", "dataList": "" },
-                        { "id": 422831, "nama": "", "caption": "2.", "type": "textbox", "dataList": "" }
-                    ]
-                }
-            ];
-
-            $scope.listInformasiBiaya = [
-                {
-                    "id": 1,
-                    "detail": [
-                        {
-                            "id": 422832, "nama": "", "caption": "Saya menyatakan setuju, baik sebagai wali atau sebagai pasien, bahwa sesuai pertimbangan yang diberikan kepada pasien, maka saya wajib untuk membayar total biaya perawatan.Biaya pelayanan berdasarkan acuan biaya dan ketentuan RSUD H.Andi Sulthan Daeng Radja, dengan perkiraan biaya sebesar", "type": "label", "dataList": ""
-                        },
-                        { "id": 422833, "nama": "", "caption": "Rp.", "type": "textbox", "dataList": "" },
-                        { "id": 422834, "nama": "", "caption": "Terbilang", "type": "textbox", "dataList": "" }
-                    ]
-                }
-            ];
-
-            $scope.listTataTertib = [
-                {
-                    "id": 1,
-                    "detail": [
-                        { "id": 422835, "nama": "", "caption": "1.", "type": "label1", "dataList": "" },
-                        {
-                            "id": 422836, "nama": "", "caption": "Pasien dan keluarga harus mematuhi peraturan yang berlaku di rumah sakit.", "type": "label", "dataList": ""
-                        },
-                        { "id": 422837, "nama": "", "caption": "2.", "type": "label1", "dataList": "" },
-                        {
-                            "id": 422838, "nama": "", "caption": "Pasien dan keluarga dilarang merokok di lingkungan rumah sakit.", "type": "label", "dataList": ""
-                        },
-                        { "id": 422839, "nama": "", "caption": "3.", "type": "label1", "dataList": "" },
-                        {
-                            "id": 422840, "nama": "", "caption": "Dilarang mencuci dan menjemur pakaian memasak di ruang perawatan.", "type": "label", "dataList": ""
-                        },
-                        { "id": 422841, "nama": "", "caption": "4.", "type": "label1", "dataList": "" },
-                        {
-                            "id": 422842, "nama": "", "caption": "Tidak membawa alkohol, obat-obatan terlarang dan senjata tajam/api.", "type": "label", "dataList": ""
-                        },
-                        { "id": 422843, "nama": "", "caption": "5.", "type": "label1", "dataList": "" },
-                        {
-                            "id": 422844, "nama": "", "caption": "Memperlakukan staf rumah sakit dan pasien lain dengan bermartabat dan hormat serta tidak melakukan tindakan yang akan mengganggu ketertiban.", "type": "label", "dataList": ""
-                        },
-                        { "id": 422845, "nama": "", "caption": "6.", "type": "label1", "dataList": "" },
-                        {
-                            "id": 422846, "nama": "", "caption": " Anak-anak dibawah 12 tahun dilarang masuk ruang perawatan.", "type": "label", "dataList": ""
-                        }
-                    ]
-                }
-            ];
-
-            $scope.listHakdanKewajiban = [
-                {
-                    "id": 1,
-                    "detail": [
-                        {
-                            "id": 422847, "nama": "", "caption": "Saya telah mendapatkan penjelasan tentang tata tertib, hak dan kewajiban pasien dan keluarga di RSUD H.Andi Sulthan Daeng Radja melalui banner yang disediakan petugas.", "type": "label", "dataList": ""
-                        }
-                    ]
-                }
-            ];
+          
 
             $scope.cetakPdf = function () {
                 if (norecEMR == '') return
-
-                var local = JSON.parse(localStorage.getItem('profile'));
-                var nama = medifirstService.getPegawaiLogin().namalengkap;
-                console.log(config.baseApiBackend);
-                window.open(config.baseApiBackend + 'report/cetak-transfusi-darah?nocm='
-                    + $scope.cc.nocm + '&norec_apd=' + $scope.cc.norec + '&emr=' + norecEMR
-                    + '&emrfk=' + $scope.cc.emrfk
-                    + '&kdprofile=' + local.id
-                    + '&index=' + paramsIndex
-                    + '&nama=' + nama, '_blank');
+                var client = new HttpClient();
+                client.get('http://127.0.0.1:1237/printvb/e-rekammedis?cetak-emr-asesmen-awal-medis-igd&id=' + $scope.cc.nocm + '&emr=' + norecEMR + '&view=true', function (response) {
+                    // do something with response
+                });
             }
 
             var cacheEMR_TRIASE_PRIMER = cacheHelper.get('cacheEMR_TRIASE_PRIMER');
@@ -258,23 +166,24 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 var status = "t";
                 medifirstService.get("emr/get-antrian-pasien-norec/" + noregistrasifk).then(function (e) {
                     var antrianPasien = e.data.result;
-                    $scope.item.obj[422800] = new Date(moment(antrianPasien.tglregistrasi).format('YYYY-MM-DD HH:mm'));
+                    $scope.item.obj[420394] = new Date(moment(antrianPasien.tglregistrasi).format('YYYY-MM-DD HH:mm'));
                     if (antrianPasien.objectruanganfk != null && antrianPasien.namaruangan) {
-                        $scope.item.obj[31101377] = {
+                        $scope.item.obj[420395] = {
                             value: antrianPasien.objectruanganfk,
                             text: antrianPasien.namaruangan
                         }
                     }
                     if (antrianPasien.objectkelasfk != null && antrianPasien.namakelas) {
-                        $scope.item.obj[422802] = {
+                        $scope.item.obj[420396] = {
                             value: antrianPasien.objectkelasfk,
                             text: antrianPasien.namakelas
                         }
                     }
-                    $scope.item.obj[422803] = antrianPasien.nocm;
-                    $scope.item.obj[422804] = antrianPasien.namapasien;
-                    $scope.item.obj[422805] = new Date(moment(antrianPasien.tgllahir).format('YYYY-MM-DD'));
-                    $scope.item.obj[422848] = $scope.now;
+    
+                    $scope.item.obj[31103681] = antrianPasien.umur;
+                    $scope.item.obj[31103680] = antrianPasien.namapasien;
+                    $scope.item.obj[31103682] = antrianPasien.alamatlengkap;
+                    
                 })
                 
                 medifirstService.get("emr/get-vital-sign?noregistrasi=" + $scope.cc.noregistrasi + "&objectidawal=4241&objectidakhir=4246&idemr=147", true).then(function (datas) {
@@ -513,7 +422,6 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 }
                 $scope.cc.jenisemr = 'asesmen'
                 $scope.cc.index = $state.params.index
-
                 var jsonSave = {
                     head: $scope.cc,
                     data: arrSave
@@ -525,7 +433,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     // });
 
                     medifirstService.postLogging('EMR', 'norec emrpasien_t', e.data.data.norec,
-                        'Check List Dan Observasi Transfusi Darah Rawat Inap ' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
+                        'Persetujuan Kolonoskopi ' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
                         + $scope.cc.noregistrasi).then(function (res) {
                         })
 
