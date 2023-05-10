@@ -19936,7 +19936,9 @@
       },
       {
         "define": "RekamMedisCtrl"
-      },
+      }
+    ]
+  },
   {
     "name": "RekamMedis.AsesmenMedis.MenuIndex.PemberianMakanAwalPenurunanCairan",
     "url": "/PemberianMakanAwalPenurunanCairan/:index/:idEMR",
@@ -20027,8 +20029,6 @@
       {
         "define": "RekamMedisCtrl"
       }
-    ]
-  }
     ]
   },
   {
