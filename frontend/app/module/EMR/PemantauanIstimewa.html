@@ -1,0 +1,104 @@
+<style type="text/css">
+    fieldset {
+        border-radius: 5px;
+        border: 1px solid #228be6;
+    }
+
+    .k-slider-horizontal {
+        display: inline-block;
+        float: left;
+        width: 450px;
+
+        height: 26px;
+
+
+    }
+
+    .k-slider {
+
+        margin-left: 3%;
+        margin-right: 3%;
+        margin-top: 1%;
+        margin-bottom: 5%;
+        display: inline-block;
+    }
+
+    .activeBtn {
+        background-color: #10c4b2;
+        color: #ffffff;
+    }
+    table,
+    th,
+    td {
+        border: 1px solid #929191;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+    td {
+        padding: 5px;
+        text-align: left;
+    }
+    th {
+        padding: 5px;
+        text-align: center;
+    }
+    .clicks {
+        cursor: pointer;
+    }
+</style>
+
+ <!-- ng-class="{'my-disable':true}" -->
+<!-- <div class="grid_12"  disable-contents="allDisabled" id="form"> -->
+<div class="grid_12">
+    <div class="grid_12">
+        <div class="panel panel-default container_12">
+            <div class="panel-heading" c-translate>Pemantauan Istimewa</div>
+        </div>
+
+        <div class="grid_12" style="margin-top: 10px;">
+            <fieldset style="margin-top: 10px;">
+                <div class="grid_12" style="margin-top: 20px;">
+                    <table>
+                        <tr>
+                            <th rowspan="2">Tanggal/Pukul</th>
+                            <th rowspan="2">Kesadaran</th>
+                            <th colspan="4">Tanda - Tanda Vtal</th>
+                            <th rowspan="2">Input</th>
+                            <th rowspan="2">Output</th>
+                            <th rowspan="2">Nama & Paraf</th>
+                        </tr>
+                        <tr>
+                            <th>TD</th>
+                            <th>Nadi</th>
+                            <th>Napas</th>
+                            <th>Suhu</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input style="width: 90%" k-ng-model="item.obj[31104496]" kendo-datetimepicker placeholer="YYYY:MM:DD"
+                                k-format="'yyyy-MM-dd'" />
+                            </td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104497]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104498]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104499]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104500]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104501]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104502]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104503]"></td>
+                            <td><input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[31104504]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" /></td>
+                        </tr>
+                    </table>
+                </div>
+            </fieldset>
+        </div>
+
+    </div>
+</div>
+
+<br />
+<br />
+<div class="grid_12">
+    <div ng-include='"../app/module/EMR/TemplateButtonDinamis" '></div>
+
+</div>

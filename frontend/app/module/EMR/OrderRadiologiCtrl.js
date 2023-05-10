@@ -455,7 +455,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 var tr = $(e.target).closest("tr");
                 var dataItem = this.dataItem(tr);
                 if (dataItem.radiologiId === undefined || dataItem.radiologiId === null || dataItem.radiologiId === '') {
-                    toastr.warning('Hasil belum ada', 'Peringatan')
+                    toastr.warning('Order belum diverifikasi!', 'Peringatan')
                 } else {
                     // syamsu
                     var datauserlogin = JSON.parse(localStorage.getItem('datauserlogin'));
@@ -533,7 +533,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 medifirstService.get('radiologi/get-pelayananpasien-radiologi?norec=' + dataItem.norec_pp + '&produkfk=' + dataItem.id).then(function (re) {
                     // $scope.dataSelectedDetail.norec_pp  =re.data.norec
                     if (re.data.data == undefined || re.data.data == '' || re.data.data == null) {
-                        toastr.error("Belum ada Expertise!");
+                        toastr.error("Order belum diverifikasi!");
                         return;
                     }
                     $scope.norecHasilRadiologi = re.data.data.norec;
