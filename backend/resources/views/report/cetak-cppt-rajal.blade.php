@@ -1186,8 +1186,8 @@
         return new Date(items);
         };
     });
-    // $(document).ready(function () {
-    //     window.print();
-    // });
+    $(document).ready(function () {
+        window.print();
+    });
 </script>
 </html>
