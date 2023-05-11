@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catatan Perkembangan Pasien Terintegrasi</title>
+    <title>Catatan Perkembangan Pasien Terintegrasi Rawat Jalan</title>
     @if (stripos(\Request::url(), 'localhost') !== false)
         {{-- <link rel="stylesheet" href="{{ asset('css/report/paper.css') }}">
         <link rel="stylesheet" href="{{ asset('css/report/table.css') }}">
@@ -211,7 +211,7 @@
         }
     </style>
 </head>
-<body ng-controller="cetakCPPT">
+<body ng-controller="cetakCPPTRajal">
       <section>
         <table width="100%" id="content" style="table-layout:fixed">
             <tr style="border:none;border-top:1px solid #000">
@@ -263,357 +263,357 @@
             </tr>
             {{-- 1 --}}
             <tr style="height:150px">
-                <td>@{{item.obj[423050] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-                <td>@{{ item.obj[423051] ? item.obj[423051] : '' }}</td>
-                <td colspan="3">@{{ item.obj[423052] ? item.obj[423052] : '' }} <br><br> 
-                    Paraf : @{{ item.obj[423053] ? item.obj[423053] : '' }} 
+                <td>@{{item.obj[421650] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td>@{{ item.obj[421651] ? item.obj[421651] : '' }}</td>
+                <td colspan="3">@{{ item.obj[421652] ? item.obj[421652] : '' }} <br><br> 
+                    Paraf : @{{ item.obj[421653] ? item.obj[421653] : '' }}
                     <br>
                     <div id="qrcodep1" style="text-align: right"></div>
                 </td>
-                <td colspan="2">@{{ item.obj[423054] ? item.obj[423054] : '' }}</td>
-                <td colspan="2">@{{ item.obj[423055] ? item.obj[423055] : '' }} <br><br> 
-                    Tanggal : @{{item.obj[423056] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
-                    Paraf : @{{ item.obj[423057] ? item.obj[423057] : '' }}
+                <td colspan="2">@{{ item.obj[421654] ? item.obj[421654] : '' }}</td>
+                <td colspan="2">@{{ item.obj[421655] ? item.obj[421655] : '' }} <br><br> 
+                    Tanggal : @{{item.obj[421656] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
+                    Paraf : @{{ item.obj[421657] ? item.obj[421657] : '' }}
                     <br>
                     <div id="qrcoded1" style="text-align: right"></div>
                 </td>
             </tr>
             {{-- 2 --}} 
-            <tr style="height:150px" ng-show="item.obj[423058]!=undefined">
-                <td>@{{item.obj[423058] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-                <td>@{{ item.obj[423059] ? item.obj[423059] : '' }}</td>
-                <td colspan="3">@{{ item.obj[423060] ? item.obj[423060] : '' }} <br><br> 
-                    Paraf : @{{ item.obj[423061] ? item.obj[423061] : '' }}
+            <tr style="height:150px" ng-show="item.obj[421658]!=undefined">
+                <td>@{{item.obj[421658] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td>@{{ item.obj[421659] ? item.obj[421659] : '' }}</td>
+                <td colspan="3">@{{ item.obj[421660] ? item.obj[421660] : '' }} <br><br> 
+                    Paraf : @{{ item.obj[421661] ? item.obj[421661] : '' }}
                     <br>
                     <div id="qrcodep2" style="text-align: right"></div>
                 </td>
-                <td colspan="2">@{{ item.obj[423062] ? item.obj[423062] : '' }}</td>
-                <td colspan="2">@{{ item.obj[423063] ? item.obj[423063] : '' }} <br><br> 
-                    Tanggal : @{{item.obj[423064] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
-                    Paraf : @{{ item.obj[423065] ? item.obj[423065] : '' }}
+                <td colspan="2">@{{ item.obj[421662] ? item.obj[421662] : '' }}</td>
+                <td colspan="2">@{{ item.obj[421663] ? item.obj[421663] : '' }} <br><br> 
+                    Tanggal : @{{item.obj[421664] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
+                    Paraf : @{{ item.obj[421665] ? item.obj[421665] : '' }}
                     <br>
                     <div id="qrcoded2" style="text-align: right"></div>
                 </td>
             </tr>
             {{-- 3 --}}
-            <tr style="height:150px" ng-show="item.obj[423066]!=undefined">
-                <td>@{{item.obj[423066] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-                <td>@{{ item.obj[423067] ? item.obj[423067] : '' }}</td>
-                <td colspan="3">@{{ item.obj[423068] ? item.obj[423068] : '' }} <br><br> 
-                    Paraf : @{{ item.obj[423069] ? item.obj[423069] : '' }}
+            <tr style="height:150px" ng-show="item.obj[421666]!=undefined">
+                <td>@{{item.obj[421666] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td>@{{ item.obj[421667] ? item.obj[421667] : '' }}</td>
+                <td colspan="3">@{{ item.obj[421668] ? item.obj[421668] : '' }} <br><br> 
+                    Paraf : @{{ item.obj[421669] ? item.obj[421669] : '' }}
                     <br>
                     <div id="qrcodep3" style="text-align: right"></div>
                 </td>
-                <td colspan="2">@{{ item.obj[423070] ? item.obj[423070] : '' }}</td>
-                <td colspan="2">@{{ item.obj[423071] ? item.obj[423071] : '' }} <br><br> 
-                    Tanggal : @{{item.obj[423072] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
-                    Paraf : @{{ item.obj[423073] ? item.obj[423073] : '' }}
+                <td colspan="2">@{{ item.obj[421670] ? item.obj[421670] : '' }}</td>
+                <td colspan="2">@{{ item.obj[421671] ? item.obj[421671] : '' }} <br><br> 
+                    Tanggal : @{{item.obj[421672] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
+                    Paraf : @{{ item.obj[421673] ? item.obj[421673] : '' }}
                     <br>
                     <div id="qrcoded3" style="text-align: right"></div>
                 </td>
             </tr>
             {{-- 4 --}}
-            <tr style="height:150px" ng-show="item.obj[423074]!=undefined">
-                <td>@{{item.obj[423074] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-                <td>@{{ item.obj[423075] ? item.obj[423075] : '' }}</td>
-                <td colspan="3">@{{ item.obj[423076] ? item.obj[423076] : '' }} <br><br> 
-                    Paraf : @{{ item.obj[423077] ? item.obj[423077] : '' }}
+            <tr style="height:150px" ng-show="item.obj[421674]!=undefined">
+                <td>@{{item.obj[421674] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td>@{{ item.obj[421675] ? item.obj[421675] : '' }}</td>
+                <td colspan="3">@{{ item.obj[421676] ? item.obj[421676] : '' }} <br><br> 
+                    Paraf : @{{ item.obj[421677] ? item.obj[421677] : '' }}
                     <br>
                     <div id="qrcodep4" style="text-align: right"></div>
                 </td>
-                <td colspan="2">@{{ item.obj[423078] ? item.obj[423078] : '' }}</td>
-                <td colspan="2">@{{ item.obj[423079] ? item.obj[423079] : '' }} <br><br> 
-                    Tanggal : @{{item.obj[423080] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
-                    Paraf : @{{ item.obj[423081] ? item.obj[423081] : '' }}
+                <td colspan="2">@{{ item.obj[421678] ? item.obj[421678] : '' }}</td>
+                <td colspan="2">@{{ item.obj[421679] ? item.obj[421679] : '' }} <br><br> 
+                    Tanggal : @{{item.obj[421680] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
+                    Paraf : @{{ item.obj[421681] ? item.obj[421681] : '' }}
                     <br>
                     <div id="qrcoded4" style="text-align: right"></div>
                 </td>
             </tr>
             {{-- 5 --}}
-            <tr style="height:150px" ng-show="item.obj[423082]!=undefined">
-                <td>@{{item.obj[423082] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-                <td>@{{ item.obj[423083] ? item.obj[423083] : '' }}</td>
-                <td colspan="3">@{{ item.obj[423084] ? item.obj[423084] : '' }} <br><br> 
-                    Paraf : @{{ item.obj[423085] ? item.obj[423085] : '' }}
+            <tr style="height:150px" ng-show="item.obj[421682]!=undefined">
+                <td>@{{item.obj[421682] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td>@{{ item.obj[421683] ? item.obj[421683] : '' }}</td>
+                <td colspan="3">@{{ item.obj[421684] ? item.obj[421684] : '' }} <br><br> 
+                    Paraf : @{{ item.obj[421685] ? item.obj[421685] : '' }}
                     <br>
                     <div id="qrcodep5" style="text-align: right"></div>
                 </td>
-                <td colspan="2">@{{ item.obj[423086] ? item.obj[423086] : '' }}</td>
-                <td colspan="2">@{{ item.obj[423087] ? item.obj[423087] : '' }} <br><br> 
-                    Tanggal : @{{item.obj[423088] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
-                    Paraf : @{{ item.obj[423089] ? item.obj[423089] : '' }}
+                <td colspan="2">@{{ item.obj[421686] ? item.obj[421686] : '' }}</td>
+                <td colspan="2">@{{ item.obj[421687] ? item.obj[421687] : '' }} <br><br> 
+                    Tanggal : @{{item.obj[421688] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
+                    Paraf : @{{ item.obj[421689] ? item.obj[421689] : '' }}
                     <br>
                     <div id="qrcoded5" style="text-align: right"></div>
                 </td>
             </tr>
             {{-- 6 --}}
-            <tr style="height:150px" ng-show="item.obj[423090]!=undefined">
-                <td>@{{item.obj[423090] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-                <td>@{{ item.obj[423091] ? item.obj[423091] : '' }}</td>
-                <td colspan="3">@{{ item.obj[423092] ? item.obj[423092] : '' }} <br><br> 
-                    Paraf : @{{ item.obj[423093] ? item.obj[423093] : '' }}
+            <tr style="height:150px" ng-show="item.obj[421690]!=undefined">
+                <td>@{{item.obj[421690] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td>@{{ item.obj[421691] ? item.obj[421691] : '' }}</td>
+                <td colspan="3">@{{ item.obj[421692] ? item.obj[421692] : '' }} <br><br> 
+                    Paraf : @{{ item.obj[421693] ? item.obj[421693] : '' }}
                     <br>
                     <div id="qrcodep6" style="text-align: right"></div>
                 </td>
-                <td colspan="2">@{{ item.obj[423094] ? item.obj[423094] : '' }}</td>
-                <td colspan="2">@{{ item.obj[423095] ? item.obj[423095] : '' }} <br><br> 
-                    Tanggal : @{{item.obj[423096] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
-                    Paraf : @{{ item.obj[423097] ? item.obj[423097] : '' }}
+                <td colspan="2">@{{ item.obj[421694] ? item.obj[421694] : '' }}</td>
+                <td colspan="2">@{{ item.obj[421695] ? item.obj[421695] : '' }} <br><br> 
+                    Tanggal : @{{item.obj[421696] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
+                    Paraf : @{{ item.obj[421697] ? item.obj[421697] : '' }}
                     <br>
                     <div id="qrcoded6" style="text-align: right"></div>
                 </td>
             </tr>
             {{-- 7 --}}
-            <tr style="height:150px" ng-show="item.obj[423098]!=undefined">
-                <td>@{{item.obj[423098] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-                <td>@{{ item.obj[423099] ? item.obj[423099] : '' }}</td>
-                <td colspan="3">@{{ item.obj[423100] ? item.obj[423100] : '' }} <br><br> 
-                    Paraf : @{{ item.obj[423101] ? item.obj[423101] : '' }}
+            <tr style="height:150px" ng-show="item.obj[421698]!=undefined">
+                <td>@{{item.obj[421698] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td>@{{ item.obj[421699] ? item.obj[421699] : '' }}</td>
+                <td colspan="3">@{{ item.obj[421700] ? item.obj[421700] : '' }} <br><br> 
+                    Paraf : @{{ item.obj[421701] ? item.obj[421701] : '' }}
                     <br>
                     <div id="qrcodep7" style="text-align: right"></div>
                 </td>
-                <td colspan="2">@{{ item.obj[423102] ? item.obj[423102] : '' }}</td>
-                <td colspan="2">@{{ item.obj[423103] ? item.obj[423103] : '' }} <br><br> 
-                    Tanggal : @{{item.obj[423104] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
-                    Paraf : @{{ item.obj[423105] ? item.obj[423105] : '' }}
+                <td colspan="2">@{{ item.obj[421702] ? item.obj[421702] : '' }}</td>
+                <td colspan="2">@{{ item.obj[421703] ? item.obj[421703] : '' }} <br><br> 
+                    Tanggal : @{{item.obj[421704] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
+                    Paraf : @{{ item.obj[421705] ? item.obj[421705] : '' }}
                     <br>
                     <div id="qrcoded7" style="text-align: right"></div>
                 </td>
             </tr>
             {{-- 8 --}}
-            <tr style="height:150px" ng-show="item.obj[423106]!=undefined">
-                <td>@{{item.obj[423106] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-                <td>@{{ item.obj[423107] ? item.obj[423107] : '' }}</td>
-                <td colspan="3">@{{ item.obj[423108] ? item.obj[423108] : '' }} <br><br> 
-                    Paraf : @{{ item.obj[423109] ? item.obj[423109] : '' }}
+            <tr style="height:150px" ng-show="item.obj[421706]!=undefined">
+                <td>@{{item.obj[421706] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td>@{{ item.obj[421707] ? item.obj[421707] : '' }}</td>
+                <td colspan="3">@{{ item.obj[421708] ? item.obj[421708] : '' }} <br><br> 
+                    Paraf : @{{ item.obj[421709] ? item.obj[421709] : '' }}
                     <br>
                     <div id="qrcodep8" style="text-align: right"></div>
                 </td>
-                <td colspan="2">@{{ item.obj[423110] ? item.obj[423110] : '' }}</td>
-                <td colspan="2">@{{ item.obj[423111] ? item.obj[423111] : '' }} <br><br> 
-                    Tanggal : @{{item.obj[423112] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
-                    Paraf : @{{ item.obj[423113] ? item.obj[423113] : '' }}
+                <td colspan="2">@{{ item.obj[421710] ? item.obj[421710] : '' }}</td>
+                <td colspan="2">@{{ item.obj[421711] ? item.obj[421711] : '' }} <br><br> 
+                    Tanggal : @{{item.obj[421712] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
+                    Paraf : @{{ item.obj[421713] ? item.obj[421713] : '' }}
                     <br>
                     <div id="qrcoded8" style="text-align: right"></div>
                 </td>
             </tr>
             {{-- 9 --}}
-            <tr style="height:150px" ng-show="item.obj[423114]!=undefined">
-                <td>@{{item.obj[423114] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-                <td>@{{ item.obj[423115] ? item.obj[423115] : '' }}</td>
-                <td colspan="3">@{{ item.obj[423116] ? item.obj[423116] : '' }} <br><br> 
-                    Paraf : @{{ item.obj[423117] ? item.obj[423117] : '' }}
+            <tr style="height:150px" ng-show="item.obj[421714]!=undefined">
+                <td>@{{item.obj[421714] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td>@{{ item.obj[421715] ? item.obj[421715] : '' }}</td>
+                <td colspan="3">@{{ item.obj[421716] ? item.obj[421716] : '' }} <br><br> 
+                    Paraf : @{{ item.obj[421717] ? item.obj[421717] : '' }}
                     <br>
                     <div id="qrcodep9" style="text-align: right"></div>
                 </td>
-                <td colspan="2">@{{ item.obj[423118] ? item.obj[423118] : '' }}</td>
-                <td colspan="2">@{{ item.obj[423119] ? item.obj[423119] : '' }} <br><br> 
-                    Tanggal : @{{item.obj[423120] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
-                    Paraf : @{{ item.obj[423121] ? item.obj[423121] : '' }}
+                <td colspan="2">@{{ item.obj[421718] ? item.obj[421718] : '' }}</td>
+                <td colspan="2">@{{ item.obj[421719] ? item.obj[421719] : '' }} <br><br> 
+                    Tanggal : @{{item.obj[421720] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
+                    Paraf : @{{ item.obj[421721] ? item.obj[421721] : '' }}
                     <br>
                     <div id="qrcoded9" style="text-align: right"></div>
                 </td>
             </tr>
             {{-- 10 --}}
-            <tr style="height:150px" ng-show="item.obj[423122]!=undefined">
-                <td>@{{item.obj[423122] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-                <td>@{{ item.obj[423123] ? item.obj[423123] : '' }}</td>
-                <td colspan="3">@{{ item.obj[423124] ? item.obj[423124] : '' }} <br><br> 
-                    Paraf : @{{ item.obj[423125] ? item.obj[423125] : '' }}
+            <tr style="height:150px" ng-show="item.obj[421722]!=undefined">
+                <td>@{{item.obj[421722] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td>@{{ item.obj[421723] ? item.obj[421723] : '' }}</td>
+                <td colspan="3">@{{ item.obj[421724] ? item.obj[421724] : '' }} <br><br> 
+                    Paraf : @{{ item.obj[421725] ? item.obj[421725] : '' }}
                     <br>
                     <div id="qrcodep10" style="text-align: right"></div>
                 </td>
-                <td colspan="2">@{{ item.obj[423126] ? item.obj[423126] : '' }}</td>
-                <td colspan="2">@{{ item.obj[423127] ? item.obj[423127] : '' }} <br><br> 
-                    Tanggal : @{{item.obj[423128] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
-                    Paraf : @{{ item.obj[423129] ? item.obj[423129] : '' }}
+                <td colspan="2">@{{ item.obj[421726] ? item.obj[421726] : '' }}</td>
+                <td colspan="2">@{{ item.obj[421727] ? item.obj[421727] : '' }} <br><br> 
+                    Tanggal : @{{item.obj[421728] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
+                    Paraf : @{{ item.obj[421729] ? item.obj[421729] : '' }}
                     <br>
                     <div id="qrcoded10" style="text-align: right"></div>
                 </td>
             </tr>
             {{-- 11 --}}
-            <tr style="height:150px" ng-show="item.obj[423130]!=undefined">
-                <td>@{{item.obj[423130] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-                <td>@{{ item.obj[423131] ? item.obj[423131] : '' }}</td>
-                <td colspan="3">@{{ item.obj[423132] ? item.obj[423132] : '' }} <br><br> 
-                    Paraf : @{{ item.obj[423133] ? item.obj[423133] : '' }}
+            <tr style="height:150px" ng-show="item.obj[421730]!=undefined">
+                <td>@{{item.obj[421730] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td>@{{ item.obj[421731] ? item.obj[421731] : '' }}</td>
+                <td colspan="3">@{{ item.obj[421732] ? item.obj[421732] : '' }} <br><br> 
+                    Paraf : @{{ item.obj[421733] ? item.obj[421733] : '' }}
                     <br>
                     <div id="qrcodep11" style="text-align: right"></div>
                 </td>
-                <td colspan="2">@{{ item.obj[423134] ? item.obj[423134] : '' }}</td>
-                <td colspan="2">@{{ item.obj[423135] ? item.obj[423135] : '' }} <br><br> 
-                    Tanggal : @{{item.obj[423136] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
-                    Paraf : @{{ item.obj[423137] ? item.obj[423137] : '' }}
+                <td colspan="2">@{{ item.obj[421734] ? item.obj[421734] : '' }}</td>
+                <td colspan="2">@{{ item.obj[421735] ? item.obj[421735] : '' }} <br><br> 
+                    Tanggal : @{{item.obj[421736] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
+                    Paraf : @{{ item.obj[421737] ? item.obj[421737] : '' }}
                     <br>
                     <div id="qrcoded11" style="text-align: right"></div>
                 </td>
             </tr>
             {{-- 12 --}}
-            <tr style="height:150px" ng-show="item.obj[423138]!=undefined">
-                <td>@{{item.obj[423138] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-                <td>@{{ item.obj[423139] ? item.obj[423139] : '' }}</td>
-                <td colspan="3">@{{ item.obj[423140] ? item.obj[423140] : '' }} <br><br> 
-                    Paraf : @{{ item.obj[423141] ? item.obj[423141] : '' }}
+            <tr style="height:150px" ng-show="item.obj[421738]!=undefined">
+                <td>@{{item.obj[421738] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td>@{{ item.obj[421739] ? item.obj[421739] : '' }}</td>
+                <td colspan="3">@{{ item.obj[421740] ? item.obj[421740] : '' }} <br><br> 
+                    Paraf : @{{ item.obj[421741] ? item.obj[421741] : '' }}
                     <br>
                     <div id="qrcodep12" style="text-align: right"></div>
                 </td>
-                <td colspan="2">@{{ item.obj[423142] ? item.obj[423142] : '' }}</td>
-                <td colspan="2">@{{ item.obj[423143] ? item.obj[423143] : '' }} <br><br> 
-                    Tanggal : @{{item.obj[423144] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
-                    Paraf : @{{ item.obj[423145] ? item.obj[423145] : '' }}
+                <td colspan="2">@{{ item.obj[421742] ? item.obj[421742] : '' }}</td>
+                <td colspan="2">@{{ item.obj[421744] ? item.obj[421744] : '' }} <br><br> 
+                    Tanggal : @{{item.obj[421744] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
+                    Paraf : @{{ item.obj[421745] ? item.obj[421745] : '' }}
                     <br>
                     <div id="qrcoded12" style="text-align: right"></div>
                 </td>
             </tr>
             {{-- 13 --}}
-            <tr style="height:150px" ng-show="item.obj[423146]!=undefined">
-                <td>@{{item.obj[423146] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-                <td>@{{ item.obj[423147] ? item.obj[423147] : '' }}</td>
-                <td colspan="3">@{{ item.obj[423148] ? item.obj[423148] : '' }} <br><br> 
-                    Paraf : @{{ item.obj[423149] ? item.obj[423149] : '' }}
+            <tr style="height:150px" ng-show="item.obj[421746]!=undefined">
+                <td>@{{item.obj[421746] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td>@{{ item.obj[421747] ? item.obj[421747] : '' }}</td>
+                <td colspan="3">@{{ item.obj[421748] ? item.obj[421748] : '' }} <br><br> 
+                    Paraf : @{{ item.obj[421749] ? item.obj[421749] : '' }}
                     <br>
                     <div id="qrcodep13" style="text-align: right"></div>
                 </td>
-                <td colspan="2">@{{ item.obj[423150] ? item.obj[423150] : '' }}</td>
-                <td colspan="2">@{{ item.obj[423151] ? item.obj[423151] : '' }} <br><br> 
-                    Tanggal : @{{item.obj[423152] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
-                    Paraf : @{{ item.obj[423153] ? item.obj[423153] : '' }}
+                <td colspan="2">@{{ item.obj[421750] ? item.obj[421750] : '' }}</td>
+                <td colspan="2">@{{ item.obj[421751] ? item.obj[421751] : '' }} <br><br> 
+                    Tanggal : @{{item.obj[421752] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
+                    Paraf : @{{ item.obj[421753] ? item.obj[421753] : '' }}
                     <br>
                     <div id="qrcoded13" style="text-align: right"></div>
                 </td>
             </tr>
             {{-- 14 --}}
-            <tr style="height:150px" ng-show="item.obj[423154]!=undefined">
-                <td>@{{item.obj[423154] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-                <td>@{{ item.obj[423155] ? item.obj[423155] : '' }}</td>
-                <td colspan="3">@{{ item.obj[423156] ? item.obj[423156] : '' }} <br><br> 
-                    Paraf : @{{ item.obj[423157] ? item.obj[423157] : '' }}
+            <tr style="height:150px" ng-show="item.obj[421754]!=undefined">
+                <td>@{{item.obj[421754] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td>@{{ item.obj[421755] ? item.obj[421755] : '' }}</td>
+                <td colspan="3">@{{ item.obj[421756] ? item.obj[421756] : '' }} <br><br> 
+                    Paraf : @{{ item.obj[421757] ? item.obj[421757] : '' }}
                     <br>
-                    <div id="qrcodep14" style="text-align: right"></div>
+                    <div id="qrcoded14" style="text-align: right"></div>
                 </td>
-                <td colspan="2">@{{ item.obj[423158] ? item.obj[423158] : '' }}</td>
-                <td colspan="2">@{{ item.obj[423159] ? item.obj[423159] : '' }} <br><br> 
-                    Tanggal : @{{item.obj[423160] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
-                    Paraf : @{{ item.obj[423161] ? item.obj[423161] : '' }}
+                <td colspan="2">@{{ item.obj[421758] ? item.obj[421758] : '' }}</td>
+                <td colspan="2">@{{ item.obj[421759] ? item.obj[421759] : '' }} <br><br> 
+                    Tanggal : @{{item.obj[421760] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
+                    Paraf : @{{ item.obj[421761] ? item.obj[421761] : '' }}
                     <br>
                     <div id="qrcoded14" style="text-align: right"></div>
                 </td>
             </tr>
             {{-- 15 --}}
-            <tr style="height:150px" ng-show="item.obj[423162]!=undefined">
-                <td>@{{item.obj[423162] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-                <td>@{{ item.obj[423163] ? item.obj[423163] : '' }}</td>
-                <td colspan="3">@{{ item.obj[423164] ? item.obj[423164] : '' }} <br><br> 
-                    Paraf : @{{ item.obj[423165] ? item.obj[423165] : '' }}
+            <tr style="height:150px" ng-show="item.obj[421762]!=undefined">
+                <td>@{{item.obj[421762] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td>@{{ item.obj[421763] ? item.obj[421763] : '' }}</td>
+                <td colspan="3">@{{ item.obj[421764] ? item.obj[421764] : '' }} <br><br> 
+                    Paraf : @{{ item.obj[421765] ? item.obj[421765] : '' }}
                     <br>
                     <div id="qrcodep15" style="text-align: right"></div>
                 </td>
-                <td colspan="2">@{{ item.obj[423166] ? item.obj[423166] : '' }}</td>
-                <td colspan="2">@{{ item.obj[423167] ? item.obj[423167] : '' }} <br><br> 
-                    Tanggal : @{{item.obj[423168] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
-                    Paraf : @{{ item.obj[423169] ? item.obj[423169] : '' }}
+                <td colspan="2">@{{ item.obj[421766] ? item.obj[421766] : '' }}</td>
+                <td colspan="2">@{{ item.obj[421767] ? item.obj[421767] : '' }} <br><br> 
+                    Tanggal : @{{item.obj[421768] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
+                    Paraf : @{{ item.obj[421769] ? item.obj[421769] : '' }}
                     <br>
                     <div id="qrcoded15" style="text-align: right"></div>
                 </td>
             </tr>
             {{-- 16 --}}
-            <tr style="height:150px" ng-show="item.obj[423170]!=undefined">
-                <td>@{{item.obj[423170] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-                <td>@{{ item.obj[423171] ? item.obj[423171] : '' }}</td>
-                <td colspan="3">@{{ item.obj[423172] ? item.obj[423172] : '' }} <br><br> 
-                    Paraf : @{{ item.obj[423173] ? item.obj[423173] : '' }}
+            <tr style="height:150px" ng-show="item.obj[421770]!=undefined">
+                <td>@{{item.obj[421770] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td>@{{ item.obj[421771] ? item.obj[421771] : '' }}</td>
+                <td colspan="3">@{{ item.obj[421772] ? item.obj[421772] : '' }} <br><br> 
+                    Paraf : @{{ item.obj[421773] ? item.obj[421773] : '' }}
                     <br>
                     <div id="qrcodep16" style="text-align: right"></div>
                 </td>
-                <td colspan="2">@{{ item.obj[423174] ? item.obj[423174] : '' }}</td>
-                <td colspan="2">@{{ item.obj[423175] ? item.obj[423175] : '' }} <br><br> 
-                    Tanggal : @{{item.obj[423176] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
-                    Paraf : @{{ item.obj[423177] ? item.obj[423177] : '' }}
+                <td colspan="2">@{{ item.obj[421774] ? item.obj[421774] : '' }}</td>
+                <td colspan="2">@{{ item.obj[421775] ? item.obj[421775] : '' }} <br><br> 
+                    Tanggal : @{{item.obj[421776] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
+                    Paraf : @{{ item.obj[421777] ? item.obj[421777] : '' }}
                     <br>
                     <div id="qrcoded16" style="text-align: right"></div>
                 </td>
             </tr>
             {{-- 17 --}}
-            <tr style="height:150px" ng-show="item.obj[423178]!=undefined">
-                <td>@{{item.obj[423178] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-                <td>@{{ item.obj[423179] ? item.obj[423179] : '' }}</td>
-                <td colspan="3">@{{ item.obj[423180] ? item.obj[423180] : '' }} <br><br> 
-                    Paraf : @{{ item.obj[423181] ? item.obj[423181] : '' }}
+            <tr style="height:150px" ng-show="item.obj[421778]!=undefined">
+                <td>@{{item.obj[421778] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td>@{{ item.obj[421779] ? item.obj[421779] : '' }}</td>
+                <td colspan="3">@{{ item.obj[421780] ? item.obj[421780] : '' }} <br><br> 
+                    Paraf : @{{ item.obj[421781] ? item.obj[421781] : '' }}
                     <br>
                     <div id="qrcodep17" style="text-align: right"></div>
                 </td>
-                <td colspan="2">@{{ item.obj[423182] ? item.obj[423182] : '' }}</td>
-                <td colspan="2">@{{ item.obj[423183] ? item.obj[423183] : '' }} <br><br> 
-                    Tanggal : @{{item.obj[423184] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
-                    Paraf : @{{ item.obj[423185] ? item.obj[423185] : '' }}
+                <td colspan="2">@{{ item.obj[421782] ? item.obj[421782] : '' }}</td>
+                <td colspan="2">@{{ item.obj[421783] ? item.obj[421783] : '' }} <br><br> 
+                    Tanggal : @{{item.obj[421784] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
+                    Paraf : @{{ item.obj[421785] ? item.obj[421785] : '' }}
                     <br>
                     <div id="qrcoded17" style="text-align: right"></div>
                 </td>
             </tr>
             {{-- 18 --}}
-            <tr style="height:150px" ng-show="item.obj[423186]!=undefined">
-                <td>@{{item.obj[423186] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-                <td>@{{ item.obj[423187] ? item.obj[423187] : '' }}</td>
-                <td colspan="3">@{{ item.obj[423188] ? item.obj[423188] : '' }} <br><br> 
-                    Paraf : @{{ item.obj[423189] ? item.obj[423189] : '' }}
+            <tr style="height:150px" ng-show="item.obj[421786]!=undefined">
+                <td>@{{item.obj[421786] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td>@{{ item.obj[421787] ? item.obj[421787] : '' }}</td>
+                <td colspan="3">@{{ item.obj[421788] ? item.obj[421788] : '' }} <br><br> 
+                    Paraf : @{{ item.obj[421789] ? item.obj[421789] : '' }}
                     <br>
                     <div id="qrcodep18" style="text-align: right"></div>
                 </td>
-                <td colspan="2">@{{ item.obj[423190] ? item.obj[423190] : '' }}</td>
-                <td colspan="2">@{{ item.obj[423191] ? item.obj[423191] : '' }} <br><br> 
-                    Tanggal : @{{item.obj[423192] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
-                    Paraf : @{{ item.obj[423193] ? item.obj[423193] : '' }}
+                <td colspan="2">@{{ item.obj[421790] ? item.obj[421790] : '' }}</td>
+                <td colspan="2">@{{ item.obj[421791] ? item.obj[421791] : '' }} <br><br> 
+                    Tanggal : @{{item.obj[421792] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
+                    Paraf : @{{ item.obj[421793] ? item.obj[421793] : '' }}
                     <br>
                     <div id="qrcoded18" style="text-align: right"></div>
                 </td>
             </tr>
             {{-- 19 --}}
-            <tr style="height:150px" ng-show="item.obj[423194]!=undefined">
-                <td>@{{item.obj[423194] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-                <td>@{{ item.obj[423195] ? item.obj[423195] : '' }}</td>
-                <td colspan="3">@{{ item.obj[423196] ? item.obj[423196] : '' }} <br><br> 
-                    Paraf : @{{ item.obj[423197] ? item.obj[423197] : '' }}
+            <tr style="height:150px" ng-show="item.obj[421794]!=undefined">
+                <td>@{{item.obj[421794] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td>@{{ item.obj[421795] ? item.obj[421795] : '' }}</td>
+                <td colspan="3">@{{ item.obj[421796] ? item.obj[421796] : '' }} <br><br> 
+                    Paraf : @{{ item.obj[421797] ? item.obj[421797] : '' }}
                     <br>
                     <div id="qrcodep19" style="text-align: right"></div>
                 </td>
-                <td colspan="2">@{{ item.obj[423198] ? item.obj[423198] : '' }}</td>
-                <td colspan="2">@{{ item.obj[423199] ? item.obj[423199] : '' }} <br><br> 
-                    Tanggal : @{{item.obj[423200] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
-                    Paraf : @{{ item.obj[423201] ? item.obj[423201] : '' }}
+                <td colspan="2">@{{ item.obj[421798] ? item.obj[421798] : '' }}</td>
+                <td colspan="2">@{{ item.obj[421799] ? item.obj[421799] : '' }} <br><br> 
+                    Tanggal : @{{item.obj[421800] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
+                    Paraf : @{{ item.obj[421801] ? item.obj[421801] : '' }}
                     <br>
                     <div id="qrcoded19" style="text-align: right"></div>
                 </td>
             </tr>
             {{-- 20 --}}
-            <tr style="height:150px" ng-show="item.obj[423202]!=undefined">
-                <td>@{{item.obj[423202] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-                <td>@{{ item.obj[423203] ? item.obj[423203] : '' }}</td>
-                <td colspan="3">@{{ item.obj[423204] ? item.obj[423204] : '' }} <br><br> 
-                    Paraf : @{{ item.obj[423205] ? item.obj[423205] : '' }}
+            <tr style="height:150px" ng-show="item.obj[421802]!=undefined">
+                <td>@{{item.obj[421802] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td>@{{ item.obj[421803] ? item.obj[421803] : '' }}</td>
+                <td colspan="3">@{{ item.obj[421804] ? item.obj[421804] : '' }} <br><br> 
+                    Paraf : @{{ item.obj[421805] ? item.obj[421805] : '' }}
                     <br>
                     <div id="qrcodep20" style="text-align: right"></div>
                 </td>
-                <td colspan="2">@{{ item.obj[423206] ? item.obj[423206] : '' }}</td>
-                <td colspan="2">@{{ item.obj[423207] ? item.obj[423207] : '' }} <br><br> 
-                    Tanggal : @{{item.obj[423208] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
-                    Paraf : @{{ item.obj[423209] ? item.obj[423209] : '' }}
+                <td colspan="2">@{{ item.obj[421806] ? item.obj[421806] : '' }}</td>
+                <td colspan="2">@{{ item.obj[421807] ? item.obj[421807] : '' }} <br><br> 
+                    Tanggal : @{{item.obj[421808] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
+                    Paraf : @{{ item.obj[421809] ? item.obj[421809] : '' }}
                     <br>
                     <div id="qrcoded20" style="text-align: right"></div>
                 </td>
             </tr>
             {{-- 21 --}}
-            <tr style="height:150px" ng-show="item.obj[423210]!=undefined">
-                <td>@{{item.obj[423210] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-                <td>@{{ item.obj[423211] ? item.obj[423211] : '' }}</td>
-                <td colspan="3">@{{ item.obj[423212] ? item.obj[423212] : '' }} <br><br> 
-                    Paraf : @{{ item.obj[423213] ? item.obj[423213] : '' }}
+            <tr style="height:150px" ng-show="item.obj[421810]!=undefined">
+                <td>@{{item.obj[421810] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td>@{{ item.obj[421811] ? item.obj[421811] : '' }}</td>
+                <td colspan="3">@{{ item.obj[421812] ? item.obj[421812] : '' }} <br><br> 
+                    Paraf : @{{ item.obj[421813] ? item.obj[421813] : '' }}
                     <br>
                     <div id="qrcodep21" style="text-align: right"></div>
                 </td>
-                <td colspan="2">@{{ item.obj[423214] ? item.obj[423214] : '' }}</td>
-                <td colspan="2">@{{ item.obj[423215] ? item.obj[423215] : '' }} <br><br> 
-                    Tanggal : @{{item.obj[423216] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
-                    Paraf : @{{ item.obj[423217] ? item.obj[423217] : '' }}
+                <td colspan="2">@{{ item.obj[421814] ? item.obj[421814] : '' }}</td>
+                <td colspan="2">@{{ item.obj[421815] ? item.obj[421815] : '' }} <br><br> 
+                    Tanggal : @{{item.obj[421816] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
+                    Paraf : @{{ item.obj[421817] ? item.obj[421817] : '' }}
                     <br>
                     <div id="qrcoded21" style="text-align: right"></div>
                 </td>
@@ -649,7 +649,7 @@
             }
         })
 
-    angular.controller('cetakCPPT', function ($scope, $http, httpService) {
+    angular.controller('cetakCPPTRajal', function ($scope, $http, httpService) {
         $scope.item = {
             obj: [],
             obj2: []
@@ -781,68 +781,68 @@
 
         // $scope.item.obj['diagnose_pasca_operatif'] = diagnose_pasca_operatif;
 
-        var p1 = $scope.item.obj[423053];
-        var d1 = $scope.item.obj[423057];
+        var p1 = $scope.item.obj[421653];
+        var d1 = $scope.item.obj[421657];
 
-        var p2 = $scope.item.obj[423061];
-        var d2 = $scope.item.obj[423065];
+        var p2 = $scope.item.obj[421661];
+        var d2 = $scope.item.obj[421665];
 
-        var p3 = $scope.item.obj[423069];
-        var d3 = $scope.item.obj[423073];
+        var p3 = $scope.item.obj[421669];
+        var d3 = $scope.item.obj[421673];
 
-        var p4 = $scope.item.obj[423077];
-        var d4 = $scope.item.obj[423081];
+        var p4 = $scope.item.obj[421677];
+        var d4 = $scope.item.obj[421681];
 
-        var p5 = $scope.item.obj[423085];
-        var d5 = $scope.item.obj[423089];
+        var p5 = $scope.item.obj[421685];
+        var d5 = $scope.item.obj[421689];
 
-        var p6 = $scope.item.obj[423093];
-        var d6 = $scope.item.obj[423097];
+        var p6 = $scope.item.obj[421693];
+        var d6 = $scope.item.obj[421697];
 
-        var p7 = $scope.item.obj[423101];
-        var d7 = $scope.item.obj[423105];
+        var p7 = $scope.item.obj[421701];
+        var d7 = $scope.item.obj[421705];
 
-        var p8 = $scope.item.obj[423109];
-        var d8 = $scope.item.obj[423113];
+        var p8 = $scope.item.obj[421709];
+        var d8 = $scope.item.obj[421713];
 
-        var p9 = $scope.item.obj[423117];
-        var d9 = $scope.item.obj[423121];
+        var p9 = $scope.item.obj[421717];
+        var d9 = $scope.item.obj[421721];
 
-        var p10 = $scope.item.obj[423125];
-        var d10 = $scope.item.obj[423129];
+        var p10 = $scope.item.obj[421725];
+        var d10 = $scope.item.obj[421729];
 
-        var p11 = $scope.item.obj[423133];
-        var d11 = $scope.item.obj[423137];
+        var p11 = $scope.item.obj[421733];
+        var d11 = $scope.item.obj[421737];
 
-        var p12 = $scope.item.obj[423141];
-        var d12 = $scope.item.obj[423145];
+        var p12 = $scope.item.obj[421741];
+        var d12 = $scope.item.obj[421745];
 
-        var p13 = $scope.item.obj[423149];
-        var d13 = $scope.item.obj[423153];
+        var p13 = $scope.item.obj[421749];
+        var d13 = $scope.item.obj[421753];
 
-        var p14 = $scope.item.obj[423157];
-        var d14 = $scope.item.obj[423161];
+        var p14 = $scope.item.obj[421757];
+        var d14 = $scope.item.obj[421761];
 
-        var p15 = $scope.item.obj[423165];
-        var d15 = $scope.item.obj[423169];
+        var p15 = $scope.item.obj[421765];
+        var d15 = $scope.item.obj[421769];
 
-        var p16 = $scope.item.obj[423173];
-        var d16 = $scope.item.obj[423177];
+        var p16 = $scope.item.obj[421773];
+        var d16 = $scope.item.obj[421777];
 
-        var p17 = $scope.item.obj[423181];
-        var d17 = $scope.item.obj[423185];
+        var p17 = $scope.item.obj[421781];
+        var d17 = $scope.item.obj[421785];
 
-        var p18 = $scope.item.obj[423189];
-        var d18 = $scope.item.obj[423193];
+        var p18 = $scope.item.obj[421789];
+        var d18 = $scope.item.obj[421793];
 
-        var p19 = $scope.item.obj[423197];
-        var d19 = $scope.item.obj[423201];
+        var p19 = $scope.item.obj[421797];
+        var d19 = $scope.item.obj[421801];
 
-        var p20 = $scope.item.obj[423205];
-        var d20 = $scope.item.obj[423209];
+        var p20 = $scope.item.obj[421805];
+        var d20 = $scope.item.obj[421809];
 
-        var p21 = $scope.item.obj[423213];
-        var d21 = $scope.item.obj[423217];
+        var p21 = $scope.item.obj[421813];
+        var d21 = $scope.item.obj[421817];
 
         if (p1 != undefined) {
             jQuery('#qrcodep1').qrcode({
@@ -1186,8 +1186,8 @@
         return new Date(items);
         };
     });
-    $(document).ready(function () {
-        window.print();
-    });
+    // $(document).ready(function () {
+    //     window.print();
+    // });
 </script>
 </html>

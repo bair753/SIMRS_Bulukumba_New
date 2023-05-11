@@ -98,11 +98,10 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 if (norecEMR == '') return
                 var local = JSON.parse(localStorage.getItem('profile'));
                 var nama = medifirstService.getPegawaiLogin().namalengkap;
-                window.open(config.baseApiBackend + 'report/cetak-cppt?nocm='
+                window.open(config.baseApiBackend + 'report/cetak-cppt-rajal?nocm='
                     + $scope.cc.nocm + '&norec_apd=' + $scope.cc.norec + '&emr=' + norecEMR
                     + '&emrfk=' + $scope.cc.emrfk
                     + '&kdprofile=' + local.id
-                    + '&index=' + paramsIndex
                     + '&nama=' + nama, '_blank');
             }
 
