@@ -95,14 +95,14 @@
                 <div class="grid_12" style="margin-top: 10px;">
                     <div class="grid_12">
                         <div class="grid_12">
-                            <label c-label item="item">Upload Gambar Hasil Pemeriksaan</label>
+                            <label c-label item="item">Upload Gambar Hasil Pemeriksaan (file harus jpg/jpeg/png/svg)</label>
                         </div>
                         <div class="grid_12" style="margin-top: 10px;">
                             <input type="file" id="fileEKG" accept="application" k-ng-model="item.obj[31101098]" kendo-upload k-select="onSelect1"/>
                         </div>
                         <div class="grid_12" style="margin-top: 10px">
                             <div id="preview1" >
-                                <img class="gambarAset" style="width: 100%;" src="{{item.objImg[31101098]}}" />
+                                <img class="gambarAset" style="min-width: 700px;" src="{{item.objImg[31101098]}}" />
                             </div>
                          </div>
                     </div>                      
