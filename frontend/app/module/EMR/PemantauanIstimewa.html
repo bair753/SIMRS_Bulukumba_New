@@ -1,0 +1,509 @@
+<style type="text/css">
+    fieldset {
+        border-radius: 5px;
+        border: 1px solid #228be6;
+    }
+
+    .k-slider-horizontal {
+        display: inline-block;
+        float: left;
+        width: 450px;
+
+        height: 26px;
+
+
+    }
+
+    .k-slider {
+
+        margin-left: 3%;
+        margin-right: 3%;
+        margin-top: 1%;
+        margin-bottom: 5%;
+        display: inline-block;
+    }
+
+    .activeBtn {
+        background-color: #10c4b2;
+        color: #ffffff;
+    }
+    table,
+    th,
+    td {
+        border: 1px solid #929191;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+    td {
+        padding: 5px;
+        text-align: left;
+    }
+    th {
+        padding: 5px;
+        text-align: center;
+    }
+    .clicks {
+        cursor: pointer;
+    }
+</style>
+
+ <!-- ng-class="{'my-disable':true}" -->
+<!-- <div class="grid_12"  disable-contents="allDisabled" id="form"> -->
+<div class="grid_12">
+    <div class="grid_12">
+        <div class="panel panel-default container_12">
+            <div class="panel-heading" c-translate>Pemantauan Istimewa</div>
+        </div>
+
+        <div class="grid_12" style="margin-top: 10px;">
+            <fieldset style="margin-top: 10px;">
+                <div class="grid_12 mt-1" style="min-width: 1000px;overflow: auto;">
+                    <table>
+                        <tr>
+                            <th rowspan="2" style="min-width: 200px;overflow: auto;">Tanggal/Pukul</th>
+                            <th rowspan="2">Kesadaran</th>
+                            <th colspan="4">Tanda - Tanda Vtal</th>
+                            <th rowspan="2">Input</th>
+                            <th rowspan="2">Output</th>
+                            <th rowspan="2" style="min-width: 200px;overflow: auto;">Nama & Paraf</th>
+                        </tr>
+                        <tr>
+                            <th style="min-width: 30px;overflow: auto;">TD</th>
+                            <th style="min-width: 30px;overflow: auto;">Nadi</th>
+                            <th style="min-width: 30px;overflow: auto;">Napas</th>
+                            <th style="min-width: 30px;overflow: auto;">Suhu</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input style="width: 90%" k-ng-model="item.obj[31104496]" kendo-datetimepicker placeholer="YYYY:MM:DD"
+                                k-format="'yyyy-MM-dd HH:mm'" />
+                            </td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104497]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104498]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104499]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104500]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104501]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104502]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104503]"></td>
+                            <td><input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[31104504]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" /></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input style="width: 90%" k-ng-model="item.obj[31104505]" kendo-datetimepicker placeholer="YYYY:MM:DD"
+                                k-format="'yyyy-MM-dd HH:mm'" />
+                            </td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104506]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104507]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104508]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104509]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104510]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104511]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104512]"></td>
+                            <td><input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[31104513]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" /></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input style="width: 90%" k-ng-model="item.obj[31104514]" kendo-datetimepicker placeholer="YYYY:MM:DD"
+                                k-format="'yyyy-MM-dd HH:mm'" />
+                            </td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104515]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104516]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104517]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104518]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104519]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104520]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104521]"></td>
+                            <td><input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[31104522]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" /></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input style="width: 90%" k-ng-model="item.obj[31104523]" kendo-datetimepicker placeholer="YYYY:MM:DD"
+                                k-format="'yyyy-MM-dd HH:mm'" />
+                            </td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104524]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104525]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104526]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104527]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104528]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104529]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104530]"></td>
+                            <td><input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[31104531]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" /></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input style="width: 90%" k-ng-model="item.obj[31104532]" kendo-datetimepicker placeholer="YYYY:MM:DD"
+                                k-format="'yyyy-MM-dd HH:mm'" />
+                            </td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104533]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104534]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104535]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104536]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104537]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104538]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104539]"></td>
+                            <td><input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[31104540]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" /></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input style="width: 90%" k-ng-model="item.obj[31104541]" kendo-datetimepicker placeholer="YYYY:MM:DD"
+                                k-format="'yyyy-MM-dd HH:mm'" />
+                            </td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104542]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104543]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104544]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104545]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104546]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104547]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104548]"></td>
+                            <td><input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[31104549]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" /></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input style="width: 90%" k-ng-model="item.obj[31104550]" kendo-datetimepicker placeholer="YYYY:MM:DD"
+                                k-format="'yyyy-MM-dd HH:mm'" />
+                            </td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104551]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104552]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104553]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104554]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104555]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104556]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104557]"></td>
+                            <td><input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[31104558]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" /></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input style="width: 90%" k-ng-model="item.obj[31104559]" kendo-datetimepicker placeholer="YYYY:MM:DD"
+                                k-format="'yyyy-MM-dd HH:mm'" />
+                            </td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104560]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104561]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104562]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104563]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104564]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104565]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104566]"></td>
+                            <td><input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[31104567]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" /></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input style="width: 90%" k-ng-model="item.obj[31104568]" kendo-datetimepicker placeholer="YYYY:MM:DD"
+                                k-format="'yyyy-MM-dd HH:mm'" />
+                            </td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104569]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104570]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104571]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104572]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104573]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104574]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104575]"></td>
+                            <td><input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[31104576]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" /></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input style="width: 90%" k-ng-model="item.obj[31104577]" kendo-datetimepicker placeholer="YYYY:MM:DD"
+                                k-format="'yyyy-MM-dd HH:mm'" />
+                            </td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104578]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104579]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104580]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104581]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104582]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104583]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104584]"></td>
+                            <td><input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[31104585]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" /></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input style="width: 90%" k-ng-model="item.obj[31104586]" kendo-datetimepicker placeholer="YYYY:MM:DD"
+                                k-format="'yyyy-MM-dd HH:mm'" />
+                            </td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104587]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104588]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104589]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104590]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104591]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104592]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104593]"></td>
+                            <td><input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[31104594]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" /></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input style="width: 90%" k-ng-model="item.obj[31104595]" kendo-datetimepicker placeholer="YYYY:MM:DD"
+                                k-format="'yyyy-MM-dd HH:mm'" />
+                            </td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104596]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104597]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104598]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104599]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104600]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104601]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104602]"></td>
+                            <td><input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[31104603]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" /></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input style="width: 90%" k-ng-model="item.obj[31104604]" kendo-datetimepicker placeholer="YYYY:MM:DD"
+                                k-format="'yyyy-MM-dd HH:mm'" />
+                            </td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104605]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104606]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104607]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104608]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104609]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104610]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104611]"></td>
+                            <td><input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[31104612]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" /></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input style="width: 90%" k-ng-model="item.obj[31104613]" kendo-datetimepicker placeholer="YYYY:MM:DD"
+                                k-format="'yyyy-MM-dd HH:mm'" />
+                            </td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104614]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104615]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104616]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104617]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104618]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104619]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104620]"></td>
+                            <td><input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[31104621]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" /></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input style="width: 90%" k-ng-model="item.obj[31104622]" kendo-datetimepicker placeholer="YYYY:MM:DD"
+                                k-format="'yyyy-MM-dd HH:mm'" />
+                            </td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104623]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104624]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104625]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104626]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104627]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104628]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104629]"></td>
+                            <td><input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[31104630]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" /></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input style="width: 90%" k-ng-model="item.obj[31104631]" kendo-datetimepicker placeholer="YYYY:MM:DD"
+                                k-format="'yyyy-MM-dd HH:mm'" />
+                            </td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104632]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104633]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104634]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104635]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104636]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104637]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104638]"></td>
+                            <td><input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[31104639]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" /></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input style="width: 90%" k-ng-model="item.obj[31104640]" kendo-datetimepicker placeholer="YYYY:MM:DD"
+                                k-format="'yyyy-MM-dd HH:mm'" />
+                            </td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104641]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104642]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104643]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104644]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104645]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104646]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104647]"></td>
+                            <td><input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[31104648]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" /></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input style="width: 90%" k-ng-model="item.obj[31104649]" kendo-datetimepicker placeholer="YYYY:MM:DD"
+                                k-format="'yyyy-MM-dd HH:mm'" />
+                            </td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104650]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104651]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104652]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104653]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104654]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104655]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104656]"></td>
+                            <td><input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[31104657]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" /></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input style="width: 90%" k-ng-model="item.obj[31104658]" kendo-datetimepicker placeholer="YYYY:MM:DD"
+                                k-format="'yyyy-MM-dd HH:mm'" />
+                            </td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104659]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104660]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104661]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104662]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104663]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104664]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104665]"></td>
+                            <td><input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[31104666]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" /></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input style="width: 90%" k-ng-model="item.obj[31104667]" kendo-datetimepicker placeholer="YYYY:MM:DD"
+                                k-format="'yyyy-MM-dd HH:mm'" />
+                            </td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104668]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104669]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104670]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104671]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104672]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104673]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104674]"></td>
+                            <td><input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[31104675]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" /></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input style="width: 90%" k-ng-model="item.obj[31104676]" kendo-datetimepicker placeholer="YYYY:MM:DD"
+                                k-format="'yyyy-MM-dd HH:mm'" />
+                            </td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104677]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104678]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104679]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104680]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104681]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104682]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104683]"></td>
+                            <td><input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[31104684]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" /></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input style="width: 90%" k-ng-model="item.obj[31104685]" kendo-datetimepicker placeholer="YYYY:MM:DD"
+                                k-format="'yyyy-MM-dd HH:mm'" />
+                            </td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104686]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104687]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104688]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104689]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104690]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104691]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104692]"></td>
+                            <td><input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[31104693]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" /></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input style="width: 90%" k-ng-model="item.obj[31104694]" kendo-datetimepicker placeholer="YYYY:MM:DD"
+                                k-format="'yyyy-MM-dd HH:mm'" />
+                            </td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104695]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104696]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104697]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104698]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104699]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104700]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104701]"></td>
+                            <td><input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[31104702]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" /></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input style="width: 90%" k-ng-model="item.obj[31104703]" kendo-datetimepicker placeholer="YYYY:MM:DD"
+                                k-format="'yyyy-MM-dd HH:mm'" />
+                            </td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104704]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104705]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104706]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104707]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104708]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104709]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104710]"></td>
+                            <td><input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[31104711]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" /></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input style="width: 90%" k-ng-model="item.obj[31104712]" kendo-datetimepicker placeholer="YYYY:MM:DD"
+                                k-format="'yyyy-MM-dd HH:mm'" />
+                            </td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104713]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104714]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104715]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104716]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104717]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104718]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104719]"></td>
+                            <td><input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[31104720]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" /></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input style="width: 90%" k-ng-model="item.obj[31104721]" kendo-datetimepicker placeholer="YYYY:MM:DD"
+                                k-format="'yyyy-MM-dd HH:mm'" />
+                            </td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104722]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104723]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104724]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104725]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104726]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104727]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104728]"></td>
+                            <td><input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[31104729]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" /></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input style="width: 90%" k-ng-model="item.obj[31104730]" kendo-datetimepicker placeholer="YYYY:MM:DD"
+                                k-format="'yyyy-MM-dd HH:mm'" />
+                            </td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104731]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104732]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104733]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104734]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104735]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104736]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104737]"></td>
+                            <td><input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[31104738]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" /></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input style="width: 90%" k-ng-model="item.obj[31104739]" kendo-datetimepicker placeholer="YYYY:MM:DD"
+                                k-format="'yyyy-MM-dd HH:mm'" />
+                            </td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104740]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104741]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104742]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104743]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104744]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104745]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[31104746]"></td>
+                            <td><input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[31104747]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" /></td>
+                        </tr>
+                    </table>
+                </div>
+            </fieldset>
+        </div>
+
+    </div>
+</div>
+
+<br />
+<br />
+<div class="grid_12">
+    <div ng-include='"../app/module/EMR/TemplateButtonDinamis" '></div>
+
+</div>

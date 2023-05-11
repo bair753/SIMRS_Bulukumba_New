@@ -277,7 +277,7 @@ define(['initialize'], function (initialize) {
                 $("#preview1").empty();
                 for (var i = 0; i < e.files.length; i++) {
                     var file = e.files[i].rawFile;
-
+                    file
                     if (file) {
                         var reader = new FileReader();
                         reader.onload = function (readerEvt) {
@@ -288,7 +288,7 @@ define(['initialize'], function (initialize) {
                          
                         }
                         reader.onloadend = function () {
-                            $("<img img class=\"gambarAset \">").attr("src", this.result).appendTo($("#preview1"));
+                            $("<img img class=\"gambarAset \" style=\"min-width: 700px;\">").attr("src", this.result).appendTo($("#preview1"));
                         };
 
                         reader.readAsDataURL(file);
