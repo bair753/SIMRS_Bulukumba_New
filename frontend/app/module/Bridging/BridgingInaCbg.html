@@ -240,6 +240,16 @@
 					<input c-text-box type="input" filter="" class="k-textbox" ng-model="item.nama" ng-keypress="($event.which == 13)? SearchEnter():item.nama" disable/>
 				</div>
 			</div>
+			<div class="grid_2">
+				<div class="grid_12">
+					<label c-label item="item">No SEP</label>
+				</div>
+				<div class="clear"></div>
+
+				<div class="grid_12">
+					<input c-text-box type="input" filter="" class="k-textbox" ng-model="item.nosep" ng-keypress="($event.which == 13)? SearchEnter():item.nosep" disable/>
+				</div>
+			</div>
 			<div class="grid_7">
 		   </div>
 			<!-- <div class="grid_1">
@@ -497,6 +507,12 @@
 			</div>
 			<div class="grid_2">
 				<button class="btnTemplate1" ng-click="suretKematian()">Cetak Surat Kematian</button>
+			</div>
+			<div class="grid_2">
+				<button class="btnTemplate1" ng-click="cppt()">Cetak CPPT</button>
+			</div>
+			<div class="grid_2">
+				<button class="btnTemplate1" ng-click="cpptrajal()">Cetak CPPT Rajal</button>
 			</div>
 			<!-- <div class="grid_2" >
 				<button class="btnTemplate1"  ng-click="editKlaimm()">Edit Klaim Masal</button>
@@ -1305,6 +1321,34 @@
 					<div class="grid_12">
 							<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
 									<button class="k-button  k-button-icontext" ng-click="cetakSuketKematian()">Cetak</button>
+							</div>
+					</div>
+			</div>
+		</div>
+
+		<div kendo-window="popUpDaftarCPPT" k-title="'Daftar Catatan Perkembangan Pasien Terintegrasi'" k-visible="false" k-width="1000" k-height="400">
+			<div class="panel panel-default container_12">
+				<div class="grid_12 headerBox">
+					<kendo-grid id="kGrids" data-source="dataDaftarCPPT" options="columnDaftarCPPT" k-selectable="'row'" k-sortable="'true'"
+							k-resizable="'true'" k-ng-model="dataSelectedCPPT" ng-click="klikGridCPPT(dataSelectedCPPT)"></kendo-grid>
+				</div>
+					<div class="grid_12">
+							<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
+									<button class="k-button  k-button-icontext" ng-click="cetakCPPT()">Cetak</button>
+							</div>
+					</div>
+			</div>
+		</div>
+
+		<div kendo-window="popUpDaftarCPPTRajal" k-title="'Daftar Catatan Perkembangan Pasien Terintegrasi Rawat Jalan'" k-visible="false" k-width="1000" k-height="400">
+			<div class="panel panel-default container_12">
+				<div class="grid_12 headerBox">
+					<kendo-grid id="kGrids" data-source="dataDaftarCPPTRajal" options="columnDaftarCPPTRajal" k-selectable="'row'" k-sortable="'true'"
+							k-resizable="'true'" k-ng-model="dataSelectedCPPTRajal" ng-click="klikGridCPPTRajal(dataSelectedCPPTRajal)"></kendo-grid>
+				</div>
+					<div class="grid_12">
+							<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
+									<button class="k-button  k-button-icontext" ng-click="cetakCPPTRajal()">Cetak</button>
 							</div>
 					</div>
 			</div>
