@@ -7364,7 +7364,8 @@ class RegistrasiController extends ApiController
             ->leftJoin('agama_m as ag','ag.id','=','ps.objectagamafk')
             ->leftJoin('jeniskelamin_m as jk','jk.id','=','ps.objectjeniskelaminfk')
             ->leftJoin('negara_m as ng','ng.id','=','ps.objectnegarafk')
-            ->leftJoin('kebangsaan_m as kb','kb.id','=','ps.objectkebangsaanfk');
+            ->leftJoin('kebangsaan_m as kb','kb.id','=','ps.objectkebangsaanfk')
+            ->where('ps.statusenabled', true);
 
         if(isset($request['noCm']) && $request['noCm']!="" && $request['noCm']!="undefined"){
             // $data = $data->where('ps.nocm', 'ilike', '%'. $request['noCm']);
