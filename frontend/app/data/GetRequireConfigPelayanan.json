@@ -3601,6 +3601,10 @@
         {
             "nameDep": "PemantauanIstimewaCtrl",
             "urlDep": "module/EMR/PemantauanIstimewaCtrl"
+        },
+        {
+            "nameDep": "ObservasiInduksiCtrl",
+            "urlDep": "module/EMR/ObservasiInduksiCtrl"
         }
     ]
 }

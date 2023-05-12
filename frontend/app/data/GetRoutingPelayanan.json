@@ -20076,6 +20076,29 @@
         "define": "RekamMedisCtrl"
       }
     ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.ObservasiInduksi",
+    "url": "/ObservasiInduksi/:index/:idEMR",
+    "templateurl": "module/EMR/ObservasiInduksi.html",
+    "controller": "ObservasiInduksiCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
   }
 
 
