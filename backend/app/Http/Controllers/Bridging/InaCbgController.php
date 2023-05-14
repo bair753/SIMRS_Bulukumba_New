@@ -1882,7 +1882,7 @@ class InaCbgController   extends ApiController
     public function getListBerkas(Request $r){
         $data = DB::select(DB::raw("SELECT * FROM dokasuransi_m 
             where statusenabled=true 
-            and kelompokpasienfk='$r[kpid]'"
+            and kelompokpasienfk='$r[kpid]' order by id"
         ));
         $cek = KelengkapanDokumen::where('noregistrasifk',$r['noregistrasifk'])->get();
         $res['data'] = $data;

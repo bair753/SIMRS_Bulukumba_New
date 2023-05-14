@@ -52,6 +52,36 @@
 		border-style: solid;
 		border-color: #228be6;
 	}
+.buttonHijau {
+  background-color: #4CAF50; /* Hijau */
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.buttonKuning {
+  background-color: #fff198; /* Hijau */
+  border: none;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.buttonUngu {
+  background-color: #8359a3; /* Hijau */
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+}
+
 </style><!-- <div ng-controller="DaftarPasienPulangKasirCtrl"> --><div ng-show="dataVOloaded">	<div class="grid_12 headerBox">
 	<h1 style="color: white;"><b>INACBGs E-Klaim</b></h1>
 </div>
@@ -431,13 +461,13 @@
 				<button class="btnTemplate1"  ng-click="pull_claim()">pull_claim</button>
 			</div> -->
 			<div class="grid_2" >
-				<button class="btnTemplate1"  ng-click="new_claim2()">New Claim</button>
+				<button class="btnTemplate1 buttonHijau"  ng-click="new_claim2()">New Claim</button>
 			</div>
 			<div class="grid_2" >
-				<button class="btnTemplate1"  ng-click="grouping2()">Grouping</button>
+				<button class="btnTemplate1 buttonHijau"  ng-click="grouping2()">Grouping</button>
 			</div>
 			<div class="grid_2" >
-				<button class="btnTemplate1"  ng-click="claim_final2()">Final Klaim</button>
+				<button class="btnTemplate1 buttonHijau"  ng-click="claim_final2()">Final Klaim</button>
 			</div>
 			<div class="grid_2" >
 				<button class="btnTemplate1"  ng-click="send_claim_individual()">Kirim Klaim Online</button>
@@ -469,50 +499,50 @@
 			<div class="grid_2">
 				<button class="btnTemplate1"  ng-click="Detail()">Detail Tagihan</button>
 			</div>
-			<div class="grid_2" >
-				<button class="btnTemplate1" ng-click="uploadKelengkapan()">Kelengkapan Dokumen</button>
+			<div class="grid_2">
+				<button class="btnTemplate1 button" ng-click="uploadKelengkapan()">Kelengkapan Dokumen</button>
 			</div>
 			<div class="grid_2">
-				<button class="btnTemplate1" ng-click="cetakSEPL3()">Cetak SEP</button>
+				<button class="btnTemplate1 buttonKuning" ng-click="cetakSEPL3()">Cetak SEP</button>
 			</div>
 			<div class="grid_2">
-				<button class="btnTemplate1" ng-click="cetakBilling()">Cetak Billing</button>
+				<button class="btnTemplate1 buttonKuning" ng-click="cetakBilling()">Cetak Billing</button>
 			</div>
 			<div class="grid_2">
-				<button class="btnTemplate1" ng-click="cetakResepDokter()">Cetak Resep</button>
+				<button class="btnTemplate1 buttonKuning" ng-click="cetakResepDokter()">Cetak Resep</button>
 			</div>
 			<div class="grid_2">
-				<button class="btnTemplate1" ng-click="hasilLab()">Cetak Hasil Lab</button>
+				<button class="btnTemplate1 buttonKuning" ng-click="hasilLab()">Cetak Hasil Lab</button>
 			</div>
 			<div class="grid_2">
-				<button class="btnTemplate1" ng-click="hasilRad()">Cetak Hasil Radiologi</button>
+				<button class="btnTemplate1 buttonKuning" ng-click="hasilRad()">Cetak Hasil Radiologi</button>
 			</div>
 			<div class="grid_2">
-				<button class="btnTemplate1" ng-click="konsulDokter()">Cetak Konsul Dokter</button>
+				<button class="btnTemplate1 buttonKuning" ng-click="konsulDokter()">Cetak Konsul Dokter</button>
 			</div>
 			<div class="grid_2">
-				<button class="btnTemplate1" ng-click="laporanOperasi()">Cetak Laporan Operasi</button>
+				<button class="btnTemplate1 buttonKuning" ng-click="laporanOperasi()">Cetak Laporan Operasi</button>
 			</div>
 			<div class="grid_2">
-				<button class="btnTemplate1" ng-click="asesmenAwalKeperIGD()">Cetak Asesmen Awal Keper IGD</button>
+				<button class="btnTemplate1 buttonKuning" ng-click="asesmenAwalKeperIGD()">Cetak Asesmen Awal Keper IGD</button>
 			</div>
 			<div class="grid_2">
-				<button class="btnTemplate1" ng-click="catatanPemberianObat()">Cetak Catatan Pemberian Obat</button>
+				<button class="btnTemplate1 buttonKuning" ng-click="catatanPemberianObat()">Cetak Catatan Pemberian Obat</button>
 			</div>
 			<div class="grid_2">
-				<button class="btnTemplate1" ng-click="observasiTransfusi()">Cetak Observasi Transfusi Darah</button>
+				<button class="btnTemplate1 buttonKuning" ng-click="observasiTransfusi()">Cetak Observasi Transfusi Darah</button>
 			</div>
 			<div class="grid_2">
-				<button class="btnTemplate1" ng-click="ringkasanPulang()">Cetak Ringkasan Pulang</button>
+				<button class="btnTemplate1 buttonKuning" ng-click="ringkasanPulang()">Cetak Ringkasan Pulang</button>
 			</div>
 			<div class="grid_2">
-				<button class="btnTemplate1" ng-click="suretKematian()">Cetak Surat Kematian</button>
+				<button class="btnTemplate1 buttonKuning" ng-click="suretKematian()">Cetak Surat Kematian</button>
 			</div>
 			<div class="grid_2">
-				<button class="btnTemplate1" ng-click="cppt()">Cetak CPPT</button>
+				<button class="btnTemplate1 buttonKuning" ng-click="cppt()">Cetak CPPT</button>
 			</div>
 			<div class="grid_2">
-				<button class="btnTemplate1" ng-click="cpptrajal()">Cetak CPPT Rajal</button>
+				<button class="btnTemplate1 buttonKuning" ng-click="cpptrajal()">Cetak CPPT Rajal</button>
 			</div>
 			<!-- <div class="grid_2" >
 				<button class="btnTemplate1"  ng-click="editKlaimm()">Edit Klaim Masal</button>
