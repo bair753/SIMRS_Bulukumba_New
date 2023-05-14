@@ -2945,14 +2945,24 @@ Route::get('public/berkas/inacbg', function (Illuminate\Http\Request $r)
      ->first();
 
      if(empty( $d)){
-       echo 'File belum di upload';
-       die;
+      echo '
+                <script language="javascript">
+                    window.alert("File tidak ada.");
+                    window.close()
+                </script>
+            ';
+            die;
      }
      $path = public_path('berkas/inacbg/'.$d->norec.'/' .$d->norec.'.pdf');
          // dd($path);
    if (!File::exists($path)) {
-       echo 'File belum di upload';
-       die;
+    echo '
+    <script language="javascript">
+        window.alert("File tidak ada.");
+        window.close()
+    </script>
+';
+die;
     }
 
 

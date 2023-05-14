@@ -4146,8 +4146,8 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 			}
 			$scope.preview = function () {
 			
-                var dataItem = $scope.dataPasienSelected
-                var strBACKEND = baseTransaksi.replace('service/medifirst2000/', '')
+                var dataItem = $scope.dataPasienSelected;
+                var strBACKEND = baseTransaksi.replace('service/medifirst2000/', '');
                 var str1 = strBACKEND + 'public/berkas/inacbg?noregistrasifk=' + dataItem.norec +'&dokasuransifk='+$scope.item.berkas
                 window.open(str1, '_blank');
                 
