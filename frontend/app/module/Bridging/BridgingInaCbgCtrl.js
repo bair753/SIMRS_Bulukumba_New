@@ -4064,6 +4064,12 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 					toastr.error('Pilih data dulu')
 					return
 				}
+
+				if ( $scope.dataPasienSelected.kpid == undefined && $scope.dataPasienSelected.norec == undefined) {
+					toastr.warning('Pilih pasien terlebih dahulu!')
+					return
+				}
+
 				$scope.listBerkas =[]
 				medifirstService.get('bridging/inacbg/get-list-berkas?kpid=' + $scope.dataPasienSelected.kpid + '&noregistrasifk='+$scope.dataPasienSelected.norec ).then(function(e){
 					$scope.listBerkas = e.data.data
@@ -4140,8 +4146,8 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 			}
 			$scope.preview = function () {
 			
-                var dataItem = $scope.dataPasienSelected
-                var strBACKEND = baseTransaksi.replace('service/medifirst2000/', '')
+                var dataItem = $scope.dataPasienSelected;
+                var strBACKEND = baseTransaksi.replace('service/medifirst2000/', '');
                 var str1 = strBACKEND + 'public/berkas/inacbg?noregistrasifk=' + dataItem.norec +'&dokasuransifk='+$scope.item.berkas
                 window.open(str1, '_blank');
                 
