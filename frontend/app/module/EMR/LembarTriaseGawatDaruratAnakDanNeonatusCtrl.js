@@ -1,4 +1,4 @@
-define(['initialize'], function (initialize) {
+define(['initialize', 'Configuration'], function (initialize, config) {
     'use strict';
     initialize.controller('LembarTriaseGawatDaruratAnakDanNeonatusCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
         function ($q, $rootScope, $scope, ModelItem, $state, cacheHelper, dateHelper, medifirstService) {
@@ -284,11 +284,23 @@ define(['initialize'], function (initialize) {
             ];
 
             $scope.cetakPdf = function () {
+                if($scope.item.obj[420445] == undefined){
+                    toastr.warning('Keluhan Utama tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[420446] == undefined){
+                    toastr.warning('Riwayat Alergi tidak boleh kosong','Peringatan')
+                    return
+                }
                 if (norecEMR == '') return
-                var client = new HttpClient();
-                client.get('http://127.0.0.1:1237/printvb/e-rekammedis?cetak-emr-asesmen-awal-medis-igd&id=' + $scope.cc.nocm + '&emr=' + norecEMR + '&view=true', function (response) {
-                    // do something with response
-                });
+                var local = JSON.parse(localStorage.getItem('profile'));
+                var nama = medifirstService.getPegawaiLogin().namalengkap;
+                window.open(config.baseApiBackend + 'report/cetak-lembar-triase-anak?nocm='
+                    + $scope.cc.nocm + '&norec_apd=' + $scope.cc.norec + '&emr=' + norecEMR
+                    + '&emrfk=' + $scope.cc.emrfk
+                    + '&kdprofile=' + local.id
+                    + '&nama=' + nama, '_blank');
             }
 
             var cacheEMR_TRIASE_PRIMER = cacheHelper.get('cacheEMR_TRIASE_PRIMER');
@@ -344,10 +356,10 @@ define(['initialize'], function (initialize) {
                 
                 medifirstService.get("emr/get-vital-sign?noregistrasi=" + $scope.cc.noregistrasi + "&objectidawal=4241&objectidakhir=4246&idemr=147", true).then(function (datas) {
                     if (datas.data.data.length>0){
-                        $scope.item.obj[420448] = datas.data.data[1].value; // Tekanan Darah
-                        $scope.item.obj[420449] = datas.data.data[5].value; // Nadi
-                        $scope.item.obj[420450] = datas.data.data[4].value; // Suhu
-                        $scope.item.obj[420452] = datas.data.data[6].value; // Napas
+                        //$scope.item.obj[420448] = datas.data.data[1].value; // Tekanan Darah
+                        //$scope.item.obj[420449] = datas.data.data[5].value; // Nadi
+                        //$scope.item.obj[420450] = datas.data.data[4].value; // Suhu
+                        //$scope.item.obj[420452] = datas.data.data[6].value; // Napas
                     }
                 })
             } else {
