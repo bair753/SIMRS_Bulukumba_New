@@ -20099,6 +20099,75 @@
         "define": "RekamMedisCtrl"
       }
     ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.PemberianMinumRutin1500",
+    "url": "/PemberianMinumRutin1500/:index/:idEMR",
+    "templateurl": "module/EMR/PemberianMinumRutin1500.html",
+    "controller": "PemberianMinumRutin1500Ctrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.PemberianMinumRutin2000",
+    "url": "/PemberianMinumRutin2000/:index/:idEMR",
+    "templateurl": "module/EMR/PemberianMinumRutin2000.html",
+    "controller": "PemberianMinumRutin2000Ctrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.PemberianMinumRutin2500",
+    "url": "/PemberianMinumRutin2500/:index/:idEMR",
+    "templateurl": "module/EMR/PemberianMinumRutin2500.html",
+    "controller": "PemberianMinumRutin2500Ctrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
   }
 
 

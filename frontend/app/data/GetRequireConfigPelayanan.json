@@ -3605,6 +3605,18 @@
         {
             "nameDep": "ObservasiInduksiCtrl",
             "urlDep": "module/EMR/ObservasiInduksiCtrl"
+        },
+        {
+            "nameDep": "PemberianMinumRutin1500Ctrl",
+            "urlDep": "module/EMR/PemberianMinumRutin1500Ctrl"
+        },
+        {
+            "nameDep": "PemberianMinumRutin2000Ctrl",
+            "urlDep": "module/EMR/PemberianMinumRutin2000Ctrl"
+        },
+        {
+            "nameDep": "PemberianMinumRutin2500Ctrl",
+            "urlDep": "module/EMR/PemberianMinumRutin2500Ctrl"
         }
     ]
 }
