@@ -2938,7 +2938,7 @@ Route::get('storage/sdm/sip-str/{norec}/{filename}', function ($norec,$filename)
 
     return $response;
 });
-Route::get('public/berkas/inacbg', function (Illuminate\Http\Request $r)
+Route::get('service/medifirst2000/public/berkas/inacbg', function (Illuminate\Http\Request $r)
 {
     $d =  \App\Transaksi\KelengkapanDokumen::where('noregistrasifk',$r['noregistrasifk'])
      ->where('dokasuransifk',$r['dokasuransifk'])
