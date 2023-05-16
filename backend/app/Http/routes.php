@@ -2752,7 +2752,8 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
         Route::get('report/cetak-cppt-rajal', 'Report\ReportController@printcpptrajal');
         Route::get('report/cetak-lembar-triase-anak', 'Report\ReportController@lembarTriaseAnak');
         Route::get('report/cetak-lembar-triase-dewasa', 'Report\ReportController@lembarTriaseDewasa');
-        Route::get('report/cetak-implementasi-asuhan-keperawatan', 'Report\ReportController@implementasiAsuhanKeperawatan');
+        Route::get('report/cetak-implementasi-asuhan-keperawatan-igd', 'Report\ReportController@implementasiAsuhanKeperawatanIGD');
+        Route::get('report/cetak-implementasi-asuhan-keperawatan-ranap', 'Report\ReportController@implementasiAsuhanKeperawatanRanap');
         Route::get('report/cetak-laporan-persalinan', 'Report\ReportController@laporanPersalinan');
         Route::get('report/cetak-partograf', 'Report\ReportController@partograf');
 

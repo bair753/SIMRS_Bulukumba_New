@@ -3617,6 +3617,18 @@
         {
             "nameDep": "PemberianMinumRutin2500Ctrl",
             "urlDep": "module/EMR/PemberianMinumRutin2500Ctrl"
+        },
+        {
+            "nameDep": "PemberianMinumRutin3000Ctrl",
+            "urlDep": "module/EMR/PemberianMinumRutin3000Ctrl"
+        },
+        {
+            "nameDep": "PemberianMinumRutin3500Ctrl",
+            "urlDep": "module/EMR/PemberianMinumRutin3500Ctrl"
+        },
+        {
+            "nameDep": "PemberianMinumRutin4000Ctrl",
+            "urlDep": "module/EMR/PemberianMinumRutin4000Ctrl"
         }
     ]
 }

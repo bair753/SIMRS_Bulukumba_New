@@ -1,6 +1,6 @@
-define(['initialize', 'Configuration'], function (initialize, config) {
+define(['initialize'], function (initialize) {
     'use strict';
-    initialize.controller('ImplementasiAsuhanKeperawatanGawatDaruratCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
+    initialize.controller('PemberianMinumRutin3500Ctrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
         function ($q, $rootScope, $scope, ModelItem, $state, cacheHelper, dateHelper, medifirstService) {
 
             var paramsIndex = $state.params.index ? parseInt($state.params.index) : null
@@ -14,36 +14,10 @@ define(['initialize', 'Configuration'], function (initialize, config) {
             $scope.cc = {};
             var nomorEMR = '-';
             var norecEMR = '';
-            $scope.cc.emrfk = 290045;
+            $scope.cc.emrfk = 290151;
             var dataLoad = [];
-            $scope.isCetak = true;
-            $scope.show = true;
+            $scope.isCetak = false;
             $scope.allDisabled = false;
-            $scope.listItem = [
-                { id: 428000, inuse: true },
-                { id: 428003 },
-                { id: 428006 },
-                { id: 428009 },
-                { id: 428012 },
-                { id: 428015 },
-                { id: 428018 },
-                { id: 428021 },
-                { id: 428024 },
-                { id: 428027 },
-                { id: 428030 },
-                { id: 428033 },
-                { id: 428036 },
-                { id: 428039 },
-                { id: 428042 },
-                { id: 428045 },
-                { id: 428048 },
-                { id: 428051 },
-                { id: 428054 },
-                { id: 428057 },
-                { id: 428060 },
-                { id: 428063 },
-                { id: 428066 }
-            ];
             var pegawaiInputDetail  = '';
             var cacheNomorEMR = cacheHelper.get('cacheNomorEMR');
             var cacheNoREC = cacheHelper.get('cacheNOREC_EMR');
@@ -72,6 +46,10 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 $scope.listDokter = data
             })
 
+            medifirstService.getPart('emr/get-asisten-operasi', true, true, 20).then(function (data) {
+                $scope.listAsisten = data
+            })
+
             medifirstService.getPart('emr/get-datacombo-part-pegawai', true, true, 20).then(function (data) {
                 $scope.listPegawai = data
             })
@@ -84,27 +62,55 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 $scope.listKelas = data
             })
 
-            medifirstService.getPart("sysadmin/general/get-datacombo-icd10", true, true, 10).then(function (data) {
+            medifirstService.getPart("emr/get-datacombo-part-diagnosa", true, true, 10).then(function (data) {
                 $scope.listDiagnosa = data;
             });
 
-            medifirstService.getPart("sysadmin/general/get-datacombo-icd10-secondary", true, true, 10).then(function (data) {
+            medifirstService.getPart("emr/get-datacombo-icd10-secondary", true, true, 10).then(function (data) {
                 $scope.listDiagnosaSecondary = data;
             });
 
-            medifirstService.getPart("sysadmin/general/get-datacombo-jenispegawai-cppt", true, true, 20).then(function (data) {
-                $scope.listJenisPegawai = data;
-            });
+
+            // $scope.cetakPdf = function () {
+            //     if (norecEMR == '') return
+            //     var client = new HttpClient();
+            //     client.get('http://127.0.0.1:1237/printvb/e-rekammedis?cetak-emr-asesmen-awal-medis-igd&id=' + $scope.cc.nocm + '&emr=' + norecEMR + '&view=true', function (response) {
+            //         // do something with response
+            //     });
+            // }
+
+          
 
             $scope.cetakPdf = function () {
+
+                if($scope.item.obj[31100543] == undefined){
+                    toastr.warning('Diagnose Pasca Operatif tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100550] == undefined){
+                    toastr.warning('Prosedur Tindakan yang Dilakukan tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100563] == undefined){
+                    toastr.warning('No. Alat yang Dipasang tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100568] == undefined){
+                    toastr.warning('Laporan/Tindakan Operasi tidak boleh kosong','Peringatan')
+                    return
+                }
+                
                 if (norecEMR == '') return
+
                 var local = JSON.parse(localStorage.getItem('profile'));
                 var nama = medifirstService.getPegawaiLogin().namalengkap;
-                window.open(config.baseApiBackend + 'report/cetak-implementasi-asuhan-keperawatan-igd?nocm='
+                window.open(config.baseApiBackend + 'report/cetak-laporan-operasi?nocm='
                     + $scope.cc.nocm + '&norec_apd=' + $scope.cc.norec + '&emr=' + norecEMR
                     + '&emrfk=' + $scope.cc.emrfk
                     + '&kdprofile=' + local.id
-                    + '&index=' + paramsIndex
                     + '&nama=' + nama, '_blank');
             }
 
@@ -138,32 +144,43 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 var nocmfk = null;
                 var noregistrasifk = $state.params.noRec;
                 var status = "t";
-                $scope.item.obj[428000] = $scope.now;
-                // medifirstService.get("emr/get-antrian-pasien-norec/" + noregistrasifk).then(function (e) {
-                //     var antrianPasien = e.data.result;
-                //     $scope.item.obj[421300] = new Date(moment(antrianPasien.tglregistrasi).format('YYYY-MM-DD HH:mm'));
-                //     if (antrianPasien.objectruanganfk != null && antrianPasien.namaruangan != null) {
-                //         $scope.item.obj[421299] = {
-                //             value: antrianPasien.objectruanganfk,
-                //             text: antrianPasien.namaruangan
-                //         }
-                //     }
-                //     if (antrianPasien.iddpjp != null && antrianPasien.dokterdpjp != null) {
-                //         $scope.item.obj[421371] = {
-                //             value: antrianPasien.iddpjp,
-                //             text: antrianPasien.dokterdpjp
-                //         }
-                //     }
-                // })
+                medifirstService.get("emr/get-antrian-pasien-norec/" + noregistrasifk).then(function (e) {
+                    var antrianPasien = e.data.result;
+                    $scope.item.obj[422700] = antrianPasien.namapasien;
+                    $scope.item.obj[422701] = antrianPasien.nocm;
+                    $scope.item.obj[422704] = new Date(moment(antrianPasien.tgllahir).format('YYYY-MM-DD'));
+                    $scope.item.obj[422707] = antrianPasien.alamatlengkap;
+                    if (antrianPasien.jeniskelamin == 'PEREMPUAN') {
+                        $scope.item.obj[422702] = false;
+                        $scope.item.obj[422703] = true;
+                    } else {
+                        $scope.item.obj[422702] = true;
+                        $scope.item.obj[422703] = false;
+                    }
+                    $scope.item.obj[422724] = new Date(moment(antrianPasien.tglregistrasi).format('YYYY-MM-DD HH:mm'));
+                    if (antrianPasien.iddpjp != null && antrianPasien.dokterdpjp != null) {
+                        $scope.item.obj[422790] = {
+                            value: antrianPasien.iddpjp,
+                            text: antrianPasien.dokterdpjp
+                        }
+                    }
+                    if (antrianPasien.objectruanganfk != null && antrianPasien.namaruangan != null) {
+                        $scope.item.obj[422723] = {
+                            value: antrianPasien.objectruanganfk,
+                            text: antrianPasien.namaruangan
+                        }
+                    }
+                    $scope.item.obj[422788] = $scope.now;
+                })
                 
-                // medifirstService.get("emr/get-vital-sign?noregistrasi=" + $scope.cc.noregistrasi + "&objectidawal=4241&objectidakhir=4246&idemr=147", true).then(function (datas) {
-                //     if (datas.data.data.length>0){
-                //         $scope.item.obj[421302] = datas.data.data[1].value; // Tekanan Darah
-                //         $scope.item.obj[421303] = datas.data.data[5].value; // Nadi
-                //         $scope.item.obj[421304] = datas.data.data[4].value; // Suhu
-                //         $scope.item.obj[421305] = datas.data.data[6].value; // Napas
-                //     }
-                // })
+                medifirstService.get("emr/get-vital-sign?noregistrasi=" + $scope.cc.noregistrasi + "&objectidawal=4241&objectidakhir=4246&idemr=147", true).then(function (datas) {
+                    if (datas.data.data.length>0){
+                        // $scope.item.obj[4228]=datas.data.data[0].value
+                        // $scope.item.obj[4229]=datas.data.data[3].value
+                        // $scope.item.obj[4230]=datas.data.data[4].value
+                        // $scope.item.obj[4231]=datas.data.data[5].value
+                    }
+                })
             } else {
                 var chekedd = false
                 //medifirstService.get("emr/get-emr-transaksi-detail?noemr="+$state.params.nomorEMR, true).then(function(dat){
@@ -237,6 +254,35 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                                 })
                             }
                         }
+                    }
+                    if (cacheEMR_TRIASE_PRIMER != undefined) {
+                        medifirstService.get("emr/get-emr-transaksi-detail?noemr=" + cacheEMR_TRIASE_PRIMER + "&emrfk=" + $scope.cc.emrfk, true).then(function (dat) {
+                            var dataNA = dat.data.data
+                            for (var i = 0; i <= dataNA.length - 1; i++) {
+                                if (dataNA[i].emrdfk == '9044') {
+                                    if (dataNA[i].value == '1') {
+                                        $scope.activeTriaseStatus = 'merah'
+                                    }
+                                }
+                                if (dataNA[i].emrdfk == '9050') {
+                                    if (dataNA[i].value == '1') {
+                                        $scope.activeTriaseStatus = 'kuning'
+                                    }
+                                }
+                                if (dataNA[i].emrdfk == '9052') {
+                                    if (dataNA[i].value == '1') {
+                                        $scope.activeTriaseStatus = 'hijau'
+                                    }
+                                }
+                                if (dataNA[i].emrdfk == '9055') {
+                                    if (dataNA[i].value == '1') {
+                                        $scope.activeTriaseStatus = 'hitam'
+                                    }
+                                }
+
+                            }
+
+                        })
                     }
                     if(nomorEMR!='-'){
                     cacheHelper.set('cacheEMR_igd', nomorEMR)
@@ -324,112 +370,11 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 
                                 }
                                 pegawaiInputDetail = dataLoad[i].pegawaifk
-                            } else {
-                                $scope.item.obj[428000] = $scope.now;
                             }
 
                         }
-
-                        var arrobj = Object.keys($scope.item.obj)
-                        for (let l = 0; l < $scope.listItem.length; l++) {
-                            const element = $scope.listItem[l];
-                            for (let m = 0; m < arrobj.length; m++) {
-                                const element2 = arrobj[m];
-                                if (element.id == element2) {
-                                    element.inuse = true
-                                }
-                            }
-
-                        } 
-                        // *** disable Input *//
-                        //setTimeout(function(){medifirstService.setDisableAllInputElement()  }, 2000);
-                        // *** disable Input *//
-
-                        //  if( $scope.cc.norec_emr !='-' && pegawaiInputDetail !='' && pegawaiInputDetail !=null){
-                        //     if(pegawaiInputDetail != medifirstService.getPegawaiLogin().id){
-                        //         $scope.allDisabled =true
-                        //         toastr.warning('Hanya Bisa melihat data','Peringatan')
-                        //         return
-                        //     }
-                        // }
-
-                    
-                   
-                    
                     })
                 })
-            }
-
-            function saveTosDipake(id) {
-                if (nomorEMR != '-') {
-                    let json = {
-                        noemr: nomorEMR,
-                        emrfk: $scope.cc.emrfk,
-                        id: id,
-                        value: moment(new Date()).format('YYYY-MM-DD HH:mm:ss')
-                    }
-                    medifirstService.postNonMessage("emr/save-status-dipake", json).then(function (dat) {
-                    })
-                }
-            }
-
-            $scope.tambah = function () {
-                // let details = []
-                // for (let i = 0; i < $scope.listItem.length; i++) {
-                //     const element = $scope.listItem[i];
-                //     if (element.inuse == undefined) {
-                //         details.push(element.id)
-                //     }
-                // }
-                // let json = {
-                //     noemr: nomorEMR,
-                //     emrfk: $scope.cc.emrfk,
-                //     details: details
-                // }
-                // medifirstService.postNonMessage("emr/get-status-dipake", json).then(function (dat) {
-                //     let result = dat.data.data
-
-                // for (let j = 0; j < $scope.listItem.length; j++) {
-                //     const element = $scope.listItem[j];
-                //     console.log(element);
-                //     console.log($scope.item.obj[element.id]);
-                //     if ($scope.item.obj[element.id] === undefined) {
-                //         element.inuse = undefined;
-                //     } else {
-                //         element.inuse = true;
-                //     }
-                // }
-                // console.log($scope.listItem);
-
-                // for (let j = 0; j < $scope.listItem.length; j++) {
-                //     const element2 = $scope.listItem[j];
-                //     if (element2.inuse == undefined) {
-                //         $scope.item.obj[parseInt(element2.id)] = new Date()
-                //         element2.inuse = true
-                //         saveTosDipake(element2.id)
-                //         break
-                //     }
-                // }
-
-                // })
-                for (let j = 0; j < $scope.listItem.length; j++) {
-                    const element = $scope.listItem[j];
-                    if ($scope.item.obj[element.id] === undefined) {
-                        element.inuse = undefined;
-                    } else {
-                        element.inuse = true;
-                    }
-                }
-                
-                for (let j = 0; j < $scope.listItem.length; j++) {
-                    const element2 = $scope.listItem[j];
-                    if (element2.inuse == undefined) {
-                        $scope.item.obj[parseInt(element2.id)] = new Date()
-                        element2.inuse = true
-                        saveTosDipake(element2.id)
-                        break
-                    }
-                }
             }
 
             $scope.kembali = function () {
@@ -448,7 +393,8 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     arrSave.push({ id: arrobj[i], values: $scope.item.obj[parseInt(arrobj[i])] })
                 }
                 $scope.cc.jenisemr = 'asesmen'
-                $scope.cc.index = $state.params.index
+                $scope.cc.index = $state.params.index;
+
                 var jsonSave = {
                     head: $scope.cc,
                     data: arrSave
@@ -460,7 +406,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     // });
 
                     medifirstService.postLogging('EMR', 'norec emrpasien_t', e.data.data.norec,
-                        'Implementasi Asuhan Keperawatan Gawat Darurat' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
+                        'Jadwal Pemberian Minum Rutin 3500-4000 gram' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
                         + $scope.cc.noregistrasi).then(function (res) {
                         })
 
@@ -471,6 +417,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     cacheHelper.set('cacheNomorEMR', arrStr);
                 });
             }
+
 
         }
     ]);
