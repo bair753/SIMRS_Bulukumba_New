@@ -289,6 +289,10 @@ define(['initialize', 'Configuration'], function (initialize, config) {
             ];
 
             $scope.cetakPdf = function () {
+                if($scope.item.obj[420516] == undefined){
+                    toastr.warning('Keluhan Utama tidak boleh kosong','Peringatan')
+                    return
+                }
                 if (norecEMR == '') return
                 var local = JSON.parse(localStorage.getItem('profile'));
                 var nama = medifirstService.getPegawaiLogin().namalengkap;
@@ -597,7 +601,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     // });
 
                     medifirstService.postLogging('EMR', 'norec emrpasien_t', e.data.data.norec,
-                        'Asesmen Medis Gawat Darurat ' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
+                        'Lembar Triase Gawat Darurat Dewasa ' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
                         + $scope.cc.noregistrasi).then(function (res) {
                         })
 
