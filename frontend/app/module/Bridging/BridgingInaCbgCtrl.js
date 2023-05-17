@@ -5117,6 +5117,76 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 		window.open(baseTransaksi + 'report/cetak-laporan-operasi?nocm='+ $scope.dataPasienSelected.nocm + '&emr=' + $scope.dataSelectedHasilOpr.norec + '&emrfk=' + $scope.dataSelectedHasilOpr.emrfk + '&index=' + $scope.dataSelectedHasilOpr.index + '&kdprofile=' + local.id + '&nama=' + nama, '_blank');
 	}
 
+	$scope.laporanPersalinan = function(){
+		if ($scope.dataPasienSelected.noregistrasi == undefined) {
+			toastr.error('Pilih Pasien Terlebih dahulu!!!')
+			return;
+		}
+		var emrfk = [290074,290075] // Emr Laporan Persalinan
+		medifirstService.get("bridging/inacbg/get-rincian-operasi?noregistrasi=" + $scope.dataPasienSelected.noregistrasi + '&emrfk=' + emrfk
+		, true).then(function (dat) {
+				$scope.dataDaftarLaporanPersalinan = {
+					data: dat.data.data,
+						_data: dat.data.data,
+						// pageSize: 10,
+						selectable: true,
+						refresh: true,
+						total: dat.data.data.length,
+						serverPaging: false,
+						aggregate: [
+								{ field: 'total', aggregate: 'sum' },
+						]
+
+			};
+			}, function (error) {
+					$scope.isLoading = false;
+			});
+		
+		$scope.popUpLaporanPersalinan.center().open();
+		
+	}
+
+	$scope.columnDaftarHasilLaporanPersalinan = {
+		columns: [
+					{
+						"field": "tglemr",
+						"title": "Tgl EMR",
+						"width": "90px",
+				}, 
+				{
+						"field": "emrpasienfk",
+						"title": "No EMR",
+						"width": "90px",
+				},                   
+				{
+						"field": "namaform",
+						"title": "Nama Form",
+						"width": "120px"
+				},
+				{
+					"field": "index",
+					"title": "Page",
+					"width": "120px"
+			},
+		],
+		sortable: {
+				mode: "single",
+				allowUnsort: false,
+		}
+	}
+
+	$scope.cetakLaporanPersalinan = function () {
+		var local = JSON.parse(localStorage.getItem('profile'));
+		var nama = medifirstService.getPegawaiLogin().namalengkap;
+		window.open(baseTransaksi + 'report/cetak-laporan-persalinan?nocm='+ 
+		$scope.dataPasienSelected.nocm 
+		+ '&emr=' + $scope.dataSelectedLaporanPersalinan.norec 
+		+ '&emrfk=' + $scope.dataSelectedLaporanPersalinan.emrfk 
+		+ '&index=' + $scope.dataSelectedLaporanPersalinan.index 
+		+ '&kdprofile=' + local.id 
+		+ '&nama=' + nama, '_blank');
+	}
+
 	$scope.cetakCtscan = function () {
 		// if ($scope.norecHasilRadiologi != '') {
 			var local = JSON.parse(localStorage.getItem('profile'))

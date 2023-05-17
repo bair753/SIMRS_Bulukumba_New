@@ -22,7 +22,8 @@ define(['initialize', 'Configuration'], function (initialize, config) {
             var namaRuanganFk = ''
             var departemenfk = ''
             $scope.item = {
-                tglInput: new Date()
+                tglInput: new Date(),
+                tglInputUsg: new Date()
             };
             var urlHasilVansLab = ''
             medifirstService.get('sysadmin/settingdatafixed/get/urlHasilVansLab').then(function (dat) {
