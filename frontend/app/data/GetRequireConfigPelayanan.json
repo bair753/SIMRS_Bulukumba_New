@@ -3629,6 +3629,14 @@
         {
             "nameDep": "PemberianMinumRutin4000Ctrl",
             "urlDep": "module/EMR/PemberianMinumRutin4000Ctrl"
+        },
+        {
+            "nameDep": "SuratKeteranganKelahiranRajalCtrl",
+            "urlDep": "module/EMR/SuratKeteranganKelahiranRajalCtrl"
+        },
+        {
+            "nameDep": "SuratKeteranganKelahiranRanapCtrl",
+            "urlDep": "module/EMR/SuratKeteranganKelahiranRanapCtrl"
         }
     ]
 }

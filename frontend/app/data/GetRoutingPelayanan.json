@@ -20237,6 +20237,52 @@
         "define": "RekamMedisCtrl"
       }
     ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.SuratKeteranganKelahiranRajal",
+    "url": "/SuratKeteranganKelahiranRajal",
+    "templateurl": "module/EMR/SuratKeteranganKelahiranRajal.html",
+    "controller": "SuratKeteranganKelahiranRajalCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.SuratKeteranganKelahiranRanap",
+    "url": "/SuratKeteranganKelahiranRanap",
+    "templateurl": "module/EMR/SuratKeteranganKelahiranRanap.html",
+    "controller": "SuratKeteranganKelahiranRanapCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
   }
 
 
