@@ -96,7 +96,18 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 
                     let dataDokter = [];
 
-                    $scope.listDokter = dat.data.dokter;
+                    $scope.listStatus = [
+                        {
+                          "id": 1,
+                          "value": "Cito"
+                        },
+                      
+                        {
+                          "id": 2,
+                          "value": "Kritis"
+                        },
+                      
+                    ]
 
                     if (datauserlogin.id == 14 || dokterRadiologiID.includes(idloginUserToRadiologi[datauserlogin.id])) {
                       if (datauserlogin.id != 14) {
@@ -1148,6 +1159,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                         $scope.item.dokter = { id: e.data[0].pegawaifk, namalengkap: e.data[0].namalengkap }
                         $scope.item.keterangan = (e.data[0].keterangan == null) ? '' : e.data[0].keterangan.replace(/~/g, "\n")
                         $scope.noeditExpertise2 = $scope.pegawai.id != e.data[0].pegawaifk;
+                        
                     }
                     $scope.popUpEkpertise.center().open();
                 })
@@ -1198,6 +1210,16 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                         $scope.item.dokterUsg = { id: e.data[0].pegawaifk, namalengkap: e.data[0].namalengkap }
                         $scope.item.keteranganUsg = (e.data[0].keterangan == null) ? '' : e.data[0].keterangan.replace(/~/g, "\n")
                         $scope.noeditExpertise4 = $scope.pegawai.id != e.data[0].pegawaifk;
+                        for (let i = 0; i < $scope.listStatus.length; i++) {
+                            const element = $scope.listStatus[i];
+                            if (e.data[0].statusrad == 'Kritis') {
+                                $scope.item.statusRad = { id: 2, value: 'Kritis' }
+                            } else if (e.data[0].statusrad == 'Cito') {
+                                $scope.item.statusRad = { id: 2, value: 'Cito' }
+                            } else {
+                                $scope.item.statusRad = null;
+                            }
+                        }
                     }
                     $scope.popUpEkpertiseUsg.center().open();
 
@@ -1356,6 +1378,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 $scope.item.klinisUsg = undefined
                 $scope.item.tglInputUsg = new Date()
                 $scope.item.dokterUsg = undefined
+                $scope.item.statusRad = undefined
                 $scope.item.keteranganUsg = undefined
                 $scope.popUpEkpertiseUsg.close();
             }
@@ -1404,6 +1427,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 })
             }
             $scope.SaveEkpertiseUsg = function () {
+                console.log($scope.item.statusRad);
                 if ($scope.item.nofotoUsg == undefined) {
                     window.messageContainer.error("No Foto Tidak Boleh Kosong!");
                     return;
@@ -1416,6 +1440,10 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     window.messageContainer.error("Dokter Tidak Boleh Kosong!");
                     return;
                 }
+                if ($scope.item.statusRad == undefined || $scope.item.statusRad == null) {
+                    window.messageContainer.error("Status Tidak Boleh Kosong!");
+                    return;
+                }
                 if ($scope.item.keteranganUsg == undefined) {
                     window.messageContainer.error("Keterangan Tidak Boleh Kosong!");
                     return;
@@ -1424,6 +1452,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     noregistrasi: $scope.item.noregistrasi,
                     nofotoUsg: $scope.item.nofotoUsg,
                     klinisUsg: $scope.item.klinisUsg,
+                    statusrad: $scope.item.statusRad.value,
                     tglinputUsg: moment($scope.item.tglInputUsg).format('YYYY-MM-DD HH:mm'),
                     dokterUsgid: $scope.item.dokterUsg.id,
                     keteranganUsg: ($scope.item.keteranganUsg == null) ? '' : $scope.item.keteranganUsg.replace(/\n/ig, '~'),

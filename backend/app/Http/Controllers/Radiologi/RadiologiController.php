@@ -1906,6 +1906,7 @@ class RadiologiController extends ApiController
                 $dataSO->klinis = $request['klinisUsg'];
                 $dataSO->keterangan = $request['keteranganUsg'];
                 $dataSO->status = 'Usg';
+                $dataSO->statusrad =  $request['statusrad'];
                 $dataSO->save();
 
                 // adding random time max 2 h 43 m
@@ -1926,7 +1927,8 @@ class RadiologiController extends ApiController
                     'tanggal' => $request['tglinputUsg'],
                     'keterangan' => $request['keteranganUsg'],
                     'nofoto' => $request['nofotoUsg'],
-                    'klinis' => $request['klinisUsg']
+                    'klinis' => $request['klinisUsg'],
+                    'statusrad' => $request['statusrad']
                 ]);
             }
 
