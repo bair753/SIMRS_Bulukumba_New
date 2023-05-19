@@ -84,7 +84,7 @@ define(['kendo.menu'], function (kendoMenu) {
                             savDB(objectData)
                             setTimeout(() => {
                                 audio.pause();
-                            }, (1500)); //4 detik
+                            }, (3000)); //4 detik
                         }
                     }
                 }
