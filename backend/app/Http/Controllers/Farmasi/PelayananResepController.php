@@ -2087,10 +2087,9 @@ class PelayananResepController extends ApiController
                 //         // }
                 //     }
                 // }
-                $newSPD = StokProdukDetail::where('nostrukterimafk', $r_PPL['nostrukterimafk'])
-                            ->where('kdprofile', $idProfile)
+                $newSPD = StokProdukDetail::where('kdprofile', $idProfile)
                             ->where('objectruanganfk', $r_PPL['ruanganfk'])
-                            ->where('objectasalprodukfk', $r_PPL['asalprodukfk'])
+                            // ->where('objectasalprodukfk', $r_PPL['asalprodukfk'])
                             ->where('objectprodukfk', $r_PPL['produkfk'])
                             ->where('qtyproduk','>=', $jmlPengurang)
                             ->first();
