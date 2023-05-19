@@ -524,6 +524,16 @@
                         <input c-text-box type="input" class="k-textbox" ng-model="item.klinisUsg" />
                     </div>
                 </div>
+                <div class="grid_3">
+                    <div class="grid_12">
+                        <label c-label item="item">Status</label>
+                    </div>
+                    <div class="grid_12">
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.statusRad"
+                            k-filter="'contains'" k-data-text-field="'value'" k-data-value-field="'id'"
+                            k-auto-bind="false" k-data-source="listStatus"/>
+                    </div>
+                </div>
             </div>
             <div class="grid_12">
                 <div class="grid_12">
