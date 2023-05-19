@@ -8,7 +8,7 @@ define(['kendo.menu'], function (kendoMenu) {
         $scope.listNotification = []
         $scope.mapLogin = []
 
-        let soundNotif = "../app/stylesheets/sound/notif.wav"
+        let soundNotif = "../app/stylesheets/notif.wav"
         // console.clear()
 
         var kelomokUser = getKelUser()
