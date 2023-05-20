@@ -1199,17 +1199,16 @@ class ReportController extends ApiController{
                 left join kelompokpasien_m AS kp ON kp.id = pt.objectkelompokpasienlastfk
                 where s.norec = '$norec'
             "))->first();
-            
-            
+
+            // $details = \DB::select(DB::raw("
+            //         select pt.rke,pt.dosis, pt.jumlah , pt.aturanpakai , pm.namaproduk, pm.kekuatan from pelayananpasien_t pt 
+            //         inner join produk_m pm on pm.id = pt.produkfk 
+            //         where strukresepfk = '$norec'
+            //     "));
         }else{
             echo 'Data Tidak ada ';
             return;
         }
-        $details = \DB::select(DB::raw("
-                select pt.rke,pt.dosis, pt.jumlah , pt.aturanpakai , pm.namaproduk, pm.kekuatan from pelayananpasien_t pt 
-                inner join produk_m pm on pm.id = pt.produkfk 
-                where strukresepfk = '$norec'
-            "));
         
         $isi = collect(DB::select("
         SELECT rd.riwayatalergi,rd.jampengkajian,rd.jampenyiapanobat,rd.jamdispening,rd.jamserah,
