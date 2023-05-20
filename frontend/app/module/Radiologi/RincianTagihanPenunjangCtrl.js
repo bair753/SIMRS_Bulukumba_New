@@ -95,7 +95,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     idloginUserToRadiologi[30072] = 100031;
 
                     let dataDokter = [];
-
+                    $scope.listDokter = dat.data.dokter;
                     $scope.listStatus = [
                         {
                           "id": 1,
