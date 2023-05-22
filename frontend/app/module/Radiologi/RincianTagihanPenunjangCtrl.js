@@ -106,6 +106,11 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                           "id": 2,
                           "value": "Kritis"
                         },
+
+                        {
+                            "id": 3,
+                            "value": "Jasa"
+                          },
                       
                     ]
 
@@ -1216,6 +1221,8 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                                 $scope.item.statusRad = { id: 2, value: 'Kritis' }
                             } else if (e.data[0].statusrad == 'Cito') {
                                 $scope.item.statusRad = { id: 2, value: 'Cito' }
+                            } else if (e.data[0].statusrad == 'Jasa') {
+                                $scope.item.statusRad = { id: 3, value: 'Jasa' }
                             } else {
                                 $scope.item.statusRad = null;
                             }
