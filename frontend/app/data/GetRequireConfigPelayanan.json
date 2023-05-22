@@ -3637,6 +3637,14 @@
         {
             "nameDep": "SuratKeteranganKelahiranRanapCtrl",
             "urlDep": "module/EMR/SuratKeteranganKelahiranRanapCtrl"
+        },
+        {
+            "nameDep": "ChecklistEndoskopiCernaAtasCtrl",
+            "urlDep": "module/EMR/ChecklistEndoskopiCernaAtasCtrl"
+        },
+        {
+            "nameDep": "ChecklistEndoskopiCernaBawahCtrl",
+            "urlDep": "module/EMR/ChecklistEndoskopiCernaBawahCtrl"
         }
     ]
 }
