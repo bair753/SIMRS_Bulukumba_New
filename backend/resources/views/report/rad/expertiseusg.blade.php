@@ -100,6 +100,10 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             <td width="78%"><font style="font-size: 12pt;" color="#000000" >: {{ $raw->klinis }}</font></td>
                         </tr>
                         <tr>
+                            <td width="22%"><font style="font-size: 12pt;" color="#000000;" >Status</font></td>
+                            <td width="78%"><font style="font-size: 12pt;" color="#000000" >: {{ $raw->statusrad }}</font></td>
+                        </tr>
+                        <tr>
                             <td width="22%"><font style="font-size: 12pt;" color="#000000;" >Dokter Pengirim</font></td>
                             <td width="78%"><font style="font-size: 12pt;" color="#000000" >: {{ $raw->dokterpengirim }}</font></td>
                         </tr>
@@ -173,6 +177,9 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
         });
 
     })
+    $(document).ready(function () {
+        window.print();
+    });
 </script>
 </body>
 </html>

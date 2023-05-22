@@ -178,6 +178,9 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
         });
 
     })
+    $(document).ready(function () {
+        window.print();
+    });
 </script>
 </body>
 </html>

@@ -692,7 +692,7 @@ class ReportController extends ApiController{
         $kdProfile = (int)$r['kdprofile'];
         $raw = collect(DB::select("
             SELECT
-                so.nofoto,ps.nocm, ps.namapasien,ps.tgllahir,kp.kelompokpasien,ps.noidentitas,so.klinis,
+                so.nofoto,ps.nocm, ps.namapasien,ps.tgllahir,kp.kelompokpasien,ps.noidentitas,so.klinis,so.statusrad,
             ru.namaruangan, so.tanggal,jk.jeniskelamin,  
             CASE WHEN alm.alamatlengkap IS NULL THEN
                 '-' ELSE (
