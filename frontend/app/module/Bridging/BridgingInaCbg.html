@@ -556,6 +556,9 @@
 			<div class="grid_2">
 				<button class="btnTemplate1 buttonKuning" ng-click="laporanPersalinan()">Cetak Laporan Persalinan</button>
 			</div>
+			<div class="grid_2">
+				<button class="btnTemplate1 buttonKuning" ng-click="partograf()">Cetak Partograf</button>
+			</div>
 			<!-- <div class="grid_2" >
 				<button class="btnTemplate1"  ng-click="editKlaimm()">Edit Klaim Masal</button>
 			</div>
@@ -1447,6 +1450,20 @@
 					<div class="grid_12">
 							<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
 									<button class="k-button  k-button-icontext" ng-click="cetakLaporanPersalinan()">Cetak</button>
+							</div>
+					</div>
+			</div>
+		</div>
+
+		<div kendo-window="popUpDaftarPartograf" k-title="'Daftar Partograf'" k-visible="false" k-width="1000" k-height="400">
+			<div class="panel panel-default container_12">
+				<div class="grid_12 headerBox">
+					<kendo-grid id="kGrids" data-source="dataDaftarPartograf" options="columnDaftarPartograf" k-selectable="'row'" k-sortable="'true'"
+							k-resizable="'true'" k-ng-model="dataSelectedPartograf" ng-click="klikGridPartograf(dataSelectedPartograf)"></kendo-grid>
+				</div>
+					<div class="grid_12">
+							<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
+									<button class="k-button  k-button-icontext" ng-click="cetakPartograf()">Cetak</button>
 							</div>
 					</div>
 			</div>

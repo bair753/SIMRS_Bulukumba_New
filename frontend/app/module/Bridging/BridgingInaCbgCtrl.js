@@ -5253,139 +5253,131 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 		
 	}
 
-		$scope.konsulDokter = function(){
-			if ($scope.dataPasienSelected.noregistrasi == undefined) {
-				toastr.error('Pilih Pasien Terlebih dahulu!!!')
-				return;
-			}
-
-			medifirstService.get("emr/get-order-konsul?noregistrasi=" + $scope.dataPasienSelected.noregistrasi
-				// medifirstService.get("lab-radiologi/get-rincian-pelayanan?objectdepartemenfk=" + departemenfk + "&noregistrasi=" +   $scope.item.noregistrasi
-				, true).then(function (dat) {
-					$scope.dataDaftadKonsulDokter = {
-						data: dat.data.data,
-						_data: dat.data.data,
-						// pageSize: 10,
-						selectable: true,
-						refresh: true,
-						total: dat.data.data.length,
-						serverPaging: false,
-						aggregate: [
-								{ field: 'total', aggregate: 'sum' },
-						]
-
-				};
-				}, function (error) {
-						$scope.isLoading = false;
-				});
-			
-			$scope.popUpDaftarKonsulDokter.center().open();
-			
-		}	
-
-		$scope.columnDaftadKonsulDokter = {
-			columns: [
-					{
-							"field": "tglorder",
-							"title": "Tgl Konsul",
-							"width": "90px",
-					},                   
-					{
-							"field": "ruanganasal",
-							"title": "Ruangan Asal",
-							"width": "160px"
-					},
-					{
-							"field": "ruangantujuan",
-							"title": "Ruangan Tujuan",
-							"width": "160px"
-					},
-					{
-							"field": "pengonsul",
-							"title": "Pengonsul",
-							"width": "160px",
-					},
-					{
-							"field": "namalengkap",
-							"title": "Dokter",
-							"width": "160px",
-					},
-			],
-			sortable: {
-					mode: "single",
-					allowUnsort: false,
-			}
+	$scope.konsulDokter = function(){
+		if ($scope.dataPasienSelected.noregistrasi == undefined) {
+			toastr.error('Pilih Pasien Terlebih dahulu!!!')
+			return;
 		}
 
-			$scope.cetakKonsulDokter = function () {
-				if ($scope.dataSelectedKonsulDokter.keteranganlainnya == undefined) {
-					toastr.error('Jawaban belum tersedia!!!')
-					return;
-				}
-
-				var local = JSON.parse(localStorage.getItem('profile'));
-				var nama = medifirstService.getPegawaiLogin();
-				window.open(baseTransaksi + 'report/cetak-konsul-dokter?nocm='
-						+ $scope.dataPasienSelected.nocm
-						+ '&emr=' + $scope.dataSelectedKonsulDokter.norec
-						+ '&kdprofile=' + local.id, '_blank');
-		}
-
-		
-		$scope.asesmenAwalKeperIGD = function(){
-			if ($scope.dataPasienSelected.noregistrasi == undefined) {
-				toastr.error('Pilih Pasien Terlebih dahulu!!!')
-				return;
-			}
-			var emrfk = [149] // emrfk Asesmen Awal Keperawatan IGD
-
-			medifirstService.get("bridging/inacbg/get-emr-pasien?noregistrasi=" + $scope.dataPasienSelected.noregistrasi + '&emrfk=' + emrfk
+		medifirstService.get("emr/get-order-konsul?noregistrasi=" + $scope.dataPasienSelected.noregistrasi
 				// medifirstService.get("lab-radiologi/get-rincian-pelayanan?objectdepartemenfk=" + departemenfk + "&noregistrasi=" +   $scope.item.noregistrasi
-				, true).then(function (dat) {
-					$scope.dataDaftadAsesmenAwalKeperIGD = {
-						data: dat.data.data,
-						_data: dat.data.data,
-						// pageSize: 10,
-						selectable: true,
-						refresh: true,
-						total: dat.data.data.length,
-						serverPaging: false,
-						aggregate: [
-								{ field: 'total', aggregate: 'sum' },
-						]
-
+			, true).then(function (dat) {
+				$scope.dataDaftadKonsulDokter = {
+					data: dat.data.data,
+					_data: dat.data.data,
+					// pageSize: 10,
+					selectable: true,
+					refresh: true,
+					total: dat.data.data.length,
+					serverPaging: false,
+					aggregate: [
+						{ field: 'total', aggregate: 'sum' },
+					]
 				};
-				}, function (error) {
-						$scope.isLoading = false;
+			}, function (error) {
+				$scope.isLoading = false;
 				});
-			
+		$scope.popUpDaftarKonsulDokter.center().open();	
+	}	
+
+	$scope.columnDaftadKonsulDokter = {
+		columns: [
+			{
+				"field": "tglorder",
+				"title": "Tgl Konsul",
+				"width": "90px",
+			},                   
+			{
+				"field": "ruanganasal",
+				"title": "Ruangan Asal",
+				"width": "160px"
+			},
+			{
+				"field": "ruangantujuan",
+				"title": "Ruangan Tujuan",
+				"width": "160px"
+			},
+			{
+				"field": "pengonsul",
+				"title": "Pengonsul",
+				"width": "160px",
+			},
+			{
+				"field": "namalengkap",
+				"title": "Dokter",
+				"width": "160px",
+			},
+		],
+		sortable: {
+			mode: "single",
+			allowUnsort: false,
+		}
+	}
+
+	$scope.cetakKonsulDokter = function () {
+		if ($scope.dataSelectedKonsulDokter.keteranganlainnya == undefined) {
+			toastr.error('Jawaban belum tersedia!!!')
+			return;
+		}
+		var local = JSON.parse(localStorage.getItem('profile'));
+		var nama = medifirstService.getPegawaiLogin();
+		window.open(baseTransaksi + 'report/cetak-konsul-dokter?nocm='
+				+ $scope.dataPasienSelected.nocm
+				+ '&emr=' + $scope.dataSelectedKonsulDokter.norec
+				+ '&kdprofile=' + local.id, '_blank');
+	}
+
+	$scope.asesmenAwalKeperIGD = function(){
+		if ($scope.dataPasienSelected.noregistrasi == undefined) {
+			toastr.error('Pilih Pasien Terlebih dahulu!!!')
+			return;
+		}
+		var emrfk = [149] // emrfk Asesmen Awal Keperawatan IGD
+
+		medifirstService.get("bridging/inacbg/get-emr-pasien?noregistrasi=" + $scope.dataPasienSelected.noregistrasi + '&emrfk=' + emrfk
+			// medifirstService.get("lab-radiologi/get-rincian-pelayanan?objectdepartemenfk=" + departemenfk + "&noregistrasi=" +   $scope.item.noregistrasi
+			, true).then(function (dat) {
+			$scope.dataDaftadAsesmenAwalKeperIGD = {
+				data: dat.data.data,
+				_data: dat.data.data,
+				// pageSize: 10,
+				selectable: true,
+				refresh: true,
+				total: dat.data.data.length,
+				serverPaging: false,
+				aggregate: [
+					{ field: 'total', aggregate: 'sum' },
+				]
+			};
+			}, function (error) {
+				$scope.isLoading = false;
+			});
 			$scope.popUpDaftarAsesmenAwalKeperIGD.center().open();
-			
-		}	
+	}	
 
-		$scope.columnDaftadAsesmenAwalKeperIGD = {
-			columns: [
-					{
-							"field": "tglemr",
-							"title": "Tgl EMR",
-							"width": "90px",
-					},                   
-					{
-							"field": "emrpasienfk",
-							"title": "No EMR",
-							"width": "160px"
-					},
-					{
-							"field": "namaform",
-							"title": "Nama EMR",
-							"width": "160px"
-					},
+	$scope.columnDaftadAsesmenAwalKeperIGD = {
+		columns: [
+			{
+				"field": "tglemr",
+				"title": "Tgl EMR",
+				"width": "90px",
+			},                   
+			{
+				"field": "emrpasienfk",
+				"title": "No EMR",
+				"width": "160px"
+			},
+			{
+				"field": "namaform",
+				"title": "Nama EMR",
+				"width": "160px"
+			},
 			],
 			sortable: {
 					mode: "single",
 					allowUnsort: false,
 			}
-		}
+	}
 
 			$scope.cetakAsesmenAwalKeperIGD = function () {
 				if ($scope.dataSelectedAsesmenAwalKeperIGD.emrpasienfk == undefined) {
@@ -5476,7 +5468,85 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 			+ '&nama=' + nama, '_blank');
 	}
 
-		$scope.catatanPemberianObat = function(){
+	$scope.partograf = function(){
+		if ($scope.dataPasienSelected.noregistrasi == undefined) {
+			toastr.error('Pilih Pasien Terlebih dahulu!!!')
+			return;
+		}
+		var emrfk = [290071] // emrfk Partograf
+
+		medifirstService.get("bridging/inacbg/get-rincian-operasi?noregistrasi=" + $scope.dataPasienSelected.noregistrasi + '&emrfk=' + emrfk
+			// medifirstService.get("lab-radiologi/get-rincian-pelayanan?objectdepartemenfk=" + departemenfk + "&noregistrasi=" +   $scope.item.noregistrasi
+			, true).then(function (dat) {
+				$scope.dataDaftarPartograf = {
+					data: dat.data.data,
+					_data: dat.data.data,
+					// pageSize: 10,
+					selectable: true,
+					refresh: true,
+					total: dat.data.data.length,
+					serverPaging: false,
+					aggregate: [
+							{ field: 'total', aggregate: 'sum' },
+					]
+
+			};
+			}, function (error) {
+					$scope.isLoading = false;
+			});
+		
+		$scope.popUpDaftarPartograf.center().open();
+		
+	}
+
+	$scope.columnDaftarPartograf = {
+		columns: [
+				{
+					"field": "tglemr",
+					"title": "Tgl EMR",
+					"width": "90px",
+				},                   
+				{
+					"field": "emrpasienfk",
+					"title": "No EMR",
+					"width": "160px"
+				},
+				{
+					"field": "namaform",
+					"title": "Nama EMR",
+					"width": "160px"
+				},
+				{
+					"field": "index",
+					"title": "Page",
+					"width": "160px"
+				},
+		],
+		sortable: {
+				mode: "single",
+				allowUnsort: false,
+		}
+	}
+
+	$scope.cetakPartograf = function () {
+		if ($scope.dataSelectedPartograf.emrpasienfk == undefined) {
+			toastr.error('Data belum dipilih!!!')
+			return;
+		}
+
+		var local = JSON.parse(localStorage.getItem('profile'));
+		var nama = medifirstService.getPegawaiLogin();
+		window.open(baseTransaksi + 'report/cetak-partograf?nocm='
+		+ $scope.dataSelectedPartograf.nocm 
+		+ '&norec_apd=' + $scope.dataSelectedPartograf.norec_apd 
+		+ '&emr=' + $scope.dataSelectedPartograf.norec 
+		+ '&emrfk=' + $scope.dataSelectedPartograf.emrfk
+		+ '&index=' + $scope.dataSelectedPartograf.index
+		+ '&kdprofile=' + local.id
+		+ '&nama=' + nama, '_blank');
+	}
+
+	$scope.catatanPemberianObat = function(){
 			if ($scope.dataPasienSelected.noregistrasi == undefined) {
 				toastr.error('Pilih Pasien Terlebih dahulu!!!')
 				return;
