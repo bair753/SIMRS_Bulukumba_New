@@ -2757,6 +2757,8 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
         Route::get('report/cetak-laporan-persalinan', 'Report\ReportController@laporanPersalinan');
         Route::get('report/cetak-partograf', 'Report\ReportController@partograf');
         Route::get('report/cetak-suket-kelahiran', 'Report\ReportController@suketKelahiran');
+        Route::get('report/cetak-ekg', 'Report\ReportController@ekg');
+        Route::get('report/cetak-echocardiografi', 'Report\ReportController@echocardiografi');
 
         Route::get('viewer/get-list-antrian','Antrian\AntrianController@getListAntrian');
         Route::get('viewer/update-antrian','Antrian\AntrianController@updatePanggil');
