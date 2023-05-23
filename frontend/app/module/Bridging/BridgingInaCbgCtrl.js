@@ -6207,7 +6207,7 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 				+ '&nama=' + nama, '_blank');
 			}
 
-			$scope.cardiografi = function(){
+			$scope.echocardiografi = function(){
 				if ($scope.dataPasienSelected.noregistrasi == undefined) {
 					toastr.error('Pilih Pasien Terlebih dahulu!!!')
 						return;
