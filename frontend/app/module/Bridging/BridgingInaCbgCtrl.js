@@ -6272,7 +6272,7 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 				}
 				var local = JSON.parse(localStorage.getItem('profile'));
 				var nama = medifirstService.getPegawaiLogin();
-				window.open(baseTransaksi + 'report/cetak-cardiografi?nocm='
+				window.open(baseTransaksi + 'report/cetak-echocardiografi?nocm='
 				+ $scope.dataSelectedEchocardiografi.nocm 
 				+ '&norec_apd=' + $scope.dataSelectedEchocardiografi.norec_apd 
 				+ '&emr=' + $scope.dataSelectedEchocardiografi.norec 
