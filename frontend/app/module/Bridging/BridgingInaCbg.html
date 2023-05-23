@@ -559,6 +559,12 @@
 			<div class="grid_2">
 				<button class="btnTemplate1 buttonKuning" ng-click="partograf()">Cetak Partograf</button>
 			</div>
+			<div class="grid_2">
+				<button class="btnTemplate1 buttonKuning" ng-click="ekg()">Cetak EKG</button>
+			</div>
+			<div class="grid_2">
+				<button class="btnTemplate1 buttonKuning" ng-click="echocardiografi()">Cetak Echocardiografi</button>
+			</div>
 			<!-- <div class="grid_2" >
 				<button class="btnTemplate1"  ng-click="editKlaimm()">Edit Klaim Masal</button>
 			</div>
@@ -1464,6 +1470,34 @@
 					<div class="grid_12">
 							<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
 									<button class="k-button  k-button-icontext" ng-click="cetakPartograf()">Cetak</button>
+							</div>
+					</div>
+			</div>
+		</div>
+
+		<div kendo-window="popUpDaftarEKG" k-title="'Daftar EKG'" k-visible="false" k-width="1000" k-height="400">
+			<div class="panel panel-default container_12">
+				<div class="grid_12 headerBox">
+					<kendo-grid id="kGrids" data-source="dataDaftarEKG" options="columnDaftarEKG" k-selectable="'row'" k-sortable="'true'"
+							k-resizable="'true'" k-ng-model="dataSelectedEKG" ng-click="klikGridEKG(dataSelectedEKG)"></kendo-grid>
+				</div>
+					<div class="grid_12">
+							<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
+									<button class="k-button  k-button-icontext" ng-click="cetakEKG()">Cetak</button>
+							</div>
+					</div>
+			</div>
+		</div>
+
+		<div kendo-window="popUpDaftarEchocardiografi" k-title="'Daftar Echocardiografi'" k-visible="false" k-width="1000" k-height="400">
+			<div class="panel panel-default container_12">
+				<div class="grid_12 headerBox">
+					<kendo-grid id="kGrids" data-source="dataDaftarEchocardiografi" options="columnDaftarEchocardiografi" k-selectable="'row'" k-sortable="'true'"
+							k-resizable="'true'" k-ng-model="dataSelectedEchocardiografi" ng-click="klikGridEchocardiografi(dataSelectedEchocardiografi)"></kendo-grid>
+				</div>
+					<div class="grid_12">
+							<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
+									<button class="k-button  k-button-icontext" ng-click="cetakEchocardiografi()">Cetak</button>
 							</div>
 					</div>
 			</div>

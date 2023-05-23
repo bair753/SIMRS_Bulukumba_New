@@ -3645,6 +3645,10 @@
         {
             "nameDep": "ChecklistEndoskopiCernaBawahCtrl",
             "urlDep": "module/EMR/ChecklistEndoskopiCernaBawahCtrl"
+        },
+        {
+            "nameDep": "EchocardiografiCtrl",
+            "urlDep": "module/EMR/EchocardiografiCtrl"
         }
     ]
 }
