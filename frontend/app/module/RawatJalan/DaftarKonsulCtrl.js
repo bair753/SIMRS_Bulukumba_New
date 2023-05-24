@@ -1871,8 +1871,9 @@ define(['initialize'], function(initialize) {
                 $scope.winKonsul.center().open()
             }
             function loadKonsul() {
-                medifirstService.get("rawatjalan/get-order-konsul?dokterid=" + $scope.dataLogin.id).then(function (e) {
+                medifirstService.get("rawatjalan/get-order-konsul2?dokterid=" + $scope.dataLogin.id).then(function (e) {
                     var res = e.data.data
+                    console.log(res);
                     for (var i = res.length - 1; i >= 0; i--) {
                         if (res[i].norec_apd != null)
                             res.splice([i], 1)
@@ -1886,7 +1887,7 @@ define(['initialize'], function(initialize) {
                 })
             }
             function loadGridKonsul() {
-                medifirstService.get("rawatjalan/get-order-konsul?dokterid=" + $scope.dataLogin.id).then(function (e) {
+                medifirstService.get("rawatjalan/get-order-konsul2?dokterid=" + $scope.dataLogin.id).then(function (e) {
                     var result = e.data.data
                     if (result.length > 0) {
                         $scope.item.dokterTujuan = result[0].namalengkap
