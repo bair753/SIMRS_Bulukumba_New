@@ -568,6 +568,9 @@
 			<div class="grid_2">
 				<button class="btnTemplate1 buttonKuning" ng-click="lembarKerjaNeonatus()">Cetak Lembar Kerja Kelainan Pernafasan Neonatus</button>
 			</div>
+			<div class="grid_2">
+				<button class="btnTemplate1 buttonKuning" ng-click="bayiSepsis()">Cetak Bayi Sepsis</button>
+			</div>
 			<!-- <div class="grid_2" >
 				<button class="btnTemplate1"  ng-click="editKlaimm()">Edit Klaim Masal</button>
 			</div>
@@ -1515,6 +1518,20 @@
 					<div class="grid_12">
 							<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
 									<button class="k-button  k-button-icontext" ng-click="cetakLembarKerjaNeonatus()">Cetak</button>
+							</div>
+					</div>
+			</div>
+		</div>
+
+		<div kendo-window="popUpDaftarBayiSepsis" k-title="'Daftar Bayi Sepsis'" k-visible="false" k-width="1000" k-height="400">
+			<div class="panel panel-default container_12">
+				<div class="grid_12 headerBox">
+					<kendo-grid id="kGrids" data-source="dataDaftarBayiSepsis" options="columnDaftarBayiSepsis" k-selectable="'row'" k-sortable="'true'"
+							k-resizable="'true'" k-ng-model="dataSelectedBayiSepsis" ng-click="klikGridBayiSepsis(dataSelectedBayiSepsis)"></kendo-grid>
+				</div>
+					<div class="grid_12">
+							<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
+									<button class="k-button  k-button-icontext" ng-click="cetakBayiSepsis()">Cetak</button>
 							</div>
 					</div>
 			</div>
