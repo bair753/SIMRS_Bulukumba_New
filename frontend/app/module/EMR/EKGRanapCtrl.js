@@ -229,7 +229,12 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 var arrobj = Object.keys($scope.item.obj);
                 var arrobjImg = Object.keys($scope.item.objImg);
                 var arrSaveImg = [];
-                var arrSave = [];         
+                var arrSave = [];   
+                
+                if($scope.item.objImg[31101098].substring(17, 20) == 'pdf'){
+                    toastr.warning('File harus jpg/jpeg/png/svg','Peringatan')
+                    return
+                }
                 
                 // const url = medifirstService.post('emr/post-imageEKG');
                 // const file = document.getElementById("fileEKG").files[0];

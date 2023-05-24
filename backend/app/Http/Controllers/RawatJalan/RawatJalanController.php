@@ -1203,6 +1203,81 @@ class RawatJalanController extends ApiController
         );
         return $this->respond($result);
     }
+    public function getOrderKonsul2(Request $request)
+    {
+        $kdProfile = $this->getDataKdProfile($request);
+        $idProfile = (int) $kdProfile;
+        $arrRuangId = [];
+        if (isset($request['perawatId']) && $request['perawatId'] != '') {
+            $dataruangan = \DB::table('maploginusertoruangan_s as mlu')
+                ->join('ruangan_m as ru', 'ru.id', '=', 'mlu.objectruanganfk')
+                ->select('ru.id', 'ru.namaruangan')
+                ->where('mlu.kdprofile', $idProfile)
+                ->where('mlu.objectloginuserfk', $request['perawatId'])
+                ->get();
+
+            if (count($dataruangan) > 0) {
+                foreach ($dataruangan as $item) {
+                    $arrRuangId[]  = $item->id;
+                }
+            }
+        }
+
+
+        $kelTrans = KelompokTransaksi::where('kelompoktransaksi', 'KONSULTASI DOKTER')->first();
+        $data = \DB::table('strukorder_t as so')
+            ->Join('pasiendaftar_t as pd', 'pd.norec', '=', 'so.noregistrasifk')
+            ->Join('pasien_m as ps', 'ps.id', '=', 'pd.nocmfk')
+            ->leftJoin('ruangan_m as ru', 'ru.id', '=', 'so.objectruanganfk')
+            ->leftJoin('ruangan_m as rutuju', 'rutuju.id', '=', 'so.objectruangantujuanfk')
+            ->leftJoin('pegawai_m as pg', 'pg.id', '=', 'so.objectpegawaiorderfk')
+            ->leftJoin('pegawai_m as pet', 'pet.id', '=', 'so.objectpetugasfk')
+            ->leftJoin('antrianpasiendiperiksa_t as apd', 'apd.objectstrukorderfk', '=', 'so.norec')
+            ->select(
+                'so.norec',
+                'so.noorder',
+                'so.tglorder',
+                'ru.namaruangan as ruanganasal',
+                'pg.namalengkap',
+                'rutuju.namaruangan as ruangantujuan',
+                'pet.namalengkap as pengonsul',
+                'pd.noregistrasi',
+                'pd.tglregistrasi',
+                'ps.nocm',
+                'so.keteranganorder',
+                'pd.norec as norec_pd',
+                'ps.namapasien',
+                'pg.id as pegawaifk',
+                'so.objectruangantujuanfk',
+                'so.objectruanganfk',
+                'apd.norec as norec_apd',
+                'so.file'
+            )
+            ->where('so.keteranganorder', '!=', 'Order Laboratorium')
+            ->where('so.keteranganorder', '!=', 'Order Radiologi')
+            ->where('so.keteranganorder', '!=', 'Order Farmasi')
+            ->where('so.kdprofile', $idProfile)
+            ->where('so.statusenabled', true)
+            ->wherenull('apd.norec')
+            // ->where('so.objectkelompoktransaksifk', $kelTrans->id)
+            ->orderBy('so.tglorder', 'desc');
+        if (isset($request['norecpd']) && $request['norecpd'] != '') {
+            $data = $data->where('pd.norec', $request['norecpd']);
+        }
+        if (isset($request['dokterid']) && $request['dokterid'] != '') {
+            $data = $data->where('pg.id', $request['dokterid']);
+        }
+        if (isset($request['perawatId']) && $request['perawatId'] != '') {
+            $data = $data->whereIn('rutuju.id', $arrRuangId);
+        }
+
+        $data = $data->get();
+        $result = array(
+            'data' => $data,
+            'message' => 'Inhuman',
+        );
+        return $this->respond($result);
+    }
     public function saveKonsulFromOrder(Request $request)
     {
         $kdProfile = $this->getDataKdProfile($request);

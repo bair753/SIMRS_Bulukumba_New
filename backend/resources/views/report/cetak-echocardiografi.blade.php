@@ -262,23 +262,23 @@
             </tr>
             <tr style="border:none">
                 <td style="border:none;" colspan="2">LA/LV</td> 
-                <td style="border:none;" colspan="7">: N/ Dilatasi /  Mengecil</td> 
+                <td style="border:none;" colspan="7">: @{{ item.obj[32110652] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} N / @{{ item.obj[32110653] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Dilatasi / @{{ item.obj[32110654] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Mengecil</td> 
             </tr>
             <tr style="border:none">
                 <td style="border:none;" colspan="2">RA/RV</td> 
-                <td style="border:none;" colspan="7">: N/ Dilatasi /  Mengecil</td> 
+                <td style="border:none;" colspan="7">: @{{ item.obj[32110655] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} N / @{{ item.obj[32110656] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Dilatasi / @{{ item.obj[32110657] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Mengecil</td> 
             </tr>
             <tr style="border:none">
                 <td style="border:none;" colspan="2">Others</td> 
-                <td style="border:none;" colspan="7">: Trombus / Pusaran / Pusaran Darah / Tumor / ………………</td> 
+                <td style="border:none;" colspan="7">: @{{ item.obj[32110658] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Trombus / @{{ item.obj[32110659] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Pusaran / @{{ item.obj[32110660] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Pusaran Darah / @{{ item.obj[32110661] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Tumor / @{{ item.obj[32110662] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} @{{ item.obj[32110663] ? item.obj[32110663] : '...............' }}</td> 
             </tr>
             <tr style="border:none">
                 <td style="border:none;" colspan="2">LVH</td> 
-                <td style="border:none;" colspan="7">: Konsentrik / Eksentrik / Tidak Ada</td> 
+                <td style="border:none;" colspan="7">:  @{{ item.obj[32110664] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Konsentrik /  @{{ item.obj[32110665] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Eksentrik /  @{{ item.obj[32110666] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Tidak Ada</td> 
             </tr>
             <tr style="border:none">
                 <td style="border:none;" colspan="2">RWMA</td> 
-                <td style="border:none;" colspan="7">: Hipo / A / Normo Kinetik di Ant. Basal / Lateral / Inferior / Middle / ……….</td> 
+                <td style="border:none;" colspan="7">: @{{ item.obj[32110667] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Hipo / @{{ item.obj[32110668] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} A / @{{ item.obj[32110669] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Normo Kinetik di Ant. Basal / @{{ item.obj[32110670] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Lateral / @{{ item.obj[32110671] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Eksentrik / @{{ item.obj[32110672] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Inferior / @{{ item.obj[32110673] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Middle / @{{ item.obj[32110674] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} @{{ item.obj[32110675] ? item.obj[32110675] : '...............' }}</td> 
             </tr>
 
             <tr style="border:none">
@@ -290,35 +290,73 @@
             </tr>
             <tr style="border:none">
                 <td style="border:none;" colspan="2">AO</td> 
-                <td style="border:none;" colspan="7">: N / AS / Al - Mild / Moderate / Severe</td> 
+                <td style="border:none;" colspan="7">: 
+                    @{{ item.obj[32110676] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} N / 
+                    @{{ item.obj[32110677] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} AS / 
+                    @{{ item.obj[32110678] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Al - Mild / 
+                    @{{ item.obj[32110679] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Moderate / 
+                    @{{ item.obj[32110680] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Severe</td> 
             </tr>
             <tr style="border:none">
                 <td style="border:none;" colspan="2">P</td> 
-                <td style="border:none;" colspan="7">: N / PS / PI - Mild / Moderate / Severe</td> 
+                <td style="border:none;" colspan="7">: 
+                    @{{ item.obj[32110681] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} N / 
+                    @{{ item.obj[32110682] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} PS / 
+                    @{{ item.obj[32110683] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} PI - Mild / 
+                    @{{ item.obj[32110684] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Moderate / 
+                    @{{ item.obj[32110685] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Severe</td> 
             </tr>
             <tr style="border:none">
                 <td style="border:none;" colspan="2">T</td> 
-                <td style="border:none;" colspan="7">: N / TS / TI - Mild / Moderate / Severe</td> 
+                <td style="border:none;" colspan="7">: 
+                    @{{ item.obj[32110686] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} N / 
+                    @{{ item.obj[32110687] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} TS / 
+                    @{{ item.obj[32110688] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} TI - Mild / 
+                    @{{ item.obj[32110689] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Moderate / 
+                    @{{ item.obj[32110690] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Severe</td> 
             </tr>
             <tr style="border:none">
                 <td style="border:none;" colspan="2">M</td> 
-                <td style="border:none;" colspan="7">: N / MS / Ml - Mild / Moderate / Severe - Distance - WS</td> 
+                <td style="border:none;" colspan="7">: 
+                    @{{ item.obj[32110691] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} N / 
+                    @{{ item.obj[32110692] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} MS / 
+                    @{{ item.obj[32110693] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Ml - Mild / 
+                    @{{ item.obj[32110694] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Moderate / 
+                    @{{ item.obj[32110695] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Severe - Distance - WS</td> 
             </tr>
             <tr style="border:none">
                 <td style="border:none;" colspan="2">EF (Estimated)</td> 
-                <td style="border:none;" colspan="7">: ………%, E/A < 1 / > , TAPSE : < 16 / > 16</td> 
+                <td style="border:none;" colspan="7">: @{{ item.obj[32110696] ? item.obj[32110696] : '.....' }}%, 
+                    @{{ item.obj[32110697] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} E/
+                    @{{ item.obj[32110698] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} A < 1 / 
+                    @{{ item.obj[32110699] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} > , TAPSE : 
+                    @{{ item.obj[32110700] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} < 16 / 
+                    @{{ item.obj[32110701] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} > 16</td> 
             </tr>
             <tr style="border:none">
                 <td style="border:none;" colspan="2">Others</td> 
-                <td style="border:none;" colspan="7">: Venticle Gap / Atrial’ GAP : …………………..</td> 
+                <td style="border:none;" colspan="7">: 
+                    @{{ item.obj[32110702] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Venticle Gap / 
+                    @{{ item.obj[32110703] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Atrial’ 
+                    GAP : @{{ item.obj[32110704] ? item.obj[32110704] : '' }}</td> 
             </tr>
             <tr style="border:none">
                 <td style="border:none;" colspan="2">Results</td> 
-                <td style="border:none;" colspan="7">: HFpEF ec, HHD , CAD, Others ( Mention ) : ……………………</td> 
+                <td style="border:none;" colspan="7">: 
+                    @{{ item.obj[32110705] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} HFpEF ec, 
+                    @{{ item.obj[32110706] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} HHD , 
+                    @{{ item.obj[32110707] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} CAD, 
+                    @{{ item.obj[32110708] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Others ( Mention ) 
+                    : @{{ item.obj[32110709] ? item.obj[32110709] : '' }}</td> 
             </tr>
             <tr style="border:none">
                 <td style="border:none;" colspan="2"></td> 
-                <td style="border:none;" colspan="7">: HFpEF ec, HHD , CAD, Others ( Mention ) : ……………………</td> 
+                <td style="border:none;" colspan="7">: 
+                    @{{ item.obj[32110710] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} HFpEF ec, 
+                    @{{ item.obj[32110711] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} HHD , 
+                    @{{ item.obj[32110712] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} CAD, 
+                    @{{ item.obj[32110713] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Others ( Mention ) 
+                    : @{{ item.obj[32110714] ? item.obj[32110714] : '' }}</td> 
             </tr>
 
             <tr style="border:none">
@@ -326,11 +364,14 @@
             </tr>
 
             <tr style="border:none">
-                <td style="border:none;" colspan="9"> Tanggal dilakukan Echoyang sebelumnya ( bila ada ) : </td> 
+                <td style="border:none;" colspan="9"> Tanggal dilakukan Echoyang sebelumnya ( bila ada ) : @{{item.obj[32110715] | toDate | date:'dd MMMM yyyy HH:mm'}}</td> 
             </tr>
 
             <tr style="border:none">
-                <td style="border:none;" colspan="9"> Impression ( Compare To Previous ) : Stabil / Better/ Not Good : </td> 
+                <td style="border:none;" colspan="9"> Impression ( Compare To Previous ) : 
+                    @{{ item.obj[32110716] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Stabil / 
+                    @{{ item.obj[32110717] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Better / 
+                    @{{ item.obj[32110718] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Not Good : </td> 
             </tr>
 
             <tr style="border:none">
@@ -343,7 +384,7 @@
 
             <tr style="border:none">
                 <td style="border:none;" colspan="6"></td> 
-                <td style="border:none;" colspan="3">Bulukumba,</td> 
+                <td style="border:none;" colspan="3">Bulukumba, @{{item.obj[32110719] | toDate | date:'dd MMMM yyyy HH:mm'}}</td> 
             </tr>
 
             <tr style="border:none">
@@ -353,12 +394,12 @@
 
             <tr style="border:none">
                 <td style="border:none;" colspan="6"></td> 
-                <td style="border:none;" colspan="3"></td> 
+                <td style="border:none;" colspan="3"><div id="qrcodeDokter" style="text-align: left"></div></td> 
             </tr>
 
             <tr style="border:none">
                 <td style="border:none;" colspan="6"></td> 
-                <td style="border:none;" colspan="3">(................................)</td> 
+                <td style="border:none;" colspan="3">(@{{ item.obj[32110720] ? item.obj[32110720] : '.....................................' }})</td> 
             </tr>
 
         </table>
@@ -529,9 +570,18 @@
             
 
             $scope.tglemr = dataLoad[i].tgl
+
+            var dokter = $scope.item.obj[32110720];
+
+            if(dokter != undefined){
+                jQuery('#qrcodeDokter').qrcode({
+                    width	: 100,
+                    height	: 100,
+                    text	: "Tanda Tangan Digital Oleh " + dokter
+                });	
+            }
             
         }
-        console.log($scope.item.objImg[31101098]);
     })
 
     angular.filter('toDate', function() {

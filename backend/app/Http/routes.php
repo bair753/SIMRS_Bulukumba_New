@@ -1574,6 +1574,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
           Route::get('rawatjalan/get-daftar-surat', 'RawatJalan\RawatJalanController@getDaftarSurat');
           Route::get('rawatjalan/get-daftarpasien-by-diagnosa', 'RawatJalan\RawatJalanController@getDaftarSurat');
           Route::get('rawatjalan/get-order-konsul', 'RawatJalan\RawatJalanController@getOrderKonsul');
+          Route::get('rawatjalan/get-order-konsul2', 'RawatJalan\RawatJalanController@getOrderKonsul2');
           Route::post('rawatjalan/save-konsul-from-order', 'RawatJalan\RawatJalanController@saveKonsulFromOrder');
           Route::get('rawatjalan/get-combo', 'RawatJalan\RawatJalanController@getComboS');
           Route::get('rawatjalan/get-pemeriksaan-keluar-lab', 'RawatJalan\RawatJalanController@getPemeriksaanKeluarLab');
