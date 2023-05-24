@@ -289,7 +289,7 @@
             </tr>
             <tr height="35px">
                 <td  valign="middle" colspan="4">Keluhan Saat ini</td>
-                <td colspan="18">@{{ item.obj[420864] ? item.obj['keluhan_saat_ini'] : '' }}</td>
+                <td colspan="18">@{{ item.obj[420864] ? item.obj[420864] : '' }}</td>
             </tr>
             <tr height="18px">
                 <td rowspan="15" colspan="4" valign="top">Status Fisik</td>
@@ -447,10 +447,10 @@
             </tr>
             <tr height="18px">
                 <td rowspan="6" colspan="4" valign="top">Riwayat Kesehatan Pasien</td>
-                <td colspan="18" height="35px" valign="top">Riwayat Penyakit Sebelumnya : @{{ item.obj[420718] ? item.obj['riwayat_penyakit_sebelumnya'] : '' }}</td>
+                <td colspan="18" height="35px" valign="top">Riwayat Penyakit Sebelumnya : @{{ item.obj[420718] ? item.obj[420718] : '' }}</td>
             </tr>
             <tr height="18px">
-                <td colspan="18" height="35px" valign="top">Riwayat Penyakit Sekarang : @{{ item.obj[420719] ? item.obj['riwayat_penyakit_sekarang'] : '' }}</td>
+                <td colspan="18" height="35px" valign="top">Riwayat Penyakit Sekarang : @{{ item.obj[420719] ? item.obj[420719] : '' }}</td>
             </tr>
             <tr height="18px">
                 <td colspan="4" style="border:none">Anak ke : @{{ item.obj[420720] ? item.obj[420720] : '' }}</td>
@@ -601,7 +601,7 @@
             </tr>
             <tr height="90px">
                 <td colspan="4" valign="top">Masalah Keperawatan</td>
-                <td colspan="18">@{{ item.obj[420800] ? item.obj['masalah_keperawatan'] : '' }}</td>
+                <td colspan="18">@{{ item.obj[420800] ? item.obj[420800] : '' }}</td>
             </tr>
             <tr height="18px">
                 <td colspan="4" rowspan="4" valign="top">Kriteria Evaluasi <br>Skala Likert (1-5)</td>
@@ -880,15 +880,15 @@
             
         }
 
-        var keluhan_saat_ini = $scope.item.obj[420864].replace(/(?:\r\n|\r|\n)/g, ', ');
-        var riwayat_penyakit_sebelumnya = $scope.item.obj[420718].replace(/(?:\r\n|\r|\n)/g, ', ');
-        var riwayat_penyakit_sekarang = $scope.item.obj[420719].replace(/(?:\r\n|\r|\n)/g, ', ');
-        var masalah_keperawatan = $scope.item.obj[420800].replace(/(?:\r\n|\r|\n)/g, ', ');
+        // var keluhan_saat_ini = $scope.item.obj[420864].replace(/(?:\r\n|\r|\n)/g, ', ');
+        // var riwayat_penyakit_sebelumnya = $scope.item.obj[420718].replace(/(?:\r\n|\r|\n)/g, ', ');
+        // var riwayat_penyakit_sekarang = $scope.item.obj[420719].replace(/(?:\r\n|\r|\n)/g, ', ');
+        // var masalah_keperawatan = $scope.item.obj[420800].replace(/(?:\r\n|\r|\n)/g, ', ');
 
-        $scope.item.obj['keluhan_saat_ini'] = keluhan_saat_ini;
-        $scope.item.obj['riwayat_penyakit_sebelumnya'] = riwayat_penyakit_sebelumnya;
-        $scope.item.obj['riwayat_penyakit_sekarang'] = riwayat_penyakit_sekarang;
-        $scope.item.obj['masalah_keperawatan'] = masalah_keperawatan;
+        // $scope.item.obj['keluhan_saat_ini'] = keluhan_saat_ini;
+        // $scope.item.obj['riwayat_penyakit_sebelumnya'] = riwayat_penyakit_sebelumnya;
+        // $scope.item.obj['riwayat_penyakit_sekarang'] = riwayat_penyakit_sekarang;
+        // $scope.item.obj['masalah_keperawatan'] = masalah_keperawatan;
 
         var dpjp = $scope.item.obj[420862];
         jQuery('#qrcodePerawat').qrcode({

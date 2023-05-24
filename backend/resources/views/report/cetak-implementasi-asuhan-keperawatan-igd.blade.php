@@ -893,10 +893,11 @@
             });	
         }
     })
-
     angular.filter('toDate', function() {
-    return function(items) {
-        return new Date(items);
+        return function(items) {
+            if(items != null){
+                 return new Date(items);
+            }
         };
     });
     $(document).ready(function () {

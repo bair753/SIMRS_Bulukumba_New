@@ -250,25 +250,25 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 
             $scope.cetakPdf = function () {
 
-                if($scope.item.obj[31100543] == undefined){
-                    toastr.warning('Diagnose Pasca Operatif tidak boleh kosong','Peringatan')
-                    return
-                }
+                // if($scope.item.obj[31100543] == undefined){
+                //     toastr.warning('Diagnose Pasca Operatif tidak boleh kosong','Peringatan')
+                //     return
+                // }
 
-                if($scope.item.obj[31100550] == undefined){
-                    toastr.warning('Prosedur Tindakan yang Dilakukan tidak boleh kosong','Peringatan')
-                    return
-                }
+                // if($scope.item.obj[31100550] == undefined){
+                //     toastr.warning('Prosedur Tindakan yang Dilakukan tidak boleh kosong','Peringatan')
+                //     return
+                // }
 
-                if($scope.item.obj[31100563] == undefined){
-                    toastr.warning('No. Alat yang Dipasang tidak boleh kosong','Peringatan')
-                    return
-                }
+                // if($scope.item.obj[31100563] == undefined){
+                //     toastr.warning('No. Alat yang Dipasang tidak boleh kosong','Peringatan')
+                //     return
+                // }
 
-                if($scope.item.obj[31100568] == undefined){
-                    toastr.warning('Laporan/Tindakan Operasi tidak boleh kosong','Peringatan')
-                    return
-                }
+                // if($scope.item.obj[31100568] == undefined){
+                //     toastr.warning('Laporan/Tindakan Operasi tidak boleh kosong','Peringatan')
+                //     return
+                // }
                 
                 if (norecEMR == '') return
 
