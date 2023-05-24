@@ -42,17 +42,18 @@
             margin:0;
             box-sizing:border-box;
         }
-        body{
-            width:210mm;
-            height:297mm;
-            margin-top:250mm;
-            margin-bottom:250mm;
-            margin-left:250mm;
-            margin-right:250mm;
-            margin:0 auto; 
+        body,
+        html {
+            font-size: 6pt;
         }
-        @page{
+
+        @page {
             size: A4;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            margin-left: 3rem;
+            margin-right: 1rem;
+            transform: scale(72%);
         }
         table{ 
             page-break-inside:auto 
@@ -458,9 +459,12 @@
 				Tanggal : @{{item.obj[31100872] | toDate | date:'dd MMMM yyyy'}} Jam: @{{item.obj[31100872] | toDate | date:'HH:mm'}}
 			</td>
 		</tr>
-		
+		<br>
+        <br><br>
 		<tr>
-			
+			{{-- <td colspan="49" class="">
+				@{{ item.obj[31100870] ? item.obj[31100870] : '.......' }}
+			</td> --}}
 		</tr>
 
 		<!-- lembar ke dua  -->
