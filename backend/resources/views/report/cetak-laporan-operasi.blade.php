@@ -271,7 +271,7 @@
                 <td colspan="5">Komplikasi Selama Operasi : @{{ item.obj[31100542] ? item.obj[31100542] : '' }}</td>
             </tr>
             <tr>
-                <td rowspan="4" colspan="4">Diagnose Pasca Operatif : @{{ item.obj[31100541] ? item.obj['diagnose_pasca_operatif'] : '' }}</td>
+                <td rowspan="4" colspan="4">Diagnose Pasca Operatif : @{{ item.obj[31100541] ? item.obj[31100541] : '' }}</td>
                 <td colspan="2" style="border:none">Intake</td>
                 <td colspan="3" style="border:none">Output</td>
             </tr>
@@ -294,7 +294,7 @@
                 <td style="border:none">: @{{ item.obj[32103419] ? item.obj[32103419] : '__' }} cc</td>
             </tr>
             <tr valign="top">
-                <td colspan="4" rowspan="5" style="border:none;border-right:1px solid #000">Prosedur Tindakan yang dilakukan : @{{ item.obj[31100550] ? item.obj['prosedur_tindakan_yang_dilakukan'] : '' }}</td>
+                <td colspan="4" rowspan="5" style="border:none;border-right:1px solid #000">Prosedur Tindakan yang dilakukan : @{{ item.obj[31100550] ? item.obj[31100550] : '' }}</td>
                 <td colspan="2" style="border:none;border-right: 1px solid #000;">Dikirim untuk pemeriksaan P.A</td>
                 <td colspan="3" style="border:none">Jenis Luka Operasi</td>
             </tr>
@@ -316,7 +316,7 @@
                 <td style="border:none;">@{{ item.obj[31100551] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Khusus</td>
                 <td style="border:none;">@{{ item.obj[31100552] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Besar</td>
                 <td style="border:none;" colspan="2">@{{ item.obj[31100553] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Sedang</td>
-                <td style="border:none;border-top:1px solid #000;border-left:1px solid #000;" colspan="5">No. Alat yang dipasang (implan) : @{{ item.obj[31100563] ? item.obj['alat_yang_dipasang'] : '' }}</td>
+                <td style="border:none;border-top:1px solid #000;border-left:1px solid #000;" colspan="5">No. Alat yang dipasang (implan) : @{{ item.obj[31100563] ? item.obj[31100563] : '' }}</td>
             </tr>
             <tr style="border:none;border-bottom:1px solid #000">
                 <td style="border:none;">@{{ item.obj[31100554] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Kecil</td>
@@ -330,7 +330,7 @@
                 <td colspan="3">Lama Operasi Berlangsung : @{{ item.obj[31100567] ? item.obj[31100567] : '' }}</td>
             </tr>
             <tr height="70px" valign="top">
-                <td colspan="9" style="border:none">Laporan Tindakan/ Operasi : (jika perlu dapat dilanjutkan di halaman sebelah) : @{{ item.obj[31100568] ? item.obj['tindakan_operasi'] : '' }}</td>
+                <td colspan="9" style="border:none">Laporan Tindakan/ Operasi : (jika perlu dapat dilanjutkan di halaman sebelah) : @{{ item.obj[31100568] ? item.obj[31100568] : '' }}</td>
             </tr>
             <tr style="text-align:center;border:none;">
                 <td colspan="6" style="border:none"></td>
@@ -543,15 +543,15 @@
             
         }
 
-        var diagnose_pasca_operatif = $scope.item.obj[31100543].replace(/(?:\r\n|\r|\n)/g, ', ');
-        var prosedur_tindakan_yang_dilakukan = $scope.item.obj[31100550].replace(/(?:\r\n|\r|\n)/g, ', ');
-        var alat_yang_dipasang = $scope.item.obj[31100563].replace(/(?:\r\n|\r|\n)/g, ', ');
-        var tindakan_operasi = $scope.item.obj[31100568].replace(/(?:\r\n|\r|\n)/g, ', ');
+        // var diagnose_pasca_operatif = $scope.item.obj[31100543].replace(/(?:\r\n|\r|\n)/g, ', ');
+        // var prosedur_tindakan_yang_dilakukan = $scope.item.obj[31100550].replace(/(?:\r\n|\r|\n)/g, ', ');
+        // var alat_yang_dipasang = $scope.item.obj[31100563].replace(/(?:\r\n|\r|\n)/g, ', ');
+        // var tindakan_operasi = $scope.item.obj[31100568].replace(/(?:\r\n|\r|\n)/g, ', ');
 
-        $scope.item.obj['diagnose_pasca_operatif'] = diagnose_pasca_operatif;
-        $scope.item.obj['prosedur_tindakan_yang_dilakukan'] = prosedur_tindakan_yang_dilakukan;
-        $scope.item.obj['alat_yang_dipasang'] = alat_yang_dipasang;
-        $scope.item.obj['tindakan_operasi'] = tindakan_operasi;
+        // $scope.item.obj['diagnose_pasca_operatif'] = diagnose_pasca_operatif;
+        // $scope.item.obj['prosedur_tindakan_yang_dilakukan'] = prosedur_tindakan_yang_dilakukan;
+        // $scope.item.obj['alat_yang_dipasang'] = alat_yang_dipasang;
+        // $scope.item.obj['tindakan_operasi'] = tindakan_operasi;
 
         var dokter = $scope.item.obj[31100569];
         var dpjp = $scope.item.obj[31100576];
@@ -567,10 +567,11 @@
             text	: "Tanda Tangan Digital Oleh " + dpjp
         });	
     })
-
     angular.filter('toDate', function() {
-    return function(items) {
-        return new Date(items);
+        return function(items) {
+            if(items != null){
+                 return new Date(items);
+            }
         };
     });
     $(document).ready(function () {

@@ -518,11 +518,12 @@
             }
             
         })
-      
         angular.filter('toDate', function() {
         return function(items) {
-            return new Date(items);
-            };
+            if(items != null){
+                 return new Date(items);
+            }
+        };
         });
         $(document).ready(function () {
             window.print();

@@ -720,14 +720,15 @@
           text	: "Tanda Tangan Digital Oleh " + petugas2
       });	
   })
-
   angular.filter('toDate', function() {
-  return function(items) {
-      return new Date(items);
-      };
-  });
-  $(document).ready(function () {
-      window.print();
-  });
+        return function(items) {
+            if(items != null){
+                 return new Date(items);
+            }
+        };
+    });
+    $(document).ready(function () {
+        window.print();
+    });
 </script>
 </html>

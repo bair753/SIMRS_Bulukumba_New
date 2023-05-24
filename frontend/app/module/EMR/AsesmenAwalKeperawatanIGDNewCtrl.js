@@ -42,30 +42,30 @@ define(['initialize', 'Configuration'], function (initialize, config) {
             }
             $scope.cetakBlade = function () {
 
-                if($scope.item.obj[420634] == undefined){
-                    toastr.warning('Alamat Pengantar tidak boleh kosong','Peringatan')
-                    return
-                }
+                // if($scope.item.obj[420634] == undefined){
+                //     toastr.warning('Alamat Pengantar tidak boleh kosong','Peringatan')
+                //     return
+                // }
 
-                if($scope.item.obj[420864] == undefined){
-                    toastr.warning('Keluhan Saat Ini tidak boleh kosong','Peringatan')
-                    return
-                }
+                // if($scope.item.obj[420864] == undefined){
+                //     toastr.warning('Keluhan Saat Ini tidak boleh kosong','Peringatan')
+                //     return
+                // }
 
-                if($scope.item.obj[420800] == undefined){
-                    toastr.warning('Masalah Keperawatan tidak boleh kosong','Peringatan')
-                    return
-                }
+                // if($scope.item.obj[420800] == undefined){
+                //     toastr.warning('Masalah Keperawatan tidak boleh kosong','Peringatan')
+                //     return
+                // }
 
-                if($scope.item.obj[420718] == undefined){
-                    toastr.warning('Riwayat Penyakit Sebelumnya tidak boleh kosong','Peringatan')
-                    return
-                }
+                // if($scope.item.obj[420718] == undefined){
+                //     toastr.warning('Riwayat Penyakit Sebelumnya tidak boleh kosong','Peringatan')
+                //     return
+                // }
 
-                if($scope.item.obj[420719] == undefined){
-                    toastr.warning('Riwayat Penyakit Sekarang tidak boleh kosong','Peringatan')
-                    return
-                }
+                // if($scope.item.obj[420719] == undefined){
+                //     toastr.warning('Riwayat Penyakit Sekarang tidak boleh kosong','Peringatan')
+                //     return
+                // }
                 
                 if (norecEMR == '') return
 
