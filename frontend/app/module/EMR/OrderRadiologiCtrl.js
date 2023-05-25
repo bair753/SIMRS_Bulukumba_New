@@ -1315,7 +1315,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 var body = {
                     norec: e.strukorder.norec,
                     judul: 'Ada order baru #' + e.strukorder.noorder,
-                    jenis: 'Order Laboratorium',
+                    jenis: 'Order Radiologi',
                     pesanNotifikasi: '',
                     idRuanganAsal: e.strukorder.objectruanganfk,
                     idRuanganTujuan: e.strukorder.objectruangantujuanfk,
