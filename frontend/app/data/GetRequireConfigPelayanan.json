@@ -3649,6 +3649,14 @@
         {
             "nameDep": "EchocardiografiCtrl",
             "urlDep": "module/EMR/EchocardiografiCtrl"
+        },
+        {
+            "nameDep": "LembarPenggunaanVentilatorCtrl",
+            "urlDep": "module/EMR/LembarPenggunaanVentilatorCtrl"
+        },
+        {
+            "nameDep": "IdentifikasiBayiV2Ctrl",
+            "urlDep": "module/EMR/IdentifikasiBayiV2Ctrl"
         }
     ]
 }

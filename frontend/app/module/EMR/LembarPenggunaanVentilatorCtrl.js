@@ -1,6 +1,6 @@
 define(['initialize', 'Configuration'], function (initialize, config) {
     'use strict';
-    initialize.controller('PemantauanCPAPDstCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
+    initialize.controller('LembarPenggunaanVentilatorCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
         function ($q, $rootScope, $scope, ModelItem, $state, cacheHelper, dateHelper, medifirstService) {
 
             var paramsIndex = $state.params.index ? parseInt($state.params.index) : null
@@ -13,10 +13,10 @@ define(['initialize', 'Configuration'], function (initialize, config) {
             $scope.SkorJatuhAnak = [];
             $scope.cc = {}
             var nomorEMR = '-'
-            $scope.cc.emrfk = 290132;
+            $scope.cc.emrfk = 290158;
             var dataLoad = []
             var pegawaiInputDetail= ''
-            $scope.isCetak = true
+            $scope.isCetak = false
             var norecEMR = ''
             var cacheNomorEMR = cacheHelper.get('cacheNomorEMR');
             var cacheNoREC = cacheHelper.get('cacheNOREC_EMR');
@@ -55,7 +55,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 var local = JSON.parse(localStorage.getItem('profile'));
                 var nama = medifirstService.getPegawaiLogin().namalengkap;
                 console.log(config.baseApiBackend);
-                window.open(config.baseApiBackend + 'report/cetak-pemantauan-cpap?nocm='
+                window.open(config.baseApiBackend + 'report/cetak-alat-monitoring-cpap?nocm='
                     + $scope.cc.nocm + '&norec_apd=' + $scope.cc.norec + '&emr=' + norecEMR
                     + '&emrfk=' + $scope.cc.emrfk
                     + '&kdprofile=' + local.id
@@ -86,7 +86,6 @@ define(['initialize', 'Configuration'], function (initialize, config) {
             medifirstService.getPart("sysadmin/general/get-datacombo-icd10-secondary", true, true, 10).then(function (data) {
                 $scope.listDiagnosaSecondary = data;
             });
-
 
             var cacheNomorEMR = cacheHelper.get('cacheNomorEMR');
             if (cacheNomorEMR != undefined) {
@@ -287,7 +286,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 }
                 medifirstService.post('emr/save-emr-dinamis', jsonSave).then(function (e) {
                     medifirstService.postLogging('EMR', 'norec emrpasien_t', e.data.data.norec,
-                    'Pemantauan CPAP Dst'+ ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
+                    'Lembar Penggunaan Ventilator'+ ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
                     + $scope.cc.noregistrasi).then(function (res) {
                     })
                     $rootScope.loadRiwayat()
