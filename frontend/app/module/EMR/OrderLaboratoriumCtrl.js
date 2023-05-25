@@ -287,6 +287,10 @@ define(['initialize'], function (initialize) {
 
                 if (norec_apd != null) {
                     var array_pp = ''
+                    if($scope.dataSelectedRiwayat.details_pp == undefined){
+                        toastr.error('Hasil tidak ditemukan');
+                        return
+                    }
                     for (let i = 0; i < $scope.dataSelectedRiwayat.details_pp.length; i++) {
                         const element =  $scope.dataSelectedRiwayat.details_pp[i];
                         array_pp = array_pp + "','" + element.norec_pp
