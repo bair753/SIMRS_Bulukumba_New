@@ -1032,7 +1032,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     var noorder = e.data.strukorder.noorder
                     var tglorder = e.data.strukorder.tglorder
                     tglorder = tglorder.replace(' ', '%20');
-                    var namaPasien = $scope.item.namaPasien
+                var namaPasien = $scope.item.namaPasien
                     namaPasien = namaPasien.replace(' ', '%20');
 
                     if ($scope.item.ruangantujuan != undefined) {
