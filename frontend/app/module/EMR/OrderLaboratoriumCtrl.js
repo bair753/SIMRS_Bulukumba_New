@@ -443,7 +443,7 @@ define(['initialize'], function (initialize) {
                 },
 
                 {
-                    "field": "statusorder",
+                    "field": "status",
                     "title": "Status",
                     "width": "70px",
                 },
@@ -826,6 +826,10 @@ define(['initialize'], function (initialize) {
             $scope.hapusOrder = function () {
                 if ($scope.dataSelectedRiwayat == undefined) {
                     toastr.error('Pilih data yang mau dihapus')
+                    return
+                }
+                if ($scope.dataSelectedRiwayat.status == 'SELESAI') {
+                    toastr.error('Tidak bisa dihapus, data sudah diverifikasi')
                     return
                 }
                 if ($scope.dataSelectedRiwayat.statusorder != 'PENDING') {

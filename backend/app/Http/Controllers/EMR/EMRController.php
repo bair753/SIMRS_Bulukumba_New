@@ -6057,9 +6057,11 @@ class EMRController  extends ApiController
 //            ->LEFTJOIN('reshd as pp','pp.ono','=','so.noorder')
             ->select('so.norec', 'pd.norec as norecpd', 'apd.norec as norecapdlab', 'jk.id as jk_id', 'jk.jeniskelamin', 'pas.tgllahir', 'pd.noregistrasi', 'so.tglorder', 'so.noorder',
                 'ru.namaruangan as namaruanganasal', 'ru2.namaruangan as namaruangantujuan', 'p.namalengkap as dokter',
-                'so.noorder','pd.noregistrasi','so.keteranganlainnya','so.cito'
+                'so.noorder','pd.noregistrasi','so.keteranganlainnya','so.cito',
 //                ,DB::raw('case when pp.ono is null then \'PENDING\' else \'SELESAI DIPERIKSA\' end as statusorder')
-            )
+                DB::raw("case when so.statusorder is null then 'MASUK' else
+                'SELESAI' end as status")
+)
             ->where('pd.statusenabled',true)
             ->where('pd.kdprofile', $idProfile);
         $noreg= '';
@@ -6560,8 +6562,10 @@ class EMRController  extends ApiController
             ->LEFTJOIN('pegawai_m as p', 'p.id', '=', 'so.objectpegawaiorderfk')
 //            ->LEFTJOIN('ris_order as pp','pp.order_no','=','so.noorder')
             ->select('so.norec', 'so.tglorder', 'so.noorder', 'ru.namaruangan as namaruanganasal', 'ru2.namaruangan as namaruangantujuan', 'p.namalengkap as dokter', 'so.statusorder',
-                'pd.noregistrasi', 'so.objectruangantujuanfk', 'so.statusorder','so.keteranganlainnya','so.cito'
+                'pd.noregistrasi', 'so.objectruangantujuanfk', 'so.statusorder','so.keteranganlainnya','so.cito',
 //                DB::raw('case when pp.order_no is null then \'PENDING\' else \'SELESAI DIPERIKSA\' end as statusorder')
+            DB::raw("case when so.statusorder is null then 'MASUK' else
+                                    'SELESAI' end as status")
             )
             ->where('pd.statusenabled',true)
             ->where('so.kdprofile', $idProfile);

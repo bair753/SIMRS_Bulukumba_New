@@ -359,7 +359,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     "width": "100px",
                 },
                 {
-                    "field": "statusorder",
+                    "field": "status",
                     "title": "Status",
                     "width": "70px",
                 },
@@ -1250,6 +1250,10 @@ define(['initialize', 'Configuration'], function (initialize, config) {
             $scope.hapusOrder = function () {
                 if ($scope.dataSelectedRiwayat == undefined) {
                     toastr.error('Pilih data yang mau dihapus')
+                    return
+                }
+                if ($scope.dataSelectedRiwayat.status == 'SELESAI') {
+                    toastr.error('Tidak bisa dihapus, data sudah diverifikasi')
                     return
                 }
                 if ($scope.dataSelectedRiwayat.statusorder == 'Belum Kirim Ke RIS' && $scope.dataSelectedRiwayat.statusorder == 'Belum Verifikasi') {
