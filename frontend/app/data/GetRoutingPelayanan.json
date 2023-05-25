@@ -20352,6 +20352,52 @@
         "define": "RekamMedisCtrl"
       }
     ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.LembarPenggunaanVentilator",
+    "url": "/LembarPenggunaanVentilator/:index/:idEMR",
+    "templateurl": "module/EMR/LembarPenggunaanVentilator.html",
+    "controller": "LembarPenggunaanVentilatorCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.IdentifikasiBayiV2",
+    "url": "/IdentifikasiBayiV2/:index/:idEMR",
+    "templateurl": "module/EMR/IdentifikasiBayiV2.html",
+    "controller": "IdentifikasiBayiV2Ctrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
   }
 
 

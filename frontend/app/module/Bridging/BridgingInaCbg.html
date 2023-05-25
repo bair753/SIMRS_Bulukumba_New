@@ -571,6 +571,13 @@
 			<div class="grid_2">
 				<button class="btnTemplate1 buttonKuning" ng-click="bayiSepsis()">Cetak Bayi Sepsis</button>
 			</div>
+			<div class="grid_2">
+				<button class="btnTemplate1 buttonKuning" ng-click="pemantauanCPAP()">Cetak Pemantauan CPAP</button>
+			</div>
+			<div class="grid_2">
+				<button class="btnTemplate1 buttonKuning" ng-click="alatMonitoringCPAP()">Cetak Alat Monitoring CPAP</button>
+			</div>
+			
 			<!-- <div class="grid_2" >
 				<button class="btnTemplate1"  ng-click="editKlaimm()">Edit Klaim Masal</button>
 			</div>
@@ -1532,6 +1539,34 @@
 					<div class="grid_12">
 							<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
 									<button class="k-button  k-button-icontext" ng-click="cetakBayiSepsis()">Cetak</button>
+							</div>
+					</div>
+			</div>
+		</div>
+
+		<div kendo-window="popUpDaftarAlatMonitoringCPAP" k-title="'Daftar Alat Monitoring CPAP'" k-visible="false" k-width="1000" k-height="400">
+			<div class="panel panel-default container_12">
+				<div class="grid_12 headerBox">
+					<kendo-grid id="kGrids" data-source="dataDaftarAlatMonitoringCPAP" options="columnDaftarAlatMonitoringCPAP" k-selectable="'row'" k-sortable="'true'"
+							k-resizable="'true'" k-ng-model="dataSelectedAlatMonitoringCPAP" ng-click="klikGridAlatMonitoringCPAP(dataSelectedAlatMonitoringCPAP)"></kendo-grid>
+				</div>
+					<div class="grid_12">
+							<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
+									<button class="k-button  k-button-icontext" ng-click="cetakAlatMonitoringCPAP()">Cetak</button>
+							</div>
+					</div>
+			</div>
+		</div>
+
+		<div kendo-window="popUpDaftarPemantauanCPAP" k-title="'Daftar Pemantauan CPAP Dst'" k-visible="false" k-width="1000" k-height="400">
+			<div class="panel panel-default container_12">
+				<div class="grid_12 headerBox">
+					<kendo-grid id="kGrids" data-source="dataDaftarPemantauanCPAP" options="columnDaftarPemantauanCPAP" k-selectable="'row'" k-sortable="'true'"
+							k-resizable="'true'" k-ng-model="dataSelectedPemantauanCPAP" ng-click="klikGridPemantauanCPAP(dataSelectedPemantauanCPAP)"></kendo-grid>
+				</div>
+					<div class="grid_12">
+							<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
+									<button class="k-button  k-button-icontext" ng-click="cetakPemantauanCPAP()">Cetak</button>
 							</div>
 					</div>
 			</div>
