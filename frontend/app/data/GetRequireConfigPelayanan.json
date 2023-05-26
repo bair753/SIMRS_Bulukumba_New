@@ -3657,6 +3657,26 @@
         {
             "nameDep": "IdentifikasiBayiV2Ctrl",
             "urlDep": "module/EMR/IdentifikasiBayiV2Ctrl"
+        },
+        {
+            "nameDep": "LembarFormulirRawatJalanCtrl",
+            "urlDep": "module/EMR/LembarFormulirRawatJalanCtrl"
+        },
+        {
+            "nameDep": "TindakanFisioterapiCtrl",
+            "urlDep": "module/EMR/TindakanFisioterapiCtrl"
+        },
+        {
+            "nameDep": "BuktiPelayananTindakanCtrl",
+            "urlDep": "module/EMR/BuktiPelayananTindakanCtrl"
+        },
+        {
+            "nameDep": "FentonBayiLakilakiCtrl",
+            "urlDep": "module/EMR/FentonBayiLakilakiCtrl"
+        },
+        {
+            "nameDep": "FentonBayiPerempuanCtrl",
+            "urlDep": "module/EMR/FentonBayiPerempuanCtrl"
         }
     ]
 }
