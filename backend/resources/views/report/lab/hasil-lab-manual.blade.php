@@ -444,16 +444,23 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
         </table>
     </div>
     <script>
-        jQuery('#qrcodeNamaPemeriksa').qrcode({
-            width	: 100,
-			height	: 100,
-            text	: "Tanda Tangan Digital Oleh " + "{{ $r['pemeriksa'] }}"
-        });	
-        jQuery('#qrcodePenanggungJawab').qrcode({
-            width	: 100,
-			height	: 100,
-            text	: "Tanda Tangan Digital Oleh " + "{{ $r['doketr'] }}"
-        });
+        var p = {!! json_encode($r['pemeriksa'] )!!};
+        var d = {!! json_encode($r['doketr'] )!!};
+        
+        if(p != null){
+            jQuery('#qrcodeNamaPemeriksa').qrcode({
+                width	: 100,
+                height	: 100,
+                text	: "Tanda Tangan Digital Oleh " + "{{ $r['pemeriksa'] }}"
+            });	
+        }
+        if(d != null){
+            jQuery('#qrcodePenanggungJawab').qrcode({
+                width	: 100,
+                height	: 100,
+                text	: "Tanda Tangan Digital Oleh " + "{{ $r['doketr'] }}"
+            });
+        }
         $(document).ready(function () {
             window.print();
         });
