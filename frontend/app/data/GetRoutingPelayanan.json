@@ -20398,6 +20398,121 @@
         "define": "RekamMedisCtrl"
       }
     ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.LembarFormulirRawatJalan",
+    "url": "/LembarFormulirRawatJalan",
+    "templateurl": "module/EMR/LembarFormulirRawatJalan.html",
+    "controller": "LembarFormulirRawatJalanCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.TindakanFisioterapi",
+    "url": "/TindakanFisioterapi",
+    "templateurl": "module/EMR/TindakanFisioterapi.html",
+    "controller": "TindakanFisioterapiCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.BuktiPelayananTindakan",
+    "url": "/BuktiPelayananTindakan",
+    "templateurl": "module/EMR/BuktiPelayananTindakan.html",
+    "controller": "BuktiPelayananTindakanCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.FentonBayiLakilaki",
+    "url": "/FentonBayiLakilaki",
+    "templateurl": "module/EMR/FentonBayiLakilaki.html",
+    "controller": "FentonBayiLakilakiCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.FentonBayiPerempuan",
+    "url": "/FentonBayiPerempuan",
+    "templateurl": "module/EMR/FentonBayiPerempuan.html",
+    "controller": "FentonBayiPerempuanCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
   }
 
 

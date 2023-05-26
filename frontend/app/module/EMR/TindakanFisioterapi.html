@@ -1,0 +1,275 @@
+<style type="text/css">
+    fieldset {
+        border-radius: 5px;
+        border: 1px solid #228be6;
+    }
+
+    .k-slider-horizontal {
+        display: inline-block;
+        float: left;
+        width: 450px;
+
+        height: 26px;
+
+
+    }
+
+    .k-slider {
+
+        margin-left: 3%;
+        margin-right: 3%;
+        margin-top: 1%;
+        margin-bottom: 5%;
+        display: inline-block;
+    }
+
+    .activeBtn {
+        background-color: #10c4b2;
+        color: #ffffff;
+    }
+    table,
+    th,
+    td {
+        border: 1px solid #929191;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+
+    th,
+    td {
+        padding: 5px;
+        text-align: left;
+    }
+</style>
+
+ <!-- ng-class="{'my-disable':true}" -->
+<!-- <div class="grid_12"  disable-contents="allDisabled" id="form"> -->
+<div class="grid_12">
+    <div class="grid_12">
+        <div class="panel panel-default container_12">
+            <div class="panel-heading" c-translate>Tindakan Fisioterapi</div>
+        </div>
+        
+        <div class="grid_12" style="margin-top: 10px;">
+            <fieldset style="margin-top: 10px;">
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_12" >
+                        <div class="grid_12">
+                            <div class="grid_12" style="margin-top: 10px;">
+                                <label c-label item="item">No. RM</label>
+                            </div>
+                            <div class="grid_6">
+                                <input type="text" class="k-textbox" ng-model="item.obj[32110985]">
+                            </div>
+                        </div>
+                        <div class="grid_12">
+                            <div class="grid_12" style="margin-top: 10px;">
+                                <label c-label item="item">Nama Pasien</label>
+                            </div>
+                            <div class="grid_6">
+                                <input type="text" class="k-textbox" ng-model="item.obj[32110986]">
+                            </div>
+                        </div>
+                        <div class="grid_12">
+                            <div class="grid_12" style="margin-top: 10px;">
+                                <label c-label item="item">Tanggal Lahir</label>
+                            </div>
+                            <div class="grid_6">
+                                <input style="width: 90%" k-ng-model="item.obj[32110987]" kendo-datepicker placeholer="YYYY:MM:DD"
+                                k-format="'yyyy-MM-dd'" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="grid_12" style="margin-top: 10px;">
+            <fieldset style="margin-top: 10px;">
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_12" >
+                        <div class="grid_12">
+                            <div class="grid_12" style="margin-top: 10px;">
+                                <label c-label item="item">Tanggal Pelayanan</label>
+                            </div>
+                            <div class="grid_6">
+                                <input style="width: 90%" k-ng-model="item.obj[32110988]" kendo-datepicker placeholer="YYYY:MM:DD"
+                                k-format="'yyyy-MM-dd'" />
+                            </div>
+                        </div>
+                        <div class="grid_12">
+                            <div class="grid_12" style="margin-top: 10px;">
+                                <label c-label item="item">Diagnosa Medis</label>
+                            </div>
+                            <div class="grid_6">
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[32110989]" ng-disable="item.obj[32110989]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listICD10" />
+                            </div>
+                        </div>
+                        <div class="grid_12">
+                            <div class="grid_12" style="margin-top: 10px;">
+                                <label c-label item="item">Diagnosa Fungsi</label>
+                            </div>
+                            <div class="grid_6">
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[32110990]" ng-disable="item.obj[32110990]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listICD10" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="grid_12" style="margin-top: 10px;">
+            <fieldset style="margin-top: 10px;">
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_12" >
+                        <div class="grid_12">
+                            <table>
+                                <tr>
+                                    <th style="text-align: center;">No</th>
+                                    <th style="text-align: center;">Jenis Tindakan</th>
+                                    <th style="text-align: center;">ICD-9</th>
+                                </tr>
+                                <tr>
+                                    <td style="width: 30px;"><input type="text" class="k-textbox" ng-model="item.obj[32110991]"></td>
+                                    <td><input type="text" class="k-textbox" ng-model="item.obj[32110992]"></td>
+                                    <td><input type="text" class="k-textbox" ng-model="item.obj[32110993]"></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 30px;"><input type="text" class="k-textbox" ng-model="item.obj[32110994]"></td>
+                                    <td><input type="text" class="k-textbox" ng-model="item.obj[32110995]"></td>
+                                    <td><input type="text" class="k-textbox" ng-model="item.obj[32110996]"></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 30px;"><input type="text" class="k-textbox" ng-model="item.obj[32110997]"></td>
+                                    <td><input type="text" class="k-textbox" ng-model="item.obj[32110998]"></td>
+                                    <td><input type="text" class="k-textbox" ng-model="item.obj[32110999]"></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 30px;"><input type="text" class="k-textbox" ng-model="item.obj[32111000]"></td>
+                                    <td><input type="text" class="k-textbox" ng-model="item.obj[32111001]"></td>
+                                    <td><input type="text" class="k-textbox" ng-model="item.obj[32111002]"></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 30px;"><input type="text" class="k-textbox" ng-model="item.obj[32111003]"></td>
+                                    <td><input type="text" class="k-textbox" ng-model="item.obj[32111004]"></td>
+                                    <td><input type="text" class="k-textbox" ng-model="item.obj[32111005]"></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 30px;"><input type="text" class="k-textbox" ng-model="item.obj[32111006]"></td>
+                                    <td><input type="text" class="k-textbox" ng-model="item.obj[32111007]"></td>
+                                    <td><input type="text" class="k-textbox" ng-model="item.obj[32111008]"></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 30px;"><input type="text" class="k-textbox" ng-model="item.obj[32111009]"></td>
+                                    <td><input type="text" class="k-textbox" ng-model="item.obj[32111010]"></td>
+                                    <td><input type="text" class="k-textbox" ng-model="item.obj[32111011]"></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 30px;"><input type="text" class="k-textbox" ng-model="item.obj[32111012]"></td>
+                                    <td><input type="text" class="k-textbox" ng-model="item.obj[32111013]"></td>
+                                    <td><input type="text" class="k-textbox" ng-model="item.obj[32111014]"></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 30px;"><input type="text" class="k-textbox" ng-model="item.obj[32111015]"></td>
+                                    <td><input type="text" class="k-textbox" ng-model="item.obj[32111016]"></td>
+                                    <td><input type="text" class="k-textbox" ng-model="item.obj[32111017]"></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 30px;"><input type="text" class="k-textbox" ng-model="item.obj[32111018]"></td>
+                                    <td><input type="text" class="k-textbox" ng-model="item.obj[32111019]"></td>
+                                    <td><input type="text" class="k-textbox" ng-model="item.obj[32111020]"></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 30px;"><input type="text" class="k-textbox" ng-model="item.obj[32111021]"></td>
+                                    <td><input type="text" class="k-textbox" ng-model="item.obj[32111022]"></td>
+                                    <td><input type="text" class="k-textbox" ng-model="item.obj[32111023]"></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 30px;"><input type="text" class="k-textbox" ng-model="item.obj[32111024]"></td>
+                                    <td><input type="text" class="k-textbox" ng-model="item.obj[32111025]"></td>
+                                    <td><input type="text" class="k-textbox" ng-model="item.obj[32111026]"></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 30px;"><input type="text" class="k-textbox" ng-model="item.obj[32111027]"></td>
+                                    <td><input type="text" class="k-textbox" ng-model="item.obj[32111028]"></td>
+                                    <td><input type="text" class="k-textbox" ng-model="item.obj[32111029]"></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="grid_12" style="margin-top: 10px;">
+            <fieldset style="margin-top: 10px;">
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_12" >
+                        <div class="grid_12">
+                            <div class="grid_12" style="margin-top: 10px;">
+                                <label c-label item="item">Bulukumba, </label>
+                            </div>
+                            <div class="grid_6">
+                                <input style="width: 90%" k-ng-model="item.obj[32111030]" kendo-datetimepicker placeholer="YYYY:MM:DD HH:mm"
+                                        k-format="'yyyy-MM-dd HH:mm'" />
+                            </div>
+                        </div>
+                        <div class="grid_6">
+                            <div class="grid_12" style="margin-top: 10px;">
+                                <label c-label item="item">Penerima Pelayanan</label>
+                            </div>
+                            <div class="grid_12">
+                                <input type="text" class="k-textbox" ng-model="item.obj[32111031]">
+                            </div>
+                        </div>
+                        <div class="grid_6">
+                            <div class="grid_12" style="margin-top: 10px;">
+                                <label c-label item="item">Pemeriksa</label>
+                            </div>
+                            <div class="grid_12">
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[32111032]" ng-disable="item.obj[32111032]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+    </div>
+</div>
+
+<br />
+<br />
+<div class="grid_12">
+    <div class="grid_3"></div>
+<div class="grid_9">
+    <div class="grid_2" ng-show="isCetakV"  >
+       
+    </div>
+    <div class="grid_6"  ng-show="!isRiwayat && !isCetak && !isCetakV">
+    </div>
+    <div class="grid_2" style="margin-top: 22px" ng-show='tombolSimpanVis'>
+        <button class="btnTemplate1" ng-click="Save()"><i class="fa fa-save"></i>Simpan</button>
+    </div>
+    <div class="grid_2" style="margin-top: 22px" ng-show="isRiwayat">
+        <button class="btnTemplate1" ng-click="Riwayat()"><i class="fa fa-th-list"></i>Riwayat</button>
+    </div>
+    <div class="grid_2" style="margin-top: 22px">
+        <button class="btnTemplate1" ng-click="Batal()"><i class="fa fa-refresh"></i>Batal</button>
+    </div>
+    <div class="grid_2" style="margin-top: 22px">
+        <button class="btnTemplate1 cancel" ng-click="kembali()"><i class="fa fa-arrow-left"></i>Kembali</button>
+    </div>
+    <div class="grid_2" ng-show="isCetak"  style="margin-top: 22px">
+        <button class="btnTemplate1" ng-click="cetakPdf()"><i class="fa fa-print"></i>Cetak</button>
+    </div>
+     <div class="grid_2" ng-show="isCetakV"  style="margin-top: 22px">
+        <button class="btnTemplate1" ng-click="cetakBlade()"><i class="fa fa-print"></i>Cetak View</button>
+    </div>
+</div>
+
+</div>

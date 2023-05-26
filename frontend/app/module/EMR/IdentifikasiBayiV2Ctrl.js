@@ -237,7 +237,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 // $scope.item.objImg =[]
                 var dataImg = dat.data.data
                 for (var i = 0; i <= dataImg.length - 1; i++) {
-                    if (parseFloat($scope.cc.emrfk) == dataImg[i].emrfk) {
+                    if (parseFloat($scope.cc.emrfk) == dataImg[i].emrfk && paramsIndex == dataImg[i].index) {
                         $scope.item.objImg[dataImg[i].emrdfk] = dataImg[i].image
                       }
 
