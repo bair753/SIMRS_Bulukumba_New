@@ -3649,6 +3649,10 @@
         {
             "nameDep": "EchocardiografiCtrl",
             "urlDep": "module/EMR/EchocardiografiCtrl"
+        },
+        {
+            "nameDep": "MonitoringBerkasKlaimCtrl",
+            "urlDep": "module/EMR/MonitoringBerkasKlaimCtrl"
         }
     ]
 }

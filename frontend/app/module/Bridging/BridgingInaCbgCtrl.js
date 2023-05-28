@@ -6282,6 +6282,15 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 				+ '&nama=' + nama, '_blank');
 			}
 
+			$scope.bundlingdocument = function () {
+				if ($scope.dataPasienSelected == undefined) {
+					toastr.error('Pilih Data Pasien dulu', 'Caution');
+					return;
+				}
+                var strBACKEND = baseTransaksi.replace('service/medifirst2000/', '')
+                window.open(strBACKEND + "service/storage/bundledokumenklaim?noregistrasi="+ $scope.dataPasienSelected.noregistrasi);
+			}
+
 			// END ################
 
 		}
