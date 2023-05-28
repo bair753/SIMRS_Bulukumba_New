@@ -94,6 +94,7 @@ class LoginController extends ApiController {
         $LoginUser = $login->get();
         if (count($LoginUser) > 0){
             //region Cek Login Expired
+            
             $now = date('Y-m-d H:i:s');
             $cekWaktuLogin_M = \Schema::hasTable('waktulogin_m');
             if($cekWaktuLogin_M == true){
@@ -229,6 +230,7 @@ class LoginController extends ApiController {
             $dataLogin = array(
                 'id' => $LoginUser[0]->id,
                 'kdProfile' => $LoginUser[0]->kdprofile,
+                'statusenabled' => $LoginUser[0]->statusenabled,
                 'namaUser' => $LoginUser[0]->namauser,
                 'kataSandi'=> $LoginUser[0]->katasandi,
                 'passCode'=> $LoginUser[0]->passcode,
@@ -238,8 +240,16 @@ class LoginController extends ApiController {
                 'pegawai' => $resPegawai,
                 'profile' => $profile
             ) ;
+            
             $token['X-AUTH-TOKEN'] = $this->createToken($LoginUser[0]->namauser).'';
-
+            if($LoginUser['statusenabled'] == 't'){
+                $result = array(
+                    'data' => $dataLogin,
+                    'messages' => 'Login gagal, Akun dinonaktifkan',
+                    'status'=> 201,
+                    'as'=> '#Inhuman'
+                );
+            }
             $result = array(
                 'data' => $dataLogin,
                 'messages' =>$token,
