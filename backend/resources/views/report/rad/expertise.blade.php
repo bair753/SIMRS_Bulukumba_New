@@ -107,6 +107,10 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             <td width="80%"><font style="font-size: 12pt;" color="#000000" >: {{ $raw->klinis }}</font></td>
                         </tr>
                         <tr>
+                            <td width="20%"><font style="font-size: 12pt;" color="#000000;" >Status</font></td>
+                            <td width="80%"><font style="font-size: 12pt;" color="#000000" >: {{ $raw->statusradctscan }}</font></td>
+                        </tr>
+                        <tr>
                             <td width="20%"><font style="font-size: 12pt;" color="#000000;" >Dokter Pengirim</font></td>
                             <td width="80%"><font style="font-size: 12pt;" color="#000000" >: {{ $raw->dokterpengirim }}</font></td>
                         </tr>
