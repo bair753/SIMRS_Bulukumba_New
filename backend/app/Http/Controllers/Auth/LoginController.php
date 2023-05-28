@@ -89,16 +89,17 @@ class LoginController extends ApiController {
 //        }
         $login = DB::table('loginuser_s')
             ->where('passcode', '=', $this->encryptSHA1($request->input('kataSandi')))
-            ->where('namauser', '=', $request->input('namaUser'))
-            ->where('statusenabled', true);
+            ->where('namauser', '=', $request->input('namaUser'));
         $LoginUser = $login->get();
-        if($LoginUser[0]->statusenabled == 't'){
+        // return $LoginUser;
+        if($LoginUser[0]->statusenabled == false){
             $result = array(
                 'data' => [],
                 'messages' => 'Login gagal, Akun telah dinonaktifkan',
                 'status'=> 400,
                 'as'=> '#Inhuman'
             );
+            return $this->setStatusCode($result['status'])->respond($result);
         }
         if (count($LoginUser) > 0){
             //region Cek Login Expired
