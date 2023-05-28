@@ -1,0 +1,281 @@
+<style type="text/css">
+    fieldset {
+        border-radius: 5px;
+        border: 1px solid #228be6;
+    }
+
+    .k-slider-horizontal {
+        display: inline-block;
+        float: left;
+        width: 450px;
+
+        height: 26px;
+
+
+    }
+
+    .k-slider {
+
+        margin-left: 3%;
+        margin-right: 3%;
+        margin-top: 1%;
+        margin-bottom: 5%;
+        display: inline-block;
+    }
+
+    .activeBtn {
+        background-color: #10c4b2;
+        color: #ffffff;
+    }
+    table,
+    th,
+    td {
+        border: 1px solid #929191;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+
+    th,
+    td {
+        padding: 5px;
+        text-align: left;
+    }
+</style>
+
+ <!-- ng-class="{'my-disable':true}" -->
+<!-- <div class="grid_12"  disable-contents="allDisabled" id="form"> -->
+<div class="grid_12">
+    <div class="grid_12">
+        <div class="panel panel-default container_12">
+            <div class="panel-heading" c-translate>Lembar Formulir Rawat Jalan</div>
+        </div>
+        
+        <div class="grid_12" style="margin-top: 10px;">
+            <fieldset style="margin-top: 10px;">
+                <legend><b>Diisi Oleh Pasien/Peserta</b></legend>
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_12" >
+                        <div class="grid_12">
+                            <div class="grid_12" style="margin-top: 10px;">
+                                <label c-label item="item">No. RM</label>
+                            </div>
+                            <div class="grid_6">
+                                <input type="text" class="k-textbox" ng-model="item.obj[32110964]">
+                            </div>
+                        </div>
+                        <div class="grid_12">
+                            <div class="grid_12" style="margin-top: 10px;">
+                                <label c-label item="item">Nama Pasien</label>
+                            </div>
+                            <div class="grid_6">
+                                <input type="text" class="k-textbox" ng-model="item.obj[32110965]">
+                            </div>
+                        </div>
+                        <div class="grid_12">
+                            <div class="grid_12" style="margin-top: 10px;">
+                                <label c-label item="item">Tanggal Lahir</label>
+                            </div>
+                            <div class="grid_6">
+                                <input style="width: 90%" k-ng-model="item.obj[32110966]" kendo-datepicker placeholer="YYYY:MM:DD"
+                                k-format="'yyyy-MM-dd'" />
+                            </div>
+                        </div>
+                        <div class="grid_12">
+                            <div class="grid_12" style="margin-top: 10px;">
+                                <label c-label item="item">Alamat</label>
+                            </div>
+                            <div class="grid_6">
+                                <input type="text" class="k-textbox" ng-model="item.obj[32110967]">
+                            </div>
+                        </div>
+                        <div class="grid_12">
+                            <div class="grid_12" style="margin-top: 10px;">
+                                <label c-label item="item">Telp./ HP</label>
+                            </div>
+                            <div class="grid_6">
+                                <input type="text" class="k-textbox" ng-model="item.obj[32110968]">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="grid_12" style="margin-top: 10px;">
+            <fieldset style="margin-top: 10px;">
+                <legend><b>Diisi oleh Dokter SpKFR</b></legend>
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_12" >
+                        <div class="grid_12">
+                            <div class="grid_12" style="margin-top: 10px;">
+                                <label c-label item="item">Tanggal Pelayanan</label>
+                            </div>
+                            <div class="grid_6">
+                                <input style="width: 90%" k-ng-model="item.obj[32110969]" kendo-datepicker placeholer="YYYY:MM:DD"
+                                k-format="'yyyy-MM-dd'" />
+                            </div>
+                        </div>
+                        <div class="grid_12">
+                            <div class="grid_12" style="margin-top: 10px;">
+                                <label c-label item="item">Anamnesia</label>
+                            </div>
+                            <div class="grid_12">
+                                <input type="text" class="k-textbox" ng-model="item.obj[32110970]">
+                            </div>
+                        </div>
+                        <div class="grid_12">
+                            <div class="grid_12" style="margin-top: 10px;">
+                                <label c-label item="item">Pemeriksaan Fisik & Uji Fungsi</label>
+                            </div>
+                            <div class="grid_12">
+                                <input type="text" class="k-textbox" ng-model="item.obj[32110971]">
+                            </div>
+                        </div>
+                        <div class="grid_12">
+                            <div class="grid_12" style="margin-top: 10px;">
+                                <label c-label item="item">Diagnosis Medis ( ICD-10 )</label>
+                            </div>
+                            <div class="grid_12">
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[32110972]" ng-disable="item.obj[32110972]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listICD10" />
+                            </div>
+                        </div>
+                        <div class="grid_12">
+                            <div class="grid_12" style="margin-top: 10px;">
+                                <label c-label item="item">Diagnosis Fungsi ( ICD-10 )</label>
+                            </div>
+                            <div class="grid_12">
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[32110973]" ng-disable="item.obj[32110973]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listICD10" />
+                            </div>
+                        </div>
+                        <div class="grid_12">
+                            <div class="grid_12" style="margin-top: 10px;">
+                                <label c-label item="item">Pemeriksaan Penunjang</label>
+                            </div>
+                            <div class="grid_12">
+                                <input type="text" class="k-textbox" ng-model="item.obj[32110974]">
+                            </div>
+                        </div>
+                        <div class="grid_12">
+                            <div class="grid_12" style="margin-top: 10px;">
+                                <label c-label item="item">Tata Laksana KFR ( ICD-9 CM )</label>
+                            </div>
+                            <div class="grid_12">
+                                <textarea style="width: 100%;height: 100px" cols="3" rows="2" c-text-area type="input" filter="'string'" class="k-textbox" ng-model="item.obj[32110975]"></textarea>
+                            </div>
+                        </div>
+                        <div class="grid_12">
+                            <div class="grid_12" style="margin-top: 10px;">
+                                <label c-label item="item">Anjuran</label>
+                            </div>
+                            <div class="grid_12">
+                                <textarea style="width: 100%;height: 100px" cols="3" rows="2" c-text-area type="input" filter="'string'" class="k-textbox" ng-model="item.obj[32110976]"></textarea>
+                            </div>
+                        </div>
+                        <div class="grid_12">
+                            <div class="grid_12" style="margin-top: 10px;">
+                                <label c-label item="item">Evaluasi</label>
+                            </div>
+                            <div class="grid_12">
+                                <input type="text" class="k-textbox" ng-model="item.obj[32110977]">
+                            </div>
+                        </div>
+                        <div class="grid_12">
+                            <div class="grid_12" style="margin-top: 10px;">
+                                <label c-label item="item">Suspek Penyakit Akibat Kerja</label>
+                            </div>
+                            <div class="grid_12">
+                                <div class="grid_2">
+                                    <input type="checkbox" class="k-checkbox" ng-model="item.obj[32110978]" id="item.obj[32110978]">
+                                    <label class="k-checkbox-label" for="item.obj[32110978]">&nbsp;Ya</label> 
+                                </div>
+                                <div class="grid_8">
+                                    <input class="k-textbox" ng-model="item.obj[32110979]" type="text">
+                                </div>
+                            </div>
+                            <div class="grid_12">
+                                <div class="grid_2">
+                                    <input type="checkbox" class="k-checkbox" ng-model="item.obj[32110980]" id="item.obj[32110980]">
+                                    <label class="k-checkbox-label" for="item.obj[32110980]">&nbsp;Tidak</label> 
+                                </div>
+                                <div class="grid_8">
+                                    <input class="k-textbox" ng-model="item.obj[32110981]" type="text">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="grid_12" style="margin-top: 10px;">
+            <fieldset style="margin-top: 10px;">
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_12" >
+                        <div class="grid_12">
+                            <div class="grid_12" style="margin-top: 10px;">
+                                <label c-label item="item">Bulukumba, </label>
+                            </div>
+                            <div class="grid_6">
+                                <input style="width: 90%" k-ng-model="item.obj[32110982]" kendo-datetimepicker placeholer="YYYY:MM:DD HH:mm"
+                                        k-format="'yyyy-MM-dd HH:mm'" />
+                            </div>
+                        </div>
+                        <div class="grid_6">
+                            <div class="grid_12" style="margin-top: 10px;">
+                                <label c-label item="item">Pasien</label>
+                            </div>
+                            <div class="grid_12">
+                                <input class="k-textbox" ng-model="item.obj[32110983]" type="text">
+                            </div>
+                        </div>
+                        <div class="grid_6">
+                            <div class="grid_12" style="margin-top: 10px;">
+                                <label c-label item="item">Dokter  SpKFR,</label>
+                            </div>
+                            <div class="grid_12">
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[32110984]" ng-disable="item.obj[32110984]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listDokter" />
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+    </div>
+</div>
+
+<br />
+<br />
+<div class="grid_12">
+    <div class="grid_3"></div>
+<div class="grid_9">
+    <div class="grid_2" ng-show="isCetakV"  >
+       
+    </div>
+    <div class="grid_6"  ng-show="!isRiwayat && !isCetak && !isCetakV">
+    </div>
+    <div class="grid_2" style="margin-top: 22px" ng-show='tombolSimpanVis'>
+        <button class="btnTemplate1" ng-click="Save()"><i class="fa fa-save"></i>Simpan</button>
+    </div>
+    <div class="grid_2" style="margin-top: 22px" ng-show="isRiwayat">
+        <button class="btnTemplate1" ng-click="Riwayat()"><i class="fa fa-th-list"></i>Riwayat</button>
+    </div>
+    <div class="grid_2" style="margin-top: 22px">
+        <button class="btnTemplate1" ng-click="Batal()"><i class="fa fa-refresh"></i>Batal</button>
+    </div>
+    <div class="grid_2" style="margin-top: 22px">
+        <button class="btnTemplate1 cancel" ng-click="kembali()"><i class="fa fa-arrow-left"></i>Kembali</button>
+    </div>
+    <div class="grid_2" ng-show="isCetak"  style="margin-top: 22px">
+        <button class="btnTemplate1" ng-click="cetakPdf()"><i class="fa fa-print"></i>Cetak</button>
+    </div>
+     <div class="grid_2" ng-show="isCetakV"  style="margin-top: 22px">
+        <button class="btnTemplate1" ng-click="cetakBlade()"><i class="fa fa-print"></i>Cetak View</button>
+    </div>
+</div>
+
+</div>

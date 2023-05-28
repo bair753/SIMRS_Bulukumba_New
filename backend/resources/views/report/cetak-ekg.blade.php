@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EKG</title>
+    <title>Hasil Pemeriksaan EKG</title>
     @if (stripos(\Request::url(), 'localhost') !== false)
         {{-- <link rel="stylesheet" href="{{ asset('css/report/paper.css') }}">
         <link rel="stylesheet" href="{{ asset('css/report/table.css') }}">
@@ -422,10 +422,11 @@
         }
         console.log($scope.item.objImg[31101098]);
     })
-
     angular.filter('toDate', function() {
-    return function(items) {
-        return new Date(items);
+        return function(items) {
+            if(items != null){
+                 return new Date(items);
+            }
         };
     });
     $(document).ready(function () {

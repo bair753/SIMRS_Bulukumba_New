@@ -396,17 +396,21 @@
     var pengonsul = {!! json_encode($res['data']->pengonsul )!!};
     var dokterjawab = {!! json_encode($res['data']->namalengkap )!!};
 
+    if (pengonsul != undefined) {
         jQuery('#qrcodePengonsul').qrcode({
             width	: 100,
 			height	: 100,
             text	: "Tanda Tangan Digital Oleh " + pengonsul
         });	
-
+    }
+        
+    if (dokterjawab != undefined) {
         jQuery('#qrcodeDokterJawab').qrcode({
             width	: 100,
 			height	: 100,
             text	: "Tanda Tangan Digital Oleh " + dokterjawab
         });
+    }
 
     $(document).ready(function () {
         window.print();

@@ -1,0 +1,410 @@
+<style type="text/css">
+    fieldset {
+        border-radius: 5px;
+        border: 1px solid #228be6;
+    }
+
+    .k-slider-horizontal {
+        display: inline-block;
+        float: left;
+        width: 450px;
+
+        height: 26px;
+
+ 
+
+    }
+    table,
+    th,
+    td {
+        border: 1px solid #929191;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+
+    th,
+    td {
+        padding: 5px;
+        text-align: left;
+    }
+
+    .k-slider {
+
+        margin-left: 3%;
+        margin-right: 3%;
+        margin-top: 1%;
+        margin-bottom: 5%;
+        display: inline-block;
+    }
+
+    .activeBtn {
+        background-color: #10c4b2;
+        color: #ffffff;
+    }
+
+    .gambarAset {
+        max-width: 310px;
+        max-height: 100%;
+        display: block;
+        height: auto;
+    }
+    hr {
+        border: 1px dashed #cccccc;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        display: inline-block;
+        width: 100%;
+    }
+
+</style>
+<div class="grid_12">
+<div class="grid_12">
+    <div class="panel panel-default container_12">
+            <div class="panel-heading" c-translate>Identifikasi Bayi</div>
+    </div>
+    
+    <div class="grid_12">
+        <div class="grid_12">
+            <fieldset style="margin-top: 10px; ">
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_4">
+                        <div class="grid_12">
+                            <label c-label item="item">Nama Ibu</label>
+                        </div>
+                        <div class="grid_12">
+                            <input type="text" class="k-textbox" ng-model="item.obj[32110783]">
+                        </div>
+                    </div> 
+                    <div class="grid_4">
+                        <div class="grid_12">
+                            <label c-label item="item">Nama Ayah</label>
+                        </div>
+                        <div class="grid_12">
+                            <input type="text" class="k-textbox" ng-model="item.obj[32110784]">
+                        </div>
+                    </div>  
+                    <div class="grid_4">
+                        <div class="grid_12">
+                            <label c-label item="item">No. Rek. Med</label>
+                        </div>
+                        <div class="grid_12">
+                            <input type="text" class="k-textbox" ng-model="item.obj[32110785]">
+                        </div>
+                    </div>                        
+                </div>
+            </fieldset>
+        </div>
+    </div>
+
+    <div class="grid_12">
+        <div class="grid_12">
+            <fieldset style="margin-top: 10px; ">
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_4">
+                        <div class="grid_12">
+                            <label c-label item="item">Nama Bayi</label>
+                        </div>
+                        <div class="grid_12">
+                            <input type="text" class="k-textbox" ng-model="item.obj[32110786]">
+                        </div>
+                    </div> 
+                    <div class="grid_4">
+                        <div class="grid_12">
+                            <label c-label item="item">Dokter / Bidan Penolong</label>
+                        </div>
+                        <div class="grid_12">
+                            <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[32110787]" ng-disable="item.obj[32110787]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listDokter" />
+                        </div>
+                    </div>  
+                    <div class="grid_4">
+                        <div class="grid_12">
+                            <label c-label item="item">No. Rek. Med</label>
+                        </div>
+                        <div class="grid_12">
+                            <input type="text" class="k-textbox" ng-model="item.obj[32110788]">
+                        </div>
+                    </div>                        
+                </div>
+            </fieldset>
+        </div>
+    </div>
+
+    <div class="grid_12">
+        <div class="grid_12">
+            <fieldset style="margin-top: 10px; ">
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_2">
+                        <div class="grid_12">
+                            <label c-label item="item">No. Pengenal</label>
+                        </div>
+                        <div class="grid_12">
+                            <input type="text" class="k-textbox" ng-model="item.obj[32110789]">
+                        </div>
+                    </div> 
+                    <div class="grid_4">
+                        <div class="grid_12">
+                            <label c-label item="item">Nama Pemberi Nomor</label>
+                        </div>
+                        <div class="grid_12">
+                            <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[32110790]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                        </div>
+                    </div>  
+                    <div class="grid_3">
+                        <div class="grid_12">
+                            <label c-label item="item">Tgl/Jam Lahir Bayi</label>
+                        </div>
+                        <div class="grid_12">
+                            <input style="width: 90%" k-ng-model="item.obj[32110791]" kendo-datetimepicker placeholer="YYYY:MM:DD HH:mm"
+                                k-format="'yyyy-MM-dd HH:mm'" />
+                        </div>
+                    </div> 
+                    <div class="grid_3">
+                        <div class="grid_12">
+                            <label c-label item="item">Jenis Kelamin</label>
+                        </div>
+                        <div class="grid_12">
+                            <input type="text" class="k-textbox" ng-model="item.obj[32110792]">
+                        </div>
+                    </div>                       
+                </div>
+            </fieldset>
+        </div>
+    </div>
+
+    <div class="grid_12">
+        <div class="grid_12">
+            <fieldset style="margin-top: 10px; ">
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_3">
+                        <div class="grid_12">
+                            <label c-label item="item">Tanda Tangan (Nama)</label>
+                        </div>
+                        <div class="grid_12">
+                            <input type="text" class="k-textbox" ng-model="item.obj[32110793]">
+                        </div>
+                    </div> 
+                    <div class="grid_3">
+                        <div class="grid_12">
+                            <label c-label item="item">Warna Kulit</label>
+                        </div>
+                        <div class="grid_12">
+                            <input type="text" class="k-textbox" ng-model="item.obj[32110794]">
+                        </div>
+                    </div>  
+                    <div class="grid_3">
+                        <div class="grid_12">
+                            <label c-label item="item">Berat Badan</label>
+                        </div>
+                        <div class="grid_12">
+                            <input type="text" class="k-textbox" ng-model="item.obj[32110795]">
+                        </div>
+                    </div> 
+                    <div class="grid_3">
+                        <div class="grid_12">
+                            <label c-label item="item">Panjang</label>
+                        </div>
+                        <div class="grid_12">
+                            <input type="text" class="k-textbox" ng-model="item.obj[32110796]">
+                        </div>
+                    </div>                       
+                </div>
+            </fieldset>
+        </div>
+    </div>
+
+    <div class="grid_12">
+        <div class="grid_12">
+            <fieldset style="margin-top: 10px; ">
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_12">
+                        <div class="grid_12">
+                            <label c-label item="item">Cap Ibu Jari Tangan</label>
+                        </div>
+                    </div> 
+                    <div class="grid_6">
+                        <div class="grid_12">
+                            <label c-label item="item">Kiri</label>
+                        </div>
+                        <div class="grid_12">
+                            <div class="grid_12" style="margin-top: 10px;">
+                                <input type="file" id="fileEKG" accept="application" k-ng-model="item.obj[32110797]" kendo-upload k-select="onSelect1"/>
+                            </div>
+                            <div class="grid_12" style="margin-top: 10px">
+                                <div id="preview1" >
+                                    <img class="gambarAset" style="min-width: 300px;" src="{{item.objImg[32110797]}}" />
+                                </div>
+                             </div>
+                        </div>
+                    </div> 
+                    <div class="grid_6">
+                        <div class="grid_12">
+                            <label c-label item="item">Kanan</label>
+                        </div>
+                        <div class="grid_12">
+                            <div class="grid_12" style="margin-top: 10px;">
+                                <input type="file" id="fileEKG" accept="application" k-ng-model="item.obj[32110798]" kendo-upload k-select="onSelect2"/>
+                            </div>
+                            <div class="grid_12" style="margin-top: 10px">
+                                <div id="preview2" >
+                                    <img class="gambarAset" style="min-width: 300px;" src="{{item.objImg[32110798]}}" />
+                                </div>
+                             </div>
+                        </div>
+                    </div>                       
+                </div>
+            </fieldset>
+        </div>
+    </div>
+
+    <div class="grid_12">
+        <div class="grid_12">
+            <fieldset style="margin-top: 10px; ">
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_12">
+                        <div class="grid_12">
+                            <label c-label item="item">Cap Semua Jari</label>
+                        </div>
+                    </div> 
+                    <div class="grid_6">
+                        <div class="grid_12">
+                            <label c-label item="item">Kaki Kiri Bayi</label>
+                        </div>
+                        <div class="grid_12">
+                            <div class="grid_12" style="margin-top: 10px;">
+                                <input type="file" id="fileEKG" accept="application" k-ng-model="item.obj[32110799]" kendo-upload k-select="onSelect3"/>
+                            </div>
+                            <div class="grid_12" style="margin-top: 10px">
+                                <div id="preview1" >
+                                    <img class="gambarAset" style="min-width: 300px;" src="{{item.objImg[32110799]}}" />
+                                </div>
+                             </div>
+                        </div>
+                    </div> 
+                    <div class="grid_6">
+                        <div class="grid_12">
+                            <label c-label item="item">Kaki Kanan Bayi</label>
+                        </div>
+                        <div class="grid_12">
+                            <div class="grid_12" style="margin-top: 10px;">
+                                <input type="file" id="fileEKG" accept="application" k-ng-model="item.obj[32110800]" kendo-upload k-select="onSelect4"/>
+                            </div>
+                            <div class="grid_12" style="margin-top: 10px">
+                                <div id="preview2" >
+                                    <img class="gambarAset" style="min-width: 300px;" src="{{item.objImg[32110800]}}" />
+                                </div>
+                             </div>
+                        </div>
+                    </div>                       
+                </div>
+            </fieldset>
+        </div>
+    </div>
+
+    <div class="grid_12">
+        <div class="grid_12">
+            <fieldset style="margin-top: 10px; ">
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_3">
+                        <div class="grid_12">
+                            <label c-label item="item">Tanda Tangan Orang yang Menentukan Jenis Kelamin Bayi</label>
+                        </div>
+                        <div class="grid_12">
+                            <input type="text" class="k-textbox" ng-model="item.obj[32110801]">
+                        </div>
+                    </div> 
+                    <div class="grid_3">
+                        <div class="grid_12">
+                            <label c-label item="item">Dokter/Bidang</label>
+                        </div>
+                        <div class="grid_12">
+                            <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[32110802]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                        </div>
+                    </div>  
+                    <div class="grid_3">
+                        <div class="grid_12">
+                            <label c-label item="item">Perawat Kamar Bersalin</label>
+                        </div>
+                        <div class="grid_12">
+                            <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[32110803]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                        </div>
+                    </div> 
+                    <div class="grid_3">
+                        <div class="grid_12">
+                            <label c-label item="item">Perawat Kamar Bersalin</label>
+                        </div>
+                        <div class="grid_12">
+                            <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[32110804]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                        </div>
+                    </div>                       
+                </div>
+            </fieldset>
+        </div>
+    </div>
+
+    <div class="grid_12">
+        <div class="grid_12">
+            <fieldset style="margin-top: 10px; ">
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_12">
+                        <div class="grid_12">
+                            <label c-label item="item">SEWAKTU PULANG</label>
+                        </div>
+                        <div class="grid_12">
+                            <label item="item">Saya menyatakan bahwa pada saat saya pulang telah menerima bayi, saya memeriksa dan yakin bayi tersebut adalah benar anak saya. Saya mengecek nomor pengenalnya adalah 
+                                <input type="text" class="k-textbox" ng-model="item.obj[32110805]"> dan berisi keterangan pengenal yang sesuai.
+                            </label>
+                        </div>
+                    </div>                      
+                </div>
+            </fieldset>
+        </div>
+    </div>
+
+    <div class="grid_12">
+        <div class="grid_12">
+            <fieldset style="margin-top: 10px; ">
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_12">
+                        <div class="grid_12">
+                            <label c-label item="item">Tanggal</label>
+                        </div>
+                        <div class="grid_6">
+                            <input style="width: 90%" k-ng-model="item.obj[32110806]" kendo-datetimepicker placeholer="YYYY:MM:DD"
+                            k-format="'yyyy-MM-dd'" />
+                            
+                        </div>
+                    </div> 
+                    <div class="grid_6">
+                        <div class="grid_12">
+                            <label c-label item="item">Tanda Tangan Perawat / Seksi	</label>
+                        </div>
+                        <div class="grid_12">
+                            <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[32110807]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                            
+                        </div>
+                    </div> 
+                    <div class="grid_6">
+                        <div class="grid_12">
+                            <label c-label item="item">Tanda Tangan Ibu / Wali</label>
+                        </div>
+                        <div class="grid_12">
+                            <input type="text" class="k-textbox" ng-model="item.obj[32110808]">
+                        </div>
+                    </div>                      
+                </div>
+            </fieldset>
+        </div>
+    </div>
+
+
+        <div class="grid_12">
+            <div ng-include='"../app/module/EMR/TemplateButtonDinamis" '></div>
+        </div>
+    </div>
+</div>

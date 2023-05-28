@@ -639,7 +639,7 @@ class ReportController extends ApiController{
         $kdProfile = (int)$r['kdprofile'];
         $raw = collect(DB::select("
             SELECT
-                so.nofoto,ps.nocm, ps.namapasien,ps.tgllahir,kp.kelompokpasien,ps.noidentitas,so.klinis,
+                so.nofoto,ps.nocm, ps.namapasien,ps.tgllahir,kp.kelompokpasien,ps.noidentitas,so.klinis,so.statusradctscan,
             ru.namaruangan, so.tanggal,jk.jeniskelamin,  
             CASE WHEN alm.alamatlengkap IS NULL THEN
                 '-' ELSE (
@@ -3482,9 +3482,15 @@ class ReportController extends ApiController{
         $res['profile'] = Profile::where('id', $request['kdprofile'])->first();
 
         $res['d'] = $data;
-
-        // dd($res['d']);
-        // dd(isset($res['d'][0]));
+        if(empty($res['d'])){
+            echo '
+                <script language="javascript">
+                    window.alert("Data tidak ada.");
+                    window.close()
+                </script>
+            ';
+            die;
+        }
         return view('report.cetak-labelkecil-apotik', compact('res'));
     }
 
@@ -3544,8 +3550,15 @@ class ReportController extends ApiController{
 
         $res['d'] = $data;
 
-        dd($res['d']);
-        // dd(isset($res['d'][0]));
+        if(empty($res['d'])){
+            echo '
+                <script language="javascript">
+                    window.alert("Data tidak ada.");
+                    window.close()
+                </script>
+            ';
+            die;
+        }
         return view('report.cetak-labelkecil-apotik', compact('res'));
     }
 
@@ -3614,6 +3627,15 @@ class ReportController extends ApiController{
         } else {
             $noemrpasien = $data[0]->noemr;
         }
+        if(empty($res['d'])){
+            echo '
+                <script language="javascript">
+                    window.alert("Data tidak ada.");
+                    window.close()
+                </script>
+            ';
+            die;
+        }
 
         return view('report.cetak-ringkasan-pasien-masuk-keluar', compact('res', 'pageWidth'));
     }
@@ -3645,6 +3667,15 @@ class ReportController extends ApiController{
 
         $res['profile'] = Profile::where('id', $kdProfile)->first();
         $res['data'] = $data;
+        if(empty($res['d'])){
+            echo '
+                <script language="javascript">
+                    window.alert("Data tidak ada.");
+                    window.close()
+                </script>
+            ';
+            die;
+        }
 
         return view('report.cetak-konsul-dokter', compact('res'));
     }
@@ -3716,19 +3747,15 @@ class ReportController extends ApiController{
         } else {
             $noemrpasien = $data[0]->noemr;
         }
-
-
-
-
-        // $dataimg = DB::table('emrfoto_t as emrp')
-        // ->select('emrp.*')
-        //     ->where('emrp.statusenabled', true)
-        //     ->where('emrp.kdprofile', $kdProfile)
-        //     ->where('emrp.noemrpasienfk', $noemrpasien)
-        //     ->where('emrp.emrfk', $request['emrfk'])
-        //     ->where('emrp.index', $request['index'])
-        //     ->get();
-        // dd($dataimg);
+        if(empty($res['d'])){
+            echo '
+                <script language="javascript">
+                    window.alert("Data tidak ada.");
+                    window.close()
+                </script>
+            ';
+            die;
+        }
         return view('report.cetak-catatan-pemberian-dan-pemantuan-obat-pasien', compact('res', 'pageWidth'));
     }
 
@@ -3796,6 +3823,15 @@ class ReportController extends ApiController{
             $noemrpasien = $request['emr'];
         } else {
             $noemrpasien = $data[0]->noemr;
+        }
+        if(empty($res['d'])){
+            echo '
+                <script language="javascript">
+                    window.alert("Data tidak ada.");
+                    window.close()
+                </script>
+            ';
+            die;
         }
 
         return view('report.cetak-asesmen-awal-keperawatan-igd', compact('res', 'pageWidth'));
@@ -3866,9 +3902,19 @@ class ReportController extends ApiController{
         } else {
             $noemrpasien = $data[0]->noemr;
         }
+        if(empty($res['d'])){
+            echo '
+                <script language="javascript">
+                    window.alert("Data tidak ada.");
+                    window.close()
+                </script>
+            ';
+            die;
+        }
 
         return view('report.cetak-asesmen-awal-medis-igd', compact('res', 'pageWidth'));
     }
+
     public function laporanOperasi(Request $request) {
         $nocm = $request['nocm'];
         $norec = $request['emr'];
@@ -3935,6 +3981,15 @@ class ReportController extends ApiController{
             $noemrpasien = $request['emr'];
         } else {
             $noemrpasien = $data[0]->noemr;
+        }
+        if(empty($res['d'])){
+            echo '
+                <script language="javascript">
+                    window.alert("Data tidak ada.");
+                    window.close()
+                </script>
+            ';
+            die;
         }
 
         return view('report.cetak-laporan-operasi', compact('res', 'pageWidth'));
@@ -4007,6 +4062,15 @@ class ReportController extends ApiController{
         } else {
             $noemrpasien = $data[0]->noemr;
         }
+        if(empty($res['d'])){
+            echo '
+                <script language="javascript">
+                    window.alert("Data tidak ada.");
+                    window.close()
+                </script>
+            ';
+            die;
+        }
 
         return view('report.cetak-transfusi-darah', compact('res', 'pageWidth'));
     }
@@ -4076,6 +4140,15 @@ class ReportController extends ApiController{
         } else {
             $noemrpasien = $data[0]->noemr;
         }
+        if(empty($res['d'])){
+            echo '
+                <script language="javascript">
+                    window.alert("Data tidak ada.");
+                    window.close()
+                </script>
+            ';
+            die;
+        }
 
         return view('report.cetak-suket-kematian', compact('res', 'pageWidth'));
     }
@@ -4144,6 +4217,15 @@ class ReportController extends ApiController{
             $noemrpasien = $request['emr'];
         } else {
             $noemrpasien = $data[0]->noemr;
+        }
+        if(empty($res['d'])){
+            echo '
+                <script language="javascript">
+                    window.alert("Data tidak ada.");
+                    window.close()
+                </script>
+            ';
+            die;
         }
 
         return view('report.cetak-suket-kelahiran', compact('res', 'pageWidth'));
@@ -4222,6 +4304,15 @@ class ReportController extends ApiController{
         } else {
             $noemrpasien = $data[0]->noemr;
         }
+        if(empty($res['d'])){
+            echo '
+                <script language="javascript">
+                    window.alert("Data tidak ada.");
+                    window.close()
+                </script>
+            ';
+            die;
+        }
 
         return view('report.cetak-cppt', compact('res', 'pageWidth'));
     }
@@ -4290,6 +4381,15 @@ class ReportController extends ApiController{
             $noemrpasien = $request['emr'];
         } else {
             $noemrpasien = $data[0]->noemr;
+        }
+        if(empty($res['d'])){
+            echo '
+                <script language="javascript">
+                    window.alert("Data tidak ada.");
+                    window.close()
+                </script>
+            ';
+            die;
         }
 
         return view('report.cetak-cppt-rajal', compact('res', 'pageWidth'));
@@ -4360,6 +4460,15 @@ class ReportController extends ApiController{
         } else {
             $noemrpasien = $data[0]->noemr;
         }
+        if(empty($res['d'])){
+            echo '
+                <script language="javascript">
+                    window.alert("Data tidak ada.");
+                    window.close()
+                </script>
+            ';
+            die;
+        }
 
         return view('report.cetak-lembar-triase-anak', compact('res', 'pageWidth'));
     }
@@ -4428,6 +4537,15 @@ class ReportController extends ApiController{
             $noemrpasien = $request['emr'];
         } else {
             $noemrpasien = $data[0]->noemr;
+        }
+        if(empty($res['d'])){
+            echo '
+                <script language="javascript">
+                    window.alert("Data tidak ada.");
+                    window.close()
+                </script>
+            ';
+            die;
         }
 
         return view('report.cetak-lembar-triase-dewasa', compact('res', 'pageWidth'));
@@ -4506,6 +4624,15 @@ class ReportController extends ApiController{
         } else {
             $noemrpasien = $data[0]->noemr;
         }
+        if(empty($res['d'])){
+            echo '
+                <script language="javascript">
+                    window.alert("Data tidak ada.");
+                    window.close()
+                </script>
+            ';
+            die;
+        }
 
         return view('report.cetak-implementasi-asuhan-keperawatan-igd', compact('res', 'pageWidth'));
     }
@@ -4582,6 +4709,15 @@ class ReportController extends ApiController{
             $noemrpasien = $request['emr'];
         } else {
             $noemrpasien = $data[0]->noemr;
+        }
+        if(empty($res['d'])){
+            echo '
+                <script language="javascript">
+                    window.alert("Data tidak ada.");
+                    window.close()
+                </script>
+            ';
+            die;
         }
 
         return view('report.cetak-implementasi-asuhan-keperawatan-ranap', compact('res', 'pageWidth'));
@@ -4660,6 +4796,15 @@ class ReportController extends ApiController{
         } else {
             $noemrpasien = $data[0]->noemr;
         }
+        if(empty($res['d'])){
+            echo '
+                <script language="javascript">
+                    window.alert("Data tidak ada.");
+                    window.close()
+                </script>
+            ';
+            die;
+        }
 
         return view('report.cetak-laporan-persalinan', compact('res', 'pageWidth'));
     }
@@ -4736,6 +4881,15 @@ class ReportController extends ApiController{
             $noemrpasien = $request['emr'];
         } else {
             $noemrpasien = $data[0]->noemr;
+        }
+        if(empty($res['d'])){
+            echo '
+                <script language="javascript">
+                    window.alert("Data tidak ada.");
+                    window.close()
+                </script>
+            ';
+            die;
         }
 
         return view('report.cetak-partograf', compact('res', 'pageWidth'));
@@ -4817,6 +4971,15 @@ class ReportController extends ApiController{
         } else {
             $noemrpasien = $data[0]->noemr;
         }
+        if(empty($res['d'])){
+            echo '
+                <script language="javascript">
+                    window.alert("Data tidak ada.");
+                    window.close()
+                </script>
+            ';
+            die;
+        }
 
         return view('report.cetak-ekg', compact('res', 'pageWidth'));
     }
@@ -4831,6 +4994,15 @@ class ReportController extends ApiController{
             $index = 'is null';
         }else{
             $index = '='.$index;
+        }
+        if(empty($res['d'])){
+            echo '
+                <script language="javascript">
+                    window.alert("Data tidak ada.");
+                    window.close()
+                </script>
+            ';
+            die;
         }
 
         $data = DB::select(DB::raw(
@@ -4895,7 +5067,441 @@ class ReportController extends ApiController{
         } else {
             $noemrpasien = $data[0]->noemr;
         }
+        if(empty($res['d'])){
+            echo '
+                <script language="javascript">
+                    window.alert("Data tidak ada.");
+                    window.close()
+                </script>
+            ';
+            die;
+        }
 
         return view('report.cetak-echocardiografi', compact('res', 'pageWidth'));
+    }
+
+    public function lembarKerjaNeonatus(Request $request) {
+        $nocm = $request['nocm'];
+        $norec = $request['emr'];
+        $kdProfile = (int) $request['kdprofile'];
+
+        $data = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        foreach ($data as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+        $pageWidth = 500;
+        $res['profile'] = Profile::where('id', $request['kdprofile'])->first();
+
+        $res['d'] = $data;
+        $noemrpasien = '';
+        if (count($data) == 0) {
+            $noemrpasien = $request['emr'];
+        } else {
+            $noemrpasien = $data[0]->noemr;
+        }
+        if(empty($res['d'])){
+            echo '
+                <script language="javascript">
+                    window.alert("Data tidak ada.");
+                    window.close()
+                </script>
+            ';
+            die;
+        }
+
+        return view('report.cetak-lembar-kerja-neonatus', compact('res', 'pageWidth'));
+    }
+
+    public function bayiSepsis(Request $request) {
+        $nocm = $request['nocm'];
+        $norec = $request['emr'];
+        $index = $request['index'];
+        $kdProfile = (int) $request['kdprofile'];
+
+        if (isset($request['index']) && $request['index'] == 'null') {
+            $index = 'is null';
+        }else{
+            $index = '='.$index;
+        }
+
+        $data = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index $index
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        foreach ($data as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+        $pageWidth = 500;
+        $res['profile'] = Profile::where('id', $request['kdprofile'])->first();
+
+        $res['d'] = $data;
+        $noemrpasien = '';
+        if (count($data) == 0) {
+            $noemrpasien = $request['emr'];
+        } else {
+            $noemrpasien = $data[0]->noemr;
+        }
+        if(empty($res['d'])){
+            echo '
+                <script language="javascript">
+                    window.alert("Data tidak ada.");
+                    window.close()
+                </script>
+            ';
+            die;
+        }
+
+        return view('report.cetak-bayi-sepsis', compact('res', 'pageWidth'));
+    }
+
+    public function alatMonitoringCPAP(Request $request) {
+        $nocm = $request['nocm'];
+        $norec = $request['emr'];
+        $index = $request['index'];
+        $kdProfile = (int) $request['kdprofile'];
+
+        if (isset($request['index']) && $request['index'] == 'null') {
+            $index = 'is null';
+        }else{
+            $index = '='.$index;
+        }
+
+        $data = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index $index
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        foreach ($data as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+        $pageWidth = 500;
+        $res['profile'] = Profile::where('id', $request['kdprofile'])->first();
+
+        $res['d'] = $data;
+        $noemrpasien = '';
+        if (count($data) == 0) {
+            $noemrpasien = $request['emr'];
+        } else {
+            $noemrpasien = $data[0]->noemr;
+        }
+        if(empty($res['d'])){
+            echo '
+                <script language="javascript">
+                    window.alert("Data tidak ada.");
+                    window.close()
+                </script>
+            ';
+            die;
+        }
+
+        return view('report.cetak-alat-monitoring-cpap', compact('res', 'pageWidth'));
+    }
+
+    public function pemantauanCPAP(Request $request) {
+        $nocm = $request['nocm'];
+        $norec = $request['emr'];
+        $index = $request['index'];
+        $kdProfile = (int) $request['kdprofile'];
+
+        if (isset($request['index']) && $request['index'] == 'null') {
+            $index = 'is null';
+        }else{
+            $index = '='.$index;
+        }
+
+        $data = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index $index
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        foreach ($data as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+        $pageWidth = 500;
+        $res['profile'] = Profile::where('id', $request['kdprofile'])->first();
+
+        $res['d'] = $data;
+        $noemrpasien = '';
+        if (count($data) == 0) {
+            $noemrpasien = $request['emr'];
+        } else {
+            $noemrpasien = $data[0]->noemr;
+        }
+        if(empty($res['d'])){
+            echo '
+                <script language="javascript">
+                    window.alert("Data tidak ada.");
+                    window.close()
+                </script>
+            ';
+            die;
+        }
+
+        return view('report.cetak-pemantauan-cpap', compact('res', 'pageWidth'));
+    }
+
+    public function hiperbilirubin(Request $request) {
+        $nocm = $request['nocm'];
+        $norec = $request['emr'];
+        $kdProfile = (int) $request['kdprofile'];
+
+        $data = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        foreach ($data as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+        $pageWidth = 500;
+        $res['profile'] = Profile::where('id', $request['kdprofile'])->first();
+
+        $res['d'] = $data;
+        $noemrpasien = '';
+        if (count($data) == 0) {
+            $noemrpasien = $request['emr'];
+        } else {
+            $noemrpasien = $data[0]->noemr;
+        }
+        if(empty($res['d'])){
+            echo '
+                <script language="javascript">
+                    window.alert("Data tidak ada.");
+                    window.close()
+                </script>
+            ';
+            die;
+        }
+
+        return view('report.cetak-hiperbilirubin', compact('res', 'pageWidth'));
     }
 }

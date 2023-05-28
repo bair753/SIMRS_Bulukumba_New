@@ -287,6 +287,10 @@ define(['initialize'], function (initialize) {
 
                 if (norec_apd != null) {
                     var array_pp = ''
+                    if($scope.dataSelectedRiwayat.details_pp == undefined){
+                        toastr.error('Hasil tidak ditemukan');
+                        return
+                    }
                     for (let i = 0; i < $scope.dataSelectedRiwayat.details_pp.length; i++) {
                         const element =  $scope.dataSelectedRiwayat.details_pp[i];
                         array_pp = array_pp + "','" + element.norec_pp
@@ -439,7 +443,7 @@ define(['initialize'], function (initialize) {
                 },
 
                 {
-                    "field": "statusorder",
+                    "field": "status",
                     "title": "Status",
                     "width": "70px",
                 },
@@ -679,7 +683,8 @@ define(['initialize'], function (initialize) {
                     objectruanganfk: namaRuanganFk,
                     objectruangantujuanfk: $scope.item.ruangantujuan.id,
                     departemenfk: 3,
-                    kddiagnosa: kkdiagnosa, //$scope.item.kddiagnosa.kddiagnosa,
+                    //kddiagnosa: kkdiagnosa, //$scope.item.kddiagnosa.kddiagnosa,
+                    kddiagnosa: $scope.item.klinis != undefined ? $scope.item.klinis : '-',
                     pegawaiorderfk: $scope.item.doktermeminta.id, //$scope.PegawaiLogin2.id,
                     keterangan: $scope.item.keterangan != undefined ? $scope.item.keterangan : null,
                     iscito: $scope.item.iscito != undefined && $scope.item.iscito == true ? $scope.item.iscito : false,
@@ -821,6 +826,10 @@ define(['initialize'], function (initialize) {
             $scope.hapusOrder = function () {
                 if ($scope.dataSelectedRiwayat == undefined) {
                     toastr.error('Pilih data yang mau dihapus')
+                    return
+                }
+                if ($scope.dataSelectedRiwayat.status == 'SELESAI') {
+                    toastr.error('Tidak bisa dihapus, data sudah diverifikasi')
                     return
                 }
                 if ($scope.dataSelectedRiwayat.statusorder != 'PENDING') {

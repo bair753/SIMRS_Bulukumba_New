@@ -129,7 +129,7 @@
                 <td colspan="20" style="text-align:center;background: #000;color: #fff;"><h1>CATATAN PEMBERIAN DAN PEMANTAUAN OBAT PASIEN</h1></td>
             </tr>
             <tr>
-                <td colspan="20" style="text-align:left"><h2>RUANG RAWAT AWAL :</h2></td>
+                <td colspan="20" style="text-align:left"><h2>RUANG RAWAT AWAL : @{{ item.obj[424100] ? item.obj[424100] : '' }}</h2></td>
             </tr>
             <tr style="text-align:center;">
                 <td rowspan="3" width="25">No</td>
@@ -1385,8 +1385,10 @@
     })
 
     angular.filter('toDate', function() {
-    return function(items) {
-        return new Date(items);
+        return function(items) {
+            if(items != null){
+                 return new Date(items);
+            }
         };
     });
     $(document).ready(function () {

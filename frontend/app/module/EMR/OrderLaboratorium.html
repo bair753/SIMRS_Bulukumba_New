@@ -185,13 +185,23 @@
                                         </div>
                                     </div>
                                     
-                                    <div class="grid_12" style="margin-top: 10px;">
+                                    <!-- <div class="grid_12" style="margin-top: 10px;">
                                         <div class="grid_12">
                                             <label c-label item="item">Diagnosa</label>
                                         </div>
                                         <div class="grid_12">
                                             <input kendo-combo-box k-ng-model="item.kddiagnosa" k-data-text-field="'namadiagnosa'"
                                                 k-data-value-field="'kddiagnosa'" k-filter="'contains'" k-auto-bind="false" k-data-source="listDiagnosa" />
+                                        </div>
+                                    </div> -->
+
+                                    <div class="grid_12" style="margin-top: 10px;">
+                                        <div class="grid_12">
+                                            <label c-label item="item">Diagnosa</label>
+                                        </div>
+                                        <div class="grid_12">
+                                                <input class="k-textbox" type="input" ng-model="item.klinis"
+                                                maxlength="8000">
                                         </div>
                                     </div>
 

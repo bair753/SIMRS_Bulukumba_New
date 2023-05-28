@@ -359,7 +359,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     "width": "100px",
                 },
                 {
-                    "field": "statusorder",
+                    "field": "status",
                     "title": "Status",
                     "width": "70px",
                 },
@@ -1032,7 +1032,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     var noorder = e.data.strukorder.noorder
                     var tglorder = e.data.strukorder.tglorder
                     tglorder = tglorder.replace(' ', '%20');
-                    var namaPasien = $scope.item.namaPasien
+                var namaPasien = $scope.item.namaPasien
                     namaPasien = namaPasien.replace(' ', '%20');
 
                     if ($scope.item.ruangantujuan != undefined) {
@@ -1252,6 +1252,10 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     toastr.error('Pilih data yang mau dihapus')
                     return
                 }
+                if ($scope.dataSelectedRiwayat.status == 'SELESAI') {
+                    toastr.error('Tidak bisa dihapus, data sudah diverifikasi')
+                    return
+                }
                 if ($scope.dataSelectedRiwayat.statusorder == 'Belum Kirim Ke RIS' && $scope.dataSelectedRiwayat.statusorder == 'Belum Verifikasi') {
                     toastr.error('Tidak bisa dihapus')
                     return
@@ -1315,7 +1319,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 var body = {
                     norec: e.strukorder.norec,
                     judul: 'Ada order baru #' + e.strukorder.noorder,
-                    jenis: 'Order Laboratorium',
+                    jenis: 'Order Radiologi',
                     pesanNotifikasi: '',
                     idRuanganAsal: e.strukorder.objectruanganfk,
                     idRuanganTujuan: e.strukorder.objectruangantujuanfk,

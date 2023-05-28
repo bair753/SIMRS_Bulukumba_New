@@ -114,6 +114,24 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                       
                     ]
 
+                    $scope.listStatusCTScan = [
+                        {
+                          "id": 1,
+                          "value": "Cito"
+                        },
+                      
+                        {
+                          "id": 2,
+                          "value": "Kritis"
+                        },
+
+                        {
+                            "id": 3,
+                            "value": "Biasa"
+                          },
+                      
+                    ]
+
                     if (datauserlogin.id == 14 || dokterRadiologiID.includes(idloginUserToRadiologi[datauserlogin.id])) {
                       if (datauserlogin.id != 14) {
                         dokterRadiologiID = [idloginUserToRadiologi[datauserlogin.id]];
@@ -1164,6 +1182,19 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                         $scope.item.dokter = { id: e.data[0].pegawaifk, namalengkap: e.data[0].namalengkap }
                         $scope.item.keterangan = (e.data[0].keterangan == null) ? '' : e.data[0].keterangan.replace(/~/g, "\n")
                         $scope.noeditExpertise2 = $scope.pegawai.id != e.data[0].pegawaifk;
+                        for (let i = 0; i < $scope.listStatusCTScan.length; i++) {
+                            const element = $scope.listStatusCTScan[i];
+                            
+                            if (e.data[0].statusradctscan == 'Cito') {
+                                $scope.item.statusRadCTScan = { id: 1, value: 'Cito' }
+                            } else if (e.data[0].statusradctscan == 'Kritis') {
+                                $scope.item.statusRadCTScan = { id: 2, value: 'Kritis' }
+                            } else if (e.data[0].statusradctscan == 'Biasa') {
+                                $scope.item.statusRadCTScan = { id: 3, value: 'Biasa' }
+                            } else {
+                                $scope.item.statusRadCTScan = null;
+                            }
+                        }
                         
                     }
                     $scope.popUpEkpertise.center().open();
@@ -1217,10 +1248,11 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                         $scope.noeditExpertise4 = $scope.pegawai.id != e.data[0].pegawaifk;
                         for (let i = 0; i < $scope.listStatus.length; i++) {
                             const element = $scope.listStatus[i];
+                            
                             if (e.data[0].statusrad == 'Kritis') {
                                 $scope.item.statusRad = { id: 2, value: 'Kritis' }
                             } else if (e.data[0].statusrad == 'Cito') {
-                                $scope.item.statusRad = { id: 2, value: 'Cito' }
+                                $scope.item.statusRad = { id: 1, value: 'Cito' }
                             } else if (e.data[0].statusrad == 'Biasa') {
                                 $scope.item.statusRad = { id: 3, value: 'Biasa' }
                             } else {
@@ -1375,6 +1407,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 $scope.item.klinis = undefined
                 $scope.item.tglInput = new Date()
                 $scope.item.dokter = undefined
+                $scope.item.statusRadCTScan = undefined
                 $scope.item.keterangan = undefined
                 $scope.popUpEkpertise.close();
             }
@@ -1403,6 +1436,10 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     window.messageContainer.error("Dokter Tidak Boleh Kosong!");
                     return;
                 }
+                if ($scope.item.statusRadCTScan == undefined || $scope.item.statusRadCTScan == null) {
+                    window.messageContainer.error("Status Tidak Boleh Kosong!");
+                    return;
+                }
                 if ($scope.item.keterangan == undefined) {
                     window.messageContainer.error("Keterangan Tidak Boleh Kosong!");
                     return;
@@ -1411,6 +1448,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     noregistrasi: $scope.item.noregistrasi,
                     nofoto: $scope.item.nofoto,
                     klinis: $scope.item.klinis,
+                    statusradctscan: $scope.item.statusRadCTScan.value,
                     tglinput: moment($scope.item.tglInput).format('YYYY-MM-DD HH:mm'),
                     dokterid: $scope.item.dokter.id,
                     keterangan: ($scope.item.keterangan == null) ? '' : $scope.item.keterangan.replace(/\n/ig, '~'),
