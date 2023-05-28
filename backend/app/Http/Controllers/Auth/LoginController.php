@@ -92,6 +92,14 @@ class LoginController extends ApiController {
             ->where('namauser', '=', $request->input('namaUser'))
             ->where('statusenabled', true);
         $LoginUser = $login->get();
+        if($LoginUser['statusenabled'] == 't'){
+            $result = array(
+                'data' => [],
+                'messages' => 'Login gagal, Akun telah dinonaktifkan',
+                'status'=> 400,
+                'as'=> '#Inhuman'
+            );
+        }
         if (count($LoginUser) > 0){
             //region Cek Login Expired
             
@@ -242,14 +250,7 @@ class LoginController extends ApiController {
             ) ;
             
             $token['X-AUTH-TOKEN'] = $this->createToken($LoginUser[0]->namauser).'';
-            if($LoginUser['statusenabled'] == 't'){
-                $result = array(
-                    'data' => $dataLogin,
-                    'messages' => 'Login gagal, Akun dinonaktifkan',
-                    'status'=> 201,
-                    'as'=> '#Inhuman'
-                );
-            }
+            
             $result = array(
                 'data' => $dataLogin,
                 'messages' =>$token,
