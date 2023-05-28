@@ -92,7 +92,7 @@ class LoginController extends ApiController {
             ->where('namauser', '=', $request->input('namaUser'))
             ->where('statusenabled', true);
         $LoginUser = $login->get();
-        if($LoginUser['statusenabled'] == 't'){
+        if($LoginUser[0]->statusenabled == 't'){
             $result = array(
                 'data' => [],
                 'messages' => 'Login gagal, Akun telah dinonaktifkan',
