@@ -517,21 +517,29 @@
         var keluargapasien = $scope.item.obj[423817];
         var dpjp = $scope.item.obj[423819];
 
-        jQuery('#qrcodeKeluargaPasien').qrcode({
+        if(pasien != undefined){
+          jQuery('#qrcodeKeluargaPasien').qrcode({
             width	: 100,
 			      height	: 100,
             text	: "Tanda Tangan Digital Oleh " + pasien
         });	
-        jQuery('#qrcodePasien').qrcode({
+        }
+        if(keluargapasien != undefined){
+          jQuery('#qrcodePasien').qrcode({
             width	: 100,
 			      height	: 100,
             text	: "Tanda Tangan Digital Oleh " + keluargapasien
         });
-        jQuery('#qrcodeDPJP').qrcode({
+        }
+        if(dpjp != undefined){
+          jQuery('#qrcodeDPJP').qrcode({
             width	: 100,
 			      height	: 100,
             text	: "Tanda Tangan Digital Oleh " + dpjp
-        });	
+        });		
+        }
+        
+        
     })
     $(document).ready(function () {
         window.print();
