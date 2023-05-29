@@ -65,7 +65,7 @@ class MonitoringDokumenKlaimController extends  ApiController
         if(count($dataDokumen) > 0){
             $file = [];
             foreach($dataDokumen as $item) {
-                array_push($file, public_path(str_replace("/", "\\", $item->filepath)));
+                array_push($file, public_path($item->filepath));
             }
     
             $pdf = PDFMerger::init();
