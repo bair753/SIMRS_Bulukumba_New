@@ -1767,6 +1767,11 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
               Route::get('registrasi/dokumenrm/get-data-kendali','Registrasi\KendaliDokumenRMController@getDataTambahKendali');
               Route::get('registrasi/dokumenrm/get-data','Registrasi\KendaliDokumenRMController@getDataKendali');
               Route::get('registrasi/dokumenrm/get-laporan-tracer','Registrasi\KendaliDokumenRMController@getLaporanTracer');
+
+              Route::get('registrasi/dokumenrm/get-dokumen-monitoring-klaim','Registrasi\KendaliDokumenRMController@getDokumenMonitoringKlaim');
+              Route::post('registrasi/dokumenrm/post-dokumen-monitoring-klaim', 'Registrasi\KendaliDokumenRMController@postDokumenMonitoring');
+              Route::post('registrasi/dokumenrm/delete-dokumen-monitoring-klaim', 'Registrasi\KendaliDokumenRMController@deleteDokumenMonitoring');
+
             // });
             // Route::group(['prefix' => 'orderlabel'], function () {
             Route::get('registrasi/orderlabel/get-pasienbynoreg', 'Registrasi\OrderLabelController@getPasienDaftarByNoreg');
@@ -2765,6 +2770,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
         Route::get('report/cetak-alat-monitoring-cpap', 'Report\ReportController@alatMonitoringCPAP');
         Route::get('report/cetak-pemantauan-cpap', 'Report\ReportController@pemantauanCPAP');
         Route::get('report/cetak-hiperbilirubin', 'Report\ReportController@hiperbilirubin');
+        Route::get('document/berkas-klaim', 'Bridging\InaCbgController@MergePdf');
 
         Route::get('viewer/get-list-antrian','Antrian\AntrianController@getListAntrian');
         Route::get('viewer/update-antrian','Antrian\AntrianController@updatePanggil');
@@ -2886,6 +2892,9 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
                 );
         return Response::download($path,  $request['filename'], $headers);
     });
+
+    Route::get('storage/dokumenklaim', 'Registrasi\MonitoringDokumenKlaimController@lihatDokumen');
+    Route::get('storage/bundledokumenklaim', 'Registrasi\MonitoringDokumenKlaimController@bundleDokumen');
 });
 
 Route::get('encode-base64/{data}', function($data){

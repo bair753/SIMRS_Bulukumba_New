@@ -3677,6 +3677,10 @@
         {
             "nameDep": "FentonBayiPerempuanCtrl",
             "urlDep": "module/EMR/FentonBayiPerempuanCtrl"
+        },
+        {
+            "nameDep": "MonitoringBerkasKlaimCtrl",
+            "urlDep": "module/EMR/MonitoringBerkasKlaimCtrl"
         }
     ]
 }

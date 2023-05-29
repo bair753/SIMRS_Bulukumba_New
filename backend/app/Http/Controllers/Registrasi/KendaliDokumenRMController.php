@@ -403,4 +403,188 @@ class KendaliDokumenRMController extends  ApiController
         return $datetime->diff(new \DateTime(date($dateAkhir)))
             ->format('%dhr %hjam %imnt');
     }
+
+    public function getDokumenMonitoringKlaim(Request $request)
+    {
+        $kdProfile = $this->getDataKdProfile($request);
+        $idProfile = (int) $kdProfile;
+        $tglawal = $request['tglawal'];
+        $tglakhir = $request['tglakhir'];
+
+        $dataMaster = DB::table('dokumenklaim_m')
+        ->where("statusenabled", true)
+        ->where("kdprofile", $idProfile);
+        
+        if(isset($request['departId']) && $request['departId']!="" && $request['departId']!="undefined"){
+            $dataMaster = $dataMaster->where('objectdepartemenfk','=', $request['departId']);
+        };
+
+        $dataMaster = $dataMaster->orderBy('nourut');
+        $dataMaster = $dataMaster->get();
+
+        $data = DB::table("pasiendaftar_t as pd")
+        ->select("pd.norec", "pd.tglregistrasi", "pd.noregistrasi", "rm.namaruangan", "ps.nocm", "ps.namapasien")
+        ->join("pasien_m as ps", "ps.id", "=", "pd.nocmfk")
+        ->join("ruangan_m as rm", "rm.id", "=", "pd.objectruanganlastfk")
+        ->where("pd.kdprofile", $idProfile)
+        ->where("pd.statusenabled", true)
+        ->where("rm.objectdepartemenfk", $request['departId'])
+        ->whereBetween("pd.tglregistrasi", [$tglawal, $tglakhir]);
+
+        if(isset($request['ruanganId']) && $request['ruanganId']!="" && $request['ruanganId']!="undefined"){
+            $data = $data->where('rm.id','=', $request['ruanganId']);
+        };
+
+        if(isset($request['nocm']) && $request['nocm']!="" && $request['nocm']!="undefined"){
+            $data = $data->where('ps.nocm','=', $request['nocm']);
+        };
+
+        if(isset($request['noregistrasi']) && $request['noregistrasi']!="" && $request['noregistrasi']!="undefined"){
+            $data = $data->where('pd.noregistrasi','=', $request['noregistrasi']);
+        };
+
+        if(isset($request['namapasien']) && $request['namapasien']!="" && $request['namapasien']!="undefined"){
+            $data = $data->where('ps.namapasien','ilike', '%'.$request['namapasien'].'%');
+        };
+        $data = $data->get();
+
+        $dataDokKlaim = DB::table("monitoringdokklaim_t")
+        // ->where("noregistrasifk", $value->norec)
+        ->where("kdprofile", $idProfile)
+        ->where("statusenabled", true)
+        ->get();
+
+        $results = [];
+        foreach($data as $value) {
+            $result['norec'] = $value->norec;
+            $result['tglregistrasi'] = $value->tglregistrasi;
+            $result['noregistrasi'] = $value->noregistrasi;
+            $result['namaruangan'] = $value->namaruangan;
+            $result['nocm'] = $value->nocm;
+            $result['namapasien'] = $value->namapasien;
+            foreach($dataMaster as $item){
+                $result[$item->kodeexternal] = null;
+                foreach ($dataDokKlaim as $datDok) {
+                    if($datDok->noregistrasifk != $value->norec) continue;
+                    if($datDok->documentklaimfk == $item->id) {
+                        $result[$item->kodeexternal] = $datDok->filename;
+                    } 
+                }
+            }
+            array_push($results, $result);
+        }
+
+        $data = array(
+            'master' => $dataMaster,
+            'data' => $results,
+            'message' => 'Inhuman'
+        );
+        return $this->respond($data);
+    }
+
+    public function postDokumenMonitoring(Request $request)
+    {
+        $kdProfile = $this->getDataKdProfile($request);
+        $idProfile = (int) $kdProfile;
+        $dataReq = $request->all();
+
+        $uploadBerkasPasien = $request->file('fileBerkas');
+        $dataRegistrasi = PasienDaftar::where('norec', $dataReq['noregistrasifk'])->first();
+        $path = 'dokumen_klaim/'.$dataRegistrasi->noregistrasi;
+
+        DB::beginTransaction();
+        try {
+            // penamaan file 
+            $extension = $uploadBerkasPasien->getClientOriginalExtension();
+            $filename = $dataReq['namafile'].'_'.date('YmdHis').'.'.$extension;
+
+            $dataInsert = array(
+                "norec" => substr(Uuid::generate(), 0, 32),
+                "kdprofile" => $idProfile,
+                "statusenabled" => true,
+                "filename" => $filename,
+                "filepath" => $path.'/'.$filename,
+                "nocmfk" => $dataRegistrasi->nocmfk,
+                "noregistrasifk" => $dataReq['noregistrasifk'],
+                "documentklaimfk" => $dataReq['documentklaimfk'],
+            );
+            DB::table('monitoringdokklaim_t')->Insert($dataInsert);
+            $request->file('fileBerkas')->move($path, $filename);
+
+            $transStatus = true;
+        } catch (\Exception $e) {
+            $transStatus = false;
+        }
+
+        if ($transStatus) {
+            $transMessage = 'Simpan Berhasil';
+            DB::commit();
+            $result = array(
+                "status" => 201,
+                "message" => $transMessage,
+                "dokumen" => $dataInsert,
+                "as" => 'inhuman',
+            );
+        } else {
+            $transMessage = "Simpan Gagal";
+            DB::rollBack();
+            $result = array(
+                "status" => 400,
+                "message" => $transMessage,
+                "as" => 'inhuman',
+            );
+        }
+        return $this->setStatusCode($result['status'])->respond($result, $transMessage);
+    }
+
+    public function deleteDokumenMonitoring(Request $request)
+    {
+        $kdProfile = $this->getDataKdProfile($request);
+        $idProfile = (int) $kdProfile;
+        DB::beginTransaction();
+        try {
+            $dataRegistrasi = PasienDaftar::where('noregistrasi', $request['noregistrasi'])->first();
+            $Dkmn = DB::table("monitoringdokklaim_t")
+            ->where('noregistrasifk', $dataRegistrasi->norec)
+            ->where('documentklaimfk',$request['documentklaimfk'])
+            ->where('kdprofile',$idProfile)
+            ->first();
+            
+            // delete file
+            $path = public_path($Dkmn->filepath);
+            if (\File::exists($Dkmn->filepath)){
+                \File::delete($path);
+            }
+
+            // detele data
+            DB::table("monitoringdokklaim_t")
+            ->where('noregistrasifk', $dataRegistrasi->norec)
+            ->where('documentklaimfk',$request['documentklaimfk'])
+            ->where('kdprofile',$idProfile)
+            ->delete();
+
+            $transStatus = true;
+        } catch (\Exception $e) {
+            $transStatus = false;
+        }
+
+        if ($transStatus) {
+            $transMessage = 'Hapus Berhasil';
+            DB::commit();
+            $result = array(
+                "status" => 201,
+                "message" => $transMessage,
+                "as" => 'inhuman',
+            );
+        } else {
+            $transMessage = "Hapus Gagal";
+            DB::rollBack();
+            $result = array(
+                "status" => 400,
+                "message" => $transMessage,
+                "as" => 'inhuman',
+            );
+        }
+        return $this->setStatusCode($result['status'])->respond($result, $transMessage);
+    }
 }

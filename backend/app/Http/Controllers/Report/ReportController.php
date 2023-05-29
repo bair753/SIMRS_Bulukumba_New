@@ -3273,6 +3273,15 @@ class ReportController extends ApiController{
         } else {
             $noemrpasien = $data[0]->noemr;
         }
+        if(empty($res['d'])){
+            echo '
+                <script language="javascript">
+                    window.alert("Data tidak ada.");
+                    window.close()
+                </script>
+            ';
+            die;
+        }
 
 
 
@@ -3353,6 +3362,15 @@ class ReportController extends ApiController{
         } else {
             $noemrpasien = $data[0]->noemr;
         }
+        if(empty($res['d'])){
+            echo '
+                <script language="javascript">
+                    window.alert("Data tidak ada.");
+                    window.close()
+                </script>
+            ';
+            die;
+        }
 
 
 
@@ -3422,6 +3440,15 @@ class ReportController extends ApiController{
         $res['profile'] = Profile::where('id', $request['kdprofile'])->first();
 
         $res['d'] = $data;
+        if(empty($res['d'])){
+            echo '
+                <script language="javascript">
+                    window.alert("Data tidak ada.");
+                    window.close()
+                </script>
+            ';
+            die;
+        }
 
         // dd($res['d']);
         // dd(isset($res['d'][0]));
