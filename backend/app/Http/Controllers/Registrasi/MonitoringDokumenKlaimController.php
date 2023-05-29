@@ -57,7 +57,7 @@ class MonitoringDokumenKlaimController extends  ApiController
         ->get();
 
         $fileName = 'bundle_'.$request['noregistrasi'].'.pdf';
-        $pathbundle = 'dokumen_klaim\\'.$request['noregistrasi'] . "\\" . $fileName;
+        $pathbundle = 'dokumen_klaim/'.$request['noregistrasi'] . "/" . $fileName;
         if (File::exists($pathbundle)){
             File::delete($pathbundle);
         }
@@ -65,7 +65,7 @@ class MonitoringDokumenKlaimController extends  ApiController
         if(count($dataDokumen) > 0){
             $file = [];
             foreach($dataDokumen as $item) {
-                array_push($file, public_path(str_replace("/", "\\", $item->filepath)));
+                array_push($file, public_path($item->filepath));
             }
     
             $pdf = PDFMerger::init();
