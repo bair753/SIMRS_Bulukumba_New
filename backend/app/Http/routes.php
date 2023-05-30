@@ -2771,6 +2771,8 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
         Route::get('report/cetak-pemantauan-cpap', 'Report\ReportController@pemantauanCPAP');
         Route::get('report/cetak-hiperbilirubin', 'Report\ReportController@hiperbilirubin');
         Route::get('document/berkas-klaim', 'Bridging\InaCbgController@MergePdf');
+        Route::get('report/cetak-bukti-pelayanan-tindakan', 'Report\ReportController@buktiPelayananTidakan');
+        Route::get('report/cetak-lembar-formulir-rajal', 'Report\ReportController@lembarFormulirRajal');
 
         Route::get('viewer/get-list-antrian','Antrian\AntrianController@getListAntrian');
         Route::get('viewer/update-antrian','Antrian\AntrianController@updatePanggil');
