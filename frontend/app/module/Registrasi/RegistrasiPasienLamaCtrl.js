@@ -330,10 +330,34 @@ define(['initialize'], function (initialize) {
                     var item = {
                         idpasien: $scope.idPasien
                     }
+                    console.log($scope);
 
-                    medifirstService.post('registrasi/update-false-pasien', item).then(function (e) {
+                    var confirm = $mdDialog.confirm()
+                    .title('Peringatan')
+                    .textContent('Yakin mau menghapus data?')
+                    .ariaLabel('Lucky day')
+                    .cancel('Tidak')
+                    .ok('Ya')
+                    $mdDialog.show(confirm).then(function () {
+
+                        // medifirstService.postLogging('Hapus EMR', 'norec emrpasien_t', $scope.dataSelected.norec,
+                        //     'Hapus No EMR - ' + $scope.dataSelected.noemr + ' pada No Registrasi  '
+                        //     + $scope.item.noregistrasi + ' - Pasien : ' + $scope.item.namaPasien).then(function (res) {
+                        //     })
+
+                        medifirstService.postLogging('Hapus Pasien', 'norec emrpasien_t', $scope.dataPasienSelected.nocm,
+                        'Hapus Data Pasien - ' + $scope.dataPasienSelected.namapasien + ' pada No RM  '
+                        + $scope.dataPasienSelected.nocm + ' - Pasien : ' + $scope.dataPasienSelected.namapasien).then(function (res) {
+                        })
+
+                        medifirstService.post('registrasi/update-false-pasien', item).then(function (e) {
                         loadData();
+                        })
                     })
+
+                    // medifirstService.post('registrasi/update-false-pasien', item).then(function (e) {
+                    //     loadData();
+                    // })
 
                 } else {
                     messageContainer.error("Pilih data dulu!")

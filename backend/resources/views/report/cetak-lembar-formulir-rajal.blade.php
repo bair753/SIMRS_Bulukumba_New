@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Surat Keterangan Kematian</title>
+    <title>Surat Lembar Formulir Rawat Jalan</title>
     @if (stripos(\Request::url(), 'localhost') !== false)
         {{-- <link rel="stylesheet" href="{{ asset('css/report/paper.css') }}">
         <link rel="stylesheet" href="{{ asset('css/report/table.css') }}">
@@ -201,7 +201,7 @@
             /* font-size: x-small; */
         }
         tr td{
-            border:1px solid #000;
+            border:none solid #000;
             border-collapse: collapse;
         }
         #content > tr td{
@@ -227,6 +227,7 @@
             </td>
         </tr>
         <tr style="text-align:center;border:none">
+            
             <td colspan="9" style="border:none"><h2>PEMERINTAH KABUPATEN BULUKUMBA</h2></td>
         </tr>
         <tr style="text-align:center;border:none">
@@ -236,48 +237,118 @@
             <td colspan="9" style="border:none"><h2>UPT RSUD H. ANDI SULTHAN DAENG RADJA</h2></td>
         </tr>
         <tr style="text-align:center;border:none">
-            <td colspan="9" style="border:none">Jalan Serikaya No. 17 Bulukumba 92512 Telpon (0413) 81290, 81292 FAX. 85030 <br> Website: https://rsud.bulukumbakab.go.id, Email: sultanhandgradja@yahoo.com <hr style="border:2px solid #000"></td>
+            <td colspan="9" style="border:none">Jalan Serikaya No. 17 Bulukumba 92512 Telpon (0413) 81290, 81292 FAX. 85030 <hr style="border:2px solid #000"></td>
         </tr>
         <tr style="text-align:center">
-            <td colspan="9" style="border:none;"><h3>SURAT KETERANGAN KEMATIAN <br> NOMOR: 440 / @{{ item.obj[32104095] ? item.obj[32104095] : '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' }} / RSUD-BLK / 2023</h3></td>
+            <td colspan="9" style="border:none;"><h3>LEMBAR FORMULIR RAWAT JALAN<br> Layanan Kedokteran Fisik dan Rehabilitasi</h3></td>
         </tr>
-        <tr style="height:20px"></tr>
+        <tr style="height:20px;"></tr>
+    </table>
+    <table width="100%" style="table-layout:fixed;border:1px solid #000;">
         <tr>
-            <td style="border:none" colspan="9">Yang bertanda tangan di bawah ini menerangkan bawah:</td>
+            <td colspan="1">I.</td>
+            <td colspan="5">Diisi oleh Pasien / Peserta</td>
+            <td colspan="3">No.RM/Reg : {!! $res['d'][0]->nocm  !!}</td>
         </tr>
         <tr>
+            <td colspan="1"></td>
+            <td colspan="4">Nama Pasien</td>
+            <td colspan="5">: {!! $res['d'][0]->namapasien  !!}</td>
+        </tr>
+        <tr>
+            <td colspan="1"></td>
+            <td colspan="4">Tanggal Lahir</td>
+            <td colspan="5">: {!! date('d-m-Y',strtotime( $res['d'][0]->tgllahir  )) !!}</td>
+        </tr>
+        <tr>
+            <td colspan="1"></td>
+            <td colspan="4">Alamat</td>
+            <td colspan="5">: {!! $res['d'][0]->alamatlengkap  !!}</td>
+        </tr>
+        <tr>
+            <td colspan="1"></td>
+            <td colspan="4">Telp./ HP</td>
+            <td colspan="5">: @{{ item.obj[32110968] ? item.obj[32110968] : '' }}</td>
+        </tr>
+    </table>
+    <table width="100%" style="table-layout:fixed;border:none">
+        <tr style="height:20px;"></tr>
+    </table>
+
+    <table width="100%" style="table-layout:fixed;border:1px solid #000;">
+        <tr>
+            <td colspan="1">II.</td>
+            <td colspan="5">Diisi oleh Dokter SpKFR</td>
+            <td colspan="4"></td>
+        </tr>
+        <tr>
+            <td colspan="1"></td>
+            <td colspan="4">Tanggal Pelayanan</td>
+            <td colspan="5">: @{{item.obj[32110969] | toDate | date:'dd MMMM yyyy'}}</td>
+        </tr>
+        <tr>
+            <td colspan="1"></td>
+            <td colspan="4">● Anamnesa</td>
+            <td colspan="5">: @{{ item.obj[32110970] ? item.obj[32110970] : '' }}</td>
+        </tr>
+        <tr>
+            <td colspan="1"></td>
+            <td colspan="4">● Pemeriksaan Fisik & Uji Fungsi</td>
+            <td colspan="5">: @{{ item.obj[32110971] ? item.obj[32110971] : '' }}</td>
+        </tr>
+        <tr>
+            <td colspan="1"></td>
+            <td colspan="4">● Diagnosis Medis ( ICD-10 )</td>
+            <td colspan="5">: @{{ item.obj[32110972] ? item.obj[32110972] : '' }}</td>
+        </tr>
+        <tr>
+            <td colspan="1"></td>
+            <td colspan="4">● Diagnosis Fungsi ( ICD-10 )</td>
+            <td colspan="5">: @{{ item.obj[32110973] ? item.obj[32110973] : '' }}</td>
+        </tr>
+        <tr>
+            <td colspan="1"></td>
+            <td colspan="4">● Pemeriksaan Penunjang</td>
+            <td colspan="5">: @{{ item.obj[32110974] ? item.obj[32110974] : '' }}</td>
+        </tr>
+        <tr>
+            <td colspan="1"></td>
+            <td colspan="4">● Tata Laksana KFR ( ICD-9 CM )</td>
+            <td colspan="5">: @{{ item.obj[32110975] ? item.obj[32110975] : '' }}</td>
+        </tr>
+        <tr>
+            <td colspan="1"></td>
+            <td colspan="4">● Anjuran</td>
+            <td colspan="5">: @{{ item.obj[32110976] ? item.obj[32110976] : '' }}</td>
+        </tr>
+        <tr>
+            <td colspan="1"></td>
+            <td colspan="4">● Evaluasi</td>
+            <td colspan="5">: @{{ item.obj[32110977] ? item.obj[32110977] : '' }}</td>
+        </tr>
+        <tr>
+            <td colspan="1"></td>
+            <td colspan="4">● Suspek Penyakit Akibat Kerja</td>
+            <td colspan="5">: @{{ item.obj[32110978] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Ya (@{{ item.obj[32110979] ? item.obj[32110979] : '.................' }})</td>
+        </tr>
+        <tr>
+            <td colspan="1"></td>
+            <td colspan="4"></td>
+            <td colspan="5">&nbsp;&nbsp;@{{ item.obj[32110980] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Tidak (@{{ item.obj[32110981] ? item.obj[32110981] : '.................' }})</td>
+        </tr>
+    </table>
+
+    <table width="100%" style="table-layout:fixed;border:none">
+        <tr style="height:20px;"></tr>
+        <tr style="text-align: center;">
+            <td colspan="4" style="border:none"></td>
             <td style="border:none"></td>
-            <td style="border:none">Nama</td>
-            <td colspan="7" style="border:none">: @{{ item.obj[32104091] ? item.obj[32104091] : '..................................................' }}</td>
-        </tr>
-        <tr>
-            <td style="border:none"></td>
-            <td style="border:none">Umur</td>
-            <td colspan="7" style="border:none">: @{{ item.obj[32104092] ? item.obj[32104092] : '..................................................' }} Tahun</td>
-        </tr>
-        <tr>
-            <td style="border:none"></td>
-            <td style="border:none">Pekerjaan</td>
-            <td colspan="7" style="border:none">: @{{ item.obj[32104093] ? item.obj[32104093] : '..................................................' }}</td>
-        </tr>
-        <tr>
-            <td style="border:none"></td>
-            <td style="border:none">Alamat</td>
-            <td colspan="7" style="border:none">: @{{ item.obj[32104094] ? item.obj[32104094] : '..................................................' }}</td>
-        </tr>
-        <tr>
-            <td colspan="9" style="border:none;text-align: justify;line-height: 20pt;">Yang tersebut namanya di atas benar telah meninggal dunia di Rumah Sakit Umum Daerah H. Andi Sulthan Daeng Radja pada hari @{{item.obj[32104096] | toDate | date:'EEEE'}} Tanggal @{{item.obj[32104096] | toDate | date:'dd-MM-yyyy'}} Jam @{{item.obj[32104096] | toDate | date:'HH:mm'}} yang dirawat dari tanggal @{{item.obj[32104097] | toDate | date:'dd-MM-yyyy HH:mm'}} dengan Diagnosa @{{ item.obj[32104098] ? item.obj[32104098] : '..................................................' }} </td>
-        </tr>
-        <tr>
-            <td colspan="9" style="border:none">Demikian surat keterangan ini dibuat untuk dipergunakan seperlunya</td>
-        </tr>
-        <tr>
-            <td colspan="4" style="border:none;text-align: center;">Mengetahui</td>
+            <td colspan="4" style="border:none">Bulukumba, @{{item.obj[32110982] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
         </tr>
         <tr style="text-align: center;">
-            <td colspan="4" style="border:none">Dokter yang merawat</td>
+            <td colspan="4" style="border:none">Pasien</td>
             <td style="border:none"></td>
-            <td colspan="4" style="border:none">Kepala Ruangan/Perawatan</td>
+            <td colspan="4" style="border:none">Dokter SpKFR</td>
         </tr>
         <tr style="text-align: center;">
             <td colspan="4" valign="bottom" style="border:none"><div id="qrcodePetugas1" style="text-align: center"></td>
@@ -285,9 +356,9 @@
             <td colspan="4" valign="bottom" style="border:none"><div id="qrcodePetugas2" style="text-align: center"></td>
         </tr>
         <tr style="text-align: center;">
-            <td colspan="4" valign="bottom" style="border:none">@{{ item.obj[32104099] ? item.obj[32104099] : '__________________________________________' }}</td>
+            <td colspan="4" valign="bottom" style="border:none">@{{ item.obj[32110983] ? item.obj[32110983] : '___________________' }}</td>
             <td style="border:none"></td>
-            <td colspan="4" valign="bottom" style="border:none">@{{ item.obj[32104100] ? item.obj[32104100] : '__________________________________________' }}</td>
+            <td colspan="4" valign="bottom" style="border:none">@{{ item.obj[32110984] ? item.obj[32110984] : '___________________' }}</td>
         </tr>
 
     </table>
@@ -449,8 +520,8 @@
   
         // $scope.item.obj['keluhan_saat_ini'] = keluhan_saat_ini;
   
-        var petugas1 = $scope.item.obj[32104099];
-        var petugas2 = $scope.item.obj[32104100];
+        var petugas1 = $scope.item.obj[32110983];
+        var petugas2 = $scope.item.obj[32110984];
         
         if(petugas1 != undefined){
             jQuery('#qrcodePetugas1').qrcode({
@@ -475,8 +546,8 @@
             }
         };
     });
-    $(document).ready(function () {
-        window.print();
-    });
+    // $(document).ready(function () {
+    //     window.print();
+    // });
   </script>
 </html>
