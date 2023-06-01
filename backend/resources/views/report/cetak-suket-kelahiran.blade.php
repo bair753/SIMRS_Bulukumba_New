@@ -15,6 +15,8 @@
         <script type="text/javascript" src="{{ asset('js/qrcode/src/qrcode.js') }}"></script>
         {{-- <link href="{{ asset('css/style.css') }}" rel="stylesheet"> --}}
         <!-- angular -->
+        <script src="{{ asset('js/angular/moment.js') }}"></script>
+        <script src="{{ asset('js/angular/moment-with-locales.js') }}"></script>
         <script src="{{ asset('js/angular/angular.min.js') }}" type="text/javascript"></script>
         <script src="{{ asset('js/angular/angular-route.min.js') }}" type="text/javascript"></script>
         <script type="text/javascript" src="{{ asset('js/angular/angular-animate.min.js') }}"></script>
@@ -30,6 +32,8 @@
         <script type="text/javascript" src="{{ asset('js/qrcode/src/qrcode.js') }}"></script>
         {{-- <link href="{{ asset('service/css/style.css') }}" rel="stylesheet"> --}}
         <!-- angular -->
+        <script src="{{ asset('js/angular/moment.js') }}"></script>
+        <script src="{{ asset('js/angular/moment-with-locales.js') }}"></script>
         <script src="{{ asset('service/js/angular/angular.min.js') }}" type="text/javascript"></script>
         <script src="{{ asset('service/js/angular/angular-route.min.js') }}" type="text/javascript"></script>
         <script type="text/javascript" src="{{ asset('service/js/angular/angular-animate.min.js') }}"></script>
@@ -321,7 +325,8 @@
             <tr style="border:none;" height="50px"></tr>
             <tr style="border:none;">
                 <td colspan="10" style="border:none;">
-                    Adalah benar telah melahirkan Anak "@{{ item.obj[32108995] ? item.obj[32108995] : '........................' }}" di Rumah Sakit Umum Daerah H. Andi Sulthan Daeng Radja Bulukumba yang bernama "@{{ item.obj[32108996] ? item.obj[32108996] : '........................' }}" "Jenis Kelamin "@{{ item.obj[32108997] ? item.obj[32108997] : '........................' }}" Pada Hari "@{{item.obj[32108998] | toDate | date:'EEEE'}}" Tanggal "@{{item.obj[32108998] | toDate | date:'dd-MM-yyyy'}}" Jam " @{{item.obj[32108998] | toDate | date:'HH:mm'}}" WITA.
+                    Adalah benar telah melahirkan Anak "@{{ item.obj[32108995] ? item.obj[32108995] : '........................' }}" di Rumah Sakit Umum Daerah H. Andi Sulthan Daeng Radja Bulukumba yang bernama "@{{ item.obj[32108996] ? item.obj[32108996] : '........................' }}" "Jenis Kelamin "@{{ item.obj[32108997] ? item.obj[32108997] : '........................' }}" 
+                    Pada Hari "@{{item.obj[32108998] | DateIndo | date:'EEEE' }}" Tanggal "@{{item.obj[32108998] | toDate | date:'dd-MM-yyyy'}}" Jam " @{{item.obj[32108998] | toDate | date:'HH:mm'}}" WITA.
                 </td>
             </tr>
             <tr style="border:none" height="50px">
@@ -518,12 +523,24 @@
             }
             
         })
+        // var moment = require('moment');
         angular.filter('toDate', function() {
-        return function(items) {
-            if(items != null){
-                 return new Date(items);
-            }
-        };
+            return function(items) {
+                if(items != null){
+                    return new Date(items);
+                    
+                }
+            };
+        });
+
+        angular.filter('DateIndo', function() {
+            return function(items) {
+                if (items != null) {
+                const date = new Date(items);
+                const hari = moment(date).locale('id').format('dddd');
+                return hari;
+                }
+            };
         });
         $(document).ready(function () {
             window.print();

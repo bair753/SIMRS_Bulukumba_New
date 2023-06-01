@@ -3681,6 +3681,10 @@
         {
             "nameDep": "MonitoringBerkasKlaimCtrl",
             "urlDep": "module/EMR/MonitoringBerkasKlaimCtrl"
+        },
+        {
+            "nameDep": "ObservasiTandaVitalEndoskopiCtrl",
+            "urlDep": "module/EMR/ObservasiTandaVitalEndoskopiCtrl"
         }
     ]
 }

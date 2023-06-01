@@ -27,6 +27,11 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 medifirstService.get("sysadmin/master/get-departemen").then(function (data) {
                     $scope.isRouteLoading = false;
                     $scope.listDepartemen = data.data;
+                });
+                $scope.isRouteLoading = true;
+                medifirstService.get("sysadmin/master/get-no-hak-akses-upload-berkas").then(function (data) {
+                    $scope.isRouteLoading = false;
+                    $scope.listNoHakAkses = data.data;
                 })
             }
 

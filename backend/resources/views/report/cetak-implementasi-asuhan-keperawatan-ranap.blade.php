@@ -264,9 +264,9 @@
             {{-- 2 --}} 
             <tr style="height:100px" ng-show="item.obj[422553]!=undefined">
                 <td colspan="3">@{{item.obj[422553] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-                <td colspan="3">@{{ item.obj[422554] ? item.obj[422554] : '' }}</td>
+                <td colspan="3">@{{ item.obj[422555] ? item.obj[422555] : '' }}</td>
                 <td colspan="3">
-                    Paraf : @{{ item.obj[422555] ? item.obj[422555] : '' }}
+                    Paraf : @{{ item.obj[422556] ? item.obj[422556] : '' }}
                     <br>
                     <div id="qrcodep2" style="text-align: right"></div>
                 </td>
@@ -665,7 +665,7 @@
 
         var p1 = $scope.item.obj[422552];
 
-        var p2 = $scope.item.obj[422555];
+        var p2 = $scope.item.obj[422556];
 
         var p3 = $scope.item.obj[422559];
 

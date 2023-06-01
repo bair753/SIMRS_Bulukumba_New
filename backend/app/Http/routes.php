@@ -2490,6 +2490,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
                 Route::get('sysadmin/master/get-daftar-jenisdiet', 'SysAdmin\Master\MasterController@getDaftarJenisDiet');
                 Route::get('sysadmin/master/get-daftar-jeniswaktu', 'SysAdmin\Master\MasterController@getDaftarJenisWaktu');
                 Route::get('sysadmin/master/get-departemen', 'SysAdmin\Master\MasterController@getDepartemen');
+                Route::get('sysadmin/master/get-no-hak-akses-upload-berkas', 'SysAdmin\Master\MasterController@getNoHakAkses');
 
                 Route::get('sysadmin/master/get-daftar-kategorydiet', 'SysAdmin\Master\MasterController@getKategoryDiet');
                 Route::get('sysadmin/master/get-combo-siklus-gizi', 'SysAdmin\Master\MasterController@getComboSiklus');
@@ -2773,6 +2774,8 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
         Route::get('document/berkas-klaim', 'Bridging\InaCbgController@MergePdf');
         Route::get('report/cetak-bukti-pelayanan-tindakan', 'Report\ReportController@buktiPelayananTidakan');
         Route::get('report/cetak-lembar-formulir-rajal', 'Report\ReportController@lembarFormulirRajal');
+        Route::get('report/cetak-tindakan-fisioterapi', 'Report\ReportController@tindakanFisioterapi');
+        Route::get('report/cetak-formulir-permintaan-darah', 'Report\ReportController@formulirPermintaanDarah');
 
         Route::get('viewer/get-list-antrian','Antrian\AntrianController@getListAntrian');
         Route::get('viewer/update-antrian','Antrian\AntrianController@updatePanggil');
