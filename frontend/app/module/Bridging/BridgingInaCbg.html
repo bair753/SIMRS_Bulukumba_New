@@ -578,11 +578,21 @@
 				<button class="btnTemplate1 buttonKuning" ng-click="alatMonitoringCPAP()">Cetak Alat Monitoring CPAP</button>
 			</div>
 			<div class="grid_2">
+				<button class="btnTemplate1 buttonKuning" ng-click="hiperbilirubin()">Cetak Hiperbilirubin</button>
+			</div>
+			<div class="grid_2">
+				<button class="btnTemplate1 buttonKuning" ng-click="formulirPermintaanDarah()">Cetak Formulir Permintaan Darah</button>
+			</div>
+			<div class="grid_2">
 				<button class="btnTemplate1 buttonKuning" ng-click="buktiPelayananFisioterapi()">Cetak Bukti Pelayanan (Fisioterapi)</button>
 			</div>
 
 			<div class="grid_2">
 				<button class="btnTemplate1 buttonKuning" ng-click="lembarFormulirRajal()">Cetak Lembar Formulir Rajal (Fisioterapi)</button>
+			</div>
+
+			<div class="grid_2">
+				<button class="btnTemplate1 buttonKuning" ng-click="tindakanFisioterapi()">Cetak Tindakan (Fisioterapi)</button>
 			</div>
 			
 			<div class="grid_2">
@@ -1582,6 +1592,34 @@
 			</div>
 		</div>
 
+		<div kendo-window="popUpDaftarHiperbilirubin" k-title="'Daftar Hiperbilirubin'" k-visible="false" k-width="1000" k-height="400">
+			<div class="panel panel-default container_12">
+				<div class="grid_12 headerBox">
+					<kendo-grid id="kGrids" data-source="dataDaftarHiperbilirubin" options="columnDaftarHiperbilirubin" k-selectable="'row'" k-sortable="'true'"
+							k-resizable="'true'" k-ng-model="dataSelectedHiperbilirubin" ng-click="klikGridHiperbilirubin(dataSelectedHiperbilirubin)"></kendo-grid>
+				</div>
+					<div class="grid_12">
+							<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
+									<button class="k-button  k-button-icontext" ng-click="cetakHiperbilirubin()">Cetak</button>
+							</div>
+					</div>
+			</div>
+		</div>
+
+		<div kendo-window="popUpDaftarPermintaanDarah" k-title="'Daftar Formulir Permintaan Darah'" k-visible="false" k-width="1000" k-height="400">
+			<div class="panel panel-default container_12">
+				<div class="grid_12 headerBox">
+					<kendo-grid id="kGrids" data-source="dataDaftarPermintaanDarah" options="columnDaftarPermintaanDarah" k-selectable="'row'" k-sortable="'true'"
+							k-resizable="'true'" k-ng-model="dataSelectedPermintaanDarah" ng-click="klikGridPermintaanDarah(dataSelectedPermintaanDarah)"></kendo-grid>
+				</div>
+					<div class="grid_12">
+							<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
+									<button class="k-button  k-button-icontext" ng-click="cetakPermintaanDarah()">Cetak</button>
+							</div>
+					</div>
+			</div>
+		</div>
+
 		<div kendo-window="popUpDaftarBuktiPelayananTindakan" k-title="'Daftar Bukti Pelayanan Tindakan (Fisioterapi)" k-visible="false" k-width="1000" k-height="400">
 			<div class="panel panel-default container_12">
 				<div class="grid_12 headerBox">
@@ -1605,6 +1643,20 @@
 					<div class="grid_12">
 							<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
 									<button class="k-button  k-button-icontext" ng-click="cetaklembarFormulirRajal()">Cetak</button>
+							</div>
+					</div>
+			</div>
+		</div>
+
+		<div kendo-window="popUpDaftartindakanFisioterapi" k-title="'Daftar Tindakan (Fisioterapi)" k-visible="false" k-width="1000" k-height="400">
+			<div class="panel panel-default container_12">
+				<div class="grid_12 headerBox">
+					<kendo-grid id="kGrids" data-source="dataDaftartindakanFisioterapi" options="columnDaftartindakanFisioterapi" k-selectable="'row'" k-sortable="'true'"
+							k-resizable="'true'" k-ng-model="dataSelectedtindakanFisioterapi" ng-click="klikGridtindakanFisioterapi(dataSelectedtindakanFisioterapi)"></kendo-grid>
+				</div>
+					<div class="grid_12">
+							<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
+									<button class="k-button  k-button-icontext" ng-click="cetaktindakanFisioterapi()">Cetak</button>
 							</div>
 					</div>
 			</div>

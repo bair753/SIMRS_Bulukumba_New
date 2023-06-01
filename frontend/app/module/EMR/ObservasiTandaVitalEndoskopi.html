@@ -1,0 +1,451 @@
+<style type="text/css">
+    fieldset {
+        border-radius: 5px;
+        border: 1px solid #228be6;
+    }
+
+    .k-slider-horizontal {
+        display: inline-block;
+        float: left;
+        width: 450px;
+
+        height: 26px;
+
+
+    }
+
+    .k-slider {
+
+        margin-left: 3%;
+        margin-right: 3%;
+        margin-top: 1%;
+        margin-bottom: 5%;
+        display: inline-block;
+    }
+
+    .activeBtn {
+        background-color: #10c4b2;
+        color: #ffffff;
+    }
+    table,
+    th,
+    td {
+        border: 1px solid #929191;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+    td {
+        padding: 5px;
+        text-align: left;
+    }
+    th {
+        padding: 5px;
+        text-align: center;
+    }
+    .clicks{
+        cursor: pointer;
+    }
+</style>
+
+ <!-- ng-class="{'my-disable':true}" -->
+<!-- <div class="grid_12"  disable-contents="allDisabled" id="form"> -->
+<div class="grid_12">
+    <div class="grid_12">
+        <div class="panel panel-default container_12">
+            <div class="panel-heading" c-translate>Observasi Tanda Vital Selama Prosedur Endoskopi</div>
+        </div>
+        
+        <div class="grid_12">
+            <fieldset style="margin-top: 10px;">
+                <div class="grid_12 mt-1" style="min-width: 1500px;overflow: auto;">
+                    <table style="border: 1;">
+                        <tr>
+                            <th style="text-align: center;width: 250px;" rowspan="2">PERIHAL</th>
+                            <th style="text-align: center;" colspan="6">SIGN IN</th>
+                            <th style="text-align: center;" colspan="12">TIME OUT</th>
+                            <th style="text-align: center;" colspan="6">SIGN OUT</th>
+                        </tr>
+
+                        <tr>
+                            <th style="text-align: center;">5</th>
+                            <th style="text-align: center;">10</th>
+                            <th style="text-align: center;">15</th>
+                            <th style="text-align: center;">20</th>
+                            <th style="text-align: center;">25</th>
+                            <th style="text-align: center;">30</th>
+                            <th style="text-align: center;">5</th>
+                            <th style="text-align: center;">10</th>
+                            <th style="text-align: center;">15</th>
+                            <th style="text-align: center;">20</th>
+                            <th style="text-align: center;">25</th>
+                            <th style="text-align: center;">30</th>
+                            <th style="text-align: center;">35</th>
+                            <th style="text-align: center;">40</th>
+                            <th style="text-align: center;">45</th>
+                            <th style="text-align: center;">50</th>
+                            <th style="text-align: center;">55</th>
+                            <th style="text-align: center;">60</th>
+                            <th style="text-align: center;">5</th>
+                            <th style="text-align: center;">10</th>
+                            <th style="text-align: center;">15</th>
+                            <th style="text-align: center;">20</th>
+                            <th style="text-align: center;">25</th>
+                            <th style="text-align: center;">30</th>
+                        </tr>
+
+                        <tr>
+                            <td>Tekanan Darah</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111035]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111036]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111037]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111038]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111039]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111040]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111041]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111042]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111043]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111044]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111045]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111046]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111047]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111048]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111049]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111050]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111051]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111052]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111053]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111054]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111055]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111056]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111057]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111058]"></td>
+                        </tr>
+
+                        <tr>
+                            <td>Nadi</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111059]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111060]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111061]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111062]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111063]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111064]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111065]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111066]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111067]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111068]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111069]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111070]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111071]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111072]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111073]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111074]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111075]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111076]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111077]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111078]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111079]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111080]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111081]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111082]"></td>
+                        </tr>
+
+                        <tr>
+                            <td>Napas</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111083]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111084]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111085]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111086]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111087]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111088]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111089]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111090]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111091]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111092]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111093]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111094]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111095]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111096]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111097]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111098]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111099]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111100]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111101]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111102]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111103]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111104]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111105]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111106]"></td>
+                        </tr>
+
+                        <tr>
+                            <td>SpO<sub>2</sub></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111107]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111108]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111109]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111110]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111111]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111112]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111113]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111114]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111115]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111116]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111117]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111118]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111119]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111120]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111121]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111122]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111123]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111124]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111125]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111126]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111127]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111128]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111129]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111130]"></td>
+                        </tr>
+
+                        <tr>
+                            <td>Nyeri</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111131]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111132]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111133]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111134]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111135]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111136]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111137]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111138]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111139]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111140]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111141]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111142]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111143]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111144]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111145]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111146]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111147]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111148]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111149]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111150]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111151]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111152]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111153]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111154]"></td>
+                        </tr>
+
+                        <tr>
+                            <td>Kesadaran</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111155]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111156]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111157]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111158]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111159]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111160]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111161]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111162]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111163]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111164]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111165]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111166]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111167]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111168]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111169]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111170]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111170]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111170]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111170]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111171]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111172]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111173]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111174]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111175]"></td>
+                        </tr>
+
+                        <tr>
+                            <td>1. Panggil Nama</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111176]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111177]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111178]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111179]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111180]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111181]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111182]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111183]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111184]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111185]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111186]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111187]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111188]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111189]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111190]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111191]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111192]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111193]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111194]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111195]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111196]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111197]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111198]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111199]"></td>
+                        </tr>
+
+                        <tr>
+                            <td>2. Tepuk Bahu</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111200]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111201]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111202]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111203]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111204]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111205]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111206]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111207]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111208]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111209]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111210]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111211]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111212]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111213]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111214]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111215]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111216]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111217]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111218]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111219]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111220]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111221]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111223]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111224]"></td>
+                        </tr>
+
+                        <tr>
+                            <td>3. Rangsang Nyeri</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111225]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111226]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111227]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111228]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111229]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111230]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111231]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111232]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111233]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111234]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111235]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111236]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111237]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111238]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111239]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111240]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111241]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111242]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111243]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111244]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111245]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111246]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111247]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32111248]"></td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="7">Infus</td>
+                            <td colspan="12"><input type="text" class="k-textbox" ng-model="item.obj[32111249]"></td>
+                            <td colspan="6"><input type="text" class="k-textbox" ng-model="item.obj[32111250]"></td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="7">Transfusi</td>
+                            <td colspan="12"><input type="text" class="k-textbox" ng-model="item.obj[32111251]"></td>
+                            <td colspan="6"><input type="text" class="k-textbox" ng-model="item.obj[32111252]"></td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="7">Perdarahan</td>
+                            <td colspan="12"><input type="text" class="k-textbox" ng-model="item.obj[32111253]"></td>
+                            <td colspan="6"><input type="text" class="k-textbox" ng-model="item.obj[32111254]"></td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="7">Output Urin</td>
+                            <td colspan="12"><input type="text" class="k-textbox" ng-model="item.obj[32111255]"></td>
+                            <td colspan="6"><input type="text" class="k-textbox" ng-model="item.obj[32111256]"></td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="7">Skala Nyeri</td>
+                            <td colspan="12"><input type="text" class="k-textbox" ng-model="item.obj[32111257]"></td>
+                            <td colspan="6"><input type="text" class="k-textbox" ng-model="item.obj[32111258]"></td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="7">Resiko Jatuh</td>
+                            <td colspan="12"><input type="text" class="k-textbox" ng-model="item.obj[32111250]"></td>
+                            <td colspan="6"><input type="text" class="k-textbox" ng-model="item.obj[32111250]"></td>
+                        </tr>
+                       
+                        <tr>
+                            <td colspan="7">Nama Obat</td>
+                            <td colspan="12"><input type="text" class="k-textbox" ng-model="item.obj[32111259]"></td>
+                            <td colspan="6"><input type="text" class="k-textbox" ng-model="item.obj[32111260]"></td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="7">Waktu Pemberian</td>
+                            <td colspan="12">
+                                <input style="width: 90%" k-ng-model="item.obj[32111261]" kendo-datetimepicker placeholer="YYYY:MM:DD HH:mm"
+                                k-format="'yyyy-MM-dd HH:mm'" />
+                            </td>
+                            <td colspan="6">
+                                <input style="width: 90%" k-ng-model="item.obj[32111262]" kendo-datetimepicker placeholer="YYYY:MM:DD HH:mm"
+                                k-format="'yyyy-MM-dd HH:mm'" />
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="7">Cara Pemberian</td>
+                            <td colspan="12"><input type="text" class="k-textbox" ng-model="item.obj[32111263]"></td>
+                            <td colspan="6"><input type="text" class="k-textbox" ng-model="item.obj[32111264]"></td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="7">Nama Petugas</td>
+                            <td colspan="12">
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[32111265]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                            </td>
+                            <td colspan="6">
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[32111266]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="7">Kejadian Tidak Diduga</td>
+                            <td colspan="12"><input type="text" class="k-textbox" ng-model="item.obj[32111267]"></td>
+                            <td colspan="6"><input type="text" class="k-textbox" ng-model="item.obj[32111268]"></td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="19" rowspan="2">
+                                Keterangan <br>
+                                Kesadaran beri tanda (+) bila pasien merespon rangsangan yang diberikan, yaitu saat dipanggil namanya, ditepuk bahunya atau dirangsang nyeri. <br>
+                                Perawat wajib melapor ke dokter yang bertanggung jawab bila pasien tidak merespon saat diberikan rangsangan nyeri.
+                            </td>
+                            <td colspan="6" rowspan="2">
+                                Nama Jelas dan Tanda Tangan Perawat <br><br>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[32111269]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </fieldset>
+        </div>
+
+    </div>
+</div>
+
+<br />
+<br />
+<div class="grid_12">
+    <div ng-include='"../app/module/EMR/TemplateButtonDinamis" '></div>
+
+</div>

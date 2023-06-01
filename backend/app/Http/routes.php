@@ -2773,6 +2773,8 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
         Route::get('document/berkas-klaim', 'Bridging\InaCbgController@MergePdf');
         Route::get('report/cetak-bukti-pelayanan-tindakan', 'Report\ReportController@buktiPelayananTidakan');
         Route::get('report/cetak-lembar-formulir-rajal', 'Report\ReportController@lembarFormulirRajal');
+        Route::get('report/cetak-tindakan-fisioterapi', 'Report\ReportController@tindakanFisioterapi');
+        Route::get('report/cetak-formulir-permintaan-darah', 'Report\ReportController@formulirPermintaanDarah');
 
         Route::get('viewer/get-list-antrian','Antrian\AntrianController@getListAntrian');
         Route::get('viewer/update-antrian','Antrian\AntrianController@updatePanggil');

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Surat Lembar Formulir Rawat Jalan</title>
+    <title>Surat Tindakan (Fisioterapi)</title>
     @if (stripos(\Request::url(), 'localhost') !== false)
         {{-- <link rel="stylesheet" href="{{ asset('css/report/paper.css') }}">
         <link rel="stylesheet" href="{{ asset('css/report/table.css') }}">
@@ -215,9 +215,10 @@
         }
     </style>
 </head>
-<body ng-controller="cetakSuketKematian">
+<body ng-controller="cetakTindakanFisioterapi">
     <table width="100%" style="table-layout:fixed;border:none">
         <tr style="text-align:center;border:none">
+            {{-- gammbar kiri taronya disini --}}
             <td colspan="1" style="border:none" rowspan="4">
                 @if(stripos(\Request::url(), 'localhost') !== FALSE)
                 <img src="{{ asset('img/logo_only.png') }}" alt="" style="width: 60px;">
@@ -248,101 +249,98 @@
             <td colspan="9" style="border:none;"><hr style="border:2px solid #000"></td>
         </tr>
         <tr style="text-align:center">
-            <td colspan="9" style="border:none;"><h3>LEMBAR FORMULIR RAWAT JALAN<br> Layanan Kedokteran Fisik dan Rehabilitasi</h3></td>
+            <td colspan="9" style="border:none;"><h3>TINDAKAN INSTALASI REHABILITASI MEDIK</h3></td>
         </tr>
         <tr style="height:20px;"></tr>
     </table>
-    <table width="100%" style="table-layout:fixed;border:1px solid #000;">
+    <table width="100%">
         <tr>
-            <td colspan="1">I.</td>
-            <td colspan="5">Diisi oleh Pasien / Peserta</td>
-            <td colspan="3">No.RM/Reg : {!! $res['d'][0]->nocm  !!}</td>
+            <td colspan="3">No Rekam Medis : {!! $res['d'][0]->nocm  !!}</td>
+            <td colspan="6">Tanggal Pelayanan : @{{item.obj[32110988] | toDate | date:'dd MMMM yyyy'}}</td>
         </tr>
         <tr>
-            <td colspan="1"></td>
-            <td colspan="4">Nama Pasien</td>
-            <td colspan="5">: {!! $res['d'][0]->namapasien  !!}</td>
+            <td colspan="3">Nama Pasien : {!! $res['d'][0]->namapasien  !!}</td>
+            <td colspan="6">Diagnosa Medis : @{{ item.obj[32110989] ? item.obj[32110989] : '' }}</td>
         </tr>
         <tr>
-            <td colspan="1"></td>
-            <td colspan="4">Tanggal Lahir</td>
-            <td colspan="5">: {!! date('d-m-Y',strtotime( $res['d'][0]->tgllahir  )) !!}</td>
-        </tr>
-        <tr>
-            <td colspan="1"></td>
-            <td colspan="4">Alamat</td>
-            <td colspan="5">: {!! $res['d'][0]->alamatlengkap  !!}</td>
-        </tr>
-        <tr>
-            <td colspan="1"></td>
-            <td colspan="4">Telp./ HP</td>
-            <td colspan="5">: @{{ item.obj[32110968] ? item.obj[32110968] : '' }}</td>
+            <td colspan="3">Tanggal Lahir : {!! date('d-m-Y',strtotime( $res['d'][0]->tgllahir  )) !!}</td>
+            <td colspan="6">Diagnosa Fungsi : @{{ item.obj[32110990] ? item.obj[32110990] : '' }}</td>
         </tr>
     </table>
     <table width="100%" style="table-layout:fixed;border:none">
         <tr style="height:20px;"></tr>
     </table>
 
-    <table width="100%" style="table-layout:fixed;border:1px solid #000;">
-        <tr>
-            <td colspan="1">II.</td>
-            <td colspan="5">Diisi oleh Dokter SpKFR</td>
-            <td colspan="4"></td>
+    <table width="100%" border="1">
+        <tr style="text-align: center">
+            <td colspan="1"><b>NO</b></td>
+            <td colspan="5"><b>JENIS TINDAKAN</b></td>
+            <td colspan="4"><b>ICD-9</b></td>
         </tr>
         <tr>
-            <td colspan="1"></td>
-            <td colspan="4">Tanggal Pelayanan</td>
-            <td colspan="5">: @{{item.obj[32110969] | toDate | date:'dd MMMM yyyy'}}</td>
+            <td colspan="1">@{{ item.obj[32110991] ? item.obj[32110991] : '' }}</td>
+            <td colspan="5">@{{ item.obj[32110992] ? item.obj[32110992] : '' }}</td>
+            <td colspan="4">@{{ item.obj[32110993] ? item.obj[32110993] : '' }}</td>
         </tr>
         <tr>
-            <td colspan="1"></td>
-            <td colspan="4">● Anamnesa</td>
-            <td colspan="5">: @{{ item.obj[32110970] ? item.obj[32110970] : '' }}</td>
+            <td colspan="1">@{{ item.obj[32110994] ? item.obj[32110994] : '' }}</td>
+            <td colspan="5">@{{ item.obj[32110995] ? item.obj[32110995] : '' }}</td>
+            <td colspan="4">@{{ item.obj[32110996] ? item.obj[32110996] : '' }}</td>
         </tr>
         <tr>
-            <td colspan="1"></td>
-            <td colspan="4">● Pemeriksaan Fisik & Uji Fungsi</td>
-            <td colspan="5">: @{{ item.obj[32110971] ? item.obj[32110971] : '' }}</td>
+            <td colspan="1">@{{ item.obj[32110997] ? item.obj[32110997] : '' }}</td>
+            <td colspan="5">@{{ item.obj[32110998] ? item.obj[32110998] : '' }}</td>
+            <td colspan="4">@{{ item.obj[32110999] ? item.obj[32110999] : '' }}</td>
         </tr>
         <tr>
-            <td colspan="1"></td>
-            <td colspan="4">● Diagnosis Medis ( ICD-10 )</td>
-            <td colspan="5">: @{{ item.obj[32110972] ? item.obj[32110972] : '' }}</td>
+            <td colspan="1">@{{ item.obj[32111000] ? item.obj[32111000] : '' }}</td>
+            <td colspan="5">@{{ item.obj[32111001] ? item.obj[32111001] : '' }}</td>
+            <td colspan="4">@{{ item.obj[32111002] ? item.obj[32111002] : '' }}</td>
         </tr>
         <tr>
-            <td colspan="1"></td>
-            <td colspan="4">● Diagnosis Fungsi ( ICD-10 )</td>
-            <td colspan="5">: @{{ item.obj[32110973] ? item.obj[32110973] : '' }}</td>
+            <td colspan="1">@{{ item.obj[32111003] ? item.obj[32111003] : '' }}</td>
+            <td colspan="5">@{{ item.obj[32111004] ? item.obj[32111004] : '' }}</td>
+            <td colspan="4">@{{ item.obj[32111005] ? item.obj[32111005] : '' }}</td>
         </tr>
         <tr>
-            <td colspan="1"></td>
-            <td colspan="4">● Pemeriksaan Penunjang</td>
-            <td colspan="5">: @{{ item.obj[32110974] ? item.obj[32110974] : '' }}</td>
+            <td colspan="1">@{{ item.obj[32111006] ? item.obj[32111006] : '' }}</td>
+            <td colspan="5">@{{ item.obj[32111007] ? item.obj[32111007] : '' }}</td>
+            <td colspan="4">@{{ item.obj[32111008] ? item.obj[32111008] : '' }}</td>
         </tr>
         <tr>
-            <td colspan="1"></td>
-            <td colspan="4">● Tata Laksana KFR ( ICD-9 CM )</td>
-            <td colspan="5">: @{{ item.obj[32110975] ? item.obj[32110975] : '' }}</td>
+            <td colspan="1">@{{ item.obj[32111009] ? item.obj[32111009] : '' }}</td>
+            <td colspan="5">@{{ item.obj[32111010] ? item.obj[32111010] : '' }}</td>
+            <td colspan="4">@{{ item.obj[32111011] ? item.obj[32111011] : '' }}</td>
         </tr>
         <tr>
-            <td colspan="1"></td>
-            <td colspan="4">● Anjuran</td>
-            <td colspan="5">: @{{ item.obj[32110976] ? item.obj[32110976] : '' }}</td>
+            <td colspan="1">@{{ item.obj[32111012] ? item.obj[32111012] : '' }}</td>
+            <td colspan="5">@{{ item.obj[32111013] ? item.obj[32111013] : '' }}</td>
+            <td colspan="4">@{{ item.obj[32111014] ? item.obj[32111014] : '' }}</td>
         </tr>
         <tr>
-            <td colspan="1"></td>
-            <td colspan="4">● Evaluasi</td>
-            <td colspan="5">: @{{ item.obj[32110977] ? item.obj[32110977] : '' }}</td>
+            <td colspan="1">@{{ item.obj[32111015] ? item.obj[32111015] : '' }}</td>
+            <td colspan="5">@{{ item.obj[32111016] ? item.obj[32111016] : '' }}</td>
+            <td colspan="4">@{{ item.obj[32111017] ? item.obj[32111017] : '' }}</td>
         </tr>
         <tr>
-            <td colspan="1"></td>
-            <td colspan="4">● Suspek Penyakit Akibat Kerja</td>
-            <td colspan="5">: @{{ item.obj[32110978] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Ya (@{{ item.obj[32110979] ? item.obj[32110979] : '.................' }})</td>
+            <td colspan="1">@{{ item.obj[32111018] ? item.obj[32111018] : '' }}</td>
+            <td colspan="5">@{{ item.obj[32111019] ? item.obj[32111019] : '' }}</td>
+            <td colspan="4">@{{ item.obj[32111020] ? item.obj[32111020] : '' }}</td>
         </tr>
         <tr>
-            <td colspan="1"></td>
-            <td colspan="4"></td>
-            <td colspan="5">&nbsp;&nbsp;@{{ item.obj[32110980] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Tidak (@{{ item.obj[32110981] ? item.obj[32110981] : '.................' }})</td>
+            <td colspan="1">@{{ item.obj[32111021] ? item.obj[32111021] : '' }}</td>
+            <td colspan="5">@{{ item.obj[32111022] ? item.obj[32111022] : '' }}</td>
+            <td colspan="4">@{{ item.obj[32111023] ? item.obj[32111023] : '' }}</td>
+        </tr>
+        <tr>
+            <td colspan="1">@{{ item.obj[32111024] ? item.obj[32111024] : '' }}</td>
+            <td colspan="5">@{{ item.obj[32111025] ? item.obj[32111025] : '' }}</td>
+            <td colspan="4">@{{ item.obj[32111026] ? item.obj[32111026] : '' }}</td>
+        </tr>
+        <tr>
+            <td colspan="1">@{{ item.obj[32111027] ? item.obj[32111027] : '' }}</td>
+            <td colspan="5">@{{ item.obj[32111028] ? item.obj[32111028] : '' }}</td>
+            <td colspan="4">@{{ item.obj[32111029] ? item.obj[32111029] : '' }}</td>
         </tr>
     </table>
 
@@ -351,12 +349,12 @@
         <tr style="text-align: center;">
             <td colspan="4" style="border:none"></td>
             <td style="border:none"></td>
-            <td colspan="4" style="border:none">Bulukumba, @{{item.obj[32110982] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+            <td colspan="4" style="border:none">Bulukumba, @{{item.obj[32111030] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
         </tr>
         <tr style="text-align: center;">
-            <td colspan="4" style="border:none">Pasien</td>
+            <td colspan="4" style="border:none">Penerima Pelayanan</td>
             <td style="border:none"></td>
-            <td colspan="4" style="border:none">Dokter SpKFR</td>
+            <td colspan="4" style="border:none">Pemeriksa</td>
         </tr>
         <tr style="text-align: center;">
             <td colspan="4" valign="bottom" style="border:none"><div id="qrcodePetugas1" style="text-align: center"></td>
@@ -364,9 +362,9 @@
             <td colspan="4" valign="bottom" style="border:none"><div id="qrcodePetugas2" style="text-align: center"></td>
         </tr>
         <tr style="text-align: center;">
-            <td colspan="4" valign="bottom" style="border:none">@{{ item.obj[32110983] ? item.obj[32110983] : '___________________' }}</td>
+            <td colspan="4" valign="bottom" style="border:none">@{{ item.obj[32111031] ? item.obj[32111031] : '___________________' }}</td>
             <td style="border:none"></td>
-            <td colspan="4" valign="bottom" style="border:none">@{{ item.obj[32110984] ? item.obj[32110984] : '___________________' }}</td>
+            <td colspan="4" valign="bottom" style="border:none">@{{ item.obj[32111032] ? item.obj[32111032] : '___________________' }}</td>
         </tr>
 
     </table>
@@ -398,7 +396,7 @@
             }
         })
   
-    angular.controller('cetakSuketKematian', function ($scope, $http, httpService) {
+    angular.controller('cetakTindakanFisioterapi', function ($scope, $http, httpService) {
         $scope.item = {
             obj: [],
             obj2: []
@@ -528,8 +526,8 @@
   
         // $scope.item.obj['keluhan_saat_ini'] = keluhan_saat_ini;
   
-        var petugas1 = $scope.item.obj[32110983];
-        var petugas2 = $scope.item.obj[32110984];
+        var petugas1 = $scope.item.obj[32111031];
+        var petugas2 = $scope.item.obj[32111032];
         
         if(petugas1 != undefined){
             jQuery('#qrcodePetugas1').qrcode({
