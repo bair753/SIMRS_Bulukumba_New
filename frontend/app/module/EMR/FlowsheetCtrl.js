@@ -1,6 +1,6 @@
 define(['initialize'], function (initialize) {
     'use strict';
-    initialize.controller('PemberianEdukasiPasienCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
+    initialize.controller('FlowsheetCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
         function ($q, $rootScope, $scope, ModelItem, $state, cacheHelper, dateHelper, medifirstService) {
 
             var paramsIndex = $state.params.index ? parseInt($state.params.index) : null
@@ -14,33 +14,35 @@ define(['initialize'], function (initialize) {
             $scope.cc = {};
             var nomorEMR = '-';
             var norecEMR = '';
-            $scope.cc.emrfk = 290027;
+            $scope.cc.emrfk = 290168;
             var dataLoad = [];
             $scope.isCetak = true;
             $scope.show = true;
             $scope.allDisabled = false;
             $scope.listItem = [
-                { id: 423291, inuse: true },
-                { id: 423298 },
-                { id: 423305 },
-                { id: 423312 },
-                { id: 423319 },
-                { id: 423326 },
-                { id: 423333 },
-                { id: 423340 },
-                { id: 423347 },
-                { id: 423354 },
-                { id: 423361 },
-                { id: 423368 },
-                { id: 423375 },
-                { id: 423382 },
-                { id: 423389 },
-                { id: 423396 },
-                { id: 423403 },
-                { id: 423410 },
-                { id: 423417 },
-                { id: 423424 },
-                { id: 423431 }
+                { id: 422550, inuse: true },
+                { id: 422553 },
+                { id: 422557 },
+                { id: 422560 },
+                { id: 422563 },
+                { id: 422566 },
+                { id: 422569 },
+                { id: 422572 },
+                { id: 422575 },
+                { id: 422578 },
+                { id: 422581 },
+                { id: 422584 },
+                { id: 422587 },
+                { id: 422590 },
+                { id: 422593 },
+                { id: 422596 },
+                { id: 422599 },
+                { id: 422602 },
+                { id: 422605 },
+                { id: 422608 },
+                { id: 422611 },
+                { id: 422614 },
+                { id: 422617 }
             ];
             var pegawaiInputDetail  = '';
             var cacheNomorEMR = cacheHelper.get('cacheNomorEMR');
@@ -489,7 +491,7 @@ define(['initialize'], function (initialize) {
                     // });
 
                     medifirstService.postLogging('EMR', 'norec emrpasien_t', e.data.data.norec,
-                        'Pemberian Edukasi Pasien' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
+                        'Flowsheet' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
                         + $scope.cc.noregistrasi).then(function (res) {
                         })
 
