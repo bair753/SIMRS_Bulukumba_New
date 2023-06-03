@@ -3685,6 +3685,10 @@
         {
             "nameDep": "ObservasiTandaVitalEndoskopiCtrl",
             "urlDep": "module/EMR/ObservasiTandaVitalEndoskopiCtrl"
+        },
+        {
+            "nameDep": "PersetujuanTatibIntensifCtrl",
+            "urlDep": "module/EMR/PersetujuanTatibIntensifCtrl"
         }
     ]
 }
