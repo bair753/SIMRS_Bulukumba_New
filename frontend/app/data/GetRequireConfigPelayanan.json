@@ -3689,6 +3689,10 @@
         {
             "nameDep": "PersetujuanTatibIntensifCtrl",
             "urlDep": "module/EMR/PersetujuanTatibIntensifCtrl"
+        },
+        {
+            "nameDep": "FlowsheetCtrl",
+            "urlDep": "module/EMR/FlowsheetCtrl"
         }
     ]
 }
