@@ -533,7 +533,13 @@
                 <td colspan="4" style="border:none">@{{ item.obj[420765] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Tergabung Penuh</td>
             </tr>
             <tr style="text-align:center;height:18px">
-                <td colspan="4" rowspan="7" style="text-align:left;vertical-align:top">Risiko Nutrisional</td>
+                <td colspan="4" rowspan="8" style="text-align:left;vertical-align:top">Risiko Nutrisional</td>
+                <td colspan="4">BB : @{{ item.obj[420766] ? item.obj[420766] : '' }}</td>
+                <td colspan="6">TB : @{{ item.obj[420767] ? item.obj[420767] : '' }}</td>
+                <td colspan="8">Lingkar Kepala : @{{ item.obj[420768] ? item.obj[420768] : '' }}</td>
+                
+            </tr>
+            <tr style="text-align:center;height:18px">
                 <td>No</td>
                 <td colspan="13">Deskripsi</td>
                 <td colspan="4">Jawaban</td>

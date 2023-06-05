@@ -244,11 +244,21 @@
 			<td colspan="1" class="noborder"></td>
 			<td colspan="23" class="noborder"  class="noborder"><u><strong>Riwayat</strong></u></td>
 			<td colspan="25" rowspan="15" class="noborder text-center">
-				@if(stripos(\Request::url(), 'localhost') !== FALSE)
-								<img class="gambarAset" style="width: 400px;display:block; margin:auto;"src="{{ asset('img/hiperbilirubin.png') }}" />
-							@else
-							<img class="gambarAset" style="width: 400px;display:block; margin:auto;" src="{{ asset('img/hiperbilirubin.png') }}" />
-							@endif
+                <div class="grid_12">
+                    <div class="grid_12">
+                        <div class="grid_12" style="width: 400px;height:220px; margin: auto; float: none;position: relative;z-index: 1;border: solid;">
+                            <img style="width: 400px;height:220px;" src="{!!  $res['d'][0]->image  !!}">
+                            <input class="k-textbox" ng-model="item.ttd1" type="hidden" >
+                        </div>
+                        <div class="grid_12" style="margin-top: -220px;">
+                            @if(stripos(\Request::url(), 'localhost') !== FALSE)
+                                <img class="gambarAset" style="width: 400px;height:220px;display:block; margin:auto;"src="{{ asset('img/hiperbilirubin.png') }}" />
+                            @else
+                                <img class="gambarAset" style="width: 400px;height:220px;display:block; margin:auto;" src="{{ asset('img/hiperbilirubin.png') }}" />
+                            @endif
+                        </div>
+                    </div>
+                </div>
 			</td>
 		</tr>
 		<tr>
@@ -669,8 +679,8 @@
             }
         };
     });
-    $(document).ready(function () {
-        window.print();
-    });
+    // $(document).ready(function () {
+    //     window.print();
+    // });
 </script>
 </html>

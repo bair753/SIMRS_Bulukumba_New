@@ -16,7 +16,7 @@ define(['initialize'], function (initialize) {
             var norecEMR = '';
             $scope.cc.emrfk = 290168;
             var dataLoad = [];
-            $scope.isCetak = true;
+            $scope.isCetak = false;
             $scope.show = true;
             $scope.allDisabled = false;
             $scope.listItem = [
@@ -94,6 +94,10 @@ define(['initialize'], function (initialize) {
 
             medifirstService.getPart("sysadmin/general/get-datacombo-jenispegawai-cppt", true, true, 20).then(function (data) {
                 $scope.listJenisPegawai = data;
+            });
+            
+            medifirstService.getPart("emr/get-datacombo-part-obat", true, true, 20).then(function (data) {
+                $scope.listObat = data;
             });
 
             $scope.listEdukasiPasien = [

@@ -4699,8 +4699,8 @@ class MasterController extends ApiController{
         $data = \DB::table('diagnosatindakan_m as dg')
             ->select('dg.*')
             ->where('dg.kdprofile', $kdProfile)
-            ->where('dg.statusenabled', true)
-            ->take(10);
+            // ->where('dg.statusenabled', true)
+            ->limit(10);
         if(isset($request['kddiagnosa']) && $request['kddiagnosa']!="" && $request['kddiagnosa']!="undefined"){
             $data = $data->where('dg.kddiagnosatindakan','ILIKE', '%'.$request['kddiagnosa'].'%');
         }
