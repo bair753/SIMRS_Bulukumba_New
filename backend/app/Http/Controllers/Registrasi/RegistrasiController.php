@@ -7473,7 +7473,8 @@ class RegistrasiController extends ApiController
             $req['filter']['filters'][0]['value']!="undefined"){
             $icdIX = $icdIX
                 ->where('dg.namadiagnosatindakan','ilike','%'.$req['filter']['filters'][0]['value'].'%' )
-                ->orWhere('dg.kddiagnosatindakan','ilike',$req['filter']['filters'][0]['value'].'%' )  ;
+                ->orWhere('dg.kddiagnosatindakan','ilike','%'.$req['filter']['filters'][0]['value'].'%' ) 
+                ->where('dg.statusenabled', true );
         }
 
 

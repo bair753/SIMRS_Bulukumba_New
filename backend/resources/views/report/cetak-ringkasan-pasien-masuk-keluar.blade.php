@@ -255,6 +255,9 @@
                 <td colspan="20" height="25px" valign="top">Diagnosa sekunder (termasuk komplikasi/ manifestasi) : @{{ item.obj[420357] ? item.obj[420357] : '' }} @{{ item.obj[420358] ? item.obj[420358] : '' }}</td>
             </tr>
             <tr>
+                <td colspan="20" height="25px" valign="top">Diagnosa sekunder (termasuk komplikasi/ manifestasi) : @{{ item.obj[32115624] ? item.obj[32115624] : '' }} @{{ item.obj[32115625] ? item.obj[32115625] : '' }}</td>
+            </tr>
+            <tr>
                 <td colspan="20" height="25px" valign="top">Tindakan Operasi yang dilakukan (bila ada, sebutkan) : @{{ item.obj[420359] ? item.obj[420359] : '' }}</td>
             </tr>
             <tr>

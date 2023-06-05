@@ -594,6 +594,19 @@
 			<div class="grid_2">
 				<button class="btnTemplate1 buttonKuning" ng-click="tindakanFisioterapi()">Cetak Tindakan (Fisioterapi)</button>
 			</div>
+
+			<div class="grid_2">
+				<button class="btnTemplate1 buttonKuning" ng-click="pemberianmakanawal1000()">Cetak Pemberian Makan Awal 1000 - 1500 gram</button>
+			</div>
+			<div class="grid_2">
+				<button class="btnTemplate1 buttonKuning" ng-click="pemberianmakanawal1500()">Cetak Pemberian Makan Awal 1500 - 2000 gram</button>
+			</div>
+			<div class="grid_2">
+				<button class="btnTemplate1 buttonKuning" ng-click="pemberianmakanawal2000()">Cetak Pemberian Makan Awal 2000 - 2500 gram</button>
+			</div>
+			<div class="grid_2">
+				<button class="btnTemplate1 buttonKuning" ng-click="pemberianmakanawal2500()">Cetak Pemberian Makan Awal lebih 2500 gram</button>
+			</div>
 			
 			<div class="grid_2">
 				<button class="btnTemplate1" ng-click="bundlingdocument()">Bundle Dokumen</button>
@@ -1620,7 +1633,7 @@
 			</div>
 		</div>
 
-		<div kendo-window="popUpDaftarBuktiPelayananTindakan" k-title="'Daftar Bukti Pelayanan Tindakan (Fisioterapi)" k-visible="false" k-width="1000" k-height="400">
+		<div kendo-window="popUpDaftarBuktiPelayananTindakan" k-title="'Daftar Bukti Pelayanan Tindakan (Fisioterapi)'" k-visible="false" k-width="1000" k-height="400">
 			<div class="panel panel-default container_12">
 				<div class="grid_12 headerBox">
 					<kendo-grid id="kGrids" data-source="dataDaftarBuktiPelayananTindakan" options="columnDaftarBuktiPelayananTindakan" k-selectable="'row'" k-sortable="'true'"
@@ -1634,7 +1647,7 @@
 			</div>
 		</div>
 
-		<div kendo-window="popUpDaftarlembarFormulirRajal" k-title="'Daftar Lembar Formulir Rawat Jalan (Fisioterapi)" k-visible="false" k-width="1000" k-height="400">
+		<div kendo-window="popUpDaftarlembarFormulirRajal" k-title="'Daftar Lembar Formulir Rawat Jalan (Fisioterapi)'" k-visible="false" k-width="1000" k-height="400">
 			<div class="panel panel-default container_12">
 				<div class="grid_12 headerBox">
 					<kendo-grid id="kGrids" data-source="dataDaftarlembarFormulirRajal" options="columnDaftarlembarFormulirRajal" k-selectable="'row'" k-sortable="'true'"
@@ -1648,7 +1661,7 @@
 			</div>
 		</div>
 
-		<div kendo-window="popUpDaftartindakanFisioterapi" k-title="'Daftar Tindakan (Fisioterapi)" k-visible="false" k-width="1000" k-height="400">
+		<div kendo-window="popUpDaftartindakanFisioterapi" k-title="'Daftar Tindakan (Fisioterapi)'" k-visible="false" k-width="1000" k-height="400">
 			<div class="panel panel-default container_12">
 				<div class="grid_12 headerBox">
 					<kendo-grid id="kGrids" data-source="dataDaftartindakanFisioterapi" options="columnDaftartindakanFisioterapi" k-selectable="'row'" k-sortable="'true'"
@@ -1657,6 +1670,76 @@
 					<div class="grid_12">
 							<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
 									<button class="k-button  k-button-icontext" ng-click="cetaktindakanFisioterapi()">Cetak</button>
+							</div>
+					</div>
+			</div>
+		</div>
+
+		<div kendo-window="popUpDaftarPemberianMakanAwal1000" k-title="'Cetak Pemberian Makan Awal 1000 - 1500 gram'" k-visible="false" k-width="1000" k-height="400">
+			<div class="panel panel-default container_12">
+				<div class="grid_12 headerBox">
+					<kendo-grid id="kGrids" data-source="dataDaftarPemberianMakanAwal1000" options="columnDaftarPemberianMakanAwal1000" k-selectable="'row'" k-sortable="'true'"
+							k-resizable="'true'" k-ng-model="dataSelectedPemberianMakanAwal1000" ng-click="klikGridPemberianMakanAwal1000(dataSelectedPemberianMakanAwal1000)"></kendo-grid>
+				</div>
+					<div class="grid_12">
+							<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
+									<button class="k-button  k-button-icontext" ng-click="cetakPemberianMakanAwal1000()">Cetak</button>
+							</div>
+					</div>
+			</div>
+		</div>
+
+		<div kendo-window="popUpDaftarPemberianMakanAwal1500" k-title="'Cetak Pemberian Makan Awal 1500 - 2000 gram'" k-visible="false" k-width="1000" k-height="400">
+			<div class="panel panel-default container_12">
+				<div class="grid_12 headerBox">
+					<kendo-grid id="kGrids" data-source="dataDaftarPemberianMakanAwal1500" options="columnDaftarPemberianMakanAwal1500" k-selectable="'row'" k-sortable="'true'"
+							k-resizable="'true'" k-ng-model="dataSelectedPemberianMakanAwal1500" ng-click="klikGridPemberianMakanAwal1500(dataSelectedPemberianMakanAwal1500)"></kendo-grid>
+				</div>
+					<div class="grid_12">
+							<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
+									<button class="k-button  k-button-icontext" ng-click="cetakPemberianMakanAwal1500()">Cetak</button>
+							</div>
+					</div>
+			</div>
+		</div>
+
+		<div kendo-window="popUpDaftarPemberianMakanAwal2000" k-title="'Cetak Pemberian Makan Awal 2000 - 2500 gram'" k-visible="false" k-width="1000" k-height="400">
+			<div class="panel panel-default container_12">
+				<div class="grid_12 headerBox">
+					<kendo-grid id="kGrids" data-source="dataDaftarPemberianMakanAwal2000" options="columnDaftarPemberianMakanAwal2000" k-selectable="'row'" k-sortable="'true'"
+							k-resizable="'true'" k-ng-model="dataSelectedPemberianMakanAwal2000" ng-click="klikGridPemberianMakanAwal2000(dataSelectedPemberianMakanAwal2000)"></kendo-grid>
+				</div>
+					<div class="grid_12">
+							<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
+									<button class="k-button  k-button-icontext" ng-click="cetakPemberianMakanAwal2000()">Cetak</button>
+							</div>
+					</div>
+			</div>
+		</div>
+
+		<div kendo-window="popUpDaftarPemberianMakanAwal2000" k-title="'Cetak Pemberian Makan Awal 2000 - 2500 gram'" k-visible="false" k-width="1000" k-height="400">
+			<div class="panel panel-default container_12">
+				<div class="grid_12 headerBox">
+					<kendo-grid id="kGrids" data-source="dataDaftarPemberianMakanAwal2000" options="columnDaftarPemberianMakanAwal2000" k-selectable="'row'" k-sortable="'true'"
+							k-resizable="'true'" k-ng-model="dataSelectedPemberianMakanAwal2000" ng-click="klikGridPemberianMakanAwal2000(dataSelectedPemberianMakanAwal2000)"></kendo-grid>
+				</div>
+					<div class="grid_12">
+							<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
+									<button class="k-button  k-button-icontext" ng-click="cetakPemberianMakanAwal2000()">Cetak</button>
+							</div>
+					</div>
+			</div>
+		</div>
+
+		<div kendo-window="popUpDaftarPemberianMakanAwal2500" k-title="'Cetak Pemberian Makan Awal Dan Penurunan Cairan I V Pada Neonatus Lebih Dari 2500 Gram Dari Hari Perawatan 1 - 12'" k-visible="false" k-width="1000" k-height="400">
+			<div class="panel panel-default container_12">
+				<div class="grid_12 headerBox">
+					<kendo-grid id="kGrids" data-source="dataDaftarPemberianMakanAwal2500" options="columnDaftarPemberianMakanAwal2500" k-selectable="'row'" k-sortable="'true'"
+							k-resizable="'true'" k-ng-model="dataSelectedPemberianMakanAwal2500" ng-click="klikGridPemberianMakanAwal2500(dataSelectedPemberianMakanAwal2500)"></kendo-grid>
+				</div>
+					<div class="grid_12">
+							<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
+									<button class="k-button  k-button-icontext" ng-click="cetakPemberianMakanAwal2500()">Cetak</button>
 							</div>
 					</div>
 			</div>

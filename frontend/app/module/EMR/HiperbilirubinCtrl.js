@@ -455,6 +455,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 medifirstService.get("emr/get-emr-transaksi-detail-img?noemr=" + nomorEMR + "&emrfk=" + $scope.cc.emrfk, true).then(function (dat) {
                 
                     var dataImg = dat.data.data
+                    console.log(dataImg);
                     for (var i = 0; i <= dataImg.length - 1; i++) {
                             if( dataImg[i].index==null){
                             dataImg[i].index =1
