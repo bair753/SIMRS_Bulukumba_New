@@ -430,41 +430,35 @@ define(['initialize'], function (initialize) {
             }
 
             $scope.tambah = function () {
-                let details = []
-                for (let i = 0; i < $scope.listItem.length; i++) {
-                    const element = $scope.listItem[i];
-                    if (element.inuse == undefined) {
-                        details.push(element.id)
+                for (let j = 0; j < $scope.listItem.length; j++) {
+                    const element = $scope.listItem[j];
+                    if ($scope.item.obj[element.id] === undefined) {
+                        element.inuse = undefined;
+                    } else {
+                        element.inuse = true;
                     }
                 }
-                let json = {
-                    noemr: nomorEMR,
-                    emrfk: $scope.cc.emrfk,
-                    details: details
+
+                for (let j = 0; j < $scope.listItem.length; j++) {
+                    const element2 = $scope.listItem[j];
+                    if (element2.inuse == undefined) {
+                        $scope.item.obj[parseInt(element2.id)] = new Date()
+                        element2.inuse = true
+                        saveTosDipake(element2.id)
+                        break
+                    }
                 }
-                medifirstService.postNonMessage("emr/get-status-dipake", json).then(function (dat) {
-                    let result = dat.data.data
-                    for (let j = 0; j < $scope.listItem.length; j++) {
-                        const element = $scope.listItem[j];
-                        for (let x = 0; x < result.length; x++) {
-                            const element2 = result[x];
-                            if (element.id == element2.emrdfk) {
-                                element.inuse = true
-                            }
-                        }
+            }
+                $scope.hapus = function (index) {
+                    var yakin = confirm("Apakah anda yakin akan menghapus?");
+                    if (yakin) {
+                        $scope.item.obj[parseFloat($scope.listItem[index].id)] = undefined;
+                        $scope.listItem[index].inuse = false;
+                    } else {
+                        return
                     }
 
-                    for (let j = 0; j < $scope.listItem.length; j++) {
-                        const element2 = $scope.listItem[j];
-                        if (element2.inuse == undefined) {
-                            $scope.item.obj[parseInt(element2.id)] = new Date()
-                            element2.inuse = true
-                            saveTosDipake(element2.id)
-                            break
-                        }
-                    }
-                })
-            }
+                }
 
             $scope.kembali = function () {
                 $rootScope.showRiwayat()
