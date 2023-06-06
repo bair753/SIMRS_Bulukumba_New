@@ -152,7 +152,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     medifirstService.post('registrasi/dokumenrm/delete-dokumen-monitoring-klaim', jsondel).then(function (data) {
                         $scope.isRouteLoading = false;
                         medifirstService.postLogging('Dokumen Klaim', 'noregistrasi pasiendaftar', noregistrasi, 
-                        'Hapus Dokumen Klaim  pada No Registrasi ' + noregistrasi + ' dengan id dokumen klaim ' + documentklaimfk).then(function (res) {
+                        'Hapus Dokumen Klaim  pada No Registrasi ' + noregistrasi + ' dengan id dokumen klaim ' + documentklaimfk + ' Nama File ' + namafile).then(function (res) {
                         })
                         $scope.SearchData();
                     })
