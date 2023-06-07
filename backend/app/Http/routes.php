@@ -2490,7 +2490,6 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
                 Route::get('sysadmin/master/get-daftar-jenisdiet', 'SysAdmin\Master\MasterController@getDaftarJenisDiet');
                 Route::get('sysadmin/master/get-daftar-jeniswaktu', 'SysAdmin\Master\MasterController@getDaftarJenisWaktu');
                 Route::get('sysadmin/master/get-departemen', 'SysAdmin\Master\MasterController@getDepartemen');
-                Route::get('sysadmin/master/get-no-hak-akses-upload-berkas', 'SysAdmin\Master\MasterController@getNoHakAkses');
 
                 Route::get('sysadmin/master/get-daftar-kategorydiet', 'SysAdmin\Master\MasterController@getKategoryDiet');
                 Route::get('sysadmin/master/get-combo-siklus-gizi', 'SysAdmin\Master\MasterController@getComboSiklus');
