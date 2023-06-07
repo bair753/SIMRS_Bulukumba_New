@@ -7361,6 +7361,78 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 				+ '&nama=' + nama, '_blank');
 			}
 
+			$scope.ringkasanPasienMasukKeluar = function(){
+				if ($scope.dataPasienSelected.noregistrasi == undefined) {
+					toastr.error('Pilih Pasien Terlebih dahulu!!!')
+					return;
+				}
+				var emrfk = [290004] // emrfk Ringkasan Pasien Masuk & Keluar
+
+				medifirstService.get("bridging/inacbg/get-emr-pasien?noregistrasi=" + $scope.dataPasienSelected.noregistrasi + '&emrfk=' + emrfk
+					// medifirstService.get("lab-radiologi/get-rincian-pelayanan?objectdepartemenfk=" + departemenfk + "&noregistrasi=" +   $scope.item.noregistrasi
+					, true).then(function (dat) {
+						$scope.dataDaftartindakanFisioterapi = {
+							data: dat.data.data,
+							_data: dat.data.data,
+							// pageSize: 10,
+							selectable: true,
+							refresh: true,
+							total: dat.data.data.length,
+							serverPaging: false,
+							aggregate: [
+									{ field: 'total', aggregate: 'sum' },
+							]
+
+					};
+					}, function (error) {
+							$scope.isLoading = false;
+					});
+				
+				$scope.popUpDaftarRingkasanPasienMasukKeluar.center().open();
+				
+			}
+
+			$scope.columnDaftarRingkasanPasienMasukKeluar = {
+				columns: [
+						{
+								"field": "tglemr",
+								"title": "Tgl EMR",
+								"width": "90px",
+						},                   
+						{
+								"field": "emrpasienfk",
+								"title": "No EMR",
+								"width": "160px"
+						},
+						{
+								"field": "namaform",
+								"title": "Nama EMR",
+								"width": "160px"
+						},
+				],
+				sortable: {
+						mode: "single",
+						allowUnsort: false,
+				}
+			}
+
+			$scope.cetakRingkasanPasienMasukKeluar = function () {
+					if ($scope.dataSelectedRingkasanPasienMasukKeluar == undefined) {
+						toastr.error('Data belum dipilih!!!')
+						return;
+					}
+
+					var local = JSON.parse(localStorage.getItem('profile'));
+					var nama = medifirstService.getPegawaiLogin();
+					window.open(baseTransaksi + 'report/cetak-ringkasan-pasien-masuk-keluar?nocm='
+					+ $scope.dataSelectedRingkasanPasienMasukKeluar.nocm 
+					+ '&norec_apd=' + $scope.dataSelectedRingkasanPasienMasukKeluar.norec_apd 
+					+ '&emr=' + $scope.dataSelectedRingkasanPasienMasukKeluar.norec 
+					+ '&emrfk=' + $scope.dataSelectedRingkasanPasienMasukKeluar.emrfk
+					+ '&kdprofile=' + local.id
+					+ '&nama=' + nama, '_blank');
+			}
+
 			// END ################
 
 		}

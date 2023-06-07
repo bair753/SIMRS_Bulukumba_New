@@ -3693,6 +3693,10 @@
         {
             "nameDep": "FlowsheetCtrl",
             "urlDep": "module/EMR/FlowsheetCtrl"
+        },
+        {
+            "nameDep": "AsesmenPasienGeriatriCtrl",
+            "urlDep": "module/EMR/AsesmenPasienGeriatriCtrl"
         }
     ]
 }
