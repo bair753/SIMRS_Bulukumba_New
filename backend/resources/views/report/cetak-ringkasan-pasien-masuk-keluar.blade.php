@@ -103,26 +103,26 @@
                     </figure>
                 </td>
                 <td rowspan="4" colspan="4" style="text-align:center;width:45%">
-                    <strong style="font-size: 7pt">{!! $res['profile']->namalengkap !!}</strong> <br>
+                    <strong style="font-size: 11pt">{!! $res['profile']->namalengkap !!}</strong> <br>
                             JL. SERIKAYA NO. 17 BULUKUMBA 92512 <br>
                             TELP : {!! $res['profile']->fixedphone !!}
                 </td>
-                <td colspan="11" style="border:none;">No RM</td>
-                <td style="border:none;" colspan="2">: {!! $res['d'][0]->nocm  !!}</td>
+                <td colspan="4" style="border:none;font-size:7pt;">No RM</td>
+                <td style="border:none;font-size:7pt;" colspan="9">: {!! $res['d'][0]->nocm  !!}</td>
                 <td rowspan="3" style="background:#000;color:#fff;width:80px;text-align:center;font-size:36px">RM</td>
             </tr>
             <tr >
-                <td colspan="11" style="border:none;">Nama Lengkap</td>
-                <td style="border:none;" colspan="1">: {!!  $res['d'][0]->namapasien  !!}</td>
-                <td style="border:none;text-align: right;">{!!  $res['d'][0]->jeniskelamin == 'PEREMPUAN' ? 'P' : 'L'  !!}</td>
+                <td colspan="4" style="border:none;font-size:7pt;">Nama Lengkap</td>
+                <td style="border:none;font-size:7pt;" colspan="9">: {!!  $res['d'][0]->namapasien  !!} ({!!  $res['d'][0]->jeniskelamin == 'PEREMPUAN' ? 'P' : 'L'  !!})</td>
+                {{-- <td style="border:none;text-align: right;">{!!  $res['d'][0]->jeniskelamin == 'PEREMPUAN' ? 'P' : 'L'  !!}</td> --}}
             </tr>
             <tr>
-                <td colspan="11" style="border:none;">Tanggal Lahir</td>
-                <td style="border:none;" colspan="2">: {!! date('d-m-Y',strtotime( $res['d'][0]->tgllahir  )) !!}</td>
+                <td colspan="4" style="border:none;font-size:7pt;">Tanggal Lahir</td>
+                <td style="border:none;font-size:7pt;" colspan="9">: {!! date('d-m-Y',strtotime( $res['d'][0]->tgllahir  )) !!}</td>
             </tr>
             <tr>
-                <td colspan="11" style="border:none;">NIK</td>
-                <td style="border:none;" colspan="2">: {!! $res['d'][0]->noidentitas  !!}</td>
+                <td colspan="4" style="border:none;font-size:7pt;">NIK</td>
+                <td style="border:none;font-size:7pt;" colspan="9">: {!! $res['d'][0]->noidentitas  !!}</td>
                 <td style="text-align:center;font-size:36px">01</td>
             </tr>
             <tr>
@@ -489,11 +489,13 @@
         }
 
         var dpjp = $scope.item.obj[420393];
-        jQuery('#qrcodeDPJP').qrcode({
+        if(dpjp != undefined){
+            jQuery('#qrcodeDPJP').qrcode({
             width	: 100,
 			height	: 100,
             text	: "Tanda Tangan Digital Oleh " + dpjp
         });	
+        }
     })
     angular.filter('toDate', function() {
         return function(items) {
