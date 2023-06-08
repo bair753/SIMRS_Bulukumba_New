@@ -2873,8 +2873,7 @@ class MasterController extends ApiController{
         $kdProfile = $this->getDataKdProfile($request);
         $idProfile = (int) $kdProfile;
         $pemeriksa = SettingDataFixed::where('id', 1586)->first();
-        $pemeriksa = (int)explode(',', $pemeriksa->nilaifield);
-        
+        $pemeriksa = $pemeriksa->nilaifield;
 
         return $this->respond($pemeriksa);
     }

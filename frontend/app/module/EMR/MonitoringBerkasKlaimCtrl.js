@@ -28,6 +28,10 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     $scope.isRouteLoading = false;
                     $scope.listDepartemen = data.data;
                 });
+                medifirstService.get("sysadmin/master/get-no-hak-akses-upload-berkas").then(function (data) {
+                    $scope.isRouteLoading = false;
+                    $scope.listNoHakAkses = data.data;
+                })
                 $scope.isRouteLoading = true;
             }
 
@@ -78,8 +82,8 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     for (let h = 0; h < dataRow.length; h++) {
                         dataRow[h].no = h + 1;
                     }
-                    // pegArray  = ['320261154', '320261155', '320261156'];
-                    // if(medifirstService.getPegawaiLogin().id != pegArray){
+                    var idNot = $scope.listNoHakAkses;
+                    if(!idNot.includes(medifirstService.getPegawaiLogin().id)){
                         for (let i = 0; i < dataMaster.length; i++) {
                             const element = dataMaster[i];
                             var col = {
@@ -90,7 +94,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                             }
                             coldimanis.push(col);
                         }
-                    // }
+                    }
                     createGrid(dataRow, coldimanis)
                 })
             }
