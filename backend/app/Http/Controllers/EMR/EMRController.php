@@ -7468,7 +7468,8 @@ class EMRController  extends ApiController
             $req['filter']['filters'][0]['value'] != "" &&
             $req['filter']['filters'][0]['value'] != "undefined") {
             $data = $data->where('kddiagnosatindakan', 'ilike', '%' . $req['filter']['filters'][0]['value'] . '%');
-            $data = $data->orwhere('namadiagnosatindakan', 'ilike', '%' . $req['filter']['filters'][0]['value'] . '%');
+            $data = $data->orWhere('namadiagnosatindakan', 'ilike', '%' . $req['filter']['filters'][0]['value'] . '%');
+            $data = $data->where('statusenabled', true);
         };
         $data = $data->take(10);
         $data = $data->get();

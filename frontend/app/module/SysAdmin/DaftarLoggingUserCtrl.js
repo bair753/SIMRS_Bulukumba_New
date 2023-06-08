@@ -60,7 +60,9 @@ define(['initialize'], function(initialize) {
                 { id: 38, jenis: 'Verifikasi Order Lab'},
                 { id: 39, jenis: 'Verifikasi Order Rad'},
                 { id: 40, jenis: 'Pemakaian Asuransi'},
-                { id: 41, jenis: 'Antrol Task ID'}
+                { id: 41, jenis: 'Antrol Task ID'},
+                { id: 42, jenis: 'Hapus Pasien'},
+                { id: 43, jenis: 'Dokumen Klaim'}
             ]
 			Load();
 

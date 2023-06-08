@@ -2388,6 +2388,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
                 Route::get('sysadmin/general/get-combo-administrasi', 'SysAdmin\GeneralController@getComboAdministrasi');
                 Route::get('sysadmin/general/get-data-maplingkuppelayanan', 'SysAdmin\GeneralController@getDataMapLapKeuanganToLingkupPelayanan');
                 Route::get('sysadmin/general/get-data-depart', 'SysAdmin\GeneralController@getDepartemen');
+                Route::get('sysadmin/master/get-no-hak-akses-upload-berkas', 'SysAdmin\Master\MasterController@getNoHakAkses');
                 Route::get('sysadmin/general/get-validasi-autorisasi-password', 'SysAdmin\ModulAplikasiController@getValidateAuthPasscode');
                 Route::get('sysadmin/general/get-combo-pegawai-dokter', 'SysAdmin\GeneralController@getDataPegawaiDokterGeneral');
                 // GET //
@@ -2771,6 +2772,14 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
         Route::get('report/cetak-pemantauan-cpap', 'Report\ReportController@pemantauanCPAP');
         Route::get('report/cetak-hiperbilirubin', 'Report\ReportController@hiperbilirubin');
         Route::get('document/berkas-klaim', 'Bridging\InaCbgController@MergePdf');
+        Route::get('report/cetak-bukti-pelayanan-tindakan', 'Report\ReportController@buktiPelayananTidakan');
+        Route::get('report/cetak-lembar-formulir-rajal', 'Report\ReportController@lembarFormulirRajal');
+        Route::get('report/cetak-tindakan-fisioterapi', 'Report\ReportController@tindakanFisioterapi');
+        Route::get('report/cetak-formulir-permintaan-darah', 'Report\ReportController@formulirPermintaanDarah');
+        Route::get('report/cetak-pemberian-makan-awal-1000', 'Report\ReportController@pemberianMakanAwal1000');
+        Route::get('report/cetak-pemberian-makan-awal-1500', 'Report\ReportController@pemberianMakanAwal1500');
+        Route::get('report/cetak-pemberian-makan-awal-2000', 'Report\ReportController@pemberianMakanAwal2000');
+        Route::get('report/cetak-pemberian-makan-awal-2500', 'Report\ReportController@pemberianMakanAwal2500');
 
         Route::get('viewer/get-list-antrian','Antrian\AntrianController@getListAntrian');
         Route::get('viewer/update-antrian','Antrian\AntrianController@updatePanggil');

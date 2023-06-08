@@ -116,12 +116,22 @@ define(['initialize'], function (initialize) {
                 excelExport: function (e) {
                     var sheet = e.workbook.sheets[0];
                     sheet.frozenRows = 3;
-                    sheet.mergedCells = ["A1:P1"];
+                    sheet.mergedCells = ["A1:G1"];
                     sheet.name = "Orders";
+                    
+                    if($scope.item.departement == undefined){
+                        toastr.warning('Department harus diisi!','Peringatan')
+                    }
+
+                    var de = $scope.item.departement.departemen.toUpperCase();
+
+                    if(de == undefined){
+                        de = '';
+                    }
 
                     var myHeaders = [{
-                        value: "Laporan Diagnosa Pasien",
-                        fontSize: 20,
+                        value: "10 BESAR KEADAAN MORBIDITAS PASIEN " + de + " RUMAH SAKIT",
+                        fontSize: 14,
                         textAlign: "center",
                         background: "#ffffff",
                         // color:"#ffffff"
@@ -134,36 +144,43 @@ define(['initialize'], function (initialize) {
                 selectable: "row",
                 columns: [  
 
-                    { field: "no", title: "No", width: "20px" },
-                    {
-                        field: "namadiagnosa",
-                        title: "Diagnosa",
-                        width: "345px",
-                    },
+                    { field: "no", title: "No", width: "25px" },
                     {
                         field: "kddiagnosa",
-                        title: "ICD X",
-                        width: "55px",
+                        title: "KODE ICD",
+                        width: "60px",
+                        textAlign: "center",
                     },
                     {
+                        field: "namadiagnosa",
+                        title: "DIAGNOSA",
+                        width: "350px",
+                        textAlign: "center",
+                    },
+                    
+                    {
                         field: "kasusbarulk",
-                        title: "Kasus Baru Laki-Laki",
-                        width: "50px"
+                        title: "LK",
+                        width: "50px",
+                        textAlign: "center",
                     },
                     {
                         field: "kasusbarup",
-                        title: "Kasus Baru Perempuan",
-                        width: "50px"
+                        title: "PR",
+                        width: "50px",
+                        textAlign: "center",
                     },
                     {
                         field: "kasus45",
-                        title: "Kasus(4+5)",
-                        width: "50px"
+                        title: "JUMLAH",
+                        width: "50px",
+                        textAlign: "center",
                     },                   
                     {
                         field: "jumlah",
-                        title: "Jumlah",
-                        width: "50px"
+                        title: "KUNJUNGAN",
+                        width: "80px",
+                        textAlign: "center",
                     }              
                 ] 
             }

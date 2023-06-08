@@ -7473,7 +7473,8 @@ class RegistrasiController extends ApiController
             $req['filter']['filters'][0]['value']!="undefined"){
             $icdIX = $icdIX
                 ->where('dg.namadiagnosatindakan','ilike','%'.$req['filter']['filters'][0]['value'].'%' )
-                ->orWhere('dg.kddiagnosatindakan','ilike',$req['filter']['filters'][0]['value'].'%' )  ;
+                ->orWhere('dg.kddiagnosatindakan','ilike','%'.$req['filter']['filters'][0]['value'].'%' ) 
+                ->where('dg.statusenabled', true );
         }
 
 
@@ -8956,7 +8957,9 @@ class RegistrasiController extends ApiController
                             left join kotakabupaten_m as kot on kot.id = alm.objectkotakabupatenfk
                             left join propinsi_m as pro on pro.id = alm.objectpropinsifk
                             left join ruangan_m as ru on ru.id = pd.objectruanganlastfk
-                            where app.kdprofile = 21 and dm.kddiagnosa <> '-'  and
+                            where dm.kddiagnosa NOT ILIKE '%Z%'
+                            AND dm.kddiagnosa NOT ILIKE '%R%'
+                            AND dm.kddiagnosa NOT ILIKE '%O%' AND app.kdprofile = $idProfile and dm.kddiagnosa <> '-'  and
                             pd.tglregistrasi BETWEEN '$tglAwal' AND '$tglAkhir'
                             )as x GROUP BY x.namadiagnosa ,x.kddiagnosa) as z
                             group by z.jumlah,z.kddiagnosa,z.namadiagnosa,z.kasusbarulk,z.kasusbarup

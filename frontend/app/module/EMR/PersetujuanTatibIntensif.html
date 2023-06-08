@@ -1,0 +1,245 @@
+<style type="text/css">
+    fieldset {
+        border-radius: 5px;
+        border: 1px solid #228be6;
+    }
+
+    .k-slider-horizontal {
+        display: inline-block;
+        float: left;
+        width: 450px;
+
+        height: 26px;
+
+
+    }
+
+    .k-slider {
+
+        margin-left: 3%;
+        margin-right: 3%;
+        margin-top: 1%;
+        margin-bottom: 5%;
+        display: inline-block;
+    }
+
+    .activeBtn {
+        background-color: #10c4b2;
+        color: #ffffff;
+    }
+    table,
+    th,
+    td {
+        border: 1px solid #929191;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+
+    th,
+    td {
+        padding: 5px;
+        text-align: left;
+    }
+</style>
+
+ <!-- ng-class="{'my-disable':true}" -->
+<!-- <div class="grid_12"  disable-contents="allDisabled" id="form"> -->
+<div class="grid_12">
+    <div class="grid_12">
+        <div class="panel panel-default container_12">
+            <div class="panel-heading" c-translate>Persetujuan Mematuhi Aturan Tata Tertib Instalasi Perawatan Intensif</div>
+        </div>
+
+        <div class="grid_12" style="margin-top: 10px;">
+            <fieldset style="margin-top: 10px;">
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_12" style="margin-top: 10px;">
+                        <label item="item">Yang Bertanda tangan dibawah in :</label>
+                    </div>
+                    <div class="grid_12" style="margin-top: 10px;">
+                        <div class="grid_12">
+                            <label c-label item="item">Nama</label>
+                        </div>
+                        <div class="grid_6">
+                            <input type="text" class="k-textbox" ng-model="item.obj[32111278]">
+                        </div>
+                    </div>
+                    <div class="grid_12" style="margin-top: 10px;">
+                        <div class="grid_12">
+                            <label c-label item="item">Tanggal Lahir</label>
+                        </div>
+                        <div class="grid_6">
+                            <input style="width: 90%" k-ng-model="item.obj[32111279]" kendo-datetimepicker placeholer="YYYY:MM:DD"
+                                k-format="'yyyy-MM-dd'" />
+                        </div>
+                    </div>
+                    <div class="grid_12" style="margin-top: 10px;">
+                        <div class="grid_12">
+                            <label c-label item="item">Alamat</label>
+                        </div>
+                        <div class="grid_6">
+                            <input type="text" class="k-textbox" ng-model="item.obj[32111280]">
+                        </div>
+                    </div>
+                    <div class="grid_12" style="margin-top: 10px;">
+                        <div class="grid_12">
+                            <label c-label item="item">No. Tanda Pengenal</label>
+                        </div>
+                        <div class="grid_6">
+                            <input type="text" class="k-textbox" ng-model="item.obj[32111281]">
+                        </div>
+                    </div>
+                    <div class="grid_12" style="margin-top: 10px;">
+                        <div class="grid_12" style="margin-top: 10px;">
+                            <label item="item">1. Saya menyadari bahwa pelayanan di Instalasi Perawatan Intensif merupakan pelayanan khusus yang membutuhkan ketenangan bagi pasien untuk menjaga keselamatan pasien dari proses penularan penyakit dari luar, tekanan lingkungan dan lain-lain yang dapat memperburuk kondisi pasien.</label>
+                        </div>
+                        <div class="grid_12" style="margin-top: 10px;">
+                            <label item="item">2. Saya menyadari dan mengerti sepenuhnya penjelasan Dokter dan Perawat di Instalasi Perawatan Intensif beberapa konsekuensi (akibat) dan risiko yang mungkin terjadi akibat kunjungan dari luar yang tak mengenal batas</label>
+                        </div>
+                        <div class="grid_12" style="margin-top: 10px;">
+                            <label item="item">3. Saya telah membaca formulir ini dan tata tertib Instalasi Perawatan Intensif yang ditampilkan oleh Dokter dan Perawat, untuk itu Saya menyetujui peraturan dan tata tertib Instalasi Perawatan Intensif RSUD H. Andi Sulthan Daeng Radja.</label>
+                        </div>
+                        <br>
+                        <div class="grid_12" style="margin-top: 10px;">
+                            <label item="item">Selanjutnya Saya berjanji bila tidak memenuhi peraturan dan tata tertib Instalasi Perawatan Intensif maka siap dipindahkan dari ruangan Instalasi Perawatan Intensif (HCU/ICU/ICCU)</label>
+                        </div>
+                        <div class="grid_12">
+                            <label item="item">Dengan ini Saya menyatakan sesungguhnya bahwa Saya : </label>
+                        </div>
+                        <div class="grid_12" style="margin-top: 10px">
+                            <div class="grid_6">
+                                <input type="checkbox" class="k-checkbox" ng-model="item.obj[32111282]" id="item.obj[32111282]">
+                                <label class="k-checkbox-label" for="item.obj[32111282]">&nbsp;SETUJU</label> 
+                            </div>
+                            <div class="grid_6">
+                                &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="k-checkbox" ng-model="item.obj[32111283]" id="item.obj[32111283]">
+                                <label class="k-checkbox-label" for="item.obj[32111283]">&nbsp;TIDAK SETUJU</label>
+                            </div>
+                        </div>
+                        <div class="grid_12" style="margin-top: 10px;">
+                            <label item="item">Untuk dilakukan perawatan terhadap :</label>
+                        </div>
+                        <div class="grid_12" style="margin-top: 10px">
+                            <div class="grid_4">
+                                <input type="checkbox" class="k-checkbox" ng-model="item.obj[32111284]" id="item.obj[32111284]">
+                                <label class="k-checkbox-label" for="item.obj[32111284]">&nbsp;Saya</label> 
+                            </div>
+                            <div class="grid_4">
+                                &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="k-checkbox" ng-model="item.obj[32111285]" id="item.obj[32111285]">
+                                <label class="k-checkbox-label" for="item.obj[32111285]">&nbsp;Anak</label>
+                            </div>
+                            <div class="grid_4">
+                                &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="k-checkbox" ng-model="item.obj[32111286]" id="item.obj[32111286]">
+                                <label class="k-checkbox-label" for="item.obj[32111286]">&nbsp;Istri</label>
+                            </div>
+                        </div>
+                        <div class="grid_12" style="margin-top: 10px">
+                            <div class="grid_4">
+                                <input type="checkbox" class="k-checkbox" ng-model="item.obj[32111287]" id="item.obj[32111287]">
+                                <label class="k-checkbox-label" for="item.obj[32111287]">&nbsp;Ayah</label> 
+                            </div>
+                            <div class="grid_4">
+                                &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="k-checkbox" ng-model="item.obj[32111288]" id="item.obj[32111288]">
+                                <label class="k-checkbox-label" for="item.obj[32111288]">&nbsp;Ibu</label>
+                            </div>
+                            <div class="grid_4">
+                                &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="k-checkbox" ng-model="item.obj[32111289]" id="item.obj[32111289]">
+                                <label class="k-checkbox-label" for="item.obj[32111289]">&nbsp;Saudara Kandung</label>
+                            </div>
+                        </div>
+                        <div class="grid_12" style="margin-top: 10px;">
+                            <label item="item">Saya dengan :</label>
+                        </div>
+                    </div>
+                    <div class="grid_12" style="margin-top: 10px;">
+                        <div class="grid_12">
+                            <label c-label item="item">Nama</label>
+                        </div>
+                        <div class="grid_6">
+                            <input type="text" class="k-textbox" ng-model="item.obj[32111290]">
+                        </div>
+                    </div>
+                    <div class="grid_12" style="margin-top: 10px;">
+                        <div class="grid_12">
+                            <label c-label item="item">Tanggal Lahir</label>
+                        </div>
+                        <div class="grid_6">
+                            <input style="width: 90%" k-ng-model="item.obj[32111291]" kendo-datetimepicker placeholer="YYYY:MM:DD"
+                                k-format="'yyyy-MM-dd'" />
+                        </div>
+                    </div>
+                    <div class="grid_12" style="margin-top: 10px;">
+                        <div class="grid_12">
+                            <label c-label item="item">Dirawat Diruang/Kelas</label>
+                        </div>
+                        <div class="grid_4">
+                            <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[32111292]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listRuangan" />
+                        </div>
+                        <div class="grid_2">
+                            <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[32111297]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listKelas" />
+                        </div>
+                    </div>
+                    <div class="grid_12" style="margin-top: 10px;">
+                        <div class="grid_12">
+                            <label c-label item="item">No. RM</label>
+                        </div>
+                        <div class="grid_6">
+                            <input type="text" class="k-textbox" ng-model="item.obj[32111293]">
+                        </div>
+                    </div>
+                    <div class="grid_12" style="margin-top: 10px;">
+                        <div class="grid_12">
+                            <label item="item">Demikian persetujuan ini Saya buat dengan penuh kesadaran dan tanpa paksaan.</label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="grid_12" style="margin-top: 10px;">
+            <fieldset style="margin-top: 10px;">
+                <div class="grid_12">
+                    <div class="grid_8"></div>
+                    <div class="grid_4">
+                        <div class="grid_12">
+                            <label c-label item="item">Bulukumba,</label>
+                        </div>
+                        <div class="grid_12">
+                            <input style="width: 100%" k-ng-model="item.obj[32111294]" kendo-datetimepicker placeholer="YYYY:MM:DD HH:MM"
+                                k-format="'yyyy-MM-dd HH:mm'" />
+                        </div>
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_6">
+                        <div class="grid_12">
+                            <label c-label item="item">Perawat</label>
+                        </div>
+                        <div class="grid_12">
+                            <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[32111295]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                        </div>
+                    </div>
+                    <div class="grid_6">
+                        <div class="grid_12">
+                            <label c-label item="item">Yang menyatakan,</label>
+                        </div>
+                        <div class="grid_12">
+                            <input class="k-textbox" ng-model="item.obj[32111296]" type="text">
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+    </div>
+</div>
+
+<br />
+<br />
+<div class="grid_12">
+    <div ng-include='"../app/module/EMR/TemplateButtonDinamis" '></div>
+
+</div>

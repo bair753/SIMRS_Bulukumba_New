@@ -239,7 +239,7 @@
             <td colspan="9" style="border:none">Jalan Serikaya No. 17 Bulukumba 92512 Telpon (0413) 81290, 81292 FAX. 85030 <br> Website: https://rsud.bulukumbakab.go.id, Email: sultanhandgradja@yahoo.com <hr style="border:2px solid #000"></td>
         </tr>
         <tr style="text-align:center">
-            <td colspan="9" style="border:none;"><h3>SURAT KETERANGANN KEMATIAN <br> NOMOR: 440 / @{{ item.obj[32104095] ? item.obj[32104095] : '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' }} / RSUD-BLK / 2023</h3></td>
+            <td colspan="9" style="border:none;"><h3>SURAT KETERANGAN KEMATIAN <br> NOMOR: 440 / @{{ item.obj[32104095] ? item.obj[32104095] : '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' }} / RSUD-BLK / 2023</h3></td>
         </tr>
         <tr style="height:20px"></tr>
         <tr>
@@ -451,16 +451,22 @@
   
         var petugas1 = $scope.item.obj[32104099];
         var petugas2 = $scope.item.obj[32104100];
-        jQuery('#qrcodePetugas1').qrcode({
-            width	: 100,
-            height	: 100,
-            text	: "Tanda Tangan Digital Oleh " + petugas1
-        });	
-        jQuery('#qrcodePetugas2').qrcode({
-            width	: 100,
-            height	: 100,
-            text	: "Tanda Tangan Digital Oleh " + petugas2
-        });	
+        
+        if(petugas1 != undefined){
+            jQuery('#qrcodePetugas1').qrcode({
+                width	: 100,
+                height	: 100,
+                text	: "Tanda Tangan Digital Oleh " + petugas1
+            });	
+        }
+        if(petugas2 != undefined){
+            jQuery('#qrcodePetugas2').qrcode({
+                width	: 100,
+                height	: 100,
+                text	: "Tanda Tangan Digital Oleh " + petugas2
+            });	
+        }
+        
     })
     angular.filter('toDate', function() {
         return function(items) {

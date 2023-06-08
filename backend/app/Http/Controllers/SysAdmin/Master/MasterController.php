@@ -7,6 +7,7 @@
  */
 namespace App\Http\Controllers\SysAdmin\Master;
 
+use App\Master\SettingDataFixed;
 use App\Http\Controllers\ApiController;
 use App\Master\Departemen;
 use App\Master\HargaNettoProdukByKelas1;
@@ -2868,6 +2869,15 @@ class MasterController extends ApiController{
         $data = $data->get();
         return $this->respond($data);
     }
+    public function getNoHakAkses(Request $request) {
+        $kdProfile = $this->getDataKdProfile($request);
+        $idProfile = (int) $kdProfile;
+        $pemeriksa = SettingDataFixed::where('id', 1586)->first();
+        $pemeriksa = (int)explode(',', $pemeriksa->nilaifield);
+        
+
+        return $this->respond($pemeriksa);
+    }
     public function getKategoryDiet(Request $request) {
         $kdProfile = (int) $this->getDataKdProfile($request);
         $data = \DB::table('kategorydiet_m as kd')
@@ -4690,8 +4700,8 @@ class MasterController extends ApiController{
         $data = \DB::table('diagnosatindakan_m as dg')
             ->select('dg.*')
             ->where('dg.kdprofile', $kdProfile)
-            ->where('dg.statusenabled', true)
-            ->take(10);
+            // ->where('dg.statusenabled', true)
+            ->limit(10);
         if(isset($request['kddiagnosa']) && $request['kddiagnosa']!="" && $request['kddiagnosa']!="undefined"){
             $data = $data->where('dg.kddiagnosatindakan','ILIKE', '%'.$request['kddiagnosa'].'%');
         }

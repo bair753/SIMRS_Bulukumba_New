@@ -20539,6 +20539,98 @@
         "define": "RekamMedisCtrl"
       }
     ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.ObservasiTandaVitalEndoskopi",
+    "url": "/ObservasiTandaVitalEndoskopi/:index/:idEMR",
+    "templateurl": "module/EMR/ObservasiTandaVitalEndoskopi.html",
+    "controller": "ObservasiTandaVitalEndoskopiCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.PersetujuanTatibIntensif",
+    "url": "/PersetujuanTatibIntensif",
+    "templateurl": "module/EMR/PersetujuanTatibIntensif.html",
+    "controller": "PersetujuanTatibIntensifCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.Flowsheet",
+    "url": "/Flowsheet/:index/:idEMR",
+    "templateurl": "module/EMR/Flowsheet.html",
+    "controller": "FlowsheetCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.AsesmenPasienGeriatri",
+    "url": "/AsesmenPasienGeriatri/:index/:idEMR",
+    "templateurl": "module/EMR/AsesmenPasienGeriatri.html",
+    "controller": "AsesmenPasienGeriatriCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
   }
 
 

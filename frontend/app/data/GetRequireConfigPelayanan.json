@@ -3681,6 +3681,22 @@
         {
             "nameDep": "MonitoringBerkasKlaimCtrl",
             "urlDep": "module/EMR/MonitoringBerkasKlaimCtrl"
+        },
+        {
+            "nameDep": "ObservasiTandaVitalEndoskopiCtrl",
+            "urlDep": "module/EMR/ObservasiTandaVitalEndoskopiCtrl"
+        },
+        {
+            "nameDep": "PersetujuanTatibIntensifCtrl",
+            "urlDep": "module/EMR/PersetujuanTatibIntensifCtrl"
+        },
+        {
+            "nameDep": "FlowsheetCtrl",
+            "urlDep": "module/EMR/FlowsheetCtrl"
+        },
+        {
+            "nameDep": "AsesmenPasienGeriatriCtrl",
+            "urlDep": "module/EMR/AsesmenPasienGeriatriCtrl"
         }
     ]
 }

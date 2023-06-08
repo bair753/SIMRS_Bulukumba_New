@@ -450,50 +450,49 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 })
             }
 
-            var hasilRadDetil = function (e) {
+            function hasilRadDetil(e) {
                 e.preventDefault();
+
                 var tr = $(e.target).closest("tr");
                 var dataItem = this.dataItem(tr);
-                if (dataItem.radiologiId === undefined || dataItem.radiologiId === null || dataItem.radiologiId === '') {
-                    toastr.warning('Order belum diverifikasi!', 'Peringatan')
-                } else {
-                    // syamsu
-                    var datauserlogin = JSON.parse(localStorage.getItem('datauserlogin'));
-
-                    var patienIdMr = dataItem.radiologiId.replace('null', '1')
-                    var client = new HttpClient();
-
-                    let viewer = null
-
-                    var errorFunc = function () {
-                        toastr.error('Ada kesalahan pada jaringan ke server', 'Kesalahan')
+                $scope.norecHasilRadiologi = ''
+                $scope.dataSelectedDetail = {}
+                $scope.dataSelectedDetail = dataItem
+                medifirstService.get('radiologi/get-pelayananpasien-radiologi?norec=' + dataItem.norec_pp + '&produkfk=' + dataItem.id).then(function (re) {
+                    // $scope.dataSelectedDetail.norec_pp  =re.data.norec
+                    if (re.data.data == undefined || re.data.data == '' || re.data.data == null) {
+                        toastr.error("Order belum diverifikasi!");
+                        return;
                     }
+                    $scope.norecHasilRadiologi = re.data.data.norec;
+                    $scope.item.nofoto = re.data.data.nofoto;
+                    $scope.item.statusrad = re.data.data.statusrad;
+                    $scope.item.namalengkap = re.data.data.namalengkap;
+                    $scope.item.tglInput = re.data.data.tanggal;
+                    $scope.item.keterangan = re.data.data.keterangan.replace(/~/g, "\n");
+                    $scope.popUpUSG.center().open();
 
-                    let awal = true
+                })
 
-                    var noMrFunc = function (response) {
-                        if (response === undefined || response === null || response == '') {
-                            if (awal) {
-                                awal = false
-                                client.get(config.urlPACSEngine + '/dcm4chee-arc/aets/TRANSMEDIC/rs/' +
-                                    'studies?limit=1&includefield=all&offset=0&PatientID=' + patienIdMr.split('-')[0],
-                                    noMrFunc, errorFunc)
-                            } else {
-                                toastr.warning('Hasil foto belum dikirim ke PACS', 'Peringatan')
-                            }
-                        } else {
-                            let data = JSON.parse(response)
-                            viewer = data[0]["0020000D"].Value[0]
-                            window.open(config.urlPACSViewer + "/viewer/" + datauserlogin.id + "/" + dataItem.norec_pp + "/" + dataItem.noorder + "/" + viewer, "pacs");
+                medifirstService.get('radiologi/get-hasil-radiologi-usg?norec_pp=' + $scope.dataSelected.norec_pp).then(function (e) {
+                    if (e.data.status) {
+                        if (e.data.data.list.length > 0) {
+                            $scope.cekhasilrad = false;
+                            $scope.listNamaGambar = e.data.data.list;
+                            $scope.itemimg.gambar = { norec: e.data.data.list[0].norec, filename: e.data.data.list[0].filename }
+                            $scope.itemimg.keterangan = e.data.data.list[0].keterangan
+                            var temp = e.data.data.list[0].filename.slice(0, e.data.data.list[0].filename.indexOf('.'))
+                            $scope.itemimg.img = config.urlPACSJpeg + "/service/medifirst2000/radiologi/images/pacs/" + temp + "/jpg"
                         }
+                    } else {
+                        $scope.cekhasilrad = true;
+                        $scope.itemimg.img = "./images/noimage.png"
+                        window.messageContainer.error("Belum Ada Ekspertise.");
                     }
-
-                    client.get(config.urlPACSEngine + '/dcm4chee-arc/aets/TRANSMEDIC/rs/' +
-                        'studies?limit=1&includefield=all&offset=0&PatientID=' + patienIdMr,
-                        noMrFunc, errorFunc)
-                    // syamsu
-                }
-            };
+                }).error(function (err) {
+                    $scope.item.img = "./images/noimage.png"
+                });
+            }
 
             function hasil(e) {
                 e.preventDefault();
@@ -538,6 +537,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     }
                     $scope.norecHasilRadiologi = re.data.data.norec;
                     $scope.item.nofoto = re.data.data.nofoto;
+                    $scope.item.statusradctscan = re.data.data.statusradctscan;
                     $scope.item.namalengkap = re.data.data.namalengkap;
                     $scope.item.tglInput = re.data.data.tanggal;
                     $scope.item.keterangan = re.data.data.keterangan.replace(/~/g, "\n");
@@ -1309,6 +1309,19 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     if (local != null) {
                         var profile = local.id;
                         window.open(config.baseApiBackend + "report/cetak-ekspertise-ctscan?norec=" + $scope.norecHasilRadiologi + '&kdprofile=' + profile
+                            + '&nama=' + nama, '_blank');
+                    }
+				}
+				$scope.popUpEkpertise.close();
+			}
+
+            $scope.cetakUSG = function(){
+				if ($scope.norecHasilRadiologi != '') {
+                    var local = JSON.parse(localStorage.getItem('profile'))
+                    var nama = medifirstService.getPegawaiLogin().namaLengkap
+                    if (local != null) {
+                        var profile = local.id;
+                        window.open(config.baseApiBackend + "report/cetak-ekspertise-usg?norec=" + $scope.norecHasilRadiologi + '&kdprofile=' + profile
                             + '&nama=' + nama, '_blank');
                     }
 				}

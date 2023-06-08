@@ -27,7 +27,8 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 medifirstService.get("sysadmin/master/get-departemen").then(function (data) {
                     $scope.isRouteLoading = false;
                     $scope.listDepartemen = data.data;
-                })
+                });
+                $scope.isRouteLoading = true;
             }
 
             $scope.getIsiComboRuangan = function (e) {
@@ -77,16 +78,19 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     for (let h = 0; h < dataRow.length; h++) {
                         dataRow[h].no = h + 1;
                     }
-                    for (let i = 0; i < dataMaster.length; i++) {
-                        const element = dataMaster[i];
-                        var col = {
-                            "field": element.kodeexternal,
-                            "title": element.dokumen,
-                            "width": "150px",
-                            "template": "<span class='style-center'># if("+ element.kodeexternal +"==null) {# <div class=\"upload-btn-wrapper\"><button class=\"btn\"><i class=\"fa fa-upload\"></i> Upload</button> <input type=\"file\" id=\"filePasien\" accept=\"application/pdf\" data-id=\""+ element.id +"\" data-namafile=\""+ element.dokumen +"\" data-norec=\"#: data.norec #\" /></div> # } else {# <a href=\"javascript:void(0);\" id=\"LihatDokumenKlaim\" data-noreg=\"#: data.noregistrasi #\" data-namafile=\"#: data."+ element.kodeexternal + "#\" data-documentklaimfk=\""+ element.id +"\"><i class=\"fa fa-file-pdf-o hitam\" aria-hidden=\"true\"></i></a> #} #</span>",
+                    // pegArray  = ['320261154', '320261155', '320261156'];
+                    // if(medifirstService.getPegawaiLogin().id != pegArray){
+                        for (let i = 0; i < dataMaster.length; i++) {
+                            const element = dataMaster[i];
+                            var col = {
+                                "field": element.kodeexternal,
+                                "title": element.dokumen,
+                                "width": "150px",
+                                "template": "<span class='style-center'># if("+ element.kodeexternal +"==null) {# <div class=\"upload-btn-wrapper\"><button class=\"btn\"><i class=\"fa fa-upload\"></i> Upload</button> <input type=\"file\" id=\"filePasien\" accept=\"application/pdf\" data-id=\""+ element.id +"\" data-namafile=\""+ element.dokumen +"\" data-norec=\"#: data.norec #\" /></div> # } else {# <a href=\"javascript:void(0);\" id=\"LihatDokumenKlaim\" data-noreg=\"#: data.noregistrasi #\" data-namafile=\"#: data."+ element.kodeexternal + "#\" data-documentklaimfk=\""+ element.id +"\"><i class=\"fa fa-file-pdf-o hitam\" aria-hidden=\"true\"></i></a> #} #</span>",
+                            }
+                            coldimanis.push(col);
                         }
-                        coldimanis.push(col);
-                    }
+                    // }
                     createGrid(dataRow, coldimanis)
                 })
             }
@@ -147,7 +151,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     medifirstService.post('registrasi/dokumenrm/delete-dokumen-monitoring-klaim', jsondel).then(function (data) {
                         $scope.isRouteLoading = false;
                         medifirstService.postLogging('Dokumen Klaim', 'noregistrasi pasiendaftar', noregistrasi, 
-                        'Hapus Dokumen Klaim  pada No Registrasi ' + noregistrasi + ' dengan id dokumen klaim ' + documentklaimfk).then(function (res) {
+                        'Hapus Dokumen Klaim  pada No Registrasi ' + noregistrasi + ' dengan id dokumen klaim ' + documentklaimfk + ' Nama File ' + namafile).then(function (res) {
                         })
                         $scope.SearchData();
                     })
