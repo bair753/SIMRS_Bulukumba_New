@@ -1170,8 +1170,8 @@ class MyJKNV2Controller extends ApiController
                     so.noorder as kodebooking,
                     so.tglpelayananawal  as tanggaloperasi,
                     pr.namaproduk as jenistindakan,
-                    ru.kdinternal as kodepoli,
-                        ru.namaexternal AS namapoli,
+                    ko.politujuan as kodepoli,
+                    ko.namapolitujuan AS namapoli,
                     pas.nocm,
                     pd.noregistrasi,pas.nobpjs
                       
@@ -1183,7 +1183,8 @@ class MyJKNV2Controller extends ApiController
                     INNER JOIN pasien_m AS pas ON pas.id = pd.nocmfk
                     LEFT JOIN ruangan_m AS ru ON ru.id = so.objectruanganfk
                     LEFT JOIN ruangan_m AS ru2 ON ru2.id = so.objectruangantujuanfk
-                    
+                    LEFT JOIN pemakaianasuransi_t AS pa ON pa.noregistrasifk = pd.norec
+                    LEFT JOIN bpjsrencanakontrol_t AS ko ON ko.nosuratkontrol = pa.nosuratskdp
                     WHERE
                         so.kdprofile = $kdProfile
                     --AND pas.nocm ILIKE '%11233764%'
@@ -1191,7 +1192,7 @@ class MyJKNV2Controller extends ApiController
                     AND ru2.objectdepartemenfk = $depbedah
                     AND so.statusenabled = true
                     and so.statusorder is null
-                    and ru.kdinternal is not null
+                    and ko.politujuan is not null
                     and pd.objectkelompokpasienlastfk=2
                     ORDER BY
                         so.tglorder desc"));
@@ -1263,8 +1264,8 @@ class MyJKNV2Controller extends ApiController
                     so.noorder as kodebooking,
                     so.tglpelayananawal  as tanggaloperasi,
                     pr.namaproduk as jenistindakan,
-                    ru.kdinternal as kodepoli,
-                        ru.namaexternal AS namapoli,
+                    ko.politujuan as kodepoli,
+                    ko.namapolitujuan AS namapoli,
                     pas.nocm,
                     pd.noregistrasi,pas.nobpjs,
                     so.statusorder,pd.objectkelompokpasienlastfk
@@ -1277,14 +1278,15 @@ class MyJKNV2Controller extends ApiController
                     INNER JOIN pasien_m AS pas ON pas.id = pd.nocmfk
                     LEFT JOIN ruangan_m AS ru ON ru.id = so.objectruanganfk
                     LEFT JOIN ruangan_m AS ru2 ON ru2.id = so.objectruangantujuanfk
-                    
+                    LEFT JOIN pemakaianasuransi_t AS pa ON pa.noregistrasifk = pd.norec
+                    LEFT JOIN bpjsrencanakontrol_t AS ko ON ko.nosuratkontrol = pa.nosuratskdp
                     WHERE
                         so.kdprofile = $kdProfile
                     --AND pas.nocm ILIKE '%11233764%'
                     AND ru2.objectdepartemenfk = $depbedah
                     AND so.statusenabled = true
                     --and so.statusorder is null
-                    and ru.kdinternal is not null
+                    and ko.politujuan is not null
                     and so.tglpelayananawal between '$request[tanggalawal] 00:00:00' and '$request[tanggalakhir] 23:59:59'
                     ORDER BY
                         so.tglorder desc"));
