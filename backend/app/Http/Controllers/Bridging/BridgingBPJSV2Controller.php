@@ -10,6 +10,7 @@
 namespace App\Http\Controllers\Bridging;
 
 use App\Http\Controllers\ApiController;
+use App\Http\Controllers\Bridging\LZCompressor\LZString;
 use App\Master\Pegawai;
 use App\Transaksi\AntrianPasienDiperiksa;
 use App\Transaksi\BPJSRujukan;
@@ -2453,7 +2454,7 @@ class BridgingBPJSV2Controller extends ApiController
 
         $output = openssl_decrypt(base64_decode($bahan), $encrypt_method, $key_hash, OPENSSL_RAW_DATA, $iv);
 
-        $x = \LZCompressor\LZString::decompressFromEncodedURIComponent($output);
+        $x = LZString::decompressFromEncodedURIComponent($output);
         $result = json_decode($x);
         if ($metadata->code != 200) {
             $result = null;
@@ -2485,7 +2486,7 @@ class BridgingBPJSV2Controller extends ApiController
 
         $output = openssl_decrypt(base64_decode($bahan), $encrypt_method, $key_hash, OPENSSL_RAW_DATA, $iv);
 
-        $x = \LZCompressor\LZString::decompressFromEncodedURIComponent($output);
+        $x = LZString::decompressFromEncodedURIComponent($output);
         $result = json_decode($x);
         if ($metadata->code != 200) {
             $result = null;
@@ -2514,7 +2515,7 @@ class BridgingBPJSV2Controller extends ApiController
 
             $output = openssl_decrypt(base64_decode($bahan), $encrypt_method, $key_hash, OPENSSL_RAW_DATA, $iv);
 
-            $x = \LZCompressor\LZString::decompressFromEncodedURIComponent($output);
+            $x = LZString::decompressFromEncodedURIComponent($output);
             $result = json_decode($x);
             if ($metadata->code != 200 && $metadata->code != 1) {
                 $result = null;
