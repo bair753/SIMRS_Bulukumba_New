@@ -8957,7 +8957,7 @@ class RegistrasiController extends ApiController
                             left join kotakabupaten_m as kot on kot.id = alm.objectkotakabupatenfk
                             left join propinsi_m as pro on pro.id = alm.objectpropinsifk
                             left join ruangan_m as ru on ru.id = pd.objectruanganlastfk
-                            where app.kdprofile = 21 and dm.kddiagnosa <> '-'  and
+                            where app.kdprofile = $idProfile and dm.kddiagnosa <> '-'  and
                             pd.tglregistrasi BETWEEN '$tglAwal' AND '$tglAkhir'
                             )as x GROUP BY x.namadiagnosa ,x.kddiagnosa) as z
                             group by z.jumlah,z.kddiagnosa,z.namadiagnosa,z.kasusbarulk,z.kasusbarup
