@@ -197,7 +197,7 @@ export class InformasiKamarComponent implements OnInit {
             if (data[i].idstatusbed == 1) {
               arrRuang[j].isi = arrRuang[j].isi + 1;
             } else {
-              arrRuang[j].kosong = arrRuang[j].kosong + 1;
+              arrRuang[j].kosong = arrRuang[j].qtyBed - arrRuang[j].isi;
             }
             stt = false;
           }
