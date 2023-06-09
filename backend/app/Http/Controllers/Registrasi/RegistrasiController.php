@@ -478,7 +478,7 @@ class RegistrasiController extends ApiController
                     }
                     //kosongkan
                     if ($isRawatInap=='true') {
-                        TempatTidur::where('id', $dataAPD->nobed)->update(['objectstatusbedfk' => 2]);
+                        TempatTidur::where('id', $dataAPD->nobed)->update(['objectstatusbedfk' => 1]);
                     }
                 }
                //count tgl pasien perruanga
