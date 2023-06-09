@@ -183,6 +183,9 @@ class KiosKController extends ApiController
                  left join statusbed_m as sb on sb.id = tt.objectstatusbedfk
                  left join kelas_m as kl on kl.id = km.objectkelasfk
                  where ru.objectdepartemenfk in (16,35) 
+                  and tt.statusenabled = true
+                  and km.statusenabled = true
+                  and ru.statusenabled = true
                   and ru.kdprofile =$kdProfile
                   and ru.namaruangan=:namaruangan)as x"),
                 array(
@@ -212,6 +215,9 @@ class KiosKController extends ApiController
                  left join statusbed_m as sb on sb.id = tt.objectstatusbedfk
                  left join kelas_m as kl on kl.id = km.objectkelasfk
                  where ru.objectdepartemenfk in (16,35)
+                  and tt.statusenabled = true
+                  and km.statusenabled = true
+                  and ru.statusenabled = true
                   and ru.kdprofile =$kdProfile
                    and kl.id=:idkelas)as x"),
                 array(
