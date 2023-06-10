@@ -344,7 +344,7 @@ define(['initialize'], function (initialize) {
                     // });
 
                     medifirstService.postLogging('EMR', 'norec emrpasien_t', e.data.data.norec,
-                        'Persetujuan Pemakaian Darah Dan Produk Darah Rawat Inap' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
+                        'Persetujuan Pemakaian Darah Dan Produk Darah' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
                         + $scope.cc.noregistrasi).then(function (res) {
                         })
 
