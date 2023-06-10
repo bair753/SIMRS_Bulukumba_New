@@ -8959,7 +8959,7 @@ class RegistrasiController extends ApiController
                             left join ruangan_m as ru on ru.id = pd.objectruanganlastfk
                             where dm.kddiagnosa NOT ILIKE '%Z%'
                             AND dm.kddiagnosa NOT ILIKE '%R%'
-                            AND dm.kddiagnosa NOT ILIKE '%O%' AND app.kdprofile = $idProfile and dm.kddiagnosa <> '-'  and
+                            AND dm.kddiagnosa NOT ILIKE '%O%' AND app.kdprofile = $idProfile $deptId and dm.kddiagnosa <> '-'  and
                             pd.tglregistrasi BETWEEN '$tglAwal' AND '$tglAkhir'
                             )as x GROUP BY x.namadiagnosa ,x.kddiagnosa) as z
                             group by z.jumlah,z.kddiagnosa,z.namadiagnosa,z.kasusbarulk,z.kasusbarup
