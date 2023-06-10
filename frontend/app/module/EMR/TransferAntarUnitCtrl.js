@@ -315,7 +315,7 @@ define(['initialize'], function (initialize) {
                 }
                 medifirstService.post('emr/save-emr-dinamis', jsonSave).then(function (e) {
                     medifirstService.postLogging('EMR', 'norec emrpasien_t', e.data.data.norec,
-                    'Transfer Antar Unit Rawat Inap'+ ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
+                    'Transfer Antar Unit'+ ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
                     + $scope.cc.noregistrasi).then(function (res) {
                     })
                     $rootScope.loadRiwayat()
