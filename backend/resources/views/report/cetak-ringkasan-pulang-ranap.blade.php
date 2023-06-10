@@ -263,6 +263,23 @@
         </span>
       </div>
     </div>
+    <div class="border-doang" style="min-height: 85px">
+      <div style="width: 70%;float: left;">
+        <span class="f-s-15 background-gray"><b>Komorbiditas Lain</b> </span><span class="background-gray"> <b>:</b> </span><span> @{{ item.obj[423807] }}</span>
+      </div>
+      <div style="width: 30%; float: right;border-left: 1px solid #000;box-sizing: border-box;min-height: 50px;">
+        <div style="text-align: center;" class="background-gray">
+          <b>ICD 10</b>
+        </div>
+        <span style="padding: 3px;box-sizing: border-box;">
+          @{{ item.obj[31101417] ? item.obj[31101417] : '_' }} <br>
+          @{{ item.obj[31101418] ? item.obj[31101418] : '_' }} <br>
+          @{{ item.obj[31101419] ? item.obj[31101419] : '_' }} <br>
+          @{{ item.obj[31101420] ? item.obj[31101420] : '_' }} <br>
+          @{{ item.obj[31101421] ? item.obj[31101421] : '_' }}
+        </span>
+      </div>
+    </div>
     <div class="border-doang" style="min-height: 50px">
       <div style="width: 70%;float: left;">
         <span class="f-s-15 background-gray"><b>Komorbiditas Lain</b> </span><span class="background-gray"> <b>:</b> </span><span> @{{ item.obj[423807] }}</span>
@@ -272,7 +289,7 @@
           <b>ICD 10</b>
         </div>
         <span style="padding: 3px;box-sizing: border-box;">
-          @{{ item.obj[423808] }}
+          @{{ item.obj[31101417] ? item.obj[31101417] : '..................................................' }}
         </span>
       </div>
     </div>
