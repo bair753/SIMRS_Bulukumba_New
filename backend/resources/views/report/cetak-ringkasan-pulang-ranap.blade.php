@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Ringkasan Pulang Rawat Inap</title>
+  <title>Ringkasan Pulang</title>
 
   @if(stripos(\Request::url(), 'localhost') !== FALSE)
         <link rel="stylesheet" href="{{ asset('css/report/paper.css') }}">
@@ -250,20 +250,7 @@
     <div class="border-doang" style="min-height: 50px">
       <span class="f-s-15 background-gray"><b>Indikasi Dirawat</b> </span><span class="background-gray"> <b>:</b> </span><span> @{{ item.obj[423804] }}</span>
     </div>
-    <div class="border-doang" style="min-height: 50px">
-      <div style="width: 70%;float: left;">
-        <span class="f-s-15 background-gray"><b>Diagnosis</b> </span><span class="background-gray"> <b>:</b> </span><span> @{{ item.obj[423805] }}</span>
-      </div>
-      <div style="width: 30%; float: right;border-left: 1px solid #000;box-sizing: border-box;min-height: 50px;">
-        <div style="text-align: center;" class="background-gray">
-          <b>ICD 10</b>
-        </div>
-        <span style="padding: 3px;box-sizing: border-box;">
-          @{{ item.obj[423806] }}
-        </span>
-      </div>
-    </div>
-    <div class="border-doang" style="min-height: 85px">
+    <div class="border-doang" style="min-height: 90px">
       <div style="width: 70%;float: left;">
         <span class="f-s-15 background-gray"><b>Komorbiditas Lain</b> </span><span class="background-gray"> <b>:</b> </span><span> @{{ item.obj[423807] }}</span>
       </div>
@@ -272,24 +259,11 @@
           <b>ICD 10</b>
         </div>
         <span style="padding: 3px;box-sizing: border-box;">
-          @{{ item.obj[31101417] ? item.obj[31101417] : '_' }} <br>
-          @{{ item.obj[31101418] ? item.obj[31101418] : '_' }} <br>
-          @{{ item.obj[31101419] ? item.obj[31101419] : '_' }} <br>
-          @{{ item.obj[31101420] ? item.obj[31101420] : '_' }} <br>
-          @{{ item.obj[31101421] ? item.obj[31101421] : '_' }}
-        </span>
-      </div>
-    </div>
-    <div class="border-doang" style="min-height: 50px">
-      <div style="width: 70%;float: left;">
-        <span class="f-s-15 background-gray"><b>Komorbiditas Lain</b> </span><span class="background-gray"> <b>:</b> </span><span> @{{ item.obj[423807] }}</span>
-      </div>
-      <div style="width: 30%; float: right;border-left: 1px solid #000;box-sizing: border-box;min-height: 50px;">
-        <div style="text-align: center;" class="background-gray">
-          <b>ICD 10</b>
-        </div>
-        <span style="padding: 3px;box-sizing: border-box;">
-          @{{ item.obj[31101417] ? item.obj[31101417] : '..................................................' }}
+          @{{ item.obj[31101417] ? '- ' + item.obj[31101417] : '' }} <br>
+          &nbsp;@{{ item.obj[31101418] ? '- ' + item.obj[31101418] : '' }} <br>
+          &nbsp;@{{ item.obj[31101419] ? '- ' + item.obj[31101419] : '' }} <br>
+          &nbsp;@{{ item.obj[31101420] ? '- ' + item.obj[31101420] : '' }} <br>
+          &nbsp;@{{ item.obj[31101421] ? '- ' + item.obj[31101421] : '' }}
         </span>
       </div>
     </div>
