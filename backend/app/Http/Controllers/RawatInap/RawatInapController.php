@@ -740,8 +740,24 @@ class RawatInapController extends ApiController
         $result = array(
             'data' => $data,
             'message' => 'ramdanegie',
+            'length' => count($data),
         );
         return $this->respond($result);
+    }
+    public function getRuanganRI(Request $request){
+        $kdProfile = $this->getDataKdProfile($request);
+        $ruanganRi = \DB::table('ruangan_m as ru')
+            ->whereIn('ru.objectdepartemenfk',[16,35])
+            ->where('ru.id', '!=', 824)
+            ->where('ru.id', '!=', 825)
+            ->where('ru.id', '!=', 827)
+            ->where('ru.id', '!=', 833)
+            ->where('ru.statusenabled',true)
+            ->where('ru.kdprofile', (int)$kdProfile)
+            ->orderBy('ru.id')
+            ->get();
+
+            return $this->respond($ruanganRi);
     }
     public function getComboPasienMasihDirawat(Request $request){
         $kdProfile = $this->getDataKdProfile($request);

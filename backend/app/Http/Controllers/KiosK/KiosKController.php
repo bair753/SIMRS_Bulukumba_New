@@ -289,6 +289,7 @@ class KiosKController extends ApiController
         if(isset($request['idstatusbed']) && $request['idstatusbed']!="" && $request['idstatusbed']!="undefined"){
             $data = $data->where('sb.id', $request['idstatusbed']);
         };
+        $data = $data->orderBy('ru.id', 'asc');
         $data = $data->get();
 
 
