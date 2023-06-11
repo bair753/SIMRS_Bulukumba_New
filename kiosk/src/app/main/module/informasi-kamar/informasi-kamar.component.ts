@@ -77,7 +77,15 @@ export class InformasiKamarComponent implements OnInit {
     };
   }
   getData() {
+    var arrRuangRI = [];
     this.isShowKamar = true
+    this.httpService.get('medifirst2000/rawatinap/get-daftar-ruangan-ri').subscribe(e => {
+      var dataRI: any = e;
+      for (var j = 0; j < dataRI.length; j++) {
+        arrRuangRI[j] = dataRI[j].id;
+      }
+    })
+    
     this.httpService.get('medifirst2000/kiosk/get-view-bed-tea').subscribe(e => {
       var data: any = e[0];
       this.jumlahTempatTidur = data.kamartotal;
@@ -243,6 +251,10 @@ export class InformasiKamarComponent implements OnInit {
         'warna1', 'warna2', 'warna3', 'warna4',
         'sales', 'views', 'users', 'checkin']
       for (let i = 0; i < arrRuang.length; i++) {
+        this.httpService.get("medifirst2000/rawatinap/get-daftar-pasien-masih-dirawat?ruanganId=" + arrRuangRI[i]).subscribe(e => {
+          arrRuang[i].isi = e.length;
+          arrRuang[i].kosong = arrRuang[i].qtyBed - arrRuang[i].isi;
+        })
         arrRuang[i].warna = warna[i]
         if (arrRuang[i].qtyBed == arrRuang[i].isi)
           arrRuang[i].bg = 'bg-maroon-gradient'

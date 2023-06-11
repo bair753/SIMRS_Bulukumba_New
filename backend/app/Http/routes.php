@@ -1537,6 +1537,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
           Route::post('rawatinap/save-pulang-pasien', 'RawatInap\PindahPulangController@savePulangPasien');
           Route::post('rawatinap/save-pindah-pasien', 'RawatInap\PindahPulangController@savePindahPasien');
           Route::get('rawatinap/get-daftar-pasien-masih-dirawat', 'RawatInap\RawatInapController@getPasienMasihDirawat');
+          Route::get('rawatinap/get-daftar-ruangan-ri', 'RawatInap\RawatInapController@getRuanganRI');
           Route::get('rawatinap/get-combo-pasien-masih-dirawat', 'RawatInap\RawatInapController@getComboPasienMasihDirawat');
           Route::get('rawatinap/get-antrian-pasien-diperiksa', 'RawatInap\RawatInapController@getDetailAntrianPasienDiperiksa');
           Route::post('rawatinap/save-batal-rawat-inap', 'RawatInap\RawatInapController@saveBatalRanap');
