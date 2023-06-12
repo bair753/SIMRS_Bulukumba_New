@@ -637,7 +637,7 @@ define(['initialize'], function (initialize) {
                     // });
 
                     medifirstService.postLogging('EMR', 'norec emrpasien_t', e.data.data.norec,
-                        'Check List Keselamatan Pasien Di Kamar Operasi Rawat Inap' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
+                        'Check List Keselamatan Pasien Di Kamar Operasi' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
                         + $scope.cc.noregistrasi).then(function (res) {
                         })
 

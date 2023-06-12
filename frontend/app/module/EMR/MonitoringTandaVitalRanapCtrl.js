@@ -520,7 +520,7 @@ define(['initialize'], function (initialize) {
                     // });
 
                     medifirstService.postLogging('EMR', 'norec emrpasien_t', e.data.data.norec,
-                        'Monitoring Tanda Vital Rawat Inap' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
+                        'Monitoring Tanda Vital' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
                         + $scope.cc.noregistrasi).then(function (res) {
                         })
 
