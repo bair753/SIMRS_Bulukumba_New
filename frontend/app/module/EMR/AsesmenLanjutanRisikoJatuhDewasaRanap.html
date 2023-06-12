@@ -52,7 +52,7 @@
 <div class="grid_12">
     <div class="grid_12">
         <div class="panel panel-default container_12">
-            <div class="panel-heading" c-translate>Asesmen Lanjutan Risiko Jatuh Pasien Dewasa Rawat Inap</div>
+            <div class="panel-heading" c-translate>Asesmen Lanjutan Risiko Jatuh Pasien Dewasa</div>
         </div>
         
         <div class="grid_12" style="margin-top: 10px;">
@@ -70,8 +70,8 @@
                             <td ng-repeat="jawab in list.detail | orderBy:'id'">
                                 <div ng-switch on="jawab.type">
                                     <div class="grid_12" ng-switch-when="datetime">
-                                        <input style="width: 100%" k-ng-model="item.obj[jawab.id]" kendo-datetimepicker placeholer="yyyy-MM-dd HH:mm"
-                                            k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                                        <input style="width: 100%" k-ng-model="item.obj[jawab.id]" kendo-datetimepicker placeholer="dd-MM-yyyy HH:mm"
+                                            k-format="'dd-MM-yyyy HH:mm'" parsedate="dd-MM-yyyy HH:mm" />
                                     </div>
                                 </div>
                             </td>
@@ -870,8 +870,8 @@
                             <td ng-repeat="list in listTglTable2 | orderBy:'id'">
                                 <div ng-switch on="list.type">
                                     <div class="grid_12" ng-switch-when="datetime">
-                                        <input style="width: 100%" k-ng-model="item.obj[list.id]" kendo-datetimepicker placeholer="yyyy-MM-dd HH:mm"
-                                            k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                                        <input style="width: 100%" k-ng-model="item.obj[list.id]" kendo-datetimepicker placeholer="dd-MM-yyyy HH:mm"
+                                            k-format="'dd-MM-yyyy HH:mm'" parsedate="dd-MM-yyyy HH:mm" />
                                     </div>
                                 </div>
                             </td>
@@ -915,7 +915,7 @@
                                 <div ng-switch on="list.type">
                                     <div class="grid_12" ng-switch-when="datetime">
                                         <input style="width: 100%" k-ng-model="item.obj[list.id]" kendo-datetimepicker
-                                            placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+                                            placeholer="dd-MM-yyyy HH:mm" k-format="'dd-MM-yyyy HH:mm'" parsedate="dd-MM-yyyy HH:mm" />
                                     </div>
                                 </div>
                             </td>
