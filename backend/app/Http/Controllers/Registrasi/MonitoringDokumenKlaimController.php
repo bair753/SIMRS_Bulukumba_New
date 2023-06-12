@@ -50,8 +50,10 @@ class MonitoringDokumenKlaimController extends  ApiController
 
     public function bundleDokumen(Request $request) {
         $dataRegistrasi = PasienDaftar::where('noregistrasi', $request['noregistrasi'])->first();
+
         $dataDokumen = DB::table('monitoringdokklaim_t as mk')
         ->join("dokumenklaim_m as dk", "dk.id", "=", "mk.documentklaimfk")
+        ->where('mk.statusenabled', true)
         ->where('mk.noregistrasifk', $dataRegistrasi->norec)
         ->orderBy('dk.nourut')
         ->get();
