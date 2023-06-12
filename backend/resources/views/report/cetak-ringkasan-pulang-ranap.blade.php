@@ -250,6 +250,19 @@
     <div class="border-doang" style="min-height: 50px">
       <span class="f-s-15 background-gray"><b>Indikasi Dirawat</b> </span><span class="background-gray"> <b>:</b> </span><span> @{{ item.obj[423804] }}</span>
     </div>
+    <div class="border-doang" style="min-height: 50px">
+      <div style="width: 70%;float: left;">
+        <span class="f-s-15 background-gray"><b>Diagnosis</b> </span><span class="background-gray"> <b>:</b> </span><span> @{{ item.obj[423805] }}</span>
+      </div>
+      <div style="width: 30%; float: right;border-left: 1px solid #000;box-sizing: border-box;min-height: 50px;">
+        <div style="text-align: center;" class="background-gray">
+          <b>ICD 10</b>
+        </div>
+        <span style="padding: 3px;box-sizing: border-box;">
+          @{{ item.obj[423806] ? '- ' + item.obj[423806] : '' }}
+        </span>
+      </div>
+    </div>
     <div class="border-doang" style="min-height: 90px">
       <div style="width: 70%;float: left;">
         <span class="f-s-15 background-gray"><b>Komorbiditas Lain</b> </span><span class="background-gray"> <b>:</b> </span><span> @{{ item.obj[423807] }}</span>
