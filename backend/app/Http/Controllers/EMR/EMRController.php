@@ -2384,12 +2384,23 @@ class EMRController  extends ApiController
   public function getMenuRekamMedisAtuh(Request $request){
         $kdProfile = $this->getDataKdProfile($request);
         $idProfile = (int) $kdProfile;
-        $dataRaw = \DB::table('emr_t as emr')
+
+        if($request['namaemr'] == 'asesmen'){
+            $dataRaw = \DB::table('emr_t as emr')
+            ->where('emr.kdprofile',$idProfile)
+            ->where('emr.statusenabled', true)
+            ->where('emr.namaemr', $request['namaemr'])
+            ->select('emr.*')
+            ->orderBy('emr.norm');
+        }else{
+            $dataRaw = \DB::table('emr_t as emr')
             ->where('emr.kdprofile',$idProfile)
             ->where('emr.statusenabled', true)
             ->where('emr.namaemr', $request['namaemr'])
             ->select('emr.*')
             ->orderBy('emr.nourut');
+        }
+        
 
         if (isset($request['departemen']) && $request['departemen'] != '' && $request['departemen'] != 'undefined') {
             $dataMapping = \DB::table('mapruangantoemr_t as mapemr')
