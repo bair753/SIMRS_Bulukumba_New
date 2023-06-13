@@ -145,6 +145,10 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                     id : dataItem.id,
                     namalengkap : dataItem.namalengkap
                 }
+                medifirstService.postLogging('Hapus Dokter Bpjs', 'norec emrpasien_t', dataItem.namalengkap,
+                        'Hapus Dokter Bpjs - ' + dataItem.namalengkap + ' dengan ID  '
+                        + dataItem.id + ' - Dokter : ' + dataItem.namalengkap).then(function (res) {
+                        })
                 medifirstService.post('bridging/bpjs/hapus-data-mappingdkoterbpjs', objSave).then(function (e) {
                     $scope.isRouteLoading = false;
                     loadCombo();
