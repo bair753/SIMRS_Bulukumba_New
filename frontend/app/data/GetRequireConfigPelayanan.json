@@ -3697,6 +3697,18 @@
         {
             "nameDep": "AsesmenPasienGeriatriCtrl",
             "urlDep": "module/EMR/AsesmenPasienGeriatriCtrl"
+        },
+        {
+            "nameDep": "PernyataanPersetujuanPengobatanCtrl",
+            "urlDep": "module/EMR/PernyataanPersetujuanPengobatanCtrl"
+        },
+        {
+            "nameDep": "LembarKerjaBayiBaruLahirCtrl",
+            "urlDep": "module/EMR/LembarKerjaBayiBaruLahirCtrl"
+        },
+        {
+            "nameDep": "SkriningGiziPadaPasienDewasaCtrl",
+            "urlDep": "module/EMR/SkriningGiziPadaPasienDewasaCtrl"
         }
     ]
 }

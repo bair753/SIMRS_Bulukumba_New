@@ -20631,6 +20631,75 @@
         "define": "RekamMedisCtrl"
       }
     ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.PernyataanPersetujuanPengobatan",
+    "url": "/PernyataanPersetujuanPengobatan",
+    "templateurl": "module/EMR/PernyataanPersetujuanPengobatan.html",
+    "controller": "PernyataanPersetujuanPengobatanCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.LembarKerjaBayiBaruLahir",
+    "url": "/LembarKerjaBayiBaruLahir/:index/:idEMR",
+    "templateurl": "module/EMR/LembarKerjaBayiBaruLahir.html",
+    "controller": "LembarKerjaBayiBaruLahirCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.SkriningGiziPadaPasienDewasa",
+    "url": "/SkriningGiziPadaPasienDewasa/:index/:idEMR",
+    "templateurl": "module/EMR/SkriningGiziPadaPasienDewasa.html",
+    "controller": "SkriningGiziPadaPasienDewasaCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
   }
 
 
