@@ -222,6 +222,26 @@
 		<div class="grid_1" style="margin-top: 16px" ng-show='cboDokter'>
 			<button class="btnTemplate1" style="margin-left: 0;" ng-click="batal()">Batal</button>
 		</div>
+		<div class="grid_3" ng-show='cboKelas'>
+		</div>
+		<div class="grid_3" ng-show='cboKelas'>
+			<div class="grid_12">
+				<label c-label item="item" c-label-text="Nama Kelas"></label>
+			</div>
+			<div class="clear"></div>
+
+			<div class="grid_12">
+				<input style="width: 100%;" kendo-combo-box k-ng-model="item.namaKelas"
+					k-data-text-field="'namakelas'" k-data-value-field="'id'" k-filter="'contains'"
+					k-auto-bind="false" k-data-source="listKelas" />
+			</div>
+		</div>
+		<div class="grid_1" style="margin-top: 16px" ng-show='cboKelas'>
+			<button class="btnTemplate1" style="margin-left: 0;" ng-click="simpanKelas()">Simpan</button>
+		</div>
+		<div class="grid_1" style="margin-top: 16px" ng-show='cboKelas'>
+			<button class="btnTemplate1" style="margin-left: 0;" ng-click="batalKelas()">Batal</button>
+		</div>
 		<div class="grid_3" ng-show='cboRekanan'>
 		</div>
 		<div class="grid_12" ng-show='cboRekanan'>
@@ -430,6 +450,10 @@
 			<div class="grid_12" style="margin-top: -10px" ng-show='cboUbahDokter'>
 				<div class="grid_2" >
 					<button class="btnTemplate1" style="margin-left: 0;" ng-click="InputMutu()"><i class="fa fa-stethoscope"></i>  Input Mutu
+					</button>
+				</div>
+				<div class="grid_2" >
+					<button class="btnTemplate1" style="margin-left: 0;" ng-click="UbahKelas()"><i class="fa fa-edit"></i>  Ubah Kelas
 					</button>
 				</div>
 			</div>

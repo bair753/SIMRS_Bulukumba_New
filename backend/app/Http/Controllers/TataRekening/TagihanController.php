@@ -3064,6 +3064,37 @@ class TagihanController  extends ApiController
 
         return $this->setStatusCode($result['status'])->respond($result, $transMessage);
     }
+    public function simpanUpdateKelasAPD(Request $request)
+    {
+        DB::beginTransaction();
+        $transStatus = 'true';
+        try {
+            $data2 = AntrianPasienDiperiksa::where('norec', $request['norec_apd'])
+                ->update([
+                        'objectkelasfk' => $request['objectkelasfk']]
+                );
+            $transMessage = "Update Kelas berhasil!";
+        } catch (\Exception $e) {
+            $transStatus = 'false';
+            $transMessage = "Update Kelas gagal";
+        }
+
+        if ($transStatus != 'false') {
+            DB::commit();
+            $result = array(
+                "status" => 201,
+                "message" => $transMessage,
+            );
+        } else {
+            DB::rollBack();
+            $result = array(
+                "status" => 400,
+                "message" => $transMessage,
+            );
+        }
+
+        return $this->setStatusCode($result['status'])->respond($result, $transMessage);
+    }
     public function simpanUpdateRekananPD(Request $request)
     {
         DB::beginTransaction();

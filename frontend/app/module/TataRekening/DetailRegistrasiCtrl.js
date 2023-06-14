@@ -65,6 +65,14 @@ define(['initialize'], function (initialize) {
 				$scope.cboRekanan = false
 				$scope.cboUbahDokter = true
 			}
+			$scope.UbahKelas = function () {
+				$scope.cboKelas = true
+				$scope.cboUbahDokter = false
+			}
+			$scope.batalKelas = function () {
+				$scope.cboKelas = false
+				$scope.cboUbahDokter = true
+			}
 
 			// $scope.listStatus = manageKasir.getStatus();
 
@@ -425,6 +433,18 @@ define(['initialize'], function (initialize) {
 				medifirstService.post('tatarekening/save-update-dokter_apd',updateDokter).then(function (e) {
 					LoadData();
 					$scope.batal();
+				})
+			}
+			$scope.simpanKelas = function () {
+				var current = $scope.currentRowData;
+				var length = $scope.dataRincianTagihan._data.length + 1;
+				var updateKelas = {
+					"norec_apd": current.norec,
+					"objectkelasfk": $scope.item.namaKelas.id
+				}
+				medifirstService.post('tatarekening/save-update-kelas_apd',updateKelas).then(function (e) {
+					LoadData();
+					$scope.batalKelas();
 				})
 			}
 			$scope.simpanRekanan = function () {

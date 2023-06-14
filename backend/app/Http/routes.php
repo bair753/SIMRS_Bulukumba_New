@@ -2591,6 +2591,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
           Route::get('tatarekening/get-sudah-verif', 'TataRekening\TagihanController@getVerifikasiNoregistrasi');
           Route::post('tatarekening/save-konsul-keruangan', 'TataRekening\TagihanController@simpanInsertAPD');
           Route::post('tatarekening/save-update-dokter_apd', 'TataRekening\TagihanController@simpanUpdateDokterAPD');
+          Route::post('tatarekening/save-update-kelas_apd', 'TataRekening\TagihanController@simpanUpdateKelasAPD');
           Route::post('tatarekening/save-update-rekanan_pd', 'TataRekening\TagihanController@simpanUpdateRekananPD');
           Route::post('tatarekening/hapus-antrian-pasien', 'TataRekening\TagihanController@hapusAPD');
           Route::post('tatarekening/ubah-tgl-detailregistrasi', 'TataRekening\TagihanController@ubahTanggalDetailRegis');
