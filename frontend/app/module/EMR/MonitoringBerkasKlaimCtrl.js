@@ -39,7 +39,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 if(e == undefined) return;
 
                 $scope.listRuangan = []
-                $scope.isRouteLoading = true;
+                $scope.isRouteLoading = false;
                 medifirstService.get(`sysadmin/master/get-ruanganbyidDepart/${e.id}`).then(function (data) {
                     $scope.isRouteLoading = false;
                     $scope.listRuangan = data.data
@@ -51,10 +51,11 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 var tglakhir = moment($scope.item.periodeAkhir).format("YYYY-MM-DD HH:mm")
 
                 var departId = ""
-                if(!$scope.item.instalasi) {
-                    toastr.error("Harap pilih instalasi terlebih dahulu !")
-                    return
-                } else { departId = $scope.item.instalasi.id }
+                if($scope.item.instalasi) { departId = "&departId=" + $scope.item.instalasi.id }
+                // if(!$scope.item.instalasi) {
+                //     toastr.error("Harap pilih instalasi terlebih dahulu !")
+                //     return
+                // } else { departId = $scope.item.instalasi.id }
 
                 var ruanganId = ""
                 if($scope.item.ruangan) { ruanganId = "&ruanganId=" + $scope.item.ruangan.id }
@@ -64,12 +65,14 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 if($scope.item.noRm) { noRm = "&nocm=" + $scope.item.noRm }
                 var nama = ""
                 if($scope.item.nama) { nama = "&namapasien=" + $scope.item.nama }
+                var noSEP = ""
+                if($scope.item.noSEP) { noSEP = "&nosep=" + $scope.item.noSEP }
                 
                 $scope.isRouteLoading = true;
                 medifirstService.get("registrasi/dokumenrm/get-dokumen-monitoring-klaim?"
                 + "tglawal=" + tglawal
                 + "&tglakhir=" + tglakhir
-                + "&departId=" + departId + ruanganId + noReg + noRm + nama).then(function (data) {
+                + "&departId=" + departId + ruanganId + noReg + noRm + nama + noSEP).then(function (data) {
                     $scope.isRouteLoading = false;
                     var dataMaster = data.data.master
                     if(dataMaster.length == 0) {

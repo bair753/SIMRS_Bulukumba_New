@@ -423,13 +423,18 @@ class KendaliDokumenRMController extends  ApiController
         $dataMaster = $dataMaster->get();
 
         $data = DB::table("pasiendaftar_t as pd")
-        ->select("pd.norec", "pd.tglregistrasi", "pd.noregistrasi", "rm.namaruangan", "ps.nocm", "ps.namapasien")
+        ->select("pd.norec", "pd.tglregistrasi", "pd.noregistrasi", "rm.namaruangan", "ps.nocm", "ps.namapasien", "pas.nosep")
         ->join("pasien_m as ps", "ps.id", "=", "pd.nocmfk")
         ->join("ruangan_m as rm", "rm.id", "=", "pd.objectruanganlastfk")
+        ->leftjoin('pemakaianasuransi_t as pas', 'pas.noregistrasifk', '=', 'pd.norec')
         ->where("pd.kdprofile", $idProfile)
         ->where("pd.statusenabled", true)
-        ->where("rm.objectdepartemenfk", $request['departId'])
+        // ->where("rm.objectdepartemenfk", $request['departId'])
         ->whereBetween("pd.tglregistrasi", [$tglawal, $tglakhir]);
+
+        if(isset($request['departId']) && $request['departId']!="" && $request['departId']!="undefined"){
+            $data = $data->where('rm.objectdepartemenfk','=', $request['departId']);
+        };
 
         if(isset($request['ruanganId']) && $request['ruanganId']!="" && $request['ruanganId']!="undefined"){
             $data = $data->where('rm.id','=', $request['ruanganId']);
@@ -445,6 +450,9 @@ class KendaliDokumenRMController extends  ApiController
 
         if(isset($request['namapasien']) && $request['namapasien']!="" && $request['namapasien']!="undefined"){
             $data = $data->where('ps.namapasien','ilike', '%'.$request['namapasien'].'%');
+        };
+        if(isset($request['nosep']) && $request['nosep']!="" && $request['nosep']!="undefined"){
+            $data = $data->where('pas.nosep','ilike', '%'.$request['nosep'].'%');
         };
         $data = $data->get();
 
@@ -462,6 +470,7 @@ class KendaliDokumenRMController extends  ApiController
             $result['namaruangan'] = $value->namaruangan;
             $result['nocm'] = $value->nocm;
             $result['namapasien'] = $value->namapasien;
+            $result['nosep'] = $value->nosep;
             foreach($dataMaster as $item){
                 $result[$item->kodeexternal] = null;
                 foreach ($dataDokKlaim as $datDok) {
