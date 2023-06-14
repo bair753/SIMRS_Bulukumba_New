@@ -7371,7 +7371,7 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 				medifirstService.get("bridging/inacbg/get-emr-pasien?noregistrasi=" + $scope.dataPasienSelected.noregistrasi + '&emrfk=' + emrfk
 					// medifirstService.get("lab-radiologi/get-rincian-pelayanan?objectdepartemenfk=" + departemenfk + "&noregistrasi=" +   $scope.item.noregistrasi
 					, true).then(function (dat) {
-						$scope.dataDaftartindakanFisioterapi = {
+						$scope.dataDaftarRingkasanPasienMasukKeluar = {
 							data: dat.data.data,
 							_data: dat.data.data,
 							// pageSize: 10,
