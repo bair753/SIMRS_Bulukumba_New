@@ -7433,6 +7433,78 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 					+ '&nama=' + nama, '_blank');
 			}
 
+			$scope.asesmenAwalMedisIGD = function(){
+				if ($scope.dataPasienSelected.noregistrasi == undefined) {
+					toastr.error('Pilih Pasien Terlebih dahulu!!!')
+					return;
+				}
+				var emrfk = [290008] // emrfk Asesmen Awal Medis Pasien Gawat Darurat
+
+				medifirstService.get("bridging/inacbg/get-emr-pasien?noregistrasi=" + $scope.dataPasienSelected.noregistrasi + '&emrfk=' + emrfk
+					// medifirstService.get("lab-radiologi/get-rincian-pelayanan?objectdepartemenfk=" + departemenfk + "&noregistrasi=" +   $scope.item.noregistrasi
+					, true).then(function (dat) {
+						$scope.dataDaftarAsesmenAwalMedisGawatDarurat = {
+							data: dat.data.data,
+							_data: dat.data.data,
+							// pageSize: 10,
+							selectable: true,
+							refresh: true,
+							total: dat.data.data.length,
+							serverPaging: false,
+							aggregate: [
+									{ field: 'total', aggregate: 'sum' },
+							]
+
+					};
+					}, function (error) {
+							$scope.isLoading = false;
+					});
+				
+				$scope.popUpDaftarAsesmenAwalMedisGawatDarurat.center().open();
+				
+			}
+
+			$scope.columnDaftarAsesmenAwalMedisGawatDarurat = {
+				columns: [
+						{
+								"field": "tglemr",
+								"title": "Tgl EMR",
+								"width": "90px",
+						},                   
+						{
+								"field": "emrpasienfk",
+								"title": "No EMR",
+								"width": "160px"
+						},
+						{
+								"field": "namaform",
+								"title": "Nama EMR",
+								"width": "160px"
+						},
+				],
+				sortable: {
+						mode: "single",
+						allowUnsort: false,
+				}
+			}
+
+			$scope.cetakAsesmenAwalMedisGawatDarurat = function () {
+					if ($scope.dataSelectedAsesmenAwalMedisGawatDarurat == undefined) {
+						toastr.error('Data belum dipilih!!!')
+						return;
+					}
+
+					var local = JSON.parse(localStorage.getItem('profile'));
+					var nama = medifirstService.getPegawaiLogin();
+					window.open(baseTransaksi + 'report/cetak-asesmen-awal-medis-igd?nocm='
+					+ $scope.dataSelectedAsesmenAwalMedisGawatDarurat.nocm 
+					+ '&norec_apd=' + $scope.dataSelectedAsesmenAwalMedisGawatDarurat.norec_apd 
+					+ '&emr=' + $scope.dataSelectedAsesmenAwalMedisGawatDarurat.norec 
+					+ '&emrfk=' + $scope.dataSelectedAsesmenAwalMedisGawatDarurat.emrfk
+					+ '&kdprofile=' + local.id
+					+ '&nama=' + nama, '_blank');
+			}
+
 			// END ################
 
 		}
