@@ -6153,6 +6153,7 @@ class RegistrasiController extends ApiController
         $icdIX = \DB::table('diagnosa_m as dg')
             ->select('dg.id', 'dg.kddiagnosa', 'dg.namadiagnosa','dg.kddiagnosa as kdDiagnosa','dg.namadiagnosa as namaDiagnosa')
             ->where('dg.statusenabled', true)
+            ->where('dg.kdprofile', 39)
             ->orderBy('dg.kddiagnosa');
 
         if (isset($req['filter']['filters'][0]['value']) &&
@@ -6161,7 +6162,9 @@ class RegistrasiController extends ApiController
         ) {
             $icdIX = $icdIX
                 ->where('dg.namadiagnosa', 'ilike', '%' . $req['filter']['filters'][0]['value'] . '%')
-                ->orWhere('dg.kddiagnosa', 'ilike', $req['filter']['filters'][0]['value'] . '%');
+                ->orWhere('dg.kddiagnosa', 'ilike', $req['filter']['filters'][0]['value'] . '%')
+                ->where('dg.statusenabled', true)
+                ->where('dg.kdprofile', 39);
         }
 
         $icdIX = $icdIX->take(10);
@@ -7466,6 +7469,7 @@ class RegistrasiController extends ApiController
         $icdIX = \DB::table('diagnosatindakan_m as dg')
             ->select('dg.id','dg.kddiagnosatindakan as kdDiagnosaTindakan','dg.namadiagnosatindakan as namaDiagnosaTindakan')
             ->where('dg.statusenabled', true)
+            ->where('dg.kdprofile', 39)
             ->orderBy('dg.kddiagnosatindakan');
 
         if(isset($req['filter']['filters'][0]['value']) &&
@@ -7474,7 +7478,8 @@ class RegistrasiController extends ApiController
             $icdIX = $icdIX
                 ->where('dg.namadiagnosatindakan','ilike','%'.$req['filter']['filters'][0]['value'].'%' )
                 ->orWhere('dg.kddiagnosatindakan','ilike','%'.$req['filter']['filters'][0]['value'].'%' ) 
-                ->where('dg.statusenabled', true );
+                ->where('dg.statusenabled', true )
+                ->where('dg.kdprofile', 39 );
         }
 
 
