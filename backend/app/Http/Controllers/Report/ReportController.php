@@ -3735,7 +3735,7 @@ class ReportController extends ApiController{
 
         $res['profile'] = Profile::where('id', $kdProfile)->first();
         $res['data'] = $data;
-        if(empty($res['d'])){
+        if(empty($res['data'])){
             echo '
                 <script language="javascript">
                     window.alert("Data tidak ada.");
