@@ -2877,6 +2877,14 @@ class MasterController extends ApiController{
 
         return $this->respond($pemeriksa);
     }
+    public function getNoHakAksesPemakaianAsuransi(Request $request) {
+        $kdProfile = $this->getDataKdProfile($request);
+        $idProfile = (int) $kdProfile;
+        $users = SettingDataFixed::where('id', 1587)->first();
+        $users = $users->nilaifield;
+
+        return $this->respond($users);
+    }
     public function getKategoryDiet(Request $request) {
         $kdProfile = (int) $this->getDataKdProfile($request);
         $data = \DB::table('kategorydiet_m as kd')

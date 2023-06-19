@@ -66,6 +66,9 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 					//  debugger;
 					$scope.sourceDiagnosisPrimer = data;
 				});
+				medifirstService.get("sysadmin/master/get-no-hak-akses-edit-pemakaian-asuransi").then(function (data) {
+                    $scope.NoEditPemakaianAsuransi = data.data;
+                })
 				medifirstService.getPart('registrasi/get-daftar-combo-pegawai-all', true, 10).then(function (e) {
 					$scope.listDataPegawai = e;
 				})
@@ -1259,6 +1262,11 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 				}
 			}
 			$scope.EditPemakaianAsuransi = function () {
+				var idNot = $scope.NoEditPemakaianAsuransi;
+				if (idNot.includes(medifirstService.getPegawaiLogin().id)) {
+                    toastr.error('Hak akses tidak ada',' Mohon hubungi IT!')
+                    return
+                }
 				if ($scope.dataPasienSelected == undefined) {
 					messageContainer.error("Pilih data dulu")
 					return
