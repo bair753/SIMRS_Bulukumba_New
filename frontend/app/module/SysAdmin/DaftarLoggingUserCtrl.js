@@ -63,7 +63,8 @@ define(['initialize'], function(initialize) {
                 { id: 41, jenis: 'Antrol Task ID'},
                 { id: 42, jenis: 'Hapus Pasien'},
                 { id: 43, jenis: 'Dokumen Klaim'},
-                { id: 44, jenis: 'Hapus Dokter Bpjs'}
+                { id: 44, jenis: 'Hapus Dokter Bpjs'},
+                { id: 45, jenis: 'DELETE No SEP'}
             ]
 			Load();
 
