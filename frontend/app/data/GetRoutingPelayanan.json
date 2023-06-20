@@ -6951,6 +6951,26 @@
     ]
   },
   {
+    "name": "LaporanTop24Diagnosis",
+    "url": "/gqpueCdCWB5Y2QYdu+LqVoFvLVJ5MISontb2NKFDOOM=",
+    "templateurl": "module/Registrasi/Laporan/LaporanTop24Diagnosis.html",
+    "controller": "LaporanTop24DiagnosisCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      }
+    ]
+  },
+  {
     "name": "LaporanKinerja",
     "url": "/TGFwb3JhbktpbmVyamE=",
     "templateurl": "module/Registrasi/Laporan/LaporanKinerja.html",

@@ -1,0 +1,325 @@
+<style type="text/css">
+    fieldset {
+        border-radius: 5px;
+        border: 1px solid #228be6;
+    }
+
+    .k-slider-horizontal {
+        display: inline-block;
+        float: left;
+        width: 450px;
+
+        height: 26px;
+
+
+    }
+
+    .k-slider {
+
+        margin-left: 3%;
+        margin-right: 3%;
+        margin-top: 1%;
+        margin-bottom: 5%;
+        display: inline-block;
+    }
+
+    .activeBtn {
+        background-color: #10c4b2;
+        color: #ffffff;
+    }
+    table,
+    th,
+    td {
+        border: 1px solid #929191;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+    td {
+        padding: 5px;
+        text-align: left;
+    }
+    th {
+        padding: 5px;
+        text-align: center;
+    }
+    .clicks{
+        cursor: pointer;
+    }
+</style>
+
+ <!-- ng-class="{'my-disable':true}" -->
+<!-- <div class="grid_12"  disable-contents="allDisabled" id="form"> -->
+<div class="grid_12">
+    <div class="grid_12">
+        <div class="panel panel-default container_12">
+            <div class="panel-heading" c-translate>Skrining Gizi Pada Pasien Dewasa/Lansia</div>
+        </div>
+
+        <div class="grid_12" style="margin-top: 10px;">
+            <fieldset style="margin-top: 10px;">
+                <div class="grid_12">
+                    <div class="grid_6" style="margin-top: 10px;">
+                        <div class="grid_12">
+                            <div class="grid_12">
+                                <label c-label item="item">Alamat</label>
+                            </div>
+                            <div class="grid_12">
+                                <input type="text" class="k-textbox" ng-model="item.obj[32116116]">
+                            </div>
+                        </div>                      
+                    </div>
+                    <div class="grid_6" style="margin-top: 10px;">
+                        <div class="grid_12">
+                            <div class="grid_12">
+                                <label c-label item="item">Tanggal MRS</label>
+                            </div>
+                            <div class="grid_12">
+                                <input style="width: 90%" k-ng-model="item.obj[32116117]" kendo-datetimepicker placeholer="YYYY:MM:DD"
+                                    k-format="'yyyy-MM-dd'" />
+                            </div>
+                        </div>                      
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_6" style="margin-top: 10px;">
+                        <div class="grid_12">
+                            <div class="grid_12">
+                                <label c-label item="item">Pekerjaan</label>
+                            </div>
+                            <div class="grid_12">
+                                <input type="text" class="k-textbox" ng-model="item.obj[32116118]">
+                            </div>
+                        </div>                      
+                    </div>
+                    <div class="grid_6" style="margin-top: 10px;">
+                        <div class="grid_12">
+                            <div class="grid_12">
+                                <label c-label item="item">Diagnosis DPJP</label>
+                            </div>
+                            <div class="grid_12">
+                                <input style="width: 90%;" kendo-combo-box k-ng-model="item.obj[32116119]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listDiagnosa" />
+                            </div>
+                        </div>                      
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        
+        <div class="grid_12" style="margin-top: 10px;">
+            <!-- Start Tanda Vital -->
+            <fieldset style="margin-top: 10px; ">
+                <div class="grid_12" style="margin-top: 20px">
+                    <table>
+                        <tr>
+                            <th colspan="4">1.	GANGGUAN STATUS GIZI</th>
+                            <th colspan="4">2.	KONDISI/KEGAWATAN PENYAKIT</th>
+                        </tr>
+                        <tr>
+                            <th colspan="2" rowspan="2">JAWABAN</th>
+                            <th colspan="2">SKOR</th>
+                            <th colspan="2" rowspan="2">JAWABAN</th>
+                            <th colspan="2">SKOR</th>
+                        </tr>
+                        <tr>
+                            <th>I</th>
+                            <th>II</th>
+                            <th>I</th>
+                            <th>II</th>
+                        </tr>
+
+                        <tr>
+                            <td>A</td>
+                            <td>Status gizi normal</td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{32116120}}" ng-model="item.obj[32116120]"
+                                    ng-click="getSkorParameter(0, 32116120)">
+                                <label class="k-checkbox-label" for="item.obj{{32116120}}">&nbsp;0
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{32116121}}" ng-model="item.obj[32116121]"
+                                    ng-click="getSkorParameter2(0, 32116121)">
+                                <label class="k-checkbox-label" for="item.obj{{32116121}}">&nbsp;0
+                                </label>
+                            </td>
+                            <td>A</td>
+                            <td>Kebutuhan gizi normal</td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{32116122}}" ng-model="item.obj[32116122]"
+                                    ng-click="getSkorParameter3(0, 32116122)">
+                                <label class="k-checkbox-label" for="item.obj{{32116122}}">&nbsp;0
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{32116123}}" ng-model="item.obj[32116123]"
+                                    ng-click="getSkorParameter4(0, 32116123)">
+                                <label class="k-checkbox-label" for="item.obj{{32116123}}">&nbsp;0
+                                </label>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>B</td>
+                            <td>BB turun >5% dalam 3 bulan atau asupan makan 50 - < 75% dari kebutuhan normal sejak 1pekan terakhir</td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{32116124}}" ng-model="item.obj[32116124]"
+                                    ng-click="getSkorParameter(1, 32116124)">
+                                <label class="k-checkbox-label" for="item.obj{{32116124}}">&nbsp;1
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{32116125}}" ng-model="item.obj[32116125]"
+                                    ng-click="getSkorParameter2(1, 32116125)">
+                                <label class="k-checkbox-label" for="item.obj{{32116125}}">&nbsp;1
+                                </label>
+                            </td>
+                            <td>B</td>
+                            <td>Fraktur pinggang*, sirosis*, COPD*, PGK/HD kronik*, DM*, Kandungan/Kehamilan</td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{32116126}}" ng-model="item.obj[32116126]"
+                                    ng-click="getSkorParameter3(1, 32116126)">
+                                <label class="k-checkbox-label" for="item.obj{{32116126}}">&nbsp;1
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{32116127}}" ng-model="item.obj[32116127]"
+                                    ng-click="getSkorParameter4(1, 32116127)">
+                                <label class="k-checkbox-label" for="item.obj{{32116127}}">&nbsp;1
+                                </label>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>C</td>
+                            <td>IMT 18,5 - < 20,5 atau BB turun >5% dalam 2 bulan + gangguan kondisi umum atau asupan makan 25 - < 50% dari kebutuhan normal sejak 1 pekan terakhir</td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{32116128}}" ng-model="item.obj[32116128]"
+                                    ng-click="getSkorParameter(2, 32116128)">
+                                <label class="k-checkbox-label" for="item.obj{{32116128}}">&nbsp;2
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{32116129}}" ng-model="item.obj[32116129]"
+                                    ng-click="getSkorParameter2(2, 32116129)">
+                                <label class="k-checkbox-label" for="item.obj{{32116129}}">&nbsp;2
+                                </label>
+                            </td>
+                            <td>C</td>
+                            <td>Bedah mayor abdomen*, <i>Severe pneumonia</i>, Stroke*, Keganasan</td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{32116130}}" ng-model="item.obj[32116130]"
+                                    ng-click="getSkorParameter3(2, 32116130)">
+                                <label class="k-checkbox-label" for="item.obj{{32116130}}">&nbsp;2
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{32116131}}" ng-model="item.obj[32116131]"
+                                    ng-click="getSkorParameter4(2, 32116131)">
+                                <label class="k-checkbox-label" for="item.obj{{32116131}}">&nbsp;2
+                                </label>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>D</td>
+                            <td>IMT < 18,5 atau BB turun >5% dalam 1 bulan (15% dalam 3 bulan) dan asupan makan 0 - < 25% dari kebutuhan normal sejak 1 pekan terakhir</td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{32116132}}" ng-model="item.obj[32116132]"
+                                    ng-click="getSkorParameter(3, 32116132)">
+                                <label class="k-checkbox-label" for="item.obj{{32116132}}">&nbsp;3
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{32116133}}" ng-model="item.obj[32116133]"
+                                    ng-click="getSkorParameter2(3, 32116133)">
+                                <label class="k-checkbox-label" for="item.obj{{32116133}}">&nbsp;3
+                                </label>
+                            </td>
+                            <td>D</td>
+                            <td>Trauma kapitis*, Transplantasi sum-sum tulang*, <i>intensive patient care (APACHE>10)</i></td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{32116134}}" ng-model="item.obj[32116134]"
+                                    ng-click="getSkorParameter3(3, 32116134)">
+                                <label class="k-checkbox-label" for="item.obj{{32116134}}">&nbsp;3
+                                </label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{32116135}}" ng-model="item.obj[32116135]"
+                                    ng-click="getSkorParameter4(3, 32116135)">
+                                <label class="k-checkbox-label" for="item.obj{{32116135}}">&nbsp;3
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">3. USIA  ≥70 TAHUN</td>
+                            <td style="text-align: center;" colspan="2">
+                                <input type="checkbox" class="k-checkbox" id="item.obj{{32116136}}" ng-model="item.obj[32116136]"
+                                    ng-click="getSkorParameter5(1, 32116136)">
+                                <label class="k-checkbox-label" for="item.obj{{32116136}}">&nbsp;1
+                                </label>
+                            </td>
+                            <td colspan="4"><input type="text" class="k-textbox" ng-model="item.obj[32116137]"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="8">
+                                <div class="grid_12" style="margin-top: 10px;">
+                                    <div class="grid_6">
+                                        <label c-label item="item">TOTAL SKOR (1+2+3) =</label>
+                                    </div>    
+                                    <div class="grid_6">
+                                        <input type="text" class="k-textbox" ng-model="item.obj[32116138]" readonly>
+                                    </div>                      
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="8">
+                                <label c-label item="item">
+                                    Skor  ≥3  = Pasien berisiko nutrisi dan membutuhkan terapi nutrisi oleh Tim Terapi Gizi (TTG). <br>
+                                    Skor < 3    = Skrining ulang 1 pekan yang akan datang <br><br>
+                                    *Diberikan dukungan nutrisi langsung dengan diagnosis tersebut <br>
+                                    Jika Skor  ≥3  dilaporkan ke DPJP Utama dan Tim Terapi Gizi Rumah Sakit. 
+                                </label>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <hr>
+                <div class="grid_12">
+                    <label c-label item="item">Jika Skor  ≥3  dilaporkan ke DPJP Utama dan Tim Terapi Gizi Rumah Sakit. </label>
+                </div>
+                <div class="grid_6" style="margin-top: 10px;">
+                    <div class="grid_12">
+                        <label c-label item="item">DPJP Utama/drSpGK**</label>
+                    </div>
+                    <div class="grid_12">
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[32116139]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listDokter" />
+                    </div>
+                </div>
+                <div class="grid_6" style="margin-top: 10px;">
+                    <div class="grid_12">
+                        <label c-label item="item">Dietisien Ruangan</label>
+                    </div>
+                    <div class="grid_12">
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[32116140]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                    </div>
+                </div>
+                <hr>
+                <div class="grid_12">
+                    <label c-label item="item">** Form skrining gizi ditandatangani oleh dr. SpGK jika hasil skrining ≥3 dan pasien dirujuk/konsul ke TTG rumah sakit</label>
+                </div>
+            </fieldset>
+        </div>
+
+    </div>
+</div>
+
+<br />
+<br />
+<div class="grid_12">
+    <div ng-include='"../app/module/EMR/TemplateButtonDinamis" '></div>
+
+</div>
