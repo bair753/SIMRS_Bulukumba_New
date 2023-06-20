@@ -3302,6 +3302,7 @@ class TagihanController  extends ApiController
     }
     public function saveAkomodasiOtomatis(Request $request) {
 //        ini_set('max_execution_time', 3000); //6 minutes
+        $kdProfile = (int) $this->getDataKdProfile($request);
         DB::beginTransaction();
         try {
             $data2 = DB::select(DB::raw("select apd.tglmasuk,apd.tglkeluar,apd.norec as norec_apd,pd.tglregistrasi
@@ -3395,7 +3396,7 @@ class TagihanController  extends ApiController
 
                         $PelPasien = new PelayananPasien();
                         $PelPasien->norec = $PelPasien->generateNewId();
-                        $PelPasien->kdprofile = 0;
+                        $PelPasien->kdprofile = $kdProfile;
                         $PelPasien->statusenabled = true;
                         $PelPasien->noregistrasifk =  $dateAPD->norec_apd;//$dataDong[0]->norec_apd;
                         $PelPasien->tglregistrasi = $dataDong[0]->tglregistrasi;
@@ -3438,7 +3439,7 @@ class TagihanController  extends ApiController
                         foreach ($buntutMacan as $itemKomponen) {
                             $PelPasienDetail = new PelayananPasienDetail();
                             $PelPasienDetail->norec = $PelPasienDetail->generateNewId();
-                            $PelPasienDetail->kdprofile = 0;
+                            $PelPasienDetail->kdprofile = $kdProfile;
                             $PelPasienDetail->statusenabled = true;
                             $PelPasienDetail->noregistrasifk = $dateAPD->norec_apd;//$dataDong[0]->norec_apd;
                             $PelPasienDetail->aturanpakai = '-';
