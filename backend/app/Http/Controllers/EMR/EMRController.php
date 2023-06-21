@@ -9092,8 +9092,8 @@ class EMRController  extends ApiController
                 $EMRPASIENDETAILIMG = [];
             } else {
                 $EMR = EMRPasien::where('noemr', $head['norec_emr'])
-                ->where('noregistrasifk', $head['noregistrasi'])
-                // ->where('nocm', $head['nocm'])
+                // ->where('noregistrasifk', $head['noregistrasi'])
+                ->where('nocm', $head['nocm'])
                 ->where('kdprofile', $kdProfile)
                     ->first();
                 $noemr = $EMR->noemr;
@@ -9117,7 +9117,7 @@ class EMRController  extends ApiController
                         ->orderBy('emrdfk')
                         ->get();
                 }
-                if ((!empty($EMR) && isset($head['noregistrasifk'])) && trim($EMR->noregistrasifk) != $head['noregistrasifk']) {
+                if ((!empty($EMR) && isset($head['nocm'])) && trim($EMR->nocm) != $head['nocm']) {
                     $transMessage = "Kesalahan loading data..!";
                     DB::rollBack();
                     $result = array(
