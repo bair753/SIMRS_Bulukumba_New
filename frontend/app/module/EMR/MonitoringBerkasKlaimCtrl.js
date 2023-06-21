@@ -52,10 +52,10 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 
                 var departId = ""
                 if($scope.item.instalasi) { departId = "&departId=" + $scope.item.instalasi.id }
-                // if(!$scope.item.instalasi) {
-                //     toastr.error("Harap pilih instalasi terlebih dahulu !")
-                //     return
-                // } else { departId = $scope.item.instalasi.id }
+                if(!$scope.item.instalasi) {
+                    toastr.error("Harap pilih instalasi terlebih dahulu !")
+                    return
+                } else { departId = $scope.item.instalasi.id }
 
                 var ruanganId = ""
                 if($scope.item.ruangan) { ruanganId = "&ruanganId=" + $scope.item.ruangan.id }
