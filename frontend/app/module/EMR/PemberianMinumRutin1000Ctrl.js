@@ -70,14 +70,39 @@ define(['initialize'], function (initialize) {
                 $scope.listDiagnosaSecondary = data;
             });
 
+            var seriesMinum1000 = [];
+            loadChart();
+            function loadChart() {
+                $("#chartMinum1000").kendoChart({
+                    title: {
+                        text: "Grafik Jadwal Pemberian Minum Rutin 1 0 0 0 - 1 5 0 0 gram"
+                    },
+                    legend: {
+                        position: "top"
+                    },
+                    series: [
+                        {
+                            type: "line",
+                            data: seriesMinum1000,
+                            name: "Grafik",
+                            color: "#fc0303",
 
-            // $scope.cetakPdf = function () {
-            //     if (norecEMR == '') return
-            //     var client = new HttpClient();
-            //     client.get('http://127.0.0.1:1237/printvb/e-rekammedis?cetak-emr-asesmen-awal-medis-igd&id=' + $scope.cc.nocm + '&emr=' + norecEMR + '&view=true', function (response) {
-            //         // do something with response
-            //     });
-            // }
+                        }],
+                    valueAxes: [{
+                        title: { text: "Pemberian Minum" },
+                        min: 1000,
+                        max: 1500,
+                        majorUnit: 25
+                    },
+                    ],
+                    categoryAxis: {
+                        categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18'],
+                        // categories: ["Mon", "Tue", "Wed", "Thu", "Fri"],
+
+                        axisCrossingValues: [0, 18]
+                    }
+                });
+            }
 
           
 
@@ -371,8 +396,36 @@ define(['initialize'], function (initialize) {
                                 }
                                 pegawaiInputDetail = dataLoad[i].pegawaifk
                             }
+                            
 
                         }
+
+                        var b = 31104038;
+                        for(var a = 0; a<=17; a++){
+                            seriesMinum1000[a] = Number($scope.item.obj[b]);
+                            b++;
+                        }
+                        
+                        // seriesMinum1000[0] = $scope.item.obj[parseInt(31104038)];
+                        // seriesMinum1000[1] = $scope.item.obj[parseInt(31104039)];
+                        // seriesMinum1000[2] = $scope.item.obj[parseInt(31104040)];
+                        // seriesMinum1000[3] = $scope.item.obj[parseInt(31104041)];
+                        // seriesMinum1000[4] = $scope.item.obj[parseInt(31104042)];
+                        // seriesMinum1000[5] = $scope.item.obj[parseInt(31104043)];
+                        // seriesMinum1000[6] = $scope.item.obj[parseInt(31104044)];
+                        // seriesMinum1000[7] = $scope.item.obj[parseInt(31104045)];
+                        // seriesMinum1000[8] = $scope.item.obj[parseInt(31104046)];
+                        // seriesMinum1000[9] = $scope.item.obj[parseInt(31104047)];
+                        // seriesMinum1000[10] = $scope.item.obj[parseInt(31104048)];
+                        // seriesMinum1000[11] = $scope.item.obj[parseInt(31104049)];
+                        // seriesMinum1000[12] = $scope.item.obj[parseInt(31104050)];
+                        // seriesMinum1000[13] = $scope.item.obj[parseInt(31104051)];
+                        // seriesMinum1000[14] = $scope.item.obj[parseInt(31104052)];
+                        // seriesMinum1000[15] = $scope.item.obj[parseInt(31104053)];
+                        // seriesMinum1000[16] = $scope.item.obj[parseInt(31104054)];
+                        // seriesMinum1000[17] = $scope.item.obj[parseInt(31104055)];
+
+                        console.log(seriesMinum1000);
                     })
                 })
             }

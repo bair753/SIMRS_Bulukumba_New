@@ -9000,6 +9000,114 @@ class RegistrasiController extends ApiController
         return $this->respond($result);
     }
 
+    public function getTopTwentyFourDiagnosa(Request $request){
+        $kdProfile = $this->getDataKdProfile($request);
+        $idProfile = (int) $kdProfile;
+        $emrfk = 290004;
+        $emrdfk = 420354;
+        // $dataLogin = $request->all();
+        $tglAwal = $request['tglAwal'];
+        $tglAkhir = $request['tglAkhir'];
+        $deptId = '';
+        $ruanganId = '';
+        if (isset($request['idDept']) && $request['idDept'] != "" && $request['idDept'] != "undefined") {
+            $deptId = ' and rg.objectdepartemenfk = ' . $request['idDept'];
+        }
+        if (isset($request['idRuangan']) && $request['idRuangan'] != "" && $request['idRuangan'] != "undefined") {
+            $ruanganId = ' and rg.id = ' . $request['idRuangan'];
+        }
+
+        $data = DB::select(DB::raw("SELECT 
+                pd.norec,
+                pd.statusenabled,
+                ps.namapasien,
+                jks.jeniskelamin,
+                ps.tgllahir,
+                ps.noidentitas,
+                ps.namaayah,
+                ps.namaibu,
+                alm.alamatlengkap,
+                pd.tglregistrasi,
+                pd.tglpulang,
+                ps.nocm,
+                emrpd.value as diagnosis,
+                rg.namaruangan,
+                ps.notelepon,
+                CASE WHEN pd.tglmeninggal is null THEN 'Hidup' ELSE'Meninggal' END as kondisi
+            FROM
+                pasiendaftar_t AS pd
+                INNER JOIN pasien_m AS ps ON ps.id = pd.nocmfk
+                INNER JOIN ruangan_m AS rg ON rg.id = pd.objectruanganlastfk
+                LEFT JOIN departemen_m AS dp ON dp.id = rg.objectdepartemenfk
+                LEFT JOIN alamat_m AS alm ON alm.nocmfk = ps.id
+                LEFT JOIN jeniskelamin_m AS jks ON jks.id = ps.objectjeniskelaminfk
+                LEFT JOIN emrpasien_t AS emrp ON emrp.noregistrasifk = pd.noregistrasi
+                LEFT JOIN emrpasiend_t AS emrpd ON emrpd.emrpasienfk = emrp.noemr 
+            WHERE
+                pd.statusenabled = true 
+                AND pd.kdprofile = $idProfile $deptId $ruanganId
+                AND pd.tglregistrasi BETWEEN '$tglAwal' AND '$tglAkhir'
+                AND emrp.jenisemr ILIKE '%asesmen%'
+                AND emrpd.emrfk = $emrfk
+                AND emrpd.emrdfk = $emrdfk
+                AND emrpd.value is not null"
+            ));
+        if (count($data)>0){
+            foreach ($data as $item){
+                $result[] = array(
+                    'namapasien' =>$item->namapasien,
+                    'jeniskelamin' => $item->jeniskelamin  ,
+                    'tgllahir' => $item->tgllahir,
+                    'noidentitas' => $item->noidentitas,
+                    'namaayah' => $item->namaayah,
+                    'namaibu' => $item->namaibu,
+                    'alamatlengkap' => $item->alamatlengkap,
+                    'tglregistrasi' => $item->tglregistrasi,
+                    'tglpulang' => $item->tglpulang,
+                    'nocm' => $item->nocm,
+                    'diagnosis' => $item->diagnosis,
+                    'hasillab' => null,
+                    'gejala' => null,
+                    'suhu' => null,
+                    'tekanandarah' => null,
+                    'beratbadan' => null,
+                    'namaruangan' => $item->namaruangan,
+                    'notelepon' => $item->notelepon,
+                    'kondisi' => $item->kondisi,
+                );
+            }
+
+        }else{
+            $result[] = array(
+                    'namapasien' => null,
+                    'jeniskelamin' => null,
+                    'tgllahir' => null,
+                    'noidentitas' => null,
+                    'namaayah' => null,
+                    'namaibu' => null,
+                    'alamatlengkap' => null,
+                    'tglregistrasi' => null,
+                    'tglpulang' => null,
+                    'nocm' => null,
+                    'diagnosis' => null,
+                    'hasillab' => null,
+                    'gejala' => null,
+                    'suhu' => null,
+                    'tekanandarah' => null,
+                    'beratbadan' => null,
+                    'namaruangan' => null,
+                    'notelepon' => null,
+                    'kondisi' => null,
+            );
+        }
+
+        $results = array(
+            'result' => $result,
+            'message' => 'mr_adhyy',
+        );
+        return $this->respond($result);
+    }
+
     public function getLaporanDemoRIKelompok(Request $request){
         $kdProfile = $this->getDataKdProfile($request);
         $idProfile = (int) $kdProfile;
