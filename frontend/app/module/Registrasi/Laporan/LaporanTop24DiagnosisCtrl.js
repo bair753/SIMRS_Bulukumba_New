@@ -1,6 +1,6 @@
 define(['initialize'], function (initialize) {
 'use strict';
-    initialize.controller('LaporanTop10DiagnosisCtrl', ['CacheHelper', '$scope', 'DateHelper', 'MedifirstService', 
+    initialize.controller('LaporanTop24DiagnosisCtrl', ['CacheHelper', '$scope', 'DateHelper', 'MedifirstService', 
         function (cacheHelper, $scope, dateHelper, medifirstService) {
             FormLoad();   
             function FormLoad(){
@@ -76,10 +76,10 @@ define(['initialize'], function (initialize) {
                     5: '',                        
                 }
                 cacheHelper.set('LaporanDiagnosaPasienCtrl', chacePeriode);
-                medifirstService.get("registrasi/laporan/get-laporan-topten-diagnosa?"
+                medifirstService.get("registrasi/laporan/get-laporan-twentyfour-diagnosa?"
                     + "tglAwal=" + tglAwal
                     + "&tglAkhir=" + tglAkhir
-                    + tempDepartemenId).then(function (data) {
+                    + tempDepartemenId + tempRuanganId).then(function (data) {
                     $scope.isRouteLoading = false;                                    
                     var datas = data.data;
                     for (var i = 0; i < datas.length; i++) {
@@ -88,7 +88,7 @@ define(['initialize'], function (initialize) {
                     $scope.sourceLaporan = new kendo.data.DataSource({                            
                         data: datas,
                         group: $scope.group,
-                        pageSize: 100,                       
+                        pageSize: 10,                       
                         total: datas.length,
                         serverPaging: false,
                         schema: {
@@ -146,42 +146,109 @@ define(['initialize'], function (initialize) {
 
                     { field: "no", title: "No", width: "25px" },
                     {
-                        field: "kddiagnosa",
-                        title: "KODE ICD",
-                        width: "60px",
-                        textAlign: "center",
+                        field: "namapasien",
+                        title: "NAMA",
+                        width: "100px",
+                        textAlign: "left",
                     },
                     {
-                        field: "namadiagnosa",
-                        title: "DIAGNOSA",
-                        width: "350px",
-                        textAlign: "center",
+                        field: "jeniskelamin",
+                        title: "JENIS KELAMIN",
+                        width: "100px",
+                        textAlign: "left",
                     },
                     
                     {
-                        field: "kasusbarulk",
-                        title: "LK",
-                        width: "50px",
-                        textAlign: "center",
+                        field: "tgllahir",
+                        title: "TANGGAL LAHIR",
+                        width: "100px",
+                        textAlign: "left",
                     },
                     {
-                        field: "kasusbarup",
-                        title: "PR",
-                        width: "50px",
-                        textAlign: "center",
+                        field: "noidentitas",
+                        title: "NIK",
+                        width: "100px",
+                        textAlign: "left",
                     },
                     {
-                        field: "kasus45",
-                        title: "JUMLAH",
-                        width: "50px",
-                        textAlign: "center",
+                        field: "namaayah",
+                        title: "NAMA AYAH",
+                        width: "100px",
+                        textAlign: "left",
                     },                   
                     {
-                        field: "jumlah",
-                        title: "KUNJUNGAN",
-                        width: "80px",
-                        textAlign: "center",
-                    }              
+                        field: "namaibu",
+                        title: "NAMA IBU",
+                        width: "100px",
+                        textAlign: "left",
+                    },
+                    {
+                        field: "alamatlengkap",
+                        title: "ALAMAT",
+                        width: "100px",
+                        textAlign: "left",
+                    },
+                    {
+                        field: "diagnosis",
+                        title: "DIAGNOSIS",
+                        width: "100px",
+                        textAlign: "left",
+                    },
+                    {
+                        field: "hasillab",
+                        title: "HASIL LAB",
+                        width: "100px",
+                        textAlign: "left",
+                    },
+                    {
+                        field: "gejala",
+                        title: "GEJALA",
+                        width: "100px",
+                        textAlign: "left",
+                    },
+                    {
+                        field: "suhu",
+                        title: "SUHU",
+                        width: "100px",
+                        textAlign: "left",
+                    },
+                    {
+                        field: "tekanandarah",
+                        title: "TEKANAN DARAH",
+                        width: "100px",
+                        textAlign: "left",
+                    },
+                    {
+                        field: "beratbadan",
+                        title: "BERAT BADAN",
+                        width: "100px",
+                        textAlign: "left",
+                    },
+                    {
+                        field: "notelepon",
+                        title: "NO.HANDPHONE",
+                        width: "100px",
+                        textAlign: "left",
+                    },
+                    {
+                        field: "tglregistrasi",
+                        title: "TANGGAL MASUK",
+                        width: "100px",
+                        textAlign: "left",
+                    },
+                    {
+                        field: "tglpulang",
+                        title: "TANGGAL KELUAR",
+                        width: "100px",
+                        textAlign: "left",
+                    },
+                    {
+                        field: "kondisi",
+                        title: "KONDISI",
+                        width: "60px",
+                        textAlign: "left",
+                    },
+                    
                 ] 
             }
 ////////////////////////////////////////////////////////    END     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

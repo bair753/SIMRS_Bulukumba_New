@@ -1181,6 +1181,10 @@
             "urlDep": "module/Registrasi/Laporan/LaporanTop10DiagnosisCtrl"
         },
         {
+            "nameDep": "LaporanTop24DiagnosisCtrl",
+            "urlDep": "module/Registrasi/Laporan/LaporanTop24DiagnosisCtrl"
+        },
+        {
             "nameDep": "MenuKekerasanCtrl",
             "urlDep": "module/EMR/MenuKekerasanCtrl"
         },
