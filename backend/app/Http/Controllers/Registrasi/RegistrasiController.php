@@ -7466,10 +7466,11 @@ class RegistrasiController extends ApiController
     public function getIcd9(Request $request)
     {
         $req = $request->all();
+        $kdProfile = $this->getDataKdProfile($request);
         $icdIX = \DB::table('diagnosatindakan_m as dg')
             ->select('dg.id','dg.kddiagnosatindakan as kdDiagnosaTindakan','dg.namadiagnosatindakan as namaDiagnosaTindakan')
             ->where('dg.statusenabled', true)
-            ->where('dg.kdprofile', 39)
+            ->where('dg.kdprofile', $kdProfile)
             ->orderBy('dg.kddiagnosatindakan');
 
         if(isset($req['filter']['filters'][0]['value']) &&
@@ -7479,7 +7480,7 @@ class RegistrasiController extends ApiController
                 ->where('dg.namadiagnosatindakan','ilike','%'.$req['filter']['filters'][0]['value'].'%' )
                 ->orWhere('dg.kddiagnosatindakan','ilike','%'.$req['filter']['filters'][0]['value'].'%' ) 
                 ->where('dg.statusenabled', true )
-                ->where('dg.kdprofile', 39 );
+                ->where('dg.kdprofile', $kdProfile );
         }
 
 

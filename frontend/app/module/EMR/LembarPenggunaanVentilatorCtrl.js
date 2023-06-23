@@ -16,7 +16,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
             $scope.cc.emrfk = 290158;
             var dataLoad = []
             var pegawaiInputDetail= ''
-            $scope.isCetak = false
+            $scope.isCetak = true
             var norecEMR = ''
             var cacheNomorEMR = cacheHelper.get('cacheNomorEMR');
             var cacheNoREC = cacheHelper.get('cacheNOREC_EMR');
@@ -48,14 +48,14 @@ define(['initialize', 'Configuration'], function (initialize, config) {
             //     });
             // }
 
-            $scope.cetakBlade = function () {
+            $scope.cetakPdf = function () {
 
                 if (norecEMR == '') return
 
                 var local = JSON.parse(localStorage.getItem('profile'));
                 var nama = medifirstService.getPegawaiLogin().namalengkap;
                 console.log(config.baseApiBackend);
-                window.open(config.baseApiBackend + 'report/cetak-alat-monitoring-cpap?nocm='
+                window.open(config.baseApiBackend + 'report/cetak-lembar-penggunaan-ventilator?nocm='
                     + $scope.cc.nocm + '&norec_apd=' + $scope.cc.norec + '&emr=' + norecEMR
                     + '&emrfk=' + $scope.cc.emrfk
                     + '&kdprofile=' + local.id

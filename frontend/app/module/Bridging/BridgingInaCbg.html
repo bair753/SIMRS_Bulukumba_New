@@ -584,6 +584,9 @@
 				<button class="btnTemplate1 buttonKuning" ng-click="formulirPermintaanDarah()">Cetak Formulir Permintaan Darah</button>
 			</div>
 			<div class="grid_2">
+				<button class="btnTemplate1 buttonKuning" ng-click="lembarPenggunaanVentilator()">Lembar Penggunaan Ventilator</button>
+			</div>
+			<div class="grid_2">
 				<button class="btnTemplate1 buttonKuning" ng-click="buktiPelayananFisioterapi()">Cetak Bukti Pelayanan (Fisioterapi)</button>
 			</div>
 
@@ -1774,6 +1777,20 @@
 					<div class="grid_12">
 							<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
 									<button class="k-button  k-button-icontext" ng-click="cetakAsesmenAwalMedisGawatDarurat()">Cetak</button>
+							</div>
+					</div>
+			</div>
+		</div>
+
+		<div kendo-window="popUpDaftarPenggunaanVentilator" k-title="'Cetak Lembar Penggunaan Ventilator'" k-visible="false" k-width="1000" k-height="400">
+			<div class="panel panel-default container_12">
+				<div class="grid_12 headerBox">
+					<kendo-grid id="kGrids" data-source="dataDaftarPenggunaanVentilator" options="columnDaftarPenggunaanVentilator" k-selectable="'row'" k-sortable="'true'"
+							k-resizable="'true'" k-ng-model="dataSelectedPenggunaanVentilator" ng-click="klikGridPenggunaanVentilator(dataSelectedPenggunaanVentilator)"></kendo-grid>
+				</div>
+					<div class="grid_12">
+							<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
+									<button class="k-button  k-button-icontext" ng-click="cetakPenggunaanVentilator()">Cetak</button>
 							</div>
 					</div>
 			</div>

@@ -116,7 +116,7 @@ define(['initialize'], function (initialize) {
                 excelExport: function (e) {
                     var sheet = e.workbook.sheets[0];
                     sheet.frozenRows = 3;
-                    sheet.mergedCells = ["A1:G1"];
+                    sheet.mergedCells = ["A1:R1"];
                     sheet.name = "Orders";
                     
                     if($scope.item.departement == undefined){
@@ -130,7 +130,7 @@ define(['initialize'], function (initialize) {
                     }
 
                     var myHeaders = [{
-                        value: "10 BESAR KEADAAN MORBIDITAS PASIEN " + de + " RUMAH SAKIT",
+                        value: "LAPORAN 24 PENYAKIT",
                         fontSize: 14,
                         textAlign: "center",
                         background: "#ffffff",
