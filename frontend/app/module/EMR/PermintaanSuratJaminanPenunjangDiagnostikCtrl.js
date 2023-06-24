@@ -1,6 +1,6 @@
 define(['initialize', 'Configuration'], function (initialize, config) {
     'use strict';
-    initialize.controller('RingkasanPulangCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
+    initialize.controller('PermintaanSuratJaminanPenunjangDiagnostikCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
         function ($q, $rootScope, $scope, ModelItem, $state, cacheHelper, dateHelper, medifirstService) {
 
 
@@ -14,10 +14,9 @@ define(['initialize', 'Configuration'], function (initialize, config) {
             $scope.cc = {};
             var nomorEMR = '-';
             var norecEMR = '';
-            $scope.cc.emrfk = 290030;
+            $scope.cc.emrfk = 290173;
             var dataLoad = [];
             $scope.isCetak = false;
-            $scope.isCetakV = true;
             $scope.allDisabled = false;
             var pegawaiInputDetail  = '';
             var cacheNomorEMR = cacheHelper.get('cacheNomorEMR');
@@ -59,54 +58,43 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 $scope.listKelas = data
             })
 
-            medifirstService.getPart("emr/get-datacombo-part-diagnosa", true, true, 10).then(function (data) {
-                $scope.listDiagnosa = data;
-            });
-
-            medifirstService.getPart("emr/get-datacombo-icd10-secondary", true, true, 10).then(function (data) {
-                $scope.listDiagnosaSecondary = data;
-            });
+            medifirstService.getPart('emr/get-datacombo-part-kamar', true, true, 20).then(function(data) {
+                $scope.listKamar = data
+            })
 
             medifirstService.getPart("emr/get-datacombo-icd10-secondary", true, true, 10).then(function(data) {
                 $scope.listICD10 = data
             });
 
-            medifirstService.getPart("emr/get-datacombo-part-diagnosa-tindakan", true, true, 10).then(function(data) {
-                $scope.listICD9 = data;
-            });
-
-            $scope.listPulang = [
-                {
-                    "id": 1,
-                    "detail": [
-                        { "id": 423803, "caption": "Riwayat Kesehatan", "type": "textarea", "dataList": "" },
-                        { "id": 423804, "caption": "Indikasi di Rawat", "type": "textarea", "dataList": "" },
-                        { "id": 423805, "caption": "Diagnosis", "type": "textarea", "dataList": "" },
-                        { "id": 423806, "caption": "ICD 10 Diagnosis", "type": "combobox", "dataList": "listICD10" },
-                        { "id": 423807, "caption": "Komorbiditas Lain", "type": "textarea", "dataList": "" },
-                        { "id": 31101417, "caption": "ICD 10 Komorbiditas Lain", "type": "combobox", "dataList": "listICD10" },
-                        { "id": 31101418, "caption": "ICD 10 Komorbiditas Lain (Bila Ada)", "type": "combobox", "dataList": "listICD10" },
-                        { "id": 31101419, "caption": "ICD 10 Komorbiditas Lain (Bila Ada)", "type": "combobox", "dataList": "listICD10" },
-                        { "id": 31101420, "caption": "ICD 10 Komorbiditas Lain (Bila Ada)", "type": "combobox", "dataList": "listICD10" },
-                        { "id": 31101421, "caption": "ICD 10 Komorbiditas Lain (Bila Ada)", "type": "combobox", "dataList": "listICD10" },
-                        { "id": 423809, "caption": "Pemeriksaan Fisik", "type": "textarea", "dataList": "" },
-                        { "id": 423810, "caption": "Pemeriksaan Diagnostik", "type": "textarea", "dataList": "" },
-                        { "id": 423811, "caption": "Tindakan yang Telah Dikerjakan", "type": "textarea", "dataList": "" },
-                        { "id": 423812, "caption": "ICD 9-CM", "type": "combobox", "dataList": "listICD9" },
-                        { "id": 423813, "caption": "Obat yang Diberikan", "type": "textarea", "dataList": "" },
-                        { "id": 423814, "caption": "Kondisi Pasien", "type": "textarea", "dataList": "" },
-                        { "id": 423815, "caption": "Tindak Lanjut", "type": "textarea", "dataList": "" }
-                    ]
-                },
-            ];
-
             $scope.cetakPdf = function () {
                 if (norecEMR == '') return
-                var client = new HttpClient();
-                client.get('http://127.0.0.1:1237/printvb/e-rekammedis?cetak-emr-asesmen-awal-medis-igd&id=' + $scope.cc.nocm + '&emr=' + norecEMR + '&view=true', function (response) {
-                    // do something with response
-                });
+
+                var local = JSON.parse(localStorage.getItem('profile'));
+                var nama = medifirstService.getPegawaiLogin().namalengkap;
+                console.log(config.baseApiBackend);
+                window.open(config.baseApiBackend + 'report/cetak-suket-kematian?nocm='
+                    + $scope.cc.nocm + '&norec_apd=' + $scope.cc.norec + '&emr=' + norecEMR
+                    + '&emrfk=' + $scope.cc.emrfk
+                    + '&kdprofile=' + local.id
+                    + '&nama=' + nama, '_blank');
             }
+
+            $scope.listRuanganInsentif = [
+                { "id": 1, "name": "HCU" },
+                { "id": 2, "name": "ICU" },
+                { "id": 3, "name": "CVCU" },
+                { "id": 4, "name": "NICU" },
+                { "id": 5, "name": "PICU" }
+            ]
+
+            $scope.listTerhadap = [
+                { "id": 1, "name": "Saya sendiri" },
+                { "id": 2, "name": "Suami"},
+                { "id": 3, "name": "Istri" },
+                { "id": 4, "name": "Anak" },
+                { "id": 5, "name": "Ayah" },
+                { "id": 6, "name": "Ibu" }
+            ]
 
             var cacheEMR_TRIASE_PRIMER = cacheHelper.get('cacheEMR_TRIASE_PRIMER');
             var cacheEMR_CTRS = cacheHelper.get('cacheEMR_CTRS');
@@ -138,32 +126,41 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 var nocmfk = null;
                 var noregistrasifk = $state.params.noRec;
                 var status = "t";
+                $scope.item.obj[430167] = $scope.now;
                 medifirstService.get("emr/get-antrian-pasien-norec/" + noregistrasifk).then(function (e) {
                     var antrianPasien = e.data.result;
-                    console.log(antrianPasien);
-                    $scope.item.obj[423801] = new Date(moment(antrianPasien.tglregistrasi).format('YYYY-MM-DD HH:mm'));
-                    $scope.item.obj[423817] = antrianPasien.namapasien;
-                    if (antrianPasien.iddpjp != null && antrianPasien.dokterdpjp != null) {
-                        $scope.item.obj[423819] = {
-                            value: antrianPasien.iddpjp,
-                            text: antrianPasien.dokterdpjp
-                        }
-                    }
-                    if (antrianPasien.objectruanganfk != null && antrianPasien.namaruangan != null) {
-                        $scope.item.obj[423800] = {
+                    $scope.item.obj[32116141] = $scope.cc.namapasien;
+                    $scope.item.obj[32116142] = new Date(moment(antrianPasien.tgllahir).format('YYYY-MM-DD'));
+                    $scope.item.obj[32116143] = antrianPasien.nocm;
+                    $scope.item.obj[32116144] = antrianPasien.alamatlengkap;
+                    $scope.item.obj[32116145] = antrianPasien.pekerjaan;
+                    $scope.item.obj[32116147] = antrianPasien.nobpjs;
+                    $scope.item.obj[32104097] = new Date(moment(antrianPasien.tglregistrasi).format('YYYY-MM-DD HH:mm'));
+                    result.umur = dateHelper.CountAge(new Date(antrianPasien.tgllahir), new Date(antrianPasien.tglregistrasi));
+                    var bln = antrianPasien.umur.month,
+                        thn = antrianPasien.umur.year,
+                        day = antrianPasien.umur.day
+                    usia = (antrianPasien.umur.year * 12) + antrianPasien.umur.month;
+                    $scope.item.obj[32104092] = thn + 'thn ' + bln + 'bln ' + day + 'hr '
+
+                    // $scope.item.obj[32103374] = new Date(moment(antrianPasien.tgllahir).format('YYYY-MM-DD'));
+                    // $scope.item.obj[32103375] = antrianPasien.jeniskelamin;
+                    // $scope.item.obj[32103380] = antrianPasien.nocm;
+                    if (antrianPasien.namaruangan != null && antrianPasien.objectruanganfk != null) {
+                        $scope.item.obj[32103377] = {
                             value: antrianPasien.objectruanganfk,
                             text: antrianPasien.namaruangan
                         }
                     }
-                    $scope.item.obj[423816] = $scope.now;
+                    $scope.item.obj[32116150] = $scope.now;
                 })
                 
                 // medifirstService.get("emr/get-vital-sign?noregistrasi=" + $scope.cc.noregistrasi + "&objectidawal=4241&objectidakhir=4246&idemr=147", true).then(function (datas) {
                 //     if (datas.data.data.length>0){
-                //         $scope.item.obj[4228]=datas.data.data[0].value
-                //         $scope.item.obj[4229]=datas.data.data[3].value
-                //         $scope.item.obj[4230]=datas.data.data[4].value
-                //         $scope.item.obj[4231]=datas.data.data[5].value
+                //         $scope.item.obj[421302] = datas.data.data[1].value; // Tekanan Darah
+                //         $scope.item.obj[421303] = datas.data.data[5].value; // Nadi
+                //         $scope.item.obj[421304] = datas.data.data[4].value; // Suhu
+                //         $scope.item.obj[421305] = datas.data.data[6].value; // Napas
                 //     }
                 // })
             } else {
@@ -240,35 +237,6 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                             }
                         }
                     }
-                    if (cacheEMR_TRIASE_PRIMER != undefined) {
-                        medifirstService.get("emr/get-emr-transaksi-detail?noemr=" + cacheEMR_TRIASE_PRIMER + "&emrfk=" + $scope.cc.emrfk, true).then(function (dat) {
-                            var dataNA = dat.data.data
-                            for (var i = 0; i <= dataNA.length - 1; i++) {
-                                if (dataNA[i].emrdfk == '9044') {
-                                    if (dataNA[i].value == '1') {
-                                        $scope.activeTriaseStatus = 'merah'
-                                    }
-                                }
-                                if (dataNA[i].emrdfk == '9050') {
-                                    if (dataNA[i].value == '1') {
-                                        $scope.activeTriaseStatus = 'kuning'
-                                    }
-                                }
-                                if (dataNA[i].emrdfk == '9052') {
-                                    if (dataNA[i].value == '1') {
-                                        $scope.activeTriaseStatus = 'hijau'
-                                    }
-                                }
-                                if (dataNA[i].emrdfk == '9055') {
-                                    if (dataNA[i].value == '1') {
-                                        $scope.activeTriaseStatus = 'hitam'
-                                    }
-                                }
-
-                            }
-
-                        })
-                    }
                     if(nomorEMR!='-'){
                     cacheHelper.set('cacheEMR_igd', nomorEMR)
                 }
@@ -329,7 +297,9 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                                     }
                                     $scope.item.obj[dataLoad[i].emrdfk] = chekedd
                                 }
-
+                                if (dataLoad[i].type == "radio") {
+                                    $scope.item.obj[dataLoad[i].emrdfk] = dataLoad[i].value
+                                }
                                 if (dataLoad[i].type == "datetime") {
                                     $scope.item.obj[dataLoad[i].emrdfk] = new Date(dataLoad[i].value)
                                 }
@@ -358,20 +328,18 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                             }
 
                         }
-                        // *** disable Input *//
-                        //setTimeout(function(){medifirstService.setDisableAllInputElement()  }, 2000);
-                        // *** disable Input *//
 
-                        //  if( $scope.cc.norec_emr !='-' && pegawaiInputDetail !='' && pegawaiInputDetail !=null){
-                        //     if(pegawaiInputDetail != medifirstService.getPegawaiLogin().id){
-                        //         $scope.allDisabled =true
-                        //         toastr.warning('Hanya Bisa melihat data','Peringatan')
-                        //         return
-                        //     }
-                        // }
+                        var arrobj = Object.keys($scope.item.obj)
+                        for (let l = 0; l < $scope.listItem.length; l++) {
+                            const element = $scope.listItem[l];
+                            for (let m = 0; m < arrobj.length; m++) {
+                                const element2 = arrobj[m];
+                                if (element.id == element2) {
+                                    element.inuse = true
+                                }
+                            }
 
-                    
-                   
+                        } 
                     
                     })
                 })
@@ -383,76 +351,20 @@ define(['initialize', 'Configuration'], function (initialize, config) {
               
             $scope.Save = function () {
 
-                if($scope.item.obj[423802] == undefined){
-                    toastr.warning('Tanggal Keluar tidak boleh kosong','Peringatan')
+                if($scope.item.obj[32116148] == undefined){
+                    toastr.warning('Tanggal Kunjungan tidak boleh kosong','Peringatan')
                     return
                 }
 
-                if($scope.item.obj[423803] == undefined){
-                    toastr.warning('Riwayat Kesehatan tidak boleh kosong','Peringatan')
+                if($scope.item.obj[32116149] == undefined){
+                    toastr.warning('Diagnosa Masuk tidak boleh kosong','Peringatan')
                     return
                 }
 
-                if($scope.item.obj[423804] == undefined){
-                    toastr.warning('Indikasi di Rawat tidak boleh kosong','Peringatan')
+                if($scope.item.obj[32116151] == undefined){
+                    toastr.warning('Dokter Yang Menerima tidak boleh kosong','Peringatan')
                     return
                 }
-
-                if($scope.item.obj[423805] == undefined){
-                    toastr.warning('Diagnosis tidak boleh kosong','Peringatan')
-                    return
-                }
-
-                if($scope.item.obj[423806] == undefined){
-                    toastr.warning('ICD 10 Diagnosis tidak boleh kosong','Peringatan')
-                    return
-                }
-
-                if($scope.item.obj[423807] == undefined){
-                    toastr.warning('Komorbiditas Lain tidak boleh kosong','Peringatan')
-                    return
-                }
-
-                if($scope.item.obj[31101417] == undefined){
-                    toastr.warning('ICD 10 Komorbiditas Lain tidak boleh kosong','Peringatan')
-                    return
-                }
-
-                if($scope.item.obj[423809] == undefined){
-                    toastr.warning('Pemeriksaan Fisik tidak boleh kosong','Peringatan')
-                    return
-                }
-
-                if($scope.item.obj[423810] == undefined){
-                    toastr.warning('Pemeriksaan Diagnostik tidak boleh kosong','Peringatan')
-                    return
-                }
-                
-                if($scope.item.obj[423811] == undefined){
-                    toastr.warning('Tindakan yang Telah Dikerjakan tidak boleh kosong','Peringatan')
-                    return
-                }
-
-                if($scope.item.obj[423813] == undefined){
-                    toastr.warning('Obat yang Diberikan tidak boleh kosong','Peringatan')
-                    return
-                }
-
-                if($scope.item.obj[423814] == undefined){
-                    toastr.warning('Kondisi Pasien tidak boleh kosong','Peringatan')
-                    return
-                }
-
-                if($scope.item.obj[423815] == undefined){
-                    toastr.warning('Tindak Lanjut tidak boleh kosong','Peringatan')
-                    return
-                }
-
-                if($scope.item.obj[423819] == undefined){
-                    toastr.warning('DPJP tidak boleh kosong','Peringatan')
-                    return
-                }
-
                 
                 var arrobj = Object.keys($scope.item.obj)
                 var arrSave = []
@@ -475,7 +387,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     // });
 
                     medifirstService.postLogging('EMR', 'norec emrpasien_t', e.data.data.norec,
-                        'Ringkasan Pulang ' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
+                        'Permintaan Surat Jaminan Penunjang Diagnostik' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
                         + $scope.cc.noregistrasi).then(function (res) {
                         })
 
@@ -487,17 +399,15 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 });
             }
 
-            $scope.cetakBlade = function () {
-                if (norecEMR == '') return
+            $scope.dapatkanTt = function(data) {
+                if (data === undefined) return;
+                if (data.value === undefined) return;
 
-                var local = JSON.parse(localStorage.getItem('profile'));
-                var nama = medifirstService.getPegawaiLogin().namalengkap;
-                console.log(config.baseApiBackend);
-                window.open(config.baseApiBackend + 'report/cetak-asesmen-ringkasan-pulang-ranap?nocm='
-                    + $scope.cc.nocm + '&norec_apd=' + $scope.cc.norec + '&emr=' + norecEMR
-                    + '&emrfk=' + $scope.cc.emrfk
-                    + '&kdprofile=' + local.id
-                    + '&nama=' + nama, '_blank');
+                var kamarId = data.value;
+                medifirstService.get("emr/get-nobedbykamar?idKamar=" + kamarId)
+                    .then(function (a) {
+                        $scope.listBed = a.data.bed;
+                    })
             }
 
         }
