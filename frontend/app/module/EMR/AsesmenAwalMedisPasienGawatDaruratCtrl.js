@@ -620,6 +620,217 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 //     }
                 // }
 
+                if($scope.item.obj[420934] == undefined && $scope.item.obj[420935] == undefined){
+                    toastr.warning('Cara Masuk tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[420938] == undefined && $scope.item.obj[420939] == undefined && $scope.item.obj[420940] == undefined){
+                    toastr.warning('Cara Pembayaran tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[420942] == undefined){
+                    toastr.warning('KELUHAN SAAT INI tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[420943] == undefined){
+                    toastr.warning('STATUS FISIK (TD) tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[420944] == undefined){
+                    toastr.warning('STATUS FISIK (Nadi) tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[420945] == undefined){
+                    toastr.warning('STATUS FISIK (Suhu) tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[420946] == undefined){
+                    toastr.warning('STATUS FISIK (Nafas) tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[420947] == undefined && $scope.item.obj[420948] == undefined && $scope.item.obj[420949] == undefined && $scope.item.obj[420950] == undefined){
+                    toastr.warning('Keadaan Umum tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[420951] == undefined && $scope.item.obj[420952] == undefined && $scope.item.obj[420953] == undefined && $scope.item.obj[420954] == undefined && $scope.item.obj[420955] == undefined){
+                    toastr.warning('Kesadaran tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[420956] == undefined){
+                    toastr.warning('General tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[420957] == undefined){
+                    toastr.warning('Lokalis tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[420960] == undefined && $scope.item.obj[420961] == undefined){
+                    toastr.warning('Masalah psikologi tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[420964] == undefined && $scope.item.obj[420965] == undefined){
+                    toastr.warning('Masalah sosial tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[420968] == undefined && $scope.item.obj[420969] == undefined){
+                    toastr.warning('Masalah cultura/bahasa tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[420972] == undefined && $scope.item.obj[420973] == undefined){
+                    toastr.warning('Masalah spiritual tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[420975] == undefined && $scope.item.obj[420976] == undefined && $scope.item.obj[420977] == undefined && $scope.item.obj[420978] == undefined && $scope.item.obj[420979] == undefined && $scope.item.obj[420980] == undefined){
+                    toastr.warning('Ekonomi tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[420982] == undefined){
+                    toastr.warning('Riwayat Penyakit Sebelumnya tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[420984] == undefined){
+                    toastr.warning('Riwayat Penyakit Sekarang tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[420985] == undefined && $scope.item.obj[420986] == undefined){
+                    toastr.warning('RIWAYAT ALERGI tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[420988] == undefined && $scope.item.obj[420989] == undefined){
+                    toastr.warning('RIWAYAT PENGGUNAAN OBAT tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[420991] == undefined && $scope.item.obj[420992] == undefined){
+                    toastr.warning('ASESMEN NYERI tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[420994] == undefined && $scope.item.obj[420995] == undefined){
+                    toastr.warning('RISIKO JATUH tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[420997] == undefined){
+                    toastr.warning('ASESMEN FUNGSIONAL (Alat Bantu) tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[420998] == undefined){
+                    toastr.warning('ASESMEN FUNGSIONAL (Prothesa) tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[420999] == undefined){
+                    toastr.warning('ASESMEN FUNGSIONAL (Cacat tubuh) tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[421001] == undefined && $scope.item.obj[421002] == undefined && $scope.item.obj[421003] == undefined){
+                    toastr.warning('ASESMEN FUNGSIONAL (ADL) tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[421004] == undefined){
+                    toastr.warning('RISIKO NUTRISIONAL (BB) tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[421005] == undefined){
+                    toastr.warning('RISIKO NUTRISIONAL (Tinggi Badan/Panjang Badan) tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[421006] == undefined){
+                    toastr.warning('RISIKO NUTRISIONAL (Khusus Anak dan Bayi) tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[421007] == undefined){
+                    toastr.warning('RISIKO NUTRISIONAL (Lingkar Kepala) tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[421010] == undefined && $scope.item.obj[421012] == undefined){
+                    toastr.warning('RISIKO NUTRISIONAL (Konsul Dietisien) tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[421013] == undefined && $scope.item.obj[421014] == undefined && $scope.item.obj[421015] == undefined){
+                    toastr.warning('KEBUTUHAN EDUKASI tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[421099] == undefined){
+                    toastr.warning('DIAGNOSA MEDIS tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[421100] == undefined){
+                    toastr.warning('PEMERIKSAAN PENUNJANG tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[421077] == undefined && $scope.item.obj[421079] == undefined && $scope.item.obj[421080] == undefined && $scope.item.obj[421081] == undefined){
+                    toastr.warning('PERENCANAAN PULANG tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[421082] == undefined){
+                    toastr.warning('Terapi Pulang tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[421086] == undefined){
+                    toastr.warning('KONDISI SAAT PULANG (TD) tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[421087] == undefined){
+                    toastr.warning('KONDISI SAAT PULANG (Nadi) tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[421088] == undefined){
+                    toastr.warning('KONDISI SAAT PULANG (Suhu) tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[421089] == undefined){
+                    toastr.warning('KONDISI SAAT PULANG (Nafas) tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[421090] == undefined && $scope.item.obj[421091] == undefined && $scope.item.obj[421092] == undefined && $scope.item.obj[421093] == undefined && $scope.item.obj[421094] == undefined && $scope.item.obj[421095] == undefined){
+                    toastr.warning('Kondisi Pasien tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[421097] == undefined){
+                    toastr.warning('Dokter Penanggung Jawab Pelayanan tidak boleh kosong','Peringatan')
+                    return
+                }
+                
+
                 var arrobj = Object.keys($scope.item.obj)
                 var arrSave = []
                 for (var i = arrobj.length - 1; i >= 0; i--) {
