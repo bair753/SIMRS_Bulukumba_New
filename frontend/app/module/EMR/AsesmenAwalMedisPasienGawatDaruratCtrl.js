@@ -760,8 +760,8 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     return
                 }
 
-                if($scope.item.obj[421006] == undefined){
-                    toastr.warning('RISIKO NUTRISIONAL (Khusus Anak dan Bayi) tidak boleh kosong','Peringatan')
+                if($scope.item.obj[421008] == undefined){
+                    toastr.warning('RISIKO NUTRISIONAL (LLA) tidak boleh kosong','Peringatan')
                     return
                 }
 
