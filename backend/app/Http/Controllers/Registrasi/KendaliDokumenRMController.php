@@ -427,7 +427,9 @@ class KendaliDokumenRMController extends  ApiController
         ->join("pasien_m as ps", "ps.id", "=", "pd.nocmfk")
         ->join("ruangan_m as rm", "rm.id", "=", "pd.objectruanganlastfk")
         ->leftjoin('pemakaianasuransi_t as pas', 'pas.noregistrasifk', '=', 'pd.norec')
+        ->join('kelompokpasien_m as kp', 'kp.id', '=', 'pd.objectkelompokpasienlastfk')
         ->where("pd.kdprofile", $idProfile)
+        ->where("kp.id", 2)
         ->where("pd.statusenabled", true)
         // ->where("rm.objectdepartemenfk", $request['departId'])
         ->whereBetween("pd.tglregistrasi", [$tglawal, $tglakhir]);
