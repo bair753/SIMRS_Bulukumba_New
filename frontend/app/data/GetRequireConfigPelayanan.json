@@ -3713,6 +3713,10 @@
         {
             "nameDep": "SkriningGiziPadaPasienDewasaCtrl",
             "urlDep": "module/EMR/SkriningGiziPadaPasienDewasaCtrl"
+        },
+        {
+            "nameDep": "PermintaanSuratJaminanPenunjangDiagnostikCtrl",
+            "urlDep": "module/EMR/PermintaanSuratJaminanPenunjangDiagnostikCtrl"
         }
     ]
 }
