@@ -873,10 +873,10 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     return
                 }
 
-                if($scope.item.obj[420676] == undefined && $scope.item.obj[420677] == undefined && $scope.item.obj[420678] == undefined){
-                    toastr.warning('Tanda Kehidupan tidak boleh kosong','Peringatan')
-                    return
-                }
+                // if($scope.item.obj[420676] == undefined && $scope.item.obj[420677] == undefined && $scope.item.obj[420678] == undefined){
+                //     toastr.warning('Tanda Kehidupan tidak boleh kosong','Peringatan')
+                //     return
+                // }
 
                 if($scope.item.obj[420680] == undefined && $scope.item.obj[420681] == undefined && $scope.item.obj[420682] == undefined && $scope.item.obj[420683] == undefined && $scope.item.obj[420684] == undefined){
                     toastr.warning('Tempat Tinggal tidak boleh kosong','Peringatan')
