@@ -770,10 +770,10 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     return
                 }
 
-                if($scope.item.obj[421010] == undefined && $scope.item.obj[421012] == undefined){
-                    toastr.warning('RISIKO NUTRISIONAL (Konsul Dietisien) tidak boleh kosong','Peringatan')
-                    return
-                }
+                // if($scope.item.obj[421010] == undefined && $scope.item.obj[421012] == undefined){
+                //     toastr.warning('RISIKO NUTRISIONAL (Konsul Dietisien) tidak boleh kosong','Peringatan')
+                //     return
+                // }
 
                 if($scope.item.obj[421013] == undefined && $scope.item.obj[421014] == undefined && $scope.item.obj[421015] == undefined){
                     toastr.warning('KEBUTUHAN EDUKASI tidak boleh kosong','Peringatan')

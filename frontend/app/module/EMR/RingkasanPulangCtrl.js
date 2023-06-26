@@ -403,20 +403,20 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     return
                 }
 
-                if($scope.item.obj[423806] == undefined){
-                    toastr.warning('ICD 10 Diagnosis tidak boleh kosong','Peringatan')
-                    return
-                }
+                // if($scope.item.obj[423806] == undefined){
+                //     toastr.warning('ICD 10 Diagnosis tidak boleh kosong','Peringatan')
+                //     return
+                // }
 
-                if($scope.item.obj[423807] == undefined){
-                    toastr.warning('Komorbiditas Lain tidak boleh kosong','Peringatan')
-                    return
-                }
+                // if($scope.item.obj[423807] == undefined){
+                //     toastr.warning('Komorbiditas Lain tidak boleh kosong','Peringatan')
+                //     return
+                // }
 
-                if($scope.item.obj[31101417] == undefined){
-                    toastr.warning('ICD 10 Komorbiditas Lain tidak boleh kosong','Peringatan')
-                    return
-                }
+                // if($scope.item.obj[31101417] == undefined){
+                //     toastr.warning('ICD 10 Komorbiditas Lain tidak boleh kosong','Peringatan')
+                //     return
+                // }
 
                 if($scope.item.obj[423809] == undefined){
                     toastr.warning('Pemeriksaan Fisik tidak boleh kosong','Peringatan')
