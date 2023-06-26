@@ -873,6 +873,226 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 
             $scope.Save = function () {
 
+                if($scope.item.obj[18000300] == undefined){
+                    toastr.warning('G tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[18000301] == undefined){
+                    toastr.warning('P tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[18000302] == undefined){
+                    toastr.warning('A tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[18000303] == undefined){
+                    toastr.warning('Ketuban Pecah Sejak tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[18000304] == undefined){
+                    toastr.warning('Mules Sejak tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[1000415] == undefined){
+                    toastr.warning('Tanggal tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[1000416] == undefined){
+                    toastr.warning('Nama Bidan tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[1000418] == undefined && $scope.item.obj[1000419] == undefined && $scope.item.obj[1000420] == undefined && $scope.item.obj[1000421] == undefined && $scope.item.obj[1000422] == undefined && $scope.item.obj[1000423] == undefined){
+                    toastr.warning('Tempat Persalinan tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[1000425] == undefined){
+                    toastr.warning('Alamat tempat persalinan tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[1000429] == undefined){
+                    toastr.warning('Alasan Merujuk tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[1000430] == undefined){
+                    toastr.warning('Tempat Rujukan tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[1000432] == undefined && $scope.item.obj[1000433] == undefined && $scope.item.obj[1000434] == undefined && $scope.item.obj[1000435] == undefined && $scope.item.obj[1000436] == undefined && $scope.item.obj[1000437] == undefined){
+                    toastr.warning('Pendamping pada saat persalinan tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[1000439] == undefined && $scope.item.obj[1000440] == undefined){
+                    toastr.warning('Partograf melewati garis waspada tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[1000441] == undefined){
+                    toastr.warning('Masalah lain, Sebutkan tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[1000442] == undefined){
+                    toastr.warning('Penatalaksanaan masalah tsb tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[1000443] == undefined){
+                    toastr.warning('Hasilnya tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[1000445] == undefined && $scope.item.obj[1000447] == undefined){
+                    toastr.warning('Episiotomi tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[1000449] == undefined && $scope.item.obj[1000450] == undefined && $scope.item.obj[1000451] == undefined && $scope.item.obj[1000452] == undefined && $scope.item.obj[1000453] == undefined){
+                    toastr.warning('Pendamping pada saat persalinan tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[1000455] == undefined && $scope.item.obj[1000459] == undefined){
+                    toastr.warning('Gawat Janin tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[1000463] == undefined && $scope.item.obj[1000467] == undefined){
+                    toastr.warning('Distosia bahu tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[1000468] == undefined){
+                    toastr.warning('Masalah lain, sebutkan tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[1000469] == undefined){
+                    toastr.warning('Penatalaksanaan masalah tersebut tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[1000470] == undefined){
+                    toastr.warning('Hasilnya tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[1000471] == undefined){
+                    toastr.warning('Lama kala III tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[1000473] == undefined && $scope.item.obj[1000475] == undefined){
+                    toastr.warning('Pemberian oksitosin 10 U IM tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[1000478] == undefined && $scope.item.obj[1000480] == undefined){
+                    toastr.warning('Pemberian ulang oksitosin (2x) tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[1000482] == undefined && $scope.item.obj[1000483] == undefined){
+                    toastr.warning('Penegangan tali pusat terkendali tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[1000486] == undefined && $scope.item.obj[1000487] == undefined){
+                    toastr.warning('Masase fundus uteri tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[1000490] == undefined && $scope.item.obj[1000491] == undefined){
+                    toastr.warning('Plasenta lahir lengkap (intact) tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[1000496] == undefined && $scope.item.obj[1000497] == undefined){
+                    toastr.warning('Plasenta tidak lahir > 30 menit tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[1000502] == undefined && $scope.item.obj[1000504] == undefined){
+                    toastr.warning('Laserasi tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[1000507] == undefined && $scope.item.obj[1000508] == undefined){
+                    toastr.warning('Jika laserasi perineum, derajat tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[1000511] == undefined && $scope.item.obj[1000515] == undefined){
+                    toastr.warning('Atonia uteri tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[1000517] == undefined){
+                    toastr.warning('Masalah lain, sebutkan tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[1000518] == undefined){
+                    toastr.warning('Penatalaksanaan masalah tersebut tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[1000519] == undefined){
+                    toastr.warning('Hasilnya tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[1000520] == undefined){
+                    toastr.warning('Berat Badan tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[1000521] == undefined){
+                    toastr.warning('Panjang tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[1000523] == undefined && $scope.item.obj[1000524] == undefined){
+                    toastr.warning('Jenis Kelamin tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[1000526] == undefined && $scope.item.obj[1000527] == undefined){
+                    toastr.warning('Penilaian bayi baru lahir tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[1000529] == undefined && $scope.item.obj[1000530] == undefined && $scope.item.obj[1000531] == undefined && $scope.item.obj[1000532] == undefined && $scope.item.obj[1000533] == undefined && $scope.item.obj[1000534] == undefined && $scope.item.obj[1000535] == undefined && $scope.item.obj[1000536] == undefined && $scope.item.obj[1000537] == undefined && $scope.item.obj[1000538] == undefined && $scope.item.obj[1000539] == undefined){
+                    toastr.warning('Bayi Lahir tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[1000548] == undefined && $scope.item.obj[1000550] == undefined){
+                    toastr.warning('Pemberian ASI tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[1000552] == undefined){
+                    toastr.warning('Masalah lain, sebutkan tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[1000553] == undefined){
+                    toastr.warning('Hasilnya tidak boleh kosong','Peringatan')
+                    return
+                }
+
                 var arrobj = Object.keys($scope.item.obj)
                 var arrSave = []
                 for (var i = arrobj.length - 1; i >= 0; i--) {

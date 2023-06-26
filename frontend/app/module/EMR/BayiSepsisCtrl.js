@@ -335,6 +335,75 @@ define(['initialize', 'Configuration'], function (initialize, config) {
               
             $scope.Save = function () {
 
+                if($scope.item.obj[31100366] == undefined){
+                    toastr.warning('Berat Badan (kg) tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100367] == undefined){
+                    toastr.warning('Usia Kehamilan (minggu) tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[32104039] == undefined && $scope.item.obj[32104040] == undefined && $scope.item.obj[32104041] == undefined && $scope.item.obj[32104042] == undefined){
+                    toastr.warning('Faktor Risiko Ibu tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[32104043] == undefined && $scope.item.obj[32104044] == undefined && $scope.item.obj[32104045] == undefined){
+                    toastr.warning('Faktor Risiko Neonatal tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100820] == undefined && $scope.item.obj[31100821] == undefined && $scope.item.obj[31100822] == undefined && $scope.item.obj[31100823] == undefined){
+                    toastr.warning('Tanda Sepsis (tidak bergantung kepada usia bayi) tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100825] == undefined){
+                    toastr.warning('Tanda Vital masih ada yang kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100826] == undefined){
+                    toastr.warning('Tanda Vital masih ada yang kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100827] == undefined){
+                    toastr.warning('Tanda Vital masih ada yang kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100828] == undefined){
+                    toastr.warning('Tanda Vital masih ada yang kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100835] == undefined && $scope.item.obj[31100836] == undefined && $scope.item.obj[31100837] == undefined && $scope.item.obj[31100838] == undefined && $scope.item.obj[31100839] == undefined && $scope.item.obj[31100840] == undefined){
+                    toastr.warning('Riwayat atau tanda dehidrasi termasuk tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100870] == undefined){
+                    toastr.warning('Keterangan tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100871] == undefined){
+                    toastr.warning('Tenaga Medis tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100872] == undefined){
+                    toastr.warning('Tanggal tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100875] == undefined){
+                    toastr.warning('Berat Badan (kg) tidak boleh kosong','Peringatan')
+                    return
+                }
                 
                 var arrobj = Object.keys($scope.item.obj)
                 var arrSave = []

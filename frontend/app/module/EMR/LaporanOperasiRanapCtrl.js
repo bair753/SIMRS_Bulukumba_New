@@ -566,7 +566,141 @@ define(['initialize', 'Configuration'], function (initialize, config) {
               
             $scope.Save = function () {
 
-                
+                if($scope.item.obj[31100530] == undefined){
+                    toastr.warning('Nama DPJP tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100532] == undefined){
+                    toastr.warning('Asisten I tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100537] == undefined){
+                    toastr.warning('Nama Dokter Anestesi tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100538] == undefined && $scope.item.obj[31100539] == undefined && $scope.item.obj[31100540] == undefined){
+                    toastr.warning('Jenis Anestesi tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100541] == undefined){
+                    toastr.warning('Diagnose Pre-Operatif tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100542] == undefined){
+                    toastr.warning('Komplikasi Selama Operasi tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100543] == undefined){
+                    toastr.warning('Diagnose Pasca Operatif tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100544] == undefined && $scope.item.obj[32103414] == undefined && $scope.item.obj[31100545] == undefined && $scope.item.obj[32103415] == undefined && $scope.item.obj[31100546] == undefined && $scope.item.obj[32103416] == undefined){
+                    toastr.warning('Intake tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100547] == undefined && $scope.item.obj[32103417] == undefined && $scope.item.obj[31100548] == undefined && $scope.item.obj[32103418] == undefined && $scope.item.obj[31100549] == undefined && $scope.item.obj[32103419] == undefined){
+                    toastr.warning('Output tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100550] == undefined){
+                    toastr.warning('Prosedur Tindakan yang Dilakukan tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100551] == undefined && $scope.item.obj[31100552] == undefined && $scope.item.obj[31100553] == undefined && $scope.item.obj[31100554] == undefined && $scope.item.obj[31100555] == undefined && $scope.item.obj[31100556] == undefined){
+                    toastr.warning('Checklist Prosedur Tindakan yang Dilakukan tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100557] == undefined && $scope.item.obj[31100558] == undefined){
+                    toastr.warning('Dikirim Untuk Pemeriksaan P.A tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100559] == undefined && $scope.item.obj[31100560] == undefined && $scope.item.obj[31100561] == undefined && $scope.item.obj[31100562] == undefined){
+                    toastr.warning('Jenis Luka Operasi tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100563] == undefined){
+                    toastr.warning('No. Alat yang Dipasang (implan) tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100564] == undefined){
+                    toastr.warning('Tanggal Operasi tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100565] == undefined){
+                    toastr.warning('Jam Operasi Dimulai tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100566] == undefined){
+                    toastr.warning('Jam Operasi Selesai tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100567] == undefined){
+                    toastr.warning('Lama Operasi Berlangsung tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100568] == undefined){
+                    toastr.warning('Laporan/Tindakan Operasi tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100569] == undefined){
+                    toastr.warning('Tanda Tangan dan Nama Dokter tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100570] == undefined){
+                    toastr.warning('Intruksi Pasca Bedah tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100571] == undefined){
+                    toastr.warning('1. Kontrol Nadi/Tensi/Nafas/Suhu tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100572] == undefined){
+                    toastr.warning('2. Puasa tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100573] == undefined){
+                    toastr.warning('3. Infus tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100574] == undefined){
+                    toastr.warning('4. Antibiotika tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100575] == undefined){
+                    toastr.warning('5. Lain-lain tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100576] == undefined){
+                    toastr.warning('DPJP tidak boleh kosong','Peringatan')
+                    return
+                }
+
                 var arrobj = Object.keys($scope.item.obj)
                 var arrSave = []
                 for (var i = arrobj.length - 1; i >= 0; i--) {

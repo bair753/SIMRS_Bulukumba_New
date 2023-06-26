@@ -121,7 +121,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 var nocmfk = null;
                 var noregistrasifk = $state.params.noRec;
                 var status = "t";
-                $scope.item.obj[430167] = $scope.now;
+                $scope.item.obj[31100445] = $scope.now;
                 medifirstService.get("emr/get-antrian-pasien-norec/" + noregistrasifk).then(function (e) {
                     var antrianPasien = e.data.result;
                     $scope.item.obj[430159] = $scope.cc.namapasien;
@@ -333,6 +333,232 @@ define(['initialize', 'Configuration'], function (initialize, config) {
             }
               
             $scope.Save = function () {
+
+                if($scope.item.obj[31100366] == undefined){
+                    toastr.warning('G tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100367] == undefined){
+                    toastr.warning('P tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100368] == undefined){
+                    toastr.warning('A tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100369] == undefined){
+                    toastr.warning('M tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100370] == undefined){
+                    toastr.warning('Tanggal/pukul Pasien Masuk tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[32103888] == undefined){
+                    toastr.warning('Tanggal/pukul Pemeriksaaan Luar tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100372] == undefined){
+                    toastr.warning('TFU tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100373] == undefined && $scope.item.obj[31100374] == undefined && $scope.item.obj[31100375] == undefined && $scope.item.obj[31100376] == undefined && $scope.item.obj[31100377] == undefined && $scope.item.obj[32116152] == undefined){
+                    toastr.warning('Letak tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100378] == undefined){
+                    toastr.warning('DJJ (x / menit) tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100413] == undefined){
+                    toastr.warning('Tanggal/pukul Pemeriksaan Dalam tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100379] == undefined && $scope.item.obj[31100380] == undefined){
+                    toastr.warning('Vulva tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100381] == undefined && $scope.item.obj[31100382] == undefined){
+                    toastr.warning('Vagina tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100383] == undefined && $scope.item.obj[31100384] == undefined && $scope.item.obj[31100385] == undefined && $scope.item.obj[31100386] == undefined){
+                    toastr.warning('Portio tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100392] == undefined && $scope.item.obj[31100393] == undefined && $scope.item.obj[31100394] == undefined && $scope.item.obj[31100395] == undefined && $scope.item.obj[31100396] == undefined){
+                    toastr.warning('Kepala tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100397] == undefined && $scope.item.obj[31100398] == undefined && $scope.item.obj[31100399] == undefined && $scope.item.obj[31100400] == undefined){
+                    toastr.warning('Dagu tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100414] == undefined){
+                    toastr.warning('Tanggal/pukul Lahir Bayi tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100401] == undefined && $scope.item.obj[31100402] == undefined){
+                    toastr.warning('Lahir Bayi tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100403] == undefined && $scope.item.obj[31100404] == undefined && $scope.item.obj[31100405] == undefined && $scope.item.obj[31100406] == undefined){
+                    toastr.warning('Spontan tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100407] == undefined){
+                    toastr.warning('Berat Badan (gram) tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100408] == undefined){
+                    toastr.warning('Panjang Badan (cm) tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100409] == undefined && $scope.item.obj[31100410] == undefined){
+                    toastr.warning('Lilitan Tali Pusat tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100411] == undefined && $scope.item.obj[31100412] == undefined){
+                    toastr.warning('Episiotomi tidak boleh kosong','Peringatan')
+                    return
+                }
+
+
+                if($scope.item.obj[31100416] == undefined && $scope.item.obj[31100417] == undefined){
+                    toastr.warning('Plasenta tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100418] == undefined && $scope.item.obj[31100419] == undefined){
+                    toastr.warning('Kelengkapan tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100420] == undefined){
+                    toastr.warning('Berat (gram) tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100421] == undefined){
+                    toastr.warning('Ukuran (cm) tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100422] == undefined){
+                    toastr.warning('Lebar tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100423] == undefined){
+                    toastr.warning('Perdarahan (cc) tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100424] == undefined){
+                    toastr.warning('Jahitan perineum Luar tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100425] == undefined){
+                    toastr.warning('Jahitan perineum Dalam tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100426] == undefined && $scope.item.obj[31100427] == undefined){
+                    toastr.warning('POST PARTUM - Keadaan Ibu tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100428] == undefined){
+                    toastr.warning('Tinggi Fundus Uteri tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100429] == undefined){
+                    toastr.warning('Kontraksi Rahim tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100430] == undefined && $scope.item.obj[31100431] == undefined){
+                    toastr.warning('Perdarahan tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100433] == undefined){
+                    toastr.warning('Terapi tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100434] == undefined){
+                    toastr.warning('Transfusi darah/ cairan tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100435] == undefined && $scope.item.obj[31100436] == undefined){
+                    toastr.warning('2 JAM POST PARTUM - Keadaan Ibu tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100437] == undefined){
+                    toastr.warning('Tensi (mmHg) tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100438] == undefined){
+                    toastr.warning('Nadi (x / menit) tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100439] == undefined){
+                    toastr.warning('Respirasi (x / menit) tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100440] == undefined){
+                    toastr.warning('Tinggi FU tidak boleh kosong','Peringatan')
+                    return
+                }
+                
+                if($scope.item.obj[31100441] == undefined && $scope.item.obj[31100442] == undefined){
+                    toastr.warning('Kontraksi Rahim tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100443] == undefined){
+                    toastr.warning('Pendarahan (cc) tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100444] == undefined){
+                    toastr.warning('Diagnosa Kebidanan tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[31100446] == undefined){
+                    toastr.warning('Dokter / Bidan tidak boleh kosong','Peringatan')
+                    return
+                }
 
                 
                 var arrobj = Object.keys($scope.item.obj)
