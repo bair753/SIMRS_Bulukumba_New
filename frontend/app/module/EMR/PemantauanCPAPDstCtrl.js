@@ -265,12 +265,47 @@ define(['initialize', 'Configuration'], function (initialize, config) {
             }
 
             $scope.Save = function () {
-                //  if( $scope.cc.norec_emr !='-' && pegawaiInputDetail !='' && pegawaiInputDetail !=null){
-                //     if(pegawaiInputDetail != medifirstService.getPegawaiLogin().id){
-                //         toastr.warning('Hanya Bisa melihat data','Peringatan')
-                //         return
-                //     }
-                // }
+
+                if($scope.item.obj[32103842] == undefined){
+                    toastr.warning('Tanggal/pukul tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[32103843] == undefined && $scope.item.obj[32103844] == undefined && $scope.item.obj[32103845] == undefined && $scope.item.obj[32103847] == undefined){
+                    toastr.warning('Gangguan Pernapasan (semua usia) tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[32103849] == undefined && $scope.item.obj[32103850] == undefined && $scope.item.obj[32103851] == undefined && $scope.item.obj[32103852] == undefined && $scope.item.obj[32103853] == undefined && $scope.item.obj[32103854] == undefined && $scope.item.obj[32103855] == undefined){
+                    toastr.warning('Bayi < usia kehamilan 30 minggu atau 1500 grams tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[32103856] == undefined && $scope.item.obj[32103857] == undefined && $scope.item.obj[32103858] == undefined && $scope.item.obj[32103859] == undefined && $scope.item.obj[32103860] == undefined && $scope.item.obj[32103861] == undefined){
+                    toastr.warning('PERLENGKAPAN CPAP tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[32103862] == undefined && $scope.item.obj[32103863] == undefined && $scope.item.obj[32103864] == undefined && $scope.item.obj[32103865] == undefined && $scope.item.obj[32103866] == undefined && $scope.item.obj[32103867] == undefined && $scope.item.obj[32103868] == undefined && $scope.item.obj[32103869] == undefined && $scope.item.obj[32103871] == undefined){
+                    toastr.warning('PENGATURAN CPAP tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[32103872] == undefined && $scope.item.obj[32103873] == undefined && $scope.item.obj[32103874] == undefined && $scope.item.obj[32103875] == undefined && $scope.item.obj[32103876] == undefined && $scope.item.obj[32103877] == undefined && $scope.item.obj[32103878] == undefined && $scope.item.obj[32103879] == undefined){
+                    toastr.warning('PEMASANGAN CPAP (lihat gambar 1) tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[32103880] == undefined && $scope.item.obj[32103881] == undefined && $scope.item.obj[32103882] == undefined && $scope.item.obj[32103883] == undefined && $scope.item.obj[32103884] == undefined && $scope.item.obj[32103885] == undefined){
+                    toastr.warning('HASIL tidak boleh kosong','Peringatan')
+                    return
+                }
+
+                if($scope.item.obj[32103888] == undefined){
+                    toastr.warning('BB tidak boleh kosong','Peringatan')
+                    return
+                }
+
 
                 var arrobj = Object.keys($scope.item.obj)
                 var arrSave = []
