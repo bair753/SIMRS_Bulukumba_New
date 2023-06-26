@@ -359,7 +359,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     return
                 }
 
-                if($scope.item.obj[32103888] == undefined){
+                if($scope.item.obj[31100371] == undefined){
                     toastr.warning('Tanggal/pukul Pemeriksaaan Luar tidak boleh kosong','Peringatan')
                     return
                 }
