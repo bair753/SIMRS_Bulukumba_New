@@ -271,7 +271,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                         }
                     }
                     $scope.item.obj[420875] = antrianPasien.nocm;
-                    $scope.item.obj[420876] = antrianPasien.namapasien;
+                    $scope.item.obj[31101253] = antrianPasien.namapasien;
                     $scope.item.obj[420877] = new Date(moment(antrianPasien.tgllahir).format('YYYY-MM-DD'));
                     $scope.item.obj[420920] = $scope.now;
                 })
