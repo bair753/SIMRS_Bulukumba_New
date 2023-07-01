@@ -345,15 +345,15 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     return
                 }
 
-                if($scope.item.obj[32104039] == undefined && $scope.item.obj[32104040] == undefined && $scope.item.obj[32104041] == undefined && $scope.item.obj[32104042] == undefined){
-                    toastr.warning('Faktor Risiko Ibu tidak boleh kosong','Peringatan')
-                    return
-                }
+                // if($scope.item.obj[32104039] == undefined && $scope.item.obj[32104040] == undefined && $scope.item.obj[32104041] == undefined && $scope.item.obj[32104042] == undefined){
+                //     toastr.warning('Faktor Risiko Ibu tidak boleh kosong','Peringatan')
+                //     return
+                // }
 
-                if($scope.item.obj[32104043] == undefined && $scope.item.obj[32104044] == undefined && $scope.item.obj[32104045] == undefined){
-                    toastr.warning('Faktor Risiko Neonatal tidak boleh kosong','Peringatan')
-                    return
-                }
+                // if($scope.item.obj[32104043] == undefined && $scope.item.obj[32104044] == undefined && $scope.item.obj[32104045] == undefined){
+                //     toastr.warning('Faktor Risiko Neonatal tidak boleh kosong','Peringatan')
+                //     return
+                // }
 
                 if($scope.item.obj[31100820] == undefined && $scope.item.obj[31100821] == undefined && $scope.item.obj[31100822] == undefined && $scope.item.obj[31100823] == undefined){
                     toastr.warning('Tanda Sepsis (tidak bergantung kepada usia bayi) tidak boleh kosong','Peringatan')
