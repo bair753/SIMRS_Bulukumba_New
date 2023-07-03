@@ -3717,6 +3717,10 @@
         {
             "nameDep": "PermintaanSuratJaminanPenunjangDiagnostikCtrl",
             "urlDep": "module/EMR/PermintaanSuratJaminanPenunjangDiagnostikCtrl"
+        },
+        {
+            "nameDep": "JadwalTindakanHemodialisaCtrl",
+            "urlDep": "module/EMR/JadwalTindakanHemodialisaCtrl"
         }
     ]
 }
