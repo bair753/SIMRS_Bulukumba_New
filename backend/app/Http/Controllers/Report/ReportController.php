@@ -5063,15 +5063,6 @@ class ReportController extends ApiController{
         }else{
             $index = '='.$index;
         }
-        if(empty($res['d'])){
-            echo '
-                <script language="javascript">
-                    window.alert("Data tidak ada.");
-                    window.close()
-                </script>
-            ';
-            die;
-        }
 
         $data = DB::select(DB::raw(
             "
