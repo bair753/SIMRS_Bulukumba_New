@@ -1258,7 +1258,7 @@ class MyJKNV2Controller extends ApiController
             $result = array("metadata"=>array("message" => "Tanggal Akhir Tidak Boleh Kecil dari Tanggal Awal ","code" => 201));
             return $this->setStatusCode($result['metadata']['code'])->respond($result);
         }
-        $depbedah = 25;
+        $depbedah = $this->settingDataFixed('KdInstalasiBedahSentral', $kdProfile);
         try {
             $data = DB::select(DB::raw("SELECT
                     so.noorder as kodebooking,
