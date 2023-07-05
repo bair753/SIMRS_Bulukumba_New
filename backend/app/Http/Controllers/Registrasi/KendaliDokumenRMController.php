@@ -518,6 +518,7 @@ class KendaliDokumenRMController extends  ApiController
                 "nocmfk" => $dataRegistrasi->nocmfk,
                 "noregistrasifk" => $dataReq['noregistrasifk'],
                 "documentklaimfk" => $dataReq['documentklaimfk'],
+                "tglupload" => date('Y-m-d H:i:s'),
             );
             DB::table('monitoringdokklaim_t')->Insert($dataInsert);
             $request->file('fileBerkas')->move($path, $filename);
