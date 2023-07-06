@@ -3,7 +3,7 @@
 
 namespace App\Http\Controllers\Report;
 
-
+use App\Datatrans\PasienDaftar;
 use App\Http\Controllers\ApiController;
 use App\Master\KelompokTransaksi;
 use App\Master\Ruangan;
@@ -6489,5 +6489,230 @@ class ReportController extends ApiController{
         }
 
         return view('report.cetak-jaminan-penunjang-diagnostik', compact('res', 'pageWidth'));
+    }
+
+    public function cetakRincBilling(Request $r)
+    {
+        $kdProfile = (int) $r['kdprofile'];
+        $print = false;
+        $pageWidth = 950;
+        $res['user'] = $r['strIdPegawai'];
+        $res['noregistrasi'] = $r['noregistrasi'];
+        $res['identitas'] =  DB::table('pasiendaftar_t as pd')
+            ->join('pasien_m as ps','ps.id', '=', 'pd.nocmfk')
+            ->join('ruangan_m as ru', 'ru.id', '=', 'pd.objectruanganlastfk')
+            ->join('kelas_m as kl', 'kl.id', '=', 'pd.objectkelasfk')
+            ->join('departemen_m as dp', 'dp.id', '=', 'ru.objectdepartemenfk')
+            ->join('kelompokpasien_m as kp','kp.id', '=', 'pd.objectkelompokpasienlastfk')
+            ->leftjoin('jeniskelamin_m as jk', 'jk.id', '=', 'ps.objectjeniskelaminfk')
+            ->leftjoin('pegawai_m as pg', 'pg.id', '=', 'pd.objectpegawaifk')
+            ->leftjoin('rekanan_m as rk', 'rk.id', '=', 'pd.objectrekananfk')
+            ->leftjoin('pemakaianasuransi_t as pa', 'pa.noregistrasifk', '=', 'pd.norec')
+            ->select(
+                'pd.noregistrasi',
+                'pd.tglregistrasi',
+                'pd.tglpulang',
+                'ps.namapasien',
+                'ps.nocm',
+                'ru.namaruangan',
+                'kl.namakelas',
+                'kp.kelompokpasien',
+                'dp.namadepartemen',
+                'jk.jeniskelamin',
+                'pg.namalengkap',
+                'rk.namarekanan',
+                'pa.nosep'
+            )
+            ->where('pd.statusenabled', true)
+            ->where('pd.kdprofile', $kdProfile)
+            ->where('pd.noregistrasi', $r['noregistrasi'])
+            ->first();
+
+        $data =  DB::table('pelayananpasien_t as pp')
+            ->join('antrianpasiendiperiksa_t as apd','apd.norec', '=', 'pp.noregistrasifk')
+            ->join('pasiendaftar_t as pd', 'pd.norec', '=', 'apd.noregistrasifk')
+            ->join('kelas_m as kls', 'kls.id', '=', 'apd.objectkelasfk')
+            ->join('produk_m as prd', 'prd.id', '=', 'pp.produkfk')
+            ->join('ruangan_m as ru', 'ru.id', '=', 'apd.objectruanganfk')
+            ->join('departemen_m as dp', 'dp.id', '=', 'ru.objectdepartemenfk')
+            ->leftJOIN('strukresep_t as sr', 'sr.norec', '=', 'pp.strukresepfk')
+            ->leftJOIN('ruangan_m as ru2', 'ru2.id', '=', 'sr.ruanganfk')
+            ->leftJOIN('departemen_m as dp2', 'dp2.id', '=', 'ru2.objectdepartemenfk')
+            ->leftJOIN('pegawai_m as pg', 'pg.id', '=', 'sr.penulisresepfk')
+            ->leftJOIN('detailjenisproduk_m as djp','djp.id', '=', 'prd.objectdetailjenisprodukfk')
+            ->leftJOIN('jenisproduk_m as jp','jp.id', '=', 'djp.objectjenisprodukfk')
+            ->select(
+                'pp.norec',
+                'prd.namaproduk',
+                'kls.namakelas',
+                'pp.tglpelayanan',
+                'ru.namaruangan',
+                'ru2.namaruangan as ruanganfarmasi',
+                'pp.strukresepfk',
+                'pp.jumlah',
+                'pp.hargasatuan',
+                'pg.namalengkap as penulisresep',
+                'jp.jenisproduk',
+                'dp.namadepartemen',
+                'dp2.namadepartemen as deparemenfarmasi',
+                DB::raw("
+            case when pp.jasa is not null then pp.jasa else 0 end jasa,
+            COALESCE (pp.hargadiscount, 0)  as diskon,
+            case when pp.hargadiscount is not null then pp.hargadiscount else 0 end hargadiscount,
+            (
+                (pp.hargasatuan  - case when pp.hargadiscount is null then 0 else pp.hargadiscount end)
+                 * pp.jumlah) 
+            + (case when pp.jasa is not null then pp.jasa else 0 end)
+             as total,
+            to_char(pp.tglpelayanan,'yyyy-MM-dd')  as tglpelayanan_group ,
+            case when pp.strukresepfk is null then 'Layanan' else 'Resep' end as jenis,
+            case when pp.strukresepfk is null then ru.namaruangan else ru2.namaruangan end as ruang_group ,
+            case when pp.strukresepfk is null then dp.namadepartemen else dp2.namadepartemen end as departemen_group 
+           ")
+            )
+            ->where('pp.statusenabled', true)
+            ->where('pp.kdprofile', $kdProfile)
+            ->where('pd.noregistrasi', $r['noregistrasi'])
+            ->orderBy('pp.tglpelayanan','desc')
+            ->get();
+
+        $sDokterPemeriksa = $this->settingDataFixed('jenisPetugasDokterPemeriksa', $kdProfile);
+        $pelayananpetugas = \DB::table('pasiendaftar_t as pd')
+            ->join('antrianpasiendiperiksa_t as apd','apd.noregistrasifk', '=', 'pd.norec')
+            ->join('pelayananpasienpetugas_t as ptu', 'ptu.nomasukfk', '=', 'apd.norec')
+            ->leftjoin('pegawai_m as pg', 'pg.id', '=', 'ptu.objectpegawaifk')
+            ->select('ptu.pelayananpasien', 'pg.namalengkap')
+            ->where('ptu.objectjenispetugaspefk', 4)
+            ->where('pd.kdprofile',$kdProfile)
+            ->where('pd.noregistrasi', $r['noregistrasi'])
+            ->get();
+        $res['total'] = 0.0;
+        foreach ($data as $item) {
+            $item->dokter = $item->strukresepfk != null ? $item->penulisresep : '-';
+            $res['total']  = $res['total']  + (float) $item->total;
+            foreach ($pelayananpetugas as $itemd) {
+                if ($itemd->pelayananpasien == $item->norec) {
+                    $item->dokter = $itemd->namalengkap;
+                }
+            }
+        }
+
+        $deposit = 0;
+        $produkIdDeposit = 402611;
+        $pasienDaftar  = DB::table('pasiendaftar_t as pd')->where('pd.noregistrasi', $r['noregistrasi'])->first();
+        if($pasienDaftar){
+            $depositList = DB::table('pelayananpasien_t as pp')
+            ->join('antrianpasiendiperiksa_t as apd','apd.norec', '=', 'pp.noregistrasifk')
+            ->join('pasiendaftar_t as pd', 'pd.norec', '=', 'apd.noregistrasifk')
+            ->where('pd.noregistrasi', $r['noregistrasi'])->get();
+            foreach ($depositList as $item){
+                if($item->produkfk==$produkIdDeposit){
+                    $deposit = $deposit + $item->hargasatuan;
+                }
+            }
+        }
+        $res['profile'] = Profile::where('id', $kdProfile)->first();
+        $res['billing'] =  collect($data)->groupBy('namaruangan');
+        $res['ismultipenjamin']  = false;
+        $res['klaim']  = $this->getTotalKlaim($r['noregistrasi'], $kdProfile);
+        $res['deposit'] = $deposit;
+        $res['dibayar'] = $this->getTotolBayar($r['noregistrasi'], $kdProfile);
+        $res['sisa'] =   $res['total']  -  $res['dibayar'] - $res['deposit'] - $res['klaim'];
+        $res['pdf']  = false;
+        $blade = 'report.kasir.billing';
+        $pageWidth = 500;
+
+        // dd($res);
+
+        if(isset($r['rekap']) && $r['rekap'] == true ){
+            $res['billing'] =   collect($data)->groupBy('departemen_group');
+            $blade = 'report.kasir.rekap-billing';
+        }
+
+        
+
+        return view(
+            $blade,
+            compact('print', 'res','r', 'pageWidth')
+        );
+    }
+
+    public function suratKeteranganKontrol(Request $request) {
+        $nocm = $request['nocm'];
+        $norec = $request['emr'];
+        $kdProfile = (int) $request['kdprofile'];
+
+        $data = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                pa.nobpjs,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                    INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                    INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+        foreach ($data as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+        $pageWidth = 500;
+        $res['profile'] = Profile::where('id', $request['kdprofile'])->first();
+
+        $res['d'] = $data;
+        $noemrpasien = '';
+        if (count($data) == 0) {
+            $noemrpasien = $request['emr'];
+        } else {
+            $noemrpasien = $data[0]->noemr;
+        }
+        if(empty($res['d'])){
+            echo '
+                <script language="javascript">
+                    window.alert("Data tidak ada.");
+                    window.close()
+                </script>
+            ';
+            die;
+        }
+
+        return view('report.cetak-surat-keterangan-kontrol', compact('res', 'pageWidth'));
     }
 }
