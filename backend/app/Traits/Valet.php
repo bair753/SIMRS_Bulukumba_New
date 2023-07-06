@@ -2,6 +2,8 @@
 namespace App\Traits;
 
 //use Illuminate\Http\Request;
+
+use App\Datatrans\PasienDaftar;
 use App\Master\LoginUser;
 use App\Master\SettingDataFixed;
 use App\Transaksi\SeqNumberSurat;
@@ -574,5 +576,64 @@ Trait Valet {
     {
         $set = 'ueyX84m1MZdSESlc3Ky3YRJ6eah3tjjA';
         return $set;
+    }
+
+    public  function getTotalKlaim($noregistrasi,$kdProfile)
+    {
+       $pelayanan = collect(\DB::select("select sum(x.totalppenjamin) as totalklaim
+         from (select spp.norec,spp.totalppenjamin
+         from pasiendaftar_t as pd
+            join antrianpasiendiperiksa_t as apd on apd.noregistrasifk=pd.norec and apd.kdprofile = pd.kdprofile
+            join pelayananpasien_t as pp on pp.noregistrasifk =apd.norec and pp.kdprofile = apd.kdprofile
+            join strukpelayanan_t as sp on sp.norec= pp.strukfk and sp.kdprofile = pp.kdprofile
+            join strukpelayananpenjamin_t as spp on spp.nostrukfk=sp.norec and spp.kdprofile = sp.kdprofile
+            where pd.noregistrasi = ?
+        --and spp.statusenabled is null 
+        and pd.kdprofile= ?
+        GROUP BY spp.norec,spp.totalppenjamin
+
+        ) as x",[$noregistrasi,$kdProfile]))->first();
+        if(!empty($pelayanan) && $pelayanan->totalklaim!= null){
+             return (float) $pelayanan->totalklaim;
+         }else{
+            return 0;
+         }
+    }
+
+    // protected function getDepositPasien($noregistrasi){
+    //     $produkIdDeposit = $this->getProdukIdDeposit();
+    //     $deposit = 0;
+    //     $pasienDaftar  = PasienDaftar::where('noregistrasi', $noregistrasi)->first();
+    //     if($pasienDaftar){
+    //         $depositList =$pasienDaftar->pelayanan_pasien()->where('nilainormal', '-1')->whereNull('strukfk')->get();
+    //         foreach ($depositList as $item){
+    //             if($item->produkfk==$produkIdDeposit){
+    //                 $deposit = $deposit + $item->hargasatuan;
+    //             }
+    //         }
+    //     }
+    //     return $deposit;
+    // }
+
+    public function getTotolBayar($noregistrasi,$kdProfile)
+    {
+      $pelayanan =collect(\DB::select("select sum(x.totaldibayar) as totaldibayar
+         from (select sbm.norec,sbm.totaldibayar
+         from pasiendaftar_t as pd
+        join antrianpasiendiperiksa_t as apd on apd.noregistrasifk=pd.norec and apd.kdprofile = pd.kdprofile
+        join pelayananpasien_t as pp on pp.noregistrasifk =apd.norec and pp.kdprofile = apd.kdprofile
+        join strukpelayanan_t as sp on sp.norec= pp.strukfk and sp.kdprofile = pp.kdprofile
+        join strukbuktipenerimaan_t as sbm on sbm.nostrukfk = sp.norec and sbm.kdprofile = sp.kdprofile
+        where pd.noregistrasi = ?
+        and sbm.statusenabled =true
+        and pd.kdprofile= ?
+        GROUP BY sbm.norec,sbm.totaldibayar
+
+        ) as x",[$noregistrasi,$kdProfile]))->first();
+        if(!empty($pelayanan) && $pelayanan->totaldibayar!= null){
+             return (float) $pelayanan->totaldibayar;
+         }else{
+            return 0;
+        }
     }
 }

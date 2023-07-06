@@ -20766,6 +20766,29 @@
         "define": "RekamMedisCtrl"
       }
     ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.SuratKeteranganKontrol",
+    "url": "/SuratKeteranganKontrol",
+    "templateurl": "module/EMR/SuratKeteranganKontrol.html",
+    "controller": "SuratKeteranganKontrolCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
   }
 
 

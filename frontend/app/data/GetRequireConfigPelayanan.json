@@ -3721,6 +3721,10 @@
         {
             "nameDep": "JadwalTindakanHemodialisaCtrl",
             "urlDep": "module/EMR/JadwalTindakanHemodialisaCtrl"
+        },
+        {
+            "nameDep": "SuratKeteranganKontrolCtrl",
+            "urlDep": "module/EMR/SuratKeteranganKontrolCtrl"
         }
     ]
 }
