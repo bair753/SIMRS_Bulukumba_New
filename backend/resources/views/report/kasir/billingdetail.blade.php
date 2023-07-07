@@ -327,124 +327,122 @@
                 <th style="border:none">No. SEP</th>
                 <td style="border:none" colspan="2">: <strong>{{ $res['identitas']->nosep }}</strong></td>
             </tr>
+            <tr style="border:1px solid #000;border-right:none;border-left:none;" height="5px">
+                <td style="border:none">No</td>
+                <td style="border:none">Tanggal</td>
+                <td style="border:none">Deskripsi</td>
+                <td style="border:none">Kelas</td>
+                <td style="border:none">Dokter</td>
+                <td style="border:none">Qty</td>
+                <td style="border:none">Tarif</td>
+                <td style="border:none">Diskon</td>
+                <td style="border:none">Sub Total</td>
+            </tr>
+            <tr style="text-align:left;border:1px solid #afafaf;border-left:none;border-right:none">
+                <th colspan="7"><i>Jenis: Jenis Barang Farmasi</i></th>
+                <th><i>::</i></th>
+                <th><i>300.870.00</i></th>
+            </tr>
+            <tr style="text-align:left;">
+                <th colspan="2">DEPO FARMASI IGD</th>
+                <th colspan="2">Resep No: O/2305/06915</th>
+                <td colspan="5" style="border:none;">dr. Muhamad Saadillah Bahtiar</td>
+            </tr>
             <tr>
-                <td style="padding-top:10px;border:none;">
-                        <tr>
-                            <th class="th-class text-left">
-                                <span class="text-normal">No</span>
-                            </th>
-                            <th class="th-class  text-center">
-                                <span class="text-normal">Tanggal</span>
-                            </th>
-                            <th class="th-class text-left">
-                                <span class="text-normal">Deskripsi</span>
-                            </th>
-                            <th class="th-class text-left">
-                                <span class="text-normal">Kelas</span>
-                            </th>
-                            <th class="th-class text-left">
-                                <span class="text-normal">Dokter</span>
-                            </th>
-                            <th class="th-class  text-center">
-                                <span class="text-normal">Qty</span>
-                            </th>
-                            <th class="th-class  text-center">
-                                <span class="text-normal">Tarif</span>
-                            </th>
-                            <th class="th-class  text-center">
-                                <span class="text-normal">Diskon</span>
-                            </th>
-                            <th class="th-class  text-right">
-                                <span class="text-normal">Sub Total</span>
-                            </th>
-                        </tr>
-                        @php
-                            $nomor = 1;
-                            $totaltagihan = 0;
-                            $totaldiskon = 0;
-                            $jumlahbill = 0;
-                            $totaldiklaim = 0;
-                        @endphp
-                        @foreach ($res['billing'] as $ruangan)
-                            <tr style="background: #d6d4d4;">
-                                <td colspan="9">
-                                    <span class="text-normal bold">
-                                        <b>   {{ strtoupper($ruangan[0]->namaruangan) }}</b>
-                                    </span>
-                                </td>
-    
-                            </tr>
-                            @foreach ($ruangan->groupBy('jenisproduk') as $item)
-                                <tr  style="font-style:italic;background: #edc1c1;">
-                                    <td colspan="9">
-                                        <span class="text-normal">
-                                            <b>     JENIS: {{ strtoupper($item[0]->jenisproduk) }}</b>
-                                        </span>
-                                    </td>
-                                </tr>
-                                @php
-                                    $total = 0;
-                                    $diskon = 0;
-                                @endphp
-                                @foreach ($item as $data)
-                                    <tr>
-                                        <td class="th-class text-left">
-                                            <span class="text">{{ $nomor }}</span>
-                                        </td>
-                                        <td class="th-class text-center">
-                                            <span class="text">
-                                                {{ date_format(date_create($data->tglpelayanan), 'd/m/Y') }}</span>
-                                        </td>
-                                        <td class="th-class text-left">
-                                            <span class="text">{{ $data->namaproduk }}</span>
-                                        </td>
-                                        <td class="th-class text-left">
-                                            <span class="text">{{ $data->namakelas }}</span>
-                                        </td>
-                                        @if ($data->penulisresep === null)
-                                            <td class="th-class text-left">
-                                                <span class="text">{{ $data->dokter }}</span>
-                                            </td>
-                                        @else
-                                            <td class="th-class text-left">
-                                                <span class="text">{{ $data->penulisresep }} </span>
-                                            </td>
-                                        @endif
-                                        <td class="th-class text-center">
-                                            <span class="text">{{ $data->jumlah }}</span>
-                                        </td>
-                                        <td class="th-class text-right">
-                                            <span class="text"> {{ number_format($data->hargasatuan, 2, '.', ',') }}</span>
-                                        </td>
-                                        <td class="th-class text-center">
-                                            <span class="text">{{ number_format($data->diskon, 2, '.', ',') }}</span>
-                                        </td>
-                                        <td class="th-class text-right">
-                                            <span class="text"> {{ number_format($data->total, 2, '.', ',') }}</span>
-                                        </td>
-                                    </tr>
-                                    @php
-                                        $nomor = $nomor + 1;
-                                        $total = $total + $data->total;
-                                        $diskon = $diskon + $data->diskon;
-                                    @endphp
-                                @endforeach
-                                <tr>
-                                    <td style="text-align: right" colspan="9">
-                                        <span class="text">
-                                            <b>Rp{{ number_format($total, 2, '.', ',') }}</b>
-                                        </span>
-                                    </td>
-                                </tr>
-                                @php
-                                    $totaltagihan = $totaltagihan + $total;
-                                    $totaldiskon = $totaldiskon + $diskon;
-                                    $jumlahbill = $totaltagihan - $totaldiskon;
-                                @endphp
-                            @endforeach
-                        @endforeach
-
-                </td>
+                <td style="border:none">1</td>
+                <td style="border:none">05/14/2023</td>
+                <td style="border:none" colspan="3">R/2 OMEPRAZOLE KAPS</td>
+                <td style="text-align:right;border:none">10.00</td>
+                <td style="text-align:right;border:none">367.00</td>
+                <td style="text-align:right;border:none">0.00</td>
+                <td style="text-align:right;border:none">367.00</td>
+            </tr>
+            <tr>
+                <td colspan="8" style="border:none"></td>
+                <th style="text-align:right">367.00</th>
+            </tr>
+            <tr style="border:none;text-align: left;border:1px solid #afafaf;border-left:none;border-right:none">
+                <th colspan="9" style="border:none">IGD</th>
+            </tr>
+            <tr>
+                <td style="border:none">2</td>
+                <td style="border:none">05/14/2023</td>
+                <td style="border:none">Akomodasi IGD</td>
+                <td style="border:none">Non Kelas -</td>
+                <td style="border:none">-</td>
+                <td style="text-align:right;border:none">1.00</td>
+                <td style="text-align:right;border:none">110.400.00</td>
+                <td style="text-align:right;border:none">0.00</td>
+                <td style="text-align:right;border:none">110.400.00</td>
+            </tr>
+            <tr>
+                <td style="border:none">3</td>
+                <td style="border:none">05/14/2023</td>
+                <td style="border:none">Akomodasi IGD ODC</td>
+                <td style="border:none">Non Kelas</td>
+                <td style="border:none">-</td>
+                <td style="text-align:right;border:none">1.00</td>
+                <td style="text-align:right;border:none">147.200.00</td>
+                <td style="text-align:right;border:none">0.00</td>
+                <td style="text-align:right;border:none">147.200.00</td>
+            </tr>
+            <tr>
+                <td style="border:none">4</td>
+                <td style="border:none">05/14/2023</td>
+                <td style="border:none">Akomodasi IGD ODC Triase</td>
+                <td style="border:none">Non Kelas</td>
+                <td style="border:none">dr. Azhari Ahsan</td>
+                <td style="text-align:right;border:none">1.00</td>
+                <td style="text-align:right;border:none">39.600.00</td>
+                <td style="text-align:right;border:none">0.00</td>
+                <td style="text-align:right;border:none">39.600.00</td>
+            </tr>
+            <tr>
+                <td style="border:none" colspan="8"></td>
+                <th style="text-align:right">297.200.00</th>
+            </tr>
+            <tr style="text-align: left;border:1px solid #afafaf;border-left:none;border-right:none">
+                <th colspan="7"><i>Jenis: PELAYANAN MEDIK NON OPERATIF</i></th>
+                <th style="text-align:center"><i>::</i></th>
+                <th style="text-align:right"><i>5.000.00</i></th>
+            </tr>
+            <tr style="border:none;text-align: left;">
+                <th colspan="9" style="border:none">IGD</th>
+            </tr>
+            <tr>
+                <td style="border:none">5</td>
+                <td style="border:none">05/14/2023</td>
+                <td style="border:none">Pemakaian O2/liter/jam</td>
+                <td style="border:none">Non Kelas</td>
+                <td style="border:none">-</td>
+                <td style="text-align:right;border:none">1.00</td>
+                <td style="text-align:right;border:none">5.000.00</td>
+                <td style="text-align:right;border:none">0.00</td>
+                <td style="text-align:right;border:none">5.000.00</td>
+            </tr>
+            <tr>
+                <td style="border:none" colspan="8"></td>
+                <th style="text-align:right">5.000.00</th>
+            </tr>
+            <tr style="text-align: left;border:1px solid #afafaf;border-left:none;border-right:none">
+                <th colspan="7"><i>Jenis: PELAYANAN RAJAL</i></th>
+                <th style="text-align:center"><i>::</i></th>
+                <th style="text-align:right"><i>35.000.00</i></th>
+            </tr>
+            <tr>
+                <td style="border:none">6</td>
+                <td style="border:none">05/14/2023</td>
+                <td style="border:none">DOKTER UMUM</td>
+                <td style="border:none">Non Kelas</td>
+                <td style="border:none">dr. Muhammad Saadillah Bahtiar</td>
+                <td style="text-align:right;border:none">1.00</td>
+                <td style="text-align:right;border:none">35.000.00</td>
+                <td style="text-align:right;border:none">0.00</td>
+                <td style="text-align:right;border:none">35.000.00</td>
+            </tr>
+            <tr style="border-bottom:1.5px solid #000">
+                <td style="border:none" colspan="8"></td>
+                <th style="text-align:right">35.000.00</th>
             </tr>
             <tr>
                 <th colspan="3"></th>
@@ -546,9 +544,4 @@
     </section>
 			
 </body>
-<script>
-    $(document).ready(function () {
-        window.print();
-    });
-</script>
 </html>
