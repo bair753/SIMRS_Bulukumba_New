@@ -607,21 +607,24 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 					var NoStruk = $scope.dataRincianTagihan;
 					var struk = "";
 					var kwitansi = "";
-					var stt = 'false'
-					if (confirm('View Rincian Biaya? ')) {
-						// Save it!
-						stt = 'true';
-					} else {
-						// Do nothing!
-						stt = 'false'
-					}
+					var stt = 'true'
+					// if (confirm('View Rincian Biaya? ')) {
+					// 	// Save it!
+					// 	stt = 'true';
+					// } else {
+					// 	// Do nothing!
+					// 	stt = 'false'
+					// }
+					
 					var user = medifirstService.getPegawaiLogin();
 					// if ($scope.item.jenisPasien != "BPJS") {
 					// medifirstService.get("tatarekening/get-data-login-cetakan").then(function (e) {
 						var client = new HttpClient();
-						client.get('http://127.0.0.1:1237/printvb/kasir?cetak-RincianBiaya=1&strNoregistrasi=' + $scope.item.noRegistrasi + '&strNoStruk=' + struk + '&strNoKwitansi=' + kwitansi + '&strIdPegawai=' + user.namaLengkap + '&view=' + stt, function (response) {
-							// do something with response
-						});
+						var local = JSON.parse(localStorage.getItem('profile'));
+						window.open(config.baseApiBackend + 'report/cetak-rinc-billing?cetak-RincianBiaya=1&noregistrasi=' + $scope.item.noRegistrasi + '&strNoStruk=' + struk + '&strNoKwitansi=' + kwitansi + '&strIdPegawai=' + user.namaLengkap + '&kdprofile=' + local.id +'&view=' + stt);
+						// client.get('report/billing-detail?cetak-RincianBiaya=1&strNoregistrasi=' + $scope.item.noRegistrasi + '&strNoStruk=' + struk + '&strNoKwitansi=' + kwitansi + '&strIdPegawai=' + user.namaLengkap + '&view=' + stt, function (response) {
+						// 	do something with response
+						// });
 					// })
 					// }else{
 					// 	medifirstService.get("tatarekening/get-data-login-cetakan").then(function (e) {
