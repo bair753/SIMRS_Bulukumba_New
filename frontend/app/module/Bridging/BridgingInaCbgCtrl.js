@@ -7507,6 +7507,78 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 					+ '&nama=' + nama, '_blank');
 			}
 
+			$scope.asesmenAwalMedisRajal = function(){
+				if ($scope.dataPasienSelected.noregistrasi == undefined) {
+					toastr.error('Pilih Pasien Terlebih dahulu!!!')
+					return;
+				}
+				var emrfk = [290012] // emrfk Asesmen Awal Medis Rajal
+
+				medifirstService.get("bridging/inacbg/get-emr-pasien?noregistrasi=" + $scope.dataPasienSelected.noregistrasi + '&emrfk=' + emrfk
+					// medifirstService.get("lab-radiologi/get-rincian-pelayanan?objectdepartemenfk=" + departemenfk + "&noregistrasi=" +   $scope.item.noregistrasi
+					, true).then(function (dat) {
+						$scope.dataDaftarAsesmenAwalMedisRajal = {
+							data: dat.data.data,
+							_data: dat.data.data,
+							// pageSize: 10,
+							selectable: true,
+							refresh: true,
+							total: dat.data.data.length,
+							serverPaging: false,
+							aggregate: [
+									{ field: 'total', aggregate: 'sum' },
+							]
+
+					};
+					}, function (error) {
+							$scope.isLoading = false;
+					});
+				
+				$scope.popUpDaftarAsesmenAwalMedisRajal.center().open();
+				
+			}
+
+			$scope.columnDaftarAsesmenAwalMedisRajal = {
+				columns: [
+						{
+								"field": "tglemr",
+								"title": "Tgl EMR",
+								"width": "90px",
+						},                   
+						{
+								"field": "emrpasienfk",
+								"title": "No EMR",
+								"width": "160px"
+						},
+						{
+								"field": "namaform",
+								"title": "Nama EMR",
+								"width": "160px"
+						},
+				],
+				sortable: {
+						mode: "single",
+						allowUnsort: false,
+				}
+			}
+
+			$scope.cetakAsesmenAwalMedisRajal = function () {
+					if ($scope.dataSelectedAsesmenAwalMedisRajal == undefined) {
+						toastr.error('Data belum dipilih!!!')
+						return;
+					}
+
+					var local = JSON.parse(localStorage.getItem('profile'));
+					var nama = medifirstService.getPegawaiLogin();
+					window.open(baseTransaksi + 'report/cetak-asesmen-awal-medis-rajal?nocm='
+					+ $scope.dataSelectedAsesmenAwalMedisRajal.nocm 
+					+ '&norec_apd=' + $scope.dataSelectedAsesmenAwalMedisRajal.norec_apd 
+					+ '&emr=' + $scope.dataSelectedAsesmenAwalMedisRajal.norec 
+					+ '&emrfk=' + $scope.dataSelectedAsesmenAwalMedisRajal.emrfk
+					+ '&kdprofile=' + local.id
+					+ '&nama=' + nama, '_blank');
+			}
+
 			$scope.lembarPenggunaanVentilator = function(){
 				if ($scope.dataPasienSelected.noregistrasi == undefined) {
 					toastr.error('Pilih Pasien Terlebih dahulu!!!')

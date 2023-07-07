@@ -619,6 +619,9 @@
 			<div class="grid_2">
 				<button class="btnTemplate1 buttonKuning" ng-click="asesmenAwalMedisIGD()">Cetak Asesmen Awal Medis Pasien Gawat Darurat</button>
 			</div>
+			<div class="grid_2">
+				<button class="btnTemplate1 buttonKuning" ng-click="asesmenAwalMedisRajal()">Cetak Asesmen Awal Medis Pasien Gawat Darurat</button>
+			</div>
 			
 			<div class="grid_2">
 				<button class="btnTemplate1" ng-click="bundlingdocument()">Bundle Dokumen</button>
@@ -1780,6 +1783,20 @@
 					<div class="grid_12">
 							<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
 									<button class="k-button  k-button-icontext" ng-click="cetakAsesmenAwalMedisGawatDarurat()">Cetak</button>
+							</div>
+					</div>
+			</div>
+		</div>
+
+		<div kendo-window="popUpDaftarAsesmenAwalMedisRajal" k-title="'Cetak Asesmen Awal Medis Rawat Jalan'" k-visible="false" k-width="1000" k-height="400">
+			<div class="panel panel-default container_12">
+				<div class="grid_12 headerBox">
+					<kendo-grid id="kGrids" data-source="dataDaftarAsesmenAwalMedisRajal" options="columnDaftarAsesmenAwalMedisRajal" k-selectable="'row'" k-sortable="'true'"
+							k-resizable="'true'" k-ng-model="dataSelectedAsesmenAwalMedisRajal" ng-click="klikGridAsesmenAwalMedisRajal(dataSelectedAsesmenAwalMedisRajal)"></kendo-grid>
+				</div>
+					<div class="grid_12">
+							<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
+									<button class="k-button  k-button-icontext" ng-click="cetakAsesmenAwalMedisRajal()">Cetak</button>
 							</div>
 					</div>
 			</div>
