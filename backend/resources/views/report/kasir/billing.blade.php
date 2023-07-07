@@ -466,7 +466,7 @@
             </tr>
             <tr>
                 <th colspan="3"></th>
-                <td colspan="2" style="border:none;">JUMLAH BIAYA TOTAL</td>
+                <td colspan="2" style="border:none;"><b>JUMLAH BIAYA TOTAL</b></td>
                 <td style="border:none;">:</td>
                 <td colspan="3" style="text-align:right;border:none;"><?php echo rupiah( $res['total'] ) ?></td>
             </tr>
@@ -502,7 +502,7 @@
             </tr>
             <tr>
                 <th colspan="3"></th>
-                <th colspan="2" style="border:none;text-align:left;">JUMLAH TELAH DIBAYAR</th>
+                <td colspan="2" style="border:none;text-align:left;">JUMLAH TELAH DIBAYAR</td>
                 <td style="border:none;">:</td>
                 <td colspan="3" style="text-align:right;border:none;"><?php echo rupiah( $res['dibayar'] ) ?></td>
             </tr>
