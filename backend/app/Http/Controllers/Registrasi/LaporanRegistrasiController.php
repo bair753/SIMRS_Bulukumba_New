@@ -2049,15 +2049,17 @@ ORDER BY nosep
             /** @var  $bto = Jumlah pasien Keluar (Hidup dan Mati) DIBAGI Jumlah tempat tidur */
             $item->bto = (int)$item->jmlpasienkeluar / (float)$item->tt;
 
-            if(count($dataMeninggal)> 0 ) {
-                foreach ($dataMeninggal as $itemDead) {
-                    /** @var  $gdr = (Jumlah Mati dibagi Jumlah pasien Keluar (Hidup dan Mati) */
-                    $item->gdr = (int)$itemDead->jumlahmeninggal * 1000 / (int)$item->jmlpasienkeluar;
+            /** @var  $gdr = (Jumlah Mati dibagi Jumlah pasien Keluar (Hidup dan Mati) */
+            $item->gdr = (int)$dataMeninggal['jumlahmeninggal'] * 100 / (int)$item->jmlpasienkeluar;
 
-                    /** @var  $NDR = (Jumlah Mati > 48 Jam dibagi Jumlah pasien Keluar (Hidup dan Mati) */
-                    $item->ndr = (int)$itemDead->jumlahlebih48 * 1000 / (int)$item->jmlpasienkeluar;
-                }
-            }
+            /** @var  $NDR = (Jumlah Mati > 48 Jam dibagi Jumlah pasien Keluar (Hidup dan Mati) */
+            $item->ndr = (int)$dataMeninggal['jumlahlebih48'] * 100 / (int)$item->jmlpasienkeluar;
+
+            // if(count($dataMeninggal)> 0 ) {
+            //     foreach ($dataMeninggal as $itemDead) {
+                    
+            //     }
+            // }
         }
         foreach ($kamar as $key => $row) {
             $count[$key] = $row->namakelas;
