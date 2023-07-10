@@ -1199,30 +1199,31 @@ class ReportController extends ApiController{
         LEFT JOIN departemen_m as dep on dep.id = ru.objectdepartemenfk 
         where pp.kdprofile = $kdProfile and pp.jeniskemasanfk = 2 and sr.norec ='$norec'        
 
-        union all 
-
-        select distinct ps.nocm,pro.kekuatan,ps.namapasien,to_char(ps.tgllahir, 'DD/MM/YYYY') as tgllahir,CASE WHEN aa.noantri IS NULL THEN sr.noresep ELSE aa.jenis || '-' || aa.noantri END AS noresep,to_char(sr.tglresep, 'DD-MM-YYYY') as tglresep,  
-        ' Racikan' || ' (' || CAST(((CAST(pp.qtydetailresep as INTEGER)/CAST(pp.dosis as INTEGER))*CAST(pro.kekuatan as INTEGER)) AS VARCHAR) || ')' AS namaproduk,pp.aturanpakai,pp.rke,  
-        case when alm.alamatlengkap is null then '-' else alm.alamatlengkap end as alamat,ps.notelepon,CASE when jr.jenisracikan IS NULL THEN '' ELSE jr.jenisracikan END AS satuanstandar,  
-        ((CAST(pp.qtydetailresep as INTEGER)/CAST(pp.dosis as INTEGER))*CAST(pro.kekuatan as INTEGER)/$qtybagi) as jumlah,  
-        CASE WHEN pp.issiang = 't' THEN 'Siang' ELSE '-' END AS siang, CASE WHEN pp.ispagi = 't' THEN 'Pagi' ELSE '-' END AS pagi,  
-        CASE WHEN pp.ismalam = 't' THEN 'Malam' ELSE '-' END as malam, CASE WHEN pp.issore = 't' THEN 'Sore' ELSE '-' END as sore,  
-        CASE WHEN pp.keteranganpakai  = '' OR pp.keteranganpakai IS NULL THEN '-' else pp.keteranganpakai END AS keteranganpakai,
-        ru.namaruangan,dep.namadepartemen,pg.namalengkap as namadokter
-        from strukresep_t as sr   
-        LEFT join pelayananpasien_t as pp on sr.norec= pp.strukresepfk 
-        LEFT join antrianpasiendiperiksa_t as apd on apd.norec = sr.pasienfk  
-        left JOIN pegawai_m AS pg ON pg.id = apd.objectpegawaifk 
-        LEFT join pasiendaftar_t as pd on pd.norec=apd.noregistrasifk  
-        LEFT join pasien_m as ps on ps.id = pd.nocmfk  
-        left join alamat_m as alm on alm.nocmfk = ps.id  
-        LEFT JOIN produk_m as pro on pro.id = pp.produkfk  
-        LEFT JOIN satuanstandar_m as ss on ss.id = pp.satuanviewfk  
-        LEFT JOIN jenisracikan_m as jr on jr.id = pp.jenisobatfk  
-        LEFT JOIN antrianapotik_t as aa on aa.noresep = sr.noresep
-        LEFT JOIN ruangan_m as ru on ru.id = apd.objectruanganfk
-        LEFT JOIN departemen_m as dep on dep.id = ru.objectdepartemenfk 
-        where pp.kdprofile = $kdProfile and pp.jeniskemasanfk = 1 and sr.norec ='$norec' "));
+        -- union all 
+        
+                                    -- select distinct ps.nocm,ps.namapasien,to_char(ps.tgllahir, 'DD/MM/YYYY') as tgllahir,CASE WHEN aa.noantri IS NULL THEN sr.noresep ELSE aa.jenis || '-' || aa.noantri END AS noresep,to_char(sr.tglresep, 'DD-MM-YYYY') as tglresep,  
+                                    -- ' Racikan' || ' (' || CAST(((CAST(pp.qtydetailresep as INTEGER)/CAST(pp.dosis as INTEGER))*CAST(pro.kekuatan as INTEGER)) AS VARCHAR) || ')' AS namaproduk,pp.aturanpakai,pp.rke,  
+                                    -- case when alm.alamatlengkap is null then '-' else alm.alamatlengkap end as alamat,ps.notelepon,CASE when jr.jenisracikan IS NULL THEN '' ELSE jr.jenisracikan END AS satuanstandar,  
+                                    -- ((CAST(pp.qtydetailresep as INTEGER)/CAST(pp.dosis as INTEGER))*CAST(pro.kekuatan as INTEGER)) as jumlah,  
+                                    -- CASE WHEN pp.issiang = 't' THEN 'Siang' ELSE '-' END AS siang, CASE WHEN pp.ispagi = 't' THEN 'Pagi' ELSE '-' END AS pagi,  
+                                    -- CASE WHEN pp.ismalam = 't' THEN 'Malam' ELSE '-' END as malam, CASE WHEN pp.issore = 't' THEN 'Sore' ELSE '-' END as sore,  
+                                    -- CASE WHEN pp.keteranganpakai  = '' OR pp.keteranganpakai IS NULL THEN '-' else pp.keteranganpakai END AS keteranganpakai,
+                                    -- ru.namaruangan,dep.namadepartemen,pg.namalengkap as namadokter
+                                    -- from strukresep_t as sr   
+                                    -- LEFT join pelayananpasien_t as pp on sr.norec= pp.strukresepfk 
+                                    -- LEFT join antrianpasiendiperiksa_t as apd on apd.norec = sr.pasienfk  
+                                    -- left JOIN pegawai_m AS pg ON pg.id = apd.objectpegawaifk 
+                                    -- LEFT join pasiendaftar_t as pd on pd.norec=apd.noregistrasifk  
+                                    -- LEFT join pasien_m as ps on ps.id = pd.nocmfk  
+                                    -- left join alamat_m as alm on alm.nocmfk = ps.id  
+                                    -- LEFT JOIN produk_m as pro on pro.id = pp.produkfk  
+                                    -- LEFT JOIN satuanstandar_m as ss on ss.id = pp.satuanviewfk  
+                                    -- LEFT JOIN jenisracikan_m as jr on jr.id = pp.jenisobatfk  
+                                    -- LEFT JOIN antrianapotik_t as aa on aa.noresep = sr.noresep
+                                    -- LEFT JOIN ruangan_m as ru on ru.id = apd.objectruanganfk
+                                    -- LEFT JOIN departemen_m as dep on dep.id = ru.objectdepartemenfk 
+                                    -- where pp.kdprofile = $kdProfile and pp.jeniskemasanfk = 1 and sr.norec ='$norec' "
+    ));
     //    dd($details);
         if(!empty($raw)){
             // $raw->umur = $this->getAge($raw->tgllahir ,date('Y-m-d'));
@@ -3522,30 +3523,31 @@ class ReportController extends ApiController{
                                     LEFT JOIN departemen_m as dep on dep.id = ru.objectdepartemenfk 
                                     where pp.kdprofile = $kdProfile and pp.jeniskemasanfk = 2 and sr.norec ='$norec'        
             
-                                    union all 
+                                    -- union all 
         
-                                    select distinct ps.nocm,ps.namapasien,to_char(ps.tgllahir, 'DD/MM/YYYY') as tgllahir,CASE WHEN aa.noantri IS NULL THEN sr.noresep ELSE aa.jenis || '-' || aa.noantri END AS noresep,to_char(sr.tglresep, 'DD-MM-YYYY') as tglresep,  
-                                    ' Racikan' || ' (' || CAST(((CAST(pp.qtydetailresep as INTEGER)/CAST(pp.dosis as INTEGER))*CAST(pro.kekuatan as INTEGER)) AS VARCHAR) || ')' AS namaproduk,pp.aturanpakai,pp.rke,  
-                                    case when alm.alamatlengkap is null then '-' else alm.alamatlengkap end as alamat,ps.notelepon,CASE when jr.jenisracikan IS NULL THEN '' ELSE jr.jenisracikan END AS satuanstandar,  
-                                    ((CAST(pp.qtydetailresep as INTEGER)/CAST(pp.dosis as INTEGER))*CAST(pro.kekuatan as INTEGER)) as jumlah,  
-                                    CASE WHEN pp.issiang = 't' THEN 'Siang' ELSE '-' END AS siang, CASE WHEN pp.ispagi = 't' THEN 'Pagi' ELSE '-' END AS pagi,  
-                                    CASE WHEN pp.ismalam = 't' THEN 'Malam' ELSE '-' END as malam, CASE WHEN pp.issore = 't' THEN 'Sore' ELSE '-' END as sore,  
-                                    CASE WHEN pp.keteranganpakai  = '' OR pp.keteranganpakai IS NULL THEN '-' else pp.keteranganpakai END AS keteranganpakai,
-                                    ru.namaruangan,dep.namadepartemen,pg.namalengkap as namadokter
-                                    from strukresep_t as sr   
-                                    LEFT join pelayananpasien_t as pp on sr.norec= pp.strukresepfk 
-                                    LEFT join antrianpasiendiperiksa_t as apd on apd.norec = sr.pasienfk  
-                                    left JOIN pegawai_m AS pg ON pg.id = apd.objectpegawaifk 
-                                    LEFT join pasiendaftar_t as pd on pd.norec=apd.noregistrasifk  
-                                    LEFT join pasien_m as ps on ps.id = pd.nocmfk  
-                                    left join alamat_m as alm on alm.nocmfk = ps.id  
-                                    LEFT JOIN produk_m as pro on pro.id = pp.produkfk  
-                                    LEFT JOIN satuanstandar_m as ss on ss.id = pp.satuanviewfk  
-                                    LEFT JOIN jenisracikan_m as jr on jr.id = pp.jenisobatfk  
-                                    LEFT JOIN antrianapotik_t as aa on aa.noresep = sr.noresep
-                                    LEFT JOIN ruangan_m as ru on ru.id = apd.objectruanganfk
-                                    LEFT JOIN departemen_m as dep on dep.id = ru.objectdepartemenfk 
-                                    where pp.kdprofile = $kdProfile and pp.jeniskemasanfk = 1 and sr.norec ='$norec' "));
+                                    -- select distinct ps.nocm,ps.namapasien,to_char(ps.tgllahir, 'DD/MM/YYYY') as tgllahir,CASE WHEN aa.noantri IS NULL THEN sr.noresep ELSE aa.jenis || '-' || aa.noantri END AS noresep,to_char(sr.tglresep, 'DD-MM-YYYY') as tglresep,  
+                                    -- ' Racikan' || ' (' || CAST(((CAST(pp.qtydetailresep as INTEGER)/CAST(pp.dosis as INTEGER))*CAST(pro.kekuatan as INTEGER)) AS VARCHAR) || ')' AS namaproduk,pp.aturanpakai,pp.rke,  
+                                    -- case when alm.alamatlengkap is null then '-' else alm.alamatlengkap end as alamat,ps.notelepon,CASE when jr.jenisracikan IS NULL THEN '' ELSE jr.jenisracikan END AS satuanstandar,  
+                                    -- ((CAST(pp.qtydetailresep as INTEGER)/CAST(pp.dosis as INTEGER))*CAST(pro.kekuatan as INTEGER)) as jumlah,  
+                                    -- CASE WHEN pp.issiang = 't' THEN 'Siang' ELSE '-' END AS siang, CASE WHEN pp.ispagi = 't' THEN 'Pagi' ELSE '-' END AS pagi,  
+                                    -- CASE WHEN pp.ismalam = 't' THEN 'Malam' ELSE '-' END as malam, CASE WHEN pp.issore = 't' THEN 'Sore' ELSE '-' END as sore,  
+                                    -- CASE WHEN pp.keteranganpakai  = '' OR pp.keteranganpakai IS NULL THEN '-' else pp.keteranganpakai END AS keteranganpakai,
+                                    -- ru.namaruangan,dep.namadepartemen,pg.namalengkap as namadokter
+                                    -- from strukresep_t as sr   
+                                    -- LEFT join pelayananpasien_t as pp on sr.norec= pp.strukresepfk 
+                                    -- LEFT join antrianpasiendiperiksa_t as apd on apd.norec = sr.pasienfk  
+                                    -- left JOIN pegawai_m AS pg ON pg.id = apd.objectpegawaifk 
+                                    -- LEFT join pasiendaftar_t as pd on pd.norec=apd.noregistrasifk  
+                                    -- LEFT join pasien_m as ps on ps.id = pd.nocmfk  
+                                    -- left join alamat_m as alm on alm.nocmfk = ps.id  
+                                    -- LEFT JOIN produk_m as pro on pro.id = pp.produkfk  
+                                    -- LEFT JOIN satuanstandar_m as ss on ss.id = pp.satuanviewfk  
+                                    -- LEFT JOIN jenisracikan_m as jr on jr.id = pp.jenisobatfk  
+                                    -- LEFT JOIN antrianapotik_t as aa on aa.noresep = sr.noresep
+                                    -- LEFT JOIN ruangan_m as ru on ru.id = apd.objectruanganfk
+                                    -- LEFT JOIN departemen_m as dep on dep.id = ru.objectdepartemenfk 
+                                    -- where pp.kdprofile = $kdProfile and pp.jeniskemasanfk = 1 and sr.norec ='$norec' "
+                                ));
 
         $res['profile'] = Profile::where('id', $request['kdprofile'])->first();
 
