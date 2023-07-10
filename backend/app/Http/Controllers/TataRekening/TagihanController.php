@@ -3386,11 +3386,11 @@ class TagihanController  extends ApiController
                         $end    = new Carbon($tglAwalDiskon);
                         $tglRegis = date('Y-m-d', strtotime($dateAPD->tglregistrasi));
                         $selisihjam = $start->diff($end)->format('%H');
-                        if ($tglRegis == $itemDate){
-                            if ((int)$selisihjam <= 6 ){
-                                $diskon = ((float)$sirahMacan[0]->hargasatuan * 50)/100;
-                            }
-                        }
+                        // if ($tglRegis == $itemDate){
+                        //     if ((int)$selisihjam <= 6 ){
+                        //         $diskon = ((float)$sirahMacan[0]->hargasatuan * 50)/100;
+                        //     }
+                        // }
                         // ## END ##
 
 
