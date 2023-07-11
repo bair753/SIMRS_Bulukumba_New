@@ -88,8 +88,8 @@ define(['initialize'], function (initialize) {
             function loadKinerja2() {
                 $scope.isRouteLoading = true;
                 if ($scope.item.tahun == undefined) return
-                var tahun = moment($scope.item.tahun).format('YYYY')
-                medifirstService.get('registrasi/laporan/get-kinerja-pelayanan-ranap-tahunan?tahun=' + tahun).then(function (data) {
+                var tahun = moment($scope.item.tahun.id).format('YYYY');
+                medifirstService.get('registrasi/laporan/get-kinerja-pelayanan-ranap-tahunan?tahun=' + $scope.item.tahun.id).then(function (data) {
                     $scope.isRouteLoading = false;
                     var datas = data.data.data;
                     for (var i = 0; i < datas.length; i++) {

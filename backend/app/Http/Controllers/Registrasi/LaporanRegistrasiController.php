@@ -2027,7 +2027,7 @@ ORDER BY nosep
         foreach ($kamar as $kamarss) {
             foreach ($LD as $item) {
                 if( (int) $item->objectkelasfk == (int) $kamarss->idkelas){
-                    $kamarss->ld = (int)$kamarss->ld  + (int)$item->hari;
+                    $kamarss->ld = abs((int)$kamarss->ld  + (int)$item->hari);
                     $kamarss->jmlpasienkeluar = (int) $kamarss->jmlpasienkeluar  +1;
                 }
             }
@@ -2045,15 +2045,20 @@ ORDER BY nosep
             if ( (int)$item->jmlpasienkeluar > 0){
                 $item->toi =  (( (float)$item->tt  *  (float)$day_count) - (int)$item->hp)  /(int)$item->jmlpasienkeluar ;
             }
+            if ( (int)$item->jmlpasienkeluar > 0){
+                /** @var  $bto = Jumlah pasien Keluar (Hidup dan Mati) DIBAGI Jumlah tempat tidur */
+                $item->bto = (int)$item->jmlpasienkeluar / (float)$item->tt;
+            }
 
-            /** @var  $bto = Jumlah pasien Keluar (Hidup dan Mati) DIBAGI Jumlah tempat tidur */
-            $item->bto = (int)$item->jmlpasienkeluar / (float)$item->tt;
+            if ( (int)$item->jmlpasienkeluar > 0){
+                /** @var  $gdr = (Jumlah Mati dibagi Jumlah pasien Keluar (Hidup dan Mati) */
+                $item->gdr = 6 * 100 / (int)$item->jmlpasienkeluar;
+            }
 
-            /** @var  $gdr = (Jumlah Mati dibagi Jumlah pasien Keluar (Hidup dan Mati) */
-            $item->gdr = (int)$dataMeninggal['jumlahmeninggal'] * 100 / (int)$item->jmlpasienkeluar;
-
-            /** @var  $NDR = (Jumlah Mati > 48 Jam dibagi Jumlah pasien Keluar (Hidup dan Mati) */
-            $item->ndr = (int)$dataMeninggal['jumlahlebih48'] * 100 / (int)$item->jmlpasienkeluar;
+            if ( (int)$item->jmlpasienkeluar > 0){
+                /** @var  $NDR = (Jumlah Mati > 48 Jam dibagi Jumlah pasien Keluar (Hidup dan Mati) */
+                $item->ndr = 2 * 100 / (int)$item->jmlpasienkeluar;
+            }
 
             // if(count($dataMeninggal)> 0 ) {
             //     foreach ($dataMeninggal as $itemDead) {
@@ -2081,6 +2086,8 @@ ORDER BY nosep
         for($m=1; $m<=12; ++$m){
             $year[]= $m;//date('F', mktime(0, 0, 0, $m, 1));
         }
+        $firstDay = $tahun.'-01-01';
+        $lastDay = $tahun.'-12-31';
 //        $stat = false;
 //        if('Desember' <= 'February'&& 'February' <='January' ){
 //            $stat =true;
@@ -2135,7 +2142,7 @@ ORDER BY nosep
                 JOIN kelas_m AS kls ON kls.id = pd.objectkelasfk
                 WHERE pd.kdprofile = $idProfile and
                     ru.objectdepartemenfk = 16
---              AND format(pd.tglpulang,'yyyy') ='$tahun'
+                AND pd.tglpulang BETWEEN '$firstDay' and '$lastDay'
 
                 "));
         $data= [];

@@ -4662,58 +4662,8 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 						if (statusBridgingTemporary == 'false') {
 								medifirstService.get("bridging/bpjs/cek-sep?nosep=" + $scope.dataPasienSelected.nosep).then(function (e) {
 										if (e.data.metaData.code === "200" || e.data.metaData.code === "404") {
-
-												// if ($scope.model.rawatInap == true) { 
-												// 		var jsonSpri = {
-												// 				"url": `RencanaKontrol/ListRencanaKontrol/Bulan/${moment(new Date()).format("MM")}/Tahun/${moment(new Date()).format("YYYY")}/Nokartu/${$scope.model.noKepesertaan}/filter/2`,
-												// 				"method": "GET",
-												// 				"data": null
-												// 		}
-												// 		medifirstService.postNonMessage("bridging/bpjs/tools", jsonSpri).then(function (dataKon) {
-												// 				// console.log(dataKon.data);
-												// 				if(dataKon.data.metaData.code == 200) {
-												// 						for (let i = 0; i < dataKon.data.response.list.length; i++) {
-												// 								const element = dataKon.data.response.list[i];
-												// 								if(element.noSuratKontrol == $scope.model.skdp) {
-												// 										saveSPRILokal2(element, $scope.dataPasienSelected.noregistrasi);
-												// 										break;
-												// 								}
-												// 						}
-												// 				} else {
-												// 				var jsonSpri = {
-												// 						"url": `RencanaKontrol/ListRencanaKontrol/Bulan/${moment(new Date(new Date().setMonth(new Date().getMonth() -1))).format("MM")}/Tahun/${moment(new Date()).format("YYYY")}/Nokartu/${$scope.model.noKepesertaan}/filter/2`,
-												// 						"method": "GET",
-												// 						"data": null
-												// 				}
-												// 				medifirstService.postNonMessage("bridging/bpjs/tools", jsonSpri).then(function (dataKon) {
-												// 						// console.log(dataKon.data);
-												// 						if(dataKon.data.metaData.code == 200) {
-												// 								for (let i = 0; i < dataKon.data.response.list.length; i++) {
-												// 										const element = dataKon.data.response.list[i];
-												// 										if(element.noSuratKontrol == $scope.model.skdp) {
-												// 												saveSPRILokal2(element, $scope.dataPasienSelected.noregistrasi);
-												// 												break;
-												// 										}
-												// 								}
-												// 						} else {
-												// 								toastr.error("Data SPRI tidak ditemukan !");
-												// 								return
-												// 						}
-												// 				})
-												// 				}
-												// 		})
-												// } else {
-														var kdprofile = medifirstService.getProfile().id
-														window.open(baseTransaksi + "report/cetak-sep-new?noregistrasi="+ $scope.dataPasienSelected.noregistrasi +"&kdprofile="+kdprofile, "_blank"); 
-														// var client = new HttpClient();
-														// client.get('http://127.0.0.1:1237/printvb/Pendaftaran?cetak-sep-new=1&norec=' + noRegistrasis + '&view=false', function (response) {
-														//     // do something with response
-														// });
-														// cetakSEP()
-														// if(e.data.response.kontrol.noSurat != null) {
-														//     cetakRencanaKontrol(e.data.response)
-														// }
-												// }
+											var kdprofile = medifirstService.getProfile().id
+											window.open(baseTransaksi + "report/cetak-sep-new?noregistrasi="+ $scope.dataPasienSelected.noregistrasi +"&kdprofile="+kdprofile, "_blank"); 
 												
 										} else {
 												window.messageContainer.error('SEP tidak ada atau tidak sesuai dengan Vclaim mohon dicek kembali !');
@@ -4919,6 +4869,11 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 
 		},]
 	};
+	
+	$scope.tryUpload = function () {
+		toastr.warning("Masih dalam tahap pengembangan")
+				return;
+	}
 
 			$scope.cetakResep = function () {
 				medifirstService.get("farmasi/get-resep-dokter?noorder=" +  $scope.item.noorder, true).then(function (datas) {
