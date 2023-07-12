@@ -200,12 +200,10 @@
                                             </div>
                                         </div>
                                         <div class="grid_12">
-                                            <div class="grid_3 parentKeteranganFieldTambahan">
-                                                <input class="k-textbox" ng-model="item.obj[32115945]" type="text">
-                                                <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px"></label>
-                                            </div>
-                                            <div class="grid_6" style="margin-top: 10px;">
-                                                <label c-label item="item">Vaksin Hepatitis B 0.5 cc IM  Tenaga Medis</label>
+                                            
+                                            <div class="grid_9">
+                                                <input type="checkbox" class="k-checkbox" ng-model="item.obj[32115945]" id="item.obj[32115945]">
+                                                <label class="k-checkbox-label" for="item.obj[32115945]">&nbsp;Vaksin Hepatitis B 0.5 cc IM  Tenaga Medis</label> 
                                             </div>
                                             <div class="grid_3 parentKeteranganFieldTambahan">
                                                 <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[32115946]" k-data-text-field="'text'" 
@@ -213,9 +211,9 @@
                                             </div>
                                         </div>
                                         <div class="grid_12">
-                                            <div class="grid_3 parentKeteranganFieldTambahan">
-                                                <input class="k-textbox" ng-model="item.obj[32115947]" type="text">
-                                                <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px"></label>
+                                            <div class="grid_9">
+                                                <input type="checkbox" class="k-checkbox" ng-model="item.obj[32115947]" id="item.obj[32115947]">
+                                                <label class="k-checkbox-label" for="item.obj[32115947]">&nbsp;Immunoglobulin Hepatitis B 0.5 cc IM  Pukul</label> 
                                             </div>
                                             <div class="grid_6" style="margin-top: 10px;">
                                                 <label c-label item="item">Immunoglobulin Hepatitis B 0.5 cc IM  Pukul</label>
@@ -373,7 +371,7 @@
                                                 <label c-label item="item">Persalinan Tanggal/Jam</label>
                                             </div>
                                             <div class="grid_9 parentKeteranganFieldTambahan">
-                                                <input style="width: 100%" k-ng-model="item.obj[32115965]" kendo-timepicker placeholer="yyyy-MM-dd HH:MM" k-format="'yyyy-MM-dd HH:mm'" />
+                                                <input style="width: 100%" k-ng-model="item.obj[32115965]" kendo-datetimepicker placeholer="yyyy-MM-dd HH:MM" k-format="'yyyy-MM-dd HH:mm'" />
                                             </div>
                                         </div>
                                         <div class="grid_12" style="margin-top: 10px;">
@@ -648,7 +646,7 @@
                                                 <label c-label item="item">Persalinan Tanggal/Jam</label>
                                             </div>
                                             <div class="grid_9 parentKeteranganFieldTambahan">
-                                                <input style="width: 100%" k-ng-model="item.obj[32115965]" kendo-timepicker placeholer="yyyy-MM-dd HH:MM" k-format="'yyyy-MM-dd HH:mm'" />
+                                                <input style="width: 100%" k-ng-model="item.obj[32115965]" kendo-datetimepicker placeholer="yyyy-MM-dd HH:MM" k-format="'yyyy-MM-dd HH:mm'" />
                                             </div>
                                         </div>
                                     </fieldset>
@@ -1361,7 +1359,7 @@
                                             </div>
                                             <div class="grid_12">
                                                 <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[32116111]" k-data-text-field="'text'"
-                                                    k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listDokter" />
+                                                    k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
                                             </div>
                                         </div>
                                         <div class="grid_6" style="margin-top: 10px;">
