@@ -94,7 +94,7 @@
                                 </div>
                                 <div class="grid_12 parentKeteranganFieldTambahan" style="margin-top: -10px;">
                                     <input class="k-textbox" ng-model="item.obj[jawab.id]" type="text" placeholder="{{jawab.caption}}"
-                                        ng-value="{{jawab.value}}" ng-disable="item.obj[jawab.id]">
+                                        ng-value="{{jawab.value}}" ng-disabled="item.obj2[jawab.id]">
                                 </div>
                             </div>
                             <div class="grid_8" ng-switch-when="textarea" style="margin-top: 10px;">
@@ -103,7 +103,7 @@
                                 </div>
                                 <div class="grid_12">
                                     <textarea cols="6" rows="3" c-text-area type="input" filter="'string'" class="k-textbox"
-                                        ng-model="item.obj[jawab.id]" ng-disable="item.obj[jawab.id]"></textarea>
+                                        ng-model="item.obj[jawab.id]" ng-disabled="item.obj2[jawab.id]"></textarea>
                                 </div>
                             </div>
                             <div class="grid_8" ng-switch-when="combobox" style="margin-top: 10px;">
@@ -112,7 +112,7 @@
                                 </div>
                                 <div class="grid_12">
                                     <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[jawab.id]" k-data-text-field="'text'"
-                                        k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="{{ jawab.dataList }}" ng-disable="item.obj[jawab.id]" />
+                                        k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="{{ jawab.dataList }}" ng-disabled="item.obj2[jawab.id]"/>
                                 </div>
                             </div>
                         </div>

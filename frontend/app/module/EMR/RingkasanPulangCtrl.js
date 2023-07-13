@@ -20,6 +20,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
             $scope.isCetakV = true;
             $scope.allDisabled = false;
             var pegawaiInputDetail  = '';
+            var pegawaiLogin = medifirstService.getPegawaiLogin()
             var cacheNomorEMR = cacheHelper.get('cacheNomorEMR');
             var cacheNoREC = cacheHelper.get('cacheNOREC_EMR');
             if(cacheNoREC!= undefined){
@@ -99,6 +100,10 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     ]
                 },
             ];
+
+            medifirstService.get("sysadmin/master/hak-akses-edit-icd", true, true, 10).then(function(data) {
+                $scope.listEditICD = data;
+            });
 
             $scope.cetakPdf = function () {
                 if (norecEMR == '') return
@@ -354,6 +359,24 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                                     $scope.item.obj[dataLoad[i].emrdfk] = { value: res[0], text: res[1] }
 
                                 }
+                                if($scope.listEditICD.data.includes(pegawaiLogin.id)){
+                                    $scope.item.obj2[423806] = false
+                                    $scope.item.obj2[31101417] = false
+                                    $scope.item.obj2[31101418] = false
+                                    $scope.item.obj2[31101419] = false
+                                    $scope.item.obj2[31101420] = false
+                                    $scope.item.obj2[31101421] = false
+                                    $scope.item.obj2[423812] = false
+                                }else{
+                                    $scope.item.obj2[423806] = true
+                                    $scope.item.obj2[31101417] = true
+                                    $scope.item.obj2[31101418] = true
+                                    $scope.item.obj2[31101419] = true
+                                    $scope.item.obj2[31101420] = true
+                                    $scope.item.obj2[31101421] = true
+                                    $scope.item.obj2[423812] = true
+                                }
+                                
                                 pegawaiInputDetail = dataLoad[i].pegawaifk
                             }
 
