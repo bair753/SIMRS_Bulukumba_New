@@ -349,6 +349,9 @@
                                                             <font size="1"><b>Aturan Pakai</font>
                                                         </td>
                                                         <td height="5">
+                                                            <font size="1"><b>Keterangan</font>
+                                                        </td>
+                                                        <td height="5">
                                                             <font size="1"><b>Paraf</font>
                                                         </td>
                                                     </tr>
@@ -371,6 +374,12 @@
                                                         </td>
                                                         <td height="5">
                                                             <font size="1"><?= $d->aturanpakai ?></font>
+                                                        </td>
+                                                        <td height="5">
+                                                            <font size="1"><?= $d->keteranganpakai ?></font>
+                                                        </td>
+                                                        <td height="5">
+                                                            <font size="1"></font>
                                                         </td>
                                                     </tr>
                                                     <?php } ?>
@@ -687,7 +696,7 @@
                                                             <font size="1"></font>
                                                         </td>
                                                         <td height="5" style="padding-left:3pt; text-align:center; border-right:solid 1.0pt;padding-bottom:5pt;">
-                                                            <font size="1"><u>({{ $r->user }})</u></font>
+                                                            <font size="1"><u>({{ $isi->farmasi == NULL ? '________________' : $isi->farmasi }})</u></font>
                                                         </td>
                                                         <td height="5" style="padding-left:3pt; text-align:center;">
                                                             <font size="1"><u>({{ $raw->namapasien }})</u></font>

@@ -18,8 +18,10 @@ define(['initialize', 'Configuration'], function (initialize, config) {
             var dataLoad = [];
             $scope.isCetak = false;
             $scope.isCetakV = true;
+            $scope.isUpload = true;
             $scope.allDisabled = false;
             var pegawaiInputDetail  = '';
+            var pegawaiLogin = medifirstService.getPegawaiLogin()
             var cacheNomorEMR = cacheHelper.get('cacheNomorEMR');
             var cacheNoREC = cacheHelper.get('cacheNOREC_EMR');
             if(cacheNoREC!= undefined){
@@ -99,6 +101,25 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     ]
                 },
             ];
+
+            medifirstService.get("sysadmin/master/hak-akses-edit-icd", true, true, 10).then(function(data) {
+                $scope.listEditICD = data;
+            });
+
+            $scope.upload = function () {
+                toastr.warning('Masih dalam tahap pengembany','Peringatan')
+                    return
+                // if (norecEMR == '') return
+
+                // var local = JSON.parse(localStorage.getItem('profile'));
+                // var nama = medifirstService.getPegawaiLogin().namalengkap;
+                // console.log(config.baseApiBackend);
+                // window.open(config.baseApiBackend + 'report/upload-asesmen-ringkasan-pulang-ranap?nocm='
+                //     + $scope.cc.nocm + '&norec_apd=' + $scope.cc.norec + '&emr=' + norecEMR
+                //     + '&emrfk=' + $scope.cc.emrfk
+                //     + '&kdprofile=' + local.id
+                //     + '&nama=' + nama, '_blank');
+            }
 
             $scope.cetakPdf = function () {
                 if (norecEMR == '') return
@@ -354,6 +375,25 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                                     $scope.item.obj[dataLoad[i].emrdfk] = { value: res[0], text: res[1] }
 
                                 }
+                                
+                                if($scope.listEditICD.data.includes(pegawaiLogin.id)){
+                                    $scope.item.obj2[423806] = false
+                                    $scope.item.obj2[31101417] = false
+                                    $scope.item.obj2[31101418] = false
+                                    $scope.item.obj2[31101419] = false
+                                    $scope.item.obj2[31101420] = false
+                                    $scope.item.obj2[31101421] = false
+                                    $scope.item.obj2[423812] = false
+                                }else{
+                                    $scope.item.obj2[423806] = true
+                                    $scope.item.obj2[31101417] = true
+                                    $scope.item.obj2[31101418] = true
+                                    $scope.item.obj2[31101419] = true
+                                    $scope.item.obj2[31101420] = true
+                                    $scope.item.obj2[31101421] = true
+                                    $scope.item.obj2[423812] = true
+                                }
+                                
                                 pegawaiInputDetail = dataLoad[i].pegawaifk
                             }
 
@@ -383,25 +423,25 @@ define(['initialize', 'Configuration'], function (initialize, config) {
               
             $scope.Save = function () {
 
-                if($scope.item.obj[423802] == undefined){
-                    toastr.warning('Tanggal Keluar tidak boleh kosong','Peringatan')
-                    return
-                }
+                // if($scope.item.obj[423802] == undefined){
+                //     toastr.warning('Tanggal Keluar tidak boleh kosong','Peringatan')
+                //     return
+                // }
 
-                if($scope.item.obj[423803] == undefined){
-                    toastr.warning('Riwayat Kesehatan tidak boleh kosong','Peringatan')
-                    return
-                }
+                // if($scope.item.obj[423803] == undefined){
+                //     toastr.warning('Riwayat Kesehatan tidak boleh kosong','Peringatan')
+                //     return
+                // }
 
-                if($scope.item.obj[423804] == undefined){
-                    toastr.warning('Indikasi di Rawat tidak boleh kosong','Peringatan')
-                    return
-                }
+                // if($scope.item.obj[423804] == undefined){
+                //     toastr.warning('Indikasi di Rawat tidak boleh kosong','Peringatan')
+                //     return
+                // }
 
-                if($scope.item.obj[423805] == undefined){
-                    toastr.warning('Diagnosis tidak boleh kosong','Peringatan')
-                    return
-                }
+                // if($scope.item.obj[423805] == undefined){
+                //     toastr.warning('Diagnosis tidak boleh kosong','Peringatan')
+                //     return
+                // }
 
                 // if($scope.item.obj[423806] == undefined){
                 //     toastr.warning('ICD 10 Diagnosis tidak boleh kosong','Peringatan')
@@ -418,40 +458,40 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 //     return
                 // }
 
-                if($scope.item.obj[423809] == undefined){
-                    toastr.warning('Pemeriksaan Fisik tidak boleh kosong','Peringatan')
-                    return
-                }
+                // if($scope.item.obj[423809] == undefined){
+                //     toastr.warning('Pemeriksaan Fisik tidak boleh kosong','Peringatan')
+                //     return
+                // }
 
-                if($scope.item.obj[423810] == undefined){
-                    toastr.warning('Pemeriksaan Diagnostik tidak boleh kosong','Peringatan')
-                    return
-                }
+                // if($scope.item.obj[423810] == undefined){
+                //     toastr.warning('Pemeriksaan Diagnostik tidak boleh kosong','Peringatan')
+                //     return
+                // }
                 
-                if($scope.item.obj[423811] == undefined){
-                    toastr.warning('Tindakan yang Telah Dikerjakan tidak boleh kosong','Peringatan')
-                    return
-                }
+                // if($scope.item.obj[423811] == undefined){
+                //     toastr.warning('Tindakan yang Telah Dikerjakan tidak boleh kosong','Peringatan')
+                //     return
+                // }
 
-                if($scope.item.obj[423813] == undefined){
-                    toastr.warning('Obat yang Diberikan tidak boleh kosong','Peringatan')
-                    return
-                }
+                // if($scope.item.obj[423813] == undefined){
+                //     toastr.warning('Obat yang Diberikan tidak boleh kosong','Peringatan')
+                //     return
+                // }
 
-                if($scope.item.obj[423814] == undefined){
-                    toastr.warning('Kondisi Pasien tidak boleh kosong','Peringatan')
-                    return
-                }
+                // if($scope.item.obj[423814] == undefined){
+                //     toastr.warning('Kondisi Pasien tidak boleh kosong','Peringatan')
+                //     return
+                // }
 
-                if($scope.item.obj[423815] == undefined){
-                    toastr.warning('Tindak Lanjut tidak boleh kosong','Peringatan')
-                    return
-                }
+                // if($scope.item.obj[423815] == undefined){
+                //     toastr.warning('Tindak Lanjut tidak boleh kosong','Peringatan')
+                //     return
+                // }
 
-                if($scope.item.obj[423819] == undefined){
-                    toastr.warning('DPJP tidak boleh kosong','Peringatan')
-                    return
-                }
+                // if($scope.item.obj[423819] == undefined){
+                //     toastr.warning('DPJP tidak boleh kosong','Peringatan')
+                //     return
+                // }
 
                 
                 var arrobj = Object.keys($scope.item.obj)

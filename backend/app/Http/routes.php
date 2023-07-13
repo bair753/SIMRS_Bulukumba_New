@@ -2392,6 +2392,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
                 Route::get('sysadmin/general/get-data-depart', 'SysAdmin\GeneralController@getDepartemen');
                 Route::get('sysadmin/master/get-no-hak-akses-upload-berkas', 'SysAdmin\Master\MasterController@getNoHakAkses');
                 Route::get('sysadmin/master/get-no-hak-akses-edit-pemakaian-asuransi', 'SysAdmin\Master\MasterController@getNoHakAksesPemakaianAsuransi');
+                Route::get('sysadmin/master/hak-akses-edit-icd', 'SysAdmin\Master\MasterController@getEditICD');
                 Route::get('sysadmin/general/get-validasi-autorisasi-password', 'SysAdmin\ModulAplikasiController@getValidateAuthPasscode');
                 Route::get('sysadmin/general/get-combo-pegawai-dokter', 'SysAdmin\GeneralController@getDataPegawaiDokterGeneral');
                 // GET //
@@ -2748,6 +2749,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
         Route::get('report/cetak-surat-perintah-bayar','Report\ReportController@cetakSuratBayar');
         Route::get('report/billing-detail','Report\ReportController@cetakBillingDetail');
         Route::get('report/cetak-asesmen-ringkasan-pulang-ranap', 'Report\ReportController@ringkasanPulang');
+        Route::get('report/upload-asesmen-ringkasan-pulang-ranap', 'Report\ReportController@uploadringkasanPulang');
         Route::get('report/cetak-asesmen-awal-medis-ranap', 'Report\ReportController@asesmenAwalMedisRanap');
         Route::get('report/cetak-labelrekap-apotik', 'Report\ReportController@labelRekapApotik');
         Route::get('report/cetak-labelkecil-apotik', 'Report\ReportController@labelLabelKecilApotik');

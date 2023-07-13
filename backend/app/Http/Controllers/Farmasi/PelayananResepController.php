@@ -3219,6 +3219,7 @@ class PelayananResepController extends ApiController
                 $resepDokter->duplikasiterapi = $request['duplikasiterapi'];;
                 $resepDokter->interaksiobat = $request['interaksiobat'];;
                 $resepDokter->nopesanan = $request['nopesanan'];
+                $resepDokter->farmasi = $request['farmasi'];
                 $resepDokter->save();
             } else {
                 $resepDokter = ResepDokter::where('nopesanan', $request['nopesanan'])->where('kdprofile', $kdProfile)
@@ -3240,7 +3241,8 @@ class PelayananResepController extends ApiController
                     'pasien' => $request['pasien'],
                     'duplikasiterapi' => $request['duplikasiterapi'],
                     'interaksiobat' => $request['interaksiobat'],
-                    'nopesanan' => $request['nopesanan']
+                    'nopesanan' => $request['nopesanan'],
+                    'farmasi' => $request['farmasi']
                 ]);
             }
         
