@@ -738,6 +738,11 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     title: "Qty",
                     width: "100px"
                 },
+                {
+                    field: "keterangan",
+                    title: "Keterangan",
+                    width: "200px"
+                },
                 // {
                 //     "field": "namalengkap",
                 //     "title": "Dokter",
@@ -1242,6 +1247,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     pasien: $scope.item.pasien != undefined ? $scope.item.pasien : false,
                     duplikasiterapi: $scope.item.duplikasiTerapi != undefined ? $scope.item.duplikasiTerapi : false,
                     interaksiobat: $scope.item.interaksiObat != undefined ? $scope.item.interaksiObat : false,
+                    farmasi: medifirstService.getPegawaiLogin().id,
 				}
                 medifirstService.post('farmasi/save-resep-obat', objSave).then(function (e) {
 

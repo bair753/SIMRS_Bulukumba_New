@@ -2749,6 +2749,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
         Route::get('report/cetak-surat-perintah-bayar','Report\ReportController@cetakSuratBayar');
         Route::get('report/billing-detail','Report\ReportController@cetakBillingDetail');
         Route::get('report/cetak-asesmen-ringkasan-pulang-ranap', 'Report\ReportController@ringkasanPulang');
+        Route::get('report/upload-asesmen-ringkasan-pulang-ranap', 'Report\ReportController@uploadringkasanPulang');
         Route::get('report/cetak-asesmen-awal-medis-ranap', 'Report\ReportController@asesmenAwalMedisRanap');
         Route::get('report/cetak-labelrekap-apotik', 'Report\ReportController@labelRekapApotik');
         Route::get('report/cetak-labelkecil-apotik', 'Report\ReportController@labelLabelKecilApotik');
