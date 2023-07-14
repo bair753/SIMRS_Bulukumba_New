@@ -388,7 +388,7 @@
                                 @endphp
                                 @foreach ($item as $data)
                                     <tr>
-                                        <td class="th-class text-left">
+                                        <td class="th-class text-center">
                                             <span class="text">{{ $nomor }}</span>
                                         </td>
                                         <td class="th-class text-center">
