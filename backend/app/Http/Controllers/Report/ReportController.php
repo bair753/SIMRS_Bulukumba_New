@@ -6522,7 +6522,7 @@ class ReportController extends ApiController{
             die;
         }
 
-        return view('report.cetak-jaminan-penunjang-diagnostik', compact('res', 'pageWidth'));
+        return view('report.cetak-jadwal-tindakan-hemodialisa', compact('res', 'pageWidth'));
     }
 
     public function jaminanPenunjangDiagnostik(Request $request) {

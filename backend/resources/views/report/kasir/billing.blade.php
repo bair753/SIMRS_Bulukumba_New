@@ -208,7 +208,7 @@
             width:20px;
         }
         td{
-            padding:.3rem
+            padding:.1rem
         }
     </style>
 </head>
