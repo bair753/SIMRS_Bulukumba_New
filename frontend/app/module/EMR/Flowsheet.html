@@ -54,6 +54,69 @@
         <div class="panel panel-default container_12">
             <div class="panel-heading" c-translate>Flowsheet</div>
         </div>
+        
+        <div class="grid_12">
+            <div class="grid_12" style="margin-top: 20px">
+                <fieldset>
+                    <div class="grid_12">
+                        <div id="container"></div>
+                    </div>
+                    <!-- <div class="grid_12">
+                        <div id="container2"></div>
+                    </div> -->
+                    <div class="grid_12">
+                        <fieldset style="margin-top: 10px; ">
+                            <legend><b>Tanda Vital</b></legend>
+                            <div class="grid_12" style="margin-top: 20px;width: 1100px;overflow: auto;">
+                                <table style="width:100%;color: #4c5356;">
+                                    <tr>
+                                        <th
+                                            style="font-weight: bold;text-align: center;background-color: #dedfe2d3;">
+                                            Waktu </th>
+                                        <th style="width:70px;text-align: center;background-color: #dedfe2d3;"
+                                            ng-repeat="list in listTanggal | orderBy:'id'"
+                                            ng-init="jawabIndex = $index">
+                                            <div class="grid_12">
+                                                <!-- <input class="k-textbox"  placeholer="HH:mm" ng-model="item.obj[list.id]" type="text" style="width: 4em;"> -->
+
+                                                <input k-ng-model="item.obj[list.id]" kendo-timepicker
+                                                    placeholer="HH:mm" k-format="'HH:mm'" style="width: 6em;" />
+
+                                            </div>
+                                        </th>
+                                    </tr>
+                                    <tr ng-repeat="list in listData1 | orderBy:'id'" ng-init="jawabIndex = $index">
+                                        <td style="width: 100px;{{list.style}}">{{list.namaexternal}}</td>
+                                        <td style="text-align: center;{{list.style}}"
+                                            ng-repeat="jawab in list.details">
+                                            <div class="grid_12">
+                                                <div ng-switch on="jawab.type">
+                                                    <div ng-switch-when="textbox">
+                                                        <input class="k-textbox" ng-blur="getSkor(jawab)"
+                                                            ng-model="item.obj[jawab.id]" type="text">
+                                                    </div>
+                                                    <div ng-switch-when="label">
+                                                        <label class="k-label"> {{jawab.caption}}</label>
+                                                    </div>
+                                                    <div ng-switch-when="checkbox">
+                                                        <input type="checkbox" class="k-checkbox"
+                                                            id="item.obj{{jawab.id}}" ng-model="item.obj[jawab.id]"
+                                                            ng-click="getSkor(jawab)">
+                                                        <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                                            <!-- &nbsp;{{jawab.nama}} -->
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </fieldset>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
 
         <div class="grid_12">
             <div ng-cloak>
@@ -7183,6 +7246,11 @@
                             </md-content>
                         </md-tab>
 
+                        <!-- <md-tab label="Grafik Tanda Tanda Vital">
+                            <md-content class="md-padding">
+                                                        
+                            </md-content>
+                        </md-tab> -->
                     </md-tabs>
                 </md-content>
             </div>

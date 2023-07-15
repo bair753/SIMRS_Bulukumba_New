@@ -15,6 +15,13 @@ define(['initialize'], function (initialize) {
             var nomorEMR = '-';
             var norecEMR = '';
             $scope.cc.emrfk = 290168;
+            var sesiesSuhu = []
+            var seriesNadi = []
+            var seriesSO2 = []
+            var seriesRR = []
+            var seriesSis = []
+            var seriesDis = []
+            var categories = []
             var dataLoad = [];
             $scope.isCetak = false;
             $scope.show = true;
@@ -55,6 +62,7 @@ define(['initialize'], function (initialize) {
                 norecEMR = cacheNomorEMR[1]
                 $scope.cc.norec_emr = nomorEMR
             }
+            
             var HttpClient = function () {
                 this.get = function (aUrl, aCallback) {
                     var anHttpRequest = new XMLHttpRequest();
@@ -100,63 +108,63 @@ define(['initialize'], function (initialize) {
                 $scope.listObat = data;
             });
 
-            $scope.listEdukasiPasien = [
-                {
-                    "id": 1,
-                    "detail": [
-                        { "id": 423249, "nama": "", "caption": "Baca dan tulis", "type": "label", "dataList": "", "satuan": "" },
-                        { "id": 423250, "nama": "Baik", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-                        { "id": 423251, "nama": "Kurang", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-                        { "id": 423252, "nama": "", "caption": "Pendidikan pasien", "type": "label", "dataList": "", "satuan": "" },
-                        { "id": 423253, "nama": "SD", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-                        { "id": 423254, "nama": "SLTP", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-                        { "id": 423255, "nama": "SLTA", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-                        { "id": 423256, "nama": "S-1", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-                        { "id": 423257, "nama": "Lain-lain :", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-                        { "id": 423258, "nama": "", "caption": "", "type": "textbox1", "dataList": "", "satuan": "" },
-                        { "id": 423259, "nama": "", "caption": "Bahasa", "type": "label", "dataList": "", "satuan": "" },
-                        { "id": 423260, "nama": "Indonesia", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-                        { "id": 423261, "nama": "Inggris", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-                        { "id": 423262, "nama": "Daerah :", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-                        { "id": 423263, "nama": "", "caption": "", "type": "textbox1", "dataList": "", "satuan": "" },
-                        { "id": 423264, "nama": "Lain-lain :", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-                        { "id": 423265, "nama": "", "caption": "", "type": "textbox1", "dataList": "", "satuan": "" },
-                        { "id": 423266, "nama": "", "caption": "Hambatan Emosional dan Motivasi", "type": "label", "dataList": "", "satuan": "" },
-                        { "id": 423267, "nama": "Tidak ada", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-                        { "id": 423268, "nama": "Bahasa", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-                        { "id": 423269, "nama": "Kognitif terbatas", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-                        { "id": 423270, "nama": "Emosional", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-                        { "id": 423271, "nama": "", "caption": "Keterbatasan Fisik dan Kognetif", "type": "label", "dataList": "", "satuan": "" },
-                        { "id": 423272, "nama": "Tidak ada", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-                        { "id": 423273, "nama": "Penglihatan terganggu", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-                        { "id": 423274, "nama": "Pendengaran terganggu", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-                        { "id": 423275, "nama": "Gangguan bicara", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-                        { "id": 423276, "nama": "Fisik lemah", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-                        { "id": 423277, "nama": "Lain-lain :", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-                        { "id": 423278, "nama": "", "caption": "", "type": "textbox1", "dataList": "", "satuan": "" },
-                        { "id": 423279, "nama": "", "caption": "Kesediaan untuk Menerima Informasi", "type": "label", "dataList": "", "satuan": "" },
-                        { "id": 423280, "nama": "Ya", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-                        { "id": 423281, "nama": "Tidak", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" }
-                    ]
-                }
-            ];
+            // $scope.listEdukasiPasien = [
+            //     {
+            //         "id": 1,
+            //         "detail": [
+            //             { "id": 423249, "nama": "", "caption": "Baca dan tulis", "type": "label", "dataList": "", "satuan": "" },
+            //             { "id": 423250, "nama": "Baik", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+            //             { "id": 423251, "nama": "Kurang", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+            //             { "id": 423252, "nama": "", "caption": "Pendidikan pasien", "type": "label", "dataList": "", "satuan": "" },
+            //             { "id": 423253, "nama": "SD", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+            //             { "id": 423254, "nama": "SLTP", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+            //             { "id": 423255, "nama": "SLTA", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+            //             { "id": 423256, "nama": "S-1", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+            //             { "id": 423257, "nama": "Lain-lain :", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+            //             { "id": 423258, "nama": "", "caption": "", "type": "textbox1", "dataList": "", "satuan": "" },
+            //             { "id": 423259, "nama": "", "caption": "Bahasa", "type": "label", "dataList": "", "satuan": "" },
+            //             { "id": 423260, "nama": "Indonesia", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+            //             { "id": 423261, "nama": "Inggris", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+            //             { "id": 423262, "nama": "Daerah :", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+            //             { "id": 423263, "nama": "", "caption": "", "type": "textbox1", "dataList": "", "satuan": "" },
+            //             { "id": 423264, "nama": "Lain-lain :", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+            //             { "id": 423265, "nama": "", "caption": "", "type": "textbox1", "dataList": "", "satuan": "" },
+            //             { "id": 423266, "nama": "", "caption": "Hambatan Emosional dan Motivasi", "type": "label", "dataList": "", "satuan": "" },
+            //             { "id": 423267, "nama": "Tidak ada", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+            //             { "id": 423268, "nama": "Bahasa", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+            //             { "id": 423269, "nama": "Kognitif terbatas", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+            //             { "id": 423270, "nama": "Emosional", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+            //             { "id": 423271, "nama": "", "caption": "Keterbatasan Fisik dan Kognetif", "type": "label", "dataList": "", "satuan": "" },
+            //             { "id": 423272, "nama": "Tidak ada", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+            //             { "id": 423273, "nama": "Penglihatan terganggu", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+            //             { "id": 423274, "nama": "Pendengaran terganggu", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+            //             { "id": 423275, "nama": "Gangguan bicara", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+            //             { "id": 423276, "nama": "Fisik lemah", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+            //             { "id": 423277, "nama": "Lain-lain :", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+            //             { "id": 423278, "nama": "", "caption": "", "type": "textbox1", "dataList": "", "satuan": "" },
+            //             { "id": 423279, "nama": "", "caption": "Kesediaan untuk Menerima Informasi", "type": "label", "dataList": "", "satuan": "" },
+            //             { "id": 423280, "nama": "Ya", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+            //             { "id": 423281, "nama": "Tidak", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" }
+            //         ]
+            //     }
+            // ];
 
-            $scope.listMateriEdukasi = [
-                {
-                    "id": 1,
-                    "detail": [
-                        { "id": 423282, "nama": "Penggunaan Obat-obatan", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-                        { "id": 423283, "nama": "Penggunaan peralatan medis", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-                        { "id": 423284, "nama": "Potensi interaksi antar obat", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-                        { "id": 423285, "nama": "Diet dan nutrisi", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-                        { "id": 423286, "nama": "Manejemen nyeri", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-                        { "id": 423287, "nama": "Teknik rehabilitasi", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-                        { "id": 423288, "nama": "Cuci tangan yang benar", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-                        { "id": 423289, "nama": "Lain-lain :", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-                        { "id": 423290, "nama": "", "caption": "", "type": "textbox1", "dataList": "", "satuan": "" }
-                    ]
-                }
-            ];
+            // $scope.listMateriEdukasi = [
+            //     {
+            //         "id": 1,
+            //         "detail": [
+            //             { "id": 423282, "nama": "Penggunaan Obat-obatan", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+            //             { "id": 423283, "nama": "Penggunaan peralatan medis", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+            //             { "id": 423284, "nama": "Potensi interaksi antar obat", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+            //             { "id": 423285, "nama": "Diet dan nutrisi", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+            //             { "id": 423286, "nama": "Manejemen nyeri", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+            //             { "id": 423287, "nama": "Teknik rehabilitasi", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+            //             { "id": 423288, "nama": "Cuci tangan yang benar", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+            //             { "id": 423289, "nama": "Lain-lain :", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+            //             { "id": 423290, "nama": "", "caption": "", "type": "textbox1", "dataList": "", "satuan": "" }
+            //         ]
+            //     }
+            // ];
 
             $scope.cetakPdf = function () {
                 if (norecEMR == '') return
@@ -191,6 +199,11 @@ define(['initialize'], function (initialize) {
                 }
             }
 
+            $scope.listData1 = []
+            $scope.listData2 = []
+            $scope.listTanggal = []
+            $scope.listTanggal2 = []
+            
             if (nomorEMR == '-') {
                 $scope.item.obj = []
                 var nocmfk = null;
@@ -222,6 +235,136 @@ define(['initialize'], function (initialize) {
                 //         $scope.item.obj[421305] = datas.data.data[6].value; // Napas
                 //     }
                 // })
+                medifirstService.get("emr/get-rekam-medis-dynamic?emrid=" + $scope.cc.emrfk).then(function (e) {
+                    $scope.listData = e.data
+                    $scope.item.title = e.data.title
+                    $scope.item.classgrid = e.data.classgrid
+
+                    // $scope.cc.emrfk = emrfk_
+                    $scope.item.objcbo = []
+
+                    var datas = e.data.kolom4
+
+                    var detail = []
+                    var arrayAskep = []
+                    var arrayAskep2 = []
+                    var arrayParenteral = []
+                    var arrayParenteral2 = []
+                    var sama = false
+                    for (let i = 0; i < datas.length; i++) {
+
+                        const element = datas[i];
+                        if (element.id >= 32116187) {
+                            sama = false
+                            if (element.type == 'time') {
+                                $scope.listTanggal.push({ id: element.id })
+                            }
+                            if (element.kodeexternal == 'date2') {
+                                $scope.listTanggal2.push({ id: element.id })
+                            }
+                            // ARRAY GEJALA
+                            if (element.kodeexternal == 'pernafasan') {
+                                for (let z = 0; z < arrayAskep.length; z++) {
+                                    const element2 = arrayAskep[z];
+                                    if (element2.namaexternal == element.namaexternal) {
+                                        detail.push(element)
+                                        element2.details = detail
+                                        sama = true
+                                    }
+                                }
+                                if (sama == false) {
+                                    var datax = {
+                                        caption: element.caption,
+                                        cbotable: element.cbotable,
+                                        child: [],
+                                        emrfk: element.emrfk,
+                                        headfk: element.headfk,
+                                        id: element.id,
+                                        kdprofile: element.kdprofile,
+                                        kodeexternal: element.kodeexternal,
+                                        namaemr: element.namaemr,
+                                        namaexternal: element.namaexternal,
+                                        nourut: element.nourut,
+                                        reportdisplay: element.reportdisplay,
+                                        satuan: element.satuan,
+                                        statusenabled: element.statusenabled,
+                                        style: element.style,
+                                        type: element.type,
+
+                                    }
+                                    arrayAskep.push(datax)
+                                }
+                            }// ARRAY GEJALA
+
+
+
+                        }
+                        // ARRAY GEJALA
+                        var gejalaKosongKeun = []
+                        for (let k = 0; k < arrayAskep.length; k++) {
+                            const element = arrayAskep[k];
+                            for (let l = 0; l < datas.length; l++) {
+                                const element2 = datas[l];
+                                if (element2.namaexternal == element.namaexternal) {
+                                    gejalaKosongKeun.push(element2)
+                                    element.details = gejalaKosongKeun
+                                } else {
+                                    gejalaKosongKeun = []
+                                }
+                            }
+                        }
+                        $scope.listData1 = arrayAskep
+                    }
+                    for (var i = e.data.kolom4.length - 1; i >= 0; i--) {
+                        if (e.data.kolom4[i].id >= 32116187) {
+                            e.data.kolom4.splice(i, 1)
+                        }
+                    }
+                    for (var i = e.data.kolom1.length - 1; i >= 0; i--) {
+                        if (e.data.kolom1[i].cbotable != null) {
+                            medifirstService.getPart2(e.data.kolom1[i].id, e.data.kolom1[i].cbotable, true, true, 20).then(function (data) {
+                                $scope.item.objcbo[data.options.idididid] = data
+                            })
+                        }
+                        for (var ii = e.data.kolom1[i].child.length - 1; ii >= 0; ii--) {
+                            if (e.data.kolom1[i].child[ii].cbotable != null) {
+                                medifirstService.getPart2(e.data.kolom1[i].child[ii].id, e.data.kolom1[i].child[ii].cbotable, true, true, 20).then(function (data) {
+                                    $scope.item.objcbo[data.options.idididid] = data
+                                })
+                            }
+                        }
+                    }
+
+                    for (var i = e.data.kolom2.length - 1; i >= 0; i--) {
+                        if (e.data.kolom2[i].cbotable != null) {
+                            medifirstService.getPart2(e.data.kolom2[i].id, e.data.kolom2[i].cbotable, true, true, 20).then(function (data) {
+                                $scope.item.objcbo[data.options.idididid] = data
+                            })
+                        }
+                        for (var ii = e.data.kolom2[i].child.length - 1; ii >= 0; ii--) {
+                            if (e.data.kolom2[i].child[ii].cbotable != null) {
+                                medifirstService.getPart2(e.data.kolom2[i].child[ii].id, e.data.kolom2[i].child[ii].cbotable, true, true, 20).then(function (data) {
+                                    $scope.item.objcbo[data.options.idididid] = data
+                                })
+                            }
+                        }
+                    }
+                    for (var i = e.data.kolom3.length - 1; i >= 0; i--) {
+                        if (e.data.kolom3[i].cbotable != null) {
+                            medifirstService.getPart2(e.data.kolom3[i].id, e.data.kolom3[i].cbotable, true, true, 20).then(function (data) {
+                                $scope.item.objcbo[data.options.idididid] = data
+                            })
+                        }
+                        for (var ii = e.data.kolom3.child.length - 1; ii >= 0; ii--) {
+                            if (e.data.kolom3[i].child[ii].cbotable != null) {
+                                medifirstService.getPart2(e.data.kolom3[i].child[ii].id, e.data.kolom3[i].child[ii].cbotable, true, true, 20).then(function (data) {
+                                    $scope.item.objcbo[data.options.idididid] = data
+                                })
+                            }
+                        }
+                    }
+
+                })
             } else {
                 var chekedd = false
                 //medifirstService.get("emr/get-emr-transaksi-detail?noemr="+$state.params.nomorEMR, true).then(function(dat){
@@ -237,8 +380,85 @@ define(['initialize'], function (initialize) {
                     $scope.item.classgrid = e.data.classgrid
 
                     // $scope.cc.emrfk = 146
+                    var datas = e.data.kolom4
+
+                    var detail = []
+                    var arrayAskep = []
+                    var arrayAskep2 = []
+                    var arrayParenteral = []
+                    var arrayParenteral2 = []
+                    var sama = false
+                    for (let i = 0; i < datas.length; i++) {
+
+                        const element = datas[i];
+                        if (element.id >= 32116187) {
+                            sama = false
+                            if (element.type == 'time') {
+                                $scope.listTanggal.push({ id: element.id })
+                            }
+                            if (element.kodeexternal == 'date2') {
+                                $scope.listTanggal2.push({ id: element.id })
+                            }
+                            // ARRAY GEJALA
+                            if (element.kodeexternal == 'pernafasan') {
+                                for (let z = 0; z < arrayAskep.length; z++) {
+                                    const element2 = arrayAskep[z];
+                                    if (element2.namaexternal == element.namaexternal) {
+                                        detail.push(element)
+                                        element2.details = detail
+                                        sama = true
+                                    }
+                                }
+                                if (sama == false) {
+                                    var datax = {
+                                        caption: element.caption,
+                                        cbotable: element.cbotable,
+                                        child: [],
+                                        emrfk: element.emrfk,
+                                        headfk: element.headfk,
+                                        id: element.id,
+                                        kdprofile: element.kdprofile,
+                                        kodeexternal: element.kodeexternal,
+                                        namaemr: element.namaemr,
+                                        namaexternal: element.namaexternal,
+                                        nourut: element.nourut,
+                                        reportdisplay: element.reportdisplay,
+                                        satuan: element.satuan,
+                                        statusenabled: element.statusenabled,
+                                        style: element.style,
+                                        type: element.type,
+
+                                    }
+                                    arrayAskep.push(datax)
+                                }
+                            }// ARRAY GEJALA
+
+
+
+                        }
+                        // ARRAY GEJALA
+                        var gejalaKosongKeun = []
+                        for (let k = 0; k < arrayAskep.length; k++) {
+                            const element = arrayAskep[k];
+                            for (let l = 0; l < datas.length; l++) {
+                                const element2 = datas[l];
+                                if (element2.namaexternal == element.namaexternal) {
+                                    gejalaKosongKeun.push(element2)
+                                    element.details = gejalaKosongKeun
+                                } else {
+                                    gejalaKosongKeun = []
+                                }
+                            }
+                        }
+                        $scope.listData1 = arrayAskep
+                    }
 
                     $scope.item.objcbo = []
+                    for (var i = e.data.kolom4.length - 1; i >= 0; i--) {
+                        if (e.data.kolom4[i].id >= 32116187) {
+                            e.data.kolom4.splice(i, 1)
+                        }
+                    }
                     for (var i = e.data.kolom1.length - 1; i >= 0; i--) {
 
                         if (e.data.kolom1[i].cbotable != null) {
@@ -308,6 +528,8 @@ define(['initialize'], function (initialize) {
                             // SET DARI SKOR CTRS
                             medifirstService.get("emr/get-emr-transaksi-detail?noemr=" + cacheEMR_CTRS + "&emrfk=" + $scope.cc.emrfk, true).then(function (datss) {
                                 var dataNA = datss.data.data
+                                
+                        
                                 var skorsss = 0
                                 for (var i = 0; i <= dataNA.length - 1; i++) {
                                     if (dataNA[i].type == "checkbox" && dataNA[i].value == '1') {
@@ -385,6 +607,81 @@ define(['initialize'], function (initialize) {
                             }
 
                         }
+
+                        categories = []
+                        var arrobj = Object.keys($scope.item.obj)
+                        for (let ii = 0; ii < arrobj.length; ii++) {
+                            if (parseInt(arrobj[ii]) >= 32116187 && parseInt(arrobj[ii]) <= 32116234) {
+                                if ($scope.item.obj[parseFloat(arrobj[ii])] instanceof Date) {
+                                    categories.push(moment($scope.item.obj[parseFloat(arrobj[ii])]).format('HH:mm'))
+                                } else {
+                                    var date = moment(new Date()).format('YYYY-MM-DD')
+                                    categories.push(moment(date + ' ' + $scope.item.obj[parseFloat(arrobj[ii])]).format('HH:mm'))
+                                }
+                            }
+                        }
+                        var arrobj = Object.keys($scope.item.obj)
+                        for (var i = arrobj.length - 1; i >= 0; i--) {
+
+                            for (let y = 0; y < 47; y++) {
+                                if (arrobj[i] == 32116235 + y && arrobj[i] != '')
+                                    sesiesSuhu[y] = $scope.item.obj[parseFloat(arrobj[i])]
+                            }
+                            for (let y = 0; y < 47; y++) {
+                                if (arrobj[i] == 32116331 + y && arrobj[i] != '')
+                                    seriesNadi[y] = $scope.item.obj[parseFloat(arrobj[i])]
+                            }
+                            for (let y = 0; y < 47; y++) {
+                                if (arrobj[i] == 32116427 + y && arrobj[i] != '')
+                                    seriesSO2[y] = $scope.item.obj[parseFloat(arrobj[i])]
+                            }
+                            for (let y = 0; y < 47; y++) {
+                                if (arrobj[i] == 32116283 + y && arrobj[i] != '')
+                                    seriesRR[y] = $scope.item.obj[parseFloat(arrobj[i])]
+                            }
+
+                            for (let y = 0; y < 47; y++) {
+                                if (arrobj[i] == 32116379 + y && arrobj[i] != '') {
+                                    var td = $scope.item.obj[parseFloat(arrobj[i])]
+                                    td = td.split('/')
+                                    if (td.length == 2) {
+                                        seriesSis[y] = td[0]
+                                        seriesDis[y] = td[1]
+                                    }
+                                }
+                            }
+                        }
+
+                        for (let x = 0; x < sesiesSuhu.length; x++) {
+                            if (!isNaN(parseFloat(sesiesSuhu[x])))
+                                sesiesSuhu[x] = parseFloat(sesiesSuhu[x])
+
+                        }
+                        for (let x = 0; x < seriesNadi.length; x++) {
+                            if (!isNaN(parseInt(seriesNadi[x])))
+                                seriesNadi[x] = parseInt(seriesNadi[x])
+
+                        }
+                        for (let x = 0; x < seriesSO2.length; x++) {
+                            if (!isNaN(parseInt(seriesSO2[x])))
+                                seriesSO2[x] = parseInt(seriesSO2[x])
+
+                        }
+                        for (let x = 0; x < seriesRR.length; x++) {
+                            if (!isNaN(parseInt(seriesRR[x])))
+                                seriesRR[x] = parseInt(seriesRR[x])
+
+                        }
+                        for (let x = 0; x < seriesSis.length; x++) {
+                            if (!isNaN(parseInt(seriesSis[x])))
+                                seriesSis[x] = parseInt(seriesSis[x])
+                        }
+                        for (let x = 0; x < seriesDis.length; x++) {
+                            if (!isNaN(parseInt(seriesDis[x])))
+                                seriesDis[x] = parseInt(seriesDis[x])
+                        }
+                        loadChart()
+                        // loadChart2()
 
                         var arrobj = Object.keys($scope.item.obj)
                         for (let l = 0; l < $scope.listItem.length; l++) {
@@ -487,6 +784,78 @@ define(['initialize'], function (initialize) {
                     //     namaEMR : $scope.cc.emrfk,
                     //     nomorEMR : e.data.data.noemr 
                     // });
+                    afterSave(e)
+                    var arrobj = Object.keys($scope.item.obj)
+                    categories = []
+
+                    for (let i = 0; i < arrobj.length; i++) {
+                        if (arrobj[i] >= 32116187 && arrobj[i] <= 32116234) {
+                            $scope.item.obj[parseFloat(arrobj[i])] = new Date($scope.item.obj[parseFloat(arrobj[i])])
+                            // if ($scope.item.obj[parseFloat(arrobj[i])] instanceof Date) {
+                            categories.push(moment($scope.item.obj[parseFloat(arrobj[i])]).format('HH:mm'))
+                            // }else{
+                            //     categories.push(moment(new Date($scope.item.obj[parseFloat(arrobj[i])])).format('HH:mm'))
+                            // }
+                        }
+                    }
+
+                    for (var i = arrobj.length - 1; i >= 0; i--) {
+
+                        for (let z = 0; z < 47; z++) {
+                            if (arrobj[i] == 32116235 + z && arrobj[i] != '')
+                                sesiesSuhu[z] = $scope.item.obj[parseFloat(arrobj[i])]
+                        }
+                        for (let z = 0; z < 47; z++) {
+                            if (arrobj[i] == 32116331 + z && arrobj[i] != '')
+                                seriesNadi[z] = $scope.item.obj[parseFloat(arrobj[i])]
+                        }
+                        for (let z = 0; z < 47; z++) {
+                            if (arrobj[i] == 32116427 + z && arrobj[i] != '')
+                                seriesSO2[z] = $scope.item.obj[parseFloat(arrobj[i])]
+                        }
+                        for (let z = 0; z < 47; z++) {
+                            if (arrobj[i] == 32116283 + z && arrobj[i] != '')
+                                seriesRR[z] = $scope.item.obj[parseFloat(arrobj[i])]
+                        }
+                        for (let z = 0; z < 47; z++) {
+                            if (arrobj[i] == 32116379 + z && arrobj[i] != '') {
+                                var td = $scope.item.obj[parseFloat(arrobj[i])]
+                                td = td.split('/')
+                                if (td.length == 2) {
+                                    seriesSis[z] = td[0]
+                                    seriesDis[z] = td[1]
+                                }
+
+                            }
+                        }
+                    }
+
+                    for (let x = 0; x < sesiesSuhu.length; x++) {
+                        if (!isNaN(parseFloat(sesiesSuhu[x])))
+                            sesiesSuhu[x] = parseFloat(sesiesSuhu[x])
+                    }
+                    for (let x = 0; x < seriesNadi.length; x++) {
+                        if (!isNaN(parseInt(seriesNadi[x])))
+                            seriesNadi[x] = parseInt(seriesNadi[x])
+                    }
+                    for (let x = 0; x < seriesSO2.length; x++) {
+                        if (!isNaN(parseInt(seriesSO2[x])))
+                            seriesSO2[x] = parseInt(seriesSO2[x])
+                    }
+                    for (let x = 0; x < seriesRR.length; x++) {
+                        if (!isNaN(parseInt(seriesRR[x])))
+                            seriesRR[x] = parseInt(seriesRR[x])
+                    }
+                    for (let x = 0; x < seriesSis.length; x++) {
+                        if (!isNaN(parseInt(seriesSis[x])))
+                            seriesSis[x] = parseInt(seriesSis[x])
+                    }
+                    for (let x = 0; x < seriesDis.length; x++) {
+                        if (!isNaN(parseInt(seriesDis[x])))
+                            seriesDis[x] = parseInt(seriesDis[x])
+                    }
+                    loadChart()
+                    // loadChart2()
 
                     medifirstService.postLogging('EMR', 'norec emrpasien_t', e.data.data.norec,
                         'Flowsheet' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
@@ -498,6 +867,249 @@ define(['initialize'], function (initialize) {
                         0: e.data.data.noemr
                     }
                     cacheHelper.set('cacheNomorEMR', arrStr);
+                });
+            }
+            function afterSave(e) {
+                $scope.cc.norec_emr = e.data.data.noemr
+                medifirstService.postLogging('EMR', 'norec emrpasien_t', e.data.data.norec,
+                    'Durante Anestesi Tanda Vita;l' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
+                    + $scope.cc.noregistrasi).then(function (res) {
+                    })
+
+                // $rootScope.loadHistoryEMRBedah();
+                var arrStr = {
+                    0: e.data.data.noemr
+                }
+                cacheHelper.set('cacheNomorEMR', arrStr);
+            }
+            loadChart()
+            function loadChart() {
+                for (var i = sesiesSuhu.length - 1; i >= 0; i--) {
+                    const element = sesiesSuhu[i]
+                    if (element == '') {
+                        sesiesSuhu.splice(i, 1)
+                    }
+                }
+                for (var i = seriesRR.length - 1; i >= 0; i--) {
+                    const element = seriesRR[i]
+                    if (element == '') {
+                        seriesRR.splice(i, 1)
+                    }
+                }
+                for (var i = seriesNadi.length - 1; i >= 0; i--) {
+                    const element = seriesNadi[i]
+                    if (element == '') {
+                        seriesNadi.splice(i, 1)
+                    }
+                }
+                for (var i = seriesSO2.length - 1; i >= 0; i--) {
+                    const element = seriesSO2[i]
+                    if (element == '') {
+                        seriesSO2.splice(i, 1)
+                    }
+                }
+                for (var i = seriesDis.length - 1; i >= 0; i--) {
+                    const element = seriesDis[i]
+                    if (element == '') {
+                        seriesDis.splice(i, 1)
+                    }
+                }
+                for (var i = seriesSis.length - 1; i >= 0; i--) {
+                    const element = seriesSis[i]
+                    if (element == '') {
+                        seriesSis.splice(i, 1)
+                    }
+                }
+                Highcharts.chart('container', {
+
+                    title: {
+                        text: 'Grafik Tanda Vital'
+                    },
+
+                    subtitle: {
+                        text: ''
+                    },
+
+                    yAxis: {
+                        title: {
+                            text: 'Jumlah'
+                        }
+                    },
+
+                    xAxis: {
+                        title: {
+                            text: 'Waktu'
+                        },
+                        categories: categories,
+                        crosshair: true
+                    },
+
+                    legend: {
+                        layout: 'vertical',
+                        align: 'right',
+                        verticalAlign: 'middle'
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    plotOptions: {
+                        series: {
+                            label: {
+                                connectorAllowed: false
+                            },
+                            cursor: 'pointer',
+
+                            dataLabels: {
+                                enabled: true,
+                                formatter: function () {
+                                    return this.y;
+                                }
+                            },
+                            showInLegend: true
+                        }
+                    },
+
+                    series: [{
+                        name: 'Temperatur',
+                        data: sesiesSuhu,
+                        color: '#1e87e3'
+                    }, {
+                        name: 'Respirasi',
+                        data: seriesRR,
+                        color: '#2be31e'
+                    }, {
+                        name: 'Nadi',
+                        data: seriesNadi,
+                        color: '#e3381e'
+                    }, {
+                        name: 'Skala Nyeri',
+                        data: seriesSO2,
+                        color: '#000000'
+                    },{
+                        name: 'Sirtulik',
+                        data: seriesSis,
+                        color: "#000000"
+                    }, {
+                        name: 'Diartulik',
+                        data: seriesDis,
+                        color: "#000000"
+                    },
+                        //  {
+                        //     name: 'Sistole',
+                        //     data: [null, null, 7988, 12169, 15112, 22452, 34400, 34227]
+                        // },
+                        // {
+                        //     name: 'Diastole',
+                        //     data: [null, null, 7988, 12169, 15112, 22452, 34400, 34227]
+                        // }
+                    ],
+
+                    responsive: {
+                        rules: [{
+                            condition: {
+                                maxWidth: 500
+                            },
+                            chartOptions: {
+                                legend: {
+                                    layout: 'horizontal',
+                                    align: 'center',
+                                    verticalAlign: 'bottom'
+                                }
+                            }
+                        }]
+                    }
+
+                });
+            }
+            // loadChart2()
+            function loadChart2() {
+                for (var i = seriesDis.length - 1; i >= 0; i--) {
+                    const element = seriesDis[i]
+                    if (element == '') {
+                        seriesDis.splice(i, 1)
+                    }
+                }
+                for (var i = seriesSis.length - 1; i >= 0; i--) {
+                    const element = seriesSis[i]
+                    if (element == '') {
+                        seriesSis.splice(i, 1)
+                    }
+                }
+                Highcharts.chart('container2', {
+
+                    title: {
+                        text: 'Grafik Tekanan Darah'
+                    },
+
+                    subtitle: {
+                        text: ''
+                    },
+
+                    yAxis: {
+                        title: {
+                            text: 'Jumlah'
+                        }
+                    },
+
+                    xAxis: {
+                        title: {
+                            text: 'Waktu'
+                        },
+                        categories: categories,
+                        crosshair: true
+                    },
+
+                    legend: {
+                        layout: 'vertical',
+                        align: 'left',
+                        verticalAlign: 'middle'
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    plotOptions: {
+                        series: {
+                            label: {
+                                connectorAllowed: false
+                            },
+                            cursor: 'pointer',
+
+                            dataLabels: {
+                                enabled: true,
+                                formatter: function () {
+                                    return this.y;
+                                }
+                            },
+                            showInLegend: true
+                        }
+                    },
+
+                    series: [{
+                        name: 'Sistolik',
+                        data: seriesSis,
+                        color: "#fc1303"
+                    }, {
+                        name: 'Diastolik',
+                        data: seriesDis,
+                        color: "#03a9fc"
+                    },
+                    ],
+
+                    responsive: {
+                        rules: [{
+                            condition: {
+                                maxWidth: 500
+                            },
+                            chartOptions: {
+                                legend: {
+                                    layout: 'horizontal',
+                                    align: 'center',
+                                    verticalAlign: 'bottom'
+                                }
+                            }
+                        }]
+                    }
+
                 });
             }
 
