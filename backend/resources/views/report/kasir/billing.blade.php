@@ -258,7 +258,7 @@
             }
         ?>
       <section>
-        <table width="100%" id="content" style="border:none;table-layout:fixed;">
+        <table width="100%" id="content" style="border:none;table-layout:auto;">
             <tr style="border:none;">
                 <td rowspan="4" style="border:none">
                     @if(stripos(\Request::url(), 'localhost') !== FALSE)
@@ -330,7 +330,7 @@
             <tr>
                 <td style="padding-top:10px;border:none;">
                         <tr>
-                            <th class="th-class text-left">
+                            <th class="th-class  text-center">
                                 <span class="text-normal">No</span>
                             </th>
                             <th class="th-class  text-center">
@@ -391,19 +391,19 @@
                                         <td class="th-class text-center">
                                             <span class="text">{{ $nomor }}</span>
                                         </td>
-                                        <td class="th-class text-center">
+                                        <td class="th-class text-center" style="padding-left: 2px; padding-right:2px">
                                             <span class="text">
                                                 {{ date_format(date_create($data->tglpelayanan), 'd/m/Y') }}</span>
                                         </td>
                                         <td class="th-class text-left">
-                                            <span class="text">{{ $data->namaproduk }}</span>
+                                            <span class="text">&nbsp;{{ $data->namaproduk }}</span>
                                         </td>
-                                        <td class="th-class text-left">
+                                        <td class="th-class text-center">
                                             <span class="text">{{ $data->namakelas }}</span>
                                         </td>
                                         @if ($data->penulisresep === null)
                                             <td class="th-class text-left">
-                                                <span class="text">{{ $data->dokter }}</span>
+                                                <span class="text">&nbsp;{{ $data->dokter }}</span>
                                             </td>
                                         @else
                                             <td class="th-class text-left">
@@ -413,13 +413,13 @@
                                         <td class="th-class text-center">
                                             <span class="text">{{ $data->jumlah }}</span>
                                         </td>
-                                        <td class="th-class text-right">
+                                        <td class="th-class" style="text-align: right">
                                             <span class="text"> {{ number_format($data->hargasatuan, 2, '.', ',') }}</span>
                                         </td>
                                         <td class="th-class text-center">
                                             <span class="text">{{ number_format($data->diskon, 2, '.', ',') }}</span>
                                         </td>
-                                        <td class="th-class text-right">
+                                        <td class="th-class" style="text-align: right">
                                             <span class="text"> {{ number_format($data->total, 2, '.', ',') }}</span>
                                         </td>
                                     </tr>
