@@ -376,23 +376,23 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 
                                 }
                                 
-                                if($scope.listEditICD.data.includes(pegawaiLogin.id)){
-                                    $scope.item.obj2[423806] = false
-                                    $scope.item.obj2[31101417] = false
-                                    $scope.item.obj2[31101418] = false
-                                    $scope.item.obj2[31101419] = false
-                                    $scope.item.obj2[31101420] = false
-                                    $scope.item.obj2[31101421] = false
-                                    $scope.item.obj2[423812] = false
-                                }else{
-                                    $scope.item.obj2[423806] = true
-                                    $scope.item.obj2[31101417] = true
-                                    $scope.item.obj2[31101418] = true
-                                    $scope.item.obj2[31101419] = true
-                                    $scope.item.obj2[31101420] = true
-                                    $scope.item.obj2[31101421] = true
-                                    $scope.item.obj2[423812] = true
-                                }
+                                // if($scope.listEditICD.data.includes(pegawaiLogin.id)){
+                                //     $scope.item.obj2[423806] = false
+                                //     $scope.item.obj2[31101417] = false
+                                //     $scope.item.obj2[31101418] = false
+                                //     $scope.item.obj2[31101419] = false
+                                //     $scope.item.obj2[31101420] = false
+                                //     $scope.item.obj2[31101421] = false
+                                //     $scope.item.obj2[423812] = false
+                                // }else{
+                                //     $scope.item.obj2[423806] = true
+                                //     $scope.item.obj2[31101417] = true
+                                //     $scope.item.obj2[31101418] = true
+                                //     $scope.item.obj2[31101419] = true
+                                //     $scope.item.obj2[31101420] = true
+                                //     $scope.item.obj2[31101421] = true
+                                //     $scope.item.obj2[423812] = true
+                                // }
                                 
                                 pegawaiInputDetail = dataLoad[i].pegawaifk
                             }
