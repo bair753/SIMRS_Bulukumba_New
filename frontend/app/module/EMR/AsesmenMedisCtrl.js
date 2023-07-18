@@ -70,12 +70,13 @@ define(['initialize'], function (initialize) {
                     if ($scope.header.DataNoregis == undefined) {
                         $scope.header.DataNoregis = false;
                     }
-                    if ($scope.header.DataNoregis == true) {
-                        paramSearch = 'noregistrasi=' + $scope.item.noregistrasi
+                    paramSearch = 'noregistrasi=' + $scope.item.noregistrasi
+                    // if ($scope.header.DataNoregis == true) {
+                    //     paramSearch = 'noregistrasi=' + $scope.item.noregistrasi
 
-                    } else {
-                        paramSearch = 'nocm=' + $scope.item.noMr
-                    }
+                    // } else {
+                    //     paramSearch = 'nocm=' + $scope.item.noMr
+                    // }
                     init()
 
                 }
