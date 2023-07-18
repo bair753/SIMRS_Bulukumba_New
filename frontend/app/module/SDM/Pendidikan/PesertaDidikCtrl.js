@@ -20,9 +20,15 @@ define(['initialize'], function (initialize) {
 					$scope.listJenisKelamin = dat.data.dataJenisKelamin
 					$scope.listAgama = dat.data.dataAgama
 					$scope.listInstitusiPendidikan = dat.data.dataInstitusipPendidikan
-					$scope.listJurusan = dat.data.dataJurusan
+					// $scope.listJurusan = dat.data.dataJurusan
 					$scope.listProgramStudi = dat.data.datafakultas
 				});
+				$scope.getIsiComboJurusan = function () {                
+					if ($scope.item.institusiPendidikan != undefined || $scope.item.institusiPendidikan != "") {
+						console.log($scope);
+						$scope.listJurusan = $scope.item.institusiPendidikan.id
+					}
+				}
 				$scope.listPeriode = [
 					{ 'id': 1, 'periode': '2017/2018' },
 					{ 'id': 2, 'periode': '2018/2019' },
@@ -210,7 +216,9 @@ define(['initialize'], function (initialize) {
 					"alamat": $scope.item.alamat,
 					"institusipendidikanfk": $scope.item.institusiPendidikan == undefined ? null : $scope.item.institusiPendidikan.id,
 					"jurusanpeminatanfk": $scope.item.jurusan == undefined ? null : $scope.item.jurusan.id,
-					"fakultasfk": $scope.item.programStudi == undefined ? null : $scope.item.programStudi.id
+					"fakultasfk": $scope.item.programStudi == undefined ? null : $scope.item.programStudi.id,
+					"periodependawal": moment(new Date($scope.item.periodeawal)).format('YYYY-MM-DD'),
+					"periodependakhir": moment(new Date($scope.item.periodeakhir)).format('YYYY-MM-DD'),
 				}
 				medifirstService.post("sdm/pendidikan/save-pesertadidik", tempData).then(function (e) {
 					$scope.item = {};
