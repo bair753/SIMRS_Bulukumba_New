@@ -14,6 +14,9 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 			$scope.item.tanggalPulang = new Date();
 			$scope.dataPasienSelected = {};
 			$scope.cboDokter = false;
+			$scope.isRajal = false;
+			$scope.isRanap = false;
+			$scope.isIGD = false;
 			$scope.pasienPulang = false;
 			$scope.cboUbahDokter = true;
 			$scope.isRouteLoading = false;
@@ -407,6 +410,22 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 			}
 
 			$scope.SearchData = function () {
+				if ($scope.item.instalasi == undefined) {
+					toastr.error('Instalasi harus di pilih',"info")
+					return
+				}
+
+				if($scope.item.instalasi.id == 18){
+					$scope.isRajal = true;
+				}
+
+				if($scope.item.instalasi.id == 16){
+					$scope.isRanap = true;
+				}
+
+				if($scope.item.instalasi.id == 24){
+					$scope.isIGD = true;
+				}
 				loadData()
 			}
 			$scope.SearchDataMasal = function () {
@@ -6780,6 +6799,150 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 					+ '&norec_apd=' + $scope.dataSelectedlembarFormulirRajal.norec_apd 
 					+ '&emr=' + $scope.dataSelectedlembarFormulirRajal.norec 
 					+ '&emrfk=' + $scope.dataSelectedlembarFormulirRajal.emrfk
+					+ '&kdprofile=' + local.id
+					+ '&nama=' + nama, '_blank');
+			}
+
+			$scope.jadwalTindakanHemodialisa = function(){
+				if ($scope.dataPasienSelected.noregistrasi == undefined) {
+					toastr.error('Pilih Pasien Terlebih dahulu!!!')
+					return;
+				}
+				var emrfk = [290174] // emrfk Jadwal Tindakan Hemodialisa
+
+				medifirstService.get("bridging/inacbg/get-emr-pasien?noregistrasi=" + $scope.dataPasienSelected.noregistrasi + '&emrfk=' + emrfk
+					// medifirstService.get("lab-radiologi/get-rincian-pelayanan?objectdepartemenfk=" + departemenfk + "&noregistrasi=" +   $scope.item.noregistrasi
+					, true).then(function (dat) {
+						$scope.dataDaftarJadwalTindakanHemodialisa = {
+							data: dat.data.data,
+							_data: dat.data.data,
+							// pageSize: 10,
+							selectable: true,
+							refresh: true,
+							total: dat.data.data.length,
+							serverPaging: false,
+							aggregate: [
+									{ field: 'total', aggregate: 'sum' },
+							]
+
+					};
+					}, function (error) {
+							$scope.isLoading = false;
+					});
+				
+				$scope.popUpDaftarJadwalTindakanHemodialisa.center().open();
+				
+			}
+
+			$scope.columnDaftarJadwalTindakanHemodialisa = {
+				columns: [
+						{
+								"field": "tglemr",
+								"title": "Tgl EMR",
+								"width": "90px",
+						},                   
+						{
+								"field": "emrpasienfk",
+								"title": "No EMR",
+								"width": "160px"
+						},
+						{
+								"field": "namaform",
+								"title": "Nama EMR",
+								"width": "160px"
+						},
+				],
+				sortable: {
+						mode: "single",
+						allowUnsort: false,
+				}
+			}
+
+			$scope.cetakJadwalTindakanHemodialisa = function () {
+					if ($scope.dataSelectedJadwalTindakanHemodialisa == undefined) {
+						toastr.error('Data belum dipilih!!!')
+						return;
+					}
+
+					var local = JSON.parse(localStorage.getItem('profile'));
+					var nama = medifirstService.getPegawaiLogin();
+					window.open(baseTransaksi + 'report/cetak-jadwal-tindakan-hemodialisa?nocm='
+					+ $scope.dataSelectedJadwalTindakanHemodialisa.nocm 
+					+ '&norec_apd=' + $scope.dataSelectedJadwalTindakanHemodialisa.norec_apd 
+					+ '&emr=' + $scope.dataSelectedJadwalTindakanHemodialisa.norec 
+					+ '&emrfk=' + $scope.dataSelectedJadwalTindakanHemodialisa.emrfk
+					+ '&kdprofile=' + local.id
+					+ '&nama=' + nama, '_blank');
+			}
+
+			$scope.suratJaminanPenunjangDiagnostik = function(){
+				if ($scope.dataPasienSelected.noregistrasi == undefined) {
+					toastr.error('Pilih Pasien Terlebih dahulu!!!')
+					return;
+				}
+				var emrfk = [290173] // emrfk Surat Jaminan Penunjang Diagnostik
+
+				medifirstService.get("bridging/inacbg/get-emr-pasien?noregistrasi=" + $scope.dataPasienSelected.noregistrasi + '&emrfk=' + emrfk
+					// medifirstService.get("lab-radiologi/get-rincian-pelayanan?objectdepartemenfk=" + departemenfk + "&noregistrasi=" +   $scope.item.noregistrasi
+					, true).then(function (dat) {
+						$scope.dataDaftarSuratJaminanPenunjangDiagnostik = {
+							data: dat.data.data,
+							_data: dat.data.data,
+							// pageSize: 10,
+							selectable: true,
+							refresh: true,
+							total: dat.data.data.length,
+							serverPaging: false,
+							aggregate: [
+									{ field: 'total', aggregate: 'sum' },
+							]
+
+					};
+					}, function (error) {
+							$scope.isLoading = false;
+					});
+				
+				$scope.popUpDaftarSuratJaminanPenunjangDiagnostik.center().open();
+				
+			}
+
+			$scope.columnDaftarSuratJaminanPenunjangDiagnostik = {
+				columns: [
+						{
+								"field": "tglemr",
+								"title": "Tgl EMR",
+								"width": "90px",
+						},                   
+						{
+								"field": "emrpasienfk",
+								"title": "No EMR",
+								"width": "160px"
+						},
+						{
+								"field": "namaform",
+								"title": "Nama EMR",
+								"width": "160px"
+						},
+				],
+				sortable: {
+						mode: "single",
+						allowUnsort: false,
+				}
+			}
+
+			$scope.cetakSuratJaminanPenunjangDiagnostik = function () {
+					if ($scope.dataSelectedSuratJaminanPenunjangDiagnostik == undefined) {
+						toastr.error('Data belum dipilih!!!')
+						return;
+					}
+
+					var local = JSON.parse(localStorage.getItem('profile'));
+					var nama = medifirstService.getPegawaiLogin();
+					window.open(baseTransaksi + 'report/cetak-jadwal-tindakan-hemodialisa?nocm='
+					+ $scope.dataSelectedSuratJaminanPenunjangDiagnostik.nocm 
+					+ '&norec_apd=' + $scope.dataSelectedSuratJaminanPenunjangDiagnostik.norec_apd 
+					+ '&emr=' + $scope.dataSelectedSuratJaminanPenunjangDiagnostik.norec 
+					+ '&emrfk=' + $scope.dataSelectedSuratJaminanPenunjangDiagnostik.emrfk
 					+ '&kdprofile=' + local.id
 					+ '&nama=' + nama, '_blank');
 			}
