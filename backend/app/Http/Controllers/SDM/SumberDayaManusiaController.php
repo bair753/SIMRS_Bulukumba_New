@@ -2054,6 +2054,8 @@ class SumberDayaManusiaController extends ApiController {
             $TP->nomorhp = $request['nomorhp'];
             $TP->tanggallahir = $request['tanggallahir'];
             $TP->tempatlahir = $request['tempatlahir'];
+            $TP->periodependawal = $request['periodependawal'];
+            $TP->periodependakhir = $request['periodependakhir'];
             $TP->save();
 
             $transStatus = 'true';

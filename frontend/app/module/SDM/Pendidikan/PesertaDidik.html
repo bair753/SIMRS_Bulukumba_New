@@ -62,7 +62,7 @@
 				<label c-label item="item" style="margin-top: 10px">Institusi Pendidikan</label>
 			</div>
 			<div class="grid_8">
-				<input style="width: 100%;" kendo-combo-box k-ng-model="item.institusiPendidikan" k-data-text-field="'institusipendidikan'" k-data-value-field="'id'" k-filter="'contains'" k-auto-bind="false" k-data-source="listInstitusiPendidikan" />
+				<input style="width: 100%;" kendo-combo-box k-ng-model="item.institusiPendidikan" k-data-text-field="'institusipendidikan'" k-data-value-field="'id'" k-filter="'contains'" k-auto-bind="false" k-data-source="listInstitusiPendidikan" k-on-change="getIsiComboJurusan()"/>
 			</div>
 			<div class="grid_4">
 				<label c-label item="item" style="margin-top: 10px">Jurusan</label>
@@ -76,6 +76,21 @@
 			<div class="grid_8">
 				<input style="width: 100%;" kendo-combo-box k-ng-model="item.programStudi" k-data-text-field="'fakultas'" k-data-value-field="'id'" k-filter="'contains'" k-auto-bind="false" k-data-source="listProgramStudi" />
 			</div>
+		</div>
+		<div class="grid_6">
+			<div class="grid_4">
+				<label c-label item="item" style="margin-top: 10px">Periode Pendidikan</label>
+			</div>
+			<div class="grid_8">
+				<div class="grid_6">
+					<input style="width: 100%" kendo-date-picker k-ng-model="item.periodeawal" k-format="'yyyy-MM-dd'"/>
+				</div>
+				<div class="grid_6">
+					<input style="width: 100%" kendo-date-picker k-ng-model="item.periodeakhir" k-format="'yyyy-MM-dd'"/>
+				</div>
+			</div>
+			
+			
 		</div>
 	</div>
 	<div class="grid_12" >
