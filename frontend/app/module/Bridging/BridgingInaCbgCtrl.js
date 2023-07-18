@@ -417,14 +417,20 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 
 				if($scope.item.instalasi.id == 18){
 					$scope.isRajal = true;
+					$scope.isRanap = false;
+					$scope.isIGD = false;
 				}
 
 				if($scope.item.instalasi.id == 16){
 					$scope.isRanap = true;
+					$scope.isRajal = false;
+					$scope.isIGD = false;
 				}
 
 				if($scope.item.instalasi.id == 24){
 					$scope.isIGD = true;
+					$scope.isRajal = false;
+					$scope.isRanap = false;
 				}
 				loadData()
 			}
