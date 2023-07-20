@@ -20,15 +20,9 @@ define(['initialize'], function (initialize) {
 					$scope.listJenisKelamin = dat.data.dataJenisKelamin
 					$scope.listAgama = dat.data.dataAgama
 					$scope.listInstitusiPendidikan = dat.data.dataInstitusipPendidikan
-					// $scope.listJurusan = dat.data.dataJurusan
+					$scope.listJurusan = dat.data.dataJurusan
 					$scope.listProgramStudi = dat.data.datafakultas
 				});
-				$scope.getIsiComboJurusan = function () {                
-					if ($scope.item.institusiPendidikan != undefined || $scope.item.institusiPendidikan != "") {
-						console.log($scope);
-						$scope.listJurusan = $scope.item.institusiPendidikan.id
-					}
-				}
 				$scope.listPeriode = [
 					{ 'id': 1, 'periode': '2017/2018' },
 					{ 'id': 2, 'periode': '2018/2019' },
