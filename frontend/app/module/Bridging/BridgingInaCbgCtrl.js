@@ -17,6 +17,7 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 			$scope.isRajal = false;
 			$scope.isRanap = false;
 			$scope.isIGD = false;
+			$scope.isAll = false;
 			$scope.pasienPulang = false;
 			$scope.cboUbahDokter = true;
 			$scope.isRouteLoading = false;
@@ -410,27 +411,32 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 			}
 
 			$scope.SearchData = function () {
-				if ($scope.item.instalasi == undefined) {
-					toastr.error('Instalasi harus di pilih',"info")
-					return
-				}
-
-				if($scope.item.instalasi.id == 18){
-					$scope.isRajal = true;
-					$scope.isRanap = false;
+				if($scope.item.instalasi == undefined){
+					$scope.isAll = true;
 					$scope.isIGD = false;
-				}
-
-				if($scope.item.instalasi.id == 16){
-					$scope.isRanap = true;
-					$scope.isRajal = false;
-					$scope.isIGD = false;
-				}
-
-				if($scope.item.instalasi.id == 24){
-					$scope.isIGD = true;
 					$scope.isRajal = false;
 					$scope.isRanap = false;
+				}else{
+					if($scope.item.instalasi.id == 18){
+						$scope.isRajal = true;
+						$scope.isRanap = false;
+						$scope.isIGD = false;
+						$scope.isAll = false;
+					}
+	
+					if($scope.item.instalasi.id == 16){
+						$scope.isRanap = true;
+						$scope.isRajal = false;
+						$scope.isIGD = false;
+						$scope.isAll = false;
+					}
+	
+					if($scope.item.instalasi.id == 24){
+						$scope.isIGD = true;
+						$scope.isRajal = false;
+						$scope.isRanap = false;
+						$scope.isAll = false;
+					}
 				}
 				loadData()
 			}
