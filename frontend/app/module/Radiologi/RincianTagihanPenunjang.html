@@ -800,7 +800,7 @@
     </div>
 </div>
 
-<div kendo-window="popup_editor" k-title="'Input Dokter'" k-visible="false" k-width="700">
+<div kendo-window="popup_editor" k-title="'Input Dokter'" k-visible="false" k-width="1000">
     <div class="panel panel-default container_12">
         <div class="grid_6">
             <div class="grid_12">
@@ -874,6 +874,16 @@
                     <input style="width: 100%;" kendo-combo-box k-ng-model="model.pegawais"
                         k-data-text-field="'namalengkap'" k-data-value-field="'id'" k-filter="'contains'"
                         k-auto-bind="false" k-data-source="listPegawaiPemeriksa" />
+                </div>
+            </div>
+            <div class="grid_6">
+                <div class="grid_12">
+                    <label c-label item="item" c-label-text="Dokter Pengirim Luar"></label>
+                </div>
+                <div class="clear"></div>
+
+                <div class="grid_12">
+                    <input c-text-box type="input" class="k-textbox" ng-model="model.dokterluar" />
                 </div>
             </div>
             <div class="pull-right" style="margin-top:4%">

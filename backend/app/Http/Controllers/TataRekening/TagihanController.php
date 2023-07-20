@@ -4149,6 +4149,13 @@ class TagihanController  extends ApiController
             $req['namapegawai']!="undefined"){
             $Pegawai = $Pegawai->where('ru.namalengkap','ilike','%'. $req['namapegawai'] .'%' );
         };
+        if(isset($req['dokterluar']) &&
+        $req['dokterluar']!="" &&
+        $req['dokterluar']!="undefined"){
+            $Pegawai = array(
+                'namapegawai' => $req['dokterluar']);
+            return $this->respond($Pegawai);
+    };
         if(isset($req['filter']['filters'][0]['value']) &&
             $req['filter']['filters'][0]['value']!="" &&
             $req['filter']['filters'][0]['value']!="undefined"){
@@ -4185,7 +4192,7 @@ class TagihanController  extends ApiController
             ->join('pelayananpasienpetugas_t as ppp', 'pp.norec', '=', 'ppp.pelayananpasien')
             ->leftjoin('pegawai_m as pg', 'pg.id', '=', 'ppp.objectpegawaifk')
             ->leftjoin('jenispetugaspelaksana_m as jpp', 'jpp.id', '=', 'ppp.objectjenispetugaspefk')
-            ->select('pp.norec as norec_pp', 'ppp.norec as norec_ppp','pg.id as pg_id','pg.namalengkap','jpp.jenispetugaspe',
+            ->select('pp.norec as norec_pp', 'ppp.norec as norec_ppp','pg.id as pg_id','pg.namalengkap','jpp.jenispetugaspe','ppp.dokterluar as dokterluar',
                 'jpp.id as jpp_id')
             ->where('pp.norec', $request['norec_pp'])
 //            ->where('jpp.id','<>',2)
@@ -4201,6 +4208,7 @@ class TagihanController  extends ApiController
     }
     public function simpanDokterPPP(Request $request)
     {
+        // return $request->all();
         DB::beginTransaction();
         $new_PPP=$request['pelayananpasienpetugas'];
 
@@ -4224,6 +4232,7 @@ class TagihanController  extends ApiController
                 $data1->pelayananpasien = $new_PPP['norec_pp'];
 //                $data1->tglpelayanan = true;
                 $data1->objectpegawaifk = $new_PPP['objectpegawaifk'];
+                $data1->dokterluar = $new_PPP['dokterluar'];
                 $data1->save();
 
             }
@@ -4236,10 +4245,10 @@ class TagihanController  extends ApiController
                 }
             }
             $transStatus = 'true';
-            $transMessage = "Simpan PelayananPasienPetugas berhasil!";
+            $transMessage = "Simpan Pelayanan Pasien Petugas berhasil!";
         } catch (\Exception $e) {
             $transStatus = 'false';
-            $transMessage = "Simpan PelayananPasienPetugas Gagal!";
+            $transMessage = "Simpan Pelayanan Pasien Petugas Gagal!";
         }
 
         if ($transStatus != 'false') {

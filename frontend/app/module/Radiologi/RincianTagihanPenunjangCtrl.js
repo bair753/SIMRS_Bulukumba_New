@@ -1736,6 +1736,12 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     title: "Nama Pegawai",
                     width: "200px",
                     // template: multiSelectArrayToString
+                },
+                {
+                    field: "dokterluar",
+                    title: "Nama Dokter",
+                    width: "200px",
+                    // template: multiSelectArrayToString
                 }
             ];
             $scope.simpanDokterPelaksana = function () {
@@ -1775,7 +1781,8 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     norec_pp: $scope.dataSelected.norec_pp,
                     norec_apd: $scope.dataSelected.norec_apd,
                     objectjenispetugaspefk: $scope.model.jenisPelaksana != undefined ? $scope.model.jenisPelaksana.id : undefined,
-                    objectpegawaifk: $scope.model.pegawais != undefined ? $scope.model.pegawais.id : undefined,
+                    objectpegawaifk: $scope.model.pegawais != undefined ? $scope.model.pegawais.id : null,
+                    dokterluar: $scope.model.dokterluar != undefined ? $scope.model.dokterluar : undefined,
                     isparamedis: $scope.itemdok.paramedis,
                 }
 
@@ -1819,6 +1826,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     }
                     $scope.model.jenisPelaksana = undefined;
                     $scope.model.pegawais = undefined;
+                    $scope.model.dokterluar = undefined;
                     $scope.dataDokterSelected = undefined;
                 })
 
@@ -1845,6 +1853,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     // LoadData();
                     $scope.model.jenisPelaksana = "";
                     $scope.model.pegawais = "";
+                    $scope.model.dokterluar = "";
                     $scope.dataDokterSelected = undefined;
                 })
                 var data = {};
@@ -1870,21 +1879,38 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 // LoadData();
                 $scope.model.jenisPelaksana = "";
                 $scope.model.pegawais = "";
+                $scope.model.dokterluar = "";
                 $scope.dataDokterSelected = undefined;
                 $scope.popup_editor.center().close();
             }
 
             $scope.clickD = function (dataDokterSelected) {
+                console.log();
                 if (dataDokterSelected != undefined) {
-                    medifirstService.get("tatarekening/get-pegawai-saeutik?namapegawai=" + dataDokterSelected.namalengkap, true, true, 10)
+                    if(dataDokterSelected.namalengkap != null){
+                        medifirstService.get("tatarekening/get-pegawai-saeutik?namapegawai=" + dataDokterSelected.namalengkap, true, true, 10)
                         .then(function (data) {
 
                             $scope.listPegawaiPemeriksa.add(data.data[0])
                             $scope.model.pegawais = data.data[0];
+                            $scope.model.dokterluar = null;
 
                         })
                     $scope.model.jenisPelaksana = { id: dataDokterSelected.jpp_id, jenisPetugasPelaksana: dataDokterSelected.jenispetugaspe }
 
+                    }else{
+                        medifirstService.get("tatarekening/get-pegawai-saeutik?dokterluar=" + dataDokterSelected.dokterluar, true, true, 10)
+                        .then(function (data) {
+
+                            $scope.listPegawaiPemeriksa.add(data.data[0]);
+                            $scope.model.pegawais = null;
+                            $scope.model.dokterluar = data.data.namapegawai;
+
+                        })
+                    $scope.model.jenisPelaksana = { id: dataDokterSelected.jpp_id, jenisPetugasPelaksana: dataDokterSelected.jenispetugaspe }
+
+                    }
+                    
                 }
             }
             $scope.catatanLab = function () {

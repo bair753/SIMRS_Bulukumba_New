@@ -105,7 +105,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                         </tr>
                         <tr>
                             <td width="22%"><font style="font-size: 12pt;" color="#000000;" >Dokter Pengirim</font></td>
-                            <td width="78%"><font style="font-size: 12pt;" color="#000000" >: {{ $raw->dokterpengirim }}</font></td>
+                            <td width="78%"><font style="font-size: 12pt;" color="#000000" >: {{ $raw->dokterpengirim == null ? $raw->dokterluar : $raw->dokterpengirim }}</font></td>
                         </tr>
                     </table>
                     <table width="100%" cellspacing="0" cellpadding="0" style="border-left: 3px solid black;border-right: 3px solid black;">
