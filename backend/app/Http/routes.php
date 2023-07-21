@@ -343,6 +343,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
               Route::get('bridging/inacbg/get-rincial-pelayanan', 'Bridging\InaCbgController@getRincianPelayanan');
               Route::get('bridging/inacbg/get-rincian-operasi', 'Bridging\InaCbgController@getLaporanOperasi');
               Route::get('bridging/inacbg/get-emr-pasien', 'Bridging\InaCbgController@getDaftarAsesmenPasien');
+              Route::get('bridging/inacbg/get-all-page-inacbg', 'Bridging\InaCbgController@getAllPage');
            
               Route::post('bridging/inacbg/save-proposi-bridging-inacbg','Bridging\InaCbgController@saveProposiBridgingINACBG');
               Route::post('bridging/inacbg/save-proposi-bridging-inacbg-multi','Bridging\InaCbgController@saveProposiBridgingINACBGMulti');
