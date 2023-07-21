@@ -1782,7 +1782,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     norec_apd: $scope.dataSelected.norec_apd,
                     objectjenispetugaspefk: $scope.model.jenisPelaksana != undefined ? $scope.model.jenisPelaksana.id : undefined,
                     objectpegawaifk: $scope.model.pegawais != undefined ? $scope.model.pegawais.id : null,
-                    dokterluar: $scope.model.dokterluar != undefined ? $scope.model.dokterluar : undefined,
+                    dokterluar: $scope.model.dokterluar != undefined ? $scope.model.dokterluar : null,
                     isparamedis: $scope.itemdok.paramedis,
                 }
 
