@@ -2341,6 +2341,32 @@ class InaCbgController   extends ApiController
         return $this->respond($result);
     }
 
+    public function getAllPage(Request $request) {
+        $kdProfile = $this->getDataKdProfile($request);
+        $idProfile = (int) $kdProfile;
+
+        $data = \DB::table('emrpasiend_t AS emrdp')
+        ->join('emrpasien_t AS emrp', 'emrp.noemr', '=', 'emrdp.emrpasienfk')
+        ->join('emr_t AS emr', 'emr.id', '=', 'emrdp.emrfk')
+        ->select('emrdp.emrpasienfk', 'emrp.tglemr', 'emrp.nocm', 'emr.caption AS namaform', 'emrp.norec_apd', 'emrdp.emrfk', 'emrp.norec')
+        ->where('emrdp.kdprofile', $idProfile)
+        ->where('emrdp.statusenabled', true)
+        ->where('emrp.statusenabled', true)
+        ->where('emrp.noregistrasifk', $request['noregistrasi'])
+        // ->where('emrdp.emrfk', $request['emrfk'])
+        ->groupBy('emrdp.emrpasienfk', 'emrdp.emrfk', 'emrp.norec', 'emr.caption');
+
+        $emrfk = explode(',', $request['emrfk']);
+        $data = $data->whereIn('emrdp.emrfk', $emrfk);
+        $data = $data->get();
+
+        $result = array(
+            'data' => $data,
+            'message' => 'Mutan'
+        );
+        return $this->respond($result);
+    }
+
     public function getDaftarAsesmenPasien(Request $request) {
         $kdProfile = $this->getDataKdProfile($request);
         $idProfile = (int) $kdProfile;

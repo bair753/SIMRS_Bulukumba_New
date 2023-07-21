@@ -5629,7 +5629,7 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 				}
 				var emrfk = [290032] // emrfk Catatan Pemberian dan Pemantauan Obat Pasien
 
-				medifirstService.get("bridging/inacbg/get-rincian-operasi?noregistrasi=" + $scope.dataPasienSelected.noregistrasi + '&emrfk=' + emrfk
+				medifirstService.get("bridging/inacbg/get-all-page-inacbg?noregistrasi=" + $scope.dataPasienSelected.noregistrasi + '&emrfk=' + emrfk
 					// medifirstService.get("lab-radiologi/get-rincian-pelayanan?objectdepartemenfk=" + departemenfk + "&noregistrasi=" +   $scope.item.noregistrasi
 					, true).then(function (dat) {
 						$scope.dataDaftadCatatanPemberianObat = {
@@ -5669,11 +5669,6 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 						"title": "Nama EMR",
 						"width": "160px"
 					},
-					{
-						"field": "index",
-						"title": "Page",
-						"width": "160px"
-					},
 				],
 				sortable: {
 					mode: "single",
@@ -5689,11 +5684,11 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 
 				var local = JSON.parse(localStorage.getItem('profile'));
 				var nama = medifirstService.getPegawaiLogin();
-				window.open(baseTransaksi + 'report/cetak-catatan-pemberian-dan-pemantuan-obat-pasien?nocm='
+				window.open(baseTransaksi + 'report/cetak-emr-all-page?nocm='
 				+ $scope.dataSelectedCatatanPemberianObat.nocm 
 				+ '&norec_apd=' + $scope.dataSelectedCatatanPemberianObat.norec_apd 
 				+ '&emr=' + $scope.dataSelectedCatatanPemberianObat.norec 
-				+ '&index=' + $scope.dataSelectedCatatanPemberianObat.index
+				+ '&emrname=' + 27
 				+ '&emrfk=' + $scope.dataSelectedCatatanPemberianObat.emrfk
 				+ '&kdprofile=' + local.id
 				+ '&nama=' + nama, '_blank');
@@ -7038,7 +7033,7 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 				}
 				var emrfk = [290095] // emrfk Formulir Permintaan Darah
 
-				medifirstService.get("bridging/inacbg/get-rincian-operasi?noregistrasi=" + $scope.dataPasienSelected.noregistrasi + '&emrfk=' + emrfk
+				medifirstService.get("bridging/inacbg/get-all-page-inacbg?noregistrasi=" + $scope.dataPasienSelected.noregistrasi + '&emrfk=' + emrfk
 					// medifirstService.get("lab-radiologi/get-rincian-pelayanan?objectdepartemenfk=" + departemenfk + "&noregistrasi=" +   $scope.item.noregistrasi
 					, true).then(function (dat) {
 						$scope.dataDaftarPermintaanDarah = {
@@ -7079,11 +7074,6 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 							"title": "Nama EMR",
 							"width": "160px"
 						},
-						{
-							"field": "index",
-							"title": "Page",
-							"width": "160px"
-						},
 				],
 				sortable: {
 						mode: "single",
@@ -7099,12 +7089,12 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 
 				var local = JSON.parse(localStorage.getItem('profile'));
 				var nama = medifirstService.getPegawaiLogin();
-				window.open(baseTransaksi + 'report/cetak-formulir-permintaan-darah?nocm='
+				window.open(baseTransaksi + 'report/cetak-emr-all-page?nocm='
 				+ $scope.dataSelectedPermintaanDarah.nocm 
 				+ '&norec_apd=' + $scope.dataSelectedPermintaanDarah.norec_apd 
 				+ '&emr=' + $scope.dataSelectedPermintaanDarah.norec 
 				+ '&emrfk=' + $scope.dataSelectedPermintaanDarah.emrfk
-				+ '&index=' + $scope.dataSelectedPermintaanDarah.index
+				+ '&emrname=' + 126
 				+ '&kdprofile=' + local.id
 				+ '&nama=' + nama, '_blank');
 			}
