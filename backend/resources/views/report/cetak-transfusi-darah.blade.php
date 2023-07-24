@@ -226,21 +226,21 @@
                     </td>
                     <td rowspan="4" colspan="4" style="text-align:center;font-size:7pt;border:none"><strong>{!! $res['profile']->namalengkap !!}</strong> <br>JL. SERIKAYA NO. 17 BULUKUMBA 92512 <br>TELP : (0413) 81292</td>
                     <td style="border:none;border-left:1px solid #000">No. RM </td>
-                    <td colspan="4" style="border:none">: {!! $res['d'][0]->nocm  !!}</td>
+                    <td colspan="4" style="border:none">: {!! $res['d1'][0]->nocm  !!}</td>
                     <td rowspan="2" style="font-size:xx-large;text-align: center;" class="bg-dark">RM</td>
                 </tr>
                 <tr>
                     <td style="border:none;border-left:1px solid #000">Nama Lengkap</td>
-                    <td colspan="4" style="border:none">:  {!!  $res['d'][0]->namapasien  !!} ({{ $res['d'][0]->jeniskelamin == 'PEREMPUAN' ? 'P' : 'L' }})</td>
+                    <td colspan="4" style="border:none">:  {!!  $res['d1'][0]->namapasien  !!} ({{ $res['d1'][0]->jeniskelamin == 'PEREMPUAN' ? 'P' : 'L' }})</td>
                 </tr>
                 <tr>
                     <td style="border:none;border-left:1px solid #000">Tanggal Lahir</td>
-                    <td colspan="4" style="border:none">: {!! date('d-m-Y',strtotime( $res['d'][0]->tgllahir  )) !!}</td>
+                    <td colspan="4" style="border:none">: {!! date('d-m-Y',strtotime( $res['d1'][0]->tgllahir  )) !!}</td>
                     <td rowspan="2" style="font-size:xx-large;text-align: center;">86</td>
                 </tr>
                 <tr>
                     <td style="border:none;border-left:1px solid #000">NIK</td>
-                    <td colspan="4" style="border:none">: {!! $res['d'][0]->noidentitas  !!}</td>
+                    <td colspan="4" style="border:none">: {!! $res['d1'][0]->noidentitas  !!}</td>
                 </tr>
                 <tr>
                     <td colspan="11" class="bg-dark" style="font-size:x-large">
