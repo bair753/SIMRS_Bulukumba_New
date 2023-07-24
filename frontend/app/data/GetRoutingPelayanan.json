@@ -20789,6 +20789,29 @@
         "define": "RekamMedisCtrl"
       }
     ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.PenolakanRestrain",
+    "url": "/PenolakanRestrain/:index/:idEMR",
+    "templateurl": "module/EMR/PenolakanRestrain.html",
+    "controller": "PenolakanRestrainCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
   }
 
 

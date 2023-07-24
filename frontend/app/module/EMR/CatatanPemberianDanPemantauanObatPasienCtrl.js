@@ -1329,11 +1329,10 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 
                 var local = JSON.parse(localStorage.getItem('profile'));
                 var nama = medifirstService.getPegawaiLogin().namalengkap;
-                window.open(config.baseApiBackend + 'report/cetak-emr-all-page?nocm='
+                window.open(config.baseApiBackend + 'report/cetak-catatan-pemberian-dan-pemantuan-obat-pasien?nocm='
                     + $scope.cc.nocm + '&norec_apd=' + $scope.cc.norec + '&emr=' + norecEMR
                     + '&emrfk=' + $scope.cc.emrfk
                     + '&kdprofile=' + local.id
-                    + '&emrname=' + 27
                     + '&nama=' + nama, '_blank');
             }
 

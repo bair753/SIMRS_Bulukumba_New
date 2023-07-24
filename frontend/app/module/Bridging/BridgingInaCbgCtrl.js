@@ -5684,11 +5684,10 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 
 				var local = JSON.parse(localStorage.getItem('profile'));
 				var nama = medifirstService.getPegawaiLogin();
-				window.open(baseTransaksi + 'report/cetak-emr-all-page?nocm='
+				window.open(baseTransaksi + 'report/cetak-catatan-pemberian-dan-pemantuan-obat-pasien?nocm='
 				+ $scope.dataSelectedCatatanPemberianObat.nocm 
 				+ '&norec_apd=' + $scope.dataSelectedCatatanPemberianObat.norec_apd 
 				+ '&emr=' + $scope.dataSelectedCatatanPemberianObat.norec 
-				+ '&emrname=' + 27
 				+ '&emrfk=' + $scope.dataSelectedCatatanPemberianObat.emrfk
 				+ '&kdprofile=' + local.id
 				+ '&nama=' + nama, '_blank');
@@ -5701,7 +5700,7 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 				}
 				var emrfk = [290093] // emrfk Check List dan Observasi Transfusi Darah
 
-				medifirstService.get("bridging/inacbg/get-rincian-operasi?noregistrasi=" + $scope.dataPasienSelected.noregistrasi + '&emrfk=' + emrfk
+				medifirstService.get("bridging/inacbg/get-all-page-inacbg?noregistrasi=" + $scope.dataPasienSelected.noregistrasi + '&emrfk=' + emrfk
 					// medifirstService.get("lab-radiologi/get-rincian-pelayanan?objectdepartemenfk=" + departemenfk + "&noregistrasi=" +   $scope.item.noregistrasi
 					, true).then(function (dat) {
 						$scope.dataDaftadObservasiTransfusi = {
@@ -5737,11 +5736,6 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 					{
 						"field": "namaform",
 						"title": "Nama EMR",
-						"width": "160px"
-					},
-					{
-						"field": "index",
-						"title": "Page",
 						"width": "160px"
 					},
 				],
@@ -7089,12 +7083,11 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 
 				var local = JSON.parse(localStorage.getItem('profile'));
 				var nama = medifirstService.getPegawaiLogin();
-				window.open(baseTransaksi + 'report/cetak-emr-all-page?nocm='
+				window.open(baseTransaksi + 'report/cetak-formulir-permintaan-darah?nocm='
 				+ $scope.dataSelectedPermintaanDarah.nocm 
 				+ '&norec_apd=' + $scope.dataSelectedPermintaanDarah.norec_apd 
 				+ '&emr=' + $scope.dataSelectedPermintaanDarah.norec 
 				+ '&emrfk=' + $scope.dataSelectedPermintaanDarah.emrfk
-				+ '&emrname=' + 126
 				+ '&kdprofile=' + local.id
 				+ '&nama=' + nama, '_blank');
 			}
