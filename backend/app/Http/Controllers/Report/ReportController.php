@@ -3866,13 +3866,13 @@ class ReportController extends ApiController{
     public function catatanPemberiandanPemantauanObatPasien(Request $request) {
         $nocm = $request['nocm'];
         $norec = $request['emr'];
-        $index = $request['index'];
         $kdProfile = (int) $request['kdprofile'];
 
-        $data = DB::select(DB::raw(
+        $res['d'] = DB::select(DB::raw(
             "
             SELECT
                 epd.emrdfk,
+                epd.index,
                 ep.noemr,
                 ed.TYPE,
                 pa.namapasien,
@@ -3883,6 +3883,7 @@ class ReportController extends ApiController{
                 ep.umur,
                 pa.noidentitas,
                 al.alamatlengkap,
+                ef.image,
                 ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
                 epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
                 --ap.noasuransi,ap.namapeserta,
@@ -3892,8 +3893,9 @@ class ReportController extends ApiController{
                 emrpasien_t AS ep
                 INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
                 INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
-                    INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
-                    INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
                 left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
                 left JOIN pasien_m as pa on ep.nocm =  pa.nocm
                 left JOIN alamat_m as al on pa.id = al.nocmfk
@@ -3907,30 +3909,1088 @@ class ReportController extends ApiController{
                     AND ep.kdprofile = '$kdProfile' 
                 AND epd.statusenabled = TRUE 
                 and epd.emrfk = $request[emrfk]
-                and epd.index = $index
+                and epd.index = 1
                 and pa.statusenabled = TRUE
                 
                 ORDER BY
                 ed.nourut
                 "
         ));
-        // dd($data);
-        foreach ($data as $z) {
+
+        $res['d2'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 2
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d3'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 3
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d4'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 4
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d5'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 5
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d6'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 6
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d7'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 7
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d8'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 8
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d9'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 9
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d10'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 10
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d11'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 11
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d12'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 12
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d13'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 13
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d14'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 14
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d15'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 15
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d16'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 16
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d17'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 17
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d18'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 18
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d19'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 19
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d20'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 20
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        foreach ($res['d'] as $z) {
             if ($z->type == "datetime") {
                 $z->value = date('Y-m-d H:i:s', strtotime($z->value));
             }
         }
-        $pageWidth = 500;
+
+        foreach ($res['d2'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d3'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d4'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d5'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d6'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d7'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d8'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d9'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d10'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d11'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d12'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d13'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d14'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d15'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d16'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d17'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d18'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d19'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d20'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+        
         $res['profile'] = Profile::where('id', $request['kdprofile'])->first();
 
-        $res['d'] = $data;
-        $noemrpasien = '';
-        if (count($data) == 0) {
-            $noemrpasien = $request['emr'];
-        } else {
-            $noemrpasien = $data[0]->noemr;
-        }
-        if(empty($res['d'])){
+        if(empty($res['d']) 
+        and empty($res['d2']) 
+        and empty($res['d3']) 
+        and empty($res['d4'])
+        and empty($res['d5'])
+        and empty($res['d6'])
+        and empty($res['d7'])
+        and empty($res['d8'])
+        and empty($res['d9'])
+        and empty($res['d10'])
+        and empty($res['d11'])
+        and empty($res['d12'])
+        and empty($res['d13'])
+        and empty($res['d14'])
+        and empty($res['d15'])
+        and empty($res['d16'])
+        and empty($res['d17'])
+        and empty($res['d18'])
+        and empty($res['d19'])
+        and empty($res['d20'])
+        ){
             echo '
                 <script language="javascript">
                     window.alert("Data tidak ada.");
@@ -3939,7 +4999,7 @@ class ReportController extends ApiController{
             ';
             die;
         }
-        return view('report.cetak-catatan-pemberian-dan-pemantuan-obat-pasien', compact('res', 'pageWidth'));
+        return view('report.cetak-catatan-pemberian-dan-pemantuan-obat-pasien', compact('res'));
     }
 
     public function asesmenAwalKeperawatanIGD(Request $request) {
@@ -4181,13 +5241,13 @@ class ReportController extends ApiController{
     public function transfusiDarah(Request $request) {
         $nocm = $request['nocm'];
         $norec = $request['emr'];
-        $index = $request['index'];
         $kdProfile = (int) $request['kdprofile'];
 
-        $data = DB::select(DB::raw(
+        $res['d'] = DB::select(DB::raw(
             "
             SELECT
                 epd.emrdfk,
+                epd.index,
                 ep.noemr,
                 ed.TYPE,
                 pa.namapasien,
@@ -4198,6 +5258,7 @@ class ReportController extends ApiController{
                 ep.umur,
                 pa.noidentitas,
                 al.alamatlengkap,
+                ef.image,
                 ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
                 epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
                 --ap.noasuransi,ap.namapeserta,
@@ -4207,8 +5268,9 @@ class ReportController extends ApiController{
                 emrpasien_t AS ep
                 INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
                 INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
-                    INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
-                    INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
                 left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
                 left JOIN pasien_m as pa on ep.nocm =  pa.nocm
                 left JOIN alamat_m as al on pa.id = al.nocmfk
@@ -4222,30 +5284,1088 @@ class ReportController extends ApiController{
                     AND ep.kdprofile = '$kdProfile' 
                 AND epd.statusenabled = TRUE 
                 and epd.emrfk = $request[emrfk]
-                and epd.index = $index
+                and epd.index = 1
                 and pa.statusenabled = TRUE
                 
                 ORDER BY
                 ed.nourut
                 "
         ));
-        // dd($data);
-        foreach ($data as $z) {
+
+        $res['d2'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 2
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d3'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 3
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d4'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 4
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d5'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 5
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d6'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 6
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d7'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 7
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d8'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 8
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d9'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 9
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d10'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 10
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d11'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 11
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d12'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 12
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d13'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 13
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d14'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 14
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d15'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 15
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d16'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 16
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d17'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 17
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d18'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 18
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d19'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 19
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d20'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 20
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        foreach ($res['d'] as $z) {
             if ($z->type == "datetime") {
                 $z->value = date('Y-m-d H:i:s', strtotime($z->value));
             }
         }
-        $pageWidth = 500;
+
+        foreach ($res['d2'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d3'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d4'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d5'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d6'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d7'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d8'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d9'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d10'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d11'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d12'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d13'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d14'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d15'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d16'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d17'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d18'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d19'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d20'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+        
         $res['profile'] = Profile::where('id', $request['kdprofile'])->first();
 
-        $res['d'] = $data;
-        $noemrpasien = '';
-        if (count($data) == 0) {
-            $noemrpasien = $request['emr'];
-        } else {
-            $noemrpasien = $data[0]->noemr;
-        }
-        if(empty($res['d'])){
+        if(empty($res['d']) 
+        and empty($res['d2']) 
+        and empty($res['d3']) 
+        and empty($res['d4'])
+        and empty($res['d5'])
+        and empty($res['d6'])
+        and empty($res['d7'])
+        and empty($res['d8'])
+        and empty($res['d9'])
+        and empty($res['d10'])
+        and empty($res['d11'])
+        and empty($res['d12'])
+        and empty($res['d13'])
+        and empty($res['d14'])
+        and empty($res['d15'])
+        and empty($res['d16'])
+        and empty($res['d17'])
+        and empty($res['d18'])
+        and empty($res['d19'])
+        and empty($res['d20'])
+        ){
             echo '
                 <script language="javascript">
                     window.alert("Data tidak ada.");
@@ -4255,7 +6375,7 @@ class ReportController extends ApiController{
             die;
         }
 
-        return view('report.cetak-transfusi-darah', compact('res', 'pageWidth'));
+        return view('report.cetak-transfusi-darah', compact('res'));
     }
 
     public function suketKematian(Request $request) {
@@ -5916,16 +8036,9 @@ class ReportController extends ApiController{
     public function formulirPermintaanDarah(Request $request) {
         $nocm = $request['nocm'];
         $norec = $request['emr'];
-        $index = $request['index'];
         $kdProfile = (int) $request['kdprofile'];
 
-        if (isset($request['index']) && $request['index'] == 'null') {
-            $index = 'is null';
-        }else{
-            $index = '='.$index;
-        }
-
-        $data = DB::select(DB::raw(
+        $res['d'] = DB::select(DB::raw(
             "
             SELECT
                 epd.emrdfk,
@@ -5966,7 +8079,7 @@ class ReportController extends ApiController{
                     AND ep.kdprofile = '$kdProfile' 
                 AND epd.statusenabled = TRUE 
                 and epd.emrfk = $request[emrfk]
-                and epd.index $index
+                and epd.index = 1
                 and pa.statusenabled = TRUE
                 
                 ORDER BY
@@ -5974,22 +8087,1080 @@ class ReportController extends ApiController{
                 "
         ));
 
-        foreach ($data as $z) {
+        $res['d2'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 2
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d3'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 3
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d4'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 4
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d5'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 5
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d6'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 6
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d7'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 7
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d8'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 8
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d9'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 9
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d10'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 10
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d11'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 11
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d12'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 12
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d13'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 13
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d14'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 14
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d15'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 15
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d16'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 16
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d17'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 17
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d18'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 18
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d19'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 19
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        $res['d20'] = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index = 20
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        foreach ($res['d'] as $z) {
             if ($z->type == "datetime") {
                 $z->value = date('Y-m-d H:i:s', strtotime($z->value));
             }
         }
-        $pageWidth = 500;
+
+        foreach ($res['d2'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d3'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d4'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d5'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d6'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d7'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d8'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d9'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d10'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d11'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d12'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d13'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d14'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d15'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d16'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d17'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d18'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d19'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+
+        foreach ($res['d20'] as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+        
         $res['profile'] = Profile::where('id', $request['kdprofile'])->first();
 
-        $res['d'] = $data;
-        $noemrpasien = '';
-        if (count($data) == 0) {
-            $noemrpasien = $request['emr'];
-        } else {
-            $noemrpasien = $data[0]->noemr;
-        }
-        if(empty($res['d'])){
+        if(empty($res['d']) 
+        and empty($res['d2']) 
+        and empty($res['d3']) 
+        and empty($res['d4'])
+        and empty($res['d5'])
+        and empty($res['d6'])
+        and empty($res['d7'])
+        and empty($res['d8'])
+        and empty($res['d9'])
+        and empty($res['d10'])
+        and empty($res['d11'])
+        and empty($res['d12'])
+        and empty($res['d13'])
+        and empty($res['d14'])
+        and empty($res['d15'])
+        and empty($res['d16'])
+        and empty($res['d17'])
+        and empty($res['d18'])
+        and empty($res['d19'])
+        and empty($res['d20'])
+        ){
             echo '
                 <script language="javascript">
                     window.alert("Data tidak ada.");
@@ -5999,7 +9170,7 @@ class ReportController extends ApiController{
             die;
         }
 
-        return view('report.cetak-formulir-permintaan-darah', compact('res', 'pageWidth'));
+        return view('report.cetak-formulir-permintaan-darah', compact('res'));
     }
 
     public function pemberianMakanAwal1000(Request $request) {
@@ -6906,6 +10077,95 @@ class ReportController extends ApiController{
             die;
         }
         return view('report.cetak-asesmen-awal-medis-rajal', compact('res', 'pageWidth'));
+    }
+
+    public function flowsheet(Request $request) {
+        $nocm = $request['nocm'];
+        $norec = $request['emr'];
+        $index = $request['index'];
+        $kdProfile = (int) $request['kdprofile'];
+
+        if (isset($request['index']) && $request['index'] == 'null') {
+            $index = 'is null';
+        }else{
+            $index = '='.$index;
+        }
+
+        $data = DB::select(DB::raw(
+            "
+            SELECT
+                epd.emrdfk,
+                epd.index,
+                ep.noemr,
+                ed.TYPE,
+                pa.namapasien,
+                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                pa.nohp,
+                pa.nocm,
+                ep.jeniskelamin,
+                ep.umur,
+                pa.noidentitas,
+                al.alamatlengkap,
+                ef.image,
+                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                --ap.noasuransi,ap.namapeserta,
+                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+            FROM
+                emrpasien_t AS ep
+                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                left JOIN alamat_m as al on pa.id = al.nocmfk
+                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+            WHERE
+                ep.norec = '$norec'
+                    AND ep.kdprofile = '$kdProfile' 
+                AND epd.statusenabled = TRUE 
+                and epd.emrfk = $request[emrfk]
+                and epd.index $index
+                and pa.statusenabled = TRUE
+                
+                ORDER BY
+                ed.nourut
+                "
+        ));
+
+        foreach ($data as $z) {
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+        }
+        $pageWidth = 500;
+        $res['profile'] = Profile::where('id', $request['kdprofile'])->first();
+
+        $res['d'] = $data;
+        $noemrpasien = '';
+        if (count($data) == 0) {
+            $noemrpasien = $request['emr'];
+        } else {
+            $noemrpasien = $data[0]->noemr;
+        }
+        if(empty($res['d'])){
+            echo '
+                <script language="javascript">
+                    window.alert("Data tidak ada.");
+                    window.close()
+                </script>
+            ';
+            die;
+        }
+
+        return view('report.cetak-flowsheet', compact('res', 'pageWidth'));
     }
 
     public function emrAllPage(Request $request) {
@@ -8052,6 +11312,9 @@ class ReportController extends ApiController{
         }
         if($request['emrname'] == 27){
             return view('report.cetak-catatan-pemberian-dan-pemantuan-obat-pasien', compact('res'));
+        }
+        if($request['emrname'] == 86){
+            return view('report.cetak-transfusi-darah', compact('res'));
         }
 
     }

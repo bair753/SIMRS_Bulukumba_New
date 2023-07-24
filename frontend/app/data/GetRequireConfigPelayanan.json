@@ -3725,6 +3725,10 @@
         {
             "nameDep": "SuratKeteranganKontrolCtrl",
             "urlDep": "module/EMR/SuratKeteranganKontrolCtrl"
+        },
+        {
+            "nameDep": "PenolakanRestrainCtrl",
+            "urlDep": "module/EMR/PenolakanRestrainCtrl"
         }
     ]
 }

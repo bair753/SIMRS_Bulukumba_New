@@ -220,7 +220,6 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     + $scope.cc.nocm + '&norec_apd=' + $scope.cc.norec + '&emr=' + norecEMR
                     + '&emrfk=' + $scope.cc.emrfk
                     + '&kdprofile=' + local.id
-                    + '&emrname=' + 126
                     + '&nama=' + nama, '_blank');
             }
 
