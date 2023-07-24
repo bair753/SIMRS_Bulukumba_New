@@ -22925,7 +22925,6 @@
 		var dataLoad19 = {!! json_encode($res['d19'] )!!};
 		var dataLoad20 = {!! json_encode($res['d20'] )!!};
 
-        console.log(dataLoad3 != undefined);
 
         for (var i = 0; i <= dataLoad.length - 1; i++) {
             if(dataLoad[i].emrdfk == 3110029){

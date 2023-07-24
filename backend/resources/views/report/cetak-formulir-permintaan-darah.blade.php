@@ -181,7 +181,7 @@
     </style>
 </head>
 <body ng-controller="cetakFormulirPermintaanDarah">
-    @if ($res['d'] != null)
+    @if (!empty(($res['d1']))
 		<div>
 			<header>
 				<div class="logo">
@@ -703,7 +703,7 @@
 		</div>
 	@endif
 
-	@if ($res['d2'] != null)
+	@if (!empty(($res['d2']))
 		<div>
 			<header>
 				<div class="logo">
@@ -1225,7 +1225,7 @@
 		</div>
 	@endif
 
-	@if ($res['d3'] != null)
+	@if (!empty(($res['d3']))
 		<div>
 			<header>
 				<div class="logo">
@@ -1747,7 +1747,7 @@
 		</div>
 	@endif
 
-	@if ($res['d4'] != null)
+	@if (!empty(($res['d4']))
 		<div>
 			<header>
 				<div class="logo">
@@ -2269,7 +2269,7 @@
 		</div>
 	@endif
 
-	@if ($res['d5'] != null)
+	@if (!empty(($res['d5']))
 		<div>
 			<header>
 				<div class="logo">
@@ -2791,7 +2791,7 @@
 		</div>
 	@endif
 
-	@if ($res['d6'] != null)
+	@if (!empty(($res['d6']))
 		<div>
 			<header>
 				<div class="logo">
@@ -3313,7 +3313,7 @@
 		</div>
 	@endif
 
-	@if ($res['d7'] != null)
+	@if (!empty(($res['d7']))
 		<div>
 			<header>
 				<div class="logo">
@@ -3835,7 +3835,7 @@
 		</div>
 	@endif
 
-	@if ($res['d8'] != null)
+	@if (!empty(($res['d8']))
 		<div>
 			<header>
 				<div class="logo">
@@ -4357,7 +4357,7 @@
 		</div>
 	@endif
 
-	@if ($res['d9'] != null)
+	@if (!empty(($res['d9']))
 		<div>
 			<header>
 				<div class="logo">
@@ -4879,7 +4879,7 @@
 		</div>
 	@endif
 
-	@if ($res['d10'] != null)
+	@if (!empty($res['d10']))
 		<div>
 			<header>
 				<div class="logo">
@@ -5401,7 +5401,7 @@
 		</div>
 	@endif
 
-	@if ($res['d11'] != null)
+	@if (!empty($res['d11']))
 		<div>
 			<header>
 				<div class="logo">
@@ -5923,7 +5923,7 @@
 		</div>
 	@endif
 
-	@if ($res['d12'] != null)
+	@if (!empty($res['d12']))
 		<div>
 			<header>
 				<div class="logo">
@@ -6445,7 +6445,7 @@
 		</div>
 	@endif
 
-	@if ($res['d13'] != null)
+	@if (!empty($res['d13']))
 		<div>
 			<header>
 				<div class="logo">
@@ -6967,7 +6967,7 @@
 		</div>
 	@endif
 
-	@if ($res['d14'] != null)
+	@if (!empty($res['d14']))
 		<div>
 			<header>
 				<div class="logo">
@@ -7489,7 +7489,7 @@
 		</div>
 	@endif
 
-	@if ($res['d15'] != null)
+	@if (!empty($res['d15']))
 		<div>
 			<header>
 				<div class="logo">
@@ -8011,7 +8011,7 @@
 		</div>
 	@endif
 
-	@if ($res['d16'] != null)
+	@if (!empty($res['d16']))
 		<div>
 			<header>
 				<div class="logo">
@@ -8533,7 +8533,7 @@
 		</div>
 	@endif
 
-	@if ($res['d17'] != null)
+	@if (!empty($res['d17']))
 		<div>
 			<header>
 				<div class="logo">
@@ -9055,7 +9055,7 @@
 		</div>
 	@endif
 
-	@if ($res['d18'] != null)
+	@if (!empty($res['d18']))
 		<div>
 			<header>
 				<div class="logo">
@@ -9577,7 +9577,7 @@
 		</div>
 	@endif
 
-	@if ($res['d19'] != null)
+	@if (!empty($res['d19']))
 		<div>
 			<header>
 				<div class="logo">
@@ -10099,7 +10099,7 @@
 		</div>
 	@endif
 
-	@if ($res['d20'] != null)
+	@if (!empty($res['d20']))
 		<div>
 			<header>
 				<div class="logo">
@@ -10672,7 +10672,7 @@
 			obji19: [],
 			obji20: []
         }
-        var dataLoad = {!! json_encode($res['d'] )!!};
+        var dataLoad = {!! json_encode($res['d1'] )!!};
 		var dataLoad2 = {!! json_encode($res['d2'] )!!};
 		var dataLoad3 = {!! json_encode($res['d3'] )!!};
 		var dataLoad4 = {!! json_encode($res['d4'] )!!};
