@@ -91,7 +91,7 @@
     </style>
 </head>
 <body ng-controller="cetakCPPOP"> 
-    @if ($res['d'] != null)
+    @if (!empty($res['d1']))
         <div class="format">
             <table>
                 <tr>
@@ -110,21 +110,21 @@
                         TELP : (0413) 81292
                     </td>
                     <td colspan="9" style="border:none;">No RM</td>
-                    <td style="border:none;" colspan="4">: {!! $res['d'][0]->nocm  !!}</td>
+                    <td style="border:none;" colspan="4">: {!! $res['d1'][0]->nocm  !!}</td>
                     <td rowspan="3" style="background:#000;color:#fff;width:100px;text-align:center;font-size:36px">RM</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">Nama Lengkap</td>
-                    <td style="border:none;" colspan="3">: {!!  $res['d'][0]->namapasien  !!}</td>
-                    <td style="border:none;text-align: right;">{{ $res['d'][0]->jeniskelamin == 'PEREMPUAN' ? 'P' : 'L' }}</td>
+                    <td style="border:none;" colspan="3">: {!!  $res['d1'][0]->namapasien  !!}</td>
+                    <td style="border:none;text-align: right;">{{ $res['d1'][0]->jeniskelamin == 'PEREMPUAN' ? 'P' : 'L' }}</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">Tanggal Lahir</td>
-                    <td style="border:none;" colspan="4">: {!! date('d-m-Y',strtotime( $res['d'][0]->tgllahir  )) !!}</td>
+                    <td style="border:none;" colspan="4">: {!! date('d-m-Y',strtotime( $res['d1'][0]->tgllahir  )) !!}</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">NIK</td>
-                    <td style="border:none;" colspan="4">: {!! $res['d'][0]->noidentitas  !!}</td>
+                    <td style="border:none;" colspan="4">: {!! $res['d1'][0]->noidentitas  !!}</td>
                     <td style="text-align:center;font-size:36px">27</td>
                 </tr>
                 <tr>
@@ -1229,7 +1229,7 @@
         </div>
     @endif
 
-    @if ($res['d2'] != null)
+    @if (!empty($res['d2']))
         <div class="format">
             <table>
                 <tr>
@@ -1248,21 +1248,21 @@
                         TELP : (0413) 81292
                     </td>
                     <td colspan="9" style="border:none;">No RM</td>
-                    <td style="border:none;" colspan="4">: {!! $res['d'][0]->nocm  !!}</td>
+                    <td style="border:none;" colspan="4">: {!! $res['d1'][0]->nocm  !!}</td>
                     <td rowspan="3" style="background:#000;color:#fff;width:100px;text-align:center;font-size:36px">RM</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">Nama Lengkap</td>
-                    <td style="border:none;" colspan="3">: {!!  $res['d'][0]->namapasien  !!}</td>
-                    <td style="border:none;text-align: right;">{{ $res['d'][0]->jeniskelamin == 'PEREMPUAN' ? 'P' : 'L' }}</td>
+                    <td style="border:none;" colspan="3">: {!!  $res['d1'][0]->namapasien  !!}</td>
+                    <td style="border:none;text-align: right;">{{ $res['d1'][0]->jeniskelamin == 'PEREMPUAN' ? 'P' : 'L' }}</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">Tanggal Lahir</td>
-                    <td style="border:none;" colspan="4">: {!! date('d-m-Y',strtotime( $res['d'][0]->tgllahir  )) !!}</td>
+                    <td style="border:none;" colspan="4">: {!! date('d-m-Y',strtotime( $res['d1'][0]->tgllahir  )) !!}</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">NIK</td>
-                    <td style="border:none;" colspan="4">: {!! $res['d'][0]->noidentitas  !!}</td>
+                    <td style="border:none;" colspan="4">: {!! $res['d1'][0]->noidentitas  !!}</td>
                     <td style="text-align:center;font-size:36px">27</td>
                 </tr>
                 <tr>
@@ -2367,7 +2367,7 @@
         </div>
     @endif
 
-    @if ($res['d3'] != null)
+    @if (!empty($res['d3']))
         <div class="format">
             <table>
                 <tr>
@@ -2386,21 +2386,21 @@
                         TELP : (0413) 81292
                     </td>
                     <td colspan="9" style="border:none;">No RM</td>
-                    <td style="border:none;" colspan="4">: {!! $res['d'][0]->nocm  !!}</td>
+                    <td style="border:none;" colspan="4">: {!! $res['d1'][0]->nocm  !!}</td>
                     <td rowspan="3" style="background:#000;color:#fff;width:100px;text-align:center;font-size:36px">RM</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">Nama Lengkap</td>
-                    <td style="border:none;" colspan="3">: {!!  $res['d'][0]->namapasien  !!}</td>
-                    <td style="border:none;text-align: right;">{{ $res['d'][0]->jeniskelamin == 'PEREMPUAN' ? 'P' : 'L' }}</td>
+                    <td style="border:none;" colspan="3">: {!!  $res['d1'][0]->namapasien  !!}</td>
+                    <td style="border:none;text-align: right;">{{ $res['d1'][0]->jeniskelamin == 'PEREMPUAN' ? 'P' : 'L' }}</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">Tanggal Lahir</td>
-                    <td style="border:none;" colspan="4">: {!! date('d-m-Y',strtotime( $res['d'][0]->tgllahir  )) !!}</td>
+                    <td style="border:none;" colspan="4">: {!! date('d-m-Y',strtotime( $res['d1'][0]->tgllahir  )) !!}</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">NIK</td>
-                    <td style="border:none;" colspan="4">: {!! $res['d'][0]->noidentitas  !!}</td>
+                    <td style="border:none;" colspan="4">: {!! $res['d1'][0]->noidentitas  !!}</td>
                     <td style="text-align:center;font-size:36px">27</td>
                 </tr>
                 <tr>
@@ -3505,7 +3505,7 @@
         </div>
     @endif
 
-    @if ($res['d4'] != null)
+    @if (!empty($res['d4']))
         <div class="format">
             <table>
                 <tr>
@@ -3524,21 +3524,21 @@
                         TELP : (0413) 81292
                     </td>
                     <td colspan="9" style="border:none;">No RM</td>
-                    <td style="border:none;" colspan="4">: {!! $res['d'][0]->nocm  !!}</td>
+                    <td style="border:none;" colspan="4">: {!! $res['d1'][0]->nocm  !!}</td>
                     <td rowspan="3" style="background:#000;color:#fff;width:100px;text-align:center;font-size:36px">RM</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">Nama Lengkap</td>
-                    <td style="border:none;" colspan="3">: {!!  $res['d'][0]->namapasien  !!}</td>
-                    <td style="border:none;text-align: right;">{{ $res['d'][0]->jeniskelamin == 'PEREMPUAN' ? 'P' : 'L' }}</td>
+                    <td style="border:none;" colspan="3">: {!!  $res['d1'][0]->namapasien  !!}</td>
+                    <td style="border:none;text-align: right;">{{ $res['d1'][0]->jeniskelamin == 'PEREMPUAN' ? 'P' : 'L' }}</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">Tanggal Lahir</td>
-                    <td style="border:none;" colspan="4">: {!! date('d-m-Y',strtotime( $res['d'][0]->tgllahir  )) !!}</td>
+                    <td style="border:none;" colspan="4">: {!! date('d-m-Y',strtotime( $res['d1'][0]->tgllahir  )) !!}</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">NIK</td>
-                    <td style="border:none;" colspan="4">: {!! $res['d'][0]->noidentitas  !!}</td>
+                    <td style="border:none;" colspan="4">: {!! $res['d1'][0]->noidentitas  !!}</td>
                     <td style="text-align:center;font-size:36px">27</td>
                 </tr>
                 <tr>
@@ -4643,7 +4643,7 @@
         </div>
     @endif
 
-    @if ($res['d5'] != null)
+    @if (!empty($res['d5']))
         <div class="format">
             <table>
                 <tr>
@@ -4662,21 +4662,21 @@
                         TELP : (0413) 81292
                     </td>
                     <td colspan="9" style="border:none;">No RM</td>
-                    <td style="border:none;" colspan="4">: {!! $res['d'][0]->nocm  !!}</td>
+                    <td style="border:none;" colspan="4">: {!! $res['d1'][0]->nocm  !!}</td>
                     <td rowspan="3" style="background:#000;color:#fff;width:100px;text-align:center;font-size:36px">RM</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">Nama Lengkap</td>
-                    <td style="border:none;" colspan="3">: {!!  $res['d'][0]->namapasien  !!}</td>
-                    <td style="border:none;text-align: right;">{{ $res['d'][0]->jeniskelamin == 'PEREMPUAN' ? 'P' : 'L' }}</td>
+                    <td style="border:none;" colspan="3">: {!!  $res['d1'][0]->namapasien  !!}</td>
+                    <td style="border:none;text-align: right;">{{ $res['d1'][0]->jeniskelamin == 'PEREMPUAN' ? 'P' : 'L' }}</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">Tanggal Lahir</td>
-                    <td style="border:none;" colspan="4">: {!! date('d-m-Y',strtotime( $res['d'][0]->tgllahir  )) !!}</td>
+                    <td style="border:none;" colspan="4">: {!! date('d-m-Y',strtotime( $res['d1'][0]->tgllahir  )) !!}</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">NIK</td>
-                    <td style="border:none;" colspan="4">: {!! $res['d'][0]->noidentitas  !!}</td>
+                    <td style="border:none;" colspan="4">: {!! $res['d1'][0]->noidentitas  !!}</td>
                     <td style="text-align:center;font-size:36px">27</td>
                 </tr>
                 <tr>
@@ -5781,7 +5781,7 @@
         </div>
     @endif
 
-    @if ($res['d6'] != null)
+    @if (!empty($res['d6']))
         <div class="format">
             <table>
                 <tr>
@@ -5800,21 +5800,21 @@
                         TELP : (0413) 81292
                     </td>
                     <td colspan="9" style="border:none;">No RM</td>
-                    <td style="border:none;" colspan="4">: {!! $res['d'][0]->nocm  !!}</td>
+                    <td style="border:none;" colspan="4">: {!! $res['d1'][0]->nocm  !!}</td>
                     <td rowspan="3" style="background:#000;color:#fff;width:100px;text-align:center;font-size:36px">RM</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">Nama Lengkap</td>
-                    <td style="border:none;" colspan="3">: {!!  $res['d'][0]->namapasien  !!}</td>
-                    <td style="border:none;text-align: right;">{{ $res['d'][0]->jeniskelamin == 'PEREMPUAN' ? 'P' : 'L' }}</td>
+                    <td style="border:none;" colspan="3">: {!!  $res['d1'][0]->namapasien  !!}</td>
+                    <td style="border:none;text-align: right;">{{ $res['d1'][0]->jeniskelamin == 'PEREMPUAN' ? 'P' : 'L' }}</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">Tanggal Lahir</td>
-                    <td style="border:none;" colspan="4">: {!! date('d-m-Y',strtotime( $res['d'][0]->tgllahir  )) !!}</td>
+                    <td style="border:none;" colspan="4">: {!! date('d-m-Y',strtotime( $res['d1'][0]->tgllahir  )) !!}</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">NIK</td>
-                    <td style="border:none;" colspan="4">: {!! $res['d'][0]->noidentitas  !!}</td>
+                    <td style="border:none;" colspan="4">: {!! $res['d1'][0]->noidentitas  !!}</td>
                     <td style="text-align:center;font-size:36px">27</td>
                 </tr>
                 <tr>
@@ -6919,7 +6919,7 @@
         </div>
     @endif
 
-    @if ($res['d7'] != null)
+    @if (!empty($res['d7']))
         <div class="format">
             <table>
                 <tr>
@@ -6938,21 +6938,21 @@
                         TELP : (0413) 81292
                     </td>
                     <td colspan="9" style="border:none;">No RM</td>
-                    <td style="border:none;" colspan="4">: {!! $res['d'][0]->nocm  !!}</td>
+                    <td style="border:none;" colspan="4">: {!! $res['d1'][0]->nocm  !!}</td>
                     <td rowspan="3" style="background:#000;color:#fff;width:100px;text-align:center;font-size:36px">RM</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">Nama Lengkap</td>
-                    <td style="border:none;" colspan="3">: {!!  $res['d'][0]->namapasien  !!}</td>
-                    <td style="border:none;text-align: right;">{{ $res['d'][0]->jeniskelamin == 'PEREMPUAN' ? 'P' : 'L' }}</td>
+                    <td style="border:none;" colspan="3">: {!!  $res['d1'][0]->namapasien  !!}</td>
+                    <td style="border:none;text-align: right;">{{ $res['d1'][0]->jeniskelamin == 'PEREMPUAN' ? 'P' : 'L' }}</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">Tanggal Lahir</td>
-                    <td style="border:none;" colspan="4">: {!! date('d-m-Y',strtotime( $res['d'][0]->tgllahir  )) !!}</td>
+                    <td style="border:none;" colspan="4">: {!! date('d-m-Y',strtotime( $res['d1'][0]->tgllahir  )) !!}</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">NIK</td>
-                    <td style="border:none;" colspan="4">: {!! $res['d'][0]->noidentitas  !!}</td>
+                    <td style="border:none;" colspan="4">: {!! $res['d1'][0]->noidentitas  !!}</td>
                     <td style="text-align:center;font-size:36px">27</td>
                 </tr>
                 <tr>
@@ -8057,7 +8057,7 @@
         </div>
     @endif
 
-    @if ($res['d8'] != null)
+    @if (!empty($res['d8']))
         <div class="format">
             <table>
                 <tr>
@@ -8076,21 +8076,21 @@
                         TELP : (0413) 81292
                     </td>
                     <td colspan="9" style="border:none;">No RM</td>
-                    <td style="border:none;" colspan="4">: {!! $res['d'][0]->nocm  !!}</td>
+                    <td style="border:none;" colspan="4">: {!! $res['d1'][0]->nocm  !!}</td>
                     <td rowspan="3" style="background:#000;color:#fff;width:100px;text-align:center;font-size:36px">RM</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">Nama Lengkap</td>
-                    <td style="border:none;" colspan="3">: {!!  $res['d'][0]->namapasien  !!}</td>
-                    <td style="border:none;text-align: right;">{{ $res['d'][0]->jeniskelamin == 'PEREMPUAN' ? 'P' : 'L' }}</td>
+                    <td style="border:none;" colspan="3">: {!!  $res['d1'][0]->namapasien  !!}</td>
+                    <td style="border:none;text-align: right;">{{ $res['d1'][0]->jeniskelamin == 'PEREMPUAN' ? 'P' : 'L' }}</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">Tanggal Lahir</td>
-                    <td style="border:none;" colspan="4">: {!! date('d-m-Y',strtotime( $res['d'][0]->tgllahir  )) !!}</td>
+                    <td style="border:none;" colspan="4">: {!! date('d-m-Y',strtotime( $res['d1'][0]->tgllahir  )) !!}</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">NIK</td>
-                    <td style="border:none;" colspan="4">: {!! $res['d'][0]->noidentitas  !!}</td>
+                    <td style="border:none;" colspan="4">: {!! $res['d1'][0]->noidentitas  !!}</td>
                     <td style="text-align:center;font-size:36px">27</td>
                 </tr>
                 <tr>
@@ -9195,7 +9195,7 @@
         </div>
     @endif
 
-    @if ($res['d9'] != null)
+    @if (!empty($res['d9']))
         <div class="format">
             <table>
                 <tr>
@@ -9214,21 +9214,21 @@
                         TELP : (0413) 81292
                     </td>
                     <td colspan="9" style="border:none;">No RM</td>
-                    <td style="border:none;" colspan="4">: {!! $res['d'][0]->nocm  !!}</td>
+                    <td style="border:none;" colspan="4">: {!! $res['d1'][0]->nocm  !!}</td>
                     <td rowspan="3" style="background:#000;color:#fff;width:100px;text-align:center;font-size:36px">RM</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">Nama Lengkap</td>
-                    <td style="border:none;" colspan="3">: {!!  $res['d'][0]->namapasien  !!}</td>
-                    <td style="border:none;text-align: right;">{{ $res['d'][0]->jeniskelamin == 'PEREMPUAN' ? 'P' : 'L' }}</td>
+                    <td style="border:none;" colspan="3">: {!!  $res['d1'][0]->namapasien  !!}</td>
+                    <td style="border:none;text-align: right;">{{ $res['d1'][0]->jeniskelamin == 'PEREMPUAN' ? 'P' : 'L' }}</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">Tanggal Lahir</td>
-                    <td style="border:none;" colspan="4">: {!! date('d-m-Y',strtotime( $res['d'][0]->tgllahir  )) !!}</td>
+                    <td style="border:none;" colspan="4">: {!! date('d-m-Y',strtotime( $res['d1'][0]->tgllahir  )) !!}</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">NIK</td>
-                    <td style="border:none;" colspan="4">: {!! $res['d'][0]->noidentitas  !!}</td>
+                    <td style="border:none;" colspan="4">: {!! $res['d1'][0]->noidentitas  !!}</td>
                     <td style="text-align:center;font-size:36px">27</td>
                 </tr>
                 <tr>
@@ -10333,7 +10333,7 @@
         </div>
     @endif
 
-    @if ($res['d10'] != null)
+    @if (!empty($res['d10']))
         <div class="format">
             <table>
                 <tr>
@@ -10352,21 +10352,21 @@
                         TELP : (0413) 81292
                     </td>
                     <td colspan="9" style="border:none;">No RM</td>
-                    <td style="border:none;" colspan="4">: {!! $res['d'][0]->nocm  !!}</td>
+                    <td style="border:none;" colspan="4">: {!! $res['d1'][0]->nocm  !!}</td>
                     <td rowspan="3" style="background:#000;color:#fff;width:100px;text-align:center;font-size:36px">RM</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">Nama Lengkap</td>
-                    <td style="border:none;" colspan="3">: {!!  $res['d'][0]->namapasien  !!}</td>
-                    <td style="border:none;text-align: right;">{{ $res['d'][0]->jeniskelamin == 'PEREMPUAN' ? 'P' : 'L' }}</td>
+                    <td style="border:none;" colspan="3">: {!!  $res['d1'][0]->namapasien  !!}</td>
+                    <td style="border:none;text-align: right;">{{ $res['d1'][0]->jeniskelamin == 'PEREMPUAN' ? 'P' : 'L' }}</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">Tanggal Lahir</td>
-                    <td style="border:none;" colspan="4">: {!! date('d-m-Y',strtotime( $res['d'][0]->tgllahir  )) !!}</td>
+                    <td style="border:none;" colspan="4">: {!! date('d-m-Y',strtotime( $res['d1'][0]->tgllahir  )) !!}</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">NIK</td>
-                    <td style="border:none;" colspan="4">: {!! $res['d'][0]->noidentitas  !!}</td>
+                    <td style="border:none;" colspan="4">: {!! $res['d1'][0]->noidentitas  !!}</td>
                     <td style="text-align:center;font-size:36px">27</td>
                 </tr>
                 <tr>
@@ -11471,7 +11471,7 @@
         </div>
     @endif
 
-    @if ($res['d11'] != null)
+    @if (!empty($res['d11']))
         <div class="format">
             <table>
                 <tr>
@@ -11490,21 +11490,21 @@
                         TELP : (0413) 81292
                     </td>
                     <td colspan="9" style="border:none;">No RM</td>
-                    <td style="border:none;" colspan="4">: {!! $res['d'][0]->nocm  !!}</td>
+                    <td style="border:none;" colspan="4">: {!! $res['d1'][0]->nocm  !!}</td>
                     <td rowspan="3" style="background:#000;color:#fff;width:100px;text-align:center;font-size:36px">RM</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">Nama Lengkap</td>
-                    <td style="border:none;" colspan="3">: {!!  $res['d'][0]->namapasien  !!}</td>
-                    <td style="border:none;text-align: right;">{{ $res['d'][0]->jeniskelamin == 'PEREMPUAN' ? 'P' : 'L' }}</td>
+                    <td style="border:none;" colspan="3">: {!!  $res['d1'][0]->namapasien  !!}</td>
+                    <td style="border:none;text-align: right;">{{ $res['d1'][0]->jeniskelamin == 'PEREMPUAN' ? 'P' : 'L' }}</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">Tanggal Lahir</td>
-                    <td style="border:none;" colspan="4">: {!! date('d-m-Y',strtotime( $res['d'][0]->tgllahir  )) !!}</td>
+                    <td style="border:none;" colspan="4">: {!! date('d-m-Y',strtotime( $res['d1'][0]->tgllahir  )) !!}</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">NIK</td>
-                    <td style="border:none;" colspan="4">: {!! $res['d'][0]->noidentitas  !!}</td>
+                    <td style="border:none;" colspan="4">: {!! $res['d1'][0]->noidentitas  !!}</td>
                     <td style="text-align:center;font-size:36px">27</td>
                 </tr>
                 <tr>
@@ -12609,7 +12609,7 @@
         </div>
     @endif
 
-    @if ($res['d12'] != null)
+    @if (!empty($res['d12']))
         <div class="format">
             <table>
                 <tr>
@@ -12628,21 +12628,21 @@
                         TELP : (0413) 81292
                     </td>
                     <td colspan="9" style="border:none;">No RM</td>
-                    <td style="border:none;" colspan="4">: {!! $res['d'][0]->nocm  !!}</td>
+                    <td style="border:none;" colspan="4">: {!! $res['d1'][0]->nocm  !!}</td>
                     <td rowspan="3" style="background:#000;color:#fff;width:100px;text-align:center;font-size:36px">RM</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">Nama Lengkap</td>
-                    <td style="border:none;" colspan="3">: {!!  $res['d'][0]->namapasien  !!}</td>
-                    <td style="border:none;text-align: right;">{{ $res['d'][0]->jeniskelamin == 'PEREMPUAN' ? 'P' : 'L' }}</td>
+                    <td style="border:none;" colspan="3">: {!!  $res['d1'][0]->namapasien  !!}</td>
+                    <td style="border:none;text-align: right;">{{ $res['d1'][0]->jeniskelamin == 'PEREMPUAN' ? 'P' : 'L' }}</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">Tanggal Lahir</td>
-                    <td style="border:none;" colspan="4">: {!! date('d-m-Y',strtotime( $res['d'][0]->tgllahir  )) !!}</td>
+                    <td style="border:none;" colspan="4">: {!! date('d-m-Y',strtotime( $res['d1'][0]->tgllahir  )) !!}</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">NIK</td>
-                    <td style="border:none;" colspan="4">: {!! $res['d'][0]->noidentitas  !!}</td>
+                    <td style="border:none;" colspan="4">: {!! $res['d1'][0]->noidentitas  !!}</td>
                     <td style="text-align:center;font-size:36px">27</td>
                 </tr>
                 <tr>
@@ -13747,7 +13747,7 @@
         </div>
     @endif
 
-    @if ($res['d13'] != null)
+    @if (!empty($res['d13']))
         <div class="format">
             <table>
                 <tr>
@@ -13766,21 +13766,21 @@
                         TELP : (0413) 81292
                     </td>
                     <td colspan="9" style="border:none;">No RM</td>
-                    <td style="border:none;" colspan="4">: {!! $res['d'][0]->nocm  !!}</td>
+                    <td style="border:none;" colspan="4">: {!! $res['d1'][0]->nocm  !!}</td>
                     <td rowspan="3" style="background:#000;color:#fff;width:100px;text-align:center;font-size:36px">RM</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">Nama Lengkap</td>
-                    <td style="border:none;" colspan="3">: {!!  $res['d'][0]->namapasien  !!}</td>
-                    <td style="border:none;text-align: right;">{{ $res['d'][0]->jeniskelamin == 'PEREMPUAN' ? 'P' : 'L' }}</td>
+                    <td style="border:none;" colspan="3">: {!!  $res['d1'][0]->namapasien  !!}</td>
+                    <td style="border:none;text-align: right;">{{ $res['d1'][0]->jeniskelamin == 'PEREMPUAN' ? 'P' : 'L' }}</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">Tanggal Lahir</td>
-                    <td style="border:none;" colspan="4">: {!! date('d-m-Y',strtotime( $res['d'][0]->tgllahir  )) !!}</td>
+                    <td style="border:none;" colspan="4">: {!! date('d-m-Y',strtotime( $res['d1'][0]->tgllahir  )) !!}</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">NIK</td>
-                    <td style="border:none;" colspan="4">: {!! $res['d'][0]->noidentitas  !!}</td>
+                    <td style="border:none;" colspan="4">: {!! $res['d1'][0]->noidentitas  !!}</td>
                     <td style="text-align:center;font-size:36px">27</td>
                 </tr>
                 <tr>
@@ -14885,7 +14885,7 @@
         </div>
     @endif
 
-    @if ($res['d14'] != null)
+    @if (!empty($res['d14']))
         <div class="format">
             <table>
                 <tr>
@@ -14904,21 +14904,21 @@
                         TELP : (0413) 81292
                     </td>
                     <td colspan="9" style="border:none;">No RM</td>
-                    <td style="border:none;" colspan="4">: {!! $res['d'][0]->nocm  !!}</td>
+                    <td style="border:none;" colspan="4">: {!! $res['d1'][0]->nocm  !!}</td>
                     <td rowspan="3" style="background:#000;color:#fff;width:100px;text-align:center;font-size:36px">RM</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">Nama Lengkap</td>
-                    <td style="border:none;" colspan="3">: {!!  $res['d'][0]->namapasien  !!}</td>
-                    <td style="border:none;text-align: right;">{{ $res['d'][0]->jeniskelamin == 'PEREMPUAN' ? 'P' : 'L' }}</td>
+                    <td style="border:none;" colspan="3">: {!!  $res['d1'][0]->namapasien  !!}</td>
+                    <td style="border:none;text-align: right;">{{ $res['d1'][0]->jeniskelamin == 'PEREMPUAN' ? 'P' : 'L' }}</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">Tanggal Lahir</td>
-                    <td style="border:none;" colspan="4">: {!! date('d-m-Y',strtotime( $res['d'][0]->tgllahir  )) !!}</td>
+                    <td style="border:none;" colspan="4">: {!! date('d-m-Y',strtotime( $res['d1'][0]->tgllahir  )) !!}</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">NIK</td>
-                    <td style="border:none;" colspan="4">: {!! $res['d'][0]->noidentitas  !!}</td>
+                    <td style="border:none;" colspan="4">: {!! $res['d1'][0]->noidentitas  !!}</td>
                     <td style="text-align:center;font-size:36px">27</td>
                 </tr>
                 <tr>
@@ -16023,7 +16023,7 @@
         </div>
     @endif
 
-    @if ($res['d15'] != null)
+    @if (!empty($res['d15']))
         <div class="format">
             <table>
                 <tr>
@@ -16042,21 +16042,21 @@
                         TELP : (0413) 81292
                     </td>
                     <td colspan="9" style="border:none;">No RM</td>
-                    <td style="border:none;" colspan="4">: {!! $res['d'][0]->nocm  !!}</td>
+                    <td style="border:none;" colspan="4">: {!! $res['d1'][0]->nocm  !!}</td>
                     <td rowspan="3" style="background:#000;color:#fff;width:100px;text-align:center;font-size:36px">RM</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">Nama Lengkap</td>
-                    <td style="border:none;" colspan="3">: {!!  $res['d'][0]->namapasien  !!}</td>
-                    <td style="border:none;text-align: right;">{{ $res['d'][0]->jeniskelamin == 'PEREMPUAN' ? 'P' : 'L' }}</td>
+                    <td style="border:none;" colspan="3">: {!!  $res['d1'][0]->namapasien  !!}</td>
+                    <td style="border:none;text-align: right;">{{ $res['d1'][0]->jeniskelamin == 'PEREMPUAN' ? 'P' : 'L' }}</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">Tanggal Lahir</td>
-                    <td style="border:none;" colspan="4">: {!! date('d-m-Y',strtotime( $res['d'][0]->tgllahir  )) !!}</td>
+                    <td style="border:none;" colspan="4">: {!! date('d-m-Y',strtotime( $res['d1'][0]->tgllahir  )) !!}</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">NIK</td>
-                    <td style="border:none;" colspan="4">: {!! $res['d'][0]->noidentitas  !!}</td>
+                    <td style="border:none;" colspan="4">: {!! $res['d1'][0]->noidentitas  !!}</td>
                     <td style="text-align:center;font-size:36px">27</td>
                 </tr>
                 <tr>
@@ -17161,7 +17161,7 @@
         </div>
     @endif
 
-    @if ($res['d16'] != null)
+    @if (!empty($res['d16']))
         <div class="format">
             <table>
                 <tr>
@@ -17180,21 +17180,21 @@
                         TELP : (0413) 81292
                     </td>
                     <td colspan="9" style="border:none;">No RM</td>
-                    <td style="border:none;" colspan="4">: {!! $res['d'][0]->nocm  !!}</td>
+                    <td style="border:none;" colspan="4">: {!! $res['d1'][0]->nocm  !!}</td>
                     <td rowspan="3" style="background:#000;color:#fff;width:100px;text-align:center;font-size:36px">RM</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">Nama Lengkap</td>
-                    <td style="border:none;" colspan="3">: {!!  $res['d'][0]->namapasien  !!}</td>
-                    <td style="border:none;text-align: right;">{{ $res['d'][0]->jeniskelamin == 'PEREMPUAN' ? 'P' : 'L' }}</td>
+                    <td style="border:none;" colspan="3">: {!!  $res['d1'][0]->namapasien  !!}</td>
+                    <td style="border:none;text-align: right;">{{ $res['d1'][0]->jeniskelamin == 'PEREMPUAN' ? 'P' : 'L' }}</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">Tanggal Lahir</td>
-                    <td style="border:none;" colspan="4">: {!! date('d-m-Y',strtotime( $res['d'][0]->tgllahir  )) !!}</td>
+                    <td style="border:none;" colspan="4">: {!! date('d-m-Y',strtotime( $res['d1'][0]->tgllahir  )) !!}</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">NIK</td>
-                    <td style="border:none;" colspan="4">: {!! $res['d'][0]->noidentitas  !!}</td>
+                    <td style="border:none;" colspan="4">: {!! $res['d1'][0]->noidentitas  !!}</td>
                     <td style="text-align:center;font-size:36px">27</td>
                 </tr>
                 <tr>
@@ -18299,7 +18299,7 @@
         </div>
     @endif
 
-    @if ($res['d17'] != null)
+    @if (!empty($res['d17']))
         <div class="format">
             <table>
                 <tr>
@@ -18318,21 +18318,21 @@
                         TELP : (0413) 81292
                     </td>
                     <td colspan="9" style="border:none;">No RM</td>
-                    <td style="border:none;" colspan="4">: {!! $res['d'][0]->nocm  !!}</td>
+                    <td style="border:none;" colspan="4">: {!! $res['d1'][0]->nocm  !!}</td>
                     <td rowspan="3" style="background:#000;color:#fff;width:100px;text-align:center;font-size:36px">RM</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">Nama Lengkap</td>
-                    <td style="border:none;" colspan="3">: {!!  $res['d'][0]->namapasien  !!}</td>
-                    <td style="border:none;text-align: right;">{{ $res['d'][0]->jeniskelamin == 'PEREMPUAN' ? 'P' : 'L' }}</td>
+                    <td style="border:none;" colspan="3">: {!!  $res['d1'][0]->namapasien  !!}</td>
+                    <td style="border:none;text-align: right;">{{ $res['d1'][0]->jeniskelamin == 'PEREMPUAN' ? 'P' : 'L' }}</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">Tanggal Lahir</td>
-                    <td style="border:none;" colspan="4">: {!! date('d-m-Y',strtotime( $res['d'][0]->tgllahir  )) !!}</td>
+                    <td style="border:none;" colspan="4">: {!! date('d-m-Y',strtotime( $res['d1'][0]->tgllahir  )) !!}</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">NIK</td>
-                    <td style="border:none;" colspan="4">: {!! $res['d'][0]->noidentitas  !!}</td>
+                    <td style="border:none;" colspan="4">: {!! $res['d1'][0]->noidentitas  !!}</td>
                     <td style="text-align:center;font-size:36px">27</td>
                 </tr>
                 <tr>
@@ -19437,7 +19437,7 @@
         </div>
     @endif
 
-    @if ($res['d18'] != null)
+    @if (!empty($res['d18']))
         <div class="format">
             <table>
                 <tr>
@@ -19456,21 +19456,21 @@
                         TELP : (0413) 81292
                     </td>
                     <td colspan="9" style="border:none;">No RM</td>
-                    <td style="border:none;" colspan="4">: {!! $res['d'][0]->nocm  !!}</td>
+                    <td style="border:none;" colspan="4">: {!! $res['d1'][0]->nocm  !!}</td>
                     <td rowspan="3" style="background:#000;color:#fff;width:100px;text-align:center;font-size:36px">RM</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">Nama Lengkap</td>
-                    <td style="border:none;" colspan="3">: {!!  $res['d'][0]->namapasien  !!}</td>
-                    <td style="border:none;text-align: right;">{{ $res['d'][0]->jeniskelamin == 'PEREMPUAN' ? 'P' : 'L' }}</td>
+                    <td style="border:none;" colspan="3">: {!!  $res['d1'][0]->namapasien  !!}</td>
+                    <td style="border:none;text-align: right;">{{ $res['d1'][0]->jeniskelamin == 'PEREMPUAN' ? 'P' : 'L' }}</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">Tanggal Lahir</td>
-                    <td style="border:none;" colspan="4">: {!! date('d-m-Y',strtotime( $res['d'][0]->tgllahir  )) !!}</td>
+                    <td style="border:none;" colspan="4">: {!! date('d-m-Y',strtotime( $res['d1'][0]->tgllahir  )) !!}</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">NIK</td>
-                    <td style="border:none;" colspan="4">: {!! $res['d'][0]->noidentitas  !!}</td>
+                    <td style="border:none;" colspan="4">: {!! $res['d1'][0]->noidentitas  !!}</td>
                     <td style="text-align:center;font-size:36px">27</td>
                 </tr>
                 <tr>
@@ -20575,7 +20575,7 @@
         </div>
     @endif
 
-    @if ($res['d19'] != null)
+    @if (!empty($res['d19']))
         <div class="format">
             <table>
                 <tr>
@@ -20594,21 +20594,21 @@
                         TELP : (0413) 81292
                     </td>
                     <td colspan="9" style="border:none;">No RM</td>
-                    <td style="border:none;" colspan="4">: {!! $res['d'][0]->nocm  !!}</td>
+                    <td style="border:none;" colspan="4">: {!! $res['d1'][0]->nocm  !!}</td>
                     <td rowspan="3" style="background:#000;color:#fff;width:100px;text-align:center;font-size:36px">RM</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">Nama Lengkap</td>
-                    <td style="border:none;" colspan="3">: {!!  $res['d'][0]->namapasien  !!}</td>
-                    <td style="border:none;text-align: right;">{{ $res['d'][0]->jeniskelamin == 'PEREMPUAN' ? 'P' : 'L' }}</td>
+                    <td style="border:none;" colspan="3">: {!!  $res['d1'][0]->namapasien  !!}</td>
+                    <td style="border:none;text-align: right;">{{ $res['d1'][0]->jeniskelamin == 'PEREMPUAN' ? 'P' : 'L' }}</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">Tanggal Lahir</td>
-                    <td style="border:none;" colspan="4">: {!! date('d-m-Y',strtotime( $res['d'][0]->tgllahir  )) !!}</td>
+                    <td style="border:none;" colspan="4">: {!! date('d-m-Y',strtotime( $res['d1'][0]->tgllahir  )) !!}</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">NIK</td>
-                    <td style="border:none;" colspan="4">: {!! $res['d'][0]->noidentitas  !!}</td>
+                    <td style="border:none;" colspan="4">: {!! $res['d1'][0]->noidentitas  !!}</td>
                     <td style="text-align:center;font-size:36px">27</td>
                 </tr>
                 <tr>
@@ -21713,7 +21713,7 @@
         </div>
     @endif
 
-    @if ($res['d20'] != null)
+    @if (!empty($res['d20']))
         <div class="format">
             <table>
                 <tr>
@@ -21732,21 +21732,21 @@
                         TELP : (0413) 81292
                     </td>
                     <td colspan="9" style="border:none;">No RM</td>
-                    <td style="border:none;" colspan="4">: {!! $res['d'][0]->nocm  !!}</td>
+                    <td style="border:none;" colspan="4">: {!! $res['d1'][0]->nocm  !!}</td>
                     <td rowspan="3" style="background:#000;color:#fff;width:100px;text-align:center;font-size:36px">RM</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">Nama Lengkap</td>
-                    <td style="border:none;" colspan="3">: {!!  $res['d'][0]->namapasien  !!}</td>
-                    <td style="border:none;text-align: right;">{{ $res['d'][0]->jeniskelamin == 'PEREMPUAN' ? 'P' : 'L' }}</td>
+                    <td style="border:none;" colspan="3">: {!!  $res['d1'][0]->namapasien  !!}</td>
+                    <td style="border:none;text-align: right;">{{ $res['d1'][0]->jeniskelamin == 'PEREMPUAN' ? 'P' : 'L' }}</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">Tanggal Lahir</td>
-                    <td style="border:none;" colspan="4">: {!! date('d-m-Y',strtotime( $res['d'][0]->tgllahir  )) !!}</td>
+                    <td style="border:none;" colspan="4">: {!! date('d-m-Y',strtotime( $res['d1'][0]->tgllahir  )) !!}</td>
                 </tr>
                 <tr>
                     <td width="30" colspan="9" style="border:none;">NIK</td>
-                    <td style="border:none;" colspan="4">: {!! $res['d'][0]->noidentitas  !!}</td>
+                    <td style="border:none;" colspan="4">: {!! $res['d1'][0]->noidentitas  !!}</td>
                     <td style="text-align:center;font-size:36px">27</td>
                 </tr>
                 <tr>
@@ -22903,7 +22903,8 @@
 			obji19: [],
 			obji20: []
         }
-        var dataLoad = {!! json_encode($res['d'] )!!};
+
+        var dataLoad = {!! json_encode($res['d1'] )!!};
 		var dataLoad2 = {!! json_encode($res['d2'] )!!};
 		var dataLoad3 = {!! json_encode($res['d3'] )!!};
 		var dataLoad4 = {!! json_encode($res['d4'] )!!};
@@ -22923,6 +22924,9 @@
 		var dataLoad18 = {!! json_encode($res['d18'] )!!};
 		var dataLoad19 = {!! json_encode($res['d19'] )!!};
 		var dataLoad20 = {!! json_encode($res['d20'] )!!};
+
+        console.log(dataLoad3 != undefined);
+
         for (var i = 0; i <= dataLoad.length - 1; i++) {
             if(dataLoad[i].emrdfk == 3110029){
                 continue;
@@ -22956,7 +22960,7 @@
 
             if (dataLoad[i].type == "checkboxtextbox") {
                 $scope.item.obj[dataLoad[i].emrdfk] = dataLoad[i].value
-                $scope.item.obj2[dataLoad[i].emrdfk] = true
+                $scope.item.obj[dataLoad[i].emrdfk] = true
             }
             if (dataLoad[i].type == "textarea") {
                 $('#id_'+dataLoad[i].emrdfk).html( dataLoad[i].value)
