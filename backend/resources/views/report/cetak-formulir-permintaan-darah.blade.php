@@ -203,22 +203,22 @@
 					<tr>
 					<td>No. RM</td>
 					<td>:</td>
-					<td colspan="2">{!! $res['d'][0]->nocm  !!}</td>
+					<td colspan="2">{!! $res['d1'][0]->nocm  !!}</td>
 					</tr>
 					<tr>
 					<td>Nama Lengkap</td>
 					<td>:</td>
-					<td>{!!  $res['d'][0]->namapasien  !!}</td>
-					<td>{!!  $res['d'][0]->jeniskelamin == 'PEREMPUAN' ? '(P)' : '(L)'  !!}</td>
+					<td>{!!  $res['d1'][0]->namapasien  !!}</td>
+					<td>{!!  $res['d1'][0]->jeniskelamin == 'PEREMPUAN' ? '(P)' : '(L)'  !!}</td>
 					</tr>
 					<tr>
 					<td>Tanggal Lahir</td>
 					<td>:</td>
-					<td colspan="2">{!! date('d-m-Y',strtotime( $res['d'][0]->tgllahir  )) !!}</td>
+					<td colspan="2">{!! date('d-m-Y',strtotime( $res['d1'][0]->tgllahir  )) !!}</td>
 					</tr>
 					<td>NIK</td>
 					<td>:</td>
-					<td colspan="2">{!! $res['d'][0]->noidentitas  !!}</td>
+					<td colspan="2">{!! $res['d1'][0]->noidentitas  !!}</td>
 				</table>
 				</div>
 				<div class="code">
