@@ -213,7 +213,7 @@
     </style>
 </head>
 <body ng-controller="cetakTransfusiDarah">
-    @if ($res['d'] != null)
+    @if (!empty($res['d1']))
         <section>
             <table width="100%" id="content" style="table-layout:fixed">
                 <tr style="border:none;border-top:1px solid #000">
@@ -552,7 +552,7 @@
         </section>
     @endif
 
-    @if ($res['d2'] != null)
+    @if (!empty($res['d2']))
         <section>
             <table width="100%" id="content" style="table-layout:fixed">
                 <tr style="border:none;border-top:1px solid #000">
@@ -891,7 +891,7 @@
         </section>
     @endif
 
-    @if ($res['d3'] != null)
+    @if (!empty($res['d3']))
         <section>
             <table width="100%" id="content" style="table-layout:fixed">
                 <tr style="border:none;border-top:1px solid #000">
@@ -1230,7 +1230,7 @@
         </section>
     @endif
 
-    @if ($res['d4'] != null)
+    @if (!empty($res['d4']))
         <section>
             <table width="100%" id="content" style="table-layout:fixed">
                 <tr style="border:none;border-top:1px solid #000">
@@ -1569,7 +1569,7 @@
         </section>
     @endif
 
-    @if ($res['d5'] != null)
+    @if (!empty($res['d5']))
         <section>
             <table width="100%" id="content" style="table-layout:fixed">
                 <tr style="border:none;border-top:1px solid #000">
@@ -1908,7 +1908,7 @@
         </section>
     @endif
 
-    @if ($res['d6'] != null)
+    @if (!empty($res['d6']))
         <section>
             <table width="100%" id="content" style="table-layout:fixed">
                 <tr style="border:none;border-top:1px solid #000">
@@ -2247,7 +2247,7 @@
         </section>
     @endif
 
-    @if ($res['d7'] != null)
+    @if (!empty($res['d7']))
         <section>
             <table width="100%" id="content" style="table-layout:fixed">
                 <tr style="border:none;border-top:1px solid #000">
@@ -2586,7 +2586,7 @@
         </section>
     @endif
 
-    @if ($res['d8'] != null)
+    @if (!empty($res['d8']))
         <section>
             <table width="100%" id="content" style="table-layout:fixed">
                 <tr style="border:none;border-top:1px solid #000">
@@ -2925,7 +2925,7 @@
         </section>
     @endif
 
-    @if ($res['d9'] != null)
+    @if (!empty($res['d9']))
         <section>
             <table width="100%" id="content" style="table-layout:fixed">
                 <tr style="border:none;border-top:1px solid #000">
@@ -3264,7 +3264,7 @@
         </section>
     @endif
 
-    @if ($res['d10'] != null)
+    @if (!empty($res['d10']))
         <section>
             <table width="100%" id="content" style="table-layout:fixed">
                 <tr style="border:none;border-top:1px solid #000">
@@ -3603,7 +3603,7 @@
         </section>
     @endif
 
-    @if ($res['d11'] != null)
+    @if (!empty($res['d11']))
         <section>
             <table width="100%" id="content" style="table-layout:fixed">
                 <tr style="border:none;border-top:1px solid #000">
@@ -3942,7 +3942,7 @@
         </section>
     @endif
 
-    @if ($res['d12'] != null)
+    @if (!empty($res['d12']))
         <section>
             <table width="100%" id="content" style="table-layout:fixed">
                 <tr style="border:none;border-top:1px solid #000">
@@ -4281,7 +4281,7 @@
         </section>
     @endif
 
-    @if ($res['d13'] != null)
+    @if (!empty($res['d13']))
         <section>
             <table width="100%" id="content" style="table-layout:fixed">
                 <tr style="border:none;border-top:1px solid #000">
@@ -4620,7 +4620,7 @@
         </section>
     @endif
 
-    @if ($res['d14'] != null)
+    @if (!empty($res['d14']))
         <section>
             <table width="100%" id="content" style="table-layout:fixed">
                 <tr style="border:none;border-top:1px solid #000">
@@ -4959,7 +4959,7 @@
         </section>
     @endif
 
-    @if ($res['d15'] != null)
+    @if (!empty($res['d15']))
         <section>
             <table width="100%" id="content" style="table-layout:fixed">
                 <tr style="border:none;border-top:1px solid #000">
@@ -5298,7 +5298,7 @@
         </section>
     @endif
 
-    @if ($res['d16'] != null)
+    @if (!empty($res['d16']))
         <section>
             <table width="100%" id="content" style="table-layout:fixed">
                 <tr style="border:none;border-top:1px solid #000">
@@ -5637,7 +5637,7 @@
         </section>
     @endif
 
-    @if ($res['d17'] != null)
+    @if (!empty($res['d17']))
         <section>
             <table width="100%" id="content" style="table-layout:fixed">
                 <tr style="border:none;border-top:1px solid #000">
@@ -5976,7 +5976,7 @@
         </section>
     @endif
 
-    @if ($res['d18'] != null)
+    @if (!empty($res['d18']))
         <section>
             <table width="100%" id="content" style="table-layout:fixed">
                 <tr style="border:none;border-top:1px solid #000">
@@ -6315,7 +6315,7 @@
         </section>
     @endif
 
-    @if ($res['d19'] != null)
+    @if (!empty($res['d19']))
         <section>
             <table width="100%" id="content" style="table-layout:fixed">
                 <tr style="border:none;border-top:1px solid #000">
@@ -6654,7 +6654,7 @@
         </section>
     @endif
 
-    @if ($res['d20'] != null)
+    @if (!empty($res['d20']))
         <section>
             <table width="100%" id="content" style="table-layout:fixed">
                 <tr style="border:none;border-top:1px solid #000">
@@ -7046,7 +7046,7 @@
 			obji19: [],
 			obji20: []
         }
-        var dataLoad = {!! json_encode($res['d'] )!!};
+        var dataLoad = {!! json_encode($res['d1'] )!!};
 		var dataLoad2 = {!! json_encode($res['d2'] )!!};
 		var dataLoad3 = {!! json_encode($res['d3'] )!!};
 		var dataLoad4 = {!! json_encode($res['d4'] )!!};
