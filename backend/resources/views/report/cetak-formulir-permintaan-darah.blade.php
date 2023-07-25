@@ -10693,2444 +10693,2484 @@
 		var dataLoad19 = {!! json_encode($res['d19'] )!!};
 		var dataLoad20 = {!! json_encode($res['d20'] )!!};
 		
-        for (var i = 0; i <= dataLoad.length - 1; i++) {
-            if(dataLoad[i].emrdfk == 3110029){
-                continue;
-            }
-            if (dataLoad[i].type == "textbox") {
-                $('#id_'+dataLoad[i].emrdfk).html( dataLoad[i].value)
-                $scope.item.obj[dataLoad[i].emrdfk] = dataLoad[i].value
-            }
-            if (dataLoad[i].type == "checkbox") {
-                var chekedd = false
-                if (dataLoad[i].value == '1') {
-                    var chekedd = true
+        if(dataLoad.length > 0){
+            for (var i = 0; i <= dataLoad.length - 1; i++) {
+                if(dataLoad[i].emrdfk == 3110029){
+                    continue;
                 }
-                $scope.item.obj[dataLoad[i].emrdfk] = chekedd
-            }
-            if (dataLoad[i].type == "radio") {
-                $scope.item.obj[dataLoad[i].emrdfk] = dataLoad[i].value
+                if (dataLoad[i].type == "textbox") {
+                    $('#id_'+dataLoad[i].emrdfk).html( dataLoad[i].value)
+                    $scope.item.obj[dataLoad[i].emrdfk] = dataLoad[i].value
+                }
+                if (dataLoad[i].type == "checkbox") {
+                    var chekedd = false
+                    if (dataLoad[i].value == '1') {
+                        var chekedd = true
+                    }
+                    $scope.item.obj[dataLoad[i].emrdfk] = chekedd
+                }
+                if (dataLoad[i].type == "radio") {
+                    $scope.item.obj[dataLoad[i].emrdfk] = dataLoad[i].value
 
-            }
+                }
 
-            if (dataLoad[i].type == "datetime") {
-                $('#id_'+dataLoad[i].emrdfk).html( dataLoad[i].value)
-                $scope.item.obj[dataLoad[i].emrdfk] = dataLoad[i].value
-            }
-            if (dataLoad[i].type == "time") {
-                $scope.item.obj[dataLoad[i].emrdfk] = dataLoad[i].value
-            }
-            if (dataLoad[i].type == "date") {
-                $scope.item.obj[dataLoad[i].emrdfk] = dataLoad[i].value
-            }
+                if (dataLoad[i].type == "datetime") {
+                    $('#id_'+dataLoad[i].emrdfk).html( dataLoad[i].value)
+                    $scope.item.obj[dataLoad[i].emrdfk] = dataLoad[i].value
+                }
+                if (dataLoad[i].type == "time") {
+                    $scope.item.obj[dataLoad[i].emrdfk] = dataLoad[i].value
+                }
+                if (dataLoad[i].type == "date") {
+                    $scope.item.obj[dataLoad[i].emrdfk] = dataLoad[i].value
+                }
 
-            if (dataLoad[i].type == "checkboxtextbox") {
-                $scope.item.obj[dataLoad[i].emrdfk] = dataLoad[i].value
-                $scope.item.obj2[dataLoad[i].emrdfk] = true
-            }
-            if (dataLoad[i].type == "textarea") {
-                $('#id_'+dataLoad[i].emrdfk).html( dataLoad[i].value)
-                $scope.item.obj[dataLoad[i].emrdfk] = dataLoad[i].value
-            }
-            if (dataLoad[i].type == "combobox") {
-     
-                var str = dataLoad[i].value
-                if(str != null)
-                {
+                if (dataLoad[i].type == "checkboxtextbox") {
+                    $scope.item.obj[dataLoad[i].emrdfk] = dataLoad[i].value
+                    $scope.item.obj2[dataLoad[i].emrdfk] = true
+                }
+                if (dataLoad[i].type == "textarea") {
+                    $('#id_'+dataLoad[i].emrdfk).html( dataLoad[i].value)
+                    $scope.item.obj[dataLoad[i].emrdfk] = dataLoad[i].value
+                }
+                if (dataLoad[i].type == "combobox") {
+        
+                    var str = dataLoad[i].value
+                    if(str != null)
+                    {
+                        var res = str.split("~");
+                        
+                        $scope.item.obj[dataLoad[i].emrdfk] = res[1]
+                        $('#id_'+dataLoad[i].emrdfk).html ( res[1])
+                    }
+                }
+                if (dataLoad[i].type == "combobox2") {
+                    var str = dataLoad[i].value
                     var res = str.split("~");
                     
+                    $scope.item.obj[dataLoad[i].emrdfk+""+1] = res[0]
                     $scope.item.obj[dataLoad[i].emrdfk] = res[1]
                     $('#id_'+dataLoad[i].emrdfk).html ( res[1])
+
                 }
-            }
-            if (dataLoad[i].type == "combobox2") {
-                var str = dataLoad[i].value
-                var res = str.split("~");
+
+                if (dataLoad[i].emrdfk == '423816' ) {
+                    $scope.hariTgl = dataLoad[i].value
+                }
+
+                if (dataLoad[i].emrdfk == '2000001974' ) {
+                    $scope.jamPeriksa = dataLoad[i].value
+                }
+
+                if (dataLoad[i].emrdfk == '2000002354' ) {
+                    $scope.tgl1 = dataLoad[i].value
+                }
+                if (dataLoad[i].emrdfk == '2000002357' ) {
+                    $scope.tgl2 = dataLoad[i].value
+                }
+                if (dataLoad[i].emrdfk == '2000002360' ) {
+                    $scope.tgl3 = dataLoad[i].value
+                }
+                if (dataLoad[i].emrdfk == '2000002363' ) {
+                    $scope.tgl4 = dataLoad[i].value
+                }
+                if (dataLoad[i].emrdfk == '2000002366' ) {
+                    $scope.tgl5 = dataLoad[i].value
+                }
+                if (dataLoad[i].emrdfk == '2000002369' ) {
+                    $scope.tgl6 = dataLoad[i].value
+                }
+                if (dataLoad[i].emrdfk == '2000002372' ) {
+                    $scope.tgl7 = dataLoad[i].value
+                }
+                if (dataLoad[i].emrdfk == '2000002375' ) {
+                    $scope.tgl8 = dataLoad[i].value
+                }
+                if (dataLoad[i].emrdfk == '2000002378' ) {
+                    $scope.tgl9 = dataLoad[i].value
+                }
+                if (dataLoad[i].emrdfk == '2000002381' ) {
+                    $scope.tgl10 = dataLoad[i].value
+                }
+                if (dataLoad[i].emrdfk == '2000002384' ) {
+                    $scope.tgl11 = dataLoad[i].value
+                }
+                if (dataLoad[i].emrdfk == '2000002387' ) {
+                    $scope.tgl12 = dataLoad[i].value
+                }
+                if (dataLoad[i].emrdfk == '2000002390' ) {
+                    $scope.tgl13 = dataLoad[i].value
+                }
+                if (dataLoad[i].emrdfk == '2000002393' ) {
+                    $scope.tgl14 = dataLoad[i].value
+                }
+                if (dataLoad[i].emrdfk == '2000002396' ) {
+                    $scope.tgl15 = dataLoad[i].value
+                }
                 
-                $scope.item.obj[dataLoad[i].emrdfk+""+1] = res[0]
-                $scope.item.obj[dataLoad[i].emrdfk] = res[1]
-                $('#id_'+dataLoad[i].emrdfk).html ( res[1])
+                if (dataLoad[i].emrdfk == '2000002408' ) {
+                    $scope.pukul2 = dataLoad[i].value
+                }
 
-            }
-
-            if (dataLoad[i].emrdfk == '423816' ) {
-                $scope.hariTgl = dataLoad[i].value
-            }
-
-            if (dataLoad[i].emrdfk == '2000001974' ) {
-                $scope.jamPeriksa = dataLoad[i].value
-            }
-
-            if (dataLoad[i].emrdfk == '2000002354' ) {
-                $scope.tgl1 = dataLoad[i].value
-            }
-            if (dataLoad[i].emrdfk == '2000002357' ) {
-                $scope.tgl2 = dataLoad[i].value
-            }
-            if (dataLoad[i].emrdfk == '2000002360' ) {
-                $scope.tgl3 = dataLoad[i].value
-            }
-            if (dataLoad[i].emrdfk == '2000002363' ) {
-                $scope.tgl4 = dataLoad[i].value
-            }
-            if (dataLoad[i].emrdfk == '2000002366' ) {
-                $scope.tgl5 = dataLoad[i].value
-            }
-            if (dataLoad[i].emrdfk == '2000002369' ) {
-                $scope.tgl6 = dataLoad[i].value
-            }
-            if (dataLoad[i].emrdfk == '2000002372' ) {
-                $scope.tgl7 = dataLoad[i].value
-            }
-            if (dataLoad[i].emrdfk == '2000002375' ) {
-                $scope.tgl8 = dataLoad[i].value
-            }
-            if (dataLoad[i].emrdfk == '2000002378' ) {
-                $scope.tgl9 = dataLoad[i].value
-            }
-            if (dataLoad[i].emrdfk == '2000002381' ) {
-                $scope.tgl10 = dataLoad[i].value
-            }
-            if (dataLoad[i].emrdfk == '2000002384' ) {
-                $scope.tgl11 = dataLoad[i].value
-            }
-            if (dataLoad[i].emrdfk == '2000002387' ) {
-                $scope.tgl12 = dataLoad[i].value
-            }
-            if (dataLoad[i].emrdfk == '2000002390' ) {
-                $scope.tgl13 = dataLoad[i].value
-            }
-            if (dataLoad[i].emrdfk == '2000002393' ) {
-                $scope.tgl14 = dataLoad[i].value
-            }
-            if (dataLoad[i].emrdfk == '2000002396' ) {
-                $scope.tgl15 = dataLoad[i].value
-            }
+                $scope.tglemr = dataLoad[i].tgl
             
-            if (dataLoad[i].emrdfk == '2000002408' ) {
-                $scope.pukul2 = dataLoad[i].value
             }
-
-            $scope.tglemr = dataLoad[i].tgl
-            
         }
 
-		for (var i = 0; i <= dataLoad2.length - 1; i++) {
-            if(dataLoad2[i].emrdfk == 3110029){
-                continue;
-            }
-            if (dataLoad2[i].type == "textbox") {
-                $('#id_'+dataLoad2[i].emrdfk).html( dataLoad2[i].value)
-                $scope.item.obji2[dataLoad2[i].emrdfk] = dataLoad2[i].value
-            }
-            if (dataLoad2[i].type == "checkbox") {
-                var chekedd = false
-                if (dataLoad2[i].value == '1') {
-                    var chekedd = true
+        if(dataLoad2.length > 0){
+            for (var i = 0; i <= dataLoad2.length - 1; i++) {
+                if(dataLoad2[i].emrdfk == 3110029){
+                    continue;
                 }
-                $scope.item.obji2[dataLoad2[i].emrdfk] = chekedd
-            }
-            if (dataLoad2[i].type == "radio") {
-                $scope.item.obji2[dataLoad2[i].emrdfk] = dataLoad2[i].value
+                if (dataLoad2[i].type == "textbox") {
+                    $('#id_'+dataLoad2[i].emrdfk).html( dataLoad2[i].value)
+                    $scope.item.obji2[dataLoad2[i].emrdfk] = dataLoad2[i].value
+                }
+                if (dataLoad2[i].type == "checkbox") {
+                    var chekedd = false
+                    if (dataLoad2[i].value == '1') {
+                        var chekedd = true
+                    }
+                    $scope.item.obji2[dataLoad2[i].emrdfk] = chekedd
+                }
+                if (dataLoad2[i].type == "radio") {
+                    $scope.item.obji2[dataLoad2[i].emrdfk] = dataLoad2[i].value
 
-            }
+                }
 
-            if (dataLoad2[i].type == "datetime") {
-                $('#id_'+dataLoad2[i].emrdfk).html( dataLoad2[i].value)
-                $scope.item.obji2[dataLoad2[i].emrdfk] = dataLoad2[i].value
-            }
-            if (dataLoad2[i].type == "time") {
-                $scope.item.obji2[dataLoad2[i].emrdfk] = dataLoad2[i].value
-            }
-            if (dataLoad2[i].type == "date") {
-                $scope.item.obji2[dataLoad2[i].emrdfk] = dataLoad2[i].value
-            }
+                if (dataLoad2[i].type == "datetime") {
+                    $('#id_'+dataLoad2[i].emrdfk).html( dataLoad2[i].value)
+                    $scope.item.obji2[dataLoad2[i].emrdfk] = dataLoad2[i].value
+                }
+                if (dataLoad2[i].type == "time") {
+                    $scope.item.obji2[dataLoad2[i].emrdfk] = dataLoad2[i].value
+                }
+                if (dataLoad2[i].type == "date") {
+                    $scope.item.obji2[dataLoad2[i].emrdfk] = dataLoad2[i].value
+                }
 
-            if (dataLoad2[i].type == "checkboxtextbox") {
-                $scope.item.obji2[dataLoad2[i].emrdfk] = dataLoad2[i].value
-                $scope.item.obji2[dataLoad2[i].emrdfk] = true
-            }
-            if (dataLoad2[i].type == "textarea") {
-                $('#id_'+dataLoad2[i].emrdfk).html( dataLoad2[i].value)
-                $scope.item.obji2[dataLoad2[i].emrdfk] = dataLoad2[i].value
-            }
-            if (dataLoad2[i].type == "combobox") {
-     
-                var str = dataLoad2[i].value
-                if(str != null)
-                {
+                if (dataLoad2[i].type == "checkboxtextbox") {
+                    $scope.item.obji2[dataLoad2[i].emrdfk] = dataLoad2[i].value
+                    $scope.item.obji2[dataLoad2[i].emrdfk] = true
+                }
+                if (dataLoad2[i].type == "textarea") {
+                    $('#id_'+dataLoad2[i].emrdfk).html( dataLoad2[i].value)
+                    $scope.item.obji2[dataLoad2[i].emrdfk] = dataLoad2[i].value
+                }
+                if (dataLoad2[i].type == "combobox") {
+        
+                    var str = dataLoad2[i].value
+                    if(str != null)
+                    {
+                        var res = str.split("~");
+                        
+                        $scope.item.obji2[dataLoad2[i].emrdfk] = res[1]
+                        $('#id_'+dataLoad2[i].emrdfk).html ( res[1])
+                    }
+                }
+                if (dataLoad2[i].type == "combobox2") {
+                    var str = dataLoad2[i].value
                     var res = str.split("~");
                     
+                    $scope.item.obji2[dataLoad2[i].emrdfk+""+1] = res[0]
                     $scope.item.obji2[dataLoad2[i].emrdfk] = res[1]
                     $('#id_'+dataLoad2[i].emrdfk).html ( res[1])
+
                 }
-            }
-            if (dataLoad2[i].type == "combobox2") {
-                var str = dataLoad2[i].value
-                var res = str.split("~");
+
+                if (dataLoad2[i].emrdfk == '423816' ) {
+                    $scope.hariTgl = dataLoad2[i].value
+                }
+
+                if (dataLoad2[i].emrdfk == '2000001974' ) {
+                    $scope.jamPeriksa = dataLoad2[i].value
+                }
+
+                if (dataLoad2[i].emrdfk == '2000002354' ) {
+                    $scope.tgl1 = dataLoad2[i].value
+                }
+                if (dataLoad2[i].emrdfk == '2000002357' ) {
+                    $scope.tgl2 = dataLoad2[i].value
+                }
+                if (dataLoad2[i].emrdfk == '2000002360' ) {
+                    $scope.tgl3 = dataLoad2[i].value
+                }
+                if (dataLoad2[i].emrdfk == '2000002363' ) {
+                    $scope.tgl4 = dataLoad2[i].value
+                }
+                if (dataLoad2[i].emrdfk == '2000002366' ) {
+                    $scope.tgl5 = dataLoad2[i].value
+                }
+                if (dataLoad2[i].emrdfk == '2000002369' ) {
+                    $scope.tgl6 = dataLoad2[i].value
+                }
+                if (dataLoad2[i].emrdfk == '2000002372' ) {
+                    $scope.tgl7 = dataLoad2[i].value
+                }
+                if (dataLoad2[i].emrdfk == '2000002375' ) {
+                    $scope.tgl8 = dataLoad2[i].value
+                }
+                if (dataLoad2[i].emrdfk == '2000002378' ) {
+                    $scope.tgl9 = dataLoad2[i].value
+                }
+                if (dataLoad2[i].emrdfk == '2000002381' ) {
+                    $scope.tgl10 = dataLoad2[i].value
+                }
+                if (dataLoad2[i].emrdfk == '2000002384' ) {
+                    $scope.tgl11 = dataLoad2[i].value
+                }
+                if (dataLoad2[i].emrdfk == '2000002387' ) {
+                    $scope.tgl12 = dataLoad2[i].value
+                }
+                if (dataLoad2[i].emrdfk == '2000002390' ) {
+                    $scope.tgl13 = dataLoad2[i].value
+                }
+                if (dataLoad2[i].emrdfk == '2000002393' ) {
+                    $scope.tgl14 = dataLoad2[i].value
+                }
+                if (dataLoad2[i].emrdfk == '2000002396' ) {
+                    $scope.tgl15 = dataLoad2[i].value
+                }
                 
-                $scope.item.obji2[dataLoad2[i].emrdfk+""+1] = res[0]
-                $scope.item.obji2[dataLoad2[i].emrdfk] = res[1]
-                $('#id_'+dataLoad2[i].emrdfk).html ( res[1])
+                if (dataLoad2[i].emrdfk == '2000002408' ) {
+                    $scope.pukul2 = dataLoad2[i].value
+                }
 
+                $scope.tglemr = dataLoad2[i].tgl
+                
             }
-
-            if (dataLoad2[i].emrdfk == '423816' ) {
-                $scope.hariTgl = dataLoad2[i].value
-            }
-
-            if (dataLoad2[i].emrdfk == '2000001974' ) {
-                $scope.jamPeriksa = dataLoad2[i].value
-            }
-
-            if (dataLoad2[i].emrdfk == '2000002354' ) {
-                $scope.tgl1 = dataLoad2[i].value
-            }
-            if (dataLoad2[i].emrdfk == '2000002357' ) {
-                $scope.tgl2 = dataLoad2[i].value
-            }
-            if (dataLoad2[i].emrdfk == '2000002360' ) {
-                $scope.tgl3 = dataLoad2[i].value
-            }
-            if (dataLoad2[i].emrdfk == '2000002363' ) {
-                $scope.tgl4 = dataLoad2[i].value
-            }
-            if (dataLoad2[i].emrdfk == '2000002366' ) {
-                $scope.tgl5 = dataLoad2[i].value
-            }
-            if (dataLoad2[i].emrdfk == '2000002369' ) {
-                $scope.tgl6 = dataLoad2[i].value
-            }
-            if (dataLoad2[i].emrdfk == '2000002372' ) {
-                $scope.tgl7 = dataLoad2[i].value
-            }
-            if (dataLoad2[i].emrdfk == '2000002375' ) {
-                $scope.tgl8 = dataLoad2[i].value
-            }
-            if (dataLoad2[i].emrdfk == '2000002378' ) {
-                $scope.tgl9 = dataLoad2[i].value
-            }
-            if (dataLoad2[i].emrdfk == '2000002381' ) {
-                $scope.tgl10 = dataLoad2[i].value
-            }
-            if (dataLoad2[i].emrdfk == '2000002384' ) {
-                $scope.tgl11 = dataLoad2[i].value
-            }
-            if (dataLoad2[i].emrdfk == '2000002387' ) {
-                $scope.tgl12 = dataLoad2[i].value
-            }
-            if (dataLoad2[i].emrdfk == '2000002390' ) {
-                $scope.tgl13 = dataLoad2[i].value
-            }
-            if (dataLoad2[i].emrdfk == '2000002393' ) {
-                $scope.tgl14 = dataLoad2[i].value
-            }
-            if (dataLoad2[i].emrdfk == '2000002396' ) {
-                $scope.tgl15 = dataLoad2[i].value
-            }
-            
-            if (dataLoad2[i].emrdfk == '2000002408' ) {
-                $scope.pukul2 = dataLoad2[i].value
-            }
-
-            $scope.tglemr = dataLoad2[i].tgl
-            
         }
 
-		for (var i = 0; i <= dataLoad3.length - 1; i++) {
-            if(dataLoad3[i].emrdfk == 3110029){
-                continue;
-            }
-            if (dataLoad3[i].type == "textbox") {
-                $('#id_'+dataLoad3[i].emrdfk).html( dataLoad3[i].value)
-                $scope.item.obji3[dataLoad3[i].emrdfk] = dataLoad3[i].value
-            }
-            if (dataLoad3[i].type == "checkbox") {
-                var chekedd = false
-                if (dataLoad3[i].value == '1') {
-                    var chekedd = true
+        if(dataLoad3.length > 0){
+            for (var i = 0; i <= dataLoad3.length - 1; i++) {
+                if(dataLoad3[i].emrdfk == 3110029){
+                    continue;
                 }
-                $scope.item.obji3[dataLoad3[i].emrdfk] = chekedd
-            }
-            if (dataLoad3[i].type == "radio") {
-                $scope.item.obji3[dataLoad3[i].emrdfk] = dataLoad3[i].value
+                if (dataLoad3[i].type == "textbox") {
+                    $('#id_'+dataLoad3[i].emrdfk).html( dataLoad3[i].value)
+                    $scope.item.obji3[dataLoad3[i].emrdfk] = dataLoad3[i].value
+                }
+                if (dataLoad3[i].type == "checkbox") {
+                    var chekedd = false
+                    if (dataLoad3[i].value == '1') {
+                        var chekedd = true
+                    }
+                    $scope.item.obji3[dataLoad3[i].emrdfk] = chekedd
+                }
+                if (dataLoad3[i].type == "radio") {
+                    $scope.item.obji3[dataLoad3[i].emrdfk] = dataLoad3[i].value
 
-            }
+                }
 
-            if (dataLoad3[i].type == "datetime") {
-                $('#id_'+dataLoad3[i].emrdfk).html( dataLoad3[i].value)
-                $scope.item.obji3[dataLoad3[i].emrdfk] = dataLoad3[i].value
-            }
-            if (dataLoad3[i].type == "time") {
-                $scope.item.obji3[dataLoad3[i].emrdfk] = dataLoad3[i].value
-            }
-            if (dataLoad3[i].type == "date") {
-                $scope.item.obji3[dataLoad3[i].emrdfk] = dataLoad3[i].value
-            }
+                if (dataLoad3[i].type == "datetime") {
+                    $('#id_'+dataLoad3[i].emrdfk).html( dataLoad3[i].value)
+                    $scope.item.obji3[dataLoad3[i].emrdfk] = dataLoad3[i].value
+                }
+                if (dataLoad3[i].type == "time") {
+                    $scope.item.obji3[dataLoad3[i].emrdfk] = dataLoad3[i].value
+                }
+                if (dataLoad3[i].type == "date") {
+                    $scope.item.obji3[dataLoad3[i].emrdfk] = dataLoad3[i].value
+                }
 
-            if (dataLoad3[i].type == "checkboxtextbox") {
-                $scope.item.obji3[dataLoad3[i].emrdfk] = dataLoad3[i].value
-                $scope.item.obji3[dataLoad3[i].emrdfk] = true
-            }
-            if (dataLoad3[i].type == "textarea") {
-                $('#id_'+dataLoad3[i].emrdfk).html( dataLoad3[i].value)
-                $scope.item.obji3[dataLoad3[i].emrdfk] = dataLoad3[i].value
-            }
-            if (dataLoad3[i].type == "combobox") {
-     
-                var str = dataLoad3[i].value
-                if(str != null)
-                {
+                if (dataLoad3[i].type == "checkboxtextbox") {
+                    $scope.item.obji3[dataLoad3[i].emrdfk] = dataLoad3[i].value
+                    $scope.item.obji3[dataLoad3[i].emrdfk] = true
+                }
+                if (dataLoad3[i].type == "textarea") {
+                    $('#id_'+dataLoad3[i].emrdfk).html( dataLoad3[i].value)
+                    $scope.item.obji3[dataLoad3[i].emrdfk] = dataLoad3[i].value
+                }
+                if (dataLoad3[i].type == "combobox") {
+        
+                    var str = dataLoad3[i].value
+                    if(str != null)
+                    {
+                        var res = str.split("~");
+                        
+                        $scope.item.obji3[dataLoad3[i].emrdfk] = res[1]
+                        $('#id_'+dataLoad3[i].emrdfk).html ( res[1])
+                    }
+                }
+                if (dataLoad3[i].type == "combobox2") {
+                    var str = dataLoad3[i].value
                     var res = str.split("~");
                     
+                    $scope.item.obji3[dataLoad3[i].emrdfk+""+1] = res[0]
                     $scope.item.obji3[dataLoad3[i].emrdfk] = res[1]
                     $('#id_'+dataLoad3[i].emrdfk).html ( res[1])
+
                 }
-            }
-            if (dataLoad3[i].type == "combobox2") {
-                var str = dataLoad3[i].value
-                var res = str.split("~");
+
+                if (dataLoad3[i].emrdfk == '423816' ) {
+                    $scope.hariTgl = dataLoad3[i].value
+                }
+
+                if (dataLoad3[i].emrdfk == '2000001974' ) {
+                    $scope.jamPeriksa = dataLoad3[i].value
+                }
+
+                if (dataLoad3[i].emrdfk == '2000002354' ) {
+                    $scope.tgl1 = dataLoad3[i].value
+                }
+                if (dataLoad3[i].emrdfk == '2000002357' ) {
+                    $scope.tgl2 = dataLoad3[i].value
+                }
+                if (dataLoad3[i].emrdfk == '2000002360' ) {
+                    $scope.tgl3 = dataLoad3[i].value
+                }
+                if (dataLoad3[i].emrdfk == '2000002363' ) {
+                    $scope.tgl4 = dataLoad3[i].value
+                }
+                if (dataLoad3[i].emrdfk == '2000002366' ) {
+                    $scope.tgl5 = dataLoad3[i].value
+                }
+                if (dataLoad3[i].emrdfk == '2000002369' ) {
+                    $scope.tgl6 = dataLoad3[i].value
+                }
+                if (dataLoad3[i].emrdfk == '2000002372' ) {
+                    $scope.tgl7 = dataLoad3[i].value
+                }
+                if (dataLoad3[i].emrdfk == '2000002375' ) {
+                    $scope.tgl8 = dataLoad3[i].value
+                }
+                if (dataLoad3[i].emrdfk == '2000002378' ) {
+                    $scope.tgl9 = dataLoad3[i].value
+                }
+                if (dataLoad3[i].emrdfk == '2000002381' ) {
+                    $scope.tgl10 = dataLoad3[i].value
+                }
+                if (dataLoad3[i].emrdfk == '2000002384' ) {
+                    $scope.tgl11 = dataLoad3[i].value
+                }
+                if (dataLoad3[i].emrdfk == '2000002387' ) {
+                    $scope.tgl12 = dataLoad3[i].value
+                }
+                if (dataLoad3[i].emrdfk == '2000002390' ) {
+                    $scope.tgl13 = dataLoad3[i].value
+                }
+                if (dataLoad3[i].emrdfk == '2000002393' ) {
+                    $scope.tgl14 = dataLoad3[i].value
+                }
+                if (dataLoad3[i].emrdfk == '2000002396' ) {
+                    $scope.tgl15 = dataLoad3[i].value
+                }
                 
-                $scope.item.obji3[dataLoad3[i].emrdfk+""+1] = res[0]
-                $scope.item.obji3[dataLoad3[i].emrdfk] = res[1]
-                $('#id_'+dataLoad3[i].emrdfk).html ( res[1])
+                if (dataLoad3[i].emrdfk == '2000002408' ) {
+                    $scope.pukul2 = dataLoad3[i].value
+                }
 
+                $scope.tglemr = dataLoad3[i].tgl
+                
             }
-
-            if (dataLoad3[i].emrdfk == '423816' ) {
-                $scope.hariTgl = dataLoad3[i].value
-            }
-
-            if (dataLoad3[i].emrdfk == '2000001974' ) {
-                $scope.jamPeriksa = dataLoad3[i].value
-            }
-
-            if (dataLoad3[i].emrdfk == '2000002354' ) {
-                $scope.tgl1 = dataLoad3[i].value
-            }
-            if (dataLoad3[i].emrdfk == '2000002357' ) {
-                $scope.tgl2 = dataLoad3[i].value
-            }
-            if (dataLoad3[i].emrdfk == '2000002360' ) {
-                $scope.tgl3 = dataLoad3[i].value
-            }
-            if (dataLoad3[i].emrdfk == '2000002363' ) {
-                $scope.tgl4 = dataLoad3[i].value
-            }
-            if (dataLoad3[i].emrdfk == '2000002366' ) {
-                $scope.tgl5 = dataLoad3[i].value
-            }
-            if (dataLoad3[i].emrdfk == '2000002369' ) {
-                $scope.tgl6 = dataLoad3[i].value
-            }
-            if (dataLoad3[i].emrdfk == '2000002372' ) {
-                $scope.tgl7 = dataLoad3[i].value
-            }
-            if (dataLoad3[i].emrdfk == '2000002375' ) {
-                $scope.tgl8 = dataLoad3[i].value
-            }
-            if (dataLoad3[i].emrdfk == '2000002378' ) {
-                $scope.tgl9 = dataLoad3[i].value
-            }
-            if (dataLoad3[i].emrdfk == '2000002381' ) {
-                $scope.tgl10 = dataLoad3[i].value
-            }
-            if (dataLoad3[i].emrdfk == '2000002384' ) {
-                $scope.tgl11 = dataLoad3[i].value
-            }
-            if (dataLoad3[i].emrdfk == '2000002387' ) {
-                $scope.tgl12 = dataLoad3[i].value
-            }
-            if (dataLoad3[i].emrdfk == '2000002390' ) {
-                $scope.tgl13 = dataLoad3[i].value
-            }
-            if (dataLoad3[i].emrdfk == '2000002393' ) {
-                $scope.tgl14 = dataLoad3[i].value
-            }
-            if (dataLoad3[i].emrdfk == '2000002396' ) {
-                $scope.tgl15 = dataLoad3[i].value
-            }
-            
-            if (dataLoad3[i].emrdfk == '2000002408' ) {
-                $scope.pukul2 = dataLoad3[i].value
-            }
-
-            $scope.tglemr = dataLoad3[i].tgl
-            
         }
 
-		for (var i = 0; i <= dataLoad4.length - 1; i++) {
-            if(dataLoad4[i].emrdfk == 3110029){
-                continue;
-            }
-            if (dataLoad4[i].type == "textbox") {
-                $('#id_'+dataLoad4[i].emrdfk).html( dataLoad4[i].value)
-                $scope.item.obji4[dataLoad4[i].emrdfk] = dataLoad4[i].value
-            }
-            if (dataLoad4[i].type == "checkbox") {
-                var chekedd = false
-                if (dataLoad4[i].value == '1') {
-                    var chekedd = true
+        if(dataLoad4.length > 0){
+            for (var i = 0; i <= dataLoad4.length - 1; i++) {
+                if(dataLoad4[i].emrdfk == 3110029){
+                    continue;
                 }
-                $scope.item.obji4[dataLoad4[i].emrdfk] = chekedd
-            }
-            if (dataLoad4[i].type == "radio") {
-                $scope.item.obji4[dataLoad4[i].emrdfk] = dataLoad4[i].value
+                if (dataLoad4[i].type == "textbox") {
+                    $('#id_'+dataLoad4[i].emrdfk).html( dataLoad4[i].value)
+                    $scope.item.obji4[dataLoad4[i].emrdfk] = dataLoad4[i].value
+                }
+                if (dataLoad4[i].type == "checkbox") {
+                    var chekedd = false
+                    if (dataLoad4[i].value == '1') {
+                        var chekedd = true
+                    }
+                    $scope.item.obji4[dataLoad4[i].emrdfk] = chekedd
+                }
+                if (dataLoad4[i].type == "radio") {
+                    $scope.item.obji4[dataLoad4[i].emrdfk] = dataLoad4[i].value
 
-            }
+                }
 
-            if (dataLoad4[i].type == "datetime") {
-                $('#id_'+dataLoad4[i].emrdfk).html( dataLoad4[i].value)
-                $scope.item.obji4[dataLoad4[i].emrdfk] = dataLoad4[i].value
-            }
-            if (dataLoad4[i].type == "time") {
-                $scope.item.obji4[dataLoad4[i].emrdfk] = dataLoad4[i].value
-            }
-            if (dataLoad4[i].type == "date") {
-                $scope.item.obji4[dataLoad4[i].emrdfk] = dataLoad4[i].value
-            }
+                if (dataLoad4[i].type == "datetime") {
+                    $('#id_'+dataLoad4[i].emrdfk).html( dataLoad4[i].value)
+                    $scope.item.obji4[dataLoad4[i].emrdfk] = dataLoad4[i].value
+                }
+                if (dataLoad4[i].type == "time") {
+                    $scope.item.obji4[dataLoad4[i].emrdfk] = dataLoad4[i].value
+                }
+                if (dataLoad4[i].type == "date") {
+                    $scope.item.obji4[dataLoad4[i].emrdfk] = dataLoad4[i].value
+                }
 
-            if (dataLoad4[i].type == "checkboxtextbox") {
-                $scope.item.obji4[dataLoad4[i].emrdfk] = dataLoad4[i].value
-                $scope.item.obji4[dataLoad4[i].emrdfk] = true
-            }
-            if (dataLoad4[i].type == "textarea") {
-                $('#id_'+dataLoad4[i].emrdfk).html( dataLoad4[i].value)
-                $scope.item.obji4[dataLoad4[i].emrdfk] = dataLoad4[i].value
-            }
-            if (dataLoad4[i].type == "combobox") {
-     
-                var str = dataLoad4[i].value
-                if(str != null)
-                {
+                if (dataLoad4[i].type == "checkboxtextbox") {
+                    $scope.item.obji4[dataLoad4[i].emrdfk] = dataLoad4[i].value
+                    $scope.item.obji4[dataLoad4[i].emrdfk] = true
+                }
+                if (dataLoad4[i].type == "textarea") {
+                    $('#id_'+dataLoad4[i].emrdfk).html( dataLoad4[i].value)
+                    $scope.item.obji4[dataLoad4[i].emrdfk] = dataLoad4[i].value
+                }
+                if (dataLoad4[i].type == "combobox") {
+        
+                    var str = dataLoad4[i].value
+                    if(str != null)
+                    {
+                        var res = str.split("~");
+                        
+                        $scope.item.obji4[dataLoad4[i].emrdfk] = res[1]
+                        $('#id_'+dataLoad4[i].emrdfk).html ( res[1])
+                    }
+                }
+                if (dataLoad4[i].type == "combobox2") {
+                    var str = dataLoad4[i].value
                     var res = str.split("~");
                     
+                    $scope.item.obji4[dataLoad4[i].emrdfk+""+1] = res[0]
                     $scope.item.obji4[dataLoad4[i].emrdfk] = res[1]
                     $('#id_'+dataLoad4[i].emrdfk).html ( res[1])
+
                 }
-            }
-            if (dataLoad4[i].type == "combobox2") {
-                var str = dataLoad4[i].value
-                var res = str.split("~");
+
+                if (dataLoad4[i].emrdfk == '423816' ) {
+                    $scope.hariTgl = dataLoad4[i].value
+                }
+
+                if (dataLoad4[i].emrdfk == '2000001974' ) {
+                    $scope.jamPeriksa = dataLoad4[i].value
+                }
+
+                if (dataLoad4[i].emrdfk == '2000002354' ) {
+                    $scope.tgl1 = dataLoad4[i].value
+                }
+                if (dataLoad4[i].emrdfk == '2000002357' ) {
+                    $scope.tgl2 = dataLoad4[i].value
+                }
+                if (dataLoad4[i].emrdfk == '2000002360' ) {
+                    $scope.tgl3 = dataLoad4[i].value
+                }
+                if (dataLoad4[i].emrdfk == '2000002363' ) {
+                    $scope.tgl4 = dataLoad4[i].value
+                }
+                if (dataLoad4[i].emrdfk == '2000002366' ) {
+                    $scope.tgl5 = dataLoad4[i].value
+                }
+                if (dataLoad4[i].emrdfk == '2000002369' ) {
+                    $scope.tgl6 = dataLoad4[i].value
+                }
+                if (dataLoad4[i].emrdfk == '2000002372' ) {
+                    $scope.tgl7 = dataLoad4[i].value
+                }
+                if (dataLoad4[i].emrdfk == '2000002375' ) {
+                    $scope.tgl8 = dataLoad4[i].value
+                }
+                if (dataLoad4[i].emrdfk == '2000002378' ) {
+                    $scope.tgl9 = dataLoad4[i].value
+                }
+                if (dataLoad4[i].emrdfk == '2000002381' ) {
+                    $scope.tgl10 = dataLoad4[i].value
+                }
+                if (dataLoad4[i].emrdfk == '2000002384' ) {
+                    $scope.tgl11 = dataLoad4[i].value
+                }
+                if (dataLoad4[i].emrdfk == '2000002387' ) {
+                    $scope.tgl12 = dataLoad4[i].value
+                }
+                if (dataLoad4[i].emrdfk == '2000002390' ) {
+                    $scope.tgl13 = dataLoad4[i].value
+                }
+                if (dataLoad4[i].emrdfk == '2000002393' ) {
+                    $scope.tgl14 = dataLoad4[i].value
+                }
+                if (dataLoad4[i].emrdfk == '2000002396' ) {
+                    $scope.tgl15 = dataLoad4[i].value
+                }
                 
-                $scope.item.obji4[dataLoad4[i].emrdfk+""+1] = res[0]
-                $scope.item.obji4[dataLoad4[i].emrdfk] = res[1]
-                $('#id_'+dataLoad4[i].emrdfk).html ( res[1])
+                if (dataLoad4[i].emrdfk == '2000002408' ) {
+                    $scope.pukul2 = dataLoad4[i].value
+                }
 
+                $scope.tglemr = dataLoad4[i].tgl
+                
             }
-
-            if (dataLoad4[i].emrdfk == '423816' ) {
-                $scope.hariTgl = dataLoad4[i].value
-            }
-
-            if (dataLoad4[i].emrdfk == '2000001974' ) {
-                $scope.jamPeriksa = dataLoad4[i].value
-            }
-
-            if (dataLoad4[i].emrdfk == '2000002354' ) {
-                $scope.tgl1 = dataLoad4[i].value
-            }
-            if (dataLoad4[i].emrdfk == '2000002357' ) {
-                $scope.tgl2 = dataLoad4[i].value
-            }
-            if (dataLoad4[i].emrdfk == '2000002360' ) {
-                $scope.tgl3 = dataLoad4[i].value
-            }
-            if (dataLoad4[i].emrdfk == '2000002363' ) {
-                $scope.tgl4 = dataLoad4[i].value
-            }
-            if (dataLoad4[i].emrdfk == '2000002366' ) {
-                $scope.tgl5 = dataLoad4[i].value
-            }
-            if (dataLoad4[i].emrdfk == '2000002369' ) {
-                $scope.tgl6 = dataLoad4[i].value
-            }
-            if (dataLoad4[i].emrdfk == '2000002372' ) {
-                $scope.tgl7 = dataLoad4[i].value
-            }
-            if (dataLoad4[i].emrdfk == '2000002375' ) {
-                $scope.tgl8 = dataLoad4[i].value
-            }
-            if (dataLoad4[i].emrdfk == '2000002378' ) {
-                $scope.tgl9 = dataLoad4[i].value
-            }
-            if (dataLoad4[i].emrdfk == '2000002381' ) {
-                $scope.tgl10 = dataLoad4[i].value
-            }
-            if (dataLoad4[i].emrdfk == '2000002384' ) {
-                $scope.tgl11 = dataLoad4[i].value
-            }
-            if (dataLoad4[i].emrdfk == '2000002387' ) {
-                $scope.tgl12 = dataLoad4[i].value
-            }
-            if (dataLoad4[i].emrdfk == '2000002390' ) {
-                $scope.tgl13 = dataLoad4[i].value
-            }
-            if (dataLoad4[i].emrdfk == '2000002393' ) {
-                $scope.tgl14 = dataLoad4[i].value
-            }
-            if (dataLoad4[i].emrdfk == '2000002396' ) {
-                $scope.tgl15 = dataLoad4[i].value
-            }
-            
-            if (dataLoad4[i].emrdfk == '2000002408' ) {
-                $scope.pukul2 = dataLoad4[i].value
-            }
-
-            $scope.tglemr = dataLoad4[i].tgl
-            
         }
 
-		for (var i = 0; i <= dataLoad5.length - 1; i++) {
-            if(dataLoad5[i].emrdfk == 3110029){
-                continue;
-            }
-            if (dataLoad5[i].type == "textbox") {
-                $('#id_'+dataLoad5[i].emrdfk).html( dataLoad5[i].value)
-                $scope.item.obji5[dataLoad5[i].emrdfk] = dataLoad5[i].value
-            }
-            if (dataLoad5[i].type == "checkbox") {
-                var chekedd = false
-                if (dataLoad5[i].value == '1') {
-                    var chekedd = true
+        if(dataLoad5.length > 0){
+            for (var i = 0; i <= dataLoad5.length - 1; i++) {
+                if(dataLoad5[i].emrdfk == 3110029){
+                    continue;
                 }
-                $scope.item.obji5[dataLoad5[i].emrdfk] = chekedd
-            }
-            if (dataLoad5[i].type == "radio") {
-                $scope.item.obji5[dataLoad5[i].emrdfk] = dataLoad5[i].value
+                if (dataLoad5[i].type == "textbox") {
+                    $('#id_'+dataLoad5[i].emrdfk).html( dataLoad5[i].value)
+                    $scope.item.obji5[dataLoad5[i].emrdfk] = dataLoad5[i].value
+                }
+                if (dataLoad5[i].type == "checkbox") {
+                    var chekedd = false
+                    if (dataLoad5[i].value == '1') {
+                        var chekedd = true
+                    }
+                    $scope.item.obji5[dataLoad5[i].emrdfk] = chekedd
+                }
+                if (dataLoad5[i].type == "radio") {
+                    $scope.item.obji5[dataLoad5[i].emrdfk] = dataLoad5[i].value
 
-            }
+                }
 
-            if (dataLoad5[i].type == "datetime") {
-                $('#id_'+dataLoad5[i].emrdfk).html( dataLoad5[i].value)
-                $scope.item.obji5[dataLoad5[i].emrdfk] = dataLoad5[i].value
-            }
-            if (dataLoad5[i].type == "time") {
-                $scope.item.obji5[dataLoad5[i].emrdfk] = dataLoad5[i].value
-            }
-            if (dataLoad5[i].type == "date") {
-                $scope.item.obji5[dataLoad5[i].emrdfk] = dataLoad5[i].value
-            }
+                if (dataLoad5[i].type == "datetime") {
+                    $('#id_'+dataLoad5[i].emrdfk).html( dataLoad5[i].value)
+                    $scope.item.obji5[dataLoad5[i].emrdfk] = dataLoad5[i].value
+                }
+                if (dataLoad5[i].type == "time") {
+                    $scope.item.obji5[dataLoad5[i].emrdfk] = dataLoad5[i].value
+                }
+                if (dataLoad5[i].type == "date") {
+                    $scope.item.obji5[dataLoad5[i].emrdfk] = dataLoad5[i].value
+                }
 
-            if (dataLoad5[i].type == "checkboxtextbox") {
-                $scope.item.obji5[dataLoad5[i].emrdfk] = dataLoad5[i].value
-                $scope.item.obji5[dataLoad5[i].emrdfk] = true
-            }
-            if (dataLoad5[i].type == "textarea") {
-                $('#id_'+dataLoad5[i].emrdfk).html( dataLoad5[i].value)
-                $scope.item.obji5[dataLoad5[i].emrdfk] = dataLoad5[i].value
-            }
-            if (dataLoad5[i].type == "combobox") {
-     
-                var str = dataLoad5[i].value
-                if(str != null)
-                {
+                if (dataLoad5[i].type == "checkboxtextbox") {
+                    $scope.item.obji5[dataLoad5[i].emrdfk] = dataLoad5[i].value
+                    $scope.item.obji5[dataLoad5[i].emrdfk] = true
+                }
+                if (dataLoad5[i].type == "textarea") {
+                    $('#id_'+dataLoad5[i].emrdfk).html( dataLoad5[i].value)
+                    $scope.item.obji5[dataLoad5[i].emrdfk] = dataLoad5[i].value
+                }
+                if (dataLoad5[i].type == "combobox") {
+        
+                    var str = dataLoad5[i].value
+                    if(str != null)
+                    {
+                        var res = str.split("~");
+                        
+                        $scope.item.obji5[dataLoad5[i].emrdfk] = res[1]
+                        $('#id_'+dataLoad5[i].emrdfk).html ( res[1])
+                    }
+                }
+                if (dataLoad5[i].type == "combobox2") {
+                    var str = dataLoad5[i].value
                     var res = str.split("~");
                     
+                    $scope.item.obji5[dataLoad5[i].emrdfk+""+1] = res[0]
                     $scope.item.obji5[dataLoad5[i].emrdfk] = res[1]
                     $('#id_'+dataLoad5[i].emrdfk).html ( res[1])
+
                 }
-            }
-            if (dataLoad5[i].type == "combobox2") {
-                var str = dataLoad5[i].value
-                var res = str.split("~");
+
+                if (dataLoad5[i].emrdfk == '423816' ) {
+                    $scope.hariTgl = dataLoad5[i].value
+                }
+
+                if (dataLoad5[i].emrdfk == '2000001974' ) {
+                    $scope.jamPeriksa = dataLoad5[i].value
+                }
+
+                if (dataLoad5[i].emrdfk == '2000002354' ) {
+                    $scope.tgl1 = dataLoad5[i].value
+                }
+                if (dataLoad5[i].emrdfk == '2000002357' ) {
+                    $scope.tgl2 = dataLoad5[i].value
+                }
+                if (dataLoad5[i].emrdfk == '2000002360' ) {
+                    $scope.tgl3 = dataLoad5[i].value
+                }
+                if (dataLoad5[i].emrdfk == '2000002363' ) {
+                    $scope.tgl4 = dataLoad5[i].value
+                }
+                if (dataLoad5[i].emrdfk == '2000002366' ) {
+                    $scope.tgl5 = dataLoad5[i].value
+                }
+                if (dataLoad5[i].emrdfk == '2000002369' ) {
+                    $scope.tgl6 = dataLoad5[i].value
+                }
+                if (dataLoad5[i].emrdfk == '2000002372' ) {
+                    $scope.tgl7 = dataLoad5[i].value
+                }
+                if (dataLoad5[i].emrdfk == '2000002375' ) {
+                    $scope.tgl8 = dataLoad5[i].value
+                }
+                if (dataLoad5[i].emrdfk == '2000002378' ) {
+                    $scope.tgl9 = dataLoad5[i].value
+                }
+                if (dataLoad5[i].emrdfk == '2000002381' ) {
+                    $scope.tgl10 = dataLoad5[i].value
+                }
+                if (dataLoad5[i].emrdfk == '2000002384' ) {
+                    $scope.tgl11 = dataLoad5[i].value
+                }
+                if (dataLoad5[i].emrdfk == '2000002387' ) {
+                    $scope.tgl12 = dataLoad5[i].value
+                }
+                if (dataLoad5[i].emrdfk == '2000002390' ) {
+                    $scope.tgl13 = dataLoad5[i].value
+                }
+                if (dataLoad5[i].emrdfk == '2000002393' ) {
+                    $scope.tgl14 = dataLoad5[i].value
+                }
+                if (dataLoad5[i].emrdfk == '2000002396' ) {
+                    $scope.tgl15 = dataLoad5[i].value
+                }
                 
-                $scope.item.obji5[dataLoad5[i].emrdfk+""+1] = res[0]
-                $scope.item.obji5[dataLoad5[i].emrdfk] = res[1]
-                $('#id_'+dataLoad5[i].emrdfk).html ( res[1])
+                if (dataLoad5[i].emrdfk == '2000002408' ) {
+                    $scope.pukul2 = dataLoad5[i].value
+                }
 
+                $scope.tglemr = dataLoad5[i].tgl
+                
             }
-
-            if (dataLoad5[i].emrdfk == '423816' ) {
-                $scope.hariTgl = dataLoad5[i].value
-            }
-
-            if (dataLoad5[i].emrdfk == '2000001974' ) {
-                $scope.jamPeriksa = dataLoad5[i].value
-            }
-
-            if (dataLoad5[i].emrdfk == '2000002354' ) {
-                $scope.tgl1 = dataLoad5[i].value
-            }
-            if (dataLoad5[i].emrdfk == '2000002357' ) {
-                $scope.tgl2 = dataLoad5[i].value
-            }
-            if (dataLoad5[i].emrdfk == '2000002360' ) {
-                $scope.tgl3 = dataLoad5[i].value
-            }
-            if (dataLoad5[i].emrdfk == '2000002363' ) {
-                $scope.tgl4 = dataLoad5[i].value
-            }
-            if (dataLoad5[i].emrdfk == '2000002366' ) {
-                $scope.tgl5 = dataLoad5[i].value
-            }
-            if (dataLoad5[i].emrdfk == '2000002369' ) {
-                $scope.tgl6 = dataLoad5[i].value
-            }
-            if (dataLoad5[i].emrdfk == '2000002372' ) {
-                $scope.tgl7 = dataLoad5[i].value
-            }
-            if (dataLoad5[i].emrdfk == '2000002375' ) {
-                $scope.tgl8 = dataLoad5[i].value
-            }
-            if (dataLoad5[i].emrdfk == '2000002378' ) {
-                $scope.tgl9 = dataLoad5[i].value
-            }
-            if (dataLoad5[i].emrdfk == '2000002381' ) {
-                $scope.tgl10 = dataLoad5[i].value
-            }
-            if (dataLoad5[i].emrdfk == '2000002384' ) {
-                $scope.tgl11 = dataLoad5[i].value
-            }
-            if (dataLoad5[i].emrdfk == '2000002387' ) {
-                $scope.tgl12 = dataLoad5[i].value
-            }
-            if (dataLoad5[i].emrdfk == '2000002390' ) {
-                $scope.tgl13 = dataLoad5[i].value
-            }
-            if (dataLoad5[i].emrdfk == '2000002393' ) {
-                $scope.tgl14 = dataLoad5[i].value
-            }
-            if (dataLoad5[i].emrdfk == '2000002396' ) {
-                $scope.tgl15 = dataLoad5[i].value
-            }
-            
-            if (dataLoad5[i].emrdfk == '2000002408' ) {
-                $scope.pukul2 = dataLoad5[i].value
-            }
-
-            $scope.tglemr = dataLoad5[i].tgl
-            
         }
 
-		for (var i = 0; i <= dataLoad6.length - 1; i++) {
-            if(dataLoad6[i].emrdfk == 3110029){
-                continue;
-            }
-            if (dataLoad6[i].type == "textbox") {
-                $('#id_'+dataLoad6[i].emrdfk).html( dataLoad6[i].value)
-                $scope.item.obji6[dataLoad6[i].emrdfk] = dataLoad6[i].value
-            }
-            if (dataLoad6[i].type == "checkbox") {
-                var chekedd = false
-                if (dataLoad6[i].value == '1') {
-                    var chekedd = true
+        if(dataLoad6.length > 0){
+            for (var i = 0; i <= dataLoad6.length - 1; i++) {
+                if(dataLoad6[i].emrdfk == 3110029){
+                    continue;
                 }
-                $scope.item.obji6[dataLoad6[i].emrdfk] = chekedd
-            }
-            if (dataLoad6[i].type == "radio") {
-                $scope.item.obji6[dataLoad6[i].emrdfk] = dataLoad6[i].value
+                if (dataLoad6[i].type == "textbox") {
+                    $('#id_'+dataLoad6[i].emrdfk).html( dataLoad6[i].value)
+                    $scope.item.obji6[dataLoad6[i].emrdfk] = dataLoad6[i].value
+                }
+                if (dataLoad6[i].type == "checkbox") {
+                    var chekedd = false
+                    if (dataLoad6[i].value == '1') {
+                        var chekedd = true
+                    }
+                    $scope.item.obji6[dataLoad6[i].emrdfk] = chekedd
+                }
+                if (dataLoad6[i].type == "radio") {
+                    $scope.item.obji6[dataLoad6[i].emrdfk] = dataLoad6[i].value
 
-            }
+                }
 
-            if (dataLoad6[i].type == "datetime") {
-                $('#id_'+dataLoad6[i].emrdfk).html( dataLoad6[i].value)
-                $scope.item.obji6[dataLoad6[i].emrdfk] = dataLoad6[i].value
-            }
-            if (dataLoad6[i].type == "time") {
-                $scope.item.obji6[dataLoad6[i].emrdfk] = dataLoad6[i].value
-            }
-            if (dataLoad6[i].type == "date") {
-                $scope.item.obji6[dataLoad6[i].emrdfk] = dataLoad6[i].value
-            }
+                if (dataLoad6[i].type == "datetime") {
+                    $('#id_'+dataLoad6[i].emrdfk).html( dataLoad6[i].value)
+                    $scope.item.obji6[dataLoad6[i].emrdfk] = dataLoad6[i].value
+                }
+                if (dataLoad6[i].type == "time") {
+                    $scope.item.obji6[dataLoad6[i].emrdfk] = dataLoad6[i].value
+                }
+                if (dataLoad6[i].type == "date") {
+                    $scope.item.obji6[dataLoad6[i].emrdfk] = dataLoad6[i].value
+                }
 
-            if (dataLoad6[i].type == "checkboxtextbox") {
-                $scope.item.obji6[dataLoad6[i].emrdfk] = dataLoad6[i].value
-                $scope.item.obji6[dataLoad6[i].emrdfk] = true
-            }
-            if (dataLoad6[i].type == "textarea") {
-                $('#id_'+dataLoad6[i].emrdfk).html( dataLoad6[i].value)
-                $scope.item.obji6[dataLoad6[i].emrdfk] = dataLoad6[i].value
-            }
-            if (dataLoad6[i].type == "combobox") {
-     
-                var str = dataLoad6[i].value
-                if(str != null)
-                {
+                if (dataLoad6[i].type == "checkboxtextbox") {
+                    $scope.item.obji6[dataLoad6[i].emrdfk] = dataLoad6[i].value
+                    $scope.item.obji6[dataLoad6[i].emrdfk] = true
+                }
+                if (dataLoad6[i].type == "textarea") {
+                    $('#id_'+dataLoad6[i].emrdfk).html( dataLoad6[i].value)
+                    $scope.item.obji6[dataLoad6[i].emrdfk] = dataLoad6[i].value
+                }
+                if (dataLoad6[i].type == "combobox") {
+        
+                    var str = dataLoad6[i].value
+                    if(str != null)
+                    {
+                        var res = str.split("~");
+                        
+                        $scope.item.obji6[dataLoad6[i].emrdfk] = res[1]
+                        $('#id_'+dataLoad6[i].emrdfk).html ( res[1])
+                    }
+                }
+                if (dataLoad6[i].type == "combobox2") {
+                    var str = dataLoad6[i].value
                     var res = str.split("~");
                     
+                    $scope.item.obji6[dataLoad6[i].emrdfk+""+1] = res[0]
                     $scope.item.obji6[dataLoad6[i].emrdfk] = res[1]
                     $('#id_'+dataLoad6[i].emrdfk).html ( res[1])
+
                 }
-            }
-            if (dataLoad6[i].type == "combobox2") {
-                var str = dataLoad6[i].value
-                var res = str.split("~");
+
+                if (dataLoad6[i].emrdfk == '423816' ) {
+                    $scope.hariTgl = dataLoad6[i].value
+                }
+
+                if (dataLoad6[i].emrdfk == '2000001974' ) {
+                    $scope.jamPeriksa = dataLoad6[i].value
+                }
+
+                if (dataLoad6[i].emrdfk == '2000002354' ) {
+                    $scope.tgl1 = dataLoad6[i].value
+                }
+                if (dataLoad6[i].emrdfk == '2000002357' ) {
+                    $scope.tgl2 = dataLoad6[i].value
+                }
+                if (dataLoad6[i].emrdfk == '2000002360' ) {
+                    $scope.tgl3 = dataLoad6[i].value
+                }
+                if (dataLoad6[i].emrdfk == '2000002363' ) {
+                    $scope.tgl4 = dataLoad6[i].value
+                }
+                if (dataLoad6[i].emrdfk == '2000002366' ) {
+                    $scope.tgl5 = dataLoad6[i].value
+                }
+                if (dataLoad6[i].emrdfk == '2000002369' ) {
+                    $scope.tgl6 = dataLoad6[i].value
+                }
+                if (dataLoad6[i].emrdfk == '2000002372' ) {
+                    $scope.tgl7 = dataLoad6[i].value
+                }
+                if (dataLoad6[i].emrdfk == '2000002375' ) {
+                    $scope.tgl8 = dataLoad6[i].value
+                }
+                if (dataLoad6[i].emrdfk == '2000002378' ) {
+                    $scope.tgl9 = dataLoad6[i].value
+                }
+                if (dataLoad6[i].emrdfk == '2000002381' ) {
+                    $scope.tgl10 = dataLoad6[i].value
+                }
+                if (dataLoad6[i].emrdfk == '2000002384' ) {
+                    $scope.tgl11 = dataLoad6[i].value
+                }
+                if (dataLoad6[i].emrdfk == '2000002387' ) {
+                    $scope.tgl12 = dataLoad6[i].value
+                }
+                if (dataLoad6[i].emrdfk == '2000002390' ) {
+                    $scope.tgl13 = dataLoad6[i].value
+                }
+                if (dataLoad6[i].emrdfk == '2000002393' ) {
+                    $scope.tgl14 = dataLoad6[i].value
+                }
+                if (dataLoad6[i].emrdfk == '2000002396' ) {
+                    $scope.tgl15 = dataLoad6[i].value
+                }
                 
-                $scope.item.obji6[dataLoad6[i].emrdfk+""+1] = res[0]
-                $scope.item.obji6[dataLoad6[i].emrdfk] = res[1]
-                $('#id_'+dataLoad6[i].emrdfk).html ( res[1])
+                if (dataLoad6[i].emrdfk == '2000002408' ) {
+                    $scope.pukul2 = dataLoad6[i].value
+                }
 
+                $scope.tglemr = dataLoad6[i].tgl
+                
             }
-
-            if (dataLoad6[i].emrdfk == '423816' ) {
-                $scope.hariTgl = dataLoad6[i].value
-            }
-
-            if (dataLoad6[i].emrdfk == '2000001974' ) {
-                $scope.jamPeriksa = dataLoad6[i].value
-            }
-
-            if (dataLoad6[i].emrdfk == '2000002354' ) {
-                $scope.tgl1 = dataLoad6[i].value
-            }
-            if (dataLoad6[i].emrdfk == '2000002357' ) {
-                $scope.tgl2 = dataLoad6[i].value
-            }
-            if (dataLoad6[i].emrdfk == '2000002360' ) {
-                $scope.tgl3 = dataLoad6[i].value
-            }
-            if (dataLoad6[i].emrdfk == '2000002363' ) {
-                $scope.tgl4 = dataLoad6[i].value
-            }
-            if (dataLoad6[i].emrdfk == '2000002366' ) {
-                $scope.tgl5 = dataLoad6[i].value
-            }
-            if (dataLoad6[i].emrdfk == '2000002369' ) {
-                $scope.tgl6 = dataLoad6[i].value
-            }
-            if (dataLoad6[i].emrdfk == '2000002372' ) {
-                $scope.tgl7 = dataLoad6[i].value
-            }
-            if (dataLoad6[i].emrdfk == '2000002375' ) {
-                $scope.tgl8 = dataLoad6[i].value
-            }
-            if (dataLoad6[i].emrdfk == '2000002378' ) {
-                $scope.tgl9 = dataLoad6[i].value
-            }
-            if (dataLoad6[i].emrdfk == '2000002381' ) {
-                $scope.tgl10 = dataLoad6[i].value
-            }
-            if (dataLoad6[i].emrdfk == '2000002384' ) {
-                $scope.tgl11 = dataLoad6[i].value
-            }
-            if (dataLoad6[i].emrdfk == '2000002387' ) {
-                $scope.tgl12 = dataLoad6[i].value
-            }
-            if (dataLoad6[i].emrdfk == '2000002390' ) {
-                $scope.tgl13 = dataLoad6[i].value
-            }
-            if (dataLoad6[i].emrdfk == '2000002393' ) {
-                $scope.tgl14 = dataLoad6[i].value
-            }
-            if (dataLoad6[i].emrdfk == '2000002396' ) {
-                $scope.tgl15 = dataLoad6[i].value
-            }
-            
-            if (dataLoad6[i].emrdfk == '2000002408' ) {
-                $scope.pukul2 = dataLoad6[i].value
-            }
-
-            $scope.tglemr = dataLoad6[i].tgl
-            
         }
 
-		for (var i = 0; i <= dataLoad7.length - 1; i++) {
-            if(dataLoad7[i].emrdfk == 3110029){
-                continue;
-            }
-            if (dataLoad7[i].type == "textbox") {
-                $('#id_'+dataLoad7[i].emrdfk).html( dataLoad7[i].value)
-                $scope.item.obji7[dataLoad7[i].emrdfk] = dataLoad7[i].value
-            }
-            if (dataLoad7[i].type == "checkbox") {
-                var chekedd = false
-                if (dataLoad7[i].value == '1') {
-                    var chekedd = true
+        if(dataLoad7.length > 0){
+            for (var i = 0; i <= dataLoad7.length - 1; i++) {
+                if(dataLoad7[i].emrdfk == 3110029){
+                    continue;
                 }
-                $scope.item.obji7[dataLoad7[i].emrdfk] = chekedd
-            }
-            if (dataLoad7[i].type == "radio") {
-                $scope.item.obji7[dataLoad7[i].emrdfk] = dataLoad7[i].value
+                if (dataLoad7[i].type == "textbox") {
+                    $('#id_'+dataLoad7[i].emrdfk).html( dataLoad7[i].value)
+                    $scope.item.obji7[dataLoad7[i].emrdfk] = dataLoad7[i].value
+                }
+                if (dataLoad7[i].type == "checkbox") {
+                    var chekedd = false
+                    if (dataLoad7[i].value == '1') {
+                        var chekedd = true
+                    }
+                    $scope.item.obji7[dataLoad7[i].emrdfk] = chekedd
+                }
+                if (dataLoad7[i].type == "radio") {
+                    $scope.item.obji7[dataLoad7[i].emrdfk] = dataLoad7[i].value
 
-            }
+                }
 
-            if (dataLoad7[i].type == "datetime") {
-                $('#id_'+dataLoad7[i].emrdfk).html( dataLoad7[i].value)
-                $scope.item.obji7[dataLoad7[i].emrdfk] = dataLoad7[i].value
-            }
-            if (dataLoad7[i].type == "time") {
-                $scope.item.obji7[dataLoad7[i].emrdfk] = dataLoad7[i].value
-            }
-            if (dataLoad7[i].type == "date") {
-                $scope.item.obji7[dataLoad7[i].emrdfk] = dataLoad7[i].value
-            }
+                if (dataLoad7[i].type == "datetime") {
+                    $('#id_'+dataLoad7[i].emrdfk).html( dataLoad7[i].value)
+                    $scope.item.obji7[dataLoad7[i].emrdfk] = dataLoad7[i].value
+                }
+                if (dataLoad7[i].type == "time") {
+                    $scope.item.obji7[dataLoad7[i].emrdfk] = dataLoad7[i].value
+                }
+                if (dataLoad7[i].type == "date") {
+                    $scope.item.obji7[dataLoad7[i].emrdfk] = dataLoad7[i].value
+                }
 
-            if (dataLoad7[i].type == "checkboxtextbox") {
-                $scope.item.obji7[dataLoad7[i].emrdfk] = dataLoad7[i].value
-                $scope.item.obji7[dataLoad7[i].emrdfk] = true
-            }
-            if (dataLoad7[i].type == "textarea") {
-                $('#id_'+dataLoad7[i].emrdfk).html( dataLoad7[i].value)
-                $scope.item.obji7[dataLoad7[i].emrdfk] = dataLoad7[i].value
-            }
-            if (dataLoad7[i].type == "combobox") {
-     
-                var str = dataLoad7[i].value
-                if(str != null)
-                {
+                if (dataLoad7[i].type == "checkboxtextbox") {
+                    $scope.item.obji7[dataLoad7[i].emrdfk] = dataLoad7[i].value
+                    $scope.item.obji7[dataLoad7[i].emrdfk] = true
+                }
+                if (dataLoad7[i].type == "textarea") {
+                    $('#id_'+dataLoad7[i].emrdfk).html( dataLoad7[i].value)
+                    $scope.item.obji7[dataLoad7[i].emrdfk] = dataLoad7[i].value
+                }
+                if (dataLoad7[i].type == "combobox") {
+        
+                    var str = dataLoad7[i].value
+                    if(str != null)
+                    {
+                        var res = str.split("~");
+                        
+                        $scope.item.obji7[dataLoad7[i].emrdfk] = res[1]
+                        $('#id_'+dataLoad7[i].emrdfk).html ( res[1])
+                    }
+                }
+                if (dataLoad7[i].type == "combobox2") {
+                    var str = dataLoad7[i].value
                     var res = str.split("~");
                     
+                    $scope.item.obji7[dataLoad7[i].emrdfk+""+1] = res[0]
                     $scope.item.obji7[dataLoad7[i].emrdfk] = res[1]
                     $('#id_'+dataLoad7[i].emrdfk).html ( res[1])
+
                 }
-            }
-            if (dataLoad7[i].type == "combobox2") {
-                var str = dataLoad7[i].value
-                var res = str.split("~");
+
+                if (dataLoad7[i].emrdfk == '423816' ) {
+                    $scope.hariTgl = dataLoad7[i].value
+                }
+
+                if (dataLoad7[i].emrdfk == '2000001974' ) {
+                    $scope.jamPeriksa = dataLoad7[i].value
+                }
+
+                if (dataLoad7[i].emrdfk == '2000002354' ) {
+                    $scope.tgl1 = dataLoad7[i].value
+                }
+                if (dataLoad7[i].emrdfk == '2000002357' ) {
+                    $scope.tgl2 = dataLoad7[i].value
+                }
+                if (dataLoad7[i].emrdfk == '2000002360' ) {
+                    $scope.tgl3 = dataLoad7[i].value
+                }
+                if (dataLoad7[i].emrdfk == '2000002363' ) {
+                    $scope.tgl4 = dataLoad7[i].value
+                }
+                if (dataLoad7[i].emrdfk == '2000002366' ) {
+                    $scope.tgl5 = dataLoad7[i].value
+                }
+                if (dataLoad7[i].emrdfk == '2000002369' ) {
+                    $scope.tgl6 = dataLoad7[i].value
+                }
+                if (dataLoad7[i].emrdfk == '2000002372' ) {
+                    $scope.tgl7 = dataLoad7[i].value
+                }
+                if (dataLoad7[i].emrdfk == '2000002375' ) {
+                    $scope.tgl8 = dataLoad7[i].value
+                }
+                if (dataLoad7[i].emrdfk == '2000002378' ) {
+                    $scope.tgl9 = dataLoad7[i].value
+                }
+                if (dataLoad7[i].emrdfk == '2000002381' ) {
+                    $scope.tgl10 = dataLoad7[i].value
+                }
+                if (dataLoad7[i].emrdfk == '2000002384' ) {
+                    $scope.tgl11 = dataLoad7[i].value
+                }
+                if (dataLoad7[i].emrdfk == '2000002387' ) {
+                    $scope.tgl12 = dataLoad7[i].value
+                }
+                if (dataLoad7[i].emrdfk == '2000002390' ) {
+                    $scope.tgl13 = dataLoad7[i].value
+                }
+                if (dataLoad7[i].emrdfk == '2000002393' ) {
+                    $scope.tgl14 = dataLoad7[i].value
+                }
+                if (dataLoad7[i].emrdfk == '2000002396' ) {
+                    $scope.tgl15 = dataLoad7[i].value
+                }
                 
-                $scope.item.obji7[dataLoad7[i].emrdfk+""+1] = res[0]
-                $scope.item.obji7[dataLoad7[i].emrdfk] = res[1]
-                $('#id_'+dataLoad7[i].emrdfk).html ( res[1])
+                if (dataLoad7[i].emrdfk == '2000002408' ) {
+                    $scope.pukul2 = dataLoad7[i].value
+                }
 
+                $scope.tglemr = dataLoad7[i].tgl
+                
             }
-
-            if (dataLoad7[i].emrdfk == '423816' ) {
-                $scope.hariTgl = dataLoad7[i].value
-            }
-
-            if (dataLoad7[i].emrdfk == '2000001974' ) {
-                $scope.jamPeriksa = dataLoad7[i].value
-            }
-
-            if (dataLoad7[i].emrdfk == '2000002354' ) {
-                $scope.tgl1 = dataLoad7[i].value
-            }
-            if (dataLoad7[i].emrdfk == '2000002357' ) {
-                $scope.tgl2 = dataLoad7[i].value
-            }
-            if (dataLoad7[i].emrdfk == '2000002360' ) {
-                $scope.tgl3 = dataLoad7[i].value
-            }
-            if (dataLoad7[i].emrdfk == '2000002363' ) {
-                $scope.tgl4 = dataLoad7[i].value
-            }
-            if (dataLoad7[i].emrdfk == '2000002366' ) {
-                $scope.tgl5 = dataLoad7[i].value
-            }
-            if (dataLoad7[i].emrdfk == '2000002369' ) {
-                $scope.tgl6 = dataLoad7[i].value
-            }
-            if (dataLoad7[i].emrdfk == '2000002372' ) {
-                $scope.tgl7 = dataLoad7[i].value
-            }
-            if (dataLoad7[i].emrdfk == '2000002375' ) {
-                $scope.tgl8 = dataLoad7[i].value
-            }
-            if (dataLoad7[i].emrdfk == '2000002378' ) {
-                $scope.tgl9 = dataLoad7[i].value
-            }
-            if (dataLoad7[i].emrdfk == '2000002381' ) {
-                $scope.tgl10 = dataLoad7[i].value
-            }
-            if (dataLoad7[i].emrdfk == '2000002384' ) {
-                $scope.tgl11 = dataLoad7[i].value
-            }
-            if (dataLoad7[i].emrdfk == '2000002387' ) {
-                $scope.tgl12 = dataLoad7[i].value
-            }
-            if (dataLoad7[i].emrdfk == '2000002390' ) {
-                $scope.tgl13 = dataLoad7[i].value
-            }
-            if (dataLoad7[i].emrdfk == '2000002393' ) {
-                $scope.tgl14 = dataLoad7[i].value
-            }
-            if (dataLoad7[i].emrdfk == '2000002396' ) {
-                $scope.tgl15 = dataLoad7[i].value
-            }
-            
-            if (dataLoad7[i].emrdfk == '2000002408' ) {
-                $scope.pukul2 = dataLoad7[i].value
-            }
-
-            $scope.tglemr = dataLoad7[i].tgl
-            
         }
 
-		for (var i = 0; i <= dataLoad8.length - 1; i++) {
-            if(dataLoad8[i].emrdfk == 3110029){
-                continue;
-            }
-            if (dataLoad8[i].type == "textbox") {
-                $('#id_'+dataLoad8[i].emrdfk).html( dataLoad8[i].value)
-                $scope.item.obji8[dataLoad8[i].emrdfk] = dataLoad8[i].value
-            }
-            if (dataLoad8[i].type == "checkbox") {
-                var chekedd = false
-                if (dataLoad8[i].value == '1') {
-                    var chekedd = true
+        if(dataLoad8.length > 0){
+            for (var i = 0; i <= dataLoad8.length - 1; i++) {
+                if(dataLoad8[i].emrdfk == 3110029){
+                    continue;
                 }
-                $scope.item.obji8[dataLoad8[i].emrdfk] = chekedd
-            }
-            if (dataLoad8[i].type == "radio") {
-                $scope.item.obji8[dataLoad8[i].emrdfk] = dataLoad8[i].value
+                if (dataLoad8[i].type == "textbox") {
+                    $('#id_'+dataLoad8[i].emrdfk).html( dataLoad8[i].value)
+                    $scope.item.obji8[dataLoad8[i].emrdfk] = dataLoad8[i].value
+                }
+                if (dataLoad8[i].type == "checkbox") {
+                    var chekedd = false
+                    if (dataLoad8[i].value == '1') {
+                        var chekedd = true
+                    }
+                    $scope.item.obji8[dataLoad8[i].emrdfk] = chekedd
+                }
+                if (dataLoad8[i].type == "radio") {
+                    $scope.item.obji8[dataLoad8[i].emrdfk] = dataLoad8[i].value
 
-            }
+                }
 
-            if (dataLoad8[i].type == "datetime") {
-                $('#id_'+dataLoad8[i].emrdfk).html( dataLoad8[i].value)
-                $scope.item.obji8[dataLoad8[i].emrdfk] = dataLoad8[i].value
-            }
-            if (dataLoad8[i].type == "time") {
-                $scope.item.obji8[dataLoad8[i].emrdfk] = dataLoad8[i].value
-            }
-            if (dataLoad8[i].type == "date") {
-                $scope.item.obji8[dataLoad8[i].emrdfk] = dataLoad8[i].value
-            }
+                if (dataLoad8[i].type == "datetime") {
+                    $('#id_'+dataLoad8[i].emrdfk).html( dataLoad8[i].value)
+                    $scope.item.obji8[dataLoad8[i].emrdfk] = dataLoad8[i].value
+                }
+                if (dataLoad8[i].type == "time") {
+                    $scope.item.obji8[dataLoad8[i].emrdfk] = dataLoad8[i].value
+                }
+                if (dataLoad8[i].type == "date") {
+                    $scope.item.obji8[dataLoad8[i].emrdfk] = dataLoad8[i].value
+                }
 
-            if (dataLoad8[i].type == "checkboxtextbox") {
-                $scope.item.obji8[dataLoad8[i].emrdfk] = dataLoad8[i].value
-                $scope.item.obji8[dataLoad8[i].emrdfk] = true
-            }
-            if (dataLoad8[i].type == "textarea") {
-                $('#id_'+dataLoad8[i].emrdfk).html( dataLoad8[i].value)
-                $scope.item.obji8[dataLoad8[i].emrdfk] = dataLoad8[i].value
-            }
-            if (dataLoad8[i].type == "combobox") {
-     
-                var str = dataLoad8[i].value
-                if(str != null)
-                {
+                if (dataLoad8[i].type == "checkboxtextbox") {
+                    $scope.item.obji8[dataLoad8[i].emrdfk] = dataLoad8[i].value
+                    $scope.item.obji8[dataLoad8[i].emrdfk] = true
+                }
+                if (dataLoad8[i].type == "textarea") {
+                    $('#id_'+dataLoad8[i].emrdfk).html( dataLoad8[i].value)
+                    $scope.item.obji8[dataLoad8[i].emrdfk] = dataLoad8[i].value
+                }
+                if (dataLoad8[i].type == "combobox") {
+        
+                    var str = dataLoad8[i].value
+                    if(str != null)
+                    {
+                        var res = str.split("~");
+                        
+                        $scope.item.obji8[dataLoad8[i].emrdfk] = res[1]
+                        $('#id_'+dataLoad8[i].emrdfk).html ( res[1])
+                    }
+                }
+                if (dataLoad8[i].type == "combobox2") {
+                    var str = dataLoad8[i].value
                     var res = str.split("~");
                     
+                    $scope.item.obji8[dataLoad8[i].emrdfk+""+1] = res[0]
                     $scope.item.obji8[dataLoad8[i].emrdfk] = res[1]
                     $('#id_'+dataLoad8[i].emrdfk).html ( res[1])
+
                 }
-            }
-            if (dataLoad8[i].type == "combobox2") {
-                var str = dataLoad8[i].value
-                var res = str.split("~");
+
+                if (dataLoad8[i].emrdfk == '423816' ) {
+                    $scope.hariTgl = dataLoad8[i].value
+                }
+
+                if (dataLoad8[i].emrdfk == '2000001974' ) {
+                    $scope.jamPeriksa = dataLoad8[i].value
+                }
+
+                if (dataLoad8[i].emrdfk == '2000002354' ) {
+                    $scope.tgl1 = dataLoad8[i].value
+                }
+                if (dataLoad8[i].emrdfk == '2000002357' ) {
+                    $scope.tgl2 = dataLoad8[i].value
+                }
+                if (dataLoad8[i].emrdfk == '2000002360' ) {
+                    $scope.tgl3 = dataLoad8[i].value
+                }
+                if (dataLoad8[i].emrdfk == '2000002363' ) {
+                    $scope.tgl4 = dataLoad8[i].value
+                }
+                if (dataLoad8[i].emrdfk == '2000002366' ) {
+                    $scope.tgl5 = dataLoad8[i].value
+                }
+                if (dataLoad8[i].emrdfk == '2000002369' ) {
+                    $scope.tgl6 = dataLoad8[i].value
+                }
+                if (dataLoad8[i].emrdfk == '2000002372' ) {
+                    $scope.tgl7 = dataLoad8[i].value
+                }
+                if (dataLoad8[i].emrdfk == '2000002375' ) {
+                    $scope.tgl8 = dataLoad8[i].value
+                }
+                if (dataLoad8[i].emrdfk == '2000002378' ) {
+                    $scope.tgl9 = dataLoad8[i].value
+                }
+                if (dataLoad8[i].emrdfk == '2000002381' ) {
+                    $scope.tgl10 = dataLoad8[i].value
+                }
+                if (dataLoad8[i].emrdfk == '2000002384' ) {
+                    $scope.tgl11 = dataLoad8[i].value
+                }
+                if (dataLoad8[i].emrdfk == '2000002387' ) {
+                    $scope.tgl12 = dataLoad8[i].value
+                }
+                if (dataLoad8[i].emrdfk == '2000002390' ) {
+                    $scope.tgl13 = dataLoad8[i].value
+                }
+                if (dataLoad8[i].emrdfk == '2000002393' ) {
+                    $scope.tgl14 = dataLoad8[i].value
+                }
+                if (dataLoad8[i].emrdfk == '2000002396' ) {
+                    $scope.tgl15 = dataLoad8[i].value
+                }
                 
-                $scope.item.obji8[dataLoad8[i].emrdfk+""+1] = res[0]
-                $scope.item.obji8[dataLoad8[i].emrdfk] = res[1]
-                $('#id_'+dataLoad8[i].emrdfk).html ( res[1])
+                if (dataLoad8[i].emrdfk == '2000002408' ) {
+                    $scope.pukul2 = dataLoad8[i].value
+                }
 
+                $scope.tglemr = dataLoad8[i].tgl
+                
             }
-
-            if (dataLoad8[i].emrdfk == '423816' ) {
-                $scope.hariTgl = dataLoad8[i].value
-            }
-
-            if (dataLoad8[i].emrdfk == '2000001974' ) {
-                $scope.jamPeriksa = dataLoad8[i].value
-            }
-
-            if (dataLoad8[i].emrdfk == '2000002354' ) {
-                $scope.tgl1 = dataLoad8[i].value
-            }
-            if (dataLoad8[i].emrdfk == '2000002357' ) {
-                $scope.tgl2 = dataLoad8[i].value
-            }
-            if (dataLoad8[i].emrdfk == '2000002360' ) {
-                $scope.tgl3 = dataLoad8[i].value
-            }
-            if (dataLoad8[i].emrdfk == '2000002363' ) {
-                $scope.tgl4 = dataLoad8[i].value
-            }
-            if (dataLoad8[i].emrdfk == '2000002366' ) {
-                $scope.tgl5 = dataLoad8[i].value
-            }
-            if (dataLoad8[i].emrdfk == '2000002369' ) {
-                $scope.tgl6 = dataLoad8[i].value
-            }
-            if (dataLoad8[i].emrdfk == '2000002372' ) {
-                $scope.tgl7 = dataLoad8[i].value
-            }
-            if (dataLoad8[i].emrdfk == '2000002375' ) {
-                $scope.tgl8 = dataLoad8[i].value
-            }
-            if (dataLoad8[i].emrdfk == '2000002378' ) {
-                $scope.tgl9 = dataLoad8[i].value
-            }
-            if (dataLoad8[i].emrdfk == '2000002381' ) {
-                $scope.tgl10 = dataLoad8[i].value
-            }
-            if (dataLoad8[i].emrdfk == '2000002384' ) {
-                $scope.tgl11 = dataLoad8[i].value
-            }
-            if (dataLoad8[i].emrdfk == '2000002387' ) {
-                $scope.tgl12 = dataLoad8[i].value
-            }
-            if (dataLoad8[i].emrdfk == '2000002390' ) {
-                $scope.tgl13 = dataLoad8[i].value
-            }
-            if (dataLoad8[i].emrdfk == '2000002393' ) {
-                $scope.tgl14 = dataLoad8[i].value
-            }
-            if (dataLoad8[i].emrdfk == '2000002396' ) {
-                $scope.tgl15 = dataLoad8[i].value
-            }
-            
-            if (dataLoad8[i].emrdfk == '2000002408' ) {
-                $scope.pukul2 = dataLoad8[i].value
-            }
-
-            $scope.tglemr = dataLoad8[i].tgl
-            
         }
 
-		for (var i = 0; i <= dataLoad9.length - 1; i++) {
-            if(dataLoad9[i].emrdfk == 3110029){
-                continue;
-            }
-            if (dataLoad9[i].type == "textbox") {
-                $('#id_'+dataLoad9[i].emrdfk).html( dataLoad9[i].value)
-                $scope.item.obji9[dataLoad9[i].emrdfk] = dataLoad9[i].value
-            }
-            if (dataLoad9[i].type == "checkbox") {
-                var chekedd = false
-                if (dataLoad9[i].value == '1') {
-                    var chekedd = true
+        if(dataLoad9.length > 0){
+            for (var i = 0; i <= dataLoad9.length - 1; i++) {
+                if(dataLoad9[i].emrdfk == 3110029){
+                    continue;
                 }
-                $scope.item.obji9[dataLoad9[i].emrdfk] = chekedd
-            }
-            if (dataLoad9[i].type == "radio") {
-                $scope.item.obji9[dataLoad9[i].emrdfk] = dataLoad9[i].value
+                if (dataLoad9[i].type == "textbox") {
+                    $('#id_'+dataLoad9[i].emrdfk).html( dataLoad9[i].value)
+                    $scope.item.obji9[dataLoad9[i].emrdfk] = dataLoad9[i].value
+                }
+                if (dataLoad9[i].type == "checkbox") {
+                    var chekedd = false
+                    if (dataLoad9[i].value == '1') {
+                        var chekedd = true
+                    }
+                    $scope.item.obji9[dataLoad9[i].emrdfk] = chekedd
+                }
+                if (dataLoad9[i].type == "radio") {
+                    $scope.item.obji9[dataLoad9[i].emrdfk] = dataLoad9[i].value
 
-            }
+                }
 
-            if (dataLoad9[i].type == "datetime") {
-                $('#id_'+dataLoad9[i].emrdfk).html( dataLoad9[i].value)
-                $scope.item.obji9[dataLoad9[i].emrdfk] = dataLoad9[i].value
-            }
-            if (dataLoad9[i].type == "time") {
-                $scope.item.obji9[dataLoad9[i].emrdfk] = dataLoad9[i].value
-            }
-            if (dataLoad9[i].type == "date") {
-                $scope.item.obji9[dataLoad9[i].emrdfk] = dataLoad9[i].value
-            }
+                if (dataLoad9[i].type == "datetime") {
+                    $('#id_'+dataLoad9[i].emrdfk).html( dataLoad9[i].value)
+                    $scope.item.obji9[dataLoad9[i].emrdfk] = dataLoad9[i].value
+                }
+                if (dataLoad9[i].type == "time") {
+                    $scope.item.obji9[dataLoad9[i].emrdfk] = dataLoad9[i].value
+                }
+                if (dataLoad9[i].type == "date") {
+                    $scope.item.obji9[dataLoad9[i].emrdfk] = dataLoad9[i].value
+                }
 
-            if (dataLoad9[i].type == "checkboxtextbox") {
-                $scope.item.obji9[dataLoad9[i].emrdfk] = dataLoad9[i].value
-                $scope.item.obji9[dataLoad9[i].emrdfk] = true
-            }
-            if (dataLoad9[i].type == "textarea") {
-                $('#id_'+dataLoad9[i].emrdfk).html( dataLoad9[i].value)
-                $scope.item.obji9[dataLoad9[i].emrdfk] = dataLoad9[i].value
-            }
-            if (dataLoad9[i].type == "combobox") {
-     
-                var str = dataLoad9[i].value
-                if(str != null)
-                {
+                if (dataLoad9[i].type == "checkboxtextbox") {
+                    $scope.item.obji9[dataLoad9[i].emrdfk] = dataLoad9[i].value
+                    $scope.item.obji9[dataLoad9[i].emrdfk] = true
+                }
+                if (dataLoad9[i].type == "textarea") {
+                    $('#id_'+dataLoad9[i].emrdfk).html( dataLoad9[i].value)
+                    $scope.item.obji9[dataLoad9[i].emrdfk] = dataLoad9[i].value
+                }
+                if (dataLoad9[i].type == "combobox") {
+        
+                    var str = dataLoad9[i].value
+                    if(str != null)
+                    {
+                        var res = str.split("~");
+                        
+                        $scope.item.obji9[dataLoad9[i].emrdfk] = res[1]
+                        $('#id_'+dataLoad9[i].emrdfk).html ( res[1])
+                    }
+                }
+                if (dataLoad9[i].type == "combobox2") {
+                    var str = dataLoad9[i].value
                     var res = str.split("~");
                     
+                    $scope.item.obji9[dataLoad9[i].emrdfk+""+1] = res[0]
                     $scope.item.obji9[dataLoad9[i].emrdfk] = res[1]
                     $('#id_'+dataLoad9[i].emrdfk).html ( res[1])
+
                 }
-            }
-            if (dataLoad9[i].type == "combobox2") {
-                var str = dataLoad9[i].value
-                var res = str.split("~");
+
+                if (dataLoad9[i].emrdfk == '423816' ) {
+                    $scope.hariTgl = dataLoad9[i].value
+                }
+
+                if (dataLoad9[i].emrdfk == '2000001974' ) {
+                    $scope.jamPeriksa = dataLoad9[i].value
+                }
+
+                if (dataLoad9[i].emrdfk == '2000002354' ) {
+                    $scope.tgl1 = dataLoad9[i].value
+                }
+                if (dataLoad9[i].emrdfk == '2000002357' ) {
+                    $scope.tgl2 = dataLoad9[i].value
+                }
+                if (dataLoad9[i].emrdfk == '2000002360' ) {
+                    $scope.tgl3 = dataLoad9[i].value
+                }
+                if (dataLoad9[i].emrdfk == '2000002363' ) {
+                    $scope.tgl4 = dataLoad9[i].value
+                }
+                if (dataLoad9[i].emrdfk == '2000002366' ) {
+                    $scope.tgl5 = dataLoad9[i].value
+                }
+                if (dataLoad9[i].emrdfk == '2000002369' ) {
+                    $scope.tgl6 = dataLoad9[i].value
+                }
+                if (dataLoad9[i].emrdfk == '2000002372' ) {
+                    $scope.tgl7 = dataLoad9[i].value
+                }
+                if (dataLoad9[i].emrdfk == '2000002375' ) {
+                    $scope.tgl8 = dataLoad9[i].value
+                }
+                if (dataLoad9[i].emrdfk == '2000002378' ) {
+                    $scope.tgl9 = dataLoad9[i].value
+                }
+                if (dataLoad9[i].emrdfk == '2000002381' ) {
+                    $scope.tgl10 = dataLoad9[i].value
+                }
+                if (dataLoad9[i].emrdfk == '2000002384' ) {
+                    $scope.tgl11 = dataLoad9[i].value
+                }
+                if (dataLoad9[i].emrdfk == '2000002387' ) {
+                    $scope.tgl12 = dataLoad9[i].value
+                }
+                if (dataLoad9[i].emrdfk == '2000002390' ) {
+                    $scope.tgl13 = dataLoad9[i].value
+                }
+                if (dataLoad9[i].emrdfk == '2000002393' ) {
+                    $scope.tgl14 = dataLoad9[i].value
+                }
+                if (dataLoad9[i].emrdfk == '2000002396' ) {
+                    $scope.tgl15 = dataLoad9[i].value
+                }
                 
-                $scope.item.obji9[dataLoad9[i].emrdfk+""+1] = res[0]
-                $scope.item.obji9[dataLoad9[i].emrdfk] = res[1]
-                $('#id_'+dataLoad9[i].emrdfk).html ( res[1])
+                if (dataLoad9[i].emrdfk == '2000002408' ) {
+                    $scope.pukul2 = dataLoad9[i].value
+                }
 
+                $scope.tglemr = dataLoad9[i].tgl
+                
             }
-
-            if (dataLoad9[i].emrdfk == '423816' ) {
-                $scope.hariTgl = dataLoad9[i].value
-            }
-
-            if (dataLoad9[i].emrdfk == '2000001974' ) {
-                $scope.jamPeriksa = dataLoad9[i].value
-            }
-
-            if (dataLoad9[i].emrdfk == '2000002354' ) {
-                $scope.tgl1 = dataLoad9[i].value
-            }
-            if (dataLoad9[i].emrdfk == '2000002357' ) {
-                $scope.tgl2 = dataLoad9[i].value
-            }
-            if (dataLoad9[i].emrdfk == '2000002360' ) {
-                $scope.tgl3 = dataLoad9[i].value
-            }
-            if (dataLoad9[i].emrdfk == '2000002363' ) {
-                $scope.tgl4 = dataLoad9[i].value
-            }
-            if (dataLoad9[i].emrdfk == '2000002366' ) {
-                $scope.tgl5 = dataLoad9[i].value
-            }
-            if (dataLoad9[i].emrdfk == '2000002369' ) {
-                $scope.tgl6 = dataLoad9[i].value
-            }
-            if (dataLoad9[i].emrdfk == '2000002372' ) {
-                $scope.tgl7 = dataLoad9[i].value
-            }
-            if (dataLoad9[i].emrdfk == '2000002375' ) {
-                $scope.tgl8 = dataLoad9[i].value
-            }
-            if (dataLoad9[i].emrdfk == '2000002378' ) {
-                $scope.tgl9 = dataLoad9[i].value
-            }
-            if (dataLoad9[i].emrdfk == '2000002381' ) {
-                $scope.tgl10 = dataLoad9[i].value
-            }
-            if (dataLoad9[i].emrdfk == '2000002384' ) {
-                $scope.tgl11 = dataLoad9[i].value
-            }
-            if (dataLoad9[i].emrdfk == '2000002387' ) {
-                $scope.tgl12 = dataLoad9[i].value
-            }
-            if (dataLoad9[i].emrdfk == '2000002390' ) {
-                $scope.tgl13 = dataLoad9[i].value
-            }
-            if (dataLoad9[i].emrdfk == '2000002393' ) {
-                $scope.tgl14 = dataLoad9[i].value
-            }
-            if (dataLoad9[i].emrdfk == '2000002396' ) {
-                $scope.tgl15 = dataLoad9[i].value
-            }
-            
-            if (dataLoad9[i].emrdfk == '2000002408' ) {
-                $scope.pukul2 = dataLoad9[i].value
-            }
-
-            $scope.tglemr = dataLoad9[i].tgl
-            
         }
 
-		for (var i = 0; i <= dataLoad10.length - 1; i++) {
-            if(dataLoad10[i].emrdfk == 3110029){
-                continue;
-            }
-            if (dataLoad10[i].type == "textbox") {
-                $('#id_'+dataLoad10[i].emrdfk).html( dataLoad10[i].value)
-                $scope.item.obji10[dataLoad10[i].emrdfk] = dataLoad10[i].value
-            }
-            if (dataLoad10[i].type == "checkbox") {
-                var chekedd = false
-                if (dataLoad10[i].value == '1') {
-                    var chekedd = true
+        if(dataLoad10.length > 0){
+            for (var i = 0; i <= dataLoad10.length - 1; i++) {
+                if(dataLoad10[i].emrdfk == 3110029){
+                    continue;
                 }
-                $scope.item.obji10[dataLoad10[i].emrdfk] = chekedd
-            }
-            if (dataLoad10[i].type == "radio") {
-                $scope.item.obji10[dataLoad10[i].emrdfk] = dataLoad10[i].value
+                if (dataLoad10[i].type == "textbox") {
+                    $('#id_'+dataLoad10[i].emrdfk).html( dataLoad10[i].value)
+                    $scope.item.obji10[dataLoad10[i].emrdfk] = dataLoad10[i].value
+                }
+                if (dataLoad10[i].type == "checkbox") {
+                    var chekedd = false
+                    if (dataLoad10[i].value == '1') {
+                        var chekedd = true
+                    }
+                    $scope.item.obji10[dataLoad10[i].emrdfk] = chekedd
+                }
+                if (dataLoad10[i].type == "radio") {
+                    $scope.item.obji10[dataLoad10[i].emrdfk] = dataLoad10[i].value
 
-            }
+                }
 
-            if (dataLoad10[i].type == "datetime") {
-                $('#id_'+dataLoad10[i].emrdfk).html( dataLoad10[i].value)
-                $scope.item.obji10[dataLoad10[i].emrdfk] = dataLoad10[i].value
-            }
-            if (dataLoad10[i].type == "time") {
-                $scope.item.obji10[dataLoad10[i].emrdfk] = dataLoad10[i].value
-            }
-            if (dataLoad10[i].type == "date") {
-                $scope.item.obji10[dataLoad10[i].emrdfk] = dataLoad10[i].value
-            }
+                if (dataLoad10[i].type == "datetime") {
+                    $('#id_'+dataLoad10[i].emrdfk).html( dataLoad10[i].value)
+                    $scope.item.obji10[dataLoad10[i].emrdfk] = dataLoad10[i].value
+                }
+                if (dataLoad10[i].type == "time") {
+                    $scope.item.obji10[dataLoad10[i].emrdfk] = dataLoad10[i].value
+                }
+                if (dataLoad10[i].type == "date") {
+                    $scope.item.obji10[dataLoad10[i].emrdfk] = dataLoad10[i].value
+                }
 
-            if (dataLoad10[i].type == "checkboxtextbox") {
-                $scope.item.obji10[dataLoad10[i].emrdfk] = dataLoad10[i].value
-                $scope.item.obji10[dataLoad10[i].emrdfk] = true
-            }
-            if (dataLoad10[i].type == "textarea") {
-                $('#id_'+dataLoad10[i].emrdfk).html( dataLoad10[i].value)
-                $scope.item.obji10[dataLoad10[i].emrdfk] = dataLoad10[i].value
-            }
-            if (dataLoad10[i].type == "combobox") {
-     
-                var str = dataLoad10[i].value
-                if(str != null)
-                {
+                if (dataLoad10[i].type == "checkboxtextbox") {
+                    $scope.item.obji10[dataLoad10[i].emrdfk] = dataLoad10[i].value
+                    $scope.item.obji10[dataLoad10[i].emrdfk] = true
+                }
+                if (dataLoad10[i].type == "textarea") {
+                    $('#id_'+dataLoad10[i].emrdfk).html( dataLoad10[i].value)
+                    $scope.item.obji10[dataLoad10[i].emrdfk] = dataLoad10[i].value
+                }
+                if (dataLoad10[i].type == "combobox") {
+        
+                    var str = dataLoad10[i].value
+                    if(str != null)
+                    {
+                        var res = str.split("~");
+                        
+                        $scope.item.obji10[dataLoad10[i].emrdfk] = res[1]
+                        $('#id_'+dataLoad10[i].emrdfk).html ( res[1])
+                    }
+                }
+                if (dataLoad10[i].type == "combobox2") {
+                    var str = dataLoad10[i].value
                     var res = str.split("~");
                     
+                    $scope.item.obji10[dataLoad10[i].emrdfk+""+1] = res[0]
                     $scope.item.obji10[dataLoad10[i].emrdfk] = res[1]
                     $('#id_'+dataLoad10[i].emrdfk).html ( res[1])
+
                 }
-            }
-            if (dataLoad10[i].type == "combobox2") {
-                var str = dataLoad10[i].value
-                var res = str.split("~");
+
+                if (dataLoad10[i].emrdfk == '423816' ) {
+                    $scope.hariTgl = dataLoad10[i].value
+                }
+
+                if (dataLoad10[i].emrdfk == '2000001974' ) {
+                    $scope.jamPeriksa = dataLoad10[i].value
+                }
+
+                if (dataLoad10[i].emrdfk == '2000002354' ) {
+                    $scope.tgl1 = dataLoad10[i].value
+                }
+                if (dataLoad10[i].emrdfk == '2000002357' ) {
+                    $scope.tgl2 = dataLoad10[i].value
+                }
+                if (dataLoad10[i].emrdfk == '2000002360' ) {
+                    $scope.tgl3 = dataLoad10[i].value
+                }
+                if (dataLoad10[i].emrdfk == '2000002363' ) {
+                    $scope.tgl4 = dataLoad10[i].value
+                }
+                if (dataLoad10[i].emrdfk == '2000002366' ) {
+                    $scope.tgl5 = dataLoad10[i].value
+                }
+                if (dataLoad10[i].emrdfk == '2000002369' ) {
+                    $scope.tgl6 = dataLoad10[i].value
+                }
+                if (dataLoad10[i].emrdfk == '2000002372' ) {
+                    $scope.tgl7 = dataLoad10[i].value
+                }
+                if (dataLoad10[i].emrdfk == '2000002375' ) {
+                    $scope.tgl8 = dataLoad10[i].value
+                }
+                if (dataLoad10[i].emrdfk == '2000002378' ) {
+                    $scope.tgl9 = dataLoad10[i].value
+                }
+                if (dataLoad10[i].emrdfk == '2000002381' ) {
+                    $scope.tgl10 = dataLoad10[i].value
+                }
+                if (dataLoad10[i].emrdfk == '2000002384' ) {
+                    $scope.tgl11 = dataLoad10[i].value
+                }
+                if (dataLoad10[i].emrdfk == '2000002387' ) {
+                    $scope.tgl12 = dataLoad10[i].value
+                }
+                if (dataLoad10[i].emrdfk == '2000002390' ) {
+                    $scope.tgl13 = dataLoad10[i].value
+                }
+                if (dataLoad10[i].emrdfk == '2000002393' ) {
+                    $scope.tgl14 = dataLoad10[i].value
+                }
+                if (dataLoad10[i].emrdfk == '2000002396' ) {
+                    $scope.tgl15 = dataLoad10[i].value
+                }
                 
-                $scope.item.obji10[dataLoad10[i].emrdfk+""+1] = res[0]
-                $scope.item.obji10[dataLoad10[i].emrdfk] = res[1]
-                $('#id_'+dataLoad10[i].emrdfk).html ( res[1])
+                if (dataLoad10[i].emrdfk == '2000002408' ) {
+                    $scope.pukul2 = dataLoad10[i].value
+                }
 
+                $scope.tglemr = dataLoad10[i].tgl
+                
             }
-
-            if (dataLoad10[i].emrdfk == '423816' ) {
-                $scope.hariTgl = dataLoad10[i].value
-            }
-
-            if (dataLoad10[i].emrdfk == '2000001974' ) {
-                $scope.jamPeriksa = dataLoad10[i].value
-            }
-
-            if (dataLoad10[i].emrdfk == '2000002354' ) {
-                $scope.tgl1 = dataLoad10[i].value
-            }
-            if (dataLoad10[i].emrdfk == '2000002357' ) {
-                $scope.tgl2 = dataLoad10[i].value
-            }
-            if (dataLoad10[i].emrdfk == '2000002360' ) {
-                $scope.tgl3 = dataLoad10[i].value
-            }
-            if (dataLoad10[i].emrdfk == '2000002363' ) {
-                $scope.tgl4 = dataLoad10[i].value
-            }
-            if (dataLoad10[i].emrdfk == '2000002366' ) {
-                $scope.tgl5 = dataLoad10[i].value
-            }
-            if (dataLoad10[i].emrdfk == '2000002369' ) {
-                $scope.tgl6 = dataLoad10[i].value
-            }
-            if (dataLoad10[i].emrdfk == '2000002372' ) {
-                $scope.tgl7 = dataLoad10[i].value
-            }
-            if (dataLoad10[i].emrdfk == '2000002375' ) {
-                $scope.tgl8 = dataLoad10[i].value
-            }
-            if (dataLoad10[i].emrdfk == '2000002378' ) {
-                $scope.tgl9 = dataLoad10[i].value
-            }
-            if (dataLoad10[i].emrdfk == '2000002381' ) {
-                $scope.tgl10 = dataLoad10[i].value
-            }
-            if (dataLoad10[i].emrdfk == '2000002384' ) {
-                $scope.tgl11 = dataLoad10[i].value
-            }
-            if (dataLoad10[i].emrdfk == '2000002387' ) {
-                $scope.tgl12 = dataLoad10[i].value
-            }
-            if (dataLoad10[i].emrdfk == '2000002390' ) {
-                $scope.tgl13 = dataLoad10[i].value
-            }
-            if (dataLoad10[i].emrdfk == '2000002393' ) {
-                $scope.tgl14 = dataLoad10[i].value
-            }
-            if (dataLoad10[i].emrdfk == '2000002396' ) {
-                $scope.tgl15 = dataLoad10[i].value
-            }
-            
-            if (dataLoad10[i].emrdfk == '2000002408' ) {
-                $scope.pukul2 = dataLoad10[i].value
-            }
-
-            $scope.tglemr = dataLoad10[i].tgl
-            
         }
 
-		for (var i = 0; i <= dataLoad11.length - 1; i++) {
-            if(dataLoad11[i].emrdfk == 3110029){
-                continue;
-            }
-            if (dataLoad11[i].type == "textbox") {
-                $('#id_'+dataLoad11[i].emrdfk).html( dataLoad11[i].value)
-                $scope.item.obji11[dataLoad11[i].emrdfk] = dataLoad11[i].value
-            }
-            if (dataLoad11[i].type == "checkbox") {
-                var chekedd = false
-                if (dataLoad11[i].value == '1') {
-                    var chekedd = true
+        if(dataLoad11.length > 0){
+            for (var i = 0; i <= dataLoad11.length - 1; i++) {
+                if(dataLoad11[i].emrdfk == 3110029){
+                    continue;
                 }
-                $scope.item.obji11[dataLoad11[i].emrdfk] = chekedd
-            }
-            if (dataLoad11[i].type == "radio") {
-                $scope.item.obji11[dataLoad11[i].emrdfk] = dataLoad11[i].value
+                if (dataLoad11[i].type == "textbox") {
+                    $('#id_'+dataLoad11[i].emrdfk).html( dataLoad11[i].value)
+                    $scope.item.obji11[dataLoad11[i].emrdfk] = dataLoad11[i].value
+                }
+                if (dataLoad11[i].type == "checkbox") {
+                    var chekedd = false
+                    if (dataLoad11[i].value == '1') {
+                        var chekedd = true
+                    }
+                    $scope.item.obji11[dataLoad11[i].emrdfk] = chekedd
+                }
+                if (dataLoad11[i].type == "radio") {
+                    $scope.item.obji11[dataLoad11[i].emrdfk] = dataLoad11[i].value
 
-            }
+                }
 
-            if (dataLoad11[i].type == "datetime") {
-                $('#id_'+dataLoad11[i].emrdfk).html( dataLoad11[i].value)
-                $scope.item.obji11[dataLoad11[i].emrdfk] = dataLoad11[i].value
-            }
-            if (dataLoad11[i].type == "time") {
-                $scope.item.obji11[dataLoad11[i].emrdfk] = dataLoad11[i].value
-            }
-            if (dataLoad11[i].type == "date") {
-                $scope.item.obji11[dataLoad11[i].emrdfk] = dataLoad11[i].value
-            }
+                if (dataLoad11[i].type == "datetime") {
+                    $('#id_'+dataLoad11[i].emrdfk).html( dataLoad11[i].value)
+                    $scope.item.obji11[dataLoad11[i].emrdfk] = dataLoad11[i].value
+                }
+                if (dataLoad11[i].type == "time") {
+                    $scope.item.obji11[dataLoad11[i].emrdfk] = dataLoad11[i].value
+                }
+                if (dataLoad11[i].type == "date") {
+                    $scope.item.obji11[dataLoad11[i].emrdfk] = dataLoad11[i].value
+                }
 
-            if (dataLoad11[i].type == "checkboxtextbox") {
-                $scope.item.obji11[dataLoad11[i].emrdfk] = dataLoad11[i].value
-                $scope.item.obji11[dataLoad11[i].emrdfk] = true
-            }
-            if (dataLoad11[i].type == "textarea") {
-                $('#id_'+dataLoad11[i].emrdfk).html( dataLoad11[i].value)
-                $scope.item.obji11[dataLoad11[i].emrdfk] = dataLoad11[i].value
-            }
-            if (dataLoad11[i].type == "combobox") {
-     
-                var str = dataLoad11[i].value
-                if(str != null)
-                {
+                if (dataLoad11[i].type == "checkboxtextbox") {
+                    $scope.item.obji11[dataLoad11[i].emrdfk] = dataLoad11[i].value
+                    $scope.item.obji11[dataLoad11[i].emrdfk] = true
+                }
+                if (dataLoad11[i].type == "textarea") {
+                    $('#id_'+dataLoad11[i].emrdfk).html( dataLoad11[i].value)
+                    $scope.item.obji11[dataLoad11[i].emrdfk] = dataLoad11[i].value
+                }
+                if (dataLoad11[i].type == "combobox") {
+        
+                    var str = dataLoad11[i].value
+                    if(str != null)
+                    {
+                        var res = str.split("~");
+                        
+                        $scope.item.obji11[dataLoad11[i].emrdfk] = res[1]
+                        $('#id_'+dataLoad11[i].emrdfk).html ( res[1])
+                    }
+                }
+                if (dataLoad11[i].type == "combobox2") {
+                    var str = dataLoad11[i].value
                     var res = str.split("~");
                     
+                    $scope.item.obji11[dataLoad11[i].emrdfk+""+1] = res[0]
                     $scope.item.obji11[dataLoad11[i].emrdfk] = res[1]
                     $('#id_'+dataLoad11[i].emrdfk).html ( res[1])
+
                 }
-            }
-            if (dataLoad11[i].type == "combobox2") {
-                var str = dataLoad11[i].value
-                var res = str.split("~");
+
+                if (dataLoad11[i].emrdfk == '423816' ) {
+                    $scope.hariTgl = dataLoad11[i].value
+                }
+
+                if (dataLoad11[i].emrdfk == '2000001974' ) {
+                    $scope.jamPeriksa = dataLoad11[i].value
+                }
+
+                if (dataLoad11[i].emrdfk == '2000002354' ) {
+                    $scope.tgl1 = dataLoad11[i].value
+                }
+                if (dataLoad11[i].emrdfk == '2000002357' ) {
+                    $scope.tgl2 = dataLoad11[i].value
+                }
+                if (dataLoad11[i].emrdfk == '2000002360' ) {
+                    $scope.tgl3 = dataLoad11[i].value
+                }
+                if (dataLoad11[i].emrdfk == '2000002363' ) {
+                    $scope.tgl4 = dataLoad11[i].value
+                }
+                if (dataLoad11[i].emrdfk == '2000002366' ) {
+                    $scope.tgl5 = dataLoad11[i].value
+                }
+                if (dataLoad11[i].emrdfk == '2000002369' ) {
+                    $scope.tgl6 = dataLoad11[i].value
+                }
+                if (dataLoad11[i].emrdfk == '2000002372' ) {
+                    $scope.tgl7 = dataLoad11[i].value
+                }
+                if (dataLoad11[i].emrdfk == '2000002375' ) {
+                    $scope.tgl8 = dataLoad11[i].value
+                }
+                if (dataLoad11[i].emrdfk == '2000002378' ) {
+                    $scope.tgl9 = dataLoad11[i].value
+                }
+                if (dataLoad11[i].emrdfk == '2000002381' ) {
+                    $scope.tgl10 = dataLoad11[i].value
+                }
+                if (dataLoad11[i].emrdfk == '2000002384' ) {
+                    $scope.tgl11 = dataLoad11[i].value
+                }
+                if (dataLoad11[i].emrdfk == '2000002387' ) {
+                    $scope.tgl12 = dataLoad11[i].value
+                }
+                if (dataLoad11[i].emrdfk == '2000002390' ) {
+                    $scope.tgl13 = dataLoad11[i].value
+                }
+                if (dataLoad11[i].emrdfk == '2000002393' ) {
+                    $scope.tgl14 = dataLoad11[i].value
+                }
+                if (dataLoad11[i].emrdfk == '2000002396' ) {
+                    $scope.tgl15 = dataLoad11[i].value
+                }
                 
-                $scope.item.obji11[dataLoad11[i].emrdfk+""+1] = res[0]
-                $scope.item.obji11[dataLoad11[i].emrdfk] = res[1]
-                $('#id_'+dataLoad11[i].emrdfk).html ( res[1])
+                if (dataLoad11[i].emrdfk == '2000002408' ) {
+                    $scope.pukul2 = dataLoad11[i].value
+                }
 
+                $scope.tglemr = dataLoad11[i].tgl
+                
             }
-
-            if (dataLoad11[i].emrdfk == '423816' ) {
-                $scope.hariTgl = dataLoad11[i].value
-            }
-
-            if (dataLoad11[i].emrdfk == '2000001974' ) {
-                $scope.jamPeriksa = dataLoad11[i].value
-            }
-
-            if (dataLoad11[i].emrdfk == '2000002354' ) {
-                $scope.tgl1 = dataLoad11[i].value
-            }
-            if (dataLoad11[i].emrdfk == '2000002357' ) {
-                $scope.tgl2 = dataLoad11[i].value
-            }
-            if (dataLoad11[i].emrdfk == '2000002360' ) {
-                $scope.tgl3 = dataLoad11[i].value
-            }
-            if (dataLoad11[i].emrdfk == '2000002363' ) {
-                $scope.tgl4 = dataLoad11[i].value
-            }
-            if (dataLoad11[i].emrdfk == '2000002366' ) {
-                $scope.tgl5 = dataLoad11[i].value
-            }
-            if (dataLoad11[i].emrdfk == '2000002369' ) {
-                $scope.tgl6 = dataLoad11[i].value
-            }
-            if (dataLoad11[i].emrdfk == '2000002372' ) {
-                $scope.tgl7 = dataLoad11[i].value
-            }
-            if (dataLoad11[i].emrdfk == '2000002375' ) {
-                $scope.tgl8 = dataLoad11[i].value
-            }
-            if (dataLoad11[i].emrdfk == '2000002378' ) {
-                $scope.tgl9 = dataLoad11[i].value
-            }
-            if (dataLoad11[i].emrdfk == '2000002381' ) {
-                $scope.tgl10 = dataLoad11[i].value
-            }
-            if (dataLoad11[i].emrdfk == '2000002384' ) {
-                $scope.tgl11 = dataLoad11[i].value
-            }
-            if (dataLoad11[i].emrdfk == '2000002387' ) {
-                $scope.tgl12 = dataLoad11[i].value
-            }
-            if (dataLoad11[i].emrdfk == '2000002390' ) {
-                $scope.tgl13 = dataLoad11[i].value
-            }
-            if (dataLoad11[i].emrdfk == '2000002393' ) {
-                $scope.tgl14 = dataLoad11[i].value
-            }
-            if (dataLoad11[i].emrdfk == '2000002396' ) {
-                $scope.tgl15 = dataLoad11[i].value
-            }
-            
-            if (dataLoad11[i].emrdfk == '2000002408' ) {
-                $scope.pukul2 = dataLoad11[i].value
-            }
-
-            $scope.tglemr = dataLoad11[i].tgl
-            
         }
 
-		for (var i = 0; i <= dataLoad12.length - 1; i++) {
-            if(dataLoad12[i].emrdfk == 3110029){
-                continue;
-            }
-            if (dataLoad12[i].type == "textbox") {
-                $('#id_'+dataLoad12[i].emrdfk).html( dataLoad12[i].value)
-                $scope.item.obji12[dataLoad12[i].emrdfk] = dataLoad12[i].value
-            }
-            if (dataLoad12[i].type == "checkbox") {
-                var chekedd = false
-                if (dataLoad12[i].value == '1') {
-                    var chekedd = true
+        if(dataLoad12.length > 0){
+            for (var i = 0; i <= dataLoad12.length - 1; i++) {
+                if(dataLoad12[i].emrdfk == 3110029){
+                    continue;
                 }
-                $scope.item.obji12[dataLoad12[i].emrdfk] = chekedd
-            }
-            if (dataLoad12[i].type == "radio") {
-                $scope.item.obji12[dataLoad12[i].emrdfk] = dataLoad12[i].value
+                if (dataLoad12[i].type == "textbox") {
+                    $('#id_'+dataLoad12[i].emrdfk).html( dataLoad12[i].value)
+                    $scope.item.obji12[dataLoad12[i].emrdfk] = dataLoad12[i].value
+                }
+                if (dataLoad12[i].type == "checkbox") {
+                    var chekedd = false
+                    if (dataLoad12[i].value == '1') {
+                        var chekedd = true
+                    }
+                    $scope.item.obji12[dataLoad12[i].emrdfk] = chekedd
+                }
+                if (dataLoad12[i].type == "radio") {
+                    $scope.item.obji12[dataLoad12[i].emrdfk] = dataLoad12[i].value
 
-            }
+                }
 
-            if (dataLoad12[i].type == "datetime") {
-                $('#id_'+dataLoad12[i].emrdfk).html( dataLoad12[i].value)
-                $scope.item.obji12[dataLoad12[i].emrdfk] = dataLoad12[i].value
-            }
-            if (dataLoad12[i].type == "time") {
-                $scope.item.obji12[dataLoad12[i].emrdfk] = dataLoad12[i].value
-            }
-            if (dataLoad12[i].type == "date") {
-                $scope.item.obji12[dataLoad12[i].emrdfk] = dataLoad12[i].value
-            }
+                if (dataLoad12[i].type == "datetime") {
+                    $('#id_'+dataLoad12[i].emrdfk).html( dataLoad12[i].value)
+                    $scope.item.obji12[dataLoad12[i].emrdfk] = dataLoad12[i].value
+                }
+                if (dataLoad12[i].type == "time") {
+                    $scope.item.obji12[dataLoad12[i].emrdfk] = dataLoad12[i].value
+                }
+                if (dataLoad12[i].type == "date") {
+                    $scope.item.obji12[dataLoad12[i].emrdfk] = dataLoad12[i].value
+                }
 
-            if (dataLoad12[i].type == "checkboxtextbox") {
-                $scope.item.obji12[dataLoad12[i].emrdfk] = dataLoad12[i].value
-                $scope.item.obji12[dataLoad12[i].emrdfk] = true
-            }
-            if (dataLoad12[i].type == "textarea") {
-                $('#id_'+dataLoad12[i].emrdfk).html( dataLoad12[i].value)
-                $scope.item.obji12[dataLoad12[i].emrdfk] = dataLoad12[i].value
-            }
-            if (dataLoad12[i].type == "combobox") {
-     
-                var str = dataLoad12[i].value
-                if(str != null)
-                {
+                if (dataLoad12[i].type == "checkboxtextbox") {
+                    $scope.item.obji12[dataLoad12[i].emrdfk] = dataLoad12[i].value
+                    $scope.item.obji12[dataLoad12[i].emrdfk] = true
+                }
+                if (dataLoad12[i].type == "textarea") {
+                    $('#id_'+dataLoad12[i].emrdfk).html( dataLoad12[i].value)
+                    $scope.item.obji12[dataLoad12[i].emrdfk] = dataLoad12[i].value
+                }
+                if (dataLoad12[i].type == "combobox") {
+        
+                    var str = dataLoad12[i].value
+                    if(str != null)
+                    {
+                        var res = str.split("~");
+                        
+                        $scope.item.obji12[dataLoad12[i].emrdfk] = res[1]
+                        $('#id_'+dataLoad12[i].emrdfk).html ( res[1])
+                    }
+                }
+                if (dataLoad12[i].type == "combobox2") {
+                    var str = dataLoad12[i].value
                     var res = str.split("~");
                     
+                    $scope.item.obji12[dataLoad12[i].emrdfk+""+1] = res[0]
                     $scope.item.obji12[dataLoad12[i].emrdfk] = res[1]
                     $('#id_'+dataLoad12[i].emrdfk).html ( res[1])
+
                 }
-            }
-            if (dataLoad12[i].type == "combobox2") {
-                var str = dataLoad12[i].value
-                var res = str.split("~");
+
+                if (dataLoad12[i].emrdfk == '423816' ) {
+                    $scope.hariTgl = dataLoad12[i].value
+                }
+
+                if (dataLoad12[i].emrdfk == '2000001974' ) {
+                    $scope.jamPeriksa = dataLoad12[i].value
+                }
+
+                if (dataLoad12[i].emrdfk == '2000002354' ) {
+                    $scope.tgl1 = dataLoad12[i].value
+                }
+                if (dataLoad12[i].emrdfk == '2000002357' ) {
+                    $scope.tgl2 = dataLoad12[i].value
+                }
+                if (dataLoad12[i].emrdfk == '2000002360' ) {
+                    $scope.tgl3 = dataLoad12[i].value
+                }
+                if (dataLoad12[i].emrdfk == '2000002363' ) {
+                    $scope.tgl4 = dataLoad12[i].value
+                }
+                if (dataLoad12[i].emrdfk == '2000002366' ) {
+                    $scope.tgl5 = dataLoad12[i].value
+                }
+                if (dataLoad12[i].emrdfk == '2000002369' ) {
+                    $scope.tgl6 = dataLoad12[i].value
+                }
+                if (dataLoad12[i].emrdfk == '2000002372' ) {
+                    $scope.tgl7 = dataLoad12[i].value
+                }
+                if (dataLoad12[i].emrdfk == '2000002375' ) {
+                    $scope.tgl8 = dataLoad12[i].value
+                }
+                if (dataLoad12[i].emrdfk == '2000002378' ) {
+                    $scope.tgl9 = dataLoad12[i].value
+                }
+                if (dataLoad12[i].emrdfk == '2000002381' ) {
+                    $scope.tgl10 = dataLoad12[i].value
+                }
+                if (dataLoad12[i].emrdfk == '2000002384' ) {
+                    $scope.tgl11 = dataLoad12[i].value
+                }
+                if (dataLoad12[i].emrdfk == '2000002387' ) {
+                    $scope.tgl12 = dataLoad12[i].value
+                }
+                if (dataLoad12[i].emrdfk == '2000002390' ) {
+                    $scope.tgl13 = dataLoad12[i].value
+                }
+                if (dataLoad12[i].emrdfk == '2000002393' ) {
+                    $scope.tgl14 = dataLoad12[i].value
+                }
+                if (dataLoad12[i].emrdfk == '2000002396' ) {
+                    $scope.tgl15 = dataLoad12[i].value
+                }
                 
-                $scope.item.obji12[dataLoad12[i].emrdfk+""+1] = res[0]
-                $scope.item.obji12[dataLoad12[i].emrdfk] = res[1]
-                $('#id_'+dataLoad12[i].emrdfk).html ( res[1])
+                if (dataLoad12[i].emrdfk == '2000002408' ) {
+                    $scope.pukul2 = dataLoad12[i].value
+                }
 
+                $scope.tglemr = dataLoad12[i].tgl
+                
             }
-
-            if (dataLoad12[i].emrdfk == '423816' ) {
-                $scope.hariTgl = dataLoad12[i].value
-            }
-
-            if (dataLoad12[i].emrdfk == '2000001974' ) {
-                $scope.jamPeriksa = dataLoad12[i].value
-            }
-
-            if (dataLoad12[i].emrdfk == '2000002354' ) {
-                $scope.tgl1 = dataLoad12[i].value
-            }
-            if (dataLoad12[i].emrdfk == '2000002357' ) {
-                $scope.tgl2 = dataLoad12[i].value
-            }
-            if (dataLoad12[i].emrdfk == '2000002360' ) {
-                $scope.tgl3 = dataLoad12[i].value
-            }
-            if (dataLoad12[i].emrdfk == '2000002363' ) {
-                $scope.tgl4 = dataLoad12[i].value
-            }
-            if (dataLoad12[i].emrdfk == '2000002366' ) {
-                $scope.tgl5 = dataLoad12[i].value
-            }
-            if (dataLoad12[i].emrdfk == '2000002369' ) {
-                $scope.tgl6 = dataLoad12[i].value
-            }
-            if (dataLoad12[i].emrdfk == '2000002372' ) {
-                $scope.tgl7 = dataLoad12[i].value
-            }
-            if (dataLoad12[i].emrdfk == '2000002375' ) {
-                $scope.tgl8 = dataLoad12[i].value
-            }
-            if (dataLoad12[i].emrdfk == '2000002378' ) {
-                $scope.tgl9 = dataLoad12[i].value
-            }
-            if (dataLoad12[i].emrdfk == '2000002381' ) {
-                $scope.tgl10 = dataLoad12[i].value
-            }
-            if (dataLoad12[i].emrdfk == '2000002384' ) {
-                $scope.tgl11 = dataLoad12[i].value
-            }
-            if (dataLoad12[i].emrdfk == '2000002387' ) {
-                $scope.tgl12 = dataLoad12[i].value
-            }
-            if (dataLoad12[i].emrdfk == '2000002390' ) {
-                $scope.tgl13 = dataLoad12[i].value
-            }
-            if (dataLoad12[i].emrdfk == '2000002393' ) {
-                $scope.tgl14 = dataLoad12[i].value
-            }
-            if (dataLoad12[i].emrdfk == '2000002396' ) {
-                $scope.tgl15 = dataLoad12[i].value
-            }
-            
-            if (dataLoad12[i].emrdfk == '2000002408' ) {
-                $scope.pukul2 = dataLoad12[i].value
-            }
-
-            $scope.tglemr = dataLoad12[i].tgl
-            
         }
 
-		for (var i = 0; i <= dataLoad13.length - 1; i++) {
-            if(dataLoad13[i].emrdfk == 3110029){
-                continue;
-            }
-            if (dataLoad13[i].type == "textbox") {
-                $('#id_'+dataLoad13[i].emrdfk).html( dataLoad13[i].value)
-                $scope.item.obji13[dataLoad13[i].emrdfk] = dataLoad13[i].value
-            }
-            if (dataLoad13[i].type == "checkbox") {
-                var chekedd = false
-                if (dataLoad13[i].value == '1') {
-                    var chekedd = true
+        if(dataLoad13.length > 0){
+            for (var i = 0; i <= dataLoad13.length - 1; i++) {
+                if(dataLoad13[i].emrdfk == 3110029){
+                    continue;
                 }
-                $scope.item.obji13[dataLoad13[i].emrdfk] = chekedd
-            }
-            if (dataLoad13[i].type == "radio") {
-                $scope.item.obji13[dataLoad13[i].emrdfk] = dataLoad13[i].value
+                if (dataLoad13[i].type == "textbox") {
+                    $('#id_'+dataLoad13[i].emrdfk).html( dataLoad13[i].value)
+                    $scope.item.obji13[dataLoad13[i].emrdfk] = dataLoad13[i].value
+                }
+                if (dataLoad13[i].type == "checkbox") {
+                    var chekedd = false
+                    if (dataLoad13[i].value == '1') {
+                        var chekedd = true
+                    }
+                    $scope.item.obji13[dataLoad13[i].emrdfk] = chekedd
+                }
+                if (dataLoad13[i].type == "radio") {
+                    $scope.item.obji13[dataLoad13[i].emrdfk] = dataLoad13[i].value
 
-            }
+                }
 
-            if (dataLoad13[i].type == "datetime") {
-                $('#id_'+dataLoad13[i].emrdfk).html( dataLoad13[i].value)
-                $scope.item.obji13[dataLoad13[i].emrdfk] = dataLoad13[i].value
-            }
-            if (dataLoad13[i].type == "time") {
-                $scope.item.obji13[dataLoad13[i].emrdfk] = dataLoad13[i].value
-            }
-            if (dataLoad13[i].type == "date") {
-                $scope.item.obji13[dataLoad13[i].emrdfk] = dataLoad13[i].value
-            }
+                if (dataLoad13[i].type == "datetime") {
+                    $('#id_'+dataLoad13[i].emrdfk).html( dataLoad13[i].value)
+                    $scope.item.obji13[dataLoad13[i].emrdfk] = dataLoad13[i].value
+                }
+                if (dataLoad13[i].type == "time") {
+                    $scope.item.obji13[dataLoad13[i].emrdfk] = dataLoad13[i].value
+                }
+                if (dataLoad13[i].type == "date") {
+                    $scope.item.obji13[dataLoad13[i].emrdfk] = dataLoad13[i].value
+                }
 
-            if (dataLoad13[i].type == "checkboxtextbox") {
-                $scope.item.obji13[dataLoad13[i].emrdfk] = dataLoad13[i].value
-                $scope.item.obji13[dataLoad13[i].emrdfk] = true
-            }
-            if (dataLoad13[i].type == "textarea") {
-                $('#id_'+dataLoad13[i].emrdfk).html( dataLoad13[i].value)
-                $scope.item.obji13[dataLoad13[i].emrdfk] = dataLoad13[i].value
-            }
-            if (dataLoad13[i].type == "combobox") {
-     
-                var str = dataLoad13[i].value
-                if(str != null)
-                {
+                if (dataLoad13[i].type == "checkboxtextbox") {
+                    $scope.item.obji13[dataLoad13[i].emrdfk] = dataLoad13[i].value
+                    $scope.item.obji13[dataLoad13[i].emrdfk] = true
+                }
+                if (dataLoad13[i].type == "textarea") {
+                    $('#id_'+dataLoad13[i].emrdfk).html( dataLoad13[i].value)
+                    $scope.item.obji13[dataLoad13[i].emrdfk] = dataLoad13[i].value
+                }
+                if (dataLoad13[i].type == "combobox") {
+        
+                    var str = dataLoad13[i].value
+                    if(str != null)
+                    {
+                        var res = str.split("~");
+                        
+                        $scope.item.obji13[dataLoad13[i].emrdfk] = res[1]
+                        $('#id_'+dataLoad13[i].emrdfk).html ( res[1])
+                    }
+                }
+                if (dataLoad13[i].type == "combobox2") {
+                    var str = dataLoad13[i].value
                     var res = str.split("~");
                     
+                    $scope.item.obji13[dataLoad13[i].emrdfk+""+1] = res[0]
                     $scope.item.obji13[dataLoad13[i].emrdfk] = res[1]
                     $('#id_'+dataLoad13[i].emrdfk).html ( res[1])
+
                 }
-            }
-            if (dataLoad13[i].type == "combobox2") {
-                var str = dataLoad13[i].value
-                var res = str.split("~");
+
+                if (dataLoad13[i].emrdfk == '423816' ) {
+                    $scope.hariTgl = dataLoad13[i].value
+                }
+
+                if (dataLoad13[i].emrdfk == '2000001974' ) {
+                    $scope.jamPeriksa = dataLoad13[i].value
+                }
+
+                if (dataLoad13[i].emrdfk == '2000002354' ) {
+                    $scope.tgl1 = dataLoad13[i].value
+                }
+                if (dataLoad13[i].emrdfk == '2000002357' ) {
+                    $scope.tgl2 = dataLoad13[i].value
+                }
+                if (dataLoad13[i].emrdfk == '2000002360' ) {
+                    $scope.tgl3 = dataLoad13[i].value
+                }
+                if (dataLoad13[i].emrdfk == '2000002363' ) {
+                    $scope.tgl4 = dataLoad13[i].value
+                }
+                if (dataLoad13[i].emrdfk == '2000002366' ) {
+                    $scope.tgl5 = dataLoad13[i].value
+                }
+                if (dataLoad13[i].emrdfk == '2000002369' ) {
+                    $scope.tgl6 = dataLoad13[i].value
+                }
+                if (dataLoad13[i].emrdfk == '2000002372' ) {
+                    $scope.tgl7 = dataLoad13[i].value
+                }
+                if (dataLoad13[i].emrdfk == '2000002375' ) {
+                    $scope.tgl8 = dataLoad13[i].value
+                }
+                if (dataLoad13[i].emrdfk == '2000002378' ) {
+                    $scope.tgl9 = dataLoad13[i].value
+                }
+                if (dataLoad13[i].emrdfk == '2000002381' ) {
+                    $scope.tgl10 = dataLoad13[i].value
+                }
+                if (dataLoad13[i].emrdfk == '2000002384' ) {
+                    $scope.tgl11 = dataLoad13[i].value
+                }
+                if (dataLoad13[i].emrdfk == '2000002387' ) {
+                    $scope.tgl12 = dataLoad13[i].value
+                }
+                if (dataLoad13[i].emrdfk == '2000002390' ) {
+                    $scope.tgl13 = dataLoad13[i].value
+                }
+                if (dataLoad13[i].emrdfk == '2000002393' ) {
+                    $scope.tgl14 = dataLoad13[i].value
+                }
+                if (dataLoad13[i].emrdfk == '2000002396' ) {
+                    $scope.tgl15 = dataLoad13[i].value
+                }
                 
-                $scope.item.obji13[dataLoad13[i].emrdfk+""+1] = res[0]
-                $scope.item.obji13[dataLoad13[i].emrdfk] = res[1]
-                $('#id_'+dataLoad13[i].emrdfk).html ( res[1])
+                if (dataLoad13[i].emrdfk == '2000002408' ) {
+                    $scope.pukul2 = dataLoad13[i].value
+                }
 
+                $scope.tglemr = dataLoad13[i].tgl
+                
             }
-
-            if (dataLoad13[i].emrdfk == '423816' ) {
-                $scope.hariTgl = dataLoad13[i].value
-            }
-
-            if (dataLoad13[i].emrdfk == '2000001974' ) {
-                $scope.jamPeriksa = dataLoad13[i].value
-            }
-
-            if (dataLoad13[i].emrdfk == '2000002354' ) {
-                $scope.tgl1 = dataLoad13[i].value
-            }
-            if (dataLoad13[i].emrdfk == '2000002357' ) {
-                $scope.tgl2 = dataLoad13[i].value
-            }
-            if (dataLoad13[i].emrdfk == '2000002360' ) {
-                $scope.tgl3 = dataLoad13[i].value
-            }
-            if (dataLoad13[i].emrdfk == '2000002363' ) {
-                $scope.tgl4 = dataLoad13[i].value
-            }
-            if (dataLoad13[i].emrdfk == '2000002366' ) {
-                $scope.tgl5 = dataLoad13[i].value
-            }
-            if (dataLoad13[i].emrdfk == '2000002369' ) {
-                $scope.tgl6 = dataLoad13[i].value
-            }
-            if (dataLoad13[i].emrdfk == '2000002372' ) {
-                $scope.tgl7 = dataLoad13[i].value
-            }
-            if (dataLoad13[i].emrdfk == '2000002375' ) {
-                $scope.tgl8 = dataLoad13[i].value
-            }
-            if (dataLoad13[i].emrdfk == '2000002378' ) {
-                $scope.tgl9 = dataLoad13[i].value
-            }
-            if (dataLoad13[i].emrdfk == '2000002381' ) {
-                $scope.tgl10 = dataLoad13[i].value
-            }
-            if (dataLoad13[i].emrdfk == '2000002384' ) {
-                $scope.tgl11 = dataLoad13[i].value
-            }
-            if (dataLoad13[i].emrdfk == '2000002387' ) {
-                $scope.tgl12 = dataLoad13[i].value
-            }
-            if (dataLoad13[i].emrdfk == '2000002390' ) {
-                $scope.tgl13 = dataLoad13[i].value
-            }
-            if (dataLoad13[i].emrdfk == '2000002393' ) {
-                $scope.tgl14 = dataLoad13[i].value
-            }
-            if (dataLoad13[i].emrdfk == '2000002396' ) {
-                $scope.tgl15 = dataLoad13[i].value
-            }
-            
-            if (dataLoad13[i].emrdfk == '2000002408' ) {
-                $scope.pukul2 = dataLoad13[i].value
-            }
-
-            $scope.tglemr = dataLoad13[i].tgl
-            
         }
 
-		for (var i = 0; i <= dataLoad14.length - 1; i++) {
-            if(dataLoad14[i].emrdfk == 3110029){
-                continue;
-            }
-            if (dataLoad14[i].type == "textbox") {
-                $('#id_'+dataLoad14[i].emrdfk).html( dataLoad14[i].value)
-                $scope.item.obji14[dataLoad14[i].emrdfk] = dataLoad14[i].value
-            }
-            if (dataLoad14[i].type == "checkbox") {
-                var chekedd = false
-                if (dataLoad14[i].value == '1') {
-                    var chekedd = true
+        if(dataLoad14.length > 0){
+            for (var i = 0; i <= dataLoad14.length - 1; i++) {
+                if(dataLoad14[i].emrdfk == 3110029){
+                    continue;
                 }
-                $scope.item.obji14[dataLoad14[i].emrdfk] = chekedd
-            }
-            if (dataLoad14[i].type == "radio") {
-                $scope.item.obji14[dataLoad14[i].emrdfk] = dataLoad14[i].value
+                if (dataLoad14[i].type == "textbox") {
+                    $('#id_'+dataLoad14[i].emrdfk).html( dataLoad14[i].value)
+                    $scope.item.obji14[dataLoad14[i].emrdfk] = dataLoad14[i].value
+                }
+                if (dataLoad14[i].type == "checkbox") {
+                    var chekedd = false
+                    if (dataLoad14[i].value == '1') {
+                        var chekedd = true
+                    }
+                    $scope.item.obji14[dataLoad14[i].emrdfk] = chekedd
+                }
+                if (dataLoad14[i].type == "radio") {
+                    $scope.item.obji14[dataLoad14[i].emrdfk] = dataLoad14[i].value
 
-            }
+                }
 
-            if (dataLoad14[i].type == "datetime") {
-                $('#id_'+dataLoad14[i].emrdfk).html( dataLoad14[i].value)
-                $scope.item.obji14[dataLoad14[i].emrdfk] = dataLoad14[i].value
-            }
-            if (dataLoad14[i].type == "time") {
-                $scope.item.obji14[dataLoad14[i].emrdfk] = dataLoad14[i].value
-            }
-            if (dataLoad14[i].type == "date") {
-                $scope.item.obji14[dataLoad14[i].emrdfk] = dataLoad14[i].value
-            }
+                if (dataLoad14[i].type == "datetime") {
+                    $('#id_'+dataLoad14[i].emrdfk).html( dataLoad14[i].value)
+                    $scope.item.obji14[dataLoad14[i].emrdfk] = dataLoad14[i].value
+                }
+                if (dataLoad14[i].type == "time") {
+                    $scope.item.obji14[dataLoad14[i].emrdfk] = dataLoad14[i].value
+                }
+                if (dataLoad14[i].type == "date") {
+                    $scope.item.obji14[dataLoad14[i].emrdfk] = dataLoad14[i].value
+                }
 
-            if (dataLoad14[i].type == "checkboxtextbox") {
-                $scope.item.obji14[dataLoad14[i].emrdfk] = dataLoad14[i].value
-                $scope.item.obji14[dataLoad14[i].emrdfk] = true
-            }
-            if (dataLoad14[i].type == "textarea") {
-                $('#id_'+dataLoad14[i].emrdfk).html( dataLoad14[i].value)
-                $scope.item.obji14[dataLoad14[i].emrdfk] = dataLoad14[i].value
-            }
-            if (dataLoad14[i].type == "combobox") {
-     
-                var str = dataLoad14[i].value
-                if(str != null)
-                {
+                if (dataLoad14[i].type == "checkboxtextbox") {
+                    $scope.item.obji14[dataLoad14[i].emrdfk] = dataLoad14[i].value
+                    $scope.item.obji14[dataLoad14[i].emrdfk] = true
+                }
+                if (dataLoad14[i].type == "textarea") {
+                    $('#id_'+dataLoad14[i].emrdfk).html( dataLoad14[i].value)
+                    $scope.item.obji14[dataLoad14[i].emrdfk] = dataLoad14[i].value
+                }
+                if (dataLoad14[i].type == "combobox") {
+        
+                    var str = dataLoad14[i].value
+                    if(str != null)
+                    {
+                        var res = str.split("~");
+                        
+                        $scope.item.obji14[dataLoad14[i].emrdfk] = res[1]
+                        $('#id_'+dataLoad14[i].emrdfk).html ( res[1])
+                    }
+                }
+                if (dataLoad14[i].type == "combobox2") {
+                    var str = dataLoad14[i].value
                     var res = str.split("~");
                     
+                    $scope.item.obji14[dataLoad14[i].emrdfk+""+1] = res[0]
                     $scope.item.obji14[dataLoad14[i].emrdfk] = res[1]
                     $('#id_'+dataLoad14[i].emrdfk).html ( res[1])
+
                 }
-            }
-            if (dataLoad14[i].type == "combobox2") {
-                var str = dataLoad14[i].value
-                var res = str.split("~");
+
+                if (dataLoad14[i].emrdfk == '423816' ) {
+                    $scope.hariTgl = dataLoad14[i].value
+                }
+
+                if (dataLoad14[i].emrdfk == '2000001974' ) {
+                    $scope.jamPeriksa = dataLoad14[i].value
+                }
+
+                if (dataLoad14[i].emrdfk == '2000002354' ) {
+                    $scope.tgl1 = dataLoad14[i].value
+                }
+                if (dataLoad14[i].emrdfk == '2000002357' ) {
+                    $scope.tgl2 = dataLoad14[i].value
+                }
+                if (dataLoad14[i].emrdfk == '2000002360' ) {
+                    $scope.tgl3 = dataLoad14[i].value
+                }
+                if (dataLoad14[i].emrdfk == '2000002363' ) {
+                    $scope.tgl4 = dataLoad14[i].value
+                }
+                if (dataLoad14[i].emrdfk == '2000002366' ) {
+                    $scope.tgl5 = dataLoad14[i].value
+                }
+                if (dataLoad14[i].emrdfk == '2000002369' ) {
+                    $scope.tgl6 = dataLoad14[i].value
+                }
+                if (dataLoad14[i].emrdfk == '2000002372' ) {
+                    $scope.tgl7 = dataLoad14[i].value
+                }
+                if (dataLoad14[i].emrdfk == '2000002375' ) {
+                    $scope.tgl8 = dataLoad14[i].value
+                }
+                if (dataLoad14[i].emrdfk == '2000002378' ) {
+                    $scope.tgl9 = dataLoad14[i].value
+                }
+                if (dataLoad14[i].emrdfk == '2000002381' ) {
+                    $scope.tgl10 = dataLoad14[i].value
+                }
+                if (dataLoad14[i].emrdfk == '2000002384' ) {
+                    $scope.tgl11 = dataLoad14[i].value
+                }
+                if (dataLoad14[i].emrdfk == '2000002387' ) {
+                    $scope.tgl12 = dataLoad14[i].value
+                }
+                if (dataLoad14[i].emrdfk == '2000002390' ) {
+                    $scope.tgl13 = dataLoad14[i].value
+                }
+                if (dataLoad14[i].emrdfk == '2000002393' ) {
+                    $scope.tgl14 = dataLoad14[i].value
+                }
+                if (dataLoad14[i].emrdfk == '2000002396' ) {
+                    $scope.tgl15 = dataLoad14[i].value
+                }
                 
-                $scope.item.obji14[dataLoad14[i].emrdfk+""+1] = res[0]
-                $scope.item.obji14[dataLoad14[i].emrdfk] = res[1]
-                $('#id_'+dataLoad14[i].emrdfk).html ( res[1])
+                if (dataLoad14[i].emrdfk == '2000002408' ) {
+                    $scope.pukul2 = dataLoad14[i].value
+                }
 
+                $scope.tglemr = dataLoad14[i].tgl
+                
             }
-
-            if (dataLoad14[i].emrdfk == '423816' ) {
-                $scope.hariTgl = dataLoad14[i].value
-            }
-
-            if (dataLoad14[i].emrdfk == '2000001974' ) {
-                $scope.jamPeriksa = dataLoad14[i].value
-            }
-
-            if (dataLoad14[i].emrdfk == '2000002354' ) {
-                $scope.tgl1 = dataLoad14[i].value
-            }
-            if (dataLoad14[i].emrdfk == '2000002357' ) {
-                $scope.tgl2 = dataLoad14[i].value
-            }
-            if (dataLoad14[i].emrdfk == '2000002360' ) {
-                $scope.tgl3 = dataLoad14[i].value
-            }
-            if (dataLoad14[i].emrdfk == '2000002363' ) {
-                $scope.tgl4 = dataLoad14[i].value
-            }
-            if (dataLoad14[i].emrdfk == '2000002366' ) {
-                $scope.tgl5 = dataLoad14[i].value
-            }
-            if (dataLoad14[i].emrdfk == '2000002369' ) {
-                $scope.tgl6 = dataLoad14[i].value
-            }
-            if (dataLoad14[i].emrdfk == '2000002372' ) {
-                $scope.tgl7 = dataLoad14[i].value
-            }
-            if (dataLoad14[i].emrdfk == '2000002375' ) {
-                $scope.tgl8 = dataLoad14[i].value
-            }
-            if (dataLoad14[i].emrdfk == '2000002378' ) {
-                $scope.tgl9 = dataLoad14[i].value
-            }
-            if (dataLoad14[i].emrdfk == '2000002381' ) {
-                $scope.tgl10 = dataLoad14[i].value
-            }
-            if (dataLoad14[i].emrdfk == '2000002384' ) {
-                $scope.tgl11 = dataLoad14[i].value
-            }
-            if (dataLoad14[i].emrdfk == '2000002387' ) {
-                $scope.tgl12 = dataLoad14[i].value
-            }
-            if (dataLoad14[i].emrdfk == '2000002390' ) {
-                $scope.tgl13 = dataLoad14[i].value
-            }
-            if (dataLoad14[i].emrdfk == '2000002393' ) {
-                $scope.tgl14 = dataLoad14[i].value
-            }
-            if (dataLoad14[i].emrdfk == '2000002396' ) {
-                $scope.tgl15 = dataLoad14[i].value
-            }
-            
-            if (dataLoad14[i].emrdfk == '2000002408' ) {
-                $scope.pukul2 = dataLoad14[i].value
-            }
-
-            $scope.tglemr = dataLoad14[i].tgl
-            
         }
 
-		for (var i = 0; i <= dataLoad15.length - 1; i++) {
-            if(dataLoad15[i].emrdfk == 3110029){
-                continue;
-            }
-            if (dataLoad15[i].type == "textbox") {
-                $('#id_'+dataLoad15[i].emrdfk).html( dataLoad15[i].value)
-                $scope.item.obji15[dataLoad15[i].emrdfk] = dataLoad15[i].value
-            }
-            if (dataLoad15[i].type == "checkbox") {
-                var chekedd = false
-                if (dataLoad15[i].value == '1') {
-                    var chekedd = true
+        if(dataLoad15.length > 0){
+            for (var i = 0; i <= dataLoad15.length - 1; i++) {
+                if(dataLoad15[i].emrdfk == 3110029){
+                    continue;
                 }
-                $scope.item.obji15[dataLoad15[i].emrdfk] = chekedd
-            }
-            if (dataLoad15[i].type == "radio") {
-                $scope.item.obji15[dataLoad15[i].emrdfk] = dataLoad15[i].value
+                if (dataLoad15[i].type == "textbox") {
+                    $('#id_'+dataLoad15[i].emrdfk).html( dataLoad15[i].value)
+                    $scope.item.obji15[dataLoad15[i].emrdfk] = dataLoad15[i].value
+                }
+                if (dataLoad15[i].type == "checkbox") {
+                    var chekedd = false
+                    if (dataLoad15[i].value == '1') {
+                        var chekedd = true
+                    }
+                    $scope.item.obji15[dataLoad15[i].emrdfk] = chekedd
+                }
+                if (dataLoad15[i].type == "radio") {
+                    $scope.item.obji15[dataLoad15[i].emrdfk] = dataLoad15[i].value
 
-            }
+                }
 
-            if (dataLoad15[i].type == "datetime") {
-                $('#id_'+dataLoad15[i].emrdfk).html( dataLoad15[i].value)
-                $scope.item.obji15[dataLoad15[i].emrdfk] = dataLoad15[i].value
-            }
-            if (dataLoad15[i].type == "time") {
-                $scope.item.obji15[dataLoad15[i].emrdfk] = dataLoad15[i].value
-            }
-            if (dataLoad15[i].type == "date") {
-                $scope.item.obji15[dataLoad15[i].emrdfk] = dataLoad15[i].value
-            }
+                if (dataLoad15[i].type == "datetime") {
+                    $('#id_'+dataLoad15[i].emrdfk).html( dataLoad15[i].value)
+                    $scope.item.obji15[dataLoad15[i].emrdfk] = dataLoad15[i].value
+                }
+                if (dataLoad15[i].type == "time") {
+                    $scope.item.obji15[dataLoad15[i].emrdfk] = dataLoad15[i].value
+                }
+                if (dataLoad15[i].type == "date") {
+                    $scope.item.obji15[dataLoad15[i].emrdfk] = dataLoad15[i].value
+                }
 
-            if (dataLoad15[i].type == "checkboxtextbox") {
-                $scope.item.obji15[dataLoad15[i].emrdfk] = dataLoad15[i].value
-                $scope.item.obji15[dataLoad15[i].emrdfk] = true
-            }
-            if (dataLoad15[i].type == "textarea") {
-                $('#id_'+dataLoad15[i].emrdfk).html( dataLoad15[i].value)
-                $scope.item.obji15[dataLoad15[i].emrdfk] = dataLoad15[i].value
-            }
-            if (dataLoad15[i].type == "combobox") {
-     
-                var str = dataLoad15[i].value
-                if(str != null)
-                {
+                if (dataLoad15[i].type == "checkboxtextbox") {
+                    $scope.item.obji15[dataLoad15[i].emrdfk] = dataLoad15[i].value
+                    $scope.item.obji15[dataLoad15[i].emrdfk] = true
+                }
+                if (dataLoad15[i].type == "textarea") {
+                    $('#id_'+dataLoad15[i].emrdfk).html( dataLoad15[i].value)
+                    $scope.item.obji15[dataLoad15[i].emrdfk] = dataLoad15[i].value
+                }
+                if (dataLoad15[i].type == "combobox") {
+        
+                    var str = dataLoad15[i].value
+                    if(str != null)
+                    {
+                        var res = str.split("~");
+                        
+                        $scope.item.obji15[dataLoad15[i].emrdfk] = res[1]
+                        $('#id_'+dataLoad15[i].emrdfk).html ( res[1])
+                    }
+                }
+                if (dataLoad15[i].type == "combobox2") {
+                    var str = dataLoad15[i].value
                     var res = str.split("~");
                     
+                    $scope.item.obji15[dataLoad15[i].emrdfk+""+1] = res[0]
                     $scope.item.obji15[dataLoad15[i].emrdfk] = res[1]
                     $('#id_'+dataLoad15[i].emrdfk).html ( res[1])
+
                 }
-            }
-            if (dataLoad15[i].type == "combobox2") {
-                var str = dataLoad15[i].value
-                var res = str.split("~");
+
+                if (dataLoad15[i].emrdfk == '423816' ) {
+                    $scope.hariTgl = dataLoad15[i].value
+                }
+
+                if (dataLoad15[i].emrdfk == '2000001974' ) {
+                    $scope.jamPeriksa = dataLoad15[i].value
+                }
+
+                if (dataLoad15[i].emrdfk == '2000002354' ) {
+                    $scope.tgl1 = dataLoad15[i].value
+                }
+                if (dataLoad15[i].emrdfk == '2000002357' ) {
+                    $scope.tgl2 = dataLoad15[i].value
+                }
+                if (dataLoad15[i].emrdfk == '2000002360' ) {
+                    $scope.tgl3 = dataLoad15[i].value
+                }
+                if (dataLoad15[i].emrdfk == '2000002363' ) {
+                    $scope.tgl4 = dataLoad15[i].value
+                }
+                if (dataLoad15[i].emrdfk == '2000002366' ) {
+                    $scope.tgl5 = dataLoad15[i].value
+                }
+                if (dataLoad15[i].emrdfk == '2000002369' ) {
+                    $scope.tgl6 = dataLoad15[i].value
+                }
+                if (dataLoad15[i].emrdfk == '2000002372' ) {
+                    $scope.tgl7 = dataLoad15[i].value
+                }
+                if (dataLoad15[i].emrdfk == '2000002375' ) {
+                    $scope.tgl8 = dataLoad15[i].value
+                }
+                if (dataLoad15[i].emrdfk == '2000002378' ) {
+                    $scope.tgl9 = dataLoad15[i].value
+                }
+                if (dataLoad15[i].emrdfk == '2000002381' ) {
+                    $scope.tgl10 = dataLoad15[i].value
+                }
+                if (dataLoad15[i].emrdfk == '2000002384' ) {
+                    $scope.tgl11 = dataLoad15[i].value
+                }
+                if (dataLoad15[i].emrdfk == '2000002387' ) {
+                    $scope.tgl12 = dataLoad15[i].value
+                }
+                if (dataLoad15[i].emrdfk == '2000002390' ) {
+                    $scope.tgl13 = dataLoad15[i].value
+                }
+                if (dataLoad15[i].emrdfk == '2000002393' ) {
+                    $scope.tgl14 = dataLoad15[i].value
+                }
+                if (dataLoad15[i].emrdfk == '2000002396' ) {
+                    $scope.tgl15 = dataLoad15[i].value
+                }
                 
-                $scope.item.obji15[dataLoad15[i].emrdfk+""+1] = res[0]
-                $scope.item.obji15[dataLoad15[i].emrdfk] = res[1]
-                $('#id_'+dataLoad15[i].emrdfk).html ( res[1])
+                if (dataLoad15[i].emrdfk == '2000002408' ) {
+                    $scope.pukul2 = dataLoad15[i].value
+                }
 
+                $scope.tglemr = dataLoad15[i].tgl
+                
             }
-
-            if (dataLoad15[i].emrdfk == '423816' ) {
-                $scope.hariTgl = dataLoad15[i].value
-            }
-
-            if (dataLoad15[i].emrdfk == '2000001974' ) {
-                $scope.jamPeriksa = dataLoad15[i].value
-            }
-
-            if (dataLoad15[i].emrdfk == '2000002354' ) {
-                $scope.tgl1 = dataLoad15[i].value
-            }
-            if (dataLoad15[i].emrdfk == '2000002357' ) {
-                $scope.tgl2 = dataLoad15[i].value
-            }
-            if (dataLoad15[i].emrdfk == '2000002360' ) {
-                $scope.tgl3 = dataLoad15[i].value
-            }
-            if (dataLoad15[i].emrdfk == '2000002363' ) {
-                $scope.tgl4 = dataLoad15[i].value
-            }
-            if (dataLoad15[i].emrdfk == '2000002366' ) {
-                $scope.tgl5 = dataLoad15[i].value
-            }
-            if (dataLoad15[i].emrdfk == '2000002369' ) {
-                $scope.tgl6 = dataLoad15[i].value
-            }
-            if (dataLoad15[i].emrdfk == '2000002372' ) {
-                $scope.tgl7 = dataLoad15[i].value
-            }
-            if (dataLoad15[i].emrdfk == '2000002375' ) {
-                $scope.tgl8 = dataLoad15[i].value
-            }
-            if (dataLoad15[i].emrdfk == '2000002378' ) {
-                $scope.tgl9 = dataLoad15[i].value
-            }
-            if (dataLoad15[i].emrdfk == '2000002381' ) {
-                $scope.tgl10 = dataLoad15[i].value
-            }
-            if (dataLoad15[i].emrdfk == '2000002384' ) {
-                $scope.tgl11 = dataLoad15[i].value
-            }
-            if (dataLoad15[i].emrdfk == '2000002387' ) {
-                $scope.tgl12 = dataLoad15[i].value
-            }
-            if (dataLoad15[i].emrdfk == '2000002390' ) {
-                $scope.tgl13 = dataLoad15[i].value
-            }
-            if (dataLoad15[i].emrdfk == '2000002393' ) {
-                $scope.tgl14 = dataLoad15[i].value
-            }
-            if (dataLoad15[i].emrdfk == '2000002396' ) {
-                $scope.tgl15 = dataLoad15[i].value
-            }
-            
-            if (dataLoad15[i].emrdfk == '2000002408' ) {
-                $scope.pukul2 = dataLoad15[i].value
-            }
-
-            $scope.tglemr = dataLoad15[i].tgl
-            
         }
 
-		for (var i = 0; i <= dataLoad16.length - 1; i++) {
-            if(dataLoad16[i].emrdfk == 3110029){
-                continue;
-            }
-            if (dataLoad16[i].type == "textbox") {
-                $('#id_'+dataLoad16[i].emrdfk).html( dataLoad16[i].value)
-                $scope.item.obji16[dataLoad16[i].emrdfk] = dataLoad16[i].value
-            }
-            if (dataLoad16[i].type == "checkbox") {
-                var chekedd = false
-                if (dataLoad16[i].value == '1') {
-                    var chekedd = true
+        if(dataLoad16.length > 0){
+            for (var i = 0; i <= dataLoad16.length - 1; i++) {
+                if(dataLoad16[i].emrdfk == 3110029){
+                    continue;
                 }
-                $scope.item.obji16[dataLoad16[i].emrdfk] = chekedd
-            }
-            if (dataLoad16[i].type == "radio") {
-                $scope.item.obji16[dataLoad16[i].emrdfk] = dataLoad16[i].value
+                if (dataLoad16[i].type == "textbox") {
+                    $('#id_'+dataLoad16[i].emrdfk).html( dataLoad16[i].value)
+                    $scope.item.obji16[dataLoad16[i].emrdfk] = dataLoad16[i].value
+                }
+                if (dataLoad16[i].type == "checkbox") {
+                    var chekedd = false
+                    if (dataLoad16[i].value == '1') {
+                        var chekedd = true
+                    }
+                    $scope.item.obji16[dataLoad16[i].emrdfk] = chekedd
+                }
+                if (dataLoad16[i].type == "radio") {
+                    $scope.item.obji16[dataLoad16[i].emrdfk] = dataLoad16[i].value
 
-            }
+                }
 
-            if (dataLoad16[i].type == "datetime") {
-                $('#id_'+dataLoad16[i].emrdfk).html( dataLoad16[i].value)
-                $scope.item.obji16[dataLoad16[i].emrdfk] = dataLoad16[i].value
-            }
-            if (dataLoad16[i].type == "time") {
-                $scope.item.obji16[dataLoad16[i].emrdfk] = dataLoad16[i].value
-            }
-            if (dataLoad16[i].type == "date") {
-                $scope.item.obji16[dataLoad16[i].emrdfk] = dataLoad16[i].value
-            }
+                if (dataLoad16[i].type == "datetime") {
+                    $('#id_'+dataLoad16[i].emrdfk).html( dataLoad16[i].value)
+                    $scope.item.obji16[dataLoad16[i].emrdfk] = dataLoad16[i].value
+                }
+                if (dataLoad16[i].type == "time") {
+                    $scope.item.obji16[dataLoad16[i].emrdfk] = dataLoad16[i].value
+                }
+                if (dataLoad16[i].type == "date") {
+                    $scope.item.obji16[dataLoad16[i].emrdfk] = dataLoad16[i].value
+                }
 
-            if (dataLoad16[i].type == "checkboxtextbox") {
-                $scope.item.obji16[dataLoad16[i].emrdfk] = dataLoad16[i].value
-                $scope.item.obji16[dataLoad16[i].emrdfk] = true
-            }
-            if (dataLoad16[i].type == "textarea") {
-                $('#id_'+dataLoad16[i].emrdfk).html( dataLoad16[i].value)
-                $scope.item.obji16[dataLoad16[i].emrdfk] = dataLoad16[i].value
-            }
-            if (dataLoad16[i].type == "combobox") {
-     
-                var str = dataLoad16[i].value
-                if(str != null)
-                {
+                if (dataLoad16[i].type == "checkboxtextbox") {
+                    $scope.item.obji16[dataLoad16[i].emrdfk] = dataLoad16[i].value
+                    $scope.item.obji16[dataLoad16[i].emrdfk] = true
+                }
+                if (dataLoad16[i].type == "textarea") {
+                    $('#id_'+dataLoad16[i].emrdfk).html( dataLoad16[i].value)
+                    $scope.item.obji16[dataLoad16[i].emrdfk] = dataLoad16[i].value
+                }
+                if (dataLoad16[i].type == "combobox") {
+        
+                    var str = dataLoad16[i].value
+                    if(str != null)
+                    {
+                        var res = str.split("~");
+                        
+                        $scope.item.obji16[dataLoad16[i].emrdfk] = res[1]
+                        $('#id_'+dataLoad16[i].emrdfk).html ( res[1])
+                    }
+                }
+                if (dataLoad16[i].type == "combobox2") {
+                    var str = dataLoad16[i].value
                     var res = str.split("~");
                     
+                    $scope.item.obji16[dataLoad16[i].emrdfk+""+1] = res[0]
                     $scope.item.obji16[dataLoad16[i].emrdfk] = res[1]
                     $('#id_'+dataLoad16[i].emrdfk).html ( res[1])
+
                 }
-            }
-            if (dataLoad16[i].type == "combobox2") {
-                var str = dataLoad16[i].value
-                var res = str.split("~");
+
+                if (dataLoad16[i].emrdfk == '423816' ) {
+                    $scope.hariTgl = dataLoad16[i].value
+                }
+
+                if (dataLoad16[i].emrdfk == '2000001974' ) {
+                    $scope.jamPeriksa = dataLoad16[i].value
+                }
+
+                if (dataLoad16[i].emrdfk == '2000002354' ) {
+                    $scope.tgl1 = dataLoad16[i].value
+                }
+                if (dataLoad16[i].emrdfk == '2000002357' ) {
+                    $scope.tgl2 = dataLoad16[i].value
+                }
+                if (dataLoad16[i].emrdfk == '2000002360' ) {
+                    $scope.tgl3 = dataLoad16[i].value
+                }
+                if (dataLoad16[i].emrdfk == '2000002363' ) {
+                    $scope.tgl4 = dataLoad16[i].value
+                }
+                if (dataLoad16[i].emrdfk == '2000002366' ) {
+                    $scope.tgl5 = dataLoad16[i].value
+                }
+                if (dataLoad16[i].emrdfk == '2000002369' ) {
+                    $scope.tgl6 = dataLoad16[i].value
+                }
+                if (dataLoad16[i].emrdfk == '2000002372' ) {
+                    $scope.tgl7 = dataLoad16[i].value
+                }
+                if (dataLoad16[i].emrdfk == '2000002375' ) {
+                    $scope.tgl8 = dataLoad16[i].value
+                }
+                if (dataLoad16[i].emrdfk == '2000002378' ) {
+                    $scope.tgl9 = dataLoad16[i].value
+                }
+                if (dataLoad16[i].emrdfk == '2000002381' ) {
+                    $scope.tgl10 = dataLoad16[i].value
+                }
+                if (dataLoad16[i].emrdfk == '2000002384' ) {
+                    $scope.tgl11 = dataLoad16[i].value
+                }
+                if (dataLoad16[i].emrdfk == '2000002387' ) {
+                    $scope.tgl12 = dataLoad16[i].value
+                }
+                if (dataLoad16[i].emrdfk == '2000002390' ) {
+                    $scope.tgl13 = dataLoad16[i].value
+                }
+                if (dataLoad16[i].emrdfk == '2000002393' ) {
+                    $scope.tgl14 = dataLoad16[i].value
+                }
+                if (dataLoad16[i].emrdfk == '2000002396' ) {
+                    $scope.tgl15 = dataLoad16[i].value
+                }
                 
-                $scope.item.obji16[dataLoad16[i].emrdfk+""+1] = res[0]
-                $scope.item.obji16[dataLoad16[i].emrdfk] = res[1]
-                $('#id_'+dataLoad16[i].emrdfk).html ( res[1])
+                if (dataLoad16[i].emrdfk == '2000002408' ) {
+                    $scope.pukul2 = dataLoad16[i].value
+                }
 
+                $scope.tglemr = dataLoad16[i].tgl
+                
             }
-
-            if (dataLoad16[i].emrdfk == '423816' ) {
-                $scope.hariTgl = dataLoad16[i].value
-            }
-
-            if (dataLoad16[i].emrdfk == '2000001974' ) {
-                $scope.jamPeriksa = dataLoad16[i].value
-            }
-
-            if (dataLoad16[i].emrdfk == '2000002354' ) {
-                $scope.tgl1 = dataLoad16[i].value
-            }
-            if (dataLoad16[i].emrdfk == '2000002357' ) {
-                $scope.tgl2 = dataLoad16[i].value
-            }
-            if (dataLoad16[i].emrdfk == '2000002360' ) {
-                $scope.tgl3 = dataLoad16[i].value
-            }
-            if (dataLoad16[i].emrdfk == '2000002363' ) {
-                $scope.tgl4 = dataLoad16[i].value
-            }
-            if (dataLoad16[i].emrdfk == '2000002366' ) {
-                $scope.tgl5 = dataLoad16[i].value
-            }
-            if (dataLoad16[i].emrdfk == '2000002369' ) {
-                $scope.tgl6 = dataLoad16[i].value
-            }
-            if (dataLoad16[i].emrdfk == '2000002372' ) {
-                $scope.tgl7 = dataLoad16[i].value
-            }
-            if (dataLoad16[i].emrdfk == '2000002375' ) {
-                $scope.tgl8 = dataLoad16[i].value
-            }
-            if (dataLoad16[i].emrdfk == '2000002378' ) {
-                $scope.tgl9 = dataLoad16[i].value
-            }
-            if (dataLoad16[i].emrdfk == '2000002381' ) {
-                $scope.tgl10 = dataLoad16[i].value
-            }
-            if (dataLoad16[i].emrdfk == '2000002384' ) {
-                $scope.tgl11 = dataLoad16[i].value
-            }
-            if (dataLoad16[i].emrdfk == '2000002387' ) {
-                $scope.tgl12 = dataLoad16[i].value
-            }
-            if (dataLoad16[i].emrdfk == '2000002390' ) {
-                $scope.tgl13 = dataLoad16[i].value
-            }
-            if (dataLoad16[i].emrdfk == '2000002393' ) {
-                $scope.tgl14 = dataLoad16[i].value
-            }
-            if (dataLoad16[i].emrdfk == '2000002396' ) {
-                $scope.tgl15 = dataLoad16[i].value
-            }
-            
-            if (dataLoad16[i].emrdfk == '2000002408' ) {
-                $scope.pukul2 = dataLoad16[i].value
-            }
-
-            $scope.tglemr = dataLoad16[i].tgl
-            
         }
 
-		for (var i = 0; i <= dataLoad17.length - 1; i++) {
-            if(dataLoad17[i].emrdfk == 3110029){
-                continue;
-            }
-            if (dataLoad17[i].type == "textbox") {
-                $('#id_'+dataLoad17[i].emrdfk).html( dataLoad17[i].value)
-                $scope.item.obji17[dataLoad17[i].emrdfk] = dataLoad17[i].value
-            }
-            if (dataLoad17[i].type == "checkbox") {
-                var chekedd = false
-                if (dataLoad17[i].value == '1') {
-                    var chekedd = true
+        if(dataLoad17.length > 0){
+            for (var i = 0; i <= dataLoad17.length - 1; i++) {
+                if(dataLoad17[i].emrdfk == 3110029){
+                    continue;
                 }
-                $scope.item.obji17[dataLoad17[i].emrdfk] = chekedd
-            }
-            if (dataLoad17[i].type == "radio") {
-                $scope.item.obji17[dataLoad17[i].emrdfk] = dataLoad17[i].value
+                if (dataLoad17[i].type == "textbox") {
+                    $('#id_'+dataLoad17[i].emrdfk).html( dataLoad17[i].value)
+                    $scope.item.obji17[dataLoad17[i].emrdfk] = dataLoad17[i].value
+                }
+                if (dataLoad17[i].type == "checkbox") {
+                    var chekedd = false
+                    if (dataLoad17[i].value == '1') {
+                        var chekedd = true
+                    }
+                    $scope.item.obji17[dataLoad17[i].emrdfk] = chekedd
+                }
+                if (dataLoad17[i].type == "radio") {
+                    $scope.item.obji17[dataLoad17[i].emrdfk] = dataLoad17[i].value
 
-            }
+                }
 
-            if (dataLoad17[i].type == "datetime") {
-                $('#id_'+dataLoad17[i].emrdfk).html( dataLoad17[i].value)
-                $scope.item.obji17[dataLoad17[i].emrdfk] = dataLoad17[i].value
-            }
-            if (dataLoad17[i].type == "time") {
-                $scope.item.obji17[dataLoad17[i].emrdfk] = dataLoad17[i].value
-            }
-            if (dataLoad17[i].type == "date") {
-                $scope.item.obji17[dataLoad17[i].emrdfk] = dataLoad17[i].value
-            }
+                if (dataLoad17[i].type == "datetime") {
+                    $('#id_'+dataLoad17[i].emrdfk).html( dataLoad17[i].value)
+                    $scope.item.obji17[dataLoad17[i].emrdfk] = dataLoad17[i].value
+                }
+                if (dataLoad17[i].type == "time") {
+                    $scope.item.obji17[dataLoad17[i].emrdfk] = dataLoad17[i].value
+                }
+                if (dataLoad17[i].type == "date") {
+                    $scope.item.obji17[dataLoad17[i].emrdfk] = dataLoad17[i].value
+                }
 
-            if (dataLoad17[i].type == "checkboxtextbox") {
-                $scope.item.obji17[dataLoad17[i].emrdfk] = dataLoad17[i].value
-                $scope.item.obji17[dataLoad17[i].emrdfk] = true
-            }
-            if (dataLoad17[i].type == "textarea") {
-                $('#id_'+dataLoad17[i].emrdfk).html( dataLoad17[i].value)
-                $scope.item.obji17[dataLoad17[i].emrdfk] = dataLoad17[i].value
-            }
-            if (dataLoad17[i].type == "combobox") {
-     
-                var str = dataLoad17[i].value
-                if(str != null)
-                {
+                if (dataLoad17[i].type == "checkboxtextbox") {
+                    $scope.item.obji17[dataLoad17[i].emrdfk] = dataLoad17[i].value
+                    $scope.item.obji17[dataLoad17[i].emrdfk] = true
+                }
+                if (dataLoad17[i].type == "textarea") {
+                    $('#id_'+dataLoad17[i].emrdfk).html( dataLoad17[i].value)
+                    $scope.item.obji17[dataLoad17[i].emrdfk] = dataLoad17[i].value
+                }
+                if (dataLoad17[i].type == "combobox") {
+        
+                    var str = dataLoad17[i].value
+                    if(str != null)
+                    {
+                        var res = str.split("~");
+                        
+                        $scope.item.obji17[dataLoad17[i].emrdfk] = res[1]
+                        $('#id_'+dataLoad17[i].emrdfk).html ( res[1])
+                    }
+                }
+                if (dataLoad17[i].type == "combobox2") {
+                    var str = dataLoad17[i].value
                     var res = str.split("~");
                     
+                    $scope.item.obji17[dataLoad17[i].emrdfk+""+1] = res[0]
                     $scope.item.obji17[dataLoad17[i].emrdfk] = res[1]
                     $('#id_'+dataLoad17[i].emrdfk).html ( res[1])
+
                 }
-            }
-            if (dataLoad17[i].type == "combobox2") {
-                var str = dataLoad17[i].value
-                var res = str.split("~");
+
+                if (dataLoad17[i].emrdfk == '423816' ) {
+                    $scope.hariTgl = dataLoad17[i].value
+                }
+
+                if (dataLoad17[i].emrdfk == '2000001974' ) {
+                    $scope.jamPeriksa = dataLoad17[i].value
+                }
+
+                if (dataLoad17[i].emrdfk == '2000002354' ) {
+                    $scope.tgl1 = dataLoad17[i].value
+                }
+                if (dataLoad17[i].emrdfk == '2000002357' ) {
+                    $scope.tgl2 = dataLoad17[i].value
+                }
+                if (dataLoad17[i].emrdfk == '2000002360' ) {
+                    $scope.tgl3 = dataLoad17[i].value
+                }
+                if (dataLoad17[i].emrdfk == '2000002363' ) {
+                    $scope.tgl4 = dataLoad17[i].value
+                }
+                if (dataLoad17[i].emrdfk == '2000002366' ) {
+                    $scope.tgl5 = dataLoad17[i].value
+                }
+                if (dataLoad17[i].emrdfk == '2000002369' ) {
+                    $scope.tgl6 = dataLoad17[i].value
+                }
+                if (dataLoad17[i].emrdfk == '2000002372' ) {
+                    $scope.tgl7 = dataLoad17[i].value
+                }
+                if (dataLoad17[i].emrdfk == '2000002375' ) {
+                    $scope.tgl8 = dataLoad17[i].value
+                }
+                if (dataLoad17[i].emrdfk == '2000002378' ) {
+                    $scope.tgl9 = dataLoad17[i].value
+                }
+                if (dataLoad17[i].emrdfk == '2000002381' ) {
+                    $scope.tgl10 = dataLoad17[i].value
+                }
+                if (dataLoad17[i].emrdfk == '2000002384' ) {
+                    $scope.tgl11 = dataLoad17[i].value
+                }
+                if (dataLoad17[i].emrdfk == '2000002387' ) {
+                    $scope.tgl12 = dataLoad17[i].value
+                }
+                if (dataLoad17[i].emrdfk == '2000002390' ) {
+                    $scope.tgl13 = dataLoad17[i].value
+                }
+                if (dataLoad17[i].emrdfk == '2000002393' ) {
+                    $scope.tgl14 = dataLoad17[i].value
+                }
+                if (dataLoad17[i].emrdfk == '2000002396' ) {
+                    $scope.tgl15 = dataLoad17[i].value
+                }
                 
-                $scope.item.obji17[dataLoad17[i].emrdfk+""+1] = res[0]
-                $scope.item.obji17[dataLoad17[i].emrdfk] = res[1]
-                $('#id_'+dataLoad17[i].emrdfk).html ( res[1])
+                if (dataLoad17[i].emrdfk == '2000002408' ) {
+                    $scope.pukul2 = dataLoad17[i].value
+                }
 
+                $scope.tglemr = dataLoad17[i].tgl
+                
             }
-
-            if (dataLoad17[i].emrdfk == '423816' ) {
-                $scope.hariTgl = dataLoad17[i].value
-            }
-
-            if (dataLoad17[i].emrdfk == '2000001974' ) {
-                $scope.jamPeriksa = dataLoad17[i].value
-            }
-
-            if (dataLoad17[i].emrdfk == '2000002354' ) {
-                $scope.tgl1 = dataLoad17[i].value
-            }
-            if (dataLoad17[i].emrdfk == '2000002357' ) {
-                $scope.tgl2 = dataLoad17[i].value
-            }
-            if (dataLoad17[i].emrdfk == '2000002360' ) {
-                $scope.tgl3 = dataLoad17[i].value
-            }
-            if (dataLoad17[i].emrdfk == '2000002363' ) {
-                $scope.tgl4 = dataLoad17[i].value
-            }
-            if (dataLoad17[i].emrdfk == '2000002366' ) {
-                $scope.tgl5 = dataLoad17[i].value
-            }
-            if (dataLoad17[i].emrdfk == '2000002369' ) {
-                $scope.tgl6 = dataLoad17[i].value
-            }
-            if (dataLoad17[i].emrdfk == '2000002372' ) {
-                $scope.tgl7 = dataLoad17[i].value
-            }
-            if (dataLoad17[i].emrdfk == '2000002375' ) {
-                $scope.tgl8 = dataLoad17[i].value
-            }
-            if (dataLoad17[i].emrdfk == '2000002378' ) {
-                $scope.tgl9 = dataLoad17[i].value
-            }
-            if (dataLoad17[i].emrdfk == '2000002381' ) {
-                $scope.tgl10 = dataLoad17[i].value
-            }
-            if (dataLoad17[i].emrdfk == '2000002384' ) {
-                $scope.tgl11 = dataLoad17[i].value
-            }
-            if (dataLoad17[i].emrdfk == '2000002387' ) {
-                $scope.tgl12 = dataLoad17[i].value
-            }
-            if (dataLoad17[i].emrdfk == '2000002390' ) {
-                $scope.tgl13 = dataLoad17[i].value
-            }
-            if (dataLoad17[i].emrdfk == '2000002393' ) {
-                $scope.tgl14 = dataLoad17[i].value
-            }
-            if (dataLoad17[i].emrdfk == '2000002396' ) {
-                $scope.tgl15 = dataLoad17[i].value
-            }
-            
-            if (dataLoad17[i].emrdfk == '2000002408' ) {
-                $scope.pukul2 = dataLoad17[i].value
-            }
-
-            $scope.tglemr = dataLoad17[i].tgl
-            
         }
 
-		for (var i = 0; i <= dataLoad18.length - 1; i++) {
-            if(dataLoad18[i].emrdfk == 3110029){
-                continue;
-            }
-            if (dataLoad18[i].type == "textbox") {
-                $('#id_'+dataLoad18[i].emrdfk).html( dataLoad18[i].value)
-                $scope.item.obji18[dataLoad18[i].emrdfk] = dataLoad18[i].value
-            }
-            if (dataLoad18[i].type == "checkbox") {
-                var chekedd = false
-                if (dataLoad18[i].value == '1') {
-                    var chekedd = true
+        if(dataLoad18.length > 0){
+            for (var i = 0; i <= dataLoad18.length - 1; i++) {
+                if(dataLoad18[i].emrdfk == 3110029){
+                    continue;
                 }
-                $scope.item.obji18[dataLoad18[i].emrdfk] = chekedd
-            }
-            if (dataLoad18[i].type == "radio") {
-                $scope.item.obji18[dataLoad18[i].emrdfk] = dataLoad18[i].value
+                if (dataLoad18[i].type == "textbox") {
+                    $('#id_'+dataLoad18[i].emrdfk).html( dataLoad18[i].value)
+                    $scope.item.obji18[dataLoad18[i].emrdfk] = dataLoad18[i].value
+                }
+                if (dataLoad18[i].type == "checkbox") {
+                    var chekedd = false
+                    if (dataLoad18[i].value == '1') {
+                        var chekedd = true
+                    }
+                    $scope.item.obji18[dataLoad18[i].emrdfk] = chekedd
+                }
+                if (dataLoad18[i].type == "radio") {
+                    $scope.item.obji18[dataLoad18[i].emrdfk] = dataLoad18[i].value
 
-            }
+                }
 
-            if (dataLoad18[i].type == "datetime") {
-                $('#id_'+dataLoad18[i].emrdfk).html( dataLoad18[i].value)
-                $scope.item.obji18[dataLoad18[i].emrdfk] = dataLoad18[i].value
-            }
-            if (dataLoad18[i].type == "time") {
-                $scope.item.obji18[dataLoad18[i].emrdfk] = dataLoad18[i].value
-            }
-            if (dataLoad18[i].type == "date") {
-                $scope.item.obji18[dataLoad18[i].emrdfk] = dataLoad18[i].value
-            }
+                if (dataLoad18[i].type == "datetime") {
+                    $('#id_'+dataLoad18[i].emrdfk).html( dataLoad18[i].value)
+                    $scope.item.obji18[dataLoad18[i].emrdfk] = dataLoad18[i].value
+                }
+                if (dataLoad18[i].type == "time") {
+                    $scope.item.obji18[dataLoad18[i].emrdfk] = dataLoad18[i].value
+                }
+                if (dataLoad18[i].type == "date") {
+                    $scope.item.obji18[dataLoad18[i].emrdfk] = dataLoad18[i].value
+                }
 
-            if (dataLoad18[i].type == "checkboxtextbox") {
-                $scope.item.obji18[dataLoad18[i].emrdfk] = dataLoad18[i].value
-                $scope.item.obji18[dataLoad18[i].emrdfk] = true
-            }
-            if (dataLoad18[i].type == "textarea") {
-                $('#id_'+dataLoad18[i].emrdfk).html( dataLoad18[i].value)
-                $scope.item.obji18[dataLoad18[i].emrdfk] = dataLoad18[i].value
-            }
-            if (dataLoad18[i].type == "combobox") {
-     
-                var str = dataLoad18[i].value
-                if(str != null)
-                {
+                if (dataLoad18[i].type == "checkboxtextbox") {
+                    $scope.item.obji18[dataLoad18[i].emrdfk] = dataLoad18[i].value
+                    $scope.item.obji18[dataLoad18[i].emrdfk] = true
+                }
+                if (dataLoad18[i].type == "textarea") {
+                    $('#id_'+dataLoad18[i].emrdfk).html( dataLoad18[i].value)
+                    $scope.item.obji18[dataLoad18[i].emrdfk] = dataLoad18[i].value
+                }
+                if (dataLoad18[i].type == "combobox") {
+        
+                    var str = dataLoad18[i].value
+                    if(str != null)
+                    {
+                        var res = str.split("~");
+                        
+                        $scope.item.obji18[dataLoad18[i].emrdfk] = res[1]
+                        $('#id_'+dataLoad18[i].emrdfk).html ( res[1])
+                    }
+                }
+                if (dataLoad18[i].type == "combobox2") {
+                    var str = dataLoad18[i].value
                     var res = str.split("~");
                     
+                    $scope.item.obji18[dataLoad18[i].emrdfk+""+1] = res[0]
                     $scope.item.obji18[dataLoad18[i].emrdfk] = res[1]
                     $('#id_'+dataLoad18[i].emrdfk).html ( res[1])
+
                 }
-            }
-            if (dataLoad18[i].type == "combobox2") {
-                var str = dataLoad18[i].value
-                var res = str.split("~");
+
+                if (dataLoad18[i].emrdfk == '423816' ) {
+                    $scope.hariTgl = dataLoad18[i].value
+                }
+
+                if (dataLoad18[i].emrdfk == '2000001974' ) {
+                    $scope.jamPeriksa = dataLoad18[i].value
+                }
+
+                if (dataLoad18[i].emrdfk == '2000002354' ) {
+                    $scope.tgl1 = dataLoad18[i].value
+                }
+                if (dataLoad18[i].emrdfk == '2000002357' ) {
+                    $scope.tgl2 = dataLoad18[i].value
+                }
+                if (dataLoad18[i].emrdfk == '2000002360' ) {
+                    $scope.tgl3 = dataLoad18[i].value
+                }
+                if (dataLoad18[i].emrdfk == '2000002363' ) {
+                    $scope.tgl4 = dataLoad18[i].value
+                }
+                if (dataLoad18[i].emrdfk == '2000002366' ) {
+                    $scope.tgl5 = dataLoad18[i].value
+                }
+                if (dataLoad18[i].emrdfk == '2000002369' ) {
+                    $scope.tgl6 = dataLoad18[i].value
+                }
+                if (dataLoad18[i].emrdfk == '2000002372' ) {
+                    $scope.tgl7 = dataLoad18[i].value
+                }
+                if (dataLoad18[i].emrdfk == '2000002375' ) {
+                    $scope.tgl8 = dataLoad18[i].value
+                }
+                if (dataLoad18[i].emrdfk == '2000002378' ) {
+                    $scope.tgl9 = dataLoad18[i].value
+                }
+                if (dataLoad18[i].emrdfk == '2000002381' ) {
+                    $scope.tgl10 = dataLoad18[i].value
+                }
+                if (dataLoad18[i].emrdfk == '2000002384' ) {
+                    $scope.tgl11 = dataLoad18[i].value
+                }
+                if (dataLoad18[i].emrdfk == '2000002387' ) {
+                    $scope.tgl12 = dataLoad18[i].value
+                }
+                if (dataLoad18[i].emrdfk == '2000002390' ) {
+                    $scope.tgl13 = dataLoad18[i].value
+                }
+                if (dataLoad18[i].emrdfk == '2000002393' ) {
+                    $scope.tgl14 = dataLoad18[i].value
+                }
+                if (dataLoad18[i].emrdfk == '2000002396' ) {
+                    $scope.tgl15 = dataLoad18[i].value
+                }
                 
-                $scope.item.obji18[dataLoad18[i].emrdfk+""+1] = res[0]
-                $scope.item.obji18[dataLoad18[i].emrdfk] = res[1]
-                $('#id_'+dataLoad18[i].emrdfk).html ( res[1])
+                if (dataLoad18[i].emrdfk == '2000002408' ) {
+                    $scope.pukul2 = dataLoad18[i].value
+                }
 
+                $scope.tglemr = dataLoad18[i].tgl
+                
             }
-
-            if (dataLoad18[i].emrdfk == '423816' ) {
-                $scope.hariTgl = dataLoad18[i].value
-            }
-
-            if (dataLoad18[i].emrdfk == '2000001974' ) {
-                $scope.jamPeriksa = dataLoad18[i].value
-            }
-
-            if (dataLoad18[i].emrdfk == '2000002354' ) {
-                $scope.tgl1 = dataLoad18[i].value
-            }
-            if (dataLoad18[i].emrdfk == '2000002357' ) {
-                $scope.tgl2 = dataLoad18[i].value
-            }
-            if (dataLoad18[i].emrdfk == '2000002360' ) {
-                $scope.tgl3 = dataLoad18[i].value
-            }
-            if (dataLoad18[i].emrdfk == '2000002363' ) {
-                $scope.tgl4 = dataLoad18[i].value
-            }
-            if (dataLoad18[i].emrdfk == '2000002366' ) {
-                $scope.tgl5 = dataLoad18[i].value
-            }
-            if (dataLoad18[i].emrdfk == '2000002369' ) {
-                $scope.tgl6 = dataLoad18[i].value
-            }
-            if (dataLoad18[i].emrdfk == '2000002372' ) {
-                $scope.tgl7 = dataLoad18[i].value
-            }
-            if (dataLoad18[i].emrdfk == '2000002375' ) {
-                $scope.tgl8 = dataLoad18[i].value
-            }
-            if (dataLoad18[i].emrdfk == '2000002378' ) {
-                $scope.tgl9 = dataLoad18[i].value
-            }
-            if (dataLoad18[i].emrdfk == '2000002381' ) {
-                $scope.tgl10 = dataLoad18[i].value
-            }
-            if (dataLoad18[i].emrdfk == '2000002384' ) {
-                $scope.tgl11 = dataLoad18[i].value
-            }
-            if (dataLoad18[i].emrdfk == '2000002387' ) {
-                $scope.tgl12 = dataLoad18[i].value
-            }
-            if (dataLoad18[i].emrdfk == '2000002390' ) {
-                $scope.tgl13 = dataLoad18[i].value
-            }
-            if (dataLoad18[i].emrdfk == '2000002393' ) {
-                $scope.tgl14 = dataLoad18[i].value
-            }
-            if (dataLoad18[i].emrdfk == '2000002396' ) {
-                $scope.tgl15 = dataLoad18[i].value
-            }
-            
-            if (dataLoad18[i].emrdfk == '2000002408' ) {
-                $scope.pukul2 = dataLoad18[i].value
-            }
-
-            $scope.tglemr = dataLoad18[i].tgl
-            
         }
 
-		for (var i = 0; i <= dataLoad19.length - 1; i++) {
-            if(dataLoad19[i].emrdfk == 3110029){
-                continue;
-            }
-            if (dataLoad19[i].type == "textbox") {
-                $('#id_'+dataLoad19[i].emrdfk).html( dataLoad19[i].value)
-                $scope.item.obji19[dataLoad19[i].emrdfk] = dataLoad19[i].value
-            }
-            if (dataLoad19[i].type == "checkbox") {
-                var chekedd = false
-                if (dataLoad19[i].value == '1') {
-                    var chekedd = true
+        if(dataLoad19.length > 0){
+            for (var i = 0; i <= dataLoad19.length - 1; i++) {
+                if(dataLoad19[i].emrdfk == 3110029){
+                    continue;
                 }
-                $scope.item.obji19[dataLoad19[i].emrdfk] = chekedd
-            }
-            if (dataLoad19[i].type == "radio") {
-                $scope.item.obji19[dataLoad19[i].emrdfk] = dataLoad19[i].value
+                if (dataLoad19[i].type == "textbox") {
+                    $('#id_'+dataLoad19[i].emrdfk).html( dataLoad19[i].value)
+                    $scope.item.obji19[dataLoad19[i].emrdfk] = dataLoad19[i].value
+                }
+                if (dataLoad19[i].type == "checkbox") {
+                    var chekedd = false
+                    if (dataLoad19[i].value == '1') {
+                        var chekedd = true
+                    }
+                    $scope.item.obji19[dataLoad19[i].emrdfk] = chekedd
+                }
+                if (dataLoad19[i].type == "radio") {
+                    $scope.item.obji19[dataLoad19[i].emrdfk] = dataLoad19[i].value
 
-            }
+                }
 
-            if (dataLoad19[i].type == "datetime") {
-                $('#id_'+dataLoad19[i].emrdfk).html( dataLoad19[i].value)
-                $scope.item.obji19[dataLoad19[i].emrdfk] = dataLoad19[i].value
-            }
-            if (dataLoad19[i].type == "time") {
-                $scope.item.obji19[dataLoad19[i].emrdfk] = dataLoad19[i].value
-            }
-            if (dataLoad19[i].type == "date") {
-                $scope.item.obji19[dataLoad19[i].emrdfk] = dataLoad19[i].value
-            }
+                if (dataLoad19[i].type == "datetime") {
+                    $('#id_'+dataLoad19[i].emrdfk).html( dataLoad19[i].value)
+                    $scope.item.obji19[dataLoad19[i].emrdfk] = dataLoad19[i].value
+                }
+                if (dataLoad19[i].type == "time") {
+                    $scope.item.obji19[dataLoad19[i].emrdfk] = dataLoad19[i].value
+                }
+                if (dataLoad19[i].type == "date") {
+                    $scope.item.obji19[dataLoad19[i].emrdfk] = dataLoad19[i].value
+                }
 
-            if (dataLoad19[i].type == "checkboxtextbox") {
-                $scope.item.obji19[dataLoad19[i].emrdfk] = dataLoad19[i].value
-                $scope.item.obji19[dataLoad19[i].emrdfk] = true
-            }
-            if (dataLoad19[i].type == "textarea") {
-                $('#id_'+dataLoad19[i].emrdfk).html( dataLoad19[i].value)
-                $scope.item.obji19[dataLoad19[i].emrdfk] = dataLoad19[i].value
-            }
-            if (dataLoad19[i].type == "combobox") {
-     
-                var str = dataLoad19[i].value
-                if(str != null)
-                {
+                if (dataLoad19[i].type == "checkboxtextbox") {
+                    $scope.item.obji19[dataLoad19[i].emrdfk] = dataLoad19[i].value
+                    $scope.item.obji19[dataLoad19[i].emrdfk] = true
+                }
+                if (dataLoad19[i].type == "textarea") {
+                    $('#id_'+dataLoad19[i].emrdfk).html( dataLoad19[i].value)
+                    $scope.item.obji19[dataLoad19[i].emrdfk] = dataLoad19[i].value
+                }
+                if (dataLoad19[i].type == "combobox") {
+        
+                    var str = dataLoad19[i].value
+                    if(str != null)
+                    {
+                        var res = str.split("~");
+                        
+                        $scope.item.obji19[dataLoad19[i].emrdfk] = res[1]
+                        $('#id_'+dataLoad19[i].emrdfk).html ( res[1])
+                    }
+                }
+                if (dataLoad19[i].type == "combobox2") {
+                    var str = dataLoad19[i].value
                     var res = str.split("~");
                     
+                    $scope.item.obji19[dataLoad19[i].emrdfk+""+1] = res[0]
                     $scope.item.obji19[dataLoad19[i].emrdfk] = res[1]
                     $('#id_'+dataLoad19[i].emrdfk).html ( res[1])
+
                 }
-            }
-            if (dataLoad19[i].type == "combobox2") {
-                var str = dataLoad19[i].value
-                var res = str.split("~");
+
+                if (dataLoad19[i].emrdfk == '423816' ) {
+                    $scope.hariTgl = dataLoad19[i].value
+                }
+
+                if (dataLoad19[i].emrdfk == '2000001974' ) {
+                    $scope.jamPeriksa = dataLoad19[i].value
+                }
+
+                if (dataLoad19[i].emrdfk == '2000002354' ) {
+                    $scope.tgl1 = dataLoad19[i].value
+                }
+                if (dataLoad19[i].emrdfk == '2000002357' ) {
+                    $scope.tgl2 = dataLoad19[i].value
+                }
+                if (dataLoad19[i].emrdfk == '2000002360' ) {
+                    $scope.tgl3 = dataLoad19[i].value
+                }
+                if (dataLoad19[i].emrdfk == '2000002363' ) {
+                    $scope.tgl4 = dataLoad19[i].value
+                }
+                if (dataLoad19[i].emrdfk == '2000002366' ) {
+                    $scope.tgl5 = dataLoad19[i].value
+                }
+                if (dataLoad19[i].emrdfk == '2000002369' ) {
+                    $scope.tgl6 = dataLoad19[i].value
+                }
+                if (dataLoad19[i].emrdfk == '2000002372' ) {
+                    $scope.tgl7 = dataLoad19[i].value
+                }
+                if (dataLoad19[i].emrdfk == '2000002375' ) {
+                    $scope.tgl8 = dataLoad19[i].value
+                }
+                if (dataLoad19[i].emrdfk == '2000002378' ) {
+                    $scope.tgl9 = dataLoad19[i].value
+                }
+                if (dataLoad19[i].emrdfk == '2000002381' ) {
+                    $scope.tgl10 = dataLoad19[i].value
+                }
+                if (dataLoad19[i].emrdfk == '2000002384' ) {
+                    $scope.tgl11 = dataLoad19[i].value
+                }
+                if (dataLoad19[i].emrdfk == '2000002387' ) {
+                    $scope.tgl12 = dataLoad19[i].value
+                }
+                if (dataLoad19[i].emrdfk == '2000002390' ) {
+                    $scope.tgl13 = dataLoad19[i].value
+                }
+                if (dataLoad19[i].emrdfk == '2000002393' ) {
+                    $scope.tgl14 = dataLoad19[i].value
+                }
+                if (dataLoad19[i].emrdfk == '2000002396' ) {
+                    $scope.tgl15 = dataLoad19[i].value
+                }
                 
-                $scope.item.obji19[dataLoad19[i].emrdfk+""+1] = res[0]
-                $scope.item.obji19[dataLoad19[i].emrdfk] = res[1]
-                $('#id_'+dataLoad19[i].emrdfk).html ( res[1])
+                if (dataLoad19[i].emrdfk == '2000002408' ) {
+                    $scope.pukul2 = dataLoad19[i].value
+                }
 
+                $scope.tglemr = dataLoad19[i].tgl
+                
             }
-
-            if (dataLoad19[i].emrdfk == '423816' ) {
-                $scope.hariTgl = dataLoad19[i].value
-            }
-
-            if (dataLoad19[i].emrdfk == '2000001974' ) {
-                $scope.jamPeriksa = dataLoad19[i].value
-            }
-
-            if (dataLoad19[i].emrdfk == '2000002354' ) {
-                $scope.tgl1 = dataLoad19[i].value
-            }
-            if (dataLoad19[i].emrdfk == '2000002357' ) {
-                $scope.tgl2 = dataLoad19[i].value
-            }
-            if (dataLoad19[i].emrdfk == '2000002360' ) {
-                $scope.tgl3 = dataLoad19[i].value
-            }
-            if (dataLoad19[i].emrdfk == '2000002363' ) {
-                $scope.tgl4 = dataLoad19[i].value
-            }
-            if (dataLoad19[i].emrdfk == '2000002366' ) {
-                $scope.tgl5 = dataLoad19[i].value
-            }
-            if (dataLoad19[i].emrdfk == '2000002369' ) {
-                $scope.tgl6 = dataLoad19[i].value
-            }
-            if (dataLoad19[i].emrdfk == '2000002372' ) {
-                $scope.tgl7 = dataLoad19[i].value
-            }
-            if (dataLoad19[i].emrdfk == '2000002375' ) {
-                $scope.tgl8 = dataLoad19[i].value
-            }
-            if (dataLoad19[i].emrdfk == '2000002378' ) {
-                $scope.tgl9 = dataLoad19[i].value
-            }
-            if (dataLoad19[i].emrdfk == '2000002381' ) {
-                $scope.tgl10 = dataLoad19[i].value
-            }
-            if (dataLoad19[i].emrdfk == '2000002384' ) {
-                $scope.tgl11 = dataLoad19[i].value
-            }
-            if (dataLoad19[i].emrdfk == '2000002387' ) {
-                $scope.tgl12 = dataLoad19[i].value
-            }
-            if (dataLoad19[i].emrdfk == '2000002390' ) {
-                $scope.tgl13 = dataLoad19[i].value
-            }
-            if (dataLoad19[i].emrdfk == '2000002393' ) {
-                $scope.tgl14 = dataLoad19[i].value
-            }
-            if (dataLoad19[i].emrdfk == '2000002396' ) {
-                $scope.tgl15 = dataLoad19[i].value
-            }
-            
-            if (dataLoad19[i].emrdfk == '2000002408' ) {
-                $scope.pukul2 = dataLoad19[i].value
-            }
-
-            $scope.tglemr = dataLoad19[i].tgl
-            
         }
 
-		for (var i = 0; i <= dataLoad20.length - 1; i++) {
-            if(dataLoad20[i].emrdfk == 3110029){
-                continue;
-            }
-            if (dataLoad20[i].type == "textbox") {
-                $('#id_'+dataLoad20[i].emrdfk).html( dataLoad20[i].value)
-                $scope.item.obji20[dataLoad20[i].emrdfk] = dataLoad20[i].value
-            }
-            if (dataLoad20[i].type == "checkbox") {
-                var chekedd = false
-                if (dataLoad20[i].value == '1') {
-                    var chekedd = true
+        if(dataLoad20.length > 0){
+            for (var i = 0; i <= dataLoad20.length - 1; i++) {
+                if(dataLoad20[i].emrdfk == 3110029){
+                    continue;
                 }
-                $scope.item.obji20[dataLoad20[i].emrdfk] = chekedd
-            }
-            if (dataLoad20[i].type == "radio") {
-                $scope.item.obji20[dataLoad20[i].emrdfk] = dataLoad20[i].value
+                if (dataLoad20[i].type == "textbox") {
+                    $('#id_'+dataLoad20[i].emrdfk).html( dataLoad20[i].value)
+                    $scope.item.obji20[dataLoad20[i].emrdfk] = dataLoad20[i].value
+                }
+                if (dataLoad20[i].type == "checkbox") {
+                    var chekedd = false
+                    if (dataLoad20[i].value == '1') {
+                        var chekedd = true
+                    }
+                    $scope.item.obji20[dataLoad20[i].emrdfk] = chekedd
+                }
+                if (dataLoad20[i].type == "radio") {
+                    $scope.item.obji20[dataLoad20[i].emrdfk] = dataLoad20[i].value
 
-            }
+                }
 
-            if (dataLoad20[i].type == "datetime") {
-                $('#id_'+dataLoad20[i].emrdfk).html( dataLoad20[i].value)
-                $scope.item.obji20[dataLoad20[i].emrdfk] = dataLoad20[i].value
-            }
-            if (dataLoad20[i].type == "time") {
-                $scope.item.obji20[dataLoad20[i].emrdfk] = dataLoad20[i].value
-            }
-            if (dataLoad20[i].type == "date") {
-                $scope.item.obji20[dataLoad20[i].emrdfk] = dataLoad20[i].value
-            }
+                if (dataLoad20[i].type == "datetime") {
+                    $('#id_'+dataLoad20[i].emrdfk).html( dataLoad20[i].value)
+                    $scope.item.obji20[dataLoad20[i].emrdfk] = dataLoad20[i].value
+                }
+                if (dataLoad20[i].type == "time") {
+                    $scope.item.obji20[dataLoad20[i].emrdfk] = dataLoad20[i].value
+                }
+                if (dataLoad20[i].type == "date") {
+                    $scope.item.obji20[dataLoad20[i].emrdfk] = dataLoad20[i].value
+                }
 
-            if (dataLoad20[i].type == "checkboxtextbox") {
-                $scope.item.obji20[dataLoad20[i].emrdfk] = dataLoad20[i].value
-                $scope.item.obji20[dataLoad20[i].emrdfk] = true
-            }
-            if (dataLoad20[i].type == "textarea") {
-                $('#id_'+dataLoad20[i].emrdfk).html( dataLoad20[i].value)
-                $scope.item.obji20[dataLoad20[i].emrdfk] = dataLoad20[i].value
-            }
-            if (dataLoad20[i].type == "combobox") {
-     
-                var str = dataLoad20[i].value
-                if(str != null)
-                {
+                if (dataLoad20[i].type == "checkboxtextbox") {
+                    $scope.item.obji20[dataLoad20[i].emrdfk] = dataLoad20[i].value
+                    $scope.item.obji20[dataLoad20[i].emrdfk] = true
+                }
+                if (dataLoad20[i].type == "textarea") {
+                    $('#id_'+dataLoad20[i].emrdfk).html( dataLoad20[i].value)
+                    $scope.item.obji20[dataLoad20[i].emrdfk] = dataLoad20[i].value
+                }
+                if (dataLoad20[i].type == "combobox") {
+        
+                    var str = dataLoad20[i].value
+                    if(str != null)
+                    {
+                        var res = str.split("~");
+                        
+                        $scope.item.obji20[dataLoad20[i].emrdfk] = res[1]
+                        $('#id_'+dataLoad20[i].emrdfk).html ( res[1])
+                    }
+                }
+                if (dataLoad20[i].type == "combobox2") {
+                    var str = dataLoad20[i].value
                     var res = str.split("~");
                     
+                    $scope.item.obji20[dataLoad20[i].emrdfk+""+1] = res[0]
                     $scope.item.obji20[dataLoad20[i].emrdfk] = res[1]
                     $('#id_'+dataLoad20[i].emrdfk).html ( res[1])
+
                 }
-            }
-            if (dataLoad20[i].type == "combobox2") {
-                var str = dataLoad20[i].value
-                var res = str.split("~");
+
+                if (dataLoad20[i].emrdfk == '423816' ) {
+                    $scope.hariTgl = dataLoad20[i].value
+                }
+
+                if (dataLoad20[i].emrdfk == '2000001974' ) {
+                    $scope.jamPeriksa = dataLoad20[i].value
+                }
+
+                if (dataLoad20[i].emrdfk == '2000002354' ) {
+                    $scope.tgl1 = dataLoad20[i].value
+                }
+                if (dataLoad20[i].emrdfk == '2000002357' ) {
+                    $scope.tgl2 = dataLoad20[i].value
+                }
+                if (dataLoad20[i].emrdfk == '2000002360' ) {
+                    $scope.tgl3 = dataLoad20[i].value
+                }
+                if (dataLoad20[i].emrdfk == '2000002363' ) {
+                    $scope.tgl4 = dataLoad20[i].value
+                }
+                if (dataLoad20[i].emrdfk == '2000002366' ) {
+                    $scope.tgl5 = dataLoad20[i].value
+                }
+                if (dataLoad20[i].emrdfk == '2000002369' ) {
+                    $scope.tgl6 = dataLoad20[i].value
+                }
+                if (dataLoad20[i].emrdfk == '2000002372' ) {
+                    $scope.tgl7 = dataLoad20[i].value
+                }
+                if (dataLoad20[i].emrdfk == '2000002375' ) {
+                    $scope.tgl8 = dataLoad20[i].value
+                }
+                if (dataLoad20[i].emrdfk == '2000002378' ) {
+                    $scope.tgl9 = dataLoad20[i].value
+                }
+                if (dataLoad20[i].emrdfk == '2000002381' ) {
+                    $scope.tgl10 = dataLoad20[i].value
+                }
+                if (dataLoad20[i].emrdfk == '2000002384' ) {
+                    $scope.tgl11 = dataLoad20[i].value
+                }
+                if (dataLoad20[i].emrdfk == '2000002387' ) {
+                    $scope.tgl12 = dataLoad20[i].value
+                }
+                if (dataLoad20[i].emrdfk == '2000002390' ) {
+                    $scope.tgl13 = dataLoad20[i].value
+                }
+                if (dataLoad20[i].emrdfk == '2000002393' ) {
+                    $scope.tgl14 = dataLoad20[i].value
+                }
+                if (dataLoad20[i].emrdfk == '2000002396' ) {
+                    $scope.tgl15 = dataLoad20[i].value
+                }
                 
-                $scope.item.obji20[dataLoad20[i].emrdfk+""+1] = res[0]
-                $scope.item.obji20[dataLoad20[i].emrdfk] = res[1]
-                $('#id_'+dataLoad20[i].emrdfk).html ( res[1])
+                if (dataLoad20[i].emrdfk == '2000002408' ) {
+                    $scope.pukul2 = dataLoad20[i].value
+                }
 
+                $scope.tglemr = dataLoad20[i].tgl
+                
             }
-
-            if (dataLoad20[i].emrdfk == '423816' ) {
-                $scope.hariTgl = dataLoad20[i].value
-            }
-
-            if (dataLoad20[i].emrdfk == '2000001974' ) {
-                $scope.jamPeriksa = dataLoad20[i].value
-            }
-
-            if (dataLoad20[i].emrdfk == '2000002354' ) {
-                $scope.tgl1 = dataLoad20[i].value
-            }
-            if (dataLoad20[i].emrdfk == '2000002357' ) {
-                $scope.tgl2 = dataLoad20[i].value
-            }
-            if (dataLoad20[i].emrdfk == '2000002360' ) {
-                $scope.tgl3 = dataLoad20[i].value
-            }
-            if (dataLoad20[i].emrdfk == '2000002363' ) {
-                $scope.tgl4 = dataLoad20[i].value
-            }
-            if (dataLoad20[i].emrdfk == '2000002366' ) {
-                $scope.tgl5 = dataLoad20[i].value
-            }
-            if (dataLoad20[i].emrdfk == '2000002369' ) {
-                $scope.tgl6 = dataLoad20[i].value
-            }
-            if (dataLoad20[i].emrdfk == '2000002372' ) {
-                $scope.tgl7 = dataLoad20[i].value
-            }
-            if (dataLoad20[i].emrdfk == '2000002375' ) {
-                $scope.tgl8 = dataLoad20[i].value
-            }
-            if (dataLoad20[i].emrdfk == '2000002378' ) {
-                $scope.tgl9 = dataLoad20[i].value
-            }
-            if (dataLoad20[i].emrdfk == '2000002381' ) {
-                $scope.tgl10 = dataLoad20[i].value
-            }
-            if (dataLoad20[i].emrdfk == '2000002384' ) {
-                $scope.tgl11 = dataLoad20[i].value
-            }
-            if (dataLoad20[i].emrdfk == '2000002387' ) {
-                $scope.tgl12 = dataLoad20[i].value
-            }
-            if (dataLoad20[i].emrdfk == '2000002390' ) {
-                $scope.tgl13 = dataLoad20[i].value
-            }
-            if (dataLoad20[i].emrdfk == '2000002393' ) {
-                $scope.tgl14 = dataLoad20[i].value
-            }
-            if (dataLoad20[i].emrdfk == '2000002396' ) {
-                $scope.tgl15 = dataLoad20[i].value
-            }
-            
-            if (dataLoad20[i].emrdfk == '2000002408' ) {
-                $scope.pukul2 = dataLoad20[i].value
-            }
-
-            $scope.tglemr = dataLoad20[i].tgl
-            
         }
 
 
