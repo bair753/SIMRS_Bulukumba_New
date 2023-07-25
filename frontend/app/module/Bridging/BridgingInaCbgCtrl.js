@@ -4932,7 +4932,7 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 					return;
 				}
 
-				medifirstService.get("bridging/inacbg/get-rincial-pelayanan?noregistrasi=" + $scope.dataPasienSelected.noregistrasi + '&idDept=3'
+				medifirstService.get("bridging/inacbg/get-rincial-pelayanan-lab-all?noregistrasi=" + $scope.dataPasienSelected.noregistrasi + '&idDept=3'
 					// medifirstService.get("lab-radiologi/get-rincian-pelayanan?objectdepartemenfk=" + departemenfk + "&noregistrasi=" +   $scope.item.noregistrasi
 					, true).then(function (dat) {
 						$scope.dataDaftarHasilLab = {
@@ -4962,7 +4962,7 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 					return;
 				}
 
-				medifirstService.get("bridging/inacbg/get-rincial-pelayanan?noregistrasi=" + $scope.dataPasienSelected.noregistrasi + '&idDept=27'
+				medifirstService.get("bridging/inacbg/get-rincial-pelayanan-rad-all?noregistrasi=" + $scope.dataPasienSelected.noregistrasi + '&idDept=27'
 					// medifirstService.get("lab-radiologi/get-rincian-pelayanan?objectdepartemenfk=" + departemenfk + "&noregistrasi=" +   $scope.item.noregistrasi
 					, true).then(function (dat) {
 						$scope.dataDaftarHasilRad = {
@@ -4998,16 +4998,16 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 						"title": "Ruangan",
 						"width": "120px"
 					},
-					{
-						"field": "namaproduk",
-						"title": "Layanan",
-						"width": "160px",
-					},
-					{
-						"field": "jumlah",
-						"title": "Qty",
-						"width": "40px",
-					},
+					// {
+					// 	"field": "namaproduk",
+					// 	"title": "Layanan",
+					// 	"width": "160px",
+					// },
+					// {
+					// 	"field": "jumlah",
+					// 	"title": "Qty",
+					// 	"width": "40px",
+					// },
 				],
 				sortable: {
 					mode: "single",
@@ -5184,7 +5184,7 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 					var nama = medifirstService.getPegawaiLogin().namaLengkap
 					if (local != null) {
 						var profile = local.id;
-						window.open(baseTransaksi + "report/cetak-ekspertise-ctscan?norec=" + $scope.dataSelectedHasilRad.norecHasilRadiologi + '&kdprofile=' + profile
+						window.open(baseTransaksi + "report/cetak-ekspertise-ctscan-all?norec=" + $scope.dataSelectedHasilRad.norecHasilRadiologi + '&kdprofile=' + profile + '&nocm=' + $scope.dataSelectedHasilRad.nocm
 							+ '&nama=' + nama, '_blank');
 					}
 				// }
@@ -5196,7 +5196,7 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 					var nama = medifirstService.getPegawaiLogin().namaLengkap
 					if (local != null) {
 						var profile = local.id;
-						window.open(baseTransaksi + "report/cetak-ekspertise-usg?norec=" + $scope.dataSelectedHasilRad.norecHasilRadiologi + '&kdprofile=' + profile
+						window.open(baseTransaksi + "report/cetak-ekspertise-usg-all?norec=" + $scope.dataSelectedHasilRad.norecHasilRadiologi + '&kdprofile=' + profile + '&nocm=' + $scope.dataSelectedHasilRad.nocm
 							+ '&nama=' + nama, '_blank');
 					}
 				// }
@@ -5208,6 +5208,10 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 				var firstDate = new Date($scope.dataPasienSelected.tgllahir);
 				var secondDate = new Date($scope.dataPasienSelected.tglregistrasi);
 				var umurHari = Math.round(Math.abs((firstDate - secondDate) / oneDay));
+				if($scope.dataSelectedHasilLab == undefined){
+					toastr.warning('Pilih data yang mau di cetak', 'Peringatan')
+                    return
+				}
 				$scope.isRouteLoading = true;
 				medifirstService.get("laboratorium/get-hasil-lab-manual?norec_apd=" + $scope.dataSelectedHasilLab.norec_apd +
 						"&objectjeniskelaminfk=" + jeniskelaminfk + "&umur=" + umurHari + "&norec='" + $scope.dataSelectedHasilLab.norec_pp + "'" ).then(function (data) {
@@ -5230,8 +5234,11 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 								} 
 								dokter = $scope.item.DataPegawai
 								pemeriksa = $scope.item.DataPemeriksa
-								window.open(baseTransaksi + "report/cetak-hasil-lab-manual?norec=&norec=" 
+								window.open(baseTransaksi + "report/cetak-hasil-lab-all?norec=&norec=" 
 								+ $scope.dataSelectedHasilLab.norec_apd
+								+ "&objectjeniskelaminfk=" + jeniskelaminfk
+								+ "&nocm=" + $scope.dataSelectedHasilLab.nocm
+								+ "&noregistrasi=" + $scope.dataSelectedHasilLab.noregistrasi
 								+ "&objectjeniskelaminfk=" + jeniskelaminfk
 								+ "&umur=" + umurHari
 								+ "&strIdPegawai=" + user.namaLengkap 
