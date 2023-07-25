@@ -5770,7 +5770,7 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 				}
 				var emrfk = [290073,290026] // emrfk CPPT
 
-				medifirstService.get("bridging/inacbg/get-rincian-operasi?noregistrasi=" + $scope.dataPasienSelected.noregistrasi + '&emrfk=' + emrfk
+				medifirstService.get("bridging/inacbg/get-all-page-inacbg?noregistrasi=" + $scope.dataPasienSelected.noregistrasi + '&emrfk=' + emrfk
 					// medifirstService.get("lab-radiologi/get-rincian-pelayanan?objectdepartemenfk=" + departemenfk + "&noregistrasi=" +   $scope.item.noregistrasi
 					, true).then(function (dat) {
 						$scope.dataDaftarCPPT = {
@@ -5806,11 +5806,6 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 					{
 						"field": "namaform",
 						"title": "Nama EMR",
-						"width": "160px"
-					},
-					{
-						"field": "index",
-						"title": "Page",
 						"width": "160px"
 					},
 				],
