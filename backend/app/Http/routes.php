@@ -341,6 +341,8 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
               Route::get('bridging/inacbg/get-status-berkas','Bridging\InaCbgController@getStatusUpload');
               Route::get('bridging/inacbg/get-data-combo-ina', 'Bridging\InaCbgController@getDataComboIna');
               Route::get('bridging/inacbg/get-rincial-pelayanan', 'Bridging\InaCbgController@getRincianPelayanan');
+              Route::get('bridging/inacbg/get-rincial-pelayanan-rad-all', 'Bridging\InaCbgController@getRincianPelayananRadAll');
+              Route::get('bridging/inacbg/get-rincial-pelayanan-lab-all', 'Bridging\InaCbgController@getRincianPelayananLabAll');
               Route::get('bridging/inacbg/get-rincian-operasi', 'Bridging\InaCbgController@getLaporanOperasi');
               Route::get('bridging/inacbg/get-emr-pasien', 'Bridging\InaCbgController@getDaftarAsesmenPasien');
               Route::get('bridging/inacbg/get-all-page-inacbg', 'Bridging\InaCbgController@getAllPage');
@@ -1133,7 +1135,9 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
           Route::get('laboratorium/get-laporan-tindakan-bank-darah', 'Laboratorium\LaboratoriumController@getLaporanTindakanBankDarah');
           Route::get('report/get-data-hasil-lab','Report\ReportController@cetakHasilLIS');
           Route::get('report/cetak-ekspertise-ctscan','Report\ReportController@cetakEkspertiseCtscan');
+          Route::get('report/cetak-ekspertise-ctscan-all','Report\ReportController@cetakEkspertiseCtscanAll');
           Route::get('report/cetak-ekspertise-usg','Report\ReportController@cetakEkspertiseUsg');
+          Route::get('report/cetak-ekspertise-usg-all','Report\ReportController@cetakEkspertiseUsgAll');
           Route::get('report/cetak-hasil-lab-histopatologi','Report\ReportController@cetakHispatologi');
           Route::get('report/cetak-resep-dokter','Report\ReportController@cetakResepDokter');
           Route::get('laboratorium/get-lap-kunjungan', 'Laboratorium\LaboratoriumController@getLaporanKunjungan');
@@ -2745,6 +2749,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
         Route::get('report/cetak-neraca','Report\ReportController@cetakNeraca');
         Route::get('report/cetak-labarugi','Report\ReportController@cetakLabaRugi');
         Route::get('report/cetak-hasil-lab-manual','Report\ReportController@cetakHasilLabManual');
+        Route::get('report/cetak-hasil-lab-all','Report\ReportController@cetakHasilLabAll');
         Route::get('report/cetak-suratjaminanpelayanan','Report\ReportController@cetakSuratJaminanPelayanan');
         Route::get('report/cetak-pegawai','Report\ReportController@cetakPegawai');
         Route::get('report/cetak-surat-perintah-bayar','Report\ReportController@cetakSuratBayar');

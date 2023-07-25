@@ -2314,6 +2314,102 @@ class InaCbgController   extends ApiController
         );
         return $this->respond($result);
     }
+    
+    public function getRincianPelayananRadAll(Request $request) {
+        $kdProfile = $this->getDataKdProfile($request);
+        $idProfile = (int) $kdProfile;
+        $pelayanan = \DB::table('pelayananpasien_t as pp')
+            ->JOIN('antrianpasiendiperiksa_t as apd', 'apd.norec', '=', 'pp.noregistrasifk')
+            ->JOIN('pasiendaftar_t as pd', 'pd.norec', '=', 'apd.noregistrasifk')
+            ->JOIN('pasien_m as ps', 'ps.id', '=', 'pd.nocmfk')
+            ->leftJOIN('jeniskelamin_m as jk', 'jk.id', '=', 'ps.objectjeniskelaminfk')
+            ->JOIN('produk_m as pr', 'pr.id', '=', 'pp.produkfk')
+            ->JOIN('ruangan_m as ru', 'ru.id', '=', 'apd.objectruanganfk')
+            ->JOIN('departemen_m as dp', 'dp.id', '=', 'ru.objectdepartemenfk')
+            ->leftJOIN('strukpelayanan_t as sp', 'sp.norec', '=', 'pp.strukfk')
+            ->leftjoin('strukbuktipenerimaan_t as sbm', 'sp.nosbmlastfk', '=', 'sbm.norec')
+            ->leftJOIN('strukorder_t as so', 'so.norec', '=', 'pp.strukorderfk')
+//                    ->leftJOIN('orderpelayanan_t op', 'so.norec', '=', 'op.strukorderfk') // syamsu tambahan
+            ->leftjoin('pmi_m as pmi','pmi.id','=','pp.pmifk')
+            ->leftJOIN('ris_order as ris', 'ris.order_no', '=',
+                DB::raw('so.noorder AND ris.order_code=cast(pp.produkfk as text)'))
+                ->leftJOIN('hasilradiologi_t AS hr','hr.pelayananpasienfk','=',
+                DB::raw("pp.norec AND hr.statusenabled = true "))
+            // ->leftJOIN('ris_order as ris', 'ris.order_no', '=',
+                // DB::raw('so.noorder AND ris.order_code=pp.produkfk'))
+            ->select('ps.nocm', 'hr.norec as norecHasilRadiologi', 'ps.namapasien', 'jk.jeniskelamin', 'pp.tglpelayanan', 'pp.produkfk', 'pr.namaproduk',
+                'pp.jumlah', 'pp.hargasatuan', 'pp.hargadiscount', 'sp.nostruk', 'pd.noregistrasi', 'ru.namaruangan',
+                'dp.namadepartemen', 'ps.id as psid', 'apd.norec as norec_apd', 'sp.norec as norec_sp', 'pp.norec as norec_pp',
+                'ru.objectdepartemenfk', 'so.noorder', 'ris.order_key as idbridging', 'apd.objectruanganfk','pp.iscito','pp.jasa','so.keteranganlainnya',
+                'ps.objectjeniskelaminfk','ps.tgllahir','sbm.nosbm','pmi.pmi',  'ris.order_cnt as nourutrad', // syamsu tambahan
+                DB::raw("case when ris.order_key is not null then 'Sudah Dikirim' else '-' end as statusbridging,'' as hr_norec"))
+            ->where('pp.kdprofile',$idProfile)
+            ->where('ru.objectdepartemenfk', $request['idDept'])
+            ->groupBy('ps.nocm', 'ps.namapasien', 'hr.norec', 'jk.jeniskelamin', 'pp.tglpelayanan', 'pp.produkfk', 'pr.namaproduk',
+                'pp.jumlah', 'pp.hargasatuan', 'pp.hargadiscount', 'sp.nostruk', 'pd.noregistrasi', 'ru.namaruangan',
+                'dp.namadepartemen', 'ps.id', 'apd.norec', 'sp.norec', 'pp.norec',
+                'ru.objectdepartemenfk', 'so.noorder', 'ris.order_key', 'apd.objectruanganfk','pp.iscito','pp.jasa','sbm.nosbm','pmi.pmi','so.keteranganlainnya')
+            ->orderBy('pp.tglpelayanan');
+        
+        if (isset($request['noregistrasi']) && $request['noregistrasi'] != "" && $request['noregistrasi'] != "undefined") {
+            $pelayanan = $pelayanan->where('pd.noregistrasi', '=', $request['noregistrasi']);
+        }
+        $pelayanan = $pelayanan->take(1)->get();
+        
+        $result =array(
+            'data' => $pelayanan,
+            'message' => 'Inhuman'
+        );
+        return $this->respond($result);
+    }
+
+    public function getRincianPelayananLabAll(Request $request) {
+        $kdProfile = $this->getDataKdProfile($request);
+        $idProfile = (int) $kdProfile;
+        $pelayanan = \DB::table('pelayananpasien_t as pp')
+            ->JOIN('antrianpasiendiperiksa_t as apd', 'apd.norec', '=', 'pp.noregistrasifk')
+            ->JOIN('pasiendaftar_t as pd', 'pd.norec', '=', 'apd.noregistrasifk')
+            ->JOIN('pasien_m as ps', 'ps.id', '=', 'pd.nocmfk')
+            ->leftJOIN('jeniskelamin_m as jk', 'jk.id', '=', 'ps.objectjeniskelaminfk')
+            ->JOIN('produk_m as pr', 'pr.id', '=', 'pp.produkfk')
+            ->JOIN('ruangan_m as ru', 'ru.id', '=', 'apd.objectruanganfk')
+            ->JOIN('departemen_m as dp', 'dp.id', '=', 'ru.objectdepartemenfk')
+            ->leftJOIN('strukpelayanan_t as sp', 'sp.norec', '=', 'pp.strukfk')
+            ->leftjoin('strukbuktipenerimaan_t as sbm', 'sp.nosbmlastfk', '=', 'sbm.norec')
+            ->leftJOIN('strukorder_t as so', 'so.norec', '=', 'pp.strukorderfk')
+//                    ->leftJOIN('orderpelayanan_t op', 'so.norec', '=', 'op.strukorderfk') // syamsu tambahan
+            ->leftjoin('pmi_m as pmi','pmi.id','=','pp.pmifk')
+            ->leftJOIN('ris_order as ris', 'ris.order_no', '=',
+                DB::raw('so.noorder AND ris.order_code=cast(pp.produkfk as text)'))
+                ->leftJOIN('hasilradiologi_t AS hr','hr.pelayananpasienfk','=',
+                DB::raw("pp.norec AND hr.statusenabled = true "))
+            // ->leftJOIN('ris_order as ris', 'ris.order_no', '=',
+                // DB::raw('so.noorder AND ris.order_code=pp.produkfk'))
+            ->select('ps.nocm', 'hr.norec as norecHasilRadiologi', 'ps.namapasien', 'jk.jeniskelamin', 'pp.tglpelayanan', 'pp.produkfk', 'pr.namaproduk',
+                'pp.jumlah', 'pp.hargasatuan', 'pp.hargadiscount', 'sp.nostruk', 'pd.noregistrasi', 'ru.namaruangan',
+                'dp.namadepartemen', 'ps.id as psid', 'apd.norec as norec_apd', 'sp.norec as norec_sp', 'pp.norec as norec_pp',
+                'ru.objectdepartemenfk', 'so.noorder', 'ris.order_key as idbridging', 'apd.objectruanganfk','pp.iscito','pp.jasa','so.keteranganlainnya',
+                'ps.objectjeniskelaminfk','ps.tgllahir','sbm.nosbm','pmi.pmi',  'ris.order_cnt as nourutrad', // syamsu tambahan
+                DB::raw("case when ris.order_key is not null then 'Sudah Dikirim' else '-' end as statusbridging,'' as hr_norec"))
+            ->where('pp.kdprofile',$idProfile)
+            ->where('ru.objectdepartemenfk', $request['idDept'])
+            ->groupBy('ps.nocm', 'ps.namapasien', 'hr.norec', 'jk.jeniskelamin', 'pp.tglpelayanan', 'pp.produkfk', 'pr.namaproduk',
+                'pp.jumlah', 'pp.hargasatuan', 'pp.hargadiscount', 'sp.nostruk', 'pd.noregistrasi', 'ru.namaruangan',
+                'dp.namadepartemen', 'ps.id', 'apd.norec', 'sp.norec', 'pp.norec',
+                'ru.objectdepartemenfk', 'so.noorder', 'ris.order_key', 'apd.objectruanganfk','pp.iscito','pp.jasa','sbm.nosbm','pmi.pmi','so.keteranganlainnya')
+            ->orderBy('pp.tglpelayanan');
+        
+        if (isset($request['noregistrasi']) && $request['noregistrasi'] != "" && $request['noregistrasi'] != "undefined") {
+            $pelayanan = $pelayanan->where('pd.noregistrasi', '=', $request['noregistrasi']);
+        }
+        $pelayanan = $pelayanan->take(1)->get();
+        
+        $result =array(
+            'data' => $pelayanan,
+            'message' => 'Inhuman'
+        );
+        return $this->respond($result);
+    }
 
     public function getLaporanOperasi(Request $request) {
         $kdProfile = $this->getDataKdProfile($request);

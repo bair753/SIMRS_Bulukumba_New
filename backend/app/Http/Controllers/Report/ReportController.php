@@ -687,9 +687,62 @@ class ReportController extends ApiController{
             compact('raw', 'pageWidth','r'));
 
     }
+
+    public function cetakEkspertiseCtscanAll(Request $r) {
+        $kdProfile = (int)$r['kdprofile'];
+        $nocm = $r['nocm'];
+        $raw = collect(DB::select("
+            SELECT
+                so.nofoto,ps.nocm, ps.namapasien,ps.tgllahir,kp.kelompokpasien,ps.noidentitas,so.klinis,so.statusradctscan,
+            ru.namaruangan, so.tanggal,jk.jeniskelamin,  
+            CASE WHEN alm.alamatlengkap IS NULL THEN
+                '-' ELSE (
+                alm.alamatlengkap || ' ' || ds.namadesakelurahan || ' '|| kc.namakecamatan
+                || ' ' || kk.namakotakabupaten || ' '  || pro.namapropinsi )
+            END AS alamatlengkap,
+            pg.namalengkap as perujuk,pg2.namalengkap as dokterrad,
+            pr.namaproduk,replace(so.keterangan, '~', '<br>') as keterangan,pd.noregistrasi,pg2.nippns,pg3.namalengkap as dokterpengirim,
+            pg2.id as pgid
+            FROM
+                hasilradiologi_t AS so
+            INNER JOIN pasiendaftar_t AS pd ON pd.norec = so.noregistrasifk
+            INNER JOIN pasien_m AS ps ON ps. ID = pd.nocmfk
+            INNER JOIN kelompokpasien_m AS kp ON kp. ID = pd.objectkelompokpasienlastfk
+            INNER JOIN ruangan_m AS ru ON ru. ID = pd.objectruanganlastfk
+            INNER JOIN pelayananpasien_t AS pp ON pp.norec = so.pelayananpasienfk
+            INNER JOIN produk_m AS pr ON pr.id = pp.produkfk
+            LEFT JOIN jeniskelamin_m AS jk ON jk. ID = ps.objectjeniskelaminfk
+            LEFT JOIN kelompokpasien_m AS kps ON kps. ID = pd.objectkelompokpasienlastfk
+            LEFT JOIN alamat_m AS alm ON alm.nocmfk = ps. ID
+            left join desakelurahan_m as ds on ds.id=alm.objectdesakelurahanfk
+            left join kotakabupaten_m as kk on kk.id=alm.objectkotakabupatenfk
+            left join kecamatan_m as kc on kc.id=alm.objectkecamatanfk
+            left join propinsi_m as pro on pro.id=alm.objectpropinsifk
+            LEFT JOIN pegawai_m AS pg ON pg. ID = pd.objectpegawaifk
+            LEFT JOIN pegawai_m AS pg2 ON pg2. ID = so.pegawaifk
+            LEFT JOIN strukorder_t as sot on sot.norec = pp.strukorderfk
+            LEFT JOIN pegawai_m as pg3 on pg3.id = sot.objectpegawaiorderfk
+            WHERE
+                --so.norec = '$r[norec]'
+                ps.nocm = '$nocm'
+            AND so.kdprofile = $kdProfile
+            AND so.statusenabled = TRUE
+        "));
+        if(empty($raw)){
+            echo 'Data Tidak ada ';
+            return;
+        }
+        $pageWidth = 950;
+
+        return view('report.rad.expertiseall',
+            compact('raw', 'pageWidth','r'));
+
+    }
+
     public function cetakEkspertiseUsg(Request $r) {
         $norec = $r['norec'];
         $kdProfile = (int)$r['kdprofile'];
+        // dd($r->all);
         $raw = collect(DB::select("
             SELECT
                 so.nofoto,ps.nocm, ps.namapasien,ps.tgllahir,kp.kelompokpasien,ps.noidentitas,so.klinis,so.statusrad,
@@ -740,6 +793,62 @@ class ReportController extends ApiController{
             compact('raw', 'pageWidth','r'));
 
     }
+
+    public function cetakEkspertiseUsgAll(Request $r) {
+        $norec = $r['norec'];
+        $nocm = $r['nocm'];
+        $kdProfile = (int)$r['kdprofile'];
+        $raw = collect(DB::select("
+            SELECT
+                so.nofoto,ps.nocm, ps.namapasien,ps.tgllahir, age(ps.tgllahir) as umur,kp.kelompokpasien,ps.noidentitas,so.klinis,so.statusrad,
+            ru.namaruangan, so.tanggal,jk.jeniskelamin,  
+            CASE WHEN alm.alamatlengkap IS NULL THEN
+                '-' ELSE (
+                alm.alamatlengkap || ' ' || ds.namadesakelurahan || ' '|| kc.namakecamatan
+                || ' ' || kk.namakotakabupaten || ' '  || pro.namapropinsi )
+            END AS alamatlengkap,
+            pg.namalengkap as perujuk,pg2.namalengkap as dokterrad, p3.dokterluar as dokterluar,
+            pr.namaproduk,replace(so.keterangan, '~', '<br>') as keterangan,pd.noregistrasi,pg2.nippns,pg3.namalengkap as dokterpengirim,
+            pg2.id as pgid
+            FROM
+                hasilradiologi_t AS so
+            INNER JOIN pasiendaftar_t AS pd ON pd.norec = so.noregistrasifk
+            INNER JOIN pasien_m AS ps ON ps. ID = pd.nocmfk
+            INNER JOIN kelompokpasien_m AS kp ON kp. ID = pd.objectkelompokpasienlastfk
+            INNER JOIN ruangan_m AS ru ON ru. ID = pd.objectruanganlastfk
+            INNER JOIN pelayananpasien_t AS pp ON pp.norec = so.pelayananpasienfk
+            INNER JOIN produk_m AS pr ON pr.id = pp.produkfk
+            LEFT JOIN pelayananpasienpetugas_t AS p3 ON pp.norec = p3.pelayananpasien
+            LEFT JOIN jeniskelamin_m AS jk ON jk. ID = ps.objectjeniskelaminfk
+            LEFT JOIN kelompokpasien_m AS kps ON kps. ID = pd.objectkelompokpasienlastfk
+            LEFT JOIN alamat_m AS alm ON alm.nocmfk = ps. ID
+            left join desakelurahan_m as ds on ds.id=alm.objectdesakelurahanfk
+            left join kotakabupaten_m as kk on kk.id=alm.objectkotakabupatenfk
+            left join kecamatan_m as kc on kc.id=alm.objectkecamatanfk
+            left join propinsi_m as pro on pro.id=alm.objectpropinsifk
+            LEFT JOIN pegawai_m AS pg ON pg. ID = pd.objectpegawaifk
+            LEFT JOIN pegawai_m AS pg2 ON pg2. ID = so.pegawaifk
+            LEFT JOIN strukorder_t as sot on sot.norec = pp.strukorderfk
+            LEFT JOIN pegawai_m as pg3 on pg3.id = sot.objectpegawaiorderfk
+            WHERE
+                -- so.norec = '$norec'
+                ps.nocm = '$nocm'
+            AND so.kdprofile = $kdProfile
+            AND so.statusenabled = TRUE
+        "));
+        // dd($raw);
+        if(empty($raw)){
+            echo 'Data Tidak ada ';
+            return;
+        }
+;
+        $pageWidth = 950;
+
+        return view('report.rad.expertiseusgall',
+            compact('raw', 'pageWidth','r'));
+
+    }
+
     public function getKegiatanRanap(Request $r){
         $kdProfile = (int)$r['kdprofile'];
         $deptRanap = explode (',',$this->settingDataFixed('kdDepartemenRanapFix',  $kdProfile ));
@@ -2965,6 +3074,166 @@ class ReportController extends ApiController{
             // 'user' => $user,
             'datas' => $data,
         );
+        
+        return view(
+            'report.lab.hasil-lab-manual',
+            compact('datas', 'header', 'pageWidth', 'r', 'profile')
+        );
+    }
+
+    public function cetakHasilLabAll(Request $r)
+    {
+        $kdProfile = (int) $this->settingDataFixed('KdProfileAktif', 35);
+        $profile = collect(DB::select("
+            select * from profile_m where statusenabled = true
+        "))->first();
+        $pageWidth = 950;
+        $datas = collect(DB::select("
+        SELECT
+        * 
+        FROM (
+            SELECT DISTINCT
+            pp.tglpelayanan,
+            maps.nourutjenispemeriksaan,
+            maps.nourutdetail,
+            pg3.namalengkap AS DokterPelayanan,
+            rj.namaruangan AS ruanganperejuk,
+            case when rj2.namaruangan is null then rj.namaruangan else rj2.namaruangan end AS ruanganasal,
+            pm.nocm,
+            pm.noidentitas,
+            pm.paspor,
+            pm.nohp,
+            ng.namanegara,
+            pd.noregistrasi,
+            so.noorder,
+            pm.namapasien,
+            alm.alamatlengkap,
+            kp.kelompokpasien,
+            rkn.namarekanan,
+            pd.tglregistrasi,
+            to_char( pd.tglregistrasi, 'DD-MM-YYYY' ) AS tglRegiss,
+            pp.tglpelayanan AS tglawal,
+            pg.namalengkap AS pengorder,
+            pg1.namalengkap AS dokterperiksa,
+            pg2.namalengkap AS dpjp,
+            pm.tgllahir,
+            to_char( pm.tgllahir, 'DD-MM-YYYY' ) AS tgllahirs,
+            pp.noregistrasifk AS norec_apd,
+            djp.detailjenisproduk,
+            pp.produkfk,
+            prd.namaproduk,
+            maps.detailpemeriksaan,
+            case when maps.memohasil is null then '' else maps.memohasil end memohasil,
+            maps.nourutdetail,
+            maps.satuanstandarfk,
+            ss.satuanstandar,
+            nn.nilaitext,
+            nn.nilaimin,
+            nn.nilaimax,
+            CASE 
+                WHEN hh.hasil IS NULL THEN '' 
+                WHEN hh.FLAG = 'Y' THEN '*   ' || hh.hasil 
+                ELSE hh.hasil 
+		    END AS hasil,
+            hh.keterangan as keterangan_lab,
+            CASE WHEN hh.FLAG = 'Y' THEN '*' ELSE '' END AS stathasil,
+            hh.hasil as hasilawal,
+            maps.ID AS map_id,
+            hh.norec AS norec_hasil,
+            jk.jeniskelamin,
+            apd.tglmasuk AS tglverif,
+            hh.tglhasil AS tglakhir,
+            ( 'Tgl Selesai  :  ' || hh.tglhasil || '          (-)         Tgl. Mulai :  ' || pp.tglpelayanan || '    (=)    Durasi :  ' || ( hh.tglhasil - pp.tglpelayanan ) ) AS tat,
+            hh.flag,
+            CASE WHEN rj.objectdepartemenfk = 18 THEN 'RAWAT JALAN' WHEN rj.objectdepartemenfk = 16 THEN 'RAWAT INAP' WHEN rj.objectdepartemenfk = 24 THEN 'GAWAT DARURAT' ELSE 'PENUNJANG' END AS jeniskunjungan,
+            CASE WHEN kmr.namakamar IS NULL THEN '-' ELSE kmr.namakamar END AS namakamar,CASE WHEN ttr.nomorbed IS NULL THEN '-' ELSE CAST(ttr.nomorbed AS VARCHAR) END AS nomorbed,
+            CASE WHEN so.tglorder IS NULL THEN apd.tglmasuk ELSE so.tglorder END AS tglorder,
+            EXTRACT(YEAR FROM AGE(pd.tglregistrasi, pm.tgllahir)) || ' Thn ' ||
+            EXTRACT(MONTH FROM AGE(pd.tglregistrasi, pm.tgllahir)) || ' Bln ' ||
+            EXTRACT(DAY FROM AGE(pd.tglregistrasi, pm.tgllahir)) || ' Hr' AS umur,pg4.namalengkap AS dokter
+            FROM pelayananpasien_t AS pp
+            INNER JOIN antrianpasiendiperiksa_t AS apd ON apd.norec = pp.noregistrasifk
+            INNER JOIN pasiendaftar_t AS pd ON pd.norec = apd.noregistrasifk
+            LEFT JOIN strukorder_t AS so ON so.norec = pp.strukorderfk
+            LEFT JOIN ruangan_m AS rj ON pd.objectruanganlastfk = rj.id 
+            LEFT JOIN ruangan_m AS rj2 ON rj2.id = so.objectruanganfk
+            INNER JOIN pasien_m AS pm ON pm.id = pd.nocmfk
+            LEFT JOIN jeniskelamin_m AS jk ON jk.id = pm.objectjeniskelaminfk
+            LEFT JOIN alamat_m AS alm ON alm.nocmfk = pm.id 
+            LEFT JOIN kelompokpasien_m AS kp ON kp.id = pd.objectkelompokpasienlastfk
+            LEFT JOIN rekanan_m AS rkn ON rkn.id = pd.objectrekananfk
+            LEFT JOIN pegawai_m AS pg ON pg.id = so.objectpegawaiorderfk
+            LEFT JOIN pegawai_m AS pg1 ON pg1.id = apd.objectpegawaifk
+            LEFT JOIN pegawai_m AS pg2 ON pg2.id = pd.objectpegawaifk
+            LEFT JOIN negara_m AS ng ON ng.id = pm.objectnegarafk
+            INNER JOIN produk_m AS prd ON prd.id = pp.produkfk
+            LEFT JOIN pelayananpasienpetugas_t AS p3 ON pp.norec = p3.pelayananpasien
+            INNER JOIN detailjenisproduk_m AS djp ON djp.id = prd.objectdetailjenisprodukfk
+            INNER JOIN maphasillab_m AS maps ON maps.produkfk = prd.id 
+            INNER JOIN maphasillabdetail_m AS maps2 ON maps2.maphasilfk = maps.id 
+            AND maps2.kelompokumurfk IN ( SELECT ID FROM kelompokumur_m kuu WHERE $r[umur] BETWEEN kuu.umurmin AND kuu.umurmax )
+            LEFT JOIN pegawai_m AS pg3 ON pg3.id = p3.objectpegawaifk AND p3.objectpegawaifk = '4'
+            INNER JOIN nilainormal_m AS nn ON nn.id = maps2.nilainormalfk
+            LEFT JOIN satuanstandar_m AS ss ON ss.id = maps.satuanstandarfk
+            LEFT JOIN hasillaboratorium_t AS hh ON hh.norecpelayanan = pp.norec 
+            AND pp.noregistrasifk = hh.noregistrasifk 
+            AND maps.detailpemeriksaan = hh.detailpemeriksaan
+            LEFT JOIN kamar_m AS kmr ON kmr.id = apd.objectkamarfk
+            LEFT JOIN tempattidur_m AS ttr ON ttr.id = apd.nobed
+            left join pegawai_m  as pg4 on pg4.id = hh.pegawaifk
+            WHERE
+                -- pp.noregistrasifk = '$r[norec]' 
+                -- AND hh.hasil IS NOT NULL 
+                -- AND pp.norec IN ($r[strNorecPP]) 
+                hh.hasil IS NOT NULL 
+                AND pm.nocm = '$r[nocm]'
+                AND pd.noregistrasi = '$r[noregistrasi]'
+        ) AS DATA 
+        ORDER BY
+            DATA.nourutjenispemeriksaan ASC
+        "));
+
+        // dd($datas);
+
+        if (count($datas) == 0) {
+            echo '
+                <script language="javascript">
+                    window.alert("Hasil belum ada / hasil tidak ditemukan");
+                    window.close()
+                </script>
+            ';
+            die;
+        }
+        // dd(substr($datas[0]->hasil,0,1));
+        foreach ($datas as $data) {
+            if ($data->flag == 'Y') {
+                $lenghiji = strlen($data->hasilawal);
+                $lengdua = strlen($data->nilaitext);
+                if ($lenghiji > $lengdua) {
+                    if(!empty($data->nilaitext)) {
+                        if (strpos($data->hasilawal, $data->nilaitext) !== FALSE) {
+                            $data->hasil = $data->hasilawal;
+                        }
+                    }
+                    
+                } else {
+                    if(!empty($data->hasilawal)) {
+                        if (strpos($data->nilaitext, $data->hasilawal) !== FALSE) {
+                            $data->hasil = $data->hasilawal;
+                        }
+                    }
+                }
+            }
+        }
+        
+        $header = $datas->groupBy('detailjenisproduk');
+        $dataReport = array(
+            'namaprofile' => $profile->namalengkap,
+            'alamat' => $profile->alamatlengkap,
+            // 'user' => $user,
+            'datas' => $data,
+        );
+        // dd($dataReport);
         
         return view(
             'report.lab.hasil-lab-manual',
