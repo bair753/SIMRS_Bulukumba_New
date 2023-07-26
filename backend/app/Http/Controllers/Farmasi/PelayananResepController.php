@@ -1049,6 +1049,7 @@ class PelayananResepController extends ApiController
             ->select('so.noorder','pg.id as pgid','pg.namalengkap','ru.id','ru.namaruangan','so.tglorder')
             ->where('so.kdprofile', $idProfile);
 
+            
         if(isset($request['noorder']) && $request['noorder']!="" && $request['noorder']!="undefined"){
             $dataStruk = $dataStruk->where('so.noorder','=', $request['noorder']);
         }
@@ -1076,6 +1077,7 @@ class PelayananResepController extends ApiController
             $data = $data->where('so.noorder','=', $request['noorder']);
         }
         $data = $data->get();
+        return $data;
 
         $orderPelayanan=[];
         $i = 0;
