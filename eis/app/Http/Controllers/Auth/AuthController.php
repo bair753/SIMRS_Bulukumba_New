@@ -2621,4 +2621,32 @@ sb.id,
             compact('pasien', 'cbo', 'norec_apd', 'paramCari', 'dataRencana')
         );
     }
+
+    public function showBedah()
+    {
+        $kdProfile = 39;
+        $tglAwal = date('Y-m-d ') . "00:00:00";
+        $tglAkhir = date('Y-m-d ') . "23:59:59";
+        $getPerawat = [];
+
+        $getDokter = collect(DB::select("
+
+            SELECT row_number() over(partition by ps.nocm order by so.tglorder) as rownum, ps.namapasien,ps.nocm,pd.noregistrasi,
+                   ru.namaruangan AS ruangrawat,
+                   so.noorder,so.tglorder AS tgloperasi
+            FROM strukorder_t AS so
+            INNER JOIN pasiendaftar_t AS pd ON pd.norec = so.noregistrasifk
+            INNER JOIN pasien_m AS ps ON ps.id = pd.nocmfk
+            LEFT JOIN jeniskelamin_m AS klm ON klm.id = ps.objectjeniskelaminfk
+            LEFT JOIN ruangan_m AS ru ON ru.id = so.objectruanganfk                                 
+            WHERE so.statusenabled = true AND pd.statusenabled = true
+                  AND so.kdprofile = $kdProfile AND pd.kdprofile = $kdProfile
+                  AND so.tglorder BETWEEN '$tglAwal' AND '$tglAkhir'                  
+                  AND so.keteranganorder = 'Pesan Jadwal Operasi'
+                  AND so.objectkelompoktransaksifk = 22
+                  ORDER BY so.tglorder ASC
+        "));
+        // dd($getDokter);
+        return view('module.bedah.dashboard-bedah', compact('getPerawat', 'getDokter'));
+    }
 }
