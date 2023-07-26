@@ -1077,7 +1077,6 @@ class PelayananResepController extends ApiController
             $data = $data->where('so.noorder','=', $request['noorder']);
         }
         $data = $data->get();
-        return $data;
 
         $orderPelayanan=[];
         $i = 0;
