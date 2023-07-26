@@ -68,7 +68,9 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
 @endphp
  <!-- onload="window.print()" -->
 <body style="background-color: #FFF;margin-bottom:20px">
-
+    @php
+    $no = 1;
+@endphp
 @foreach ($raw as $item)
 <div align="center" class="section">
     <table cellspacing="0" cellpadding="0" width="{{$pageWidth}}" style="padding-right:25px;padding-left:80px;padding-top:110px;padding-bottom:25px;">
@@ -140,7 +142,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             </td>
                             <td width="65%" align="center">
                                 <font style="padding-right: 50px; font-size:14pt">BTK,SS</font><br>
-                                <div style="padding-right: 50px; font-size:20pt" id="qrDokter"></div>
+                                <div style="padding-right: 50px; font-size:20pt" id="qrDokter{{ $item->pgid }}{{ $no }}"></div>
                                 <font style="padding-right: 50px; font-size:14pt"><u>( {{ $item->dokterrad }} )</u></font><br>
                                 <font style="padding-right: 50px; font-size:14pt">Spesialis Radiologi</font><br><br><br>
                             </td>
@@ -151,45 +153,20 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
         </tbody>
     </table>
 </div>
-@endforeach
+
 <script>
-    var baseUrl =
-            {!! json_encode(url('/')) !!}
-    var angular = angular.module('angularApp', [], function ($interpolateProvider) {
-            $interpolateProvider.startSymbol('@{{');
-            $interpolateProvider.endSymbol('}}');
-        }).factory('httpService', function ($http, $q) {
-            return {
-                get: function (url) {
-                    // $("#showLoading").show()
-                    var deffer = $q.defer();
-                    $http.get(baseUrl + '/' + url, {
-                        headers: {
-                            'Content-Type': 'application/json',
-                        }
-                    }).then(function successCallback(response) {
-                        deffer.resolve(response);
-                        // $("#showLoading").hide()
-                    }, function errorCallback(response) {
-                        deffer.reject(response);
-                        // $("#showLoading").hide()
-                    });
-                    return deffer.promise;
-                },
-            }
-        })
-    $(function () {
-        'use strict';
-        $('#qrDokter').qrcode({
-            text: baseUrl + '/service/medifirst2000/report/data-dokter?reg=' + {{ $raw[0]->pgid }} ,
+    $('#qrDokter{{ $item->pgid }}{{ $no }}').qrcode({
+            text: 'Tanda Tangan Digital Oleh ' + {{ $item->pgid }}{{ $no }} ,
             height: 75,
             width: 75
         });
-
-    })
     $(document).ready(function () {
         window.print();
     });
 </script>
+@php
+    $no ++;
+@endphp
+@endforeach
 </body>
 </html>
