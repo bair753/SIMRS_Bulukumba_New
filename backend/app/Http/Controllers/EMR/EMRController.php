@@ -1449,7 +1449,7 @@ class EMRController  extends ApiController
             ->leftjoin('rekanan_m as rk', 'rk.id', '=', 'pd.objectrekananfk')
             ->leftjoin('kelas_m as kls', 'kls.id', '=', 'apd.objectkelasfk')
             ->leftJoin('pegawai_m as pg1', 'pg1.id', '=', 'pd.objectpegawaifk')
-            ->select('apd.norec', 'pd.noregistrasi', 'pd.tglregistrasi', 'ps.nocm', 'ps.namapasien', 'ps.tgllahir', 'ru.objectdepartemenfk',
+            ->select('apd.norec', 'pd.noregistrasi', 'pd.tglregistrasi', 'ps.nocm', 'ps.nobpjs', 'ps.notelepon', 'ps.namapasien', 'ps.tgllahir', 'ru.objectdepartemenfk',
                 'alm.alamatlengkap', 'kps.kelompokpasien', 'ru.namaruangan', 'pg.namalengkap', 'jk.jeniskelamin', 'pd.norec as norec_pd',
                 'pdd.pendidikan', 'pk.pekerjaan','ru.objectdepartemenfk','pd.jenispelayanan',
                 'rk.namarekanan', 'kls.namakelas', 'pd.nocmfk', 'pd.objectkelompokpasienlastfk', 'apd.objectruanganfk', 'apd.objectpegawaifk',

@@ -130,16 +130,17 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 medifirstService.get("emr/get-antrian-pasien-norec/" + noregistrasifk).then(function (e) {
                     var antrianPasien = e.data.result;
                     $scope.item.obj[32116169] = antrianPasien.nobpjs;
-                    $scope.item.obj[32116170] = $scope.cc.nocm;
-                    $scope.item.obj[32116172] = $scope.cc.namapasien;
-                    $scope.item.obj[32116157] = new Date(moment(antrianPasien.tgllahir).format('YYYY-MM-DD'));
-                    $scope.item.obj[32104094] = antrianPasien.alamatlengkap;
-                    result.umur = dateHelper.CountAge(new Date(antrianPasien.tgllahir), new Date(antrianPasien.tglregistrasi));
-                    var bln = antrianPasien.umur.month,
-                        thn = antrianPasien.umur.year,
-                        day = antrianPasien.umur.day
-                    usia = (antrianPasien.umur.year * 12) + antrianPasien.umur.month;
-                    $scope.item.obj[32104092] = thn + 'thn ' + bln + 'bln ' + day + 'hr '
+                    $scope.item.obj[32116170] = antrianPasien.nocm;
+                    $scope.item.obj[32116172] = antrianPasien.namapasien;
+                    $scope.item.obj[32116174] = antrianPasien.notelepon;
+                    // $scope.item.obj[32116157] = new Date(moment(antrianPasien.tgllahir).format('YYYY-MM-DD'));
+                    // $scope.item.obj[32104094] = antrianPasien.alamatlengkap;
+                    // result.umur = dateHelper.CountAge(new Date(antrianPasien.tgllahir), new Date(antrianPasien.tglregistrasi));
+                    // var bln = antrianPasien.umur.month,
+                    //     thn = antrianPasien.umur.year,
+                    //     day = antrianPasien.umur.day
+                    // usia = (antrianPasien.umur.year * 12) + antrianPasien.umur.month;
+                    // $scope.item.obj[32104092] = thn + 'thn ' + bln + 'bln ' + day + 'hr '
 
                     // $scope.item.obj[32103374] = new Date(moment(antrianPasien.tgllahir).format('YYYY-MM-DD'));
                     // $scope.item.obj[32103375] = antrianPasien.jeniskelamin;

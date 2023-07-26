@@ -261,11 +261,11 @@
                 <td style="border:none;" colspan="9">All Chambers</td> 
             </tr>
             <tr style="border:none">
-                <td style="border:none;" colspan="2">LA/LV</td> 
+                <td style="border:none;" colspan="2">@{{ item.obj[32116513] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} LA/ @{{ item.obj[32116514] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} LV</td> 
                 <td style="border:none;" colspan="7">: @{{ item.obj[32110652] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} N / @{{ item.obj[32110653] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Dilatasi / @{{ item.obj[32110654] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Mengecil</td> 
             </tr>
             <tr style="border:none">
-                <td style="border:none;" colspan="2">RA/RV</td> 
+                <td style="border:none;" colspan="2">@{{ item.obj[32116515] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} RA/ @{{ item.obj[32116516] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} RV</td> 
                 <td style="border:none;" colspan="7">: @{{ item.obj[32110655] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} N / @{{ item.obj[32110656] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Dilatasi / @{{ item.obj[32110657] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Mengecil</td> 
             </tr>
             <tr style="border:none">
@@ -320,6 +320,7 @@
                 <td style="border:none;" colspan="7">: 
                     @{{ item.obj[32110691] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} N / 
                     @{{ item.obj[32110692] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} MS / 
+                    Wilkin Score : @{{ item.obj[32116517] ? item.obj[32116517] : '............' }} /
                     @{{ item.obj[32110693] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Ml - Mild / 
                     @{{ item.obj[32110694] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Moderate / 
                     @{{ item.obj[32110695] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Severe - Distance - WS</td> 
