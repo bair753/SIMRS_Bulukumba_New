@@ -20,6 +20,7 @@ Route::get('/', "Auth\AuthController@show")->name("login");
 Route::post('/logins', "Auth\AuthController@loginKeun")->name("login_validation");
 Route::get('/logout', "Auth\AuthController@logoutKeun")->name("logout");
 
+Route::get('/bedah', "Auth\AuthController@showBedah");
 
 Route::group([ 'prefix' => 'view'], function () {
     Route::get('pasien', 'MedicalRecord\GeneralController@getPasien')->name('pasien');
