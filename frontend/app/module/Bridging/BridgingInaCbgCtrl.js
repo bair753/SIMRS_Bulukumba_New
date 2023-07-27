@@ -5050,7 +5050,7 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 					return;
 				}
 				var emrfk = [290083,290084,290092] // Emr Laporan Operasi
-				medifirstService.get("bridging/inacbg/get-rincian-operasi?noregistrasi=" + $scope.dataPasienSelected.noregistrasi + '&emrfk=' + emrfk
+				medifirstService.get("bridging/inacbg/get-all-page-inacbg?noregistrasi=" + $scope.dataPasienSelected.noregistrasi + '&emrfk=' + emrfk
 				, true).then(function (dat) {
 						$scope.dataDaftarHasilOperasi = {
 							data: dat.data.data,
@@ -5090,11 +5090,11 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 								"title": "Nama Form",
 								"width": "120px"
 						},
-						{
-							"field": "index",
-							"title": "Page",
-							"width": "120px"
-					},
+						// {
+						// 	"field": "index",
+						// 	"title": "Page",
+						// 	"width": "120px"
+						// },
 				],
 				sortable: {
 						mode: "single",
@@ -6206,7 +6206,7 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 				}
 				var emrfk = [290099] // emrfk EKG
 
-				medifirstService.get("bridging/inacbg/get-rincian-operasi?noregistrasi=" + $scope.dataPasienSelected.noregistrasi + '&emrfk=' + emrfk
+				medifirstService.get("bridging/inacbg/get-all-page-inacbg?noregistrasi=" + $scope.dataPasienSelected.noregistrasi + '&emrfk=' + emrfk
 					// medifirstService.get("lab-radiologi/get-rincian-pelayanan?objectdepartemenfk=" + departemenfk + "&noregistrasi=" +   $scope.item.noregistrasi
 					, true).then(function (dat) {
 						$scope.dataDaftarEKG = {
