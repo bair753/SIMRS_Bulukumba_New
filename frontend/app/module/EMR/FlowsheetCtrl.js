@@ -1,4 +1,4 @@
-define(['initialize'], function (initialize) {
+define(['initialize', 'Configuration'], function (initialize, config) {
     'use strict';
     initialize.controller('FlowsheetCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
         function ($q, $rootScope, $scope, ModelItem, $state, cacheHelper, dateHelper, medifirstService) {
@@ -23,7 +23,7 @@ define(['initialize'], function (initialize) {
             var seriesDis = []
             var categories = []
             var dataLoad = [];
-            $scope.isCetak = false;
+            $scope.isCetak = true;
             $scope.show = true;
             $scope.allDisabled = false;
             $scope.listItem = [
@@ -108,70 +108,16 @@ define(['initialize'], function (initialize) {
                 $scope.listObat = data;
             });
 
-            // $scope.listEdukasiPasien = [
-            //     {
-            //         "id": 1,
-            //         "detail": [
-            //             { "id": 423249, "nama": "", "caption": "Baca dan tulis", "type": "label", "dataList": "", "satuan": "" },
-            //             { "id": 423250, "nama": "Baik", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-            //             { "id": 423251, "nama": "Kurang", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-            //             { "id": 423252, "nama": "", "caption": "Pendidikan pasien", "type": "label", "dataList": "", "satuan": "" },
-            //             { "id": 423253, "nama": "SD", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-            //             { "id": 423254, "nama": "SLTP", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-            //             { "id": 423255, "nama": "SLTA", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-            //             { "id": 423256, "nama": "S-1", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-            //             { "id": 423257, "nama": "Lain-lain :", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-            //             { "id": 423258, "nama": "", "caption": "", "type": "textbox1", "dataList": "", "satuan": "" },
-            //             { "id": 423259, "nama": "", "caption": "Bahasa", "type": "label", "dataList": "", "satuan": "" },
-            //             { "id": 423260, "nama": "Indonesia", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-            //             { "id": 423261, "nama": "Inggris", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-            //             { "id": 423262, "nama": "Daerah :", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-            //             { "id": 423263, "nama": "", "caption": "", "type": "textbox1", "dataList": "", "satuan": "" },
-            //             { "id": 423264, "nama": "Lain-lain :", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-            //             { "id": 423265, "nama": "", "caption": "", "type": "textbox1", "dataList": "", "satuan": "" },
-            //             { "id": 423266, "nama": "", "caption": "Hambatan Emosional dan Motivasi", "type": "label", "dataList": "", "satuan": "" },
-            //             { "id": 423267, "nama": "Tidak ada", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-            //             { "id": 423268, "nama": "Bahasa", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-            //             { "id": 423269, "nama": "Kognitif terbatas", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-            //             { "id": 423270, "nama": "Emosional", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-            //             { "id": 423271, "nama": "", "caption": "Keterbatasan Fisik dan Kognetif", "type": "label", "dataList": "", "satuan": "" },
-            //             { "id": 423272, "nama": "Tidak ada", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-            //             { "id": 423273, "nama": "Penglihatan terganggu", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-            //             { "id": 423274, "nama": "Pendengaran terganggu", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-            //             { "id": 423275, "nama": "Gangguan bicara", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-            //             { "id": 423276, "nama": "Fisik lemah", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-            //             { "id": 423277, "nama": "Lain-lain :", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-            //             { "id": 423278, "nama": "", "caption": "", "type": "textbox1", "dataList": "", "satuan": "" },
-            //             { "id": 423279, "nama": "", "caption": "Kesediaan untuk Menerima Informasi", "type": "label", "dataList": "", "satuan": "" },
-            //             { "id": 423280, "nama": "Ya", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-            //             { "id": 423281, "nama": "Tidak", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" }
-            //         ]
-            //     }
-            // ];
-
-            // $scope.listMateriEdukasi = [
-            //     {
-            //         "id": 1,
-            //         "detail": [
-            //             { "id": 423282, "nama": "Penggunaan Obat-obatan", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-            //             { "id": 423283, "nama": "Penggunaan peralatan medis", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-            //             { "id": 423284, "nama": "Potensi interaksi antar obat", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-            //             { "id": 423285, "nama": "Diet dan nutrisi", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-            //             { "id": 423286, "nama": "Manejemen nyeri", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-            //             { "id": 423287, "nama": "Teknik rehabilitasi", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-            //             { "id": 423288, "nama": "Cuci tangan yang benar", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-            //             { "id": 423289, "nama": "Lain-lain :", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-            //             { "id": 423290, "nama": "", "caption": "", "type": "textbox1", "dataList": "", "satuan": "" }
-            //         ]
-            //     }
-            // ];
-
             $scope.cetakPdf = function () {
                 if (norecEMR == '') return
-                var client = new HttpClient();
-                client.get('http://127.0.0.1:1237/printvb/e-rekammedis?cetak-emr-asesmen-awal-medis-igd&id=' + $scope.cc.nocm + '&emr=' + norecEMR + '&view=true', function (response) {
-                    // do something with response
-                });
+                var local = JSON.parse(localStorage.getItem('profile'));
+                var nama = medifirstService.getPegawaiLogin().namalengkap;
+                window.open(config.baseApiBackend + 'report/cetak-flowsheet?nocm='
+                    + $scope.cc.nocm + '&norec_apd=' + $scope.cc.norec + '&emr=' + norecEMR
+                    + '&emrfk=' + $scope.cc.emrfk
+                    + '&kdprofile=' + local.id
+                    + '&index=' + paramsIndex
+                    + '&nama=' + nama, '_blank');
             }
 
             var cacheEMR_TRIASE_PRIMER = cacheHelper.get('cacheEMR_TRIASE_PRIMER');

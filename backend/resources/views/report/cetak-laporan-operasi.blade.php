@@ -556,14 +556,14 @@
         var dokter = $scope.item.obj[31100569];
         var dpjp = $scope.item.obj[31100576];
         jQuery('#qrcodeDokter').qrcode({
-            width	: 100,
-			height	: 100,
+            width	: 80,
+			height	: 80,
             text	: "Tanda Tangan Digital Oleh " + dokter
         });	
 
         jQuery('#qrcodeDPJP').qrcode({
-            width	: 100,
-			height	: 100,
+            width	: 80,
+			height	: 80,
             text	: "Tanda Tangan Digital Oleh " + dpjp
         });	
     })
@@ -574,8 +574,8 @@
             }
         };
     });
-    $(document).ready(function () {
-        window.print();
-    });
+    // $(document).ready(function () {
+    //     window.print();
+    // });
 </script>
 </html>
