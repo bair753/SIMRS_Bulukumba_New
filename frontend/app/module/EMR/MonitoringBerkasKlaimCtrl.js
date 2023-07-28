@@ -73,7 +73,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 + "tglawal=" + tglawal
                 + "&tglakhir=" + tglakhir
                 + "&departId=" + departId + ruanganId + noReg + noRm + nama + noSEP).then(function (data) {
-                    $scope.isRouteLoading = false;
+                    
                     var dataMaster = data.data.master
                     if(dataMaster.length == 0) {
                         toastr.error("Master data dokumen klaim belum disetting!");
@@ -89,6 +89,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     if(!idNot.includes(medifirstService.getPegawaiLogin().id)){
                         for (let i = 0; i < dataMaster.length; i++) {
                             const element = dataMaster[i];
+                            console.log(element.kodeexternal);
                             var col = {
                                 "field": element.kodeexternal,
                                 "title": element.dokumen,
@@ -98,6 +99,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                             coldimanis.push(col);
                         }
                     }
+                    $scope.isRouteLoading = false;
                     createGrid(dataRow, coldimanis)
                 })
             }
