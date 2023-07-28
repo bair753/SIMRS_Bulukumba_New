@@ -491,8 +491,8 @@
         var dpjp = $scope.item.obj[420393];
         if(dpjp != undefined){
             jQuery('#qrcodeDPJP').qrcode({
-            width	: 100,
-			height	: 100,
+            width	: 70,
+			height	: 70,
             text	: "Tanda Tangan Digital Oleh " + dpjp
         });	
         }
