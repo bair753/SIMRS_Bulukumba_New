@@ -2,7 +2,7 @@
 
 <head>
     <title>
-        Report
+        Resep Elektronik
     </title>
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/jquery.qr-code.js') }}"></script>
@@ -58,7 +58,7 @@
     }
 </style>
 
-<body style="background-color: #CCCCCC">
+<body>
     <?php date_default_timezone_set('Asia/Makassar');?>
     <div align="center">
         <table cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0" width="{{ $pageWidth }}">
@@ -708,11 +708,11 @@
                                             <br><br>
                                         </td>
                                     </tr>
-                                    {{-- <script>
+                                    <script>
                                         $(document).ready(function() {
                                             window.print();
                                         });
-                                    </script> --}}
+                                    </script>
                                     <script>
                                         var dpjp = "{{ $raw->namalengkap}}";
                                     </script>

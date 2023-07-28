@@ -2,7 +2,7 @@
 
 <head>
     <title>
-        hasil laboratorium
+        Hasil Laboratorium
     </title>
 
     <script src="{{ asset('js/jquery.min.js') }}"></script>
@@ -106,7 +106,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
 @endphp
 <!-- onload="window.print()"  -->
 
-<body style="background-color: #CCCCCC">
+<body>
     
     <div id="qrcode"></div>
     <div align="center">
