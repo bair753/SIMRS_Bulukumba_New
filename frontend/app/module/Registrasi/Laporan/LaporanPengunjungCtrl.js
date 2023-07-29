@@ -284,6 +284,11 @@ define(['initialize'], function (initialize) {
                         "title": "Kode Penyakit",
                         "width": "80px",
                         // "template": "# for(var i=0; i < kddiagnosa.length;i++){# <span class=\"label label-primary text-center\"> #= kendo.toString(kddiagnosa[i]) #,</span> #}#",
+                    },
+                    {
+                        "field": "namadiagnosa",
+                        "title": "Nama Diagnosa",
+                        "width": "250px",
                     }
                 ]
             });

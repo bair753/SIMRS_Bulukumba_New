@@ -632,6 +632,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
           Route::get('emr/get-resume-medis-inap/{nocm}', 'EMR\EMRController@getResumeMedisInap');
           Route::post('emr/post-konsultasi', 'EMR\EMRController@saveOrderKonsul');
           Route::get('emr/get-order-konsul', 'EMR\EMRController@getOrderKonsul');
+          Route::get('emr/get-order-konsul-all', 'EMR\EMRController@getOrderKonsulAll');
           Route::post('emr/disabled-konsultasi', 'EMR\EMRController@disabledOrderKonsul');
           Route::post('emr/save-konsul-from-order', 'EMR\EMRController@saveKonsulFromOrder');
           Route::get('emr/get-data-pengkajian-medis-pasien', 'EMR\EMRController@getDataPasienPengkajianMedis');
@@ -2761,6 +2762,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
         Route::get('report/cetak-labelkecil-apotik', 'Report\ReportController@labelLabelKecilApotik');
         Route::get('report/cetak-ringkasan-pasien-masuk-keluar', 'Report\ReportController@ringkasanPasienMasukKeluar');
         Route::get('report/cetak-konsul-dokter', 'Report\ReportController@konsulDokter');
+        Route::get('report/cetak-konsul-dokter-all', 'Report\ReportController@konsulDokterAll');
         Route::get('report/cetak-catatan-pemberian-dan-pemantuan-obat-pasien', 'Report\ReportController@catatanPemberiandanPemantauanObatPasien');
         Route::get('report/cetak-asesmen-awal-keperawatan-igd', 'Report\ReportController@asesmenAwalKeperawatanIGD');
         Route::get('report/cetak-asesmen-awal-medis-igd', 'Report\ReportController@asesmenAwalMedisIGD');
