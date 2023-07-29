@@ -4114,6 +4114,48 @@ class ReportController extends ApiController{
         return view('report.cetak-konsul-dokter', compact('res'));
     }
 
+    public function konsulDokterAll(Request $request)
+    {
+        $kdProfile = $request['kdprofile'];
+        $noregistrasi = $request['noregistrasi'];
+
+        $kelTrans = KelompokTransaksi::where('kelompoktransaksi', 'KONSULTASI DOKTER')->first();
+        $data = \DB::table('strukorder_t as so')
+            ->Join('pasiendaftar_t as pd', 'pd.norec', '=', 'so.noregistrasifk')
+            ->Join('pasien_m as ps', 'ps.id', '=', 'pd.nocmfk')
+            ->leftJoin('ruangan_m as ru', 'ru.id', '=', 'so.objectruanganfk')
+            ->leftJoin('ruangan_m as rutuju', 'rutuju.id', '=', 'so.objectruangantujuanfk')
+            ->leftJoin('pegawai_m as pg', 'pg.id', '=', 'so.objectpegawaiorderfk')
+            ->leftJoin('pegawai_m as pet', 'pet.id', '=', 'so.objectpetugasfk')
+            ->leftJoin('antrianpasiendiperiksa_t as apd', 'apd.objectstrukorderfk', '=', 'so.norec')
+            ->select('so.norec', 'so.noorder', 'so.tglorder', 'ru.namaruangan as ruanganasal', 'pg.namalengkap', 
+                'rutuju.namaruangan as ruangantujuan', 'pet.namalengkap as pengonsul',
+                'pd.noregistrasi', 'pd.tglregistrasi', 'ps.nocm', 'so.keteranganorder', 'pd.norec as norec_pd',
+                'ps.namapasien', 'ps.tgllahir', 'ps.noidentitas', 'pg.id as pegawaifk', 'so.objectruangantujuanfk', 'so.objectruanganfk', 'apd.norec as norec_apd',
+                'so.keteranganlainnya')
+            ->where('so.kdprofile',$kdProfile)
+            ->where('pd.noregistrasi',$noregistrasi)
+            ->where('so.statusenabled', true)
+            ->where('so.objectkelompoktransaksifk', $kelTrans->id)
+            ->whereNotNull('so.keteranganlainnya')
+            ->orderBy('so.tglorder', 'desc')->get();
+            // dd($data);
+
+        $res['profile'] = Profile::where('id', $kdProfile)->first();
+        $res['data'] = $data;
+        if(empty($res['data'])){
+            echo '
+                <script language="javascript">
+                    window.alert("Data tidak ada / Jawaban konsul belum ada");
+                    window.close()
+                </script>
+            ';
+            die;
+        }
+
+        return view('report.cetak-konsul-dokter-all', compact('res'));
+    }
+
     public function catatanPemberiandanPemantauanObatPasien(Request $request) {
         $nocm = $request['nocm'];
         $norec = $request['emr'];

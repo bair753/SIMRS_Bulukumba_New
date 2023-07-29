@@ -82,7 +82,7 @@ class LaporanPengunjungController extends ApiController
             // ->leftjoin ('diagnosa_m as dg','ddp.objectdiagnosafk','=','dg.id')
             ->select('pd.norec','pd.noregistrasi','pd.tglregistrasi','ps.nocm','ps.namapasien','ps.nohp','ps.tgllahir','jk.jeniskelamin','ag.agama','pdd.pendidikan','pkr.pekerjaan','alm.alamatlengkap',
                 'dsk.namadesakelurahan','alm.kecamatan','kkb.namakotakabupaten','sp.statusperkawinan','pd.statuspasien','rg.namaruangan','pg.namalengkap','ps.tgldaftar','klp.kelompokpasien','apd.norec as norec_apd',
-                DB::raw("to_char(pd.tglregistrasi,'DD-MM-YYYY') as tglregistrasi1,to_char(pd.tglregistrasi,'HH:mm') as jamregistrasi,'' AS kddiagnosa"))
+                DB::raw("to_char(pd.tglregistrasi,'DD-MM-YYYY') as tglregistrasi1,to_char(pd.tglregistrasi,'HH:mm') as jamregistrasi,'' AS kddiagnosa, '' AS namadiagnosa"))
             ->where('pd.statusenabled',1);
             //->where('ddp.objectjenisdiagnosafk',1);
             DB::raw('ddp.objectjenisdiagnosafk = 1 or ddp.objectjenisdiagnosafk IS NULL' );
@@ -118,7 +118,7 @@ class LaporanPengunjungController extends ApiController
                     ->join('detaildiagnosapasien_t AS ddp','ddp.noregistrasifk','=','apd.norec')
                     ->join('diagnosapasien_t AS dp','dp.norec','=','ddp.objectdiagnosapasienfk')
                     ->join ('diagnosa_m as dg','ddp.objectdiagnosafk','=','dg.id')
-                    ->select(DB::raw("apd.noregistrasifk,ddp.objectjenisdiagnosafk,dg.kddiagnosa AS diagnosa,
+                    ->select(DB::raw("apd.noregistrasifk,ddp.objectjenisdiagnosafk,dg.kddiagnosa AS diagnosa, dg.namadiagnosa AS namadiagnosa,
                                      CASE WHEN dp.iskasusbaru = true AND dp.iskasuslama = false THEN 'BARU'
                                      WHEN dp.iskasuslama = true AND dp.iskasusbaru = false THEN 'LAMA' ELSE '' END kasus"))
                     ->where('apd.kdprofile', 21)
@@ -134,7 +134,7 @@ class LaporanPengunjungController extends ApiController
 //                    $diagnosa = [];
                     if($norecaPd!= ''){
                         $diagnosa = DB::select(DB::raw("
-                           select dg.kddiagnosa,ddp.noregistrasifk as norec_apd
+                           select dg.kddiagnosa,dg.namadiagnosa,ddp.noregistrasifk as norec_apd
                            from detaildiagnosapasien_t as ddp
                            left join diagnosapasien_t as dp on dp.norec=ddp.objectdiagnosapasienfk
                            left join diagnosa_m as dg on ddp.objectdiagnosafk=dg.id
@@ -145,6 +145,7 @@ class LaporanPengunjungController extends ApiController
                                if($data[$i]->norec_apd == $d->norec_apd){
                                    if ($d->kddiagnosa != null){
                                        $data[$i]->kddiagnosa = $data[$i]->kddiagnosa . ', ' . $d->kddiagnosa;
+                                       $data[$i]->namadiagnosa = $data[$i]->namadiagnosa . ' + ' . $d->namadiagnosa;
                                    }
                                }
                            }
@@ -157,6 +158,7 @@ class LaporanPengunjungController extends ApiController
                     if ($hideung->kddiagnosa != ""){
 //                        return $this->respond()
                         $data[$d]->kddiagnosa = substr($data[$d]->kddiagnosa,1);
+                        $data[$d]->namadiagnosa = substr($data[$d]->namadiagnosa,2);
                         $result [] = $data[$d];
                     }
                     $d = $d + 1;

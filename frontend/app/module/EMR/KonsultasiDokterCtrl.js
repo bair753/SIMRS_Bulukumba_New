@@ -31,10 +31,16 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     }
             }
             $scope.resumeOpt = {
-                toolbar: [{
+                toolbar: [
+                    {
                     name: "create", text: "Input Baru",
                     template: '<button ng-click="inputBaru()" class="k-button k-button-icontext k-grid-upload" href="\\#"><span class="k-icon k-i-plus"></span>Tambah Konsul</button>'
-                },],
+                    },
+                    {
+                        name: "create", text: "Input Baru",
+                        template: '<button ng-click="cetakSemua()" class="k-button k-button-icontext k-grid-upload" href="\\#"><span class="fa fa-print"></span> &nbsp;Cetak Semua</button>'
+                    },
+                ],
                 pageable: true,
                 scrollable: true,
                 columns: [
@@ -135,6 +141,20 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     + $scope.nocm
                     + '&kdprofile=' + local.id
                     + '&emr=' + $scope.item.norec, '_blank');
+            }
+
+            $scope.cetakSemua = function () {
+                if (paramSearch == undefined){
+                    toastr.error("Konsul Dokter tidak ditemukan");
+                    return
+                } 
+
+                var local = JSON.parse(localStorage.getItem('profile'));
+                var nama = medifirstService.getPegawaiLogin().namalengkap;
+                window.open(config.baseApiBackend + 'report/cetak-konsul-dokter-all?'
+                    + paramSearch
+                    + '&kdprofile=' + local.id
+                    + '_blank');
             }
             function editData(e) {
                 e.preventDefault();

@@ -5257,7 +5257,7 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 					return;
 				}
 
-				medifirstService.get("emr/get-order-konsul?noregistrasi=" + $scope.dataPasienSelected.noregistrasi
+				medifirstService.get("emr/get-order-konsul-all?noregistrasi=" + $scope.dataPasienSelected.noregistrasi
 						// medifirstService.get("lab-radiologi/get-rincian-pelayanan?objectdepartemenfk=" + departemenfk + "&noregistrasi=" +   $scope.item.noregistrasi
 					, true).then(function (dat) {
 						$scope.dataDaftadKonsulDokter = {
@@ -5295,16 +5295,16 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 						"title": "Ruangan Tujuan",
 						"width": "160px"
 					},
-					{
-						"field": "pengonsul",
-						"title": "Pengonsul",
-						"width": "160px",
-					},
-					{
-						"field": "namalengkap",
-						"title": "Dokter",
-						"width": "160px",
-					},
+					// {
+					// 	"field": "pengonsul",
+					// 	"title": "Pengonsul",
+					// 	"width": "160px",
+					// },
+					// {
+					// 	"field": "namalengkap",
+					// 	"title": "Dokter",
+					// 	"width": "160px",
+					// },
 				],
 				sortable: {
 					mode: "single",
@@ -5313,16 +5313,20 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 			}
 
 			$scope.cetakKonsulDokter = function () {
-				if ($scope.dataSelectedKonsulDokter.keteranganlainnya == undefined) {
-					toastr.error('Jawaban belum tersedia!!!')
-					return;
-				}
+				// if ($scope.dataSelectedKonsulDokter.keteranganlainnya == undefined) {
+				// 	toastr.error('Jawaban belum tersedia!!!')
+				// 	return;
+				// }
 				var local = JSON.parse(localStorage.getItem('profile'));
 				var nama = medifirstService.getPegawaiLogin();
-				window.open(baseTransaksi + 'report/cetak-konsul-dokter?nocm='
-						+ $scope.dataPasienSelected.nocm
-						+ '&emr=' + $scope.dataSelectedKonsulDokter.norec
-						+ '&kdprofile=' + local.id, '_blank');
+				// window.open(baseTransaksi + 'report/cetak-konsul-dokter?nocm='
+				// 		+ $scope.dataPasienSelected.nocm
+				// 		+ '&emr=' + $scope.dataSelectedKonsulDokter.norec
+				// 		+ '&kdprofile=' + local.id, '_blank');
+
+				window.open(baseTransaksi + 'report/cetak-konsul-dokter-all?'
+				+ 'noregistrasi=' + $scope.dataPasienSelected.noregistrasi
+				+ '&kdprofile=' + local.id);
 			}
 
 			$scope.asesmenAwalKeperIGD = function(){
