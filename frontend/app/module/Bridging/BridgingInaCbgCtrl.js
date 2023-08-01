@@ -4938,6 +4938,7 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 						$scope.dataDaftarHasilLab = {
 							data: dat.data.data,
 							_data: dat.data.data,
+							data_all: dat.data.data_all,
 							// pageSize: 10,
 							selectable: true,
 							refresh: true,
@@ -5232,6 +5233,12 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 										alert("Pilih terlebih dahulu dokternya!!")
 										return;
 								} 
+								var norec_pp = [];
+								for(let i = 0; i < $scope.dataDaftarHasilLab.data_all.length; i++) {
+									norec_pp.push($scope.dataDaftarHasilLab.data_all[i].norec_pp);
+							 	} 
+								console.log(norec_pp);
+								console.log($scope.dataDaftarHasilLab.data_all);
 								dokter = $scope.item.DataPegawai
 								pemeriksa = $scope.item.DataPemeriksa
 								window.open(baseTransaksi + "report/cetak-hasil-lab-all?norec=&norec=" 
@@ -5242,7 +5249,8 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 								+ "&objectjeniskelaminfk=" + jeniskelaminfk
 								+ "&umur=" + umurHari
 								+ "&strIdPegawai=" + user.namaLengkap 
-								+ "&strNorecPP='" + $scope.dataSelectedHasilLab.norec_pp + "'"
+								+ "&strNorecPP=" + norec_pp
+								+ "&countnorec=" + norec_pp.length
 								+ "&doketr=" + dokter.namalengkap 
 								+ "&pemeriksa=" + pemeriksa.namalengkap 
 								+ "&catatan=" + $scope.item.catatan

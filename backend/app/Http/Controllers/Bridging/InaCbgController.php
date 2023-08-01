@@ -2402,10 +2402,12 @@ class InaCbgController   extends ApiController
         if (isset($request['noregistrasi']) && $request['noregistrasi'] != "" && $request['noregistrasi'] != "undefined") {
             $pelayanan = $pelayanan->where('pd.noregistrasi', '=', $request['noregistrasi']);
         }
-        $pelayanan = $pelayanan->take(1)->get();
+        $pelayanan_all = $pelayanan->get();
+        $pelayanan1 = $pelayanan->take(1)->get();
         
         $result =array(
-            'data' => $pelayanan,
+            'data' => $pelayanan1,
+            'data_all' => $pelayanan_all,
             'message' => 'Inhuman'
         );
         return $this->respond($result);

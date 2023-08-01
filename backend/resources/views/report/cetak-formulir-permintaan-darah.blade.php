@@ -21,9 +21,9 @@
         <script type="text/javascript" src="{{ asset('js/angular/angular-aria.min.js') }}"></script>
         <script src="{{ asset('js/angular/angular-material.js') }}" type="text/javascript"></script>
     @else
-        <link rel="stylesheet" href="{{ asset('service/css/report/paper.css') }}">
+        {{-- <link rel="stylesheet" href="{{ asset('service/css/report/paper.css') }}">
         <link rel="stylesheet" href="{{ asset('service/css/report/table.css') }}">
-        <link rel="stylesheet" href="{{ asset('service/css/report/tabel.css') }}">
+        <link rel="stylesheet" href="{{ asset('service/css/report/tabel.css') }}"> --}}
         <script src="{{ asset('service/js/jquery.min.js') }}"></script>
         <script src="{{ asset('service/js/jquery.qr-code.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/qrcode/src/jquery.qrcode.js') }}"></script>
@@ -181,7 +181,7 @@
     </style>
 </head>
 <body ng-controller="cetakFormulirPermintaanDarah">
-    @if (!empty(($res['d1']))
+    @if (!empty($res['d1']))
 		<div>
 			<header>
 				<div class="logo">
@@ -703,7 +703,7 @@
 		</div>
 	@endif
 
-	@if (!empty(($res['d2']))
+	@if (!empty($res['d2']))
 		<div>
 			<header>
 				<div class="logo">
@@ -1225,7 +1225,7 @@
 		</div>
 	@endif
 
-	@if (!empty(($res['d3']))
+	@if (!empty($res['d3']))
 		<div>
 			<header>
 				<div class="logo">
@@ -1747,7 +1747,7 @@
 		</div>
 	@endif
 
-	@if (!empty(($res['d4']))
+	@if (!empty($res['d4']))
 		<div>
 			<header>
 				<div class="logo">
@@ -2269,7 +2269,7 @@
 		</div>
 	@endif
 
-	@if (!empty(($res['d5']))
+	@if (!empty($res['d5']))
 		<div>
 			<header>
 				<div class="logo">
@@ -2791,7 +2791,7 @@
 		</div>
 	@endif
 
-	@if (!empty(($res['d6']))
+	@if (!empty($res['d6']))
 		<div>
 			<header>
 				<div class="logo">
@@ -3313,7 +3313,7 @@
 		</div>
 	@endif
 
-	@if (!empty(($res['d7']))
+	@if (!empty($res['d7']))
 		<div>
 			<header>
 				<div class="logo">
@@ -3835,7 +3835,7 @@
 		</div>
 	@endif
 
-	@if (!empty(($res['d8']))
+	@if (!empty($res['d8']))
 		<div>
 			<header>
 				<div class="logo">
@@ -4357,7 +4357,7 @@
 		</div>
 	@endif
 
-	@if (!empty(($res['d9']))
+	@if (!empty($res['d9']))
 		<div>
 			<header>
 				<div class="logo">
