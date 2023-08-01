@@ -216,7 +216,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 if (norecEMR == '') return
                 var local = JSON.parse(localStorage.getItem('profile'));
                 var nama = medifirstService.getPegawaiLogin().namalengkap;
-                window.open(config.baseApiBackend + 'report/cetak-emr-all-page?nocm='
+                window.open(config.baseApiBackend + 'report/cetak-formulir-permintaan-darah?nocm='
                     + $scope.cc.nocm + '&norec_apd=' + $scope.cc.norec + '&emr=' + norecEMR
                     + '&emrfk=' + $scope.cc.emrfk
                     + '&kdprofile=' + local.id
