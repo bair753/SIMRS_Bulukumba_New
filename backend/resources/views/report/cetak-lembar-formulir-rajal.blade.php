@@ -230,7 +230,7 @@
                 @if(stripos(\Request::url(), 'localhost') !== FALSE)
                 <img src="{{ asset('img/bakti-husada.png') }}" alt="" style="width: 60px;">
                 @else
-                <img src="{{ asset('img/bakti-husada.png') }}" alt="" style="width: 60px;">
+                <img src="{{ asset('service/img/bakti-husada.png') }}" alt="" style="width: 60px;">
                 @endif
             </td>
         </tr>

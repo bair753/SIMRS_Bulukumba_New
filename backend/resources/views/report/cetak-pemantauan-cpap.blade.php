@@ -211,7 +211,7 @@
 								@if(stripos(\Request::url(), 'localhost') !== FALSE)
                                     <img src="{{ asset('img/CPAP.jpg') }}" alt="" style="width: 300px;display:block; margin:auto;">
                                 @else
-                                    <img src="{{ asset('img/CPAP.jpg') }}" alt="" style="width: 300px;display:block; margin:auto;">
+                                    <img src="{{ asset('service/img/CPAP.jpg') }}" alt="" style="width: 300px;display:block; margin:auto;">
                                 @endif
 							</td>
 						</tr>
