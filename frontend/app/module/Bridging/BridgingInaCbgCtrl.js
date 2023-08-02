@@ -6594,7 +6594,7 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 				}
 				var emrfk = [290168] // emrfk Flowsheet
 
-				medifirstService.get("bridging/inacbg/get-rincian-operasi?noregistrasi=" + $scope.dataPasienSelected.noregistrasi + '&emrfk=' + emrfk
+				medifirstService.get("bridging/inacbg/get-all-page-inacbg?noregistrasi=" + $scope.dataPasienSelected.noregistrasi + '&emrfk=' + emrfk
 					// medifirstService.get("lab-radiologi/get-rincian-pelayanan?objectdepartemenfk=" + departemenfk + "&noregistrasi=" +   $scope.item.noregistrasi
 					, true).then(function (dat) {
 						$scope.dataDaftarFlowsheet = {
@@ -6630,16 +6630,16 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 							"title": "No EMR",
 							"width": "160px"
 						},
-						{
-							"field": "namaform",
-							"title": "Nama EMR",
-							"width": "160px"
-						},
-						{
-							"field": "index",
-							"title": "Page",
-							"width": "160px"
-						},
+						// {
+						// 	"field": "namaform",
+						// 	"title": "Nama EMR",
+						// 	"width": "160px"
+						// },
+						// {
+						// 	"field": "index",
+						// 	"title": "Page",
+						// 	"width": "160px"
+						// },
 				],
 				sortable: {
 						mode: "single",
