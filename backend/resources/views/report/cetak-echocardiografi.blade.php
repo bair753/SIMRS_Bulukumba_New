@@ -335,6 +335,10 @@
                     @{{ item.obj[32110701] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} > 16</td> 
             </tr>
             <tr style="border:none">
+                <td style="border:none;" colspan="2">eRAP</td> 
+                <td style="border:none;" colspan="7">: @{{ item.obj[32116518] ? item.obj[32116518] : '.....' }}</td> 
+            </tr>
+            <tr style="border:none">
                 <td style="border:none;" colspan="2">Others</td> 
                 <td style="border:none;" colspan="7">: 
                     @{{ item.obj[32110702] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Venticle Gap / 

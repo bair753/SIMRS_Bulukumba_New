@@ -836,7 +836,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
           Route::post('farmasi/save-status-resepelektonik', 'Farmasi\ResepElektronikController@saveStatusResepElektronik');
           Route::post('farmasi/update-status-grabexpress', 'Farmasi\ResepElektronikController@updateStatusGrabExpress');
 
-          Route::get('farmasi/get-datacombo_dp', 'Farmasi\FarmasiController@getDataComboDaftarPasien');
+          Route::get('farmasi/get-datacombo_dp', 'Farmasi\FarmasiControllerservice/storage@getDataComboDaftarPasien');
           Route::get('farmasi/get-daftar-pasien-farmasi', 'Farmasi\FarmasiController@getDaftarPasien');
 
           Route::get('farmasi/get-detailPD', 'Farmasi\PelayananResepController@getDataPengkajian');
