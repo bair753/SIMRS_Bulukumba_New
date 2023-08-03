@@ -3788,12 +3788,13 @@ class GeneralController extends ApiController
 //        $kdJenisPegawaiDokter = $this->settingDataFixed('kdJenisPegawaiDokter');
         $kdProfile = (int) $this->getDataKdProfile($request);
         $req = $request->all();
-        $data = \DB::table('pegawai_m')
-            ->select('id','namalengkap')
-            ->where('kdprofile', $kdProfile)
-            ->where('statusenabled', true)
+        $data = \DB::table('pegawai_m AS pg')
+            ->join('jenispegawai_m AS jp','jp.id','=','pg.objectjenispegawaifk')
+            ->select('pg.id','pg.namalengkap','pg.objectjenispegawaifk','jp.jenispegawai')
+            ->where('pg.kdprofile', $kdProfile)
+            ->where('pg.statusenabled', true)
 //            ->where('objectjenispegawaifk',$kdJenisPegawaiDokter)
-            ->orderBy('namalengkap');
+            ->orderBy('pg.namalengkap');
 
         if(isset($req['namalengkap']) &&
             $req['namalengkap']!="" &&

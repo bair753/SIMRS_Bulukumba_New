@@ -8,12 +8,15 @@ define(['initialize'], function (initialize) {
             $scope.isRouteLoading = false;
             $scope.now = new Date();
             $scope.item = {};
+            $scope.itemC = {};
             $scope.arrDokter = [];
             $scope.selectedData = [];
+            var dataChecklist = [];
             var datana = []
             var data_head = []
             var dataARR = []
             var dataTea = [];
+            $scope.item.tglInput = moment($scope.now).format('YYYY-MM-DD')
             FormLoad();
 
             function FormLoad() {
@@ -161,6 +164,10 @@ define(['initialize'], function (initialize) {
 
 
             $scope.inputJadwal = function () {
+                if ($scope.item.ruangan == undefined) {
+                    toastr.warning('Pilih ruangan terlebih dahulu')
+                    return;
+                }
                 $scope.isInput = !$scope.isInput
                 if ($scope.isInput) {
                     $scope.titleButton = 'Hide Input APD'
@@ -206,35 +213,113 @@ define(['initialize'], function (initialize) {
                 ]
                 $scope.mainGridOptionss = {
                     selectable: "cell",
-                    dataBound: $scope.onDataBound,
+                    // dataBound: $scope.onDataBound,
                     // change: onChange,
-                    columns: $scope.column
+                    columns: [
+                        {
+                            "field": "no",
+                            "title": "No",
+                            "width": "48px",
+                        },
+                        {
+                            "field": "jeniskegiatan",
+                            "title": "Jenis Kegiatan",
+                            "width": "180px",
+                        },
+                        {
+                            "field": "namalengkap",
+                            "title": "Inisial Petugas",
+                            "width": "100px",
+                        },
+                        {
+                            "field": "jenispegawai",
+                            "title": "Profesi",
+                            "width": "100px",
+                        },
+                        {
+                            "field": "sarungtangan",
+                            "title": "Sarung Tangan",
+                            "width": "80px",
+                        },
+                        {
+                            "field": "maskerbedah",
+                            "title": "Masker Bedah",
+                            "width": "80px",
+                        },
+                        {
+                            "field": "maskern95",
+                            "title": "Masker N95",
+                            "width": "80px",
+                        },
+                        {
+                            "field": "faceshield",
+                            "title": "Google/Face Shield",
+                            "width": "80px",
+                        },
+                        {
+                            "field": "apron",
+                            "title": "Apron",
+                            "width": "80px",
+                        },
+                        {
+                            "field": "gaun",
+                            "title": "gaun",
+                            "width": "80px",
+                        },
+                        {
+                            "field": "penutupkepala",
+                            "title": "Penutup Kepala",
+                            "width": "80px",
+                        },
+                        {
+                            "field": "sepatupelindung",
+                            "title": "Sepatu Pelindung",
+                            "width": "80px",
+                        },
+                        {
+                            "field": "catatan",
+                            "title": "Catatan",
+                            "width": "200px",
+                        },
+                    ]
 
                 }
 
-                var grid = $("#gridBulan").data("kendoGrid");
-                if (grid != undefined) {
-                    grid.destroy();
+                // var grid = $("#gridBulan").data("kendoGrid");
+                // if (grid != undefined) {
+                //     grid.destroy();
                     // grid.setDataSource( $scope.sourceJadwalBulanan);
-                    $("#gridBulan").empty().kendoGrid({
-                        dataSource: $scope.sourceJadwalBulanan,
-                        columns: $scope.column,
-                        selectable: "cell",
-                        dataBound: $scope.onDataBound,
+                    // $("#gridBulan").empty().kendoGrid({
+                    //     dataSource: $scope.sourceJadwalBulanan,
+                    //     columns: $scope.column,
+                    //     selectable: "cell",
+                    //     dataBound: $scope.onDataBound,
                         // options: $scope.mainGridOptionss
-                    });
-                }
-                for (let i = 0; i < datana.length; i++) {
-                    const element = datana[i];
-                    element.listTgl = []
+                //     });
+                // }
+                // for (let i = 0; i < datana.length; i++) {
+                //     const element = datana[i];
+                //     element.listTgl = []
 
-                }
-                dataARR = []
-                dataARR = datana
-                $scope.sourceJadwalBulanan = new kendo.data.DataSource({
-                    data: datana,
-                });
+                // }
+                // dataARR = []
+                // dataARR = datana
+                // $scope.sourceJadwalBulanan = new kendo.data.DataSource({
+                //     data: dataChecklist,
+                // });
             }
+
+            $scope.sourceJadwalBulanan = new kendo.data.DataSource({
+                data: dataChecklist,
+                group: $scope.group,
+                pageSize: 100,
+                total: dataChecklist.length,
+                serverPaging: false,
+                schema: {
+                    model: {
+                    }
+                }
+            });
 
             $scope.bulanSelected = moment($scope.item.bulan).format("MMMM YYYY")
 
@@ -350,10 +435,10 @@ define(['initialize'], function (initialize) {
                     return
                 }
 
-                if ($scope.item.pegawai == undefined) {
-                    toastr.error('Pegawai Tidak Boleh Kosong')
-                    return
-                }
+                // if ($scope.itemC.pegawai == undefined) {
+                //     toastr.error('Pegawai Tidak Boleh Kosong')
+                //     return
+                // }
 
                 var data2 = []
                 // for (let i = 0; i < dataARR.length; i++) {
@@ -369,31 +454,43 @@ define(['initialize'], function (initialize) {
                 //         'jeniskegiatan': dataARR[i].jeniskegiatan
                 //     })                    
                 // }
-                debugger
-                for (let i = 0; i < dataARR.length; i++) {
-                    for (let j = 0; j < dataARR[i].listTgl.length; j++) {
-                        data2.push({                        
-                            'jeniskegiatan': dataARR[i].jeniskegiatan,
-                            'tgl': dataARR[i].listTgl[j],
-                            'isi': '01',
-                        })
-                    }
+                // debugger
+                // for (let i = 0; i < dataARR.length; i++) {
+                //     for (let j = 0; j < dataARR[i].listTgl.length; j++) {
+                //         data2.push({                        
+                //             'jeniskegiatan': dataARR[i].jeniskegiatan,
+                //             'tgl': dataARR[i].listTgl[j],
+                //             'isi': '01',
+                //         })
+                //     }
 
 
+                // }
+                if (dataChecklist.length == 0) {
+                    toastr.warning('Data belum diisi');
+                    return
                 }
+
+
                 var objSave = {
+                    'norec': '',
                     'ruanganfk': $scope.item.ruangan.id,
-                    'pegawaifk': $scope.item.pegawai.id,
-                    'data': data2
+                    'tglinput': moment($scope.item.tglInput).format('YYYY-MM-DD hh:mm'),
+                    'data': dataChecklist
                 }
                 medifirstService.post('rawatinap/save-data-apd', objSave).then(function (e) {
+                    dataChecklist = []
+                    $scope.sourceJadwalBulanan = new kendo.data.DataSource({
+                        data: dataChecklist
+                    });
                     searchData()
+                    $scope.isInput = !$scope.isInput
                 })
             }
 
             function searchData() {
                 var dataGrid = [];
-                var bln = moment($scope.item.bulan).format('MM.YYYY')
+                var tgl = moment($scope.item.tglInput).format('YYYY-MM-DD')
                 var ruangId = ''
                 if ($scope.item.ruangan != undefined) {
                     ruangId = '&idRuangan=' + $scope.item.ruangan.id
@@ -404,46 +501,41 @@ define(['initialize'], function (initialize) {
                 }
                 $scope.isRouteLoading = true;
                 var dataGrid = [];
-                medifirstService.get('rawatinap/get-data-cheklis-apd?bulan=' + bln
+                medifirstService.get('rawatinap/get-data-cheklis-apd-new?tglinput=' + tgl
                     + pegawaiId + ruangId).then(function (e) {
                         $scope.isRouteLoading = false
                         $scope.datasSearch = e.data
                         for (var i = $scope.datasSearch.length - 1; i >= 0; i--) {
                             $scope.datasSearch[i].no = i + 1
-                            if ($scope.datasSearch[i].isi == '01') {
-                                $scope.datasSearch[i].isian = '✔'
-                            } else {
-                                $scope.datasSearch[i].isian = '-'
-                            }
                         }
 
                         if (!$scope.datasSearch) {
                             return toastr.success('Data tidak ditemukan', 'Info');
                         };
 
-                        $scope.datasSearch.forEach(function (element) {
-                            var customData = {};
-                            for (var key in element) {
-                                switch (key) {
-                                    case "tgl":                                        
-                                        var tgl = element.tgl;
-                                        var key = tgl.slice(-1);
-                                        if (key[0] === "0") {
-                                            customData[key] = element.isian;
-                                        } else {
-                                            customData[key] = element.isian;
-                                        }                                       
-                                        break;
-                                    default:
-                                        customData[key] = element[key];
-                                        break;
-                                }
-                            };
-                            dataGrid.push(customData);
-                        });
+                        // $scope.datasSearch.forEach(function (element) {
+                        //     var customData = {};
+                        //     for (var key in element) {
+                        //         switch (key) {
+                        //             case "tgl":                                        
+                        //                 var tgl = element.tgl;
+                        //                 var key = tgl.slice(-1);
+                        //                 if (key[0] === "0") {
+                        //                     customData[key] = element.isian;
+                        //                 } else {
+                        //                     customData[key] = element.isian;
+                        //                 }                                       
+                        //                 break;
+                        //             default:
+                        //                 customData[key] = element[key];
+                        //                 break;
+                        //         }
+                        //     };
+                        //     dataGrid.push(customData);
+                        // });
                         $scope.mainGridOption = {
                             dataSource: {
-                                data: dataGrid,
+                                data: $scope.datasSearch,
                                 aggregate: [
                                     // { field: "totalTindakan", aggregate: "sum" },
                                     // { field: "pointQty", aggregate: "sum" }
@@ -464,38 +556,73 @@ define(['initialize'], function (initialize) {
                             columns: [
                                 {
                                     "field": "no",
-                                    "title": "<h3 align=center>No.<h3>",
+                                    "title": "No",
                                     "width": "48px",
-                                    "filterable": false,
-                                    attributes: {
-                                        "class": "table-cell",
-                                        style: "text-align: center;"
-                                    }
                                 },
                                 {
                                     "field": "jeniskegiatan",
-                                    "title": "<h3 align=center>Jenis Kegiatan<h3>",
-                                    "width": "410px",
-                                    "filterable": false,
-                                    attributes: {
-                                        "class": "table-cell",
-                                        style: "text-align: left;"
-                                    }
+                                    "title": "Jenis Kegiatan",
+                                    "width": "180px",
                                 },
                                 {
-                                    field: "isian",
-                                    "title": "<h3 align=center>" + $scope.getBulan() + "<h3>",
-                                    "columns": $scope.generateGridColumn(),
-                                    "filterable": false,
-                                    attributes: {
-                                        "class": "table-cell",
-                                        style: "text-align: center;"
-                                    }
-                                }
+                                    "field": "petugas",
+                                    "title": "Inisial Petugas",
+                                    "width": "100px",
+                                },
+                                {
+                                    "field": "jenispegawai",
+                                    "title": "Profesi",
+                                    "width": "100px",
+                                },
+                                {
+                                    "field": "sarungtangan",
+                                    "title": "Sarung Tangan",
+                                    "width": "80px",
+                                },
+                                {
+                                    "field": "maskerbedah",
+                                    "title": "Masker Bedah",
+                                    "width": "80px",
+                                },
+                                {
+                                    "field": "maskern95",
+                                    "title": "Masker N95",
+                                    "width": "80px",
+                                },
+                                {
+                                    "field": "faceshield",
+                                    "title": "Google/Face Shield",
+                                    "width": "80px",
+                                },
+                                {
+                                    "field": "apron",
+                                    "title": "Apron",
+                                    "width": "80px",
+                                },
+                                {
+                                    "field": "gaun",
+                                    "title": "gaun",
+                                    "width": "80px",
+                                },
+                                {
+                                    "field": "penutupkepala",
+                                    "title": "Penutup Kepala",
+                                    "width": "80px",
+                                },
+                                {
+                                    "field": "sepatupelindung",
+                                    "title": "Sepatu Pelindung",
+                                    "width": "80px",
+                                },
+                                {
+                                    "field": "isi",
+                                    "title": "Catatan",
+                                    "width": "200px",
+                                },
                             ]
                         };
                         $scope.dataSource = new kendo.data.DataSource({
-                            data: dataGrid
+                            data: $scope.datasSearch
                         });
                     })
             }
@@ -624,6 +751,132 @@ define(['initialize'], function (initialize) {
                 }
                 return listDay;
             }
+
+            $scope.selectPegawai = function(data) {
+                $scope.itemC.jenispegawai = data.jenispegawai
+            }
+
+            $scope.tambah = function() {
+                if ($scope.itemC.pegawai == undefined) {
+                    toastr.warning('Inisial Petugas belum diiisi!')
+                    return
+                }
+                var no = 0
+                if (dataChecklist.length == 0) {
+                    no = 1
+                } else {
+                    no = dataChecklist[dataChecklist.length - 1].no + 1
+                }
+                if ($scope.itemC.no != undefined) {
+                    no = $scope.itemC.no
+                }
+                var data = {}
+                if ($scope.itemC.no != undefined) { // Edit
+                    for (let i = 0; i < dataChecklist.length; i++) {
+                        if (dataChecklist[i].no == $scope.itemC.no) {
+                            data.no = $scope.itemC.no
+                            data.id = $scope.itemC.pegawai.id
+                            data.namalengkap = $scope.itemC.pegawai.namalengkap
+                            data.jenispegawai = $scope.itemC.jenispegawai
+                            data.jeniskegiatan = $scope.itemC.jeniskegiatan
+                            data.catatan = $scope.itemC.catatan
+                            data.sarungtangan = $scope.itemC.sarungtangan
+                            data.maskerbedah = $scope.itemC.maskerbedah
+                            data.maskern95 = $scope.itemC.maskern95
+                            data.faceshield = $scope.itemC.faceshield
+                            data.apron = $scope.itemC.apron
+                            data.gaun = $scope.itemC.gaun
+                            data.penutupkepala = $scope.itemC.penutupkepala
+                            data.sepatupelindung = $scope.itemC.sepatupelindung
+                        }
+                        dataChecklist[i] = data
+                        $scope.sourceJadwalBulanan = new kendo.data.DataSource({
+                            data: dataChecklist
+                        });
+                        kosongkanIsian()
+                    }
+                } else { // Tambah
+                    data = {
+                        no: no,
+                        id: $scope.itemC.pegawai.id,
+                        namalengkap: $scope.itemC.pegawai.namalengkap,
+                        jenispegawai: $scope.itemC.jenispegawai,
+                        jeniskegiatan: $scope.itemC.jeniskegiatan,
+                        catatan: $scope.itemC.catatan,
+                        sarungtangan: $scope.itemC.sarungtangan,
+                        maskerbedah: $scope.itemC.maskerbedah,
+                        maskern95: $scope.itemC.maskern95,
+                        faceshield: $scope.itemC.faceshield,
+                        apron: $scope.itemC.apron,
+                        gaun: $scope.itemC.gaun,
+                        penutupkepala: $scope.itemC.penutupkepala,
+                        sepatupelindung: $scope.itemC.sepatupelindung,
+                    }
+                    dataChecklist.push(data)
+                    $scope.sourceJadwalBulanan = new kendo.data.DataSource({
+                        data: dataChecklist
+                    });
+                    kosongkanIsian()
+                }
+            }
+
+            function kosongkanIsian() {
+                $scope.itemC.no = undefined
+                $scope.itemC.pegawai = undefined
+                $scope.itemC.jenispegawai = undefined
+                $scope.itemC.jeniskegiatan = undefined
+                $scope.itemC.catatan = undefined
+                $scope.itemC.sarungtangan = undefined
+                $scope.itemC.maskerbedah = undefined
+                $scope.itemC.maskern95 = undefined
+                $scope.itemC.faceshield = undefined
+                $scope.itemC.apron = undefined
+                $scope.itemC.gaun = undefined
+                $scope.itemC.penutupkepala = undefined
+                $scope.itemC.sepatupelindung = undefined
+            }
+
+            $scope.klikGridPro = function(dataSelectedKegiatan) {
+                if (dataSelectedKegiatan == undefined) {
+                    toastr.warning('Data belum dipilih')
+                    return
+                }
+                $scope.itemC.no = dataSelectedKegiatan.no
+                $scope.itemC.pegawai = { id: dataSelectedKegiatan.id, namalengkap: dataSelectedKegiatan.namalengkap }
+                $scope.itemC.jenispegawai = dataSelectedKegiatan.jenispegawai
+                $scope.itemC.jeniskegiatan = dataSelectedKegiatan.jeniskegiatan
+                $scope.itemC.catatan = dataSelectedKegiatan.catatan
+                $scope.itemC.sarungtangan = dataSelectedKegiatan.sarungtangan
+                $scope.itemC.maskerbedah = dataSelectedKegiatan.maskerbedah
+                $scope.itemC.maskern95 = dataSelectedKegiatan.maskern95
+                $scope.itemC.faceshield = dataSelectedKegiatan.faceshield
+                $scope.itemC.apron = dataSelectedKegiatan.apron
+                $scope.itemC.gaun = dataSelectedKegiatan.gaun
+                $scope.itemC.penutupkepala = dataSelectedKegiatan.penutupkepala
+                $scope.itemC.sepatupelindung = dataSelectedKegiatan.sepatupelindung
+            }
+
+            $scope.batal = function() {
+                kosongkanIsian()
+            }
+
+            $scope.hapus = function () {
+				if ($scope.itemC.pegawai == undefined) {
+					toastr.warning("Data belum dipilih")
+                    return
+				}
+                if ($scope.itemC.no != undefined){
+                    for (var i = dataChecklist.length - 1; i >= 0; i--) {
+                        if (dataChecklist[i].no ==  $scope.itemC.no){                            
+                            dataChecklist.splice(i, 1);
+                        }
+                    }
+                }
+                $scope.sourceJadwalBulanan = new kendo.data.DataSource({
+                    data: dataChecklist
+                });
+                kosongkanIsian();
+			}
 
             /////////////////////////////// // ///////
         }
