@@ -16,7 +16,7 @@
     <div class="panel-heading headerBox"><span class="title" c-translate>Cheklis APD</span></div>
     <div class="panel-body">
         <div class="grid_12" style="margin-: ">
-            <div class="grid_2">
+            <!-- <div class="grid_2">
                 <fieldset class="effect-shadow" style=" border-radius: 1px">
                     <legend id="filterData">
                         <a ng-click="showAndHide()">Kalender</a>
@@ -33,12 +33,21 @@
                         </center>
                     </div>
                 </fieldset>
-            </div>
+            </div> -->
             <!-- <div class="grid_1"></div> -->
-            <div class="grid_10">
+            <div class="grid_12">
                 <md-content class="md-padding">
                     <div class="grid_12">
-                        <div class="grid_3">
+                        <div class="grid_2">
+                            <div class="grid_12">
+                                <label c-label item="item" c-label-text="Tanggal"></label>
+                            </div>
+                            <div class="clear"></div>
+                            <div class="grid_12">
+                                <input style="width: 100%" k-ng-model="item.tglInput" kendo-datepicker placeholer="yyyy-MM-dd" k-format="'yyyy-MM-dd'" ng-disabled="isInput" />
+                            </div>
+                        </div>
+                        <div class="grid_2">
                             <div class="grid_12">
                                 <label c-label item="item" c-label-text="Ruangan"></label>
                             </div>
@@ -50,7 +59,7 @@
                                     k-on-change='search()' />
                             </div>
                         </div>
-                        <div class="grid_3">
+                        <div class="grid_2">
                             <div class="grid_12">
                                 <label c-label item="item" c-label-text="Pegawai"></label>
                             </div>
@@ -62,17 +71,147 @@
                                     k-on-change='search()' />
                             </div>
                         </div>
-                        <div class="grid_2" style="margin-top: 22px;">
+                        <div class="grid_1" style="margin-top: 22px;">
                             <button class="c-button" ng-click="cari()">CARI</button>
                         </div>
                     </div>
                 </md-content>
                 <md-content class="md-padding" ng-show="isInput">
-                    <div class="grid_12 borderBox" style="width:100%;">
-                        <div kendo-grid id="gridBulan" k-data-source="sourceJadwalBulanan" options="mainGridOptionss"
-                            k-scrollable="'true'" style="font-size: small" k-ng-model="databulan">
+                    <!-- <div class="grid_12 borderBox" style="width:100%;"> -->
+                        <div class="grid_12">
+                            <div class="grid_1">
+                                <label c-label item="item">No</label>
+                                <input type="text" class="k-textbox" ng-model="itemC.no" disabled>
+                            </div>
+                            <div class="grid_2">
+                                <label c-label item="item">Inisial Petugas</label>
+                                <input style="width: 100%;" kendo-combo-box k-ng-model="itemC.pegawai"
+                                    k-data-text-field="'namalengkap'" k-data-value-field="'id'" k-filter="'contains'"
+                                    k-auto-bind="false" k-data-source="listPegawai"
+                                    k-on-change='selectPegawai(itemC.pegawai)' />
+                            </div>
+                            <div class="grid_2">
+                                <label c-label item="item">Profesi</label>
+                                <input type="text" class="k-textbox" ng-model="itemC.jenispegawai">
+                            </div>
+                            <div class="grid_3">
+                                <label c-label item="item">Jenis Kegiatan</label>
+                                <input type="text" class="k-textbox" ng-model="itemC.jeniskegiatan">
+                            </div>
+                            <div class="grid_4">
+                                <label c-label item="item">Catatan</label>
+                                <textarea cols="4" rows="4" class="k-textbox" ng-model="itemC.catatan"></textarea>
+                            </div>
                         </div>
-                    </div>
+                        <div class="grid_12">
+                            <div class="grid_1">
+                                <label c-label item="item" style="margin-bottom: 10px;">Sarung Tangan</label>
+                                <md-radio-group ng-model="itemC.sarungtangan">
+                                    <md-radio-button value="Ya" class="md-primary">Ya
+                                    </md-radio-button>
+                                </md-radio-group>
+                                <md-radio-group ng-model="itemC.sarungtangan">
+                                    <md-radio-button value="Tidak" class="md-primary">Tidak
+                                    </md-radio-button>
+                                </md-radio-group>
+                            </div>
+                            <div class="grid_1">
+                                <label c-label item="item" style="margin-bottom: 10px;">Masker Bedah</label>
+                                <md-radio-group ng-model="itemC.maskerbedah">
+                                    <md-radio-button value="Ya" class="md-primary">Ya
+                                    </md-radio-button>
+                                </md-radio-group>
+                                <md-radio-group ng-model="itemC.maskerbedah">
+                                    <md-radio-button value="Tidak" class="md-primary">Tidak
+                                    </md-radio-button>
+                                </md-radio-group>
+                            </div>
+                            <div class="grid_1">
+                                <label c-label item="item" style="margin-bottom: 10px;">Masker N95</label>
+                                <md-radio-group ng-model="itemC.maskern95">
+                                    <md-radio-button value="Ya" class="md-primary">Ya
+                                    </md-radio-button>
+                                </md-radio-group>
+                                <md-radio-group ng-model="itemC.maskern95">
+                                    <md-radio-button value="Tidak" class="md-primary">Tidak
+                                    </md-radio-button>
+                                </md-radio-group>
+                            </div>
+                            <div class="grid_1">
+                                <label c-label item="item" style="margin-bottom: 10px;">Google/Face Shield</label>
+                                <md-radio-group ng-model="itemC.faceshield">
+                                    <md-radio-button value="Ya" class="md-primary">Ya
+                                    </md-radio-button>
+                                </md-radio-group>
+                                <md-radio-group ng-model="itemC.faceshield">
+                                    <md-radio-button value="Tidak" class="md-primary">Tidak
+                                    </md-radio-button>
+                                </md-radio-group>
+                            </div>
+                            <div class="grid_1">
+                                <label c-label item="item" style="margin-bottom: 10px;">Apron</label>
+                                <md-radio-group ng-model="itemC.apron">
+                                    <md-radio-button value="Ya" class="md-primary">Ya
+                                    </md-radio-button>
+                                </md-radio-group>
+                                <md-radio-group ng-model="itemC.apron">
+                                    <md-radio-button value="Tidak" class="md-primary">Tidak
+                                    </md-radio-button>
+                                </md-radio-group>
+                            </div>
+                            <div class="grid_1">
+                                <label c-label item="item" style="margin-bottom: 10px;">Gaun</label>
+                                <md-radio-group ng-model="itemC.gaun">
+                                    <md-radio-button value="Ya" class="md-primary">Ya
+                                    </md-radio-button>
+                                </md-radio-group>
+                                <md-radio-group ng-model="itemC.gaun">
+                                    <md-radio-button value="Tidak" class="md-primary">Tidak
+                                    </md-radio-button>
+                                </md-radio-group>
+                            </div>
+                            <div class="grid_1">
+                                <label c-label item="item" style="margin-bottom: 10px;">Penutup Kepala</label>
+                                <md-radio-group ng-model="itemC.penutupkepala">
+                                    <md-radio-button value="Ya" class="md-primary">Ya
+                                    </md-radio-button>
+                                </md-radio-group>
+                                <md-radio-group ng-model="itemC.penutupkepala">
+                                    <md-radio-button value="Tidak" class="md-primary">Tidak
+                                    </md-radio-button>
+                                </md-radio-group>
+                            </div>
+                            <div class="grid_1">
+                                <label c-label item="item" style="margin-bottom: 10px;">Sepatu Pelindung</label>
+                                <md-radio-group ng-model="itemC.sepatupelindung">
+                                    <md-radio-button value="Ya" class="md-primary">Ya
+                                    </md-radio-button>
+                                </md-radio-group>
+                                <md-radio-group ng-model="itemC.sepatupelindung">
+                                    <md-radio-button value="Tidak" class="md-primary">Tidak
+                                    </md-radio-button>
+                                </md-radio-group>
+                            </div>
+                            <div class="grid_4">
+                                <div class="grid_12" style="margin-top: 10px">
+                                    <div class="grid_4">
+                                        <button class="btnTemplate1" ng-click="tambah()">Tambah</button>
+                                    </div>
+                                    <div class="grid_4">
+                                        <button class="btnTemplate1" ng-click="hapus()">Hapus</button>
+                                    </div>
+                                    <div class="grid_4">
+                                        <button class="btnTemplate1" ng-click="batal()">Batal</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid_12 borderBox" style="margin-top: 10px;">
+                            <div kendo-grid k-data-source="sourceJadwalBulanan" options="mainGridOptionss"
+                                k-scrollable="'true'" style="font-size: small" k-ng-model="dataSelectedKegiatan" ng-click="klikGridPro(dataSelectedKegiatan)">
+                            </div>
+                        </div>
+                    <!-- </div> -->
                 </md-content>
                 <md-content class="md-padding">
                     <div class="grid_12">

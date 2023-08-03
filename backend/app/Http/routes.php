@@ -1565,6 +1565,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
           Route::get('rawatinap/get-data-ido-surveilans', 'RawatInap\RawatInapController@getDataIdoSurveilans');
           Route::post('rawatinap/save-data-apd','RawatInap\RawatInapController@saveCheklisApd');
           Route::get('rawatinap/get-data-cheklis-apd','RawatInap\RawatInapController@getDataCheklisApd');
+          Route::get('rawatinap/get-data-cheklis-apd-new','RawatInap\RawatInapController@getDataCheklisApdNew');
         // });
         // Route::group(['prefix' => 'rawatjalan'], function () {
           Route::get('rawatjalan/get-data-combo-dokter', 'RawatJalan\RawatJalanController@getDataComboDokter');

@@ -1963,23 +1963,45 @@ class RawatInapController extends ApiController
         try {
             foreach ($request['data'] as $item) {
 //                foreach ($item['tgl'] as $itemTgl){
-                    if ($request['id'] == '') {
+                    if ($request['norec'] == '') {
                         $dataJadwal = new CheklisApd();
                         $dataJadwal->norec = $dataJadwal->generateNewId();
                         $dataJadwal->kdprofile = (int)$kdProfile;
                         $dataJadwal->statusenabled = true;
-
                     } else {
                         $dataJadwal = CheklisApd::where('id', $request['id'])->first();
                     }
-
-                    $dataJadwal->objectpegawaifk = $request['pegawaifk'];
+                    $dataJadwal->objectpegawaifk = $item['id'];
                     $dataJadwal->objectruanganfk = $request['ruanganfk'];
                     $dataJadwal->jeniskegiatan = $item['jeniskegiatan'];
-                    $dataJadwal->tglinput = $tglAyeuna;
-                    $dataJadwal->tgl = $item['tgl'];
-                    if(isset($item['isi'])){
-                        $dataJadwal->isi = $item['isi'];
+                    $dataJadwal->tglinput = $request['tglinput'];
+                    $dataJadwal->jenispegawai = $item['jenispegawai'];
+                    if(isset($item['catatan'])){
+                        $dataJadwal->isi = $item['catatan'];
+                    }
+                    if(isset($item['sarungtangan'])){
+                        $dataJadwal->sarungtangan = $item['sarungtangan'];
+                    }
+                    if(isset($item['maskerbedah'])){
+                        $dataJadwal->maskerbedah = $item['maskerbedah'];
+                    }
+                    if(isset($item['maskern95'])){
+                        $dataJadwal->maskern95 = $item['maskern95'];
+                    }
+                    if(isset($item['faceshield'])){
+                        $dataJadwal->faceshield = $item['faceshield'];
+                    }
+                    if(isset($item['apron'])){
+                        $dataJadwal->apron = $item['apron'];
+                    }
+                    if(isset($item['gaun'])){
+                        $dataJadwal->gaun = $item['gaun'];
+                    }
+                    if(isset($item['penutupkepala'])){
+                        $dataJadwal->penutupkepala = $item['penutupkepala'];
+                    }
+                    if(isset($item['sepatupelindung'])){
+                        $dataJadwal->sepatupelindung = $item['sepatupelindung'];
                     }
                     $dataJadwal->save();
 //                }
@@ -2038,6 +2060,37 @@ class RawatInapController extends ApiController
             $request['idRuangan']!="" &&
             $request['idRuangan']!="undefined"){
             $data = $data->where('ru.id','=', $request['idRuangan'] );
+        };
+
+        $data = $data->get();
+        return $this->respond($data);
+    }
+
+    public function getDataCheklisApdNew(Request $request){
+        $kdProfile = (int) $this->getDataKdProfile($request);
+        $data = \DB::table('cheklisapd_t as ei')
+            ->join('pegawai_m as pg','pg.id','=','ei.objectpegawaifk')
+            ->join('ruangan_m as ru','ru.id','=','ei.objectruanganfk')
+            ->select(DB::raw("ei.*,ru.namaruangan,pg.namalengkap as petugas"))
+            ->where('ei.kdprofile', $kdProfile)
+            ->where('ei.statusenabled', true)
+            ->orderBy('ei.tglinput');
+
+        if(isset($request['idPegawai']) &&
+            $request['idPegawai']!="" &&
+            $request['idPegawai']!="undefined"){
+            $data = $data->where('ei.objectpegawaifk','=',$request['idPegawai']);
+        };
+        if(isset($request['idRuangan']) &&
+            $request['idRuangan']!="" &&
+            $request['idRuangan']!="undefined"){
+            $data = $data->where('ru.id','=', $request['idRuangan'] );
+        };
+        if(isset($request['tglinput']) &&
+            $request['tglinput']!="" &&
+            $request['tglinput']!="undefined"){
+            $data = $data->where('ei.tglinput','>=', $request['tglinput'] . ' 00:00');
+            $data = $data->where('ei.tglinput','<=', $request['tglinput'] . ' 23:59');
         };
 
         $data = $data->get();
