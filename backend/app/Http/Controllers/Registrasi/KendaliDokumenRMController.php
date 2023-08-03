@@ -499,9 +499,9 @@ class KendaliDokumenRMController extends  ApiController
         $idProfile = (int) $kdProfile;
         $dataReq = $request->all();
 
-        $request->validate([
-             'fileBerkas'=>'required|mimes:pdf'
-        ]);
+        // $request->validate([
+        //      'fileBerkas'=>'required|mimes:pdf'
+        // ]);
 
         $uploadBerkasPasien = $request->file('fileBerkas');
         $dataRegistrasi = PasienDaftar::where('norec', $dataReq['noregistrasifk'])->first();
