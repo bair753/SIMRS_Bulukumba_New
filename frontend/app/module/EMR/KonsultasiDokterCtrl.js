@@ -153,8 +153,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 var nama = medifirstService.getPegawaiLogin().namalengkap;
                 window.open(config.baseApiBackend + 'report/cetak-konsul-dokter-all?'
                     + paramSearch
-                    + '&kdprofile=' + local.id
-                    + '_blank');
+                    + '&kdprofile=' + local.id);
             }
             function editData(e) {
                 e.preventDefault();
