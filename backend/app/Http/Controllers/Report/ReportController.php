@@ -1397,7 +1397,16 @@ class ReportController extends ApiController{
         WHERE nopesanan = '$noorder'
         "))->first();
         $pageWidth = 550;
-        
+
+        if(empty($isi)) {
+            echo '
+                <script language="javascript">
+                    window.alert("Informasi order belum diisi");
+                    window.close()
+                </script>
+            ';
+            die;
+        }
 
         return view('report.apotik.resepdokter',
             compact('raw', 'pageWidth','r','details','profile', 'alamatpasien', 'tinggibadan', 'beratbadan', 'isi'));
@@ -1506,6 +1515,10 @@ class ReportController extends ApiController{
                 'isi' => $isi
             );
         }
+        $resulttt = array_filter($resulttt, function($value) {
+            return $value['isi'] != null;
+        });
+
         $rinci = [];
 
         $raw = collect(DB::select("
@@ -6068,7 +6081,6 @@ class ReportController extends ApiController{
                 ep.umur,
                 pa.noidentitas,
                 al.alamatlengkap,
-                ef.image,
                 ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
                 epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
                 --ap.noasuransi,ap.namapeserta,
@@ -6080,7 +6092,6 @@ class ReportController extends ApiController{
                 INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
                 INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
                 INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
-                left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
                 left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
                 left JOIN pasien_m as pa on ep.nocm =  pa.nocm
                 left JOIN alamat_m as al on pa.id = al.nocmfk
@@ -6100,6 +6111,15 @@ class ReportController extends ApiController{
                 ed.nourut
                 "
         ));
+
+        $res['img'] = \DB::table('emrfoto_t as emrp')
+
+            ->select('emrp.*')
+            ->where('emrp.statusenabled', true)
+            ->where('emrp.kdprofile', $kdProfile)
+            ->where('emrp.noemrpasienfk', $data[0]->noemr)
+            ->where('emrp.emrfk', $request->emrfk)
+            ->first();
 
         foreach ($data as $z) {
             if ($z->type == "datetime") {
