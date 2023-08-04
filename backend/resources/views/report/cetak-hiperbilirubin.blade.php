@@ -247,7 +247,7 @@
                 <div class="grid_12">
                     <div class="grid_12">
                         <div class="grid_12" style="width: 400px;height:220px; margin: auto; float: none;position: relative;z-index: 1;border: solid;">
-                            <img style="width: 400px;height:220px;" src="{!!  $res['d'][0]->image  !!}">
+                            <img style="width: 400px;height:220px;" src="{!!  $res['img']->image  !!}">
                             <input class="k-textbox" ng-model="item.ttd1" type="hidden" >
                         </div>
                         <div class="grid_12" style="margin-top: -220px;">
