@@ -14,6 +14,17 @@
         border-style: solid;
         border-color: #228be6;
     }
+    .buttonHijau {
+		background-color: #4CAF50;
+		/* Hijau */
+		border: none;
+		color: white;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		cursor: pointer;
+        border-radius: 5px;
+	}
 </style>
 <div class="panel panel-default">
     <div class="panel-body">
@@ -197,6 +208,12 @@
     <div class="grid_2">
         <c-button style="width: 100%; padding:0px, margin:0px;" item="item" position="'right'" click="resepDokter">
             <span class="title"><label c-label c-label-text='cetakResepDokter' font-size="13"></label></span>
+        </c-button>
+    </div>
+    <div class="grid_2">
+        <c-button style="width: 100%; padding:0px; margin:0px;" item="item" position="'right'"
+            click="cetakSemuaResep" class="buttonHijau">
+            <span class="title"><label c-label font-size="13">Cetak Semua Resep</label></span>
         </c-button>
     </div>
      <div class="grid_2">
