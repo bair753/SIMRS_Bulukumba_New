@@ -1192,6 +1192,37 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 }
             }
 
+            $scope.cetakSemuaResep = function () {
+                if($scope.item.noregistrasi == undefined){
+                    toastr.error('Pilih data dulu')
+                    return
+                }
+                var userLogin = medifirstService.getPegawaiLogin();
+                if ($scope.item.statusorder == 'Verifikasi' || $scope.item.statusorder == 'Packaging' || $scope.item.statusorder == 'Selesai' || $scope.item.statusorder == 'Sudah Di Ambil') {
+                    var Norec = $scope.item.norecresep;
+                    var local = JSON.parse(localStorage.getItem('profile'));
+                    var stt = 'false'
+                    if (Norec == undefined) {
+                        // Save it!
+                        toastr.error('Pilih data dulu')
+                        stt = 'true';
+                        return;
+                    } else {
+                        // Do nothing!
+                        stt = 'false'
+                            var local = JSON.parse(localStorage.getItem('profile'));
+                            var profile = local.id;
+                            var user = medifirstService.getPegawaiLogin();
+                        window.open(config.baseApiBackend + "report/cetak-resep-dokter-all?noorder=" + $scope.item.noorder 
+                        + "&norec=" + $scope.item.norecresep 
+                        + "&nocm=" + $scope.item.nocm 
+                        + "&noregistrasi=" + $scope.item.noregistrasi 
+                        + '&kodeprofile=' + profile 
+                        + '&user=' + user.namaLengkap);
+                    }
+                }
+            }
+
             $scope.resepDokter = function (){
                 $scope.popUpFormulir.center().open();
                 $scope.item.riwayatAlergi = $scope.item.riwayatalergi;
