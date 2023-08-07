@@ -727,6 +727,7 @@ class RawatJalanController extends ApiController
     }
     public function savePanggilDokter(Request $request)
     {
+        date_default_timezone_set('Asia/Makassar');
         $kdProfile = $this->getDataKdProfile($request);
         $idProfile = (int) $kdProfile;
         DB::beginTransaction();
