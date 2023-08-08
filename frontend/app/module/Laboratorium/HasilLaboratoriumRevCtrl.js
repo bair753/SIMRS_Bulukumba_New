@@ -705,11 +705,11 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 var pemeriksa = "";
                 var user = medifirstService.getPegawaiLogin();
                 var catatan = $scope.item.catatan == undefined ? "" : $scope.item.catatan;
-                if ($scope.item.DataPemeriksa == undefined) {
+                if ($scope.item.DataPemeriksa == undefined || $scope.item.DataPemeriksa.id == null) {
                     alert("Pilih terlebih dahulu pemeriksanya!!")
                     return;
                 }
-                if ($scope.item.DataPegawai == undefined) {
+                if ($scope.item.DataPegawai == undefined || $scope.item.DataPegawai.id == null) {
                     alert("Pilih terlebih dahulu dokternya!!")
                     return;
                 }   
