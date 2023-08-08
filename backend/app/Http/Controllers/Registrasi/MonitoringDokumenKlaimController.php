@@ -18,6 +18,9 @@ use Webpatser\Uuid\Uuid;
 use File;
 use App\Transaksi\PasienDaftar;
 use Webklex\PDFMerger\Facades\PDFMergerFacade as PDFMerger;
+use Symfony\Component\Filesystem\Filesystem;
+use Xthiago\PDFVersionConverter\Converter\GhostscriptConverterCommand;
+use Xthiago\PDFVersionConverter\Converter\GhostscriptConverter;
 
 class MonitoringDokumenKlaimController extends  ApiController
 {
@@ -67,6 +70,12 @@ class MonitoringDokumenKlaimController extends  ApiController
         if(count($dataDokumen) > 0){
             $file = [];
             foreach($dataDokumen as $item) {
+                $command = new GhostscriptConverterCommand();
+                $filesystem = new Filesystem();
+
+                $converter = new GhostscriptConverter($command, $filesystem);
+                $converter->convert(public_path($item->filepath), '1.4');
+
                 array_push($file, public_path($item->filepath));
             }
     
