@@ -117,7 +117,6 @@ define(['initialize'], function (initialize) {
 			}
 
 			function LoadCache() {
-				debugger;
 				var chacePeriode = cacheHelper.get('MasterBarangInvestasiCtrl');
 				if (chacePeriode != undefined) {
 					norecNoAsset = chacePeriode[0]
