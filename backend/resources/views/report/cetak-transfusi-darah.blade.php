@@ -272,7 +272,7 @@
                 </tr>
                 <tr style="border-bottom:1px solid #000">
                     <td colspan="2" style="border:none">Jumlah Kebutuhan Darah	:</td>
-                    <td style="border:none" colspan="9">@{{ item.obj[31101382] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} BAG / CC</td>
+                    <td style="border:none" colspan="9">@{{ item.obj[32116519] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} BAG / @{{ item.obj[32116520] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} CC :  @{{ item.obj[31101382] ? item.obj[31101382] : '' }}</td>
                 </tr>
                 <tr>
                     <td style="border:none">Golongan Darah</td>

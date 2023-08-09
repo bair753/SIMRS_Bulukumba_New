@@ -1489,28 +1489,17 @@ class ReportController extends ApiController{
             
             $resulttt[] = array(
                 'noregistrasi' => $item->noregistrasi,
-                'norec_order' => $item->norec_order,
-                'norec' => $item->noregistrasifk,
-                'tglregistrasi' => $item->tglregistrasi,
-                'norec_apd' => $item->norec_apd,
                 'alamatlengkap' => $item->alamatlengkap,
                 'noorder' => $item->noorder,
                 'nocm' => $item->nocm,
                 'namapasien' => $item->namapasien,
                 'jeniskelamin' => $item->jeniskelamin,
-                'namaruanganrawat' => $item->namaruanganrawat,
                 'tglorder' => $item->tglorder,
                 'nosip' => $item->nosip,
                 'namalengkap' => $item->namalengkap,
                 'kelompokpasien' => $item->kelompokpasien,
                 'namaruangan' => $item->namaruangan,
-                'statusorder' => $status,
-                'namapengambilorder' => $item->namapengambilorder,
                 'tgllahir' => $item->tgllahir,
-                'klid' => $item->klid,
-                'namakelas' => $item->namakelas,
-                'reseppulang' => $item->isreseppulang,
-                'isambilobat' => $item->isambilobat,
                 'details' => $details,
                 'isi' => $isi
             );
@@ -1585,29 +1574,18 @@ class ReportController extends ApiController{
                 "))->first();
             
             $rinci[] = array(
-                'noregistrasi' => $item->noregistrasi,
-                'norec_order' => $item->norec_order,
-                'noorder' => $item->noorder,
-                'norec' => $item->noregistrasifk,
-                'tglregistrasi' => $item->tglregistrasi,
-                'norec_apd' => $item->norec_apd,
-                'alamatlengkap' => $item->alamatlengkap,
-                'nocm' => $item->nocm,
-                'namapasien' => $item->namapasien,
-                'jeniskelamin' => $item->jeniskelamin,
-                'namaruanganrawat' => $item->namaruanganrawat,
-                'tglorder' => $item->tglorder,
-                'nosip' => $item->nosip,
-                'namalengkap' => $item->namalengkap,
-                'kelompokpasien' => $item->kelompokpasien,
-                'namaruangan' => $item->namaruangan,
-                'statusorder' => $status,
-                'namapengambilorder' => $item->namapengambilorder,
-                'tgllahir' => $item->tgllahir,
-                'klid' => $item->klid,
-                'namakelas' => $item->namakelas,
-                'reseppulang' => $item->isreseppulang,
-                'isambilobat' => $item->isambilobat,
+                'noregistrasi' => $jj->noregistrasi,
+                'alamatlengkap' => $jj->alamatlengkap,
+                'noorder' => $jj->noorder,
+                'nocm' => $jj->nocm,
+                'namapasien' => $jj->namapasien,
+                'jeniskelamin' => $jj->jeniskelamin,
+                'tglorder' => $jj->tglorder,
+                'nosip' => $jj->nosip,
+                'namalengkap' => $jj->namalengkap,
+                'kelompokpasien' => $jj->kelompokpasien,
+                'namaruangan' => $jj->namaruangan,
+                'tgllahir' => $jj->tgllahir,
                 'details' => $dt,
                 'isi' => $isi
             );
@@ -1620,6 +1598,16 @@ class ReportController extends ApiController{
             'dokter' => $resulttt,
             'depo' => $rinci
         ];
+
+        if(count($data['dokter']) <= 0 or count($data['depo']) <= 0) {
+            echo '
+                <script language="javascript">
+                    window.alert("Data tidak ditemukan, silahkan mengisi informasi resep pasien terlebih dahulu");
+                    window.close()
+                </script>
+            ';
+            die;
+        }
         return view('report.apotik.resepdokterall',compact('data','profile'));
     }
 
@@ -7446,7 +7434,7 @@ class ReportController extends ApiController{
         $norec = $request['emr'];
         $kdProfile = (int) $request['kdprofile'];
 
-        for($a = 1; $a <= 10; $a++){
+        for($a = 1; $a <= 20; $a++){
             $res['d'.$a] = DB::select(DB::raw(
                 "
                 SELECT
