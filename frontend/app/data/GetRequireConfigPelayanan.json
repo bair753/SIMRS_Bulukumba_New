@@ -3729,6 +3729,10 @@
         {
             "nameDep": "PenolakanRestrainCtrl",
             "urlDep": "module/EMR/PenolakanRestrainCtrl"
+        },
+        {
+            "nameDep": "PengantarPemeriksaanPatologiCtrl",
+            "urlDep": "module/EMR/PengantarPemeriksaanPatologiCtrl"
         }
     ]
 }
