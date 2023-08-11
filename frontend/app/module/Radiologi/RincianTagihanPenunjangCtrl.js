@@ -93,9 +93,11 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     idloginUserToRadiologi[30070] = 100489;
                     idloginUserToRadiologi[30071] = 100493;
                     idloginUserToRadiologi[30072] = 100031;
+                    console.log(dat);
 
                     let dataDokter = [];
                     $scope.listDokter = dat.data.dokter;
+                    $scope.listICD = dat.data.icdX;
                     $scope.listStatus = [
                         {
                           "id": 1,
@@ -1387,6 +1389,8 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     kesimpulan: $scope.itemPA.kesimpulan != undefined ? $scope.itemPA.kesimpulan.replace(/\n/ig, '~') : null,
                     anjuran: $scope.itemPA.anjuran != undefined ? $scope.itemPA.anjuran.replace(/\n/ig, '~') : null,
                     jaringanasal: $scope.itemPA.jaringanAsal != undefined ? $scope.itemPA.jaringanAsal : null,
+                    getjaringan: $scope.itemPA.getjaringan != undefined ? $scope.itemPA.getjaringan : null,
+                    icd0: $scope.itemPA.icd0 != undefined ? $scope.itemPA.icd0.id : null,
                     norec_pd: norec_pd,
                     norec: $scope.norecPA
                 }

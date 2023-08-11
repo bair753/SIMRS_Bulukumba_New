@@ -6,14 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Partograf</title>
     @if (stripos(\Request::url(), 'localhost') !== false)
-        {{-- <link rel="stylesheet" href="{{ asset('css/report/paper.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/report/table.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/report/tabel.css') }}"> --}}
+        <script src="{{ asset('js/Chart.js') }}"></script>
         <script src="{{ asset('js/jquery.min.js') }}"></script>
         <script src="{{ asset('js/jquery.qr-code.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/qrcode/src/jquery.qrcode.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/qrcode/src/qrcode.js') }}"></script>
-        {{-- <link href="{{ asset('css/style.css') }}" rel="stylesheet"> --}}
         <!-- angular -->
         <script src="{{ asset('js/angular/angular.min.js') }}" type="text/javascript"></script>
         <script src="{{ asset('js/angular/angular-route.min.js') }}" type="text/javascript"></script>
@@ -21,14 +18,11 @@
         <script type="text/javascript" src="{{ asset('js/angular/angular-aria.min.js') }}"></script>
         <script src="{{ asset('js/angular/angular-material.js') }}" type="text/javascript"></script>
     @else
-        <link rel="stylesheet" href="{{ asset('service/css/report/paper.css') }}">
-        <link rel="stylesheet" href="{{ asset('service/css/report/table.css') }}">
-        <link rel="stylesheet" href="{{ asset('service/css/report/tabel.css') }}">
+        <script src="{{ asset('service/js/Chart.js') }}"></script>
         <script src="{{ asset('service/js/jquery.min.js') }}"></script>
         <script src="{{ asset('service/js/jquery.qr-code.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/qrcode/src/jquery.qrcode.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/qrcode/src/qrcode.js') }}"></script>
-        {{-- <link href="{{ asset('service/css/style.css') }}" rel="stylesheet"> --}}
         <!-- angular -->
         <script src="{{ asset('service/js/angular/angular.min.js') }}" type="text/javascript"></script>
         <script src="{{ asset('service/js/angular/angular-route.min.js') }}" type="text/javascript"></script>
@@ -70,6 +64,10 @@
             border:1px solid #000;
             border-collapse:collapse;
         }
+        canvas{
+            width:600px !important;
+            height:270px !important;
+        } 
         .mintd{
             width:48pt;
         }
@@ -119,7 +117,7 @@
             color:#fff;
         }
         .rotate{
-            vertical-align: bottom;
+            /* vertical-align: bottom; */
             text-align: center;
         }
         #rotate{
@@ -173,6 +171,7 @@
         <tr class="bordered bg-dark">
             <th colspan="49" height="20pt">PARTOGRAF</th>
         </tr>
+        
         <tr class="noborder">
             <td colspan="8" class="noborder">G: @{{ item.obj[18000300] ? item.obj[18000300] : '................' }}</td>
             <td colspan="8" class="noborder">P: @{{ item.obj[18000301] ? item.obj[18000301] : '................' }}</td>
@@ -189,1724 +188,287 @@
         <tr style="border:none">
             <td colspan="49" style="border-bottom:none"></td>
         </tr>
-        <tr>
-            <td colspan="10" rowspan="13" style="border:none;text-align:center">Denyut Jantung Janin (    / mnt)</td>
-            <td colspan="7" style="text-align:right;border:none">200</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+        <tr >
+            <td colspan="10" style="border:none;text-align:center">Denyut Jantung Janin (    / mnt)</td>
+            <td colspan="39"  style="text-align:right;border:none"><canvas id="chartJantung"></canvas></td>
         </tr>
-        <tr>
-            <td colspan="7" style="text-align:right;border:none">190</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+        
+        <tr style="text-align:center">
+            <td colspan="10" style="text-align:right;border:none">Air Ketuban</td>
+            <td>@{{ item.obj[1000055] ? item.obj[1000055] : '' }}</td>
+            <td>@{{ item.obj[1000056] ? item.obj[1000056] : '' }}</td>
+            <td>@{{ item.obj[1000057] ? item.obj[1000057] : '' }}</td>
+            <td>@{{ item.obj[1000058] ? item.obj[1000058] : '' }}</td>
+            <td>@{{ item.obj[1000059] ? item.obj[1000059] : '' }}</td>
+            <td>@{{ item.obj[1000060] ? item.obj[1000060] : '' }}</td>
+            <td>@{{ item.obj[1000061] ? item.obj[1000061] : '' }}</td>
+            <td>@{{ item.obj[1000062] ? item.obj[1000062] : '' }}</td>
+            <td>@{{ item.obj[1000063] ? item.obj[1000063] : '' }}</td>
+            <td>@{{ item.obj[1000064] ? item.obj[1000064] : '' }}</td>
+            <td>@{{ item.obj[1000065] ? item.obj[1000065] : '' }}</td>
+            <td>@{{ item.obj[1000066] ? item.obj[1000066] : '' }}</td>
+            <td>@{{ item.obj[1000067] ? item.obj[1000067] : '' }}</td>
+            <td>@{{ item.obj[1000068] ? item.obj[1000068] : '' }}</td>
+            <td>@{{ item.obj[1000069] ? item.obj[1000069] : '' }}</td>
+            <td>@{{ item.obj[1000070] ? item.obj[1000070] : '' }}</td>
+            <td>@{{ item.obj[1000239] ? item.obj[1000239] : '' }}</td>
+            <td>@{{ item.obj[1000240] ? item.obj[1000240] : '' }}</td>
+            <td>@{{ item.obj[1000241] ? item.obj[1000241] : '' }}</td>
+            <td>@{{ item.obj[1000242] ? item.obj[1000242] : '' }}</td>
+            <td>@{{ item.obj[1000243] ? item.obj[1000243] : '' }}</td>
+            <td>@{{ item.obj[1000244] ? item.obj[1000244] : '' }}</td>
+            <td>@{{ item.obj[1000245] ? item.obj[1000245] : '' }}</td>
+            <td>@{{ item.obj[1000246] ? item.obj[1000246] : '' }}</td>
+            <td>@{{ item.obj[1000247] ? item.obj[1000247] : '' }}</td>
+            <td>@{{ item.obj[1000248] ? item.obj[1000248] : '' }}</td>
+            <td>@{{ item.obj[1000249] ? item.obj[1000249] : '' }}</td>
+            <td>@{{ item.obj[1000250] ? item.obj[1000250] : '' }}</td>
+            <td>@{{ item.obj[1000251] ? item.obj[1000251] : '' }}</td>
+            <td>@{{ item.obj[1000252] ? item.obj[1000252] : '' }}</td>
+            <td>@{{ item.obj[1000253] ? item.obj[1000253] : '' }}</td>
+            <td>@{{ item.obj[1000254] ? item.obj[1000254] : '' }}</td>
+            <td class="noborder"></td>
+            <td class="noborder"></td>
+            <td class="noborder"></td>
+            <td class="noborder"></td>
+            <td class="noborder"></td>
+            <td class="noborder"></td>
+            <td class="noborder"></td>
         </tr>
-        <tr>
-            <td colspan="7" style="text-align:right;border:none">180</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td colspan="7" style="text-align:right;border:none">170</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td colspan="7" style="text-align:right;border:none">160</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td colspan="7" style="text-align:right;border:none">150</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td colspan="7" style="text-align:right;border:none">140</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td colspan="7" style="text-align:right;border:none">130</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td colspan="7" style="text-align:right;border:none">120</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td colspan="7" style="text-align:right;border:none">110</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td colspan="7" style="text-align:right;border:none">100</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td colspan="7" style="text-align:right;border:none">90</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td colspan="7" style="text-align:right;border:none">80</td>
-            <td colspan="32"></td>
-        </tr>
-        <tr>
-            <td colspan="17" style="text-align:right;border:none">Air Ketuban</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td colspan="17" style="text-align:right;border:none">Penyusupan</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+        <tr style="text-align:center">
+            <td colspan="10" style="text-align:right;border:none">Penyusupan</td>
+            <td>@{{ item.obj[1000071] ? item.obj[1000071] : '' }}</td>
+            <td>@{{ item.obj[1000072] ? item.obj[1000072] : '' }}</td>
+            <td>@{{ item.obj[1000073] ? item.obj[1000073] : '' }}</td>
+            <td>@{{ item.obj[1000074] ? item.obj[1000074] : '' }}</td>
+            <td>@{{ item.obj[1000075] ? item.obj[1000075] : '' }}</td>
+            <td>@{{ item.obj[1000076] ? item.obj[1000076] : '' }}</td>
+            <td>@{{ item.obj[1000077] ? item.obj[1000077] : '' }}</td>
+            <td>@{{ item.obj[1000078] ? item.obj[1000078] : '' }}</td>
+            <td>@{{ item.obj[1000079] ? item.obj[1000079] : '' }}</td>
+            <td>@{{ item.obj[1000080] ? item.obj[1000080] : '' }}</td>
+            <td>@{{ item.obj[1000081] ? item.obj[1000081] : '' }}</td>
+            <td>@{{ item.obj[1000082] ? item.obj[1000082] : '' }}</td>
+            <td>@{{ item.obj[1000083] ? item.obj[1000083] : '' }}</td>
+            <td>@{{ item.obj[1000084] ? item.obj[1000084] : '' }}</td>
+            <td>@{{ item.obj[1000085] ? item.obj[1000085] : '' }}</td>
+            <td>@{{ item.obj[1000086] ? item.obj[1000086] : '' }}</td>
+            <td>@{{ item.obj[1000255] ? item.obj[1000255] : '' }}</td>
+            <td>@{{ item.obj[1000256] ? item.obj[1000256] : '' }}</td>
+            <td>@{{ item.obj[1000257] ? item.obj[1000257] : '' }}</td>
+            <td>@{{ item.obj[1000258] ? item.obj[1000258] : '' }}</td>
+            <td>@{{ item.obj[1000259] ? item.obj[1000259] : '' }}</td>
+            <td>@{{ item.obj[1000260] ? item.obj[1000260] : '' }}</td>
+            <td>@{{ item.obj[1000261] ? item.obj[1000261] : '' }}</td>
+            <td>@{{ item.obj[1000262] ? item.obj[1000262] : '' }}</td>
+            <td>@{{ item.obj[1000263] ? item.obj[1000263] : '' }}</td>
+            <td>@{{ item.obj[1000264] ? item.obj[1000264] : '' }}</td>
+            <td>@{{ item.obj[1000265] ? item.obj[1000265] : '' }}</td>
+            <td>@{{ item.obj[1000266] ? item.obj[1000266] : '' }}</td>
+            <td>@{{ item.obj[1000267] ? item.obj[1000267] : '' }}</td>
+            <td>@{{ item.obj[1000268] ? item.obj[1000268] : '' }}</td>
+            <td>@{{ item.obj[1000269] ? item.obj[1000269] : '' }}</td>
+            <td>@{{ item.obj[1000270] ? item.obj[1000270] : '' }}</td>
+            <td class="noborder"></td>
+            <td class="noborder"></td>
+            <td class="noborder"></td>
+            <td class="noborder"></td>
+            <td class="noborder"></td>
+            <td class="noborder"></td>
+            <td class="noborder"></td>
         </tr>
         <tr>
             <td colspan="46" style="text-align:right;border:none"></td>
         </tr>
         <tr>
-            <td class="rotate" colspan="7" rowspan="12" style="border:none">
+            <td class="rotate noborder" colspan="10" rowspan="1">
                 <span id="rotate">
                     Pembukaan serviks (cm) beri tanda x <br> 
                     Turunnya kepala 
                     <br>beri tanda o
                 </span>
             </td>
-            <td colspan="10" style="text-align:right;border:none">10</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td colspan="39"  style="text-align:right;border:none"><canvas id="chartServiksKontraksi"></canvas></td>
         </tr>
+        <tr >
+            <td colspan="10" style="border:none;text-align:center">Nadi & Tekanan Darah</td>
+            <td colspan="39"  style="text-align:right;border:none"><canvas id="chartNadiDarah"></canvas></td>
+        </tr>
+        
         <tr>
-            <td colspan="10" style="text-align:right;border:none">9</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td colspan="36" style="border:none"></td>
         </tr>
-        <tr>
-            <td colspan="10" style="text-align:right;border:none">8</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td colspan="10" style="text-align:right;border:none">7</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td colspan="10" style="text-align:right;border:none">6</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td colspan="10" style="text-align:right;border:none">5</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td colspan="10" style="text-align:right;border:none">4</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td colspan="10" style="text-align:right;border:none">3</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td colspan="10" style="text-align:right;border:none">2</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td colspan="10" style="text-align:right;border:none">1</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr style="text-align: center;">
-            <td colspan="10" style="text-align:right;border:none">0</td>
-            <td colspan="2">1</td>
-            <td colspan="2">2</td>
-            <td colspan="2">3</td>
-            <td colspan="2">4</td>
-            <td colspan="2">5</td>
-            <td colspan="2">6</td>
-            <td colspan="2">7</td>
-            <td colspan="2">8</td>
-            <td colspan="2">9</td>
-            <td colspan="2">10</td>
-            <td colspan="2">11</td>
-            <td colspan="2">12</td>
-            <td colspan="2">13</td>
-            <td colspan="2">14</td>
-            <td colspan="2">15</td>
-            <td colspan="2">16</td>
-        </tr>
-        <tr>
-            <td colspan="10" style="text-align:right;border:none">Waktu <br>(jam)</td>
-            <td colspan="2"></td>
-            <td colspan="2"></td>
-            <td colspan="2"></td>
-            <td colspan="2"></td>
-            <td colspan="2"></td>
-            <td colspan="2"></td>
-            <td colspan="2"></td>
-            <td colspan="2"></td>
-            <td colspan="2"></td>
-            <td colspan="2"></td>
-            <td colspan="2"></td>
-            <td colspan="2"></td>
-            <td colspan="2"></td>
-            <td colspan="2"></td>
-            <td colspan="2"></td>
-            <td colspan="2"></td>
+        <tr style="text-align:center">
+            <td colspan="10" class="noborder">Suhu (℃)</td>
+            <td>@{{ item.obj[1000135] ? item.obj[1000135] : '' }}</td>
+            <td>@{{ item.obj[1000136] ? item.obj[1000136] : '' }}</td>
+            <td>@{{ item.obj[1000137] ? item.obj[1000137] : '' }}</td>
+            <td>@{{ item.obj[1000138] ? item.obj[1000138] : '' }}</td>
+            <td>@{{ item.obj[1000139] ? item.obj[1000139] : '' }}</td>
+            <td>@{{ item.obj[1000140] ? item.obj[1000140] : '' }}</td>
+            <td>@{{ item.obj[1000141] ? item.obj[1000141] : '' }}</td>
+            <td>@{{ item.obj[1000142] ? item.obj[1000142] : '' }}</td>
+            <td>@{{ item.obj[1000143] ? item.obj[1000143] : '' }}</td>
+            <td>@{{ item.obj[1000144] ? item.obj[1000144] : '' }}</td>
+            <td>@{{ item.obj[1000145] ? item.obj[1000145] : '' }}</td>
+            <td>@{{ item.obj[1000146] ? item.obj[1000146] : '' }}</td>
+            <td>@{{ item.obj[1000147] ? item.obj[1000147] : '' }}</td>
+            <td>@{{ item.obj[1000148] ? item.obj[1000148] : '' }}</td>
+            <td>@{{ item.obj[1000149] ? item.obj[1000149] : '' }}</td>
+            <td>@{{ item.obj[1000150] ? item.obj[1000150] : '' }}</td>
+            <td>@{{ item.obj[1000319] ? item.obj[1000319] : '' }}</td>
+            <td>@{{ item.obj[1000320] ? item.obj[1000320] : '' }}</td>
+            <td>@{{ item.obj[1000321] ? item.obj[1000321] : '' }}</td>
+            <td>@{{ item.obj[1000322] ? item.obj[1000322] : '' }}</td>
+            <td>@{{ item.obj[1000323] ? item.obj[1000323] : '' }}</td>
+            <td>@{{ item.obj[1000324] ? item.obj[1000324] : '' }}</td>
+            <td>@{{ item.obj[1000325] ? item.obj[1000325] : '' }}</td>
+            <td>@{{ item.obj[1000326] ? item.obj[1000326] : '' }}</td>
+            <td>@{{ item.obj[1000327] ? item.obj[1000327] : '' }}</td>
+            <td>@{{ item.obj[1000328] ? item.obj[1000328] : '' }}</td>
+            <td>@{{ item.obj[1000329] ? item.obj[1000329] : '' }}</td>
+            <td>@{{ item.obj[1000330] ? item.obj[1000330] : '' }}</td>
+            <td>@{{ item.obj[1000331] ? item.obj[1000331] : '' }}</td>
+            <td>@{{ item.obj[1000332] ? item.obj[1000332] : '' }}</td>
+            <td>@{{ item.obj[1000333] ? item.obj[1000333] : '' }}</td>
+            <td>@{{ item.obj[1000334] ? item.obj[1000334] : '' }}</td>
+            <td class="noborder"></td>
+            <td class="noborder"></td>
+            <td class="noborder"></td>
+            <td class="noborder"></td>
+            <td class="noborder"></td>
+            <td class="noborder"></td>
+            <td class="noborder"></td>
         </tr>
         <tr>
             <td colspan="36" style="border:none"></td>
         </tr>
-        <tr>
-            <td valign="bottom" colspan="8" rowspan="5" style="border:none;text-align:center">Kontraksi <br> Tiap <br> 0 Menit</td>
-            <td colspan="3" style="border:none"></td>
-            <td colspan="6" style="text-align: right;border:none">5</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+        <tr style="text-align:center">
+            <td colspan="5" class="noborder" rowspan="3">Urin &nbsp;</td>
+            <td colspan="5" style="text-align:right;" class="noborder">Protein &nbsp;</td>
+            <td>@{{ item.obj[1000151] ? item.obj[1000151] : '' }}</td>
+            <td>@{{ item.obj[1000152] ? item.obj[1000152] : '' }}</td>
+            <td>@{{ item.obj[1000153] ? item.obj[1000153] : '' }}</td>
+            <td>@{{ item.obj[1000154] ? item.obj[1000154] : '' }}</td>
+            <td>@{{ item.obj[1000155] ? item.obj[1000155] : '' }}</td>
+            <td>@{{ item.obj[1000156] ? item.obj[1000156] : '' }}</td>
+            <td>@{{ item.obj[1000157] ? item.obj[1000157] : '' }}</td>
+            <td>@{{ item.obj[1000158] ? item.obj[1000158] : '' }}</td>
+            <td>@{{ item.obj[1000159] ? item.obj[1000159] : '' }}</td>
+            <td>@{{ item.obj[1000160] ? item.obj[1000160] : '' }}</td>
+            <td>@{{ item.obj[1000161] ? item.obj[1000161] : '' }}</td>
+            <td>@{{ item.obj[1000162] ? item.obj[1000162] : '' }}</td>
+            <td>@{{ item.obj[1000163] ? item.obj[1000163] : '' }}</td>
+            <td>@{{ item.obj[1000164] ? item.obj[1000164] : '' }}</td>
+            <td>@{{ item.obj[1000165] ? item.obj[1000165] : '' }}</td>
+            <td>@{{ item.obj[1000166] ? item.obj[1000166] : '' }}</td>
+            <td>@{{ item.obj[1000335] ? item.obj[1000335] : '' }}</td>
+            <td>@{{ item.obj[1000336] ? item.obj[1000336] : '' }}</td>
+            <td>@{{ item.obj[1000337] ? item.obj[1000337] : '' }}</td>
+            <td>@{{ item.obj[1000338] ? item.obj[1000338] : '' }}</td>
+            <td>@{{ item.obj[1000339] ? item.obj[1000339] : '' }}</td>
+            <td>@{{ item.obj[1000340] ? item.obj[1000340] : '' }}</td>
+            <td>@{{ item.obj[1000341] ? item.obj[1000341] : '' }}</td>
+            <td>@{{ item.obj[1000342] ? item.obj[1000342] : '' }}</td>
+            <td>@{{ item.obj[1000343] ? item.obj[1000343] : '' }}</td>
+            <td>@{{ item.obj[1000344] ? item.obj[1000344] : '' }}</td>
+            <td>@{{ item.obj[1000345] ? item.obj[1000345] : '' }}</td>
+            <td>@{{ item.obj[1000346] ? item.obj[1000346] : '' }}</td>
+            <td>@{{ item.obj[1000347] ? item.obj[1000347] : '' }}</td>
+            <td>@{{ item.obj[1000348] ? item.obj[1000348] : '' }}</td>
+            <td>@{{ item.obj[1000349] ? item.obj[1000349] : '' }}</td>
+            <td>@{{ item.obj[1000350] ? item.obj[1000350] : '' }}</td>
+            <td class="noborder"></td>
+            <td class="noborder"></td>
+            <td class="noborder"></td>
+            <td class="noborder"></td>
+            <td class="noborder"></td>
+            <td class="noborder"></td>
+            <td class="noborder"></td>
         </tr>
-        <tr>
-            <td colspan="3" style="border:none"></td>
-            <td colspan="6" style="text-align: right;border:none">< 20 4</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+        <tr style="text-align:center">
+            <td colspan="5" style="text-align:right;" class="noborder">Aseton &nbsp;</td>
+            <td>@{{ item.obj[1000167] ? item.obj[1000167] : '' }}</td>
+            <td>@{{ item.obj[1000168] ? item.obj[1000168] : '' }}</td>
+            <td>@{{ item.obj[1000169] ? item.obj[1000169] : '' }}</td>
+            <td>@{{ item.obj[1000170] ? item.obj[1000170] : '' }}</td>
+            <td>@{{ item.obj[1000171] ? item.obj[1000171] : '' }}</td>
+            <td>@{{ item.obj[1000172] ? item.obj[1000172] : '' }}</td>
+            <td>@{{ item.obj[1000173] ? item.obj[1000173] : '' }}</td>
+            <td>@{{ item.obj[1000174] ? item.obj[1000174] : '' }}</td>
+            <td>@{{ item.obj[1000175] ? item.obj[1000175] : '' }}</td>
+            <td>@{{ item.obj[1000176] ? item.obj[1000176] : '' }}</td>
+            <td>@{{ item.obj[1000177] ? item.obj[1000177] : '' }}</td>
+            <td>@{{ item.obj[1000178] ? item.obj[1000178] : '' }}</td>
+            <td>@{{ item.obj[1000179] ? item.obj[1000179] : '' }}</td>
+            <td>@{{ item.obj[1000180] ? item.obj[1000180] : '' }}</td>
+            <td>@{{ item.obj[1000181] ? item.obj[1000181] : '' }}</td>
+            <td>@{{ item.obj[1000182] ? item.obj[1000182] : '' }}</td>
+            <td>@{{ item.obj[1000351] ? item.obj[1000351] : '' }}</td>
+            <td>@{{ item.obj[1000352] ? item.obj[1000352] : '' }}</td>
+            <td>@{{ item.obj[1000353] ? item.obj[1000353] : '' }}</td>
+            <td>@{{ item.obj[1000354] ? item.obj[1000354] : '' }}</td>
+            <td>@{{ item.obj[1000355] ? item.obj[1000355] : '' }}</td>
+            <td>@{{ item.obj[1000356] ? item.obj[1000356] : '' }}</td>
+            <td>@{{ item.obj[1000357] ? item.obj[1000357] : '' }}</td>
+            <td>@{{ item.obj[1000358] ? item.obj[1000358] : '' }}</td>
+            <td>@{{ item.obj[1000359] ? item.obj[1000359] : '' }}</td>
+            <td>@{{ item.obj[1000360] ? item.obj[1000360] : '' }}</td>
+            <td>@{{ item.obj[1000361] ? item.obj[1000361] : '' }}</td>
+            <td>@{{ item.obj[1000362] ? item.obj[1000362] : '' }}</td>
+            <td>@{{ item.obj[1000363] ? item.obj[1000363] : '' }}</td>
+            <td>@{{ item.obj[1000364] ? item.obj[1000364] : '' }}</td>
+            <td>@{{ item.obj[1000365] ? item.obj[1000365] : '' }}</td>
+            <td>@{{ item.obj[1000366] ? item.obj[1000366] : '' }}</td>
+            <td class="noborder"></td>
+            <td class="noborder"></td>
+            <td class="noborder"></td>
+            <td class="noborder"></td>
+            <td class="noborder"></td>
+            <td class="noborder"></td>
+            <td class="noborder"></td>
         </tr>
-        <tr>
-            <td colspan="3"></td>
-            <td colspan="6" style="text-align: right;border:none">20-40 3</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td colspan="3"></td>
-            <td colspan="6" style="text-align: right;border:none">> 40 2</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td colspan="3"></td>
-            <td colspan="6" style="text-align: right;border:none">( dok) 1</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td colspan="33" style="border:none"></td>
-        </tr>
-        <tr>
-            <td colspan="17" style="text-align:right;border:none">Obat dan <br>
-                Cairan IV
-               </td>
-            <td colspan="2"></td>
-            <td colspan="2"></td>
-            <td colspan="2"></td>
-            <td colspan="2"></td>
-            <td colspan="2"></td>
-            <td colspan="2"></td>
-            <td colspan="2"></td>
-            <td colspan="2"></td>
-            <td colspan="2"></td>
-            <td colspan="2"></td>
-            <td colspan="2"></td>
-            <td colspan="2"></td>
-            <td colspan="2"></td>
-            <td colspan="2"></td>
-            <td colspan="2"></td>
-            <td colspan="2"></td>
-        </tr>
-        <tr>
-            <td colspan="8" valign="top" rowspan="13" style="text-align:center;border:none">
-                <li>
-                    Nadi
-                </li>
-            </td>
-            <td colspan="6" rowspan="13" valign="middle" style="border:none;">Tekanan
-                <br>darah
-              </td>
-            <td colspan="3"style="border:none;text-align:right">180</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td colspan="3"style="border:none;text-align:right">170</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td colspan="3"style="border:none;text-align:right">160</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td colspan="3"style="border:none;text-align:right">150</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td colspan="3"style="border:none;text-align:right">140</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td colspan="3"style="border:none;text-align:right">130</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td colspan="3"style="border:none;text-align:right">120</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td colspan="3"style="border:none;text-align:right">110</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td colspan="3"style="border:none;text-align:right">100</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td colspan="3"style="border:none;text-align:right">90</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td colspan="3"style="border:none;text-align:right">80</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td colspan="3"style="border:none;text-align:right">70</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td colspan="3"style="border:none;text-align:right">60</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td colspan="36" style="border:none"></td>
-        </tr>
-        <tr>
-            <td colspan="8" style="border:none;text-align:center">
-                <li>
-                    Suhu
-                </li>
-            </td>
-            <td colspan="9" style="border:none;text-align:right">&#x2103;</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td colspan="3" rowspan="3" style="border:none" valign="middle">Urin</td>
-            <td colspan="5" style="border-right:none"></td>
-            <td colspan="3" style="border:none"></td>
-            <td colspan="6" style="border:none">Protein</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td colspan="5" style="border-right:none"></td>
-            <td colspan="3" style="border:none"></td>
-            <td colspan="6" style="border:none">Aseton</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr height="30pt">
-            <td colspan="5" style="border:none"></td>
-            <td colspan="3" style="border:none"></td>
-            <td colspan="6" style="border:none">Volume </td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+        <tr style="text-align:center">
+            <td colspan="5" style="text-align:right;" class="noborder">Volume &nbsp;</td>
+            <td>@{{ item.obj[1000183] ? item.obj[1000183] : '' }}</td>
+            <td>@{{ item.obj[1000184] ? item.obj[1000184] : '' }}</td>
+            <td>@{{ item.obj[1000185] ? item.obj[1000185] : '' }}</td>
+            <td>@{{ item.obj[1000186] ? item.obj[1000186] : '' }}</td>
+            <td>@{{ item.obj[1000187] ? item.obj[1000187] : '' }}</td>
+            <td>@{{ item.obj[1000188] ? item.obj[1000188] : '' }}</td>
+            <td>@{{ item.obj[1000189] ? item.obj[1000189] : '' }}</td>
+            <td>@{{ item.obj[1000190] ? item.obj[1000190] : '' }}</td>
+            <td>@{{ item.obj[1000191] ? item.obj[1000191] : '' }}</td>
+            <td>@{{ item.obj[1000192] ? item.obj[1000192] : '' }}</td>
+            <td>@{{ item.obj[1000193] ? item.obj[1000193] : '' }}</td>
+            <td>@{{ item.obj[1000194] ? item.obj[1000194] : '' }}</td>
+            <td>@{{ item.obj[1000195] ? item.obj[1000195] : '' }}</td>
+            <td>@{{ item.obj[1000196] ? item.obj[1000196] : '' }}</td>
+            <td>@{{ item.obj[1000197] ? item.obj[1000197] : '' }}</td>
+            <td>@{{ item.obj[1000198] ? item.obj[1000198] : '' }}</td>
+            <td>@{{ item.obj[1000367] ? item.obj[1000367] : '' }}</td>
+            <td>@{{ item.obj[1000368] ? item.obj[1000368] : '' }}</td>
+            <td>@{{ item.obj[1000369] ? item.obj[1000369] : '' }}</td>
+            <td>@{{ item.obj[1000370] ? item.obj[1000370] : '' }}</td>
+            <td>@{{ item.obj[1000371] ? item.obj[1000371] : '' }}</td>
+            <td>@{{ item.obj[1000372] ? item.obj[1000372] : '' }}</td>
+            <td>@{{ item.obj[1000373] ? item.obj[1000373] : '' }}</td>
+            <td>@{{ item.obj[1000374] ? item.obj[1000374] : '' }}</td>
+            <td>@{{ item.obj[1000375] ? item.obj[1000375] : '' }}</td>
+            <td>@{{ item.obj[1000376] ? item.obj[1000376] : '' }}</td>
+            <td>@{{ item.obj[1000377] ? item.obj[1000377] : '' }}</td>
+            <td>@{{ item.obj[1000378] ? item.obj[1000378] : '' }}</td>
+            <td>@{{ item.obj[1000379] ? item.obj[1000379] : '' }}</td>
+            <td>@{{ item.obj[1000380] ? item.obj[1000380] : '' }}</td>
+            <td>@{{ item.obj[1000381] ? item.obj[1000381] : '' }}</td>
+            <td>@{{ item.obj[1000382] ? item.obj[1000382] : '' }}</td>
+            <td class="noborder"></td>
+            <td class="noborder"></td>
+            <td class="noborder"></td>
+            <td class="noborder"></td>
+            <td class="noborder"></td>
+            <td class="noborder"></td>
+            <td class="noborder"></td>
         </tr>
         <tr style="height:5pt"></tr>
         <!-- next page  -->
@@ -2706,30 +1268,178 @@
 
             $scope.tglemr = dataLoad[i].tgl
             
+            
         }
 
-        // var keluhan_utama = $scope.item.obj[420516].replace(/(?:\r\n|\r|\n)/g, ', ');
+            var speedCanvasJantung = document.getElementById("chartJantung");
+            var dataWaktu = [ 
+                $scope.item.obj[1000015]?.substring(11, 16) == undefined ? '-' : $scope.item.obj[1000015]?.substring(11, 16),
+                '-',
+                $scope.item.obj[1000016]?.substring(11, 16) == undefined ? '-' : $scope.item.obj[1000016]?.substring(11, 16),
+                '-',
+                $scope.item.obj[1000017]?.substring(11, 16) == undefined ? '-' : $scope.item.obj[1000017]?.substring(11, 16),
+                '-',
+                $scope.item.obj[1000018]?.substring(11, 16) == undefined ? '-' : $scope.item.obj[1000018]?.substring(11, 16),
+                '-',
+                $scope.item.obj[1000019]?.substring(11, 16) == undefined ? '-' : $scope.item.obj[1000019]?.substring(11, 16),
+                '-',
+                $scope.item.obj[1000020]?.substring(11, 16) == undefined ? '-' : $scope.item.obj[1000020]?.substring(11, 16),
+                '-',
+                $scope.item.obj[1000021]?.substring(11, 16) == undefined ? '-' : $scope.item.obj[1000021]?.substring(11, 16),
+                '-',
+                $scope.item.obj[1000199]?.substring(11, 16) == undefined ? '-' : $scope.item.obj[1000199]?.substring(11, 16),
+                '-',
+                $scope.item.obj[1000200]?.substring(11, 16) == undefined ? '-' : $scope.item.obj[1000200]?.substring(11, 16),
+                '-',
+                $scope.item.obj[1000201]?.substring(11, 16) == undefined ? '-' : $scope.item.obj[1000201]?.substring(11, 16),
+                '-',
+                $scope.item.obj[1000202]?.substring(11, 16) == undefined ? '-' : $scope.item.obj[1000202]?.substring(11, 16),
+                '-',
+                $scope.item.obj[1000203]?.substring(11, 16) == undefined ? '-' : $scope.item.obj[1000203]?.substring(11, 16),
+                '-',
+                $scope.item.obj[1000204]?.substring(11, 16) == undefined ? '-' : $scope.item.obj[1000204]?.substring(11, 16),
+            ]
+            const date = new Date();
+            const hasil = dataWaktu.map(h) => {
+                const [hour, minute] = h.split(':');
+                date.setHours(hour)
+                date.setMinutes(minute)
+                const newDate = new Date(date.getTime() - 1000 * 60 * 60 *16)
+                return newDate.toTimeString().slice(0, 5)
+            };
+            console.log(hasil);
 
-        // $scope.item.obj['keluhan_utama'] = keluhan_utama;
+            var dataJantung = Array(16).fill(null).map((_, i) => $scope.item.obj[1000023 + i] == undefined ? '-' : $scope.item.obj[1000023 + i]);
+            var dataJantungg = Array(16).fill(null).map((_, i) => $scope.item.obj[1000207 + i] == undefined ? '-' : $scope.item.obj[1000207 + i]);
+            var dataJantungAll = dataJantung.concat(dataJantungg);
 
-        var p1 = $scope.item.obj[420614];
-        var p2 = $scope.item.obj[420615];
+            var Jantung = {
+                label: "Denyut Jantung",
+                data: dataJantung,
+                lineTension: 0,
+                fill: false,
+                borderColor: 'red'
+            };
 
-        if (p1 != undefined) {
-            jQuery('#qrcodep1').qrcode({
-            width	: 70,
-			height	: 70,
-            text	: "Tanda Tangan Digital Oleh " + p1
-            });	
-        }
+            var speedData = {
+            labels: dataWaktu,
+            datasets: [Jantung]
+            };
 
-        if (p2 != undefined) {
-            jQuery('#qrcodep2').qrcode({
-            width	: 70,
-			height	: 70,
-            text	: "Tanda Tangan Digital Oleh " + p2
-            });	
-        }
+            var chartOptions = {
+            legend: {
+                display: false,
+                position: 'top',
+                labels: {
+                boxWidth: 80,
+                fontColor: 'black'
+                }
+            }
+            };
+            
+            var lineChart = new Chart(speedCanvasJantung, {
+            type: 'line',
+            data: speedData,
+            options: chartOptions
+            });
+
+            var speedCanvasServiksKontraksi = document.getElementById("chartServiksKontraksi");
+            var dataServiks = Array(16).fill(null).map((_, i) => $scope.item.obj[1000039 + i] == undefined ? '-' : $scope.item.obj[1000039 + i]);
+            var dataServikss = Array(16).fill(null).map((_, i) => $scope.item.obj[1000223 + i] == undefined ? '-' : $scope.item.obj[1000223 + i]);
+            var dataServiksAll = dataServiks.concat(dataServikss);
+
+            var dataKontraksi = Array(32).fill(null).map((_, i) => $scope.item.obj[1000383 + i] == undefined ? '-' : $scope.item.obj[1000383 + i]);
+
+            var Serviks = {
+                label: "Serviks",
+                data: dataServiksAll,
+                lineTension: 0,
+                fill: false,
+                borderColor: 'blue'
+            };
+
+            var Kontraksi = {
+                label: "Kontraksi",
+                data: dataKontraksi,
+                lineTension: 0,
+                fill: false,
+                borderColor: 'black'
+            };
+
+            var speedDataServiksKontraksi = {
+            labels: dataWaktu,
+            datasets: [Serviks, Kontraksi]
+            };
+
+            var chartOptionsServiksKontraksi = {
+            legend: {
+                display: true,
+                position: 'top',
+                labels: {
+                boxWidth: 80,
+                fontColor: 'black'
+                }
+            }
+            };
+            
+
+            var lineChartServiksKontraksi = new Chart(speedCanvasServiksKontraksi, {
+            type: 'line',
+            data: speedDataServiksKontraksi,
+            options: chartOptionsServiksKontraksi
+            });
+
+            //
+            var speedCanvasNadiDarah = document.getElementById("chartNadiDarah");
+            var dataNadi = Array(16).fill(null).map((_, i) => $scope.item.obj[1000103 + i] == undefined ? '-' : $scope.item.obj[1000103 + i]);
+            var dataNadii = Array(16).fill(null).map((_, i) => $scope.item.obj[1000287 + i] == undefined ? '-' : $scope.item.obj[1000287 + i]);
+            var dataNadiAll = dataNadi.concat(dataNadii);
+
+            var dataDarah = Array(16).fill(null).map((_, i) => $scope.item.obj[1000119 + i] == undefined ? '-' : $scope.item.obj[1000119 + i]);
+            var dataDarahi = Array(16).fill(null).map((_, i) => $scope.item.obj[1000303 + i] == undefined ? '-' : $scope.item.obj[1000303 + i]);
+            var dataDarahAll = dataDarah.concat(dataDarahi);
+
+            var Nadi = {
+                label: "Nadi",
+                data: dataNadiAll,
+                lineTension: 0,
+                fill: false,
+                borderColor: 'blue'
+            };
+
+            var Darah = {
+                label: "Tekanan Darah",
+                data: dataDarahAll,
+                lineTension: 0,
+                fill: false,
+                borderColor: 'black'
+            };
+
+            var speedDataNadiDarah = {
+            labels: dataWaktu,
+            datasets: [Nadi, Darah]
+            };
+
+            var chartOptionsNadiDarah = {
+            legend: {
+                display: true,
+                position: 'top',
+                labels: {
+                boxWidth: 80,
+                fontColor: 'black'
+                }
+            }
+            };
+            
+
+            var lineChartNadiDarah = new Chart(speedCanvasNadiDarah, {
+            type: 'line',
+            data: speedDataNadiDarah,
+            options: chartOptionsNadiDarah
+            });
+
+        Chart.defaults.global.defaultFontFamily = "Tahoma";
+        Chart.defaults.global.defaultFontSize = 8;
     })
     angular.filter('toDate', function() {
         return function(items) {
@@ -2738,8 +1448,8 @@
             }
         };
     });
-    $(document).ready(function () {
-        window.print();
-    });
+    // $(document).ready(function () {
+    //     window.print();
+    // });
 </script>
 </html>

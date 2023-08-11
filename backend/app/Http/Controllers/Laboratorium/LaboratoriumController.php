@@ -333,6 +333,8 @@ class LaboratoriumController extends ApiController
             $dataSO->kesimpulan = $request['kesimpulan'];
             $dataSO->anjuran = $request['anjuran'];
             $dataSO->jaringanasal = $request['jaringanasal'];
+            $dataSO->getjaringan = $request['getjaringan'];
+            $dataSO->icd0 = $request['icd0'];
             $dataSO->save();
 
 //
