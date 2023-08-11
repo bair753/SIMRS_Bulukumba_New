@@ -1085,6 +1085,8 @@ class ReportController extends ApiController{
     }
     public function cetakHispatologi(Request $r) {
         $kdProfile = (int)$r['kdprofile'];
+        $profile = collect(DB::select("
+        SELECT * FROM profile_m WHERE id = $kdProfile"))->first();
         $raw = collect(DB::select("
             SELECT
                 pd.noregistrasi, pm.nocm, pm.namapasien, hpl.dokterluar, dokterpengirim.namalengkap as namadokterpengirim,
@@ -1108,7 +1110,7 @@ class ReportController extends ApiController{
              CASE WHEN hpl.keteranganpb IS NULL THEN ''  ELSE hpl.keteranganpb END AS keteranganpb,
              CASE WHEN pg1.namalengkap IS NULL THEN '' ELSE  pg1.namalengkap   END AS namapenanggungjawab,
              CASE WHEN pg1.nippns IS NULL THEN ''ELSE  pg1.nippns END AS nippns,hpl.nomorpa,
-             ru.namaruangan as asal,pg1.nosip,
+             ru.namaruangan as asal,pg1.nosip, hpl.jenis,
               CASE
                     WHEN alm.alamatlengkap IS NULL THEN
                         '-'
@@ -1191,11 +1193,12 @@ class ReportController extends ApiController{
             echo 'Data Tidak ada ';
             return;
         }
-//        dd($raw);
         $pageWidth = 950;
+        if($raw->jenis == 'pa'){
+            return view('report.lab.histopatologi', compact('raw', 'pageWidth','r', 'profile'));
+        }
 
-        return view('report.lab.hispatologi',
-            compact('raw', 'pageWidth','r'));
+        return view('report.lab.sitologi', compact('raw', 'pageWidth','r', 'profile'));
 
     }
 

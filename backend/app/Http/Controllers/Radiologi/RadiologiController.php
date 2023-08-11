@@ -77,10 +77,31 @@ class RadiologiController extends ApiController
             ->orderBy('id')
             ->get();
 
+            $icdIX = \DB::table('diagnosa_m as dg')
+            ->select('dg.id as value', 'dg.kddiagnosa', 'dg.namadiagnosa as text')
+            ->where('dg.kdprofile', $kdProfile)
+            ->where('dg.statusenabled', true)
+            ->orderBy('dg.kddiagnosa');
+
+        if (
+            isset($request['filter']['filters'][0]['value']) &&
+            $request['filter']['filters'][0]['value'] != "" &&
+            $request['filter']['filters'][0]['value'] != "undefined"
+        ) {
+            $icdIX = $icdIX->where('kddiagnosa', 'ilike', '%' . $request['filter']['filters'][0]['value'] . '%');
+            $icdIX = $icdIX->orwhere('namadiagnosa', 'ilike', '%' . $request['filter']['filters'][0]['value'] . '%');
+        };
+
+
+        $icdIX = $icdIX->take(10);
+        $icdIX = $icdIX->distinct();
+        $icdIX = $icdIX->get();
+
         $result = array(
             'dokter' => $dataDokter,
             'golongandarah' =>   $golonganDarah,
             'pmi' => $pmi,
+            'icdX' => $icdIX,
             'message' => 'inhuman',
         );
         return $this->respond($result);

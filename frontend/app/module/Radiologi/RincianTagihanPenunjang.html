@@ -613,7 +613,7 @@
                 </div>
                 <div class="grid_3">
                     <div class="grid_12">
-                        <label c-label item="item">Dokter</label>
+                        <label c-label item="item">Dokter Pemeriksa</label>
                     </div>
 
                     <div class="grid_12">
@@ -632,7 +632,7 @@
                     <label class="k-checkbox-label" for="isDokterLuar"><b>
                             Dokter Luar</b></label>
                 </div>
-                <div class="grid_2">
+                <div class="grid_4">
                     <div class="grid_12">
                         <label c-label item="item">Dokter Pengirim</label>
                     </div>
@@ -650,7 +650,7 @@
                             ng-hide="hideDokterPengirim2" />
                     </div>
                 </div>
-                <div class="grid_2">
+                <!-- <div class="grid_2">
                     <div class="grid_12">
                         <label c-label item="item">Diganosa Klinik</label>
                     </div>
@@ -679,18 +679,18 @@
                         <input c-text-box type="input" filter="'varchar'" class="k-textbox"
                             ng-model="itemPA.jaringanAsal" />
                     </div>
-                </div>
-                <div class="grid_4">
+                </div> -->
+                <div class="grid_12">
                     <div class="grid_12">
                         <label c-label style="padding:5px;font-size:14px; font-weight:600">Jenis</label>
                     </div>
                     <div class="grid_12">
                         <md-radio-group ng-model="findBy" layout="row" layout-sm="row" layout-align="left left"
                             layout-wrap>
-                            <div class="grid_6">
+                            <div class="grid_3">
                                 <md-radio-button value="0" class="md-primary">HISTOPATOLOGI</md-radio-button>
                             </div>
-                            <div class="grid_6">
+                            <div class="grid_3">
                                 <md-radio-button value="1" class="md-primary">SITOLOGI</md-radio-button>
                             </div>
                         </md-radio-group>
@@ -699,27 +699,51 @@
 
             </div>
             <div class="grid_12" ng-show="findBy == 0">
-                <div class="grid_3">
-                    <div class="grid_12">
-                        <label c-label item="item">Diganosis PB</label>
-                    </div>
-                    <div class="clear"></div>
-                    <div class="grid_12">
-                        <input c-text-box type="input" filter="'varchar'" class="k-textbox"
-                            ng-model="itemPA.diagnosaPB" />
-                    </div>
+                <div class="grid_12" style="margin-top: 5px">
+                    <label c-label item="item">Lokasi/Bahan Jaringan</label>
                 </div>
-                <div class="grid_3">
-                    <div class="grid_12">
-                        <label c-label item="item">Keterangan PB</label>
-                    </div>
-                    <div class="clear"></div>
-                    <div class="grid_12">
-                        <input c-text-box type="input" filter="'varchar'" class="k-textbox" ng-model="itemPA.ketPB" />
-                    </div>
+                <div class="clear"></div>
+                <div class="grid_12">
+                    <textarea placeholder="Isi Lokasi/Bahan Jaringan" class="k-textbox" ng-model="itemPA.jaringanAsal"
+                        maxlength="12000" style="height: 80px; width: 100%;"></textarea>
+    
+                    <span class="max-length"> 12000/{{itemPA.jaringanAsal ? itemPA.jaringanAsal.length : 0}}</span>
                 </div>
 
-                <div class="grid_3">
+                <div class="grid_12" style="margin-top: 5px">
+                    <label c-label item="item">Cara Mendapatkan Jaringan</label>
+                </div>
+                <div class="clear"></div>
+                <div class="grid_12">
+                    <textarea placeholder="Isi Cara Mendapatkan Jaringan" class="k-textbox" ng-model="itemPA.getjaringan"
+                        maxlength="12000" style="height: 80px; width: 100%;"></textarea>
+    
+                    <span class="max-length"> 12000/{{itemPA.getjaringan ? itemPA.getjaringan.length : 0}}</span>
+                </div>
+
+                <div class="grid_12" style="margin-top: 5px">
+                    <label c-label item="item">Diagnosa Klinik</label>
+                </div>
+                <div class="clear"></div>
+                <div class="grid_12">
+                    <textarea placeholder="Isi Diagnosa Klinik" class="k-textbox" ng-model="itemPA.diagnosaKlinik"
+                        maxlength="12000" style="height: 80px; width: 100%;"></textarea>
+    
+                    <span class="max-length"> 12000/{{itemPA.diagnosaKlinik ? itemPA.diagnosaKlinik.length : 0}}</span>
+                </div>
+
+                <div class="grid_12" style="margin-top: 5px">
+                    <label c-label item="item">Keterangan Klinik</label>
+                </div>
+                <div class="clear"></div>
+                <div class="grid_12">
+                    <textarea placeholder="Isi Keterangan Klinik" class="k-textbox" ng-model="itemPA.ketKlinik"
+                        maxlength="12000" style="height: 80px; width: 100%;"></textarea>
+    
+                    <span class="max-length"> 12000/{{itemPA.ketKlinik ? itemPA.ketKlinik.length : 0}}</span>
+                </div>
+
+                <!-- <div class="grid_3">
                     <div class="grid_12">
                         <label c-label item="item">Topografi</label>
                     </div>
@@ -728,7 +752,7 @@
                         <input c-text-box type="input" filter="'varchar'" class="k-textbox"
                             ng-model="itemPA.topografi" />
                     </div>
-                </div>
+                </div> 
                 <div class="grid_3">
                     <div class="grid_12">
                         <label c-label item="item">Morfologi </label>
@@ -738,7 +762,7 @@
                         <input c-text-box type="input" filter="'varchar'" class="k-textbox"
                             ng-model="itemPA.morfologi" />
                     </div>
-                </div>
+                </div>-->
             </div>
             <div class="grid_12" style="margin-top: 5px">
                 <label c-label item="item">Makroskopik</label>
@@ -774,17 +798,34 @@
                 <!-- <textarea class="k-textbox" style="height: 80px; width: 100%;" ng-model="itemPA.kesimpulan"></textarea>
  -->
             </div>
-            <div class="grid_12" style="margin-top: 5px">
-                <label c-label item="item">Anjuran</label>
+            <div class="grid_12" ng-show="findBy == 0">
+                <div class="grid_12" style="margin-top: 5px">
+                    <label c-label item="item">ICD-O</label>
+                </div>
+                <div class="clear"></div>
+                <div class="grid_12">
+                    <input style="width: 100%;" kendo-combo-box k-ng-model="itemPA.icd0"
+                            k-data-text-field="'text'" k-data-value-field="'value'" k-filter="'contains'"
+                            k-auto-bind="false" k-data-source="listICD" />
+    
+                    <span class="max-length"> 12000/{{itemPA.icd ? itemPA.icd.length : 0}}</span>
+                    <!-- <textarea class="k-textbox" style="height: 80px; width: 100%;" ng-model="itemPA.anjuran"></textarea> -->
+                </div>
             </div>
-            <div class="clear"></div>
-            <div class="grid_12">
-                <textarea placeholder="Isi Anjuran" class="k-textbox" ng-model="itemPA.anjuran" maxlength="12000"
-                    style="height: 80px; width: 100%;"></textarea>
-
-                <span class="max-length"> 12000/{{itemPA.anjuran ? itemPA.anjuran.length : 0}}</span>
-                <!-- <textarea class="k-textbox" style="height: 80px; width: 100%;" ng-model="itemPA.anjuran"></textarea> -->
+            <div class="grid_12" ng-show="findBy != 0">
+                <div class="grid_12" style="margin-top: 5px">
+                    <label c-label item="item">Anjuran</label>
+                </div>
+                <div class="clear"></div>
+                <div class="grid_12">
+                    <textarea placeholder="Isi Anjuran" class="k-textbox" ng-model="itemPA.anjuran" maxlength="12000"
+                        style="height: 80px; width: 100%;"></textarea>
+    
+                    <span class="max-length"> 12000/{{itemPA.anjuran ? itemPA.anjuran.length : 0}}</span>
+                    <!-- <textarea class="k-textbox" style="height: 80px; width: 100%;" ng-model="itemPA.anjuran"></textarea> -->
+                </div>
             </div>
+            
 
         </fieldset>
 

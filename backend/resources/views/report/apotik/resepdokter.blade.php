@@ -733,5 +733,10 @@
                                     });	
                                     </script>
 </body>
+<script>
+    $(document).ready(function () {
+        window.print();
+    });
+</script>
 
 </html>
