@@ -1299,15 +1299,15 @@
                 '-',
                 $scope.item.obj[1000204]?.substring(11, 16) == undefined ? '-' : $scope.item.obj[1000204]?.substring(11, 16),
             ]
-            const date = new Date();
-            const hasil = dataWaktu.map(h) => {
-                const [hour, minute] = h.split(':');
-                date.setHours(hour)
-                date.setMinutes(minute)
-                const newDate = new Date(date.getTime() - 1000 * 60 * 60 *16)
-                return newDate.toTimeString().slice(0, 5)
-            };
-            console.log(hasil);
+            // const date = new Date();
+            // const hasil = dataWaktu.map(h) => {
+            //     const [hour, minute] = h.split(':');
+            //     date.setHours(hour)
+            //     date.setMinutes(minute)
+            //     const newDate = new Date(date.getTime() - 1000 * 60 * 60 *16)
+            //     return newDate.toTimeString().slice(0, 5)
+            // };
+            // console.log(hasil);
 
             var dataJantung = Array(16).fill(null).map((_, i) => $scope.item.obj[1000023 + i] == undefined ? '-' : $scope.item.obj[1000023 + i]);
             var dataJantungg = Array(16).fill(null).map((_, i) => $scope.item.obj[1000207 + i] == undefined ? '-' : $scope.item.obj[1000207 + i]);
