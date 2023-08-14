@@ -84,7 +84,8 @@ class MonitoringDokumenKlaimController extends  ApiController
                 $gsCmd = "gs -sDEVICE=pdfwrite -dCompatibilityLevel=$pdfVersion -dNOPAUSE -dBATCH -sOutputFile=$newFile $currentFile";
 
                 //Run it using PHP's exec function.
-                exec($gsCmd);
+                $coba = exec($gsCmd);
+                dd($coba);
                 // $command = new GhostscriptConverterCommand();
                 // $filesystem = new Filesystem();
 
