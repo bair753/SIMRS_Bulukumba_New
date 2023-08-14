@@ -70,6 +70,21 @@ class MonitoringDokumenKlaimController extends  ApiController
         if(count($dataDokumen) > 0){
             $file = [];
             foreach($dataDokumen as $item) {
+                $pdfVersion = "1.4";
+
+                //The path that you want to save the new
+                //file to
+                $newFile = public_path($item->filepath);
+
+                //The path of the file that you want
+                //to convert
+                $currentFile = public_path($item->filepath);
+
+                //Create the GhostScript command
+                $gsCmd = "gs -sDEVICE=pdfwrite -dCompatibilityLevel=$pdfVersion -dNOPAUSE -dBATCH -sOutputFile=$newFile $currentFile";
+
+                //Run it using PHP's exec function.
+                exec($gsCmd);
                 // $command = new GhostscriptConverterCommand();
                 // $filesystem = new Filesystem();
 
