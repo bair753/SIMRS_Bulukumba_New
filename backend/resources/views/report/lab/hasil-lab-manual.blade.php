@@ -239,7 +239,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <font style="font-size: 11pt" color="#000000">Dokter Penanggung Jawab</font>
                                 </td>
                                 <td>
-                                    <font style="font-size: 11pt" color="#000000">: {{ $r['doketr'] }}</font>
+                                    <font style="font-size: 11pt" color="#000000">: {!! $datas[0]->dokterpenanggungjawab !!}</font>
                                 </td>
                             </tr>
                             <tr>
@@ -412,10 +412,10 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             </tr>
                             <tr>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['pemeriksa'] }}</font>
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $datas[0]->dokterperiksa }}</font>
                                 </td>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['doketr'] }}</font>
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $datas[0]->dokterpenanggungjawab !!}</font>
                                 </td>
                             </tr>
                         </table>
@@ -452,21 +452,21 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
         </table>
     </div>
     <script>
-        var p = {!! json_encode($r['pemeriksa'] )!!};
-        var d = {!! json_encode($r['doketr'] )!!};
+        var p = "{{ $datas[0]->dokterperiksa }}";
+        var d = "{{ $datas[0]->dokterpenanggungjawab }}";
         
         if(p != null){
             jQuery('#qrcodeNamaPemeriksa').qrcode({
                 width	: 100,
                 height	: 100,
-                text	: "Tanda Tangan Digital Oleh " + "{{ $r['pemeriksa'] }}"
+                text	: "Tanda Tangan Digital Oleh {{ $datas[0]->dokterperiksa }}"
             });	
         }
         if(d != null){
             jQuery('#qrcodePenanggungJawab').qrcode({
                 width	: 100,
                 height	: 100,
-                text	: "Tanda Tangan Digital Oleh " + "{{ $r['doketr'] }}"
+                text	: "Tanda Tangan Digital Oleh {!! $datas[0]->dokterpenanggungjawab !!}"
             });
         }
         $(document).ready(function () {

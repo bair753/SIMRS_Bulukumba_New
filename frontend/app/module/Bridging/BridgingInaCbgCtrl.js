@@ -5109,6 +5109,268 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 				window.open(baseTransaksi + 'report/cetak-laporan-operasi?nocm='+ $scope.dataPasienSelected.nocm + '&emr=' + $scope.dataSelectedHasilOpr.norec + '&emrfk=' + $scope.dataSelectedHasilOpr.emrfk + '&index=' + $scope.dataSelectedHasilOpr.index + '&kdprofile=' + local.id + '&nama=' + nama, '_blank');
 			}
 
+			$scope.pemberianEdukasiPasien = function(){
+				if ($scope.dataPasienSelected.noregistrasi == undefined) {
+					toastr.error('Pilih Pasien Terlebih dahulu!!!')
+					return;
+				}
+				var emrfk = [290027] // Emr Laporan Operasi
+				medifirstService.get("bridging/inacbg/get-all-page-inacbg?noregistrasi=" + $scope.dataPasienSelected.noregistrasi + '&emrfk=' + emrfk
+				, true).then(function (dat) {
+						$scope.dataDaftarPemberianEdukasiPasien = {
+							data: dat.data.data,
+								_data: dat.data.data,
+								// pageSize: 10,
+								selectable: true,
+								refresh: true,
+								total: dat.data.data.length,
+								serverPaging: false,
+								aggregate: [
+										{ field: 'total', aggregate: 'sum' },
+								]
+
+					};
+					}, function (error) {
+							$scope.isLoading = false;
+					});
+				
+				$scope.popUpDaftarPemberianEdukasiPasien.center().open();
+				
+			}
+
+			$scope.columnDaftarPemberianEdukasiPasien = {
+				columns: [
+							{
+								"field": "tglemr",
+								"title": "Tgl EMR",
+								"width": "90px",
+						}, 
+						{
+								"field": "emrpasienfk",
+								"title": "No EMR",
+								"width": "90px",
+						},                   
+						{
+								"field": "namaform",
+								"title": "Nama Form",
+								"width": "120px"
+						},
+				],
+				sortable: {
+						mode: "single",
+						allowUnsort: false,
+				}
+			}
+
+			$scope.cetakPemberianEdukasiPasien = function () {
+				var local = JSON.parse(localStorage.getItem('profile'));
+				var nama = medifirstService.getPegawaiLogin().namalengkap;
+				window.open(baseTransaksi + 'report/cetak-pemberian-edukasi-pasien?nocm='+ $scope.dataPasienSelected.nocm + '&emr=' + $scope.dataSelectedPemberianEdukasiPasien.norec + '&emrfk=' + $scope.dataSelectedPemberianEdukasiPasien.emrfk + '&index=' + $scope.dataSelectedPemberianEdukasiPasien.index + '&kdprofile=' + local.id + '&nama=' + nama, '_blank');
+			}
+
+			$scope.pasienJatuhDewasa = function(){
+				if ($scope.dataPasienSelected.noregistrasi == undefined) {
+					toastr.error('Pilih Pasien Terlebih dahulu!!!')
+					return;
+				}
+				var emrfk = [290088] // Emr Pasien Jatuh Dewasa
+				medifirstService.get("bridging/inacbg/get-all-page-inacbg?noregistrasi=" + $scope.dataPasienSelected.noregistrasi + '&emrfk=' + emrfk
+				, true).then(function (dat) {
+						$scope.dataDaftarPasienJatuhDewasa = {
+							data: dat.data.data,
+								_data: dat.data.data,
+								// pageSize: 10,
+								selectable: true,
+								refresh: true,
+								total: dat.data.data.length,
+								serverPaging: false,
+								aggregate: [
+										{ field: 'total', aggregate: 'sum' },
+								]
+
+					};
+					}, function (error) {
+							$scope.isLoading = false;
+					});
+				
+				$scope.popUpDaftarPasienJatuhDewasa.center().open();
+				
+			}
+
+			$scope.columnDaftarPasienJatuhDewasa = {
+				columns: [
+							{
+								"field": "tglemr",
+								"title": "Tgl EMR",
+								"width": "90px",
+						}, 
+						{
+								"field": "emrpasienfk",
+								"title": "No EMR",
+								"width": "90px",
+						},                   
+						{
+								"field": "namaform",
+								"title": "Nama Form",
+								"width": "120px"
+						},
+				],
+				sortable: {
+						mode: "single",
+						allowUnsort: false,
+				}
+			}
+
+			$scope.cetakPasienJatuhDewasa = function () {
+				var local = JSON.parse(localStorage.getItem('profile'));
+				var nama = medifirstService.getPegawaiLogin().namalengkap;
+				window.open(baseTransaksi + 'report/cetak-lanjutan-pasien-dewasa?nocm='+ $scope.dataPasienSelected.nocm + '&emr=' + $scope.dataSelectedPasienJatuhDewasa.norec + '&emrfk=' + $scope.dataSelectedPasienJatuhDewasa.emrfk + '&index=' + $scope.dataSelectedPasienJatuhDewasa.index + '&kdprofile=' + local.id + '&nama=' + nama, '_blank');
+			}
+
+			$scope.persetujuanTindakanHemodialisa = function(){
+				if ($scope.dataPasienSelected.noregistrasi == undefined) {
+					toastr.error('Pilih Pasien Terlebih dahulu!!!')
+					return;
+				}
+				var emrfk = [290048] // emrfk persetujuanTindakanHemodialisa
+
+				medifirstService.get("bridging/inacbg/get-emr-pasien?noregistrasi=" + $scope.dataPasienSelected.noregistrasi + '&emrfk=' + emrfk
+					// medifirstService.get("lab-radiologi/get-rincian-pelayanan?objectdepartemenfk=" + departemenfk + "&noregistrasi=" +   $scope.item.noregistrasi
+					, true).then(function (dat) {
+						$scope.dataDaftarPersetujuanTindakanHemodialisa = {
+							data: dat.data.data,
+							_data: dat.data.data,
+							// pageSize: 10,
+							selectable: true,
+							refresh: true,
+							total: dat.data.data.length,
+							serverPaging: false,
+							aggregate: [
+									{ field: 'total', aggregate: 'sum' },
+							]
+
+					};
+					}, function (error) {
+							$scope.isLoading = false;
+					});
+				
+				$scope.popUpDaftarPersetujuanTindakanHemodialisa.center().open();
+				
+			}
+
+			$scope.columnDaftarPersetujuanTindakanHemodialisa = {
+				columns: [
+						{
+								"field": "tglemr",
+								"title": "Tgl EMR",
+								"width": "90px",
+						},                   
+						{
+								"field": "emrpasienfk",
+								"title": "No EMR",
+								"width": "160px"
+						},
+						{
+								"field": "namaform",
+								"title": "Nama EMR",
+								"width": "160px"
+						},
+				],
+				sortable: {
+						mode: "single",
+						allowUnsort: false,
+				}
+			}
+
+			$scope.cetakPersetujuanTindakanHemodialisa = function () {
+					if ($scope.dataSelectedPersetujuanTindakanHemodialisa == undefined) {
+						toastr.error('Data belum dipilih!!!')
+						return;
+					}
+
+					var local = JSON.parse(localStorage.getItem('profile'));
+					var nama = medifirstService.getPegawaiLogin();
+					window.open(baseTransaksi + 'report/cetak-persetujuan-tindakan-hemodialisa?nocm='
+					+ $scope.dataSelectedPersetujuanTindakanHemodialisa.nocm 
+					+ '&norec_apd=' + $scope.dataSelectedPersetujuanTindakanHemodialisa.norec_apd 
+					+ '&emr=' + $scope.dataSelectedPersetujuanTindakanHemodialisa.norec 
+					+ '&emrfk=' + $scope.dataSelectedPersetujuanTindakanHemodialisa.emrfk
+					+ '&kdprofile=' + local.id
+					+ '&nama=' + nama, '_blank');
+			}
+
+			$scope.pengkajianHarianHemodialisa = function(){
+				if ($scope.dataPasienSelected.noregistrasi == undefined) {
+					toastr.error('Pilih Pasien Terlebih dahulu!!!')
+					return;
+				}
+				var emrfk = [290050] // emrfk pengkajianHarianHemodialisa
+
+				medifirstService.get("bridging/inacbg/get-emr-pasien?noregistrasi=" + $scope.dataPasienSelected.noregistrasi + '&emrfk=' + emrfk
+					// medifirstService.get("lab-radiologi/get-rincian-pelayanan?objectdepartemenfk=" + departemenfk + "&noregistrasi=" +   $scope.item.noregistrasi
+					, true).then(function (dat) {
+						$scope.dataDaftarPengkajianHarianHemodialisa = {
+							data: dat.data.data,
+							_data: dat.data.data,
+							// pageSize: 10,
+							selectable: true,
+							refresh: true,
+							total: dat.data.data.length,
+							serverPaging: false,
+							aggregate: [
+									{ field: 'total', aggregate: 'sum' },
+							]
+
+					};
+					}, function (error) {
+							$scope.isLoading = false;
+					});
+				
+				$scope.popUpDaftarPengkajianHarianHemodialisa.center().open();
+				
+			}
+
+			$scope.columnDaftarPengkajianHarianHemodialisa = {
+				columns: [
+						{
+								"field": "tglemr",
+								"title": "Tgl EMR",
+								"width": "90px",
+						},                   
+						{
+								"field": "emrpasienfk",
+								"title": "No EMR",
+								"width": "160px"
+						},
+						{
+								"field": "namaform",
+								"title": "Nama EMR",
+								"width": "160px"
+						},
+				],
+				sortable: {
+						mode: "single",
+						allowUnsort: false,
+				}
+			}
+
+			$scope.cetakPengkajianHarianHemodialisa = function () {
+					if ($scope.dataSelectedPengkajianHarianHemodialisa == undefined) {
+						toastr.error('Data belum dipilih!!!')
+						return;
+					}
+
+					var local = JSON.parse(localStorage.getItem('profile'));
+					var nama = medifirstService.getPegawaiLogin();
+					window.open(baseTransaksi + 'report/cetak-pengkajian-harian-hemodialisa?nocm='
+					+ $scope.dataSelectedPengkajianHarianHemodialisa.nocm 
+					+ '&norec_apd=' + $scope.dataSelectedPengkajianHarianHemodialisa.norec_apd 
+					+ '&emr=' + $scope.dataSelectedPengkajianHarianHemodialisa.norec 
+					+ '&emrfk=' + $scope.dataSelectedPengkajianHarianHemodialisa.emrfk
+					+ '&kdprofile=' + local.id
+					+ '&nama=' + nama, '_blank');
+			}
+
 			$scope.laporanPersalinan = function(){
 				if ($scope.dataPasienSelected.noregistrasi == undefined) {
 					toastr.error('Pilih Pasien Terlebih dahulu!!!')

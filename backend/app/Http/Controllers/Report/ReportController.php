@@ -3204,7 +3204,7 @@ class ReportController extends ApiController{
             apd.tglmasuk AS tglverif,
             hh.tglhasil AS tglakhir,
             ( 'Tgl Selesai  :  ' || hh.tglhasil || '          (-)         Tgl. Mulai :  ' || pp.tglpelayanan || '    (=)    Durasi :  ' || ( hh.tglhasil - pp.tglpelayanan ) ) AS tat,
-            hh.flag,
+            hh.flag,pg5.namalengkap as dokterpenanggungjawab,
             CASE WHEN rj.objectdepartemenfk = 18 THEN 'RAWAT JALAN' WHEN rj.objectdepartemenfk = 16 THEN 'RAWAT INAP' WHEN rj.objectdepartemenfk = 24 THEN 'GAWAT DARURAT' ELSE 'PENUNJANG' END AS jeniskunjungan,
             CASE WHEN kmr.namakamar IS NULL THEN '-' ELSE kmr.namakamar END AS namakamar,CASE WHEN ttr.nomorbed IS NULL THEN '-' ELSE CAST(ttr.nomorbed AS VARCHAR) END AS nomorbed,
             CASE WHEN so.tglorder IS NULL THEN apd.tglmasuk ELSE so.tglorder END AS tglorder,
@@ -3242,6 +3242,7 @@ class ReportController extends ApiController{
             LEFT JOIN kamar_m AS kmr ON kmr.id = apd.objectkamarfk
             LEFT JOIN tempattidur_m AS ttr ON ttr.id = apd.nobed
             left join pegawai_m  as pg4 on pg4.id = hh.pegawaifk
+            left join pegawai_m  as pg5 on pg5.id = hh.objectdokterfk
             WHERE
                 pp.noregistrasifk = '$r[norec]' 
                 AND hh.hasil IS NOT NULL 
@@ -6053,6 +6054,80 @@ class ReportController extends ApiController{
         return view('report.cetak-pemantauan-cpap', compact('res', 'pageWidth'));
     }
 
+    public function pemberianEdukasiPasien(Request $request) {
+        $nocm = $request['nocm'];
+        $norec = $request['emr'];
+        $index = $request['index'];
+        $kdProfile = (int) $request['kdprofile'];
+
+        for($a = 1; $a <= 20; $a++){
+            $res['d'.$a] = DB::select(DB::raw(
+                "
+                SELECT
+                    epd.emrdfk,
+                    epd.index,
+                    ep.noemr,
+                    ed.TYPE,
+                    pa.namapasien,
+                    TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                    pa.nohp,
+                    pa.nocm,
+                    ep.jeniskelamin,
+                    ep.umur,
+                    pa.noidentitas,
+                    al.alamatlengkap,
+                    ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                    epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                    --ap.noasuransi,ap.namapeserta,
+                    pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                    --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+                FROM
+                    emrpasien_t AS ep
+                    INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                    INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+                    INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
+                    INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
+                    left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
+                    left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                    left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                    left JOIN alamat_m as al on pa.id = al.nocmfk
+                    left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                    left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                    left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                    left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                    -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+                WHERE
+                    ep.norec = '$norec'
+                        AND ep.kdprofile = '$kdProfile' 
+                    AND epd.statusenabled = TRUE 
+                    and epd.emrfk = $request[emrfk]
+                    and epd.index = $a
+                    and pa.statusenabled = TRUE
+                    
+                    ORDER BY
+                    ed.nourut
+                    "
+            ));
+            foreach ($res['d'.$a] as $z) {
+                if ($z->type == "datetime") {
+                    $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                }
+            }
+        }
+        $res['profile'] = Profile::where('id', $request['kdprofile'])->first();
+        if(empty($res)){
+            echo '
+                <script language="javascript">
+                    window.alert("Data tidak ada.");
+                    window.close()
+                </script>
+            ';
+            die;
+        }
+
+        return view('report.cetak-pemberian-edukasi-pasien', compact('res'));
+    }
+
     public function hiperbilirubin(Request $request) {
         $nocm = $request['nocm'];
         $norec = $request['emr'];
@@ -7492,6 +7567,7 @@ class ReportController extends ApiController{
             }
         }
         // $res = collect($res)->filter()->all();
+        dd($res);
       
         $res['profile'] = Profile::where('id', $request['kdprofile'])->first();
 

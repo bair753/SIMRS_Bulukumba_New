@@ -668,7 +668,21 @@
 			<button class="btnTemplate1 buttonKuning" ng-click="asesmenAwalMedisRajal()">Cetak Asesmen Awal Medis Rawat
 				Jalan</button>
 		</div>
-		
+		<div class="grid_2">
+			<button class="btnTemplate1 buttonKuning" ng-click="profilRingkas()">Cetak Profil Ringkas Medis</button>
+		</div>
+		<div class="grid_2">
+			<button class="btnTemplate1 buttonKuning" ng-click="pemberianEdukasiPasien()">Cetak Pemberian Edukasi Pasien</button>
+		</div>
+		<div class="grid_2">
+			<button class="btnTemplate1 buttonKuning" ng-click="pasienJatuhDewasa()">Cetak Asesmen Resiko Pasien Jatuh Dewasa</button>
+		</div>
+		<div class="grid_2">
+			<button class="btnTemplate1 buttonKuning" ng-click="persetujuanTindakanHemodialisa()">Cetak Persetujuan Tindakan Hemodialisa</button>
+		</div>
+		<div class="grid_2">
+			<button class="btnTemplate1 buttonKuning" ng-click="pengkajianHarianHemodialisa()">Cetak Pengkajian Harian Hemodialisa</button>
+		</div>
 	</div>
 
 	<div class="grid_12" ng-show="isRajal">
@@ -729,6 +743,18 @@
 		</div>
 		<div class="grid_2">
 			<button class="btnTemplate1 buttonKuning" ng-click="profilRingkas()">Cetak Profil Ringkas Medis</button>
+		</div>
+		<div class="grid_2">
+			<button class="btnTemplate1 buttonKuning" ng-click="pemberianEdukasiPasien()">Cetak Pemberian Edukasi Pasien</button>
+		</div>
+		<div class="grid_2">
+			<button class="btnTemplate1 buttonKuning" ng-click="pasienJatuhDewasa()">Cetak Asesmen Resiko Pasien Jatuh Dewasa</button>
+		</div>
+		<div class="grid_2">
+			<button class="btnTemplate1 buttonKuning" ng-click="persetujuanTindakanHemodialisa()">Cetak Persetujuan Tindakan Hemodialisa</button>
+		</div>
+		<div class="grid_2">
+			<button class="btnTemplate1 buttonKuning" ng-click="pengkajianHarianHemodialisa()">Cetak Pengkajian Harian Hemodialisa</button>
 		</div>
     </div>
 
@@ -2394,6 +2420,87 @@
 							</div>
 						</div>
 					</div>
+
+					<div kendo-window="popUpDaftarPemberianEdukasiPasien" k-title="'Cetak Pemberian Edukasi Pasien'"
+						k-visible="false" k-width="1000" k-height="400">
+						<div class="panel panel-default container_12">
+							<div class="grid_12 headerBox">
+								<kendo-grid id="kGrids" data-source="dataDaftarPemberianEdukasiPasien"
+									options="columnDaftarPemberianEdukasiPasien" k-selectable="'row'"
+									k-sortable="'true'" k-resizable="'true'"
+									k-ng-model="dataSelectedPemberianEdukasiPasien"
+									ng-click="klikGridPemberianEdukasiPasien(dataSelectedPemberianEdukasiPasien)">
+								</kendo-grid>
+							</div>
+							<div class="grid_12">
+								<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
+									<button class="k-button  k-button-icontext"
+										ng-click="cetakPemberianEdukasiPasien()">Download</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div kendo-window="popUpDaftarPasienJatuhDewasa" k-title="'Cetak Asesmen Lanjutan Risiko Jatuh Pasien Dewasa'"
+						k-visible="false" k-width="1000" k-height="400">
+						<div class="panel panel-default container_12">
+							<div class="grid_12 headerBox">
+								<kendo-grid id="kGrids" data-source="dataDaftarPasienJatuhDewasa"
+									options="columnDaftarPasienJatuhDewasa" k-selectable="'row'"
+									k-sortable="'true'" k-resizable="'true'"
+									k-ng-model="dataSelectedPasienJatuhDewasa"
+									ng-click="klikGridPasienJatuhDewasa(dataSelectedPasienJatuhDewasa)">
+								</kendo-grid>
+							</div>
+							<div class="grid_12">
+								<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
+									<button class="k-button  k-button-icontext"
+										ng-click="cetakPasienJatuhDewasa()">Download</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div kendo-window="popUpDaftarPersetujuanTindakanHemodialisa" k-title="'Cetak Persetujuan Tindakan Hemodialisa'"
+						k-visible="false" k-width="1000" k-height="400">
+						<div class="panel panel-default container_12">
+							<div class="grid_12 headerBox">
+								<kendo-grid id="kGrids" data-source="dataDaftarPersetujuanTindakanHemodialisa"
+									options="columnDaftarPersetujuanTindakanHemodialisa" k-selectable="'row'"
+									k-sortable="'true'" k-resizable="'true'"
+									k-ng-model="dataSelectedPersetujuanTindakanHemodialisa"
+									ng-click="klikGridPersetujuanTindakanHemodialisa(dataSelectedPersetujuanTindakanHemodialisa)">
+								</kendo-grid>
+							</div>
+							<div class="grid_12">
+								<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
+									<button class="k-button  k-button-icontext"
+										ng-click="cetakPersetujuanTindakanHemodialisa()">Download</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div kendo-window="popUpDaftarPengkajianHarianHemodialisa" k-title="'Cetak Pengkajian Harian Hemodialisa'"
+						k-visible="false" k-width="1000" k-height="400">
+						<div class="panel panel-default container_12">
+							<div class="grid_12 headerBox">
+								<kendo-grid id="kGrids" data-source="dataDaftarPengkajianHarianHemodialisa"
+									options="columnDaftarPengkajianHarianHemodialisa" k-selectable="'row'"
+									k-sortable="'true'" k-resizable="'true'"
+									k-ng-model="dataSelectedPengkajianHarianHemodialisa"
+									ng-click="klikGridPengkajianHarianHemodialisa(dataSelectedPengkajianHarianHemodialisa)">
+								</kendo-grid>
+							</div>
+							<div class="grid_12">
+								<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
+									<button class="k-button  k-button-icontext"
+										ng-click="cetakPengkajianHarianHemodialisa()">Download</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					
 
 
 				</div>
