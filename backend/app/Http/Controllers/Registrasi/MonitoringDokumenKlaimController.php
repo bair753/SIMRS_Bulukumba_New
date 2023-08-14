@@ -79,6 +79,7 @@ class MonitoringDokumenKlaimController extends  ApiController
                 //The path of the file that you want
                 //to convert
                 $currentFile = public_path($item->filepath);
+                dd($currentFile);
 
                 //Create the GhostScript command
                 $gsCmd = "gs -sDEVICE=pdfwrite -dCompatibilityLevel=$pdfVersion -dNOPAUSE -dBATCH -sOutputFile=$newFile $currentFile";
