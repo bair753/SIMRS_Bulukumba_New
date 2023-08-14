@@ -2804,6 +2804,10 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
         Route::get('report/cetak-asesmen-awal-medis-rajal', 'Report\ReportController@asesmenAwalMedisRajal');
         Route::get('report/cetak-flowsheet', 'Report\ReportController@flowsheet');
         Route::get('report/cetak-profil-ringkas', 'Report\ReportController@profilRingkas');
+        Route::get('report/cetak-pemberian-edukasi-pasien', 'Report\ReportController@pemberianEdukasiPasien');
+        Route::get('report/cetak-lanjutan-pasien-dewasa', 'Report\ReportController@lanjutanPasienDewasa');
+        Route::get('report/cetak-persetujuan-tindakan-hemodialisa', 'Report\ReportController@persetujuanTindakanHemodialisa');
+        Route::get('report/cetak-pengkajian-harian-hemodialisa', 'Report\ReportController@pengkajianHarianHemodialisa');
         Route::get('report/cetak-emr-all-page', 'Report\ReportController@emrAllPage');
 
         Route::get('viewer/get-list-antrian','Antrian\AntrianController@getListAntrian');
