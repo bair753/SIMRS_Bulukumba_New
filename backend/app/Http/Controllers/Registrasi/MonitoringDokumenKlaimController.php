@@ -21,6 +21,7 @@ use Webklex\PDFMerger\Facades\PDFMergerFacade as PDFMerger;
 use Symfony\Component\Filesystem\Filesystem;
 use Xthiago\PDFVersionConverter\Converter\GhostscriptConverterCommand;
 use Xthiago\PDFVersionConverter\Converter\GhostscriptConverter;
+use Xthiago\PDFVersionConverter\Guesser\RegexGuesser;
 
 class MonitoringDokumenKlaimController extends  ApiController
 {
@@ -70,29 +71,10 @@ class MonitoringDokumenKlaimController extends  ApiController
         if(count($dataDokumen) > 0){
             $file = [];
             foreach($dataDokumen as $item) {
-                $pdfVersion = "1.4";
-
-                //The path that you want to save the new
-                //file to
-                $newFile = public_path($item->filepath);
-
-                //The path of the file that you want
-                //to convert
-                $currentFile = public_path($item->filepath);
-                dd($currentFile);
-
-                //Create the GhostScript command
-                $gsCmd = "gs -sDEVICE=pdfwrite -dCompatibilityLevel=$pdfVersion -dNOPAUSE -dBATCH -sOutputFile=$newFile $currentFile";
-
-                //Run it using PHP's exec function.
-                $coba = exec($gsCmd);
+                $guesser = new RegexGuesser();
+                $coba = $guesser->guess(public_path($item->filepath));
                 dd($coba);
-                // $command = new GhostscriptConverterCommand();
-                // $filesystem = new Filesystem();
-
-                // $converter = new GhostscriptConverter($command, $filesystem);
-                // $converter->convert(public_path($item->filepath), '1.4');
-
+                
                 array_push($file, public_path($item->filepath));
             }
     
