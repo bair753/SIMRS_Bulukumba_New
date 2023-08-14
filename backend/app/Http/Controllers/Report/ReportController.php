@@ -7567,7 +7567,6 @@ class ReportController extends ApiController{
             }
         }
         // $res = collect($res)->filter()->all();
-        dd($res);
       
         $res['profile'] = Profile::where('id', $request['kdprofile'])->first();
 
