@@ -3174,7 +3174,7 @@ class ReportController extends ApiController{
             to_char( pd.tglregistrasi, 'DD-MM-YYYY' ) AS tglRegiss,
             pp.tglpelayanan AS tglawal,
             pg.namalengkap AS pengorder,
-            pg1.namalengkap AS dokterperiksa,
+            pg6.namalengkap AS dokterperiksa,
             pg2.namalengkap AS dpjp,
             pm.tgllahir,
             to_char( pm.tgllahir, 'DD-MM-YYYY' ) AS tgllahirs,
@@ -3243,6 +3243,7 @@ class ReportController extends ApiController{
             LEFT JOIN tempattidur_m AS ttr ON ttr.id = apd.nobed
             left join pegawai_m  as pg4 on pg4.id = hh.pegawaifk
             left join pegawai_m  as pg5 on pg5.id = hh.objectdokterfk
+            left join pegawai_m  as pg6 on pg6.id = hh.objectpemeriksafk
             WHERE
                 pp.noregistrasifk = '$r[norec]' 
                 AND hh.hasil IS NOT NULL 
