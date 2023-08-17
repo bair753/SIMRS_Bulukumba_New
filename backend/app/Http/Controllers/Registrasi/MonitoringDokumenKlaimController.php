@@ -70,6 +70,7 @@ class MonitoringDokumenKlaimController extends  ApiController
         if(count($dataDokumen) > 0){
             $file = [];
             foreach($dataDokumen as $item) {
+                exec('gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile="'.public_path($item->filepath).'" "'.public_path($item->filepath).'"'); 
                 // $command = new GhostscriptConverterCommand();
                 // $filesystem = new Filesystem();
 
