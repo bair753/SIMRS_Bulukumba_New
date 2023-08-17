@@ -21,6 +21,7 @@ use Webklex\PDFMerger\Facades\PDFMergerFacade as PDFMerger;
 use Symfony\Component\Filesystem\Filesystem;
 use Xthiago\PDFVersionConverter\Converter\GhostscriptConverterCommand;
 use Xthiago\PDFVersionConverter\Converter\GhostscriptConverter;
+use setasign\Fpdi\Fpdi;
 
 class MonitoringDokumenKlaimController extends  ApiController
 {
@@ -70,12 +71,18 @@ class MonitoringDokumenKlaimController extends  ApiController
         if(count($dataDokumen) > 0){
             $file = [];
             foreach($dataDokumen as $item) {
-                // exec('gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile="'.public_path($item->filepath).'" "'.public_path($item->filepath).'"'); 
-                // $command = new GhostscriptConverterCommand();
-                // $filesystem = new Filesystem();
+                exec('gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile="'.public_path($item->filepath).'" "'.public_path($item->filepath).'"'); 
+                $pdf = new Fpdi();
+                // add a page
+                $pdf->AddPage();
+                // set the source file
+                $pdf->setSourceFile($item->filepath);
+                // import page 1
+                $tplId = $pdf->importPage(1);
+                // use the imported page and place it at point 10,10 with a width of 100 mm
+                $pdf->useTemplate($tplId, 10, 10, 100);
 
-                // $converter = new GhostscriptConverter($command, $filesystem);
-                // $converter->convert(public_path($item->filepath), '1.4');
+                $pdf->Output();   
 
                 array_push($file, public_path($item->filepath));
             }
