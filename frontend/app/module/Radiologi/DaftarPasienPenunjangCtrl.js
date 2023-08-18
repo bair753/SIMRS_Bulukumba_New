@@ -1,5 +1,6 @@
-define(['initialize'], function (initialize) {
+define(['initialize', 'Configuration'], function (initialize,configuration) {
     'use strict';
+    var baseTransaksi = configuration.baseApiBackend;
     initialize.controller('DaftarPasienPenunjangCtrl', ['$scope', 'MedifirstService', '$state', 'CacheHelper', 'DateHelper','socket',
         function ($scope, medifirstService, $state, cacheHelper, dateHelper, socket) {
             $scope.item = {};
@@ -195,6 +196,87 @@ define(['initialize'], function (initialize) {
             $scope.formatTanggal = function (tanggal) {
                 return moment(tanggal).format('DD-MMM-YYYY');
             }
+
+            $scope.hasilRad = function(){
+				if ($scope.dataSelected.noregistrasi == undefined) {
+					toastr.error('Pilih Pasien Terlebih dahulu!!!')
+					return;
+				}
+
+				medifirstService.get("bridging/inacbg/get-rincial-pelayanan-rad-all?noregistrasi=" + $scope.dataSelected.noregistrasi + '&idDept=27'
+					, true).then(function (dat) {
+						$scope.dataDaftarHasilRad = {
+							data: dat.data.data,
+							_data: dat.data.data,
+							// pageSize: 10,
+							selectable: true,
+							refresh: true,
+							total: dat.data.data.length,
+							serverPaging: false,
+							aggregate: [
+									{ field: 'total', aggregate: 'sum' },
+							]
+
+					};
+					}, function (error) {
+							$scope.isLoading = false;
+					});
+				
+				$scope.popUpDaftarHasilRad.center().open();
+				
+			}
+
+            $scope.columnDaftarHasilRad = {
+				columns: [
+					{
+						"field": "tglpelayanan",
+						"title": "Tgl Pelayanan",
+						"width": "90px",
+					},                   
+					{
+						"field": "namaruangan",
+						"title": "Ruangan",
+						"width": "120px"
+					},
+					{
+						"field": "namaproduk",
+						"title": "Layanan",
+						"width": "160px",
+					},
+					{
+						"field": "jumlah",
+						"title": "Qty",
+						"width": "40px",
+					},
+				],
+				sortable: {
+					mode: "single",
+					allowUnsort: false,
+				}
+			}
+            $scope.cetakCtscan = function () {
+				// if ($scope.norecHasilRadiologi != '') {
+					var local = JSON.parse(localStorage.getItem('profile'))
+					var nama = medifirstService.getPegawaiLogin().namaLengkap
+					if (local != null) {
+						var profile = local.id;
+						window.open(baseTransaksi + "report/cetak-ekspertise-ctscan-all?norec=" + $scope.dataSelected.norec_apd + '&kdprofile=' + profile + '&nocm=' + $scope.dataSelected.nocm
+							+ '&nama=' + nama, '_blank');
+					}
+				// }
+			}
+
+			$scope.cetakUsg = function () {
+				// if ($scope.norecHasilRadiologiUsg != '') {
+					var local = JSON.parse(localStorage.getItem('profile'))
+					var nama = medifirstService.getPegawaiLogin().namaLengkap
+					if (local != null) {
+						var profile = local.id;
+						window.open(baseTransaksi + "report/cetak-ekspertise-usg-all?norec=" + $scope.dataSelected.norec_apd + '&kdprofile=' + profile + '&nocm=' + $scope.dataSelected.nocm
+							+ '&nama=' + nama, '_blank');
+					}
+				// }
+			}	
 
 
             $scope.columnGrid = [

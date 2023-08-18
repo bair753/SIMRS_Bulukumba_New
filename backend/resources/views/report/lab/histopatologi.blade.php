@@ -1,334 +1,336 @@
-<html>
+
+<!DOCTYPE html>
+<html lang="en" ng-app="angularApp">
 <head>
-    <title>
-        Report
-    </title>
-    <link href="{{ asset('service/css/style.css') }}" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hasil Pemeriksaan Hispatologi</title>
+    @if (stripos(\Request::url(), 'localhost') !== false)
+        <script src="{{ asset('js/jquery.min.js') }}"></script>
+        <script src="{{ asset('js/jquery.qr-code.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/qrcode/src/jquery.qrcode.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/qrcode/src/qrcode.js') }}"></script>
+        <!-- angular -->
+        <script src="{{ asset('js/angular/angular.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/angular/angular-route.min.js') }}" type="text/javascript"></script>
+        <script type="text/javascript" src="{{ asset('js/angular/angular-animate.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/angular/angular-aria.min.js') }}"></script>
+        <script src="{{ asset('js/angular/angular-material.js') }}" type="text/javascript"></script>
+    @else
+        <script src="{{ asset('service/js/jquery.min.js') }}"></script>
+        <script src="{{ asset('service/js/jquery.qr-code.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/qrcode/src/jquery.qrcode.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/qrcode/src/qrcode.js') }}"></script>
+        <!-- angular -->
+        <script src="{{ asset('service/js/angular/angular.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('service/js/angular/angular-route.min.js') }}" type="text/javascript"></script>
+        <script type="text/javascript" src="{{ asset('service/js/angular/angular-animate.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('service/js/angular/angular-aria.min.js') }}"></script>
+        <script src="{{ asset('service/js/angular/angular-material.js') }}" type="text/javascript"></script>
+    @endif
+    <style>
+        *{
+            padding:0;
+            margin:0;
+            box-sizing:border-box;
+        }
+        @page{
+            size:A4;
+            width:210mm;
+            height:279mm;
+            margin-left:3rem;
+            margin-top:1rem;
+            margin-bottom:1rem;
+            margin-right:1rem;
+            transform:scale(72%);
+        }
+        body{
+            font-family:Arial, Helvetica, sans-serif;
+        }
+        table{ 
+            page-break-inside:auto 
+        }
+        tr{ 
+            page-break-inside:avoid; 
+            page-break-after:auto 
+        }
+        header{
+            border:1px solid #000; 
+        }
+        section{
+            width:210mm
+        }
+		.rotate{
+			transform: rotate(-90deg);
+		}
+		.text-center{
+			text-align: center;
+		}
+		.p05{
+			padding:.2rem;
+		}
+        body{
+            width:210mm;
+            height:279mm;
+            margin:0 auto;
+            /* border:.1rem solid rgba(0,0,0,0.35); */
+			border-bottom:none;
+        }
+        header{
+            width:100%;
+            display:flex;
+            justify-content:flex-start;
+            /* border:1px solid #000; */
+        }
+        .logo{
+            width:100px;
+            height:auto;
+            border-right:1px solid #000;
+            padding:.3rem;
+        }
+        img{
+            width:100%;
+            height:100%;
+            object-fit:cover;
+        }
+        .kop{
+            padding:.3rem;
+            align-self:center;
+        }
+        .kop-text{
+            justify-content:center;
+            align-items:center;
+            align-content:center;
+            text-align:center;
+            font-size:smaller;
+        }
+        .info{
+            border-left:1px solid #000;
+            border-right:1px solid #000;
+			border-collapse:collapse;
+            flex-grow:1;
+            padding:.3rem;
+        }
+        .code{
+            display:flex;
+            flex-direction:column;
+            font-size:34px;
+            flex-basis:15%;
+            padding:0;
+        }
+        .code div:first-child{
+            width:100%;
+            background:#000;
+            color:#fff;
+            text-align:center;
+            padding:.5rem;
+        }
+        .code div:last-child{
+            text-align:center;
+            width:100%;
+            padding:.5rem;
+        }
+        .title{
+            font-size:16pt;
+            font-weight:bold;
+        }
+        .bg-dark{
+            background:#000;
+            color:#fff;
+            padding:.5rem;
+            text-align:center;
+        }
+		.bordered{
+			border:1px solid black;
+			border-collapse:collapse;
+			padding:.2rem;
+			box-sizing: border-box;
+		}
+        .border-top{
+            border-top:.1rem solid rgba(0,0,0,0.45);
+			border-collapse:collapse;
+			box-sizing: border-box;
+        }
+        .border-bottom{
+            border-bottom:.1rem solid rgba(0,0,0,0.45);
+			border-collapse:collapse;
+			box-sizing: border-box;
+        }
+        .border-left{
+            border-left:.1rem solid rgba(0,0,0,0.45);
+			border-collapse:collapse;
+			box-sizing: border-box;
+        }
+        .border-right{
+            border-right:.1rem solid rgba(0,0,0,0.45);
+			border-collapse:collapse;
+			box-sizing: border-box;
+        }
+        .flex{
+            display:flex;
+        }
+        .flex .basis50{
+            flex-basis:50%;
+        }
+        .col-2{
+            display:flex;
+            flex-basis:50%;
+        }
+        ul li:not(nth-child(1)){
+            padding:.3rem;
+        }
+        ul li{
+        list-style:none;
+        }
+        .basis50 ul li:first-child{
+            border-bottom:1px solid #000;
+            padding:.3rem;
+        }
+        table {
+            border:1px solid #000;
+            border-collapse: collapse;
+            /* font-size: x-small; */
+        }
+        tr td{
+            border:1px solid #000;
+            border-collapse: collapse;
+        }
+        #content > tr td{
+            width:20px;
+        }
+        .info table > tr td{
+            width:20px;
+        }
+        td{
+            padding:.3rem
+        }
+    </style>
 </head>
-<style type="text/css" media="print">
-    @page {
-        size: auto;   /* auto is the initial value */
-        margin: 0;  /* this affects the margin in the printer settings */
-    }
-</style>
-<style>
-    tr td {
-        padding:2px 4px 2px 4px;
-    }
-    .borderss{
-        border-bottom: 1px solid black;
-    }
-    body{
-        font-family: Tahoma, Geneva, sans-serif;
-    }
-
-</style>
-<body style="background-color: #CCCCCC">
-<div align="center">
-    <table class="bayangprint" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0" width="{{$pageWidth}}">
-        <tbody>
+<body ng-controller="cetakSuketKematian">
+    <table width="100%" style="table-layout:fixed;border:none">
+        <tr style="text-align:center;border:none">
+            <td colspan="9" style="border:none">
+                @if(stripos(\Request::url(), 'localhost') !== FALSE)
+                <img src="{{ asset('img/logo_only.png') }}" alt="" style="width: 60px;">
+            @else
+                <img src="{{ asset('service/img/logo_only.png') }}" alt="" style="width: 60px;">
+            @endif
+            </td>
+        </tr>
+        <tr style="text-align:center;border:none">
+            <td colspan="9" style="border:none"><h2>PEMERINTAH KABUPATEN BULUKUMBA</h2></td>
+        </tr>
+        <tr style="text-align:center;border:none">
+            <td colspan="9" style="border:none"><h2>DINAS KESEHATAN BULUKUMBA</h2></td>
+        </tr>
+        <tr style="text-align:center;border:none">
+            <td colspan="9" style="border:none"><h2>UPT RSUD H. ANDI SULTHAN DAENG RADJA</h2></td>
+        </tr>
+        <tr style="text-align:center;border:none">
+            <td colspan="9" style="border:none">Jalan Serikaya No. 17 Bulukumba 92512 Telpon (0413) 81290, 81292 FAX. 85030 <br> Website: https://rsud.bulukumbakab.go.id, Email: sultanhandgradja@yahoo.com <hr style="border:2px solid #000"></td>
+        </tr>
+        <tr style="text-align:center">
+            <td colspan="9" style="border:none;"><h3>HASIL PEMERIKSAAN HISPATOLOGI</h3></td>
+        </tr>
+        <tr style="height:20px"></tr>
+        <tr style="font-size: 9pt">
+            <td style="border:none" colspan="2">Nomor PA</td>
+            <td style="border:none" colspan="3">: {{ $raw->nomorpa  }}</td>
+            <td style="border:none" colspan="2">Nomor RM</td>
+            <td style="border:none" colspan="2">: {{ $raw->nocm }}</td>
+        </tr>
+        <tr style="font-size: 9pt">
+            <td style="border:none" colspan="2">Nama Pasien</td>
+            <td style="border:none" colspan="3">: {{   $raw->namapasien  }}</td>
+            <td style="border:none" colspan="2">Tanggal Diterima</td>
+            <td style="border:none" colspan="2">: {{   $raw->tglterima }}</td>
+        </tr>
+        <tr style="font-size: 9pt">
+            <td style="border:none" colspan="2">Jenis Kelamin</td>
+            <td style="border:none" colspan="3">: {{  $raw->jeniskelamin }}</td>
+            <td style="border:none" colspan="2">Tanggal Jawab</td>
+            <td style="border:none" colspan="2">: {{ $raw->tgljawab  }}</td>
+        </tr>
+        <tr style="font-size: 9pt">
+            <td style="border:none" colspan="2">Tanggal Lahir</td>
+            <td style="border:none" colspan="3">: {{  $raw->umur }}</td>
+            <td style="border:none" colspan="2">Dokter Pengirim</td>
+            <td style="border:none" colspan="2">: @php 
+                if (empty($raw->dokterluar)) {
+                    $dokterPengirim = $raw->namadokterpengirim;
+                }
+                else {
+                    $dokterPengirim = $raw->dokterluar;
+                }
+            @endphp {{ $dokterPengirim }}</td>
+        </tr>
+        <tr style="font-size: 9pt">
+            <td style="border:none" colspan="2">Alamat</td>
+            <td style="border:none" colspan="3">: {{  $raw->alamatlengkap }}</td>
+            <td style="border:none" colspan="2">Poli/Bagian</td>
+            <td style="border:none" colspan="2">: {{ $raw->asal }}</td>
+        </tr>
         <tr>
-            <td style="padding: 30px">
-                <div align="center">
-                    <p align="right">
-                          <table cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" height="133" border="0" width="100%" style="text-align: center">
-                            <tbody>
-                            <tr>
-                                <td style="text-align:left">
-                                    <div align="center">
-                                        <table cellspacing="0" cellpadding="0" height="74" border="0" width="850">
-                                            <tbody>
-                                            <tr>
-                                                <td valign="top"></td>
-                                            </tr>
-                                            <tr>
-                                        <td valign="top">
-                                            <table cellspacing="0" cellpadding="0" border="0" width="100%">
-                                                <tbody>
-                                                <tr>
-                                                    <td width="105">
-                                                    <p align="left">
-                                                        <img src="{{ asset('service/img/logo_rsud.png') }}"
-                                                             style="width: 80px" border="0"/>
-                                                    </p>
-                                                 </td>
-                                                <td align="center" >
-                                                    <div style="margin-left: -80px">
-                                                    <b>
-                                                        <font style="font-size: 14pt" color="#000000">LABORATORIUM PATOLOGI ANATOMIK</font>
-                                                        <br>
-                                                    </b>
-                                                        <font style="font-size: 12pt" color="#000000">Rumah Sakit Umum Daerah Cibinong</font>
-                                                        <br>
-                                                    <font size="3" color="#000000">
-                                                        Jln. KSR Dadi Kusmayadi No. 27, Cibinong - 16914
-                                                        <br>
-                                                        Telp. (021) 8753487 - Fax. (021) 87906194
-                                                       <font>
-                                                    </div>
-                                                </td>
-                                </tr>
-                                <tr>
-                                <td width="105">&nbsp;</td>
-                                <td>&nbsp;</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    </td>
-                    </tr>
-                    </tbody>
+            <td colspan="9" style="border:none;height:80px"><b>Lokasi/Bahan Jaringan : </b>{{  $raw->jaringanasal }}</td>
+        </tr>
+        <tr>
+            <td colspan="9" style="border:none;height:80px"><b>Cara Mendapatkan Jaringan : </b>{{  $raw->getjaringan }}</td>
+        </tr>
+        <tr>
+            <td colspan="9" style="border:none;height:80px"><b>Diagnosa Klinik : </b>{{  $raw->diagnosaklinik }}</td>
+        </tr>
+        <tr>
+            <td colspan="9" style="border:none;height:80px"><b>Keterangan Klinik : </b>{{  $raw->keteranganklinik }}</td>
+        </tr>
+        
+        <tr>
+            <td colspan="9" style="border:none;height:80px"><b>Makroskopik : </b>{{  $raw->makroskopik }}</td>
+        </tr>
+        <tr>
+            <td colspan="9" style="border:none;height:80px"><b>Mikroskopik : </b>{{  $raw->mikroskopik }}</td>
+        </tr>
+        <tr>
+            <td colspan="9" style="border:none;height:50px"><b>Kesimpulan : </b>{{  $raw->kesimpulan }}</td>
+        </tr>
+        <tr>
+            <td colspan="9" style="border:none;"><b>ICD-0 : </b>{{  $raw->diagnosa }}</td>
+        </tr>
+        <tr style="text-align: center;">
+            <td colspan="4" style="border:none"></td>
+            <td style="border:none"></td>
+            <td colspan="4" style="border:none">Dokter Pemeriksa</td>
+        </tr>
+        <tr style="text-align: center;">
+            <td colspan="4" valign="bottom" style="border:none"></td>
+            <td style="border:none"></td>
+            <td colspan="4" valign="bottom" style="border:none"><div id="qrcoded1" style="text-align: center"></td>
+        </tr>
+        <tr style="text-align: center;">
+            <td colspan="4" valign="bottom" style="border:none"></td>
+            <td style="border:none"></td>
+            <td colspan="4" valign="bottom" style="border:none">{{  $raw->namapenanggungjawab }}</td>
+        </tr>
+        <tr style="text-align: center;">
+            <td colspan="4" valign="bottom" style="border:none"></td>
+            <td style="border:none"></td>
+            <td colspan="4" valign="bottom" style="border:none">NIP : {{  $raw->nippns }}</td>
+        </tr>
+
     </table>
-</div>
-
-</td>
-</tr>
-    <tr>
-
-        <td style="border-top:1px solid #000;border-bottom:1px solid #000;border-width: medium">
-            <font style="font-size: 11pt"  color="#000000">
-                    <span style="font-weight: 700;font-size: 12pt">
-                        HASIL PEMERIKSAAN {{ $r['jenis'] =='his'? 'HISTOPATOLOGI' : 'SITOLOGI' }}
-                    </span>
-            </font>
-        </td>
-
-    </tr>
-    <tr>
-        <td bordercolor="#808080" height="13"></td>
-    </tr>
-    <tr>
-        <td bordercolor="#808080" height="13">
-            <table cellspacing="0" cellpadding="0" border="0" width="100%">
-                <tbody valign="top">
-                <p style="text-align: left;font-weight: bold"> DATA REGISTRASI</p>
-                <tr>
-                    <td height="25"  width="15%">
-                        <font style="font-size: 10pt" >No. Rekam Medik</font>
-                    </td>
-                    <td >:</td>
-                    <td height="25"  width="30%"><font style="font-size: 10pt" > {{ $raw->nocm }}</font></td>
-                    <td height="25" width="16%">
-                        <font style="font-size: 10pt" >No. PA</font>
-                    </td>
-                    <td>:</td>
-                    <td height="25"><font style="font-size: 10pt" >{{ $raw->nomorpa  }}  </font></td>
-
-                </tr>
-                <tr>
-                    <td height="25" width="82">
-                        <font style="font-size: 10pt" >Tanggal Terima</font>
-                    </td>
-                    <td>:</td>
-                    <td height="25" width="401"><font style="font-size: 10pt" >{{   $raw->tglterima }} </font></td>
-
-
-                    <td height="25" width="15%">
-                        <font style="font-size: 10pt" >Nama Pasien</font>
-                    </td>
-                    <td>:</td>
-                    <td height="25"><font style="font-size: 10pt" >{{   $raw->namapasien  }}</font></td>
-
-                </tr>
-                <tr>
-                    <td height="25" width="92">
-                        <font style="font-size: 10pt" >Tanggal Jawab</font>
-                    </td>
-                    <td>:</td>
-                    <td height="25" width="401"><font style="font-size: 10pt" >{{ $raw->tgljawab  }} </font></td>
-
-                    <td height="25" width="105">
-                        <font style="font-size: 10pt" >Jenis Kelamin / Umur</font>
-                    </td>
-                    <td>:</td>
-                    <td height="25"><font style="font-size: 10pt" >{{  $raw->umur }} </font></td>
-
-                </tr>
-                <tr>
-                    <td height="25" width="82">
-                        <font style="font-size: 10pt" >Pembayaran</font>
-                    </td>
-                    <td>:</td>
-                    <td height="25" width="401"><font style="font-size: 10pt" >{{ $raw->kelompokpasien   }} </font></td>
-
-                    <td height="25" width="105">
-                        <font style="font-size: 10pt" >Alamat</font>
-                    </td>
-                    <td>:</td>
-                    <td height="25"><font style="font-size: 10pt" >{{  $raw->alamatlengkap }} </font></td>
-
-                </tr>
-
-                <tr>
-                    <td height="25" width="92">
-                        <font style="font-size: 10pt" >Dokter Pengirim</font>
-                    </td>
-                    <td>:</td>
-                    @php 
-                        if (empty($raw->dokterluar)) {
-                            $dokterPengirim = $raw->namadokterpengirim;
-                        }
-                        else {
-                            $dokterPengirim = $raw->dokterluar;
-                        }
-                    @endphp
-                    <td height="25" width="401"><font style="font-size: 10pt" >{{ $dokterPengirim }} </font></td>
-                    <td height="25" width="105">
-                        <font style="font-size: 10pt" >Ruangan</font>
-                    </td>
-                    <td>:</td>
-                    <td height="25"><font style="font-size: 10pt" > {{ $raw->asal }}</font></td>
-
-                </tr>
-{{--                <tr>--}}
-{{--                    <td height="25" width="92">--}}
-{{--                        <font style="font-size: 10pt" >Asal Rujukan</font>--}}
-{{--                    </td>--}}
-{{--                    <td>:</td>--}}
-{{--                    <td height="25" width="401"><font style="font-size: 10pt" >{{ $raw->asalrujukan }} </font></td>--}}
-
-
-{{--                </tr>--}}
-                <tr>
-                    <td height="25" width="92">
-                        <font style="font-size: 10pt" >Topografi</font>
-                    </td>
-                    <td>:</td>
-                    <td height="25" width="401"><font style="font-size: 10pt" >{{  $raw->topografi   }} </font></td>
-                    <td height="25" width="105">
-                        <font style="font-size: 10pt" >Morfologi</font>
-                    </td>
-                    <td>:</td>
-                    <td height="25"><font style="font-size: 10pt" >{{ $raw->morfologi  }}  </font></td>
-                </tr>
-                </tbody>
-            </table>
-        </td>
-    </tr>
-
-    <tr>
-        <td>
-            <table cellspacing="0" cellpadding="0" border="0" width="100%" style="margin-top: 20px">
-                <tbody valign="top" style="font-size: 10pt">
-                <tr>
-                    <td height="25" width="25%">
-                       <b> DIAGNOSIS KLINIK</b>
-                    </td>
-                    <td>:</td>
-                    <td height="35">
-                        {{ $raw->diagnosaklinik  }}
-                    </td>
-                </tr>
-                <tr>
-                    <td height="25" >
-                        <b>  KETERANGAN KLINIK</b>
-                    </td>
-                    <td>:</td>
-                    <td height="35">
-                        {{ $raw->keteranganklinik  }}
-                    </td>
-                </tr>
-              @if($r['jenis'] =='his' &&  $raw->diagnosapb !=null)
-                <tr>
-                    <td height="25" >
-                       <b> DIAGNOSIS PB</b>
-                    </td>
-                    <td>:</td>
-                    <td height="35"> {{ $raw->diagnosapb  }}
-                    </td>
-                </tr>
-                <tr>
-                    <td height="25">
-                        <b>KETERANGAN PB</b>
-                    </td>
-                    <td>:</td>
-                    <td height="35"> {{ $raw->keteranganpb  }}
-                    </td>
-                </tr>
-                @endif
-                <tr>
-                    <td height="25" >
-                        <b> MAKROSKOPIK</b>
-                    </td>
-                    <td>:</td>
-                    <td height="90">
-                         {!!  nl2br(str_replace('~','<br/>',$raw->makroskopik )) !!}
-                    </td>
-                </tr>
-                <tr>
-                    <td height="25">
-                        <b> MIKROSKOPIK</b>
-                    </td>
-                    <td>:</td>
-                    <td height="90">
-                        {!! nl2br(str_replace('~','<br/>',$raw->mikroskopik )) !!}
-                    </td>
-                </tr>
-                <tr>
-                    <td height="25" >
-                        <b> KESIMPULAN</b>
-                    </td>
-                    <td>:</td>
-                    <td height="90">
-                      {!!  nl2br(str_replace('~','<br/>',$raw->kesimpulan ))!!}
-                    </td>
-                </tr>
-                <tr>
-                    <td height="25" >
-                        <b> ANJURAN</b>
-                    </td>
-                    <td>:</td>
-                    <td height="90">
-                        {!!  nl2br(str_replace('~','<br/>',$raw->anjuran ))!!}
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </td>
-
-    </tr>
-    <tr>
-        <td bordercolor="#808080" height="13"></td>
-    </tr>
-    <tr >
-        <td>
-            <table style="margin-top:15px;">
-                <tr>
-                    <td width="500"></td>
-                </tr>
-                <tr>
-                    <td ></td>
-                    <td style="text-align: center">
-                        <font style="font-size: 10pt" >Cibinong, {{ App\Traits\Valet::getDateIndo(date('Y-m-d'))   }}</font>
-                        <br>
-{{--                        <font style="font-size: 10pt;" ></font>--}}
-                    </td>
-                </tr>
-                <tr>
-                    <td height="150"></td>
-                    <td style="text-align: center">
-                        <font  style="font-size: 10pt">
-                            <u>{{  $raw->namapenanggungjawab }}</u>
-                            <br>
-                              {{ $raw->nosip != null? '('.$raw->nosip.')' :'-' }}
-                        </font>
-                    </td>
-                </tr>
-            </table>
-        </td>
-    </tr>
-
-
-
-    </tbody>
-    </table>
-    </p>
-    </div>
-    </td>
-
-    </tr>
-
-    </tbody>
-    </table>
-    </div>
 </body>
+<script>
+    var d1 = {!! json_encode($raw->namapenanggungjawab )!!}
+        
+        if(d1 != undefined){
+            jQuery('#qrcoded1').qrcode({
+                width	: 100,
+                height	: 100,
+                text	: "Tanda Tangan Digital Oleh " + d1
+            });	
+        }
+        $(document).ready(function () {
+        window.print();
+    });
+</script>
 </html>
