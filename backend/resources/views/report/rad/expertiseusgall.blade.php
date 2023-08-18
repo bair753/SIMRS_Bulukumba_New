@@ -147,15 +147,16 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
             height: 75,
             width: 75
         });
-    $(document).ready(function () {
-        window.print();
-    });
 </script>
 @php
     $no ++;
 @endphp
 @endforeach
 
-
+<script>
+    $(document).ready(function () {
+        window.print();
+    });
+</script>
 </body>
 </html>

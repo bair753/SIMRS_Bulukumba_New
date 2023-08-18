@@ -28,6 +28,16 @@
     .k-grid .k-grid-header .k-header {
         text-align: center;
     }
+    .buttonKuning {
+		background-color: #fff198;
+		/* Hijau */
+		border: none;
+		color: black;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		cursor: pointer;
+	}
 </style>
 
 <!-- <div ng-controller="DaftarPasienApotikCtrl"> -->
@@ -186,7 +196,10 @@
             </div>            
         </div>
         <div class="grid_12">
-            <div class="grid_10"></div>
+            <div class="grid_8"></div>
+            <div class="grid_2">
+                <button class="btnTemplate1 buttonKuning" style="margin-left: 0;" ng-click="hasilRad()">Cetak Hasil Radiologi</button>
+            </div>
             <div class="grid_2">
                 <button class="btnTemplate1" style="margin-left: 0;" ng-click="PanggilPasien()"><i
                         class="fa fa-phone-square"></i>Panggil Pasien</button>
@@ -245,6 +258,27 @@
             </div>
         </div>
     </div>
+    <div kendo-window="popUpDaftarHasilRad" k-title="'Daftar Hasil Radiologi'" k-visible="false"
+						k-width="1000" k-height="400">
+						<div class="panel panel-default container_12">
+							<div class="grid_12 headerBox">
+								<kendo-grid id="kGrids" data-source="dataDaftarHasilRad" options="columnDaftarHasilRad"
+									k-selectable="'row'" k-sortable="'true'" k-resizable="'true'"
+									k-ng-model="dataSelectedHasilRad" ng-click="klikGridHasilRad(dataSelectedHasilRad)">
+								</kendo-grid>
+							</div>
+							<div class="grid_12">
+								<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
+									<button class="k-button  k-button-icontext" ng-click="cetakCtscan()">Cetak CT
+										Scan</button>
+								</div>
+								<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
+									<button class="k-button  k-button-icontext" ng-click="cetakUsg()">Cetak Foto dan
+										USG</button>
+								</div>
+							</div>
+						</div>
+					</div>
     <!-- </c-panel> -->
 </div>
 <!-- </div>

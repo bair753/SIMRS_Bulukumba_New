@@ -1090,7 +1090,7 @@ class ReportController extends ApiController{
         $raw = collect(DB::select("
             SELECT
                 pd.noregistrasi, pm.nocm, pm.namapasien, hpl.dokterluar, dokterpengirim.namalengkap as namadokterpengirim,
-                jk.jeniskelamin || '/ ' || EXTRACT ( YEAR
+                jk.jeniskelamin, EXTRACT ( YEAR
                     FROM AGE(  pd.tglregistrasi,pm.tgllahir )
                 ) || ' Thn ' || EXTRACT (MONTH  FROM AGE(  pd.tglregistrasi, pm.tgllahir )
                 ) || ' Bln ' || EXTRACT ( DAY  FROM  AGE( pd.tglregistrasi, pm.tgllahir )  ) || ' Hr' || '(' || to_char(pm.tgllahir, 'DD-MM-YYYY') || ')' AS umur,
@@ -1098,6 +1098,8 @@ class ReportController extends ApiController{
                 to_char( hpl.tanggal, 'DD-MM-YYYY HH24:MI:SS'  ) AS tgljawab,
                 to_char( pp.tglpelayanan,'DD-MM-YYYY HH24:MI:SS' ) AS tglterima,
                 to_char(  sbm.tglsbm,'DD-MM-YYYY HH24:MI:SS' ) AS tglbayar, pg.namalengkap,
+             CASE WHEN hpl.jaringanasal IS NULL THEN  ''  ELSE  jaringanasal  END AS jaringanasal,
+             CASE WHEN hpl.getjaringan IS NULL THEN  ''  ELSE  getjaringan  END AS getjaringan,
              CASE WHEN hpl.diagnosaklinik IS NULL THEN  ''  ELSE  diagnosaklinik  END AS diagnosaklinik,
              CASE WHEN hpl.keteranganklinik IS NULL THEN ''   ELSE hpl.keteranganklinik  END AS keteranganklinik,
              CASE WHEN hpl.makroskopik IS NULL THEN   '' ELSE  hpl.makroskopik END AS makroskopik, 
@@ -1109,6 +1111,7 @@ class ReportController extends ApiController{
              CASE WHEN hpl.diagnosapb IS NULL THEN  '' ELSE  hpl.diagnosapb  END AS diagnosapb,
              CASE WHEN hpl.keteranganpb IS NULL THEN ''  ELSE hpl.keteranganpb END AS keteranganpb,
              CASE WHEN pg1.namalengkap IS NULL THEN '' ELSE  pg1.namalengkap   END AS namapenanggungjawab,
+             CASE WHEN dm.kddiagnosa IS NULL THEN '' ELSE  dm.kddiagnosa   END AS diagnosa,
              CASE WHEN pg1.nippns IS NULL THEN ''ELSE  pg1.nippns END AS nippns,hpl.nomorpa,
              ru.namaruangan as asal,pg1.nosip, hpl.jenis,
               CASE
@@ -1160,6 +1163,7 @@ class ReportController extends ApiController{
             LEFT JOIN jeniskelamin_m AS jk ON jk. ID = pm.objectjeniskelaminfk
             LEFT JOIN pegawai_m AS pg ON pg. ID = so.objectpegawaiorderfk
             LEFT JOIN pegawai_m AS pg1 ON pg1. ID = hpl.pegawaifk
+            LEFT JOIN diagnosa_m AS dm ON dm.ID = hpl.icd0
             LEFT JOIN pegawai_m AS dokterpengirim ON dokterpengirim. ID = hpl.dokterpengirimfk
              LEFT JOIN ruangan_m AS ru ON ru. ID = pd.objectruanganlastfk
             left join alamat_m as alm on alm.nocmfk=pm.id
@@ -1172,7 +1176,6 @@ class ReportController extends ApiController{
                 pp.norec = '$r[norec]'
                 and hpl.statusenabled=true
         "))->first();
-//        dd($raw);
         if(!empty($raw)){
             $norec_pd = $raw->norec_pd;
             $objectruanganlastfk = $raw->objectruanganlastfk;
@@ -1193,6 +1196,7 @@ class ReportController extends ApiController{
             echo 'Data Tidak ada ';
             return;
         }
+        // dd($raw);
         $pageWidth = 950;
         if($raw->jenis == 'pa'){
             return view('report.lab.histopatologi', compact('raw', 'pageWidth','r', 'profile'));
