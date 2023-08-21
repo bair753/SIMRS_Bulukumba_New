@@ -5994,7 +5994,7 @@ class EMRController  extends ApiController
             ->where('ru.kdprofile', $idProfile)
             ->where('ru.objectdepartemenfk', $request['departemenfk'])
             ->where('ru.statusenabled', true)
-            ->orderBy('ru.namaruangan')
+            ->orderBy('ru.id')
             ->get();
         $ruangan = \DB::table('ruangan_m as ru')
             ->select('ru.id', 'ru.namaruangan')
