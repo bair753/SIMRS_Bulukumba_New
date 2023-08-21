@@ -523,22 +523,22 @@
 
         if(pasien != undefined){
           jQuery('#qrcodeKeluargaPasien').qrcode({
-            width	: 100,
-			      height	: 100,
+            width	: 70,
+			      height	: 70,
             text	: "Tanda Tangan Digital Oleh " + pasien
         });	
         }
         if(keluargapasien != undefined){
           jQuery('#qrcodePasien').qrcode({
-            width	: 100,
-			      height	: 100,
+            width	: 70,
+			      height	: 70,
             text	: "Tanda Tangan Digital Oleh " + keluargapasien
         });
         }
         if(dpjp != undefined){
           jQuery('#qrcodeDPJP').qrcode({
-            width	: 100,
-			      height	: 100,
+            width	: 70,
+			      height	: 70,
             text	: "Tanda Tangan Digital Oleh " + dpjp
         });		
         }
