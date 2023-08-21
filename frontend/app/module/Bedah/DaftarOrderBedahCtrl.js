@@ -520,7 +520,7 @@ define(['initialize'], function (initialize) {
                     // }
                 }
                 var norec_pp = ''
-                if ($scope.sourceVerif._data[0].norec_pp != null) {
+                if ($scope.sourceVerif._data[0] != undefined) {
                     norec_pp = $scope.sourceVerif._data[0].norec_pp
                 }
 
@@ -540,19 +540,7 @@ define(['initialize'], function (initialize) {
                     "tgloperasi": moment($scope.item.tglOperasi).format('YYYY-MM-DD HH:mm'),
                     "pegawaifk": $scope.item.dokterOperasi.id
                 }
-
-                if (dataPost.length > 0) {
-                    $scope.btnSimpanVis = true;
-                    var departemen = $scope.sourceVerif._data[0].objectdepartemenfk;
-                    if (departemen == 3) {/*lab */
-                        // manageServicePhp.saveBridingSysmex(itemsave)
-                        //     .then(function (e) {
-                        //     });                       
-                    } else if (departemen == 27) {
-                        // manageServicePhp.saveBrigdingZeta(itemsave)
-                        //     .then(function (e) {
-                        //     });
-                    }
+                $scope.btnSimpanVis = true;
 
                     medifirstService.post('bedah/save-pelayanan-pasien-bedah',itemsave)
                         .then(function (e) {
@@ -561,10 +549,13 @@ define(['initialize'], function (initialize) {
                             init()
 
                         });
-                }
-                else {
-                    toastr.error('Belum ada data yang dipilih');
-                }
+
+                // if (dataPost.length > 0) {
+                    
+                // }
+                // else {
+                //     toastr.error('Belum ada data yang dipilih');
+                // }
             }
 
             $scope.hapusTindakan = function () {

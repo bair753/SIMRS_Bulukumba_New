@@ -771,10 +771,10 @@ define(['initialize'], function (initialize) {
                     alert("Pilih Ruangan Tujuan terlebih dahulu!!")
                     return;
                 }
-                if ($scope.item.layanan == undefined) {
-                    alert("Pilih Layanan terlebih dahulu!!")
-                    return;
-                }
+                // if ($scope.item.layanan == undefined) {
+                //     alert("Pilih Layanan terlebih dahulu!!")
+                //     return;
+                // }
                 var nomor = 0
                 if ($scope.dataGridOrder == undefined) {
                     nomor = 1
@@ -854,10 +854,10 @@ define(['initialize'], function (initialize) {
                     alert("Pilih Ruangan Tujuan terlebih dahulu!!")
                     return;
                 }
-                if ($scope.item.layanan == undefined) {
-                    alert("Pilih Layanan terlebih dahulu!!")
-                    return;
-                }
+                // if ($scope.item.layanan == undefined) {
+                //     alert("Pilih Layanan terlebih dahulu!!")
+                //     return;
+                // }
                 var nomor = 0
                 if ($scope.dataGrid == undefined) {
                     nomor = 1
@@ -908,10 +908,10 @@ define(['initialize'], function (initialize) {
                     alert("Pilih Ruangan Tujuan terlebih dahulu!!")
                     return
                 }
-                if (data2.length == 0) {
-                    alert("Pilih layanan terlebih dahulu!!")
-                    return
-                }
+                // if (data2.length == 0) {
+                //     alert("Pilih layanan terlebih dahulu!!")
+                //     return
+                // }
                 if ($scope.item.rencanaTindakan == undefined) {
                     alert("Isi Rencana Tindakan terlebih dahulu!!")
                     return

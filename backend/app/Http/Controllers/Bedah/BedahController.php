@@ -279,68 +279,68 @@ class BedahController extends ApiController
                 $Edit = PelayananPasien::where('strukorderfk', $request['norec_so'])->where('kdprofile', $kdProfile)->delete();
             }
 
-            foreach ($request['bridging'] as $item){
-                $PelPasien = new PelayananPasien();
-                $PelPasien->norec = $PelPasien->generateNewId();
-                $PelPasien->kdprofile = $kdProfile;
-                $PelPasien->statusenabled = true;
-                $PelPasien->noregistrasifk =  $dataAPDnorec;
-                $PelPasien->tglregistrasi = $dataAPDtglPel;
-                $PelPasien->hargadiscount = 0;
-                $PelPasien->hargajual =  $item['hargasatuan'];
-                $PelPasien->hargasatuan =  $item['hargasatuan'];
-                $PelPasien->jumlah =  $item['qtyproduk'];
-                $PelPasien->kelasfk =  $request['objectkelasfk'];
-                $PelPasien->kdkelompoktransaksi =  1;
-                $PelPasien->piutangpenjamin =  0;
-                $PelPasien->piutangrumahsakit = 0;
-                $PelPasien->produkfk =  $item['produkid'];
-                $PelPasien->stock =  1;
-                $PelPasien->strukorderfk =  $request['norec_so'];
-                $PelPasien->tglpelayanan = date('Y-m-d H:i:s');
-                $PelPasien->harganetto =  $item['hargasatuan'];
+            // foreach ($request['bridging'] as $item){
+            //     $PelPasien = new PelayananPasien();
+            //     $PelPasien->norec = $PelPasien->generateNewId();
+            //     $PelPasien->kdprofile = $kdProfile;
+            //     $PelPasien->statusenabled = true;
+            //     $PelPasien->noregistrasifk =  $dataAPDnorec;
+            //     $PelPasien->tglregistrasi = $dataAPDtglPel;
+            //     $PelPasien->hargadiscount = 0;
+            //     $PelPasien->hargajual =  $item['hargasatuan'];
+            //     $PelPasien->hargasatuan =  $item['hargasatuan'];
+            //     $PelPasien->jumlah =  $item['qtyproduk'];
+            //     $PelPasien->kelasfk =  $request['objectkelasfk'];
+            //     $PelPasien->kdkelompoktransaksi =  1;
+            //     $PelPasien->piutangpenjamin =  0;
+            //     $PelPasien->piutangrumahsakit = 0;
+            //     $PelPasien->produkfk =  $item['produkid'];
+            //     $PelPasien->stock =  1;
+            //     $PelPasien->strukorderfk =  $request['norec_so'];
+            //     $PelPasien->tglpelayanan = date('Y-m-d H:i:s');
+            //     $PelPasien->harganetto =  $item['hargasatuan'];
 
-                $PelPasien->save();
-                $PPnorec = $PelPasien->norec;
-                $PelPasienPetugas = new PelayananPasienPetugas();
-                $PelPasienPetugas->norec = $PelPasienPetugas->generateNewId();
-                $PelPasienPetugas->kdprofile = $kdProfile;
-                $PelPasienPetugas->statusenabled = true;
-                $PelPasienPetugas->nomasukfk = $dataAPDnorec;
-                $PelPasienPetugas->objectpegawaifk = $request['iddokterverif'];//$request['objectpegawaiorderfk'];
-                $PelPasienPetugas->objectjenispetugaspefk = 4;//$jenisPetugasPe->objectjenispetugaspefk;
-                $PelPasienPetugas->pelayananpasien = $PPnorec;
-                $PelPasienPetugas->save();
-                $PPPnorec = $PelPasienPetugas->norec;
+            //     $PelPasien->save();
+            //     $PPnorec = $PelPasien->norec;
+            //     $PelPasienPetugas = new PelayananPasienPetugas();
+            //     $PelPasienPetugas->norec = $PelPasienPetugas->generateNewId();
+            //     $PelPasienPetugas->kdprofile = $kdProfile;
+            //     $PelPasienPetugas->statusenabled = true;
+            //     $PelPasienPetugas->nomasukfk = $dataAPDnorec;
+            //     $PelPasienPetugas->objectpegawaifk = $request['iddokterverif'];//$request['objectpegawaiorderfk'];
+            //     $PelPasienPetugas->objectjenispetugaspefk = 4;//$jenisPetugasPe->objectjenispetugaspefk;
+            //     $PelPasienPetugas->pelayananpasien = $PPnorec;
+            //     $PelPasienPetugas->save();
+            //     $PPPnorec = $PelPasienPetugas->norec;
 
 
-                foreach ($item['komponenharga'] as $itemKomponen) {
-                    $PelPasienDetail = new PelayananPasienDetail();
-                    $PelPasienDetail->norec = $PelPasienDetail->generateNewId();
-                    $PelPasienDetail->kdprofile = $kdProfile;
-                    $PelPasienDetail->statusenabled = true;
-                    $PelPasienDetail->noregistrasifk = $dataAPDnorec;
-                    $PelPasienDetail->aturanpakai = '-';
-                    $PelPasienDetail->hargadiscount = 0;
-                    $PelPasienDetail->hargajual = $itemKomponen['hargasatuan'];
-                    $PelPasienDetail->hargasatuan = $itemKomponen['hargasatuan'];
-                    $PelPasienDetail->jumlah = 1;
-                    $PelPasienDetail->keteranganlain = '-';
-                    $PelPasienDetail->keteranganpakai2 = '-';
-                    $PelPasienDetail->komponenhargafk = $itemKomponen['objectkomponenhargafk'];
-                    $PelPasienDetail->pelayananpasien = $PPnorec;
-                    $PelPasienDetail->piutangpenjamin = 0;
-                    $PelPasienDetail->piutangrumahsakit = 0;
-                    $PelPasienDetail->produkfk =  $item['produkid'];
-                    $PelPasienDetail->stock = 1;
-                    $PelPasienDetail->strukorderfk =  $request['norec_so'];
-                    $PelPasienDetail->tglpelayanan =$dataAPDtglPel;
-                    $PelPasienDetail->harganetto = $itemKomponen['hargasatuan'];
-                    $PelPasienDetail->save();
-                    $PPDnorec = $PelPasienDetail->norec;
-                    $transStatus = 'true';
-                }
-            }
+            //     foreach ($item['komponenharga'] as $itemKomponen) {
+            //         $PelPasienDetail = new PelayananPasienDetail();
+            //         $PelPasienDetail->norec = $PelPasienDetail->generateNewId();
+            //         $PelPasienDetail->kdprofile = $kdProfile;
+            //         $PelPasienDetail->statusenabled = true;
+            //         $PelPasienDetail->noregistrasifk = $dataAPDnorec;
+            //         $PelPasienDetail->aturanpakai = '-';
+            //         $PelPasienDetail->hargadiscount = 0;
+            //         $PelPasienDetail->hargajual = $itemKomponen['hargasatuan'];
+            //         $PelPasienDetail->hargasatuan = $itemKomponen['hargasatuan'];
+            //         $PelPasienDetail->jumlah = 1;
+            //         $PelPasienDetail->keteranganlain = '-';
+            //         $PelPasienDetail->keteranganpakai2 = '-';
+            //         $PelPasienDetail->komponenhargafk = $itemKomponen['objectkomponenhargafk'];
+            //         $PelPasienDetail->pelayananpasien = $PPnorec;
+            //         $PelPasienDetail->piutangpenjamin = 0;
+            //         $PelPasienDetail->piutangrumahsakit = 0;
+            //         $PelPasienDetail->produkfk =  $item['produkid'];
+            //         $PelPasienDetail->stock = 1;
+            //         $PelPasienDetail->strukorderfk =  $request['norec_so'];
+            //         $PelPasienDetail->tglpelayanan =$dataAPDtglPel;
+            //         $PelPasienDetail->harganetto = $itemKomponen['hargasatuan'];
+            //         $PelPasienDetail->save();
+            //         $PPDnorec = $PelPasienDetail->norec;
+            //         $transStatus = 'true';
+            //     }
+            // }
 
             $transStatus = 'true';
         } catch (\Exception $e) {
@@ -354,7 +354,7 @@ class BedahController extends ApiController
             $result = array(
                 'status' => 201,
                 'message' => $transMessage,
-                'dataPP' => $PelPasien,
+                // 'dataPP' => $PelPasien,
                 'as' => 'ramdanegie',
             );
         } else {
