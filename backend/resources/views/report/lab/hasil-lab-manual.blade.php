@@ -199,7 +199,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <font style="font-size: 11pt" color="#000000">Dokter Perujuk</font>
                                 </td>
                                 <td>
-                                    <font style="font-size: 11pt" color="#000000">: {{ $datas[0]->dokterperiksa }}</font>
+                                    <font style="font-size: 11pt" color="#000000">: {{ $datas[0]->pengorder }}</font>
                                 </td>
                                 {{-- <td>
                                     <font style="font-size: 11pt" color="#000000">Ruang/Kamar/Nomor</font>
