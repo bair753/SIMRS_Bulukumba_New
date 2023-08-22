@@ -800,7 +800,8 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 			}
 
 			$scope.GelangPasien = function () {
-				if ($scope.dataPasienSelected == undefined) {
+
+				if ($scope.dataPasienSelected.noregistrasi == undefined) {
 					toastr.error('Pilih data dulu')
 					return
 				}
@@ -811,6 +812,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 					{ id: 3, nama: 'Gelang Pasien Bayi Laki-Laki', url: 'http://127.0.0.1:1237/printvb/Pendaftaran?cetak-gelangpasien-bayi=1&norec=' + noregistrasi + '&view=true' +'&qty=1' },
 					{ id: 4, nama: 'Gelang Pasien Bayi Perempuan', url: 'http://127.0.0.1:1237/printvb/Pendaftaran?cetak-gelangpasien-bayi-perempuan=1&norec=' + noregistrasi + '&view=true' +'&qty=1' },					
 				]
+				console.log($scope.item.cetakanGelang);
 				$scope.popUpCetakanGelang.center().open()
 				//  var stt = 'false'
 				// if (confirm('View Lembar Gelang Pasien? ')) {
@@ -828,10 +830,10 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 
 			$scope.cetakGelangPasien = function(params){
 				if (!params) return
-				var client = new HttpClient();
-				client.get(params.url, function (response) {
-					//aadc=response; 
-				});
+				window.open(config.baseApiBackend + 'report/cetak-gelang-pasien?noregistrasi='
+                    + $scope.dataPasienSelected.noregistrasi + '&idcetakangelang=' + $scope.item.cetakanGelang.id
+                    + '&nocm=' + $scope.dataPasienSelected.nocm, '_blank');
+
 			}
 
 			$scope.Tracer = function () {

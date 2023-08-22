@@ -10644,6 +10644,7 @@ class EMRController  extends ApiController
             ->where('pg.kdprofile',$idProfile)
             ->whereIn('pg.id', $pemeriksa)
             ->where('pg.statusenabled',true)
+            ->orderBy('pg.namalengkap')
             ->get();
         return $dataAsistenOperasi;
     }
