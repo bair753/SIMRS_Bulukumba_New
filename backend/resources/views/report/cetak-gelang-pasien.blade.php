@@ -52,7 +52,7 @@
 			border-bottom:none;
         }
 		tr{
-			font-size: 50px;
+			font-size: 80px;
 		}
         
 		table{
