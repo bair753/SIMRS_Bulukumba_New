@@ -7769,8 +7769,12 @@ class ReportController extends ApiController{
             ->first();
         
         $gelang = $request['idcetakangelang'];
+        if($request['idcetakangelang'] == 1 or $request['idcetakangelang'] == 2){
+            return view('report.cetak-gelang-pasien-dewasa', compact('data', 'gelang', 'profile'));
+        }else{
+            return view('report.cetak-gelang-pasien', compact('data', 'gelang', 'profile'));
+        }
 
-        return view('report.cetak-gelang-pasien', compact('data', 'gelang', 'profile'));
     }
 
     public function emrAllPage(Request $request) {
