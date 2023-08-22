@@ -54,6 +54,7 @@
 <script type="text/javascript">
         $(document).ready(function () {
         window.print();
+		window.close();
     });
 </script>
 </html>

@@ -674,6 +674,12 @@ class RadiologiController extends ApiController
         $dataLogin = $request->all();
         $kdProfile = $this->getDataKdProfile($request);
         $idProfile = (int) $kdProfile;
+        $dataInstalasi = \DB::table('departemen_m as dp')
+            ->where('dp.kdprofile', $idProfile)
+            ->select('dp.id','dp.namadepartemen')
+            ->where('dp.statusenabled', true)
+            ->orderBy('dp.namadepartemen')
+            ->get();
         $dataruangan = \DB::table('maploginusertoruangan_s as mlu')
             ->leftjoin('ruangan_m as ru','ru.id','=','mlu.objectruanganfk')
             ->leftjoin('departemen_m as dp','dp.id','=','ru.objectdepartemenfk')
@@ -704,7 +710,7 @@ class RadiologiController extends ApiController
                 DB::raw("'' AS expertise
                 "))
             ->where('apd.kdprofile', $idProfile)
-            ->where('ru.objectdepartemenfk',$dataruangan[0]->objectdepartemenfk)
+            // ->where('ru.objectdepartemenfk',$dataruangan[0]->objectdepartemenfk)
 //            ->where('apd.objectruanganfk',$dataruangan[0]->id)
             ->orderBy('apd.tglregistrasi','desc');
 
@@ -724,6 +730,8 @@ class RadiologiController extends ApiController
 //        }
         if(isset($request['deptId']) && $request['deptId']!="" && $request['deptId']!="undefined"){
             $data = $data->where('dept.id','=', $request['deptId']);
+        }else{
+            $data = $data->where('ru.objectdepartemenfk','=', $dataruangan[0]->objectdepartemenfk);
         }
         if(isset($request['ruangId']) && $request['ruangId']!="" && $request['ruangId']!="undefined"){
             $data = $data->where('ru.id','=', $request['ruangId']);
@@ -790,6 +798,7 @@ class RadiologiController extends ApiController
         $result = array(
             "data" => $data,
             "ruanganlogin" => $dataruangan,
+            "datainstalasi" => $dataInstalasi,
             "as" => 'er@epic',
         );
         return $this->respond($result);
