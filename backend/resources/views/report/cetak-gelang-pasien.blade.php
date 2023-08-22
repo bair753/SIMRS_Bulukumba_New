@@ -39,18 +39,21 @@
         @page{
             size:A4;
             margin-left:1rem;
-            margin-top:30rem;
+            margin-top:1rem;
             margin-bottom:1rem;
             margin-right:1rem;
             transform:scale(72%);
         }
         body{
-            width:210mm;
-            height:279mm;
+            /* width:210mm;
+            height:279mm; */
             margin:0 auto;
             /* border:.1rem solid rgba(0,0,0,0.35); */
 			border-bottom:none;
         }
+		tr{
+			font-size: 50px;
+		}
         
 		table{
 			writing-mode: vertical-lr;
