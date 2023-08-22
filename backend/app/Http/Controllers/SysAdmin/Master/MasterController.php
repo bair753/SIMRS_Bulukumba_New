@@ -2877,6 +2877,14 @@ class MasterController extends ApiController{
 
         return $this->respond($pemeriksa);
     }
+    public function getAdminRadiologi(Request $request) {
+        $kdProfile = $this->getDataKdProfile($request);
+        $idProfile = (int) $kdProfile;
+        $adminRadiologi = SettingDataFixed::where('id', 1589)->first();
+        $adminRadiologi = $adminRadiologi->nilaifield;
+
+        return $this->respond($adminRadiologi);
+    }
     public function getNoHakAksesPemakaianAsuransi(Request $request) {
         $kdProfile = $this->getDataKdProfile($request);
         $idProfile = (int) $kdProfile;
