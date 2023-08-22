@@ -45,15 +45,12 @@
             transform:scale(72%);
         }
         body{
-            /* width:210mm;
-            height:279mm; */
+            width:210mm;
+            height:279mm;
             margin:0 auto;
             /* border:.1rem solid rgba(0,0,0,0.35); */
 			border-bottom:none;
         }
-		tr{
-			font-size: 80px;
-		}
         
 		table{
 			writing-mode: vertical-lr;
@@ -66,6 +63,9 @@
 			transform: rotate(180deg);
 			border-radius: 25px;
 			text-align: left;
+		}
+		tr{
+			font-size: 90px;
 		}
     </style>
 </head>
