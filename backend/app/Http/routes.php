@@ -2399,6 +2399,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
                 Route::get('sysadmin/general/get-data-maplingkuppelayanan', 'SysAdmin\GeneralController@getDataMapLapKeuanganToLingkupPelayanan');
                 Route::get('sysadmin/general/get-data-depart', 'SysAdmin\GeneralController@getDepartemen');
                 Route::get('sysadmin/master/get-no-hak-akses-upload-berkas', 'SysAdmin\Master\MasterController@getNoHakAkses');
+                Route::get('sysadmin/master/get-admin-radiologi', 'SysAdmin\Master\MasterController@getAdminRadiologi');
                 Route::get('sysadmin/master/get-no-hak-akses-edit-pemakaian-asuransi', 'SysAdmin\Master\MasterController@getNoHakAksesPemakaianAsuransi');
                 Route::get('sysadmin/master/hak-akses-edit-icd', 'SysAdmin\Master\MasterController@getEditICD');
                 Route::get('sysadmin/general/get-validasi-autorisasi-password', 'SysAdmin\ModulAplikasiController@getValidateAuthPasscode');
@@ -2809,6 +2810,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
         Route::get('report/cetak-persetujuan-tindakan-hemodialisa', 'Report\ReportController@persetujuanTindakanHemodialisa');
         Route::get('report/cetak-pengkajian-harian-hemodialisa', 'Report\ReportController@pengkajianHarianHemodialisa');
         Route::get('report/cetak-emr-all-page', 'Report\ReportController@emrAllPage');
+        Route::get('report/cetak-gelang-pasien', 'Report\ReportController@gelangPasien');
 
         Route::get('viewer/get-list-antrian','Antrian\AntrianController@getListAntrian');
         Route::get('viewer/update-antrian','Antrian\AntrianController@updatePanggil');
