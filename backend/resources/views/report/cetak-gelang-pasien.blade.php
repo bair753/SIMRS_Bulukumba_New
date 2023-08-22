@@ -11,16 +11,13 @@
         <script src="{{ asset('service/js/jquery.min.js') }}"></script>
     @endif
     <style>
-        
 		table{
 			writing-mode: vertical-lr;
 			display: inline;
+			margin-right: 3px;
 			color: #000000;
-			margin-top: 650px;
-			word-spacing: 2px;
-			letter-spacing: 1.2px;
+			margin-top: 550px;
 			transform: rotate(180deg);
-			border-radius: 25px;
 			text-align: left;
 		}
     </style>
