@@ -75,13 +75,14 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
                 var tglAkhir = moment($scope.item.tglAkhir).format('YYYY-MM-DD HH:mm:ss');
                 $scope.isRouteLoading = true;
                 medifirstService.get("radiologi/get-daftar-pasien-penunjang?" +
-                    // "tglAwal=" + tglAwal +
-                    // "&tglAkhir=" + tglAkhir +
+                    "tglAwal=" + tglAwal +
+                    "&tglAkhir=" + tglAkhir +
                     reg +
                     rm +
                     nm +
                     ins + rg + kp + jmlRow
                     , true).then(function (dat) {
+                        $scope.listDepartemen = dat.data.datainstalasi;
                         $scope.listRuangan = dat.data.ruanganlogin;
                         // $scope.item.ruangan = {id:  $scope.listRuangan[0].id,namaruangan:  $scope.listRuangan[0].namaruangan};
                         for (var i = 0; i < dat.data.data.length; i++) {

@@ -7747,6 +7747,32 @@ class ReportController extends ApiController{
         return view('report.cetak-flowsheet', compact('res'));
     }
 
+    public function gelangPasien(Request $request) {
+        $nocm = $request['nocm'];
+        $norec = $request['emr'];
+        $kdProfile = 39;
+        $profile = DB::table('profile_m')
+            ->where('id', $kdProfile)
+            ->first();
+
+        $data =  DB::table('pasiendaftar_t as pd')
+            ->join('pasien_m as ps','ps.id', '=', 'pd.nocmfk')
+            ->select(
+                'ps.namapasien',
+                'ps.nocm',
+                'ps.noidentitas',
+                'ps.tgllahir',
+            )
+            // ->where('pd.statusenabled', true)
+            ->where('pd.kdprofile', $kdProfile)
+            ->where('pd.noregistrasi', $request['noregistrasi'])
+            ->first();
+        
+        $gelang = $request['idcetakangelang'];
+
+        return view('report.cetak-gelang-pasien', compact('data', 'gelang', 'profile'));
+    }
+
     public function emrAllPage(Request $request) {
         $nocm = $request['nocm'];
         $norec = $request['emr'];
