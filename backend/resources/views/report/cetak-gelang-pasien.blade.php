@@ -16,7 +16,7 @@
 			display: inline;
 			margin-right: 3px;
 			color: #000000;
-			margin-top: 600px;
+			margin-top: 620px;
 			transform: rotate(180deg);
 			text-align: left;
 		}
