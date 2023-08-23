@@ -7,9 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BUKTI PELAYANAN TINDAKAN KEDOKTERAN FISIK DAN REHABILITASI</title>
     @if (stripos(\Request::url(), 'localhost') !== false)
-        {{-- <link rel="stylesheet" href="{{ asset('css/report/paper.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/report/table.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/report/tabel.css') }}"> --}}
         <script src="{{ asset('js/jquery.min.js') }}"></script>
         <script src="{{ asset('js/jquery.qr-code.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/qrcode/src/jquery.qrcode.js') }}"></script>
@@ -22,9 +19,6 @@
         <script type="text/javascript" src="{{ asset('js/angular/angular-aria.min.js') }}"></script>
         <script src="{{ asset('js/angular/angular-material.js') }}" type="text/javascript"></script>
     @else
-        <link rel="stylesheet" href="{{ asset('service/css/report/paper.css') }}">
-        <link rel="stylesheet" href="{{ asset('service/css/report/table.css') }}">
-        <link rel="stylesheet" href="{{ asset('service/css/report/tabel.css') }}">
         <script src="{{ asset('service/js/jquery.min.js') }}"></script>
         <script src="{{ asset('service/js/jquery.qr-code.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/qrcode/src/jquery.qrcode.js') }}"></script>
