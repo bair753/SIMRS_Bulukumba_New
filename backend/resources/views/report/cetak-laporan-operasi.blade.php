@@ -2407,19 +2407,19 @@
             });	
         }
 
-        if (dokter2 != undefined) {
-            jQuery('#qrcodeDokter2').qrcode({
+        if (dokter3 != undefined) {
+            jQuery('#qrcodeDokter3').qrcode({
                 width	: 80,
                 height	: 80,
-                text	: "Tanda Tangan Digital Oleh " + dokter2
+                text	: "Tanda Tangan Digital Oleh " + dokter3
             });	
         }
 
-        if (dpjp2 != undefined) {
-            jQuery('#qrcodeDPJP2').qrcode({
+        if (dpjp3 != undefined) {
+            jQuery('#qrcodeDPJP3').qrcode({
                 width	: 80,
                 height	: 80,
-                text	: "Tanda Tangan Digital Oleh " + dpjp2
+                text	: "Tanda Tangan Digital Oleh " + dpjp3
             });	
         }
 
