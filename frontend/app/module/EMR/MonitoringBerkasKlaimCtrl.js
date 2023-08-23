@@ -32,6 +32,10 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     $scope.isRouteLoading = false;
                     $scope.listNoHakAkses = data.data;
                 })
+                medifirstService.get("sysadmin/master/get-admin-radiologi").then(function (data) {
+                    $scope.isRouteLoading = false;
+                    $scope.listAdminRadiologi = data.data;
+                })
                 $scope.isRouteLoading = true;
             }
 
@@ -73,8 +77,16 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 + "tglawal=" + tglawal
                 + "&tglakhir=" + tglakhir
                 + "&departId=" + departId + ruanganId + noReg + noRm + nama + noSEP).then(function (data) {
-                    
-                    var dataMaster = data.data.master
+                    var dataKlaim = data.data.master
+                    var adminRadiologi = $scope.listAdminRadiologi;
+                    if(adminRadiologi.includes(medifirstService.getPegawaiLogin().id)){
+                        var dataMaster = dataKlaim.filter(function (el) {
+                            return el.id == 20 || el.id == 5 || el.id == 32;
+                            }
+                        );
+                    }else{
+                        var dataMaster = dataKlaim
+                    }
                     if(dataMaster.length == 0) {
                         toastr.error("Master data dokumen klaim belum disetting!");
                         return
@@ -89,7 +101,6 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     if(!idNot.includes(medifirstService.getPegawaiLogin().id)){
                         for (let i = 0; i < dataMaster.length; i++) {
                             const element = dataMaster[i];
-                            console.log(element.kodeexternal);
                             var col = {
                                 "field": element.kodeexternal,
                                 "title": element.dokumen,
