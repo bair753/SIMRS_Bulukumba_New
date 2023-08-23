@@ -637,6 +637,8 @@ class SumberDayaManusiaController extends ApiController {
             $dataSavePegawai->bankrekeningatasnama = $dataPegawai['namarekening'];
             $dataSavePegawai->bankrekeningnama = $dataPegawai['namabank'];
             $dataSavePegawai->npwp = $dataPegawai['npwp'];
+            $dataSavePegawai->email = $dataPegawai['email'];
+            $dataSavePegawai->emailalternatif = $dataPegawai['emailalternatif'];
             if (isset($dataPegawai['kodepos'])){
                 $dataSavePegawai->kodepos = $dataPegawai['kodepos'];
             }
@@ -993,13 +995,40 @@ class SumberDayaManusiaController extends ApiController {
         $data = \DB::table('pegawai_m as pg')
             ->leftJoin('jenispegawai_m as jp','jp.id','=','pg.objectjenispegawaifk')
             ->leftJoin('pangkat_m as pk','pk.id','=','pg.objectpangkatfk')
+            ->leftJoin('jeniskelamin_m as jk','jk.id','=','pg.objectjeniskelaminfk')
             ->leftJoin('jabatan_m as jb','jb.id','=','pg.objectjabatanfungsionalfk')
             ->leftJoin('sdm_golongan_m as sg','sg.id','=','pg.objectgolonganfk')
-            ->select(\DB::raw("pg.id as pegawaiid,pg.namalengkap,pg.tempatlahir,pg.tgllahir,pg.nippns,
-                             pg.objectjenispegawaifk,jp.jenispegawai,pg.objectpangkatfk,
-                             pk.namapangkat,pg.objectjabatanfungsionalfk,jb.namajabatan,
-                             pg.objectgolonganfk,sg.reportdisplay as golongan"))
+            ->leftJoin('eselon_m as ese','ese.id','=','pg.objecteselonfk')
+            ->leftJoin('masaberlakusipstr_t as ms','ms.pegawaifk','=','pg.id')
+            ->select(\DB::raw("
+            pg.id as pegawaiid,
+            pg.namalengkap,
+            pg.noidentitas,
+            pg.email,
+            pg.nohandphone,
+            pg.alamat,
+            pg.tglpensiun,
+            pg.nostr,
+            pg.nosip,
+            pg.tempatlahir,
+            pg.tgllahir,
+            pg.nippns,
+            ese.eselon,
+            ms.terbitsip,
+            ms.berakhirsip,
+            ms.terbitstr,
+            ms.berakhirstr,
+            jk.jeniskelamin,
+            pg.objectjenispegawaifk,
+            jp.jenispegawai,
+            pg.objectpangkatfk,
+            pk.namapangkat,
+            pg.objectjabatanfungsionalfk,
+            jb.namajabatan,
+            pg.objectgolonganfk,
+            sg.reportdisplay as golongan"))
             ->where('pg.statusenabled',true)
+            ->where('pg.kategorypegawai',1)
             ->where('pg.kdprofile',$kdProfile);
 
         if(isset($request['idPegawai']) && $request['idPegawai']!="" && $request['idPegawai']!="undefined"){

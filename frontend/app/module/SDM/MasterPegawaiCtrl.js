@@ -179,6 +179,8 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
 							$scope.item.pendidikan = { id: dataCachePegawai.objectpendidikanterakhirfk, pendidikan: dataCachePegawai.pendidikan };
 							$scope.item.statusPerkawinanPegawai = { id: dataCachePegawai.objectstatusperkawinanpegawaifk, statusperkawinan: dataCachePegawai.statusperkawinan };
 							$scope.item.npwp = dataCachePegawai.npwp
+							$scope.item.email = dataCachePegawai.email
+							$scope.item.emailalternatif = dataCachePegawai.emailalternatif
 							$scope.item.agama = { id: dataCachePegawai.objectagamafk, agama: dataCachePegawai.agama };
 							if (dataCachePegawai.tglmeninggal)
 								$scope.item.tglMeninggal = moment(dataCachePegawai.tglmeninggal).format('YYYY-MM-DD HH:mm');
@@ -2046,6 +2048,16 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
 					Npwp = $scope.item.npwp;
 				}
 
+				var email = "-";
+				if ($scope.item.email != undefined) {
+					email = $scope.item.email;
+				}
+
+				var emailalternatif = "-";
+				if ($scope.item.emailalternatif != undefined) {
+					emailalternatif = $scope.item.emailalternatif;
+				}
+
 				var tglKeluar = null;
 				if ($scope.item.tglkeluar != undefined) {
 					tglKeluar = moment($scope.item.tglkeluar).format('YYYY-MM-DD HH:mm');
@@ -2119,6 +2131,8 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
 						pendidikan: $scope.item.pendidikan.id,
 						statusperkawinan: $scope.item.statusPerkawinanPegawai.id,
 						npwp: Npwp,
+						email: email,
+						emailalternatif: emailalternatif,
 						agama: $scope.item.agama.id,
 						tglmeninggal: tglMeninggal,
 						unitkerjafk:$scope.item.unitKerja != undefined?$scope.item.unitKerja.id :null,
