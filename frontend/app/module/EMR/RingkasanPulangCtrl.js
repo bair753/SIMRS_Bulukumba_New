@@ -18,7 +18,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
             var dataLoad = [];
             $scope.isCetak = false;
             $scope.isCetakV = true;
-            $scope.isUpload = true;
+            $scope.isUpload = false;
             $scope.allDisabled = false;
             var pegawaiInputDetail  = '';
             var pegawaiLogin = medifirstService.getPegawaiLogin()
