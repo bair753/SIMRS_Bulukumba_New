@@ -117,7 +117,7 @@
                     <label c-label item="item">Telah mendapatkan penjelasan dokter tentang :</label>
                 </div>
                 <div class="grid_12" ng-repeat="list in listPeringatan | orderBy:'id'" style="margin-top: 10px;">
-                    <div ng-repeat="jawab in list.detail | orderBy:'id'">
+                    <div ng-repeat="jawab in list.detail | orderBy:'nourut'">
                         <div ng-switch on="jawab.type">
                             <div class="grid_5" ng-switch-when="checkbox" style="margin-top: 10px;margin-left: -5px;">
                                 <div class="grid_12">
