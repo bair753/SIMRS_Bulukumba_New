@@ -14,9 +14,11 @@ define(['initialize'], function (initialize) {
 			$scope.Clear = function () {
 				delete $scope.item.kddiagnosa
 				delete $scope.item.namadiagnosa
+				delete $scope.item.statusenabled
 				delete $scope.popUp.id
 				delete $scope.popUp.kddiagnosa
 				delete $scope.popUp.namadiagnosa
+				delete $scope.popUp.statusenabled
 
 
 			}
@@ -92,6 +94,10 @@ define(['initialize'], function (initialize) {
 					"field": "namadiagnosa",
 					"title": "<h3 align=center>Nama Diagnosa</h3>",
 					"width": "150px"
+				}, {
+					"field": "statusenabled",
+					"title": "<h3 align=center>Status Enabled</h3>",
+					"width": "150px"
 				}, 
 				{
 					"command": [{
@@ -126,11 +132,16 @@ define(['initialize'], function (initialize) {
 				if ($scope.popUp.namadiagnosa != undefined)
 					namadiagnosa = $scope.popUp.namadiagnosa
 
+				var statusenabled = ""
+				if ($scope.popUp.statusenabled != undefined)
+					statusenabled = $scope.popUp.statusenabled
+
 
 				var objSave = {
 					"id": id,
 					"kddiagnosa": kddiagnosa,
 					"namadiagnosa": namadiagnosa,
+					"statusenabled": statusenabled,
 				}
 				medifirstService.post("sysadmin/master/save-saveIcdSepuluh", objSave).then(function (res) {
 					loadData();
@@ -187,6 +198,7 @@ define(['initialize'], function (initialize) {
 				$scope.popUp.id = dataItem.id
 				$scope.popUp.kddiagnosa = dataItem.kddiagnosa
 				$scope.popUp.namadiagnosa = dataItem.namadiagnosa
+				$scope.popUp.statusenabled = dataItem.statusenabled
 				$scope.popUp.center().open();
 
 			}

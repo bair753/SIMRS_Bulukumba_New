@@ -5183,7 +5183,7 @@
     angular.controller('cetakPemberianEdukasiPasien', function ($scope, $http, httpService) {
         $scope.item = {
             obj2: [],
-            obji1: [],
+            obj: [],
 			obji2: [],
 			obji3: [],
 			obji4: [],
@@ -5233,38 +5233,38 @@
                 }
                 if (dataLoad[i].type == "textbox") {
                     $('#id_'+dataLoad[i].emrdfk).html( dataLoad[i].value)
-                    $scope.item.obji1[dataLoad[i].emrdfk] = dataLoad[i].value
+                    $scope.item.obj[dataLoad[i].emrdfk] = dataLoad[i].value
                 }
                 if (dataLoad[i].type == "checkbox") {
                     var chekedd = false
                     if (dataLoad[i].value == '1') {
                         var chekedd = true
                     }
-                    $scope.item.obji1[dataLoad[i].emrdfk] = chekedd
+                    $scope.item.obj[dataLoad[i].emrdfk] = chekedd
                 }
                 if (dataLoad[i].type == "radio") {
-                    $scope.item.obji1[dataLoad[i].emrdfk] = dataLoad[i].value
+                    $scope.item.obj[dataLoad[i].emrdfk] = dataLoad[i].value
 
                 }
 
                 if (dataLoad[i].type == "datetime") {
                     $('#id_'+dataLoad[i].emrdfk).html( dataLoad[i].value)
-                    $scope.item.obji1[dataLoad[i].emrdfk] = dataLoad[i].value
+                    $scope.item.obj[dataLoad[i].emrdfk] = dataLoad[i].value
                 }
                 if (dataLoad[i].type == "time") {
-                    $scope.item.obji1[dataLoad[i].emrdfk] = dataLoad[i].value
+                    $scope.item.obj[dataLoad[i].emrdfk] = dataLoad[i].value
                 }
                 if (dataLoad[i].type == "date") {
-                    $scope.item.obji1[dataLoad[i].emrdfk] = dataLoad[i].value
+                    $scope.item.obj[dataLoad[i].emrdfk] = dataLoad[i].value
                 }
 
                 if (dataLoad[i].type == "checkboxtextbox") {
-                    $scope.item.obji1[dataLoad[i].emrdfk] = dataLoad[i].value
+                    $scope.item.obj[dataLoad[i].emrdfk] = dataLoad[i].value
                     $scope.item.obji12[dataLoad[i].emrdfk] = true
                 }
                 if (dataLoad[i].type == "textarea") {
                     $('#id_'+dataLoad[i].emrdfk).html( dataLoad[i].value)
-                    $scope.item.obji1[dataLoad[i].emrdfk] = dataLoad[i].value
+                    $scope.item.obj[dataLoad[i].emrdfk] = dataLoad[i].value
                 }
                 if (dataLoad[i].type == "combobox") {
         
@@ -5273,7 +5273,7 @@
                     {
                         var res = str.split("~");
                         
-                        $scope.item.obji1[dataLoad[i].emrdfk] = res[1]
+                        $scope.item.obj[dataLoad[i].emrdfk] = res[1]
                         $('#id_'+dataLoad[i].emrdfk).html ( res[1])
                     }
                 }
@@ -5281,8 +5281,8 @@
                     var str = dataLoad[i].value
                     var res = str.split("~");
                     
-                    $scope.item.obji1[dataLoad[i].emrdfk+""+1] = res[0]
-                    $scope.item.obji1[dataLoad[i].emrdfk] = res[1]
+                    $scope.item.obj[dataLoad[i].emrdfk+""+1] = res[0]
+                    $scope.item.obj[dataLoad[i].emrdfk] = res[1]
                     $('#id_'+dataLoad[i].emrdfk).html ( res[1])
 
                 }

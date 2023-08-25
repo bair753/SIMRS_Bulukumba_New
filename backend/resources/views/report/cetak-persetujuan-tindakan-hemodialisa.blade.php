@@ -258,6 +258,15 @@
 			<td class="noborder" colspan="16">@{{ item.obj[428358] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Rencana tindakan kedokteran :</td>
 			<td class="noborder" colspan="32">Terapi pengganti fungsi ginjal</td>
 		</tr>
+        <tr valign="top" style="padding:.5rem;">
+			<td class="noborder"></td>
+			<td class="noborder" colspan="16" rowspan="2">@{{ item.obj[32116611] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Penggunaan Dialyzer :</td>
+			<td class="noborder" colspan="32">@{{ item.obj[32116612] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Single Use</td>
+		</tr>
+		<tr>
+			<td class="noborder"></td>
+			<td class="noborder" colspan="32">@{{ item.obj[32116613] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Re-use</td>
+		</tr>
 		<tr>
 			<td class="noborder"></td>
 			<td class="noborder" colspan="24">@{{ item.obj[428359] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Dokter penanggung jawab tindakan/ pengobatan : @{{ item.obj[428360] ? item.obj[428360] : '' }}</td>
