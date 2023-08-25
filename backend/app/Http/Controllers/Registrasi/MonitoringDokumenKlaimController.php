@@ -70,7 +70,27 @@ class MonitoringDokumenKlaimController extends  ApiController
         if(count($dataDokumen) > 0){
             $file = [];
             foreach($dataDokumen as $item) {
-                // exec('gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile="'.public_path($item->filepath).'" "'.public_path($item->filepath).'"'); 
+                
+                // Script converte gs untuk coba di local window *Note: harus install wsl terlebih dahulu !
+                // $path = explode("/", $item->filepath);
+                // $basepath = $path[0] . "/" . $path[1];
+                // $namafiletemp = str_replace("\\", "/", str_replace("C:\\","/mnt/c/", public_path($basepath . "/temp_". $item->filename)));
+                // $namafile = str_replace("\\", "/", str_replace("C:\\","/mnt/c/", public_path($basepath . "/". $item->filename)));
+
+                // exec('wsl cp "'.$namafile.'" "'.$namafiletemp.'"');
+                // exec('wsl gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile="'.$namafiletemp.'" "'.$namafile.'"'); 
+                // exec('wsl mv "'.$namafiletemp.'" "'.$namafile.'"');
+
+                // Script converte gs server
+                $path = explode("/", $item->filepath);
+                $basepath = $path[0] . "/" . $path[1];
+                $namafiletemp = public_path($basepath . "/temp_". $item->filename);
+                $namafile = public_path($basepath . "/". $item->filename);
+
+                exec('cp "'.$namafile.'" "'.$namafiletemp.'"');
+                exec('gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile="'.$namafiletemp.'" "'.$namafile.'"'); 
+                exec('mv "'.$namafiletemp.'" "'.$namafile.'"');
+
                 // $command = new GhostscriptConverterCommand();
                 // $filesystem = new Filesystem();
 
