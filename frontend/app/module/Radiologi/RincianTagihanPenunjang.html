@@ -302,6 +302,13 @@
     </div>
     <div class="grid_2">
         <div class="grid_12" style="margin-top: 2px">
+            <button class="btnTemplate1" style="margin-left: 0;" ng-disabled="disableLab" ng-click="darahTepi()"><i
+                    class="fa fa-heartbeat"></i> Evaluasi Darah Tepi</button>
+            <!-- <kendo-button class="c-button" ng-click="labPA()"><span class="title">Hasil Lab PA</span></kendo-button> -->
+        </div>
+    </div>
+    <div class="grid_2">
+        <div class="grid_12" style="margin-top: 2px">
             <button class="btnTemplate1" style="margin-left: 0;" ng-click="inputDokterPelaksana()"><i
                     class="fa fa-users"></i> Detail Dokter</button>
             <!-- <kendo-button class="c-button" ng-click="labPA()"><span class="title">Hasil Lab PA</span></kendo-button> -->
@@ -764,6 +771,30 @@
                     </div>
                 </div>-->
             </div>
+            <div class="grid_12" ng-show="findBy == 1">
+
+                <div class="grid_12" style="margin-top: 5px">
+                    <label c-label item="item">Diagnosa Klinik</label>
+                </div>
+                <div class="clear"></div>
+                <div class="grid_12">
+                    <textarea placeholder="Isi Diagnosa Klinik" class="k-textbox" ng-model="itemPA.diagnosaKlinik"
+                        maxlength="12000" style="height: 80px; width: 100%;"></textarea>
+    
+                    <span class="max-length"> 12000/{{itemPA.diagnosaKlinik ? itemPA.diagnosaKlinik.length : 0}}</span>
+                </div>
+
+                <div class="grid_12" style="margin-top: 5px">
+                    <label c-label item="item">Keterangan Klinik</label>
+                </div>
+                <div class="clear"></div>
+                <div class="grid_12">
+                    <textarea placeholder="Isi Keterangan Klinik" class="k-textbox" ng-model="itemPA.ketKlinik"
+                        maxlength="12000" style="height: 80px; width: 100%;"></textarea>
+    
+                    <span class="max-length"> 12000/{{itemPA.ketKlinik ? itemPA.ketKlinik.length : 0}}</span>
+                </div>
+            </div>
             <div class="grid_12" style="margin-top: 5px">
                 <label c-label item="item">Makroskopik</label>
             </div>
@@ -835,6 +866,190 @@
             <button class="k-button k-button-icontext k-primary k-grid-update" ng-click="cetakLabPA()"><span
                     class="k-icon k-print"></span>Cetak</button>
             <button class="k-button  k-button-icontext" ng-click="batalPA()"><span
+                    class="k-icon k-cancel"></span>Batal</button>
+        </div>
+
+    </div>
+</div>
+
+<div kendo-window="popUpTepi" k-title="'Evaluasi Darah Tepi'" k-width="1100" k-visible="false" k-on-open="win2visible = true"
+    k-on-close="win2visible = false">
+    <div class="panel panel-default container_12" style="padding: 0px 10px;">
+        <fieldset>
+            <legend>Evaluasi Darah Tepi</legend>
+            <div class="grid_12">
+                <div class="grid_4">
+                    <div class="grid_12">
+                        <label c-label item="item">Nama Pelayanan</label>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="grid_12">
+                        <input c-text-box type="input" filter="'varchar'" class="k-textbox" disabled
+                            ng-model="itemTepi.namaPelayanan" />
+                    </div>
+                </div>
+                <div class="grid_2">
+                    <input type="checkbox" class="k-checkbox" id="isDokterLuarEDT" ng-model="itemTepi.dokterLuar"
+                        value="true" ng-click="cekDokterLuarEDT(itemTepi.dokterLuar)">
+                    <label class="k-checkbox-label" for="isDokterLuarEDT"><b>
+                            Dokter Luar</b></label>
+                </div>
+                <div class="grid_3">
+                    <div class="grid_12">
+                        <label c-label item="item">Dokter Pengirim</label>
+                    </div>
+                    <div class="grid_12">
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="itemTepi.dokterPengirim1EDT"
+                            k-data-text-field="'namalengkap'" k-data-value-field="'id'" k-filter="'contains'"
+                            k-auto-bind="false" k-data-source="listDokter" ng-disabled="disabledokterPengirim1EDT"
+                            ng-hide="hidedokterPengirim1EDT" />
+                    </div>
+                    <div class="grid_12">
+                        <input c-text-box type="input" filter="'varchar'" class="k-textbox"
+                            ng-model="itemTepi.dokterPengirim2EDT" ng-disabled="disableDokterPengirim2EDT"
+                            ng-hide="hideDokterPengirim2EDT" />
+                    </div>
+                </div>
+                <div class="grid_3">
+                    <div class="grid_12">
+                        <label c-label item="item">Tanggal/Jam Pemeriksaan</label>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="grid_12 padDatePicker">
+                        <input style="width: 100%" k-ng-model="itemTepi.tglInput" kendo-datetimepicker
+                            placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" />
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_3">
+                        <div class="grid_12">
+                            <label c-label item="item">Penanggung Jawab</label>
+                        </div>
+    
+                        <div class="grid_12">
+                            <input style="width: 100%;" kendo-combo-box k-ng-model="itemTepi.penanggungjawab"
+                                k-data-text-field="'namalengkap'" k-data-value-field="'id'" k-filter="'contains'"
+                                k-auto-bind="false" k-data-source="listDokter" />
+                        </div>
+                    </div>
+                    <div class="grid_3">
+                        <div class="grid_12">
+                            <label c-label item="item">Dokter Pemeriksa</label>
+                        </div>
+    
+                        <div class="grid_12">
+                            <input style="width: 100%;" kendo-combo-box k-ng-model="itemTepi.dokterpemeriksa"
+                                k-data-text-field="'namalengkap'" k-data-value-field="'id'" k-filter="'contains'"
+                                k-auto-bind="false" k-data-source="listDokter" />
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+            <div class="grid_12">
+                <div class="grid_12">
+                    <div class="grid_12">
+                        <label c-label style="padding:5px;font-size:14px; font-weight:600">DATA LABORATORIUM</label>
+                    </div>
+                </div>
+            </div>
+            <div class="grid_12">
+                <div class="grid_6">
+                    <div class="grid_12" style="margin-top: 5px">
+                        <label c-label item="item">HAEMOGLOBIN</label>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="grid_12 parentKeteranganFieldTambahan">
+                        <input type="text" class="k-textbox" ng-model="itemTepi.haemoglobin">
+                        <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px">gr %</label>
+                    </div>
+                </div>
+                <div class="grid_6">
+                    <div class="grid_12" style="margin-top: 5px">
+                        <label c-label item="item">LEUKOSIT</label>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="grid_12 parentKeteranganFieldTambahan">
+                        <input type="text" class="k-textbox" ng-model="itemTepi.leukosit">
+                        <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px">x 10<sup>3</sup>/mm<sup>3</sup></label>
+                    </div>
+                </div>
+                <div class="grid_6">
+                    <div class="grid_12" style="margin-top: 5px">
+                        <label c-label item="item">ERITROSIT</label>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="grid_12 parentKeteranganFieldTambahan">
+                        <input type="text" class="k-textbox" ng-model="itemTepi.eritrosit">
+                        <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px">x 10<sup>6</sup>/mm<sup>3</sup></label>
+                    </div>
+                </div>
+                <div class="grid_6">
+                    <div class="grid_12" style="margin-top: 5px">
+                        <label c-label item="item">TROMBOSIT</label>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="grid_12 parentKeteranganFieldTambahan">
+                        <input type="text" class="k-textbox" ng-model="itemTepi.trombosit">
+                        <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px">x 10<sup>3</sup>/mm<sup>3</sup></label>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            
+            <div class="grid_12" style="margin-top: 5px">
+                <label c-label item="item">ERITROSIT</label>
+            </div>
+            <div class="clear"></div>
+            <div class="grid_12">
+                <textarea placeholder="Isi ERITROSIT" class="k-textbox" ng-model="itemTepi.keteritrosit"
+                    maxlength="12000" style="height: 80px; width: 100%;"></textarea>
+
+                <span class="max-length"> 12000/{{itemTepi.keteritrosit ? itemTepi.keteritrosit.length : 0}}</span>
+            </div>
+            <div class="grid_12" style="margin-top: 5px">
+                <label c-label item="item">LEUKOSIT</label>
+            </div>
+            <div class="clear"></div>
+            <div class="grid_12">
+                <textarea placeholder="Isi LEUKOSIT" class="k-textbox" ng-model="itemTepi.ketleukosit" maxlength="12000"
+                    style="height: 80px; width: 100%;"></textarea>
+
+                <span class="max-length"> 12000/{{itemTepi.ketleukosit ? itemTepi.ketleukosit.length : 0}}</span>
+            </div>
+            <div class="grid_12" ng-show="findBy != 0">
+                <div class="grid_12" style="margin-top: 5px">
+                    <label c-label item="item">TROMBOSIT</label>
+                </div>
+                <div class="clear"></div>
+                <div class="grid_12">
+                    <textarea placeholder="Isi TROMBOSIT" class="k-textbox" ng-model="itemTepi.kettrombosit" maxlength="12000"
+                        style="height: 80px; width: 100%;"></textarea>
+    
+                    <span class="max-length"> 12000/{{itemTepi.kettrombosit ? itemTepi.kettrombosit.length : 0}}</span>
+                </div>
+            </div>
+            <div class="grid_12" ng-show="findBy != 0">
+                <div class="grid_12" style="margin-top: 5px">
+                    <label c-label item="item">KESIMPULAN/KESAN</label>
+                </div>
+                <div class="clear"></div>
+                <div class="grid_12">
+                    <textarea placeholder="Isi KESIMPULAN/KESAN" class="k-textbox" ng-model="itemTepi.kesimpulan" maxlength="12000"
+                        style="height: 80px; width: 100%;"></textarea>
+    
+                    <span class="max-length"> 12000/{{itemTepi.kesimpulan ? itemTepi.kesimpulan.length : 0}}</span>
+                </div>
+            </div>
+        </fieldset>
+
+        <div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
+            <button class="k-button k-button-icontext k-primary k-grid-update" ng-hide="hideExper"
+                ng-click="saveLabEDT()"><span class="k-icon k-update"></span>Simpan</button>
+            <!-- <button class="k-button k-button-icontext k-primary k-grid-update" ng-click="cetakLabEDT()"><span
+                    class="k-icon k-print"></span>Cetak</button> -->
+            <button class="k-button  k-button-icontext" ng-click="batalTepi()"><span
                     class="k-icon k-cancel"></span>Batal</button>
         </div>
 

@@ -1131,6 +1131,8 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
           Route::get('laboratorium/get-laporan-tindakan', 'Laboratorium\LaboratoriumController@getLaporanTindakanLaboratorium');
           Route::get('laboratorium/get-hasil-lab-pa', 'Laboratorium\LaboratoriumController@getHasilLabPA');
           Route::post('laboratorium/save-hasil-lab-pa', 'Laboratorium\LaboratoriumController@saveHasilLabPA');
+          Route::get('laboratorium/get-hasil-lab-edt', 'Laboratorium\LaboratoriumController@getHasilLabEDT');
+          Route::post('laboratorium/save-hasil-lab-edt', 'Laboratorium\LaboratoriumController@saveHasilLabEDT');
           Route::get('laboratorium/get-lap-pemeriksaan-pa', 'Laboratorium\LaboratoriumController@getLapPemeriksaanPA');
           Route::get('laboratorium/get-hasil-lis',  'Bridging\BridgingPenunjangController@getHasilLIS');
           Route::get('laboratorium/get-laporan-tindakan-bank-darah', 'Laboratorium\LaboratoriumController@getLaporanTindakanBankDarah');
@@ -1140,6 +1142,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
           Route::get('report/cetak-ekspertise-usg','Report\ReportController@cetakEkspertiseUsg');
           Route::get('report/cetak-ekspertise-usg-all','Report\ReportController@cetakEkspertiseUsgAll');
           Route::get('report/cetak-hasil-lab-histopatologi','Report\ReportController@cetakHispatologi');
+          Route::get('report/cetak-hasil-lab-edt','Report\ReportController@cetakEDT');
           Route::get('report/cetak-resep-dokter','Report\ReportController@cetakResepDokter');
           Route::get('report/cetak-resep-dokter-all','Report\ReportController@cetakResepDokterAll');
           Route::get('laboratorium/get-lap-kunjungan', 'Laboratorium\LaboratoriumController@getLaporanKunjungan');

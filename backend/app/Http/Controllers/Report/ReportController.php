@@ -1206,6 +1206,129 @@ class ReportController extends ApiController{
 
     }
 
+    public function cetakEDT(Request $r) {
+        $kdProfile = (int)$r['kdprofile'];
+        $profile = collect(DB::select("
+        SELECT * FROM profile_m WHERE id = $kdProfile"))->first();
+        $raw = collect(DB::select("
+            SELECT
+                pd.noregistrasi, pm.nocm, pm.namapasien, hpl.dokterluar, dokterpengirim.namalengkap as namadokterpengirim,
+                jk.jeniskelamin, EXTRACT ( YEAR
+                    FROM AGE(  pd.tglregistrasi,pm.tgllahir )
+                ) || ' Thn ' || EXTRACT (MONTH  FROM AGE(  pd.tglregistrasi, pm.tgllahir )
+                ) || ' Bln ' || EXTRACT ( DAY  FROM  AGE( pd.tglregistrasi, pm.tgllahir )  ) || ' Hr' || '(' || to_char(pm.tgllahir, 'DD-MM-YYYY') || ')' AS umur,
+                to_char(  so.tglorder, 'DD-MM-YYYY HH24:MI:SS') AS tglorder,
+                to_char( hpl.tanggal, 'DD-MM-YYYY HH24:MI:SS'  ) AS tgljawab,
+                to_char( pp.tglpelayanan,'DD-MM-YYYY HH24:MI:SS' ) AS tglterima,
+                to_char(  sbm.tglsbm,'DD-MM-YYYY HH24:MI:SS' ) AS tglbayar, pg.namalengkap,
+             CASE WHEN hpl.jaringanasal IS NULL THEN  ''  ELSE  jaringanasal  END AS jaringanasal,
+             CASE WHEN hpl.getjaringan IS NULL THEN  ''  ELSE  getjaringan  END AS getjaringan,
+             CASE WHEN hpl.diagnosaklinik IS NULL THEN  ''  ELSE  diagnosaklinik  END AS diagnosaklinik,
+             CASE WHEN hpl.keteranganklinik IS NULL THEN ''   ELSE hpl.keteranganklinik  END AS keteranganklinik,
+             CASE WHEN hpl.makroskopik IS NULL THEN   '' ELSE  hpl.makroskopik END AS makroskopik, 
+             CASE WHEN hpl.mikroskopik IS NULL THEN ''   ELSE  hpl.mikroskopik END AS mikroskopik, 
+             CASE WHEN hpl.kesimpulan IS NULL THEN '' ELSE hpl.kesimpulan END AS kesimpulan,
+             CASE WHEN hpl.anjuran IS NULL THEN  '' ELSE  hpl.anjuran END AS anjuran,
+             CASE WHEN hpl.topografi IS NULL THEN   '' ELSE hpl.topografi  END AS topografi, 
+             CASE WHEN hpl.morfologi IS NULL THEN  '' ELSE hpl.morfologi END AS morfologi,
+             CASE WHEN hpl.diagnosapb IS NULL THEN  '' ELSE  hpl.diagnosapb  END AS diagnosapb,
+             CASE WHEN hpl.keteranganpb IS NULL THEN ''  ELSE hpl.keteranganpb END AS keteranganpb,
+             CASE WHEN pg1.namalengkap IS NULL THEN '' ELSE  pg1.namalengkap   END AS namapenanggungjawab,
+             CASE WHEN dm.kddiagnosa IS NULL THEN '' ELSE  dm.kddiagnosa   END AS diagnosa,
+             CASE WHEN pg1.nippns IS NULL THEN ''ELSE  pg1.nippns END AS nippns,hpl.nomorpa,
+             ru.namaruangan as asal,pg1.nosip, hpl.jenis,
+              CASE
+                    WHEN alm.alamatlengkap IS NULL THEN
+                        '-'
+                    ELSE
+                        (
+                            alm.alamatlengkap || ' ' || (
+                                CASE
+                                WHEN ds.namadesakelurahan IS NOT NULL THEN
+                                   'Kel. ' ||  ds.namadesakelurahan
+                                ELSE
+                                    ''
+                                END
+                            ) || ' ' || (
+                                CASE
+                                WHEN kc.namakecamatan IS NOT NULL THEN
+                                   'Kec. ' || kc.namakecamatan
+                                ELSE
+                                    ''
+                                END
+                            ) || ' ' || (
+                                CASE
+                                WHEN kk.namakotakabupaten IS NOT NULL THEN
+                                  kk.namakotakabupaten
+                                ELSE
+                                    ''
+                                END
+                            ) || ' ' || (
+                                CASE
+                                WHEN prop.namapropinsi IS NOT NULL THEN
+                                 'Prov. ' ||   prop.namapropinsi
+                                ELSE
+                                    ''
+                                END
+                            )
+                        )
+                    END AS alamatlengkap,
+                    kps.kelompokpasien,pd.norec as norec_pd,pd.objectruanganlastfk
+            FROM
+                hasilpemeriksaanlab_t AS hpl
+            INNER JOIN pasiendaftar_t AS pd ON pd.norec = hpl.noregistrasifk
+            INNER JOIN pelayananpasien_t AS pp ON pp.norec = hpl.pelayananpasienfk
+            LEFT JOIN strukorder_t AS so ON so.norec = pp.strukorderfk
+            LEFT JOIN strukpelayanan_t AS sp ON sp.norec = pp.strukfk
+            LEFT JOIN strukbuktipenerimaan_t AS sbm ON sbm.nostrukfk = pp.norec
+            INNER JOIN produk_m AS pro ON pro. ID = pp.produkfk
+            INNER JOIN pasien_m AS pm ON pm. ID = pd.nocmfk
+            LEFT JOIN jeniskelamin_m AS jk ON jk. ID = pm.objectjeniskelaminfk
+            LEFT JOIN pegawai_m AS pg ON pg. ID = so.objectpegawaiorderfk
+            LEFT JOIN pegawai_m AS pg1 ON pg1. ID = hpl.pegawaifk
+            LEFT JOIN diagnosa_m AS dm ON dm.ID = hpl.icd0
+            LEFT JOIN pegawai_m AS dokterpengirim ON dokterpengirim. ID = hpl.dokterpengirimfk
+             LEFT JOIN ruangan_m AS ru ON ru. ID = pd.objectruanganlastfk
+            left join alamat_m as alm on alm.nocmfk=pm.id
+            left join desakelurahan_m as ds on ds.id=alm.objectdesakelurahanfk
+            left join kotakabupaten_m as kk on kk.id=alm.objectkotakabupatenfk
+            left join kecamatan_m as kc on kc.id=alm.objectkecamatanfk
+            left join propinsi_m as prop on prop.id=alm.objectpropinsifk
+              left join kelompokpasien_m as kps on kps.id=pd.objectkelompokpasienlastfk
+            WHERE
+                pp.norec = '$r[norec]'
+                and hpl.statusenabled=true
+        "))->first();
+        if(!empty($raw)){
+            $norec_pd = $raw->norec_pd;
+            $objectruanganlastfk = $raw->objectruanganlastfk;
+            $asalRujukan = collect(DB::select("select
+                    asalrujukan from antrianpasiendiperiksa_t as apd 
+                join asalrujukan_m as asl on asl.id=apd.objectasalrujukanfk
+                where apd.noregistrasifk='$norec_pd'
+                and apd.objectruanganfk=$objectruanganlastfk
+                and apd.kdprofile=$kdProfile
+                "))->first();
+            $raw->asalrujukan ='';
+            if(!empty( $asalRujukan )){
+              $raw->asalrujukan=  $asalRujukan->asalrujukan;
+            }
+
+//            $raw->umur = $this->getAge($raw->tgllahir ,date('Y-m-d'));
+        }else{
+            echo 'Data Tidak ada ';
+            return;
+        }
+        // dd($raw);
+        $pageWidth = 950;
+        if($raw->jenis == 'pa'){
+            return view('report.lab.histopatologi', compact('raw', 'pageWidth','r', 'profile'));
+        }
+
+        return view('report.lab.sitologi', compact('raw', 'pageWidth','r', 'profile'));
+
+    }
+
 
     function getDataLaporanPenerimaanSemuaKasirPDF(Request $request) {
         $kdProfile = $request['kdProfile'];

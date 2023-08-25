@@ -42,6 +42,7 @@ use App\Transaksi\OrderProduk;
 use App\Master\Pegawai;
 use App\Master\Pasien;
 use App\Traits\Valet;
+use App\Transaksi\HasilPemeriksaanLabEDT;
 use phpDocumentor\Reflection\Types\Null_;
 use Webpatser\Uuid\Uuid;
 class LaboratoriumController extends ApiController
@@ -368,6 +369,74 @@ class LaboratoriumController extends ApiController
         return $this->setStatusCode($result['status'])->respond($result, $transMessage);
     }
 
+    public function saveHasilLabEDT(Request $request) {
+        $kdProfile = $this->getDataKdProfile($request);
+        $idProfile = (int) $kdProfile;
+        DB::beginTransaction();
+        try{
+
+            if ($request['norec']=="") {
+                $dataSO = new HasilPemeriksaanLabEDT();
+                $dataSO->norec = $dataSO->generateNewId();
+                $dataSO->kdprofile = $idProfile;
+                $dataSO->statusenabled = true;
+            }else {
+                $dataSO =  HasilPemeriksaanLabEDT::where('norec',$request['norec'])->first();
+            }
+            if ($request['isDokterLuarEDT'] == true) {
+                $dataSO->dokterluar = $request['dokterpengirim2'];
+                $dataSO->dokterpengirimfk = NULL;
+            }
+            else {
+                $dataSO->dokterluar = NULL;
+                $dataSO->dokterpengirimfk = $request['dokterpengirim1'];
+            }
+            $dataSO->tanggal =$request['tglinput'];
+            $dataSO->pelayananpasienfk = $request['pelayananpasienfk'];
+            $dataSO->noregistrasifk = $request['norec_pd'];
+            $dataSO->penanggungjawab = $request['penanggungjawab'];
+            $dataSO->dokterpemeriksa = $request['dokterpemeriksa'];
+            $dataSO->haemoglobin = $request['haemoglobin'];
+            $dataSO->leukosit = $request['leukosit'];
+            $dataSO->eritrosit = $request['eritrosit'];
+            $dataSO->trombosit = $request['trombosit'];
+            $dataSO->keteritrosit = $request['keteritrosit'];
+            $dataSO->ketleukosit = $request['ketleukosit'];
+            $dataSO->kettrombosit = $request['kettrombosit'];
+            $dataSO->kesimpulan = $request['kesimpulan'];
+            $dataSO->save();
+
+//
+            $transStatus = 'true';
+        } catch (\Exception $e) {
+            $transStatus = 'false';
+
+        }
+
+        if ($transStatus == 'true') {
+
+            $transMessage = "Simpan";
+            DB::commit();
+            $result = array(
+                "status" => 201,
+                "message" => $transMessage,
+                "strukorder" => $dataSO,
+                "as" => 'mr_adhyy',
+            );
+
+        } else {
+            $transMessage = "Simpan  gagal!!";
+            DB::rollBack();
+            $result = array(
+                "status" => 400,
+                "message"  => $transMessage,
+//                "nokirim" => $dataSO,//$noResep,
+                "as" => 'inhuman',
+            );
+        }
+        return $this->setStatusCode($result['status'])->respond($result, $transMessage);
+    }
+
     public function getHasilLabPA(Request $request) {
         $kdProfile = $this->getDataKdProfile($request);
         $idProfile = (int) $kdProfile;
@@ -386,6 +455,21 @@ class LaboratoriumController extends ApiController
             //     ->where('map.idprodukfk',$request['idproduk'])
             //     ->get(); 
             // }
+        return $this->respond($data);
+    }
+
+    public function getHasilLabEDT(Request $request) {
+        $kdProfile = $this->getDataKdProfile($request);
+        $idProfile = (int) $kdProfile;
+        $data = DB::table('hasilpemeriksaanlabedt_t as ar')
+            ->leftjoin('pegawai_m as pg1', 'pg1.id', '=', 'ar.penanggungjawab')
+            ->leftjoin('pegawai_m as pg2', 'pg2.id', '=', 'ar.dokterpemeriksa')
+            ->leftjoin('pegawai_m as pg3', 'pg3.id', '=', 'ar.dokterpengirimfk')
+            ->select('ar.*','pg1.namalengkap as namapenanggungjawab','pg2.namalengkap as namadokterpemeriksa','pg3.namalengkap as namadokterpengirimfk')
+            ->where('ar.kdprofile', $idProfile)
+            ->where('ar.statusenabled',true)
+            ->where('ar.pelayananpasienfk',$request['norec_pp'])
+            ->get();
         return $this->respond($data);
     }
     public function getComboMapLab(Request $request) {
