@@ -4631,7 +4631,7 @@ class MasterController extends ApiController{
         if(isset($request['namadiagnosa']) && $request['namadiagnosa']!="" && $request['namadiagnosa']!="undefined"){
             $data = $data->where('dg.namadiagnosa','ILIKE', '%'.$request['namadiagnosa'].'%');
         }
-        $data = $data->get();
+        $data = $data->take(10)->get();
         $result = array(
             'data'=> $data,
             'message' => 'innothuman',
