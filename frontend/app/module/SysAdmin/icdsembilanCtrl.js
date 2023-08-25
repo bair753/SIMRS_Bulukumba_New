@@ -15,6 +15,7 @@ define(['initialize'], function (initialize) {
 				delete $scope.item.id
 				delete $scope.item.kddiagnosa
 				delete $scope.item.namadiagnosa
+				delete $scope.item.statusenabled
 				delete $scope.popUp.id
 				delete $scope.popUp.kodeJenisDiet
 				delete $scope.popUp.jenisDiet
@@ -95,6 +96,10 @@ define(['initialize'], function (initialize) {
 					"field": "namadiagnosatindakan",
 					"title": "<h3 align=center>Nama Diagnosa</h3>",
 					"width": "150px"
+				}, {
+					"field": "statusenabled",
+					"title": "<h3 align=center>Status Enabled</h3>",
+					"width": "150px"
 				}, 
 				{
 					"command": [{
@@ -129,11 +134,16 @@ define(['initialize'], function (initialize) {
 				if ($scope.popUp.namadiagnosa != undefined)
 					namadiagnosa = $scope.popUp.namadiagnosa
 
+				var statusenabled = ""
+				if ($scope.popUp.statusenabled != undefined)
+					statusenabled = $scope.popUp.statusenabled
+
 
 				var objSave = {
 					"id": id,
 					"kddiagnosa": kddiagnosa,
-					"namadiagnosa": namadiagnosa,
+					"namadiagnosa": namadiagnosa, 
+					"statusenabled": statusenabled, 
 				}
 				medifirstService.post("sysadmin/master/save-saveIcdSembilan", objSave).then(function (res) {
 					loadData();
@@ -190,6 +200,7 @@ define(['initialize'], function (initialize) {
 				$scope.popUp.id = dataItem.id
 				$scope.popUp.kddiagnosa = dataItem.kddiagnosatindakan
 				$scope.popUp.namadiagnosa = dataItem.namadiagnosatindakan
+				$scope.popUp.statusenabled = dataItem.statusenabled
 				$scope.popUp.center().open();
 
 			}

@@ -4623,7 +4623,8 @@ class MasterController extends ApiController{
         $kdProfile = (int) $this->getDataKdProfile($request);
         $data = \DB::table('diagnosa_m as dg')
             ->select('dg.*')
-            ->where('dg.kdprofile', $kdProfile);
+            ->where('dg.kdprofile', $kdProfile)
+            ->limit(10);
             // ->where('dg.statusenabled', true);
         if(isset($request['kddiagnosa']) && $request['kddiagnosa']!="" && $request['kddiagnosa']!="undefined"){
             $data = $data->where('dg.kddiagnosa','ILIKE', '%'.$request['kddiagnosa'].'%');
@@ -4631,7 +4632,7 @@ class MasterController extends ApiController{
         if(isset($request['namadiagnosa']) && $request['namadiagnosa']!="" && $request['namadiagnosa']!="undefined"){
             $data = $data->where('dg.namadiagnosa','ILIKE', '%'.$request['namadiagnosa'].'%');
         }
-        $data = $data->take(10)->get();
+        $data = $data->get();
         $result = array(
             'data'=> $data,
             'message' => 'innothuman',
@@ -4726,7 +4727,7 @@ class MasterController extends ApiController{
         $data = \DB::table('diagnosatindakan_m as dg')
             ->select('dg.*')
             ->where('dg.kdprofile', $kdProfile)
-            ->where('dg.statusenabled', true)
+            // ->where('dg.statusenabled', true)
             ->limit(10);
         if(isset($request['kddiagnosa']) && $request['kddiagnosa']!="" && $request['kddiagnosa']!="undefined"){
             $data = $data->where('dg.kddiagnosatindakan','ILIKE', '%'.$request['kddiagnosa'].'%');
@@ -4763,6 +4764,7 @@ class MasterController extends ApiController{
             $ICD->reportdisplay = $request['namadiagnosa'];
             $ICD->kddiagnosatindakan = $request['kddiagnosa'];
             $ICD->namadiagnosatindakan = $request['namadiagnosa'];
+            $ICD->statusenabled = $request['statusenabled'];
             $ICD->qdiagnosatindakan = $idIcd;
             $ICD->save();
             $transStatus = 'true';
