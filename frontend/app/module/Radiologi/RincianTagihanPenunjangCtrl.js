@@ -9,6 +9,8 @@ define(['initialize', 'Configuration'], function (initialize, config) {
             $scope.isLoading = false;
             $scope.disableDokterPengirim2 = true;
             $scope.hideDokterPengirim2 = true;
+            $scope.disableDokterPengirim2EDT = true;
+            $scope.hideDokterPengirim2EDT = true;
             var norec_apd = ''
             var norec_pd = ''
 
@@ -247,6 +249,20 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     $scope.disableDokterPengirim2 = true;
                     $scope.hideDokterPengirim1 = false;
                     $scope.hideDokterPengirim2 = true;
+                }
+            }
+
+            $scope.cekDokterLuarEDT = function (bool) {
+                if (bool) {
+                    $scope.disabledokterPengirim1EDT = true;
+                    $scope.disableDokterPengirim2EDT = false;
+                    $scope.hidedokterPengirim1EDT = true;
+                    $scope.hideDokterPengirim2EDT = false;
+                } else {
+                    $scope.disabledokterPengirim1EDT = false;
+                    $scope.disableDokterPengirim2EDT = true;
+                    $scope.hidedokterPengirim1EDT = false;
+                    $scope.hideDokterPengirim2EDT = true;
                 }
             }
 
@@ -1404,6 +1420,101 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     $scope.hideExper = false
                 })
             }
+
+            $scope.itemTepi = {}
+            $scope.darahTepi = function () {
+                if ($scope.dataSelected == undefined) {
+                    window.messageContainer.error("Pilih Data Dulu!");
+                    return;
+                }
+                $scope.norecEDT = ''
+                $scope.itemTepi.namaPelayanan = $scope.dataSelected.namaproduk
+                $scope.itemTepi.dokters = $scope.dataSelected.dokter
+                $scope.itemTepi.tglInput = new Date()
+                medifirstService.get('laboratorium/get-hasil-lab-edt?norec_pp=' + $scope.dataSelected.norec_pp + '&idproduk=' + $scope.dataSelected.produkfk).then(function (e) {
+                    if (e.data.length > 0) {
+                        let res = e.data[0]
+                        $scope.norecEDT = res.norec
+                        $scope.itemTepi.tglInput = new Date(res.tanggal)
+                        $scope.itemTepi.penanggungjawab = { id: res.penanggungjawab, namalengkap: res.namapenanggungjawab }
+                        $scope.itemTepi.dokterpemeriksa = { id: res.dokterpemeriksa, namalengkap: res.namadokterpemeriksa }
+                        if (res.dokterpengirimfk)
+                            $scope.itemTepi.dokterPengirim1EDT = { id: res.dokterpengirimfk, namalengkap: res.namadokterpengirimfk }
+                        if (res.dokterluar)
+                            $scope.itemTepi.dokterPengirim2EDT = res.dokterluar
+                        $scope.itemTepi.trombosit = res.trombosit
+                        $scope.itemTepi.eritrosit = res.eritrosit
+                        $scope.itemTepi.haemoglobin = res.haemoglobin
+                        $scope.itemTepi.leukosit = res.leukosit
+                        if (res.keteritrosit)
+                            $scope.itemTepi.keteritrosit = res.keteritrosit.replace(/~/g, "\n")
+                        if (res.ketleukosit)
+                            $scope.itemTepi.ketleukosit = res.ketleukosit.replace(/~/g, "\n")
+                        if (res.kettrombosit)
+                            $scope.itemTepi.kettrombosit = res.kettrombosit.replace(/~/g, "\n")
+                        if (res.kesimpulan)
+                            $scope.itemTepi.kesimpulan = res.kesimpulan.replace(/~/g, "\n")
+
+                    }
+                    $scope.popUpTepi.center().open();
+                })
+
+            }
+
+
+            $scope.batalTepi = function () {
+                $scope.norecEDT = ''
+                $scope.itemTepi = {}
+                $scope.itemTepi.tglInput = new Date()
+                $scope.popUpTepi.close();
+            }
+
+            $scope.saveLabEDT = function () {
+
+                if ($scope.itemTepi.tglInput == undefined) {
+                    window.messageContainer.error("Tanggal Tidak Boleh Kosong!");
+                    return;
+                }
+                if ($scope.itemTepi.penanggungjawab == undefined) {
+                    window.messageContainer.error("Penanggung Jawab Tidak Boleh Kosong!");
+                    return;
+                }
+                if ($scope.itemTepi.dokterpemeriksa == undefined) {
+                    window.messageContainer.error("Dokter Pemeriksa Tidak Boleh Kosong!");
+                    return;
+                }
+
+                var objSave = {
+                    noregistrasi: $scope.item.noregistrasi,
+                    tglinput: moment($scope.itemTepi.tglInput).format('YYYY-MM-DD HH:mm'),
+                    penanggungjawab: $scope.itemTepi.penanggungjawab.id,
+                    dokterpemeriksa: $scope.itemTepi.dokterpemeriksa.id,
+                    pelayananpasienfk: $scope.dataSelected.norec_pp,
+                    isDokterLuar: $scope.itemTepi.dokterLuar,
+                    dokterpengirim1: $scope.itemTepi.dokterPengirim1EDT != undefined ? $scope.itemTepi.dokterPengirim1EDT.id : null,
+                    dokterpengirim2: $scope.itemTepi.dokterPengirim2EDT != undefined ? $scope.itemTepi.dokterPengirim2EDT : null,
+                    haemoglobin: $scope.itemTepi.haemoglobin != undefined ? $scope.itemTepi.haemoglobin : null,
+                    leukosit: $scope.itemTepi.leukosit != undefined ? $scope.itemTepi.leukosit : null,
+                    eritrosit: $scope.itemTepi.eritrosit != undefined ? $scope.itemTepi.eritrosit : null,
+                    trombosit: $scope.itemTepi.trombosit != undefined ? $scope.itemTepi.trombosit : null,
+                    keteritrosit: $scope.itemTepi.keteritrosit != undefined ? $scope.itemTepi.keteritrosit.replace(/\n/ig, '~') : null,
+                    ketleukosit: $scope.itemTepi.ketleukosit != undefined ? $scope.itemTepi.ketleukosit.replace(/\n/ig, '~') : null,
+                    kettrombosit: $scope.itemTepi.kettrombosit != undefined ? $scope.itemTepi.kettrombosit.replace(/\n/ig, '~') : null,
+                    kesimpulan: $scope.itemTepi.kesimpulan != undefined ? $scope.itemTepi.kesimpulan.replace(/\n/ig, '~') : null,
+                    norec_pd: norec_pd,
+                    norec: $scope.norecEDT
+                }
+                $scope.hideExper = true
+                medifirstService.post('laboratorium/save-hasil-lab-edt', objSave).then(function (e) {
+                    init();
+                    $scope.hideExper = false
+                    $scope.popUpTepi.close()
+
+                }, function (error) {
+                    $scope.hideExper = false
+                })
+            }
+
             $scope.BatalEkpertise = function () {
 
                 $scope.norecHasilRadiologi = ''
@@ -1644,6 +1755,16 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 
 
 
+            }
+
+            $scope.cetakLabEDT = function () {
+                if ($scope.dataSelected == undefined) return
+                var local = JSON.parse(localStorage.getItem('profile'))
+                var user = medifirstService.getPegawaiLogin().namaLengkap
+
+                var profile = local.id;
+                window.open(config.baseApiBackend + "report/cetak-hasil-lab-edt?norec=" + $scope.dataSelected.norec_pp + '&kdprofile=' + profile
+                        + '&user=' + user + '&jenis=his', '_blank');
             }
             $scope.CetakEkspertise = function () {
                 var user = medifirstService.getPegawaiLogin();
