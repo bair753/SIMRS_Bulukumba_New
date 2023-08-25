@@ -4623,8 +4623,8 @@ class MasterController extends ApiController{
         $kdProfile = (int) $this->getDataKdProfile($request);
         $data = \DB::table('diagnosa_m as dg')
             ->select('dg.*')
-            ->where('dg.kdprofile', $kdProfile)
-            ->where('dg.statusenabled', true);
+            ->where('dg.kdprofile', $kdProfile);
+            // ->where('dg.statusenabled', true);
         if(isset($request['kddiagnosa']) && $request['kddiagnosa']!="" && $request['kddiagnosa']!="undefined"){
             $data = $data->where('dg.kddiagnosa','ILIKE', '%'.$request['kddiagnosa'].'%');
         }
@@ -4660,6 +4660,7 @@ class MasterController extends ApiController{
             $ICD->reportdisplay = $request['namadiagnosa'];
             $ICD->kddiagnosa = $request['kddiagnosa'];
             $ICD->namadiagnosa = $request['namadiagnosa'];
+            $ICD->statusenabled = $request['statusenabled'];
             $ICD->qdiagnosa = $idIcd;
             $ICD->save();
             $transStatus = 'true';
