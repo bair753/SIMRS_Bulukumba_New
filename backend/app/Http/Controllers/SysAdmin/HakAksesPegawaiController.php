@@ -917,7 +917,7 @@ class HakAksesPegawaiController extends ApiController
                 $loginuser = DB::table('loginuser_s as lu')
                     ->join('kelompokuser_s as ku', 'ku.id', '=', 'lu.objectkelompokuserfk')
                     ->join('pegawai_m as pg', 'pg.id', '=', 'lu.objectpegawaifk')
-                    ->select('lu.id as luid','lu.namauser', 'ku.kelompokuser', 'ku.id as kuid', 'lu.katasandi',
+                    ->select('lu.id as luid','lu.namauser', 'ku.kelompokuser', 'ku.id as kuid', 'lu.katasandi', 'pg.id as pegawai_id',
                         'lu.objectpegawaifk')
                     ->where('lu.kdprofile', $kdProfile);
                     if(isset($request['nama']) && $request['nama']!="" && $request['nama']!="undefined"){
@@ -933,6 +933,7 @@ class HakAksesPegawaiController extends ApiController
                     if ($item->pegawaiId == $item2->objectpegawaifk){
                         $log[]=array(
                             'luid' => $item2->luid,
+                            'pegawai_id' => $item2->pegawai_id,
                             'namauser' => $item2->namauser,
                             'kelompokuser' => $item2->kelompokuser,
                             'kuid' => $item2->kuid,
@@ -953,7 +954,8 @@ class HakAksesPegawaiController extends ApiController
         }elseif (isset($req['get']) && $req['get'] == "loginuser") {
             $loginuser = DB::table('loginuser_s as lu')
                 ->join('kelompokuser_s as ku', 'ku.id', '=', 'lu.objectkelompokuserfk')
-                ->select('lu.id as luid','lu.namauser', 'ku.kelompokuser', 'ku.id as kuid', 'lu.katasandi',
+                ->join('pegawai_m as pg', 'pg.id', '=', 'lu.objectpegawaifk')
+                ->select('lu.id as luid','lu.namauser', 'ku.kelompokuser', 'ku.id as kuid', 'lu.katasandi', 'pg.id as pegawai_id',
                     'lu.objectpegawaifk')
                 ->where('lu.kdprofile', $kdProfile);
                 if(isset($req['id'])){
@@ -974,6 +976,7 @@ class HakAksesPegawaiController extends ApiController
 
             $data[]=array(
                 'luid' => $loginuser->luid,
+                'pegawai_id' => $loginuser->pegawai_id,
                 'namauser' => $loginuser->namauser,
                 'kelompokuser' => $loginuser->kelompokuser,
                 'kuid' => $loginuser->kuid,

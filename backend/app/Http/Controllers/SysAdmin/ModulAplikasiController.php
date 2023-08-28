@@ -487,8 +487,9 @@ class ModulAplikasiController extends ApiController
         $kdProfile = (int) $this->getDataKdProfile($request);
         $data = DB::table('maploginusertomodulaplikasi_s as maps')
             ->join('loginuser_s as log','maps.objectloginuserfk','=','log.id')
+            ->join('pegawai_m as pg','log.objectpegawaifk','=','pg.id')
             ->join('modulaplikasi_s as mod','maps.objectmodulaplikasifk','=','mod.id')
-            ->select('maps.*','mod.modulaplikasi','log.namauser')
+            ->select('maps.*','mod.modulaplikasi','log.namauser', 'pg.id as pg_id')
             ->where('maps.kdprofile', $kdProfile)
             ->where('maps.statusenabled',true)
             ->where('log.id',$request['idLogin'])
