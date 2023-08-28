@@ -130,6 +130,7 @@ define(['initialize'], function (initialize) {
                 $scope.isRouteLoading = true
                 medifirstService.get("sysadmin/menu/svc-modul?get=loginuser&id=" + $scope.item.loginUser.luid).then(function (data) {
                     $scope.item.idlogin = data.data.loginuser[0].luid;
+                    $scope.item.pg_id = data.data.loginuser[0].pegawai_id;
                     $scope.item.namaUser = data.data.loginuser[0].namauser;
                     // $scope.item.kataKunciPass = data.data.loginuser.katasandi;
                     // $scope.item.kataKunciConfirm = data.data.loginuser.katasandi;
@@ -150,6 +151,7 @@ define(['initialize'], function (initialize) {
                 medifirstService.get("sysadmin/menu/save-map-luRuangan?loginuserfk=" + $scope.item.loginUser.luid + "&ruanganfk=" + $scope.item.ruangan.id).then(function (data) {
                     medifirstService.get("sysadmin/menu/svc-modul?get=loginuser&id=" + $scope.item.loginUser.luid).then(function (data) {
                         $scope.item.idlogin = data.data.loginuser[0].luid;
+                        $scope.item.pg_id = data.data.loginuser[0].pegawai_id;
                         $scope.item.namaUser = data.data.loginuser[0].namauser;
                         // $scope.item.kataKunciPass = data.data.loginuser.katasandi;
                         // $scope.item.kataKunciConfirm = data.data.loginuser.katasandi;
@@ -166,6 +168,7 @@ define(['initialize'], function (initialize) {
                 medifirstService.get("sysadmin/menu/save-hapus-map-luRuangan?loginuserfk=" + $scope.item.loginUser.luid + "&ruanganfk=" + $scope.dataSelected.ruid).then(function (data) {
                     medifirstService.get("sysadmin/menu/svc-modul?get=loginuser&id=" + $scope.item.loginUser.luid).then(function (data) {
                         $scope.item.idlogin = data.data.loginuser[0].luid;
+                        $scope.item.pg_id = data.data.loginuser[0].pegawai_id;
                         $scope.item.namaUser = data.data.loginuser[0].namauser;
                         // $scope.item.kataKunciPass = data.data.loginuser.katasandi;
                         // $scope.item.kataKunciConfirm = data.data.loginuser.katasandi;
