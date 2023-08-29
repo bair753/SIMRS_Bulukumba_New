@@ -144,12 +144,15 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     data: []
                 })
                 
-                $scope.isRouteLoading = true               
+                $scope.isRouteLoading = true   
+                console.log($scope);         
                 // medifirstService.get("laboratorium/get-hasil-lab-manual?norec_apd=" + $state.params.norecApd +
                 //     '&objectjeniskelaminfk=' + $scope.item.objectjeniskelaminfk + '&umur=' + $scope.item.umurDay + '&norec=' + $scope.item.norecPP + '&norecOrder=' + $scope.norecOrder ).then(function (data) {
                 medifirstService.get("laboratorium/get-hasil-lab-manual-ruangan?norec_apd=" + $state.params.norecApd +
-                    '&objectjeniskelaminfk=' + $scope.item.objectjeniskelaminfk + '&umur=' + $scope.item.umurDay + '&norec=' + $scope.item.norecPP + '&norecOrder=' + $scope.norecOrder ).then(function (data) {
+                    '&objectjeniskelaminfk=' + $scope.item.objectjeniskelaminfk + '&umur=' + $scope.item.umurDay + '&norec=' + $scope.item.norecPP + '&norm=' + $scope.item.noMr + '&noregistrasi=' + $scope.item.noregistrasi + '&norecOrder=' + $scope.norecOrder ).then(function (data) {
                         // var sourceGrid = []
+                        $scope.norec_edt = data.data.edt.map(x => x.pelayananpasienfk);
+                        $scope.norec_pa = data.data.pa.map(y => y.pelayananpasienfk);
                         $scope.isRouteLoading = false;
                         $scope.dokter = data.data.dokter.namalengkap
                         if (data.statResponse == true && data.data.data.length > 0) {
@@ -219,6 +222,24 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 window.open(config.baseApiBackend + 'report/cetak-hasil-lab-manual?norec=&norec=' + $scope.norecAPD
                 + '&objectjeniskelaminfk=' + $scope.item.objectjeniskelaminfk + '&umur=' + $scope.item.umurDay
                 + '&strIdPegawai=' + user.namaLengkap + '&strNorecPP=' + $scope.item.norecPP + '&doketr=' + $scope.dokter + '&catatan=' + catatan,"_blank");
+            }
+
+            $scope.cetakEDT = function () {
+                var local = JSON.parse(localStorage.getItem('profile'))
+                var user = medifirstService.getPegawaiLogin().namaLengkap
+
+                var profile = local.id;
+                window.open(config.baseApiBackend + "report/cetak-hasil-lab-edt-all?norec=" + $scope.norec_edt + '&kdprofile=' + profile
+                        + '&user=' + user + '&jenis=his', '_blank');
+            }
+
+            $scope.cetakPA = function () {
+                var local = JSON.parse(localStorage.getItem('profile'))
+                var user = medifirstService.getPegawaiLogin().namaLengkap
+
+                var profile = local.id;
+                window.open(config.baseApiBackend + "report/cetak-hasil-lab-pa-all?norec=" + $scope.norec_pa + '&kdprofile=' + profile
+                        + '&user=' + user + '&jenis=his', '_blank');
             }
 
         }

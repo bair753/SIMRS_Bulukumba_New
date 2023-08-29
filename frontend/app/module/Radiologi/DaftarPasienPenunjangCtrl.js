@@ -7,6 +7,7 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
             $scope.dataVOloaded = true;
             $scope.now = new Date();
             $scope.isRouteLoading = false;
+            $scope.isCetakRadiologi = false;
             $scope.item.jmlRow = 50
 
             loadCombo();
@@ -84,6 +85,9 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
                     , true).then(function (dat) {
                         $scope.listDepartemen = dat.data.datainstalasi;
                         $scope.listRuangan = dat.data.ruanganlogin;
+                        if($scope.listRuangan[0].objectdepartemenfk == 27){
+                            $scope.isCetakRadiologi = true;
+                        }
                         // $scope.item.ruangan = {id:  $scope.listRuangan[0].id,namaruangan:  $scope.listRuangan[0].namaruangan};
                         for (var i = 0; i < dat.data.data.length; i++) {
                             dat.data.data[i].no = i + 1

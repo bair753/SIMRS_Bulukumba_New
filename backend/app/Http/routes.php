@@ -1143,6 +1143,8 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
           Route::get('report/cetak-ekspertise-usg-all','Report\ReportController@cetakEkspertiseUsgAll');
           Route::get('report/cetak-hasil-lab-histopatologi','Report\ReportController@cetakHispatologi');
           Route::get('report/cetak-hasil-lab-edt','Report\ReportController@cetakEDT');
+          Route::get('report/cetak-hasil-lab-edt-all','Report\ReportController@cetakEDTAll');
+          Route::get('report/cetak-hasil-lab-pa-all','Report\ReportController@cetakPAAll');
           Route::get('report/cetak-resep-dokter','Report\ReportController@cetakResepDokter');
           Route::get('report/cetak-resep-dokter-all','Report\ReportController@cetakResepDokterAll');
           Route::get('laboratorium/get-lap-kunjungan', 'Laboratorium\LaboratoriumController@getLaporanKunjungan');

@@ -1212,7 +1212,8 @@ class ReportController extends ApiController{
         SELECT * FROM profile_m WHERE id = $kdProfile"))->first();
         $raw = collect(DB::select("
             SELECT
-                pd.noregistrasi, pm.nocm, pm.namapasien, hpl.dokterluar, dokterpengirim.namalengkap as namadokterpengirim,
+                pd.noregistrasi, pm.nocm, pm.namapasien,pm.tgllahir, hpl.dokterluar, dokterpengirim.namalengkap as namadokterpengirim, pg1.namalengkap as namapenanggungjawab,
+                pg2.namalengkap as namadokterpemeriksa,
                 jk.jeniskelamin, EXTRACT ( YEAR
                     FROM AGE(  pd.tglregistrasi,pm.tgllahir )
                 ) || ' Thn ' || EXTRACT (MONTH  FROM AGE(  pd.tglregistrasi, pm.tgllahir )
@@ -1221,22 +1222,16 @@ class ReportController extends ApiController{
                 to_char( hpl.tanggal, 'DD-MM-YYYY HH24:MI:SS'  ) AS tgljawab,
                 to_char( pp.tglpelayanan,'DD-MM-YYYY HH24:MI:SS' ) AS tglterima,
                 to_char(  sbm.tglsbm,'DD-MM-YYYY HH24:MI:SS' ) AS tglbayar, pg.namalengkap,
-             CASE WHEN hpl.jaringanasal IS NULL THEN  ''  ELSE  jaringanasal  END AS jaringanasal,
-             CASE WHEN hpl.getjaringan IS NULL THEN  ''  ELSE  getjaringan  END AS getjaringan,
-             CASE WHEN hpl.diagnosaklinik IS NULL THEN  ''  ELSE  diagnosaklinik  END AS diagnosaklinik,
-             CASE WHEN hpl.keteranganklinik IS NULL THEN ''   ELSE hpl.keteranganklinik  END AS keteranganklinik,
-             CASE WHEN hpl.makroskopik IS NULL THEN   '' ELSE  hpl.makroskopik END AS makroskopik, 
-             CASE WHEN hpl.mikroskopik IS NULL THEN ''   ELSE  hpl.mikroskopik END AS mikroskopik, 
-             CASE WHEN hpl.kesimpulan IS NULL THEN '' ELSE hpl.kesimpulan END AS kesimpulan,
-             CASE WHEN hpl.anjuran IS NULL THEN  '' ELSE  hpl.anjuran END AS anjuran,
-             CASE WHEN hpl.topografi IS NULL THEN   '' ELSE hpl.topografi  END AS topografi, 
-             CASE WHEN hpl.morfologi IS NULL THEN  '' ELSE hpl.morfologi END AS morfologi,
-             CASE WHEN hpl.diagnosapb IS NULL THEN  '' ELSE  hpl.diagnosapb  END AS diagnosapb,
-             CASE WHEN hpl.keteranganpb IS NULL THEN ''  ELSE hpl.keteranganpb END AS keteranganpb,
-             CASE WHEN pg1.namalengkap IS NULL THEN '' ELSE  pg1.namalengkap   END AS namapenanggungjawab,
-             CASE WHEN dm.kddiagnosa IS NULL THEN '' ELSE  dm.kddiagnosa   END AS diagnosa,
-             CASE WHEN pg1.nippns IS NULL THEN ''ELSE  pg1.nippns END AS nippns,hpl.nomorpa,
-             ru.namaruangan as asal,pg1.nosip, hpl.jenis,
+             CASE WHEN hpl.haemoglobin IS NULL THEN  '-'  ELSE  haemoglobin  END AS haemoglobin,
+             CASE WHEN hpl.leukosit IS NULL THEN  '-'  ELSE  leukosit  END AS leukosit,
+             CASE WHEN hpl.eritrosit IS NULL THEN  '-'  ELSE  eritrosit  END AS eritrosit,
+             CASE WHEN hpl.trombosit IS NULL THEN '-'   ELSE hpl.trombosit  END AS trombosit,
+             CASE WHEN hpl.keteritrosit IS NULL THEN '-'   ELSE hpl.keteritrosit  END AS keteritrosit,
+             CASE WHEN hpl.ketleukosit IS NULL THEN '-'   ELSE hpl.ketleukosit  END AS ketleukosit,
+             CASE WHEN hpl.kettrombosit IS NULL THEN '-'   ELSE hpl.kettrombosit  END AS kettrombosit,
+             CASE WHEN hpl.kesimpulan IS NULL THEN '-'   ELSE hpl.kesimpulan  END AS kesimpulan,
+             CASE WHEN hpl.trombosit IS NULL THEN '-'   ELSE hpl.trombosit  END AS trombosit,
+             ru.namaruangan as asal,pg1.nosip,
               CASE
                     WHEN alm.alamatlengkap IS NULL THEN
                         '-'
@@ -1275,7 +1270,7 @@ class ReportController extends ApiController{
                     END AS alamatlengkap,
                     kps.kelompokpasien,pd.norec as norec_pd,pd.objectruanganlastfk
             FROM
-                hasilpemeriksaanlab_t AS hpl
+                hasilpemeriksaanlabedt_t AS hpl
             INNER JOIN pasiendaftar_t AS pd ON pd.norec = hpl.noregistrasifk
             INNER JOIN pelayananpasien_t AS pp ON pp.norec = hpl.pelayananpasienfk
             LEFT JOIN strukorder_t AS so ON so.norec = pp.strukorderfk
@@ -1285,8 +1280,8 @@ class ReportController extends ApiController{
             INNER JOIN pasien_m AS pm ON pm. ID = pd.nocmfk
             LEFT JOIN jeniskelamin_m AS jk ON jk. ID = pm.objectjeniskelaminfk
             LEFT JOIN pegawai_m AS pg ON pg. ID = so.objectpegawaiorderfk
-            LEFT JOIN pegawai_m AS pg1 ON pg1. ID = hpl.pegawaifk
-            LEFT JOIN diagnosa_m AS dm ON dm.ID = hpl.icd0
+            LEFT JOIN pegawai_m AS pg1 ON pg1. ID = hpl.penanggungjawab
+            LEFT JOIN pegawai_m AS pg2 ON pg2. ID = hpl.dokterpemeriksa
             LEFT JOIN pegawai_m AS dokterpengirim ON dokterpengirim. ID = hpl.dokterpengirimfk
              LEFT JOIN ruangan_m AS ru ON ru. ID = pd.objectruanganlastfk
             left join alamat_m as alm on alm.nocmfk=pm.id
@@ -1321,12 +1316,91 @@ class ReportController extends ApiController{
         }
         // dd($raw);
         $pageWidth = 950;
-        if($raw->jenis == 'pa'){
-            return view('report.lab.histopatologi', compact('raw', 'pageWidth','r', 'profile'));
+
+        return view('report.lab.edt', compact('raw', 'pageWidth','r', 'profile'));
+
+    }
+
+    public function cetakEDTAll(Request $r) {
+        $kdProfile = (int)$r['kdprofile'];
+        $norec = explode(',', $r->norec);
+        $profile = collect(DB::select("
+        SELECT * FROM profile_m WHERE id = $kdProfile"))->first();
+        $raw = DB::table('hasilpemeriksaanlabedt_t AS hpl')
+        ->join('pasiendaftar_t AS pd', 'pd.norec', '=', 'hpl.noregistrasifk')
+        ->leftjoin('pelayananpasien_t AS pp', 'pp.norec', '=', 'hpl.pelayananpasienfk')
+        ->leftjoin('strukorder_t AS so', 'so.norec', '=', 'pp.strukorderfk')
+        ->leftjoin('strukpelayanan_t AS sp', 'sp.norec', '=', 'pp.strukfk')
+        ->join('pasien_m AS pm', 'pm.id', '=', 'pd.nocmfk')
+        ->leftjoin('ruangan_m as ru', 'ru.id', '=', 'pd.objectruanganlastfk')
+        ->leftjoin('kelompokpasien_m AS kps', 'kps.id', '=', 'pd.objectkelompokpasienlastfk')
+        ->leftjoin('jeniskelamin_m AS jk', 'jk.id', '=', 'pm.objectjeniskelaminfk')
+        ->leftjoin('pegawai_m AS pg', 'pg.id', '=', 'hpl.dokterpemeriksa')
+        ->leftjoin('pegawai_m AS pg1', 'pg1.id', '=', 'hpl.penanggungjawab')
+        ->leftjoin('pegawai_m AS pg2', 'pg2.id', '=', 'hpl.dokterpemeriksa')
+        ->leftjoin('pegawai_m AS dokterpengirim', 'dokterpengirim.id', '=', 'hpl.dokterpengirimfk')
+        ->leftjoin('alamat_m as alm', 'alm.nocmfk', '=', 'pm.id')
+        ->wherein('pp.norec', $norec)
+        ->where('hpl.statusenabled', true)
+        ->select('pd.noregistrasi', 'pm.nocm', 'pm.namapasien', 'pm.tgllahir', 'hpl.dokterluar', 'dokterpengirim.namalengkap as namadokterpengirim', 'pg1.namalengkap as namapenanggungjawab',
+    'pg2.namalengkap as namadokterpemeriksa', 'jk.jeniskelamin', 'pm.tgllahir', 'hpl.haemoglobin', 'hpl.leukosit', 'hpl.eritrosit', 'hpl.trombosit', 'hpl.tanggal as tgljawab', 'hpl.dokterpemeriksa',
+'hpl.keteritrosit', 'hpl.ketleukosit', 'hpl.kettrombosit', 'hpl.kesimpulan', 'hpl.trombosit', 'ru.namaruangan as asal', 'pg1.nosip' ,'kps.kelompokpasien', 'pd.norec as norec_pd', 'pd.objectruanganlastfk', 'alm.alamatlengkap')
+        ->get();
+        if(empty($raw)){
+            echo '
+            <script language="javascript">
+                window.alert("Hasil tidak ditemukan");
+                window.close()
+            </script>
+        ';
+        die;
+        }else{
+            return view('report.lab.edt-all', compact('raw','r', 'profile'));
         }
+    }
 
-        return view('report.lab.sitologi', compact('raw', 'pageWidth','r', 'profile'));
-
+    public function cetakPAAll(Request $r) {
+        
+        
+        $kdProfile = (int)$r['kdprofile'];
+        $norec = explode(',', $r->norec);
+        $profile = collect(DB::select("
+        SELECT * FROM profile_m WHERE id = $kdProfile"))->first();
+        $raw = DB::table('hasilpemeriksaanlab_t AS hpl')
+        ->join('pasiendaftar_t AS pd', 'pd.norec', '=', 'hpl.noregistrasifk')
+        ->leftjoin('diagnosa_m AS dm', 'dm.id', '=', 'hpl.icd0')
+        ->leftjoin('pelayananpasien_t AS pp', 'pp.norec', '=', 'hpl.pelayananpasienfk')
+        ->leftjoin('strukorder_t AS so', 'so.norec', '=', 'pp.strukorderfk')
+        ->leftjoin('strukpelayanan_t AS sp', 'sp.norec', '=', 'pp.strukfk')
+        ->join('pasien_m AS pm', 'pm.id', '=', 'pd.nocmfk')
+        ->leftjoin('ruangan_m as ru', 'ru.id', '=', 'pd.objectruanganlastfk')
+        ->leftjoin('kelompokpasien_m AS kps', 'kps.id', '=', 'pd.objectkelompokpasienlastfk')
+        ->leftjoin('jeniskelamin_m AS jk', 'jk.id', '=', 'pm.objectjeniskelaminfk')
+        ->leftjoin('pegawai_m AS dokterpengirim', 'dokterpengirim.id', '=', 'hpl.dokterpengirimfk')
+        ->leftjoin('pegawai_m AS pg1', 'pg1.id', '=', 'hpl.pegawaifk')
+        ->leftjoin('alamat_m as alm', 'alm.nocmfk', '=', 'pm.id')
+        ->wherein('pp.norec', $norec)
+        ->where('hpl.statusenabled', true)
+        ->select('pd.noregistrasi', 'pm.nocm', 'pm.namapasien', 'pm.tgllahir', 'hpl.dokterluar', 'dokterpengirim.namalengkap as namadokterpengirim', 'hpl.nomorpa', 'pp.tglpelayanan as tglterima', 'pg1.namalengkap as namapenanggungjawab', 'pg1.nippns',
+    'jk.jeniskelamin', 'pm.tgllahir', 'hpl.jaringanasal', 'hpl.getjaringan', 'hpl.diagnosaklinik', 'hpl.keteranganklinik', 'hpl.tanggal as tgljawab', 'hpl.makroskopik','hpl.mikroskopik',
+'hpl.kesimpulan', 'hpl.anjuran', 'hpl.topografi', 'hpl.morfologi', 'hpl.diagnosapb','hpl.keteranganpb','ru.namaruangan as asal', 'pg1.nosip','kps.kelompokpasien', 'pd.norec as norec_pd', 'pd.objectruanganlastfk', 'alm.alamatlengkap', 'dm.kddiagnosa', 'hpl.jenis')
+        ->first();
+        $raw->umur = $this->getAge($raw->tgllahir ,date('Y-m-d'));
+        if(empty($raw)){
+            echo '
+            <script language="javascript">
+                window.alert("Hasil tidak ditemukan");
+                window.close()
+            </script>
+        ';
+        die;
+        }else{
+            if($raw->jenis == 'pa'){
+                return view('report.lab.histopatologi', compact('raw', 'pageWidth','r', 'profile'));
+            }
+    
+            return view('report.lab.sitologi', compact('raw','r', 'profile'));
+        }
     }
 
 
