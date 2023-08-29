@@ -1248,49 +1248,43 @@ class MyJKNV2Controller extends ApiController
     public function getJadwalOperasi_fix(Request $request)
     {
         $kdProfile = $this->getDataKdProfile($request);
-        $request = $request->json()->all();
-        if((!isset($request['tanggalawal']) &&  empty($request['tanggalawal']) )
-            && (!isset($request['tanggalakhir']) &&  empty($request['tanggalakhir']))) {
-            $result = array("metadata"=>array("message" => "Tanggal Awal dan Akhir tidak boleh kosong", "code" => 201));
-            return $this->setStatusCode($result['metadata']['code'])->respond($result);
-        }
-        if($request['tanggalawal'] >  $request['tanggalakhir']) {
-            $result = array("metadata"=>array("message" => "Tanggal Akhir Tidak Boleh Kecil dari Tanggal Awal ","code" => 201));
-            return $this->setStatusCode($result['metadata']['code'])->respond($result);
-        }
-        $depbedah = $this->settingDataFixed('KdInstalasiBedahSentral', $kdProfile);
+        $tglAwal = date('Y-m-d ') . "00:00:00";
+        $tglAkhir = date('Y-m-d ') . "23:59:59";
+
         try {
-            $data = DB::select(DB::raw("SELECT
-                    so.noorder as kodebooking,
-                    so.tglpelayananawal  as tanggaloperasi,
-                    pr.namaproduk as jenistindakan,
-                    ko.politujuan as kodepoli,
-                    ko.namapolitujuan AS namapoli,
-                    pas.nocm,
-                    pd.noregistrasi,pas.nobpjs,
-                    so.statusorder,pd.objectkelompokpasienlastfk
-                      
-                    FROM
-                        strukorder_t AS so
-                    join orderpelayanan_t as op on op.noorderfk=so.norec
-                    join produk_m as pr on pr.id=op.objectprodukfk
-                    LEFT JOIN pasiendaftar_t AS pd ON pd.norec = so.noregistrasifk
-                    INNER JOIN pasien_m AS pas ON pas.id = pd.nocmfk
-                    LEFT JOIN ruangan_m AS ru ON ru.id = so.objectruanganfk
-                    LEFT JOIN ruangan_m AS ru2 ON ru2.id = so.objectruangantujuanfk
-                    LEFT JOIN pemakaianasuransi_t AS pa ON pa.noregistrasifk = pd.norec
-                    LEFT JOIN bpjsrencanakontrol_t AS ko ON ko.nosuratkontrol = pa.nosuratskdp
-                    WHERE
-                        so.kdprofile = $kdProfile
-                    --AND pas.nocm ILIKE '%11233764%'
-                    AND ru2.objectdepartemenfk = $depbedah
-                    AND so.statusenabled = true
-                    --and so.statusorder is null
-                    and ko.politujuan is not null
-                    AND ko.kdprofile = $kdProfile
-                    and so.tglpelayananawal between '$request[tanggalawal] 00:00:00' and '$request[tanggalakhir] 23:59:59'
-                    ORDER BY
-                        so.tglorder desc"));
+            $data = DB::select(DB::raw("SELECT ROW_NUMBER
+            () OVER ( PARTITION BY ps.nocm ORDER BY so.tglorder ) AS rownum,
+            so.noorder as kodebooking,
+            so.tglpelayananawal AS tanggaloperasi,
+            ko.politujuan AS kodepoli,
+            ko.namapolitujuan AS namapoli,
+            ps.namapasien,
+            ps.nocm,
+            pd.noregistrasi,
+            ru.namaruangan AS ruangrawat,
+            ru.objectdepartemenfk,
+            so.tglorder AS tgloperasi,
+            ps.nobpjs,
+            so.statusorder
+        FROM
+            strukorder_t AS so
+            INNER JOIN pasiendaftar_t AS pd ON pd.norec = so.noregistrasifk
+            INNER JOIN pasien_m AS ps ON ps.ID = pd.nocmfk
+            LEFT JOIN jeniskelamin_m AS klm ON klm.ID = ps.objectjeniskelaminfk
+            LEFT JOIN ruangan_m AS ru ON ru.ID = so.objectruanganfk 
+            LEFT JOIN pemakaianasuransi_t AS pa ON pa.noregistrasifk = pd.norec
+            LEFT JOIN bpjsrencanakontrol_t AS ko ON ko.nosuratkontrol = pa.nosuratskdp 
+        WHERE
+            so.statusenabled = TRUE 
+            AND pd.statusenabled = TRUE 
+            AND so.kdprofile = $kdProfile
+            AND pd.kdprofile = $kdProfile
+            AND so.tglorder BETWEEN '$tglAwal' 
+            AND '$tglAkhir' 
+            AND so.keteranganorder = 'Pesan Jadwal Operasi' 
+            AND so.objectkelompoktransaksifk = 22 
+        ORDER BY
+            so.tglorder DESC"));
             $list = [];
             foreach ($data as $k){
                 $stt = $k->statusorder;
@@ -1302,7 +1296,7 @@ class MyJKNV2Controller extends ApiController
                 $list [] = array(
                     'kodebooking' => $k->kodebooking,
                     'tanggaloperasi' => date('Y-m-d',strtotime($k->tanggaloperasi)),
-                    'jenistindakan' => $k->jenistindakan,
+                    // 'jenistindakan' => $k->jenistindakan,
                     'kodepoli' => $k->kodepoli,
                     'namapoli' => $k->namapoli,
                     'terlaksana' => $stt ,
