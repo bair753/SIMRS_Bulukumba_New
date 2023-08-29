@@ -11,6 +11,8 @@ define(['initialize', 'Configuration'], function (initialize, config) {
             $scope.hideDokterPengirim2 = true;
             $scope.disableDokterPengirim2EDT = true;
             $scope.hideDokterPengirim2EDT = true;
+            $scope.disableDokterPengirim2Rad = true;
+            $scope.hideDokterPengirim2Rad = true;
             var norec_apd = ''
             var norec_pd = ''
 
@@ -263,6 +265,20 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     $scope.disableDokterPengirim2EDT = true;
                     $scope.hidedokterPengirim1EDT = false;
                     $scope.hideDokterPengirim2EDT = true;
+                }
+            }
+
+            $scope.cekDokterLuarRad = function (bool) {
+                if (bool) {
+                    $scope.disabledokterPengirim1Rad = true;
+                    $scope.disableDokterPengirim2Rad = false;
+                    $scope.hidedokterPengirim1Rad = true;
+                    $scope.hideDokterPengirim2Rad = false;
+                } else {
+                    $scope.disabledokterPengirim1Rad = false;
+                    $scope.disableDokterPengirim2Rad = true;
+                    $scope.hidedokterPengirim1Rad = false;
+                    $scope.hideDokterPengirim2Rad = true;
                 }
             }
 
@@ -1864,7 +1880,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 },
                 {
                     field: "dokterluar",
-                    title: "Nama Dokter",
+                    title: "Nama Dokter Luar",
                     width: "200px",
                     // template: multiSelectArrayToString
                 }
@@ -1899,7 +1915,6 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                         }
                     }
                 }
-
 
                 var pelayananpasienpetugas = {
                     norec_ppp: norec_ppp,
