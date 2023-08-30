@@ -267,7 +267,7 @@
       <div style="width: 70%;float: left;">
         <span class="f-s-15 background-gray"><b>Komorbiditas Lain</b> </span><span class="background-gray"> <b>:</b> </span><span> @{{ item.obj[423807] }}</span>
       </div>
-      <div style="width: 30%; float: right;border-left: 1px solid #000;box-sizing: border-box;min-height: 50px;">
+      <div style="width: 30%; float: right;border-left: 1px solid #000;box-sizing: border-box;min-height: 90px;">
         <div style="text-align: center;" class="background-gray">
           <b>ICD 10</b>
         </div>
@@ -286,16 +286,20 @@
     <div class="border-doang" style="min-height: 50px">
       <span class="f-s-15 background-gray"><b>Pemeriksaan Diagnostik</b> </span><span class="background-gray"> <b>:</b> </span><span> @{{ item.obj[423810] }}</span>
     </div>
-    <div class="border-doang" style="min-height: 50px">
+    <div class="border-doang" style="min-height: 90px">
       <div style="width: 70%;float: left;">
         <span class="f-s-15 background-gray"><b>Tindakan yang Telah Dikerjakan</b> </span><span class="background-gray"> <b>:</b> </span><span> @{{ item.obj[423811] }}</span>
       </div>
-      <div style="width: 30%; float: right;border-left: 1px solid #000;box-sizing: border-box;min-height: 50px;">
+      <div style="width: 30%; float: right;border-left: 1px solid #000;box-sizing: border-box;min-height: 90px;">
         <div style="text-align: center;" class="background-gray">
           <b>ICD 9-CM</b>
         </div>
         <span style="padding: 3px;box-sizing: border-box;">
-          @{{ item.obj[423812] }}
+          @{{ item.obj[423812] }} <br>
+          &nbsp;@{{ item.obj[32116614] ? '- ' + item.obj[32116614] : '' }} <br>
+          &nbsp;@{{ item.obj[32116615] ? '- ' + item.obj[32116615] : '' }} <br>
+          &nbsp;@{{ item.obj[32116616] ? '- ' + item.obj[32116616] : '' }} <br>
+          &nbsp;@{{ item.obj[32116617] ? '- ' + item.obj[32116617] : '' }}
         </span>
       </div>
     </div>

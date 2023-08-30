@@ -95,6 +95,10 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                         { "id": 423810, "caption": "Pemeriksaan Diagnostik", "type": "textarea", "dataList": "" },
                         { "id": 423811, "caption": "Tindakan yang Telah Dikerjakan", "type": "textarea", "dataList": "" },
                         { "id": 423812, "caption": "ICD 9-CM", "type": "combobox", "dataList": "listICD9" },
+                        { "id": 32116614, "caption": "ICD 9-CM (Bila Ada)", "type": "combobox", "dataList": "listICD9" },
+                        { "id": 32116615, "caption": "ICD 9-CM (Bila Ada)", "type": "combobox", "dataList": "listICD9" },
+                        { "id": 32116616, "caption": "ICD 9-CM (Bila Ada)", "type": "combobox", "dataList": "listICD9" },
+                        { "id": 32116617, "caption": "ICD 9-CM (Bila Ada)", "type": "combobox", "dataList": "listICD9" },
                         { "id": 423813, "caption": "Obat yang Diberikan", "type": "textarea", "dataList": "" },
                         { "id": 423814, "caption": "Kondisi Pasien", "type": "textarea", "dataList": "" },
                         { "id": 423815, "caption": "Tindak Lanjut", "type": "textarea", "dataList": "" }
