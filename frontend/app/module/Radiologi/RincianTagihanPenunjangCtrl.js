@@ -1462,6 +1462,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                         $scope.itemTepi.eritrosit = res.eritrosit
                         $scope.itemTepi.haemoglobin = res.haemoglobin
                         $scope.itemTepi.leukosit = res.leukosit
+                        $scope.itemTepi.rasio = res.rasio
                         if (res.keteritrosit)
                             $scope.itemTepi.keteritrosit = res.keteritrosit.replace(/~/g, "\n")
                         if (res.ketleukosit)
@@ -1513,6 +1514,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     leukosit: $scope.itemTepi.leukosit != undefined ? $scope.itemTepi.leukosit : null,
                     eritrosit: $scope.itemTepi.eritrosit != undefined ? $scope.itemTepi.eritrosit : null,
                     trombosit: $scope.itemTepi.trombosit != undefined ? $scope.itemTepi.trombosit : null,
+                    rasio: $scope.itemTepi.rasio != undefined ? $scope.itemTepi.rasio : null,
                     keteritrosit: $scope.itemTepi.keteritrosit != undefined ? $scope.itemTepi.keteritrosit.replace(/\n/ig, '~') : null,
                     ketleukosit: $scope.itemTepi.ketleukosit != undefined ? $scope.itemTepi.ketleukosit.replace(/\n/ig, '~') : null,
                     kettrombosit: $scope.itemTepi.kettrombosit != undefined ? $scope.itemTepi.kettrombosit.replace(/\n/ig, '~') : null,
@@ -2028,29 +2030,17 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 console.log();
                 if (dataDokterSelected != undefined) {
                     if(dataDokterSelected.namalengkap != null){
-                        medifirstService.get("tatarekening/get-pegawai-saeutik?namapegawai=" + dataDokterSelected.namalengkap, true, true, 10)
+                        medifirstService.get("tatarekening/get-pegawai-saeutik?norec_pp=" + $scope.dataSelected.norec_pp, true, true, 10)
                         .then(function (data) {
 
                             $scope.listPegawaiPemeriksa.add(data.data[0])
                             $scope.model.pegawais = data.data[0];
-                            $scope.model.dokterluar = null;
-
-                        })
-                    $scope.model.jenisPelaksana = { id: dataDokterSelected.jpp_id, jenisPetugasPelaksana: dataDokterSelected.jenispetugaspe }
-
-                    }else{
-                        medifirstService.get("tatarekening/get-pegawai-saeutik?dokterluar=" + dataDokterSelected.dokterluar, true, true, 10)
-                        .then(function (data) {
-
-                            $scope.listPegawaiPemeriksa.add(data.data[0]);
-                            $scope.model.pegawais = null;
-                            $scope.model.dokterluar = data.data.namapegawai;
+                            $scope.model.dokterluar = data.data[0].dokterluar;
 
                         })
                     $scope.model.jenisPelaksana = { id: dataDokterSelected.jpp_id, jenisPetugasPelaksana: dataDokterSelected.jenispetugaspe }
 
                     }
-                    
                 }
             }
             $scope.catatanLab = function () {
