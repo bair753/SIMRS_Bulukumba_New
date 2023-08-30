@@ -32,9 +32,12 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     $scope.isRouteLoading = false;
                     $scope.listNoHakAkses = data.data;
                 })
-                medifirstService.get("sysadmin/master/get-admin-radiologi").then(function (data) {
+                medifirstService.get("sysadmin/master/get-admin").then(function (data) {
                     $scope.isRouteLoading = false;
-                    $scope.listAdminRadiologi = data.data;
+                    $scope.listAdminRadiologi = data.data.adminRadiologi;
+                    $scope.listAdminTHT = data.data.adminTHT;
+                    $scope.listAdminBedah = data.data.adminBedah;
+                    $scope.listAdminKulit = data.data.adminKulit;
                 })
                 $scope.isRouteLoading = true;
             }
@@ -77,11 +80,30 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 + "tglawal=" + tglawal
                 + "&tglakhir=" + tglakhir
                 + "&departId=" + departId + ruanganId + noReg + noRm + nama + noSEP).then(function (data) {
+                    console.log(data);
                     var dataKlaim = data.data.master
                     var adminRadiologi = $scope.listAdminRadiologi;
+                    var adminTHT = $scope.listAdminTHT;
+                    var adminKulit = $scope.listAdminKulit;
+                    var adminBedah = $scope.listAdminBedah;
                     if(adminRadiologi.includes(medifirstService.getPegawaiLogin().id)){
                         var dataMaster = dataKlaim.filter(function (el) {
                             return el.id == 20 || el.id == 5 || el.id == 32;
+                            }
+                        );
+                    }else if(adminTHT.includes(medifirstService.getPegawaiLogin().id)){
+                        var dataMaster = dataKlaim.filter(function (el) {
+                            return el.id == 66 || el.id == 15 || el.id == 65 || el.id == 110 || el.id == 111;
+                            }
+                        );
+                    }else if(adminKulit.includes(medifirstService.getPegawaiLogin().id)){
+                        var dataMaster = dataKlaim.filter(function (el) {
+                            return el.id == 66 || el.id == 15 || el.id == 65 || el.id == 22;
+                            }
+                        );
+                    }else if(adminBedah.includes(medifirstService.getPegawaiLogin().id)){
+                        var dataMaster = dataKlaim.filter(function (el) {
+                            return el.id == 66 || el.id == 15 || el.id == 65 || el.id == 96;
                             }
                         );
                     }else{

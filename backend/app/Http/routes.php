@@ -2404,7 +2404,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
                 Route::get('sysadmin/general/get-data-maplingkuppelayanan', 'SysAdmin\GeneralController@getDataMapLapKeuanganToLingkupPelayanan');
                 Route::get('sysadmin/general/get-data-depart', 'SysAdmin\GeneralController@getDepartemen');
                 Route::get('sysadmin/master/get-no-hak-akses-upload-berkas', 'SysAdmin\Master\MasterController@getNoHakAkses');
-                Route::get('sysadmin/master/get-admin-radiologi', 'SysAdmin\Master\MasterController@getAdminRadiologi');
+                Route::get('sysadmin/master/get-admin', 'SysAdmin\Master\MasterController@getAdmin');
                 Route::get('sysadmin/master/get-no-hak-akses-edit-pemakaian-asuransi', 'SysAdmin\Master\MasterController@getNoHakAksesPemakaianAsuransi');
                 Route::get('sysadmin/master/hak-akses-edit-icd', 'SysAdmin\Master\MasterController@getEditICD');
                 Route::get('sysadmin/general/get-validasi-autorisasi-password', 'SysAdmin\ModulAplikasiController@getValidateAuthPasscode');
