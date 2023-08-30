@@ -1296,7 +1296,7 @@ class MyJKNV2Controller extends ApiController
                 $list [] = array(
                     'kodebooking' => $k->kodebooking,
                     'tanggaloperasi' => date('Y-m-d',strtotime($k->tanggaloperasi)),
-                    // 'jenistindakan' => $k->jenistindakan,
+                    'jenistindakan' => "Bedah Operasi",
                     'kodepoli' => $k->kodepoli,
                     'namapoli' => $k->namapoli,
                     'terlaksana' => $stt ,
