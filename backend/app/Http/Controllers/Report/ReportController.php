@@ -1230,7 +1230,7 @@ class ReportController extends ApiController{
              CASE WHEN hpl.ketleukosit IS NULL THEN '-'   ELSE hpl.ketleukosit  END AS ketleukosit,
              CASE WHEN hpl.kettrombosit IS NULL THEN '-'   ELSE hpl.kettrombosit  END AS kettrombosit,
              CASE WHEN hpl.kesimpulan IS NULL THEN '-'   ELSE hpl.kesimpulan  END AS kesimpulan,
-             CASE WHEN hpl.trombosit IS NULL THEN '-'   ELSE hpl.trombosit  END AS trombosit,
+             CASE WHEN hpl.rasio IS NULL THEN '-'   ELSE hpl.rasio  END AS rasio,
              ru.namaruangan as asal,pg1.nosip,
               CASE
                     WHEN alm.alamatlengkap IS NULL THEN
@@ -1343,8 +1343,8 @@ class ReportController extends ApiController{
         ->wherein('pp.norec', $norec)
         ->where('hpl.statusenabled', true)
         ->select('pd.noregistrasi', 'pm.nocm', 'pm.namapasien', 'pm.tgllahir', 'hpl.dokterluar', 'dokterpengirim.namalengkap as namadokterpengirim', 'pg1.namalengkap as namapenanggungjawab',
-    'pg2.namalengkap as namadokterpemeriksa', 'jk.jeniskelamin', 'pm.tgllahir', 'hpl.haemoglobin', 'hpl.leukosit', 'hpl.eritrosit', 'hpl.trombosit', 'hpl.tanggal as tgljawab', 'hpl.dokterpemeriksa',
-'hpl.keteritrosit', 'hpl.ketleukosit', 'hpl.kettrombosit', 'hpl.kesimpulan', 'hpl.trombosit', 'ru.namaruangan as asal', 'pg1.nosip' ,'kps.kelompokpasien', 'pd.norec as norec_pd', 'pd.objectruanganlastfk', 'alm.alamatlengkap')
+    'pg2.namalengkap as namadokterpemeriksa', 'jk.jeniskelamin', 'pm.tgllahir', 'hpl.haemoglobin', 'hpl.leukosit', 'hpl.eritrosit', 'hpl.trombosit', 'hpl.rasio', 'hpl.tanggal as tgljawab', 'hpl.dokterpemeriksa',
+'hpl.keteritrosit', 'hpl.ketleukosit', 'hpl.kettrombosit', 'hpl.kesimpulan', 'ru.namaruangan as asal', 'pg1.nosip' ,'kps.kelompokpasien', 'pd.norec as norec_pd', 'pd.objectruanganlastfk', 'alm.alamatlengkap')
         ->get();
         if(empty($raw)){
             echo '

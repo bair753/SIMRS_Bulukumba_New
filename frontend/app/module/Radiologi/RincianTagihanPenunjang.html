@@ -1042,6 +1042,15 @@
                     <span class="max-length"> 12000/{{itemTepi.kesimpulan ? itemTepi.kesimpulan.length : 0}}</span>
                 </div>
             </div>
+            <div class="grid_6" ng-show="findBy != 0">
+                <div class="grid_12" style="margin-top: 5px">
+                    <label c-label item="item">I/T Rasio</label>
+                </div>
+                <div class="clear"></div>
+                <div class="grid_12">
+                    <input type="text" class="k-textbox" ng-model="itemTepi.rasio">
+                </div>
+            </div>
         </fieldset>
 
         <div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">

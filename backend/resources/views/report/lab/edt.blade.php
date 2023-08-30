@@ -285,7 +285,7 @@
 		</tr>
 		<tr style="height:50pt;">
 			<td colspan="34" style="text-align: right;" class="noborder p3">I/T Rasio :</td>
-			<td colspan="34" style="text-align: left;" class="noborder p3">4 / 75 = 0,05</td>
+			<td colspan="34" style="text-align: left;" class="noborder p3">{{ $raw->rasio }}</td>
 		</tr>
 		<tr class="text-center" style="height: 50pt;">
 			<td colspan="44" class="noborder"></td>
