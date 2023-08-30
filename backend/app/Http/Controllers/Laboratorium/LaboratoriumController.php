@@ -404,6 +404,7 @@ class LaboratoriumController extends ApiController
             $dataSO->ketleukosit = $request['ketleukosit'];
             $dataSO->kettrombosit = $request['kettrombosit'];
             $dataSO->kesimpulan = $request['kesimpulan'];
+            $dataSO->rasio = $request['rasio'];
             $dataSO->save();
 
 //
