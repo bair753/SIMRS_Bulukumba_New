@@ -1265,7 +1265,7 @@ class MyJKNV2Controller extends ApiController
             ru.objectdepartemenfk,
             so.tglorder AS tgloperasi,
             ps.nobpjs,
-            so.statusorder
+            so.statusorder,pd.objectkelompokpasienlastfk
         FROM
             strukorder_t AS so
             INNER JOIN pasiendaftar_t AS pd ON pd.norec = so.noregistrasifk
