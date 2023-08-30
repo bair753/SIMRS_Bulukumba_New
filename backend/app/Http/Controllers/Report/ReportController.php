@@ -787,7 +787,7 @@ class ReportController extends ApiController{
             echo 'Data Tidak ada ';
             return;
         }
-       dd($raw);
+    //    dd($raw);
         $pageWidth = 950;
 
         return view('report.rad.expertiseusg',
