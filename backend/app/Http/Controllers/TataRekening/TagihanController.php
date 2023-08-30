@@ -4136,38 +4136,13 @@ class TagihanController  extends ApiController
     }
     public function getPegawaiSaeutik(Request $request)
     {
-        $req = $request->all();
+        $pelayananpasien = DB::table('pelayananpasienpetugas_t as pp')
+        ->leftjoin('pegawai_m as pg', 'pg.id', '=','pp.objectpegawaifk')
+        ->select('pg.id', 'pg.namalengkap','pp.dokterluar')
+        ->where('pp.pelayananpasien', $request['norec_pp'])
+        ->get();
 
-        $Pegawai = \DB::table('pegawai_m as ru')
-            ->select('ru.id','ru.namalengkap')
-            ->where('ru.statusenabled', true)
-//            ->where('ru.objectjenispegawaifk', 1)
-            ->orderBy('ru.namalengkap');
-
-        if(isset($req['namapegawai']) &&
-            $req['namapegawai']!="" &&
-            $req['namapegawai']!="undefined"){
-            $Pegawai = $Pegawai->where('ru.namalengkap','ilike','%'. $req['namapegawai'] .'%' );
-        };
-        if(isset($req['dokterluar']) &&
-        $req['dokterluar']!="" &&
-        $req['dokterluar']!="undefined"){
-            $Pegawai = array(
-                'namapegawai' => $req['dokterluar']);
-            return $this->respond($Pegawai);
-    };
-        if(isset($req['filter']['filters'][0]['value']) &&
-            $req['filter']['filters'][0]['value']!="" &&
-            $req['filter']['filters'][0]['value']!="undefined"){
-            $Pegawai = $Pegawai
-                ->where('ru.namalengkap','ilike','%'.$req['filter']['filters'][0]['value'].'%' );
-//                ->orWhere('dg.kddiagnosatindakan','ilike',$req['filter']['filters'][0]['value'].'%' )  ;
-        }
-
-        $Pegawai=$Pegawai->take(10);
-        $Pegawai=$Pegawai->get();
-
-        return $this->respond($Pegawai);
+        return $this->respond($pelayananpasien);
     }
     public function getComboJenisPetugasPel(Request $request)
     {
