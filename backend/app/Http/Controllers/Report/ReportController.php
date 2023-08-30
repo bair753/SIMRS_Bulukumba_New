@@ -646,7 +646,7 @@ class ReportController extends ApiController{
                 alm.alamatlengkap || ' ' || ds.namadesakelurahan || ' '|| kc.namakecamatan
                 || ' ' || kk.namakotakabupaten || ' '  || pro.namapropinsi )
             END AS alamatlengkap,
-            pg.namalengkap as perujuk,pg2.namalengkap as dokterrad,
+            pg.namalengkap as perujuk,pg2.namalengkap as dokterrad,p3.dokterluar as dokterluar,
             pr.namaproduk,replace(so.keterangan, '~', '<br>') as keterangan,pd.noregistrasi,pg2.nippns,pg3.namalengkap as dokterpengirim,
             pg2.id as pgid
             FROM
@@ -656,6 +656,7 @@ class ReportController extends ApiController{
             INNER JOIN kelompokpasien_m AS kp ON kp. ID = pd.objectkelompokpasienlastfk
             INNER JOIN ruangan_m AS ru ON ru. ID = pd.objectruanganlastfk
             INNER JOIN pelayananpasien_t AS pp ON pp.norec = so.pelayananpasienfk
+            LEFT JOIN pelayananpasienpetugas_t AS p3 ON pp.norec = p3.pelayananpasien
             INNER JOIN produk_m AS pr ON pr.id = pp.produkfk
             LEFT JOIN jeniskelamin_m AS jk ON jk. ID = ps.objectjeniskelaminfk
             LEFT JOIN kelompokpasien_m AS kps ON kps. ID = pd.objectkelompokpasienlastfk
@@ -680,7 +681,7 @@ class ReportController extends ApiController{
             echo 'Data Tidak ada ';
             return;
         }
-//        dd($raw);
+    //    dd($raw);
         $pageWidth = 950;
 
         return view('report.rad.expertise',
@@ -786,7 +787,7 @@ class ReportController extends ApiController{
             echo 'Data Tidak ada ';
             return;
         }
-    //    dd($raw);
+       dd($raw);
         $pageWidth = 950;
 
         return view('report.rad.expertiseusg',
