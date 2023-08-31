@@ -1,6 +1,6 @@
 define(['initialize', 'Configuration'], function (initialize, config) {
     'use strict';
-    initialize.controller('HolterMonitorCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
+    initialize.controller('AudiometriCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
         function ($q, $rootScope, $scope, ModelItem, $state, cacheHelper, dateHelper, medifirstService) {
 
             $scope.noCM = $state.params.noCM;
@@ -10,11 +10,11 @@ define(['initialize', 'Configuration'], function (initialize, config) {
             $scope.totalSkor = 0
             $scope.totalSkor2 = 0
             $scope.item.objImg =[]
-            $scope.item.objImg[32116627] = "../app/images/svg/no-image.svg"
+            $scope.item.objImg[32116619] = "../app/images/svg/no-image.svg"
          
             $scope.cc = {}
             var nomorEMR = '-'
-            var emrfk_ = 290182;
+            var emrfk_ = 290178;
             $scope.cc.emrfk = emrfk_
             var dataLoad = []
             $scope.isCetak = true
@@ -45,7 +45,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 if (norecEMR == '') return
                 var local = JSON.parse(localStorage.getItem('profile'));
                 var nama = medifirstService.getPegawaiLogin().namalengkap;
-                window.open(config.baseApiBackend + 'report/cetak-holterMonitor?nocm='
+                window.open(config.baseApiBackend + 'report/cetak-audiometri?nocm='
                     + $scope.cc.nocm + '&norec_apd=' + $scope.cc.norec + '&emr=' + norecEMR
                     + '&emrfk=' + $scope.cc.emrfk
                     + '&kdprofile=' + local.id
@@ -111,7 +111,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
             medifirstService.get("emr/get-emr-transaksi-detail?noemr=" + nomorEMR + "&emrfk=" + $scope.cc.emrfk, true).then(function (dat) {
                 $scope.item.obj = []
                 $scope.item.obj2 = []
-                $scope.item.obj[32116626] = $scope.now;
+                $scope.item.obj[32116618] = $scope.now;
                 dataLoad = dat.data.data
            
                 // console.log(dataLoad)
@@ -225,7 +225,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 var arrSaveImg = [];
                 var arrSave = [];   
                 
-                if($scope.item.objImg[32116627].substring(17, 20) == 'pdf'){
+                if($scope.item.objImg[32116619].substring(17, 20) == 'pdf'){
                     toastr.warning('File harus jpg/jpeg/png/svg','Peringatan')
                     return
                 }
@@ -251,7 +251,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 
                     $rootScope.loadRiwayat()
                     medifirstService.postLogging('EMR', 'norec emrpasien_t', e.data.data.norec,  
-                    'Holter Monitor' + ' dengan No EMR - ' +e.data.data.noemr +  ' pada No Registrasi ' 
+                    'Audiometri' + ' dengan No EMR - ' +e.data.data.noemr +  ' pada No Registrasi ' 
                     + $scope.cc.noregistrasi).then(function (res) {
                     })
                       $scope.cc.norec_emr = e.data.data.noemr
@@ -270,7 +270,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                        //     debugger;
                             var binaryString = readerEvt.target.result;
                     
-                           $scope.item.objImg[32116627] = binaryString;
+                           $scope.item.objImg[32116619] = binaryString;
                          
                         }
                         reader.onloadend = function () {
