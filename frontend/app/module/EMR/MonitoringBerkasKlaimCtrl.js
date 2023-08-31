@@ -38,6 +38,10 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     $scope.listAdminTHT = data.data.adminTHT;
                     $scope.listAdminBedah = data.data.adminBedah;
                     $scope.listAdminKulit = data.data.adminKulit;
+                    $scope.listAdminInterna = data.data.adminInterna;
+                    $scope.listAdminSaraf = data.data.adminSaraf;
+                    $scope.listAdminOrto = data.data.adminOrto;
+                    $scope.listAdminJantung = data.data.adminJantung;
                 })
                 $scope.isRouteLoading = true;
             }
@@ -86,6 +90,10 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     var adminTHT = $scope.listAdminTHT;
                     var adminKulit = $scope.listAdminKulit;
                     var adminBedah = $scope.listAdminBedah;
+                    var adminInterna = $scope.listAdminInterna;
+                    var adminSaraf = $scope.listAdminSaraf;
+                    var adminOrto = $scope.listAdminOrto;
+                    var adminJantung = $scope.listAdminJantung;
                     if(adminRadiologi.includes(medifirstService.getPegawaiLogin().id)){
                         var dataMaster = dataKlaim.filter(function (el) {
                             return el.id == 20 || el.id == 5 || el.id == 32;
@@ -104,6 +112,26 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     }else if(adminBedah.includes(medifirstService.getPegawaiLogin().id)){
                         var dataMaster = dataKlaim.filter(function (el) {
                             return el.id == 66 || el.id == 15 || el.id == 65 || el.id == 96;
+                            }
+                        );
+                    }else if(adminInterna.includes(medifirstService.getPegawaiLogin().id)){
+                        var dataMaster = dataKlaim.filter(function (el) {
+                            return el.id == 66 || el.id == 15 || el.id == 21 || el.id == 65 || el.id == 93 || el.id == 112;
+                            }
+                        );
+                    }else if(adminSaraf.includes(medifirstService.getPegawaiLogin().id)){
+                        var dataMaster = dataKlaim.filter(function (el) {
+                            return el.id == 66 || el.id == 15 || el.id == 21 || el.id == 65 || el.id == 93 || el.id == 112;
+                            }
+                        );
+                    }else if(adminOrto.includes(medifirstService.getPegawaiLogin().id)){
+                        var dataMaster = dataKlaim.filter(function (el) {
+                            return el.id == 66 || el.id == 15 || el.id == 21 || el.id == 65 || el.id == 98 || el.id == 102;
+                            }
+                        );
+                    }else if(adminJantung.includes(medifirstService.getPegawaiLogin().id)){
+                        var dataMaster = dataKlaim.filter(function (el) {
+                            return el.id == 66 || el.id == 15 || el.id == 21 || el.id == 65 || el.id == 93 || el.id == 113 || el.id == 94 || el.id == 114;
                             }
                         );
                     }else{
