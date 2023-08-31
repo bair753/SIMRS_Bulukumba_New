@@ -131,7 +131,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                         );
                     }else if(adminJantung.includes(medifirstService.getPegawaiLogin().id)){
                         var dataMaster = dataKlaim.filter(function (el) {
-                            return el.id == 66 || el.id == 15 || el.id == 21 || el.id == 65 || el.id == 93 || el.id == 113 || el.id == 94;
+                            return el.id == 66 || el.id == 15 || el.id == 21 || el.id == 65 || el.id == 93 || el.id == 113 || el.id == 94 || el.id == 114;
                             }
                         );
                     }else{
