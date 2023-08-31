@@ -1279,8 +1279,8 @@ class MyJKNV2Controller extends ApiController
             AND pd.statusenabled = TRUE 
             AND so.kdprofile = $kdProfile
             AND pd.kdprofile = $kdProfile
-            AND so.tglorder BETWEEN '$tglAwal' 
-            AND '$tglAkhir' 
+            -- AND so.tglorder BETWEEN '$tglAwal' 
+            -- AND '$tglAkhir' 
             AND so.keteranganorder = 'Pesan Jadwal Operasi' 
             AND so.objectkelompoktransaksifk = 22 
         ORDER BY
