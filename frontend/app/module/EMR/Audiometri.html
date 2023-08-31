@@ -1,0 +1,112 @@
+<style type="text/css">
+    fieldset {
+        border-radius: 5px;
+        border: 1px solid #228be6;
+    }
+
+    .k-slider-horizontal {
+        display: inline-block;
+        float: left;
+        width: 450px;
+
+        height: 26px;
+
+ 
+
+    }
+    table,
+    th,
+    td {
+        border: 1px solid #929191;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+
+    th,
+    td {
+        padding: 5px;
+        text-align: left;
+    }
+
+    .k-slider {
+
+        margin-left: 3%;
+        margin-right: 3%;
+        margin-top: 1%;
+        margin-bottom: 5%;
+        display: inline-block;
+    }
+
+    .activeBtn {
+        background-color: #10c4b2;
+        color: #ffffff;
+    }
+
+    .gambarAset {
+        max-width: 310px;
+        max-height: 100%;
+        display: block;
+        height: auto;
+    }
+    hr {
+        border: 1px dashed #cccccc;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        display: inline-block;
+        width: 100%;
+    }
+
+</style>
+<div class="grid_12">
+<div class="grid_12">
+    <div class="panel panel-default container_12">
+            <div class="panel-heading" c-translate>Audiometri</div>
+    </div>
+
+    <div class="grid_12">
+        <div class="grid_12">
+            <fieldset style="margin-top: 10px; ">
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_6">
+                        <div class="grid_12">
+                            <label c-label item="item">Tgl Pemeriksaan</label>
+                        </div>
+                        <div class="grid_12">
+                            <input style="width: 90%" k-ng-model="item.obj[32116618]" kendo-datetimepicker placeholer="YYYY:MM:DD HH:mm"
+                                k-format="'yyyy-MM-dd HH:mm'" />
+                        </div>
+                    </div>                       
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    
+    <div class="grid_12">
+        <div class="grid_12">
+            <fieldset style="margin-top: 10px; ">
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_12">
+                        <div class="grid_12">
+                            <label c-label item="item">Upload Hasil</label>
+                        </div>
+                        <div class="grid_12">
+                            <div class="grid_12" style="margin-top: 10px;">
+                                <input type="file" id="fileEKG" accept="application" k-ng-model="item.obj[32116619]" kendo-upload k-select="onSelect1"/>
+                            </div>
+                            <div class="grid_12" style="margin-top: 10px">
+                                <div id="preview1" >
+                                    <img class="gambarAset" style="min-width: 700px;" src="{{item.objImg[32116619]}}" />
+                                </div>
+                             </div>
+                        </div>
+                    </div>                     
+                </div>
+            </fieldset>
+        </div>
+    </div>
+
+        <div class="grid_12">
+            <div ng-include='"../app/module/EMR/TemplateButtonDinamis" '></div>
+        </div>
+    </div>
+</div>

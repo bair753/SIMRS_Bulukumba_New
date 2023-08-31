@@ -3733,6 +3733,26 @@
         {
             "nameDep": "PengantarPemeriksaanPatologiCtrl",
             "urlDep": "module/EMR/PengantarPemeriksaanPatologiCtrl"
+        },
+        {
+            "nameDep": "AudiometriCtrl",
+            "urlDep": "module/EMR/AudiometriCtrl"
+        },
+        {
+            "nameDep": "TympanometriCtrl",
+            "urlDep": "module/EMR/TympanometriCtrl"
+        },
+        {
+            "nameDep": "ElectroencephalogramCtrl",
+            "urlDep": "module/EMR/ElectroencephalogramCtrl"
+        },
+        {
+            "nameDep": "TreadmillCtrl",
+            "urlDep": "module/EMR/TreadmillCtrl"
+        },
+        {
+            "nameDep": "HolterMonitorCtrl",
+            "urlDep": "module/EMR/HolterMonitorCtrl"
         }
     ]
 }

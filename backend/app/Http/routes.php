@@ -2787,6 +2787,11 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
         Route::get('report/cetak-partograf', 'Report\ReportController@partograf');
         Route::get('report/cetak-suket-kelahiran', 'Report\ReportController@suketKelahiran');
         Route::get('report/cetak-ekg', 'Report\ReportController@ekg');
+        Route::get('report/cetak-audiometri', 'Report\ReportController@audiometri');
+        Route::get('report/cetak-tympanometri', 'Report\ReportController@tympanometri');
+        Route::get('report/cetak-electroencephalogram', 'Report\ReportController@electroencephalogram');
+        Route::get('report/cetak-treadmill', 'Report\ReportController@treadmill');
+        Route::get('report/cetak-holterMonitor', 'Report\ReportController@holterMonitor');
         Route::get('report/cetak-echocardiografi', 'Report\ReportController@echocardiografi');
         Route::get('report/cetak-lembar-kerja-neonatus', 'Report\ReportController@lembarKerjaNeonatus');
         Route::get('report/cetak-bayi-sepsis', 'Report\ReportController@bayiSepsis');
