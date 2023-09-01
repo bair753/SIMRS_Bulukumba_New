@@ -2901,6 +2901,24 @@ class MasterController extends ApiController{
 
         $adminJantung = SettingDataFixed::where('id', 1596)->first();
         $adminJantung = $adminJantung->nilaifield;
+
+        $adminMata = SettingDataFixed::where('id', 1597)->first();
+        $adminMata = $adminMata->nilaifield;
+
+        $adminKIA = SettingDataFixed::where('id', 1598)->first();
+        $adminKIA = $adminKIA->nilaifield;
+
+        $adminJiwa = SettingDataFixed::where('id', 1599)->first();
+        $adminJiwa = $adminJiwa->nilaifield;
+
+        $adminAnak = SettingDataFixed::where('id', 1600)->first();
+        $adminAnak = $adminAnak->nilaifield;
+
+        $adminParu = SettingDataFixed::where('id', 1601)->first();
+        $adminParu = $adminParu->nilaifield;
+
+        $adminBedahSaraf = SettingDataFixed::where('id', 1602)->first();
+        $adminBedahSaraf = $adminBedahSaraf->nilaifield;
         
         $admin = [
             'adminRadiologi' => $adminRadiologi,
@@ -2911,6 +2929,12 @@ class MasterController extends ApiController{
             'adminSaraf' => $adminSaraf,
             'adminOrto' => $adminOrto,
             'adminJantung' => $adminJantung,
+            'adminMata' => $adminMata,
+            'adminKIA' => $adminKIA,
+            'adminJiwa' => $adminJantung,
+            'adminAnak' => $adminJantung,
+            'adminParu' => $adminParu,
+            'adminBedahSaraf' => $adminBedahSaraf,
         ];
 
         return $this->respond($admin);

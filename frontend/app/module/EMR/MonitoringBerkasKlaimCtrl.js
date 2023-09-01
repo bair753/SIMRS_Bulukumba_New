@@ -42,6 +42,12 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     $scope.listAdminSaraf = data.data.adminSaraf;
                     $scope.listAdminOrto = data.data.adminOrto;
                     $scope.listAdminJantung = data.data.adminJantung;
+                    $scope.listAdminMata = data.data.adminMata;
+                    $scope.listAdminKIA = data.data.adminKIA;
+                    $scope.listAdminJiwa = data.data.adminJiwa;
+                    $scope.listAdminAnak = data.data.adminAnak;
+                    $scope.listAdminParu = data.data.adminParu;
+                    $scope.listAdminBedahSaraf = data.data.adminBedahSaraf;
                 })
                 $scope.isRouteLoading = true;
             }
@@ -94,6 +100,12 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     var adminSaraf = $scope.listAdminSaraf;
                     var adminOrto = $scope.listAdminOrto;
                     var adminJantung = $scope.listAdminJantung;
+                    var adminMata = $scope.listAdminMata;
+                    var adminKIA = $scope.listAdminKIA;
+                    var adminJiwa = $scope.listAdminJiwa;
+                    var adminAnak = $scope.listAdminAnak;
+                    var adminParu = $scope.listAdminParu;
+                    var adminBedahSaraf = $scope.listAdminBedahSaraf;
                     if(adminRadiologi.includes(medifirstService.getPegawaiLogin().id)){
                         var dataMaster = dataKlaim.filter(function (el) {
                             return el.id == 20 || el.id == 5 || el.id == 32;
@@ -132,6 +144,36 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     }else if(adminJantung.includes(medifirstService.getPegawaiLogin().id)){
                         var dataMaster = dataKlaim.filter(function (el) {
                             return el.id == 66 || el.id == 15 || el.id == 21 || el.id == 65 || el.id == 93 || el.id == 113 || el.id == 94 || el.id == 114;
+                            }
+                        );
+                    }else if(adminMata.includes(medifirstService.getPegawaiLogin().id)){
+                        var dataMaster = dataKlaim.filter(function (el) {
+                            return el.id == 66 || el.id == 15 || el.id == 21 || el.id == 65 || el.id == 22;
+                            }
+                        );
+                    }else if(adminKIA.includes(medifirstService.getPegawaiLogin().id)){
+                        var dataMaster = dataKlaim.filter(function (el) {
+                            return el.id == 66 || el.id == 15 || el.id == 21 || el.id == 65;
+                            }
+                        );
+                    }else if(adminJiwa.includes(medifirstService.getPegawaiLogin().id)){
+                        var dataMaster = dataKlaim.filter(function (el) {
+                            return el.id == 66 || el.id == 15 || el.id == 21 || el.id == 65;
+                            }
+                        );
+                    }else if(adminAnak.includes(medifirstService.getPegawaiLogin().id)){
+                        var dataMaster = dataKlaim.filter(function (el) {
+                            return el.id == 66 || el.id == 15 || el.id == 21 || el.id == 65;
+                            }
+                        );
+                    }else if(adminParu.includes(medifirstService.getPegawaiLogin().id)){
+                        var dataMaster = dataKlaim.filter(function (el) {
+                            return el.id == 66 || el.id == 15 || el.id == 21 || el.id == 65;
+                            }
+                        );
+                    }else if(adminBedahSaraf.includes(medifirstService.getPegawaiLogin().id)){
+                        var dataMaster = dataKlaim.filter(function (el) {
+                            return el.id == 66 || el.id == 15 || el.id == 21 || el.id == 65;
                             }
                         );
                     }else{
