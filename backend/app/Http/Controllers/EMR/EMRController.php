@@ -5523,6 +5523,7 @@ class EMRController  extends ApiController
         $data = $data->where('so.keteranganorder', 'ilike', '%' . 'Order Farmasi' . '%');
         $data = $data->where('so.objectkelompoktransaksifk', 4);
         $data = $data->where('so.statusenabled', true);
+        $data = $data->orderBy('so.tglorder', 'desc');
         $data = $data->get();
         $status = '';
 
