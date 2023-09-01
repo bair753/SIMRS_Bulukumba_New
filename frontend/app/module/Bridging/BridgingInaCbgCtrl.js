@@ -7828,7 +7828,7 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 				}
 				var emrfk = [290141] // emrfk Pemberian Makan Awal lebih 2500 gram
 
-				medifirstService.get("bridging/inacbg/get-rincian-operasi?noregistrasi=" + $scope.dataPasienSelected.noregistrasi + '&emrfk=' + emrfk
+				medifirstService.get("bridging/inacbg/get-all-page-inacbg?noregistrasi=" + $scope.dataPasienSelected.noregistrasi + '&emrfk=' + emrfk
 					// medifirstService.get("lab-radiologi/get-rincian-pelayanan?objectdepartemenfk=" + departemenfk + "&noregistrasi=" +   $scope.item.noregistrasi
 					, true).then(function (dat) {
 						$scope.dataDaftarPemberianMakanAwal2500 = {
@@ -7869,11 +7869,11 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 							"title": "Nama EMR",
 							"width": "160px"
 						},
-						{
-							"field": "index",
-							"title": "Page",
-							"width": "160px"
-						},
+						// {
+						// 	"field": "index",
+						// 	"title": "Page",
+						// 	"width": "160px"
+						// },
 				],
 				sortable: {
 						mode: "single",
