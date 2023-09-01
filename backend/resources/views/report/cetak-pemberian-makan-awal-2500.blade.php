@@ -162,7 +162,7 @@
         }
     </style>
 </head>
-<body ng-controller="cetakPemberianMakanAwal2000">
+<body ng-controller="cetakPemberianMakanAwal2500">
 	@if (!empty($res['d1']))
 		<div class="format">
 			<table width='100%'>
@@ -4374,9 +4374,9 @@
                     return deffer.promise;
                 },
             }
-	}
+	});
 
-    angular.controller('cetakPemberianMakanAwal2000', function ($scope, $http, httpService) {
+    angular.controller('cetakPemberianMakanAwal2500', function ($scope, $http, httpService) {
         $scope.item = {
             obj: [],
             obj2: [],
