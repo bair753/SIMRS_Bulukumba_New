@@ -4534,6 +4534,7 @@ class ReportController extends ApiController{
     {
         $kdProfile = $request['kdprofile'];
         $noregistrasi = $request['noregistrasi'];
+        $nocm = $request['nocm'];
 
         $kelTrans = KelompokTransaksi::where('kelompoktransaksi', 'KONSULTASI DOKTER')->first();
         $data = \DB::table('strukorder_t as so')
@@ -4550,11 +4551,18 @@ class ReportController extends ApiController{
                 'ps.namapasien', 'ps.tgllahir', 'ps.noidentitas', 'pg.id as pegawaifk', 'so.objectruangantujuanfk', 'so.objectruanganfk', 'apd.norec as norec_apd',
                 'so.keteranganlainnya')
             ->where('so.kdprofile',$kdProfile)
-            ->where('pd.noregistrasi',$noregistrasi)
             ->where('so.statusenabled', true)
             ->where('so.objectkelompoktransaksifk', $kelTrans->id)
             ->whereNotNull('so.keteranganlainnya')
-            ->orderBy('so.tglorder', 'desc')->get();
+            ->orderBy('so.tglorder', 'desc');
+            
+            if (isset($request['noregistrasi']) && $request['noregistrasi'] != "" && $request['noregistrasi'] != "undefined") {
+                $data = $data->where('pd.noregistrasi',$noregistrasi);
+            }
+            if (isset($request['nocm']) && $request['nocm'] != "" && $request['nocm'] != "undefined") {
+                $data = $data->where('ps.nocm',$nocm);
+            }
+            $data = $data->get();
             // dd($data);
 
         $res['profile'] = Profile::where('id', $kdProfile)->first();

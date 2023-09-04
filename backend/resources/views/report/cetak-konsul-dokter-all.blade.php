@@ -406,13 +406,15 @@
             width: 100
         });
 
-        $(document).ready(function () {
-            window.print();
-        });
+        
     </script>
 @php
     $no++;
 @endphp
 @endforeach
-
+<script>
+    $(document).ready(function () {
+                window.print();
+            });
+</script>
 </html>
