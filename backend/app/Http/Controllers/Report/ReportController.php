@@ -1112,7 +1112,7 @@ class ReportController extends ApiController{
              CASE WHEN hpl.diagnosapb IS NULL THEN  '' ELSE  hpl.diagnosapb  END AS diagnosapb,
              CASE WHEN hpl.keteranganpb IS NULL THEN ''  ELSE hpl.keteranganpb END AS keteranganpb,
              CASE WHEN pg1.namalengkap IS NULL THEN '' ELSE  pg1.namalengkap   END AS namapenanggungjawab,
-             CASE WHEN dm.kddiagnosa IS NULL THEN '' ELSE  dm.kddiagnosa   END AS diagnosa,
+             CASE WHEN dm.kddiagnosa IS NULL THEN '' ELSE  dm.namadiagnosa   END AS diagnosa,
              CASE WHEN pg1.nippns IS NULL THEN ''ELSE  pg1.nippns END AS nippns,hpl.nomorpa,
              ru.namaruangan as asal,pg1.nosip, hpl.jenis,
               CASE
@@ -1383,7 +1383,7 @@ class ReportController extends ApiController{
         ->where('hpl.statusenabled', true)
         ->select('pd.noregistrasi', 'pm.nocm', 'pm.namapasien', 'pm.tgllahir', 'hpl.dokterluar', 'dokterpengirim.namalengkap as namadokterpengirim', 'hpl.nomorpa', 'pp.tglpelayanan as tglterima', 'pg1.namalengkap as namapenanggungjawab', 'pg1.nippns',
     'jk.jeniskelamin', 'pm.tgllahir', 'hpl.jaringanasal', 'hpl.getjaringan', 'hpl.diagnosaklinik', 'hpl.keteranganklinik', 'hpl.tanggal as tgljawab', 'hpl.makroskopik','hpl.mikroskopik',
-'hpl.kesimpulan', 'hpl.anjuran', 'hpl.topografi', 'hpl.morfologi', 'hpl.diagnosapb','hpl.keteranganpb','ru.namaruangan as asal', 'pg1.nosip','kps.kelompokpasien', 'pd.norec as norec_pd', 'pd.objectruanganlastfk', 'alm.alamatlengkap', 'dm.kddiagnosa', 'hpl.jenis')
+'hpl.kesimpulan', 'hpl.anjuran', 'hpl.topografi', 'hpl.morfologi', 'hpl.diagnosapb','hpl.keteranganpb','ru.namaruangan as asal', 'pg1.nosip','kps.kelompokpasien', 'pd.norec as norec_pd', 'pd.objectruanganlastfk', 'alm.alamatlengkap', 'dm.kddiagnosa', 'hpl.jenis', 'dm.namadiagnosa as diagnosa')
         ->first();
         $raw->umur = $this->getAge($raw->tgllahir ,date('Y-m-d'));
         if(empty($raw)){
