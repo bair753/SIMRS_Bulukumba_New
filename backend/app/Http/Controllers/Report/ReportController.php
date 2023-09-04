@@ -1198,12 +1198,11 @@ class ReportController extends ApiController{
             return;
         }
         // dd($raw);
-        $pageWidth = 950;
         if($raw->jenis == 'pa'){
-            return view('report.lab.histopatologi', compact('raw', 'pageWidth','r', 'profile'));
+            return view('report.lab.histopatologi', compact('raw','r', 'profile'));
         }
 
-        return view('report.lab.sitologi', compact('raw', 'pageWidth','r', 'profile'));
+        return view('report.lab.sitologi', compact('raw','r', 'profile'));
 
     }
 
@@ -1397,7 +1396,7 @@ class ReportController extends ApiController{
         die;
         }else{
             if($raw->jenis == 'pa'){
-                return view('report.lab.histopatologi', compact('raw', 'pageWidth','r', 'profile'));
+                return view('report.lab.histopatologi', compact('raw','r', 'profile'));
             }
     
             return view('report.lab.sitologi', compact('raw','r', 'profile'));
