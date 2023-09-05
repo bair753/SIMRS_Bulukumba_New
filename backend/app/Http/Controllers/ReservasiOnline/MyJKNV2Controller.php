@@ -772,7 +772,8 @@ class MyJKNV2Controller extends ApiController
         try {
 
             AntrianPasienRegistrasi::where('norec',$data->norec)->update([
-                'isconfirm' => true
+                'isconfirm' => true,
+                'ischeckin' => true
             ]); 
             PasienDaftar::where('statusschedule',$data->noreservasi)->update([
                 'ischeckin' => true,
