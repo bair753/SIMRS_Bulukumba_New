@@ -44,13 +44,14 @@ class KiosKController extends ApiController
         $nontrian = AntrianPasienRegistrasi::where('jenis', $request['jenis'])
                         ->whereBetween('tanggalreservasi', [$tglAwal, $tglAkhir])
                         ->max('noantrian') + 1;
+        $pasien = AntrianPasienRegistrasi::where('noreservasi', $request['noreservasi'])->first();
         $kdRuanganTPP = $this->settingDataFixed('idRuanganTPP1',$kdProfile);
             if($request['noreservasi'] != null){
                 $updatepasien = AntrianPasienRegistrasi::where('noreservasi', $request['noreservasi'])->update([
                     'noantrian' => $nontrian,
-                    'ischeckin' => 't',
+                    'ischeckin' => true,
                 ]);
-                $noRec = $updatepasien->norec;
+                $noRec = $pasien->norec;
             }else{
                 $newptp = new AntrianPasienRegistrasi();
                 $norec = $newptp->generateNewId();
