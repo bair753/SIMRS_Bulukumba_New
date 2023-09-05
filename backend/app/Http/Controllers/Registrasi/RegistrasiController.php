@@ -339,13 +339,17 @@ class RegistrasiController extends ApiController
         }
         $tglAwal = date('Y-m-d 00:00:00');
         $tglAkhir = date('Y-m-d 23:59:59');
-        $nontrian = AntrianPasienRegistrasi::where('jenis', $request['jenis'])
-                        ->whereBetween('tanggalreservasi', [$tglAwal, $tglAkhir])
-                        ->max('noantrian') + 1;
+        $countNoAntrian = AntrianPasienDiperiksa::where('objectruanganfk',$r_NewPD['objectruanganfk'])
+                        ->where('kdprofile', $idProdile)
+                        ->where('tglregistrasi', '>=', $r_NewPD['tglregistrasidate'].' 00:00')
+                        ->where('tglregistrasi', '<=', $r_NewPD['tglregistrasidate'].' 23:59')
+                        ->where('statusenabled',true)
+                        ->max('noantrian');
+        $noAntrian = $countNoAntrian + 1;
         $CekAntrian= AntrianPasienRegistrasi::where('noreservasi', $r_NewPD['noreservasi'])->update(
             [
                 'ischeckin' => true,
-                'noantrian' => $nontrian,
+                'noantrian' => $noAntrian,
             ]
         );
         DB::beginTransaction();
@@ -6559,7 +6563,7 @@ class RegistrasiController extends ApiController
                 'jpl.jenispelayanan','pa.objectdiagnosafk as iddiagnosabpjs','ps.nobpjs','jks.jeniskelamin', 'pa.tglcreate',
                 DB::raw("pd.ismobilejkn,
                 case when pd.ismobilejkn = true then 
-                (case when pd.ischeckin = true  then 'Sudah Checkin' else 'Belum Checkin' end) else '-' end as statusjkn"), 'pd.statusschedule as statusschedule')
+                (case when pd.ischeckin = true  then 'Sudah Checkin' else 'Belum Checkin' end) else '-' end as statusjkn"), 'pd.statusschedule as statusschedule', 'apd.noantrian')
             ->whereNull('br.norec')
             ->where('pd.statusenabled', true)
             ->where('pd.kdprofile', (int)$kdProfile);
@@ -6631,7 +6635,7 @@ class RegistrasiController extends ApiController
             $data = $data->where('pd.jenispelayanan', '=', $filter['jenisPel']);
         }
 
-        $data = $data->orderBy('pd.noregistrasi');
+        $data = $data->orderBy('apd.noantrian');
 //        $data = $data->groupBy('pd.norec', 'pd.statusenabled', 'pd.tglregistrasi', 'ps.nocm', 'pd.nocmfk', 'pd.noregistrasi',
 //            'ru.namaruangan', 'ps.namapasien',
 //            'kp.kelompokpasien', 'rek.namarekanan', 'pg.namalengkap', 'pd.tglpulang', 'pd.statuspasien',
