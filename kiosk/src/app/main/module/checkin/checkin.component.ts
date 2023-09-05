@@ -88,8 +88,8 @@ export class CheckinComponent implements OnInit {
     +'&cekin=true').subscribe(e => {
       this.isloading = false
       if (e.data != null) {
-
-        let result = e.data
+        let result = e.data;     
+        
         let now = new Date();// new Date(new Date(tglRes).setHours(new Date(tglRes).getHours() - 1))
         let tglResDate = new Date(result.tanggalreservasi)
         var hours = this.diff_hours(tglResDate, now)
@@ -241,6 +241,7 @@ export class CheckinComponent implements OnInit {
       'tglregistrasi': moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
       'tglregistrasidate': moment(new Date()).format('YYYY-MM-DD'),
       'nocmfk': this.item.nocmfk,
+      'noreservasi': this.item.noreservasi,
       'objectruanganfk': this.item.objectruanganfk,
       'objectdepartemenfk': this.item.objectdepartemenfk,
       'objectkelasfk': 6,//nonkelas
@@ -285,6 +286,7 @@ export class CheckinComponent implements OnInit {
     }, error => {
 
     })
+    this.isInfoPasien = false
   }
   updateStatusConfirm() {
     let data = {
