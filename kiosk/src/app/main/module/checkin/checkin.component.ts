@@ -87,9 +87,9 @@ export class CheckinComponent implements OnInit {
     this.httpservice.get('medifirst2000/reservasionline/get-history?noReservasi=' + this.formGroup.get('noReservasi').value
     +'&cekin=true').subscribe(e => {
       this.isloading = false
-      if (e.data.length > 0) {
+      if (e.data != null) {
 
-        let result = e.data[0]
+        let result = e.data
         let now = new Date();// new Date(new Date(tglRes).setHours(new Date(tglRes).getHours() - 1))
         let tglResDate = new Date(result.tanggalreservasi)
         var hours = this.diff_hours(tglResDate, now)
@@ -208,7 +208,8 @@ export class CheckinComponent implements OnInit {
   savePasienPerjanjian() {
 
     let antrian = {
-      "jenis": this.item.prefixnoantrian//"D"
+      "jenis": this.item.prefixnoantrian,//"D"
+      "noreservasi": this.item.noreservasi
     }
     this.httpservice.post('medifirst2000/kiosk/save-antrian', antrian).subscribe(response => {
       // window.open(Configuration.get().apiBackend + 'medifirst2000/report/cetak-antrian?norec='
