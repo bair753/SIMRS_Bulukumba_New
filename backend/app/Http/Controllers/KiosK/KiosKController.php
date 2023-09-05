@@ -48,7 +48,9 @@ class KiosKController extends ApiController
             if($request['noreservasi'] != null){
                 $updatepasien = AntrianPasienRegistrasi::where('noreservasi', $request['noreservasi'])->update([
                     'noantrian' => $nontrian,
+                    'ischeckin' => true,
                 ]);
+                $noRec = $updatepasien->norec;
             }else{
                 $newptp = new AntrianPasienRegistrasi();
                 $norec = $newptp->generateNewId();
