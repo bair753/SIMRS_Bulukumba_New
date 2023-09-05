@@ -417,6 +417,7 @@ class ReservasiOnlineController extends ApiController
                 'ru.prefixnoantrian',
                 'apr.norujukan',
                 'apr.tanggal',
+                'apr.ischeckin',
                 'apr.jamreservasi',
                 DB::raw('(case when pm.namapasien is null then apr.namapasien else pm.namapasien end) as namapasien, 
                 (case when apr.isconfirm=true then \'Confirm\' else \'Reservasi\' end) as status,case when pm.tempatlahir is null then apr.tempatlahir else pm.tempatlahir end as tempatlahir,

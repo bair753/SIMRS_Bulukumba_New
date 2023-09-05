@@ -337,6 +337,7 @@ class RegistrasiController extends ApiController
         }else{
             $isRawatInap='false';
         }
+        $CekAntrian= AntrianPasienRegistrasi::where('noreservasi', $r_NewPD['noreservasi'])->update(['ischeckin' => true]);
         DB::beginTransaction();
         $cekUdahDaftar=PasienDaftar::where('nocmfk', $r_NewPD['nocmfk'])
             ->wherenull('tglpulang')

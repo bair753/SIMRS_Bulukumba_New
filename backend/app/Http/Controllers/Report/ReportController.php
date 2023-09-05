@@ -1893,10 +1893,17 @@ class ReportController extends ApiController{
             ->leftJoin('antrianpasienregistrasi_t as apr','apr.noreservasi','=','pd.statusschedule')
             ->select(DB::raw("pd.noregistrasi,ps.nocm,ps.tgllahir,ps.namapasien,to_char(pd.tglregistrasi, 'DD-MM-YYYY HH:mm') AS tglregistrasi,jk.reportdisplay AS jk, 
                      ap.alamatlengkap,ap.mobilephone2,ru.namaruangan AS ruanganperiksa,pp.namalengkap AS namadokter, 
-                     kp.kelompokpasien,apdp.noantrian,pd.statuspasien,apr.noreservasi,CASE WHEN apr.tanggalreservasi IS NULL THEN '' 
+                     kp.kelompokpasien,apr.noantrian,ru.prefixnoantrian,pd.statuspasien,apr.noreservasi,CASE WHEN apr.tanggalreservasi IS NULL THEN '' 
                      ELSE to_char(apr.tanggalreservasi, 'DD-MM-YYYY HH:mm') END AS tanggalreservasi"))
             ->where('pd.noregistrasi', $request['noregistrasi'])
             ->first();
+
+            $huruf = 'Z';
+            if ($registrasi->prefixnoantrian != null) {
+                $huruf = $registrasi->prefixnoantrian;
+            }
+            $nomorAntrian = $huruf . '-' . str_pad($registrasi->noantrian, 4, "0", STR_PAD_LEFT);
+            $registrasi->noantrian = $nomorAntrian;
 
         $statusonline = "";
         $status = "";
