@@ -10,6 +10,8 @@ define(['initialize', 'Configuration'], function (initialize, config) {
             $scope.norecPP = $state.params.norecPP
             $scope.norecOrder = undefined;
             $scope.dokter = "";
+            $scope.isPA = false;
+            $scope.isEDT = false;
             // $scope.shows = 0;
             $scope.item = {};
 
@@ -189,6 +191,14 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                             });
                         } else {
                             toastr.info('Data Hasil tidak ada', 'Info')
+                        }
+                        if($scope.norec_edt.length <= 0){
+                            $scope.isEDT = true;
+                            toastr.info('Data Hasil EDT tidak ditemukan', 'Info')
+                        }
+                        if($scope.norec_pa.length <= 0){
+                            $scope.isPA = true;
+                            toastr.info('Data Hasil PA tidak ditemukan', 'Info')
                         }
                     });
             }

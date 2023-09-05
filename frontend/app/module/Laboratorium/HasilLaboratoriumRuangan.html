@@ -62,10 +62,10 @@
                 <div class="grid_2">
                     <button class="btnTemplate1" ng-click="cetakhtml()"><i class="fa fa-print"></i>Cetak</button>
                 </div>
-                <div class="grid_2">
+                <div class="grid_2" ng-show="!isPA">
                     <button class="btnTemplate1" ng-click="cetakPA()"><i class="fa fa-print"></i>Cetak Hasil PA</button>
                 </div>
-                <div class="grid_2">
+                <div class="grid_2" ng-show="!isEDT">
                     <button class="btnTemplate1" ng-click="cetakEDT()"><i class="fa fa-print"></i>Cetak Hasil EDT</button>
                 </div>
             </div>
