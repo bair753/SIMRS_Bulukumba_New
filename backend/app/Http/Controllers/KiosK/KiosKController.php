@@ -41,30 +41,34 @@ class KiosKController extends ApiController
         $tglAyeuna = date('Y-m-d H:i:s');
         $tglAwal = date('Y-m-d 00:00:00');
         $tglAkhir = date('Y-m-d 23:59:59');
+        $nontrian = AntrianPasienRegistrasi::where('jenis', $request['jenis'])
+                        ->whereBetween('tanggalreservasi', [$tglAwal, $tglAkhir])
+                        ->max('noantrian') + 1;
         $kdRuanganTPP = $this->settingDataFixed('idRuanganTPP1',$kdProfile);
-
-            $newptp = new AntrianPasienRegistrasi();
-            $norec = $newptp->generateNewId();
-            $nontrian = AntrianPasienRegistrasi::where('jenis', $request['jenis'])
-                    ->whereBetween('tanggalreservasi', [$tglAwal, $tglAkhir])
-                    ->max('noantrian') + 1;
-            $newptp->norec = $norec;
-            $newptp->kdprofile = $kdProfile;
-            $newptp->statusenabled = true;
-            $newptp->objectruanganfk = isset($request['ruanganfk']) ? $request['ruanganfk']: $kdRuanganTPP;
-            $newptp->objectjeniskelaminfk = 0;
-            $newptp->noantrian = $nontrian;
-            $newptp->noreservasi = "-";
-            $newptp->objectpendidikanfk = 0;
-            $newptp->tanggalreservasi = $tglAyeuna;
-            $newptp->tipepasien = "BARU";
-            $newptp->type = "BARU";
-            $newptp->jenis = $request['jenis'];
-            $newptp->statuspanggil = 0;
-            $newptp->iskiosk = true;
-            $newptp->save();
-            $noRec = $newptp->norec;
-
+            if($request['noreservasi'] != null){
+                $updatepasien = AntrianPasienRegistrasi::where('noreservasi', $request['noreservasi'])->update([
+                    'noantrian' => $nontrian,
+                ]);
+            }else{
+                $newptp = new AntrianPasienRegistrasi();
+                $norec = $newptp->generateNewId();
+                $newptp->norec = $norec;
+                $newptp->kdprofile = $kdProfile;
+                $newptp->statusenabled = true;
+                $newptp->objectruanganfk = isset($request['ruanganfk']) ? $request['ruanganfk']: $kdRuanganTPP;
+                $newptp->objectjeniskelaminfk = 0;
+                $newptp->noantrian = $nontrian;
+                $newptp->noreservasi = "-";
+                $newptp->objectpendidikanfk = 0;
+                $newptp->tanggalreservasi = $tglAyeuna;
+                $newptp->tipepasien = "BARU";
+                $newptp->type = "BARU";
+                $newptp->jenis = $request['jenis'];
+                $newptp->statuspanggil = 0;
+                $newptp->iskiosk = true;
+                $newptp->save();
+                $noRec = $newptp->norec;
+            }
 
             $transMessage = "Simpan Antrian";
             $transStatus = 'true';
