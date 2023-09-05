@@ -6131,14 +6131,21 @@ class RegistrasiController extends ApiController
         $data = $data->get();
         foreach($data as $d){
             $d->nomorantrean  = null;
-            if($d->ismobilejkn ==true){
-                $huruf = 'Z';
+            // if($d->ismobilejkn ==true){
+            //     $huruf = 'Z';
+            //     if ($d->prefixnoantrian != null) {
+            //         $huruf = $d->prefixnoantrian;
+            //     }
+            //     $nomorAntrian = $huruf . '-' . str_pad($d->noantrian, 4, "0", STR_PAD_LEFT);
+            //     $d->nomorantrean = $nomorAntrian;
+            // }
+
+            $huruf = 'Z';
                 if ($d->prefixnoantrian != null) {
                     $huruf = $d->prefixnoantrian;
                 }
                 $nomorAntrian = $huruf . '-' . str_pad($d->noantrian, 4, "0", STR_PAD_LEFT);
                 $d->nomorantrean = $nomorAntrian;
-            }
         }
 
         $result = array(
