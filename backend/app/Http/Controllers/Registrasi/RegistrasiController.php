@@ -346,12 +346,14 @@ class RegistrasiController extends ApiController
                         ->where('statusenabled',true)
                         ->max('noantrian');
         $noAntrian = $countNoAntrian + 1;
-        $CekAntrian= AntrianPasienRegistrasi::where('noreservasi', $r_NewPD['noreservasi'])->update(
-            [
-                'ischeckin' => true,
-                'noantrian' => $noAntrian,
-            ]
-        );
+        if(isset($r_NewPD['noreservasi'])){
+            $CekAntrian= AntrianPasienRegistrasi::where('noreservasi', $r_NewPD['noreservasi'])->update(
+                [
+                    'ischeckin' => true,
+                    'noantrian' => $noAntrian,
+                ]
+            );
+        };
         DB::beginTransaction();
         $cekUdahDaftar=PasienDaftar::where('nocmfk', $r_NewPD['nocmfk'])
             ->wherenull('tglpulang')
