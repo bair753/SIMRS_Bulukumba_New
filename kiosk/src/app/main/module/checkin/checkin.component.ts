@@ -112,6 +112,16 @@ export class CheckinComponent implements OnInit {
           return
         }
 
+        if (result.ischeckin == true) {
+          this.alertService.error('', 'Kode reservasi sudah checkin sebelumnya', {
+            toastClass: 'toast ngx-toastr',
+            closeButton: true,
+            positionClass: 'toast-bottom-center'
+          });
+          // this.alertService.error('Info', 'Batas Waktu Check-In anda melebihi batas yang ditentukan')
+          return
+        }
+
         if (result.tgllahir == null)
           result.tgllahir = '-'
         else
