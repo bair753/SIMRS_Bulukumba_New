@@ -337,7 +337,17 @@ class RegistrasiController extends ApiController
         }else{
             $isRawatInap='false';
         }
-        $CekAntrian= AntrianPasienRegistrasi::where('noreservasi', $r_NewPD['noreservasi'])->update(['ischeckin' => true]);
+        $tglAwal = date('Y-m-d 00:00:00');
+        $tglAkhir = date('Y-m-d 23:59:59');
+        $nontrian = AntrianPasienRegistrasi::where('jenis', $request['jenis'])
+                        ->whereBetween('tanggalreservasi', [$tglAwal, $tglAkhir])
+                        ->max('noantrian') + 1;
+        $CekAntrian= AntrianPasienRegistrasi::where('noreservasi', $r_NewPD['noreservasi'])->update(
+            [
+                'ischeckin' => true,
+                'noantrian' => $nontrian,
+            ]
+        );
         DB::beginTransaction();
         $cekUdahDaftar=PasienDaftar::where('nocmfk', $r_NewPD['nocmfk'])
             ->wherenull('tglpulang')
@@ -385,6 +395,7 @@ class RegistrasiController extends ApiController
                 $dataPD->objectdokterpemeriksafk =  isset($r_NewPD['objectpegawaifk']) ? $r_NewPD['objectpegawaifk'] : null;
                 $dataPD->objectpegawaifk = isset($r_NewPD['objectpegawaifk']) ? $r_NewPD['objectpegawaifk'] : null;
                 $dataPD->iskajianawal = false;
+                $dataPD->ischeckin = true;
                 $dataPD->isonsiteservice = 0;
                 $dataPD->isregistrasilengkap = 0;
                 $dataPD->jenispelayanan = $r_NewPD['tipelayanan'];
