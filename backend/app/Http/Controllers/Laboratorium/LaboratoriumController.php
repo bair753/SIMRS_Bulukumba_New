@@ -1434,7 +1434,7 @@ class LaboratoriumController extends ApiController
             AND so.statusenabled = true
             AND so.keteranganorder = 'Order Laboratorium'
             AND so.objectkelompoktransaksifk = 93
-            AND pd.noregistrasi = '$r[noregistrasi]'
+            -- AND pd.noregistrasi = '$r[noregistrasi]'
             AND ps.nocm = '$r[norm]'
         ")));
 
