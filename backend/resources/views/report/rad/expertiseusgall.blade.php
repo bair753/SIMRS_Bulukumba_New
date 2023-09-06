@@ -112,7 +112,13 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                         </tr>
                         <tr>
                             <td width="22%"><font style="font-size: 12pt;" color="#000000;" >Dokter Pengirim</font></td>
-                            <td width="78%"><font style="font-size: 12pt;" color="#000000" >: {{ $item->dokterpengirim == null ? $item->dokterluar : $item->dokterpengirim }}</font></td>
+                            <td width="78%"><font style="font-size: 12pt;" color="#000000" >: 
+                                @if($item->dokterpengirim != null) {{ $item->dokterpengirim }} 
+                                @elseif($item->dokterpengirim == null) {{ $item->dokterluar }} 
+                                @elseif($item->dokterluar == null or $item->dokterluar == "") {{ $item->dokterrad }} 
+                                @else {{ $item->dokterrad }} 
+                                @endif
+                            </font></td>
                         </tr>
                     </table>
                     <table width="100%" cellspacing="0" cellpadding="0" style="border-left: 3px solid black;border-right: 3px solid black;">

@@ -1129,26 +1129,30 @@
                         />
                     </div> -->
             </div>
-            <div class="grid_2">
-                <input type="checkbox" class="k-checkbox" id="isDokterLuarRad" ng-model="model.dokterluar"
-                    value="true" ng-click="cekDokterLuarRad(model.dokterluar)">
-                <label class="k-checkbox-label" for="isDokterLuarRad"><b>
-                        Dokter Luar</b></label>
-            </div>
-            <div class="grid_3">
+            <div class="grid_6">
                 <div class="grid_12">
                     <label c-label item="item">Dokter Pengirim</label>
                 </div>
                 <div class="grid_12">
-                    <input style="width: 100%;" kendo-combo-box k-ng-model="model.pegawais"
-                        k-data-text-field="'namalengkap'" k-data-value-field="'id'" k-filter="'contains'"
-                        k-auto-bind="false" k-data-source="listDokter" ng-disabled="disabledokterPengirim1Rad"
-                        ng-hide="hidedokterPengirim1Rad" />
-                </div>
-                <div class="grid_12">
-                    <input c-text-box type="input" filter="'varchar'" class="k-textbox"
-                        ng-model="model.dokterluar" ng-disabled="disableDokterPengirim2Rad"
-                        ng-hide="hideDokterPengirim2Rad" />
+                    <div class="grid_6">
+                        <div class="grid_12">
+                            <label c-label item="item">Pegawai RS</label>
+                        </div>
+                        <div class="grid_12">
+                            <input style="width: 100%;" kendo-combo-box k-ng-model="model.pegawais"
+                                k-data-text-field="'namalengkap'" k-data-value-field="'id'" k-filter="'contains'"
+                                k-auto-bind="false" k-data-source="listDokter" />
+                        </div>
+                    </div>
+                    <div class="grid_6">
+                        <div class="grid_12">
+                            <label c-label item="item">Dokter Luar</label>
+                        </div>
+                        <div class="grid_12">
+                            <input c-text-box type="input" filter="'varchar'" class="k-textbox" ng-model="model.dokterluar" />
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
             <!-- <div class="grid_6">
