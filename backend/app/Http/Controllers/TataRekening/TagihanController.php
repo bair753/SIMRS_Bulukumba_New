@@ -4186,6 +4186,14 @@ class TagihanController  extends ApiController
         // return $request->all();
         DB::beginTransaction();
         $new_PPP=$request['pelayananpasienpetugas'];
+        $pegawaifk = null;
+        $dokterluar = null;
+        if(isset($new_PPP['objectpegawaifk'])){
+            $pegawaifk = $new_PPP['objectpegawaifk'];
+        }
+        if(isset($new_PPP['dokterluar'])){
+            $dokterluar = $new_PPP['dokterluar'];
+        }
 
         try {
             if (isset($new_PPP['norec_ppp']) && $new_PPP['norec_ppp']=='' && isset($new_PPP['objectjenispetugaspefk'])){
@@ -4206,8 +4214,8 @@ class TagihanController  extends ApiController
 //                $data1->ispetugaspepjawab = true;
                 $data1->pelayananpasien = $new_PPP['norec_pp'];
 //                $data1->tglpelayanan = true;
-                $data1->objectpegawaifk = $new_PPP['objectpegawaifk'];
-                $data1->dokterluar = $new_PPP['dokterluar'];
+                $data1->objectpegawaifk = $pegawaifk;
+                $data1->dokterluar = $dokterluar;
                 $data1->save();
 
             }

@@ -1888,8 +1888,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 }
             ];
             $scope.simpanDokterPelaksana = function () {
-                if ($scope.model.jenisPelaksana == undefined && $scope.itemdok.paramedis == undefined) {
-                    if ($scope.model.jenisPelaksana == undefined) {
+                    if ($scope.model.jenisPelaksana == undefined || $scope.model.jenisPelaksana == null) {
                         messageContainer.error("Jenis Pelaksana Tidak Boleh Kosong")
                         return
                     }
@@ -1897,7 +1896,6 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                         messageContainer.error("Pegawai Tidak Boleh Kosong")
                         return
                     }
-                }
 
 
                 var norec_ppp = "";
@@ -2027,12 +2025,12 @@ define(['initialize', 'Configuration'], function (initialize, config) {
             }
 
             $scope.clickD = function (dataDokterSelected) {
-                console.log();
+                
                 if (dataDokterSelected != undefined) {
                     if(dataDokterSelected.namalengkap != null){
                         medifirstService.get("tatarekening/get-pegawai-saeutik?norec_pp=" + $scope.dataSelected.norec_pp, true, true, 10)
                         .then(function (data) {
-
+                            
                             $scope.listPegawaiPemeriksa.add(data.data[0])
                             $scope.model.pegawais = data.data[0];
                             $scope.model.dokterluar = data.data[0].dokterluar;
