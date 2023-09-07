@@ -14017,8 +14017,8 @@
     ]
   },
   {
-    "name": "RekamMedis.AsesmenMedis.ResikoHumptyDumpty",
-    "url": "/ResikoHumptyDumpty",
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.ResikoHumptyDumpty",
+    "url": "/ResikoHumptyDumpty/:index/:idEMR",
     "templateurl": "module/EMR/ResikoHumptyDumpty.html",
     "controller": "ResikoHumptyDumptyCtrl",
     "deps": [
