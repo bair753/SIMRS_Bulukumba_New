@@ -118,7 +118,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                         );
                     }else if(adminKulit.includes(medifirstService.getPegawaiLogin().id)){
                         var dataMaster = dataKlaim.filter(function (el) {
-                            return el.id == 66 || el.id == 15 || el.id == 65 || el.id == 22;
+                            return el.id == 66 || el.id == 15 || el.id == 65 || el.id == 22 || el.id == 21;
                             }
                         );
                     }else if(adminBedah.includes(medifirstService.getPegawaiLogin().id)){
