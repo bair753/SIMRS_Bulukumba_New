@@ -64,6 +64,7 @@ body .ui-steps.steps-custom .ui-steps-item .ui-steps-title {
   max-height: 300px;
   text-align: center;
   background: #f5f5f5;
+  border-radius: 20px;
 }
 
 
@@ -71,19 +72,28 @@ body .ui-steps.steps-custom .ui-steps-item .ui-steps-title {
 .ex-image-a{
   background-image: url('/assets/humastemplate/images/pasien-baru1.png');
   background-size: cover;
+  margin: 0 0;
 }
 .ex-image-b{
   background-image: url('/assets/humastemplate/images/pasien-lama.png');
   background-size: cover;
+  margin: 0 0;
+}
+.ex-image-c{
+  background-image: url('/assets/humastemplate/images/pasien-lama.png');
+  background-size: cover;
+  font-size: 5pt;
 }
 .kanan {
-  float: right;
+  margin: 0px;
+  float: center;
+
 }
 
 .example-card:active {
   -moz-border-radius: 0px;
   -webkit-border-radius: 0px;
-  border-radius: 5px;
+  border-radius: 20px;
   background: #f5f5f5;
   -moz-box-shadow: 0 0 4px 0 rgba(10, 27, 102, 0.418);
   -webkit-box-shadow: 0 0 4px 0 rgba(10, 27, 102, 0.418);
@@ -98,7 +108,7 @@ body .ui-steps.steps-custom .ui-steps-item .ui-steps-title {
   background: #f5f5f5
 }
 
- 
+
 .poliklinik-card {
   max-width: 100px;
   max-height: 100px;
@@ -132,7 +142,7 @@ body .ui-menu-close-item {
 }
 .label-popup{
     font-weight: bold;
-    font-size: 14px;
+    font-size: 7px;
 }
 .label-popup-gede{
     font-weight: bold;
@@ -148,7 +158,7 @@ body .ui-menu-close-item {
 .zoom:hover {
   -ms-transform: scale(3); /* IE 9 */
   -webkit-transform: scale(3); /* Safari 3-8 */
-  transform: scale(3); 
+  transform: scale(3);
 }
 .ui-button-icon-only .fa {
   top: 50%;

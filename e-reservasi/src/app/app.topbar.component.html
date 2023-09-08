@@ -2,13 +2,13 @@
 <!-- <p-progressBar mode="indeterminate" [style]="{'height': '6px'}"  *ngIf="isLoading"></p-progressBar> -->
 
 <div class="topbar clearfix">
-    <a href="#" id="menu-button" (click)="app.onMenuButtonClick($event,0)">
+    <a href="/" id="menu-button" >
         <span class="fa fa-home"></span>
     </a>
     <!-- <a href="#" id="menu-button" (click)="app.onMenuButtonClick($event,0)">
             <span class="fa fa-chevron-circle-left"></span>
         </a> -->
-    <a class="morpheus-logo-link" href="#">
+    <a class="morpheus-logo-link">
         <!-- <img src="assets/img/logo_t.png" class="logo-top-bar morpheus-logo" /> -->
 
         <!-- <img src="assets/img/pemandu-512.png" class="logo-top-bar morpheus-logo" style="height: 40px;" /> -->
@@ -17,13 +17,13 @@
             |
         </span> -->
         <!-- <img src="assets/img/rsj_surakarta_logo.png" class="logo-top-bar morpheus-logo" /> -->
-        <img src="assets/img/logo_only.png" class="logo-top-bar morpheus-logo" style="height: 40px;" />
+        <!-- <img src="assets/img/logo_only.png" class="logo-top-bar morpheus-logo" style="height: 40px;" /> -->
          <!-- <img src="assets/img/logoRsBanten_mini.jpg" class="logo-top-bar morpheus-logo" style="height: 40px;" /> -->
         <!-- <span class="morpheus-logo-text" style="  font-size: 25px;">
             |
         </span>  -->
-        <span class="text-rss" >
-          RSUD H. A. Sulthan Daeng Radja Kab. Bulukumba
+        <span class="text-rss" style="font-size: 14px;">
+          RSUD H. A. Sulthan Daeng Radja
         </span>
         <!--
         <img src="assets/img/rsj_surakarta_logo.png" class="logo-top-bar morpheus-logo" />
@@ -34,9 +34,9 @@
         <!-- <p style="  color: #777777;">E-RESERVASI</p> -->
     </a>
 
-    <a id="topbar-menu-button" href="#" (click)="app.onTopbarMenuButtonClick($event)">
+    <button id="topbar-menu-button" (click)="app.onTopbarMenuButtonClick($event)">
         <i class="fa fa-bars"></i>
-    </a>
+    </button>
 
     <ul class="topbar-menu fadeInDown" [ngClass]="{'topbar-menu-visible': app.topbarMenuActive}">
         <!-- <li #search class="search-item" [ngClass]="{'active-topmenuitem':app.activeTopbarItem === search}"
@@ -48,7 +48,7 @@
                     [style]="{'width':'300px','font-size':'15px'}">
                 </p-calendar>
                 <i class="fa fa-calendar"></i>
-      
+
             </span>
         </li> -->
         <!-- <li #notifications [ngClass]="{'active-topmenuitem':app.activeTopbarItem === notifications}">
@@ -133,14 +133,14 @@
             </a>
             <ul class="fadeInDown">
                 <li role="menuitem">
-                    <a href="tel:+6287752073834">
+                    <a href="tel:+6285213067944">
                         <i class="fa fa-fw fa-phone"></i>
-                        <!-- <span>0877-5207-3834</span> -->
+                        <span>0852-1306-7944</span>
                     </a>
-                    <!-- https://api.whatsapp.com/send?phone=6287752073834 -->
-                    <a href="whatsapp://send?phone=6287752073834&text=Hello!">
+                    <!-- https://api.whatsapp.com/send?phone=6285213067944 -->
+                    <a href="whatsapp://send?phone=6285213067944&text=Hello!">
                         <i class="fa fa-fw fa-whatsapp"></i>
-                        <!-- <span>0877-5207-3834</span> -->
+                        <span>0852-1306-7944</span>
                     </a>
                     <!-- <a href="#" (click)="app.onTopbarSubItemClick($event)">
                         <i class="fa fa-fw fa-envelope-o"></i>
