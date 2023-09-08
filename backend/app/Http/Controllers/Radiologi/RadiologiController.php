@@ -728,11 +728,11 @@ class RadiologiController extends ApiController
 //            $tgl= $request['tglAkhir'];
 //            $data = $data->where('so.tglorder','<=', $tgl);
 //        }
-        if(isset($request['deptId']) && $request['deptId']!="" && $request['deptId']!="undefined"){
-            $data = $data->where('dept.id','=', $request['deptId']);
-        }else{
-            $data = $data->where('ru.objectdepartemenfk','=', $dataruangan[0]->objectdepartemenfk);
-        }
+        // if(isset($request['deptId']) && $request['deptId']!="" && $request['deptId']!="undefined"){
+        //     $data = $data->where('dept.id','=', $request['deptId']);
+        // }else{
+        //     $data = $data->where('ru.objectdepartemenfk','=', $dataruangan[0]->objectdepartemenfk);
+        // }
         if(isset($request['ruangId']) && $request['ruangId']!="" && $request['ruangId']!="undefined"){
             $data = $data->where('ru.id','=', $request['ruangId']);
         }
