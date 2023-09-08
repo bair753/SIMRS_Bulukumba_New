@@ -48,6 +48,13 @@ class ReservasiOnlineController extends ApiController
         foreach ($deptJalan as $item) {
             $kdDepartemenRawatJalan[] =  (int)$item;
         }
+        $dataInstalasi  = \DB::table('departemen_m')
+            ->select('id','namadepartemen')
+            ->where('statusenabled',true)
+            ->where('kdprofile', $kdProfile)
+            ->whereIn('id',[16,18,24,3,27])
+            ->orderBy('namadepartemen');
+        $dataInstalasi = $dataInstalasi->get();
 
         $dataRuanganJalan = \DB::table('ruangan_m as ru')
             ->select('ru.id', 'ru.namaruangan', 'ru.objectdepartemenfk')
@@ -91,6 +98,7 @@ class ReservasiOnlineController extends ApiController
             'message' => 'success',
             'status' => 200,
             'ruanganrajal' => $dataRuanganJalan,
+            'instalasi' => $dataInstalasi,
             'jeniskelamin' => $jk,
             'dokter' => $dkoter,
             'kelompokpasien' => $kelompokPasien,

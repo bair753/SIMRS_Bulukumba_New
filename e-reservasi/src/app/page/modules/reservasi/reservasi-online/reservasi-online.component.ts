@@ -34,6 +34,10 @@ export const MY_FORMATS = {
     monthYearA11yLabel: 'MMMM YYYY',
   },
 };
+export interface Departemen {
+  namadepartemen: string;
+  id: any
+}
 export interface Ruangan {
   namaruangan: string;
   objectdepartemenfk: any;
@@ -55,6 +59,7 @@ export class ReservasiOnlineComponent implements OnInit {
   loading: boolean = false;
   isBaru: boolean = false
   isLama: boolean = false
+  isPelayanan: boolean = false
   // minDate = new Date()
   minDate = new Date(new Date().setDate(new Date().getDate() + 1))
   maxDate: any
@@ -79,8 +84,10 @@ export class ReservasiOnlineComponent implements OnInit {
   loadingHistory: boolean = false
   @ViewChild('menuItems') menu: MenuItem[];
   dataSource: any[]
-  listJenisPasien: any[] = [{ 'id': 1, 'jenis': 'Baru', 'src': 'assets/humastemplate/images/pasien-baru1.png', 'style': 'kanan', 'images': 'ex-image-a' },
-  { 'id': 2, 'jenis': 'Lama', 'src': 'assets/humastemplate/images/pasien-lama.png', 'style': '', 'images': 'ex-image-b' }]
+  listJenisPasien: any[] = [
+    { 'id': 1, 'jenis': 'Baru', 'src': 'assets/humastemplate/images/pasien-baru1.png', 'style': '', 'images': 'ex-image-a' },
+    { 'id': 2, 'jenis': 'Lama', 'src': 'assets/humastemplate/images/pasien-lama.png', 'style': '', 'images': 'ex-image-b' },
+    { 'id': 3, 'jenis': 'Pelayanan', 'src': 'assets/humastemplate/images/pasien-lama.png', 'style': '', 'images': 'ex-image' }]
   selection: any = {}
   imageIndex: any = 0
   // imagesDenah: any="assets/img/denah_rs.jpg";
@@ -171,7 +178,8 @@ export class ReservasiOnlineComponent implements OnInit {
     }
   }; // {customBtns: [{name: 'print', icon: 'fa fa-print'}, {name: 'link', icon: 'fa fa-link'}]};
   poliKlinik = new FormControl();
-  listRuangan: Ruangan[] = []
+  listDepartemen: Departemen[] = [];
+  listRuangan: Ruangan[] = [];
   listRuanganF: Observable<Ruangan[]>;
   dokter2 = new FormControl();
   listDokter: Dokter[] = []
@@ -246,9 +254,14 @@ export class ReservasiOnlineComponent implements OnInit {
         this.listJK.push(element)
       });
 
+      e.instalasi.forEach(element => {
+        this.listDepartemen.push(element)
+      });
+
       e.ruanganrajal.forEach(element => {
         this.listRuangan.push(element)
       });
+
 
       // e.dokter.forEach(element => {
       //   this.listDokter.push(element)
@@ -548,12 +561,19 @@ export class ReservasiOnlineComponent implements OnInit {
     if (select.id == 1) {
       this.isBaru = true
       this.isLama = false
+      this.isPelayanan = false
     } else if (select.id == 2) {
       this.isBaru = false
       this.isLama = true
+      this.isPelayanan = false
+    } else if (select.id == 3) {
+      this.isBaru = false
+      this.isLama = false
+      this.isPelayanan = true
     } else {
       this.isBaru = false
       this.isLama = false
+      this.isPelayanan = false
     }
     this.selection.selectedJenis2 = select;
   }
@@ -727,12 +747,19 @@ export class ReservasiOnlineComponent implements OnInit {
     if (e == 1) {
       this.isBaru = true
       this.isLama = false
+      this.isPelayanan = false
     } else if (e == 2) {
       this.isBaru = false
       this.isLama = true
+      this.isPelayanan = false
+    }else if (e == 3) {
+      this.isBaru = false
+      this.isLama = false
+      this.isPelayanan = true
     } else {
       this.isBaru = false
       this.isLama = false
+      this.isPelayanan = false
     }
   }
 
