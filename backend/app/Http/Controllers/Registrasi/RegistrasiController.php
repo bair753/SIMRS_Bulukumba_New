@@ -8967,6 +8967,9 @@ class RegistrasiController extends ApiController
         $tglAwal = $request['tglAwal'];
         $tglAkhir = $request['tglAkhir'];
         $deptId = '';
+        $idDiagnosa = SettingDataFixed::where('id', 1603)->first();
+        $idDiagnosa = $idDiagnosa->nilaifield;
+
         if (isset($request['idDept']) && $request['idDept'] != "" && $request['idDept'] != "undefined") {
             $deptId = ' and ru.objectdepartemenfk = ' . $request['idDept'];
         }
@@ -8979,7 +8982,8 @@ class RegistrasiController extends ApiController
                             from antrianpasiendiperiksa_t as app
                             left join diagnosapasien_t as dp on dp.noregistrasifk = app.norec
                             left join detaildiagnosapasien_t as ddp on ddp.objectdiagnosapasienfk = dp.norec
-                            inner join diagnosa_m as dm on ddp.objectdiagnosafk = dm.id
+                            left join diagnosa_m as dm on ddp.objectdiagnosafk = dm.id
+                            left join diagnosatindakan_m as dmt on ddp.objectdiagnosafk = dmt.id
                             inner join pasiendaftar_t as pd on pd.norec = app.noregistrasifk
                             inner join pasien_m as ps on ps.id = pd.nocmfk
                             inner join jeniskelamin_m as jk on jk.id = ps.objectjeniskelaminfk 
@@ -8988,9 +8992,9 @@ class RegistrasiController extends ApiController
                             left join kotakabupaten_m as kot on kot.id = alm.objectkotakabupatenfk
                             left join propinsi_m as pro on pro.id = alm.objectpropinsifk
                             left join ruangan_m as ru on ru.id = pd.objectruanganlastfk
-                            where dm.kddiagnosa NOT ILIKE '%Z%'
-                            AND dm.kddiagnosa NOT ILIKE '%R%'
-                            AND dm.kddiagnosa NOT ILIKE '%O%' AND app.kdprofile = $idProfile $deptId and dm.kddiagnosa <> '-'  and
+                            WHERE dmt.id IN ($idDiagnosa) 
+                            OR dm.id IN ($idDiagnosa) 
+                            AND app.kdprofile = $idProfile $deptId and dm.kddiagnosa <> '-'  and
                             pd.tglregistrasi BETWEEN '$tglAwal' AND '$tglAkhir'
                             )as x GROUP BY x.namadiagnosa ,x.kddiagnosa) as z
                             group by z.jumlah,z.kddiagnosa,z.namadiagnosa,z.kasusbarulk,z.kasusbarup
