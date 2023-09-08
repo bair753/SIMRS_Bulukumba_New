@@ -2931,8 +2931,8 @@ class MasterController extends ApiController{
             'adminJantung' => $adminJantung,
             'adminMata' => $adminMata,
             'adminKIA' => $adminKIA,
-            'adminJiwa' => $adminJantung,
-            'adminAnak' => $adminJantung,
+            'adminJiwa' => $adminJiwa,
+            'adminAnak' => $adminAnak,
             'adminParu' => $adminParu,
             'adminBedahSaraf' => $adminBedahSaraf,
         ];
