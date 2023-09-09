@@ -3753,6 +3753,14 @@
         {
             "nameDep": "HolterMonitorCtrl",
             "urlDep": "module/EMR/HolterMonitorCtrl"
+        },
+        {
+            "nameDep": "FormulirPemeriksaaanAntiHIVCtrl",
+            "urlDep": "module/EMR/FormulirPemeriksaaanAntiHIVCtrl"
+        },
+        {
+            "nameDep": "FormulirInformedConsentCtrl",
+            "urlDep": "module/EMR/FormulirInformedConsentCtrl"
         }
     ]
 }
