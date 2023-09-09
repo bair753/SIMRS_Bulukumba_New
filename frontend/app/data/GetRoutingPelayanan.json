@@ -20929,6 +20929,52 @@
     ]
   },
   {
+    "name": "RekamMedis.AsesmenMedis.FormulirPemeriksaaanAntiHIV",
+    "url": "/FormulirPemeriksaaanAntiHIV",
+    "templateurl": "module/EMR/FormulirPemeriksaaanAntiHIV.html",
+    "controller": "FormulirPemeriksaaanAntiHIVCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.FormulirInformedConsent",
+    "url": "/FormulirInformedConsent",
+    "templateurl": "module/EMR/FormulirInformedConsent.html",
+    "controller": "FormulirInformedConsentCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
     "name": "RekamMedis.AsesmenMedis.HolterMonitor",
     "url": "/HolterMonitor",
     "templateurl": "module/EMR/HolterMonitor.html",

@@ -1,0 +1,120 @@
+<style type="text/css">
+    fieldset {
+        border-radius: 5px;
+        border: 1px solid #228be6;
+    }
+
+    .k-slider-horizontal {
+        display: inline-block;
+        float: left;
+        width: 450px;
+
+        height: 26px;
+
+
+    }
+
+    .k-slider {
+
+        margin-left: 3%;
+        margin-right: 3%;
+        margin-top: 1%;
+        margin-bottom: 5%;
+        display: inline-block;
+    }
+
+    .activeBtn {
+        background-color: #10c4b2;
+        color: #ffffff;
+    }
+    table,
+    th,
+    td {
+        border: 1px solid #929191;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+    td {
+        padding: 5px;
+        text-align: left;
+    }
+    th {
+        padding: 5px;
+        text-align: center;
+    }
+    .clicks{
+        cursor: pointer;
+    }
+</style>
+
+ <!-- ng-class="{'my-disable':true}" -->
+<!-- <div class="grid_12"  disable-contents="allDisabled" id="form"> -->
+<div class="grid_12">
+    <div class="grid_12">
+        <div class="panel panel-default container_12">
+            <div class="panel-heading" c-translate>Formulir Informed Consent HIV-AIDS</div>
+        </div>
+
+        <div class="grid_12">
+            <fieldset style="margin-top: 10px;">
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_12">
+                        <label item="item">Saya yang bertanda tangan dibawah ini telah mengerti tentang HIV-AIDS, 
+                            memahami prosedur pemeriksaan dan tahu segala akibat yang mungkin timbul dari diketahuinya status HIV saya, 
+                            serta telah diberikan konseling dengan baik maka saya:
+                        </label>
+                    </div>
+                    <div class="grid_12">
+                        <input c-text-box type="text" filter="" class="k-textbox" ng-model="item.obj[32116644]" />
+                    </div>
+                </div>
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_12">
+                        <label item="item">Saya menyetujui untuk menjalani pemeriksaan darah HIV dengan ketentuan hasil tes akan
+                            tetap rahasia dan terbuka hanya kepada saya dan untuk tim perawatan dan pengobatan. 
+                            Saya menyetujui diambil darah untuk pemeriksaan HIV dan kemudian mendiskusikan kambali hasil tes 
+                            dan cara-cara untuk meningkatkan kualitas hidup terkait HIV-AIDS.</label>
+                    </div>
+                </div>
+                <hr>
+                <div class="grid_12">
+                    <div class="grid_12">
+                        <label item="item">Saya dengan ini menyetujui tes HIV</label>
+                    </div>
+                </div>
+                <div class="grid_6" style="margin-top: 20px;">
+                    <div class="grid_12">
+                        <div class="grid_12">
+                            <label item="item" c-label>Nama Klien</label>
+                        </div>
+                        <div class="grid_12">
+                            <input c-text-box type="text" filter="" class="k-textbox" ng-model="item.obj[32116645]" />
+                        </div>
+                       
+                    </div>
+                    
+                </div>
+                <div class="grid_6" style="margin-top: 20px;">
+                    <div class="grid_12">
+                        <div class="grid_12">
+                            <label item="item" c-label>Nama Petugas/Konselor HIV</label>
+                        </div>
+                        <div class="grid_12">
+                            <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[32116646]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                        </div>
+                    </div>
+                    
+                </div>
+            </fieldset>
+        </div>
+
+    </div>
+</div>
+
+<br />
+<br />
+<div class="grid_12">
+    <div ng-include='"../app/module/EMR/TemplateButtonDinamis" '></div>
+
+</div>
