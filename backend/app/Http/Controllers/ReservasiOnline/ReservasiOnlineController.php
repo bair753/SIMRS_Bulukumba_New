@@ -4233,6 +4233,40 @@ class ReservasiOnlineController extends ApiController
         );
         return $this->respond($result);
     }
+
+    public function getRuangan(Request $request)
+    {
+        if (!isset($request['id_instalasi']) || $request['id_instalasi'] == '') {
+            $result = array(
+                'message' => 'id_instalasi harus di isi',
+                'status' => 201,
+            );
+            return $this->respond($result);
+        }
+        $dataRuangan = \DB::table('ruangan_m as ru')
+            ->select('ru.id', 'ru.namaruangan', 'ru.objectdepartemenfk')
+            ->where('ru.statusenabled', true)
+            ->where('ru.kdprofile', 39)
+            ->where('ru.objectdepartemenfk', $request['id_instalasi'])
+            ->orderBy('ru.namaruangan')
+            ->get();
+
+        if (count($dataRuangan) == 0) {
+            $result = array(
+                'message' => 'Ruangan tidak ditemukan',
+                'status' => 201,
+                'list' => $dataRuangan,
+            );
+            return $this->respond($result);
+        }
+        $result = array(
+            'message' => 'success',
+            'status' => 200,
+            'list' => $dataRuangan,
+        );
+        return $this->respond($result);
+    }
+
     public function saveAntrolV2($request)
     {
         try {
