@@ -1313,7 +1313,7 @@ export class ReservasiOnlineComponent implements OnInit {
           this.messageService.warn('Maaf', e.message)
           return
         }else{
-          this.messageService.info('Info', e.list.length+ ' Ruangan tidak tersedia')
+          this.messageService.info('Info', e.list.length+ ' Ruangan tersedia')
           this.listRuanganAll = e.list
         }
 
