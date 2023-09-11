@@ -219,7 +219,7 @@
 			<td colspan="14" class="p3 noborder" style="font-size:9pt">: {{ $raw->namapenanggungjawab }}</td>
 		</tr>
 		<tr style="height:70pt">
-			<td colspan="68" class="text-center p3"><u>EVALUASI DARAH TEPI</u></td>
+			<td colspan="68" class="text-center p3"><u><b>EVALUASI DARAH TEPI</b></u></td>
 		</tr>
 		<tr style="height: 40pt;">
 			<td colspan="5" class="noborder"></td>
@@ -227,63 +227,80 @@
 			<td colspan="43" class="noborder"><strong><u>:</u></strong></td>
 		</tr>
 		<tr class="-P3">
-			<td colspan="10" class="noborder"></td>
-			<td colspan="20" class="noborder">HAEMOGLOBIN</td>
-			<td colspan="5" class="noborder">: {{ $raw->haemoglobin }}</td>
-			<td colspan="33" class="noborder">gr%</td>
+			<td colspan="5" class="noborder"></td>
+			<td colspan="12" class="noborder">HAEMOGLOBIN</td>
+			<td colspan="41" class="noborder">: {{ $raw->haemoglobin }} gr%</td>\
 		</tr>
 		<tr class="p3">
-			<td colspan="10" class="noborder"></td>
-			<td colspan="20" class="noborder">LEUKOSIT</td>
-			<td colspan="5" class="noborder">: {{ $raw->leukosit }}</td>
-			<td colspan="33" class="noborder">x 10<sup>3</sup>/mm <sup>3</sup></td>
+			<td colspan="5" class="noborder"></td>
+			<td colspan="12" class="noborder">LEUKOSIT</td>
+			<td colspan="41" class="noborder">: {{ $raw->leukosit }} x 10<sup>3</sup>/mm <sup>3</sup></td>
 		</tr>
 		<tr class="p3">
-			<td colspan="10" class="noborder"></td>
-			<td colspan="20" class="noborder">ERITROSIT</td>
-			<td colspan="5" class="noborder">: {{ $raw->eritrosit }}</td>
-			<td colspan="33" class="noborder">x 10<sup>4</sup>/mm <sup>3</sup></td>
+			<td colspan="5" class="noborder"></td>
+			<td colspan="12" class="noborder">ERITROSIT</td>
+			<td colspan="41" class="noborder">: {{ $raw->eritrosit }} x 10<sup>4</sup>/mm <sup>3</sup></td>
 		</tr>
 		<tr class="p3">
-			<td colspan="10" class="noborder"></td>
-			<td colspan="20" class="noborder">TROMBOSIT</td>
-			<td colspan="5" class="noborder">: {{ $raw->trombosit }}</td>
-			<td colspan="33" class="noborder">x 10<sup>3</sup>/mm <sup>3</sup></td>
+			<td colspan="5" class="noborder"></td>
+			<td colspan="12" class="noborder">TROMBOSIT</td>
+			<td colspan="41" class="noborder">: {{ $raw->trombosit }} x 10<sup>3</sup>/mm <sup>3</sup></td>
 		</tr>
-		<tr class="p3" style="height: 40pt;">
+		<tr class="p3" style="height: 20pt;">
 			<td colspan="5" class="noborder"></td>
 			<td colspan="58" class="noborder p3" style="border-top:3px solid #000"></td>
 			<td colspan="5" class="noborder"></td>
 		</tr>
+        
 		<tr>
 			<td colspan="5" class="noborder"></td>
-			<td colspan="20" class="noborder"><strong>ERITROSIT</strong></td>
-			<td class="noborder" colspan="3">: </td>
-			<td colspan="35" class="noborder">{{ $raw->keteritrosit }}</td>
+			<td colspan="15" class="noborder"><strong>ERITROSIT</strong></td>
+			<td class="noborder" colspan="8">: </td>
+			<td colspan="35" class="noborder"></td>
 			<td colspan="5" class="noborder"></td>
 		</tr>
+        <tr>
+            <td colspan="5" class="noborder"></td>
+			<td colspan="63" class="noborder">{{ $raw->keteritrosit }}</td>
+		</tr>
+        <tr class="p3" style="height: 10pt;"></tr>
 		<tr  valign="top">
 			<td colspan="5" class="noborder"></td>
-			<td colspan="20" class="noborder"><strong>LEUKOSIT</strong></td>
-			<td class="noborder" colspan="3">:</td>
-			<td colspan="35" class="noborder">{{ $raw->ketleukosit }}</td>
+			<td colspan="15" class="noborder"><strong>LEUKOSIT</strong></td>
+			<td class="noborder" colspan="8">:</td>
+			<td colspan="35" class="noborder"></td>
 			<td colspan="5" class="noborder"></td>
 		</tr>
+        <tr>
+            <td colspan="5" class="noborder"></td>
+			<td colspan="63" class="noborder">{{ $raw->ketleukosit }}</td>
+		</tr>
+        <tr class="p3" style="height: 10pt;"></tr>
 		<tr  valign="top">
 			<td colspan="5" class="noborder"></td>
-			<td colspan="20" class="noborder"><strong>TROMBOSIT</strong></td>
-			<td class="noborder" colspan="3">:</td>
-			<td colspan="35" class="noborder">{{ $raw->kettrombosit }}</td>
+			<td colspan="15" class="noborder"><strong>TROMBOSIT</strong></td>
+			<td class="noborder" colspan="8">:</td>
+			<td colspan="35" class="noborder"></td>
 			<td colspan="5" class="noborder"></td>
 		</tr>
-		<tr  valign="top" style="height:40pt">
+        <tr>
+            <td colspan="5" class="noborder"></td>
+			<td colspan="63" class="noborder">{{ $raw->kettrombosit }}</td>
+		</tr>
+        <tr class="p3" style="height: 10pt;"></tr>
+		<tr  valign="top">
 			<td colspan="5" class="noborder"></td>
-			<td colspan="20" class="noborder"><strong>KESIMPULAN/KESAN</strong></td>
-			<td class="noborder" colspan="3">:</td>
-			<td colspan="35" class="noborder">{{ $raw->kesimpulan }}</td>
+			<td colspan="15" class="noborder"><strong>KESIMPULAN/KESAN</strong></td>
+			<td class="noborder" colspan="8">:</td>
+			<td colspan="35" class="noborder"></td>
 			<td colspan="5" class="noborder"></td>
 		</tr>
-		<tr style="height:50pt;">
+        <tr>
+            <td colspan="5" class="noborder"></td>
+			<td colspan="63" class="noborder">{{ $raw->kesimpulan }}</td>
+		</tr>
+        <tr class="p3" style="height: 10pt;"></tr>
+		<tr>
 			<td colspan="34" style="text-align: right;" class="noborder p3">I/T Rasio :</td>
 			<td colspan="34" style="text-align: left;" class="noborder p3">{{ $raw->rasio }}</td>
 		</tr>
