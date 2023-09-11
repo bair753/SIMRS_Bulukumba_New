@@ -2013,6 +2013,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
           Route::get('reservasionline/get-combo-reservasi','ReservasiOnline\ReservasiOnlineController@getComboReserv');
           Route::get('reservasionline/get-slotting-rev','ReservasiOnline\ReservasiOnlineController@getSlottingByRuanganDokter');
           Route::get('reservasionline/get-dokter','ReservasiOnline\ReservasiOnlineController@getDokterByRuang');
+          Route::get('reservasionline/get-ruangan','ReservasiOnline\ReservasiOnlineController@getRuangan');
           Route::get('reservasionline/get-pasien-nokartu/{nocm}','ReservasiOnline\ReservasiOnlineController@getPasienByNoka');
         // });
         // Route::group(['prefix' => 'sanitasi'], function () {

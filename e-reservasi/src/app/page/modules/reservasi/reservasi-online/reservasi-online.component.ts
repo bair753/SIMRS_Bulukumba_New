@@ -43,6 +43,11 @@ export interface Ruangan {
   objectdepartemenfk: any;
   id: any
 }
+export interface RuanganAll {
+  namaruangan: string;
+  objectdepartemenfk: any;
+  id: any
+}
 export interface Dokter {
   namalengkap: string;
   id: any
@@ -178,11 +183,13 @@ export class ReservasiOnlineComponent implements OnInit {
     }
   }; // {customBtns: [{name: 'print', icon: 'fa fa-print'}, {name: 'link', icon: 'fa fa-link'}]};
   poliKlinik = new FormControl();
+  pelayanan = new FormControl();
   listDepartemen: Departemen[] = [];
   listRuangan: Ruangan[] = [];
   listRuanganF: Observable<Ruangan[]>;
   dokter2 = new FormControl();
   listDokter: Dokter[] = []
+  listRuanganAll: RuanganAll[] = []
   // listRuanganF: Observable<string[]>;
   listDokterF: Observable<Dokter[]>;
   handleEvent(event: CustomEvent) {
@@ -337,6 +344,7 @@ export class ReservasiOnlineComponent implements OnInit {
       'tglLahirLama': new FormControl(null),
       'dokter': new FormControl(null),
       'poliKlinik': new FormControl(null),
+      'pelayanan': new FormControl(null),
       'tipePembayaran': new FormControl(null),
       'tglReservasi': new FormControl({ value: null, disabled: true }),
       'noKartuPeserta': new FormControl(null),
@@ -1272,6 +1280,11 @@ export class ReservasiOnlineComponent implements OnInit {
 
     this.getListDokter()
   }
+  getSlotInstalasi(event) {
+    this.listRuanganAll = []
+
+    this.getListRuangan()
+  }
   getSlotDok(event) {
     this.formGroup.get('jamReservasi').reset()
     this.getSlotting()
@@ -1288,6 +1301,20 @@ export class ReservasiOnlineComponent implements OnInit {
         }else{
           this.messageService.info('Info', e.list.length+ ' Dokter tersedia di Poli ini')
           this.listDokter = e.list
+        }
+
+      })
+  }
+  getListRuangan() {
+    this.listRuanganAll = []
+    if (this.formGroup.get('pelayanan').value == null || this.formGroup.get('pelayanan').value == '') return
+    this.httpService.get('medifirst2000/reservasionline/get-ruangan?id_instalasi=' + this.formGroup.get('pelayanan').value.id).subscribe(e => {
+        if(e.list.length == 0){
+          this.messageService.warn('Maaf', e.message)
+          return
+        }else{
+          this.messageService.info('Info', e.list.length+ ' Ruangan tidak tersedia')
+          this.listRuanganAll = e.list
         }
 
       })
