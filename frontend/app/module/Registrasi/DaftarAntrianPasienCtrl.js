@@ -241,17 +241,22 @@ define(['initialize', 'Configuration'], function (initialize, config) {
             };
             $scope.cetakGelang = function () {
                 if ($scope.item == undefined) {
-					toastr.error('Pilih data dulu')
-					return
-				}
-				var noregistrasi = $scope.item.noregistrasi
-				$scope.listCetakanGelang = [
-					{ id: 1, nama: 'Gelang Pasien Laki-Laki', url: 'http://127.0.0.1:1237/printvb/Pendaftaran?cetak-gelangpasien=1&norec=' + noregistrasi + '&view=true' +'&qty=1' },
-					{ id: 2, nama: 'Gelang Pasien Perempuan', url: 'http://127.0.0.1:1237/printvb/Pendaftaran?cetak-gelangpasien-perempuan=1&norec=' + noregistrasi + '&view=true' +'&qty=1' },
-					{ id: 3, nama: 'Gelang Pasien Bayi Laki-Laki', url: 'http://127.0.0.1:1237/printvb/Pendaftaran?cetak-gelangpasien-bayi=1&norec=' + noregistrasi + '&view=true' +'&qty=1' },
-					{ id: 4, nama: 'Gelang Pasien Bayi Perempuan', url: 'http://127.0.0.1:1237/printvb/Pendaftaran?cetak-gelangpasien-bayi-perempuan=1&norec=' + noregistrasi + '&view=true' +'&qty=1' },					
-				]
-				$scope.popUpCetakanGelang.center().open()
+                    toastr.error('Pilih pasien terlebih dahulu')
+                    return
+            }
+            var umur = dateHelper.CountAge(new Date($scope.item.tgllahir), new Date($scope.item.tglregistrasi));
+            var thn = umur.year,
+            usia = (umur.year * 12) + umur.month;
+            
+            if(thn <= 1){
+                $scope.cetakanGelang  = 1;
+            }else{
+                $scope.cetakanGelang  = 3;
+            }
+            
+            window.open(config.baseApiBackend + 'report/cetak-gelang-pasien?noregistrasi='
+                + $scope.item.noregistrasi + '&idcetakangelang=' + $scope.cetakanGelang
+                + '&nocm=' + $scope.item.nocm, '_blank');
                 // var stt = 'false'
                 // if (confirm('View Gelang Pasien? ')) {
                 //     // Save it!
