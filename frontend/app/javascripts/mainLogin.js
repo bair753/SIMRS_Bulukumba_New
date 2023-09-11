@@ -112,7 +112,8 @@ require(['LoginService', 'core', "kendo.angular", 'Configuration', 'Helper', 'jQ
                                 if (error.data != null)
                                     window.messageContainer.error(error.data.messages)
                                 else
-                                    window.messageContainer.error('Login Gagal, Koneksi Internet Tidak Stabil')
+                                    // window.messageContainer.error('Login Gagal, Koneksi Internet Tidak Stabil')
+                                    window.messageContainer.error('Gagal masuk ke dalam system')
                                 $scope.isBusy = false;
                                 // window.messageContainer.error('Gagal masuk ke dalam system')
                             });
