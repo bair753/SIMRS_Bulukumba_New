@@ -585,9 +585,9 @@
 					<td class="bordered">@{{ item.obj[31101317] ? item.obj[31101317] : '' }}</td>
 					<td class="bordered">@{{ item.obj[31101318] ? item.obj[31101318] : '' }}</td>
 					<td class="bordered">@{{item.obj[31101319] | toDate | date:'dd MMMM yyyy'}}</td>
-					<td colspan="2" class="bordered"></td>
-					<td rowspan="5" class="bordered" colspan="3">@{{ item.obj[31101320] ? item.obj[31101320] : '' }}</td>
+					<td colspan="2" class="bordered">@{{ item.obj[31101320] ? item.obj[31101320] : '' }}</td>
 					<td rowspan="5" class="bordered" colspan="3">@{{ item.obj[31101321] ? item.obj[31101321] : '' }}</td>
+					<td rowspan="5" class="bordered" colspan="3">@{{ item.obj[31101322] ? item.obj[31101322] : '' }}</td>
 				</tr>
 				<tr>
 					<td class="bordered">2</td>
