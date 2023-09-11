@@ -800,20 +800,42 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 			}
 
 			$scope.GelangPasien = function () {
-
 				if ($scope.dataPasienSelected.noregistrasi == undefined) {
-					toastr.error('Pilih data dulu')
-					return
+						toastr.error('Pilih pasien terlebih dahulu')
+						return
 				}
-				var noregistrasi = $scope.dataPasienSelected.noregistrasi
-				$scope.listCetakanGelang = [
-					{ id: 1, nama: 'Gelang Pasien Laki-Laki', url: 'http://127.0.0.1:1237/printvb/Pendaftaran?cetak-gelangpasien=1&norec=' + noregistrasi + '&view=true' +'&qty=1' },
-					{ id: 2, nama: 'Gelang Pasien Perempuan', url: 'http://127.0.0.1:1237/printvb/Pendaftaran?cetak-gelangpasien-perempuan=1&norec=' + noregistrasi + '&view=true' +'&qty=1' },
-					{ id: 3, nama: 'Gelang Pasien Bayi Laki-Laki', url: 'http://127.0.0.1:1237/printvb/Pendaftaran?cetak-gelangpasien-bayi=1&norec=' + noregistrasi + '&view=true' +'&qty=1' },
-					{ id: 4, nama: 'Gelang Pasien Bayi Perempuan', url: 'http://127.0.0.1:1237/printvb/Pendaftaran?cetak-gelangpasien-bayi-perempuan=1&norec=' + noregistrasi + '&view=true' +'&qty=1' },					
-				]
-				console.log($scope.item.cetakanGelang);
-				$scope.popUpCetakanGelang.center().open()
+				var umur = dateHelper.CountAge(new Date($scope.dataPasienSelected.tgllahir), new Date($scope.dataPasienSelected.tglregistrasi));
+                var thn = umur.year,
+                usia = (umur.year * 12) + umur.month;
+				
+				if(thn <= 1){
+					$scope.cetakanGelang  = 1;
+				}else{
+					$scope.cetakanGelang  = 3;
+				}
+				
+				window.open(config.baseApiBackend + 'report/cetak-gelang-pasien?noregistrasi='
+                    + $scope.dataPasienSelected.noregistrasi + '&idcetakangelang=' + $scope.cetakanGelang
+                    + '&nocm=' + $scope.dataPasienSelected.nocm, '_blank');
+
+				// { id: 1, nama: 'Gelang Pasien Laki-Laki', url: 'http://127.0.0.1:1237/printvb/Pendaftaran?cetak-gelangpasien=1&norec=' + noregistrasi + '&view=true' +'&qty=1' },
+				// 	{ id: 2, nama: 'Gelang Pasien Perempuan', url: 'http://127.0.0.1:1237/printvb/Pendaftaran?cetak-gelangpasien-perempuan=1&norec=' + noregistrasi + '&view=true' +'&qty=1' },
+				// 	{ id: 3, nama: 'Gelang Pasien Bayi Laki-Laki', url: 'http://127.0.0.1:1237/printvb/Pendaftaran?cetak-gelangpasien-bayi=1&norec=' + noregistrasi + '&view=true' +'&qty=1' },
+				// 	{ id: 4, nama: 'Gelang Pasien Bayi Perempuan', url: 'http://127.0.0.1:1237/printvb/Pendaftaran?cetak-gelangpasien-bayi-perempuan=1&norec=' + noregistrasi + '&view=true' +'&qty=1' },
+
+				// if ($scope.dataPasienSelected.noregistrasi == undefined) {
+				// 	toastr.error('Pilih data dulu')
+				// 	return
+				// }
+				// var noregistrasi = $scope.dataPasienSelected.noregistrasi
+				// $scope.listCetakanGelang = [
+				// 	{ id: 1, nama: 'Gelang Pasien Laki-Laki', url: 'http://127.0.0.1:1237/printvb/Pendaftaran?cetak-gelangpasien=1&norec=' + noregistrasi + '&view=true' +'&qty=1' },
+				// 	{ id: 2, nama: 'Gelang Pasien Perempuan', url: 'http://127.0.0.1:1237/printvb/Pendaftaran?cetak-gelangpasien-perempuan=1&norec=' + noregistrasi + '&view=true' +'&qty=1' },
+				// 	{ id: 3, nama: 'Gelang Pasien Bayi Laki-Laki', url: 'http://127.0.0.1:1237/printvb/Pendaftaran?cetak-gelangpasien-bayi=1&norec=' + noregistrasi + '&view=true' +'&qty=1' },
+				// 	{ id: 4, nama: 'Gelang Pasien Bayi Perempuan', url: 'http://127.0.0.1:1237/printvb/Pendaftaran?cetak-gelangpasien-bayi-perempuan=1&norec=' + noregistrasi + '&view=true' +'&qty=1' },					
+				// ]
+				// console.log($scope.item.cetakanGelang);
+				// $scope.popUpCetakanGelang.center().open()
 				//  var stt = 'false'
 				// if (confirm('View Lembar Gelang Pasien? ')) {
 				//     // Save it!
@@ -829,6 +851,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 			}
 
 			$scope.cetakGelangPasien = function(params){
+				console.log(params);
 				if (!params) return
 				window.open(config.baseApiBackend + 'report/cetak-gelang-pasien?noregistrasi='
                     + $scope.dataPasienSelected.noregistrasi + '&idcetakangelang=' + $scope.item.cetakanGelang.id
