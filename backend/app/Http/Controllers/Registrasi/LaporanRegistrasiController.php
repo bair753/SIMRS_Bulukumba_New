@@ -1936,7 +1936,9 @@ ORDER BY nosep
 //            }
         }
 
-        $kamar =  DB::select(DB::raw("select count(x.idkelas) as tt,x.namakelas ,x.idkelas,
+        $kamar =  DB::select(DB::raw("select count( x.idruangan ) AS tt,
+        x.namaruangan,
+        x.idruangan,
             0 as ld,0 as hp,0 as jmlpasienkeluar,0 as bor,0 as los ,0 as toi, 0 as bto, 0 as ndr,0 as gdr
           from (
             SELECT
@@ -1955,7 +1957,7 @@ ORDER BY nosep
             AND km.statusenabled = true
             AND tt.statusenabled = true
             ) as x
-            group by x.namakelas,x.idkelas"));
+            group by x.namaruangan,x.idruangan"));
 
         $firstDay = $bulan.'-01';
         $lastDay = $bulan.'-'. $day_count;
@@ -2010,12 +2012,12 @@ ORDER BY nosep
                     if($item->tglpulang != null){
                         if(Carbon::parse($item->tglregistrasi)->format('Y-m-d') <= date($dayInMonth[$i])
                             && date($dayInMonth[$i]) <= Carbon::parse($item->tglpulang)->format('Y-m-d')
-                            && (int)  $kamarss->idkelas == (int) $item->objectkelasfk ){
+                            && (int)  $kamarss->idruangan == (int) $item->objectkelasfk ){
                             $kamarss->hp =(int)  $kamarss->hp + 1;
                         }
                     }else{
                         if(Carbon::parse($item->tglregistrasi)->format('Y-m-d') <= date($dayInMonth[$i])
-                            && (int)  $kamarss->idkelas == (int) $item->objectkelasfk ){
+                            && (int)  $kamarss->idruangan == (int) $item->objectkelasfk ){
                             $kamarss->hp =(int)  $kamarss->hp + 1;
                         }
                     }
