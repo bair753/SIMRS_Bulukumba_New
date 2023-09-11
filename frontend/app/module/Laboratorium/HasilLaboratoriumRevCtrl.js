@@ -145,7 +145,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                         title: "Hasil Pemeriksaan",
                         width: "15%",
                         attributes: {
-                            class: "#if(hasil == 'Negatif'){# green #} if(hasil == 'Non Reaktif'){# red #} if(hasil == 'Positif'){# red #} if(flag != 'N'){# red #} else{# green #} #"
+                            class: "#if(hasil == 'Negatif'){# green #} if(hasil == 'Non Reaktif'){# green #} if(hasil == 'Positif'){# red #} if(flag != 'N'){# red #} else{# green #} #"
                        },
                        editor: dynamicEditor
                     }, {
