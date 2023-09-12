@@ -1333,6 +1333,13 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     window.messageContainer.error("Pilih Data Dulu!");
                     return;
                 }
+                var objPA = {
+                    pelayananpasienfk: $scope.dataSelected.norec_pp,
+                }
+                medifirstService.post('laboratorium/hasil-lab-pa', objPA).then(function (e) {
+                }, function (error) {
+                    // $scope.hideExper = false
+                })
                 $scope.norecPA = ''
                 $scope.itemPA.namaPelayanan = $scope.dataSelected.namaproduk
                 $scope.itemPA.dokters = $scope.dataSelected.dokter
@@ -1354,8 +1361,22 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                             $scope.itemPA.dokterPengirim1 = { id: res.dokterpengirimfk, namalengkap: res.namadokterpengirim }
                         if (res.dokterluar)
                             $scope.itemPA.dokterPengirim2 = res.dokterluar
-                        $scope.itemPA.diagnosaKlinik = res.diagnosaklinik
-                        $scope.itemPA.ketKlinik = res.keteranganklinik
+                        if(res.klinis == null || res.klinis == ''){
+                            $scope.itemPA.diagnosaKlinik = res.diagnosaklinik
+                        }else{
+                            $scope.itemPA.diagnosaKlinik = res.klinis
+                        }
+                        if(res.keteranganlainnya == null || res.keteranganlainnya == ''){
+                            $scope.itemPA.ketKlinik = res.keteranganklinik
+                        }else{
+                            $scope.itemPA.ketKlinik = res.keteranganlainnya
+                        }
+                        if(res.klinis == null || res.klinis == ''){
+                            $scope.itemPA.jaringanAsal = res.lokasijaringan
+                        }else{
+                            $scope.itemPA.jaringanAsal = res.jaringanasal
+                        }
+                        $scope.itemPA.getjaringan = res.getjaringan
                         $scope.itemPA.diagnosaPB = res.diagnosapb
                         $scope.itemPA.ketPB = res.keteranganpb
                         $scope.itemPA.topografi = res.topografi
@@ -1439,10 +1460,18 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 
             $scope.itemTepi = {}
             $scope.darahTepi = function () {
+                
                 if ($scope.dataSelected == undefined) {
                     window.messageContainer.error("Pilih Data Dulu!");
                     return;
                 }
+                var objEDT = {
+                    pelayananpasienfk: $scope.dataSelected.norec_pp,
+                }
+                medifirstService.post('laboratorium/hasil-lab-edt', objEDT).then(function (e) {
+                }, function (error) {
+                    // $scope.hideExper = false
+                })
                 $scope.norecEDT = ''
                 $scope.itemTepi.namaPelayanan = $scope.dataSelected.namaproduk
                 $scope.itemTepi.dokters = $scope.dataSelected.dokter

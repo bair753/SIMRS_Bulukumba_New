@@ -1130,6 +1130,8 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
           Route::get('laboratorium/get-hasil-lab-fire','Laboratorium\LaboratoriumController@getHasilLabVans');
           Route::get('laboratorium/get-laporan-tindakan', 'Laboratorium\LaboratoriumController@getLaporanTindakanLaboratorium');
           Route::get('laboratorium/get-hasil-lab-pa', 'Laboratorium\LaboratoriumController@getHasilLabPA');
+          Route::post('laboratorium/hasil-lab-pa', 'Laboratorium\LaboratoriumController@HasilLabPA');
+          Route::post('laboratorium/hasil-lab-edt', 'Laboratorium\LaboratoriumController@HasilLabEDT');
           Route::post('laboratorium/save-hasil-lab-pa', 'Laboratorium\LaboratoriumController@saveHasilLabPA');
           Route::get('laboratorium/get-hasil-lab-edt', 'Laboratorium\LaboratoriumController@getHasilLabEDT');
           Route::post('laboratorium/save-hasil-lab-edt', 'Laboratorium\LaboratoriumController@saveHasilLabEDT');

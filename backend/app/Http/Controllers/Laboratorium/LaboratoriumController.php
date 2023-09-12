@@ -295,7 +295,50 @@ class LaboratoriumController extends ApiController
         );
         return $this->respond($result);
     }
-      public function saveHasilLabPA(Request $request) {
+    public function HasilLabPA(Request $request) {
+
+        $dataSO =  HasilPemeriksaanLab::where('pelayananpasienfk',$request['pelayananpasienfk'])->get();
+        if ($dataSO->count() == 0) {
+            $dataSO = new HasilPemeriksaanLab();
+            $dataSO->norec = $dataSO->generateNewId();
+            $dataSO->pelayananpasienfk = $request['pelayananpasienfk'];
+            $dataSO->statusenabled = true;
+            $dataSO->save();
+        }else {
+            $dataSO =  HasilPemeriksaanLab::where('pelayananpasienfk',$request['pelayananpasienfk'])->first();
+        }
+        $transMessage = 'Sukses';
+        $result = array(
+            'status' => 201,
+            'data'=> $dataSO,
+            'message' => 'mr_adhyy',
+        );
+        return $this->setStatusCode($result['status'])->respond($result, $transMessage);
+        
+    }
+
+    public function HasilLabEDT(Request $request) {
+
+        $dataSO =  HasilPemeriksaanLabEDT::where('pelayananpasienfk',$request['pelayananpasienfk'])->get();
+        if ($dataSO->count() == 0) {
+            $dataSO = new HasilPemeriksaanLabEDT();
+            $dataSO->norec = $dataSO->generateNewId();
+            $dataSO->pelayananpasienfk = $request['pelayananpasienfk'];
+            $dataSO->statusenabled = true;
+            $dataSO->save();
+        }else {
+            $dataSO =  HasilPemeriksaanLabEDT::where('pelayananpasienfk',$request['pelayananpasienfk'])->first();
+        }
+        $transMessage = 'Sukses';
+        $result = array(
+            'status' => 201,
+            'data'=> $dataSO,
+            'message' => 'mr_adhyy',
+        );
+        return $this->setStatusCode($result['status'])->respond($result, $transMessage);
+        
+    }
+    public function saveHasilLabPA(Request $request) {
         $kdProfile = $this->getDataKdProfile($request);
         $idProfile = (int) $kdProfile;
         DB::beginTransaction();
@@ -444,7 +487,9 @@ class LaboratoriumController extends ApiController
         $data = DB::table('hasilpemeriksaanlab_t as ar')
             ->leftjoin('pegawai_m as pg', 'pg.id', '=', 'ar.pegawaifk')
             ->leftjoin('pegawai_m as dokterpengirim', 'dokterpengirim.id', '=', 'ar.dokterpengirimfk')
-            ->select('ar.*','pg.namalengkap','dokterpengirim.namalengkap as namadokterpengirim')
+            ->leftjoin('pelayananpasien_t as pp', 'pp.norec', '=', 'ar.pelayananpasienfk')
+            ->leftjoin('strukorder_t as so', 'so.norec', '=', 'pp.strukorderfk')
+            ->select('ar.*','pg.namalengkap','dokterpengirim.namalengkap as namadokterpengirim', 'so.keteranganlainnya', 'so.klinis', 'so.lokasijaringan')
             ->where('ar.kdprofile', $idProfile)
             ->where('ar.statusenabled',true)
             ->where('ar.pelayananpasienfk',$request['norec_pp'])
