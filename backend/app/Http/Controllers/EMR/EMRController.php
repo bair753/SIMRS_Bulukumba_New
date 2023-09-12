@@ -6110,7 +6110,7 @@ class EMRController  extends ApiController
 //            ->LEFTJOIN('reshd as pp','pp.ono','=','so.noorder')
             ->select('so.norec', 'pd.norec as norecpd', 'apd.norec as norecapdlab', 'jk.id as jk_id', 'jk.jeniskelamin', 'pas.tgllahir', 'pd.noregistrasi', 'so.tglorder', 'so.noorder',
                 'ru.namaruangan as namaruanganasal', 'ru2.namaruangan as namaruangantujuan', 'p.namalengkap as dokter',
-                'so.noorder','pd.noregistrasi','so.keteranganlainnya','so.cito',
+                'so.noorder','pd.noregistrasi','so.keteranganlainnya','so.cito','so.klinis','so.lokasijaringan',
 //                ,DB::raw('case when pp.ono is null then \'PENDING\' else \'SELESAI DIPERIKSA\' end as statusorder')
                 DB::raw("case when so.statusorder is null then 'MASUK' else
                 'SELESAI' end as status")
