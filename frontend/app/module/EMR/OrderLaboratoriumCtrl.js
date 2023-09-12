@@ -422,11 +422,11 @@ define(['initialize'], function (initialize) {
                     "title": "Tgl Order",
                     "width": "50px",
                 },
-                {
-                    "field": "noorder",
-                    "title": "No Order",
-                    "width": "60px",
-                },
+                // {
+                //     "field": "noorder",
+                //     "title": "No Order",
+                //     "width": "60px",
+                // },
                 {
                     "field": "dokter",
                     "title": "Dokter",
@@ -443,6 +443,16 @@ define(['initialize'], function (initialize) {
                     "width": "100px",
                 },
                 {
+                    "field": "klinis",
+                    "title": "Diagnosa Klinik",
+                    "width": "100px",
+                },
+                {
+                    "field": "lokasijaringan",
+                    "title": "Lokasi Asal Jaringan",
+                    "width": "100px",
+                },
+                {
                     "field": "keteranganlainnya",
                     "title": "Keterangan",
                     "width": "100px",
@@ -452,13 +462,13 @@ define(['initialize'], function (initialize) {
                     "field": "status",
                     "title": "Status",
                     "width": "70px",
-                },
-                {
-                    "field": "cito",
-                    "title": "Cito",
-                    "template": '# if( cito==true) {# ✔ # } else {# ✘ #} #',
-                    "width": "70px",
                 }
+                // {
+                //     "field": "cito",
+                //     "title": "Cito",
+                //     "template": '# if( cito==true) {# ✔ # } else {# ✘ #} #',
+                //     "width": "70px",
+                // }
             ];
             $scope.detailGridOptions = function (dataItem) {
                 return {
