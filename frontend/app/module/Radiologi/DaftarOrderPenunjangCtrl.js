@@ -1140,8 +1140,18 @@ define(['initialize'], function (initialize) {
                         "width": "100px"
                     },
                     {
+                        "field": "klinis",
+                        "title": "Diagnosa Klinik",
+                        "width": "100px"
+                    },
+                    {
                         "field": "keteranganlainnya",
                         "title": "Keterangan",
+                        "width": "100px"
+                    },
+                    {
+                        "field": "lokasijaringan",
+                        "title": "Lokasi Asal Jaringan",
                         "width": "100px"
                     },
                     {

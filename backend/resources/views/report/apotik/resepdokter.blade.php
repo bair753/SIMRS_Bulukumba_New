@@ -709,11 +709,6 @@
                                         </td>
                                     </tr>
                                     <script>
-                                        $(document).ready(function() {
-                                            window.print();
-                                        });
-                                    </script>
-                                    <script>
                                         var dpjp = "{{ $raw->namalengkap}}";
                                     </script>
                                     <script>

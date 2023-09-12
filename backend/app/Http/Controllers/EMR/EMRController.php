@@ -6366,6 +6366,12 @@ class EMRController  extends ApiController
                 if(isset( $request['keterangan'])){
                       $dataSO->keteranganlainnya = $request['keterangan'];
                 }
+                if(isset( $request['klinis'])){
+                    $dataSO->klinis = $request['klinis'];
+              }
+                if(isset( $request['lokasijaringan'])){
+                    $dataSO->lokasijaringan = $request['lokasijaringan'];
+                }
                 $dataSO->tglorder = $request['tanggal'];
                 $dataSO->totalbeamaterai = 0;
                 $dataSO->totalbiayakirim = 0;
