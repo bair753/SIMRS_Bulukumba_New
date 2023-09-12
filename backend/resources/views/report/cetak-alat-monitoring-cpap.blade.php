@@ -4112,6 +4112,2382 @@
             </table>
         </div>
     @endif
+
+    @if (!empty($res['d21']))
+        <div class="format">
+            <table width='100%'>
+                <tr height=20 class="noborder">
+                    <td colspan="8" rowspan="4" class="p3 noborder-tb text-center">
+                        @if(stripos(\Request::url(), 'localhost') !== FALSE)
+                            <img src="{{ asset('img/logo_only.png') }}" alt="" style="width: 60px;display:block; margin:auto;">
+                        @else
+                            <img src="{{ asset('service/img/logo_only.png') }}" alt="" style="width: 60px;display:block; margin:auto;">
+                        @endif
+                    </td>
+                    <td colspan="17" rowspan="4" class="noborder-tb text-center" style="font-size:large">
+                        <strong>{!! $res['profile']->namalengkap !!}</strong> <br>{!! $res['profile']->alamatlengkap !!}<br>TELP : (0413) 81292
+                    </td>
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;No. RM </td>
+                    <td colspan="13" class="noborder" style="text-align: left">&nbsp;
+                        : {!!$res['d1'][0]->nocm  !!}
+                    </td>
+                    <td colspan="5" rowspan="2" class="border-lr bg-dark" style="font-size: xxx-large;text-align:center">RM</td>
+                </tr>
+                <tr class="noborder">
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;Nama Lengkap</td>
+                    <td colspan="11" class="noborder" style="text-align: left">&nbsp;
+                        : {!! $res['d1'][0]->namapasien  !!}
+                    </td>
+                    <td colspan="2" class="noborder">{!! $res['d1'][0]->jeniskelamin == 'PEREMPUAN' ? '(P)' : '(L)'  !!}</td>
+                </tr>
+                <tr class="noborder">
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;Tanggal Lahir</td>
+                    <td colspan="13" class="noborder" style="text-align: left">&nbsp;
+                        : {!! date('d-m-Y',strtotime($res['d1'][0]->tgllahir  )) !!}
+                    </td>
+                    <td colspan="5" class="border-lr" rowspan="2" style="font-size: xxx-large;text-align:center">67</td>
+                </tr>
+                <tr class="noborder">
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;NIK</td>
+                    <td colspan="11" class="noborder" style="text-align: left">&nbsp;
+                        : {!!$res['d1'][0]->noidentitas  !!}
+                    </td>
+                </tr>
+                <tr class="bordered bg-dark">
+                    <th colspan="49" height="20pt">ALAT MONITORING CPAP</th>
+                </tr>
+                <tr>
+                    <td colspan="9" class="noborder">Tanggal : @{{item.obji21[32103929] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                    <td colspan="40" class="noborder text-center">Lengkapi table dibawah setiap 4 jam. Isi dengan angka atau memberi tanda “X” bila sudah dilakukan</td>
+                </tr>
+                <tr>
+                    <td colspan="13" class="text-right">Waktu&nbsp;</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji21[32103930] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji21[32103931] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji21[32103932] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji21[32103933] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji21[32103934] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji21[32103935] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji21[32103936] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji21[32103937] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="12" style="text-align: center">Catatan</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Laju pernapasan</td>
+                    <td colspan="3">@{{ item.obji21[32103938] ? item.obji21[32103938] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103939] ? item.obji21[32103939] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103940] ? item.obji21[32103940] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103941] ? item.obji21[32103941] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103942] ? item.obji21[32103942] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103943] ? item.obji21[32103943] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103944] ? item.obji21[32103944] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103945] ? item.obji21[32103945] : '' }}</td>
+                    <td colspan="12">@{{ item.obji21[32103946] ? item.obji21[32103946] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Saturasi O2. Bila dibawah target, naikan aliran 1L</td>
+                    <td colspan="3">@{{ item.obji21[32103947] ? item.obji21[32103947] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103948] ? item.obji21[32103948] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103949] ? item.obji21[32103949] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103950] ? item.obji21[32103950] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103951] ? item.obji21[32103951] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103952] ? item.obji21[32103952] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103953] ? item.obji21[32103953] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103954] ? item.obji21[32103954] : '' }}</td>
+                    <td colspan="12">@{{ item.obji21[32103955] ? item.obji21[32103955] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Nasopharynx suctioned dengan ukuran 8 or 6 Fr</td>
+                    <td colspan="3">@{{ item.obji21[32103956] ? item.obji21[32103956] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103957] ? item.obji21[32103957] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103958] ? item.obji21[32103958] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103959] ? item.obji21[32103959] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103960] ? item.obji21[32103960] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103961] ? item.obji21[32103961] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103962] ? item.obji21[32103962] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103963] ? item.obji21[32103963] : '' }}</td>
+                    <td colspan="12">@{{ item.obji21[32103964] ? item.obji21[32103964] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Prongs tidak menekan septum hidung</td>
+                    <td colspan="3">@{{ item.obji21[32103965] ? item.obji21[32103965] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103966] ? item.obji21[32103966] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103967] ? item.obji21[32103967] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103968] ? item.obji21[32103968] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103969] ? item.obji21[32103969] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103970] ? item.obji21[32103970] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103971] ? item.obji21[32103971] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103972] ? item.obji21[32103972] : '' }}</td>
+                    <td colspan="12">@{{ item.obji21[32103973] ? item.obji21[32103973] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Jarak 2 mm antara pangkal prong dan hidung</td>
+                    <td colspan="3">@{{ item.obji21[32103974] ? item.obji21[32103974] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103975] ? item.obji21[32103975] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103976] ? item.obji21[32103976] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103977] ? item.obji21[32103977] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103978] ? item.obji21[32103978] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103979] ? item.obji21[32103979] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103980] ? item.obji21[32103980] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103981] ? item.obji21[32103981] : '' }}</td>
+                    <td colspan="12">@{{ item.obji21[32103982] ? item.obji21[32103982] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Tidak ada kerusakan kulit sekitar lubang hidung</td>
+                    <td colspan="3">@{{ item.obji21[32103983] ? item.obji21[32103983] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103984] ? item.obji21[32103984] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103985] ? item.obji21[32103985] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103986] ? item.obji21[32103986] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103987] ? item.obji21[32103987] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103988] ? item.obji21[32103988] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103989] ? item.obji21[32103989] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103990] ? item.obji21[32103990] : '' }}</td>
+                    <td colspan="12">@{{ item.obji21[32103991] ? item.obji21[32103991] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Ubah-ubah posisi bayi supaya bayi terstimulasi</td>
+                    <td colspan="3">@{{ item.obji21[32103992] ? item.obji21[32103992] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103993] ? item.obji21[32103993] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103994] ? item.obji21[32103994] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103995] ? item.obji21[32103995] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103996] ? item.obji21[32103996] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103997] ? item.obji21[32103997] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103998] ? item.obji21[32103998] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32103999] ? item.obji21[32103999] : '' }}</td>
+                    <td colspan="12">@{{ item.obji21[32104000] ? item.obji21[32104000] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Level air dipertahankan pada @{{ item.obji21[32104001] ? item.obji21[32104001] : '_______' }} cm</td>
+                    <td colspan="3">@{{ item.obji21[32104002] ? item.obji21[32104002] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32104003] ? item.obji21[32104003] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32104004] ? item.obji21[32104004] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32104005] ? item.obji21[32104005] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32104006] ? item.obji21[32104006] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32104007] ? item.obji21[32104007] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32104008] ? item.obji21[32104008] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32104009] ? item.obji21[32104009] : '' }}</td>
+                    <td colspan="12">@{{ item.obji21[32104010] ? item.obji21[32104010] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Selang dibersihkan dari pengembunan</td>
+                    <td colspan="3">@{{ item.obji21[32104011] ? item.obji21[32104011] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32104012] ? item.obji21[32104012] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32104013] ? item.obji21[32104013] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32104014] ? item.obji21[32104014] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32104015] ? item.obji21[32104015] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32104016] ? item.obji21[32104016] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32104017] ? item.obji21[32104017] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32104018] ? item.obji21[32104018] : '' }}</td>
+                    <td colspan="12">@{{ item.obji21[32104019] ? item.obji21[32104019] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Gelembung air</td>
+                    <td colspan="3">@{{ item.obji21[32104020] ? item.obji21[32104020] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32104021] ? item.obji21[32104021] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32104022] ? item.obji21[32104022] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32104023] ? item.obji21[32104023] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32104024] ? item.obji21[32104024] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32104025] ? item.obji21[32104025] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32104026] ? item.obji21[32104026] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32104027] ? item.obji21[32104027] : '' }}</td>
+                    <td colspan="12">@{{ item.obji21[32104028] ? item.obji21[32104028] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Tidak ada kebocoran</td>
+                    <td colspan="3">@{{ item.obji21[32104029] ? item.obji21[32104029] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32104030] ? item.obji21[32104030] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32104031] ? item.obji21[32104031] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32104032] ? item.obji21[32104032] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32104033] ? item.obji21[32104033] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32104034] ? item.obji21[32104034] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32104035] ? item.obji21[32104035] : '' }}</td>
+                    <td colspan="3">@{{ item.obji21[32104036] ? item.obji21[32104036] : '' }}</td>
+                    <td colspan="12">@{{ item.obji21[32104037] ? item.obji21[32104037] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="49" style="text-align: left">&nbsp;&nbsp;@{{ item.obji21[32104038] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Nasal prongs diberikan setiap hari dengan 2% asam asetat atau chlorin</td>
+                </tr>
+            </table>
+        </div>
+    @endif
+
+    @if (!empty($res['d22']))
+        <div class="format">
+            <table width='100%'>
+                <tr height=20 class="noborder">
+                    <td colspan="8" rowspan="4" class="p3 noborder-tb text-center">
+                        @if(stripos(\Request::url(), 'localhost') !== FALSE)
+                            <img src="{{ asset('img/logo_only.png') }}" alt="" style="width: 60px;display:block; margin:auto;">
+                        @else
+                            <img src="{{ asset('service/img/logo_only.png') }}" alt="" style="width: 60px;display:block; margin:auto;">
+                        @endif
+                    </td>
+                    <td colspan="17" rowspan="4" class="noborder-tb text-center" style="font-size:large">
+                        <strong>{!! $res['profile']->namalengkap !!}</strong> <br>{!! $res['profile']->alamatlengkap !!}<br>TELP : (0413) 81292
+                    </td>
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;No. RM </td>
+                    <td colspan="13" class="noborder" style="text-align: left">&nbsp;
+                        : {!!$res['d1'][0]->nocm  !!}
+                    </td>
+                    <td colspan="5" rowspan="2" class="border-lr bg-dark" style="font-size: xxx-large;text-align:center">RM</td>
+                </tr>
+                <tr class="noborder">
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;Nama Lengkap</td>
+                    <td colspan="11" class="noborder" style="text-align: left">&nbsp;
+                        : {!! $res['d1'][0]->namapasien  !!}
+                    </td>
+                    <td colspan="2" class="noborder">{!! $res['d1'][0]->jeniskelamin == 'PEREMPUAN' ? '(P)' : '(L)'  !!}</td>
+                </tr>
+                <tr class="noborder">
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;Tanggal Lahir</td>
+                    <td colspan="13" class="noborder" style="text-align: left">&nbsp;
+                        : {!! date('d-m-Y',strtotime($res['d1'][0]->tgllahir  )) !!}
+                    </td>
+                    <td colspan="5" class="border-lr" rowspan="2" style="font-size: xxx-large;text-align:center">67</td>
+                </tr>
+                <tr class="noborder">
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;NIK</td>
+                    <td colspan="11" class="noborder" style="text-align: left">&nbsp;
+                        : {!!$res['d1'][0]->noidentitas  !!}
+                    </td>
+                </tr>
+                <tr class="bordered bg-dark">
+                    <th colspan="49" height="20pt">ALAT MONITORING CPAP</th>
+                </tr>
+                <tr>
+                    <td colspan="9" class="noborder">Tanggal : @{{item.obji22[32103929] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                    <td colspan="40" class="noborder text-center">Lengkapi table dibawah setiap 4 jam. Isi dengan angka atau memberi tanda “X” bila sudah dilakukan</td>
+                </tr>
+                <tr>
+                    <td colspan="13" class="text-right">Waktu&nbsp;</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji22[32103930] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji22[32103931] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji22[32103932] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji22[32103933] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji22[32103934] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji22[32103935] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji22[32103936] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji22[32103937] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="12" style="text-align: center">Catatan</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Laju pernapasan</td>
+                    <td colspan="3">@{{ item.obji22[32103938] ? item.obji22[32103938] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103939] ? item.obji22[32103939] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103940] ? item.obji22[32103940] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103941] ? item.obji22[32103941] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103942] ? item.obji22[32103942] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103943] ? item.obji22[32103943] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103944] ? item.obji22[32103944] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103945] ? item.obji22[32103945] : '' }}</td>
+                    <td colspan="12">@{{ item.obji22[32103946] ? item.obji22[32103946] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Saturasi O2. Bila dibawah target, naikan aliran 1L</td>
+                    <td colspan="3">@{{ item.obji22[32103947] ? item.obji22[32103947] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103948] ? item.obji22[32103948] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103949] ? item.obji22[32103949] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103950] ? item.obji22[32103950] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103951] ? item.obji22[32103951] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103952] ? item.obji22[32103952] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103953] ? item.obji22[32103953] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103954] ? item.obji22[32103954] : '' }}</td>
+                    <td colspan="12">@{{ item.obji22[32103955] ? item.obji22[32103955] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Nasopharynx suctioned dengan ukuran 8 or 6 Fr</td>
+                    <td colspan="3">@{{ item.obji22[32103956] ? item.obji22[32103956] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103957] ? item.obji22[32103957] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103958] ? item.obji22[32103958] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103959] ? item.obji22[32103959] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103960] ? item.obji22[32103960] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103961] ? item.obji22[32103961] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103962] ? item.obji22[32103962] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103963] ? item.obji22[32103963] : '' }}</td>
+                    <td colspan="12">@{{ item.obji22[32103964] ? item.obji22[32103964] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Prongs tidak menekan septum hidung</td>
+                    <td colspan="3">@{{ item.obji22[32103965] ? item.obji22[32103965] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103966] ? item.obji22[32103966] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103967] ? item.obji22[32103967] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103968] ? item.obji22[32103968] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103969] ? item.obji22[32103969] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103970] ? item.obji22[32103970] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103971] ? item.obji22[32103971] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103972] ? item.obji22[32103972] : '' }}</td>
+                    <td colspan="12">@{{ item.obji22[32103973] ? item.obji22[32103973] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Jarak 2 mm antara pangkal prong dan hidung</td>
+                    <td colspan="3">@{{ item.obji22[32103974] ? item.obji22[32103974] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103975] ? item.obji22[32103975] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103976] ? item.obji22[32103976] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103977] ? item.obji22[32103977] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103978] ? item.obji22[32103978] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103979] ? item.obji22[32103979] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103980] ? item.obji22[32103980] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103981] ? item.obji22[32103981] : '' }}</td>
+                    <td colspan="12">@{{ item.obji22[32103982] ? item.obji22[32103982] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Tidak ada kerusakan kulit sekitar lubang hidung</td>
+                    <td colspan="3">@{{ item.obji22[32103983] ? item.obji22[32103983] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103984] ? item.obji22[32103984] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103985] ? item.obji22[32103985] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103986] ? item.obji22[32103986] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103987] ? item.obji22[32103987] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103988] ? item.obji22[32103988] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103989] ? item.obji22[32103989] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103990] ? item.obji22[32103990] : '' }}</td>
+                    <td colspan="12">@{{ item.obji22[32103991] ? item.obji22[32103991] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Ubah-ubah posisi bayi supaya bayi terstimulasi</td>
+                    <td colspan="3">@{{ item.obji22[32103992] ? item.obji22[32103992] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103993] ? item.obji22[32103993] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103994] ? item.obji22[32103994] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103995] ? item.obji22[32103995] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103996] ? item.obji22[32103996] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103997] ? item.obji22[32103997] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103998] ? item.obji22[32103998] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32103999] ? item.obji22[32103999] : '' }}</td>
+                    <td colspan="12">@{{ item.obji22[32104000] ? item.obji22[32104000] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Level air dipertahankan pada @{{ item.obji22[32104001] ? item.obji22[32104001] : '_______' }} cm</td>
+                    <td colspan="3">@{{ item.obji22[32104002] ? item.obji22[32104002] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32104003] ? item.obji22[32104003] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32104004] ? item.obji22[32104004] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32104005] ? item.obji22[32104005] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32104006] ? item.obji22[32104006] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32104007] ? item.obji22[32104007] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32104008] ? item.obji22[32104008] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32104009] ? item.obji22[32104009] : '' }}</td>
+                    <td colspan="12">@{{ item.obji22[32104010] ? item.obji22[32104010] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Selang dibersihkan dari pengembunan</td>
+                    <td colspan="3">@{{ item.obji22[32104011] ? item.obji22[32104011] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32104012] ? item.obji22[32104012] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32104013] ? item.obji22[32104013] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32104014] ? item.obji22[32104014] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32104015] ? item.obji22[32104015] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32104016] ? item.obji22[32104016] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32104017] ? item.obji22[32104017] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32104018] ? item.obji22[32104018] : '' }}</td>
+                    <td colspan="12">@{{ item.obji22[32104019] ? item.obji22[32104019] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Gelembung air</td>
+                    <td colspan="3">@{{ item.obji22[32104020] ? item.obji22[32104020] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32104021] ? item.obji22[32104021] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32104022] ? item.obji22[32104022] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32104023] ? item.obji22[32104023] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32104024] ? item.obji22[32104024] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32104025] ? item.obji22[32104025] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32104026] ? item.obji22[32104026] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32104027] ? item.obji22[32104027] : '' }}</td>
+                    <td colspan="12">@{{ item.obji22[32104028] ? item.obji22[32104028] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Tidak ada kebocoran</td>
+                    <td colspan="3">@{{ item.obji22[32104029] ? item.obji22[32104029] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32104030] ? item.obji22[32104030] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32104031] ? item.obji22[32104031] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32104032] ? item.obji22[32104032] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32104033] ? item.obji22[32104033] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32104034] ? item.obji22[32104034] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32104035] ? item.obji22[32104035] : '' }}</td>
+                    <td colspan="3">@{{ item.obji22[32104036] ? item.obji22[32104036] : '' }}</td>
+                    <td colspan="12">@{{ item.obji22[32104037] ? item.obji22[32104037] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="49" style="text-align: left">&nbsp;&nbsp;@{{ item.obji22[32104038] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Nasal prongs diberikan setiap hari dengan 2% asam asetat atau chlorin</td>
+                </tr>
+            </table>
+        </div>
+    @endif
+
+    @if (!empty($res['d23']))
+        <div class="format">
+            <table width='100%'>
+                <tr height=20 class="noborder">
+                    <td colspan="8" rowspan="4" class="p3 noborder-tb text-center">
+                        @if(stripos(\Request::url(), 'localhost') !== FALSE)
+                            <img src="{{ asset('img/logo_only.png') }}" alt="" style="width: 60px;display:block; margin:auto;">
+                        @else
+                            <img src="{{ asset('service/img/logo_only.png') }}" alt="" style="width: 60px;display:block; margin:auto;">
+                        @endif
+                    </td>
+                    <td colspan="17" rowspan="4" class="noborder-tb text-center" style="font-size:large">
+                        <strong>{!! $res['profile']->namalengkap !!}</strong> <br>{!! $res['profile']->alamatlengkap !!}<br>TELP : (0413) 81292
+                    </td>
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;No. RM </td>
+                    <td colspan="13" class="noborder" style="text-align: left">&nbsp;
+                        : {!!$res['d1'][0]->nocm  !!}
+                    </td>
+                    <td colspan="5" rowspan="2" class="border-lr bg-dark" style="font-size: xxx-large;text-align:center">RM</td>
+                </tr>
+                <tr class="noborder">
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;Nama Lengkap</td>
+                    <td colspan="11" class="noborder" style="text-align: left">&nbsp;
+                        : {!! $res['d1'][0]->namapasien  !!}
+                    </td>
+                    <td colspan="2" class="noborder">{!! $res['d1'][0]->jeniskelamin == 'PEREMPUAN' ? '(P)' : '(L)'  !!}</td>
+                </tr>
+                <tr class="noborder">
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;Tanggal Lahir</td>
+                    <td colspan="13" class="noborder" style="text-align: left">&nbsp;
+                        : {!! date('d-m-Y',strtotime($res['d1'][0]->tgllahir  )) !!}
+                    </td>
+                    <td colspan="5" class="border-lr" rowspan="2" style="font-size: xxx-large;text-align:center">67</td>
+                </tr>
+                <tr class="noborder">
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;NIK</td>
+                    <td colspan="11" class="noborder" style="text-align: left">&nbsp;
+                        : {!!$res['d1'][0]->noidentitas  !!}
+                    </td>
+                </tr>
+                <tr class="bordered bg-dark">
+                    <th colspan="49" height="20pt">ALAT MONITORING CPAP</th>
+                </tr>
+                <tr>
+                    <td colspan="9" class="noborder">Tanggal : @{{item.obji23[32103929] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                    <td colspan="40" class="noborder text-center">Lengkapi table dibawah setiap 4 jam. Isi dengan angka atau memberi tanda “X” bila sudah dilakukan</td>
+                </tr>
+                <tr>
+                    <td colspan="13" class="text-right">Waktu&nbsp;</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji23[32103930] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji23[32103931] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji23[32103932] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji23[32103933] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji23[32103934] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji23[32103935] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji23[32103936] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji23[32103937] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="12" style="text-align: center">Catatan</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Laju pernapasan</td>
+                    <td colspan="3">@{{ item.obji23[32103938] ? item.obji23[32103938] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103939] ? item.obji23[32103939] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103940] ? item.obji23[32103940] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103941] ? item.obji23[32103941] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103942] ? item.obji23[32103942] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103943] ? item.obji23[32103943] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103944] ? item.obji23[32103944] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103945] ? item.obji23[32103945] : '' }}</td>
+                    <td colspan="12">@{{ item.obji23[32103946] ? item.obji23[32103946] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Saturasi O2. Bila dibawah target, naikan aliran 1L</td>
+                    <td colspan="3">@{{ item.obji23[32103947] ? item.obji23[32103947] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103948] ? item.obji23[32103948] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103949] ? item.obji23[32103949] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103950] ? item.obji23[32103950] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103951] ? item.obji23[32103951] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103952] ? item.obji23[32103952] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103953] ? item.obji23[32103953] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103954] ? item.obji23[32103954] : '' }}</td>
+                    <td colspan="12">@{{ item.obji23[32103955] ? item.obji23[32103955] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Nasopharynx suctioned dengan ukuran 8 or 6 Fr</td>
+                    <td colspan="3">@{{ item.obji23[32103956] ? item.obji23[32103956] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103957] ? item.obji23[32103957] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103958] ? item.obji23[32103958] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103959] ? item.obji23[32103959] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103960] ? item.obji23[32103960] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103961] ? item.obji23[32103961] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103962] ? item.obji23[32103962] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103963] ? item.obji23[32103963] : '' }}</td>
+                    <td colspan="12">@{{ item.obji23[32103964] ? item.obji23[32103964] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Prongs tidak menekan septum hidung</td>
+                    <td colspan="3">@{{ item.obji23[32103965] ? item.obji23[32103965] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103966] ? item.obji23[32103966] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103967] ? item.obji23[32103967] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103968] ? item.obji23[32103968] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103969] ? item.obji23[32103969] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103970] ? item.obji23[32103970] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103971] ? item.obji23[32103971] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103972] ? item.obji23[32103972] : '' }}</td>
+                    <td colspan="12">@{{ item.obji23[32103973] ? item.obji23[32103973] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Jarak 2 mm antara pangkal prong dan hidung</td>
+                    <td colspan="3">@{{ item.obji23[32103974] ? item.obji23[32103974] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103975] ? item.obji23[32103975] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103976] ? item.obji23[32103976] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103977] ? item.obji23[32103977] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103978] ? item.obji23[32103978] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103979] ? item.obji23[32103979] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103980] ? item.obji23[32103980] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103981] ? item.obji23[32103981] : '' }}</td>
+                    <td colspan="12">@{{ item.obji23[32103982] ? item.obji23[32103982] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Tidak ada kerusakan kulit sekitar lubang hidung</td>
+                    <td colspan="3">@{{ item.obji23[32103983] ? item.obji23[32103983] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103984] ? item.obji23[32103984] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103985] ? item.obji23[32103985] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103986] ? item.obji23[32103986] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103987] ? item.obji23[32103987] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103988] ? item.obji23[32103988] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103989] ? item.obji23[32103989] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103990] ? item.obji23[32103990] : '' }}</td>
+                    <td colspan="12">@{{ item.obji23[32103991] ? item.obji23[32103991] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Ubah-ubah posisi bayi supaya bayi terstimulasi</td>
+                    <td colspan="3">@{{ item.obji23[32103992] ? item.obji23[32103992] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103993] ? item.obji23[32103993] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103994] ? item.obji23[32103994] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103995] ? item.obji23[32103995] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103996] ? item.obji23[32103996] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103997] ? item.obji23[32103997] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103998] ? item.obji23[32103998] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32103999] ? item.obji23[32103999] : '' }}</td>
+                    <td colspan="12">@{{ item.obji23[32104000] ? item.obji23[32104000] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Level air dipertahankan pada @{{ item.obji23[32104001] ? item.obji23[32104001] : '_______' }} cm</td>
+                    <td colspan="3">@{{ item.obji23[32104002] ? item.obji23[32104002] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32104003] ? item.obji23[32104003] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32104004] ? item.obji23[32104004] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32104005] ? item.obji23[32104005] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32104006] ? item.obji23[32104006] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32104007] ? item.obji23[32104007] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32104008] ? item.obji23[32104008] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32104009] ? item.obji23[32104009] : '' }}</td>
+                    <td colspan="12">@{{ item.obji23[32104010] ? item.obji23[32104010] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Selang dibersihkan dari pengembunan</td>
+                    <td colspan="3">@{{ item.obji23[32104011] ? item.obji23[32104011] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32104012] ? item.obji23[32104012] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32104013] ? item.obji23[32104013] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32104014] ? item.obji23[32104014] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32104015] ? item.obji23[32104015] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32104016] ? item.obji23[32104016] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32104017] ? item.obji23[32104017] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32104018] ? item.obji23[32104018] : '' }}</td>
+                    <td colspan="12">@{{ item.obji23[32104019] ? item.obji23[32104019] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Gelembung air</td>
+                    <td colspan="3">@{{ item.obji23[32104020] ? item.obji23[32104020] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32104021] ? item.obji23[32104021] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32104022] ? item.obji23[32104022] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32104023] ? item.obji23[32104023] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32104024] ? item.obji23[32104024] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32104025] ? item.obji23[32104025] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32104026] ? item.obji23[32104026] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32104027] ? item.obji23[32104027] : '' }}</td>
+                    <td colspan="12">@{{ item.obji23[32104028] ? item.obji23[32104028] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Tidak ada kebocoran</td>
+                    <td colspan="3">@{{ item.obji23[32104029] ? item.obji23[32104029] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32104030] ? item.obji23[32104030] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32104031] ? item.obji23[32104031] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32104032] ? item.obji23[32104032] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32104033] ? item.obji23[32104033] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32104034] ? item.obji23[32104034] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32104035] ? item.obji23[32104035] : '' }}</td>
+                    <td colspan="3">@{{ item.obji23[32104036] ? item.obji23[32104036] : '' }}</td>
+                    <td colspan="12">@{{ item.obji23[32104037] ? item.obji23[32104037] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="49" style="text-align: left">&nbsp;&nbsp;@{{ item.obji23[32104038] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Nasal prongs diberikan setiap hari dengan 2% asam asetat atau chlorin</td>
+                </tr>
+            </table>
+        </div>
+    @endif
+
+    @if (!empty($res['d24']))
+        <div class="format">
+            <table width='100%'>
+                <tr height=20 class="noborder">
+                    <td colspan="8" rowspan="4" class="p3 noborder-tb text-center">
+                        @if(stripos(\Request::url(), 'localhost') !== FALSE)
+                            <img src="{{ asset('img/logo_only.png') }}" alt="" style="width: 60px;display:block; margin:auto;">
+                        @else
+                            <img src="{{ asset('service/img/logo_only.png') }}" alt="" style="width: 60px;display:block; margin:auto;">
+                        @endif
+                    </td>
+                    <td colspan="17" rowspan="4" class="noborder-tb text-center" style="font-size:large">
+                        <strong>{!! $res['profile']->namalengkap !!}</strong> <br>{!! $res['profile']->alamatlengkap !!}<br>TELP : (0413) 81292
+                    </td>
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;No. RM </td>
+                    <td colspan="13" class="noborder" style="text-align: left">&nbsp;
+                        : {!!$res['d1'][0]->nocm  !!}
+                    </td>
+                    <td colspan="5" rowspan="2" class="border-lr bg-dark" style="font-size: xxx-large;text-align:center">RM</td>
+                </tr>
+                <tr class="noborder">
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;Nama Lengkap</td>
+                    <td colspan="11" class="noborder" style="text-align: left">&nbsp;
+                        : {!! $res['d1'][0]->namapasien  !!}
+                    </td>
+                    <td colspan="2" class="noborder">{!! $res['d1'][0]->jeniskelamin == 'PEREMPUAN' ? '(P)' : '(L)'  !!}</td>
+                </tr>
+                <tr class="noborder">
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;Tanggal Lahir</td>
+                    <td colspan="13" class="noborder" style="text-align: left">&nbsp;
+                        : {!! date('d-m-Y',strtotime($res['d1'][0]->tgllahir  )) !!}
+                    </td>
+                    <td colspan="5" class="border-lr" rowspan="2" style="font-size: xxx-large;text-align:center">67</td>
+                </tr>
+                <tr class="noborder">
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;NIK</td>
+                    <td colspan="11" class="noborder" style="text-align: left">&nbsp;
+                        : {!!$res['d1'][0]->noidentitas  !!}
+                    </td>
+                </tr>
+                <tr class="bordered bg-dark">
+                    <th colspan="49" height="20pt">ALAT MONITORING CPAP</th>
+                </tr>
+                <tr>
+                    <td colspan="9" class="noborder">Tanggal : @{{item.obji24[32103929] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                    <td colspan="40" class="noborder text-center">Lengkapi table dibawah setiap 4 jam. Isi dengan angka atau memberi tanda “X” bila sudah dilakukan</td>
+                </tr>
+                <tr>
+                    <td colspan="13" class="text-right">Waktu&nbsp;</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji24[32103930] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji24[32103931] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji24[32103932] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji24[32103933] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji24[32103934] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji24[32103935] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji24[32103936] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji24[32103937] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="12" style="text-align: center">Catatan</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Laju pernapasan</td>
+                    <td colspan="3">@{{ item.obji24[32103938] ? item.obji24[32103938] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103939] ? item.obji24[32103939] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103940] ? item.obji24[32103940] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103941] ? item.obji24[32103941] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103942] ? item.obji24[32103942] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103943] ? item.obji24[32103943] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103944] ? item.obji24[32103944] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103945] ? item.obji24[32103945] : '' }}</td>
+                    <td colspan="12">@{{ item.obji24[32103946] ? item.obji24[32103946] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Saturasi O2. Bila dibawah target, naikan aliran 1L</td>
+                    <td colspan="3">@{{ item.obji24[32103947] ? item.obji24[32103947] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103948] ? item.obji24[32103948] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103949] ? item.obji24[32103949] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103950] ? item.obji24[32103950] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103951] ? item.obji24[32103951] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103952] ? item.obji24[32103952] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103953] ? item.obji24[32103953] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103954] ? item.obji24[32103954] : '' }}</td>
+                    <td colspan="12">@{{ item.obji24[32103955] ? item.obji24[32103955] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Nasopharynx suctioned dengan ukuran 8 or 6 Fr</td>
+                    <td colspan="3">@{{ item.obji24[32103956] ? item.obji24[32103956] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103957] ? item.obji24[32103957] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103958] ? item.obji24[32103958] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103959] ? item.obji24[32103959] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103960] ? item.obji24[32103960] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103961] ? item.obji24[32103961] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103962] ? item.obji24[32103962] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103963] ? item.obji24[32103963] : '' }}</td>
+                    <td colspan="12">@{{ item.obji24[32103964] ? item.obji24[32103964] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Prongs tidak menekan septum hidung</td>
+                    <td colspan="3">@{{ item.obji24[32103965] ? item.obji24[32103965] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103966] ? item.obji24[32103966] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103967] ? item.obji24[32103967] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103968] ? item.obji24[32103968] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103969] ? item.obji24[32103969] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103970] ? item.obji24[32103970] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103971] ? item.obji24[32103971] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103972] ? item.obji24[32103972] : '' }}</td>
+                    <td colspan="12">@{{ item.obji24[32103973] ? item.obji24[32103973] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Jarak 2 mm antara pangkal prong dan hidung</td>
+                    <td colspan="3">@{{ item.obji24[32103974] ? item.obji24[32103974] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103975] ? item.obji24[32103975] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103976] ? item.obji24[32103976] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103977] ? item.obji24[32103977] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103978] ? item.obji24[32103978] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103979] ? item.obji24[32103979] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103980] ? item.obji24[32103980] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103981] ? item.obji24[32103981] : '' }}</td>
+                    <td colspan="12">@{{ item.obji24[32103982] ? item.obji24[32103982] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Tidak ada kerusakan kulit sekitar lubang hidung</td>
+                    <td colspan="3">@{{ item.obji24[32103983] ? item.obji24[32103983] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103984] ? item.obji24[32103984] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103985] ? item.obji24[32103985] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103986] ? item.obji24[32103986] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103987] ? item.obji24[32103987] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103988] ? item.obji24[32103988] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103989] ? item.obji24[32103989] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103990] ? item.obji24[32103990] : '' }}</td>
+                    <td colspan="12">@{{ item.obji24[32103991] ? item.obji24[32103991] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Ubah-ubah posisi bayi supaya bayi terstimulasi</td>
+                    <td colspan="3">@{{ item.obji24[32103992] ? item.obji24[32103992] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103993] ? item.obji24[32103993] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103994] ? item.obji24[32103994] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103995] ? item.obji24[32103995] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103996] ? item.obji24[32103996] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103997] ? item.obji24[32103997] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103998] ? item.obji24[32103998] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32103999] ? item.obji24[32103999] : '' }}</td>
+                    <td colspan="12">@{{ item.obji24[32104000] ? item.obji24[32104000] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Level air dipertahankan pada @{{ item.obji24[32104001] ? item.obji24[32104001] : '_______' }} cm</td>
+                    <td colspan="3">@{{ item.obji24[32104002] ? item.obji24[32104002] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32104003] ? item.obji24[32104003] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32104004] ? item.obji24[32104004] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32104005] ? item.obji24[32104005] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32104006] ? item.obji24[32104006] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32104007] ? item.obji24[32104007] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32104008] ? item.obji24[32104008] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32104009] ? item.obji24[32104009] : '' }}</td>
+                    <td colspan="12">@{{ item.obji24[32104010] ? item.obji24[32104010] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Selang dibersihkan dari pengembunan</td>
+                    <td colspan="3">@{{ item.obji24[32104011] ? item.obji24[32104011] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32104012] ? item.obji24[32104012] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32104013] ? item.obji24[32104013] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32104014] ? item.obji24[32104014] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32104015] ? item.obji24[32104015] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32104016] ? item.obji24[32104016] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32104017] ? item.obji24[32104017] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32104018] ? item.obji24[32104018] : '' }}</td>
+                    <td colspan="12">@{{ item.obji24[32104019] ? item.obji24[32104019] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Gelembung air</td>
+                    <td colspan="3">@{{ item.obji24[32104020] ? item.obji24[32104020] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32104021] ? item.obji24[32104021] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32104022] ? item.obji24[32104022] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32104023] ? item.obji24[32104023] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32104024] ? item.obji24[32104024] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32104025] ? item.obji24[32104025] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32104026] ? item.obji24[32104026] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32104027] ? item.obji24[32104027] : '' }}</td>
+                    <td colspan="12">@{{ item.obji24[32104028] ? item.obji24[32104028] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Tidak ada kebocoran</td>
+                    <td colspan="3">@{{ item.obji24[32104029] ? item.obji24[32104029] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32104030] ? item.obji24[32104030] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32104031] ? item.obji24[32104031] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32104032] ? item.obji24[32104032] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32104033] ? item.obji24[32104033] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32104034] ? item.obji24[32104034] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32104035] ? item.obji24[32104035] : '' }}</td>
+                    <td colspan="3">@{{ item.obji24[32104036] ? item.obji24[32104036] : '' }}</td>
+                    <td colspan="12">@{{ item.obji24[32104037] ? item.obji24[32104037] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="49" style="text-align: left">&nbsp;&nbsp;@{{ item.obji24[32104038] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Nasal prongs diberikan setiap hari dengan 2% asam asetat atau chlorin</td>
+                </tr>
+            </table>
+        </div>
+    @endif
+
+    @if (!empty($res['d25']))
+        <div class="format">
+            <table width='100%'>
+                <tr height=20 class="noborder">
+                    <td colspan="8" rowspan="4" class="p3 noborder-tb text-center">
+                        @if(stripos(\Request::url(), 'localhost') !== FALSE)
+                            <img src="{{ asset('img/logo_only.png') }}" alt="" style="width: 60px;display:block; margin:auto;">
+                        @else
+                            <img src="{{ asset('service/img/logo_only.png') }}" alt="" style="width: 60px;display:block; margin:auto;">
+                        @endif
+                    </td>
+                    <td colspan="17" rowspan="4" class="noborder-tb text-center" style="font-size:large">
+                        <strong>{!! $res['profile']->namalengkap !!}</strong> <br>{!! $res['profile']->alamatlengkap !!}<br>TELP : (0413) 81292
+                    </td>
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;No. RM </td>
+                    <td colspan="13" class="noborder" style="text-align: left">&nbsp;
+                        : {!!$res['d1'][0]->nocm  !!}
+                    </td>
+                    <td colspan="5" rowspan="2" class="border-lr bg-dark" style="font-size: xxx-large;text-align:center">RM</td>
+                </tr>
+                <tr class="noborder">
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;Nama Lengkap</td>
+                    <td colspan="11" class="noborder" style="text-align: left">&nbsp;
+                        : {!! $res['d1'][0]->namapasien  !!}
+                    </td>
+                    <td colspan="2" class="noborder">{!! $res['d1'][0]->jeniskelamin == 'PEREMPUAN' ? '(P)' : '(L)'  !!}</td>
+                </tr>
+                <tr class="noborder">
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;Tanggal Lahir</td>
+                    <td colspan="13" class="noborder" style="text-align: left">&nbsp;
+                        : {!! date('d-m-Y',strtotime($res['d1'][0]->tgllahir  )) !!}
+                    </td>
+                    <td colspan="5" class="border-lr" rowspan="2" style="font-size: xxx-large;text-align:center">67</td>
+                </tr>
+                <tr class="noborder">
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;NIK</td>
+                    <td colspan="11" class="noborder" style="text-align: left">&nbsp;
+                        : {!!$res['d1'][0]->noidentitas  !!}
+                    </td>
+                </tr>
+                <tr class="bordered bg-dark">
+                    <th colspan="49" height="20pt">ALAT MONITORING CPAP</th>
+                </tr>
+                <tr>
+                    <td colspan="9" class="noborder">Tanggal : @{{item.obji25[32103929] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                    <td colspan="40" class="noborder text-center">Lengkapi table dibawah setiap 4 jam. Isi dengan angka atau memberi tanda “X” bila sudah dilakukan</td>
+                </tr>
+                <tr>
+                    <td colspan="13" class="text-right">Waktu&nbsp;</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji25[32103930] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji25[32103931] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji25[32103932] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji25[32103933] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji25[32103934] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji25[32103935] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji25[32103936] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji25[32103937] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="12" style="text-align: center">Catatan</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Laju pernapasan</td>
+                    <td colspan="3">@{{ item.obji25[32103938] ? item.obji25[32103938] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103939] ? item.obji25[32103939] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103940] ? item.obji25[32103940] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103941] ? item.obji25[32103941] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103942] ? item.obji25[32103942] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103943] ? item.obji25[32103943] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103944] ? item.obji25[32103944] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103945] ? item.obji25[32103945] : '' }}</td>
+                    <td colspan="12">@{{ item.obji25[32103946] ? item.obji25[32103946] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Saturasi O2. Bila dibawah target, naikan aliran 1L</td>
+                    <td colspan="3">@{{ item.obji25[32103947] ? item.obji25[32103947] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103948] ? item.obji25[32103948] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103949] ? item.obji25[32103949] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103950] ? item.obji25[32103950] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103951] ? item.obji25[32103951] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103952] ? item.obji25[32103952] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103953] ? item.obji25[32103953] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103954] ? item.obji25[32103954] : '' }}</td>
+                    <td colspan="12">@{{ item.obji25[32103955] ? item.obji25[32103955] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Nasopharynx suctioned dengan ukuran 8 or 6 Fr</td>
+                    <td colspan="3">@{{ item.obji25[32103956] ? item.obji25[32103956] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103957] ? item.obji25[32103957] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103958] ? item.obji25[32103958] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103959] ? item.obji25[32103959] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103960] ? item.obji25[32103960] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103961] ? item.obji25[32103961] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103962] ? item.obji25[32103962] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103963] ? item.obji25[32103963] : '' }}</td>
+                    <td colspan="12">@{{ item.obji25[32103964] ? item.obji25[32103964] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Prongs tidak menekan septum hidung</td>
+                    <td colspan="3">@{{ item.obji25[32103965] ? item.obji25[32103965] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103966] ? item.obji25[32103966] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103967] ? item.obji25[32103967] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103968] ? item.obji25[32103968] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103969] ? item.obji25[32103969] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103970] ? item.obji25[32103970] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103971] ? item.obji25[32103971] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103972] ? item.obji25[32103972] : '' }}</td>
+                    <td colspan="12">@{{ item.obji25[32103973] ? item.obji25[32103973] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Jarak 2 mm antara pangkal prong dan hidung</td>
+                    <td colspan="3">@{{ item.obji25[32103974] ? item.obji25[32103974] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103975] ? item.obji25[32103975] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103976] ? item.obji25[32103976] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103977] ? item.obji25[32103977] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103978] ? item.obji25[32103978] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103979] ? item.obji25[32103979] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103980] ? item.obji25[32103980] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103981] ? item.obji25[32103981] : '' }}</td>
+                    <td colspan="12">@{{ item.obji25[32103982] ? item.obji25[32103982] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Tidak ada kerusakan kulit sekitar lubang hidung</td>
+                    <td colspan="3">@{{ item.obji25[32103983] ? item.obji25[32103983] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103984] ? item.obji25[32103984] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103985] ? item.obji25[32103985] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103986] ? item.obji25[32103986] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103987] ? item.obji25[32103987] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103988] ? item.obji25[32103988] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103989] ? item.obji25[32103989] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103990] ? item.obji25[32103990] : '' }}</td>
+                    <td colspan="12">@{{ item.obji25[32103991] ? item.obji25[32103991] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Ubah-ubah posisi bayi supaya bayi terstimulasi</td>
+                    <td colspan="3">@{{ item.obji25[32103992] ? item.obji25[32103992] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103993] ? item.obji25[32103993] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103994] ? item.obji25[32103994] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103995] ? item.obji25[32103995] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103996] ? item.obji25[32103996] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103997] ? item.obji25[32103997] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103998] ? item.obji25[32103998] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32103999] ? item.obji25[32103999] : '' }}</td>
+                    <td colspan="12">@{{ item.obji25[32104000] ? item.obji25[32104000] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Level air dipertahankan pada @{{ item.obji25[32104001] ? item.obji25[32104001] : '_______' }} cm</td>
+                    <td colspan="3">@{{ item.obji25[32104002] ? item.obji25[32104002] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32104003] ? item.obji25[32104003] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32104004] ? item.obji25[32104004] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32104005] ? item.obji25[32104005] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32104006] ? item.obji25[32104006] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32104007] ? item.obji25[32104007] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32104008] ? item.obji25[32104008] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32104009] ? item.obji25[32104009] : '' }}</td>
+                    <td colspan="12">@{{ item.obji25[32104010] ? item.obji25[32104010] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Selang dibersihkan dari pengembunan</td>
+                    <td colspan="3">@{{ item.obji25[32104011] ? item.obji25[32104011] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32104012] ? item.obji25[32104012] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32104013] ? item.obji25[32104013] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32104014] ? item.obji25[32104014] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32104015] ? item.obji25[32104015] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32104016] ? item.obji25[32104016] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32104017] ? item.obji25[32104017] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32104018] ? item.obji25[32104018] : '' }}</td>
+                    <td colspan="12">@{{ item.obji25[32104019] ? item.obji25[32104019] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Gelembung air</td>
+                    <td colspan="3">@{{ item.obji25[32104020] ? item.obji25[32104020] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32104021] ? item.obji25[32104021] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32104022] ? item.obji25[32104022] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32104023] ? item.obji25[32104023] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32104024] ? item.obji25[32104024] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32104025] ? item.obji25[32104025] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32104026] ? item.obji25[32104026] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32104027] ? item.obji25[32104027] : '' }}</td>
+                    <td colspan="12">@{{ item.obji25[32104028] ? item.obji25[32104028] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Tidak ada kebocoran</td>
+                    <td colspan="3">@{{ item.obji25[32104029] ? item.obji25[32104029] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32104030] ? item.obji25[32104030] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32104031] ? item.obji25[32104031] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32104032] ? item.obji25[32104032] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32104033] ? item.obji25[32104033] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32104034] ? item.obji25[32104034] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32104035] ? item.obji25[32104035] : '' }}</td>
+                    <td colspan="3">@{{ item.obji25[32104036] ? item.obji25[32104036] : '' }}</td>
+                    <td colspan="12">@{{ item.obji25[32104037] ? item.obji25[32104037] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="49" style="text-align: left">&nbsp;&nbsp;@{{ item.obji25[32104038] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Nasal prongs diberikan setiap hari dengan 2% asam asetat atau chlorin</td>
+                </tr>
+            </table>
+        </div>
+    @endif
+
+    @if (!empty($res['d26']))
+        <div class="format">
+            <table width='100%'>
+                <tr height=20 class="noborder">
+                    <td colspan="8" rowspan="4" class="p3 noborder-tb text-center">
+                        @if(stripos(\Request::url(), 'localhost') !== FALSE)
+                            <img src="{{ asset('img/logo_only.png') }}" alt="" style="width: 60px;display:block; margin:auto;">
+                        @else
+                            <img src="{{ asset('service/img/logo_only.png') }}" alt="" style="width: 60px;display:block; margin:auto;">
+                        @endif
+                    </td>
+                    <td colspan="17" rowspan="4" class="noborder-tb text-center" style="font-size:large">
+                        <strong>{!! $res['profile']->namalengkap !!}</strong> <br>{!! $res['profile']->alamatlengkap !!}<br>TELP : (0413) 81292
+                    </td>
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;No. RM </td>
+                    <td colspan="13" class="noborder" style="text-align: left">&nbsp;
+                        : {!!$res['d1'][0]->nocm  !!}
+                    </td>
+                    <td colspan="5" rowspan="2" class="border-lr bg-dark" style="font-size: xxx-large;text-align:center">RM</td>
+                </tr>
+                <tr class="noborder">
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;Nama Lengkap</td>
+                    <td colspan="11" class="noborder" style="text-align: left">&nbsp;
+                        : {!! $res['d1'][0]->namapasien  !!}
+                    </td>
+                    <td colspan="2" class="noborder">{!! $res['d1'][0]->jeniskelamin == 'PEREMPUAN' ? '(P)' : '(L)'  !!}</td>
+                </tr>
+                <tr class="noborder">
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;Tanggal Lahir</td>
+                    <td colspan="13" class="noborder" style="text-align: left">&nbsp;
+                        : {!! date('d-m-Y',strtotime($res['d1'][0]->tgllahir  )) !!}
+                    </td>
+                    <td colspan="5" class="border-lr" rowspan="2" style="font-size: xxx-large;text-align:center">67</td>
+                </tr>
+                <tr class="noborder">
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;NIK</td>
+                    <td colspan="11" class="noborder" style="text-align: left">&nbsp;
+                        : {!!$res['d1'][0]->noidentitas  !!}
+                    </td>
+                </tr>
+                <tr class="bordered bg-dark">
+                    <th colspan="49" height="20pt">ALAT MONITORING CPAP</th>
+                </tr>
+                <tr>
+                    <td colspan="9" class="noborder">Tanggal : @{{item.obji26[32103929] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                    <td colspan="40" class="noborder text-center">Lengkapi table dibawah setiap 4 jam. Isi dengan angka atau memberi tanda “X” bila sudah dilakukan</td>
+                </tr>
+                <tr>
+                    <td colspan="13" class="text-right">Waktu&nbsp;</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji26[32103930] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji26[32103931] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji26[32103932] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji26[32103933] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji26[32103934] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji26[32103935] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji26[32103936] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji26[32103937] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="12" style="text-align: center">Catatan</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Laju pernapasan</td>
+                    <td colspan="3">@{{ item.obji26[32103938] ? item.obji26[32103938] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103939] ? item.obji26[32103939] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103940] ? item.obji26[32103940] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103941] ? item.obji26[32103941] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103942] ? item.obji26[32103942] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103943] ? item.obji26[32103943] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103944] ? item.obji26[32103944] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103945] ? item.obji26[32103945] : '' }}</td>
+                    <td colspan="12">@{{ item.obji26[32103946] ? item.obji26[32103946] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Saturasi O2. Bila dibawah target, naikan aliran 1L</td>
+                    <td colspan="3">@{{ item.obji26[32103947] ? item.obji26[32103947] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103948] ? item.obji26[32103948] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103949] ? item.obji26[32103949] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103950] ? item.obji26[32103950] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103951] ? item.obji26[32103951] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103952] ? item.obji26[32103952] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103953] ? item.obji26[32103953] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103954] ? item.obji26[32103954] : '' }}</td>
+                    <td colspan="12">@{{ item.obji26[32103955] ? item.obji26[32103955] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Nasopharynx suctioned dengan ukuran 8 or 6 Fr</td>
+                    <td colspan="3">@{{ item.obji26[32103956] ? item.obji26[32103956] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103957] ? item.obji26[32103957] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103958] ? item.obji26[32103958] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103959] ? item.obji26[32103959] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103960] ? item.obji26[32103960] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103961] ? item.obji26[32103961] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103962] ? item.obji26[32103962] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103963] ? item.obji26[32103963] : '' }}</td>
+                    <td colspan="12">@{{ item.obji26[32103964] ? item.obji26[32103964] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Prongs tidak menekan septum hidung</td>
+                    <td colspan="3">@{{ item.obji26[32103965] ? item.obji26[32103965] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103966] ? item.obji26[32103966] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103967] ? item.obji26[32103967] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103968] ? item.obji26[32103968] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103969] ? item.obji26[32103969] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103970] ? item.obji26[32103970] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103971] ? item.obji26[32103971] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103972] ? item.obji26[32103972] : '' }}</td>
+                    <td colspan="12">@{{ item.obji26[32103973] ? item.obji26[32103973] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Jarak 2 mm antara pangkal prong dan hidung</td>
+                    <td colspan="3">@{{ item.obji26[32103974] ? item.obji26[32103974] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103975] ? item.obji26[32103975] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103976] ? item.obji26[32103976] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103977] ? item.obji26[32103977] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103978] ? item.obji26[32103978] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103979] ? item.obji26[32103979] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103980] ? item.obji26[32103980] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103981] ? item.obji26[32103981] : '' }}</td>
+                    <td colspan="12">@{{ item.obji26[32103982] ? item.obji26[32103982] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Tidak ada kerusakan kulit sekitar lubang hidung</td>
+                    <td colspan="3">@{{ item.obji26[32103983] ? item.obji26[32103983] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103984] ? item.obji26[32103984] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103985] ? item.obji26[32103985] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103986] ? item.obji26[32103986] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103987] ? item.obji26[32103987] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103988] ? item.obji26[32103988] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103989] ? item.obji26[32103989] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103990] ? item.obji26[32103990] : '' }}</td>
+                    <td colspan="12">@{{ item.obji26[32103991] ? item.obji26[32103991] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Ubah-ubah posisi bayi supaya bayi terstimulasi</td>
+                    <td colspan="3">@{{ item.obji26[32103992] ? item.obji26[32103992] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103993] ? item.obji26[32103993] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103994] ? item.obji26[32103994] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103995] ? item.obji26[32103995] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103996] ? item.obji26[32103996] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103997] ? item.obji26[32103997] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103998] ? item.obji26[32103998] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32103999] ? item.obji26[32103999] : '' }}</td>
+                    <td colspan="12">@{{ item.obji26[32104000] ? item.obji26[32104000] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Level air dipertahankan pada @{{ item.obji26[32104001] ? item.obji26[32104001] : '_______' }} cm</td>
+                    <td colspan="3">@{{ item.obji26[32104002] ? item.obji26[32104002] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32104003] ? item.obji26[32104003] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32104004] ? item.obji26[32104004] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32104005] ? item.obji26[32104005] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32104006] ? item.obji26[32104006] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32104007] ? item.obji26[32104007] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32104008] ? item.obji26[32104008] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32104009] ? item.obji26[32104009] : '' }}</td>
+                    <td colspan="12">@{{ item.obji26[32104010] ? item.obji26[32104010] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Selang dibersihkan dari pengembunan</td>
+                    <td colspan="3">@{{ item.obji26[32104011] ? item.obji26[32104011] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32104012] ? item.obji26[32104012] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32104013] ? item.obji26[32104013] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32104014] ? item.obji26[32104014] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32104015] ? item.obji26[32104015] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32104016] ? item.obji26[32104016] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32104017] ? item.obji26[32104017] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32104018] ? item.obji26[32104018] : '' }}</td>
+                    <td colspan="12">@{{ item.obji26[32104019] ? item.obji26[32104019] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Gelembung air</td>
+                    <td colspan="3">@{{ item.obji26[32104020] ? item.obji26[32104020] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32104021] ? item.obji26[32104021] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32104022] ? item.obji26[32104022] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32104023] ? item.obji26[32104023] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32104024] ? item.obji26[32104024] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32104025] ? item.obji26[32104025] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32104026] ? item.obji26[32104026] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32104027] ? item.obji26[32104027] : '' }}</td>
+                    <td colspan="12">@{{ item.obji26[32104028] ? item.obji26[32104028] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Tidak ada kebocoran</td>
+                    <td colspan="3">@{{ item.obji26[32104029] ? item.obji26[32104029] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32104030] ? item.obji26[32104030] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32104031] ? item.obji26[32104031] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32104032] ? item.obji26[32104032] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32104033] ? item.obji26[32104033] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32104034] ? item.obji26[32104034] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32104035] ? item.obji26[32104035] : '' }}</td>
+                    <td colspan="3">@{{ item.obji26[32104036] ? item.obji26[32104036] : '' }}</td>
+                    <td colspan="12">@{{ item.obji26[32104037] ? item.obji26[32104037] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="49" style="text-align: left">&nbsp;&nbsp;@{{ item.obji26[32104038] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Nasal prongs diberikan setiap hari dengan 2% asam asetat atau chlorin</td>
+                </tr>
+            </table>
+        </div>
+    @endif
+
+    @if (!empty($res['d27']))
+        <div class="format">
+            <table width='100%'>
+                <tr height=20 class="noborder">
+                    <td colspan="8" rowspan="4" class="p3 noborder-tb text-center">
+                        @if(stripos(\Request::url(), 'localhost') !== FALSE)
+                            <img src="{{ asset('img/logo_only.png') }}" alt="" style="width: 60px;display:block; margin:auto;">
+                        @else
+                            <img src="{{ asset('service/img/logo_only.png') }}" alt="" style="width: 60px;display:block; margin:auto;">
+                        @endif
+                    </td>
+                    <td colspan="17" rowspan="4" class="noborder-tb text-center" style="font-size:large">
+                        <strong>{!! $res['profile']->namalengkap !!}</strong> <br>{!! $res['profile']->alamatlengkap !!}<br>TELP : (0413) 81292
+                    </td>
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;No. RM </td>
+                    <td colspan="13" class="noborder" style="text-align: left">&nbsp;
+                        : {!!$res['d1'][0]->nocm  !!}
+                    </td>
+                    <td colspan="5" rowspan="2" class="border-lr bg-dark" style="font-size: xxx-large;text-align:center">RM</td>
+                </tr>
+                <tr class="noborder">
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;Nama Lengkap</td>
+                    <td colspan="11" class="noborder" style="text-align: left">&nbsp;
+                        : {!! $res['d1'][0]->namapasien  !!}
+                    </td>
+                    <td colspan="2" class="noborder">{!! $res['d1'][0]->jeniskelamin == 'PEREMPUAN' ? '(P)' : '(L)'  !!}</td>
+                </tr>
+                <tr class="noborder">
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;Tanggal Lahir</td>
+                    <td colspan="13" class="noborder" style="text-align: left">&nbsp;
+                        : {!! date('d-m-Y',strtotime($res['d1'][0]->tgllahir  )) !!}
+                    </td>
+                    <td colspan="5" class="border-lr" rowspan="2" style="font-size: xxx-large;text-align:center">67</td>
+                </tr>
+                <tr class="noborder">
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;NIK</td>
+                    <td colspan="11" class="noborder" style="text-align: left">&nbsp;
+                        : {!!$res['d1'][0]->noidentitas  !!}
+                    </td>
+                </tr>
+                <tr class="bordered bg-dark">
+                    <th colspan="49" height="20pt">ALAT MONITORING CPAP</th>
+                </tr>
+                <tr>
+                    <td colspan="9" class="noborder">Tanggal : @{{item.obji27[32103929] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                    <td colspan="40" class="noborder text-center">Lengkapi table dibawah setiap 4 jam. Isi dengan angka atau memberi tanda “X” bila sudah dilakukan</td>
+                </tr>
+                <tr>
+                    <td colspan="13" class="text-right">Waktu&nbsp;</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji27[32103930] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji27[32103931] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji27[32103932] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji27[32103933] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji27[32103934] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji27[32103935] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji27[32103936] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji27[32103937] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="12" style="text-align: center">Catatan</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Laju pernapasan</td>
+                    <td colspan="3">@{{ item.obji27[32103938] ? item.obji27[32103938] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103939] ? item.obji27[32103939] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103940] ? item.obji27[32103940] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103941] ? item.obji27[32103941] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103942] ? item.obji27[32103942] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103943] ? item.obji27[32103943] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103944] ? item.obji27[32103944] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103945] ? item.obji27[32103945] : '' }}</td>
+                    <td colspan="12">@{{ item.obji27[32103946] ? item.obji27[32103946] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Saturasi O2. Bila dibawah target, naikan aliran 1L</td>
+                    <td colspan="3">@{{ item.obji27[32103947] ? item.obji27[32103947] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103948] ? item.obji27[32103948] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103949] ? item.obji27[32103949] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103950] ? item.obji27[32103950] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103951] ? item.obji27[32103951] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103952] ? item.obji27[32103952] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103953] ? item.obji27[32103953] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103954] ? item.obji27[32103954] : '' }}</td>
+                    <td colspan="12">@{{ item.obji27[32103955] ? item.obji27[32103955] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Nasopharynx suctioned dengan ukuran 8 or 6 Fr</td>
+                    <td colspan="3">@{{ item.obji27[32103956] ? item.obji27[32103956] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103957] ? item.obji27[32103957] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103958] ? item.obji27[32103958] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103959] ? item.obji27[32103959] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103960] ? item.obji27[32103960] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103961] ? item.obji27[32103961] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103962] ? item.obji27[32103962] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103963] ? item.obji27[32103963] : '' }}</td>
+                    <td colspan="12">@{{ item.obji27[32103964] ? item.obji27[32103964] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Prongs tidak menekan septum hidung</td>
+                    <td colspan="3">@{{ item.obji27[32103965] ? item.obji27[32103965] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103966] ? item.obji27[32103966] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103967] ? item.obji27[32103967] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103968] ? item.obji27[32103968] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103969] ? item.obji27[32103969] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103970] ? item.obji27[32103970] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103971] ? item.obji27[32103971] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103972] ? item.obji27[32103972] : '' }}</td>
+                    <td colspan="12">@{{ item.obji27[32103973] ? item.obji27[32103973] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Jarak 2 mm antara pangkal prong dan hidung</td>
+                    <td colspan="3">@{{ item.obji27[32103974] ? item.obji27[32103974] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103975] ? item.obji27[32103975] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103976] ? item.obji27[32103976] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103977] ? item.obji27[32103977] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103978] ? item.obji27[32103978] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103979] ? item.obji27[32103979] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103980] ? item.obji27[32103980] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103981] ? item.obji27[32103981] : '' }}</td>
+                    <td colspan="12">@{{ item.obji27[32103982] ? item.obji27[32103982] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Tidak ada kerusakan kulit sekitar lubang hidung</td>
+                    <td colspan="3">@{{ item.obji27[32103983] ? item.obji27[32103983] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103984] ? item.obji27[32103984] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103985] ? item.obji27[32103985] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103986] ? item.obji27[32103986] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103987] ? item.obji27[32103987] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103988] ? item.obji27[32103988] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103989] ? item.obji27[32103989] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103990] ? item.obji27[32103990] : '' }}</td>
+                    <td colspan="12">@{{ item.obji27[32103991] ? item.obji27[32103991] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Ubah-ubah posisi bayi supaya bayi terstimulasi</td>
+                    <td colspan="3">@{{ item.obji27[32103992] ? item.obji27[32103992] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103993] ? item.obji27[32103993] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103994] ? item.obji27[32103994] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103995] ? item.obji27[32103995] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103996] ? item.obji27[32103996] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103997] ? item.obji27[32103997] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103998] ? item.obji27[32103998] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32103999] ? item.obji27[32103999] : '' }}</td>
+                    <td colspan="12">@{{ item.obji27[32104000] ? item.obji27[32104000] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Level air dipertahankan pada @{{ item.obji27[32104001] ? item.obji27[32104001] : '_______' }} cm</td>
+                    <td colspan="3">@{{ item.obji27[32104002] ? item.obji27[32104002] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32104003] ? item.obji27[32104003] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32104004] ? item.obji27[32104004] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32104005] ? item.obji27[32104005] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32104006] ? item.obji27[32104006] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32104007] ? item.obji27[32104007] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32104008] ? item.obji27[32104008] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32104009] ? item.obji27[32104009] : '' }}</td>
+                    <td colspan="12">@{{ item.obji27[32104010] ? item.obji27[32104010] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Selang dibersihkan dari pengembunan</td>
+                    <td colspan="3">@{{ item.obji27[32104011] ? item.obji27[32104011] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32104012] ? item.obji27[32104012] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32104013] ? item.obji27[32104013] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32104014] ? item.obji27[32104014] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32104015] ? item.obji27[32104015] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32104016] ? item.obji27[32104016] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32104017] ? item.obji27[32104017] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32104018] ? item.obji27[32104018] : '' }}</td>
+                    <td colspan="12">@{{ item.obji27[32104019] ? item.obji27[32104019] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Gelembung air</td>
+                    <td colspan="3">@{{ item.obji27[32104020] ? item.obji27[32104020] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32104021] ? item.obji27[32104021] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32104022] ? item.obji27[32104022] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32104023] ? item.obji27[32104023] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32104024] ? item.obji27[32104024] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32104025] ? item.obji27[32104025] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32104026] ? item.obji27[32104026] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32104027] ? item.obji27[32104027] : '' }}</td>
+                    <td colspan="12">@{{ item.obji27[32104028] ? item.obji27[32104028] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Tidak ada kebocoran</td>
+                    <td colspan="3">@{{ item.obji27[32104029] ? item.obji27[32104029] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32104030] ? item.obji27[32104030] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32104031] ? item.obji27[32104031] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32104032] ? item.obji27[32104032] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32104033] ? item.obji27[32104033] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32104034] ? item.obji27[32104034] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32104035] ? item.obji27[32104035] : '' }}</td>
+                    <td colspan="3">@{{ item.obji27[32104036] ? item.obji27[32104036] : '' }}</td>
+                    <td colspan="12">@{{ item.obji27[32104037] ? item.obji27[32104037] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="49" style="text-align: left">&nbsp;&nbsp;@{{ item.obji27[32104038] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Nasal prongs diberikan setiap hari dengan 2% asam asetat atau chlorin</td>
+                </tr>
+            </table>
+        </div>
+    @endif
+
+    @if (!empty($res['d28']))
+        <div class="format">
+            <table width='100%'>
+                <tr height=20 class="noborder">
+                    <td colspan="8" rowspan="4" class="p3 noborder-tb text-center">
+                        @if(stripos(\Request::url(), 'localhost') !== FALSE)
+                            <img src="{{ asset('img/logo_only.png') }}" alt="" style="width: 60px;display:block; margin:auto;">
+                        @else
+                            <img src="{{ asset('service/img/logo_only.png') }}" alt="" style="width: 60px;display:block; margin:auto;">
+                        @endif
+                    </td>
+                    <td colspan="17" rowspan="4" class="noborder-tb text-center" style="font-size:large">
+                        <strong>{!! $res['profile']->namalengkap !!}</strong> <br>{!! $res['profile']->alamatlengkap !!}<br>TELP : (0413) 81292
+                    </td>
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;No. RM </td>
+                    <td colspan="13" class="noborder" style="text-align: left">&nbsp;
+                        : {!!$res['d1'][0]->nocm  !!}
+                    </td>
+                    <td colspan="5" rowspan="2" class="border-lr bg-dark" style="font-size: xxx-large;text-align:center">RM</td>
+                </tr>
+                <tr class="noborder">
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;Nama Lengkap</td>
+                    <td colspan="11" class="noborder" style="text-align: left">&nbsp;
+                        : {!! $res['d1'][0]->namapasien  !!}
+                    </td>
+                    <td colspan="2" class="noborder">{!! $res['d1'][0]->jeniskelamin == 'PEREMPUAN' ? '(P)' : '(L)'  !!}</td>
+                </tr>
+                <tr class="noborder">
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;Tanggal Lahir</td>
+                    <td colspan="13" class="noborder" style="text-align: left">&nbsp;
+                        : {!! date('d-m-Y',strtotime($res['d1'][0]->tgllahir  )) !!}
+                    </td>
+                    <td colspan="5" class="border-lr" rowspan="2" style="font-size: xxx-large;text-align:center">67</td>
+                </tr>
+                <tr class="noborder">
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;NIK</td>
+                    <td colspan="11" class="noborder" style="text-align: left">&nbsp;
+                        : {!!$res['d1'][0]->noidentitas  !!}
+                    </td>
+                </tr>
+                <tr class="bordered bg-dark">
+                    <th colspan="49" height="20pt">ALAT MONITORING CPAP</th>
+                </tr>
+                <tr>
+                    <td colspan="9" class="noborder">Tanggal : @{{item.obji28[32103929] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                    <td colspan="40" class="noborder text-center">Lengkapi table dibawah setiap 4 jam. Isi dengan angka atau memberi tanda “X” bila sudah dilakukan</td>
+                </tr>
+                <tr>
+                    <td colspan="13" class="text-right">Waktu&nbsp;</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji28[32103930] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji28[32103931] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji28[32103932] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji28[32103933] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji28[32103934] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji28[32103935] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji28[32103936] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji28[32103937] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="12" style="text-align: center">Catatan</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Laju pernapasan</td>
+                    <td colspan="3">@{{ item.obji28[32103938] ? item.obji28[32103938] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103939] ? item.obji28[32103939] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103940] ? item.obji28[32103940] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103941] ? item.obji28[32103941] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103942] ? item.obji28[32103942] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103943] ? item.obji28[32103943] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103944] ? item.obji28[32103944] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103945] ? item.obji28[32103945] : '' }}</td>
+                    <td colspan="12">@{{ item.obji28[32103946] ? item.obji28[32103946] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Saturasi O2. Bila dibawah target, naikan aliran 1L</td>
+                    <td colspan="3">@{{ item.obji28[32103947] ? item.obji28[32103947] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103948] ? item.obji28[32103948] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103949] ? item.obji28[32103949] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103950] ? item.obji28[32103950] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103951] ? item.obji28[32103951] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103952] ? item.obji28[32103952] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103953] ? item.obji28[32103953] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103954] ? item.obji28[32103954] : '' }}</td>
+                    <td colspan="12">@{{ item.obji28[32103955] ? item.obji28[32103955] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Nasopharynx suctioned dengan ukuran 8 or 6 Fr</td>
+                    <td colspan="3">@{{ item.obji28[32103956] ? item.obji28[32103956] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103957] ? item.obji28[32103957] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103958] ? item.obji28[32103958] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103959] ? item.obji28[32103959] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103960] ? item.obji28[32103960] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103961] ? item.obji28[32103961] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103962] ? item.obji28[32103962] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103963] ? item.obji28[32103963] : '' }}</td>
+                    <td colspan="12">@{{ item.obji28[32103964] ? item.obji28[32103964] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Prongs tidak menekan septum hidung</td>
+                    <td colspan="3">@{{ item.obji28[32103965] ? item.obji28[32103965] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103966] ? item.obji28[32103966] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103967] ? item.obji28[32103967] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103968] ? item.obji28[32103968] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103969] ? item.obji28[32103969] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103970] ? item.obji28[32103970] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103971] ? item.obji28[32103971] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103972] ? item.obji28[32103972] : '' }}</td>
+                    <td colspan="12">@{{ item.obji28[32103973] ? item.obji28[32103973] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Jarak 2 mm antara pangkal prong dan hidung</td>
+                    <td colspan="3">@{{ item.obji28[32103974] ? item.obji28[32103974] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103975] ? item.obji28[32103975] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103976] ? item.obji28[32103976] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103977] ? item.obji28[32103977] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103978] ? item.obji28[32103978] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103979] ? item.obji28[32103979] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103980] ? item.obji28[32103980] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103981] ? item.obji28[32103981] : '' }}</td>
+                    <td colspan="12">@{{ item.obji28[32103982] ? item.obji28[32103982] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Tidak ada kerusakan kulit sekitar lubang hidung</td>
+                    <td colspan="3">@{{ item.obji28[32103983] ? item.obji28[32103983] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103984] ? item.obji28[32103984] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103985] ? item.obji28[32103985] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103986] ? item.obji28[32103986] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103987] ? item.obji28[32103987] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103988] ? item.obji28[32103988] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103989] ? item.obji28[32103989] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103990] ? item.obji28[32103990] : '' }}</td>
+                    <td colspan="12">@{{ item.obji28[32103991] ? item.obji28[32103991] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Ubah-ubah posisi bayi supaya bayi terstimulasi</td>
+                    <td colspan="3">@{{ item.obji28[32103992] ? item.obji28[32103992] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103993] ? item.obji28[32103993] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103994] ? item.obji28[32103994] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103995] ? item.obji28[32103995] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103996] ? item.obji28[32103996] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103997] ? item.obji28[32103997] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103998] ? item.obji28[32103998] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32103999] ? item.obji28[32103999] : '' }}</td>
+                    <td colspan="12">@{{ item.obji28[32104000] ? item.obji28[32104000] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Level air dipertahankan pada @{{ item.obji28[32104001] ? item.obji28[32104001] : '_______' }} cm</td>
+                    <td colspan="3">@{{ item.obji28[32104002] ? item.obji28[32104002] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32104003] ? item.obji28[32104003] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32104004] ? item.obji28[32104004] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32104005] ? item.obji28[32104005] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32104006] ? item.obji28[32104006] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32104007] ? item.obji28[32104007] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32104008] ? item.obji28[32104008] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32104009] ? item.obji28[32104009] : '' }}</td>
+                    <td colspan="12">@{{ item.obji28[32104010] ? item.obji28[32104010] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Selang dibersihkan dari pengembunan</td>
+                    <td colspan="3">@{{ item.obji28[32104011] ? item.obji28[32104011] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32104012] ? item.obji28[32104012] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32104013] ? item.obji28[32104013] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32104014] ? item.obji28[32104014] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32104015] ? item.obji28[32104015] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32104016] ? item.obji28[32104016] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32104017] ? item.obji28[32104017] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32104018] ? item.obji28[32104018] : '' }}</td>
+                    <td colspan="12">@{{ item.obji28[32104019] ? item.obji28[32104019] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Gelembung air</td>
+                    <td colspan="3">@{{ item.obji28[32104020] ? item.obji28[32104020] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32104021] ? item.obji28[32104021] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32104022] ? item.obji28[32104022] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32104023] ? item.obji28[32104023] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32104024] ? item.obji28[32104024] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32104025] ? item.obji28[32104025] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32104026] ? item.obji28[32104026] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32104027] ? item.obji28[32104027] : '' }}</td>
+                    <td colspan="12">@{{ item.obji28[32104028] ? item.obji28[32104028] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Tidak ada kebocoran</td>
+                    <td colspan="3">@{{ item.obji28[32104029] ? item.obji28[32104029] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32104030] ? item.obji28[32104030] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32104031] ? item.obji28[32104031] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32104032] ? item.obji28[32104032] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32104033] ? item.obji28[32104033] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32104034] ? item.obji28[32104034] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32104035] ? item.obji28[32104035] : '' }}</td>
+                    <td colspan="3">@{{ item.obji28[32104036] ? item.obji28[32104036] : '' }}</td>
+                    <td colspan="12">@{{ item.obji28[32104037] ? item.obji28[32104037] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="49" style="text-align: left">&nbsp;&nbsp;@{{ item.obji28[32104038] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Nasal prongs diberikan setiap hari dengan 2% asam asetat atau chlorin</td>
+                </tr>
+            </table>
+        </div>
+    @endif
+
+    @if (!empty($res['d29']))
+        <div class="format">
+            <table width='100%'>
+                <tr height=20 class="noborder">
+                    <td colspan="8" rowspan="4" class="p3 noborder-tb text-center">
+                        @if(stripos(\Request::url(), 'localhost') !== FALSE)
+                            <img src="{{ asset('img/logo_only.png') }}" alt="" style="width: 60px;display:block; margin:auto;">
+                        @else
+                            <img src="{{ asset('service/img/logo_only.png') }}" alt="" style="width: 60px;display:block; margin:auto;">
+                        @endif
+                    </td>
+                    <td colspan="17" rowspan="4" class="noborder-tb text-center" style="font-size:large">
+                        <strong>{!! $res['profile']->namalengkap !!}</strong> <br>{!! $res['profile']->alamatlengkap !!}<br>TELP : (0413) 81292
+                    </td>
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;No. RM </td>
+                    <td colspan="13" class="noborder" style="text-align: left">&nbsp;
+                        : {!!$res['d1'][0]->nocm  !!}
+                    </td>
+                    <td colspan="5" rowspan="2" class="border-lr bg-dark" style="font-size: xxx-large;text-align:center">RM</td>
+                </tr>
+                <tr class="noborder">
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;Nama Lengkap</td>
+                    <td colspan="11" class="noborder" style="text-align: left">&nbsp;
+                        : {!! $res['d1'][0]->namapasien  !!}
+                    </td>
+                    <td colspan="2" class="noborder">{!! $res['d1'][0]->jeniskelamin == 'PEREMPUAN' ? '(P)' : '(L)'  !!}</td>
+                </tr>
+                <tr class="noborder">
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;Tanggal Lahir</td>
+                    <td colspan="13" class="noborder" style="text-align: left">&nbsp;
+                        : {!! date('d-m-Y',strtotime($res['d1'][0]->tgllahir  )) !!}
+                    </td>
+                    <td colspan="5" class="border-lr" rowspan="2" style="font-size: xxx-large;text-align:center">67</td>
+                </tr>
+                <tr class="noborder">
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;NIK</td>
+                    <td colspan="11" class="noborder" style="text-align: left">&nbsp;
+                        : {!!$res['d1'][0]->noidentitas  !!}
+                    </td>
+                </tr>
+                <tr class="bordered bg-dark">
+                    <th colspan="49" height="20pt">ALAT MONITORING CPAP</th>
+                </tr>
+                <tr>
+                    <td colspan="9" class="noborder">Tanggal : @{{item.obji29[32103929] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                    <td colspan="40" class="noborder text-center">Lengkapi table dibawah setiap 4 jam. Isi dengan angka atau memberi tanda “X” bila sudah dilakukan</td>
+                </tr>
+                <tr>
+                    <td colspan="13" class="text-right">Waktu&nbsp;</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji29[32103930] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji29[32103931] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji29[32103932] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji29[32103933] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji29[32103934] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji29[32103935] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji29[32103936] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji29[32103937] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="12" style="text-align: center">Catatan</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Laju pernapasan</td>
+                    <td colspan="3">@{{ item.obji29[32103938] ? item.obji29[32103938] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103939] ? item.obji29[32103939] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103940] ? item.obji29[32103940] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103941] ? item.obji29[32103941] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103942] ? item.obji29[32103942] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103943] ? item.obji29[32103943] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103944] ? item.obji29[32103944] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103945] ? item.obji29[32103945] : '' }}</td>
+                    <td colspan="12">@{{ item.obji29[32103946] ? item.obji29[32103946] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Saturasi O2. Bila dibawah target, naikan aliran 1L</td>
+                    <td colspan="3">@{{ item.obji29[32103947] ? item.obji29[32103947] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103948] ? item.obji29[32103948] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103949] ? item.obji29[32103949] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103950] ? item.obji29[32103950] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103951] ? item.obji29[32103951] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103952] ? item.obji29[32103952] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103953] ? item.obji29[32103953] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103954] ? item.obji29[32103954] : '' }}</td>
+                    <td colspan="12">@{{ item.obji29[32103955] ? item.obji29[32103955] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Nasopharynx suctioned dengan ukuran 8 or 6 Fr</td>
+                    <td colspan="3">@{{ item.obji29[32103956] ? item.obji29[32103956] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103957] ? item.obji29[32103957] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103958] ? item.obji29[32103958] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103959] ? item.obji29[32103959] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103960] ? item.obji29[32103960] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103961] ? item.obji29[32103961] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103962] ? item.obji29[32103962] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103963] ? item.obji29[32103963] : '' }}</td>
+                    <td colspan="12">@{{ item.obji29[32103964] ? item.obji29[32103964] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Prongs tidak menekan septum hidung</td>
+                    <td colspan="3">@{{ item.obji29[32103965] ? item.obji29[32103965] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103966] ? item.obji29[32103966] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103967] ? item.obji29[32103967] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103968] ? item.obji29[32103968] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103969] ? item.obji29[32103969] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103970] ? item.obji29[32103970] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103971] ? item.obji29[32103971] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103972] ? item.obji29[32103972] : '' }}</td>
+                    <td colspan="12">@{{ item.obji29[32103973] ? item.obji29[32103973] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Jarak 2 mm antara pangkal prong dan hidung</td>
+                    <td colspan="3">@{{ item.obji29[32103974] ? item.obji29[32103974] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103975] ? item.obji29[32103975] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103976] ? item.obji29[32103976] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103977] ? item.obji29[32103977] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103978] ? item.obji29[32103978] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103979] ? item.obji29[32103979] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103980] ? item.obji29[32103980] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103981] ? item.obji29[32103981] : '' }}</td>
+                    <td colspan="12">@{{ item.obji29[32103982] ? item.obji29[32103982] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Tidak ada kerusakan kulit sekitar lubang hidung</td>
+                    <td colspan="3">@{{ item.obji29[32103983] ? item.obji29[32103983] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103984] ? item.obji29[32103984] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103985] ? item.obji29[32103985] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103986] ? item.obji29[32103986] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103987] ? item.obji29[32103987] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103988] ? item.obji29[32103988] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103989] ? item.obji29[32103989] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103990] ? item.obji29[32103990] : '' }}</td>
+                    <td colspan="12">@{{ item.obji29[32103991] ? item.obji29[32103991] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Ubah-ubah posisi bayi supaya bayi terstimulasi</td>
+                    <td colspan="3">@{{ item.obji29[32103992] ? item.obji29[32103992] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103993] ? item.obji29[32103993] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103994] ? item.obji29[32103994] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103995] ? item.obji29[32103995] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103996] ? item.obji29[32103996] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103997] ? item.obji29[32103997] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103998] ? item.obji29[32103998] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32103999] ? item.obji29[32103999] : '' }}</td>
+                    <td colspan="12">@{{ item.obji29[32104000] ? item.obji29[32104000] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Level air dipertahankan pada @{{ item.obji29[32104001] ? item.obji29[32104001] : '_______' }} cm</td>
+                    <td colspan="3">@{{ item.obji29[32104002] ? item.obji29[32104002] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32104003] ? item.obji29[32104003] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32104004] ? item.obji29[32104004] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32104005] ? item.obji29[32104005] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32104006] ? item.obji29[32104006] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32104007] ? item.obji29[32104007] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32104008] ? item.obji29[32104008] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32104009] ? item.obji29[32104009] : '' }}</td>
+                    <td colspan="12">@{{ item.obji29[32104010] ? item.obji29[32104010] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Selang dibersihkan dari pengembunan</td>
+                    <td colspan="3">@{{ item.obji29[32104011] ? item.obji29[32104011] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32104012] ? item.obji29[32104012] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32104013] ? item.obji29[32104013] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32104014] ? item.obji29[32104014] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32104015] ? item.obji29[32104015] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32104016] ? item.obji29[32104016] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32104017] ? item.obji29[32104017] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32104018] ? item.obji29[32104018] : '' }}</td>
+                    <td colspan="12">@{{ item.obji29[32104019] ? item.obji29[32104019] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Gelembung air</td>
+                    <td colspan="3">@{{ item.obji29[32104020] ? item.obji29[32104020] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32104021] ? item.obji29[32104021] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32104022] ? item.obji29[32104022] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32104023] ? item.obji29[32104023] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32104024] ? item.obji29[32104024] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32104025] ? item.obji29[32104025] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32104026] ? item.obji29[32104026] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32104027] ? item.obji29[32104027] : '' }}</td>
+                    <td colspan="12">@{{ item.obji29[32104028] ? item.obji29[32104028] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Tidak ada kebocoran</td>
+                    <td colspan="3">@{{ item.obji29[32104029] ? item.obji29[32104029] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32104030] ? item.obji29[32104030] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32104031] ? item.obji29[32104031] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32104032] ? item.obji29[32104032] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32104033] ? item.obji29[32104033] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32104034] ? item.obji29[32104034] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32104035] ? item.obji29[32104035] : '' }}</td>
+                    <td colspan="3">@{{ item.obji29[32104036] ? item.obji29[32104036] : '' }}</td>
+                    <td colspan="12">@{{ item.obji29[32104037] ? item.obji29[32104037] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="49" style="text-align: left">&nbsp;&nbsp;@{{ item.obji29[32104038] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Nasal prongs diberikan setiap hari dengan 2% asam asetat atau chlorin</td>
+                </tr>
+            </table>
+        </div>
+    @endif
+
+    @if (!empty($res['d30']))
+        <div class="format">
+            <table width='100%'>
+                <tr height=20 class="noborder">
+                    <td colspan="8" rowspan="4" class="p3 noborder-tb text-center">
+                        @if(stripos(\Request::url(), 'localhost') !== FALSE)
+                            <img src="{{ asset('img/logo_only.png') }}" alt="" style="width: 60px;display:block; margin:auto;">
+                        @else
+                            <img src="{{ asset('service/img/logo_only.png') }}" alt="" style="width: 60px;display:block; margin:auto;">
+                        @endif
+                    </td>
+                    <td colspan="17" rowspan="4" class="noborder-tb text-center" style="font-size:large">
+                        <strong>{!! $res['profile']->namalengkap !!}</strong> <br>{!! $res['profile']->alamatlengkap !!}<br>TELP : (0413) 81292
+                    </td>
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;No. RM </td>
+                    <td colspan="13" class="noborder" style="text-align: left">&nbsp;
+                        : {!!$res['d1'][0]->nocm  !!}
+                    </td>
+                    <td colspan="5" rowspan="2" class="border-lr bg-dark" style="font-size: xxx-large;text-align:center">RM</td>
+                </tr>
+                <tr class="noborder">
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;Nama Lengkap</td>
+                    <td colspan="11" class="noborder" style="text-align: left">&nbsp;
+                        : {!! $res['d1'][0]->namapasien  !!}
+                    </td>
+                    <td colspan="2" class="noborder">{!! $res['d1'][0]->jeniskelamin == 'PEREMPUAN' ? '(P)' : '(L)'  !!}</td>
+                </tr>
+                <tr class="noborder">
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;Tanggal Lahir</td>
+                    <td colspan="13" class="noborder" style="text-align: left">&nbsp;
+                        : {!! date('d-m-Y',strtotime($res['d1'][0]->tgllahir  )) !!}
+                    </td>
+                    <td colspan="5" class="border-lr" rowspan="2" style="font-size: xxx-large;text-align:center">67</td>
+                </tr>
+                <tr class="noborder">
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;NIK</td>
+                    <td colspan="11" class="noborder" style="text-align: left">&nbsp;
+                        : {!!$res['d1'][0]->noidentitas  !!}
+                    </td>
+                </tr>
+                <tr class="bordered bg-dark">
+                    <th colspan="49" height="20pt">ALAT MONITORING CPAP</th>
+                </tr>
+                <tr>
+                    <td colspan="9" class="noborder">Tanggal : @{{item.obji30[32103929] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                    <td colspan="40" class="noborder text-center">Lengkapi table dibawah setiap 4 jam. Isi dengan angka atau memberi tanda “X” bila sudah dilakukan</td>
+                </tr>
+                <tr>
+                    <td colspan="13" class="text-right">Waktu&nbsp;</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji30[32103930] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji30[32103931] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji30[32103932] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji30[32103933] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji30[32103934] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji30[32103935] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji30[32103936] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji30[32103937] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="12" style="text-align: center">Catatan</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Laju pernapasan</td>
+                    <td colspan="3">@{{ item.obji30[32103938] ? item.obji30[32103938] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103939] ? item.obji30[32103939] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103940] ? item.obji30[32103940] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103941] ? item.obji30[32103941] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103942] ? item.obji30[32103942] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103943] ? item.obji30[32103943] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103944] ? item.obji30[32103944] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103945] ? item.obji30[32103945] : '' }}</td>
+                    <td colspan="12">@{{ item.obji30[32103946] ? item.obji30[32103946] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Saturasi O2. Bila dibawah target, naikan aliran 1L</td>
+                    <td colspan="3">@{{ item.obji30[32103947] ? item.obji30[32103947] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103948] ? item.obji30[32103948] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103949] ? item.obji30[32103949] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103950] ? item.obji30[32103950] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103951] ? item.obji30[32103951] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103952] ? item.obji30[32103952] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103953] ? item.obji30[32103953] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103954] ? item.obji30[32103954] : '' }}</td>
+                    <td colspan="12">@{{ item.obji30[32103955] ? item.obji30[32103955] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Nasopharynx suctioned dengan ukuran 8 or 6 Fr</td>
+                    <td colspan="3">@{{ item.obji30[32103956] ? item.obji30[32103956] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103957] ? item.obji30[32103957] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103958] ? item.obji30[32103958] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103959] ? item.obji30[32103959] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103960] ? item.obji30[32103960] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103961] ? item.obji30[32103961] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103962] ? item.obji30[32103962] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103963] ? item.obji30[32103963] : '' }}</td>
+                    <td colspan="12">@{{ item.obji30[32103964] ? item.obji30[32103964] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Prongs tidak menekan septum hidung</td>
+                    <td colspan="3">@{{ item.obji30[32103965] ? item.obji30[32103965] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103966] ? item.obji30[32103966] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103967] ? item.obji30[32103967] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103968] ? item.obji30[32103968] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103969] ? item.obji30[32103969] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103970] ? item.obji30[32103970] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103971] ? item.obji30[32103971] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103972] ? item.obji30[32103972] : '' }}</td>
+                    <td colspan="12">@{{ item.obji30[32103973] ? item.obji30[32103973] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Jarak 2 mm antara pangkal prong dan hidung</td>
+                    <td colspan="3">@{{ item.obji30[32103974] ? item.obji30[32103974] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103975] ? item.obji30[32103975] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103976] ? item.obji30[32103976] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103977] ? item.obji30[32103977] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103978] ? item.obji30[32103978] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103979] ? item.obji30[32103979] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103980] ? item.obji30[32103980] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103981] ? item.obji30[32103981] : '' }}</td>
+                    <td colspan="12">@{{ item.obji30[32103982] ? item.obji30[32103982] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Tidak ada kerusakan kulit sekitar lubang hidung</td>
+                    <td colspan="3">@{{ item.obji30[32103983] ? item.obji30[32103983] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103984] ? item.obji30[32103984] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103985] ? item.obji30[32103985] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103986] ? item.obji30[32103986] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103987] ? item.obji30[32103987] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103988] ? item.obji30[32103988] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103989] ? item.obji30[32103989] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103990] ? item.obji30[32103990] : '' }}</td>
+                    <td colspan="12">@{{ item.obji30[32103991] ? item.obji30[32103991] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Ubah-ubah posisi bayi supaya bayi terstimulasi</td>
+                    <td colspan="3">@{{ item.obji30[32103992] ? item.obji30[32103992] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103993] ? item.obji30[32103993] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103994] ? item.obji30[32103994] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103995] ? item.obji30[32103995] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103996] ? item.obji30[32103996] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103997] ? item.obji30[32103997] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103998] ? item.obji30[32103998] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32103999] ? item.obji30[32103999] : '' }}</td>
+                    <td colspan="12">@{{ item.obji30[32104000] ? item.obji30[32104000] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Level air dipertahankan pada @{{ item.obji30[32104001] ? item.obji30[32104001] : '_______' }} cm</td>
+                    <td colspan="3">@{{ item.obji30[32104002] ? item.obji30[32104002] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32104003] ? item.obji30[32104003] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32104004] ? item.obji30[32104004] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32104005] ? item.obji30[32104005] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32104006] ? item.obji30[32104006] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32104007] ? item.obji30[32104007] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32104008] ? item.obji30[32104008] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32104009] ? item.obji30[32104009] : '' }}</td>
+                    <td colspan="12">@{{ item.obji30[32104010] ? item.obji30[32104010] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Selang dibersihkan dari pengembunan</td>
+                    <td colspan="3">@{{ item.obji30[32104011] ? item.obji30[32104011] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32104012] ? item.obji30[32104012] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32104013] ? item.obji30[32104013] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32104014] ? item.obji30[32104014] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32104015] ? item.obji30[32104015] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32104016] ? item.obji30[32104016] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32104017] ? item.obji30[32104017] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32104018] ? item.obji30[32104018] : '' }}</td>
+                    <td colspan="12">@{{ item.obji30[32104019] ? item.obji30[32104019] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Gelembung air</td>
+                    <td colspan="3">@{{ item.obji30[32104020] ? item.obji30[32104020] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32104021] ? item.obji30[32104021] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32104022] ? item.obji30[32104022] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32104023] ? item.obji30[32104023] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32104024] ? item.obji30[32104024] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32104025] ? item.obji30[32104025] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32104026] ? item.obji30[32104026] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32104027] ? item.obji30[32104027] : '' }}</td>
+                    <td colspan="12">@{{ item.obji30[32104028] ? item.obji30[32104028] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Tidak ada kebocoran</td>
+                    <td colspan="3">@{{ item.obji30[32104029] ? item.obji30[32104029] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32104030] ? item.obji30[32104030] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32104031] ? item.obji30[32104031] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32104032] ? item.obji30[32104032] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32104033] ? item.obji30[32104033] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32104034] ? item.obji30[32104034] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32104035] ? item.obji30[32104035] : '' }}</td>
+                    <td colspan="3">@{{ item.obji30[32104036] ? item.obji30[32104036] : '' }}</td>
+                    <td colspan="12">@{{ item.obji30[32104037] ? item.obji30[32104037] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="49" style="text-align: left">&nbsp;&nbsp;@{{ item.obji30[32104038] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Nasal prongs diberikan setiap hari dengan 2% asam asetat atau chlorin</td>
+                </tr>
+            </table>
+        </div>
+    @endif
+
+    @if (!empty($res['d31']))
+        <div class="format">
+            <table width='100%'>
+                <tr height=20 class="noborder">
+                    <td colspan="8" rowspan="4" class="p3 noborder-tb text-center">
+                        @if(stripos(\Request::url(), 'localhost') !== FALSE)
+                            <img src="{{ asset('img/logo_only.png') }}" alt="" style="width: 60px;display:block; margin:auto;">
+                        @else
+                            <img src="{{ asset('service/img/logo_only.png') }}" alt="" style="width: 60px;display:block; margin:auto;">
+                        @endif
+                    </td>
+                    <td colspan="17" rowspan="4" class="noborder-tb text-center" style="font-size:large">
+                        <strong>{!! $res['profile']->namalengkap !!}</strong> <br>{!! $res['profile']->alamatlengkap !!}<br>TELP : (0413) 81292
+                    </td>
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;No. RM </td>
+                    <td colspan="13" class="noborder" style="text-align: left">&nbsp;
+                        : {!!$res['d1'][0]->nocm  !!}
+                    </td>
+                    <td colspan="5" rowspan="2" class="border-lr bg-dark" style="font-size: xxx-large;text-align:center">RM</td>
+                </tr>
+                <tr class="noborder">
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;Nama Lengkap</td>
+                    <td colspan="11" class="noborder" style="text-align: left">&nbsp;
+                        : {!! $res['d1'][0]->namapasien  !!}
+                    </td>
+                    <td colspan="2" class="noborder">{!! $res['d1'][0]->jeniskelamin == 'PEREMPUAN' ? '(P)' : '(L)'  !!}</td>
+                </tr>
+                <tr class="noborder">
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;Tanggal Lahir</td>
+                    <td colspan="13" class="noborder" style="text-align: left">&nbsp;
+                        : {!! date('d-m-Y',strtotime($res['d1'][0]->tgllahir  )) !!}
+                    </td>
+                    <td colspan="5" class="border-lr" rowspan="2" style="font-size: xxx-large;text-align:center">67</td>
+                </tr>
+                <tr class="noborder">
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;NIK</td>
+                    <td colspan="11" class="noborder" style="text-align: left">&nbsp;
+                        : {!!$res['d1'][0]->noidentitas  !!}
+                    </td>
+                </tr>
+                <tr class="bordered bg-dark">
+                    <th colspan="49" height="20pt">ALAT MONITORING CPAP</th>
+                </tr>
+                <tr>
+                    <td colspan="9" class="noborder">Tanggal : @{{item.obji31[32103929] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                    <td colspan="40" class="noborder text-center">Lengkapi table dibawah setiap 4 jam. Isi dengan angka atau memberi tanda “X” bila sudah dilakukan</td>
+                </tr>
+                <tr>
+                    <td colspan="13" class="text-right">Waktu&nbsp;</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji31[32103930] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji31[32103931] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji31[32103932] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji31[32103933] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji31[32103934] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji31[32103935] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji31[32103936] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji31[32103937] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="12" style="text-align: center">Catatan</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Laju pernapasan</td>
+                    <td colspan="3">@{{ item.obji31[32103938] ? item.obji31[32103938] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103939] ? item.obji31[32103939] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103940] ? item.obji31[32103940] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103941] ? item.obji31[32103941] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103942] ? item.obji31[32103942] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103943] ? item.obji31[32103943] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103944] ? item.obji31[32103944] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103945] ? item.obji31[32103945] : '' }}</td>
+                    <td colspan="12">@{{ item.obji31[32103946] ? item.obji31[32103946] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Saturasi O2. Bila dibawah target, naikan aliran 1L</td>
+                    <td colspan="3">@{{ item.obji31[32103947] ? item.obji31[32103947] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103948] ? item.obji31[32103948] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103949] ? item.obji31[32103949] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103950] ? item.obji31[32103950] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103951] ? item.obji31[32103951] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103952] ? item.obji31[32103952] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103953] ? item.obji31[32103953] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103954] ? item.obji31[32103954] : '' }}</td>
+                    <td colspan="12">@{{ item.obji31[32103955] ? item.obji31[32103955] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Nasopharynx suctioned dengan ukuran 8 or 6 Fr</td>
+                    <td colspan="3">@{{ item.obji31[32103956] ? item.obji31[32103956] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103957] ? item.obji31[32103957] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103958] ? item.obji31[32103958] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103959] ? item.obji31[32103959] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103960] ? item.obji31[32103960] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103961] ? item.obji31[32103961] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103962] ? item.obji31[32103962] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103963] ? item.obji31[32103963] : '' }}</td>
+                    <td colspan="12">@{{ item.obji31[32103964] ? item.obji31[32103964] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Prongs tidak menekan septum hidung</td>
+                    <td colspan="3">@{{ item.obji31[32103965] ? item.obji31[32103965] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103966] ? item.obji31[32103966] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103967] ? item.obji31[32103967] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103968] ? item.obji31[32103968] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103969] ? item.obji31[32103969] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103970] ? item.obji31[32103970] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103971] ? item.obji31[32103971] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103972] ? item.obji31[32103972] : '' }}</td>
+                    <td colspan="12">@{{ item.obji31[32103973] ? item.obji31[32103973] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Jarak 2 mm antara pangkal prong dan hidung</td>
+                    <td colspan="3">@{{ item.obji31[32103974] ? item.obji31[32103974] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103975] ? item.obji31[32103975] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103976] ? item.obji31[32103976] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103977] ? item.obji31[32103977] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103978] ? item.obji31[32103978] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103979] ? item.obji31[32103979] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103980] ? item.obji31[32103980] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103981] ? item.obji31[32103981] : '' }}</td>
+                    <td colspan="12">@{{ item.obji31[32103982] ? item.obji31[32103982] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Tidak ada kerusakan kulit sekitar lubang hidung</td>
+                    <td colspan="3">@{{ item.obji31[32103983] ? item.obji31[32103983] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103984] ? item.obji31[32103984] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103985] ? item.obji31[32103985] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103986] ? item.obji31[32103986] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103987] ? item.obji31[32103987] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103988] ? item.obji31[32103988] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103989] ? item.obji31[32103989] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103990] ? item.obji31[32103990] : '' }}</td>
+                    <td colspan="12">@{{ item.obji31[32103991] ? item.obji31[32103991] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Ubah-ubah posisi bayi supaya bayi terstimulasi</td>
+                    <td colspan="3">@{{ item.obji31[32103992] ? item.obji31[32103992] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103993] ? item.obji31[32103993] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103994] ? item.obji31[32103994] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103995] ? item.obji31[32103995] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103996] ? item.obji31[32103996] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103997] ? item.obji31[32103997] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103998] ? item.obji31[32103998] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32103999] ? item.obji31[32103999] : '' }}</td>
+                    <td colspan="12">@{{ item.obji31[32104000] ? item.obji31[32104000] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Level air dipertahankan pada @{{ item.obji31[32104001] ? item.obji31[32104001] : '_______' }} cm</td>
+                    <td colspan="3">@{{ item.obji31[32104002] ? item.obji31[32104002] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32104003] ? item.obji31[32104003] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32104004] ? item.obji31[32104004] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32104005] ? item.obji31[32104005] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32104006] ? item.obji31[32104006] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32104007] ? item.obji31[32104007] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32104008] ? item.obji31[32104008] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32104009] ? item.obji31[32104009] : '' }}</td>
+                    <td colspan="12">@{{ item.obji31[32104010] ? item.obji31[32104010] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Selang dibersihkan dari pengembunan</td>
+                    <td colspan="3">@{{ item.obji31[32104011] ? item.obji31[32104011] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32104012] ? item.obji31[32104012] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32104013] ? item.obji31[32104013] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32104014] ? item.obji31[32104014] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32104015] ? item.obji31[32104015] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32104016] ? item.obji31[32104016] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32104017] ? item.obji31[32104017] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32104018] ? item.obji31[32104018] : '' }}</td>
+                    <td colspan="12">@{{ item.obji31[32104019] ? item.obji31[32104019] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Gelembung air</td>
+                    <td colspan="3">@{{ item.obji31[32104020] ? item.obji31[32104020] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32104021] ? item.obji31[32104021] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32104022] ? item.obji31[32104022] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32104023] ? item.obji31[32104023] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32104024] ? item.obji31[32104024] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32104025] ? item.obji31[32104025] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32104026] ? item.obji31[32104026] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32104027] ? item.obji31[32104027] : '' }}</td>
+                    <td colspan="12">@{{ item.obji31[32104028] ? item.obji31[32104028] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Tidak ada kebocoran</td>
+                    <td colspan="3">@{{ item.obji31[32104029] ? item.obji31[32104029] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32104030] ? item.obji31[32104030] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32104031] ? item.obji31[32104031] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32104032] ? item.obji31[32104032] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32104033] ? item.obji31[32104033] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32104034] ? item.obji31[32104034] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32104035] ? item.obji31[32104035] : '' }}</td>
+                    <td colspan="3">@{{ item.obji31[32104036] ? item.obji31[32104036] : '' }}</td>
+                    <td colspan="12">@{{ item.obji31[32104037] ? item.obji31[32104037] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="49" style="text-align: left">&nbsp;&nbsp;@{{ item.obji31[32104038] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Nasal prongs diberikan setiap hari dengan 2% asam asetat atau chlorin</td>
+                </tr>
+            </table>
+        </div>
+    @endif
+
+    @if (!empty($res['d32']))
+        <div class="format">
+            <table width='100%'>
+                <tr height=20 class="noborder">
+                    <td colspan="8" rowspan="4" class="p3 noborder-tb text-center">
+                        @if(stripos(\Request::url(), 'localhost') !== FALSE)
+                            <img src="{{ asset('img/logo_only.png') }}" alt="" style="width: 60px;display:block; margin:auto;">
+                        @else
+                            <img src="{{ asset('service/img/logo_only.png') }}" alt="" style="width: 60px;display:block; margin:auto;">
+                        @endif
+                    </td>
+                    <td colspan="17" rowspan="4" class="noborder-tb text-center" style="font-size:large">
+                        <strong>{!! $res['profile']->namalengkap !!}</strong> <br>{!! $res['profile']->alamatlengkap !!}<br>TELP : (0413) 81292
+                    </td>
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;No. RM </td>
+                    <td colspan="13" class="noborder" style="text-align: left">&nbsp;
+                        : {!!$res['d1'][0]->nocm  !!}
+                    </td>
+                    <td colspan="5" rowspan="2" class="border-lr bg-dark" style="font-size: xxx-large;text-align:center">RM</td>
+                </tr>
+                <tr class="noborder">
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;Nama Lengkap</td>
+                    <td colspan="11" class="noborder" style="text-align: left">&nbsp;
+                        : {!! $res['d1'][0]->namapasien  !!}
+                    </td>
+                    <td colspan="2" class="noborder">{!! $res['d1'][0]->jeniskelamin == 'PEREMPUAN' ? '(P)' : '(L)'  !!}</td>
+                </tr>
+                <tr class="noborder">
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;Tanggal Lahir</td>
+                    <td colspan="13" class="noborder" style="text-align: left">&nbsp;
+                        : {!! date('d-m-Y',strtotime($res['d1'][0]->tgllahir  )) !!}
+                    </td>
+                    <td colspan="5" class="border-lr" rowspan="2" style="font-size: xxx-large;text-align:center">67</td>
+                </tr>
+                <tr class="noborder">
+                    <td colspan="6" class="noborder" style="text-align: left">&nbsp;NIK</td>
+                    <td colspan="11" class="noborder" style="text-align: left">&nbsp;
+                        : {!!$res['d1'][0]->noidentitas  !!}
+                    </td>
+                </tr>
+                <tr class="bordered bg-dark">
+                    <th colspan="49" height="20pt">ALAT MONITORING CPAP</th>
+                </tr>
+                <tr>
+                    <td colspan="9" class="noborder">Tanggal : @{{item.obji32[32103929] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                    <td colspan="40" class="noborder text-center">Lengkapi table dibawah setiap 4 jam. Isi dengan angka atau memberi tanda “X” bila sudah dilakukan</td>
+                </tr>
+                <tr>
+                    <td colspan="13" class="text-right">Waktu&nbsp;</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji32[32103930] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji32[32103931] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji32[32103932] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji32[32103933] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji32[32103934] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji32[32103935] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji32[32103936] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="3" style="text-align: center">@{{item.obji32[32103937] | toDate | date:'HH:mm'}}</td>
+                    <td colspan="12" style="text-align: center">Catatan</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Laju pernapasan</td>
+                    <td colspan="3">@{{ item.obji32[32103938] ? item.obji32[32103938] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103939] ? item.obji32[32103939] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103940] ? item.obji32[32103940] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103941] ? item.obji32[32103941] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103942] ? item.obji32[32103942] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103943] ? item.obji32[32103943] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103944] ? item.obji32[32103944] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103945] ? item.obji32[32103945] : '' }}</td>
+                    <td colspan="12">@{{ item.obji32[32103946] ? item.obji32[32103946] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Saturasi O2. Bila dibawah target, naikan aliran 1L</td>
+                    <td colspan="3">@{{ item.obji32[32103947] ? item.obji32[32103947] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103948] ? item.obji32[32103948] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103949] ? item.obji32[32103949] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103950] ? item.obji32[32103950] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103951] ? item.obji32[32103951] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103952] ? item.obji32[32103952] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103953] ? item.obji32[32103953] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103954] ? item.obji32[32103954] : '' }}</td>
+                    <td colspan="12">@{{ item.obji32[32103955] ? item.obji32[32103955] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Nasopharynx suctioned dengan ukuran 8 or 6 Fr</td>
+                    <td colspan="3">@{{ item.obji32[32103956] ? item.obji32[32103956] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103957] ? item.obji32[32103957] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103958] ? item.obji32[32103958] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103959] ? item.obji32[32103959] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103960] ? item.obji32[32103960] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103961] ? item.obji32[32103961] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103962] ? item.obji32[32103962] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103963] ? item.obji32[32103963] : '' }}</td>
+                    <td colspan="12">@{{ item.obji32[32103964] ? item.obji32[32103964] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Prongs tidak menekan septum hidung</td>
+                    <td colspan="3">@{{ item.obji32[32103965] ? item.obji32[32103965] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103966] ? item.obji32[32103966] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103967] ? item.obji32[32103967] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103968] ? item.obji32[32103968] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103969] ? item.obji32[32103969] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103970] ? item.obji32[32103970] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103971] ? item.obji32[32103971] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103972] ? item.obji32[32103972] : '' }}</td>
+                    <td colspan="12">@{{ item.obji32[32103973] ? item.obji32[32103973] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Jarak 2 mm antara pangkal prong dan hidung</td>
+                    <td colspan="3">@{{ item.obji32[32103974] ? item.obji32[32103974] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103975] ? item.obji32[32103975] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103976] ? item.obji32[32103976] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103977] ? item.obji32[32103977] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103978] ? item.obji32[32103978] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103979] ? item.obji32[32103979] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103980] ? item.obji32[32103980] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103981] ? item.obji32[32103981] : '' }}</td>
+                    <td colspan="12">@{{ item.obji32[32103982] ? item.obji32[32103982] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Tidak ada kerusakan kulit sekitar lubang hidung</td>
+                    <td colspan="3">@{{ item.obji32[32103983] ? item.obji32[32103983] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103984] ? item.obji32[32103984] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103985] ? item.obji32[32103985] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103986] ? item.obji32[32103986] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103987] ? item.obji32[32103987] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103988] ? item.obji32[32103988] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103989] ? item.obji32[32103989] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103990] ? item.obji32[32103990] : '' }}</td>
+                    <td colspan="12">@{{ item.obji32[32103991] ? item.obji32[32103991] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Ubah-ubah posisi bayi supaya bayi terstimulasi</td>
+                    <td colspan="3">@{{ item.obji32[32103992] ? item.obji32[32103992] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103993] ? item.obji32[32103993] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103994] ? item.obji32[32103994] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103995] ? item.obji32[32103995] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103996] ? item.obji32[32103996] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103997] ? item.obji32[32103997] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103998] ? item.obji32[32103998] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32103999] ? item.obji32[32103999] : '' }}</td>
+                    <td colspan="12">@{{ item.obji32[32104000] ? item.obji32[32104000] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Level air dipertahankan pada @{{ item.obji32[32104001] ? item.obji32[32104001] : '_______' }} cm</td>
+                    <td colspan="3">@{{ item.obji32[32104002] ? item.obji32[32104002] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32104003] ? item.obji32[32104003] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32104004] ? item.obji32[32104004] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32104005] ? item.obji32[32104005] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32104006] ? item.obji32[32104006] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32104007] ? item.obji32[32104007] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32104008] ? item.obji32[32104008] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32104009] ? item.obji32[32104009] : '' }}</td>
+                    <td colspan="12">@{{ item.obji32[32104010] ? item.obji32[32104010] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Selang dibersihkan dari pengembunan</td>
+                    <td colspan="3">@{{ item.obji32[32104011] ? item.obji32[32104011] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32104012] ? item.obji32[32104012] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32104013] ? item.obji32[32104013] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32104014] ? item.obji32[32104014] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32104015] ? item.obji32[32104015] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32104016] ? item.obji32[32104016] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32104017] ? item.obji32[32104017] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32104018] ? item.obji32[32104018] : '' }}</td>
+                    <td colspan="12">@{{ item.obji32[32104019] ? item.obji32[32104019] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Gelembung air</td>
+                    <td colspan="3">@{{ item.obji32[32104020] ? item.obji32[32104020] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32104021] ? item.obji32[32104021] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32104022] ? item.obji32[32104022] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32104023] ? item.obji32[32104023] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32104024] ? item.obji32[32104024] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32104025] ? item.obji32[32104025] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32104026] ? item.obji32[32104026] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32104027] ? item.obji32[32104027] : '' }}</td>
+                    <td colspan="12">@{{ item.obji32[32104028] ? item.obji32[32104028] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="13" style="text-align: left">&nbsp;Tidak ada kebocoran</td>
+                    <td colspan="3">@{{ item.obji32[32104029] ? item.obji32[32104029] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32104030] ? item.obji32[32104030] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32104031] ? item.obji32[32104031] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32104032] ? item.obji32[32104032] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32104033] ? item.obji32[32104033] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32104034] ? item.obji32[32104034] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32104035] ? item.obji32[32104035] : '' }}</td>
+                    <td colspan="3">@{{ item.obji32[32104036] ? item.obji32[32104036] : '' }}</td>
+                    <td colspan="12">@{{ item.obji32[32104037] ? item.obji32[32104037] : '' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="49" style="text-align: left">&nbsp;&nbsp;@{{ item.obji32[32104038] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Nasal prongs diberikan setiap hari dengan 2% asam asetat atau chlorin</td>
+                </tr>
+            </table>
+        </div>
+    @endif
 </body>
 <script type="text/javascript">
     var baseUrl =
@@ -4162,7 +6538,20 @@
 			obji17: [],
 			obji18: [],
 			obji19: [],
-			obji20: []
+			obji20: [],
+			obji21: [],
+			obji22: [],
+			obji23: [],
+			obji24: [],
+			obji25: [],
+			obji26: [],
+			obji27: [],
+			obji28: [],
+			obji29: [],
+			obji30: [],
+			obji31: [],
+			obji32: []
+
         }
 
         var dataLoad = {!! json_encode($res['d1'] )!!};
@@ -4185,6 +6574,18 @@
 		var dataLoad18 = {!! json_encode($res['d18'] )!!};
 		var dataLoad19 = {!! json_encode($res['d19'] )!!};
 		var dataLoad20 = {!! json_encode($res['d20'] )!!};
+		var dataLoad21 = {!! json_encode($res['d21'] )!!};
+		var dataLoad22 = {!! json_encode($res['d22'] )!!};
+		var dataLoad23 = {!! json_encode($res['d23'] )!!};
+		var dataLoad24 = {!! json_encode($res['d24'] )!!};
+		var dataLoad25 = {!! json_encode($res['d25'] )!!};
+		var dataLoad26 = {!! json_encode($res['d26'] )!!};
+		var dataLoad27 = {!! json_encode($res['d27'] )!!};
+		var dataLoad28 = {!! json_encode($res['d28'] )!!};
+		var dataLoad29 = {!! json_encode($res['d29'] )!!};
+		var dataLoad30 = {!! json_encode($res['d30'] )!!};
+		var dataLoad31 = {!! json_encode($res['d31'] )!!};
+		var dataLoad32 = {!! json_encode($res['d32'] )!!};
 
         if(dataLoad.length > 0){
             for (var i = 0; i <= dataLoad.length - 1; i++) {
@@ -6665,6 +9066,1495 @@
                 
             }
         }
+
+        if(dataLoad21.length > 0){
+            for (var i = 0; i <= dataLoad21.length - 1; i++) {
+                if(dataLoad21[i].emrdfk == 3110029){
+                    continue;
+                }
+                if (dataLoad21[i].type == "textbox") {
+                    $('#id_'+dataLoad21[i].emrdfk).html( dataLoad21[i].value)
+                    $scope.item.obji21[dataLoad21[i].emrdfk] = dataLoad21[i].value
+                }
+                if (dataLoad21[i].type == "checkbox") {
+                    var chekedd = false
+                    if (dataLoad21[i].value == '1') {
+                        var chekedd = true
+                    }
+                    $scope.item.obji21[dataLoad21[i].emrdfk] = chekedd
+                }
+                if (dataLoad21[i].type == "radio") {
+                    $scope.item.obji21[dataLoad21[i].emrdfk] = dataLoad21[i].value
+
+                }
+
+                if (dataLoad21[i].type == "datetime") {
+                    $('#id_'+dataLoad21[i].emrdfk).html( dataLoad21[i].value)
+                    $scope.item.obji21[dataLoad21[i].emrdfk] = dataLoad21[i].value
+                }
+                if (dataLoad21[i].type == "time") {
+                    $scope.item.obji21[dataLoad21[i].emrdfk] = dataLoad21[i].value
+                }
+                if (dataLoad21[i].type == "date") {
+                    $scope.item.obji21[dataLoad21[i].emrdfk] = dataLoad21[i].value
+                }
+
+                if (dataLoad21[i].type == "checkboxtextbox") {
+                    $scope.item.obji21[dataLoad21[i].emrdfk] = dataLoad21[i].value
+                    $scope.item.obji21[dataLoad21[i].emrdfk] = true
+                }
+                if (dataLoad21[i].type == "textarea") {
+                    $('#id_'+dataLoad21[i].emrdfk).html( dataLoad21[i].value)
+                    $scope.item.obji21[dataLoad21[i].emrdfk] = dataLoad21[i].value
+                }
+                if (dataLoad21[i].type == "combobox") {
+
+                    var str = dataLoad21[i].value
+                    if(str != null)
+                    {
+                        var res = str.split("~");
+                        
+                        $scope.item.obji21[dataLoad21[i].emrdfk] = res[1]
+                        $('#id_'+dataLoad21[i].emrdfk).html ( res[1])
+                    }
+                }
+                if (dataLoad21[i].type == "combobox2") {
+                    var str = dataLoad21[i].value
+                    var res = str.split("~");
+                    
+                    $scope.item.obji21[dataLoad21[i].emrdfk+""+1] = res[0]
+                    $scope.item.obji21[dataLoad21[i].emrdfk] = res[1]
+                    $('#id_'+dataLoad21[i].emrdfk).html ( res[1])
+
+                }
+
+                if (dataLoad21[i].emrdfk == '423816' ) {
+                    $scope.hariTgl = dataLoad21[i].value
+                }
+
+                if (dataLoad21[i].emrdfk == '2000001974' ) {
+                    $scope.jamPeriksa = dataLoad21[i].value
+                }
+
+                if (dataLoad21[i].emrdfk == '2000002354' ) {
+                    $scope.tgl1 = dataLoad21[i].value
+                }
+                if (dataLoad21[i].emrdfk == '2000002357' ) {
+                    $scope.tgl2 = dataLoad21[i].value
+                }
+                if (dataLoad21[i].emrdfk == '2000002360' ) {
+                    $scope.tgl3 = dataLoad21[i].value
+                }
+                if (dataLoad21[i].emrdfk == '2000002363' ) {
+                    $scope.tgl4 = dataLoad21[i].value
+                }
+                if (dataLoad21[i].emrdfk == '2000002366' ) {
+                    $scope.tgl5 = dataLoad21[i].value
+                }
+                if (dataLoad21[i].emrdfk == '2000002369' ) {
+                    $scope.tgl6 = dataLoad21[i].value
+                }
+                if (dataLoad21[i].emrdfk == '2000002372' ) {
+                    $scope.tgl7 = dataLoad21[i].value
+                }
+                if (dataLoad21[i].emrdfk == '2000002375' ) {
+                    $scope.tgl8 = dataLoad21[i].value
+                }
+                if (dataLoad21[i].emrdfk == '2000002378' ) {
+                    $scope.tgl9 = dataLoad21[i].value
+                }
+                if (dataLoad21[i].emrdfk == '2000002381' ) {
+                    $scope.tgl10 = dataLoad21[i].value
+                }
+                if (dataLoad21[i].emrdfk == '2000002384' ) {
+                    $scope.tgl11 = dataLoad21[i].value
+                }
+                if (dataLoad21[i].emrdfk == '2000002387' ) {
+                    $scope.tgl12 = dataLoad21[i].value
+                }
+                if (dataLoad21[i].emrdfk == '2000002390' ) {
+                    $scope.tgl13 = dataLoad21[i].value
+                }
+                if (dataLoad21[i].emrdfk == '2000002393' ) {
+                    $scope.tgl14 = dataLoad21[i].value
+                }
+                if (dataLoad21[i].emrdfk == '2000002396' ) {
+                    $scope.tgl15 = dataLoad21[i].value
+                }
+                
+                if (dataLoad21[i].emrdfk == '2000002408' ) {
+                    $scope.pukul2 = dataLoad21[i].value
+                }
+
+                $scope.tglemr = dataLoad21[i].tgl
+                
+            }
+        }
+
+        if(dataLoad22.length > 0){
+            for (var i = 0; i <= dataLoad22.length - 1; i++) {
+                if(dataLoad22[i].emrdfk == 3110029){
+                    continue;
+                }
+                if (dataLoad22[i].type == "textbox") {
+                    $('#id_'+dataLoad22[i].emrdfk).html( dataLoad22[i].value)
+                    $scope.item.obji22[dataLoad22[i].emrdfk] = dataLoad22[i].value
+                }
+                if (dataLoad22[i].type == "checkbox") {
+                    var chekedd = false
+                    if (dataLoad22[i].value == '1') {
+                        var chekedd = true
+                    }
+                    $scope.item.obji22[dataLoad22[i].emrdfk] = chekedd
+                }
+                if (dataLoad22[i].type == "radio") {
+                    $scope.item.obji22[dataLoad22[i].emrdfk] = dataLoad22[i].value
+
+                }
+
+                if (dataLoad22[i].type == "datetime") {
+                    $('#id_'+dataLoad22[i].emrdfk).html( dataLoad22[i].value)
+                    $scope.item.obji22[dataLoad22[i].emrdfk] = dataLoad22[i].value
+                }
+                if (dataLoad22[i].type == "time") {
+                    $scope.item.obji22[dataLoad22[i].emrdfk] = dataLoad22[i].value
+                }
+                if (dataLoad22[i].type == "date") {
+                    $scope.item.obji22[dataLoad22[i].emrdfk] = dataLoad22[i].value
+                }
+
+                if (dataLoad22[i].type == "checkboxtextbox") {
+                    $scope.item.obji22[dataLoad22[i].emrdfk] = dataLoad22[i].value
+                    $scope.item.obji22[dataLoad22[i].emrdfk] = true
+                }
+                if (dataLoad22[i].type == "textarea") {
+                    $('#id_'+dataLoad22[i].emrdfk).html( dataLoad22[i].value)
+                    $scope.item.obji22[dataLoad22[i].emrdfk] = dataLoad22[i].value
+                }
+                if (dataLoad22[i].type == "combobox") {
+
+                    var str = dataLoad22[i].value
+                    if(str != null)
+                    {
+                        var res = str.split("~");
+                        
+                        $scope.item.obji22[dataLoad22[i].emrdfk] = res[1]
+                        $('#id_'+dataLoad22[i].emrdfk).html ( res[1])
+                    }
+                }
+                if (dataLoad22[i].type == "combobox2") {
+                    var str = dataLoad22[i].value
+                    var res = str.split("~");
+                    
+                    $scope.item.obji22[dataLoad22[i].emrdfk+""+1] = res[0]
+                    $scope.item.obji22[dataLoad22[i].emrdfk] = res[1]
+                    $('#id_'+dataLoad22[i].emrdfk).html ( res[1])
+
+                }
+
+                if (dataLoad22[i].emrdfk == '423816' ) {
+                    $scope.hariTgl = dataLoad22[i].value
+                }
+
+                if (dataLoad22[i].emrdfk == '2000001974' ) {
+                    $scope.jamPeriksa = dataLoad22[i].value
+                }
+
+                if (dataLoad22[i].emrdfk == '2000002354' ) {
+                    $scope.tgl1 = dataLoad22[i].value
+                }
+                if (dataLoad22[i].emrdfk == '2000002357' ) {
+                    $scope.tgl2 = dataLoad22[i].value
+                }
+                if (dataLoad22[i].emrdfk == '2000002360' ) {
+                    $scope.tgl3 = dataLoad22[i].value
+                }
+                if (dataLoad22[i].emrdfk == '2000002363' ) {
+                    $scope.tgl4 = dataLoad22[i].value
+                }
+                if (dataLoad22[i].emrdfk == '2000002366' ) {
+                    $scope.tgl5 = dataLoad22[i].value
+                }
+                if (dataLoad22[i].emrdfk == '2000002369' ) {
+                    $scope.tgl6 = dataLoad22[i].value
+                }
+                if (dataLoad22[i].emrdfk == '2000002372' ) {
+                    $scope.tgl7 = dataLoad22[i].value
+                }
+                if (dataLoad22[i].emrdfk == '2000002375' ) {
+                    $scope.tgl8 = dataLoad22[i].value
+                }
+                if (dataLoad22[i].emrdfk == '2000002378' ) {
+                    $scope.tgl9 = dataLoad22[i].value
+                }
+                if (dataLoad22[i].emrdfk == '2000002381' ) {
+                    $scope.tgl10 = dataLoad22[i].value
+                }
+                if (dataLoad22[i].emrdfk == '2000002384' ) {
+                    $scope.tgl11 = dataLoad22[i].value
+                }
+                if (dataLoad22[i].emrdfk == '2000002387' ) {
+                    $scope.tgl12 = dataLoad22[i].value
+                }
+                if (dataLoad22[i].emrdfk == '2000002390' ) {
+                    $scope.tgl13 = dataLoad22[i].value
+                }
+                if (dataLoad22[i].emrdfk == '2000002393' ) {
+                    $scope.tgl14 = dataLoad22[i].value
+                }
+                if (dataLoad22[i].emrdfk == '2000002396' ) {
+                    $scope.tgl15 = dataLoad22[i].value
+                }
+                
+                if (dataLoad22[i].emrdfk == '2000002408' ) {
+                    $scope.pukul2 = dataLoad22[i].value
+                }
+
+                $scope.tglemr = dataLoad22[i].tgl
+                
+            }
+        }
+
+        if(dataLoad23.length > 0){
+            for (var i = 0; i <= dataLoad23.length - 1; i++) {
+                if(dataLoad23[i].emrdfk == 3110029){
+                    continue;
+                }
+                if (dataLoad23[i].type == "textbox") {
+                    $('#id_'+dataLoad23[i].emrdfk).html( dataLoad23[i].value)
+                    $scope.item.obji23[dataLoad23[i].emrdfk] = dataLoad23[i].value
+                }
+                if (dataLoad23[i].type == "checkbox") {
+                    var chekedd = false
+                    if (dataLoad23[i].value == '1') {
+                        var chekedd = true
+                    }
+                    $scope.item.obji23[dataLoad23[i].emrdfk] = chekedd
+                }
+                if (dataLoad23[i].type == "radio") {
+                    $scope.item.obji23[dataLoad23[i].emrdfk] = dataLoad23[i].value
+
+                }
+
+                if (dataLoad23[i].type == "datetime") {
+                    $('#id_'+dataLoad23[i].emrdfk).html( dataLoad23[i].value)
+                    $scope.item.obji23[dataLoad23[i].emrdfk] = dataLoad23[i].value
+                }
+                if (dataLoad23[i].type == "time") {
+                    $scope.item.obji23[dataLoad23[i].emrdfk] = dataLoad23[i].value
+                }
+                if (dataLoad23[i].type == "date") {
+                    $scope.item.obji23[dataLoad23[i].emrdfk] = dataLoad23[i].value
+                }
+
+                if (dataLoad23[i].type == "checkboxtextbox") {
+                    $scope.item.obji23[dataLoad23[i].emrdfk] = dataLoad23[i].value
+                    $scope.item.obji23[dataLoad23[i].emrdfk] = true
+                }
+                if (dataLoad23[i].type == "textarea") {
+                    $('#id_'+dataLoad23[i].emrdfk).html( dataLoad23[i].value)
+                    $scope.item.obji23[dataLoad23[i].emrdfk] = dataLoad23[i].value
+                }
+                if (dataLoad23[i].type == "combobox") {
+
+                    var str = dataLoad23[i].value
+                    if(str != null)
+                    {
+                        var res = str.split("~");
+                        
+                        $scope.item.obji23[dataLoad23[i].emrdfk] = res[1]
+                        $('#id_'+dataLoad23[i].emrdfk).html ( res[1])
+                    }
+                }
+                if (dataLoad23[i].type == "combobox2") {
+                    var str = dataLoad23[i].value
+                    var res = str.split("~");
+                    
+                    $scope.item.obji23[dataLoad23[i].emrdfk+""+1] = res[0]
+                    $scope.item.obji23[dataLoad23[i].emrdfk] = res[1]
+                    $('#id_'+dataLoad23[i].emrdfk).html ( res[1])
+
+                }
+
+                if (dataLoad23[i].emrdfk == '423816' ) {
+                    $scope.hariTgl = dataLoad23[i].value
+                }
+
+                if (dataLoad23[i].emrdfk == '2000001974' ) {
+                    $scope.jamPeriksa = dataLoad23[i].value
+                }
+
+                if (dataLoad23[i].emrdfk == '2000002354' ) {
+                    $scope.tgl1 = dataLoad23[i].value
+                }
+                if (dataLoad23[i].emrdfk == '2000002357' ) {
+                    $scope.tgl2 = dataLoad23[i].value
+                }
+                if (dataLoad23[i].emrdfk == '2000002360' ) {
+                    $scope.tgl3 = dataLoad23[i].value
+                }
+                if (dataLoad23[i].emrdfk == '2000002363' ) {
+                    $scope.tgl4 = dataLoad23[i].value
+                }
+                if (dataLoad23[i].emrdfk == '2000002366' ) {
+                    $scope.tgl5 = dataLoad23[i].value
+                }
+                if (dataLoad23[i].emrdfk == '2000002369' ) {
+                    $scope.tgl6 = dataLoad23[i].value
+                }
+                if (dataLoad23[i].emrdfk == '2000002372' ) {
+                    $scope.tgl7 = dataLoad23[i].value
+                }
+                if (dataLoad23[i].emrdfk == '2000002375' ) {
+                    $scope.tgl8 = dataLoad23[i].value
+                }
+                if (dataLoad23[i].emrdfk == '2000002378' ) {
+                    $scope.tgl9 = dataLoad23[i].value
+                }
+                if (dataLoad23[i].emrdfk == '2000002381' ) {
+                    $scope.tgl10 = dataLoad23[i].value
+                }
+                if (dataLoad23[i].emrdfk == '2000002384' ) {
+                    $scope.tgl11 = dataLoad23[i].value
+                }
+                if (dataLoad23[i].emrdfk == '2000002387' ) {
+                    $scope.tgl12 = dataLoad23[i].value
+                }
+                if (dataLoad23[i].emrdfk == '2000002390' ) {
+                    $scope.tgl13 = dataLoad23[i].value
+                }
+                if (dataLoad23[i].emrdfk == '2000002393' ) {
+                    $scope.tgl14 = dataLoad23[i].value
+                }
+                if (dataLoad23[i].emrdfk == '2000002396' ) {
+                    $scope.tgl15 = dataLoad23[i].value
+                }
+                
+                if (dataLoad23[i].emrdfk == '2000002408' ) {
+                    $scope.pukul2 = dataLoad23[i].value
+                }
+
+                $scope.tglemr = dataLoad23[i].tgl
+                
+            }
+        }
+
+        if(dataLoad24.length > 0){
+            for (var i = 0; i <= dataLoad24.length - 1; i++) {
+                if(dataLoad24[i].emrdfk == 3110029){
+                    continue;
+                }
+                if (dataLoad24[i].type == "textbox") {
+                    $('#id_'+dataLoad24[i].emrdfk).html( dataLoad24[i].value)
+                    $scope.item.obji24[dataLoad24[i].emrdfk] = dataLoad24[i].value
+                }
+                if (dataLoad24[i].type == "checkbox") {
+                    var chekedd = false
+                    if (dataLoad24[i].value == '1') {
+                        var chekedd = true
+                    }
+                    $scope.item.obji24[dataLoad24[i].emrdfk] = chekedd
+                }
+                if (dataLoad24[i].type == "radio") {
+                    $scope.item.obji24[dataLoad24[i].emrdfk] = dataLoad24[i].value
+
+                }
+
+                if (dataLoad24[i].type == "datetime") {
+                    $('#id_'+dataLoad24[i].emrdfk).html( dataLoad24[i].value)
+                    $scope.item.obji24[dataLoad24[i].emrdfk] = dataLoad24[i].value
+                }
+                if (dataLoad24[i].type == "time") {
+                    $scope.item.obji24[dataLoad24[i].emrdfk] = dataLoad24[i].value
+                }
+                if (dataLoad24[i].type == "date") {
+                    $scope.item.obji24[dataLoad24[i].emrdfk] = dataLoad24[i].value
+                }
+
+                if (dataLoad24[i].type == "checkboxtextbox") {
+                    $scope.item.obji24[dataLoad24[i].emrdfk] = dataLoad24[i].value
+                    $scope.item.obji24[dataLoad24[i].emrdfk] = true
+                }
+                if (dataLoad24[i].type == "textarea") {
+                    $('#id_'+dataLoad24[i].emrdfk).html( dataLoad24[i].value)
+                    $scope.item.obji24[dataLoad24[i].emrdfk] = dataLoad24[i].value
+                }
+                if (dataLoad24[i].type == "combobox") {
+
+                    var str = dataLoad24[i].value
+                    if(str != null)
+                    {
+                        var res = str.split("~");
+                        
+                        $scope.item.obji24[dataLoad24[i].emrdfk] = res[1]
+                        $('#id_'+dataLoad24[i].emrdfk).html ( res[1])
+                    }
+                }
+                if (dataLoad24[i].type == "combobox2") {
+                    var str = dataLoad24[i].value
+                    var res = str.split("~");
+                    
+                    $scope.item.obji24[dataLoad24[i].emrdfk+""+1] = res[0]
+                    $scope.item.obji24[dataLoad24[i].emrdfk] = res[1]
+                    $('#id_'+dataLoad24[i].emrdfk).html ( res[1])
+
+                }
+
+                if (dataLoad24[i].emrdfk == '423816' ) {
+                    $scope.hariTgl = dataLoad24[i].value
+                }
+
+                if (dataLoad24[i].emrdfk == '2000001974' ) {
+                    $scope.jamPeriksa = dataLoad24[i].value
+                }
+
+                if (dataLoad24[i].emrdfk == '2000002354' ) {
+                    $scope.tgl1 = dataLoad24[i].value
+                }
+                if (dataLoad24[i].emrdfk == '2000002357' ) {
+                    $scope.tgl2 = dataLoad24[i].value
+                }
+                if (dataLoad24[i].emrdfk == '2000002360' ) {
+                    $scope.tgl3 = dataLoad24[i].value
+                }
+                if (dataLoad24[i].emrdfk == '2000002363' ) {
+                    $scope.tgl4 = dataLoad24[i].value
+                }
+                if (dataLoad24[i].emrdfk == '2000002366' ) {
+                    $scope.tgl5 = dataLoad24[i].value
+                }
+                if (dataLoad24[i].emrdfk == '2000002369' ) {
+                    $scope.tgl6 = dataLoad24[i].value
+                }
+                if (dataLoad24[i].emrdfk == '2000002372' ) {
+                    $scope.tgl7 = dataLoad24[i].value
+                }
+                if (dataLoad24[i].emrdfk == '2000002375' ) {
+                    $scope.tgl8 = dataLoad24[i].value
+                }
+                if (dataLoad24[i].emrdfk == '2000002378' ) {
+                    $scope.tgl9 = dataLoad24[i].value
+                }
+                if (dataLoad24[i].emrdfk == '2000002381' ) {
+                    $scope.tgl10 = dataLoad24[i].value
+                }
+                if (dataLoad24[i].emrdfk == '2000002384' ) {
+                    $scope.tgl11 = dataLoad24[i].value
+                }
+                if (dataLoad24[i].emrdfk == '2000002387' ) {
+                    $scope.tgl12 = dataLoad24[i].value
+                }
+                if (dataLoad24[i].emrdfk == '2000002390' ) {
+                    $scope.tgl13 = dataLoad24[i].value
+                }
+                if (dataLoad24[i].emrdfk == '2000002393' ) {
+                    $scope.tgl14 = dataLoad24[i].value
+                }
+                if (dataLoad24[i].emrdfk == '2000002396' ) {
+                    $scope.tgl15 = dataLoad24[i].value
+                }
+                
+                if (dataLoad24[i].emrdfk == '2000002408' ) {
+                    $scope.pukul2 = dataLoad24[i].value
+                }
+
+                $scope.tglemr = dataLoad24[i].tgl
+                
+            }
+        }
+
+        if(dataLoad25.length > 0){
+            for (var i = 0; i <= dataLoad25.length - 1; i++) {
+                if(dataLoad25[i].emrdfk == 3110029){
+                    continue;
+                }
+                if (dataLoad25[i].type == "textbox") {
+                    $('#id_'+dataLoad25[i].emrdfk).html( dataLoad25[i].value)
+                    $scope.item.obji25[dataLoad25[i].emrdfk] = dataLoad25[i].value
+                }
+                if (dataLoad25[i].type == "checkbox") {
+                    var chekedd = false
+                    if (dataLoad25[i].value == '1') {
+                        var chekedd = true
+                    }
+                    $scope.item.obji25[dataLoad25[i].emrdfk] = chekedd
+                }
+                if (dataLoad25[i].type == "radio") {
+                    $scope.item.obji25[dataLoad25[i].emrdfk] = dataLoad25[i].value
+
+                }
+
+                if (dataLoad25[i].type == "datetime") {
+                    $('#id_'+dataLoad25[i].emrdfk).html( dataLoad25[i].value)
+                    $scope.item.obji25[dataLoad25[i].emrdfk] = dataLoad25[i].value
+                }
+                if (dataLoad25[i].type == "time") {
+                    $scope.item.obji25[dataLoad25[i].emrdfk] = dataLoad25[i].value
+                }
+                if (dataLoad25[i].type == "date") {
+                    $scope.item.obji25[dataLoad25[i].emrdfk] = dataLoad25[i].value
+                }
+
+                if (dataLoad25[i].type == "checkboxtextbox") {
+                    $scope.item.obji25[dataLoad25[i].emrdfk] = dataLoad25[i].value
+                    $scope.item.obji25[dataLoad25[i].emrdfk] = true
+                }
+                if (dataLoad25[i].type == "textarea") {
+                    $('#id_'+dataLoad25[i].emrdfk).html( dataLoad25[i].value)
+                    $scope.item.obji25[dataLoad25[i].emrdfk] = dataLoad25[i].value
+                }
+                if (dataLoad25[i].type == "combobox") {
+
+                    var str = dataLoad25[i].value
+                    if(str != null)
+                    {
+                        var res = str.split("~");
+                        
+                        $scope.item.obji25[dataLoad25[i].emrdfk] = res[1]
+                        $('#id_'+dataLoad25[i].emrdfk).html ( res[1])
+                    }
+                }
+                if (dataLoad25[i].type == "combobox2") {
+                    var str = dataLoad25[i].value
+                    var res = str.split("~");
+                    
+                    $scope.item.obji25[dataLoad25[i].emrdfk+""+1] = res[0]
+                    $scope.item.obji25[dataLoad25[i].emrdfk] = res[1]
+                    $('#id_'+dataLoad25[i].emrdfk).html ( res[1])
+
+                }
+
+                if (dataLoad25[i].emrdfk == '423816' ) {
+                    $scope.hariTgl = dataLoad25[i].value
+                }
+
+                if (dataLoad25[i].emrdfk == '2000001974' ) {
+                    $scope.jamPeriksa = dataLoad25[i].value
+                }
+
+                if (dataLoad25[i].emrdfk == '2000002354' ) {
+                    $scope.tgl1 = dataLoad25[i].value
+                }
+                if (dataLoad25[i].emrdfk == '2000002357' ) {
+                    $scope.tgl2 = dataLoad25[i].value
+                }
+                if (dataLoad25[i].emrdfk == '2000002360' ) {
+                    $scope.tgl3 = dataLoad25[i].value
+                }
+                if (dataLoad25[i].emrdfk == '2000002363' ) {
+                    $scope.tgl4 = dataLoad25[i].value
+                }
+                if (dataLoad25[i].emrdfk == '2000002366' ) {
+                    $scope.tgl5 = dataLoad25[i].value
+                }
+                if (dataLoad25[i].emrdfk == '2000002369' ) {
+                    $scope.tgl6 = dataLoad25[i].value
+                }
+                if (dataLoad25[i].emrdfk == '2000002372' ) {
+                    $scope.tgl7 = dataLoad25[i].value
+                }
+                if (dataLoad25[i].emrdfk == '2000002375' ) {
+                    $scope.tgl8 = dataLoad25[i].value
+                }
+                if (dataLoad25[i].emrdfk == '2000002378' ) {
+                    $scope.tgl9 = dataLoad25[i].value
+                }
+                if (dataLoad25[i].emrdfk == '2000002381' ) {
+                    $scope.tgl10 = dataLoad25[i].value
+                }
+                if (dataLoad25[i].emrdfk == '2000002384' ) {
+                    $scope.tgl11 = dataLoad25[i].value
+                }
+                if (dataLoad25[i].emrdfk == '2000002387' ) {
+                    $scope.tgl12 = dataLoad25[i].value
+                }
+                if (dataLoad25[i].emrdfk == '2000002390' ) {
+                    $scope.tgl13 = dataLoad25[i].value
+                }
+                if (dataLoad25[i].emrdfk == '2000002393' ) {
+                    $scope.tgl14 = dataLoad25[i].value
+                }
+                if (dataLoad25[i].emrdfk == '2000002396' ) {
+                    $scope.tgl15 = dataLoad25[i].value
+                }
+                
+                if (dataLoad25[i].emrdfk == '2000002408' ) {
+                    $scope.pukul2 = dataLoad25[i].value
+                }
+
+                $scope.tglemr = dataLoad25[i].tgl
+                
+            }
+        }
+
+        if(dataLoad26.length > 0){
+            for (var i = 0; i <= dataLoad26.length - 1; i++) {
+                if(dataLoad26[i].emrdfk == 3110029){
+                    continue;
+                }
+                if (dataLoad26[i].type == "textbox") {
+                    $('#id_'+dataLoad26[i].emrdfk).html( dataLoad26[i].value)
+                    $scope.item.obji26[dataLoad26[i].emrdfk] = dataLoad26[i].value
+                }
+                if (dataLoad26[i].type == "checkbox") {
+                    var chekedd = false
+                    if (dataLoad26[i].value == '1') {
+                        var chekedd = true
+                    }
+                    $scope.item.obji26[dataLoad26[i].emrdfk] = chekedd
+                }
+                if (dataLoad26[i].type == "radio") {
+                    $scope.item.obji26[dataLoad26[i].emrdfk] = dataLoad26[i].value
+
+                }
+
+                if (dataLoad26[i].type == "datetime") {
+                    $('#id_'+dataLoad26[i].emrdfk).html( dataLoad26[i].value)
+                    $scope.item.obji26[dataLoad26[i].emrdfk] = dataLoad26[i].value
+                }
+                if (dataLoad26[i].type == "time") {
+                    $scope.item.obji26[dataLoad26[i].emrdfk] = dataLoad26[i].value
+                }
+                if (dataLoad26[i].type == "date") {
+                    $scope.item.obji26[dataLoad26[i].emrdfk] = dataLoad26[i].value
+                }
+
+                if (dataLoad26[i].type == "checkboxtextbox") {
+                    $scope.item.obji26[dataLoad26[i].emrdfk] = dataLoad26[i].value
+                    $scope.item.obji26[dataLoad26[i].emrdfk] = true
+                }
+                if (dataLoad26[i].type == "textarea") {
+                    $('#id_'+dataLoad26[i].emrdfk).html( dataLoad26[i].value)
+                    $scope.item.obji26[dataLoad26[i].emrdfk] = dataLoad26[i].value
+                }
+                if (dataLoad26[i].type == "combobox") {
+
+                    var str = dataLoad26[i].value
+                    if(str != null)
+                    {
+                        var res = str.split("~");
+                        
+                        $scope.item.obji26[dataLoad26[i].emrdfk] = res[1]
+                        $('#id_'+dataLoad26[i].emrdfk).html ( res[1])
+                    }
+                }
+                if (dataLoad26[i].type == "combobox2") {
+                    var str = dataLoad26[i].value
+                    var res = str.split("~");
+                    
+                    $scope.item.obji26[dataLoad26[i].emrdfk+""+1] = res[0]
+                    $scope.item.obji26[dataLoad26[i].emrdfk] = res[1]
+                    $('#id_'+dataLoad26[i].emrdfk).html ( res[1])
+
+                }
+
+                if (dataLoad26[i].emrdfk == '423816' ) {
+                    $scope.hariTgl = dataLoad26[i].value
+                }
+
+                if (dataLoad26[i].emrdfk == '2000001974' ) {
+                    $scope.jamPeriksa = dataLoad26[i].value
+                }
+
+                if (dataLoad26[i].emrdfk == '2000002354' ) {
+                    $scope.tgl1 = dataLoad26[i].value
+                }
+                if (dataLoad26[i].emrdfk == '2000002357' ) {
+                    $scope.tgl2 = dataLoad26[i].value
+                }
+                if (dataLoad26[i].emrdfk == '2000002360' ) {
+                    $scope.tgl3 = dataLoad26[i].value
+                }
+                if (dataLoad26[i].emrdfk == '2000002363' ) {
+                    $scope.tgl4 = dataLoad26[i].value
+                }
+                if (dataLoad26[i].emrdfk == '2000002366' ) {
+                    $scope.tgl5 = dataLoad26[i].value
+                }
+                if (dataLoad26[i].emrdfk == '2000002369' ) {
+                    $scope.tgl6 = dataLoad26[i].value
+                }
+                if (dataLoad26[i].emrdfk == '2000002372' ) {
+                    $scope.tgl7 = dataLoad26[i].value
+                }
+                if (dataLoad26[i].emrdfk == '2000002375' ) {
+                    $scope.tgl8 = dataLoad26[i].value
+                }
+                if (dataLoad26[i].emrdfk == '2000002378' ) {
+                    $scope.tgl9 = dataLoad26[i].value
+                }
+                if (dataLoad26[i].emrdfk == '2000002381' ) {
+                    $scope.tgl10 = dataLoad26[i].value
+                }
+                if (dataLoad26[i].emrdfk == '2000002384' ) {
+                    $scope.tgl11 = dataLoad26[i].value
+                }
+                if (dataLoad26[i].emrdfk == '2000002387' ) {
+                    $scope.tgl12 = dataLoad26[i].value
+                }
+                if (dataLoad26[i].emrdfk == '2000002390' ) {
+                    $scope.tgl13 = dataLoad26[i].value
+                }
+                if (dataLoad26[i].emrdfk == '2000002393' ) {
+                    $scope.tgl14 = dataLoad26[i].value
+                }
+                if (dataLoad26[i].emrdfk == '2000002396' ) {
+                    $scope.tgl15 = dataLoad26[i].value
+                }
+                
+                if (dataLoad26[i].emrdfk == '2000002408' ) {
+                    $scope.pukul2 = dataLoad26[i].value
+                }
+
+                $scope.tglemr = dataLoad26[i].tgl
+                
+            }
+        }
+
+        if(dataLoad27.length > 0){
+            for (var i = 0; i <= dataLoad27.length - 1; i++) {
+                if(dataLoad27[i].emrdfk == 3110029){
+                    continue;
+                }
+                if (dataLoad27[i].type == "textbox") {
+                    $('#id_'+dataLoad27[i].emrdfk).html( dataLoad27[i].value)
+                    $scope.item.obji27[dataLoad27[i].emrdfk] = dataLoad27[i].value
+                }
+                if (dataLoad27[i].type == "checkbox") {
+                    var chekedd = false
+                    if (dataLoad27[i].value == '1') {
+                        var chekedd = true
+                    }
+                    $scope.item.obji27[dataLoad27[i].emrdfk] = chekedd
+                }
+                if (dataLoad27[i].type == "radio") {
+                    $scope.item.obji27[dataLoad27[i].emrdfk] = dataLoad27[i].value
+
+                }
+
+                if (dataLoad27[i].type == "datetime") {
+                    $('#id_'+dataLoad27[i].emrdfk).html( dataLoad27[i].value)
+                    $scope.item.obji27[dataLoad27[i].emrdfk] = dataLoad27[i].value
+                }
+                if (dataLoad27[i].type == "time") {
+                    $scope.item.obji27[dataLoad27[i].emrdfk] = dataLoad27[i].value
+                }
+                if (dataLoad27[i].type == "date") {
+                    $scope.item.obji27[dataLoad27[i].emrdfk] = dataLoad27[i].value
+                }
+
+                if (dataLoad27[i].type == "checkboxtextbox") {
+                    $scope.item.obji27[dataLoad27[i].emrdfk] = dataLoad27[i].value
+                    $scope.item.obji27[dataLoad27[i].emrdfk] = true
+                }
+                if (dataLoad27[i].type == "textarea") {
+                    $('#id_'+dataLoad27[i].emrdfk).html( dataLoad27[i].value)
+                    $scope.item.obji27[dataLoad27[i].emrdfk] = dataLoad27[i].value
+                }
+                if (dataLoad27[i].type == "combobox") {
+
+                    var str = dataLoad27[i].value
+                    if(str != null)
+                    {
+                        var res = str.split("~");
+                        
+                        $scope.item.obji27[dataLoad27[i].emrdfk] = res[1]
+                        $('#id_'+dataLoad27[i].emrdfk).html ( res[1])
+                    }
+                }
+                if (dataLoad27[i].type == "combobox2") {
+                    var str = dataLoad27[i].value
+                    var res = str.split("~");
+                    
+                    $scope.item.obji27[dataLoad27[i].emrdfk+""+1] = res[0]
+                    $scope.item.obji27[dataLoad27[i].emrdfk] = res[1]
+                    $('#id_'+dataLoad27[i].emrdfk).html ( res[1])
+
+                }
+
+                if (dataLoad27[i].emrdfk == '423816' ) {
+                    $scope.hariTgl = dataLoad27[i].value
+                }
+
+                if (dataLoad27[i].emrdfk == '2000001974' ) {
+                    $scope.jamPeriksa = dataLoad27[i].value
+                }
+
+                if (dataLoad27[i].emrdfk == '2000002354' ) {
+                    $scope.tgl1 = dataLoad27[i].value
+                }
+                if (dataLoad27[i].emrdfk == '2000002357' ) {
+                    $scope.tgl2 = dataLoad27[i].value
+                }
+                if (dataLoad27[i].emrdfk == '2000002360' ) {
+                    $scope.tgl3 = dataLoad27[i].value
+                }
+                if (dataLoad27[i].emrdfk == '2000002363' ) {
+                    $scope.tgl4 = dataLoad27[i].value
+                }
+                if (dataLoad27[i].emrdfk == '2000002366' ) {
+                    $scope.tgl5 = dataLoad27[i].value
+                }
+                if (dataLoad27[i].emrdfk == '2000002369' ) {
+                    $scope.tgl6 = dataLoad27[i].value
+                }
+                if (dataLoad27[i].emrdfk == '2000002372' ) {
+                    $scope.tgl7 = dataLoad27[i].value
+                }
+                if (dataLoad27[i].emrdfk == '2000002375' ) {
+                    $scope.tgl8 = dataLoad27[i].value
+                }
+                if (dataLoad27[i].emrdfk == '2000002378' ) {
+                    $scope.tgl9 = dataLoad27[i].value
+                }
+                if (dataLoad27[i].emrdfk == '2000002381' ) {
+                    $scope.tgl10 = dataLoad27[i].value
+                }
+                if (dataLoad27[i].emrdfk == '2000002384' ) {
+                    $scope.tgl11 = dataLoad27[i].value
+                }
+                if (dataLoad27[i].emrdfk == '2000002387' ) {
+                    $scope.tgl12 = dataLoad27[i].value
+                }
+                if (dataLoad27[i].emrdfk == '2000002390' ) {
+                    $scope.tgl13 = dataLoad27[i].value
+                }
+                if (dataLoad27[i].emrdfk == '2000002393' ) {
+                    $scope.tgl14 = dataLoad27[i].value
+                }
+                if (dataLoad27[i].emrdfk == '2000002396' ) {
+                    $scope.tgl15 = dataLoad27[i].value
+                }
+                
+                if (dataLoad27[i].emrdfk == '2000002408' ) {
+                    $scope.pukul2 = dataLoad27[i].value
+                }
+
+                $scope.tglemr = dataLoad27[i].tgl
+                
+            }
+        }
+
+        if(dataLoad28.length > 0){
+            for (var i = 0; i <= dataLoad28.length - 1; i++) {
+                if(dataLoad28[i].emrdfk == 3110029){
+                    continue;
+                }
+                if (dataLoad28[i].type == "textbox") {
+                    $('#id_'+dataLoad28[i].emrdfk).html( dataLoad28[i].value)
+                    $scope.item.obji28[dataLoad28[i].emrdfk] = dataLoad28[i].value
+                }
+                if (dataLoad28[i].type == "checkbox") {
+                    var chekedd = false
+                    if (dataLoad28[i].value == '1') {
+                        var chekedd = true
+                    }
+                    $scope.item.obji28[dataLoad28[i].emrdfk] = chekedd
+                }
+                if (dataLoad28[i].type == "radio") {
+                    $scope.item.obji28[dataLoad28[i].emrdfk] = dataLoad28[i].value
+
+                }
+
+                if (dataLoad28[i].type == "datetime") {
+                    $('#id_'+dataLoad28[i].emrdfk).html( dataLoad28[i].value)
+                    $scope.item.obji28[dataLoad28[i].emrdfk] = dataLoad28[i].value
+                }
+                if (dataLoad28[i].type == "time") {
+                    $scope.item.obji28[dataLoad28[i].emrdfk] = dataLoad28[i].value
+                }
+                if (dataLoad28[i].type == "date") {
+                    $scope.item.obji28[dataLoad28[i].emrdfk] = dataLoad28[i].value
+                }
+
+                if (dataLoad28[i].type == "checkboxtextbox") {
+                    $scope.item.obji28[dataLoad28[i].emrdfk] = dataLoad28[i].value
+                    $scope.item.obji28[dataLoad28[i].emrdfk] = true
+                }
+                if (dataLoad28[i].type == "textarea") {
+                    $('#id_'+dataLoad28[i].emrdfk).html( dataLoad28[i].value)
+                    $scope.item.obji28[dataLoad28[i].emrdfk] = dataLoad28[i].value
+                }
+                if (dataLoad28[i].type == "combobox") {
+
+                    var str = dataLoad28[i].value
+                    if(str != null)
+                    {
+                        var res = str.split("~");
+                        
+                        $scope.item.obji28[dataLoad28[i].emrdfk] = res[1]
+                        $('#id_'+dataLoad28[i].emrdfk).html ( res[1])
+                    }
+                }
+                if (dataLoad28[i].type == "combobox2") {
+                    var str = dataLoad28[i].value
+                    var res = str.split("~");
+                    
+                    $scope.item.obji28[dataLoad28[i].emrdfk+""+1] = res[0]
+                    $scope.item.obji28[dataLoad28[i].emrdfk] = res[1]
+                    $('#id_'+dataLoad28[i].emrdfk).html ( res[1])
+
+                }
+
+                if (dataLoad28[i].emrdfk == '423816' ) {
+                    $scope.hariTgl = dataLoad28[i].value
+                }
+
+                if (dataLoad28[i].emrdfk == '2000001974' ) {
+                    $scope.jamPeriksa = dataLoad28[i].value
+                }
+
+                if (dataLoad28[i].emrdfk == '2000002354' ) {
+                    $scope.tgl1 = dataLoad28[i].value
+                }
+                if (dataLoad28[i].emrdfk == '2000002357' ) {
+                    $scope.tgl2 = dataLoad28[i].value
+                }
+                if (dataLoad28[i].emrdfk == '2000002360' ) {
+                    $scope.tgl3 = dataLoad28[i].value
+                }
+                if (dataLoad28[i].emrdfk == '2000002363' ) {
+                    $scope.tgl4 = dataLoad28[i].value
+                }
+                if (dataLoad28[i].emrdfk == '2000002366' ) {
+                    $scope.tgl5 = dataLoad28[i].value
+                }
+                if (dataLoad28[i].emrdfk == '2000002369' ) {
+                    $scope.tgl6 = dataLoad28[i].value
+                }
+                if (dataLoad28[i].emrdfk == '2000002372' ) {
+                    $scope.tgl7 = dataLoad28[i].value
+                }
+                if (dataLoad28[i].emrdfk == '2000002375' ) {
+                    $scope.tgl8 = dataLoad28[i].value
+                }
+                if (dataLoad28[i].emrdfk == '2000002378' ) {
+                    $scope.tgl9 = dataLoad28[i].value
+                }
+                if (dataLoad28[i].emrdfk == '2000002381' ) {
+                    $scope.tgl10 = dataLoad28[i].value
+                }
+                if (dataLoad28[i].emrdfk == '2000002384' ) {
+                    $scope.tgl11 = dataLoad28[i].value
+                }
+                if (dataLoad28[i].emrdfk == '2000002387' ) {
+                    $scope.tgl12 = dataLoad28[i].value
+                }
+                if (dataLoad28[i].emrdfk == '2000002390' ) {
+                    $scope.tgl13 = dataLoad28[i].value
+                }
+                if (dataLoad28[i].emrdfk == '2000002393' ) {
+                    $scope.tgl14 = dataLoad28[i].value
+                }
+                if (dataLoad28[i].emrdfk == '2000002396' ) {
+                    $scope.tgl15 = dataLoad28[i].value
+                }
+                
+                if (dataLoad28[i].emrdfk == '2000002408' ) {
+                    $scope.pukul2 = dataLoad28[i].value
+                }
+
+                $scope.tglemr = dataLoad28[i].tgl
+                
+            }
+        }
+
+        if(dataLoad29.length > 0){
+            for (var i = 0; i <= dataLoad29.length - 1; i++) {
+                if(dataLoad29[i].emrdfk == 3110029){
+                    continue;
+                }
+                if (dataLoad29[i].type == "textbox") {
+                    $('#id_'+dataLoad29[i].emrdfk).html( dataLoad29[i].value)
+                    $scope.item.obji29[dataLoad29[i].emrdfk] = dataLoad29[i].value
+                }
+                if (dataLoad29[i].type == "checkbox") {
+                    var chekedd = false
+                    if (dataLoad29[i].value == '1') {
+                        var chekedd = true
+                    }
+                    $scope.item.obji29[dataLoad29[i].emrdfk] = chekedd
+                }
+                if (dataLoad29[i].type == "radio") {
+                    $scope.item.obji29[dataLoad29[i].emrdfk] = dataLoad29[i].value
+
+                }
+
+                if (dataLoad29[i].type == "datetime") {
+                    $('#id_'+dataLoad29[i].emrdfk).html( dataLoad29[i].value)
+                    $scope.item.obji29[dataLoad29[i].emrdfk] = dataLoad29[i].value
+                }
+                if (dataLoad29[i].type == "time") {
+                    $scope.item.obji29[dataLoad29[i].emrdfk] = dataLoad29[i].value
+                }
+                if (dataLoad29[i].type == "date") {
+                    $scope.item.obji29[dataLoad29[i].emrdfk] = dataLoad29[i].value
+                }
+
+                if (dataLoad29[i].type == "checkboxtextbox") {
+                    $scope.item.obji29[dataLoad29[i].emrdfk] = dataLoad29[i].value
+                    $scope.item.obji29[dataLoad29[i].emrdfk] = true
+                }
+                if (dataLoad29[i].type == "textarea") {
+                    $('#id_'+dataLoad29[i].emrdfk).html( dataLoad29[i].value)
+                    $scope.item.obji29[dataLoad29[i].emrdfk] = dataLoad29[i].value
+                }
+                if (dataLoad29[i].type == "combobox") {
+
+                    var str = dataLoad29[i].value
+                    if(str != null)
+                    {
+                        var res = str.split("~");
+                        
+                        $scope.item.obji29[dataLoad29[i].emrdfk] = res[1]
+                        $('#id_'+dataLoad29[i].emrdfk).html ( res[1])
+                    }
+                }
+                if (dataLoad29[i].type == "combobox2") {
+                    var str = dataLoad29[i].value
+                    var res = str.split("~");
+                    
+                    $scope.item.obji29[dataLoad29[i].emrdfk+""+1] = res[0]
+                    $scope.item.obji29[dataLoad29[i].emrdfk] = res[1]
+                    $('#id_'+dataLoad29[i].emrdfk).html ( res[1])
+
+                }
+
+                if (dataLoad29[i].emrdfk == '423816' ) {
+                    $scope.hariTgl = dataLoad29[i].value
+                }
+
+                if (dataLoad29[i].emrdfk == '2000001974' ) {
+                    $scope.jamPeriksa = dataLoad29[i].value
+                }
+
+                if (dataLoad29[i].emrdfk == '2000002354' ) {
+                    $scope.tgl1 = dataLoad29[i].value
+                }
+                if (dataLoad29[i].emrdfk == '2000002357' ) {
+                    $scope.tgl2 = dataLoad29[i].value
+                }
+                if (dataLoad29[i].emrdfk == '2000002360' ) {
+                    $scope.tgl3 = dataLoad29[i].value
+                }
+                if (dataLoad29[i].emrdfk == '2000002363' ) {
+                    $scope.tgl4 = dataLoad29[i].value
+                }
+                if (dataLoad29[i].emrdfk == '2000002366' ) {
+                    $scope.tgl5 = dataLoad29[i].value
+                }
+                if (dataLoad29[i].emrdfk == '2000002369' ) {
+                    $scope.tgl6 = dataLoad29[i].value
+                }
+                if (dataLoad29[i].emrdfk == '2000002372' ) {
+                    $scope.tgl7 = dataLoad29[i].value
+                }
+                if (dataLoad29[i].emrdfk == '2000002375' ) {
+                    $scope.tgl8 = dataLoad29[i].value
+                }
+                if (dataLoad29[i].emrdfk == '2000002378' ) {
+                    $scope.tgl9 = dataLoad29[i].value
+                }
+                if (dataLoad29[i].emrdfk == '2000002381' ) {
+                    $scope.tgl10 = dataLoad29[i].value
+                }
+                if (dataLoad29[i].emrdfk == '2000002384' ) {
+                    $scope.tgl11 = dataLoad29[i].value
+                }
+                if (dataLoad29[i].emrdfk == '2000002387' ) {
+                    $scope.tgl12 = dataLoad29[i].value
+                }
+                if (dataLoad29[i].emrdfk == '2000002390' ) {
+                    $scope.tgl13 = dataLoad29[i].value
+                }
+                if (dataLoad29[i].emrdfk == '2000002393' ) {
+                    $scope.tgl14 = dataLoad29[i].value
+                }
+                if (dataLoad29[i].emrdfk == '2000002396' ) {
+                    $scope.tgl15 = dataLoad29[i].value
+                }
+                
+                if (dataLoad29[i].emrdfk == '2000002408' ) {
+                    $scope.pukul2 = dataLoad29[i].value
+                }
+
+                $scope.tglemr = dataLoad29[i].tgl
+                
+            }
+        }
+
+        if(dataLoad30.length > 0){
+            for (var i = 0; i <= dataLoad30.length - 1; i++) {
+                if(dataLoad30[i].emrdfk == 3110029){
+                    continue;
+                }
+                if (dataLoad30[i].type == "textbox") {
+                    $('#id_'+dataLoad30[i].emrdfk).html( dataLoad30[i].value)
+                    $scope.item.obji30[dataLoad30[i].emrdfk] = dataLoad30[i].value
+                }
+                if (dataLoad30[i].type == "checkbox") {
+                    var chekedd = false
+                    if (dataLoad30[i].value == '1') {
+                        var chekedd = true
+                    }
+                    $scope.item.obji30[dataLoad30[i].emrdfk] = chekedd
+                }
+                if (dataLoad30[i].type == "radio") {
+                    $scope.item.obji30[dataLoad30[i].emrdfk] = dataLoad30[i].value
+
+                }
+
+                if (dataLoad30[i].type == "datetime") {
+                    $('#id_'+dataLoad30[i].emrdfk).html( dataLoad30[i].value)
+                    $scope.item.obji30[dataLoad30[i].emrdfk] = dataLoad30[i].value
+                }
+                if (dataLoad30[i].type == "time") {
+                    $scope.item.obji30[dataLoad30[i].emrdfk] = dataLoad30[i].value
+                }
+                if (dataLoad30[i].type == "date") {
+                    $scope.item.obji30[dataLoad30[i].emrdfk] = dataLoad30[i].value
+                }
+
+                if (dataLoad30[i].type == "checkboxtextbox") {
+                    $scope.item.obji30[dataLoad30[i].emrdfk] = dataLoad30[i].value
+                    $scope.item.obji30[dataLoad30[i].emrdfk] = true
+                }
+                if (dataLoad30[i].type == "textarea") {
+                    $('#id_'+dataLoad30[i].emrdfk).html( dataLoad30[i].value)
+                    $scope.item.obji30[dataLoad30[i].emrdfk] = dataLoad30[i].value
+                }
+                if (dataLoad30[i].type == "combobox") {
+
+                    var str = dataLoad30[i].value
+                    if(str != null)
+                    {
+                        var res = str.split("~");
+                        
+                        $scope.item.obji30[dataLoad30[i].emrdfk] = res[1]
+                        $('#id_'+dataLoad30[i].emrdfk).html ( res[1])
+                    }
+                }
+                if (dataLoad30[i].type == "combobox2") {
+                    var str = dataLoad30[i].value
+                    var res = str.split("~");
+                    
+                    $scope.item.obji30[dataLoad30[i].emrdfk+""+1] = res[0]
+                    $scope.item.obji30[dataLoad30[i].emrdfk] = res[1]
+                    $('#id_'+dataLoad30[i].emrdfk).html ( res[1])
+
+                }
+
+                if (dataLoad30[i].emrdfk == '423816' ) {
+                    $scope.hariTgl = dataLoad30[i].value
+                }
+
+                if (dataLoad30[i].emrdfk == '2000001974' ) {
+                    $scope.jamPeriksa = dataLoad30[i].value
+                }
+
+                if (dataLoad30[i].emrdfk == '2000002354' ) {
+                    $scope.tgl1 = dataLoad30[i].value
+                }
+                if (dataLoad30[i].emrdfk == '2000002357' ) {
+                    $scope.tgl2 = dataLoad30[i].value
+                }
+                if (dataLoad30[i].emrdfk == '2000002360' ) {
+                    $scope.tgl3 = dataLoad30[i].value
+                }
+                if (dataLoad30[i].emrdfk == '2000002363' ) {
+                    $scope.tgl4 = dataLoad30[i].value
+                }
+                if (dataLoad30[i].emrdfk == '2000002366' ) {
+                    $scope.tgl5 = dataLoad30[i].value
+                }
+                if (dataLoad30[i].emrdfk == '2000002369' ) {
+                    $scope.tgl6 = dataLoad30[i].value
+                }
+                if (dataLoad30[i].emrdfk == '2000002372' ) {
+                    $scope.tgl7 = dataLoad30[i].value
+                }
+                if (dataLoad30[i].emrdfk == '2000002375' ) {
+                    $scope.tgl8 = dataLoad30[i].value
+                }
+                if (dataLoad30[i].emrdfk == '2000002378' ) {
+                    $scope.tgl9 = dataLoad30[i].value
+                }
+                if (dataLoad30[i].emrdfk == '2000002381' ) {
+                    $scope.tgl10 = dataLoad30[i].value
+                }
+                if (dataLoad30[i].emrdfk == '2000002384' ) {
+                    $scope.tgl11 = dataLoad30[i].value
+                }
+                if (dataLoad30[i].emrdfk == '2000002387' ) {
+                    $scope.tgl12 = dataLoad30[i].value
+                }
+                if (dataLoad30[i].emrdfk == '2000002390' ) {
+                    $scope.tgl13 = dataLoad30[i].value
+                }
+                if (dataLoad30[i].emrdfk == '2000002393' ) {
+                    $scope.tgl14 = dataLoad30[i].value
+                }
+                if (dataLoad30[i].emrdfk == '2000002396' ) {
+                    $scope.tgl15 = dataLoad30[i].value
+                }
+                
+                if (dataLoad30[i].emrdfk == '2000002408' ) {
+                    $scope.pukul2 = dataLoad30[i].value
+                }
+
+                $scope.tglemr = dataLoad30[i].tgl
+                
+            }
+        }
+
+        if(dataLoad31.length > 0){
+            for (var i = 0; i <= dataLoad31.length - 1; i++) {
+                if(dataLoad31[i].emrdfk == 3110029){
+                    continue;
+                }
+                if (dataLoad31[i].type == "textbox") {
+                    $('#id_'+dataLoad31[i].emrdfk).html( dataLoad31[i].value)
+                    $scope.item.obji31[dataLoad31[i].emrdfk] = dataLoad31[i].value
+                }
+                if (dataLoad31[i].type == "checkbox") {
+                    var chekedd = false
+                    if (dataLoad31[i].value == '1') {
+                        var chekedd = true
+                    }
+                    $scope.item.obji31[dataLoad31[i].emrdfk] = chekedd
+                }
+                if (dataLoad31[i].type == "radio") {
+                    $scope.item.obji31[dataLoad31[i].emrdfk] = dataLoad31[i].value
+
+                }
+
+                if (dataLoad31[i].type == "datetime") {
+                    $('#id_'+dataLoad31[i].emrdfk).html( dataLoad31[i].value)
+                    $scope.item.obji31[dataLoad31[i].emrdfk] = dataLoad31[i].value
+                }
+                if (dataLoad31[i].type == "time") {
+                    $scope.item.obji31[dataLoad31[i].emrdfk] = dataLoad31[i].value
+                }
+                if (dataLoad31[i].type == "date") {
+                    $scope.item.obji31[dataLoad31[i].emrdfk] = dataLoad31[i].value
+                }
+
+                if (dataLoad31[i].type == "checkboxtextbox") {
+                    $scope.item.obji31[dataLoad31[i].emrdfk] = dataLoad31[i].value
+                    $scope.item.obji31[dataLoad31[i].emrdfk] = true
+                }
+                if (dataLoad31[i].type == "textarea") {
+                    $('#id_'+dataLoad31[i].emrdfk).html( dataLoad31[i].value)
+                    $scope.item.obji31[dataLoad31[i].emrdfk] = dataLoad31[i].value
+                }
+                if (dataLoad31[i].type == "combobox") {
+
+                    var str = dataLoad31[i].value
+                    if(str != null)
+                    {
+                        var res = str.split("~");
+                        
+                        $scope.item.obji31[dataLoad31[i].emrdfk] = res[1]
+                        $('#id_'+dataLoad31[i].emrdfk).html ( res[1])
+                    }
+                }
+                if (dataLoad31[i].type == "combobox2") {
+                    var str = dataLoad31[i].value
+                    var res = str.split("~");
+                    
+                    $scope.item.obji31[dataLoad31[i].emrdfk+""+1] = res[0]
+                    $scope.item.obji31[dataLoad31[i].emrdfk] = res[1]
+                    $('#id_'+dataLoad31[i].emrdfk).html ( res[1])
+
+                }
+
+                if (dataLoad31[i].emrdfk == '423816' ) {
+                    $scope.hariTgl = dataLoad31[i].value
+                }
+
+                if (dataLoad31[i].emrdfk == '2000001974' ) {
+                    $scope.jamPeriksa = dataLoad31[i].value
+                }
+
+                if (dataLoad31[i].emrdfk == '2000002354' ) {
+                    $scope.tgl1 = dataLoad31[i].value
+                }
+                if (dataLoad31[i].emrdfk == '2000002357' ) {
+                    $scope.tgl2 = dataLoad31[i].value
+                }
+                if (dataLoad31[i].emrdfk == '2000002360' ) {
+                    $scope.tgl3 = dataLoad31[i].value
+                }
+                if (dataLoad31[i].emrdfk == '2000002363' ) {
+                    $scope.tgl4 = dataLoad31[i].value
+                }
+                if (dataLoad31[i].emrdfk == '2000002366' ) {
+                    $scope.tgl5 = dataLoad31[i].value
+                }
+                if (dataLoad31[i].emrdfk == '2000002369' ) {
+                    $scope.tgl6 = dataLoad31[i].value
+                }
+                if (dataLoad31[i].emrdfk == '2000002372' ) {
+                    $scope.tgl7 = dataLoad31[i].value
+                }
+                if (dataLoad31[i].emrdfk == '2000002375' ) {
+                    $scope.tgl8 = dataLoad31[i].value
+                }
+                if (dataLoad31[i].emrdfk == '2000002378' ) {
+                    $scope.tgl9 = dataLoad31[i].value
+                }
+                if (dataLoad31[i].emrdfk == '2000002381' ) {
+                    $scope.tgl10 = dataLoad31[i].value
+                }
+                if (dataLoad31[i].emrdfk == '2000002384' ) {
+                    $scope.tgl11 = dataLoad31[i].value
+                }
+                if (dataLoad31[i].emrdfk == '2000002387' ) {
+                    $scope.tgl12 = dataLoad31[i].value
+                }
+                if (dataLoad31[i].emrdfk == '2000002390' ) {
+                    $scope.tgl13 = dataLoad31[i].value
+                }
+                if (dataLoad31[i].emrdfk == '2000002393' ) {
+                    $scope.tgl14 = dataLoad31[i].value
+                }
+                if (dataLoad31[i].emrdfk == '2000002396' ) {
+                    $scope.tgl15 = dataLoad31[i].value
+                }
+                
+                if (dataLoad31[i].emrdfk == '2000002408' ) {
+                    $scope.pukul2 = dataLoad31[i].value
+                }
+
+                $scope.tglemr = dataLoad31[i].tgl
+                
+            }
+        }
+
+        if(dataLoad32.length > 0){
+            for (var i = 0; i <= dataLoad32.length - 1; i++) {
+                if(dataLoad32[i].emrdfk == 3110029){
+                    continue;
+                }
+                if (dataLoad32[i].type == "textbox") {
+                    $('#id_'+dataLoad32[i].emrdfk).html( dataLoad32[i].value)
+                    $scope.item.obji32[dataLoad32[i].emrdfk] = dataLoad32[i].value
+                }
+                if (dataLoad32[i].type == "checkbox") {
+                    var chekedd = false
+                    if (dataLoad32[i].value == '1') {
+                        var chekedd = true
+                    }
+                    $scope.item.obji32[dataLoad32[i].emrdfk] = chekedd
+                }
+                if (dataLoad32[i].type == "radio") {
+                    $scope.item.obji32[dataLoad32[i].emrdfk] = dataLoad32[i].value
+
+                }
+
+                if (dataLoad32[i].type == "datetime") {
+                    $('#id_'+dataLoad32[i].emrdfk).html( dataLoad32[i].value)
+                    $scope.item.obji32[dataLoad32[i].emrdfk] = dataLoad32[i].value
+                }
+                if (dataLoad32[i].type == "time") {
+                    $scope.item.obji32[dataLoad32[i].emrdfk] = dataLoad32[i].value
+                }
+                if (dataLoad32[i].type == "date") {
+                    $scope.item.obji32[dataLoad32[i].emrdfk] = dataLoad32[i].value
+                }
+
+                if (dataLoad32[i].type == "checkboxtextbox") {
+                    $scope.item.obji32[dataLoad32[i].emrdfk] = dataLoad32[i].value
+                    $scope.item.obji32[dataLoad32[i].emrdfk] = true
+                }
+                if (dataLoad32[i].type == "textarea") {
+                    $('#id_'+dataLoad32[i].emrdfk).html( dataLoad32[i].value)
+                    $scope.item.obji32[dataLoad32[i].emrdfk] = dataLoad32[i].value
+                }
+                if (dataLoad32[i].type == "combobox") {
+
+                    var str = dataLoad32[i].value
+                    if(str != null)
+                    {
+                        var res = str.split("~");
+                        
+                        $scope.item.obji32[dataLoad32[i].emrdfk] = res[1]
+                        $('#id_'+dataLoad32[i].emrdfk).html ( res[1])
+                    }
+                }
+                if (dataLoad32[i].type == "combobox2") {
+                    var str = dataLoad32[i].value
+                    var res = str.split("~");
+                    
+                    $scope.item.obji32[dataLoad32[i].emrdfk+""+1] = res[0]
+                    $scope.item.obji32[dataLoad32[i].emrdfk] = res[1]
+                    $('#id_'+dataLoad32[i].emrdfk).html ( res[1])
+
+                }
+
+                if (dataLoad32[i].emrdfk == '423816' ) {
+                    $scope.hariTgl = dataLoad32[i].value
+                }
+
+                if (dataLoad32[i].emrdfk == '2000001974' ) {
+                    $scope.jamPeriksa = dataLoad32[i].value
+                }
+
+                if (dataLoad32[i].emrdfk == '2000002354' ) {
+                    $scope.tgl1 = dataLoad32[i].value
+                }
+                if (dataLoad32[i].emrdfk == '2000002357' ) {
+                    $scope.tgl2 = dataLoad32[i].value
+                }
+                if (dataLoad32[i].emrdfk == '2000002360' ) {
+                    $scope.tgl3 = dataLoad32[i].value
+                }
+                if (dataLoad32[i].emrdfk == '2000002363' ) {
+                    $scope.tgl4 = dataLoad32[i].value
+                }
+                if (dataLoad32[i].emrdfk == '2000002366' ) {
+                    $scope.tgl5 = dataLoad32[i].value
+                }
+                if (dataLoad32[i].emrdfk == '2000002369' ) {
+                    $scope.tgl6 = dataLoad32[i].value
+                }
+                if (dataLoad32[i].emrdfk == '2000002372' ) {
+                    $scope.tgl7 = dataLoad32[i].value
+                }
+                if (dataLoad32[i].emrdfk == '2000002375' ) {
+                    $scope.tgl8 = dataLoad32[i].value
+                }
+                if (dataLoad32[i].emrdfk == '2000002378' ) {
+                    $scope.tgl9 = dataLoad32[i].value
+                }
+                if (dataLoad32[i].emrdfk == '2000002381' ) {
+                    $scope.tgl10 = dataLoad32[i].value
+                }
+                if (dataLoad32[i].emrdfk == '2000002384' ) {
+                    $scope.tgl11 = dataLoad32[i].value
+                }
+                if (dataLoad32[i].emrdfk == '2000002387' ) {
+                    $scope.tgl12 = dataLoad32[i].value
+                }
+                if (dataLoad32[i].emrdfk == '2000002390' ) {
+                    $scope.tgl13 = dataLoad32[i].value
+                }
+                if (dataLoad32[i].emrdfk == '2000002393' ) {
+                    $scope.tgl14 = dataLoad32[i].value
+                }
+                if (dataLoad32[i].emrdfk == '2000002396' ) {
+                    $scope.tgl15 = dataLoad32[i].value
+                }
+                
+                if (dataLoad32[i].emrdfk == '2000002408' ) {
+                    $scope.pukul2 = dataLoad32[i].value
+                }
+
+                $scope.tglemr = dataLoad32[i].tgl
+                
+            }
+        }
+
     })
 
     angular.filter('toDate', function() {

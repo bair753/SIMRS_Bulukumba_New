@@ -6788,7 +6788,7 @@ class ReportController extends ApiController{
         $norec = $request['emr'];
         $kdProfile = (int) $request['kdprofile'];
 
-        for($a = 1; $a <= 20; $a++){
+        for($a = 1; $a <= 32; $a++){
             $res['d'.$a] = DB::select(DB::raw(
                 "
                 SELECT
