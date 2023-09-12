@@ -303,6 +303,7 @@ class LaboratoriumController extends ApiController
             $dataSO->norec = $dataSO->generateNewId();
             $dataSO->pelayananpasienfk = $request['pelayananpasienfk'];
             $dataSO->statusenabled = true;
+            $dataSO->kdprofile = 39;
             $dataSO->save();
         }else {
             $dataSO =  HasilPemeriksaanLab::where('pelayananpasienfk',$request['pelayananpasienfk'])->first();
@@ -325,6 +326,7 @@ class LaboratoriumController extends ApiController
             $dataSO->norec = $dataSO->generateNewId();
             $dataSO->pelayananpasienfk = $request['pelayananpasienfk'];
             $dataSO->statusenabled = true;
+            $dataSO->kdprofile = 39;
             $dataSO->save();
         }else {
             $dataSO =  HasilPemeriksaanLabEDT::where('pelayananpasienfk',$request['pelayananpasienfk'])->first();
