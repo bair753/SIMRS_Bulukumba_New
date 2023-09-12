@@ -1213,7 +1213,7 @@ class RadiologiController extends ApiController
 //                    'pp.norec as norec_pp',
                     'ru.namaruangan','ru.id as ruid', 'ru2.namaruangan as ruangantujuan','so.tglorder','sps.nostruk','apd.norec as norec_apd',
                     // 'apd.norec as norec_apd',
-                    'so.keteranganlainnya','so.cito',
+                    'so.keteranganlainnya','so.cito','so.klinis','so.lokasijaringan',
 //                    (DB::raw("case when pp.ono is null then 'MASUK' else
 //                                    'SELESAI' end as status")))
                     (DB::raw("case when so.statusorder is null then 'MASUK' else

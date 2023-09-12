@@ -195,9 +195,19 @@
                                         </div>
                                     </div> -->
 
+                                    <div class="grid_12" style="margin-top: 10px;" ng-show="isLokasiJaringan">
+                                        <div class="grid_12">
+                                            <label c-label item="item">Lokasi Asal Jaringan</label>
+                                        </div>
+                                        <div class="grid_12" style="margin-top: 5px;">
+                                            <textarea class="k-textbox" type="input" ng-model="item.lokasijaringan"
+                                                maxlength="8000"></textarea>
+                                        </div>
+                                    </div>
+
                                     <div class="grid_12" style="margin-top: 10px;">
                                         <div class="grid_12">
-                                            <label c-label item="item">Diagnosa</label>
+                                            <label c-label item="item">Diagnosa Klinik</label>
                                         </div>
                                         <div class="grid_12">
                                                 <input class="k-textbox" type="input" ng-model="item.klinis"
@@ -208,7 +218,7 @@
 
                                     <div class="grid_12" style="margin-top: 10px;">
                                         <div class="grid_12">
-                                            <label c-label item="item">Keterangan</label>
+                                            <label c-label item="item">Keterangan Klinik</label>
                                         </div>
                                         <div class="grid_12" style="margin-top: 5px;">
                                             <textarea class="k-textbox" type="input" ng-model="item.keterangan"

@@ -15,6 +15,7 @@ define(['initialize'], function (initialize) {
             $scope.inputOrder = true
             $scope.CmdOrderPelayanan = true;
             $scope.OrderPelayanan = false;
+            $scope.isLokasiJaringan = false;
             $scope.showTombol = false
             $scope.header.DataNoregis = true
             var produkDef = []
@@ -120,6 +121,11 @@ define(['initialize'], function (initialize) {
                     + jenisPelayananId
                     + "&isLabRad=true")
                     .then(function (x) {
+                        if(ruangan.id == 839){
+                            $scope.isLokasiJaringan = true;
+                        }else{
+                            $scope.isLokasiJaringan = false;
+                        }
                         $scope.listProdukCek = x.data.details
                         produkDef = x.data.details
                         console.log($scope.listProdukCek);
@@ -686,6 +692,8 @@ define(['initialize'], function (initialize) {
                     //kddiagnosa: kkdiagnosa, //$scope.item.kddiagnosa.kddiagnosa,
                     kddiagnosa: $scope.item.klinis != undefined ? $scope.item.klinis : '-',
                     pegawaiorderfk: $scope.item.doktermeminta.id, //$scope.PegawaiLogin2.id,
+                    lokasijaringan: $scope.item.lokasijaringan != undefined ? $scope.item.lokasijaringan : null,
+                    klinis: $scope.item.klinis != undefined ? $scope.item.klinis : null,
                     keterangan: $scope.item.keterangan != undefined ? $scope.item.keterangan : null,
                     iscito: $scope.item.iscito != undefined && $scope.item.iscito == true ? $scope.item.iscito : false,
                     details: data2,
