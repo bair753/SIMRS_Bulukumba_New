@@ -122,7 +122,15 @@
                 </div>
 
                 <!-- class="max-height" -->
-                <div class="grid_12" style="margin-top: 10px;">
+                <div class="grid_12" style="margin-top: 10px;" ng-show="isRanap">
+                    <div class="grid_12 borderBox">
+                        <kendo-grid id="kGrid2" data-source="sourceLaporan" options="columnLaporanRanap" k-selectable="'row'"
+                            k-sortable="'true'" class="max-height" k-resizable="'true'" k-ng-model="dataSelected"
+                            ng-click="klik(dataSelected)">
+                        </kendo-grid>
+                    </div>
+                </div>
+                <div class="grid_12" style="margin-top: 10px;" ng-show="!isRanap">
                     <div class="grid_12 borderBox">
                         <kendo-grid id="kGrid2" data-source="sourceLaporan" options="columnLaporan" k-selectable="'row'"
                             k-sortable="'true'" class="max-height" k-resizable="'true'" k-ng-model="dataSelected"

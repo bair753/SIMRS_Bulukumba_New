@@ -8977,13 +8977,16 @@ class RegistrasiController extends ApiController
         $data = DB::select(DB::raw("select *,sum(z.kasusbarulk)+sum(z.kasusbarup) as kasus45 from (
             select count(x.kddiagnosa)as jumlah,x.kddiagnosa,x.namadiagnosa,
             sum(case when x.kasusbaru = 1 and x.jeniskelamin like 'LAKI-LAKI' then 1 else 0 end) as kasusbarulk,
+            sum(case when x.tglmeninggal = 1 and x.jeniskelamin like 'LAKI-LAKI' then 1 else 0 end) as meninggallk,
+            sum(case when x.tglmeninggal = 1 and x.jeniskelamin like 'PEREMPUAN' then 1 else 0 end) as meninggalp,
             sum(case when x.kasusbaru = 1 and x.jeniskelamin like 'PEREMPUAN' then 1 else 0 end) as kasusbarup from (
-            select dm.kddiagnosa,dm.namadiagnosa, case when dp.iskasusbaru = true then 1 else 0 end as kasusbaru,jk.jeniskelamin 
+            select dm.kddiagnosa,dm.namadiagnosa, case when dp.iskasusbaru = true then 1 else 0 end as kasusbaru,jk.jeniskelamin,
+            case when ps.tglmeninggal IS NOT NULL then 1 else 0 end as tglmeninggal
                             from antrianpasiendiperiksa_t as app
                             left join diagnosapasien_t as dp on dp.noregistrasifk = app.norec
                             left join detaildiagnosapasien_t as ddp on ddp.objectdiagnosapasienfk = dp.norec
                             left join diagnosa_m as dm on ddp.objectdiagnosafk = dm.id
-                            left join diagnosatindakan_m as dmt on ddp.objectdiagnosafk = dmt.id
+                            -- left join diagnosatindakan_m as dmt on ddp.objectdiagnosafk = dmt.id
                             inner join pasiendaftar_t as pd on pd.norec = app.noregistrasifk
                             inner join pasien_m as ps on ps.id = pd.nocmfk
                             inner join jeniskelamin_m as jk on jk.id = ps.objectjeniskelaminfk 
@@ -8992,12 +8995,17 @@ class RegistrasiController extends ApiController
                             left join kotakabupaten_m as kot on kot.id = alm.objectkotakabupatenfk
                             left join propinsi_m as pro on pro.id = alm.objectpropinsifk
                             left join ruangan_m as ru on ru.id = pd.objectruanganlastfk
-                            WHERE dmt.id IN ($idDiagnosa) 
-                            OR dm.id IN ($idDiagnosa) 
+                            where dm.kddiagnosa NOT ILIKE '%Z%'
+                            AND dm.kddiagnosa NOT ILIKE '%R%'
+                            AND dm.kddiagnosa NOT ILIKE '%O%'
+                            -- WHERE dmt.id IN ($idDiagnosa) 
+                            -- OR dm.id IN ($idDiagnosa) 
+                            and ps.statusenabled = true
                             AND app.kdprofile = $idProfile $deptId and dm.kddiagnosa <> '-'  and
                             pd.tglregistrasi BETWEEN '$tglAwal' AND '$tglAkhir'
                             )as x GROUP BY x.namadiagnosa ,x.kddiagnosa) as z
-                            group by z.jumlah,z.kddiagnosa,z.namadiagnosa,z.kasusbarulk,z.kasusbarup
+                            group by z.jumlah,z.kddiagnosa,z.namadiagnosa,z.kasusbarulk,z.kasusbarup,z.meninggallk,
+                            z.meninggalp
                             ORDER BY z.jumlah desc"
                         ));
         if (count($data)>0){
@@ -9008,7 +9016,10 @@ class RegistrasiController extends ApiController
                     'namadiagnosa' => $item->namadiagnosa,
                     'kasusbarulk' => $item->kasusbarulk,
                     'kasusbarup' => $item->kasusbarup,
-                    'kasus45' => $item->kasus45
+                    'kasus45' => $item->kasus45,
+                    'meninggallk' => $item->meninggallk,
+                    'meninggalp' => $item->meninggalp,
+
                 );
             }
 
@@ -9019,7 +9030,9 @@ class RegistrasiController extends ApiController
                 'namadiagnosa' => null,
                 'kasusbarulk' => 0,
                 'kasusbarup' => 0,
-                'kasus45' => 0
+                'kasus45' => 0,
+                'meninggallk' => 0,
+                'meninggalp' => 0
             );
         }
 
