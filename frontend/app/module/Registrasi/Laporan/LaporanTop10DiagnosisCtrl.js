@@ -2,6 +2,7 @@ define(['initialize'], function (initialize) {
 'use strict';
     initialize.controller('LaporanTop10DiagnosisCtrl', ['CacheHelper', '$scope', 'DateHelper', 'MedifirstService', 
         function (cacheHelper, $scope, dateHelper, medifirstService) {
+            $scope.isRanap = false;
             FormLoad();   
             function FormLoad(){
                 $scope.isRouteLoading = false;
@@ -80,6 +81,16 @@ define(['initialize'], function (initialize) {
                     + "tglAwal=" + tglAwal
                     + "&tglAkhir=" + tglAkhir
                     + tempDepartemenId).then(function (data) {
+                        if($scope.item.departement != undefined){
+                            if($scope.item.departement.id == 16){
+                                $scope.isRanap = true;
+                            }else{
+                                $scope.isRanap = false;
+                            }
+                        }else{
+                            $scope.isRanap = false;
+                        }
+                        console.log($scope.isRanap);
                     $scope.isRouteLoading = false;                                    
                     var datas = data.data;
                     for (var i = 0; i < datas.length; i++) {
@@ -182,6 +193,91 @@ define(['initialize'], function (initialize) {
                         width: "80px",
                         textAlign: "center",
                     }              
+                ] 
+            }
+
+            $scope.columnLaporanRanap = {
+                toolbar: [
+                    "excel",                    
+                ],
+                excel: { fileName: "LaporanDiagnosaPasien.xlsx", allPages: true, },
+                // pdf: { fileName: "RekapPembayaranJasaPelayanan.pdf", allPages: true, },
+                excelExport: function (e) {
+                    var sheet = e.workbook.sheets[0];
+                    sheet.frozenRows = 3;
+                    sheet.mergedCells = ["A1:H1"];
+                    sheet.name = "Orders";
+                    
+                    if($scope.item.departement == undefined){
+                        toastr.warning('Department harus diisi!','Peringatan')
+                    }
+
+                    var de = $scope.item.departement.departemen.toUpperCase();
+
+                    if(de == undefined){
+                        de = '';
+                    }
+
+                    var myHeaders = [{
+                        value: "10 BESAR KEADAAN MORBIDITAS PASIEN " + de + " RUMAH SAKIT",
+                        fontSize: 14,
+                        textAlign: "center",
+                        background: "#ffffff",
+                        // color:"#ffffff"
+                    }];
+
+                    sheet.rows.splice(0, 0, { cells: myHeaders, type: "header", height: 70 });
+                },
+                sortable: true,
+                pageable: true,
+                selectable: "row",
+                columns: [  
+
+                    { field: "no", title: "No", width: "25px" },
+                    {
+                        field: "kddiagnosa",
+                        title: "KODE ICD",
+                        width: "70px",
+                        textAlign: "center",
+                    },
+                    {
+                        field: "namadiagnosa",
+                        title: "DIAGNOSA",
+                        width: "300px",
+                        textAlign: "center",
+                    },
+                    
+                    {
+                        field: "kasusbarulk",
+                        title: "LK",
+                        width: "50px",
+                        textAlign: "center",
+                    },
+                    {
+                        field: "kasusbarup",
+                        title: "PR",
+                        width: "50px",
+                        textAlign: "center",
+                    },
+                    {
+                        field: "meninggallk",
+                        title: "Meninggal Laki-laki",
+                        width: "80px",
+                        textAlign: "center",
+                    },
+                    {
+                        field: "meninggalp",
+                        title: "Meninggal Perempuan",
+                        width: "100px",
+                        textAlign: "center",
+                    },
+                    {
+                        field: "kasus45",
+                        title: "JUMLAH",
+                        width: "50px",
+                        textAlign: "center",
+                    }                   
+                                  
                 ] 
             }
 ////////////////////////////////////////////////////////    END     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
