@@ -260,7 +260,7 @@
             </tr>
             <tr style="border:none" height="35px"></tr>
             <tr>
-                <th colspan="10" style="text-align:center;font-size: large;">
+                <th colspan="10" style="text-align:center;font-size: 20pt;">
                     <u>SURAT KETERANGAN KELAHIRAN</u>
                 </th>
             </tr>
