@@ -1528,29 +1528,6 @@ class InaCbgController   extends ApiController
         if (isset($filter['ruangId']) && $filter['ruangId'] != "" && $filter['ruangId'] != "undefined") {
             $data = $data->where('ru.id', '=', $filter['ruangId']);
         }
-        // if (isset($filter['kelId']) && $filter['kelId'] != "" && $filter['kelId'] != "undefined") {
-        //     if($filter['kelId'] == 2){
-        //         $data = $data->where('pas.nosep','<>','');
-        //         $data = $data->whereNotNull('pas.nosep');
-        //     }
-        //     $data = $data->where('kp.id', '=', $filter['kelId']);
-        // }
-        $paramKel  ='';
-        if(isset($request['kelId']) && $request['kelId']!="" && $request['kelId']!="undefined"){
-            $arrKel = explode(',',$request['kelId']) ;
-            $kodeKel = [];
-            foreach ( $arrKel as $item){
-                $kodeKel[] = (int) $item;
-            }
-            $paramKel = ' and kp.id in ('.$request['kelId'].')';
-            $data = $data->whereIn('kp.id',$kodeKel);
-        }
-        if (isset($filter['dokId']) && $filter['dokId'] != "" && $filter['dokId'] != "undefined") {
-            $data = $data->where('pg.id', '=', $filter['dokId']);
-        }
-        if (isset($filter['sttts']) && $filter['sttts'] != "" && $filter['sttts'] != "undefined") {
-            $data = $data->where('pd.statuspasien', '=', $filter['sttts']);
-        }
         if (isset($filter['noreg']) && $filter['noreg'] != "" && $filter['noreg'] != "undefined") {
             $data = $data->where('pd.noregistrasi', 'like', '%' . $filter['noreg'] . '%');
         }
@@ -1563,6 +1540,34 @@ class InaCbgController   extends ApiController
         if (isset($filter['nosep']) && $filter['nosep'] != "" && $filter['nosep'] != "undefined") {
             $data = $data->where('pas.nosep', '=', $filter['nosep']);
         }
+        // if (isset($filter['kelId']) && $filter['kelId'] != "" && $filter['kelId'] != "undefined") {
+        //     if($filter['kelId'] == 2){
+        //         $data = $data->where('pas.nosep','<>','');
+        //         $data = $data->whereNotNull('pas.nosep');
+        //     }
+        //     $data = $data->where('kp.id', '=', $filter['kelId']);
+        // }
+        $paramKel  ='';
+        // if(isset($request['kelId']) && $request['kelId']!="" && $request['kelId']!="undefined"){
+        //     $arrKel = explode(',',$request['kelId']) ;
+        //     $kodeKel = [];
+        //     foreach ( $arrKel as $item){
+        //         $kodeKel[] = (int) $item;
+        //     }
+        //     $paramKel = ' and kp.id in ('.$request['kelId'].')';
+        //     $data = $data->whereIn('kp.id',$kodeKel);
+        // }
+        if (isset($request['kelId']) && $request['kelId'] != "" && $request['kelId'] != "undefined") {
+            // $data = $data->where('pg.id', '=', $request['kelId']);
+            $data = $data->where('kp.id',$request['kelId']);
+        }
+        if (isset($filter['dokId']) && $filter['dokId'] != "" && $filter['dokId'] != "undefined") {
+            $data = $data->where('pg.id', '=', $filter['dokId']);
+        }
+        if (isset($filter['sttts']) && $filter['sttts'] != "" && $filter['sttts'] != "undefined") {
+            $data = $data->where('pd.statuspasien', '=', $filter['sttts']);
+        }
+        
         if (isset($filter['status']) && $filter['status'] != "" && $filter['status'] != "undefined") {
             $data = $data->where('pd.statusklaim', '=', $filter['status']);
         }
