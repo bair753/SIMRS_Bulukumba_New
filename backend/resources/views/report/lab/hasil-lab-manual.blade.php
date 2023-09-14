@@ -336,10 +336,15 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                 <td style="text-align:center;">
                                     <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
                                 </td>
+                                @elseif($data->hasil == "Jernih")
+                                <td style="text-align:center;">
+                                    <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
+                                </td>
                                 @elseif($data->hasil == "Non Reaktif")
                                 <td style="text-align:center;">
                                     <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
                                 </td>
+                                
                                 @elseif($data->hasil == "Positif")
                                 <td style="text-align:center;">
                                     <font style="font-size: 10pt;" color="#FF0000">{{ $data->hasil }}</font>
