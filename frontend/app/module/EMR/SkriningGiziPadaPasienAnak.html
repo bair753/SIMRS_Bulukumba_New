@@ -1,0 +1,286 @@
+<style type="text/css">
+    fieldset {
+        border-radius: 5px;
+        border: 1px solid #228be6;
+    }
+
+    .k-slider-horizontal {
+        display: inline-block;
+        float: left;
+        width: 450px;
+
+        height: 26px;
+
+
+    }
+
+    .k-slider {
+
+        margin-left: 3%;
+        margin-right: 3%;
+        margin-top: 1%;
+        margin-bottom: 5%;
+        display: inline-block;
+    }
+
+    .activeBtn {
+        background-color: #10c4b2;
+        color: #ffffff;
+    }
+    table,
+    th,
+    td {
+        border: 1px solid #929191;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+    td {
+        padding: 5px;
+        text-align: left;
+    }
+    th {
+        padding: 5px;
+        text-align: center;
+    }
+    .clicks{
+        cursor: pointer;
+    }
+</style>
+
+ <!-- ng-class="{'my-disable':true}" -->
+<!-- <div class="grid_12"  disable-contents="allDisabled" id="form"> -->
+<div class="grid_12">
+    <div class="grid_12">
+        <div class="panel panel-default container_12">
+            <div class="panel-heading" c-translate>Skrining Gizi Pada Pasien Anak</div>
+        </div>
+
+        <div class="grid_12" style="margin-top: 10px;">
+            <fieldset style="margin-top: 10px;">
+                <div class="grid_12">
+                    <div class="grid_6" style="margin-top: 10px;">
+                        <div class="grid_12">
+                            <div class="grid_12">
+                                <label c-label item="item">Alamat</label>
+                            </div>
+                            <div class="grid_12">
+                                <input type="text" class="k-textbox" ng-model="item.obj[32116647]">
+                            </div>
+                        </div>                      
+                    </div>
+                    <div class="grid_6" style="margin-top: 10px;">
+                        <div class="grid_12">
+                            <div class="grid_12">
+                                <label c-label item="item">Tanggal MRS</label>
+                            </div>
+                            <div class="grid_12">
+                                <input style="width: 90%" k-ng-model="item.obj[32116648]" kendo-datepicker placeholer="YYYY:MM:DD"
+                                    k-format="'yyyy-MM-dd'" />
+                            </div>
+                        </div>                      
+                    </div>
+                </div>
+                <div class="grid_12">
+                    <div class="grid_6" style="margin-top: 10px;">
+                        <div class="grid_12">
+                            <div class="grid_12">
+                                <label c-label item="item">Pekerjaan</label>
+                            </div>
+                            <div class="grid_12">
+                                <input type="text" class="k-textbox" ng-model="item.obj[32116649]">
+                            </div>
+                        </div>                      
+                    </div>
+                    <div class="grid_6" style="margin-top: 10px;">
+                        <div class="grid_12">
+                            <div class="grid_12">
+                                <label c-label item="item">Diagnosis DPJP</label>
+                            </div>
+                            <div class="grid_12">
+                                <input style="width: 90%;" kendo-combo-box k-ng-model="item.obj[32116650]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listDiagnosa" />
+                            </div>
+                        </div>                      
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        
+        <div class="grid_12" style="margin-top: 10px;">
+            <!-- Start Tanda Vital -->
+            <fieldset style="margin-top: 10px; ">
+                <div class="grid_12" style="margin-top: 20px">
+                    <table>
+                        <tr>
+                            <th>No</th>
+                            <th>Tanggal Skrining</th>
+                            <th>SKOR I</th>
+                            <th>SKOR II</th>
+                        </tr>
+                        <tr>
+                            <td><b>1</b></td>
+                            <td><b>Apakah anak memiliki diagnosis yang dapat mempengaruhi status gizi</b></td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <td rowspan="3"></td>
+                            <td>Tidak ada</td>
+                            <td style="text-align: center;">0</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32116651]"></td>
+                        </tr>
+                        <tr>
+                            <td>Memungkinkan (gangguan kebiasaan makan, anoreksia, demam tinggi, diare, dyspepsia, nyeri menelan)</td>
+                            <td style="text-align: center;">2</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32116652]"></td>
+                        </tr>
+                        <tr>
+                            <td>Pasti (disfagia, penyakit kronis, kesadaran menurun, pembedahan saluran cerna, penyakit kritis)</td>
+                            <td style="text-align: center;">3</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32116653]"></td>
+                        </tr>
+
+                        <tr>
+                            <td><b>2</b></td>
+                            <td><b>Asuhan nutrisi dalam 48 jam</b></td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <td rowspan="3"></td>
+                            <td>Adekuat dan tidak ada perubahan pola makan</td>
+                            <td style="text-align: center;">0</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32116654]"></td>
+                        </tr>
+                        <tr>
+                            <td>Asupan makanan tidak adekuat : ≤ 50 % dari kebiasaan makan</td>
+                            <td style="text-align: center;">2</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32116655]"></td>
+                        </tr>
+                        <tr>
+                            <td>Tidak ada asupan makanan dalam 48 jam</td>
+                            <td style="text-align: center;">3</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32116656]"></td>
+                        </tr>
+
+                        <tr>
+                            <td><b>3</b></td>
+                            <td><b>Penyakit/tindakan/pembedahan dan asupan makanan</b></td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <td rowspan="3"></td>
+                            <td>Anak < 5 tahun : -2 SD sampai 2 SD berdasarkan BB/PB (TB) <br>
+                                Anak > 5 tahun : >90% BB/TB
+                            </td>
+                            <td style="text-align: center;">0</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32116657]"></td>
+                        </tr>
+                        <tr>
+                            <td>Anak < 5 tahun : -3 SD sampai < -2 SD berdasarkan BB/PB (TB) <br>
+                                Anak > 5 tahun : 71-90% BB/TB
+                            </td>
+                            <td style="text-align: center;">2</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32116658]"></td>
+                        </tr>
+                        <tr>
+                            <td>Anak < 5 tahun : < -3 SD berdasarkan BB/PB (TB) <br>
+                                Anak > 5 tahun : ≤70% BB/TB
+                            </td>
+                            <td style="text-align: center;">3</td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32116659]"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="text-align: center;"><b>TOTAL SKOR</b></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32116660]"></td>
+                            <td><input type="text" class="k-textbox" ng-model="item.obj[32116661]" readonly></td>
+                        </tr>
+                        <tr>
+                            <td rowspan="4"></td>
+                            <td><b>Risiko Bermasalah Gizi</b></td>
+                            <td><b>Tatalaksana Gizi</b></td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <td>* Skor 0-1 = Risiko Rendah</td>
+                            <td>* Skrining ulang 5 hari (Terapi gizi oleh DPJP + Dietisien)</td>
+                            <td colspan="2"><input type="text" class="k-textbox" ng-model="item.obj[32116662]"></td>
+                        </tr>
+                        <tr>
+                            <td>* Skor 2-3 = Risiko Sedang</td>
+                            <td>* Skrining ulang 3 hari (Terapi gizi oleh DPJP + Dietisien)</td>
+                            <td colspan="2"><input type="text" class="k-textbox" ng-model="item.obj[32116663]"></td>
+                        </tr>
+                        <tr>
+                            <td>* Skor ≥ 4 = Risiko Tinggi</td>
+                            <td>* Tim Terapi Gizi</td>
+                            <td colspan="2"><input type="text" class="k-textbox" ng-model="item.obj[32116664]"></td>
+                        </tr>
+                    </table>
+                </div>
+                <hr>
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_6">
+                        <label c-label item="item">SKRINING I (Dietisien)</label>
+                    </div>
+                    <div class="grid_6">
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[32116665]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                    </div>
+                </div>
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_6">
+                        <label c-label item="item">SKRINING II (Dietisien)</label>
+                    </div>
+                    <div class="grid_6">
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[32116666]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                    </div>
+                </div>
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_6">
+                        <label c-label item="item">SKRINING III (Dietisien)</label>
+                    </div>
+                    <div class="grid_6">
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[32116667]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                    </div>
+                </div>
+                <hr>
+                <div class="grid_12" style="margin-top: 10px;">
+                    <div class="grid_12">
+                        <label item="item">NB : Untuk Pasien Risiko Tinggi dan malnutrisi format skrining <br>
+                            ditandatangani oleh Dokter Spesialis Gizi Klinis
+                        </label>
+                    </div>
+                </div>
+                <hr>
+                <div class="grid_6" style="margin-top: 10px;">
+                    <div class="grid_12">
+                        <label c-label item="item">DPJP Utama/drSpGK**</label>
+                    </div>
+                    <div class="grid_12">
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[32116668]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listDokter" />
+                    </div>
+                </div>
+                <div class="grid_6" style="margin-top: 10px;">
+                    <div class="grid_12">
+                        <label c-label item="item">Dietisien Ruangan</label>
+                    </div>
+                    <div class="grid_12">
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[32116669]" k-data-text-field="'text'"
+                            k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />
+                    </div>
+                </div>
+                
+            </fieldset>
+        </div>
+
+    </div>
+</div>
+
+<br />
+<br />
+<div class="grid_12">
+    <div ng-include='"../app/module/EMR/TemplateButtonDinamis" '></div>
+
+</div>
