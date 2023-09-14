@@ -3711,6 +3711,10 @@
             "urlDep": "module/EMR/LembarKerjaBayiBaruLahirCtrl"
         },
         {
+            "nameDep": "SkriningGiziPadaPasienAnakCtrl",
+            "urlDep": "module/EMR/SkriningGiziPadaPasienAnakCtrl"
+        },
+        {
             "nameDep": "SkriningGiziPadaPasienDewasaCtrl",
             "urlDep": "module/EMR/SkriningGiziPadaPasienDewasaCtrl"
         },
