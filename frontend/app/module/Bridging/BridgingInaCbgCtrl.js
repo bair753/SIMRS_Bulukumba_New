@@ -4926,6 +4926,88 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 				})
 			}
 
+			$scope.dokumen = function(){
+				if ($scope.dataPasienSelected.noregistrasi == undefined) {
+					toastr.error('Pilih Pasien Terlebih dahulu!!!')
+					return;
+				}
+
+				medifirstService.get("emr/get-berkas-pasien?noregistrasi=" + $scope.dataPasienSelected.noregistrasi
+						// medifirstService.get("lab-radiologi/get-rincian-pelayanan?objectdepartemenfk=" + departemenfk + "&noregistrasi=" +   $scope.item.noregistrasi
+					, true).then(function (dat) {
+						$scope.dataDaftarDokumen = {
+							data: dat.data.data,
+							_data: dat.data.data,
+							// pageSize: 10,
+							selectable: true,
+							refresh: true,
+							total: dat.data.data.length,
+							serverPaging: false,
+							aggregate: [
+								{ field: 'total', aggregate: 'sum' },
+							]
+						};
+					}, function (error) {
+						$scope.isLoading = false;
+						});
+				$scope.popUpDaftarDokumen.center().open();	
+			}	
+
+			$scope.columnDaftarDokumen = {
+				columns: [
+					{
+						"field": "tglemr",
+						"title": "Tgl Upload",
+						"width": "90px",
+					},                   
+					{
+						"field": "namafile",
+						"title": "Nama File",
+						"width": "160px"
+					},
+					{
+						"field": "deskripsi",
+						"title": "Deskripsi",
+						"width": "160px"
+					},
+					// {
+					// 	"field": "pengonsul",
+					// 	"title": "Pengonsul",
+					// 	"width": "160px",
+					// },
+					// {
+					// 	"field": "namalengkap",
+					// 	"title": "Dokter",
+					// 	"width": "160px",
+					// },
+				],
+				sortable: {
+					mode: "single",
+					allowUnsort: false,
+				}
+			}
+
+			$scope.cetakDokumen = function () {
+				{
+					var strBACKEND = baseTransaksi.replace('service/medifirst2000/', '')
+					window.open(strBACKEND + "service/storage/berkaspasien?nocm="+ $scope.dataPasienSelected.nocm + "&filename=" + $scope.dataSelectedDokumen.namafile);
+				}
+				// if ($scope.dataSelectedKonsulDokter.keteranganlainnya == undefined) {
+				// 	toastr.error('Jawaban belum tersedia!!!')
+				// 	return;
+				// }
+				var local = JSON.parse(localStorage.getItem('profile'));
+				var nama = medifirstService.getPegawaiLogin();
+				// window.open(baseTransaksi + 'report/cetak-konsul-dokter?nocm='
+				// 		+ $scope.dataPasienSelected.nocm
+				// 		+ '&emr=' + $scope.dataSelectedKonsulDokter.norec
+				// 		+ '&kdprofile=' + local.id, '_blank');
+
+				window.open(baseTransaksi + 'report/cetak-konsul-dokter-all?'
+				+ 'noregistrasi=' + $scope.dataPasienSelected.noregistrasi
+				+ '&kdprofile=' + local.id);
+			}
+
 			$scope.hasilLab = function(){
 				if ($scope.dataPasienSelected.noregistrasi == undefined) {
 					toastr.error('Pilih Pasien Terlebih dahulu!!!')
