@@ -459,8 +459,13 @@ class KendaliDokumenRMController extends  ApiController
         };
         $data = $data->get();
 
+        $noregistrasifk = [];
+        foreach ($data as $item) {
+            array_push($noregistrasifk, $item->norec);
+        }
+
         $dataDokKlaim = DB::table("monitoringdokklaim_t")
-        // ->where("noregistrasifk", $value->norec)
+        ->whereIn("noregistrasifk", $noregistrasifk)
         ->where("kdprofile", $idProfile)
         ->where("statusenabled", true)
         ->get();
