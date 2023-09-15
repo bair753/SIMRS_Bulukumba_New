@@ -465,33 +465,24 @@ class KendaliDokumenRMController extends  ApiController
         ->get();
 
         $results = [];
-        foreach ($data as $value) {
-            $result = [
-                'norec' => $value->norec,
-                'tglregistrasi' => $value->tglregistrasi,
-                'noregistrasi' => $value->noregistrasi,
-                'namaruangan' => $value->namaruangan,
-                'nocm' => $value->nocm,
-                'namapasien' => $value->namapasien,
-                'nosep' => $value->nosep
-            ];
-
-            $itemData = array_fill_keys(array_column($dataMaster, 'kodeexternal'), null);
-
-            foreach ($dataDokKlaim as $datDok) {
-                if ($datDok->noregistrasifk != $value->norec) {
-                    continue;
-                }
-                foreach ($dataMaster as $item) {
-                    if ($datDok->documentklaimfk == $item->id) {
-                        $itemData[$item->kodeexternal] = $datDok->filename;
-                        break;
-                    }
+        foreach($data as $value) {
+            $result['norec'] = $value->norec;
+            $result['tglregistrasi'] = $value->tglregistrasi;
+            $result['noregistrasi'] = $value->noregistrasi;
+            $result['namaruangan'] = $value->namaruangan;
+            $result['nocm'] = $value->nocm;
+            $result['namapasien'] = $value->namapasien;
+            $result['nosep'] = $value->nosep;
+            foreach($dataMaster as $item){
+                $result[$item->kodeexternal] = null;
+                foreach ($dataDokKlaim as $datDok) {
+                    if($datDok->noregistrasifk != $value->norec) continue;
+                    if($datDok->documentklaimfk == $item->id) {
+                        $result[$item->kodeexternal] = $datDok->filename;
+                    } 
                 }
             }
-
-            $result = array_merge($result, $itemData);
-            $results[] = $result;
+            array_push($results, $result);
         }
 
         $data = array(
