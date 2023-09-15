@@ -43,7 +43,7 @@
     }
 </style>
 {{-- onLoad="window.print()" --}}
-<body style="background-color: #CCCCCC;margin: 0">
+<body style="margin: 0">
 <div align="left">
 {{-- class="bayangprint" --}}
     <table cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0" width="{{$pageWidth}}">
