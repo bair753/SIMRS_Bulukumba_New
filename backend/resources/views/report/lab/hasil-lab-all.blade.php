@@ -325,6 +325,10 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                 <td style="text-align:center;">
                                     <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
                                 </td>
+                                @elseif($data->hasil == "Lembek")
+                                <td style="text-align:center;">
+                                    <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
+                                </td>
                                 @elseif($data->hasil == "Jernih")
                                 <td style="text-align:center;">
                                     <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
@@ -686,6 +690,10 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <font style="font-size: 10pt" color="#000000">{{ $data->detailpemeriksaan }}</font>
                                 </td>
                                 @if($data->hasil == "Negatif")
+                                <td style="text-align:center;">
+                                    <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
+                                </td>
+                                @elseif($data->hasil == "Lembek")
                                 <td style="text-align:center;">
                                     <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
                                 </td>
@@ -1053,6 +1061,10 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                 <td style="text-align:center;">
                                     <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
                                 </td>
+                                @elseif($data->hasil == "Lembek")
+                                <td style="text-align:center;">
+                                    <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
+                                </td>
                                 @elseif($data->hasil == "Jernih")
                                 <td style="text-align:center;">
                                     <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
@@ -1414,6 +1426,10 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <font style="font-size: 10pt" color="#000000">{{ $data->detailpemeriksaan }}</font>
                                 </td>
                                 @if($data->hasil == "Negatif")
+                                <td style="text-align:center;">
+                                    <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
+                                </td>
+                                @elseif($data->hasil == "Lembek")
                                 <td style="text-align:center;">
                                     <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
                                 </td>
@@ -1781,6 +1797,10 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                 <td style="text-align:center;">
                                     <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
                                 </td>
+                                @elseif($data->hasil == "Lembek")
+                                <td style="text-align:center;">
+                                    <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
+                                </td>
                                 @elseif($data->hasil == "Jernih")
                                 <td style="text-align:center;">
                                     <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
@@ -2142,6 +2162,10 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <font style="font-size: 10pt" color="#000000">{{ $data->detailpemeriksaan }}</font>
                                 </td>
                                 @if($data->hasil == "Negatif")
+                                <td style="text-align:center;">
+                                    <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
+                                </td>
+                                @elseif($data->hasil == "Lembek")
                                 <td style="text-align:center;">
                                     <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
                                 </td>
@@ -2509,6 +2533,10 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                 <td style="text-align:center;">
                                     <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
                                 </td>
+                                @elseif($data->hasil == "Lembek")
+                                <td style="text-align:center;">
+                                    <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
+                                </td>
                                 @elseif($data->hasil == "Jernih")
                                 <td style="text-align:center;">
                                     <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
@@ -2870,6 +2898,10 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <font style="font-size: 10pt" color="#000000">{{ $data->detailpemeriksaan }}</font>
                                 </td>
                                 @if($data->hasil == "Negatif")
+                                <td style="text-align:center;">
+                                    <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
+                                </td>
+                                @elseif($data->hasil == "Lembek")
                                 <td style="text-align:center;">
                                     <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
                                 </td>
@@ -3237,6 +3269,10 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                 <td style="text-align:center;">
                                     <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
                                 </td>
+                                @elseif($data->hasil == "Lembek")
+                                <td style="text-align:center;">
+                                    <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
+                                </td>
                                 @elseif($data->hasil == "Jernih")
                                 <td style="text-align:center;">
                                     <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
@@ -3598,6 +3634,10 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <font style="font-size: 10pt" color="#000000">{{ $data->detailpemeriksaan }}</font>
                                 </td>
                                 @if($data->hasil == "Negatif")
+                                <td style="text-align:center;">
+                                    <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
+                                </td>
+                                @elseif($data->hasil == "Lembek")
                                 <td style="text-align:center;">
                                     <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
                                 </td>
@@ -3965,6 +4005,10 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                 <td style="text-align:center;">
                                     <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
                                 </td>
+                                @elseif($data->hasil == "Lembek")
+                                <td style="text-align:center;">
+                                    <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
+                                </td>
                                 @elseif($data->hasil == "Jernih")
                                 <td style="text-align:center;">
                                     <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
@@ -4326,6 +4370,10 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <font style="font-size: 10pt" color="#000000">{{ $data->detailpemeriksaan }}</font>
                                 </td>
                                 @if($data->hasil == "Negatif")
+                                <td style="text-align:center;">
+                                    <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
+                                </td>
+                                @elseif($data->hasil == "Lembek")
                                 <td style="text-align:center;">
                                     <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
                                 </td>
@@ -4693,6 +4741,10 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                 <td style="text-align:center;">
                                     <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
                                 </td>
+                                @elseif($data->hasil == "Lembek")
+                                <td style="text-align:center;">
+                                    <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
+                                </td>
                                 @elseif($data->hasil == "Jernih")
                                 <td style="text-align:center;">
                                     <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
@@ -5054,6 +5106,10 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <font style="font-size: 10pt" color="#000000">{{ $data->detailpemeriksaan }}</font>
                                 </td>
                                 @if($data->hasil == "Negatif")
+                                <td style="text-align:center;">
+                                    <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
+                                </td>
+                                @elseif($data->hasil == "Lembek")
                                 <td style="text-align:center;">
                                     <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
                                 </td>
@@ -5421,6 +5477,10 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                 <td style="text-align:center;">
                                     <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
                                 </td>
+                                @elseif($data->hasil == "Lembek")
+                                <td style="text-align:center;">
+                                    <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
+                                </td>
                                 @elseif($data->hasil == "Jernih")
                                 <td style="text-align:center;">
                                     <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
@@ -5782,6 +5842,10 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <font style="font-size: 10pt" color="#000000">{{ $data->detailpemeriksaan }}</font>
                                 </td>
                                 @if($data->hasil == "Negatif")
+                                <td style="text-align:center;">
+                                    <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
+                                </td>
+                                @elseif($data->hasil == "Lembek")
                                 <td style="text-align:center;">
                                     <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
                                 </td>
@@ -6149,6 +6213,10 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                 <td style="text-align:center;">
                                     <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
                                 </td>
+                                @elseif($data->hasil == "Lembek")
+                                <td style="text-align:center;">
+                                    <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
+                                </td>
                                 @elseif($data->hasil == "Jernih")
                                 <td style="text-align:center;">
                                     <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
@@ -6510,6 +6578,10 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <font style="font-size: 10pt" color="#000000">{{ $data->detailpemeriksaan }}</font>
                                 </td>
                                 @if($data->hasil == "Negatif")
+                                <td style="text-align:center;">
+                                    <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
+                                </td>
+                                @elseif($data->hasil == "Lembek")
                                 <td style="text-align:center;">
                                     <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
                                 </td>
@@ -6877,6 +6949,10 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                 <td style="text-align:center;">
                                     <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
                                 </td>
+                                @elseif($data->hasil == "Lembek")
+                                <td style="text-align:center;">
+                                    <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
+                                </td>
                                 @elseif($data->hasil == "Jernih")
                                 <td style="text-align:center;">
                                     <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
@@ -7238,6 +7314,10 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <font style="font-size: 10pt" color="#000000">{{ $data->detailpemeriksaan }}</font>
                                 </td>
                                 @if($data->hasil == "Negatif")
+                                <td style="text-align:center;">
+                                    <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
+                                </td>
+                                @elseif($data->hasil == "Lembek")
                                 <td style="text-align:center;">
                                     <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
                                 </td>
@@ -7605,6 +7685,10 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                 <td style="text-align:center;">
                                     <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
                                 </td>
+                                @elseif($data->hasil == "Lembek")
+                                <td style="text-align:center;">
+                                    <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
+                                </td>
                                 @elseif($data->hasil == "Jernih")
                                 <td style="text-align:center;">
                                     <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
@@ -7966,6 +8050,10 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <font style="font-size: 10pt" color="#000000">{{ $data->detailpemeriksaan }}</font>
                                 </td>
                                 @if($data->hasil == "Negatif")
+                                <td style="text-align:center;">
+                                    <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
+                                </td>
+                                @elseif($data->hasil == "Lembek")
                                 <td style="text-align:center;">
                                     <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
                                 </td>
@@ -8333,6 +8421,10 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                 <td style="text-align:center;">
                                     <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
                                 </td>
+                                @elseif($data->hasil == "Lembek")
+                                <td style="text-align:center;">
+                                    <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
+                                </td>
                                 @elseif($data->hasil == "Jernih")
                                 <td style="text-align:center;">
                                     <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
@@ -8697,6 +8789,10 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                 <td style="text-align:center;">
                                     <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
                                 </td>
+                                @elseif($data->hasil == "Lembek")
+                                <td style="text-align:center;">
+                                    <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
+                                </td>
                                 @elseif($data->hasil == "Jernih")
                                 <td style="text-align:center;">
                                     <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
@@ -9058,6 +9154,10 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <font style="font-size: 10pt" color="#000000">{{ $data->detailpemeriksaan }}</font>
                                 </td>
                                 @if($data->hasil == "Negatif")
+                                <td style="text-align:center;">
+                                    <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
+                                </td>
+                                @elseif($data->hasil == "Lembek")
                                 <td style="text-align:center;">
                                     <font style="font-size: 10pt;" color="#000000">{{ $data->hasil }}</font>
                                 </td>
