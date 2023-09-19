@@ -3107,6 +3107,14 @@
             "urlDep": "module/EMR/HasilLaboratoriumCtrl"
         },
         {
+            "nameDep": "HasilEndoskopiCtrl",
+            "urlDep": "module/EMR/HasilEndoskopiCtrl"
+        },
+        {
+            "nameDep": "HasilKolonoskopiCtrl",
+            "urlDep": "module/EMR/HasilKolonoskopiCtrl"
+        },
+        {
             "nameDep": "CPPTRanapCtrl",
             "urlDep": "module/EMR/CPPTRanapCtrl"
         },

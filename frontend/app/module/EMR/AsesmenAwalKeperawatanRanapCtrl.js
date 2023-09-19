@@ -348,11 +348,70 @@ define(['initialize'], function (initialize) {
                     "id": 5,
                     "detail": [
                         {
-                            "id": 422126, "nama": "", "caption": "Ada gangguan metabolisme (DM, PenyakitJantung, HT, CKD, TBC Keganasan) Lain-lain :", "type": "textbox", "dataList": "", "satuan": "" },
+                        "id": 422126, "nama": "", "caption": "Ada gangguan metabolisme (DM, PenyakitJantung, HT, CKD, TBC Keganasan) Lain-lain :", "type": "textbox", "dataList": "", "satuan": "" },
                         { "id": 422127, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
                         { "id": 422128, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" }
                     ]
                 }
+            ];
+
+            $scope.listSkriningLaktasi = [
+                {
+                    "id": 1,
+                    "detail": [
+                        { "id": 32116669, "nama": "", "caption": "Apakah puting datar atau terbenam?	", "type": "label", "dataList": "", "satuan": "" },
+                        { "id": 32116670, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 32116671, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "detail": [
+                        { "id": 32116672, "nama": "", "caption": "Apakah bayi diberi ASI?", "type": "label", "dataList": "", "satuan": "" },
+                        { "id": 32116673, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 32116674, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" }
+                    ]
+                },
+                {
+                    "id": 3,
+                    "detail": [
+                        { "id": 32116675, "nama": "", "caption": "Apakah ada kesulitan dalam memberi ASI?", "type": "label", "dataList": "", "satuan": "" },
+                        { "id": 32116676, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 32116677, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" }
+                    ]
+                },
+                {
+                    "id": 4,
+                    "detail": [
+                        { "id": 32116678, "nama": "", "caption": "Apakah posisi bayi saat menyusu sudah benar?", "type": "label", "dataList": "", "satuan": "" },
+                        { "id": 32116679, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 32116680, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" }
+                    ]
+                },
+                {
+                    "id": 5,
+                    "detail": [
+                        { "id": 32116681, "nama": "", "caption": "Apakah bayi melekat dengan baik?", "type": "label", "dataList": "", "satuan": "" },
+                        { "id": 32116682, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 32116683, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" }
+                    ]
+                },
+                {
+                    "id": 6,
+                    "detail": [
+                        { "id": 32116684, "nama": "", "caption": "Apakah bayi mengisap dengan efektif?", "type": "label", "dataList": "", "satuan": "" },
+                        { "id": 32116685, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 32116686, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" }
+                    ]
+                },
+                {
+                    "id": 7,
+                    "detail": [
+                        { "id": 32116687, "nama": "", "caption": "Apakah ada dukungan suami/keluarga terdekat?", "type": "label", "dataList": "", "satuan": "" },
+                        { "id": 32116688, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 32116689, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" }
+                    ]
+                },
             ];
 
             $scope.listKebutuhanEdukasi = [

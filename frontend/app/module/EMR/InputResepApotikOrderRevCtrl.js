@@ -1319,11 +1319,11 @@ define(['initialize'], function (initialize) {
                     "title": "Tgl Resep",
                     "width": "120px",
                 },
-                {
-                    "field": "tglorder",
-                    "title": "Tgl Order",
-                    "width": "120px",
-                },
+                // {
+                //     "field": "tglorder",
+                //     "title": "Tgl Order",
+                //     "width": "120px",
+                // },
                 {
                     "field": "noregistrasi",
                     "title": "No.Registrasi",
