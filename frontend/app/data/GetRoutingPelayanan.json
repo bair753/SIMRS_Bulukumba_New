@@ -17247,6 +17247,52 @@
     ]
   },
   {
+    "name": "RekamMedis.AsesmenMedis.HasilEndoskopi",
+    "url": "/HasilEndoskopi",
+    "templateurl": "module/EMR/HasilEndoskopi.html",
+    "controller": "HasilEndoskopiCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.HasilKolonoskopi",
+    "url": "/HasilKolonoskopi",
+    "templateurl": "module/EMR/HasilKolonoskopi.html",
+    "controller": "HasilKolonoskopiCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
     "name": "RekamMedis.AsesmenMedis.MenuIndex.CPPTRanap",
     "url": "/CPPTRanap/:index/:idEMR",
     "templateurl": "module/EMR/CPPTRanap.html",
