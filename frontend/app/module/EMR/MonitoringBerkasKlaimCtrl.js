@@ -236,8 +236,10 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 
             $('body ').on('click','#bundleDokumen',function(e){
                 var noregistrasi = $(this).data("noreg");
+                var instalasi = $scope.item.instalasi.id;
+
                 var strBACKEND = baseTransaksi.replace('service/medifirst2000/', '')
-                window.open(strBACKEND + "service/storage/bundledokumenklaim?noregistrasi="+ noregistrasi);
+                window.open(strBACKEND + "service/storage/bundledokumenklaim?noregistrasi="+ noregistrasi + "&instalasi=" + instalasi);
             })
             
             $('body ').on('click','#LihatDokumenKlaim',function(e){
