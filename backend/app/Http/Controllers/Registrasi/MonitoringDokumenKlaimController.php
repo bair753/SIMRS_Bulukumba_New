@@ -58,6 +58,7 @@ class MonitoringDokumenKlaimController extends  ApiController
         ->join("dokumenklaim_m as dk", "dk.id", "=", "mk.documentklaimfk")
         ->where('mk.statusenabled', true)
         ->where('mk.noregistrasifk', $dataRegistrasi->norec)
+        ->where('dk.objectdepartemenfk', $request['instalasi'])
         ->orderBy('dk.nourut')
         ->get();
 
