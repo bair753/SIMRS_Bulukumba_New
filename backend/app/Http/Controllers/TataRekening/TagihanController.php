@@ -2802,7 +2802,7 @@ class TagihanController  extends ApiController
         if (isset($filter['jmlRows']) && $filter['jmlRows'] != "" && $filter['jmlRows'] != "undefined") {
             $data = $data->take($filter['jmlRows']);
         }
-        $data = $data->orderBy('pd.noregistrasi');
+        $data = $data->orderBy('pd.tglregistrasi');
 
         $data = $data->get();
 

@@ -923,7 +923,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 						if (e.data.metaData.code == 200) {
 							cetakSEP(e.data.response)
 						}
-						else toastr.info(e.data.metaData.message, 'Info')
+						else toastr.info(e.data.metaData.code, 'Info')
 					})
 				}
 			}

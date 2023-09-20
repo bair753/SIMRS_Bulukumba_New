@@ -403,6 +403,18 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 }
             }
 
+            $scope.hapus = function (index) {
+                var yakin = confirm("Apakah anda yakin akan menghapus?");
+                if (yakin) {
+                    $scope.item.obj[parseFloat($scope.listItem[index].id)] = undefined;
+                    $scope.listItem[index].inuse = false;
+                    
+                } else {
+                    return
+                }
+
+            }
+
             $scope.kembali = function () {
                 $rootScope.showRiwayat()
             }

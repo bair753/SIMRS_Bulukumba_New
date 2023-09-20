@@ -150,14 +150,14 @@ define(['initialize'], function (initialize) {
 					{
 						"field": "kelompokpasien",
 						"title": "Kelompok Pasien",
-						"width": "100px",
+						"width": "70px",
 						"template": "<span class='style-left'>#: kelompokpasien #</span>"
 					},
 					{
 						"field": "tglpulang",
 						"title": "Tgl Pulang",
-						"width": "80px",
-						"template": "<span class='style-left'>{{formatTanggal('#: tglpulang #')}}</span>"
+						"width": "100px",
+						"template": '# if( tglpulang==null) {# Belum Pulang # } else {# #= tglpulang # #} #'
 					},
 					{
 						"field": "statuspasien",
