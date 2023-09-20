@@ -686,6 +686,7 @@ class RadiologiController extends ApiController
             ->select('ru.id','ru.namaruangan','ru.objectdepartemenfk')
             ->where('mlu.kdprofile', $idProfile)
             ->where('objectloginuserfk',$dataLogin['userData']['id'])
+            ->orderBy('mlu.id')
             ->get();
 //        return $this->respond($dataruangan);
 
