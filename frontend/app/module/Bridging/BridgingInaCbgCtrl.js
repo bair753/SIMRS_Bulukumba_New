@@ -7162,7 +7162,8 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 					return;
 				}
                 var strBACKEND = baseTransaksi.replace('service/medifirst2000/', '')
-                window.open(strBACKEND + "service/storage/bundledokumenklaim?noregistrasi="+ $scope.dataPasienSelected.noregistrasi);
+                window.open(strBACKEND + "service/storage/bundledokumenklaim?noregistrasi="+ $scope.dataPasienSelected.noregistrasi
+				+ '&instalasi=' + $scope.dataPasienSelected.deptid );
 			}
 
 			$scope.buktiPelayananFisioterapi = function(){
