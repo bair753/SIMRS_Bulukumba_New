@@ -1201,10 +1201,10 @@ class RadiologiController extends ApiController
                 ->leftJoin('kelompokpasien_m as kps', 'kps.id', '=', 'pd.objectkelompokpasienlastfk')
                 ->join('kelas_m as kls', 'kls.id', '=', 'pd.objectkelasfk')
                 ->leftJoin('pegawai_m as pg', 'pg.id', '=', 'so.objectpegawaiorderfk')
-                ->Join('antrianpasiendiperiksa_t as apd', function($join){
-                    $join->on('apd.noregistrasifk','=','pd.norec');
-                    $join->on('apd.objectruanganfk','=','pd.objectruanganlastfk');
-                })
+                // ->Join('antrianpasiendiperiksa_t as apd', function($join){
+                //     $join->on('apd.noregistrasifk','=','pd.norec');
+                //     $join->on('apd.objectruanganfk','=','pd.objectruanganlastfk');
+                // })
 //                ->leftJoin('lisorder as pp', 'pp.ono', '=', 'so.noorder')
                 ->select('so.norec as norec_so', 'pd.norec as norec_pd', 'so.noorder', 'pd.noregistrasi', 'pd.tglregistrasi', 'pd.tglpulang', 'ps.nocm', 'ps.namapasien','kps.kelompokpasien',
                     'klm.jeniskelamin', 'ps.tgllahir',
@@ -1212,7 +1212,7 @@ class RadiologiController extends ApiController
                     'so.objectruanganfk', 'pd.objectkelompokpasienlastfk', 'ru.objectdepartemenfk', 'ru2.objectdepartemenfk as iddeptujuan',
                     'so.objectpegawaiorderfk', 'pg.namalengkap as pegawaiorder',
 //                    'pp.norec as norec_pp',
-                    'ru.namaruangan','ru.id as ruid', 'ru2.namaruangan as ruangantujuan','so.tglorder','sps.nostruk','apd.norec as norec_apd',
+                    'ru.namaruangan','ru.id as ruid', 'ru2.namaruangan as ruangantujuan','so.tglorder','sps.nostruk',
                     // 'apd.norec as norec_apd',
                     'so.keteranganlainnya','so.cito','so.klinis','so.lokasijaringan',
 //                    (DB::raw("case when pp.ono is null then 'MASUK' else
@@ -1469,10 +1469,10 @@ class RadiologiController extends ApiController
         $data = $data->get();
 
         $norecaPd = '';
-        foreach ($data as $ob){
-            $norecaPd = $norecaPd.",'".$ob->norec_apd . "'";
-            $ob->kddiagnosa = '';
-        }
+        // foreach ($data as $ob){
+        //     $norecaPd = $norecaPd.",'".$ob->norec_apd . "'";
+        //     $ob->kddiagnosa = '';
+        // }
         $norecaPd = substr($norecaPd, 1, strlen($norecaPd)-1);
         $diagnosa = [];
         if($norecaPd!= ''){
