@@ -2322,6 +2322,10 @@
             "urlDep": "module/Bridging/BridgingInaCbgCtrl"
         },
         {
+            "nameDep": "AsuransiLainCtrl",
+            "urlDep": "module/Bridging/AsuransiLainCtrl"
+        },
+        {
             "nameDep": "InformasiTanggunganCtrl",
             "urlDep": "module/Bridging/InformasiTanggunganCtrl"
         },

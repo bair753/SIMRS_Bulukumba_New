@@ -16,7 +16,7 @@ define(['initialize'], function (initialize) {
             var norecEMR = '';
             $scope.cc.emrfk = 290017;
             var dataLoad = [];
-            $scope.isCetak = true;
+            $scope.isCetak = false;
             $scope.allDisabled = false;
             var pegawaiInputDetail  = '';
             var cacheNomorEMR = cacheHelper.get('cacheNomorEMR');
@@ -40,6 +40,18 @@ define(['initialize'], function (initialize) {
                     anHttpRequest.open("GET", aUrl, true);
                     anHttpRequest.send(null);
                 }
+            }
+            
+            if($scope.cc.objectruanganfk == 818){
+                $scope.skriningLaktasi = true;
+            }else{
+                $scope.skriningLaktasi = false;
+            }
+
+            if($scope.cc.objectruanganfk == 821 || $scope.cc.objectruanganfk == 816){
+                $scope.skriningLaktasiNifas = true;
+            }else{
+                $scope.skriningLaktasiNifas = false;
             }
 
             medifirstService.getPart('emr/get-datacombo-part-dokter', true, true, 20).then(function (data) {
@@ -359,23 +371,23 @@ define(['initialize'], function (initialize) {
                 {
                     "id": 1,
                     "detail": [
-                        { "id": 32116669, "nama": "", "caption": "Apakah puting datar atau terbenam?	", "type": "label", "dataList": "", "satuan": "" },
-                        { "id": 32116670, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-                        { "id": 32116671, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" }
-                    ]
-                },
-                {
-                    "id": 2,
-                    "detail": [
                         { "id": 32116672, "nama": "", "caption": "Apakah bayi diberi ASI?", "type": "label", "dataList": "", "satuan": "" },
                         { "id": 32116673, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
                         { "id": 32116674, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" }
                     ]
                 },
                 {
+                    "id": 2,
+                    "detail": [
+                        { "id": 32116669, "nama": "", "caption": "Apakah puting menonjol (tidak datar atau terbenam)?	", "type": "label", "dataList": "", "satuan": "" },
+                        { "id": 32116670, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 32116671, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" }
+                    ]
+                },
+                {
                     "id": 3,
                     "detail": [
-                        { "id": 32116675, "nama": "", "caption": "Apakah ada kesulitan dalam memberi ASI?", "type": "label", "dataList": "", "satuan": "" },
+                        { "id": 32116675, "nama": "", "caption": "Apakah proses menyusui baik (tidak ada kesulitan)?", "type": "label", "dataList": "", "satuan": "" },
                         { "id": 32116676, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
                         { "id": 32116677, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" }
                     ]
@@ -410,6 +422,81 @@ define(['initialize'], function (initialize) {
                         { "id": 32116687, "nama": "", "caption": "Apakah ada dukungan suami/keluarga terdekat?", "type": "label", "dataList": "", "satuan": "" },
                         { "id": 32116688, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
                         { "id": 32116689, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" }
+                    ]
+                },
+            ];
+
+            $scope.listSkriningLaktasiNifas = [
+                {
+                    "id": 1,
+                    "detail": [
+                        { "id": 32116708, "nama": "", "caption": "Apakah ibu dan bayi dirawat gabung?", "type": "label", "dataList": "", "satuan": "" },
+                        { "id": 32116709, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 32116710, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "detail": [
+                        { "id": 32116711, "nama": "", "caption": "Jika dirawat terpisah, apakah bayi tetap diberikan ASI?	", "type": "label", "dataList": "", "satuan": "" },
+                        { "id": 32116712, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 32116713, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" }
+                    ]
+                },
+                {
+                    "id": 3,
+                    "detail": [
+                        { "id": 32116714, "nama": "", "caption": "Apakah puting menonjol (tidak datar atau terbenam)?", "type": "label", "dataList": "", "satuan": "" },
+                        { "id": 32116715, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 32116716, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" }
+                    ]
+                },
+                {
+                    "id": 4,
+                    "detail": [
+                        { "id": 32116717, "nama": "", "caption": "Apakah bayi diberi ASI?", "type": "label", "dataList": "", "satuan": "" },
+                        { "id": 32116718, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 32116719, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" }
+                    ]
+                },
+                {
+                    "id": 5,
+                    "detail": [
+                        { "id": 32116720, "nama": "", "caption": "Apakah proses menyusui baik (tidak ada kesulitan)?", "type": "label", "dataList": "", "satuan": "" },
+                        { "id": 32116721, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 32116722, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" }
+                    ]
+                },
+                {
+                    "id": 6,
+                    "detail": [
+                        { "id": 32116723, "nama": "", "caption": "Apakah posisi bayi saat menyusu sudah benar?", "type": "label", "dataList": "", "satuan": "" },
+                        { "id": 32116724, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 32116725, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" }
+                    ]
+                },
+                {
+                    "id": 7,
+                    "detail": [
+                        { "id": 32116726, "nama": "", "caption": "Apakah bayi melekat dengan baik?", "type": "label", "dataList": "", "satuan": "" },
+                        { "id": 32116727, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 32116728, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "detail": [
+                        { "id": 32116729, "nama": "", "caption": "Apakah bayi mengisap dengan efektif?", "type": "label", "dataList": "", "satuan": "" },
+                        { "id": 32116730, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 32116731, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" }
+                    ]
+                },
+                {
+                    "id": 9,
+                    "detail": [
+                        { "id": 32116732, "nama": "", "caption": "Apakah ada dukungan suami/keluarga terdekat?", "type": "label", "dataList": "", "satuan": "" },
+                        { "id": 32116733, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 32116734, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" }
                     ]
                 },
             ];
@@ -517,6 +604,12 @@ define(['initialize'], function (initialize) {
                 })
                 
                 medifirstService.get("emr/get-vital-sign?noregistrasi=" + $scope.cc.noregistrasi + "&objectidawal=4241&objectidakhir=4246&idemr=147", true).then(function (datas) {
+                    if($scope.cc.objectruanganfk == 785){
+                        $scope.skriningLaktasi = true;
+                    }
+                    else{
+                        $scope.skriningLaktasi = false;
+                    }
                     if (datas.data.data.length>0){
                         $scope.item.obj[421911] = datas.data.data[1].value; // Tekanan Darah
                         $scope.item.obj[421912] = datas.data.data[5].value; // Nadi

@@ -16,7 +16,6 @@ define(['initialize'], function (initialize) {
             var norecEMR = '';
             $scope.cc.emrfk = 290011;
             var dataLoad = [];
-            $scope.isCetak = true;
             $scope.allDisabled = false;
             var pegawaiInputDetail  = '';
             var cacheNomorEMR = cacheHelper.get('cacheNomorEMR');
@@ -41,6 +40,8 @@ define(['initialize'], function (initialize) {
                     anHttpRequest.send(null);
                 }
             }
+
+            
 
             medifirstService.getPart('emr/get-datacombo-part-dokter', true, true, 20).then(function (data) {
                 $scope.listDokter = data
@@ -183,6 +184,49 @@ define(['initialize'], function (initialize) {
                 }
             ];
 
+            $scope.listSkriningLaktasi = [
+                {
+                    "id": 1,
+                    "detail": [
+                        { "id": 32116693, "nama": "", "caption": "Apakah ibu hamil paham tentang manfaat dan pentingnya ASI dan menyusui?", "type": "label", "dataList": "", "satuan": "" },
+                        { "id": 32116694, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 32116695, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "detail": [
+                        { "id": 32116696, "nama": "", "caption": "Riwayat pemberian ASI Eksklusif pada anak sebelumnya?	", "type": "label", "dataList": "", "satuan": "" },
+                        { "id": 32116697, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 32116698, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" }
+                    ]
+                },
+                {
+                    "id": 3,
+                    "detail": [
+                        { "id": 32116699, "nama": "", "caption": "Riwayat penggunaan dot/kempeng pada anak sebelumnya?", "type": "label", "dataList": "", "satuan": "" },
+                        { "id": 32116700, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 32116701, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" }
+                    ]
+                },
+                {
+                    "id": 4,
+                    "detail": [
+                        { "id": 32116702, "nama": "", "caption": "Apakah puting payudara menonjol?", "type": "label", "dataList": "", "satuan": "" },
+                        { "id": 32116703, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 32116704, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" }
+                    ]
+                },
+                {
+                    "id": 5,
+                    "detail": [
+                        { "id": 32116705, "nama": "", "caption": "Apakah ada dukungan suami/keluarga untuk memberikan ASI?", "type": "label", "dataList": "", "satuan": "" },
+                        { "id": 32116706, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 32116707, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" }
+                    ]
+                }
+            ];
+
             $scope.listKebutuhanEdukasi = [
                 {
                     "id": 1,
@@ -296,6 +340,12 @@ define(['initialize'], function (initialize) {
                 })
                 
                 medifirstService.get("emr/get-vital-sign?noregistrasi=" + $scope.cc.noregistrasi + "&objectidawal=4241&objectidakhir=4246&idemr=147", true).then(function (datas) {
+                    if($scope.cc.objectruanganfk == 785){
+                        $scope.skriningLaktasi = true;
+                    }
+                    else{
+                        $scope.skriningLaktasi = false;
+                    }
                     if (datas.data.data.length>0){
                         $scope.item.obj[421153] = datas.data.data[1].value; // Tekanan Darah
                         $scope.item.obj[421154] = datas.data.data[5].value; // Nadi
