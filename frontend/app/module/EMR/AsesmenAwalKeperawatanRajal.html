@@ -594,6 +594,62 @@
             </fieldset>
         </div>
 
+        <div class="grid_12" style="margin-top: 10px;" ng-show="skriningLaktasi">
+            <fieldset style="margin-top: 10px;">
+                <legend><b>SKRINING LAKTASI</b></legend>
+                <div class="grid_12" style="margin: 10px 0;">
+                    <table>
+                        <tr>
+                            <th rowspan="2" style="width: 15px;">No</th>
+                            <th rowspan="2">Deskripsi</th>
+                            <th colspan="2">Jawaban</th>
+                        </tr>
+                        <tr>
+                            <th>Ya</th>
+                            <th>Tidak</th>
+                        </tr>
+                        <tr ng-repeat="list in listSkriningLaktasi | orderBy:'id'">
+                            <td>{{ list.id }}</td>
+                            <td ng-repeat="jawab in list.detail | orderBy:'id'">
+                                <div ng-switch on="jawab.type">
+                                    <div class="grid_12" ng-switch-when="label" style="margin-top: 10px;">
+                                        <div class="grid_12">
+                                            <label c-label item="item">{{ jawab.caption }}</label>
+                                        </div>
+                                    </div>
+                                    <div class="grid_8" ng-switch-when="textbox">
+                                        <div class="grid_12">
+                                            <label c-label item="item">{{ jawab.caption }}</label>
+                                        </div>
+                                        <div class="grid_12">
+                                            <input c-text-box type="text" filter="" class="k-textbox" ng-model="item.obj[jawab.id]" />
+                                            <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px">{{
+                                                jawab.satuan }}</label>
+                                        </div>
+                                    </div>
+                                    <div class="grid_3" ng-switch-when="checkbox" style="margin-top: 5px;">
+                                        <input type="checkbox" class="k-checkbox" id="item.obj{{jawab.id}}" ng-model="item.obj[jawab.id]">
+                                        <label class="k-checkbox-label" for="item.obj{{jawab.id}}">
+                                            &nbsp;{{jawab.nama}}</label>
+                                    </div>
+                                    <div class="grid_3 parentKeteranganFieldTambahan" ng-switch-when="textbox1" style="margin-top: -5px;">
+                                        <input c-text-box type="text" filter="" class="k-textbox" ng-model="item.obj[jawab.id]" />
+                                        <label class="keteranganFieldTambahan" style="margin-top: 5px;margin-right: 30px"></label>
+                                    </div>
+                                    <div class="grid_12" ng-switch-when="hr">
+                                        <hr>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="grid_12">
+                    <label c-label item="item">Jika terdapat jawaban Ya, maka dilaporkan kedietisien untuk dilakukan skrining lanjut.</label>
+                </div>
+            </fieldset>
+        </div>
+
         <div class="grid_12" style="margin-top: 10px;">
             <fieldset style="margin-top: 10px;">
                 <legend><b>KEBUTUHAN EDUKASI</b></legend>
