@@ -12788,6 +12788,26 @@
     ]
   },
   {
+    "name": "AsuransiLain",
+    "url": "/AsuransiLain",
+    "templateurl": "module/Bridging/AsuransiLain.html",
+    "controller": "AsuransiLainCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      }
+    ]
+  },
+  {
     "name": "InformasiTanggungan",
     "url": "/InformasiTanggungan",
     "templateurl": "module/Bridging/InformasiTanggungan.html",
