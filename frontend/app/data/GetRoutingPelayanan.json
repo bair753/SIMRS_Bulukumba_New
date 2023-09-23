@@ -20003,6 +20003,75 @@
     ]
   },
   {
+    "name": "RekamMedis.AsesmenMedis.PenolakanTerhadapTesSkriningHipotoroidKongenital",
+    "url": "/PenolakanTerhadapTesSkriningHipotoroidKongenital",
+    "templateurl": "module/EMR/PenolakanTerhadapTesSkriningHipotoroidKongenital.html",
+    "controller": "PenolakanTerhadapTesSkriningHipotoroidKongenitalCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.PersetujuanTerhadapTesSkriningHipotoroidKongenital",
+    "url": "/PersetujuanTerhadapTesSkriningHipotoroidKongenital",
+    "templateurl": "module/EMR/PersetujuanTerhadapTesSkriningHipotoroidKongenital.html",
+    "controller": "PersetujuanTerhadapTesSkriningHipotoroidKongenitalCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.TidakDilakukanSkriningHipotiroidKongenital",
+    "url": "/TidakDilakukanSkriningHipotiroidKongenital",
+    "templateurl": "module/EMR/TidakDilakukanSkriningHipotiroidKongenital.html",
+    "controller": "TidakDilakukanSkriningHipotiroidKongenitalCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
     "name": "RekamMedis.AsesmenMedis.PermintaanPelayananKerohanian",
     "url": "/PermintaanPelayananKerohanian",
     "templateurl": "module/EMR/PermintaanPelayananKerohanian.html",
