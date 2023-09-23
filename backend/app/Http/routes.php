@@ -2190,6 +2190,8 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
             // Route::group(['prefix' => 'penelitian'], function (){
               Route::get('sdm/penelitian/get-data-combo-penelitian','SDM\PenelitianController@getDataComboPenelitian');
               Route::post('sdm/penelitian/save-kegiatan-penelitian-eksternal','SDM\PenelitianController@saveKegiatanPenelitianExternal');
+              Route::get('sdm/penelitian/berkas-kegiatan-penelitian-eksternal','SDM\PenelitianController@berkasKegiatanPenelitianExternal');
+              Route::post('sdm/penelitian/save-berkas-kegiatan-penelitian-eksternal', 'SDM\PenelitianController@saveBerkasEksternal');
               Route::get('sdm/penelitian/get-daftar-penelitian-eksternal','SDM\PenelitianController@getDaftarPenelitianKegiatanEksternal');
               Route::post('sdm/penelitian/batal-kegiatan-penelitian-eksternal','SDM\PenelitianController@saveBatalPenelitianEksternal');
               Route::get('sdm/penelitian/get-detail-penelitian-eksternal','SDM\PenelitianController@getDetailPenelitianKegiatanEksternal');
@@ -3052,6 +3054,42 @@ die;
     $response->header("Content-Type", $type);
 
     return $response;
+});
+
+Route::get('service/medifirst2000/public/berkas/external', function (Illuminate\Http\Request $r)
+{
+  $d =  \App\Transaksi\BerkasDiklat::where('penelitianeksternalfk',$r['penelitianeksternalfk'])
+  ->where('objectberkas',$r['objectberkas'])
+  ->first();
+
+  if(empty( $d)){
+   echo '
+             <script language="javascript">
+                 window.alert("File tidak ada.");
+                 window.close()
+             </script>
+         ';
+         die;
+  }
+  $path = public_path('BerkasDiklat/'.$d->norec.'/' .$d->norec.'.pdf');
+      // dd($path);
+if (!File::exists($path)) {
+ echo '
+ <script language="javascript">
+     window.alert("File tidak ada.");
+     window.close()
+ </script>
+ ';
+ die;
+}
+
+ $file = File::get($path);
+ $type = File::mimeType($path);
+
+ $response = Response::make($file, 200);
+ $response->header("Content-Type", $type);
+
+ return $response;
 });
 
 

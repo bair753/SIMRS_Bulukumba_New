@@ -1,15 +1,20 @@
-define(['initialize'], function (initialize) {
+define(['initialize', 'Configuration'], function (initialize, config) {
     'use strict';
     initialize.controller('DaftarPenelitianEksternalCtrl', ['$scope', '$state', 'DateHelper', 'CacheHelper', 'MedifirstService',
         function ($scope, $state, dateHelper, cacheHelper, medifirstService) {
             $scope.item = {};
             $scope.isRouteLoading = false;
             $scope.now = new Date();
+            var baseTransaksi = config.baseApiBackend; 
             $scope.item.tglawal = new moment($scope.now).format('YYYY-MM-DD 00:00');
             $scope.item.tglakhir = new moment($scope.now).format('YYYY-MM-DD 23:59');
             var norec = "";
             LoadCombo();
             Load();
+
+            medifirstService.get("sdm/penelitian/berkas-kegiatan-penelitian-eksternal", true).then(function (dat) {
+                $scope.listJenisBerkas = dat.data;
+            });
 
             function Load() {
                 var chacePeriode = cacheHelper.get('DaftarPenelitianEksternalCtrl');
@@ -142,6 +147,98 @@ define(['initialize'], function (initialize) {
                     GetData()
                 })
             }
+            
+
+            $scope.uploadKelengkapan = function () {
+				if ($scope.current == undefined) {
+					toastr.error('Pilih data dulu')
+					return
+				}
+
+				$scope.listBerkas =[]
+				medifirstService.get('sdm/penelitian/berkas-kegiatan-penelitian-eksternal?penelitianeksternalfk=' + $scope.current.norec).then(function(e){
+					$scope.listBerkas = e.data.data
+					$scope.listUpload = e.data.upload
+					$scope.item.berkas = $scope.listBerkas[0].id
+					for (var i = 0; i < $scope.listBerkas.length; i++) {
+						$scope.listBerkas[i].no =  i+1
+						const elem = $scope.listBerkas[i]
+						for (var x = 0; x < $scope.listUpload .length; x++) {
+							const elem2 =$scope.listUpload [x]
+							if(elem2.objectberkas == elem.id){
+								elem.isupload =true
+							}
+						}
+					}
+					$scope.popupUpload.center().open();
+				})
+			}
+
+            $scope.preview = function () {
+                var dataItem = $scope.current;
+                var str1 = baseTransaksi + 'public/berkas/external?penelitianeksternalfk=' + dataItem.norec +'&objectberkas='+$scope.item.berkas
+                window.open(str1, '_blank');
+                
+            
+			}
+
+            
+
+            $scope.saveKelengkapan = function () {
+                const form = document.querySelector('form')
+                const formData = new FormData()
+
+                const fileSIP = document.querySelectorAll('.myStr')[0].files[0]
+                if (fileSIP != "" && fileSIP != undefined) {
+                    if (fileSIP.size > 10145728 || fileSIP.type != "application/pdf") { //dalam bytes
+                        toastr.error('Maksimum Ukuran File adalah 10 MB dalam Format PDF')
+                        return;
+                    }
+                }
+                  
+                formData.append('file', fileSIP)
+                formData.append('penelitianeksternalfk', $scope.current.norec)
+                formData.append('objectberkas', $scope.item.berkas)
+                const url = baseTransaksi + 'sdm/penelitian/save-berkas-kegiatan-penelitian-eksternal'
+                var arr = document.cookie.split(';')
+                var authorization;
+                for (var i = 0; i < arr.length; i++) {
+                    var element = arr[i].split('=');
+                    if (element[0].indexOf('authorization') > 0) {
+                        authorization = element[1];
+                    }
+                }
+                fetch(url, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-AUTH-TOKEN': authorization
+                    }
+                }).then(response => {
+                    // console.log(response)
+                    if (response.status == 201){
+                        for (var i = 0; i < $scope.listBerkas.length; i++) {
+                            const elem = $scope.listBerkas[i]
+                            if(elem.id == $scope.item.berkas){
+                                elem.isupload =true
+                            }
+                        }
+                        toastr.success('Sukses');
+                        document.getElementById("files").value = null;
+                        $scope.popupUpload.close();
+                    }
+                    else
+                        toastr.error('Simpan Gagal');
+                    // $scope.loadDataSip();
+                    // $scope.batalSip();
+                })
+    //             medifirstService.post('bridging/inacbg/save-berkas' ,formData).then(function(e){
+                
+                // })
+              
+
+        }
+
 
             $scope.columnPenelitian = {
                 toolbar: ["excel"],
