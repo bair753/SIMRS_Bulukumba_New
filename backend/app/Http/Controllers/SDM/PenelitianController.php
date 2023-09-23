@@ -15,12 +15,15 @@ use App\Master\DiklatKategory;
 use App\Traits\SettingDataFixedTrait;
 use App\Transaksi\LoggingUser;
 use App\Transaksi\SdmPenelitianEksternal;
+use App\Transaksi\BerkasDiklat;
 use App\Transaksi\KegiatanPenelitianPegawai;
 use Illuminate\Http\Request;
 use App\Traits\PelayananPasienTrait;
 use DB;
 use App\Traits\Valet;
-
+use App\Transaksi\BerkasPasien;
+use File;
+use Response;
 
 class PenelitianController extends ApiController {
 
@@ -190,6 +193,85 @@ class PenelitianController extends ApiController {
             );
         }
         return $this->setStatusCode($result['status'])->respond($result, $transMessage);
+    }
+
+    public function saveBerkasEksternal(Request $request){
+        // return $request;
+         \DB::beginTransaction();
+        $kdProfile = (int) $this->getDataKdProfile($request);
+        try {
+                $cek = BerkasDiklat::where('objectberkas',$request['objectberkas'])
+                    ->where('penelitianeksternalfk',$request['penelitianeksternalfk'])
+                    ->first();
+                
+                if(!empty( $cek)){
+                       $path = public_path('berkas/berkas/'.$cek->norec.'/');
+
+                        if (!\File::exists($path)) {
+                        }else{
+                            $file = \File::deleteDirectory($path);
+                        }
+                    $cek = BerkasDiklat::where('objectberkas',$request['objectberkas'])
+                    ->where('penelitianeksternalfk',$request['penelitianeksternalfk'])
+                    ->delete();
+                }    
+                $new = new BerkasDiklat();
+                $new->kdprofile = $kdProfile;
+                $new->statusenabled=true;
+                $new->norec = $new->generateNewId();
+
+                $uploadedFile= $request->file('file');
+                if(!empty($uploadedFile)){
+                    $extensionSip = $uploadedFile->getClientOriginalExtension();
+                    $filenameSip = $request['penelitianeksternalfk'] .$request['objectberkas'] .'.'.$extensionSip;
+                    $new->filename = $filenameSip;
+                }
+                $new->penelitianeksternalfk=$request['penelitianeksternalfk'];
+                $new->objectberkas=$request['objectberkas'];
+                $new->tglupload =date('Y-m-d H:i:s');
+              
+                $new->save();
+                $norec =  $new->norec ;
+
+                if(!empty($uploadedFile)) {
+                    $request->file('file')->move('BerkasDiklat/'.$norec,
+                        $norec.'.'.$extensionSip);
+                }
+            $transStatus = 'true';
+        } catch (\Exception $e) {
+            $transStatus = 'false';
+        }
+
+        if ($transStatus = 'true') {
+            $transMessage = "Sukses ";
+            \DB::commit();
+            $result = array(
+                "status" => 201,
+                "norec" => $new,
+               
+            );
+        } else {
+            $transMessage = "Simpan Gagal";
+            DB::rollBack();
+            $result = array(
+                "status" => 400,
+              
+            );
+        }
+
+        return $this->setStatusCode($result['status'])->respond($result, $transMessage);
+    }
+
+    public function berkasKegiatanPenelitianExternal(Request $request)
+    {
+        $kdProfile = $this->getDataKdProfile($request);
+        $idProfile = (int) $kdProfile;
+        $data = BerkasPasien::where('kodeexternal','External')->where('statusenabled',true)->get();
+        $cek = BerkasDiklat::where('penelitianeksternalfk',$request['penelitianeksternalfk'])->get();
+
+        $res['data'] = $data;
+        $res['upload'] = $cek;
+        return $this->respond($res);
     }
 
     public function getDaftarPenelitianKegiatanEksternal (Request $request){
