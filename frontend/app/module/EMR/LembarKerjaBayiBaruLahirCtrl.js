@@ -16,7 +16,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
             var norecEMR = '';
             $scope.cc.emrfk = 290171;
             var dataLoad = [];
-            $scope.isCetak = true;
+            $scope.isCetak = false;
             $scope.allDisabled = false;
             var pegawaiInputDetail  = '';
             var cacheNomorEMR = cacheHelper.get('cacheNomorEMR');
