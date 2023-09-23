@@ -3591,6 +3591,18 @@
             "urlDep": "module/EMR/SuratKeteranganKematianRanapCtrl"
         },
         {
+            "nameDep": "PenolakanTerhadapTesSkriningHipotoroidKongenitalCtrl",
+            "urlDep": "module/EMR/PenolakanTerhadapTesSkriningHipotoroidKongenitalCtrl"
+        },
+        {
+            "nameDep": "PersetujuanTerhadapTesSkriningHipotoroidKongenitalCtrl",
+            "urlDep": "module/EMR/PersetujuanTerhadapTesSkriningHipotoroidKongenitalCtrl"
+        },
+        {
+            "nameDep": "TidakDilakukanSkriningHipotiroidKongenitalCtrl",
+            "urlDep": "module/EMR/TidakDilakukanSkriningHipotiroidKongenitalCtrl"
+        },
+        {
             "nameDep": "PermintaanPelayananKerohanianCtrl",
             "urlDep": "module/EMR/PermintaanPelayananKerohanianCtrl"
         },
