@@ -18,7 +18,7 @@
 
 <div *ngIf="activeItem.label == 'Reservasi' && !isBuktiReservasi">
 
-  <div class="card" style="margin-top:10px;background-color: #C7F9CC;">
+  <div class="card" style="margin-top:10px;background-color: #ffffff;">
     <div style="padding-left: 10px;padding-right: 10px">
       <p-steps [model]="stepsMenuItems" [styleClass]="steps-custom" [(activeIndex)]="activeIndex" [readonly]="true">
       </p-steps>
@@ -26,9 +26,9 @@
   </div>
 
   <form [formGroup]="formGroup">
-    <div class="card card-w-title" *ngIf="activeIndex == 0" style="background-color: #C7F9CC;">
+    <div class="card card-w-title" *ngIf="activeIndex == 0" style="background-color: #ffffff;">
       <div class="card card-form-header">
-        <h1>Pilih Jenis Pasien</h1>
+        <h1>Pilih Kategori</h1>
       </div>
 
       <div class="ui-g ui-fluid">

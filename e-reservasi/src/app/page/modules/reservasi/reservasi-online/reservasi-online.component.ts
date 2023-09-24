@@ -90,9 +90,9 @@ export class ReservasiOnlineComponent implements OnInit {
   @ViewChild('menuItems') menu: MenuItem[];
   dataSource: any[]
   listJenisPasien: any[] = [
-    { 'id': 1, 'jenis': 'Baru', 'src': 'assets/humastemplate/images/pasien-baru1.png', 'style': '', 'images': 'ex-image-a' },
-    { 'id': 2, 'jenis': 'Lama', 'src': 'assets/humastemplate/images/pasien-lama.png', 'style': '', 'images': 'ex-image-b' },
-    { 'id': 3, 'jenis': 'Pelayanan', 'src': 'assets/humastemplate/images/pasien-lama.png', 'style': '', 'images': 'ex-image' }]
+    { 'id': 1, 'jenis': 'Pasien Baru', 'src': 'assets/humastemplate/images/add-friend.png', 'style': '', 'images': 'ex-image-a' },
+    { 'id': 2, 'jenis': 'Pasien Lama', 'src': 'assets/humastemplate/images/tour-guide.png', 'style': '', 'images': 'ex-image-b' },
+    { 'id': 3, 'jenis': 'Jenis Layanan', 'src': 'assets/humastemplate/images/medical.png', 'style': '', 'images': 'ex-image' }]
   selection: any = {}
   imageIndex: any = 0
   // imagesDenah: any="assets/img/denah_rs.jpg";
