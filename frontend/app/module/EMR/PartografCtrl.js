@@ -205,12 +205,26 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                         name: "SERVIKS",
                         color: "#0328fc",
 
-                    }
-                    ,{
+                    },
+                    {
                         type: "line",
                         data: seriesKontraksi,
                         name: "KONTRAKSI",
                         color: "#4e4141",
+
+                    },
+                    {
+                        type: "line",
+                        data: [4,5,6,7,8,9,10],
+                        name: "WASPADA",
+                        color: "black",
+
+                    },
+                    {
+                        type: "line",
+                        data: ['*','*','*','*','*','*','*',4,5,6,7,8,9,10],
+                        name: "BERTINDAK",
+                        color: "black",
 
                     }
                     ],
