@@ -6975,6 +6975,8 @@ class LaporanPengunjungController extends ApiController
             ->JOIN ('jeniskelamin_m as jk','jk.id', '=','ps.objectjeniskelaminfk')
             ->JOIN ('agama_m as ag','ag.id','=','ps.objectagamafk')
             ->leftjoin ('pendidikan_m as pdd','pdd.id','=','ps.objectpendidikanfk')
+            ->leftjoin ('detaildiagnosapasien_t as ddp','ddp.noregistrasifk','=','apd.norec')
+            ->join ('diagnosa_m as dm','dm.id','=','ddp.objectdiagnosafk')
             ->join ('pekerjaan_m as pkr','pkr.id','=','ps.objectpekerjaanfk')
             ->join ('alamat_m as alm','alm.nocmfk','=','ps.id')
             ->join ('desakelurahan_m as dsk','dsk.id','=','alm.objectdesakelurahanfk')
@@ -6992,10 +6994,12 @@ class LaporanPengunjungController extends ApiController
             ->leftJoin('kelompokpasien_m as klp','klp.id','=','pd.objectkelompokpasienlastfk')
             ->select('pd.norec','pd.noregistrasi','pd.tglregistrasi','ps.nocm','ps.namapasien','ps.nohp','ps.tgllahir','jk.jeniskelamin','ag.agama','pdd.pendidikan','pkr.pekerjaan','alm.alamatlengkap',
                         'dsk.namadesakelurahan','alm.kecamatan','kkb.namakotakabupaten','sp.statusperkawinan','pd.statuspasien','rg.namaruangan','pg.namalengkap','ps.tgldaftar',
-                        'klp.kelompokpasien','pd.statuspasien','apd.noantrian','pg1.namalengkap AS user','apd.objectruanganfk','jk.reportdisplay')
-            ->groupBy('pd.norec','pd.noregistrasi','pd.tglregistrasi','ps.nocm','ps.namapasien','ps.nohp','ps.tgllahir','jk.jeniskelamin','ag.agama','pdd.pendidikan','pkr.pekerjaan','alm.alamatlengkap',
-                      'dsk.namadesakelurahan','alm.kecamatan','kkb.namakotakabupaten','sp.statusperkawinan','pd.statuspasien','rg.namaruangan','pg.namalengkap','ps.tgldaftar',
-                      'klp.kelompokpasien','pd.statuspasien','apd.noantrian','pg1.namalengkap','apd.objectruanganfk','jk.reportdisplay')
+                        'klp.kelompokpasien','pd.statuspasien','apd.noantrian','apd.norec as norec_apd','pg1.namalengkap AS user','apd.objectruanganfk','jk.reportdisplay',
+                        DB::raw("CASE WHEN pd.tglmeninggal is null THEN 'Hidup' ELSE'Meninggal' END as kondisi,
+                        case when dm.namadiagnosa = '-' then '-, ' || ddp.keterangan else dm.kddiagnosa || ', ' || dm.namadiagnosa end as diagnosa"))
+            // ->groupBy('pd.norec','pd.noregistrasi','pd.tglregistrasi','ps.nocm','ps.namapasien','ps.nohp','ps.tgllahir','jk.jeniskelamin','ag.agama','pdd.pendidikan','pkr.pekerjaan','alm.alamatlengkap',
+            //           'dsk.namadesakelurahan','alm.kecamatan','kkb.namakotakabupaten','sp.statusperkawinan','pd.statuspasien','rg.namaruangan','pg.namalengkap','ps.tgldaftar', 'apd.norec',
+            //           'klp.kelompokpasien','pd.statuspasien','apd.noantrian','pg1.namalengkap','apd.objectruanganfk','jk.reportdisplay')
             ->where('pd.statusenabled', true)
             ->where('pd.kdprofile', $kdProfile);
             
@@ -7049,37 +7053,38 @@ class LaporanPengunjungController extends ApiController
                 ->where('apd.tglregistrasi', '>=', $request['tglAwal'])
                 ->where('apd.tglregistrasi', '<=', $request['tglAkhir'])
                 ->get();
-        $i=0;
-        $dataDiagnosa = '';
-        foreach ($data as $items){
-            foreach ($diagnosa as $dg){
-                if ($data[$i]->norec == $dg->noregistrasifk){
-                    if ($dataDiagnosa == ''){
-                        $dataDiagnosa = $dg->diagnosa;
-                    }else{
-                        $dataDiagnosa = $dataDiagnosa . ',' . $dg->diagnosa;
-                    }
-                    $data[$i]->diagnosa = $dataDiagnosa;
-                    $data[$i]->kasus = $dg->kasus;
-                }else{
-                    $data[$i]->diagnosa = '';
-                    $data[$i]->kasus = '';
-                }
-            }
-            $i = $i + 1;
-        }
+        // $i=0;
+        // $dataDiagnosa = '';
+        // foreach ($data as $items){
+        //     foreach ($diagnosa as $dg){
+        //         if ($items->norec_apd == $dg->noregistrasifk){
+        //             $dataDiagnosa = $dataDiagnosa . ',' . $dg->diagnosa;
+        //             if ($dataDiagnosa == ''){
+        //                 $dataDiagnosa = $dg->diagnosa;
+        //             }else{
+                        
+        //             }
+        //             $items->diagnosa = $dataDiagnosa;
+        //             $items->kasus = $dg->kasus;
+        //         }else{
+        //             $items->diagnosa = '';
+        //             $items->kasus = '';
+        //         }
+        //     }
+        //     $i = $i + 1;
+        // }
 
-        $d=0;
-        foreach ($data as $itemss){
-            foreach ($bayar as $dataBayar){
-                if ($data[$d]->norec == $dataBayar->noregistrasifk && $data[$d]->objectruanganfk == $dataBayar->objectruanganfk){
-                    $data[$d]->bayar = $dataBayar->total;
-                }else{
-                    $data[$d]->bayar = 0;
-                }
-            }
-            $d = $d + 1;
-        }
+        // $d=0;
+        // foreach ($data as $itemss){
+        //     foreach ($bayar as $dataBayar){
+        //         if ($data[$d]->norec == $dataBayar->noregistrasifk && $data[$d]->objectruanganfk == $dataBayar->objectruanganfk){
+        //             $data[$d]->bayar = $dataBayar->total;
+        //         }else{
+        //             $data[$d]->bayar = 0;
+        //         }
+        //     }
+        //     $d = $d + 1;
+        // }
 
         $result = array(
             'data'=> $data,

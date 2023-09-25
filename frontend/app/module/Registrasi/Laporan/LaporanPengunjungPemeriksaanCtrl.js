@@ -220,7 +220,7 @@ define(['initialize'], function (initialize) {
                     {
                         "field": "reportdisplay",
                         "title": "JK",
-                        "width": "50px",
+                        "width": "20px",
                         // "template": "<span class='style-center'>#: jeniskelamin #</span>"
                     },
                     {
@@ -228,7 +228,12 @@ define(['initialize'], function (initialize) {
                         "title": "Umur",
                         "width": "50px",
                         // "template": "<span class='style-center'>#: namapasien #</span>"
-                    },                   
+                    },    
+                    {
+                        "field": "alamatlengkap",
+                        "title": "Alamat",
+                        "width": "50px",
+                    },               
                     {
                         "field": "kelompokpasien",
                         "title": "Cara Bayar",
@@ -245,7 +250,7 @@ define(['initialize'], function (initialize) {
                         "width": "50px",
                     },
                     {
-                        "field": "status",
+                        "field": "kondisi",
                         "title": "Status ",
                         "width": "50px",
                     },
@@ -254,21 +259,21 @@ define(['initialize'], function (initialize) {
                         "title": "Diagnosa",
                         "width": "50px",
                     },
-                    {
-                        "field": "kasus",
-                        "title": "Kasus ",
-                        "width": "50px",
-                    },
+                    // {
+                    //     "field": "kasus",
+                    //     "title": "Kasus ",
+                    //     "width": "50px",
+                    // },
                     {
                         "field": "user",
                         "title": "Admin",
                         "width": "50px",
                     },
-                    {
-                        "field": "bayar",
-                        "title": "Sudah Bayar",
-                        "width": "50px",
-                    }                
+                    // {
+                    //     "field": "bayar",
+                    //     "title": "Sudah Bayar",
+                    //     "width": "50px",
+                    // }                
                 ]
             };
 
