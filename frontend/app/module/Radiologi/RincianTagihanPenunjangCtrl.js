@@ -1,5 +1,6 @@
 define(['initialize', 'Configuration'], function (initialize, config) {
     'use strict';
+    var baseTransaksi = config.baseApiBackend;
     initialize.controller('RincianTagihanPenunjangCtrl', ['$scope', 'MedifirstService', '$state', 'CacheHelper', '$window',
         function ($scope, medifirstService, $state, cacheHelper, $window) {
             $scope.item = {};
@@ -2393,6 +2394,63 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     });
                 $scope.popUpRiwayatHasil.center().open();
             }
+
+            $scope.hasilLabMAll = function () {
+                console.log($scope);
+				var jeniskelaminfk = $scope.item.objectjeniskelaminfk
+				var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+				var firstDate = new Date($scope.item.tgllahir);
+				var secondDate = new Date($scope.item.tglRegistrasi);
+				var umurHari = Math.round(Math.abs((firstDate - secondDate) / oneDay));
+				if($scope.dataSelected == undefined){
+					toastr.warning('Pilih salah satu hasil terlebih dahulu', 'Peringatan')
+                    return
+				}
+				$scope.isRouteLoading = true;
+				medifirstService.get("laboratorium/get-hasil-lab-manual?norec_apd=" + $scope.dataSelected.norec_apd +
+						"&objectjeniskelaminfk=" + jeniskelaminfk + "&umur=" + umurHari + "&norec='" + $scope.dataSelected.norec_pp + "'" ).then(function (data) {
+								// var sourceGrid = []
+								$scope.isRouteLoading = false;
+								$scope.item.DataPemeriksa = {namalengkap: data.data.data[0].pemeriksa, id: data.data.data[0].objectpemeriksafk}
+								$scope.item.DataPegawai = {namalengkap: data.data.data[0].dokter, id: data.data.data[0].objectdokterfk}
+								$scope.item.catatan = data.data.data[0].catatan;
+
+								var dokter = "";
+								var pemeriksa = "";
+								var user = medifirstService.getPegawaiLogin();
+								if ($scope.item.DataPemeriksa == undefined) {
+										alert("Pilih terlebih dahulu pemeriksanya!!")
+										return;
+								}
+								if ($scope.item.DataPegawai == undefined) {
+										alert("Pilih terlebih dahulu dokternya!!")
+										return;
+								} 
+								var norec_pp = [];
+								for(let i = 0; i < $scope.dataGrid.data.length; i++) {
+									norec_pp.push($scope.dataGrid.data[i].norec_pp);
+							 	} 
+								console.log(norec_pp);
+								console.log($scope.dataGrid.data);
+								dokter = $scope.item.DataPegawai
+								pemeriksa = $scope.item.DataPemeriksa
+								window.open(baseTransaksi + "report/cetak-hasil-lab-all?norec=&norec=" 
+								+ $scope.dataSelected.norec_apd
+								+ "&objectjeniskelaminfk=" + jeniskelaminfk
+								+ "&nocm=" + $scope.dataSelected.nocm
+								+ "&noregistrasi=" + $scope.dataSelected.noregistrasi
+								+ "&objectjeniskelaminfk=" + jeniskelaminfk
+								+ "&umur=" + umurHari
+								+ "&strIdPegawai=" + user.namaLengkap 
+								+ "&strNorecPP=" + norec_pp
+								+ "&countnorec=" + norec_pp.length
+								+ "&doketr=" + dokter.namalengkap 
+								+ "&pemeriksa=" + pemeriksa.namalengkap 
+								+ "&catatan=" + $scope.item.catatan
+								,"_blank");
+				});
+				
+			}
 
             $scope.hasilLabM = function () {
                 var user = medifirstService.getPegawaiLogin();
