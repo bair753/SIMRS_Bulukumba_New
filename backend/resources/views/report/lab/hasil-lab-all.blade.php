@@ -9,9 +9,9 @@
     <script src="{{ asset('js/jquery.qr-code.js') }}"></script>
     @if(stripos(\Request::url(), 'localhost') !== FALSE)
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/report/paper.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('css/report/paper.css') }}">
     <link rel="stylesheet" href="{{ asset('css/report/table.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/report/tabel.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/report/tabel.css') }}"> --}}
 
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/jquery.qr-code.js') }}"></script>
@@ -25,9 +25,9 @@
     <script src="{{ asset('js/angular/angular-material.js') }}" type="text/javascript"></script>
     @else
 
-    <link rel="stylesheet" href="{{ asset('service/css/report/paper.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('service/css/report/paper.css') }}">
     <link rel="stylesheet" href="{{ asset('service/css/report/table.css') }}">
-    <link rel="stylesheet" href="{{ asset('service/css/report/tabel.css') }}">
+    <link rel="stylesheet" href="{{ asset('service/css/report/tabel.css') }}"> --}}
     <script src="{{ asset('service/js/jquery.min.js') }}"></script>
     <script src="{{ asset('service/js/jquery.qr-code.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/qrcode/src/jquery.qrcode.js') }}"></script>
@@ -9311,12 +9311,8 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
     @endif
 
     <script>
-        var p = {
-            !!json_encode($r['pemeriksa']) !!
-        };
-        var d = {
-            !!json_encode($r['doketr']) !!
-        };
+        var p = {!!json_encode($r['pemeriksa']) !!};
+        var d = {!!json_encode($r['doketr']) !!};
 
         jQuery('#qrcodeNamaPemeriksa0').qrcode({
             width: 70,
@@ -9618,6 +9614,9 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
             text: "Tanda Tangan Digital Oleh " + "{{ $r['doketr'] }}"
         });
 
+        
+    </script>
+    <script>
         $(document).ready(function () {
             window.print();
         });
