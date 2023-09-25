@@ -340,7 +340,7 @@ define(['initialize'], function (initialize) {
                 })
                 
                 medifirstService.get("emr/get-vital-sign?noregistrasi=" + $scope.cc.noregistrasi + "&objectidawal=4241&objectidakhir=4246&idemr=147", true).then(function (datas) {
-                    if($scope.cc.objectruanganfk == 785){
+                    if($scope.cc.objectruanganfk == 784){
                         $scope.skriningLaktasi = true;
                     }
                     else{

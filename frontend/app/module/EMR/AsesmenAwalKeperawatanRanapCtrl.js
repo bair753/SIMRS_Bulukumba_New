@@ -42,13 +42,13 @@ define(['initialize'], function (initialize) {
                 }
             }
             
-            if($scope.cc.objectruanganfk == 818){
+            if($scope.cc.objectruanganfk == 818 || $scope.cc.objectruanganfk == 834 || $scope.cc.objectruanganfk == 785){
                 $scope.skriningLaktasi = true;
             }else{
                 $scope.skriningLaktasi = false;
             }
 
-            if($scope.cc.objectruanganfk == 821 || $scope.cc.objectruanganfk == 816){
+            if($scope.cc.objectruanganfk == 821 || $scope.cc.objectruanganfk == 816 || $scope.cc.objectruanganfk == 820 || $scope.cc.objectruanganfk == 822){
                 $scope.skriningLaktasiNifas = true;
             }else{
                 $scope.skriningLaktasiNifas = false;
