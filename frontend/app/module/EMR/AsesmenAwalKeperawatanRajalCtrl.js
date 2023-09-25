@@ -184,6 +184,65 @@ define(['initialize'], function (initialize) {
                 }
             ];
 
+            $scope.listSkriningLaktasiAnak = [
+                {
+                    "id": 1,
+                    "detail": [
+                        { "id": 32116772, "nama": "", "caption": "Apakah bayi diberi ASI?", "type": "label", "dataList": "", "satuan": "" },
+                        { "id": 32116773, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 32116774, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "detail": [
+                        { "id": 32116775, "nama": "", "caption": "Apakah puting menonjol (tidak datar atau terbenam)?	", "type": "label", "dataList": "", "satuan": "" },
+                        { "id": 32116776, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 32116777, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" }
+                    ]
+                },
+                {
+                    "id": 3,
+                    "detail": [
+                        { "id": 32116778, "nama": "", "caption": "Apakah proses menyusui baik (tidak ada kesulitan)?", "type": "label", "dataList": "", "satuan": "" },
+                        { "id": 32116779, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 32116780, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" }
+                    ]
+                },
+                {
+                    "id": 4,
+                    "detail": [
+                        { "id": 32116781, "nama": "", "caption": "Apakah posisi bayi saat menyusu sudah benar?", "type": "label", "dataList": "", "satuan": "" },
+                        { "id": 32116782, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 32116783, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" }
+                    ]
+                },
+                {
+                    "id": 5,
+                    "detail": [
+                        { "id": 32116784, "nama": "", "caption": "Apakah bayi melekat dengan baik?", "type": "label", "dataList": "", "satuan": "" },
+                        { "id": 32116785, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 32116786, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" }
+                    ]
+                },
+                {
+                    "id": 6,
+                    "detail": [
+                        { "id": 32116787, "nama": "", "caption": "Apakah bayi mengisap dengan efektif?", "type": "label", "dataList": "", "satuan": "" },
+                        { "id": 32116788, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 32116789, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" }
+                    ]
+                },
+                {
+                    "id": 7,
+                    "detail": [
+                        { "id": 32116790, "nama": "", "caption": "Apakah ada dukungan suami/keluarga terdekat?", "type": "label", "dataList": "", "satuan": "" },
+                        { "id": 32116791, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
+                        { "id": 32116792, "nama": "", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" }
+                    ]
+                },
+            ];
+
             $scope.listSkriningLaktasi = [
                 {
                     "id": 1,
@@ -345,6 +404,12 @@ define(['initialize'], function (initialize) {
                     }
                     else{
                         $scope.skriningLaktasi = false;
+                    }
+                    if($scope.cc.objectruanganfk == 785){
+                        $scope.skriningLaktasiAnak = true;
+                    }
+                    else{
+                        $scope.skriningLaktasiAnak = false;
                     }
                     if (datas.data.data.length>0){
                         $scope.item.obj[421153] = datas.data.data[1].value; // Tekanan Darah
