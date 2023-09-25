@@ -512,7 +512,8 @@ define(['initialize'], function (initialize) {
                         { "id": 422143, "nama": "Perawatan", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
                         { "id": 422144, "nama": "Manajemen nyeri", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
                         { "id": 422145, "nama": "Lainnya :", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" },
-                        { "id": 422146, "nama": "", "caption": "", "type": "textbox1", "dataList": "", "satuan": "" }
+                        { "id": 422146, "nama": "", "caption": "", "type": "textbox1", "dataList": "", "satuan": "" },
+                        { "id": 32116793, "nama": "Manajemen laktasi", "caption": "", "type": "checkbox", "dataList": "", "satuan": "" }
                     ]
                 }
             ];
