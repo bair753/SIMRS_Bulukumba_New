@@ -236,27 +236,27 @@
         <tr style="height:20px"></tr>
         <tr style="font-size: 9pt">
             <td style="border:none" colspan="2">Nomor PA</td>
-            <td style="border:none" colspan="3">: {{ $raw->nomorpa  }}</td>
+            <td style="border:none" colspan="2">: {{ $raw->nomorpa  }}</td>
             <td style="border:none" colspan="2">Nomor RM</td>
-            <td style="border:none" colspan="2">: {{ $raw->nocm }}</td>
+            <td style="border:none" colspan="3">: {{ $raw->nocm }}</td>
         </tr>
         <tr style="font-size: 9pt">
             <td style="border:none" colspan="2">Nama Pasien</td>
-            <td style="border:none" colspan="3">: {{   $raw->namapasien  }}</td>
+            <td style="border:none" colspan="2">: {{   $raw->namapasien  }}</td>
             <td style="border:none" colspan="2">Tanggal Diterima</td>
-            <td style="border:none" colspan="2">: {{   $raw->tglterima }}</td>
+            <td style="border:none" colspan="3">: {{   $raw->tglterima }}</td>
         </tr>
         <tr style="font-size: 9pt">
             <td style="border:none" colspan="2">Jenis Kelamin</td>
-            <td style="border:none" colspan="3">: {{  $raw->jeniskelamin }}</td>
+            <td style="border:none" colspan="2">: {{  $raw->jeniskelamin }}</td>
             <td style="border:none" colspan="2">Tanggal Jawab</td>
-            <td style="border:none" colspan="2">: {{ $raw->tgljawab  }}</td>
+            <td style="border:none" colspan="3">: {{ $raw->tgljawab  }}</td>
         </tr>
         <tr style="font-size: 9pt">
             <td style="border:none" colspan="2">Tanggal Lahir</td>
-            <td style="border:none" colspan="3">: {{  $raw->umur }}</td>
+            <td style="border:none" colspan="2">: {{  $raw->umur }}</td>
             <td style="border:none" colspan="2">Dokter Pengirim</td>
-            <td style="border:none" colspan="2">: @php 
+            <td style="border:none" colspan="3">: @php 
                 if (empty($raw->dokterluar)) {
                     $dokterPengirim = $raw->namadokterpengirim;
                 }
@@ -267,28 +267,28 @@
         </tr>
         <tr style="font-size: 9pt">
             <td style="border:none" colspan="2">Alamat</td>
-            <td style="border:none" colspan="3">: {{  $raw->alamatlengkap }}</td>
+            <td style="border:none" colspan="2">: {{  $raw->alamatlengkap }}</td>
             <td style="border:none" colspan="2">Poli/Bagian</td>
-            <td style="border:none" colspan="2">: {{ $raw->asal }}</td>
+            <td style="border:none" colspan="3">: {{ $raw->asal }}</td>
         </tr>
         <tr>
-            <td colspan="9" style="border:none;height:80px"><b>Lokasi/Bahan Jaringan : </b>{{  $raw->jaringanasal }}</td>
+            <td colspan="9" style="border:none;height:60px"><b>Lokasi/Bahan Jaringan : </b>{{  $raw->jaringanasal }}</td>
         </tr>
         <tr>
-            <td colspan="9" style="border:none;height:80px"><b>Cara Mendapatkan Jaringan : </b>{{  $raw->getjaringan }}</td>
+            <td colspan="9" style="border:none;height:60px"><b>Cara Mendapatkan Jaringan : </b>{{  $raw->getjaringan }}</td>
         </tr>
         <tr>
-            <td colspan="9" style="border:none;height:80px"><b>Diagnosa Klinik : </b>{{  $raw->diagnosaklinik }}</td>
+            <td colspan="9" style="border:none;height:60px"><b>Diagnosa Klinik : </b>{{  $raw->diagnosaklinik }}</td>
         </tr>
         <tr>
-            <td colspan="9" style="border:none;height:80px"><b>Keterangan Klinik : </b>{{  $raw->keteranganklinik }}</td>
+            <td colspan="9" style="border:none;height:60px"><b>Keterangan Klinik : </b>{{  $raw->keteranganklinik }}</td>
         </tr>
         
         <tr>
-            <td colspan="9" style="border:none;height:80px"><b>Makroskopik : </b>{{  $raw->makroskopik }}</td>
+            <td colspan="9" style="border:none;height:60px"><b>Makroskopik : </b>{{  $raw->makroskopik }}</td>
         </tr>
         <tr>
-            <td colspan="9" style="border:none;height:80px"><b>Mikroskopik : </b>{{  $raw->mikroskopik }}</td>
+            <td colspan="9" style="border:none;height:60px"><b>Mikroskopik : </b>{{  $raw->mikroskopik }}</td>
         </tr>
         <tr>
             <td colspan="9" style="border:none;height:50px"><b>Kesimpulan : </b>{{  $raw->kesimpulan }}</td>
