@@ -1,6 +1,6 @@
 define(['initialize'], function (initialize) {
     'use strict';
-    initialize.controller('HasilLaboratoriumCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
+    initialize.controller('HasilKolonoskopiCtrl', ['$q', '$rootScope', '$scope', 'ModelItem', '$state', 'CacheHelper', 'DateHelper', 'MedifirstService',
         function ($q, $rootScope, $scope, ModelItem, $state, cacheHelper, dateHelper, medifirstService) {
 
 
@@ -338,7 +338,7 @@ define(['initialize'], function (initialize) {
                     // });
 
                     medifirstService.postLogging('EMR', 'norec emrpasien_t', e.data.data.norec,
-                        'Hasil Laboratorium ' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
+                        'Hasil Kolonoskopi ' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
                         + $scope.cc.noregistrasi).then(function (res) {
                         })
 
