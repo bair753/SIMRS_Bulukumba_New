@@ -1097,7 +1097,7 @@ class ReportController extends ApiController{
                 ) || ' Bln ' || EXTRACT ( DAY  FROM  AGE( pd.tglregistrasi, pm.tgllahir )  ) || ' Hr' || '(' || to_char(pm.tgllahir, 'DD-MM-YYYY') || ')' AS umur,
                 to_char(  so.tglorder, 'DD-MM-YYYY HH24:MI:SS') AS tglorder,
                 to_char( hpl.tanggal, 'DD-MM-YYYY HH24:MI:SS'  ) AS tgljawab,
-                to_char( pp.tglpelayanan,'DD-MM-YYYY HH24:MI:SS' ) AS tglterima,
+                to_char( so.tglorder,'DD-MM-YYYY HH24:MI:SS' ) AS tglterima,
                 to_char(  sbm.tglsbm,'DD-MM-YYYY HH24:MI:SS' ) AS tglbayar, pg.namalengkap,
              CASE WHEN hpl.jaringanasal IS NULL THEN  ''  ELSE  jaringanasal  END AS jaringanasal,
              CASE WHEN hpl.getjaringan IS NULL THEN  ''  ELSE  getjaringan  END AS getjaringan,
@@ -1220,7 +1220,7 @@ class ReportController extends ApiController{
                 ) || ' Bln ' || EXTRACT ( DAY  FROM  AGE( pd.tglregistrasi, pm.tgllahir )  ) || ' Hr' || '(' || to_char(pm.tgllahir, 'DD-MM-YYYY') || ')' AS umur,
                 to_char(  so.tglorder, 'DD-MM-YYYY HH24:MI:SS') AS tglorder,
                 to_char( hpl.tanggal, 'DD-MM-YYYY HH24:MI:SS'  ) AS tgljawab,
-                to_char( pp.tglpelayanan,'DD-MM-YYYY HH24:MI:SS' ) AS tglterima,
+                to_char( so.tglorder,'DD-MM-YYYY HH24:MI:SS' ) AS tglterima,
                 to_char(  sbm.tglsbm,'DD-MM-YYYY HH24:MI:SS' ) AS tglbayar, pg.namalengkap,
              CASE WHEN hpl.haemoglobin IS NULL THEN  '-'  ELSE  haemoglobin  END AS haemoglobin,
              CASE WHEN hpl.leukosit IS NULL THEN  '-'  ELSE  leukosit  END AS leukosit,
@@ -1381,7 +1381,7 @@ class ReportController extends ApiController{
         ->leftjoin('alamat_m as alm', 'alm.nocmfk', '=', 'pm.id')
         ->wherein('pp.norec', $norec)
         ->where('hpl.statusenabled', true)
-        ->select('pd.noregistrasi', 'pm.nocm', 'pm.namapasien', 'pm.tgllahir', 'hpl.dokterluar', 'dokterpengirim.namalengkap as namadokterpengirim', 'hpl.nomorpa', 'pp.tglpelayanan as tglterima', 'pg1.namalengkap as namapenanggungjawab', 'pg1.nippns',
+        ->select('pd.noregistrasi', 'pm.nocm', 'pm.namapasien', 'pm.tgllahir', 'hpl.dokterluar', 'dokterpengirim.namalengkap as namadokterpengirim', 'hpl.nomorpa', 'so.tglorder as tglterima', 'pg1.namalengkap as namapenanggungjawab', 'pg1.nippns',
     'jk.jeniskelamin', 'pm.tgllahir', 'hpl.jaringanasal', 'hpl.getjaringan', 'hpl.diagnosaklinik', 'hpl.keteranganklinik', 'hpl.tanggal as tgljawab', 'hpl.makroskopik','hpl.mikroskopik',
 'hpl.kesimpulan', 'hpl.anjuran', 'hpl.topografi', 'hpl.morfologi', 'hpl.diagnosapb','hpl.keteranganpb','ru.namaruangan as asal', 'pg1.nosip','kps.kelompokpasien', 'pd.norec as norec_pd', 'pd.objectruanganlastfk', 'alm.alamatlengkap', 'dm.kddiagnosa', 'hpl.jenis', 'dm.namadiagnosa as diagnosa')
         ->first();
