@@ -42,17 +42,7 @@ define(['initialize'], function (initialize) {
                 }
             }
             
-            if($scope.cc.objectruanganfk == 818 || $scope.cc.objectruanganfk == 834 || $scope.cc.objectruanganfk == 785){
-                $scope.skriningLaktasi = true;
-            }else{
-                $scope.skriningLaktasi = false;
-            }
-
-            if($scope.cc.objectruanganfk == 821 || $scope.cc.objectruanganfk == 816 || $scope.cc.objectruanganfk == 820 || $scope.cc.objectruanganfk == 822){
-                $scope.skriningLaktasiNifas = true;
-            }else{
-                $scope.skriningLaktasiNifas = false;
-            }
+            
 
             medifirstService.getPart('emr/get-datacombo-part-dokter', true, true, 20).then(function (data) {
                 $scope.listDokter = data
@@ -604,17 +594,16 @@ define(['initialize'], function (initialize) {
                 })
                 
                 medifirstService.get("emr/get-vital-sign?noregistrasi=" + $scope.cc.noregistrasi + "&objectidawal=4241&objectidakhir=4246&idemr=147", true).then(function (datas) {
-                    if($scope.cc.objectruanganfk == 785){
+                    if($scope.cc.objectruanganfk == 818 || $scope.cc.objectruanganfk == 834 || $scope.cc.objectruanganfk == 785){
                         $scope.skriningLaktasi = true;
-                    }
-                    else{
+                    }else{
                         $scope.skriningLaktasi = false;
                     }
-                    if (datas.data.data.length>0){
-                        $scope.item.obj[421911] = datas.data.data[1].value; // Tekanan Darah
-                        $scope.item.obj[421912] = datas.data.data[5].value; // Nadi
-                        $scope.item.obj[421913] = datas.data.data[4].value; // Suhu
-                        $scope.item.obj[421914] = datas.data.data[6].value; // Napas
+        
+                    if($scope.cc.objectruanganfk == 821 || $scope.cc.objectruanganfk == 816 || $scope.cc.objectruanganfk == 820 || $scope.cc.objectruanganfk == 822){
+                        $scope.skriningLaktasiNifas = true;
+                    }else{
+                        $scope.skriningLaktasiNifas = false;
                     }
                 })
             } else {
