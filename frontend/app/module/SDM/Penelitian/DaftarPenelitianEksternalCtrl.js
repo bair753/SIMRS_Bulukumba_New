@@ -143,6 +143,11 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     data: data,
                 }
 
+                medifirstService.postLogging('Hapus Daftar Pelatihan Eksternal', 'norec emrpasien_t', $scope.current.nim,
+                        'Hapus Daftar Pelatihan Eksternal - ' + $scope.current.namapeneliti + ' pada NIM  '
+                        + $scope.current.nim + ' - Peserta : ' + $scope.current.namapeneliti).then(function (res) {
+                        })
+
                 medifirstService.post('sdm/penelitian/batal-kegiatan-penelitian-eksternal',objSave).then(function (e) {
                     GetData()
                 })
@@ -176,7 +181,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 
             $scope.preview = function () {
                 var dataItem = $scope.current;
-                var str1 = baseTransaksi + 'public/berkas/external?penelitianeksternalfk=' + dataItem.norec +'&objectberkas='+$scope.item.berkas
+                var str1 = baseTransaksi + 'public/berkas?penelitianeksternalfk=' + dataItem.norec +'&objectberkas='+$scope.item.berkas
                 window.open(str1, '_blank');
                 
             

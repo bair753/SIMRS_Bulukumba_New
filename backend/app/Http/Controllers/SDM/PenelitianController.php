@@ -274,6 +274,18 @@ class PenelitianController extends ApiController {
         return $this->respond($res);
     }
 
+    public function berkasKegiatanPenelitianInternal(Request $request)
+    {
+        $kdProfile = $this->getDataKdProfile($request);
+        $idProfile = (int) $kdProfile;
+        $data = BerkasPasien::where('kodeexternal','Internal')->where('statusenabled',true)->get();
+        $cek = BerkasDiklat::where('penelitianeksternalfk',$request['penelitianeksternalfk'])->get();
+
+        $res['data'] = $data;
+        $res['upload'] = $cek;
+        return $this->respond($res);
+    }
+
     public function getDaftarPenelitianKegiatanEksternal (Request $request){
         $kdProfile = (int) $this->getDataKdProfile($request);
          $tglAwal = $request['tglAwal'];

@@ -1,7 +1,7 @@
 define(['initialize'], function (initialize) {
     'use strict';
-    initialize.controller('OrderBarangLogistikCtrl', ['$scope', 'CacheHelper', '$mdDialog', 'MedifirstService',
-        function ($scope, cacheHelper, $mdDialog, medifirstService) {
+    initialize.controller('OrderBarangLogistikCtrl', ['$scope', 'CacheHelper', '$mdDialog', 'MedifirstService', 'DateHelper',
+        function ($scope, cacheHelper, $mdDialog, medifirstService, dateHelper) {
             $scope.item = {};
             $scope.dataVOloaded = true;
             $scope.now = new Date();
@@ -516,6 +516,8 @@ define(['initialize'], function (initialize) {
                 medifirstService.post('logistik/save-order-barang-ruangan', objSave).then(function (e) {
                     $scope.item.noKirim = e.data.nokirim
                     norecCetak = $scope.item.noKirim;
+                    sendNotification(e.data)
+                    init();
                     Kosongkan();
                     $scope.popUp.center().open();
                 })
@@ -552,6 +554,29 @@ define(['initialize'], function (initialize) {
                 $mdDialog.show(confirm).then(function () {
                     $scope.SaveOrder();
                 })
+            }
+
+            function sendNotification(e) {
+                var body = {
+                    norec: norecOrder,
+                    judul: 'Ada order baru #' + norecOrder,
+                    jenis: 'Order Barang',
+                    pesanNotifikasi: '',
+                    idRuanganAsal: $scope.item.ruangan.id,
+                    idRuanganTujuan: $scope.item.ruanganTujuan.id,
+                    ruanganAsal: scope.item.ruangan.namaruangan,
+                    ruanganTujuan: $scope.item.ruanganTujuan.namaruangan,
+                    kelompokUser: null,//medifirstService.getKelompokUser()
+                    idKelompokUser: null,
+                    idPegawai: medifirstService.getPegawai().id,
+                    dataArray: [],
+                    urlForm: 'DaftarOrderBarang',
+                    params: null,
+                    namaFungsiFrontEnd: null,
+                    tgl: $scope.item.tglAwal,
+                    tgl_string: dateHelper.getTanggalJamFormatted($scope.item.tglAwal),
+                }
+                medifirstService.sendSocket("sendNotification", body);
             }
 
             var HttpClient = function () {

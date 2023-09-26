@@ -1,3 +1,21 @@
+<style>
+	.green2 {
+		background-color: #10c4b2;
+	}
+
+	.classUpload {
+
+background-color: #10c4b2;
+color: #ffffff;
+padding: 3px;
+border-radius: 10px;
+}
+
+.classUpload2 {
+color: #ff3860;
+margin-left: 30px;
+}
+</style>
 <div class="panel panel-default container_12">
 	<div class="panel-heading" c-translate>Daftar Kegiatan Diklat Internal</div>
 	<div class="panel-body">
@@ -58,28 +76,96 @@
 		<div class="grid_12" style="margin-top:60px">
 			<div ng-include='"../app/template/Shared/TemplateLoading"'></div>
 		</div>
-		<div class="grid_12">
-			<div class="grid_3"></div>
-			<div class="grid_3">
-				<c-button ng-show="!isLoading"
-					style="width: 99.5%; font-size: 24px; padding:0px, margin:0px; text-align: center;" item="item"
-					size="36" position=" 'right'" is-validate ng-click="Cetak()">
-					<span class="title">Cetak Surat Penelitian</span>
-				</c-button>
+		<div class="grid_3">
+			<div class="grid_12">
+				<button class="btnTemplate1" style="margin-left: 0;" ng-click="uploadKelengkapan()"><i
+					class="fa fa-plus-circle"></i>Kelengkapan Dokumen</button>
 			</div>
-			<div class="grid_3">
-				<c-button ng-show="!isLoading" class="success"
-					style="width: 99.5%; font-size: 24px; padding:0px, margin:0px; text-align: center;" item="item"
-					size="36" position=" 'right'" is-validate ng-click="Ubah()">
-					<span class="title">Ubah</span>
-				</c-button>
+		</div>
+		<div class="grid_3">
+			<div class="grid_12">
+				<button class="btnTemplate1" style="margin-left: 0;" ng-show="!isLoading" ng-click="Cetak()">Cetak Surat Penelitian</button>
 			</div>
-			<div class="grid_3">
-				<c-button ng-show="!isLoading" style="width: 99.5%; font-size: 24px; padding:0px, margin:0px;"
-					item="item" size="36" position=" 'right'" class="cancel" ng-click="Hapus()">
-					<span class="title">Hapus</span>
-				</c-button>
+		</div>
+		<div class="grid_3">
+			<div class="grid_12">
+				<button class="btnTemplate1" style="margin-left: 0;" ng-show="!isLoading" ng-click="Ubah()">Ubah</button>
+			</div>
+		</div>
+		<div class="grid_3">
+			<div class="grid_12">
+				<button class="btnTemplate1" style="margin-left: 0;" ng-show="!isLoading" ng-click="Hapus()">Hapus</button>
 			</div>
 		</div>
 	</div>
 </div>
+
+<div kendo-window="popupUpload" k-title="'Upload Kelengkapan Dokumen'" k-width="700"
+						k-visible="false" k-on-open="win2visible = true" k-on-close="win2visible = false">
+						<div class="panel panel-default container_12">
+							
+							<div class="grid_6">
+								<div class="grid_12">
+									<label c-label item="item">Nama Peneliti</label>
+								</div>
+								<div class="clear"></div>
+
+								<div class="grid_12">
+									<input c-text-box type="input" filter="" class="k-textbox"
+										ng-model="current.namalengkap" disabled />
+								</div>
+							</div>
+							<div class="grid_6">
+								<div class="grid_12">
+									<label c-label item="item">NIP</label>
+								</div>
+								<div class="clear"></div>
+
+								<div class="grid_12">
+									<input c-text-box type="input" filter="" class="k-textbox"
+										ng-model="current.nip_pns" disabled />
+								</div>
+							</div>
+							<span style="font-style: italic;"> *Keterangan : Dokumen sudah upload ditandai warna hijau
+								<span id="square" class="green2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
+							<div class="grid_12">
+								<fieldset>
+									<legend><b>Pilih File</b></legend>
+									<form method="post" enctype="multipart/form-data" id="coba">
+										<input type="file" name="filestr" class="myStr" id="files"
+											accept="application/pdf" />
+										<!-- <input type="file" name="fileBerkas" id="fileBerkas" class="mySip"  accept="application/pdf"/> -->
+									</form>
+
+								</fieldset>
+							</div>
+
+							<div class="grid_12">
+								<fieldset>
+									<legend><b>Jenis File</b></legend>
+
+									<div class="grid_12">
+										<div ng-repeat="stat in listBerkas | orderBy:'id'">
+											<div class="grid_12">
+												<md-radio-group ng-model="item.berkas">
+													<md-radio-button value="{{stat.id}}" class="md-primary"
+														style="padding: 3px;"
+														ng-class="{'classUpload': stat.isupload == true}">
+														{{stat.nama}}
+														<!-- <span style="color:rgb(250,250,250);margin-left: 200px"  >  **Sudah Upload** </span> -->
+													</md-radio-button>
+
+												</md-radio-group>
+
+											</div>
+										</div>
+									</div>
+								</fieldset>
+							</div>
+							<div class="grid_12" style="margin-top: 10px">
+								<button class="k-button" ng-click="saveKelengkapan()"
+									style="float:right;margin-right: 2px;">Upload </button>
+								<button class="k-button" ng-click="preview()"
+									style="float:right;margin-right: 2px">Preview </button>
+							</div>
+					</div>
