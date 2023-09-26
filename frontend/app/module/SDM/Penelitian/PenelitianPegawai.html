@@ -152,33 +152,7 @@
                                             </div>
 
 
-                                            <div class="grid_6" style="margin: 15px 0 0 0;">
-                                                <div class="grid_12">
-                                                    <div class="grid_12">
-                                                        <label c-label item="item"
-                                                            c-label-text="Kelengkapan Administrasi"></label>
-                                                    </div>
-                                                    <div class="grid_12" style="margin: 5px 0 0 0;">
-                                                        <div class="grid_6" ng-repeat="data in Listketerangan">
-                                                            <input type="checkbox" ng-checked="data.isChecked"
-                                                                class="k-checkbox" name="{{data.keterangan}}"
-                                                                id="{{data.keterangan}}" value="{{data.id}}"
-                                                                ng-click="addListKeterangan(bool,data)">
-                                                            <label class="k-checkbox-label"
-                                                                for="{{data.keterangan}}">{{data.keterangan}}</label>
-                                                        </div>
-                                                    </div>
-                                                    <!-- <div class="grid_12" ng-repeat="list in listKesimpulanKronologis | orderBy:'id'" style="margin-top: 10px;">
-                                                        <b>{{list.nama}}</b>
-                                                        <div ng-repeat="opsi in list.detail | orderBy:'id'" style="margin-top: 5px;">
-                                                            <div class="grid_3">
-                                                                <input type="checkbox" ng-checked="opsi.isChecked" class="k-checkbox" name="{{opsi.nama}}" id="{{opsi.nama}}" ng-model="bool" value="{{opsi.id}}"  ng-click="addListKesimpulanKronologis(bool,opsi)" >
-                                                                <label class="k-checkbox-label" for="{{opsi.nama}}">{{opsi.nama}}</label>
-                                                            </div>
-                                                        </div>
-                                                    </div> -->
-                                                </div>
-                                            </div>
+                                            
 
                                         </div>
                                     </div>

@@ -2191,6 +2191,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
               Route::get('sdm/penelitian/get-data-combo-penelitian','SDM\PenelitianController@getDataComboPenelitian');
               Route::post('sdm/penelitian/save-kegiatan-penelitian-eksternal','SDM\PenelitianController@saveKegiatanPenelitianExternal');
               Route::get('sdm/penelitian/berkas-kegiatan-penelitian-eksternal','SDM\PenelitianController@berkasKegiatanPenelitianExternal');
+              Route::get('sdm/penelitian/berkas-kegiatan-penelitian-internal','SDM\PenelitianController@berkasKegiatanPenelitianInternal');
               Route::post('sdm/penelitian/save-berkas-kegiatan-penelitian-eksternal', 'SDM\PenelitianController@saveBerkasEksternal');
               Route::get('sdm/penelitian/get-daftar-penelitian-eksternal','SDM\PenelitianController@getDaftarPenelitianKegiatanEksternal');
               Route::post('sdm/penelitian/batal-kegiatan-penelitian-eksternal','SDM\PenelitianController@saveBatalPenelitianEksternal');
@@ -3056,7 +3057,7 @@ die;
     return $response;
 });
 
-Route::get('service/medifirst2000/public/berkas/external', function (Illuminate\Http\Request $r)
+Route::get('service/medifirst2000/public/berkas', function (Illuminate\Http\Request $r)
 {
   $d =  \App\Transaksi\BerkasDiklat::where('penelitianeksternalfk',$r['penelitianeksternalfk'])
   ->where('objectberkas',$r['objectberkas'])
