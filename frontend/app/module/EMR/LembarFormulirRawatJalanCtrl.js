@@ -124,6 +124,8 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 medifirstService.get("emr/get-antrian-pasien-norec/" + noregistrasifk).then(function (e) {
                     var antrianPasien = e.data.result;
                     $scope.item.obj[32110965] = antrianPasien.namapasien;
+                    $scope.item.obj[32110969] = $scope.now;
+                    $scope.item.obj[32110982] = $scope.now;
                     $scope.item.obj[32110983] = antrianPasien.namapasien;
                     $scope.item.obj[32110964] = antrianPasien.nocm;
                     $scope.item.obj[32110966] = new Date(moment(antrianPasien.tgllahir).format('YYYY-MM-DD'));
@@ -138,7 +140,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     }
                     $scope.item.obj[420327] = new Date(moment(antrianPasien.tglregistrasi).format('YYYY-MM-DD HH:mm'));
                     if (antrianPasien.iddpjp != null && antrianPasien.dokterdpjp != null) {
-                        $scope.item.obj[420393] = {
+                        $scope.item.obj[32110984] = {
                             value: antrianPasien.iddpjp,
                             text: antrianPasien.dokterdpjp
                         }

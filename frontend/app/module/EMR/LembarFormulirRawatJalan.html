@@ -111,7 +111,7 @@
                                 <label c-label item="item">Tanggal Pelayanan</label>
                             </div>
                             <div class="grid_6">
-                                <input style="width: 90%" k-ng-model="item.obj[32110969]" kendo-datepicker placeholer="YYYY:MM:DD"
+                                <input style="width: 90%" k-ng-model="item.obj[32110969]" kendo-datetimepicker placeholer="YYYY:MM:DD"
                                 k-format="'yyyy-MM-dd'" />
                             </div>
                         </div>
@@ -136,8 +136,9 @@
                                 <label c-label item="item">Diagnosis Medis ( ICD-10 )</label>
                             </div>
                             <div class="grid_12">
-                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[32110972]" ng-disable="item.obj[32110972]" k-data-text-field="'text'"
-                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listICD10" />
+                                <!-- <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[32110972]" ng-disable="item.obj[32110972]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listICD10" /> -->
+                                <input type="text" class="k-textbox" ng-model="item.obj[32116794]">
                             </div>
                         </div>
                         <div class="grid_12">
@@ -145,8 +146,9 @@
                                 <label c-label item="item">Diagnosis Fungsi ( ICD-10 )</label>
                             </div>
                             <div class="grid_12">
-                                <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[32110973]" ng-disable="item.obj[32110973]" k-data-text-field="'text'"
-                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listICD10" />
+                                <!-- <input style="width: 100%;" kendo-combo-box k-ng-model="item.obj[32110973]" ng-disable="item.obj[32110973]" k-data-text-field="'text'"
+                                k-data-value-field="'value'" k-filter="'contains'" k-auto-bind="false" k-data-source="listICD10" /> -->
+                                <input type="text" class="k-textbox" ng-model="item.obj[32116795]">
                             </div>
                         </div>
                         <div class="grid_12">
