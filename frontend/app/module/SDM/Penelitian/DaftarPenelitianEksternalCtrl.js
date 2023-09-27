@@ -259,15 +259,16 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                         "title": "No",
                         "width": "10%"
                     },
-                    {
-                        "field": "nim",
-                        "title": "Nim",
-                        "width": "15%"
-                    },
+                    
                     {
                         "field": "namapeneliti",
                         "title": "Nama Peneliti",
                         "width": "20%"
+                    },
+                    {
+                        "field": "namasebagai",
+                        "title": "Sebagai",
+                        "width": "15%"
                     },
                     {
                         "field": "institusipendidikan",
@@ -275,8 +276,8 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                         "width": "20%"
                     },
                     {
-                        "field": "fakultas",
-                        "title": "Fakultas",
+                        "field": "namakegiatan",
+                        "title": "Kegiatan",
                         "width": "20%"
                     },
                     {

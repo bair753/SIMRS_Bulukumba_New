@@ -43,6 +43,8 @@ define(['initialize'], function(initialize) {
 	            	$scope.ListInstitusiPendidikan=dat.institusi;
 	            	$scope.ListjurusanPeminatan=dat.jurusanpeminatan;
 	            	$scope.ListFakultas=dat.fakultas;
+	            	$scope.ListSebagai=dat.sebagai;
+	            	$scope.ListKegiatan=dat.kegiatan;
 	            });
 		    }
 
@@ -160,12 +162,27 @@ define(['initialize'], function(initialize) {
                 var c = ""
 
                 if ($scope.item.Pegawai == undefined) {
-                    alert("Nama Pegawai Tidak Boleh Kosong!")
+                    alert("Nama Peserta Tidak Boleh Kosong!")
                     return;
                 }  
 
+                if ($scope.item.sebagai == undefined) {
+                    alert("Sebagai Tidak Boleh Kosong!")
+                    return;
+                } 
+                
+                if ($scope.item.kegiatan == undefined) {
+                    alert("Jenis Kegiatan Tidak Boleh Kosong!")
+                    return;
+                } 
+
                 if ($scope.item.judulPenelitian == undefined) {
                     alert("Judul Penelitian Tidak Boleh Kosong!")
+                    return;
+                }
+
+                if ($scope.item.lokasiPenelitian == undefined) {
+                    alert("Lokasi Penelitian Tidak Boleh Kosong!")
                     return;
                 }
             
@@ -179,15 +196,20 @@ define(['initialize'], function(initialize) {
                     return;
                 } 
 
-                if ($scope.item.biayaPenelitian == undefined) {
-                    alert("Biaya Penelitian Tidak Boleh Kosong!")
+                if ($scope.item.biaya == undefined) {
+                    alert("Biaya Tidak Boleh Kosong!")
                     return;
                 }  
 
-                if ($scope.item.laporanPenelitian == undefined) {
-                    alert("Laporan Penelitian Tidak Boleh Kosong!")
+                if ($scope.item.jumlahBiaya == undefined) {
+                    alert("Jumlah Biaya Tidak Boleh Kosong!")
                     return;
-                } 
+                }
+
+                // if ($scope.item.laporanPenelitian == undefined) {
+                //     alert("Laporan Penelitian Tidak Boleh Kosong!")
+                //     return;
+                // } 
 
             			
                 var jumlahbantuan = 0;
@@ -249,6 +271,16 @@ define(['initialize'], function(initialize) {
                 if ($scope.item.UnitKerja != undefined) {
                     unitkerja = $scope.item.UnitKerja
                 }
+
+                var laporanPenelitian="-";
+                if ($scope.item.laporanPenelitian != undefined) {
+                    laporanPenelitian = $scope.item.laporanPenelitian
+                }
+
+                var biayapenelitian=0;
+                if ($scope.item.biayaPenelitian != undefined) {
+                    biayapenelitian = $scope.item.biayaPenelitian
+                }
                 
                 for (var i =  $scope.currentKeterangan.length - 1; i >= 0; i--) {
                     var c = $scope.currentKeterangan[i].id
@@ -262,11 +294,15 @@ define(['initialize'], function(initialize) {
 					"norec_kpe":norec_kpe,
                     "pegawaifk":$scope.item.Pegawai.id,
                     "unitkerja":unitkerja,
+                    "sebagai":$scope.item.sebagai.id,
+                    "kegiatan":$scope.item.kegiatan.id,
                     "lokasipenelitian":lokasipenelitian,
                     "judulpenelitian":$scope.item.judulPenelitian,
                     "tanggalmulai":moment($scope.item.tanggalMulai).format('YYYY-MM-DD HH:mm'),
                     "tanggalselesai":moment($scope.item.tanggalSelesai).format('YYYY-MM-DD HH:mm'),
-                    "biayapenelitian":$scope.item.biayaPenelitian,
+                    "biaya":$scope.item.biaya,
+                    "jumlahBiaya":$scope.item.jumlahBiaya,
+                    "biayapenelitian":biayapenelitian,
                     "jumlahbantuan":jumlahbantuan,
                     "bantuanditerima":bantuanditerima,
                     "tanggalpembayaran":tanggalPembayaran,
@@ -274,7 +310,7 @@ define(['initialize'], function(initialize) {
                     "kelengkapanadministrasi":listKeterangan,
                     "tanggalpresentasi":tanggalPresentasi,
                     "tanggalproposal":tanggalPresentasiProposal,
-                    "laporanpenelitian":$scope.item.laporanPenelitian,
+                    "laporanpenelitian":laporanPenelitian,
                     "tanggalkajian":tanggalLolosKajiKelayakan,
                     "publikasijurnal":publikasijurnal,
                     "tanggalpublikasi":tanggalPublikasi,
@@ -284,6 +320,7 @@ define(['initialize'], function(initialize) {
 				var objSave = {
                     data: data,
                 }
+                console.log(objSave);
 
                 medifirstService.post('sdm/penelitian/save-kegiatan-penelitian-pegawai',objSave).then(function (e) {
                     $scope.item = {};  
