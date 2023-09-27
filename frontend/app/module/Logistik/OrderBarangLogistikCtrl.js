@@ -559,7 +559,7 @@ define(['initialize'], function (initialize) {
             function sendNotification(e) {
                 var body = {
                     norec: e.data.nokirim,
-                    judul: 'Ada order baru #OTRF-' + e.config.data.strukorder.tglorder,
+                    judul: 'Ada order barang',
                     jenis: 'Order Barang',
                     pesanNotifikasi: '',
                     idRuanganAsal: e.config.data.strukorder.ruanganfk,
@@ -570,7 +570,7 @@ define(['initialize'], function (initialize) {
                     idKelompokUser: null,
                     idPegawai: medifirstService.getPegawai().id,
                     dataArray: [],
-                    urlForm: 'ResepElektronik',
+                    urlForm: 'DaftarOrderBarang',
                     params: null,
                     namaFungsiFrontEnd: null,
                     tgl: e.config.data.strukorder.tglorder,
