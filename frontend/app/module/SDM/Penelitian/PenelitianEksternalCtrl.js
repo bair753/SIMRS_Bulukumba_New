@@ -39,6 +39,9 @@ define(['initialize'], function(initialize) {
 	            	$scope.ListInstitusiPendidikan=dat.institusi;
 	            	$scope.ListjurusanPeminatan=dat.jurusanpeminatan;
 	            	$scope.ListFakultas=dat.fakultas;
+                    $scope.ListSebagai=dat.sebagai;
+	            	$scope.ListKegiatan=dat.kegiatan;
+	            	$scope.ListProfesi=dat.profesi;
 	            });
 		    }
 
@@ -162,59 +165,99 @@ define(['initialize'], function(initialize) {
                 var b = ""
                 var c = ""
 
-                if ($scope.item.namaPendamping == undefined) {
-                    alert("Hasil Nama Pendamping Tidak Boleh Kosong!")
+                if ($scope.item.namaPeneliti == undefined) {
+                    alert("Nama Peserta Tidak Boleh Kosong!")
                     return;
                 }  
 
-                if ($scope.item.judulPenelitian == undefined) {
-                    alert("Hasil Judul Penelitian Tidak Boleh Kosong!")
+                if ($scope.item.sebagai == undefined) {
+                    alert("Sebagai Tidak Boleh Kosong!")
                     return;
                 }
 
-                if ($scope.item.laporanPenelitian == undefined) {
-                    alert("Hasil Laporan Penelitian Tidak Boleh Kosong!")
+                if ($scope.item.institusiPendidikan == undefined) {
+                    alert("Tempat Kegiatan Tidak Boleh Kosong!")
                     return;
                 }  
 
-                if ($scope.item.lokasiPenelitian == undefined) {
-                    alert("Hasil Lokasi Penelitian Tidak Boleh Kosong!")
+                if ($scope.item.profesi == undefined) {
+                    alert("Profesi Tidak Boleh Kosong!")
                     return;
                 } 
 
-                if ($scope.item.namaPeneliti == undefined) {
-                    alert("Hasil Nama Peneliti Tidak Boleh Kosong!")
+                if ($scope.item.judulPenelitian == undefined) {
+                    alert("Judul Kegiatan Tidak Boleh Kosong!")
                     return;
                 }  
 
-                if ($scope.item.nim == undefined) {
-                    alert("Hasil nim Peneliti Tidak Boleh Kosong!")
+                if ($scope.item.kegiatan == undefined) {
+                    alert("Jenis Kegiatan Tidak Boleh Kosong!")
                     return;
                 } 
+
+                if ($scope.item.biaya == undefined) {
+                    alert("Biaya Tidak Boleh Kosong!")
+                    return;
+                } 
+
+                if ($scope.item.jumlahBiaya == undefined) {
+                    alert("Jumlah Biaya Tidak Boleh Kosong!")
+                    return;
+                }  
 
                 if ($scope.item.tanggalMulai == undefined) {
-                    alert("Hasil Tanggal Mulai Tidak Boleh Kosong!")
-                    return;
-                } 
-
-                if ($scope.item.tanggalPembayaran == undefined) {
-                    alert("Hasil Tanggal Pembayaran Tidak Boleh Kosong!")
-                    return;
-                }  
-
-                if ($scope.item.tanggalPresentasi == undefined) {
-                    alert("Hasil Tanggal Presentasi Tidak Boleh Kosong!")
+                    alert("Tanggal Mulai Tidak Boleh Kosong!")
                     return;
                 } 
 
                 if ($scope.item.tanggalSelesai == undefined) {
-                    alert("Hasil Tanggal Selesai Tidak Boleh Kosong!")
+                    alert("Tanggal Selesai Tidak Boleh Kosong!")
                     return;
                 } 
 				
-                var biaya = 0;
+                var biayaPenelitian = 0;
                 if ($scope.item.biayaPenelitian != undefined) {
-                	biaya = $scope.item.biayaPenelitian;
+                	biayaPenelitian = $scope.item.biayaPenelitian;
+                }
+
+                var nim = null;
+                if ($scope.item.nim != undefined) {
+                	nim = $scope.item.nim;
+                }
+
+                var biaya = 0;
+                if ($scope.item.biaya != undefined) {
+                	biaya = $scope.item.biaya;
+                }
+
+                var jumlahBiaya = 0;
+                if ($scope.item.jumlahBiaya != undefined) {
+                	jumlahBiaya = $scope.item.jumlahBiaya;
+                }
+
+                var fakultas =null
+                if ($scope.item.fakultas != undefined) {
+                	fakultas = $scope.item.fakultas.id;
+                }
+
+                var jurusanPeminatan =null
+                if ($scope.item.jurusanPeminatan != undefined) {
+                	jurusanPeminatan = $scope.item.jurusanPeminatan.id;
+                }
+
+                var namapendamping =null
+                if ($scope.item.namaPendamping != undefined) {
+                	namapendamping = $scope.item.namaPendamping;
+                }
+
+                var laporanPenelitian =null
+                if ($scope.item.laporanPenelitian != undefined) {
+                	laporanPenelitian = $scope.item.laporanPenelitian;
+                }
+
+                var lokasiPenelitian =null
+                if ($scope.item.lokasiPenelitian != undefined) {
+                	lokasiPenelitian = $scope.item.lokasiPenelitian;
                 }
 
                 var nomorkwitansi ="-"
@@ -225,6 +268,16 @@ define(['initialize'], function(initialize) {
                 var TahunAjaran =moment($scope.now).format('YYYY')
                 if ($scope.item.periodePengajaran != undefined) {
                 	TahunAjaran = $scope.item.periodePengajaran;
+                }
+
+                var tanggalPembayaran = null
+                if ($scope.item.tanggalPembayaran != undefined) {
+                	tanggalPembayaran = moment($scope.item.tanggalPembayaran).format('YYYY-MM-DD');
+                }
+
+                var tanggalPresentasi = null
+                if ($scope.item.tanggalPresentasi != undefined) {
+                	tanggalPresentasi = moment($scope.item.tanggalPresentasi).format('YYYY-MM-DD');
                 }
                 
                 for (var i =  $scope.currentKeterangan.length - 1; i >= 0; i--) {
@@ -237,21 +290,26 @@ define(['initialize'], function(initialize) {
 
 				var data = {
 					"norec_kpe":norec_kpe,
-					"namapendamping":$scope.item.namaPendamping,
-					"biayapenelitian":biaya,
-					"fakultasfk":$scope.item.fakultas.id,
+					"namapendamping":namapendamping,
+					"biayapenelitian":biayaPenelitian,
+					"fakultasfk":fakultas,
+					"biaya":biaya,
+					"jumlahBiaya":jumlahBiaya,
+                    "sebagai":$scope.item.sebagai.id,
 					"institusipendidikanfk":$scope.item.institusiPendidikan.id,
+					"profesi":$scope.item.profesi.id,
+                    "kegiatan":$scope.item.kegiatan.id,
 					"judulpeneltian":$scope.item.judulPenelitian,
-					"jurusanpeminatanfk":$scope.item.jurusanPeminatan.id,
-					"laporanpenelitian":$scope.item.laporanPenelitian,
-					"lokasipenelitian":$scope.item.lokasiPenelitian,
+					"jurusanpeminatanfk":jurusanPeminatan,
+					"laporanpenelitian":laporanPenelitian,
+					"lokasipenelitian":lokasiPenelitian,
 					"namapeneliti":$scope.item.namaPeneliti,
-					"nim":$scope.item.nim,
+					"nim":nim,
 					"nomorkwitansi":nomorkwitansi,
 					"periodepengajaran":TahunAjaran,
 					"tanggalmulai":moment($scope.item.tanggalMulai).format('YYYY-MM-DD HH:mm'),
-					"tanggalpembayaran":moment($scope.item.tanggalPembayaran).format('YYYY-MM-DD HH:mm'),
-					"tanggalpresentasi":moment($scope.item.tanggalPresentasi).format('YYYY-MM-DD HH:mm'),
+					"tanggalpembayaran":tanggalPembayaran,
+					"tanggalpresentasi":tanggalPresentasi,
 					"tanggalselesai":TglSelesai,
 					"kelengkapanadministrasi":listKeterangan
 				};	

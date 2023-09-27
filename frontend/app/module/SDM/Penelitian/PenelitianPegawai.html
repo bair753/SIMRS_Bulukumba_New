@@ -7,12 +7,12 @@
                 <!-- DATA PENELITI -->
                 <div class="grid_12">
                     <div class="panel panel-default panel-white">
-                        <div class="panel-heading-white"><span class="title" c-translate>Data Peneliti</span></div>
+                        <div class="panel-heading-white"><span class="title" c-translate>Data Peserta Pelatihan</span></div>
                         <div class="panel-body">
                             <div class="grid_12">
                                 <div class="grid_3">
                                     <div class="grid_12" style="margin: 6px 0 0 0;">
-                                        <label c-label item="item" c-label-text="Nama Peneliti"></label>
+                                        <label c-label item="item" c-label-text="Nama Peserta"></label>
                                     </div>
                                     <div class="grid_12">
                                         <input style="width: 100%;" kendo-combo-box k-ng-model="item.Pegawai"
@@ -22,37 +22,40 @@
                                     </div>
                                 </div>
                                 <div class="grid_3">
-                                    <div class="grid_12" style="margin: 6px 0 0 0;">
-                                        <label><b>NIP</b></label>
+                                    <div class="grid_12">
+                                        <label c-label item="item" c-label-text="Sebagai"></label>
                                     </div>
                                     <div class="grid_12">
-                                        <input c-text-box type="input" filter="'varchar'" class="k-textbox"
-                                            ng-model="item.nim" />
+                                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.sebagai"
+                                            k-data-text-field="'kodeexternal'" k-data-value-field="'id'"
+                                            k-filter="'contains'" k-auto-bind="false" k-data-source="ListSebagai" />
+                                    </div>
+                                </div>
+                                <div class="grid_3">
+                                    <div class="grid_12">
+                                        <label c-label item="item" c-label-text="JenisKegiatan"></label>
+                                    </div>
+                                    <div class="grid_12">
+                                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.kegiatan"
+                                            k-data-text-field="'namakegiatan'" k-data-value-field="'id'"
+                                            k-filter="'contains'" k-auto-bind="false" k-data-source="ListKegiatan" />
                                     </div>
                                 </div>
                                 <div class="grid_3">
                                     <div class="grid_12" style="margin: 6px 0 0 0;">
-                                        <label><b>Unit Kerja</b></label>
-                                    </div>
-                                    <div class="grid_12">
-                                        <input c-text-box type="input" filter="'varchar'" class="k-textbox"
-                                            ng-model="item.UnitKerja" />
-                                    </div>
-                                </div>
-                                <div class="grid_3">
-                                    <div class="grid_12" style="margin: 6px 0 0 0;">
-                                        <label c-label item="item" c-label-text="Lokasi Penelitian"></label>
+                                        <label c-label item="item" c-label-text="Tempat Penelitian"></label>
                                     </div>
                                     <div class="grid_12">
                                         <input c-text-box type="input" filter="'varchar'" class="k-textbox"
                                             ng-model="item.lokasiPenelitian" />
                                     </div>
                                 </div>
+                               
                             </div>
                             <div class="grid_12">
                                 <div class="grid_3">
                                     <div class="grid_12">
-                                        <label c-label item="item" c-label-text="Judul Penelitian"></label>
+                                        <label c-label item="item" c-label-text="Judul Kegiatan"></label>
                                     </div>
                                     <div class="grid_12">
                                         <input c-text-box type="input" filter="'varchar'" class="k-textbox"
@@ -78,6 +81,27 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="grid_12">
+                                <div class="grid_3">
+                                    <div class="grid_12" style="margin: 6px 0 0 0;">
+                                        <label c-label item="item" c-label-text="Biaya"></label>
+                                    </div>
+                                    <div class="grid_12">
+                                        <input c-text-box type="number" filter="'varchar'" class="k-textbox"
+                                            ng-model="item.biaya" />
+                                    </div>
+                                </div>
+                                <div class="grid_3">
+                                    <div class="grid_12" style="margin: 6px 0 0 0;">
+                                        <label c-label item="item" c-label-text="Jumlah Biaya"></label>
+                                    </div>
+                                    <div class="grid_12">
+                                        <input c-text-box type="number" filter="'varchar'" class="k-textbox"
+                                            ng-model="item.jumlahBiaya" />
+                                    </div>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>

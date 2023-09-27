@@ -252,19 +252,19 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 						"title": "No",
 						"width": "10%"
 					},
-	                {
-						"field": "nip_pns",
-						"title": "Nip",
-						"width": "15%"
-					},
 					{
 						"field": "namalengkap",
 						"title": "Nama Peneliti",
 						"width": "20%"
 					},
+                    {
+						"field": "namasebagai",
+						"title": "Sebagai",
+						"width": "15%"
+					},
 					{
-						"field": "unitkerja",
-						"title": "Unit Kerja",
+						"field": "jenispegawai",
+						"title": "Profesi",
 						"width": "20%"
 					},
 					{

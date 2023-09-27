@@ -90,6 +90,25 @@ class PenelitianController extends ApiController {
         ->orderBy('ru.fakultas')
         ->get();
 
+        $sebagai = \DB::table('sebagai_m as ru')
+        ->where('ru.kdprofile', $kdProfile)
+        ->where('ru.statusenabled', true)
+        ->orderBy('ru.kodeexternal')
+        ->get();
+
+        $profesi = \DB::table('jenispegawai_m as ru')
+        ->where('ru.kdprofile', $kdProfile)
+        ->where('ru.statusenabled', true)
+        ->orderBy('ru.jenispegawai')
+        ->get();
+
+        $kegiatan = \DB::table('kegiatan_m as ru')
+        ->where('ru.kdprofile', $kdProfile)
+        ->where('ru.statusenabled', true)
+        ->wherein('ru.id', [10,11,12,13])
+        ->orderBy('ru.namakegiatan')
+        ->get();
+
         $Institusi = \DB::table('sdm_institusipendidikan_m as ru')
             ->where('ru.kdprofile', $kdProfile)
         ->where('ru.statusenabled', true)
@@ -105,6 +124,9 @@ class PenelitianController extends ApiController {
             'jurusanpeminatan' => $JurusanPeminatan,
             'fakultas' => $Fakultas,
             'institusi' => $Institusi,
+            'sebagai' => $sebagai,
+            'kegiatan' => $kegiatan,
+            'profesi' => $profesi,
             'message' => 'ea@epic',
         );
 
@@ -148,6 +170,11 @@ class PenelitianController extends ApiController {
             $dataKPE->tanggalpembayaran = $request['data']['tanggalpembayaran'];
             $dataKPE->tanggalpresentasi = $request['data']['tanggalpresentasi'];
             $dataKPE->tanggalselesai = $request['data']['tanggalselesai'];
+            $dataKPE->biaya = $request['data']['biaya'];
+            $dataKPE->jumlahBiaya = $request['data']['jumlahBiaya'];
+            $dataKPE->sebagai = $request['data']['sebagai'];
+            $dataKPE->sebagai = $request['data']['sebagai'];
+            $dataKPE->kegiatan = $request['data']['kegiatan'];
             $dataKPE->kelengkapanadministrasi = $request['data']['kelengkapanadministrasi'];
             $dataKPE->save();
             $idPP=$dataKPE->norec;
@@ -305,11 +332,13 @@ class PenelitianController extends ApiController {
             $InstitusiPendidikan = ' and pe.institusipendidikanfk = ' . $request['InstitusiPendidikan'];
          }
 
-         $data = DB::select(DB::raw("select pe.*,ip.institusipendidikan,fa.fakultas,jp.jurusanpeminatan
+         $data = DB::select(DB::raw("select pe.*,ip.institusipendidikan,fa.fakultas,jp.jurusanpeminatan, sb.kodeexternal as namasebagai, jk.namakegiatan
                  from sdm_penelitianeksternal_t as pe 
-                 INNER JOIN jurusanpeminatan_m as jp on jp.id = pe.jurusanpeminatanfk
-                 INNER JOIN sdm_fakultas_m as fa on fa.id = pe.fakultasfk
-                 INNER JOIN sdm_institusipendidikan_m as ip on ip.id = pe.institusipendidikanfk
+                 LEFT JOIN jurusanpeminatan_m as jp on jp.id = pe.jurusanpeminatanfk
+                 LEFT JOIN sdm_fakultas_m as fa on fa.id = pe.fakultasfk
+                 LEFT JOIN sdm_institusipendidikan_m as ip on ip.id = pe.institusipendidikanfk
+                 LEFT JOIN sebagai_m as sb on sb.id = pe.sebagai
+                 LEFT JOIN kegiatan_m as jk on jk.id = pe.kegiatan
                  where pe.kdprofile = $kdProfile and pe.tanggalmulai >= '$tglAwal' and pe.tanggalmulai <= '$tglAkhir' and pe.statusenabled = true
                  $NamaPeneliti
                  $Fakultas
@@ -410,56 +439,59 @@ class PenelitianController extends ApiController {
             ->where('lu.kdprofile', $kdProfile)
             ->first();
         DB::beginTransaction();
+        if ($request['data']['norec_kpe'] == ''){
+            $dataKPE = new KegiatanPenelitianPegawai();
+            $dataKPE->kdprofile = $kdProfile;
+            $dataKPE->statusenabled = true;
+            $dataKPE->norec = $dataKPE->generateNewId();
+            $JenisLog='Simpan Penelitian Kegiatan Pegawai';
+        }else{
+            $dataKPE =  KegiatanPenelitianPegawai::where('norec',$request['data']['norec_kpe'])->where('kdprofile', $kdProfile)->first();
+            $JenisLog='Ubah Penelitian Kegiatan Pegawai';
+        }
+        $dataKPE->pegawaifk = $request['data']['pegawaifk'];
+        $dataKPE->unitkerja = $request['data']['unitkerja'];
+        $dataKPE->sebagai = $request['data']['sebagai'];
+        $dataKPE->kegiatan = $request['data']['kegiatan'];
+        $dataKPE->lokasipenelitian = $request['data']['lokasipenelitian'];
+        $dataKPE->judulpenelitian = $request['data']['judulpenelitian'];
+        $dataKPE->tanggalmulai = $request['data']['tanggalmulai'];
+        $dataKPE->tanggalselesai=$request['data']['tanggalselesai'];
+        $dataKPE->biayapenelitian = $request['data']['biayapenelitian'];
+        $dataKPE->jumlahbantuan = $request['data']['jumlahbantuan'];
+        $dataKPE->bantuanditerima = $request['data']['bantuanditerima'];
+        $dataKPE->tanggalpembayaran = $request['data']['tanggalpembayaran'];
+        $dataKPE->nokwitansi = $request['data']['nokwitansi'];
+        $dataKPE->kelengkapanadministrasi = $request['data']['kelengkapanadministrasi'];
+        $dataKPE->tanggalpresentasi = $request['data']['tanggalpresentasi'];
+        $dataKPE->tanggalproposal = $request['data']['tanggalproposal'];
+        $dataKPE->tanggalpresentasi = $request['data']['tanggalpresentasi'];
+        $dataKPE->laporanpenelitian = $request['data']['laporanpenelitian'];
+        $dataKPE->tanggalkajian = $request['data']['tanggalkajian'];
+        $dataKPE->publikasijurnal = $request['data']['publikasijurnal'];
+        $dataKPE->tanggalpublikasi = $request['data']['tanggalpublikasi'];
+        $dataKPE->tindaklanjut = $request['data']['tindaklanjut'];
+        $dataKPE->save();
+        $idPP=$dataKPE->norec;
+
+        //## Logging User
+        $newId = LoggingUser::max('id');
+        $newId = $newId +1;
+        $logUser = new LoggingUser();
+        $logUser->id = $newId;
+        $logUser->norec = $logUser->generateNewId();
+        $logUser->kdprofile= $kdProfile;
+        $logUser->statusenabled=true;
+        $logUser->jenislog = $JenisLog;
+        $logUser->noreff =$idPP;
+        $logUser->referensi='norec Penelitian Kegiatan Pegawai';
+        $logUser->objectloginuserfk =  $dataLogin['userData']['id'];
+        $logUser->tanggal = $tglAyeuna;
+        $logUser->save();
+
+        $transStatus = 'true';
         try{
-            if ($request['data']['norec_kpe'] == ''){
-                $dataKPE = new KegiatanPenelitianPegawai();
-                $dataKPE->kdprofile = $kdProfile;
-                $dataKPE->statusenabled = true;
-                $dataKPE->norec = $dataKPE->generateNewId();
-                $JenisLog='Simpan Penelitian Kegiatan Pegawai';
-            }else{
-                $dataKPE =  KegiatanPenelitianPegawai::where('norec',$request['data']['norec_kpe'])->where('kdprofile', $kdProfile)->first();
-                $JenisLog='Ubah Penelitian Kegiatan Pegawai';
-            }
-            $dataKPE->pegawaifk = $request['data']['pegawaifk'];
-            $dataKPE->unitkerja = $request['data']['unitkerja'];
-            $dataKPE->lokasipenelitian = $request['data']['lokasipenelitian'];
-            $dataKPE->judulpenelitian = $request['data']['judulpenelitian'];
-            $dataKPE->tanggalmulai = $request['data']['tanggalmulai'];
-            $dataKPE->tanggalselesai=$request['data']['tanggalselesai'];
-            $dataKPE->biayapenelitian = $request['data']['biayapenelitian'];
-            $dataKPE->jumlahbantuan = $request['data']['jumlahbantuan'];
-            $dataKPE->bantuanditerima = $request['data']['bantuanditerima'];
-            $dataKPE->tanggalpembayaran = $request['data']['tanggalpembayaran'];
-            $dataKPE->nokwitansi = $request['data']['nokwitansi'];
-            $dataKPE->kelengkapanadministrasi = $request['data']['kelengkapanadministrasi'];
-            $dataKPE->tanggalpresentasi = $request['data']['tanggalpresentasi'];
-            $dataKPE->tanggalproposal = $request['data']['tanggalproposal'];
-            $dataKPE->tanggalpresentasi = $request['data']['tanggalpresentasi'];
-            $dataKPE->laporanpenelitian = $request['data']['laporanpenelitian'];
-            $dataKPE->tanggalkajian = $request['data']['tanggalkajian'];
-            $dataKPE->publikasijurnal = $request['data']['publikasijurnal'];
-            $dataKPE->tanggalpublikasi = $request['data']['tanggalpublikasi'];
-            $dataKPE->tindaklanjut = $request['data']['tindaklanjut'];
-            $dataKPE->save();
-            $idPP=$dataKPE->norec;
-
-            //## Logging User
-            $newId = LoggingUser::max('id');
-            $newId = $newId +1;
-            $logUser = new LoggingUser();
-            $logUser->id = $newId;
-            $logUser->norec = $logUser->generateNewId();
-            $logUser->kdprofile= $kdProfile;
-            $logUser->statusenabled=true;
-            $logUser->jenislog = $JenisLog;
-            $logUser->noreff =$idPP;
-            $logUser->referensi='norec Penelitian Kegiatan Pegawai';
-            $logUser->objectloginuserfk =  $dataLogin['userData']['id'];
-            $logUser->tanggal = $tglAyeuna;
-            $logUser->save();
-
-            $transStatus = 'true';
+            
         } catch (\Exception $e) {
             $transStatus = 'false';
             $transMessage = "Simpan Kegiatan Penelitian Pegawai";
@@ -479,7 +511,7 @@ class PenelitianController extends ApiController {
             DB::rollBack();
             $result = array(
                 'status' => 400,
-                'norec' => $idPP,
+                // 'norec' => $idPP,
                 'message'  => $transStatus,
                 'as' => 'ea@epic',
             );
@@ -584,9 +616,12 @@ class PenelitianController extends ApiController {
             $UnitKerja = " and pe.unitkerja ILIKE ". "'%" . $request['UnitKerja'] . "%'";
         }
 
-        $data = DB::select(DB::raw("select pe.*,pg.namalengkap,pg.nip_pns
+        $data = DB::select(DB::raw("select pe.*,pg.namalengkap,jp.jenispegawai, sb.kodeexternal as namasebagai,kg.namakegiatan
                  from kegiatanpenelitianpegawai_t as pe 
                  INNER JOIN pegawai_m as pg on pg.id = pe.pegawaifk
+                 LEFT JOIN sebagai_m as sb on sb.id = pe.sebagai
+                 LEFT JOIN kegiatan_m as kg on kg.id = pe.kegiatan
+                 LEFT JOIN jenispegawai_m as jp on jp.id = pg.objectjenispegawaifk
                  where pe.kdprofile = $kdProfile and pe.tanggalmulai >= '$tglAwal' and pe.tanggalmulai <= '$tglAkhir' and pe.statusenabled = true
                  $NamaPeneliti
                  $JudulPenelitian
