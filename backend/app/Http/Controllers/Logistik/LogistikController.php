@@ -6590,7 +6590,7 @@ class LogistikController extends ApiController{
         $data2 = $data2->orderBy('sp.noorder');
         $data2 = $data2->get();
 
-//        $results =array();
+       $results =array();
         foreach ($data2 as $item){
             $details = DB::select(DB::raw("
                      select  pr.id as kdproduk,pr.kdproduk as kdsirs,pr.namaproduk,
