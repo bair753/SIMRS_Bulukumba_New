@@ -570,7 +570,7 @@ define(['initialize'], function (initialize) {
                     idKelompokUser: null,
                     idPegawai: medifirstService.getPegawai().id,
                     dataArray: [],
-                    urlForm: 'DaftarOrderBarang',
+                    urlForm: 'ResepElektronik',
                     params: null,
                     namaFungsiFrontEnd: null,
                     tgl: e.config.data.strukorder.tglorder,
