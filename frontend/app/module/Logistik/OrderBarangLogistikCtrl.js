@@ -516,7 +516,7 @@ define(['initialize'], function (initialize) {
                 medifirstService.post('logistik/save-order-barang-ruangan', objSave).then(function (e) {
                     $scope.item.noKirim = e.data.nokirim
                     norecCetak = $scope.item.noKirim;
-                    sendNotification(e.data)
+                    sendNotification(e)
                     init();
                     Kosongkan();
                     $scope.popUp.center().open();
@@ -558,14 +558,14 @@ define(['initialize'], function (initialize) {
 
             function sendNotification(e) {
                 var body = {
-                    norec: norecOrder,
-                    judul: 'Ada order baru #' + norecOrder,
+                    norec: e.data.nokirim,
+                    judul: 'Ada order baru #OTRF-' + e.config.data.strukorder.tglorder,
                     jenis: 'Order Barang',
                     pesanNotifikasi: '',
-                    idRuanganAsal: $scope.item.ruangan.id,
-                    idRuanganTujuan: $scope.item.ruanganTujuan.id,
-                    ruanganAsal: scope.item.ruangan.namaruangan,
-                    ruanganTujuan: $scope.item.ruanganTujuan.namaruangan,
+                    idRuanganAsal: e.config.data.strukorder.ruanganfk,
+                    idRuanganTujuan: e.config.data.strukorder.ruangantujuanfk,
+                    ruanganAsal: null,
+                    ruanganTujuan: null,
                     kelompokUser: null,//medifirstService.getKelompokUser()
                     idKelompokUser: null,
                     idPegawai: medifirstService.getPegawai().id,
@@ -573,8 +573,8 @@ define(['initialize'], function (initialize) {
                     urlForm: 'DaftarOrderBarang',
                     params: null,
                     namaFungsiFrontEnd: null,
-                    tgl: $scope.item.tglAwal,
-                    tgl_string: dateHelper.getTanggalJamFormatted($scope.item.tglAwal),
+                    tgl: e.config.data.strukorder.tglorder,
+                    tgl_string: moment($scope.now).format('DD MMMM YYYY'),
                 }
                 medifirstService.sendSocket("sendNotification", body);
             }
