@@ -842,7 +842,7 @@ class LogistikController extends ApiController{
             $data = $data->where('spd.objectruanganfk','=', $request['ruanganfk']);
         }
         $data = $data->where('pr.statusenabled',true);
-        $data = $data->where('spdd.statusenabled',true);
+        $data = $data->where('spd.statusenabled',true);
         $data = $data->get();
         $data2=[] ;
         foreach ($data as $item){
