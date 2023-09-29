@@ -13416,30 +13416,36 @@ public function getLaporanPersediaan_v4_2 (Request $request) {
     if(isset($request['djp']) && $request['djp']!="" && $request['djp']!="undefined"){
         $jProduk = 'and pr.objectdetailjenisprodukfk = '.$request['djp'];
     }
+
+    $idRuangan =''; 
+    if(isset($request['idRuangan']) && $request['idRuangan']!="" && $request['idRuangan']!="undefined"){
+        $idRuangan = 'and x.objectruanganfk = '.$request['idRuangan'];
+    }
         $data = DB::select(DB::raw("
         
-        select x.id,x.namaproduk,sum(x.saldoawal) as saldoawal,sum(x.qtyterima) as qtyterima,sum(x.qtykeluar) as qtykeluar,sum(x.saldoakhir) as saldoakhir, 
+        select x.id,x.namaproduk,x.objectruanganfk,sum(x.saldoawal) as saldoawal,sum(x.qtyterima) as qtyterima,sum(x.qtykeluar) as qtykeluar,sum(x.saldoakhir) as saldoakhir, 
         sum(x.returjual) as returjual,sum(x.returbeli) as returbeli,
         x.hargasatuan,x.asalproduk,x.apid,x.satuanstandar  from ( 
-            select '0' as norec,pr.id,pr.namaproduk,
+            select '0' as norec,pr.id,pr.namaproduk,spd.objectruanganfk,
                         sum(cp.saldoakhir) AS saldoawal,
                         0 AS qtyterima,
                         0 AS qtykeluar,
                         0 AS saldoakhir,0 as returjual,0 as returbeli,round(cp.harga) as hargasatuan,ap.asalproduk,case when cp.asalprodukfk = 1 then 16 else cp.asalprodukfk end as apid,ss.satuanstandar
                         from closingpersediaan_t AS cp
                         inner join produk_m as pr on pr.id = cp.produkfk
+                        LEFT JOIN strukpelayanandetail_t spd ON spd.objectprodukfk = pr.id
                         LEFT JOIN satuanstandar_m AS ss ON ss.id = pr.objectsatuanstandarfk
                         LEFT JOIN asalproduk_m AS ap ON ap.id = case when cp.asalprodukfk = 1 then 16 else cp.asalprodukfk end 
                         where cp.bulanclosing = '$bulanlalu' 
-                        and cp.kdprofile = 21
+                        and cp.kdprofile = 39
                         and cp.statusenabled = TRUE
                         and pr.statusenabled = TRUE
                         and cp.saldoakhir >0
-            group by pr.id,pr.namaproduk,cp.harga,cp.asalprodukfk,ss.satuanstandar,ap.asalproduk
+            group by pr.id,pr.namaproduk,spd.objectruanganfk,cp.harga,cp.asalprodukfk,ss.satuanstandar,ap.asalproduk
             union all
             
                         -- penerimaan
-                        select sp.norec,pr.id,pr.namaproduk, 0 as saldoawal,(spd.qtyproduk) as qtyterima,0 as qtykeluar, 
+                        select sp.norec,pr.id,pr.namaproduk,spd.objectruanganfk, 0 as saldoawal,(spd.qtyproduk) as qtyterima,0 as qtykeluar, 
                         0 as saldoakhir,0 as returjual,0 as returbeli,round(spd.hargasatuan) as hargasatuan ,ap.asalproduk,
                         case when ap.id = 1 then 16 else ap.id end as apid,ss.satuanstandar
                         from strukpelayanan_t sp
@@ -13456,7 +13462,7 @@ public function getLaporanPersediaan_v4_2 (Request $request) {
  
                  -- returbeli
                  SELECT DISTINCT --ppr.*
-                 sr.norec,pr.id,pr.namaproduk, 0 as saldoawal,0 as qtyterima,0 as qtykeluar, 
+                 sr.norec,pr.id,pr.namaproduk,spd.objectruanganfk, 0 as saldoawal,0 as qtyterima,0 as qtykeluar, 
                  0 as saldoakhir,0 as returjual,ppr.qtyproduk as returbeli,round(spd.hargasatuan) as hargasatuan ,ap.asalproduk,
                  ap.id as apid,ss.satuanstandar
                  FROM strukretur_t AS sr
@@ -13470,8 +13476,8 @@ public function getLaporanPersediaan_v4_2 (Request $request) {
                  and pr.statusenabled = TRUE
             
             ) as x
-            where x.namaproduk ilike '%$namaproduk%'
-            group by x.id,x.namaproduk, x.hargasatuan,x.asalproduk,x.apid,x.satuanstandar 
+            where x.namaproduk ilike '%$namaproduk%' $idRuangan
+            group by x.id,x.namaproduk,x.objectruanganfk, x.hargasatuan,x.asalproduk,x.apid,x.satuanstandar 
             order by x.namaproduk,x.hargasatuan desc
            
         "));
@@ -13526,7 +13532,7 @@ public function getLaporanPersediaan_v4_2 (Request $request) {
             INNER JOIN asalproduk_m ap on ap.id=case when spd.objectasalprodukfk = 1 then 16 else spd.objectasalprodukfk end 
             INNER JOIN ruangan_m ru on ru.id=sk.objectruangantujuanfk
             LEFT JOIN satuanstandar_m AS ss ON ss.id = pr.objectsatuanstandarfk
-            WHERE sk.kdprofile = 21 and sk.jenispermintaanfk = 1
+            WHERE sk.kdprofile = 39 and sk.jenispermintaanfk = 1
             and sk.statusenabled = TRUE and kp.qtyproduk > 0
             and sk.tglkirim BETWEEN '$tglAwal' and '$tglAkhir' $jProduk
             and pr.statusenabled = TRUE
@@ -13544,7 +13550,7 @@ public function getLaporanPersediaan_v4_2 (Request $request) {
             LEFT JOIN satuanstandar_m AS ss ON ss.id = pr.objectsatuanstandarfk
             INNER JOIN ruangan_m AS ru ON ru.id = sc.objectruanganfk
             LEFT JOIN asalproduk_m AS ap ON ap.id = case when spdo.objectasalprodukfk = 1 then 16 else spdo.objectasalprodukfk end 
-            where sc.kdprofile = 21
+            where sc.kdprofile = 39
             and sc.statusenabled = true
             and sc.tglclosing BETWEEN '$tglAwal' and '$tglAkhir' $jProduk
             and spdo.qtyproduksystem <> spdo.qtyprodukreal
