@@ -222,7 +222,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <font style="font-size: 11pt" color="#000000">Dokter Penanggung Jawab</font>
                                 </td>
                                 <td>
-                                    <font style="font-size: 11pt" color="#000000">: {{ $r['doketr'] }}</font>
+                                    <font style="font-size: 11pt" color="#000000">: {!! $res['d0'][0]->dokterpenanggungjawab !!}</font>
                                 </td>
                             </tr>
                             <tr>
@@ -414,11 +414,11 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             </tr>
                             <tr>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['pemeriksa'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterperiksa !!}
                                     </font>
                                 </td>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['doketr'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterpenanggungjawab !!}
                                     </font>
                                 </td>
                             </tr>
@@ -590,7 +590,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <font style="font-size: 11pt" color="#000000">Dokter Penanggung Jawab</font>
                                 </td>
                                 <td>
-                                    <font style="font-size: 11pt" color="#000000">: {{ $r['doketr'] }}</font>
+                                    <font style="font-size: 11pt" color="#000000">: {!! $res['d0'][0]->dokterpenanggungjawab !!}</font>
                                 </td>
                             </tr>
                             <tr>
@@ -782,11 +782,11 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             </tr>
                             <tr>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['pemeriksa'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterperiksa !!}
                                     </font>
                                 </td>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['doketr'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterpenanggungjawab !!}
                                     </font>
                                 </td>
                             </tr>
@@ -958,7 +958,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <font style="font-size: 11pt" color="#000000">Dokter Penanggung Jawab</font>
                                 </td>
                                 <td>
-                                    <font style="font-size: 11pt" color="#000000">: {{ $r['doketr'] }}</font>
+                                    <font style="font-size: 11pt" color="#000000">: {!! $res['d0'][0]->dokterpenanggungjawab !!}</font>
                                 </td>
                             </tr>
                             <tr>
@@ -1150,11 +1150,11 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             </tr>
                             <tr>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['pemeriksa'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterperiksa !!}
                                     </font>
                                 </td>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['doketr'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterpenanggungjawab !!}
                                     </font>
                                 </td>
                             </tr>
@@ -1326,7 +1326,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <font style="font-size: 11pt" color="#000000">Dokter Penanggung Jawab</font>
                                 </td>
                                 <td>
-                                    <font style="font-size: 11pt" color="#000000">: {{ $r['doketr'] }}</font>
+                                    <font style="font-size: 11pt" color="#000000">: {!! $res['d0'][0]->dokterpenanggungjawab !!}</font>
                                 </td>
                             </tr>
                             <tr>
@@ -1518,11 +1518,11 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             </tr>
                             <tr>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['pemeriksa'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterperiksa !!}
                                     </font>
                                 </td>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['doketr'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterpenanggungjawab !!}
                                     </font>
                                 </td>
                             </tr>
@@ -1694,7 +1694,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <font style="font-size: 11pt" color="#000000">Dokter Penanggung Jawab</font>
                                 </td>
                                 <td>
-                                    <font style="font-size: 11pt" color="#000000">: {{ $r['doketr'] }}</font>
+                                    <font style="font-size: 11pt" color="#000000">: {!! $res['d0'][0]->dokterpenanggungjawab !!}</font>
                                 </td>
                             </tr>
                             <tr>
@@ -1886,11 +1886,11 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             </tr>
                             <tr>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['pemeriksa'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterperiksa !!}
                                     </font>
                                 </td>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['doketr'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterpenanggungjawab !!}
                                     </font>
                                 </td>
                             </tr>
@@ -2062,7 +2062,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <font style="font-size: 11pt" color="#000000">Dokter Penanggung Jawab</font>
                                 </td>
                                 <td>
-                                    <font style="font-size: 11pt" color="#000000">: {{ $r['doketr'] }}</font>
+                                    <font style="font-size: 11pt" color="#000000">: {!! $res['d0'][0]->dokterpenanggungjawab !!}</font>
                                 </td>
                             </tr>
                             <tr>
@@ -2254,11 +2254,11 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             </tr>
                             <tr>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['pemeriksa'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterperiksa !!}
                                     </font>
                                 </td>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['doketr'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterpenanggungjawab !!}
                                     </font>
                                 </td>
                             </tr>
@@ -2430,7 +2430,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <font style="font-size: 11pt" color="#000000">Dokter Penanggung Jawab</font>
                                 </td>
                                 <td>
-                                    <font style="font-size: 11pt" color="#000000">: {{ $r['doketr'] }}</font>
+                                    <font style="font-size: 11pt" color="#000000">: {!! $res['d0'][0]->dokterpenanggungjawab !!}</font>
                                 </td>
                             </tr>
                             <tr>
@@ -2622,11 +2622,11 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             </tr>
                             <tr>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['pemeriksa'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterperiksa !!}
                                     </font>
                                 </td>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['doketr'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterpenanggungjawab !!}
                                     </font>
                                 </td>
                             </tr>
@@ -2798,7 +2798,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <font style="font-size: 11pt" color="#000000">Dokter Penanggung Jawab</font>
                                 </td>
                                 <td>
-                                    <font style="font-size: 11pt" color="#000000">: {{ $r['doketr'] }}</font>
+                                    <font style="font-size: 11pt" color="#000000">: {!! $res['d0'][0]->dokterpenanggungjawab !!}</font>
                                 </td>
                             </tr>
                             <tr>
@@ -2990,11 +2990,11 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             </tr>
                             <tr>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['pemeriksa'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterperiksa !!}
                                     </font>
                                 </td>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['doketr'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterpenanggungjawab !!}
                                     </font>
                                 </td>
                             </tr>
@@ -3166,7 +3166,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <font style="font-size: 11pt" color="#000000">Dokter Penanggung Jawab</font>
                                 </td>
                                 <td>
-                                    <font style="font-size: 11pt" color="#000000">: {{ $r['doketr'] }}</font>
+                                    <font style="font-size: 11pt" color="#000000">: {!! $res['d0'][0]->dokterpenanggungjawab !!}</font>
                                 </td>
                             </tr>
                             <tr>
@@ -3358,11 +3358,11 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             </tr>
                             <tr>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['pemeriksa'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterperiksa !!}
                                     </font>
                                 </td>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['doketr'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterpenanggungjawab !!}
                                     </font>
                                 </td>
                             </tr>
@@ -3534,7 +3534,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <font style="font-size: 11pt" color="#000000">Dokter Penanggung Jawab</font>
                                 </td>
                                 <td>
-                                    <font style="font-size: 11pt" color="#000000">: {{ $r['doketr'] }}</font>
+                                    <font style="font-size: 11pt" color="#000000">: {!! $res['d0'][0]->dokterpenanggungjawab !!}</font>
                                 </td>
                             </tr>
                             <tr>
@@ -3726,11 +3726,11 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             </tr>
                             <tr>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['pemeriksa'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterperiksa !!}
                                     </font>
                                 </td>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['doketr'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterpenanggungjawab !!}
                                     </font>
                                 </td>
                             </tr>
@@ -3902,7 +3902,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <font style="font-size: 11pt" color="#000000">Dokter Penanggung Jawab</font>
                                 </td>
                                 <td>
-                                    <font style="font-size: 11pt" color="#000000">: {{ $r['doketr'] }}</font>
+                                    <font style="font-size: 11pt" color="#000000">: {!! $res['d0'][0]->dokterpenanggungjawab !!}</font>
                                 </td>
                             </tr>
                             <tr>
@@ -4094,11 +4094,11 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             </tr>
                             <tr>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['pemeriksa'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterperiksa !!}
                                     </font>
                                 </td>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['doketr'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterpenanggungjawab !!}
                                     </font>
                                 </td>
                             </tr>
@@ -4270,7 +4270,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <font style="font-size: 11pt" color="#000000">Dokter Penanggung Jawab</font>
                                 </td>
                                 <td>
-                                    <font style="font-size: 11pt" color="#000000">: {{ $r['doketr'] }}</font>
+                                    <font style="font-size: 11pt" color="#000000">: {!! $res['d0'][0]->dokterpenanggungjawab !!}</font>
                                 </td>
                             </tr>
                             <tr>
@@ -4462,11 +4462,11 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             </tr>
                             <tr>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['pemeriksa'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterperiksa !!}
                                     </font>
                                 </td>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['doketr'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterpenanggungjawab !!}
                                     </font>
                                 </td>
                             </tr>
@@ -4638,7 +4638,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <font style="font-size: 11pt" color="#000000">Dokter Penanggung Jawab</font>
                                 </td>
                                 <td>
-                                    <font style="font-size: 11pt" color="#000000">: {{ $r['doketr'] }}</font>
+                                    <font style="font-size: 11pt" color="#000000">: {!! $res['d0'][0]->dokterpenanggungjawab !!}</font>
                                 </td>
                             </tr>
                             <tr>
@@ -4830,11 +4830,11 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             </tr>
                             <tr>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['pemeriksa'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterperiksa !!}
                                     </font>
                                 </td>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['doketr'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterpenanggungjawab !!}
                                     </font>
                                 </td>
                             </tr>
@@ -5006,7 +5006,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <font style="font-size: 11pt" color="#000000">Dokter Penanggung Jawab</font>
                                 </td>
                                 <td>
-                                    <font style="font-size: 11pt" color="#000000">: {{ $r['doketr'] }}</font>
+                                    <font style="font-size: 11pt" color="#000000">: {!! $res['d0'][0]->dokterpenanggungjawab !!}</font>
                                 </td>
                             </tr>
                             <tr>
@@ -5198,11 +5198,11 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             </tr>
                             <tr>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['pemeriksa'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterperiksa !!}
                                     </font>
                                 </td>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['doketr'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterpenanggungjawab !!}
                                     </font>
                                 </td>
                             </tr>
@@ -5374,7 +5374,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <font style="font-size: 11pt" color="#000000">Dokter Penanggung Jawab</font>
                                 </td>
                                 <td>
-                                    <font style="font-size: 11pt" color="#000000">: {{ $r['doketr'] }}</font>
+                                    <font style="font-size: 11pt" color="#000000">: {!! $res['d0'][0]->dokterpenanggungjawab !!}</font>
                                 </td>
                             </tr>
                             <tr>
@@ -5566,11 +5566,11 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             </tr>
                             <tr>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['pemeriksa'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterperiksa !!}
                                     </font>
                                 </td>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['doketr'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterpenanggungjawab !!}
                                     </font>
                                 </td>
                             </tr>
@@ -5742,7 +5742,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <font style="font-size: 11pt" color="#000000">Dokter Penanggung Jawab</font>
                                 </td>
                                 <td>
-                                    <font style="font-size: 11pt" color="#000000">: {{ $r['doketr'] }}</font>
+                                    <font style="font-size: 11pt" color="#000000">: {!! $res['d0'][0]->dokterpenanggungjawab !!}</font>
                                 </td>
                             </tr>
                             <tr>
@@ -5934,11 +5934,11 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             </tr>
                             <tr>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['pemeriksa'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterperiksa !!}
                                     </font>
                                 </td>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['doketr'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterpenanggungjawab !!}
                                     </font>
                                 </td>
                             </tr>
@@ -6110,7 +6110,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <font style="font-size: 11pt" color="#000000">Dokter Penanggung Jawab</font>
                                 </td>
                                 <td>
-                                    <font style="font-size: 11pt" color="#000000">: {{ $r['doketr'] }}</font>
+                                    <font style="font-size: 11pt" color="#000000">: {!! $res['d0'][0]->dokterpenanggungjawab !!}</font>
                                 </td>
                             </tr>
                             <tr>
@@ -6302,11 +6302,11 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             </tr>
                             <tr>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['pemeriksa'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterperiksa !!}
                                     </font>
                                 </td>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['doketr'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterpenanggungjawab !!}
                                     </font>
                                 </td>
                             </tr>
@@ -6478,7 +6478,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <font style="font-size: 11pt" color="#000000">Dokter Penanggung Jawab</font>
                                 </td>
                                 <td>
-                                    <font style="font-size: 11pt" color="#000000">: {{ $r['doketr'] }}</font>
+                                    <font style="font-size: 11pt" color="#000000">: {!! $res['d0'][0]->dokterpenanggungjawab !!}</font>
                                 </td>
                             </tr>
                             <tr>
@@ -6670,11 +6670,11 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             </tr>
                             <tr>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['pemeriksa'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterperiksa !!}
                                     </font>
                                 </td>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['doketr'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterpenanggungjawab !!}
                                     </font>
                                 </td>
                             </tr>
@@ -6846,7 +6846,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <font style="font-size: 11pt" color="#000000">Dokter Penanggung Jawab</font>
                                 </td>
                                 <td>
-                                    <font style="font-size: 11pt" color="#000000">: {{ $r['doketr'] }}</font>
+                                    <font style="font-size: 11pt" color="#000000">: {!! $res['d0'][0]->dokterpenanggungjawab !!}</font>
                                 </td>
                             </tr>
                             <tr>
@@ -7038,11 +7038,11 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             </tr>
                             <tr>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['pemeriksa'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterperiksa !!}
                                     </font>
                                 </td>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['doketr'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterpenanggungjawab !!}
                                     </font>
                                 </td>
                             </tr>
@@ -7214,7 +7214,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <font style="font-size: 11pt" color="#000000">Dokter Penanggung Jawab</font>
                                 </td>
                                 <td>
-                                    <font style="font-size: 11pt" color="#000000">: {{ $r['doketr'] }}</font>
+                                    <font style="font-size: 11pt" color="#000000">: {!! $res['d0'][0]->dokterpenanggungjawab !!}</font>
                                 </td>
                             </tr>
                             <tr>
@@ -7406,11 +7406,11 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             </tr>
                             <tr>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['pemeriksa'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterperiksa !!}
                                     </font>
                                 </td>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['doketr'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterpenanggungjawab !!}
                                     </font>
                                 </td>
                             </tr>
@@ -7582,7 +7582,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <font style="font-size: 11pt" color="#000000">Dokter Penanggung Jawab</font>
                                 </td>
                                 <td>
-                                    <font style="font-size: 11pt" color="#000000">: {{ $r['doketr'] }}</font>
+                                    <font style="font-size: 11pt" color="#000000">: {!! $res['d0'][0]->dokterpenanggungjawab !!}</font>
                                 </td>
                             </tr>
                             <tr>
@@ -7774,11 +7774,11 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             </tr>
                             <tr>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['pemeriksa'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterperiksa !!}
                                     </font>
                                 </td>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['doketr'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterpenanggungjawab !!}
                                     </font>
                                 </td>
                             </tr>
@@ -7950,7 +7950,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <font style="font-size: 11pt" color="#000000">Dokter Penanggung Jawab</font>
                                 </td>
                                 <td>
-                                    <font style="font-size: 11pt" color="#000000">: {{ $r['doketr'] }}</font>
+                                    <font style="font-size: 11pt" color="#000000">: {!! $res['d0'][0]->dokterpenanggungjawab !!}</font>
                                 </td>
                             </tr>
                             <tr>
@@ -8142,11 +8142,11 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             </tr>
                             <tr>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['pemeriksa'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterperiksa !!}
                                     </font>
                                 </td>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['doketr'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterpenanggungjawab !!}
                                     </font>
                                 </td>
                             </tr>
@@ -8318,7 +8318,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <font style="font-size: 11pt" color="#000000">Dokter Penanggung Jawab</font>
                                 </td>
                                 <td>
-                                    <font style="font-size: 11pt" color="#000000">: {{ $r['doketr'] }}</font>
+                                    <font style="font-size: 11pt" color="#000000">: {!! $res['d0'][0]->dokterpenanggungjawab !!}</font>
                                 </td>
                             </tr>
                             <tr>
@@ -8510,11 +8510,11 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             </tr>
                             <tr>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['pemeriksa'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterperiksa !!}
                                     </font>
                                 </td>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['doketr'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterpenanggungjawab !!}
                                     </font>
                                 </td>
                             </tr>
@@ -8686,7 +8686,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <font style="font-size: 11pt" color="#000000">Dokter Penanggung Jawab</font>
                                 </td>
                                 <td>
-                                    <font style="font-size: 11pt" color="#000000">: {{ $r['doketr'] }}</font>
+                                    <font style="font-size: 11pt" color="#000000">: {!! $res['d0'][0]->dokterpenanggungjawab !!}</font>
                                 </td>
                             </tr>
                             <tr>
@@ -8878,11 +8878,11 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             </tr>
                             <tr>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['pemeriksa'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterperiksa !!}
                                     </font>
                                 </td>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['doketr'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterpenanggungjawab !!}
                                     </font>
                                 </td>
                             </tr>
@@ -9054,7 +9054,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                                     <font style="font-size: 11pt" color="#000000">Dokter Penanggung Jawab</font>
                                 </td>
                                 <td>
-                                    <font style="font-size: 11pt" color="#000000">: {{ $r['doketr'] }}</font>
+                                    <font style="font-size: 11pt" color="#000000">: {!! $res['d0'][0]->dokterpenanggungjawab !!}</font>
                                 </td>
                             </tr>
                             <tr>
@@ -9246,11 +9246,11 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             </tr>
                             <tr>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['pemeriksa'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterperiksa !!}
                                     </font>
                                 </td>
                                 <td style="align-items: center">
-                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{{ $r['doketr'] }}
+                                    <font style="font-size: 8pt;font-weight:bold;" color="#000000">{!! $res['d0'][0]->dokterpenanggungjawab !!}
                                     </font>
                                 </td>
                             </tr>
@@ -9311,307 +9311,305 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
     @endif
 
     <script>
-        var p = {!!json_encode($r['pemeriksa']) !!};
-        var d = {!!json_encode($r['doketr']) !!};
 
         jQuery('#qrcodeNamaPemeriksa0').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['pemeriksa'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterperiksa !!}"
         });
 
         jQuery('#qrcodePenanggungJawab0').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['doketr'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterpenanggungjawab !!}"
         });
 
         jQuery('#qrcodeNamaPemeriksa1').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['pemeriksa'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterperiksa !!}"
         });
 
         jQuery('#qrcodePenanggungJawab1').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['doketr'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterpenanggungjawab !!}"
         });
 
         jQuery('#qrcodeNamaPemeriksa2').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['pemeriksa'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterperiksa !!}"
         });
 
         jQuery('#qrcodePenanggungJawab2').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['doketr'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterpenanggungjawab !!}"
         });
 
         jQuery('#qrcodeNamaPemeriksa3').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['pemeriksa'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterperiksa !!}"
         });
 
         jQuery('#qrcodePenanggungJawab3').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['doketr'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterpenanggungjawab !!}"
         });
 
         jQuery('#qrcodeNamaPemeriksa4').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['pemeriksa'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterperiksa !!}"
         });
 
         jQuery('#qrcodePenanggungJawab4').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['doketr'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterpenanggungjawab !!}"
         });
 
         jQuery('#qrcodeNamaPemeriksa5').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['pemeriksa'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterperiksa !!}"
         });
 
         jQuery('#qrcodePenanggungJawab5').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['doketr'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterpenanggungjawab !!}"
         });
 
         jQuery('#qrcodeNamaPemeriksa6').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['pemeriksa'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterperiksa !!}"
         });
 
         jQuery('#qrcodePenanggungJawab6').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['doketr'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterpenanggungjawab !!}"
         });
 
         jQuery('#qrcodeNamaPemeriksa7').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['pemeriksa'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterperiksa !!}"
         });
 
         jQuery('#qrcodePenanggungJawab7').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['doketr'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterpenanggungjawab !!}"
         });
 
         jQuery('#qrcodeNamaPemeriksa8').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['pemeriksa'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterperiksa !!}"
         });
 
         jQuery('#qrcodePenanggungJawab8').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['doketr'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterpenanggungjawab !!}"
         });
 
         jQuery('#qrcodeNamaPemeriksa9').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['pemeriksa'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterperiksa !!}"
         });
 
         jQuery('#qrcodePenanggungJawab9').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['doketr'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterpenanggungjawab !!}"
         });
 
         jQuery('#qrcodeNamaPemeriksa10').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['pemeriksa'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterperiksa !!}"
         });
 
         jQuery('#qrcodePenanggungJawab10').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['doketr'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterpenanggungjawab !!}"
         });
 
         jQuery('#qrcodeNamaPemeriksa11').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['pemeriksa'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterperiksa !!}"
         });
 
         jQuery('#qrcodePenanggungJawab11').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['doketr'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterpenanggungjawab !!}"
         });
 
         jQuery('#qrcodeNamaPemeriksa12').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['pemeriksa'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterperiksa !!}"
         });
 
         jQuery('#qrcodePenanggungJawab12').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['doketr'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterpenanggungjawab !!}"
         });
 
         jQuery('#qrcodeNamaPemeriksa13').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['pemeriksa'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterperiksa !!}"
         });
 
         jQuery('#qrcodePenanggungJawab13').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['doketr'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterpenanggungjawab !!}"
         });
 
         jQuery('#qrcodeNamaPemeriksa14').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['pemeriksa'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterperiksa !!}"
         });
 
         jQuery('#qrcodePenanggungJawab14').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['doketr'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterpenanggungjawab !!}"
         });
 
         jQuery('#qrcodeNamaPemeriksa15').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['pemeriksa'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterperiksa !!}"
         });
 
         jQuery('#qrcodePenanggungJawab15').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['doketr'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterpenanggungjawab !!}"
         });
 
         jQuery('#qrcodeNamaPemeriksa16').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['pemeriksa'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterperiksa !!}"
         });
 
         jQuery('#qrcodePenanggungJawab16').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['doketr'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterpenanggungjawab !!}"
         });
 
         jQuery('#qrcodeNamaPemeriksa17').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['pemeriksa'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterperiksa !!}"
         });
 
         jQuery('#qrcodePenanggungJawab17').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['doketr'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterpenanggungjawab !!}"
         });
 
         jQuery('#qrcodeNamaPemeriksa18').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['pemeriksa'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterperiksa !!}"
         });
 
         jQuery('#qrcodePenanggungJawab18').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['doketr'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterpenanggungjawab !!}"
         });
 
         jQuery('#qrcodeNamaPemeriksa19').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['pemeriksa'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterperiksa !!}"
         });
 
         jQuery('#qrcodePenanggungJawab19').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['doketr'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterpenanggungjawab !!}"
         });
 
         jQuery('#qrcodeNamaPemeriksa20').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['pemeriksa'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterperiksa !!}"
         });
 
         jQuery('#qrcodePenanggungJawab20').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['doketr'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterpenanggungjawab !!}"
         });
 
         jQuery('#qrcodeNamaPemeriksa21').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['pemeriksa'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterperiksa !!}"
         });
 
         jQuery('#qrcodePenanggungJawab21').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['doketr'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterpenanggungjawab !!}"
         });
 
         jQuery('#qrcodeNamaPemeriksa22').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['pemeriksa'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterperiksa !!}"
         });
 
         jQuery('#qrcodePenanggungJawab22').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['doketr'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterpenanggungjawab !!}"
         });
 
         jQuery('#qrcodeNamaPemeriksa23').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['pemeriksa'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterperiksa !!}"
         });
 
         jQuery('#qrcodePenanggungJawab23').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['doketr'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterpenanggungjawab !!}"
         });
 
         jQuery('#qrcodeNamaPemeriksa24').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['pemeriksa'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterperiksa !!}"
         });
 
         jQuery('#qrcodePenanggungJawab24').qrcode({
             width: 70,
             height: 70,
-            text: "Tanda Tangan Digital Oleh " + "{{ $r['doketr'] }}"
+            text: "Tanda Tangan Digital Oleh " + "{!! $res['d0'][0]->dokterpenanggungjawab !!}"
         });
 
         
