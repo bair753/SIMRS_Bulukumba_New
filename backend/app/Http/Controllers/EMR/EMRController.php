@@ -9146,7 +9146,7 @@ class EMRController  extends ApiController
                     ->first();
                 $noemr = $EMR->noemr;
 
-                if ((!empty($EMR))) {
+                if ((empty($EMR))) {
                     $transMessage = "No. RM Pasien yang lama telah digabungkan ke yang baru";
                     DB::rollBack();
                     $result = array(
