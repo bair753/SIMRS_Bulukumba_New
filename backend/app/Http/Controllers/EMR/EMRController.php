@@ -9140,11 +9140,22 @@ class EMRController  extends ApiController
                 $EMRPASIENDETAILIMG = [];
             } else {
                 $EMR = EMRPasien::where('noemr', $head['norec_emr'])
-                ->where('noregistrasifk', $head['noregistrasi'])
-                // ->where('nocm', $head['nocm'])
+                // ->where('noregistrasifk', $head['noregistrasi'])
+                ->where('nocm', $head['nocm'])
                 ->where('kdprofile', $kdProfile)
                     ->first();
                 $noemr = $EMR->noemr;
+
+                if ((!empty($EMR))) {
+                    $transMessage = "No. RM Pasien yang lama telah digabungkan ke yang baru";
+                    DB::rollBack();
+                    $result = array(
+                        "status" => 400,
+                        "message" => $transMessage,
+                        "as" => 'as@epic',
+                    );
+                    return $this->setStatusCode($result['status'])->respond($result, $transMessage);
+                }
 
                 //LOAD DATA EMR PEMBANDING
                 $EMRPASIENDETAIL = EMRPasienD::where('emrpasienfk', $noemr)
