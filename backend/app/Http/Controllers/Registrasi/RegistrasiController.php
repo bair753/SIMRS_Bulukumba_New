@@ -8974,7 +8974,7 @@ class RegistrasiController extends ApiController
             $deptId = ' and ru.objectdepartemenfk = ' . $request['idDept'];
         }
 
-        $data = DB::select(DB::raw("select *,sum(z.kasusbarulk)+sum(z.kasusbarup) as kasus45 from (
+        $data = DB::select(DB::raw("select *,sum(z.kasusbarulk)+sum(z.kasusbarup)+sum(z.meninggallk)+sum(z.meninggalp) as kasus45 from (
             select count(x.kddiagnosa)as jumlah,x.kddiagnosa,x.namadiagnosa,
             sum(case when x.kasusbaru = 1 and x.jeniskelamin like 'LAKI-LAKI' then 1 else 0 end) as kasusbarulk,
             sum(case when x.tglmeninggal = 1 and x.jeniskelamin like 'LAKI-LAKI' then 1 else 0 end) as meninggallk,
