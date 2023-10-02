@@ -14,7 +14,7 @@ define(['initialize'], function (initialize) {
             $scope.cc = {};
             var nomorEMR = '-';
             var norecEMR = '';
-            $scope.cc.emrfk = 290186;
+            $scope.cc.emrfk = 290025;
             var dataLoad = [];
             $scope.isCetak = false;
             $scope.allDisabled = false;
