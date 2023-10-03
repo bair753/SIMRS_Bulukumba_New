@@ -3789,6 +3789,10 @@
         {
             "nameDep": "FormulirInformedConsentCtrl",
             "urlDep": "module/EMR/FormulirInformedConsentCtrl"
+        },
+        {
+            "nameDep": "SementaraBerobatCtrl",
+            "urlDep": "module/EMR/SementaraBerobatCtrl"
         }
     ]
 }
