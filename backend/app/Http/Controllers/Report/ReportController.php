@@ -3512,9 +3512,10 @@ class ReportController extends ApiController{
             select * from profile_m where statusenabled = true
         "))->first();
         $pageWidth = 950;
+        $head = array();
 
         for ($i=0; $i < $r->countnorec; $i++) { 
-            $res['d'.$i] = collect(DB::select("
+            $res = collect(DB::select("
                 SELECT
                 * 
                 FROM (
@@ -3576,7 +3577,7 @@ class ReportController extends ApiController{
                     CASE WHEN so.tglorder IS NULL THEN apd.tglmasuk ELSE so.tglorder END AS tglorder,
                     EXTRACT(YEAR FROM AGE(pd.tglregistrasi, pm.tgllahir)) || ' Thn ' ||
                     EXTRACT(MONTH FROM AGE(pd.tglregistrasi, pm.tgllahir)) || ' Bln ' ||
-                    EXTRACT(DAY FROM AGE(pd.tglregistrasi, pm.tgllahir)) || ' Hr' AS umur,pg4.namalengkap AS dokter
+                    EXTRACT(DAY FROM AGE(pd.tglregistrasi, pm.tgllahir)) || ' Hr' AS umur,pg4.namalengkap AS dokter, hh.catatan
                     FROM pelayananpasien_t AS pp
                     INNER JOIN antrianpasiendiperiksa_t AS apd ON apd.norec = pp.noregistrasifk
                     INNER JOIN pasiendaftar_t AS pd ON pd.norec = apd.noregistrasifk
@@ -3618,7 +3619,7 @@ class ReportController extends ApiController{
                 ORDER BY
                     DATA.nourutjenispemeriksaan ASC
                     "));
-                    foreach ($res['d'.$i] as $data) {
+                    foreach ($res as $data) {
                         if ($data->flag == 'Y') {
                             $lenghiji = strlen($data->hasilawal);
                             $lengdua = strlen($data->nilaitext);
@@ -3638,12 +3639,16 @@ class ReportController extends ApiController{
                             }
                         }
                     }
-                    $res['head'.$i] = $res['d'.$i]->groupBy('detailjenisproduk');
+                    $head[$i] = $res->groupBy('detailjenisproduk');
+                    $headi[$i] = $res->groupBy('detailjenisproduk');
         }
+         $cek = $res[0];
+        
 
-            $res = collect($res)->filter( function ( $item ) { 
-                return strlen( $item ) > 100; 
-            }); 
+         $head = collect($head)->filter( function ( $item ) { 
+            return strlen( $item ) > 100; 
+        }); 
+            // dd($res);
           if (count($res) == 0) {
             echo '
                 <script language="javascript">
@@ -3654,14 +3659,17 @@ class ReportController extends ApiController{
             die;
         }
         $dataReport = array(
-            'namaprofile' => $profile->namalengkap,
+            'namaprofile' => $profile,
             'alamat' => $profile->alamatlengkap,
             'res' => $res,
+            'head' => $head,
+            'cek' => $cek,
         );
+        // dd($dataReport);
         
         return view(
             'report.lab.hasil-lab-all',
-            compact('res', 'pageWidth', 'r', 'profile')
+            compact('res', 'head', 'cek', 'headi', 'pageWidth', 'r', 'profile')
         );
     }
 
