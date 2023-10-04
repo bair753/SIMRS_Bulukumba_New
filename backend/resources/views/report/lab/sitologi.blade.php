@@ -272,22 +272,22 @@
             <td style="border:none" colspan="3">: {{ $raw->asal }}</td>
         </tr>
         <tr>
-            <td colspan="9" style="border:none;height:60px"><b>Keterangan Klinik : </b>{{  $raw->keteranganklinik }}</td>
+            <td colspan="9" style="border:none;;text-align:justify"><b>Keterangan Klinik : </b>{{  $raw->keteranganklinik }}</td>
         </tr>
         <tr>
-            <td colspan="9" style="border:none;height:60px"><b>Diagnosa Klinik : </b>{{  $raw->diagnosaklinik }}</td>
+            <td colspan="9" style="border:none;;text-align:justify"><b>Diagnosa Klinik : </b>{{  $raw->diagnosaklinik }}</td>
         </tr>
         <tr>
-            <td colspan="9" style="border:none;height:60px"><b>Makroskopik : </b>{{  $raw->makroskopik }}</td>
+            <td colspan="9" style="border:none;;text-align:justify"><b>Makroskopik : </b>{{  $raw->makroskopik }}</td>
         </tr>
         <tr>
-            <td colspan="9" style="border:none;height:60px"><b>Mikroskopik : </b>{{  $raw->mikroskopik }}</td>
+            <td colspan="9" style="border:none;;text-align:justify"><b>Mikroskopik : </b>{{  $raw->mikroskopik }}</td>
         </tr>
         <tr>
-            <td colspan="9" style="border:none;height:50px"><b>Kesimpulan : </b>{{  $raw->kesimpulan }}</td>
+            <td colspan="9" style="border:none;;text-align:justify"><b>Kesimpulan : </b>{{  $raw->kesimpulan }}</td>
         </tr>
         <tr>
-            <td colspan="9" style="border:none;height:50px"><b>Anjuran : </b>{{  $raw->anjuran }}</td>
+            <td colspan="9" style="border:none;;text-align:justify"><b>Anjuran : </b>{{  $raw->anjuran }}</td>
         </tr>
         <tr style="text-align: center;">
             <td colspan="4" style="border:none"></td>
@@ -317,8 +317,8 @@
         
         if(d1 != undefined){
             jQuery('#qrcoded1').qrcode({
-                width	: 100,
-                height	: 100,
+                width	: 70,
+                height	: 70,
                 text	: "Tanda Tangan Digital Oleh " + d1
             });	
         }
