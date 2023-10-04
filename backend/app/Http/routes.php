@@ -1997,6 +1997,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
           // Route::post('reservasionline/save','ReservasiOnline\ReservasiOnlineController@saveReservasi');
           Route::post('reservasionline/save','ReservasiOnline\ReservasiOnlineController@saveReservasi_15012023');
           Route::post('reservasionline/delete','ReservasiOnline\ReservasiOnlineController@deleteReservasi');
+          Route::post('reservasionline/update-reservasi-sirudal','ReservasiOnline\ReservasiOnlineController@updateReservasiSirudal');
           Route::get('reservasionline/cek-reservasi-satu','ReservasiOnline\ReservasiOnlineController@cekReservasiDipoliYangSama');
           Route::get('reservasionline/get-slotting-by-ruangan-new/{kode}/{tgl}','ReservasiOnline\ReservasiOnlineController@getSlottingByRuanganNew');
           Route::get('reservasionline/get-slot-available','ReservasiOnline\ReservasiOnlineController@getDaftarSlottingAktif');

@@ -18,7 +18,7 @@
 
 <div *ngIf="activeItem.label == 'Reservasi' && !isBuktiReservasi">
 
-  <div class="card" style="margin-top:10px;background-color: #ffffff;">
+  <div class="card" style="margin-top:10px;background-color: #C7F9CC;">
     <div style="padding-left: 10px;padding-right: 10px">
       <p-steps [model]="stepsMenuItems" [styleClass]="steps-custom" [(activeIndex)]="activeIndex" [readonly]="true">
       </p-steps>
@@ -26,7 +26,7 @@
   </div>
 
   <form [formGroup]="formGroup">
-    <div class="card card-w-title" *ngIf="activeIndex == 0" style="background-color: #ffffff;">
+    <div class="card card-w-title" *ngIf="activeIndex == 0" style="background-color: #C7F9CC;">
       <div class="card card-form-header">
         <h1>Pilih Kategori</h1>
       </div>
@@ -144,6 +144,8 @@
                   </mat-select>
                 </mat-form-field> -->
                 </div>
+
+
               </div>
               <div class="ui-g-12 ui-md-12 ui-lg-12">
                 <div class="ui-g-12 ui-md-12 ui-lg-3">
@@ -153,7 +155,32 @@
                     <mat-icon matSuffix>phone</mat-icon>
                   </mat-form-field>
                 </div>
+                <!-- <div class="ui-g-12 ui-md-12 ui-lg-3">
+                  <mat-form-field appearance="fill">
+                    <mat-label>Agama</mat-label>
+                    <mat-select formControlName="agama">
+                      <mat-option *ngFor="let aga of listAgama" [value]="aga">
+                        {{aga.agama}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div> -->
+                <div class="ui-g-12 ui-md-12 ui-lg-3">
+                  <mat-form-field appearance="fill">
+                    <mat-label>Tempat Lahir</mat-label>
+                    <input matInput placeholder="Tempat Lahir" formControlName="tempatLahir">
+                    <mat-icon matSuffix>phone</mat-icon>
+                  </mat-form-field>
+                </div>
+                <div class="ui-g-12 ui-md-12 ui-lg-3">
+                  <mat-form-field appearance="fill">
+                    <mat-label>Alamat</mat-label>
+                    <input matInput placeholder="Alamat" formControlName="alamat">
+                    <mat-icon matSuffix>phone</mat-icon>
+                  </mat-form-field>
+                </div>
               </div>
+
             </div>
             <div class="ui-g-12" *ngIf="isLama">
               <div class="ui-g-12 ui-md-12 ui-lg-12">
@@ -352,6 +379,16 @@
               </button>
             </mat-form-field>
           </div>
+          <!-- <div class="ui-g-12 ui-md-12 ui-lg-3" *ngIf="isBPJS">
+            <mat-form-field appearance="fill">
+              <mat-label>Diagnosa</mat-label>
+              <input matInput placeholder="No Rujukan" formControlName="diagnosa">
+              <button mat-button *ngIf="formGroup.get('diagnosa').value" matSuffix mat-icon-button aria-label="Clear"
+                (click)="formGroup.get('diagnosa').setValue('')">
+                <mat-icon>close</mat-icon>
+              </button>
+            </mat-form-field>
+          </div> -->
           <!-- <div class="ui-g-12 ui-md-6 ui-lg-4" *ngFor="let ruang of listRuangan">
 
           <mat-card class="poliklinik-card" (click)="selectedJenis(2)">
@@ -459,6 +496,12 @@
                 <input matInput placeholder="No Rujukan" disabled="true" formControlName="resumNoRujukan">
               </mat-form-field>
             </div>
+            <div class="ui-g-12 ui-md-12 ui-lg-3">
+              <mat-form-field appearance="fill">
+                <mat-label>Diagnosa</mat-label>
+                <input matInput placeholder="Diagnosa" disabled="true" formControlName="resumDiagnosa">
+              </mat-form-field>
+            </div>
           </p-fieldset>
         </div>
         <div class="ui-g-12" *ngIf="isLama || isBaru && activeIndex ==2">
@@ -555,6 +598,12 @@
                 <mat-form-field appearance="fill">
                   <mat-label>Jenis Kelamin</mat-label>
                   <input matInput placeholder="Jenis Kelamin" disabled="true" formControlName="jenisKelamin">
+                </mat-form-field>
+              </div>
+              <div class="ui-g-12 ui-md-12 ui-lg-3">
+                <mat-form-field appearance="fill">
+                  <mat-label>Agama</mat-label>
+                  <input matInput placeholder="Agama" disabled="true" formControlName="agama">
                 </mat-form-field>
               </div>
               <div class="ui-g-12 ui-md-12 ui-lg-3">
@@ -757,12 +806,14 @@
           <label for="input" class="label-popup-gede">{{kodeReservasi}}</label>
         </div>
       </div>
+
       <div class="ui-g-6 ui-md-6 ui-lg-6">
         <img src='{{barCode}}' alt='Barcode Generator TEC-IT'
           style=" width: 100%; height: auto;    max-width: 200px;-webkit-user-select: none;cursor:pointer"
           (click)="popUpQR()" />
         <!-- <img style="-webkit-user-select: none;cursor:pointer" (click)="popUpQR()" src="{{qrCode}}"> -->
       </div>
+
       <div class="ui-g-6 ui-md-6 ui-lg-6">
         <div class="ui-g-12 ui-md-12 ui-lg-12"> <label for="input">Tgl Reservasi</label></div>
         <div class="ui-g-12 ui-md-12 ui-lg-12"> <label for="input" class="label-popup">{{tglReservasi}}</label></div>
@@ -775,6 +826,14 @@
         <div class="ui-g-12 ui-md-12 ui-lg-12"> <label for="input">Dokter</label></div>
         <div class="ui-g-12 ui-md-12 ui-lg-12"> <label for="input" class="label-popup">{{dokter}}</label></div>
       </div>
+      <div class="ui-g-6 ui-md-6 ui-lg-6">
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+          <label for="input">No. Antrian</label>
+        </div>
+        <div class="ui-g-12 ui-md-12 ui-lg-12">
+          <label for="input" class="label-popup-gede">{{nomorantrean}}</label>
+        </div>
+      </div>
     </div>
 
     <div class="ui-g-12">
@@ -782,6 +841,8 @@
 
         <span style="color:red;font-size:10px">* </span> <span style="font-size:10px;font-style:italic">Harap Check-in
           30 menit sebelum jam reservasi</span>
+          <br>
+          <span style="color:red;font-size:10px">* </span> <span style="font-size:10px;font-style:italic">lalu ke loket pendaftaran untuk pembuatan SEP</span>
       </div>
 
     </div>
