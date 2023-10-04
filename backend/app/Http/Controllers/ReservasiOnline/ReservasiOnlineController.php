@@ -9,14 +9,19 @@
 
 namespace App\Http\Controllers\ReservasiOnline;
 
+use App\Transaksi\AntrianPasienDiperiksa;
 use App\Http\Controllers\ApiController;
+use App\Master\Agama;
 use App\Master\Alamat;
+use App\Master\Diagnosa;
 use App\Master\JenisKelamin;
+use App\Master\Kelas;
 use App\Master\Pasien;
 use App\Master\Pegawai;
 use App\Master\SlottingOnline;
 use App\Master\SlottingLibur;
 use App\Master\Ruangan;
+use App\Master\RunningNumber;
 use App\Web\Profile;
 use Carbon\Carbon;
 //use Faker\Provider\DateTime;
@@ -28,6 +33,7 @@ use DB;
 use App\Transaksi\AntrianPasienRegistrasi;
 use Mpdf\Tag\Em;
 use App\Transaksi\PasienDaftar;
+use App\Transaksi\PemakaianAsuransi;
 use Webpatser\Uuid\Uuid;
 
 class ReservasiOnlineController extends ApiController
@@ -68,6 +74,11 @@ class ReservasiOnlineController extends ApiController
             ->where('statusenabled', true)
             ->orderBy('jeniskelamin')
             ->get();
+        $agama = \DB::table('agama_m')
+            ->select('id', 'agama')
+            ->where('statusenabled', true)
+            ->orderBy('agama')
+            ->get();
         $kdJenisPegawaiDokter = $this->settingDataFixed('kdJenisPegawaiDokter',   $kdProfile);
 
         $dkoter = \DB::table('pegawai_m')
@@ -100,6 +111,7 @@ class ReservasiOnlineController extends ApiController
             'ruanganrajal' => $dataRuanganJalan,
             'instalasi' => $dataInstalasi,
             'jeniskelamin' => $jk,
+            'agama' => $agama,
             'dokter' => $dkoter,
             'kelompokpasien' => $kelompokPasien,
             'libur' => $libur,
@@ -400,6 +412,7 @@ class ReservasiOnlineController extends ApiController
             ->leftJoin('kelompokpasien_m as kps', 'kps.id', '=', 'apr.objectkelompokpasienfk')
             ->select(
                 'apr.norec',
+                'apr.noantrian',
                 'pm.nocm',
                 'apr.noreservasi',
                 'apr.tanggalreservasi',
@@ -474,6 +487,16 @@ class ReservasiOnlineController extends ApiController
             $data = $data->offset($request['jmlOffset']);
         }
         $data = $data->get();
+        foreach($data as $d){
+            $d->nomorantrean  = null;
+
+            $huruf = 'Z';
+                if ($d->prefixnoantrian != null) {
+                    $huruf = $d->prefixnoantrian;
+                }
+                $nomorAntrian = $huruf . '-' . str_pad($d->noantrian, 3, "0", STR_PAD_LEFT);
+                $d->nomorantrean = $nomorAntrian;
+        }
 
         $result = array(
             'data' => $data,
@@ -494,6 +517,43 @@ class ReservasiOnlineController extends ApiController
         } catch (\Exception $e) {
             $transStatus = 'false';
             $transMessage = "Hapus Reservasi Gagal";
+        }
+
+        if ($transStatus != 'false') {
+            DB::commit();
+            $result = array(
+                "status" => 201,
+                "message" => $transMessage,
+                "as" => 'ramdan@epic',
+            );
+        } else {
+            DB::rollBack();
+            $result = array(
+                "status" => 400,
+                "message" => $transMessage,
+            );
+        }
+
+        return $this->setStatusCode($result['status'])->respond($result, $transMessage);
+    }
+
+    public function updateReservasiSirudal(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $pd = PasienDaftar::where('statusschedule', $request['noreservasi'])->update([
+                'statusenabled' => true,
+            ]);
+
+            $apd = AntrianPasienDiperiksa::where('noregistrasifk', $request['norecAPD'])->update([
+                'statusenabled' => true,
+            ]);
+            $transStatus = 'true';
+
+            $transMessage = "Update Reservasi Sukses";
+        } catch (\Exception $e) {
+            $transStatus = 'false';
+            $transMessage = "Update Reservasi Gagal";
         }
 
         if ($transStatus != 'false') {
@@ -4691,6 +4751,7 @@ class ReservasiOnlineController extends ApiController
     public function saveReservasi_15012023(Request $request)
     {
         $kdProfile = $this->getDataKdProfile($request);
+        $kdProfile = (int)$kdProfile;
         DB::beginTransaction();
         try {
             $tgl = $request['tglReservasiFix'];
@@ -4744,90 +4805,379 @@ class ReservasiOnlineController extends ApiController
                 }
             }
 
+            $tglreservasi = date('Y-m-d',strtotime($request['tglReservasiFix']));
+            $tglregistgrasi = date('Y-m-d H:m:s',strtotime($request['tglReservasiFix']));
+
+            $countNoAntrian = AntrianPasienDiperiksa::where('objectruanganfk',$request['poliKlinik']['id'])
+                        ->where('kdprofile', $kdProfile)
+                        ->where('tglregistrasi', '>=', $tglreservasi.' 00:00')
+                        ->where('tglregistrasi', '<=', $tglreservasi.' 23:59')
+                        ->max('noantrian');
+            $noAntrian = $countNoAntrian + 1;
+
+            $noRegistrasiSeq = $this->generateCodeBySeqTable(new PasienDaftar, 'noregistrasi', 10, date('ym'),$kdProfile);
+
             if ($request['isBaru'] == false) {
                 $pasien  = Pasien::where('nocm', $request['noCm'])
                     ->where('statusenabled', true)->first();
-            }
 
-            $newptp = new AntrianPasienRegistrasi();
-            $nontrian = AntrianPasienRegistrasi::max('noantrian') + 1;
-            $newptp->norec = $newptp->generateNewId();;
-            $newptp->kdprofile = (int) $kdProfile;
-            $newptp->statusenabled = true;
-            $newptp->objectruanganfk = $request['poliKlinik']['id'];
-            $newptp->objectjeniskelaminfk = $request['jenisKelamin']['id'];
-            $newptp->noreservasi = substr(Uuid::generate(), 0, 7);
-            $newptp->tanggalreservasi = $request['tglReservasiFix'];
-            $newptp->tgllahir = $request['tglLahir'];
-            $newptp->objectkelompokpasienfk = $request['tipePembayaran']['id'];
-            $newptp->objectpendidikanfk = 0;
-            $newptp->namapasien =  $request['namaPasien'];
-            $newptp->noidentitas =  $request['nik'];
-            $newptp->tglinput = date('Y-m-d H:i:s');
-            if ($request['tipePembayaran']['id'] == 2) {
-                $newptp->nobpjs = $request['noKartuPeserta'];
-                $newptp->norujukan = $request['noRujukan'];
-            } else {
-                $newptp->noasuransilain = $request['noKartuPeserta'];
-            }
-            $newptp->notelepon = $request['noTelpon'];
-            if (isset($request['dokter']['id'])) {
-                $newptp->objectpegawaifk =  $request['dokter']['id'];
-            }
-            if (isset($request['caraDaftar'])) {
-                $newptp->caradaftar =  $request['caraDaftar'];
-            }
-
-            if ($request['isBaru'] == true) {
-                $newptp->tipepasien = "BARU";
-                $newptp->type = "BARU";
-            } else {
-                $newptp->tipepasien = "LAMA";
-                $newptp->type = "LAMA";
-            }
-            //            $newptp->objectasalrujukanfk = 0;
-            //            $newptp->objectstrukreturfk= 0;
-            //            $newptp->objecttitlefk= 0;
-            //            $newptp->isconfirm= 0;
-            //            $newptp->jenis = $request['datas']['norecpap'];
-            //            $newptp->statuspanggil = 0;
-            if (isset($pasien) && !empty($pasien)) {
-                $newptp->objectagamafk = $pasien->objectagamafk;
-                $alamat = Alamat::where('nocmfk', $pasien->id)->first();
-                if (!empty($alamat)) {
-                    $newptp->alamatlengkap = $alamat->alamatlengkap;
-                    $newptp->objectdesakelurahanfk = $alamat->objectdesakelurahanfk;
-                    $newptp->negara = $alamat->objectnegarafk;
+                $newptp = new AntrianPasienRegistrasi();
+                $newptp->noantrian = $noAntrian;
+                $newptp->norec = $newptp->generateNewId();;
+                $newptp->kdprofile = (int) $kdProfile;
+                $newptp->statusenabled = true;
+                $newptp->nocmfk = $pasien->id;
+                $newptp->objectruanganfk = $request['poliKlinik']['id'];
+                $newptp->objectjeniskelaminfk = $request['jenisKelamin']['id'];
+                $newptp->noreservasi = substr(Uuid::generate(), 0, 7);
+                $newptp->tanggalreservasi = $request['tglReservasiFix'];
+                $newptp->tgllahir = $request['tglLahir'];
+                $newptp->objectkelompokpasienfk = $request['tipePembayaran']['id'];
+                $newptp->objectpendidikanfk = 0;
+                $newptp->namapasien =  $request['namaPasien'];
+                $newptp->noidentitas =  $request['nik'];
+                $newptp->tglinput = date('Y-m-d H:i:s');
+                if ($request['tipePembayaran']['id'] == 2) {
+                    $newptp->nobpjs = $request['noKartuPeserta'];
+                    $newptp->norujukan = $request['noRujukan'];
+                } else {
+                    $newptp->noasuransilain = $request['noKartuPeserta'];
                 }
-                $newptp->objectgolongandarahfk =  $pasien->objectgolongandarahfk;
-                $newptp->kebangsaan = $pasien->objectkebangsaanfk;
-                $newptp->namaayah = $pasien->namaayah;
-                $newptp->namaibu = $pasien->namaibu;
-                $newptp->namasuamiistri = $pasien->namasuamiistri;
+                $newptp->notelepon = $request['noTelpon'];
+                if (isset($request['dokter']['id'])) {
+                    $newptp->objectpegawaifk =  $request['dokter']['id'];
+                }
+                if (isset($request['caraDaftar'])) {
+                    $newptp->caradaftar =  $request['caraDaftar'];
+                }
+        
+                if ($request['isBaru'] == true) {
+                    $newptp->tipepasien = "BARU";
+                    $newptp->type = "BARU";
+                } else {
+                    $newptp->tipepasien = "LAMA";
+                    $newptp->type = "LAMA";
+                }
+                $newptp->keterangan = "reservasi-online";
+                $newptp->save();
 
-                $newptp->noaditional = $pasien->noaditional;
-                //                $newptp->noantrian= 0;
-                $newptp->noidentitas = $pasien->noidentitas;
-                $newptp->nocmfk =  $pasien->id;
-                $newptp->paspor =  $pasien->paspor;
-                $newptp->objectpekerjaanfk =  $pasien->objectpekerjaanfk;
-                $newptp->objectpendidikanfk = $pasien->objectpendidikanfk != null ? $pasien->objectpendidikanfk  : 0;
-                $newptp->objectstatusperkawinanfk =  $pasien->objectstatusperkawinanfk;
-                $newptp->tempatlahir = $pasien->tempatlahir;
-            }
-            $newptp->keterangan = "reservasi-online";
-            $newptp->save();
-            $newptp->namaruangan = Ruangan::where('id', $newptp->objectruanganfk)
-                ->where('kdprofile', (int) $kdProfile)
-                ->first()->namaruangan;
-
-            if (isset($request['dokter']['id'])) {
-                $cek = Pegawai::where('id', $request['dokter']['id'])
+                $newptp->namaruangan = Ruangan::where('id', $newptp->objectruanganfk)
                     ->where('kdprofile', (int) $kdProfile)
+                    ->select('namaruangan', 'prefixnoantrian')
                     ->first();
-                $newptp->dokter = !empty($cek) ? $cek->namalengkap : '-';
+                    $newptp->nomorantrean  = null;
+            
+                    $huruf = 'Z';
+                        if ($newptp->namaruangan->prefixnoantrian != null) {
+                            $huruf = $newptp->namaruangan->prefixnoantrian;
+                        }
+                        $nomorAntrian = $huruf . '-' . str_pad($newptp->noantrian, 3, "0", STR_PAD_LEFT);
+                        $newptp->nomorantrean = $nomorAntrian;
+    
+                if (isset($request['dokter']['id'])) {
+                    $cek = Pegawai::where('id', $request['dokter']['id'])
+                        ->where('kdprofile', (int) $kdProfile)
+                        ->first();
+                    $newptp->dokter = !empty($cek) ? $cek->namalengkap : '-';
+                }
+
+                $dataPD = new PasienDaftar();
+                $dataPD->norec = $dataPD->generateNewId();
+                $dataPD->kdprofile = $kdProfile;
+                $dataPD->statusenabled = false;
+                $dataPD->noregistrasi = $noRegistrasiSeq;
+                $dataPD->nocmfk =  $pasien->id;
+                $dataPD->jenispelayanan =  '1';
+                $dataPD->objectkasuspenyakitlastfk =  '1';
+                $dataPD->objectruanganasalfk = $request['poliKlinik']['id'];
+                $dataPD->objectruanganlastfk = $request['poliKlinik']['id'];
+                $dataPD->objectkelompokpasienlastfk = $request['tipePembayaran']['id'];
+                if ($request['tipePembayaran']['id'] == 2) { 
+                    $kelas = Kelas::where('namakelas', 'ilike', '%' . $request['rujukan']['peserta']['hakKelas']['keterangan'] . '%')->first();
+                    $dataPD->objectkelasfk = $kelas->id;
+                }else{    
+                    $dataPD->objectkelasfk = 6;
+                }
+                $dataPD->objectpegawaifk = $request['dokter']['id'];
+                $dataPD->statusschedule = $newptp->noreservasi;
+                $dataPD->iskajianawal = false;
+                $dataPD->isonsiteservice = 0;
+                $dataPD->isregistrasilengkap = 0;
+                $dataPD->tglregistrasi = $tglregistgrasi;
+                $dataPD->statuskasuspenyakit = false;
+                $dataPD->save();
+
+                // if ($request['tipePembayaran']['id'] == 2) {
+                //     $diagnosa = Diagnosa::where('namadiagnosa', $request['diagnosa'])->where('statusenabled', true)->first();
+                //     $datPA = new PemakaianAsuransi();
+                //     $datPA->norec = $datPA->generateNewId();
+                //     $datPA->kdprofile = $kdProfile;
+                //     $datPA->statusenabled = true;
+                //     $datPA->noregistrasifk = $dataPD->norec;
+                //     $datPA->tglregistrasi = $tglregistgrasi;
+                //     $datPA->diagnosisfk = $diagnosa->id;
+                //     $datPA->lakalantas = '0';
+                //     $datPA->nokepesertaan = $request['noKartuPeserta'];
+                //     $datPA->norujukan = $request['noRujukan'];
+                //     $datPA->nosep = $request['noSep'];
+                //     $datPA->tglrujukan = $request['rujukan']['tglKunjungan']. ' 00:00:00';
+                //     // $datPA->objectasuransipasienfk = $request['rujukan']['provPerujuk']['kode'];
+                //     $datPA->objectdiagnosafk = $diagnosa->id;
+                //     $datPA->tanggalsep = $request['rujukan']['tglKunjungan']. ' 00:00:00';
+                //     $datPA->cob = false;
+                //     $datPA->katarak = false;
+                //     $datPA->suplesi = false;
+                //     $datPA->nosuratskdp = $request['noRujukan'];
+                //     $datPA->kodedpjp = $request['dokter']['id'];
+                //     $datPA->namadpjp = $request['dokter']['namalengkap'];
+                //     $datPA->asalrujukanfk = '1';
+                //     $datPA->polirujukankode = $request['rujukan']['poliRujukan']['kode'];
+                //     $datPA->polirujukannama = $request['rujukan']['poliRujukan']['nama'];
+                //     $datPA->kodedpjpmelayani = $request['dokter']['id'];
+                //     $datPA->namadjpjpmelayanni = $request['dokter']['namalengkap'];
+                //     $datPA->tujuankunj = '0';
+                //     $datPA->tglcreate = $tglreservasi;
+                //     $datPA->save();
+                // } 
+
+                $dataAPD = new AntrianPasienDiperiksa();
+                $dataAPD->norec = $dataAPD->generateNewId();
+                $dataAPD->kdprofile = $kdProfile;
+                $dataAPD->statusenabled = false;
+                $dataAPD->noregistrasifk = $dataPD->norec;
+                $dataAPD->objectpegawaifk = $request['dokter']['id'];
+                $dataAPD->noantrian = $newptp->noantrian;
+                $dataAPD->objectruanganfk = $request['poliKlinik']['id'];
+                $dataAPD->statusantrian = 0;
+                if ($request['tipePembayaran']['id'] == 2) { 
+                    $kelas = Kelas::where('namakelas', 'ilike', '%' . $request['rujukan']['peserta']['hakKelas']['keterangan'] . '%')->first();
+                    $dataAPD->objectkelasfk = $kelas->id;
+                }else{    
+                    $dataAPD->objectkelasfk = 6;
+                }
+                $dataAPD->statuspasien = 1;
+                $dataAPD->tglregistrasi = $tglregistgrasi;
+                $dataAPD->objectruanganasalfk = $request['poliKlinik']['id'];
+                $dataAPD->save();
+    
+                
+                $transStatus = true;
+
+            }else{
+                $noCm = null;
+                if($noCm == null){
+                    if(isset($request['isPenunjang'])  &&  $request['isPenunjang'] == true ) {
+                        $noCm = $this->generateCodeBySeqTable(new Pasien, 'nocm_penunjang', 9, 'P',$kdProfile);
+                    }
+                    else if(isset($request['isTelemedicine'])  &&  $request['isTelemedicine'] == true ) {
+                            $noCm = $this->generateCodeBySeqTable(new Pasien, 'nocm_telemedicine', 9, 'T',$kdProfile);
+                    }
+                    //endregion
+                    else{
+                        //region SaveRunningNumber
+                        $idRunningNumber = 1745;
+                        // if ($request['isbayi'] == true) {
+                        //     $idRunningNumber = 13535;
+                        // }
+                        $runningNumber = RunningNumber::where('id', $idRunningNumber)->first();
+                        $extension = $runningNumber->extention;
+                        // if ($request['isbayi'] == true) {
+                        //     $extension = $runningNumber->reset . $runningNumber->extention;
+                        // }
+                        $noCmTerakhir = $runningNumber->nomer_terbaru + 1;
+                        $noCm = $extension . $noCmTerakhir;
+
+                        RunningNumber::where('id', $idRunningNumber)
+                            ->update([
+                                    'nomer_terbaru' => $noCmTerakhir
+                                ]
+                            );
+
+                        //endregion
+
+                    }
+                }
+                $newId = Pasien::max('id') + 1;
+                $dataPS = new Pasien();
+                $dataPS->id = $newId;
+                $dataPS->nocm = $noCm;
+                $dataPS->kdprofile = (int)$kdProfile;//12;
+                $dataPS->statusenabled = true;
+                $dataPS->kodeexternal = $newId;
+                $dataPS->namaexternal =  $request['namaPasien'];
+                $dataPS->norec =  $dataPS->generateNewId();
+                $dataPS->reportdisplay =  $request['namaPasien'];
+                $dataPS->nobpjs = $request['noKartuPeserta'];
+                $dataPS->namapasien = $request['namaPasien'];
+                $dataPS->nohp = $request['noTelepon'];
+                $dataPS->qpasien = '1';
+                $dataPS->tgldaftar = date('Y-m-d H:i:s');
+                $dataPS->tgllahir =  date('Y-m-d H:i:s',strtotime($request['tglLahir']));
+                $dataPS->notelepon = $request['noTelepon'];
+                $dataPS->noidentitas = $request['nik'];
+                $dataPS->objectjeniskelaminfk = $request['jenisKelamin']['id'];
+                $dataPS->tempatlahir = $request['tempatLahir'];
+                // $dataPS->objectagamafk = $request['agama']?$request['agama']['id']:null;
+                $dataPS->save();
+
+                $IDAl = Alamat::max('id') + 1;
+                $dataAl = new Alamat();
+                $dataAl->id = $IDAl;
+                $dataAl->kdprofile = (int)$kdProfile;//12;
+                $dataAl->statusenabled = true;
+                $dataAl->kodeexternal = $IDAl;
+                $dataAl->norec =  $dataAl->generateNewId();
+                $dataAl->alamatlengkap =  $request['alamat'];
+                $dataAl->objecthubungankeluargafk =  '7';
+                $dataAl->objectjenisalamatfk =  '1';
+                $dataAl->kdalamat = $IDAl;
+                $dataAl->nocmfk = $dataPS->id;
+                $dataAl->objectpegawaifk = $request['dokter']['id'];
+                $dataAl->save();
+
+                $newptp = new AntrianPasienRegistrasi();
+                $newptp->noantrian = $noAntrian;
+                $newptp->norec = $newptp->generateNewId();;
+                $newptp->kdprofile = (int) $kdProfile;
+                $newptp->statusenabled = true;
+                $newptp->nocmfk = $dataPS->id;
+                $newptp->objectruanganfk = $request['poliKlinik']['id'];
+                $newptp->objectjeniskelaminfk = $request['jenisKelamin']['id'];
+                $newptp->noreservasi = substr(Uuid::generate(), 0, 7);
+                $newptp->tanggalreservasi = $request['tglReservasiFix'];
+                $newptp->tgllahir = $request['tglLahir'];
+                $newptp->objectkelompokpasienfk = $request['tipePembayaran']['id'];
+                $newptp->objectpendidikanfk = 0;
+                $newptp->namapasien =  $request['namaPasien'];
+                $newptp->noidentitas =  $request['nik'];
+                $newptp->tglinput = date('Y-m-d H:i:s');
+                if ($request['tipePembayaran']['id'] == 2) {
+                    $newptp->nobpjs = $request['noKartuPeserta'];
+                    $newptp->norujukan = $request['noRujukan'];
+                } else {
+                    $newptp->noasuransilain = $request['noKartuPeserta'];
+                }
+                $newptp->notelepon = $request['noTelpon'];
+                if (isset($request['dokter']['id'])) {
+                    $newptp->objectpegawaifk =  $request['dokter']['id'];
+                }
+                if (isset($request['caraDaftar'])) {
+                    $newptp->caradaftar =  $request['caraDaftar'];
+                }
+        
+                if ($request['isBaru'] == true) {
+                    $newptp->tipepasien = "BARU";
+                    $newptp->type = "BARU";
+                } else {
+                    $newptp->tipepasien = "LAMA";
+                    $newptp->type = "LAMA";
+                }
+                $newptp->keterangan = "reservasi-online";
+                $newptp->save();
+                
+                $dataPD = new PasienDaftar();
+                $dataPD->norec = $dataPD->generateNewId();
+                $dataPD->kdprofile = $kdProfile;
+                $dataPD->statusenabled = false;
+                $dataPD->noregistrasi = $noRegistrasiSeq;
+                $dataPD->nocmfk =  $dataPS->id;
+                $dataPD->jenispelayanan =  '1';
+                $dataPD->objectkasuspenyakitlastfk =  '1';
+                $dataPD->objectruanganasalfk = $request['poliKlinik']['id'];
+                $dataPD->objectruanganlastfk = $request['poliKlinik']['id'];
+                $dataPD->objectkelompokpasienlastfk = $request['tipePembayaran']['id'];
+                if ($request['tipePembayaran']['id'] == 2) { 
+                    $kelas = Kelas::where('namakelas', 'ilike', '%' . $request['rujukan']['peserta']['hakKelas']['keterangan'] . '%')->first();
+                    $dataPD->objectkelasfk = $kelas->id;
+                }else{    
+                    $dataPD->objectkelasfk = 6;
+                }
+                $dataPD->objectpegawaifk = $request['dokter']['id'];
+                $dataPD->statusschedule = $newptp->noreservasi;
+                $dataPD->iskajianawal = false;
+                $dataPD->isonsiteservice = 0;
+                $dataPD->isregistrasilengkap = 0;
+                $dataPD->tglregistrasi = $tglregistgrasi;
+                $dataPD->statuskasuspenyakit = false;
+                $dataPD->save();
+
+                // if ($request['tipePembayaran']['id'] == 2) {
+                //     $diagnosa = Diagnosa::where('namadiagnosa', $request['diagnosa'])->where('statusenabled', true)->first();
+                //     $datPA = new PemakaianAsuransi();
+                //     $datPA->norec = $datPA->generateNewId();
+                //     $datPA->kdprofile = $kdProfile;
+                //     $datPA->statusenabled = true;
+                //     $datPA->noregistrasifk = $dataPD->norec;
+                //     $datPA->tglregistrasi = $tglregistgrasi;
+                //     $datPA->diagnosisfk = $diagnosa->id;
+                //     $datPA->lakalantas = '0';
+                //     $datPA->nokepesertaan = $request['noKartuPeserta'];
+                //     $datPA->norujukan = $request['noRujukan'];
+                //     $datPA->nosep = $request['noSep'];
+                //     $datPA->tglrujukan = $request['rujukan']['tglKunjungan'];
+                //     $datPA->objectasuransipasienfk = $request['rujukan']['provPerujuk']['kode'];
+                //     $datPA->objectdiagnosafk = $diagnosa->id;
+                //     $datPA->tanggalsep = $request['rujukan']['tglKunjungan'];
+                //     $datPA->cob = false;
+                //     $datPA->katarak = false;
+                //     $datPA->suplesi = false;
+                //     $datPA->nosuratskdp = $request['noRujukan'];
+                //     $datPA->kodedpjp = $request['dokter']['id'];
+                //     $datPA->namadpjp = $request['dokter']['namalengkap'];
+                //     $datPA->asalrujukan = '1';
+                //     $datPA->polirujukankode = $request['rujukan']['poliRujukan']['kode'];
+                //     $datPA->polirujukannama = $request['rujukan']['poliRujukan']['nama'];
+                //     $datPA->kodedpjpmelayani = $request['dokter']['id'];
+                //     $datPA->namadpjpmelayani = $request['dokter']['namalengkap'];
+                //     $datPA->tujuankuj = '0';
+                //     $datPA->tglcreate = $tglreservasi;
+                //     $datPA->save();
+                // } 
+
+                $dataAPD = new AntrianPasienDiperiksa();
+                $dataAPD->norec = $dataAPD->generateNewId();
+                $dataAPD->kdprofile = $kdProfile;
+                $dataAPD->statusenabled = false;
+                $dataAPD->noregistrasifk = $dataPD->norec;
+                $dataAPD->objectpegawaifk = $request['dokter']['id'];
+                $dataAPD->noantrian = $newptp->noantrian;
+                $dataAPD->objectruanganfk = $request['poliKlinik']['id'];
+                $dataAPD->statusantrian = 0;
+                if ($request['tipePembayaran']['id'] == 2) { 
+                    $kelas = Kelas::where('namakelas', 'ilike', '%' . $request['rujukan']['peserta']['hakKelas']['keterangan'] . '%')->first();
+                    $dataAPD->objectkelasfk = $kelas->id;
+                }else{    
+                    $dataAPD->objectkelasfk = 6;
+                }
+                $dataAPD->statuspasien = 1;
+                $dataAPD->tglregistrasi = $tglregistgrasi;
+                $dataAPD->objectruanganasalfk = $request['poliKlinik']['id'];
+                $dataAPD->save();
+    
+                $newptp->namaruangan = Ruangan::where('id', $newptp->objectruanganfk)
+                    ->where('kdprofile', (int) $kdProfile)
+                    ->select('namaruangan', 'prefixnoantrian')
+                    ->first();
+                    $newptp->nomorantrean  = null;
+            
+                    $huruf = 'Z';
+                        if ($newptp->namaruangan->prefixnoantrian != null) {
+                            $huruf = $newptp->namaruangan->prefixnoantrian;
+                        }
+                        $nomorAntrian = $huruf . '-' . str_pad($newptp->noantrian, 3, "0", STR_PAD_LEFT);
+                        $newptp->nomorantrean = $nomorAntrian;
+    
+                if (isset($request['dokter']['id'])) {
+                    $cek = Pegawai::where('id', $request['dokter']['id'])
+                        ->where('kdprofile', (int) $kdProfile)
+                        ->first();
+                    $newptp->dokter = !empty($cek) ? $cek->namalengkap : '-';
+                }
+                $transStatus = true;
+
             }
-            $transStatus = true;
+
+           
         } catch (\Exception $e) {
             $transStatus = false;
         }

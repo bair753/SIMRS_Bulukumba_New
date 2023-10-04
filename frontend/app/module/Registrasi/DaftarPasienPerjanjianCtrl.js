@@ -226,6 +226,21 @@ define(['initialize'], function (initialize) {
                 })
             }
 
+            $scope.reconfirmNew = function () {
+                console.log($scope);
+                medifirstService.post( "reservasionline/update-reservasi-sirudal",{"noreservasi":$scope.item.noreservasi, "norecPD":$scope.item.norec_pd, "norecAPD":$scope.item.norec_apd})
+                .then(function (data) {               
+                            //   console.log(data);
+                })
+
+                $state.go('UGVtYWthaWFuQXN1cmFuc2k=', {
+                    norecPD: $scope.item.norec_pd,
+                    norecAPD: $scope.item.norec_apd,
+                });
+                var cacheSet = undefined;
+                cacheHelper.set('CachePemakaianAsuransi', cacheSet);
+            }
+
             $scope.reconfirm = function () {
                 // window.isPerjanjian = $scope.item.noreservasi;
                 // findPasien.CheckNoReconfirm($scope.item.noreservasi).then(function(e) {

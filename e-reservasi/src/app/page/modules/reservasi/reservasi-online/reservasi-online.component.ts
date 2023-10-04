@@ -105,6 +105,7 @@ export class ReservasiOnlineComponent implements OnInit {
   kodeReservasi: any;
   tglReservasi: any;
   poliTujuan: any;
+  nomorantrean: any;
   dokter: any;
   Estimasi:any
   jamR:any
@@ -340,6 +341,8 @@ export class ReservasiOnlineComponent implements OnInit {
       'jenisKelamin': new FormControl(null),
       'tglLahir': new FormControl(null),
       'noTelpon': new FormControl(null),
+      'alamat': new FormControl(null),
+      'tempatLahir': new FormControl(null),
       'noCm': new FormControl(null),
       'tglLahirLama': new FormControl(null),
       'dokter': new FormControl(null),
@@ -350,6 +353,8 @@ export class ReservasiOnlineComponent implements OnInit {
       'noKartuPeserta': new FormControl(null),
       'jamReservasi': new FormControl(null),
       'noRujukan': new FormControl(null),
+      'rujukan': new FormControl(null),
+      'diagnosa': new FormControl(null),
       'resumeNoRM': new FormControl({ value: null, disabled: true }),
       'resumeNama': new FormControl({ value: null, disabled: true }),
       'resumeNamaDukcapil': new FormControl({ value: null, disabled: true }),
@@ -362,6 +367,7 @@ export class ReservasiOnlineComponent implements OnInit {
       'resumeTipe': new FormControl({ value: null, disabled: true }),
       'resumNoka': new FormControl({ value: null, disabled: true }),
       'resumNoRujukan': new FormControl({ value: null, disabled: true }),
+      'resumDiagnosa': new FormControl({ value: null, disabled: true }),
       'tglReservasiFix': new FormControl(null),
       'isBaru': new FormControl(null),
       'tglAwal': new FormControl(null),
@@ -500,6 +506,8 @@ export class ReservasiOnlineComponent implements OnInit {
         this.formGroup.get('tglLahir').setValue(new Date(result.tglLahir))
         this.formGroup.get('namaPasien').setValue(result.nama)
         this.formGroup.get('noTelpon').setValue(result.mr.noTelepon)
+        this.formGroup.get('alamat').setValue(result.mr.alamat)
+        // this.formGroup.get('jenisKelamin').setValue(result.mr.jenisKelamin)
         this.formGroup.get('noKartuPeserta').setValue(result.noKartu)
 
       } else {
@@ -643,6 +651,7 @@ export class ReservasiOnlineComponent implements OnInit {
     this.jamR =  selected.jamreservasi
     this.poliTujuan = selected.namaruangan
     this.dokter = selected.dokter
+    this.nomorantrean = selected.nomorantrean
     this.Estimasi = selected.tanggalreservasi
 
     this.barCode = this.linkBarcode + selected.noreservasi + this.linkBarcode2
@@ -778,6 +787,8 @@ export class ReservasiOnlineComponent implements OnInit {
     let noTelpon = this.formGroup.get('noTelpon').value
     let namaPasien = this.formGroup.get('namaPasien').value
     let tglLahirLama = this.formGroup.get('tglLahirLama').value
+    let tempatLahir = this.formGroup.get('tempatLahir').value
+    let alamat = this.formGroup.get('alamat').value
     let nik = this.formGroup.get('nik').value
 
     if (valueIndex == 1) {
@@ -800,6 +811,14 @@ export class ReservasiOnlineComponent implements OnInit {
         }
         if (!noTelpon) {
           this.messageService.warn('Peringatan', 'No Telepon harus di isi !')
+          return
+        }
+        if (!tempatLahir) {
+          this.messageService.warn('Peringatan', 'Tempat Lahir harus di isi !')
+          return
+        }
+        if (!alamat) {
+          this.messageService.warn('Peringatan', 'Alamat harus di isi !')
           return
         }
         if (nik.length > 14) {
@@ -867,6 +886,7 @@ export class ReservasiOnlineComponent implements OnInit {
       let tipePembayaran = this.formGroup.get('tipePembayaran').value
       let jamReservasi = this.formGroup.get('jamReservasi').value
       let noRujukan = this.formGroup.get('noRujukan').value
+      let diagnosa = this.formGroup.get('diagnosa').value
       let noKartuPeserta = this.formGroup.get('noKartuPeserta').value
       if (!tglReservasi) {
         this.messageService.warn('Peringatan', 'Tgl Reservasi harus di isi !')
@@ -928,6 +948,7 @@ export class ReservasiOnlineComponent implements OnInit {
       this.formGroup.get('resumeTipe').setValue(tipePembayaran.kelompokpasien)
       this.formGroup.get('resumNoka').setValue(this.formGroup.get('noKartuPeserta').value != null ? this.formGroup.get('noKartuPeserta').value : '')
       this.formGroup.get('resumNoRujukan').setValue(this.formGroup.get('noRujukan').value != null ? this.formGroup.get('noRujukan').value : '-')
+      this.formGroup.get('resumDiagnosa').setValue(this.formGroup.get('diagnosa').value != null ? this.formGroup.get('diagnosa').value : '-')
       let tipePasiens = ''
       if (this.isBaru) {
         tipePasiens = 'baru'
@@ -1033,7 +1054,10 @@ export class ReservasiOnlineComponent implements OnInit {
       // this.httpService.get('medifirst2000/bridging/bpjs/get-rujukan-pcare-nokartu?nokartu=' + searchValue).subscribe(e => {
       if (e.metaData.code == '200') {
         this.formGroup.get('noRujukan').setValue(e.response.rujukan.noKunjungan)
+        this.formGroup.get('rujukan').setValue(e.response.rujukan)
+        this.formGroup.get('diagnosa').setValue(e.response.rujukan.diagnosa.nama)
         this.formGroup.get('resumNoRujukan').setValue(this.formGroup.get('noRujukan').value != null ? this.formGroup.get('noRujukan').value : '-')
+        this.formGroup.get('resumDiagnosa').setValue(this.formGroup.get('diagnosa').value != null ? this.formGroup.get('diagnosa').value : '-')
         let bool = this.checkRujukan(e.response.rujukan.tglKunjungan)
         if(!bool){
           this.messageService.error('Info','Masa berlaku rujukan berakhir')
@@ -1054,7 +1078,10 @@ export class ReservasiOnlineComponent implements OnInit {
          this.httpService.postNonMessage("medifirst2000/bridging/bpjs/tools", prosv).subscribe(x => {
           if (x.metaData.code == '200') {
             this.formGroup.get('noRujukan').setValue(x.response.rujukan.noKunjungan)
+            this.formGroup.get('rujukan').setValue(x.response.rujukan)
+            this.formGroup.get('diagnosa').setValue(x.response.rujukan.diagnosa.nama)
             this.formGroup.get('resumNoRujukan').setValue(this.formGroup.get('noRujukan').value != null ? this.formGroup.get('noRujukan').value : '-')
+            this.formGroup.get('resumDiagnosa').setValue(this.formGroup.get('diagnosa').value != null ? this.formGroup.get('diagnosa').value : '-')
             let bool = this.checkRujukan(x.response.rujukan.tglKunjungan)
             if(!bool){
               this.messageService.error('Info','Masa berlaku rujukan berakhir')
@@ -1093,8 +1120,11 @@ export class ReservasiOnlineComponent implements OnInit {
     this.httpService.postNonMessage("medifirst2000/bridging/bpjs/tools", prov).subscribe(e => {
       if (e.metaData.code == '200') {
         this.formGroup.get('noRujukan').setValue(e.response.rujukan.noKunjungan)
+        this.formGroup.get('rujukan').setValue(e.response.rujukan)
+        this.formGroup.get('diagnosa').setValue(e.response.rujukan.diagnosa.nama)
         this.formGroup.get('resumNoRujukan').setValue(this.formGroup.get('noRujukan').value != null ? this.formGroup.get('noRujukan').value : '-')
-        let bool = this.checkRujukan(e.response.rujukan.tglKunjungan)
+        this.formGroup.get('resumDiagnosa').setValue(this.formGroup.get('diagnosa').value != null ? this.formGroup.get('diagnosa').value : '-')
+    let bool = this.checkRujukan(e.response.rujukan.tglKunjungan)
         if(!bool){
           this.messageService.error('Info','Masa berlaku rujukan berakhir')
         }
@@ -1113,7 +1143,10 @@ export class ReservasiOnlineComponent implements OnInit {
          this.httpService.postNonMessage("medifirst2000/bridging/bpjs/tools", prosv).subscribe(x => {
           if (x.metaData.code == '200') {
             this.formGroup.get('noRujukan').setValue(x.response.rujukan.noKunjungan)
+            this.formGroup.get('rujukan').setValue(x.response.rujukan)
+            this.formGroup.get('diagnosa').setValue(x.response.rujukan.diagnosa.nama)
             this.formGroup.get('resumNoRujukan').setValue(this.formGroup.get('noRujukan').value != null ? this.formGroup.get('noRujukan').value : '-')
+            this.formGroup.get('resumDiagnosa').setValue(this.formGroup.get('diagnosa').value != null ? this.formGroup.get('diagnosa').value : '-')
             let bool = this.checkRujukan(x.response.rujukan.tglKunjungan)
             if(!bool){
               this.messageService.error('Info','Masa berlaku rujukan berakhir')
