@@ -3791,6 +3791,10 @@
             "urlDep": "module/EMR/FormulirInformedConsentCtrl"
         },
         {
+            "nameDep": "PenilaianDekubitusCtrl",
+            "urlDep": "module/EMR/PenilaianDekubitusCtrl"
+        },
+        {
             "nameDep": "SementaraBerobatCtrl",
             "urlDep": "module/EMR/SementaraBerobatCtrl"
         }
