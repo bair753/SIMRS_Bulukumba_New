@@ -58,7 +58,7 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
 			};
 
 			function ClearDataRiwayatJabatan() {
-				$scope.itemPendidikan = {};
+				$scope.itemJabatan = {};
 				// $scope.itemKeluarga.tglLahir=moment($scope.now).format("DD-MM-YYYY");			
 			};
 
@@ -91,6 +91,13 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
 				dataNoTelp = [];
 				// $scope.itemKeluarga.tglLahir=moment($scope.now).format("DD-MM-YYYY");			
 			};
+			
+			$scope.monthSelectorOptions = function () {
+				return {
+					start: "year",
+					depth: "year"
+				}
+			}
 
 			function FormLoad() {
 				$scope.isRouteLoading = true;
@@ -107,6 +114,7 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
 					$scope.ListKedudukanPegawai = dataCombo.kedudukan;
 					$scope.ListKategoriPegawai = dataCombo.kategorypegawai;
 					$scope.ListJabatanFungsional = dataCombo.jabatan;
+					$scope.ListJabatan = dataCombo.jabatan;
 					$scope.ListGolonganPegawai = dataCombo.golonganpegawai;
 					$scope.ListDetilKelompokJabatan = dataCombo.kelompokjabatan;
 					$scope.ListEselon = dataCombo.eselon;
@@ -339,7 +347,7 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
 
 			$scope.ubah = function () {
 				if ($scope.itemJabatan.jenisJabatan != undefined || $scope.itemJabatan.jenisJabatan != "") {
-					$scope.ListJabatan = $scope.itemJabatan.jenisJabatan.jabatan;
+					// $scope.ListJabatan = $scope.itemJabatan.jenisJabatan.jabatan;
 				}
 			}
 			$scope.$watch('itemSip.unitKerja', function (newValue, oldValue) {
@@ -591,18 +599,18 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
 						"width": "20%",
 						"template": "<span class='style-left'>{{formatTanggal('#: tglsk #')}}</span>"
 					},
-					{
-						"field": "jenisjabatan",
-						"title": "Jenis Jabatan",
-						"width": "20%"
-					},
+					// {
+					// 	"field": "jenisjabatan",
+					// 	"title": "Jenis Jabatan",
+					// 	"width": "20%"
+					// },
 					{
 						"field": "namajabatan",
 						"title": "Jabatan",
 						"width": "20%"
 					},
 					{
-						"field": "pegawaipenanggungjawab",
+						"field": "ttdjabatan",
 						"title": "Penanda Tangan SK",
 						"width": "20%"
 					},
@@ -1055,6 +1063,8 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
 				$scope.itemJabatan.jenisJabatan = { id: dataItem.objectjenisjabatanfk, jenisjabatan: dataItem.jenisjabatan };
 				$scope.itemJabatan.jabatan = { id: dataItem.objectjabatanfk, namajabatan: dataItem.namajabatan };
 				$scope.itemJabatan.noSK = dataItem.nosk;
+				$scope.itemJabatan.tandask = dataItem.tandask;
+				$scope.itemJabatan.jabatantandask = dataItem.jabatantandask;
 				$scope.itemJabatan.tglSK = moment(dataItem.tglsk).format('YYYY-MM-DD HH:mm');
 				$scope.itemJabatan.ttdSK = { id: dataItem.objectpegawaittdfk, namalengkap: dataItem.pegawaittd };
 				$scope.itemJabatan.jabatanTtd = { id: dataItem.objectjabatanttdfk, namajabatan: dataItem.namajabatanttd };
@@ -1655,12 +1665,12 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
 
 			$scope.tambahRiwayatJabatan = function () {
 				var listRawRequired = [
-					"itemJabatan.jenisJabatan|k-ng-model|Jenis Jabatan",
+					// "itemJabatan.jenisJabatan|k-ng-model|Jenis Jabatan",
 					"itemJabatan.jabatan|k-ng-model|Nama Jabatan",
 					"itemJabatan.noSK|ng-model|Nomor SK",
-					"itemJabatan.tglSK|k-ng-model|Tgl SK",
-					"itemJabatan.ttdSK|k-ng-model|Penandatangan SK",
-					"itemJabatan.jabatanTtd|k-ng-model|Penandatangan Jabatan",
+					// "itemJabatan.tglSK|k-ng-model|Tgl SK",
+					"itemJabatan.tandask|k-ng-model|Penandatangan SK",
+					"itemJabatan.jabatantandask|k-ng-model|Penandatangan Jabatan",
 				];
 
 				var isValid = ModelItem.setValidation($scope, listRawRequired);
@@ -1673,8 +1683,8 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
 					}
 					var data = {};
 					if ($scope.item.nomorId != undefined) {
-						for (var i = gridRiwayatJabatan.length - 1; i >= 0; i--) {
-							if (gridRiwayatJabatan[i].no == $scope.item.nomorId) {
+						for (var i = $scope.gridRiwayatJabatan.length - 1; i >= 0; i--) {
+							if ($scope.gridRiwayatJabatan[i].no == $scope.item.nomorId) {
 
 								data.no = $scope.item.nomorId
 								data.objectjenisjabatanfk = $scope.itemJabatan.jenisJabatan.id
@@ -1682,12 +1692,14 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
 								data.objectjabatanfk = $scope.itemJabatan.jabatan.id
 								data.namajabatan = $scope.itemJabatan.jabatan.namajabatan
 								data.nosk = $scope.itemJabatan.noSK
+								data.tandask = $scope.itemJabatan.tandask
+								data.jabatantandask = $scope.itemJabatan.jabatantandask
 								data.tglsk = moment($scope.itemJabatan.tglSK).format('YYYY-MM-DD HH:mm')
 								data.objectpegawaittdfk = $scope.itemJabatan.ttdSK.id
 								data.pegawaittd = $scope.itemJabatan.ttdSK.namalengkap
 								data.objectjabatanttdfk = $scope.itemJabatan.jabatanTtd.id
 								data.namajabatanttd = $scope.itemJabatan.jabatanTtd.namajabatan
-								data.pegawaipenanggungjawab = $scope.itemJabatan.ttdSK.namalengkap + " / " + $scope.itemJabatan.jabatanTtd.namajabatan
+								data.pegawaipenanggungjawab = $scope.itemJabatan.tandask + " / " + $scope.itemJabatan.jabatantandask
 								data.norec = $scope.item.norecJab
 
 								dataRiwayatJabatan[i] = data;
@@ -1701,17 +1713,19 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
 
 						data = {
 							no: nomorId,
-							objectjenisjabatanfk: $scope.itemJabatan.jenisJabatan.id,
-							jenisjabatan: $scope.itemJabatan.jenisJabatan.jenisjabatan,
+							objectjenisjabatanfk: $scope.itemJabatan.jenisJabatan == undefined ? null : $scope.itemJabatan.jenisJabatan.id,
+							// jenisjabatan: $scope.itemJabatan.jenisJabatan.jenisjabatan,
 							objectjabatanfk: $scope.itemJabatan.jabatan.id,
 							namajabatan: $scope.itemJabatan.jabatan.namajabatan,
 							nosk: $scope.itemJabatan.noSK,
+							tandask: $scope.itemJabatan.tandask,
+							jabatantandask: $scope.itemJabatan.jabatantandask,
 							tglsk: moment($scope.itemJabatan.tglSK).format('YYYY-MM-DD HH:mm'),
-							objectpegawaittdfk: $scope.itemJabatan.ttdSK.id,
-							pegawaittd: $scope.itemJabatan.ttdSK.namalengkap,
-							objectjabatanttdfk: $scope.itemJabatan.jabatanTtd.id,
-							namajabatanttd: $scope.itemJabatan.jabatanTtd.namajabatan,
-							pegawaipenanggungjawab: $scope.itemJabatan.ttdSK.namalengkap + " / " + $scope.itemJabatan.jabatanTtd.namajabatan,
+							objectpegawaittdfk: $scope.itemJabatan.ttdSK == undefined ? null : $scope.itemJabatan.ttdSK.id,
+							// pegawaittd: $scope.itemJabatan.ttdSK.namalengkap,
+							objectjabatanttdfk: $scope.itemJabatan.jabatanTtd == undefined ? null : $scope.itemJabatan.jabatanTtd.id,
+							// namajabatanttd: $scope.itemJabatan.jabatanTtd.namajabatan,
+							pegawaipenanggungjawab: $scope.itemJabatan.tandask + " / " + $scope.itemJabatan.jabatantandask,
 							norec: $scope.item.norecJab
 						}
 

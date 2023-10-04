@@ -716,7 +716,25 @@
 									</div>
 									<div class="grid_4">
 										<div class="grid_12">
-											<label c-label item="item" c-label-text="Tgl Masuk"></label>
+											<label c-label item="item">Tahun Masuk</label>
+										</div>
+										<div class="grid_12">
+											<input style="width: 100%" k-ng-model="itemPendidikan.tglMasukPend" kendo-datepicker k-max="now"
+												k-format="'yyyy'" parsedate="yyyy" k-options="monthSelectorOptions()" />
+										</div>
+									</div>
+									<div class="grid_4">
+										<div class="grid_12">
+											<label c-label item="item">Tahun Lulus</label>
+										</div>
+										<div class="grid_12">
+											<input style="width: 100%" k-ng-model="itemPendidikan.tglLulus" kendo-datepicker k-max="now"
+												k-format="'yyyy'" parsedate="yyyy" k-options="monthSelectorOptions()" />
+										</div>
+									</div>
+									<!-- <div class="grid_4">
+										<div class="grid_12">
+											<label c-label item="item" c-label-text="Tahun Masuk"></label>
 										</div>
 										<div class="grid_12">
 											<input style="width: 100%" kendo-date-picker
@@ -725,13 +743,13 @@
 									</div>
 									<div class="grid_4">
 										<div class="grid_12">
-											<label c-label item="item" c-label-text="Tgl Lulus"></label>
+											<label c-label item="item" c-label-text="Tahun Lulus"></label>
 										</div>
 										<div class="grid_12">
 											<input style="width: 100%" kendo-date-picker
 												k-ng-model="itemPendidikan.tglLulus" k-format="'yyyy-MM-dd'" />
 										</div>
-									</div>
+									</div> -->
 								</div>
 								<div class="grid_12">
 									<div class="grid_4">
@@ -901,7 +919,7 @@
 							k-on-close="win2visible = false">
 							<div class="panel panel-default container_12" style="padding: 0px 10px;">
 								<div class="grid_12">
-									<div class="grid_4">
+									<!-- <div class="grid_4">
 										<div class="grid_12">
 											<label c-label item="item" c-label-text="JenisJabatan"></label>
 										</div>
@@ -911,7 +929,7 @@
 												k-filter="'contains'" k-auto-bind="false"
 												k-data-source="listJenisJabatan" k-on-change="ubah()" />
 										</div>
-									</div>
+									</div> -->
 									<div class="grid_4">
 										<div class="grid_12">
 											<label c-label item="item" c-label-text="Jabatan"></label>
@@ -948,6 +966,24 @@
 											<label c-label item="item" c-label-text="tandaTangan SK"></label>
 										</div>
 										<div class="grid_12">
+											<input c-text-box type="input" filter="'varchar'" class="k-textbox"
+												ng-model="itemJabatan.tandask" />
+										</div>
+									</div>
+									<div class="grid_4">
+										<div class="grid_12">
+											<label c-label item="item" c-label-text="Jabatan tandaTangan SK"></label>
+										</div>
+										<div class="grid_12">
+											<input c-text-box type="input" filter="'varchar'" class="k-textbox"
+												ng-model="itemJabatan.jabatantandask" />
+										</div>
+									</div>
+									<!-- <div class="grid_4">
+										<div class="grid_12">
+											<label c-label item="item" c-label-text="tandaTangan SK"></label>
+										</div>
+										<div class="grid_12">
 											<input style="width: 100%;" kendo-combo-box k-ng-model="itemJabatan.ttdSK"
 												k-data-text-field="'namalengkap'" k-data-value-field="'id'"
 												k-filter="'contains'" k-auto-bind="false" k-data-source="listPgw" />
@@ -963,7 +999,7 @@
 												k-filter="'contains'" k-auto-bind="false"
 												k-data-source="ListJabatanFungsional" />
 										</div>
-									</div>
+									</div> -->
 								</div>
 								<div class="grid_12">
 									<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
