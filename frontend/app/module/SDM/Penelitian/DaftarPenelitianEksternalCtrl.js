@@ -262,7 +262,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     
                     {
                         "field": "namapeneliti",
-                        "title": "Nama Peneliti",
+                        "title": "Nama Peserta",
                         "width": "20%"
                     },
                     {
@@ -271,13 +271,13 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                         "width": "15%"
                     },
                     {
-                        "field": "institusipendidikan",
-                        "title": "Universitas",
+                        "field": "judulpeneltian",
+                        "title": "Judul Penelitian",
                         "width": "20%"
                     },
                     {
-                        "field": "namakegiatan",
-                        "title": "Kegiatan",
+                        "field": "tempatkegiatan",
+                        "title": "Tempat Kegiatan",
                         "width": "20%"
                     },
                     {
