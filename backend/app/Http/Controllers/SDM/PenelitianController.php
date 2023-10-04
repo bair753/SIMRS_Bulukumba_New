@@ -175,6 +175,7 @@ class PenelitianController extends ApiController {
             $dataKPE->sebagai = $request['data']['sebagai'];
             $dataKPE->sebagai = $request['data']['sebagai'];
             $dataKPE->kegiatan = $request['data']['kegiatan'];
+            $dataKPE->tempatkegiatan = $request['data']['tempatkegiatan'];
             $dataKPE->kelengkapanadministrasi = $request['data']['kelengkapanadministrasi'];
             $dataKPE->save();
             $idPP=$dataKPE->norec;

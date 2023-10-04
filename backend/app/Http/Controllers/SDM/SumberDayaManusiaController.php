@@ -798,6 +798,9 @@ class SumberDayaManusiaController extends ApiController {
                     $dataSaveJabatan->tglsk = $hideung['tglsk'];
                     $dataSaveJabatan->objectpegawaittdfk = $hideung['objectpegawaittdfk'];
                     $dataSaveJabatan->objectjabatanttdfk = $hideung['objectjabatanttdfk'];
+                    $dataSaveJabatan->tandask = $hideung['tandask'];
+                    $dataSaveJabatan->jabatantandask = $hideung['jabatantandask'];
+                    $dataSaveJabatan->ttdjabatan = $hideung['tandask'] ." / ". $hideung['jabatantandask'];
                     $dataSaveJabatan->save();
                 }
             }

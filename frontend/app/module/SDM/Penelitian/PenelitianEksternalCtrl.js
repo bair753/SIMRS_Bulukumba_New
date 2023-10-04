@@ -55,6 +55,7 @@ define(['initialize'], function(initialize) {
                         norec_kpe = datas.norec;
                         $scope.item.nim = datas.nim;
                         $scope.item.namaPeneliti = datas.namapeneliti;
+                        $scope.item.tempatkegiatan = datas.tempatkegiatan;
                         $scope.item.periodePengajaran = datas.periodepengajaran;                           
                         $scope.item.institusiPendidikan = {id:datas.institusipendidikanfk,institusipendidikan:datas.institusipendidikan};
                         $scope.item.jurusanPeminatan = {id:datas.jurusanpeminatanfk,jurusanpeminatan:datas.jurusanpeminatan};
@@ -175,7 +176,7 @@ define(['initialize'], function(initialize) {
                     return;
                 }
 
-                if ($scope.item.institusiPendidikan == undefined) {
+                if ($scope.item.tempatkegiatan == undefined) {
                     alert("Tempat Kegiatan Tidak Boleh Kosong!")
                     return;
                 }  
@@ -245,6 +246,11 @@ define(['initialize'], function(initialize) {
                 	jurusanPeminatan = $scope.item.jurusanPeminatan.id;
                 }
 
+                var institusipendidikanfk =null
+                if ($scope.item.institusipendidikanfk != undefined) {
+                	institusipendidikanfk = $scope.item.institusiPendidikan.id;
+                }
+
                 var namapendamping =null
                 if ($scope.item.namaPendamping != undefined) {
                 	namapendamping = $scope.item.namaPendamping;
@@ -296,7 +302,7 @@ define(['initialize'], function(initialize) {
 					"biaya":biaya,
 					"jumlahBiaya":jumlahBiaya,
                     "sebagai":$scope.item.sebagai.id,
-					"institusipendidikanfk":$scope.item.institusiPendidikan.id,
+					"institusipendidikanfk":institusipendidikanfk,
 					"profesi":$scope.item.profesi.id,
                     "kegiatan":$scope.item.kegiatan.id,
 					"judulpeneltian":$scope.item.judulPenelitian,
@@ -304,6 +310,7 @@ define(['initialize'], function(initialize) {
 					"laporanpenelitian":laporanPenelitian,
 					"lokasipenelitian":lokasiPenelitian,
 					"namapeneliti":$scope.item.namaPeneliti,
+					"tempatkegiatan":$scope.item.tempatkegiatan,
 					"nim":nim,
 					"nomorkwitansi":nomorkwitansi,
 					"periodepengajaran":TahunAjaran,
