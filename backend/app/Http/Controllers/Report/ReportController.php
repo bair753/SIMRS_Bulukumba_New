@@ -780,6 +780,7 @@ class ReportController extends ApiController{
                 so.norec = '$norec'
             AND so.kdprofile = $kdProfile
             AND so.statusenabled = TRUE
+            AND p3.objectjenispetugaspefk = 4
         "))->first();
         if(!empty($raw)){
             $raw->umur = $this->getAge($raw->tgllahir ,date('Y-m-d'));
