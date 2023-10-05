@@ -3643,14 +3643,7 @@ class ReportController extends ApiController{
                     $head[$i] = $res->groupBy('detailjenisproduk');
                     $headi[$i] = $res->groupBy('detailjenisproduk');
         }
-         $cek = $res[0];
-        
-
-         $head = collect($head)->filter( function ( $item ) { 
-            return strlen( $item ) > 100; 
-        }); 
-            // dd($res);
-          if (count($res) == 0) {
+        if (count($res) == 0) {
             echo '
                 <script language="javascript">
                     window.alert("Hasil belum ada / hasil tidak ditemukan");
@@ -3659,6 +3652,15 @@ class ReportController extends ApiController{
             ';
             die;
         }
+        
+         $cek = $res[0];
+        
+
+         $head = collect($head)->filter( function ( $item ) { 
+            return strlen( $item ) > 100; 
+        }); 
+            // dd($res);
+          
         $dataReport = array(
             'namaprofile' => $profile,
             'alamat' => $profile->alamatlengkap,
@@ -3666,7 +3668,7 @@ class ReportController extends ApiController{
             'head' => $head,
             'cek' => $cek,
         );
-        // dd($dataReport);
+        dd($dataReport);
         
         return view(
             'report.lab.hasil-lab-all',
