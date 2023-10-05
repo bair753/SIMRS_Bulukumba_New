@@ -34,12 +34,21 @@ define(['initialize'], function (initialize) {
                         $(row.cells[10]).addClass("red");
                     }
 
-                    var ischeckin = kendoGrid.dataItem(row).ischeckin;
-                    if (ischeckin != null && ischeckin == '✔') {
+                    var issirudal = kendoGrid.dataItem(row).issirudal;
+                    if (issirudal != null && issirudal == '✔') {
                         $(row.cells[11]).addClass("green");
 
                     }else{
                         $(row.cells[11]).addClass("red");
+                    }
+                    
+
+                    var ischeckin = kendoGrid.dataItem(row).ischeckin;
+                    if (ischeckin != null && ischeckin == '✔') {
+                        $(row.cells[12]).addClass("green");
+
+                    }else{
+                        $(row.cells[12]).addClass("red");
                     }
 
 
@@ -125,6 +134,11 @@ define(['initialize'], function (initialize) {
                         width: 100
                     },
                     {
+                        field: "issirudal",
+                        title: "Sirudal",
+                        width: 100
+                    },
+                    {
                         field: "nomorantrean",
                         title: "No Antrean",
                         field: "ischeckin",
@@ -202,6 +216,11 @@ define(['initialize'], function (initialize) {
                         }else{
                             element.ismobilejkn = "✘"    
                         }
+                        if(element.issirudal ==true){
+                            element.issirudal = "✔"            
+                        }else{
+                            element.issirudal = "✘"    
+                        }
                         if(element.ischeckin ==true){
                             element.ischeckin = "✔"            
                         }else{
@@ -227,7 +246,10 @@ define(['initialize'], function (initialize) {
             }
 
             $scope.reconfirmNew = function () {
-                console.log($scope);
+                if ($scope.item.issirudal == "✘"){
+                    toastr.error('Bukan pasien Sirudal !')
+                    return
+                }
                 medifirstService.post( "reservasionline/update-reservasi-sirudal",{"noreservasi":$scope.item.noreservasi, "norecPD":$scope.item.norec_pd, "norecAPD":$scope.item.norec_apd})
                 .then(function (data) {               
                             //   console.log(data);
