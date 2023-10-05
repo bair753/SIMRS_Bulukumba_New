@@ -117,7 +117,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
     
     <div align="center" class="break">
         <table cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0" width="{{$pageWidth}}"
-            style="padding-right:25px;padding-left:80px;padding-top:80px;padding-bottom:25px;">
+            style="padding-right:25px;padding-left:40px;padding-top:40px;padding-bottom:25px;">
             <tbody>
                 <tr>
                     <td>
@@ -432,7 +432,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                 <tr>
                     <td>
                         <table>
-                            <tr>
+                            {{-- <tr>
                                 <td></td>
                             </tr>
                             <tr>
@@ -464,7 +464,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             </tr>
                             <tr>
                                 <td></td>
-                            </tr>
+                            </tr> --}}
                             <tr>
                                 <td>{{ $cek->tat }}</td>
                             </tr>
@@ -484,14 +484,14 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
 
         $('#qrcodeNamaPemeriksa{{ $cek->produkfk }}{{ $noo }}').qrcode({
             text: 'Tanda Tangan Digital Oleh {{ $cek->dokterperiksa }}' ,
-            height: 100,
-            width: 100
+            height: 70,
+            width: 70
         });
 
         $('#qrcodePenanggungJawab{{ $cek->produkfk }}{{ $noo }}').qrcode({
             text: 'Tanda Tangan Digital Oleh {{ $cek->dokterpenanggungjawab }}',
-            height: 100,
-            width: 100
+            height: 70,
+            width: 70
         });
 
         

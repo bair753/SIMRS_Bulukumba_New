@@ -2397,7 +2397,7 @@ class InaCbgController   extends ApiController
                 'ps.objectjeniskelaminfk','ps.tgllahir','sbm.nosbm','pmi.pmi',  'ris.order_cnt as nourutrad', // syamsu tambahan
                 DB::raw("case when ris.order_key is not null then 'Sudah Dikirim' else '-' end as statusbridging,'' as hr_norec"))
             ->where('pp.kdprofile',$idProfile)
-            ->where('ru.objectdepartemenfk', $request['idDept'])
+            ->where('ru.id', 575)
             ->groupBy('ps.nocm', 'ps.namapasien', 'hr.norec', 'jk.jeniskelamin', 'pp.tglpelayanan', 'pp.produkfk', 'pr.namaproduk',
                 'pp.jumlah', 'pp.hargasatuan', 'pp.hargadiscount', 'sp.nostruk', 'pd.noregistrasi', 'ru.namaruangan',
                 'dp.namadepartemen', 'ps.id', 'apd.norec', 'sp.norec', 'pp.norec',
