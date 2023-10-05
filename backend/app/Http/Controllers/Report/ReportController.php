@@ -3668,7 +3668,7 @@ class ReportController extends ApiController{
             'head' => $head,
             'cek' => $cek,
         );
-        dd($dataReport);
+        // dd($dataReport);
         
         return view(
             'report.lab.hasil-lab-all',
