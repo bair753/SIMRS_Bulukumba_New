@@ -561,7 +561,7 @@ class ReservasiOnlineController extends ApiController
             $result = array(
                 "status" => 201,
                 "message" => $transMessage,
-                "as" => 'ramdan@epic',
+                "as" => 'mr_adhyy',
             );
         } else {
             DB::rollBack();

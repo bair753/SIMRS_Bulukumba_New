@@ -9141,7 +9141,7 @@ class EMRController  extends ApiController
             } else {
                 $EMR = EMRPasien::where('noemr', $head['norec_emr'])
                 // ->where('noregistrasifk', $head['noregistrasi'])
-                ->where('nocm', $head['nocm'])
+                // ->where('nocm', $head['nocm'])
                 ->where('kdprofile', $kdProfile)
                     ->first();
                 $noemr = $EMR->noemr;
