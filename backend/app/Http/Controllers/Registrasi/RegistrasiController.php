@@ -6109,7 +6109,8 @@ class RegistrasiController extends ApiController
                 'apr.notelepon','pm.namapasien','apr.namapasien','apr.objectkelompokpasienfk','kps.kelompokpasien',
                 'apr.tglinput','apr.nocmfk', 'apr.ischeckin', 'apd.norec as norec_apd', 'pd.norec as norec_pd', 'ru.prefixnoantrian',
                 DB::raw('(case when pm.namapasien is null then apr.namapasien else pm.namapasien end) as namapasien,
-                (case when apr.isconfirm=\'true\' then \'Confirm\' else \'Reservasi\' end) as status,apr.ismobilejkn,apr.noantrian,apr.jenis
+                (case when apr.isconfirm=\'true\' then \'Confirm\' else \'Reservasi\' end) as status,
+                (case when apr.keterangan=\'reservasi-online\' then true else false end) as issirudal,apr.ismobilejkn,apr.noantrian,apr.jenis
                 ,apr.jamreservasi')
             )
             ->where('apr.noreservasi','<>','-')
