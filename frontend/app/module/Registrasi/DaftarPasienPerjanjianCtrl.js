@@ -250,7 +250,7 @@ define(['initialize'], function (initialize) {
                     toastr.error('Bukan pasien Sirudal !')
                     return
                 }
-                if ($scope.item.kelompokpasien == 'Umum/Pribadi') {
+                if ($scope.item.objectkelompokpasienfk == 1) {
                     toastr.error('Pasien Umum','Tidak dapat mengubah pemakaian asuransi')
                     return
                 }

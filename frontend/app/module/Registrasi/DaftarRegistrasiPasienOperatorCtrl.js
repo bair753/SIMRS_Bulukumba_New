@@ -1292,7 +1292,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     toastr.error('Hak akses tidak ada',' Mohon hubungi IT!')
                     return
                 }
-				if ($scope.dataPasienSelected.kelompokpasien == 'Umum/Pribadi') {
+				if ($scope.dataPasienSelected.kpid == 1) {
                     toastr.error('Pasien Umum','Tidak dapat mengubah pemakaian asuransi')
                     return
                 }
