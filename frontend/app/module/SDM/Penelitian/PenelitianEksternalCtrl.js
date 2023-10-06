@@ -167,52 +167,52 @@ define(['initialize'], function(initialize) {
                 var c = ""
 
                 if ($scope.item.namaPeneliti == undefined) {
-                    alert("Nama Peserta Tidak Boleh Kosong!")
+                    toastr.warning("Nama Peserta Tidak Boleh Kosong!")
                     return;
                 }  
 
                 if ($scope.item.sebagai == undefined) {
-                    alert("Sebagai Tidak Boleh Kosong!")
+                    toastr.warning("Sebagai Tidak Boleh Kosong!")
                     return;
                 }
 
                 if ($scope.item.tempatkegiatan == undefined) {
-                    alert("Tempat Kegiatan Tidak Boleh Kosong!")
+                    toastr.warning("Tempat Kegiatan Tidak Boleh Kosong!")
                     return;
                 }  
 
                 if ($scope.item.profesi == undefined) {
-                    alert("Profesi Tidak Boleh Kosong!")
+                    toastr.warning("Profesi Tidak Boleh Kosong!")
                     return;
                 } 
 
                 if ($scope.item.judulPenelitian == undefined) {
-                    alert("Judul Kegiatan Tidak Boleh Kosong!")
+                    toastr.warning("Judul Kegiatan Tidak Boleh Kosong!")
                     return;
                 }  
 
                 if ($scope.item.kegiatan == undefined) {
-                    alert("Jenis Kegiatan Tidak Boleh Kosong!")
+                    toastr.warning("Jenis Kegiatan Tidak Boleh Kosong!")
                     return;
                 } 
 
                 if ($scope.item.biaya == undefined) {
-                    alert("Biaya Tidak Boleh Kosong!")
+                    toastr.warning("Biaya Tidak Boleh Kosong!")
                     return;
                 } 
 
                 if ($scope.item.jumlahBiaya == undefined) {
-                    alert("Jumlah Biaya Tidak Boleh Kosong!")
+                    toastr.warning("Jumlah Biaya Tidak Boleh Kosong!")
                     return;
                 }  
 
                 if ($scope.item.tanggalMulai == undefined) {
-                    alert("Tanggal Mulai Tidak Boleh Kosong!")
+                    toastr.warning("Tanggal Mulai Tidak Boleh Kosong!")
                     return;
                 } 
 
                 if ($scope.item.tanggalSelesai == undefined) {
-                    alert("Tanggal Selesai Tidak Boleh Kosong!")
+                    toastr.warning("Tanggal Selesai Tidak Boleh Kosong!")
                     return;
                 } 
 				
