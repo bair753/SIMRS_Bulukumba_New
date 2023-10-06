@@ -146,7 +146,7 @@
                 </div>
                 <!-- END DATA PENELITI -->
             </div>
-            <div class="grid_12" style="margin-top: 5px">
+            <!-- <div class="grid_12" style="margin-top: 5px">
                 <div ng-cloak>
                     <md-content>
                         <md-tabs md-dynamic-height md-border-bottom>
@@ -191,7 +191,6 @@
                                                         c-label-text="Tanggal Pembayaran"></label>
                                                 </div>
                                                 <div class="grid_12">
-                                                    <!-- <input kendo-date-picker k-ng-model="item.tanggalPembayaran" k-max="now" k-format="'dd-MM-yyyy'" style="width: 100%" /> -->
                                                     <input style="width: 100%" k-ng-model="item.tanggalPembayaran"
                                                         kendo-datetimepicker placeholer="yyyy-mm-dd"
                                                         k-format="'yyyy-MM-dd'" />
@@ -222,7 +221,6 @@
                                                             c-label-text="Tanggal Presentasi Hasil Penelitian"></label>
                                                     </div>
                                                     <div class="grid_12">
-                                                        <!-- <input kendo-date-picker k-ng-model="item.tanggalPresentasi" k-max="now" k-format="'dd-MM-yyyy'" style="width: 100%" /> -->
                                                         <input style="width: 100%" k-ng-model="item.tanggalPresentasi"
                                                             kendo-datetimepicker placeholer="yyyy-mm-dd"
                                                             k-format="'yyyy-MM-dd'" />
@@ -234,7 +232,6 @@
                                                             c-label-text="Tanggal Presentasi Proposal"></label>
                                                     </div>
                                                     <div class="grid_12">
-                                                        <!--  <input kendo-date-picker k-ng-model="item.tanggalPresentasiProposal" k-max="now" k-format="'dd-MM-yyyy'" style="width: 100%" /> -->
                                                         <input style="width: 100%"
                                                             k-ng-model="item.tanggalPresentasiProposal"
                                                             kendo-datetimepicker placeholer="yyyy-mm-dd"
@@ -294,22 +291,19 @@
                         </md-tabs>
                     </md-content>
                 </div>
-            </div>
+            </div> -->
             <div class="grid_12">
                 <div class="grid_8"></div>
+
                 <div class="grid_2">
-                    <c-button ng-show="!isLoading"
-                        style="width: 99.5%; font-size: 24px; padding:0px, margin:0px; text-align: center;" item="item"
-                        size="36" position=" 'right'" class="cancel" ng-click="Batal()">
-                        <span class="title">Batal</span>
-                    </c-button>
+                    <div class="grid_12">
+                        <button class="btnTemplate1 cancel" style="margin-left: 0;" ng-show="!isLoading" ng-click="Batal()">Batal</button>
+                    </div>
                 </div>
                 <div class="grid_2">
-                    <c-button ng-show="!isLoading" class="success"
-                        style="width: 99.5%; font-size: 24px; padding:0px, margin:0px; text-align: center;" item="item"
-                        size="36" position=" 'right'" is-validate ng-click="Save()">
-                        <span class="title">Simpan</span>
-                    </c-button>
+                    <div class="grid_12">
+                        <button class="btnTemplate1" style="margin-left: 0;" ng-show="!isLoading" ng-click="Save()">Simpan</button>
+                    </div>
                 </div>
             </div>
             <div class="grid_12" style="margin-top:60px">
