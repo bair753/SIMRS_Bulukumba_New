@@ -4887,7 +4887,7 @@ class ReservasiOnlineController extends ApiController
                 $dataPD = new PasienDaftar();
                 $dataPD->norec = $dataPD->generateNewId();
                 $dataPD->kdprofile = $kdProfile;
-                $dataPD->statusenabled = false;
+                $dataPD->statusenabled = true;
                 $dataPD->noregistrasi = $noRegistrasiSeq;
                 $dataPD->nocmfk =  $pasien->id;
                 $dataPD->jenispelayanan =  '1';
@@ -4946,7 +4946,7 @@ class ReservasiOnlineController extends ApiController
                 $dataAPD = new AntrianPasienDiperiksa();
                 $dataAPD->norec = $dataAPD->generateNewId();
                 $dataAPD->kdprofile = $kdProfile;
-                $dataAPD->statusenabled = false;
+                $dataAPD->statusenabled = true;
                 $dataAPD->noregistrasifk = $dataPD->norec;
                 $dataAPD->objectpegawaifk = $request['dokter']['id'];
                 $dataAPD->noantrian = $newptp->noantrian;
@@ -5081,7 +5081,7 @@ class ReservasiOnlineController extends ApiController
                 $dataPD = new PasienDaftar();
                 $dataPD->norec = $dataPD->generateNewId();
                 $dataPD->kdprofile = $kdProfile;
-                $dataPD->statusenabled = false;
+                $dataPD->statusenabled = true;
                 $dataPD->noregistrasi = $noRegistrasiSeq;
                 $dataPD->nocmfk =  $dataPS->id;
                 $dataPD->jenispelayanan =  '1';
@@ -5140,7 +5140,7 @@ class ReservasiOnlineController extends ApiController
                 $dataAPD = new AntrianPasienDiperiksa();
                 $dataAPD->norec = $dataAPD->generateNewId();
                 $dataAPD->kdprofile = $kdProfile;
-                $dataAPD->statusenabled = false;
+                $dataAPD->statusenabled = true;
                 $dataAPD->noregistrasifk = $dataPD->norec;
                 $dataAPD->objectpegawaifk = $request['dokter']['id'];
                 $dataAPD->noantrian = $newptp->noantrian;

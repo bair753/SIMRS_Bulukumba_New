@@ -338,11 +338,11 @@
                                 <td ng-repeat="jawab in list.details | orderBy:'id'">
                                     <div ng-switch on="jawab.type">
                                         <div class="grid_12" ng-switch-when="date">
-                                            <input style="width: 100%" k-ng-model="item.obj[list.id]" kendo-datepicker
+                                            <input style="width: 100%" k-ng-model="item.obj[jawab.id]" kendo-datepicker
                                                 placeholer="yyyy-MM-dd" k-format="'yyyy-MM-dd'" parsedate="yyyy-MM-dd" />
                                         </div>
                                         <div class="grid_12" ng-switch-when="time">
-                                            <input style="width: 100%" k-ng-model="item.obj[list.id]" kendo-timepicker
+                                            <input style="width: 100%" k-ng-model="item.obj[jawab.id]" kendo-timepicker
                                                 placeholer="HH:mm" k-format="'HH:mm'" parsedate="HH:mm" />
                                         </div>
                                         <div ng-switch-when="textbox">
@@ -370,11 +370,11 @@
                                 <td ng-repeat="jawab in list.details | orderBy:'id'">
                                     <div ng-switch on="jawab.type">
                                         <div class="grid_12" ng-switch-when="date">
-                                            <input style="width: 100%" k-ng-model="item.obj[list.id]" kendo-datepicker
+                                            <input style="width: 100%" k-ng-model="item.obj[jawab.id]" kendo-datepicker
                                                 placeholer="yyyy-MM-dd" k-format="'yyyy-MM-dd'" parsedate="yyyy-MM-dd" />
                                         </div>
                                         <div class="grid_12" ng-switch-when="time">
-                                            <input style="width: 100%" k-ng-model="item.obj[list.id]" kendo-timepicker
+                                            <input style="width: 100%" k-ng-model="item.obj[jawab.id]" kendo-timepicker
                                                 placeholer="HH:mm" k-format="'HH:mm'" parsedate="HH:mm" />
                                         </div>
                                         <div ng-switch-when="textbox">
