@@ -1292,10 +1292,15 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     toastr.error('Hak akses tidak ada',' Mohon hubungi IT!')
                     return
                 }
+				if ($scope.dataPasienSelected.kelompokpasien == 'Umum/Pribadi') {
+                    toastr.error('Pasien Umum','Tidak dapat mengubah pemakaian asuransi')
+                    return
+                }
 				if ($scope.dataPasienSelected == undefined) {
 					messageContainer.error("Pilih data dulu")
 					return
 				}
+
 				else {
 
 					medifirstService.get("registrasi/get-apd?noregistrasi="

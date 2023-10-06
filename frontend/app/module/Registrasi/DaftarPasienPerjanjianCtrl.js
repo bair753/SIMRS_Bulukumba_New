@@ -250,6 +250,10 @@ define(['initialize'], function (initialize) {
                     toastr.error('Bukan pasien Sirudal !')
                     return
                 }
+                if ($scope.item.kelompokpasien == 'Umum/Pribadi') {
+                    toastr.error('Pasien Umum','Tidak dapat mengubah pemakaian asuransi')
+                    return
+                }
                 medifirstService.post( "reservasionline/update-reservasi-sirudal",{"noreservasi":$scope.item.noreservasi, "norecPD":$scope.item.norec_pd, "norecAPD":$scope.item.norec_apd})
                 .then(function (data) {               
                             //   console.log(data);
@@ -380,6 +384,11 @@ define(['initialize'], function (initialize) {
             $scope.CheckinJKN = function() {
                 if ($scope.item == undefined){
                     toastr.error('silahkan pilih data ...')
+                    return
+                }
+
+                if ($scope.item.kelompokpasien == 'Umum/Pribadi') {
+                    toastr.error('Pasien Umum','Tidak dapat mengubah pemakaian asuransi')
                     return
                 }
 
