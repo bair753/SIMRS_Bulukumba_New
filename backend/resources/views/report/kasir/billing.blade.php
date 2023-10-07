@@ -466,12 +466,6 @@
             </tr>
             <tr>
                 <th colspan="3"></th>
-                <td colspan="2" style="border:none;"><b>JUMLAH BIAYA TOTAL</b></td>
-                <td style="border:none;">:</td>
-                <td colspan="3" style="text-align:right;border:none;"><?php echo rupiah( $res['total'] ) ?></td>
-            </tr>
-            <tr>
-                <th colspan="3"></th>
                 <td colspan="2" style="border:none;"></td>
                 <td style="border:none;"></td>
                 <td colspan="3" style="text-align:right;border:none;"></td>
@@ -523,7 +517,7 @@
                 <th colspan="3"></th>
                 <td colspan="2" style="border:none;text-align:left;">DITANGGUNG SENDIRI / OBAT</td>
                 <td style="border:none;">:</td>
-                <td colspan="3" style="text-align:right;border:none;"><?php echo rupiah( $res['total'] ) ?></td>
+                <td colspan="3" style="text-align:right;border:none;">Rp0.00</td>
             </tr>
             <tr>
                 <th colspan="3"></th>
