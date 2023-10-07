@@ -8333,6 +8333,26 @@ class ReportController extends ApiController{
             }
         }
 
+        $dataTotalDiskon = DB::select(DB::raw("
+                select CAST(SUM(x.totaldiscount) AS FLOAT) AS total FROM 
+                (select sp.totaldiscount
+                from pasiendaftar_t as pd
+                INNER JOIN antrianpasiendiperiksa_t as apd on apd.noregistrasifk=pd.norec
+                INNER JOIN pelayananpasien_t as pp on pp.noregistrasifk=apd.norec
+                INNER JOIN strukpelayanan_t as sp on sp.norec=pp.strukfk
+                where pd.kdprofile = $kdProfile 
+                and pd.noregistrasi=:noregistrasi               
+                and pp.produkfk not in (402611)
+                GROUP BY sp.totaldiscount) AS x
+            "),
+            array(
+                'noregistrasi' => $r['noregistrasi'] ,
+            )
+        );
+        $totalDiskon = 0;
+        if(!empty($dataTotalDiskon)){
+            $totalDiskon = $dataTotalDiskon[0]->total;
+        }
         $deposit = 0;
         $produkIdDeposit = 402611;
         $pasienDaftar  = DB::table('pasiendaftar_t as pd')->where('pd.noregistrasi', $r['noregistrasi'])->first();
@@ -8353,12 +8373,12 @@ class ReportController extends ApiController{
         $res['klaim']  = $this->getTotalKlaim($r['noregistrasi'], $kdProfile);
         $res['deposit'] = $deposit;
         $res['dibayar'] = $this->getTotolBayar($r['noregistrasi'], $kdProfile);
-        $res['sisa'] =   $res['total']  -  $res['dibayar'] - $res['deposit'] - $res['klaim'];
+        $res['diskon'] =   $totalDiskon;
+        $res['sisa'] =   $res['total']  -  $res['dibayar'] - $res['deposit'] - $res['klaim'] - $res['diskon'] ;
         $res['pdf']  = false;
         $blade = 'report.kasir.billing';
         $pageWidth = 500;
 
-        // dd($res);
 
         if(isset($r['rekap']) && $r['rekap'] == true ){
             $res['billing'] =   collect($data)->groupBy('departemen_group');
