@@ -492,7 +492,7 @@
                 <th colspan="3"></th>
                 <td colspan="2" style="border:none;">DISKON UMUM</td>
                 <td style="border:none;">:</td>
-                <td colspan="3" style="text-align:right;border:none;">0.00</td>
+                <td colspan="3" style="text-align:right;border:none;"><?php echo rupiah( $res['diskon'] ) ?></td>
             </tr>
             <tr>
                 <th colspan="3"></th>
@@ -530,6 +530,12 @@
                 <td colspan="2" style="border:none;text-align:left;">SURPLUS / MINUS KE RS</td>
                 <td style="border:none;">:</td>
                 <td colspan="3" style="text-align:right;border:none;">Rp0.00</td>
+            </tr>
+            <tr>
+                <th colspan="3"></th>
+                <td colspan="2" style="border:none;"><b>JUMLAH BIAYA TOTAL</b></td>
+                <td style="border:none;">:</td>
+                <td colspan="3" style="text-align:right;border:none;"><b><?php echo rupiah( $res['sisa'] ) ?></b></td>
             </tr>
             <tr height="50px">
                 <th colspan="9" style="text-align:left;">TERBILANG:</th>
