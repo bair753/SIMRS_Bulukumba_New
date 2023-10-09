@@ -4949,7 +4949,7 @@ class ReservasiOnlineController extends ApiController
                 $dataAPD->statusenabled = false;
                 $dataAPD->noregistrasifk = $dataPD->norec;
                 $dataAPD->objectpegawaifk = $request['dokter']['id'];
-                $dataAPD->noantrian = $newptp->noantrian;
+                $dataAPD->noantrian = $noAntrian;
                 $dataAPD->objectruanganfk = $request['poliKlinik']['id'];
                 $dataAPD->statusantrian = 0;
                 if ($request['tipePembayaran']['id'] == 2) { 
@@ -5143,7 +5143,7 @@ class ReservasiOnlineController extends ApiController
                 $dataAPD->statusenabled = false;
                 $dataAPD->noregistrasifk = $dataPD->norec;
                 $dataAPD->objectpegawaifk = $request['dokter']['id'];
-                $dataAPD->noantrian = $newptp->noantrian;
+                $dataAPD->noantrian = $noAntrian;
                 $dataAPD->objectruanganfk = $request['poliKlinik']['id'];
                 $dataAPD->statusantrian = 0;
                 if ($request['tipePembayaran']['id'] == 2) { 
