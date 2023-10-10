@@ -307,12 +307,12 @@
         <tr>
             <td colspan="1"></td>
             <td colspan="4">● Diagnosis Medis ( ICD-10 )</td>
-            <td colspan="5">: @{{ item.obj[32110972] ? item.obj[32110972] : '' }}</td>
+            <td colspan="5">: @{{ item.obj[32116794] ? item.obj[32116794] : '' }}</td>
         </tr>
         <tr>
             <td colspan="1"></td>
             <td colspan="4">● Diagnosis Fungsi ( ICD-10 )</td>
-            <td colspan="5">: @{{ item.obj[32110973] ? item.obj[32110973] : '' }}</td>
+            <td colspan="5">: @{{ item.obj[32116795] ? item.obj[32116795] : '' }}</td>
         </tr>
         <tr>
             <td colspan="1"></td>
