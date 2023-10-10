@@ -244,6 +244,13 @@ class MyJKNV2Controller extends ApiController
                 return $this->setStatusCode($result['metadata']['code'])->respond($result);
             }
 
+            $countNoAntrian = AntrianPasienDiperiksa::where('objectruanganfk',$request['poliKlinik']['id'])
+                        ->where('kdprofile', $kdProfile)
+                        ->where('tglregistrasi', '>=', $request['tanggalperiksa'].' 00:00')
+                        ->where('tglregistrasi', '<=', $request['tanggalperiksa'].' 23:59')
+                        ->max('noantrian');
+            $noAntrian = $countNoAntrian + 1;
+
 
             $newptp = new AntrianPasienRegistrasi();
             $nontrian = AntrianPasienRegistrasi::max('noantrian') + 1;
@@ -298,12 +305,24 @@ class MyJKNV2Controller extends ApiController
             $newptp->tempatlahir = !empty($pasien) ? $pasien->tempatlahir : null;
             $newptp->statuspanggil  = 0;
             $newptp->save();
-            $nomorAntrian = strlen((string)$newptp->noantrian);
+            $nomorAntrian = strlen((string)$noAntrian);
             // dd($nomorAntrian);
+            $newptp->namaruangan = Ruangan::where('id', $ruang->id)
+                    ->where('kdprofile', (int) $kdProfile)
+                    ->select('namaruangan', 'prefixnoantrian')
+                    ->first();
+            $newptp->nomorantrean  = null;
+            
+                    $huruf = 'Z';
+                        if ($newptp->namaruangan->prefixnoantrian != null) {
+                            $huruf = $newptp->namaruangan->prefixnoantrian;
+                        }
+                        $nomorAntrian = $huruf . '-' . str_pad($newptp->noantrian, 3, "0", STR_PAD_LEFT);
+                        $newptp->nomorantrean = $nomorAntrian;
             if ($nomorAntrian == 1){
                 $nomorAntrian = '0'.$newptp->noantrian;
             }else{
-                $nomorAntrian = $newptp->noantrian;
+                $nomorAntrian = $newptp->nomorantrean;
             }
 
             $kodeDokter = $request['kodedokter'];
@@ -370,7 +389,7 @@ class MyJKNV2Controller extends ApiController
                         if ($ruang->prefixnoantrian != null) {
                             $huruf = $ruang->prefixnoantrian;
                         }
-                        $nomorAntrian = $huruf . '-' . str_pad($cek["metadata"]["dataAPD"]["noantrian"], 4, "0", STR_PAD_LEFT);
+                        $nomorAntrian = $nomorAntrian;
 
                         $transMessage = "Ok";
                         $transStatus = 'true';
