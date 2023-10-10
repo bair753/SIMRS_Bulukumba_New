@@ -381,6 +381,34 @@ class GeneralController extends ApiController
         return $this->respond($dataPenulis2);
     }
 
+    public function getDataMesinGeneral(Request $request) {
+        $kdProfile = (int) $this->getDataKdProfile($request);
+        $req=$request->all();
+        $dataProduk=[];
+        $dataProduk  = \DB::table('settingdatafixed_m as st')
+            ->select('st.id','st.namafield')
+            ->where('st.kdprofile', $kdProfile)
+            ->where('st.statusenabled',true)
+            ->wherein('st.id',[1604,1605,1606,1607,1608,1609,1610,1611,1612,1613])
+            ->orderBy('st.id');
+        if(isset($req['filter']['filters'][0]['value']) &&
+            $req['filter']['filters'][0]['value']!="" &&
+            $req['filter']['filters'][0]['value']!="undefined"){
+            $dataProduk = $dataProduk->where('st.namafield','ilike','%'. $req['filter']['filters'][0]['value'].'%' );
+        };
+        $dataProduk = $dataProduk->take(10);
+        $dataProduk = $dataProduk->get();
+
+        foreach ($dataProduk as $item){
+            $dataPenulis2[]=array(
+                'id' => $item->id,
+                'namalengkap' => $item->namafield,
+            );
+        }
+
+        return $this->respond($dataPenulis2);
+    }
+
     public function getComboAddressGeneral(Request $request){
         $kdProfile = (int) $this->getDataKdProfile($request);
         $kebangsaan = DB::table('kebangsaan_m')

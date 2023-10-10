@@ -2,8 +2,8 @@
 define(['initialize'], function (initialize) {
 
     'use strict';
-    initialize.controller('AbsensiPegawaiCtrl', ['$scope', 'DateHelper', 'MedifirstService', '$timeout',
-        function ($scope, dateHelper, medifirstService, $timeout) {
+    initialize.controller('AbsensiPegawaiCtrl', ['CacheHelper', '$scope', 'DateHelper', 'MedifirstService', '$timeout',
+        function (cacheHelper, $scope, dateHelper, medifirstService, $timeout) {
             $scope.titleButton = 'Input Jadwal'
             $scope.isRouteLoading = false;
             $scope.now = new Date();
@@ -30,6 +30,10 @@ define(['initialize'], function (initialize) {
                     $scope.listPegawai = data;
                 });
 
+                medifirstService.getPart("sysadmin/general/get-combo-mesin", true, true, 20).then(function (data) {
+                    $scope.listMesin = data;
+                });
+
                 medifirstService.get('sdm/get-combo-pegawai-jadwal-all').then(function (e) {
                     $scope.listDokter = e.data
                     $scope.listDokterCari = e.data
@@ -43,6 +47,10 @@ define(['initialize'], function (initialize) {
                     $scope.ListStatusPegawai = dataCombo.kategorypegawai;
                 });
             }
+
+            $scope.tambahUser = function () {
+				$scope.popupUpload.center().open();
+			}
 
             $scope.cekAll = function (bool) {
                 if (bool) {
@@ -123,88 +131,49 @@ define(['initialize'], function (initialize) {
                 depth: "year"
             }
 
-            $scope.cari = function () {
-                if ($scope.item.qBulan == undefined) {
-                    toastr.error('Bulan Harus di isi')
-                    return
-                }
-                if ($scope.item.qPegawai == undefined) {
-                    toastr.error('Pegawai Harus di pilih')
-                    return
-                }
-                var bln = ''
-                if ($scope.item.qBulan != undefined) {
-                    bln = moment($scope.item.qBulan).format('YYYY-MM')
-                }
-                var pegawaiId = ''
-                if ($scope.item.qPegawai != undefined) {
-                    pegawaiId = '&idPegawai=' + $scope.item.qPegawai.id
-                }
-                $scope.isRouteLoading = true
-                data2 = []
-
-                // generateTable()
-                medifirstService.get('sdm/get-absensi-pegawai?bulan=' + bln + pegawaiId).then(function (e) {
-                    $scope.isRouteLoading = false
-                    for (let i = 0; i < e.data.length; i++) {
-                        const element = e.data[i];
-                        element.no = i + 1
+                $scope.cari = function () {
+             
+                    $scope.isRouteLoading = true;
+                
+                    var idPegawai = "";
+                    if ($scope.item.qPegawai != undefined) {
+                        idPegawai = "&idPegawai=" + $scope.item.qPegawai.id;
                     }
-                    var dataBack = e.data.data
-
-                    var date = $scope.item.qBulan;
-                    var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-                    var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-                    var loppHari = getMonths(moment(firstDay).format('YYYY-MM-DD'), moment(lastDay).format('YYYY-MM-DD'))
-
-                    for (let x = 0; x < loppHari.length; x++) {
-                        const element = loppHari[x];
-
-                        data2.push({
-                            'no': x + 1,
-                            'tanggal': element.str,
-                            'tglabsen':element.tglabsen,// moment(element.firstDay).format('YYYY-MM-DD'),
-                            'jammasuk': null,
-                            'jampulang': null,
-                            'mesinmasuk': null,
-                            'mesinpulang': null,
-                            'status': null,
-                            'kwk': null,
-                        })
+    
+    
+                    var chacePeriode = {
+                        0: idPegawai
                     }
-                    if (dataBack.length > 0) {
-                        for (let z = 0; z < data2.length; z++) {
-                            const element = data2[z];
-                            for (let x = 0; x < dataBack.length; x++) {
-                                const element2 = dataBack[x];
-                                if (element.tglabsen == moment(new Date(element2.jammasuk)).format('YYYY-MM-DD')) {
-                                    element.jammasuk = moment(new Date(element2.jammasuk)).format('HH:mm')
-                                    element.jampulang = moment(new Date(element2.jamkeluar)).format('HH:mm')
-                                    element.mesinpulang = element2.mesinpulang
-                                    element.mesinmasuk = element2.mesinmasuk
-                                    element.status = element2.status
-                                    if (element2.kwk)
-                                        element.kwk = parseInt(element2.kwk)
-                                    break
+                    cacheHelper.set('AbsensiPegawaiCtrl', chacePeriode);
+    
+                    medifirstService.get("sdm/get-absensi-pegawai?"
+                        + "&idPegawai=" + idPegawai
+                        ).then(function (data) {
+                            $scope.isLoadingData = false;
+                            var datas = data.data.data;
+                            $scope.dataSourceGrid = new kendo.data.DataSource({
+                                data: datas,
+                                pageSize: 10,
+                                total: data.length,
+                                serverPaging: false,
+                                schema: {
+                                    model: {
+                                        fields: {
+                                        }
+                                    }
                                 }
+                            });
+    
+                        $scope.dataSourceGrid = data.data;
+                        $scope.isRouteLoading = false;
+                    })
+                }   
 
-                            }
-                        }
-
-                    }
-
-                    $scope.dataSourceGrid = new kendo.data.DataSource({
-                        data: data2,
-                        batch: true,
-                        schema: {
-                            model: {
-                            }
-                        }
-                    });
-                }, function error() {
-                    $scope.isRouteLoading = false
-                })
-
+            $scope.formatTanggal = function(tanggal){
+                return moment(tanggal).format('DD-MMM-YYYY HH:mm');
+            }
+            $scope.formatJam = function(tanggal){
+                return moment(tanggal).format('HH:mm');
             }
 
             $scope.mainGridOptions = {
@@ -233,66 +202,66 @@ define(['initialize'], function (initialize) {
                 columns: [
 
                     {
-                        field: "no",
-                        title: "No",
+                        field: "pegawaifk",
+                        title: "User ID",
                         width: "20px"
                     },
                     {
-                        field: "tanggal",
-                        title: "Tanggal",
+                        field: "namalengkap",
+                        title: "Nama Pegawai",
                         width: "80px"
                     },
                     {
-                        title: "Absen",
-                        headerAttributes: { style: "text-align : center" },
-                        columns: [
-                            {
-                                field: "jammasuk",
-                                title: "Jam Masuk",
-                                width: "80px",
-                                headerAttributes: { style: "text-align : center" }
-                            },
-                            {
-                                field: "mesinmasuk",
-                                title: "Mesin Masuk",
-                                width: "100px",
-                                headerAttributes: { style: "text-align : center" },
-                            },
-                            {
-                                field: "jampulang",
-                                title: "Jam Pulang",
-                                width: "80px",
-                                headerAttributes: { style: "text-align : center" }
-                            },
-                            {
-                                field: "mesinpulang",
-                                title: "Mesin Pulang",
-                                width: "100px",
-                                headerAttributes: { style: "text-align : center" },
-                            }
-
-                        ]
-                    },
-                    {
-                        field: "status",
-                        title: "Status",
-                        hidden: false,
+                        field: "mesin",
+                        title: "Mesin",
                         width: "50px"
                     },
                     {
-                        field: "kwk",
-                        title: "KWK (Menit)",
-                        hidden: false,
-                        width: "50px"
-                    },
-                    {
+                        field: "tglregister",
+                        title: "Tgl Registrasi",
                         width: "50px",
-                        "command": [
-                            { text: "Edit", click: showDetails, imageClass: "k-icon k-i-pencil" },
-
-                        ],
-
+                        "template": "<span class='style-center'>{{formatTanggal('#: tglregister #')}}</span>"
                     },
+                    // {
+                    //     title: "Absen",
+                    //     headerAttributes: { style: "text-align : center" },
+                    //     columns: [
+                    //         {
+                    //             field: "jammasuk",
+                    //             title: "Jam Masuk",
+                    //             width: "80px",
+                    //             headerAttributes: { style: "text-align : center" }
+                    //         },
+                    //         {
+                    //             field: "mesinmasuk",
+                    //             title: "Mesin Masuk",
+                    //             width: "100px",
+                    //             headerAttributes: { style: "text-align : center" },
+                    //         },
+                    //         {
+                    //             field: "jampulang",
+                    //             title: "Jam Pulang",
+                    //             width: "80px",
+                    //             headerAttributes: { style: "text-align : center" }
+                    //         },
+                    //         {
+                    //             field: "mesinpulang",
+                    //             title: "Mesin Pulang",
+                    //             width: "100px",
+                    //             headerAttributes: { style: "text-align : center" },
+                    //         }
+
+                    //     ]
+                    // },
+                    
+                    // {
+                    //     width: "50px",
+                    //     "command": [
+                    //         { text: "Edit", click: showDetails, imageClass: "k-icon k-i-pencil" },
+
+                    //     ],
+
+                    // },
 
                 ],
                 selectable: "cell",
@@ -748,6 +717,70 @@ define(['initialize'], function (initialize) {
                 medifirstService.post('sdm/save-jadwal-perbulan-pegawai', json).then(function (e) {
                     $scope.search()
                 })
+            }
+
+            $scope.simpanUser = function (current) {
+                if ($scope.insert.pegawai == undefined) {
+                    toastr.error('Pegawai Belum Dipilih', 'Info');
+                    return;
+                }
+
+                if ($scope.insert.mesin == undefined) {
+                    toastr.error('Mesin Belum Dipilih', 'Info');
+                    return;
+                }
+
+                var data =
+                {
+                    pegawaifk: $scope.insert.pegawai.id,
+                    namalengkap: $scope.insert.pegawai.namalengkap,
+                    mesin: $scope.insert.mesin.id,
+                }
+
+                var objSave = {
+                    data: data,
+                }
+
+                medifirstService.postLogging('Tambah User Mesin', 'norec emrpasien_t', $scope.insert.pegawai.namalengkap,
+                        'Tambah User Mesin - ' + $scope.insert.pegawai.namalengkap + ' pada Mesin  '
+                        + $scope.insert.mesin.namalengkap + ' - Peserta : ' + $scope.insert.pegawai.namalengkap).then(function (res) {
+                        })
+                       
+                medifirstService.post('sdm/save-user-pegawai', objSave).then(function (e) {
+                    $scope.cari()
+                    $scope.popupUpload.close();
+                }, function error() {
+        
+                })
+                
+            }
+
+            $scope.hapusUser = function (current) {
+                console.log($scope.dataSelected == undefined);
+                if ($scope.dataSelected == undefined) {
+                    toastr.error('User Belum Dipilih', 'Info');
+                    return;
+                }
+
+                var data =
+                {
+                    norec: $scope.dataSelected.norec,
+                }
+
+                var objSave = {
+                    data: data,
+                }
+
+                medifirstService.postLogging('Hapus User Mesin', 'norec emrpasien_t', $scope.dataSelected.namalengkap,
+                        'Hapus User Mesin - ' + $scope.dataSelected.namalengkap + ' pada Mesin  '
+                        + $scope.dataSelected.mesin + ' - Peserta : ' + $scope.dataSelected.namalengkap).then(function (res) {
+                        })
+
+                medifirstService.post('sdm/hapus-user-pegawai', objSave).then(function (e) {
+                        $scope.cari()
+                    }, function error() {
+                
+                    })
             }
 
             $scope.search = function () {

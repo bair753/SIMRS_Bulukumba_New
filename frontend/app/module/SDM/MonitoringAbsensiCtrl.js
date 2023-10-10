@@ -85,6 +85,10 @@ define(['initialize'], function (initialize) {
                 }
                 cacheHelper.set('MonitoringAbsensiCtrl', chacePeriode);
 
+                medifirstService.get("sdm/get-log-presensi-pegawai?").then(function (data) {
+
+                        });
+
                 medifirstService.get("sdm/get-monitoring-absensi-pegawai?"
                     + "tglAwal=" + tglAwal
                     + "&tglAkhir=" + tglAkhir
@@ -122,7 +126,7 @@ define(['initialize'], function (initialize) {
             }
 
             $scope.formatTanggal = function(tanggal){
-                return moment(tanggal).format('DD-MMM-YYYY');
+                return moment(tanggal).format('DD-MMM-YYYY HH:mm');
             }
 
             $scope.formatJam = function(tanggal){
@@ -146,30 +150,33 @@ define(['initialize'], function (initialize) {
                         // "template": "<span class='style-left'>{{formatTanggal('#: tglsurveilans #')}}</span>"
                     },
                     {
-                        "field": "jammasuk",
+                        "field": "tglhistori",
                         "title": "Tgl. Absen",
                         "width": "100px",
-                        "template": "<span class='style-center'>{{formatTanggal('#: jammasuk #')}}</span>"
+                        "template": "<span class='style-center'>{{formatTanggal('#: tglhistori #')}}</span>"
                     },                    
                     {
-                        "field": "jammasuk",
-                        "title": "Absen Masuk",
+                        "field": "status",
+                        "title": "Status",
                         "width": "80px",
-                        "template": "<span class='style-center'>{{formatJam('#: jammasuk #')}}</span>"
+                        //Status 0 : Masuk
+                        //Status 1 : Pulang
+                        "template": '# if( status==0) {# Masuk # } else {# Pulang #} #'
+                        // "template": "<span class='style-center'>{{formatJam('#: jamkeluar #')}}</span>"
 
                     },
                     {
-                        "field": "jamkeluar",
-                        "title": "Absen Keluar",
+                        "field": "verified",
+                        "title": "Verifikasi",
                         "width": "80px",
-                        "template": "<span class='style-center'>{{formatJam('#: jamkeluar #')}}</span>"
+                        //verified 3 : Password
+                        //verified 1 : SIdik Jari
+                        //verified 15 : Wajah
+
+                        "template": '# if( verified==3) {# Password # } else if( verified==1) {# Sidik Jari # } else if( verified==15) {# Wajah # } else {# Tidak ditemukan #} #'
+                        // "template": "<span class='style-center'>{{formatJam('#: jamkeluar #')}}</span>"
 
                     },
-                    {
-                        "field": "namaruangan",
-                        "title": "Ruangan",
-                        "width": "180px"
-                    }
                 ]
             }; 
 
