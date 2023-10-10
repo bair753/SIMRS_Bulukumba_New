@@ -69,17 +69,17 @@
             <md-content class="md-padding" ng-show="!isInput">
                 <div class="grid_12">
                     <!-- Nama -->
-                    <div class="grid_2">
+                    <div class="grid_4">
                         <label c-label item="item" c-label-text="namaLengkap"></label>
                         <input style="width: 100%;" kendo-combo-box k-ng-model="item.qPegawai"
                             k-data-text-field="'namalengkap'" k-data-value-field="'id'" k-filter="'contains'"
                             k-auto-bind="false" k-data-source="listPegawai" />
                     </div>
-                    <div class="grid_1">
+                    <!-- <div class="grid_4">
                         <label c-label item="item" c-label-text="bulan"></label>
                         <input style="width: 100%" k-options="monthUngkul" k-ng-model="item.qBulan" kendo-date-picker
                             placeholer="MMMM" k-format="'MMMM-yyyy'" />
-                    </div>
+                    </div> -->
 
                     <!-- <div class="grid_2" ng-disabled="true">
                         <label c-label item="item" c-label-text="Unit Kerja"></label>
@@ -138,8 +138,16 @@
                 </div>
             </md-content>
             <md-content class="md-padding">
-                <div class="grid_2">
+                <!-- <div class="grid_2">
                     <button class="btnTemplate1 " ng-click="Simpan()"><i class="fa fa-save"></i>Update
+                    </button>
+                </div> -->
+                <div class="grid_2">
+                    <button class="btnTemplate1 " ng-click="tambahUser()">Tambah User
+                    </button>
+                </div>
+                <div class="grid_2">
+                    <button class="btnTemplate1 " ng-click="hapusUser()" style="background-color: red;">Hapus User
                     </button>
                 </div>
             </md-content>
@@ -218,6 +226,7 @@
                     <button class="k-button  btnHapus k-button-icontext" ng-click="cancel()"><span
                             class="k-icon k-cancel"></span>Cancel</button>
                 </div>
+                
             </div>
 
         </div>
@@ -226,3 +235,34 @@
         </div>
     </div>
 </div>
+
+<div kendo-window="popupUpload" k-title="'Tambah User'" k-width="700"
+						k-visible="false" k-on-open="win2visible = true" k-on-close="win2visible = false">
+						<div class="panel panel-default container_12">
+							<div class="grid_6">
+								<div class="grid_12">
+									<label c-label item="item">Nama Lengkap</label>
+								</div>
+								<div class="clear"></div>
+
+								<input style="width: 100%;" kendo-combo-box k-ng-model="insert.pegawai"
+                            k-data-text-field="'namalengkap'" k-data-value-field="'id'" k-filter="'contains'"
+                            k-auto-bind="false" k-data-source="listPegawai" />
+							</div>
+							<div class="grid_6">
+								<div class="grid_12">
+									<label c-label item="item">Nama Mesin</label>
+								</div>
+								<div class="clear"></div>
+
+								<div class="grid_12">
+									<input style="width: 100%;" kendo-combo-box k-ng-model="insert.mesin"
+                            k-data-text-field="'namalengkap'" k-data-value-field="'id'" k-filter="'contains'"
+                            k-auto-bind="false" k-data-source="listMesin" />
+								</div>
+							</div>
+							<div class="grid_12" style="margin-top: 10px">
+								<button class="k-button" ng-click="simpanUser()"
+									style="float:right;margin-right: 2px;">Simpan </button>
+							</div>
+					</div>

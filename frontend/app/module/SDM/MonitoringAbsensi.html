@@ -11,7 +11,7 @@
     }
 </style>
 <div class="panel panel-default container_12">
-	<div class="panel-heading" c-translate>Monitoring Absensi</div>
+	<div class="panel-heading" c-translate>Monitoring Log Presensi</div>
 	<div class="panel-body">
 		<fieldset style="min-height:50px !important" align="left">
             <legend><h2>Pencarian</h2></legend>
@@ -27,15 +27,15 @@
 					/>
 				</div>
             	<div class="grid_6">            		
-					<div class="grid_4">
+					<!-- <div class="grid_4">
 				        <label c-label item="item" c-label-text="Departement"></label>
 				        <input  style="width: 100%;" kendo-combo-box k-ng-model="item.departement" k-data-text-field="'departemen'" k-data-value-field="'id'" k-filter="'contains'" k-auto-bind="false" k-data-source="listDepartemen"  k-on-change="getIsiComboRuangan()"/>
 				    </div>
 				    <div class="grid_4">
 				        <label c-label item="item" c-label-text="Ruangan"></label>
 				        <input ng-disabled="isDisable" style="width: 100%;" kendo-combo-box k-ng-model="item.ruangan" k-data-text-field="'ruangan'" k-data-value-field="'id'" k-filter="'contains'" k-auto-bind="false" k-data-source="listRuangan"/>
-				    </div>
-					<div class="grid_4">
+				    </div> -->
+					<div class="grid_6">
 						<label c-label item="item" c-label-text="Nama Lengkap"></label>
 						<input style="width: 100%;" kendo-combo-box k-ng-model="item.namaPegawai" k-data-text-field="'namalengkap'" k-data-value-field="'id'"
 						 k-filter="'contains'" k-auto-bind="false" k-data-source="listPegawai" />

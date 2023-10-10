@@ -2071,6 +2071,12 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
         // });
         // Route::group(['prefix' => 'sdm'], function () {
             /*GET*/
+            //Mesin Presensi
+            Route::get('sdm/get-log-presensi-pegawai', 'SDM\SumberDayaManusiaController@getLogPresensiPegawai1');
+            Route::post('sdm/save-user-pegawai', 'SDM\SumberDayaManusiaController@saveUserPegawai');
+            Route::post('sdm/hapus-user-pegawai', 'SDM\SumberDayaManusiaController@hapusUserPegawai');
+
+
             Route::get('sdm/get-data-combo-sdm', 'SDM\SumberDayaManusiaController@getComboPegawaiSdm');
             Route::get('sdm/get-data-pegawai-all-sdm', 'SDM\SumberDayaManusiaController@getDaftarPegawai');
             Route::get('sdm/get-data-detail-pegawai', 'SDM\SumberDayaManusiaController@getDetailPegawai');
@@ -2354,6 +2360,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
                 Route::get('sysadmin/general/get-status-close/{noregistrasi}', 'SysAdmin\GeneralController@getStatusClosePeriksa');
                 Route::get('sysadmin/general/get-tgl-posting', 'SysAdmin\GeneralController@getPostingTgl');
                 Route::get('sysadmin/general/get-combo-pegawai', 'SysAdmin\GeneralController@getDataPegawaiGeneral');
+                Route::get('sysadmin/general/get-combo-mesin', 'SysAdmin\GeneralController@getDataMesinGeneral');
                 Route::get('sysadmin/general/get-combo-address','SysAdmin\GeneralController@getComboAddressGeneral');
                 Route::get('sysadmin/general/get-desa-kelurahan', 'SysAdmin\GeneralController@getDesaKelurahanGeneral');
                 Route::get('sysadmin/general/get-alamat-bykodepos', 'SysAdmin\GeneralController@getAlamatByKodePosGeneral');

@@ -69,6 +69,8 @@ use App\Http\Controllers\ApiController;
 use App\Traits\Valet;
 use Carbon\Carbon;
 use App\Master\MapPegawaiToUnit;
+use App\Transaksi\SDM_UserAbsensi;
+use Fahriztx\Zksoapphp\Fingerprint;
 
 class SumberDayaManusiaController extends ApiController {
 
@@ -1708,22 +1710,280 @@ class SumberDayaManusiaController extends ApiController {
         return $this->respond($data);
     }
 
+    public function getLogPresensiPegawai1 (Request $request) {
+        $kdProfile = (int) $this->getDataKdProfile($request);
+        $set1 =$this->settingDataFixed('presensi_1',$kdProfile);
+        $machine1 = Fingerprint::connect($set1, '80', '0');
+        $machine = $machine1->getAttendance();
+        $Connect = fsockopen($set1, "80", $errno, $errstr, 1);
+
+        try {
+            //Insert Log Presensi
+            foreach ($machine as $key => $value) {
+                $find_before = \DB::table('sdm_absensipegawai_t as ap')->where('pegawaifk',$value['pin'])
+                ->where('tglhistori', $value['datetime'])
+                ->where('verified', $value['verified'])
+                ->where('status', $value['status'])
+                ->where('workcode', $value['workcode'])->first();
+                    if($find_before){
+                      continue;
+                    };
+
+                    $logAP = new SDM_AbsensiPegawai();
+                    $logAP->norec = $logAP->generateNewId();
+                    $logAP->kdprofile = $kdProfile;
+                    $logAP->statusenabled = true;
+                    $logAP->pegawaifk = $value['pin'];
+                    $logAP->tglhistori = $value['datetime'];
+                    $logAP->verified = $value['verified'];
+                    $logAP->status = $value['status'];
+                    $logAP->workcode = $value['workcode'];
+                    $logAP->save();
+            }
+
+            //Hapus Log Presensi
+            $soap_request="<ClearData><ArgComKey xsi:type=\"xsd:integer\">"."0"."</ArgComKey><Arg><Value xsi:type=\"xsd:integer\">3</Value></Arg></ClearData>";
+            $newLine="\r\n";
+            fputs($Connect, "POST /iWsService HTTP/1.0".$newLine);
+            fputs($Connect, "Content-Type: text/xml".$newLine);
+            fputs($Connect, "Content-Length: ".strlen($soap_request).$newLine.$newLine);
+            fputs($Connect, $soap_request.$newLine);
+            $buffer="";
+            while($Response=fgets($Connect, 1024)){
+                $buffer=$buffer.$Response;
+            }
+            $buffer=$this->parse_presensi($buffer,"<Information>","</Information>");
+
+            $transStatus = 'true';
+            $transMessage = "Berhasil import Log Presensi";
+            } catch (\Throwable $th) {
+                $transStatus = 'false';
+                $transMessage = $th->getMessage();
+            }
+
+            if ($transStatus != 'false') {
+                $result = array(
+
+                    "status" => 201,
+                    "message" => $transMessage,
+                    "as" => 'mr_adhyy',
+                );
+            } else {
+                $result = array(
+
+                    "status" => 400,
+                    "message" => $transMessage,
+                    "as" => 'mr_adhyy',
+                );
+            }
+            return $this->setStatusCode($result['status'])->respond($result, $transMessage);
+    }
+
+    public function saveUserPegawai (Request $request) {
+        $kdProfile = (int) $this->getDataKdProfile($request);
+
+        $cekUser = SDM_UserAbsensi::where('pegawaifk', $request->data['pegawaifk'])->where('statusenabled', true)->first();
+        if($cekUser == null){
+            try {
+                if($request->data['mesin'] == 1604){
+                    $set1 =$this->settingDataFixed('presensi_1',$kdProfile);  
+                }
+                if($request->data['mesin'] == 1605){
+                    $set1 =$this->settingDataFixed('presensi_2',$kdProfile);
+                }
+                if($request->data['mesin'] == 1606){
+                    $set1 =$this->settingDataFixed('presensi_3',$kdProfile);
+                }
+                if($request->data['mesin'] == 1607){
+                    $set1 =$this->settingDataFixed('presensi_4',$kdProfile);
+                }
+                if($request->data['mesin'] == 1608){
+                    $set1 =$this->settingDataFixed('presensi_5',$kdProfile);
+                }
+                if($request->data['mesin'] == 1609){
+                    $set1 =$this->settingDataFixed('presensi_6',$kdProfile);
+                }
+                if($request->data['mesin'] == 1610){
+                    $set1 =$this->settingDataFixed('presensi_7',$kdProfile);
+                }
+                if($request->data['mesin'] == 1611){
+                    $set1 =$this->settingDataFixed('presensi_8',$kdProfile);
+                }
+                if($request->data['mesin'] == 1612){
+                    $set1 =$this->settingDataFixed('presensi_9',$kdProfile);
+                }
+                if($request->data['mesin'] == 1613){
+                    $set1 =$this->settingDataFixed('presensi_10',$kdProfile);
+                }
+                $Connect = fsockopen($set1, "80", $errno, $errstr, 1);
+    
+                $soap_request="<SetUserInfo><ArgComKey Xsi:type=\"xsd:integer\">"."0"."</ArgComKey><Arg><PIN>".$request->data['pegawaifk']."</PIN><Name>".$request->data['namalengkap']."</Name></Arg></SetUserInfo>";
+                    $newLine="\r\n";
+                    fputs($Connect, "POST /iWsService HTTP/1.0".$newLine);
+                    fputs($Connect, "Content-Type: text/xml".$newLine);
+                    fputs($Connect, "Content-Length: ".strlen($soap_request).$newLine.$newLine);
+                    fputs($Connect, $soap_request.$newLine);
+                    $buffer="";
+                    while($Response=fgets($Connect, 1024)){
+                        $buffer=$buffer.$Response;
+                    }
+                $buffer=$this->parse_presensi($buffer,"<Information>","</Information>");
+        
+                $newU = new SDM_UserAbsensi();
+                $newU->norec = $newU->generateNewId();
+                $newU->kdprofile = $kdProfile;
+                $newU->statusenabled = true;
+                $newU->pegawaifk = $request->data['pegawaifk'];
+                $newU->mesin = $request->data['mesin'];
+                $newU->tglregister = date('Y-m-d H:i:s');
+                $newU->save();
+    
+                $transStatus = 'true';
+                $transMessage = "Sukses";
+            } catch (\Throwable $th) {
+                $transStatus = 'false';
+                    $transMessage = $th->getMessage();
+            }
+    
+            if ($transStatus != 'false') {
+                $result = array(
+    
+                    "status" => 201,
+                    "message" => $transMessage,
+                    "as" => 'mr_adhyy',
+                );
+            } else {
+                $result = array(
+    
+                    "status" => 400,
+                    "message" => $transMessage,
+                    "as" => 'mr_adhyy',
+                );
+            }
+            return $this->setStatusCode($result['status'])->respond($result, $transMessage);
+        }else{
+            $transMessage = "User sudah ada";
+            $result = array(
+    
+                "status" => 400,
+                "message" => $transMessage,
+                "as" => 'mr_adhyy',
+            );
+            return $this->setStatusCode($result['status'])->respond($result, $transMessage);
+        }
+     
+    }
+
+    public function hapusUserPegawai (Request $request) {
+        $kdProfile = (int) $this->getDataKdProfile($request);
+
+        $cekUser = SDM_UserAbsensi::where('norec', $request->data['norec'])->first();
+        try {
+            if($cekUser->mesin == 1604){
+                $set1 =$this->settingDataFixed('presensi_1',$kdProfile);  
+            }
+            if($cekUser->mesin == 1605){
+                $set1 =$this->settingDataFixed('presensi_2',$kdProfile);
+            }
+            if($cekUser->mesin == 1606){
+                $set1 =$this->settingDataFixed('presensi_3',$kdProfile);
+            }
+            if($cekUser->mesin == 1607){
+                $set1 =$this->settingDataFixed('presensi_4',$kdProfile);
+            }
+            if($cekUser->mesin == 1608){
+                $set1 =$this->settingDataFixed('presensi_5',$kdProfile);
+            }
+            if($cekUser->mesin == 1609){
+                $set1 =$this->settingDataFixed('presensi_6',$kdProfile);
+            }
+            if($cekUser->mesin == 1610){
+                $set1 =$this->settingDataFixed('presensi_7',$kdProfile);
+            }
+            if($cekUser->mesin == 1611){
+                $set1 =$this->settingDataFixed('presensi_8',$kdProfile);
+            }
+            if($cekUser->mesin == 1612){
+                $set1 =$this->settingDataFixed('presensi_9',$kdProfile);
+            }
+            if($cekUser->mesin == 1613){
+                $set1 =$this->settingDataFixed('presensi_10',$kdProfile);
+            }
+            $Connect = fsockopen($set1, "80", $errno, $errstr, 1);
+
+            //Hapus User
+            $soap_request="<DeleteUser><ArgComKey xsi:type=\"xsd:integer\">"."0"."</ArgComKey><Arg><PIN xsi:type=\"xsd:integer\">".$cekUser->pegawaifk."</PIN></Arg></DeleteUser>";
+            $newLine="\r\n";
+            fputs($Connect, "POST /iWsService HTTP/1.0".$newLine);
+            fputs($Connect, "Content-Type: text/xml".$newLine);
+            fputs($Connect, "Content-Length: ".strlen($soap_request).$newLine.$newLine);
+            fputs($Connect, $soap_request.$newLine);
+            $buffer="";
+            while($Response=fgets($Connect, 1024)){
+                $buffer=$buffer.$Response;
+            }
+            $buffer=$this->parse_presensi($buffer,"<Information>","</Information>");
+
+            //Hapus Sidik Jari
+            $soap_delete="<DeleteTemplate><ArgComKey xsi:type=\"xsd:integer\">"."0"."</ArgComKey><Arg><PIN xsi:type=\"xsd:integer\">".$cekUser->pegawaifk."</PIN></Arg></DeleteTemplate>";
+            $newLineSJ="\r\n";
+            fputs($Connect, "POST /iWsService HTTP/1.0".$newLineSJ);
+            fputs($Connect, "Content-Type: text/xml".$newLineSJ);
+            fputs($Connect, "Content-Length: ".strlen($soap_delete).$newLineSJ.$newLineSJ);
+            fputs($Connect, $soap_delete.$newLineSJ);
+            $buff_SJ="";
+            while($Response=fgets($Connect, 1024)){
+                $buff_SJ=$buff_SJ.$Response;
+            }
+
+            $buff_SJ=$this->parse_presensi($buff_SJ,"<Information>","</Information>");
+
+            //Disable User
+            SDM_UserAbsensi::where('norec', $request->data['norec'])->update([
+                'statusenabled' => false
+            ]);
+
+            $transStatus = 'true';
+            $transMessage = "Sukses";
+        } catch (\Throwable $th) {
+            $transStatus = 'false';
+                $transMessage = $th->getMessage();
+        }
+
+        if ($transStatus != 'false') {
+            $result = array(
+
+                "status" => 201,
+                "message" => $transMessage,
+                "as" => 'mr_adhyy',
+            );
+        } else {
+            $result = array(
+
+                "status" => 400,
+                "message" => $transMessage,
+                "as" => 'mr_adhyy',
+            );
+        }
+        return $this->setStatusCode($result['status'])->respond($result, $transMessage);
+    }
+
     public function getMonitoringAbsensiPegawai (Request $request) {
         $kdProfile = (int) $this->getDataKdProfile($request);
         $data = \DB::table('pegawai_m as pg')
             ->Join('sdm_absensipegawai_t as abn','abn.pegawaifk','=','pg.id')
-            ->select(\DB::raw("abn.pegawaifk,pg.namalengkap,abn.jammasuk,abn.jamkeluar,'-' as namaruangan"))
+            ->select(\DB::raw("abn.pegawaifk,pg.namalengkap,abn.tglhistori,abn.status,abn.verified,'-' as namaruangan"))
             ->where('pg.kdprofile', $kdProfile)
             ->where('pg.statusenabled',true)
             ->where('abn.statusenabled',true);
 
         if (isset($request['tglAwal']) && $request['tglAwal'] != "" && $request['tglAwal'] != "undefined") {
-            $data = $data->where('abn.jammasuk', '>=', $request['tglAwal']);
+            $data = $data->where('abn.tglhistori', '>=', $request['tglAwal']);
         }
 
         if (isset($request['tglAkhir']) && $request['tglAkhir'] != "" && $request['tglAkhir'] != "undefined") {
             $tgl = $request['tglAkhir'];//." 23:59:59";
-            $data = $data->where('abn.jammasuk', '<=', $tgl);
+            $data = $data->where('abn.tglhistori', '<=', $tgl);
         }
 
         if(isset($request['idPegawai']) && $request['idPegawai']!="" && $request['idPegawai']!="undefined"){
@@ -1737,7 +1997,7 @@ class SumberDayaManusiaController extends ApiController {
         $data = $data->get();
         $result = array(
             'data'  => $data,
-            'as' => 'ea@epic',
+            'as' => 'mr_adhyy',
         );
         return $this->respond($result);
     }
@@ -2932,38 +3192,40 @@ class SumberDayaManusiaController extends ApiController {
     }
     public function getAbsesnsiPegawai (Request $request) {
         $kdProfile = (int) $this->getDataKdProfile($request);
-        $data = \DB::table('pegawai_m as pg')
-            ->Join('sdm_absensipegawai_t as abn','abn.pegawaifk','=','pg.id')
-            ->select('pg.namalengkap','abn.*')
+
+        $data = \DB::table('sdm_userabsensi_m as ub')
+            ->leftjoin('pegawai_m as pg','pg.id','=','ub.pegawaifk')
+            ->leftjoin('settingdatafixed_m as sdf','sdf.id','=','ub.mesin')
+            ->select('ub.norec', 'ub.tglregister','pg.namalengkap', 'sdf.namafield as mesin', 'pg.id as pegawaifk')
             ->where('pg.kdprofile', $kdProfile)
             ->where('pg.statusenabled',true)
-            ->where('abn.statusenabled',true);
+            ->where('ub.statusenabled',true);
 
-        if (isset($request['tglAwal']) && $request['tglAwal'] != "" && $request['tglAwal'] != "undefined") {
-            $data = $data->where('abn.jammasuk', '>=', $request['tglAwal']);
+        if (isset($request['idPegawai']) && $request['idPegawai'] != "" && $request['idPegawai'] != "undefined") {
+            $data = $data->where('pg.id', '>=', $request['idPegawai']);
         }
 
-        if (isset($request['tglAkhir']) && $request['tglAkhir'] != "" && $request['tglAkhir'] != "undefined") {
-            $tgl = $request['tglAkhir'];//." 23:59:59";
-            $data = $data->where('abn.jammasuk', '<=', $tgl);
-        }
+        // if (isset($request['tglAkhir']) && $request['tglAkhir'] != "" && $request['tglAkhir'] != "undefined") {
+        //     $tgl = $request['tglAkhir'];//." 23:59:59";
+        //     $data = $data->where('abn.jammasuk', '<=', $tgl);
+        // }
 
-        if(isset($request['idPegawai']) && $request['idPegawai']!="" && $request['idPegawai']!="undefined"){
-            $data = $data->where('pg.id','=',$request['idPegawai']);
-        }
-        if(isset($request['bulan']) && $request['bulan']!="" && $request['bulan']!="undefined"){
-            $bln = $request['bulan'];
-            $data = $data->whereRaw("to_char(abn.jammasuk,'yyyy-MM')= '$bln'");
-        }
+        // if(isset($request['idPegawai']) && $request['idPegawai']!="" && $request['idPegawai']!="undefined"){
+        //     $data = $data->where('pg.id','=',$request['idPegawai']);
+        // }
+        // if(isset($request['bulan']) && $request['bulan']!="" && $request['bulan']!="undefined"){
+        //     $bln = $request['bulan'];
+        //     $data = $data->whereRaw("to_char(abn.jammasuk,'yyyy-MM')= '$bln'");
+        // }
 
-        $data = $data->orderBy('abn.jammasuk');
+        $data = $data->orderBy('pg.id');
         $data = $data->get();
 
 
 
         $result = array(
             'data'  => $data,
-            'as' => 'er@epic',
+            'as' => 'mr_adhyy',
         );
         return $this->respond($result);
     }
