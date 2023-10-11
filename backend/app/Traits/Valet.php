@@ -602,12 +602,12 @@ Trait Valet {
             join pelayananpasien_t as pp on pp.noregistrasifk =apd.norec and pp.kdprofile = apd.kdprofile
             join strukpelayanan_t as sp on sp.norec= pp.strukfk and sp.kdprofile = pp.kdprofile
             join strukpelayananpenjamin_t as spp on spp.nostrukfk=sp.norec and spp.kdprofile = sp.kdprofile
-            where pd.noregistrasi = ?
+            where pd.noregistrasi = '$noregistrasi'
         --and spp.statusenabled is null 
-        and pd.kdprofile= ?
+        and pd.kdprofile= $kdProfile
         GROUP BY spp.norec,spp.totalppenjamin
 
-        ) as x",[$noregistrasi,$kdProfile]))->first();
+        ) as x"))->first();
         if(!empty($pelayanan) && $pelayanan->totalklaim!= null){
              return (float) $pelayanan->totalklaim;
          }else{
@@ -639,12 +639,12 @@ Trait Valet {
         join pelayananpasien_t as pp on pp.noregistrasifk =apd.norec and pp.kdprofile = apd.kdprofile
         join strukpelayanan_t as sp on sp.norec= pp.strukfk and sp.kdprofile = pp.kdprofile
         join strukbuktipenerimaan_t as sbm on sbm.nostrukfk = sp.norec and sbm.kdprofile = sp.kdprofile
-        where pd.noregistrasi = ?
+        where pd.noregistrasi = '$noregistrasi'
         and sbm.statusenabled =true
-        and pd.kdprofile= ?
+        and pd.kdprofile= $kdProfile
         GROUP BY sbm.norec,sbm.totaldibayar
 
-        ) as x",[$noregistrasi,$kdProfile]))->first();
+        ) as x"))->first();
         if(!empty($pelayanan) && $pelayanan->totaldibayar!= null){
              return (float) $pelayanan->totaldibayar;
          }else{
