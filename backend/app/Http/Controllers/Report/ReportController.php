@@ -8370,11 +8370,12 @@ class ReportController extends ApiController{
         $res['profile'] = Profile::where('id', $kdProfile)->first();
         $res['billing'] =  collect($data)->groupBy('namaruangan');
         $res['ismultipenjamin']  = false;
-        $res['klaim']  = $this->getTotalKlaim($r['noregistrasi'], $kdProfile);
+        // $res['klaim']  = $this->getTotalKlaim($r['noregistrasi'], $kdProfile);
         $res['deposit'] = $deposit;
+        
         $res['dibayar'] = $this->getTotolBayar($r['noregistrasi'], $kdProfile);
         $res['diskon'] =   $totalDiskon;
-        $res['sisa'] =   $res['total']  -  $res['dibayar'] - $res['deposit'] - $res['klaim'] - $res['diskon'] ;
+        $res['sisa'] =   $res['total']  -  $res['dibayar'] - $res['deposit'] - $res['diskon'] ;
         $res['pdf']  = false;
         $blade = 'report.kasir.billing';
         $pageWidth = 500;
