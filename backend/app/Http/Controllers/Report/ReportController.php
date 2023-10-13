@@ -3646,7 +3646,7 @@ class ReportController extends ApiController{
         if (count($res) == 0) {
             echo '
                 <script language="javascript">
-                    window.alert("Hasil belum ada / hasil tidak ditemukan");
+                    window.alert("Ada hasil yang belum lengkap");
                     window.close()
                 </script>
             ';
