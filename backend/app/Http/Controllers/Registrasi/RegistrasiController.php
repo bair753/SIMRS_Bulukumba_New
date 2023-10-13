@@ -489,7 +489,7 @@ class RegistrasiController extends ApiController
                             ->where('kdprofile', $idProdile)
                             ->where('tglregistrasi', '>=', $r_NewPD['tglregistrasidate'].' 00:00')
                             ->where('tglregistrasi', '<=', $r_NewPD['tglregistrasidate'].' 23:59')
-                            // ->where('statusenabled',true)
+                            ->where('statusenabled',true)
                             ->max('noantrian');
                         $noAntrian = $countNoAntrian + 1;
                         $dataAPD->noantrian = $noAntrian;
@@ -6115,6 +6115,7 @@ class RegistrasiController extends ApiController
             )
             ->where('apr.noreservasi','<>','-')
             ->where('apr.statusenabled',true)
+            ->where('apd.statusenabled',true)
             ->where('apr.kdprofile', (int)$kdProfile)
             ->whereNotNull('apr.noreservasi');
 
