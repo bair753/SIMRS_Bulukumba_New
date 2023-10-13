@@ -6163,7 +6163,7 @@ class RegistrasiController extends ApiController
                 if ($d->prefixnoantrian != null) {
                     $huruf = $d->prefixnoantrian;
                 }
-                $nomorAntrian = $huruf . '-' . str_pad($d->noantrian, 4, "0", STR_PAD_LEFT);
+                $nomorAntrian = $huruf . '-' . str_pad($d->noantrian, 3, "0", STR_PAD_LEFT);
                 $d->nomorantrean = $nomorAntrian;
         }
 
