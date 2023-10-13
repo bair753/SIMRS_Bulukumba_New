@@ -369,7 +369,7 @@ class MyJKNV2Controller extends ApiController
                         if ($ruang->prefixnoantrian != null) {
                             $huruf = $ruang->prefixnoantrian;
                         }
-                        $nomorAntrian = $huruf . '-' . str_pad($cek["metadata"]["dataAPD"]["noantrian"], 4, "0", STR_PAD_LEFT);
+                        $nomorAntrian = $huruf . '-' . str_pad($cek["metadata"]["dataAPD"]["noantrian"], 3, "0", STR_PAD_LEFT);
 
                         $transMessage = "Ok";
                         $transStatus = 'true';
