@@ -42,9 +42,9 @@ class MyJKNV2Controller extends ApiController
     public function GetAntrean_fix(Request $request){
         $kdProfile = $this->getDataKdProfile($request);
         $userData = $request->all();
-        // $request = $request->json()->all();
+        $request = $request->json()->all();
         date_default_timezone_set('Asia/Jakarta'); // set timezone
-        \Log::info('REQUEST GetAntrean_fix : '. json_encode($request));
+
         if (empty($request['nomorkartu'])) {
             $result = array("metadata" => array("message" => "Nomor Kartu Belum Diisi", "code" => 201));
             return $this->setStatusCode($result['metadata']['code'])->respond($result);
@@ -137,7 +137,6 @@ class MyJKNV2Controller extends ApiController
         }
   
         if($code != '200'){
-            \Log::info('Info Jadwal Dokter : '.json_encode($cek));
             $result = array("metadata"=>array("message" => "Pendaftaran ke Poli Ini Sedang Tutup", "code" => 201));
             return $this->setStatusCode($result['metadata']['code'])->respond($result);
         }else{
@@ -244,13 +243,6 @@ class MyJKNV2Controller extends ApiController
                 return $this->setStatusCode($result['metadata']['code'])->respond($result);
             }
 
-            $countNoAntrian = AntrianPasienDiperiksa::where('objectruanganfk',$request['poliKlinik']['id'])
-                        ->where('kdprofile', $kdProfile)
-                        ->where('tglregistrasi', '>=', $request['tanggalperiksa'].' 00:00')
-                        ->where('tglregistrasi', '<=', $request['tanggalperiksa'].' 23:59')
-                        ->max('noantrian');
-            $noAntrian = $countNoAntrian + 1;
-
 
             $newptp = new AntrianPasienRegistrasi();
             $nontrian = AntrianPasienRegistrasi::max('noantrian') + 1;
@@ -307,18 +299,6 @@ class MyJKNV2Controller extends ApiController
             $newptp->save();
             $nomorAntrian = strlen((string)$newptp->noantrian);
             // dd($nomorAntrian);
-            $newptp->namaruangan = Ruangan::where('id', $ruang->id)
-                    ->where('kdprofile', (int) $kdProfile)
-                    ->select('namaruangan', 'prefixnoantrian')
-                    ->first();
-            $newptp->nomorantrean  = null;
-            
-                    $huruf = 'Z';
-                        if ($newptp->namaruangan->prefixnoantrian != null) {
-                            $huruf = $newptp->namaruangan->prefixnoantrian;
-                        }
-                        $nomorAntrian = $huruf . '-' . str_pad($newptp->noantrian, 3, "0", STR_PAD_LEFT);
-                        $newptp->nomorantrean = $nomorAntrian;
             if ($nomorAntrian == 1){
                 $nomorAntrian = '0'.$newptp->noantrian;
             }else{
@@ -406,7 +386,6 @@ class MyJKNV2Controller extends ApiController
         } catch (\Exception $e) {
             $transMessage = "Gagal Reservasi";
             $transStatus = 'false';
-            \Log::info($e->getMessage());
         }
 
         if ($transStatus == 'true') {
