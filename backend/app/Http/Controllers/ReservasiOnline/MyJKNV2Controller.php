@@ -305,7 +305,7 @@ class MyJKNV2Controller extends ApiController
             $newptp->tempatlahir = !empty($pasien) ? $pasien->tempatlahir : null;
             $newptp->statuspanggil  = 0;
             $newptp->save();
-            $nomorAntrian = strlen((string)$noAntrian);
+            $nomorAntrian = strlen((string)$newptp->noantrian);
             // dd($nomorAntrian);
             $newptp->namaruangan = Ruangan::where('id', $ruang->id)
                     ->where('kdprofile', (int) $kdProfile)
@@ -322,7 +322,7 @@ class MyJKNV2Controller extends ApiController
             if ($nomorAntrian == 1){
                 $nomorAntrian = '0'.$newptp->noantrian;
             }else{
-                $nomorAntrian = $newptp->nomorantrean;
+                $nomorAntrian = $newptp->noantrian;
             }
 
             $kodeDokter = $request['kodedokter'];
@@ -389,7 +389,7 @@ class MyJKNV2Controller extends ApiController
                         if ($ruang->prefixnoantrian != null) {
                             $huruf = $ruang->prefixnoantrian;
                         }
-                        $nomorAntrian = $nomorAntrian;
+                        $nomorAntrian = $huruf . '-' . str_pad($cek["metadata"]["dataAPD"]["noantrian"], 4, "0", STR_PAD_LEFT);
 
                         $transMessage = "Ok";
                         $transStatus = 'true';
