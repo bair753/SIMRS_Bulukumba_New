@@ -6115,7 +6115,7 @@ class RegistrasiController extends ApiController
             )
             ->where('apr.noreservasi','<>','-')
             ->where('apr.statusenabled',true)
-            ->where('apd.statusenabled',true)
+            // ->where('apd.statusenabled',true)
             ->where('apr.kdprofile', (int)$kdProfile)
             ->whereNotNull('apr.noreservasi');
 
