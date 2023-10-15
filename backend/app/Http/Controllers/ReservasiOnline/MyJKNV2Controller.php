@@ -857,57 +857,64 @@ class MyJKNV2Controller extends ApiController
                     ->where('statusschedule', $request['kodebooking'])
                     ->first();
             if (empty($data)){
-                DB::rollBack();
-                $result = array(
-                    "metadata" => array(
-                        "message" => "Antrean Tidak Ditemukan",
-                        "code" => 201
-                    )
-                );
+               
+            $transMessage = "Ok";
+        
+            $result = array(
+                "metadata" => array(
+                    "message" => $transMessage,
+                    "code" => 201)
+            );
+                // $result = array(
+                //     "metadata" => array(
+                //         "message" => "Antrean Tidak Ditemukan",
+                //         "code" => 201
+                //     )
+                // );
                 return $this->setStatusCode($result['metadata']['code'])->respond($result);
             }else{
-            //     if($data->statusenabled == false){
-            //         $result = array(
-            //             "metadata" => array(
-            //                 "message" => "Antrean Tidak Ditemukan atau Sudah Dibatalkan",
-            //                 "code" => 201
-            //             )
-            //         );
-            //         return $this->setStatusCode($result['metadata']['code'])->respond($result);
-            //     }
-            //     if($data->ischeckin == true){
-            //         DB::rollBack();
-            //         $result = array(
-            //             "metadata" => array(
-            //                 "message" => "Pasien Sudah Dilayani, Antrean Tidak Dapat Dibatalkan",
-            //                 "code" => 201
-            //             )
-            //         );
-            //         return $this->setStatusCode($result['metadata']['code'])->respond($result);
-            //     }
-            //     $dataperjanjian = DB::table('antrianpasienregistrasi_t')
-            //     ->where('kdprofile', $kdProfile)
-            //     ->where('statusenabled', true)
-            //     ->where('noreservasi', $request['kodebooking'])
-            //     ->update([
-            //         'statusenabled' => false,
-            //         'isbatal' => false,
-            //         'keteranganbatal' => $request['kodebooking'],
-            //     ]);
-            //     $pendaftaran = DB::table('pasiendaftar_t')
-            //     ->where('kdprofile', $kdProfile)
-            //     ->where('statusenabled', true)
-            //     ->where('statusschedule', $request['kodebooking'])
-            //     ->update([
-            //         'statusenabled' => false,
-            //     ]);
-            //     $antrianpasien = DB::table('antrianpasiendiperiksa_t')
-            //     ->where('kdprofile', $kdProfile)
-            //     ->where('statusenabled', true)
-            //     ->where('noregistrasifk', $data->norec)
-            //     ->update([
-            //         'statusenabled' => false,
-            //     ]);
+                if($data->statusenabled == false){
+                    $result = array(
+                        "metadata" => array(
+                            "message" => "Antrean Tidak Ditemukan atau Sudah Dibatalkan",
+                            "code" => 201
+                        )
+                    );
+                    return $this->setStatusCode($result['metadata']['code'])->respond($result);
+                }
+                if($data->ischeckin == true){
+                    DB::rollBack();
+                    $result = array(
+                        "metadata" => array(
+                            "message" => "Pasien Sudah Dilayani, Antrean Tidak Dapat Dibatalkan",
+                            "code" => 201
+                        )
+                    );
+                    return $this->setStatusCode($result['metadata']['code'])->respond($result);
+                }
+                $dataperjanjian = DB::table('antrianpasienregistrasi_t')
+                ->where('kdprofile', $kdProfile)
+                ->where('statusenabled', true)
+                ->where('noreservasi', $request['kodebooking'])
+                ->update([
+                    'statusenabled' => false,
+                    'isbatal' => false,
+                    'keteranganbatal' => $request['kodebooking'],
+                ]);
+                $pendaftaran = DB::table('pasiendaftar_t')
+                ->where('kdprofile', $kdProfile)
+                ->where('statusenabled', true)
+                ->where('statusschedule', $request['kodebooking'])
+                ->update([
+                    'statusenabled' => false,
+                ]);
+                $antrianpasien = DB::table('antrianpasiendiperiksa_t')
+                ->where('kdprofile', $kdProfile)
+                ->where('statusenabled', true)
+                ->where('noregistrasifk', $data->norec)
+                ->update([
+                    'statusenabled' => false,
+                ]);
                 
             }
 
