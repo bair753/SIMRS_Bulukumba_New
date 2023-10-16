@@ -1591,7 +1591,7 @@ class ReportController extends ApiController{
             rd.pasien,
             rd.duplikasiterapi,
             rd.interaksiobat,
-            rd.farmasi
+            pg5.namalengkap as farmasi
         FROM
             resepdokter_t as rd
             LEFT JOIN pegawai_m as pg1 on pg1.id = rd.petugaspengkajian
@@ -1681,7 +1681,7 @@ class ReportController extends ApiController{
                     rd.pasien,
                     rd.duplikasiterapi,
                     rd.interaksiobat,
-                    rd.farmasi
+                    pg5.namalengkap as farmasi
                 FROM
                     resepdokter_t as rd
                     LEFT JOIN pegawai_m as pg1 on pg1.id = rd.petugaspengkajian
@@ -1767,7 +1767,7 @@ class ReportController extends ApiController{
                     rd.pasien,
                     rd.duplikasiterapi,
                     rd.interaksiobat,
-                    rd.farmasi
+                    pg5.namalengkap as farmasi
                 FROM
                     resepdokter_t as rd
                     LEFT JOIN pegawai_m as pg1 on pg1.id = rd.petugaspengkajian
