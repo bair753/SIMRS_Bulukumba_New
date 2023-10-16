@@ -45,6 +45,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 }
             }
             $scope.cetakPdf = function () {
+                console.log($scope);
                 if (norecEMR == '') return
                 var local = JSON.parse(localStorage.getItem('profile'));
                 var nama = medifirstService.getPegawaiLogin().namalengkap;
@@ -53,6 +54,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     + '&emrfk=' + $scope.cc.emrfk
                     + '&kdprofile=' + local.id
                     + '&index=' + paramsIndex
+                    + '&emr_foto=' + $scope.dataphoto.norec
                     + '&nama=' + nama, '_blank');
             }
              $scope.listDaily = [
@@ -205,6 +207,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
             medifirstService.get("emr/get-emr-transaksi-detail-img?noemr=" + nomorEMR + "&emrfk=" + $scope.cc.emrfk, true).then(function (dat) {
                 // $scope.item.objImg =[]
                 var dataImg = dat.data.data
+                $scope.dataphoto = dat.data.data[dat.data.count]
                 for (var i = 0; i <= dataImg.length - 1; i++) {
                     if (parseFloat($scope.cc.emrfk) == dataImg[i].emrfk  && paramsIndex == dataImg[i].index) {
                         $scope.item.objImg[dataImg[i].emrdfk] = dataImg[i].image

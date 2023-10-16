@@ -6079,7 +6079,7 @@ class ReportController extends ApiController{
                     and epd.emrfk = $request[emrfk]
                     and epd.index = $a
                     and pa.statusenabled = TRUE
-                    
+                    and ef.norec = '$request[emr_foto]'
                     ORDER BY
                     ed.nourut
                     "
