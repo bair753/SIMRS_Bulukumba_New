@@ -9801,6 +9801,7 @@ class EMRController  extends ApiController
         $result = array(
             'data' => $data,
             'message' => 'er@epic',
+            'count' => count($data) - 1,
         );
         return $this->respond($result);
     }
