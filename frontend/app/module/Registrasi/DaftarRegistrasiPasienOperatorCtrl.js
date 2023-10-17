@@ -827,22 +827,14 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 				// 	toastr.error('Pilih data dulu')
 				// 	return
 				// }
-				var stt = 'false'
-				if (confirm('Lihat Lembar Gelang Pasien? ')) {
-				    // Save it!
-				    stt = 'true';
-				} else {
-				    // Do nothing!
-				    stt = 'false'
-				}
+				
 				var noregistrasi = $scope.dataPasienSelected.noregistrasi
 				$scope.listCetakanGelang = [
-					{ id: 1, nama: 'Gelang Pasien Laki-Laki', url: 'http://127.0.0.1:1237/printvb/Pendaftaran?cetak-gelangpasien=1&norec=' + noregistrasi + '&view='+stt+'&qty=1' },
-					{ id: 2, nama: 'Gelang Pasien Perempuan', url: 'http://127.0.0.1:1237/printvb/Pendaftaran?cetak-gelangpasien-perempuan=1&norec=' + noregistrasi + '&view='+stt+'&qty=1' },
-					{ id: 3, nama: 'Gelang Pasien Bayi Laki-Laki', url: 'http://127.0.0.1:1237/printvb/Pendaftaran?cetak-gelangpasien-bayi=1&norec=' + noregistrasi + '&view='+stt+'&qty=1' },
-					{ id: 4, nama: 'Gelang Pasien Bayi Perempuan', url: 'http://127.0.0.1:1237/printvb/Pendaftaran?cetak-gelangpasien-bayi-perempuan=1&norec=' + noregistrasi + '&view='+stt+'&qty=1' },					
+					{ id: 1, nama: 'Gelang Pasien Laki-Laki', url: 'http://127.0.0.1:1237/printvb/Pendaftaran?cetak-gelangpasien=1&norec=' + noregistrasi },
+					{ id: 2, nama: 'Gelang Pasien Perempuan', url: 'http://127.0.0.1:1237/printvb/Pendaftaran?cetak-gelangpasien-perempuan=1&norec=' + noregistrasi },
+					{ id: 3, nama: 'Gelang Pasien Bayi Laki-Laki', url: 'http://127.0.0.1:1237/printvb/Pendaftaran?cetak-gelangpasien-bayi=1&norec=' + noregistrasi },
+					{ id: 4, nama: 'Gelang Pasien Bayi Perempuan', url: 'http://127.0.0.1:1237/printvb/Pendaftaran?cetak-gelangpasien-bayi-perempuan=1&norec=' + noregistrasi },					
 				]
-				console.log($scope.item.cetakanGelang);
 				$scope.popUpCetakanGelang.center().open()
 				
 				// var client = new HttpClient();
@@ -852,13 +844,20 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 			}
 
 			$scope.cetakGelangPasien = function(params){
-				console.log(params);
+				var stt = 'false'
+				if (confirm('Lihat Lembar Gelang Pasien? ')) {
+				    // Save it!
+				    stt = 'true';
+				} else {
+				    // Do nothing!
+				    stt = 'false'
+				}
 				if(params == null){
 					toastr.error('Pilih printernya dulu')
 					return
 				}else{
 					var client = new HttpClient();
-					client.get(params.url, function (response) {
+					client.get(params.url + '&view='+stt+'&qty=1', function (response) {
 						// do something with response
 					});
 				}
