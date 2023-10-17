@@ -16,7 +16,10 @@
 			display: inline;
 			margin-right: 3px;
 			color: #000000;
-			margin-top: 520px;
+			/* Yang Lama */
+			/* margin-top: 520px; */
+			/* Yang Baru */
+			margin-top: 120px;
 			transform: rotate(180deg);
 			text-align: left;
 		}
