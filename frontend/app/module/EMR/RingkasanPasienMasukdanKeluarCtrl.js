@@ -289,6 +289,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 var status = "t";
                 medifirstService.get("emr/get-antrian-pasien-norec/" + noregistrasifk).then(function (e) {
                     $scope.item.obj[420342] = $scope.now;
+                    $scope.item.obj[420345] = $scope.now;
                     var antrianPasien = e.data.result;
                     $scope.item.obj[420303] = antrianPasien.namapasien;
                     $scope.item.obj[420304] = antrianPasien.nocm;
