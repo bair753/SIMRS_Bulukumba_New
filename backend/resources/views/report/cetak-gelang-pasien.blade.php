@@ -19,7 +19,7 @@
 			/* Yang lama */
 			/* margin-top: 620px; */
 			/* Yang baru */
-			margin-top: 820px;
+			margin-top: 740px;
 			transform: rotate(180deg);
 			text-align: left;
 		}
