@@ -10148,6 +10148,7 @@ class EMRController  extends ApiController
             ->select('bp.id', 'bp.nama')
             ->where('bp.kdprofile', $idProfile)
             ->where('bp.statusenabled', true)
+            ->where('bp.kodeexternal', 'EMR')
             ->get();
 
         return $this->respond($result);
