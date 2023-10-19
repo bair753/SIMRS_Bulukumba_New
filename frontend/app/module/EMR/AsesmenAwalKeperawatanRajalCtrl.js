@@ -399,18 +399,18 @@ define(['initialize'], function (initialize) {
                 })
                 
                 medifirstService.get("emr/get-vital-sign?noregistrasi=" + $scope.cc.noregistrasi + "&objectidawal=4241&objectidakhir=4246&idemr=147", true).then(function (datas) {
-                    if($scope.cc.objectruanganfk == 784){
-                        $scope.skriningLaktasi = true;
-                    }
-                    else{
-                        $scope.skriningLaktasi = false;
-                    }
-                    if($scope.cc.objectruanganfk == 785){
-                        $scope.skriningLaktasiAnak = true;
-                    }
-                    else{
-                        $scope.skriningLaktasiAnak = false;
-                    }
+                    // if($scope.cc.objectruanganfk == 784){
+                    //     $scope.skriningLaktasi = true;
+                    // }
+                    // else{
+                    //     $scope.skriningLaktasi = false;
+                    // }
+                    // if($scope.cc.objectruanganfk == 785){
+                    //     $scope.skriningLaktasiAnak = true;
+                    // }
+                    // else{
+                    //     $scope.skriningLaktasiAnak = false;
+                    // }
                     if (datas.data.data.length>0){
                         $scope.item.obj[421153] = datas.data.data[1].value; // Tekanan Darah
                         $scope.item.obj[421154] = datas.data.data[5].value; // Nadi

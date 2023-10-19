@@ -595,17 +595,17 @@ define(['initialize'], function (initialize) {
                 })
                 
                 medifirstService.get("emr/get-vital-sign?noregistrasi=" + $scope.cc.noregistrasi + "&objectidawal=4241&objectidakhir=4246&idemr=147", true).then(function (datas) {
-                    if($scope.cc.objectruanganfk == 818 || $scope.cc.objectruanganfk == 834 || $scope.cc.objectruanganfk == 785){
-                        $scope.skriningLaktasi = true;
-                    }else{
-                        $scope.skriningLaktasi = false;
-                    }
+                    // if($scope.cc.objectruanganfk == 818 || $scope.cc.objectruanganfk == 834 || $scope.cc.objectruanganfk == 785){
+                    //     $scope.skriningLaktasi = true;
+                    // }else{
+                    //     $scope.skriningLaktasi = false;
+                    // }
         
-                    if($scope.cc.objectruanganfk == 821 || $scope.cc.objectruanganfk == 816 || $scope.cc.objectruanganfk == 820 || $scope.cc.objectruanganfk == 822){
-                        $scope.skriningLaktasiNifas = true;
-                    }else{
-                        $scope.skriningLaktasiNifas = false;
-                    }
+                    // if($scope.cc.objectruanganfk == 821 || $scope.cc.objectruanganfk == 816 || $scope.cc.objectruanganfk == 820 || $scope.cc.objectruanganfk == 822){
+                    //     $scope.skriningLaktasiNifas = true;
+                    // }else{
+                    //     $scope.skriningLaktasiNifas = false;
+                    // }
                 })
             } else {
                 var chekedd = false
