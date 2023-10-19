@@ -43,7 +43,9 @@
             <td width="2%"></td>
             <td width="16%">
                 <p align="left">
-                    <img src="{{ $image }}" width="200px"/>
+                    <img src="{{ asset('img/logo_bpjs.png') }}"
+                         style="width: 200px" border="0"/>
+                    {{-- <img src="{{ $image }}" width="200px"/> --}}
                 </p>
             </td>
             <td width="82%">
