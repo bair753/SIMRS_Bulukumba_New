@@ -3556,12 +3556,11 @@ class ReportController extends ApiController{
             );
             DB::table('dokklaim_t')->updateOrInsert(["filename" => $namafile], $dataInsert);
 
-            // echo '
-            // <script language="javascript">
-            //     window.alert("OK.");
-            //     window.close()
-            // </script>';
-            // die;
+            echo '
+            <script language="javascript">
+                window.close()
+            </script>';
+            die;
         } catch (\Exception $e) {
             echo '
             <script language="javascript">
