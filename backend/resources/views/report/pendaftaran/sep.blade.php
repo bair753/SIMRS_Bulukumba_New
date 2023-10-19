@@ -37,13 +37,13 @@
 {{----}}
 <body onLoad="window.print()">
 <div align="left">
-    <table class="bayangprint" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0" width="{{$pageWidth}}">
+    <table cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0" width="{{$pageWidth}}">
         <tbody>
         <tr>
             <td width="2%"></td>
             <td width="16%">
                 <p align="left">
-                    <img src="{{ asset('img/logo_bpjs.png') }}"
+                    <img src="{{ asset('service/img/logo_bpjs.png') }}"
                          style="width: 200px" border="0"/>
                     {{-- <img src="{{ $image }}" width="200px"/> --}}
                 </p>
