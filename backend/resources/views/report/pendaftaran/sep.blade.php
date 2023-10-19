@@ -25,7 +25,7 @@
         }
     }
     tr td {
-        padding:2px 4px 2px 4px;
+        /* padding:2px 4px 2px 4px; */
     }
     .borderss{
         border-bottom: 1px solid black;
@@ -37,7 +37,7 @@
 {{----}}
 <body onLoad="window.print()">
 <div align="left">
-    <table cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0" width="{{$pageWidth}}">
+    <table class="bayangprint" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0" width="{{$pageWidth}}">
         <tbody>
         <tr>
             <td width="2%"></td>
