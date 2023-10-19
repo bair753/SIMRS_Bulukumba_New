@@ -33,6 +33,67 @@
 		background-color: #10c4b2;
 	}
 
+	.upload-btn-wrapper {
+		position: relative;
+		overflow: hidden;
+		display: inline-block;
+	}
+
+	.upload-btn-wrapper input[type=file] {
+		cursor: inherit;
+		display: block;
+		font-size: 999px;
+		filter: alpha(opacity=0);
+		min-height: 100%;
+		min-width: 100%;
+		opacity: 0;
+		position: absolute;
+		right: 0;
+		text-align: right;
+		top: 0;
+		cursor: pointer;
+	}
+
+	.btnlihat {
+		/* background-color: DodgerBlue; */
+		background-color: rgb(99, 86, 241);
+		border: none;
+		color: white;
+		padding: 8px 12px;
+		font-size: 12px;
+		cursor: pointer;
+	}
+
+	.btnupload {
+		/* background-color: DodgerBlue; */
+		background-color: rgb(244, 181, 36);
+		border: none;
+		color: white;
+		padding: 8px 12px;
+		font-size: 12px;
+		cursor: pointer;
+	}
+
+	.btnhapus {
+		/* background-color: DodgerBlue; */
+		background-color: rgb(225, 65, 65);
+		border: none;
+		color: white;
+		padding: 8px 12px;
+		font-size: 12px;
+		cursor: pointer;
+	}
+
+	.btncari {
+		/* background-color: DodgerBlue; */
+		background-color: rgb(62, 232, 31);
+		border: none;
+		color: white;
+		padding: 8px 12px;
+		font-size: 12px;
+		cursor: pointer;
+	}
+
 	.classUpload {
 
 		background-color: #10c4b2;
@@ -529,7 +590,10 @@
 		<button class="btnTemplate1" ng-click="bundlingdocument()">Bundle Dokumen</button>
 	</div>
 	<div class="grid_2">
-		<button class="btnTemplate1" ng-click="dokumen()">Dokumen</button>
+		<button class="btnTemplate1" ng-click="dokumen()">Dokumen EMR</button>
+	</div>
+	<div class="grid_2">
+		<button class="btnTemplate1 buttonKuning" ng-click="uploadKelengkapanNew()">Kelengkapan Dokumen Baru (beta)</button>
 	</div>
 	<div class="grid_12" ng-show="isAll">
 		<div class="grid_2">
@@ -2524,6 +2588,71 @@
 					
 
 
+				</div>
+				<div kendo-window="popupUploadNew" k-title="'Kelengkapan Dokumen'" k-width="1000"  k-visible="false" k-on-open="win2visible = true" k-on-close="win2visible = false">
+					<div class="panel panel-default container_12">
+						<div class="grid_6">
+							<div class="grid_12">
+								<label c-label item="item">No RM</label>
+							</div>
+							<div class="clear"></div>
+				
+							<div class="grid_12">
+								<input c-text-box type="input" filter="" class="k-textbox" ng-model="dataPasienSelected.nocm"  disabled/>
+							</div>
+						</div>
+						<div class="grid_6">
+							<div class="grid_12">
+								<label c-label item="item">Nama Pasien</label>
+							</div>
+							<div class="clear"></div>
+				
+							<div class="grid_12">
+								<input c-text-box type="input" filter="" class="k-textbox" ng-model="dataPasienSelected.namapasien"  disabled/>
+							</div>
+						</div>
+						<div class="grid_12">
+							<fieldset>
+								<legend><b>Jenis File</b></legend>
+								<div class="grid_12 headerBox">
+									<kendo-grid id="kGridDokumen" data-source="dataDaftarDokumen" options="columnDaftarDokumen"
+										k-selectable="'row'" k-sortable="'true'" k-resizable="'true'"
+										k-ng-model="dataSelectedDokumen" ng-click="klikGridDokumen(dataSelectedDokumen)">
+									</kendo-grid>
+								</div>
+								<!-- <div class="grid_12">
+									<table width="100%" id="customers">
+										<tr ng-repeat="stat in listBerkas | orderBy:'id'">
+											<td width="80%">
+												<label c-label item="item">{{stat.namaberkas}}</label>
+											</td>
+											<td width="20%">
+												<button class="k-button" ng-click="previewV2(stat.id)">Preview </button> -->
+												<!-- <button class="k-button" ng-click="uploadV2()" style="float:right;margin-right: 2px;">Upload </button> -->
+											<!-- </td>
+										</tr>
+									</table>
+								</div> -->
+								<button class="k-button" ng-click="bunldedokumen()" style="float:right;margin-top: 5px;">Bundle Dokumen </button>
+							</fieldset>
+						</div>
+					</div>
+				</div>
+
+				<div kendo-window="popUpData" k-title="'Data Dokumen'" k-width="800"k-visible="false" k-on-open="win2visible = true" k-on-close="win2visible = false">
+					<div class="panel panel-default container_12" style="padding: 0px 10px;">
+						<div class="grid_12">
+							<div class="borderBox">
+								<div id="kGrid2" kendo-grid data-source="dataCariDaftarDokumen" k-options="columnCariDaftarDokumen"
+									k-selectable="'row'" 
+									k-sortable="'true'"
+									k-resizable="'true'"
+									k-ng-model="dataCariDokumenSelected">
+								</div>
+							</div>
+						</div>
+						<button class="k-button" ng-click="tutupdokumen()" style="float:right;margin-top:2%">Tutup</button>
+					</div>
 				</div>
 
 				<style>

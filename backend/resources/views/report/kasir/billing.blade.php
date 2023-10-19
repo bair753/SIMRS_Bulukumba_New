@@ -261,11 +261,8 @@
         <table width="100%" id="content" style="border:none;table-layout:auto;">
             <tr style="border:none;">
                 <td rowspan="4" style="border:none">
-                    @if(stripos(\Request::url(), 'localhost') !== FALSE)
-                    <img src="{{ asset('img/logo_only.png') }}" alt="" style="width: 60px;display:block; margin:auto;">
-                    @else
-                    <img src="{{ asset('service/img/logo_only.png') }}" alt="" style="width: 60px;display:block; margin:auto;">
-                    @endif
+                    <img src="{{ $image }}" alt="" style="width: 60px;display:block; margin:auto;">
+                    
                 </td>
                 <td rowspan="4" colspan="6" style="text-align:left;font-size:larger;border:none"><strong>{!! $res['profile']->namalengkap !!}</strong> <br>{!! $res['profile']->alamatlengkap !!}<br> 92517, Tlpn. 0413 81004, Fax. <br>Email. diskominfo@bulukumbakab.go.id, Website - </td>
                 <td style="border:none;"></td>

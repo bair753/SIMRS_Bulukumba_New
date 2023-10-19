@@ -51,6 +51,80 @@ class MonitoringDokumenKlaimController extends  ApiController
         return $response;
     }
 
+    public function bundleDokumenBaru(Request $request) {
+        $dataRegistrasi = PasienDaftar::where('noregistrasi', $request['noregistrasi'])->first();
+
+        $dataDokumen = DB::table('dokklaim_t as mk')
+        ->join("dokklaim_m as dk", "dk.id", "=", "mk.documentklaimfk")
+        ->where('mk.statusenabled', true)
+        ->where('mk.noregistrasifk', $dataRegistrasi->norec)
+        ->orderBy('dk.nourut')
+        ->get();
+
+        $fileName = 'bundle_'.$request['noregistrasi'].'.pdf';
+        $pathbundle = 'dokumen_klaim/'.$request['noregistrasi'] . "/" . $fileName;
+        if (File::exists($pathbundle)){
+            File::delete($pathbundle);
+        }
+
+        if(count($dataDokumen) > 0){
+            $file = [];
+            foreach($dataDokumen as $item) {
+                
+                // Script converte gs untuk coba di local window *Note: harus install wsl terlebih dahulu !
+                // $path = explode("/", $item->filepath);
+                // $basepath = $path[0] . "/" . $path[1];
+                // $namafiletemp = str_replace("\\", "/", str_replace("C:\\","/mnt/c/", public_path($basepath . "/temp_". $item->filename)));
+                // $namafile = str_replace("\\", "/", str_replace("C:\\","/mnt/c/", public_path($basepath . "/". $item->filename)));
+
+                // exec('wsl cp "'.$namafile.'" "'.$namafiletemp.'"');
+                // exec('wsl gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile="'.$namafiletemp.'" "'.$namafile.'"'); 
+                // exec('wsl mv "'.$namafiletemp.'" "'.$namafile.'"');
+
+                // Script converte gs server
+                // Matiin dlu
+                $path = explode("/", $item->filepath);
+                $basepath = $path[0] . "/" . $path[1];
+                $namafiletemp = public_path($basepath . "/temp_". $item->filename);
+                $namafile = public_path($basepath . "/". $item->filename);
+
+                exec('cp "'.$namafile.'" "'.$namafiletemp.'"');
+                exec('gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile="'.$namafiletemp.'" "'.$namafile.'"'); 
+                exec('mv "'.$namafiletemp.'" "'.$namafile.'"');
+
+                // $command = new GhostscriptConverterCommand();
+                // $filesystem = new Filesystem();
+
+                // $converter = new GhostscriptConverter($command, $filesystem);
+                // $converter->convert(public_path($item->filepath), '1.4');
+
+                array_push($file, public_path($item->filepath));
+            }
+    
+            $pdf = PDFMerger::init();
+            foreach ($file as $data) {
+                $pdf->addPDF($data, 'all');
+            }
+            $pdf->merge();
+            $pdf->save(public_path($pathbundle));
+    
+            $file = File::get($pathbundle);
+            $type = File::mimeType($pathbundle);
+
+            $response = Response::make($file, 200);
+            $response->header("Content-Type", $type);
+            return $response;
+
+        } else {
+            echo '
+            <script language="javascript">
+                window.alert("Tidak ada data.");
+                window.close()
+            </script>';
+            die;
+        }
+    }
+
     public function bundleDokumen(Request $request) {
         $dataRegistrasi = PasienDaftar::where('noregistrasi', $request['noregistrasi'])->first();
 

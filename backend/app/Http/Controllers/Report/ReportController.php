@@ -18,6 +18,7 @@ use DB;
 use Barryvdh\DomPDF\Facade as PDF;
 use JasperPHP\JasperPHP;
 use PHPJasper\PHPJasper;
+use Webpatser\Uuid\Uuid;
 
 
 class ReportController extends ApiController{
@@ -1998,9 +1999,29 @@ class ReportController extends ApiController{
             'catatan' => $registrasi->catatan,
             'tanggal' => $tglAyeuna,
         );
-        return view('report.pendaftaran.sep',
-            compact('dataReport', 'pageWidth','profile'));
-//        return view('','$result');
+
+        $imagePath = public_path("img/logo_bpjs.png");
+        $image = "data:image/png;base64,".base64_encode(file_get_contents($imagePath));
+
+        if(isset($request["issimpanberkas"])) {
+            // PDF::setOptions(['isPhpEnabled' => true, 'isJavascriptEnabled', true, 'isRemoteEnabled', true]);
+            $pdf = PDF::setOptions(['isPhpEnabled' => true, 'isJavascriptEnabled' => true, 'isRemoteEnabled' => true]);
+            $pdf->loadView('report.pendaftaran.sep', array(
+                'profile' => $profile,
+                'pageWidth' => $pageWidth,
+                'dataReport' => $dataReport,
+                'image' => $image,
+            
+            ));
+            
+            $this->saveDokumenKlaim($pdf, $request);
+            
+        }else{
+            
+            return view('report.pendaftaran.sep',
+            compact('dataReport', 'pageWidth','profile', 'image'));
+        }
+        
     }
 
     public function cetakSEPV2(Request $request) {
@@ -3503,6 +3524,52 @@ class ReportController extends ApiController{
             'report.lab.hasil-lab-manual',
             compact('datas', 'header', 'pageWidth', 'r', 'profile')
         );
+    }
+
+    function saveDokumenKlaim($pdf, $request) {
+        ini_set('max_execution_time', 2000);
+        $profile = collect(DB::select("select * from profile_m where statusenabled = true"))->first();
+        $content = $pdf->download()->getOriginalContent();
+
+        $path = 'dokumen_klaim/'.$request['isberkasnoreg'];
+
+        try {
+            $savePath = public_path($path);
+            \File::makeDirectory($savePath, 0755, true, true);
+            $namafile = $request['namafile'].'_'.$request['isberkasnoreg'].'.pdf';
+            $public_path = $savePath."/".$namafile;
+            $pdf->save($public_path);
+            // $pdf->render();
+            // $pdf->stream($public_path);
+            
+            $dataRegistrasi = \DB::table('pasiendaftar_t')->where('noregistrasi', $request['isberkasnoreg'])->first();
+            $dataInsert = array(
+                "norec" => substr(Uuid::generate(), 0, 32),
+                "kdprofile" => $profile->id,
+                "statusenabled" => true,
+                "filename" => $namafile,
+                "filepath" => $path.'/'.$namafile,
+                "nocmfk" => $dataRegistrasi->nocmfk,
+                "noregistrasifk" => $dataRegistrasi->norec,
+                "documentklaimfk" => $request['iddok'],
+                "tglupload" => date('Y-m-d H:i:s'),
+            );
+            DB::table('dokklaim_t')->updateOrInsert(["filename" => $namafile], $dataInsert);
+
+            // echo '
+            // <script language="javascript">
+            //     window.alert("OK.");
+            //     window.close()
+            // </script>';
+            // die;
+        } catch (\Exception $e) {
+            echo '
+            <script language="javascript">
+                window.alert("Gagal.");
+                window.close()
+            </script>';
+            die;
+        }
     }
 
     public function cetakHasilLabAll(Request $r)
@@ -6078,8 +6145,9 @@ class ReportController extends ApiController{
                     AND epd.statusenabled = TRUE 
                     and epd.emrfk = $request[emrfk]
                     and epd.index = $a
-                    and pa.statusenabled = TRUE
                     and ef.norec = '$request[emr_foto]'
+                    and pa.statusenabled = TRUE
+                    
                     ORDER BY
                     ed.nourut
                     "
@@ -8379,6 +8447,8 @@ class ReportController extends ApiController{
         $res['pdf']  = false;
         $blade = 'report.kasir.billing';
         $pageWidth = 500;
+        $imagePath = public_path('img\logo_only.png');
+        $image = "data:image/png;base64,".base64_encode(file_get_contents($imagePath));
 
 
         if(isset($r['rekap']) && $r['rekap'] == true ){
@@ -8386,12 +8456,24 @@ class ReportController extends ApiController{
             $blade = 'report.kasir.rekap-billing';
         }
 
-        
-
-        return view(
-            $blade,
-            compact('print', 'res','r', 'pageWidth')
-        );
+        if(isset($r["issimpanberkas"])) {
+            $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
+            $pdf = PDF::loadView($blade, array(
+                'print' => $print,
+                'pageWidth' => $pageWidth,
+                'r' => $r,
+                'res' => $res,
+                'image' => $image,
+            ));
+            $this->saveDokumenKlaim($pdf, $r);
+            return;
+        }else{
+            return view(
+                $blade,
+                compact('print', 'res','r', 'pageWidth', 'image')
+            );
+        }
+   
     }
 
     public function suratKeteranganKontrol(Request $request) {
