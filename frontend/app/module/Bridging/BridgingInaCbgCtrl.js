@@ -5204,8 +5204,8 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
                 + dataItem.url 
                 + dataItem.param + "&issimpanberkas=true&iddok="+dataItem.id+"&isberkasnoreg="+dataItem.noregistrasi+"&namafile=" + dataItem.namafile, 
                 '_blank');
-				// $scope.tutupdokumen();
-				$scope.uploadKelengkapanNew();
+				$scope.tutupdokumen();
+				// $scope.uploadKelengkapanNew();
 				$scope.isRouteLoading = false
             }
 
