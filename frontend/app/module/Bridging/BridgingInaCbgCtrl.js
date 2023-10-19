@@ -5205,8 +5205,8 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
                 + dataItem.url 
                 + dataItem.param + "&issimpanberkas=true&iddok="+dataItem.id+"&isberkasnoreg="+dataItem.noregistrasi+"&namafile=" + dataItem.namafile, 
                 '_blank');
-				$scope.tutupdokumen();
 				$scope.isRouteLoading = false
+				$scope.tutupdokumen();
             }
 
             $scope.tutupdokumen = function() {
