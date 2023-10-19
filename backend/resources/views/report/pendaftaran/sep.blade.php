@@ -58,7 +58,7 @@
         </tr>
         </tbody>
     </table>
-    <table class="bayangprint" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0" width="{{$pageWidth}}" style="margin-top: -25px">
+    <table cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0" width="{{$pageWidth}}" style="margin-top: -25px">
         <tbody>
         <tr>
             <td style="padding: 30px;text-align: left">
