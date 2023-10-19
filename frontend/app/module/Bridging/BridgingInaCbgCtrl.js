@@ -4124,6 +4124,7 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 			}
 
 			$scope.uploadKelengkapanNew = function () {
+				$scope.popupUploadNew.close();
 				if ($scope.dataPasienSelected.noregistrasi == undefined ) {
 					toastr.error('Pilih data dulu')
 					return
@@ -5205,7 +5206,6 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
                 + dataItem.param + "&issimpanberkas=true&iddok="+dataItem.id+"&isberkasnoreg="+dataItem.noregistrasi+"&namafile=" + dataItem.namafile, 
                 '_blank');
 				$scope.tutupdokumen();
-				$scope.uploadKelengkapanNew();
 				$scope.isRouteLoading = false
             }
 
