@@ -4122,6 +4122,52 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 					$scope.popupUpload.center().open();
 				})
 			}
+
+			$scope.uploadKelengkapanNew = function () {
+				if ($scope.dataPasienSelected.noregistrasi == undefined ) {
+					toastr.error('Pilih data dulu')
+					return
+				}
+				var dpid = $scope.dataPasienSelected.objectdepartemenfk
+				if(dpid != 16) {
+					dpid = 18
+				}
+				$scope.listBerkasMonitoring =[]
+				$scope.isRouteLoading = true
+				medifirstService.get('bridging/inacbg/get-list-berkas-monitoring?dpid=' + dpid + '&noregistrasifk='+$scope.dataPasienSelected.norec ).then(function(e){
+					$scope.isRouteLoading = false
+					$scope.listBerkasMonitoring = e.data.data
+					$scope.listUploadMonitoring = e.data.upload
+					for (var i = 0; i < $scope.listBerkasMonitoring.length; i++) {
+						$scope.listBerkasMonitoring[i].no = i + 1
+						$scope.listBerkasMonitoring[i].norec = $scope.dataPasienSelected.norec
+						$scope.listBerkasMonitoring[i].noregistrasi = $scope.dataPasienSelected.noregistrasi
+						$scope.listBerkasMonitoring[i].kodeexternal = null
+
+						const elem = $scope.listBerkasMonitoring[i]
+						for (var x = 0; x < $scope.listUploadMonitoring .length; x++) {
+							const elem2 = $scope.listUploadMonitoring [x]
+							if(elem2.documentklaimfk == elem.id){
+								$scope.listBerkasMonitoring[i].kodeexternal = elem2.filename
+							}
+						}
+					}
+					$scope.dataDaftarDokumen = new kendo.data.DataSource({
+						data: $scope.listBerkasMonitoring,
+						pageSize: 10,
+						total: $scope.listBerkasMonitoring.length,
+						serverPaging: false,
+						schema: {
+							model: {
+								fields: {
+								}
+							}
+						}
+					});
+					$scope.popupUploadNew.center().open();
+				})
+			}
+
 			$scope.upload = function () {
 				    const form = document.querySelector('form')
 	                const formData = new FormData()
@@ -4954,37 +5000,224 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 			}	
 
 			$scope.columnDaftarDokumen = {
-				columns: [
-					{
-						"field": "tglemr",
-						"title": "Tgl Upload",
-						"width": "90px",
-					},                   
-					{
-						"field": "namafile",
-						"title": "Nama File",
-						"width": "160px"
-					},
-					{
-						"field": "deskripsi",
-						"title": "Deskripsi",
-						"width": "160px"
-					},
-					// {
-					// 	"field": "pengonsul",
-					// 	"title": "Pengonsul",
-					// 	"width": "160px",
-					// },
-					// {
-					// 	"field": "namalengkap",
-					// 	"title": "Dokter",
-					// 	"width": "160px",
-					// },
-				],
-				sortable: {
-					mode: "single",
-					allowUnsort: false,
-				}
+				selectable: 'row',
+				pageable: true,
+	            columns:[
+				{
+					"field": "no",
+					"title": "No",
+					"width":"10px",
+					"template": "<span class='style-center'>#: no #</span>"
+				},
+				{
+					"field": "namaberkas",
+					"title": "Nama File",
+					"width":"80px",
+				},
+				{
+					"title": "Action",
+					"width":"30px",
+					"template": "<span class='style-center'>\
+					# if(data.kodeexternal == null) {#\
+						<div class=\"upload-btn-wrapper\">\
+							<button class=\"btnupload\">Upload</button>\
+							<input type=\"file\" id=\"filePasien\" accept=\"application/pdf\" data-id=\"#: data.id #\" data-namafile=\"#: data.namaberkas #\" data-norec=\"#: data.norec #\" />\
+						</div>\
+						<div class=\"upload-btn-wrapper\">\
+							<button class=\"btncari\" id=\"cariDokumen\" data-id=\"#: data.id #\" data-noreg=\"#: data.noregistrasi #\">Cari Dokumen</button>\
+						</div>\
+					# } else {#\
+						<div class=\"upload-btn-wrapper\">\
+							<button class=\"btnlihat\">Lihat</button>\
+							<input type=\"file\" id=\"LihatDokumenKlaim\" data-noreg=\"#: data.noregistrasi #\" data-namafile=\"#: data.kodeexternal #\" data-documentklaimfk=\"#: data.id #\"/>\
+						</div>\
+						<div class=\"upload-btn-wrapper\">\
+						<button class=\"btnhapus\" id=\"hapusDokumenKlaim\" data-id=\"#: data.id #\" data-noreg=\"#: data.noregistrasi #\" data-namafile=\"#: data.kodeexternal #\" data-documentklaimfk=\"#: data.id #\">Hapus</button>\
+						</div>\
+					# } #\
+					</span>",
+				},			
+			]};
+
+			$('body ').on('change','#filePasien',function(e){
+                var id = $(this).data("id");
+                var norec = $(this).data("norec");
+                var namafile = $(this).data("namafile");
+
+                if (e.target.files[0]) {
+                    $scope.isRouteLoading = true;
+                    const url = baseTransaksi + 'bridging/inacbg/post-dokumen-klaim'
+                    const formData = new FormData()
+				    const file = e.target.files[0];
+                    if(file.type != "application/pdf") {
+                        toastr.error('File yang diizinkan dalam bentuk format PDF.')
+                        return;
+                    }
+
+                    formData.append('fileBerkas', file)
+                    formData.append('noregistrasifk', norec)
+                    formData.append('documentklaimfk', id)
+                    formData.append('namafile', namafile)
+                    var arr = document.cookie.split(';')
+                    var authorization;
+                    for (var i = 0; i < arr.length; i++) {
+                        var element = arr[i].split('=');
+                        if (element[0].indexOf('authorization') > 0) {
+                            authorization = element[1];
+                        }
+                    }
+                    fetch(url, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'X-AUTH-TOKEN': authorization
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(result => {
+                        $scope.isRouteLoading = false;
+                        medifirstService.postLogging('Dokumen Klaim', 'Norec dokklaim_t', result.dokumen.norec, 
+                        'Upload Dokumen Klaim '+ namafile +' pada norec pasiendaftar_t ' + norec).then(function (res) {})
+                        toastr.success(" Berkas berhasil.");
+                        $scope.uploadKelengkapanNew();
+                    })
+                    .catch((error) => {
+                        $scope.isRouteLoading = false;
+                        toastr.error("Simpan Berkas gagal.");
+                    });
+                }
+            });
+
+			$('body ').on('click','#LihatDokumenKlaim',function(e){
+                var noregistrasi = $(this).data("noreg");
+                var namafile = $(this).data("namafile");
+                var documentklaimfk = $(this).data("documentklaimfk");
+					var strBACKEND = baseTransaksi.replace('service/medifirst2000/', '')
+                    window.open(strBACKEND + "service/storage/dokumenklaim?noregistrasi="+ noregistrasi + "&filename=" + namafile);
+            })
+
+			$('body ').on('click','#hapusDokumenKlaim',function(e){
+				var documentklaimfk = $(this).data("documentklaimfk");
+				var namafile = $(this).data("namafile");
+                $scope.isRouteLoading = true
+				medifirstService.post("bridging/inacbg/delete-dokumen-klaim?noregistrasi="+ $scope.dataPasienSelected.noregistrasi + "&documentklaimfk=" + documentklaimfk).then(function (e) {
+				$scope.isRouteLoading = false	
+				medifirstService.postLogging('Hapus Dokumen Klaim', 'Norec dokklaim_t', $scope.dataPasienSelected.noregistrasi, 
+                'Hapus Dokumen Klaim '+ namafile +' pada norec pasiendaftar_t ' + $scope.dataPasienSelected.norec_pd).then(function (res) {})
+				$scope.uploadKelengkapanNew();
+				})
+            })
+
+			$('body ').on('click','#cariDokumen',function(e){
+				console.log($scope);
+                var id = $(this).data("id");
+                var noregistrasi = $(this).data("noreg");
+                $scope.isRouteLoading = true
+				medifirstService.get(`bridging/inacbg/get-parameter?id=${id}&noregistrasi=${noregistrasi}&user=${$scope.dataPasienSelected.namapasien}`).then(function (e) {
+					$scope.isRouteLoading = false
+                    for (let i = 0; i < e.data.data.length; i++) {
+                        e.data.data[i].no = i + 1;
+                    }
+                    $scope.dataCariDaftarDokumen = new kendo.data.DataSource({
+						data: e.data.data,
+						pageSize: 10,
+						total: e.data.data.length,
+						serverPaging: false,
+						schema: {
+							model: {
+								fields: {
+								}
+							}
+						}
+					});
+
+
+                    // Get current actions
+                    var actions = $scope.popUpData.options.actions;
+                    // Remove "Close" button
+                    actions.splice(actions.indexOf("Close"), 1);
+                    // Set the new options
+                    $scope.popUpData.setOptions({ actions : actions });
+                    $scope.popUpData.center().open();
+
+					// if(e.data.parameter == "?q=q") {
+                    //     toastr.info("Infor", "Data tidak ditemukan");
+                    //     return
+                    // }
+                    // window.open(baseTransaksi 
+					// + e.data.url 
+					// + e.data.parameter, 
+					// '_blank');
+				})
+            })
+
+			$scope.columnCariDaftarDokumen = {
+				selectable: 'row',
+				pageable: true,
+	            columns:[
+				{
+					"field": "no",
+					"title": "No",
+					"width":"10px",
+				},
+				{
+					"field": "namafile",
+					"title": "Nama File",
+					"width":"80px",
+				},
+                {
+                    "command": [
+                        {
+                            text: "Lihat",
+                            click: lihatDokumen,
+                        },
+                        {
+                            text: "Simpan",
+                            click: simpanDokumen,
+                        },
+                    ],
+                    title: "Action",
+                    width: "40px",
+                },
+			]};
+
+            function lihatDokumen(e) {
+				e.preventDefault();
+                var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+                if(dataItem.param == "?q=q") {
+                    toastr.info("Infor", "Data tidak ditemukan");
+                    return
+                }
+                window.open(baseTransaksi 
+                + dataItem.url 
+                + dataItem.param, 
+                '_blank');
+            }
+            function simpanDokumen(e) {
+				e.preventDefault();
+                var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+                if(dataItem.param == "?q=q") {
+                    toastr.info("Infor", "Data tidak ditemukan");
+                    return
+                }
+                window.open(baseTransaksi 
+                + dataItem.url 
+                + dataItem.param + "&issimpanberkas=true&iddok="+dataItem.id+"&isberkasnoreg="+dataItem.noregistrasi+"&namafile=" + dataItem.namafile, 
+                '_blank');
+				// $scope.tutupdokumen();
+				$scope.uploadKelengkapanNew();
+				$scope.isRouteLoading = false
+            }
+
+            $scope.tutupdokumen = function() {
+                $scope.uploadKelengkapanNew();
+                $scope.popUpData.close();
+            }
+
+			$scope.bunldedokumen = function() {
+				var noregistrasi = $scope.dataPasienSelected.noregistrasi;
+                var strBACKEND = baseTransaksi.replace('service/medifirst2000/', '')
+                window.open(strBACKEND + "service/storage/bundledokumenklaim-baru?noregistrasi="+ noregistrasi);
 			}
 
 			$scope.cetakDokumen = function () {

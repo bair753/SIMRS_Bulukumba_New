@@ -1,19 +1,30 @@
 <html>
 <head>
     <title>
-        Report
+        SURAT ELIGIBILITAS PESERTA
     </title>
-    <link href="{{ asset('service/css/style.css') }}" rel="stylesheet">
+  <link href="{{ asset('service/css/style.css') }}" rel="stylesheet">
 </head>
 <style type="text/css" media="print">
     @media print
     {
-        @page
-        {
-            size: auto;
-            margin: 0;
-            /* size: portrait; */
-        }
+        @page {
+  size: A4;
+  margin: 0;
+}
+
+@media print {
+  .page {
+    margin: 0;
+    border: initial;
+    border-radius: initial;
+    width: initial;
+    min-height: initial;
+    box-shadow: initial;
+    background: initial;
+    page-break-after: always;
+    }
+}
         footer {
             display: none
         }
@@ -25,7 +36,7 @@
         }
     }
     tr td {
-        /*padding:2px 4px 2px 4px;*/
+        padding:2px 4px 2px 4px;
     }
     .borderss{
         border-bottom: 1px solid black;
@@ -35,16 +46,15 @@
     }
 </style>
 {{----}}
-<body style="background-color: #CCCCCC;margin: 0" onLoad="window.print()">
+<body onLoad="window.print()">
 <div align="left">
-    <table class="bayangprint" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0" width="{{$pageWidth}}">
+    <table cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0" width="{{$pageWidth}}">
         <tbody>
         <tr>
             <td width="2%"></td>
             <td width="16%">
                 <p align="left">
-                    <img src="{{ asset('img/logo_bpjs.png') }}"
-                         style="width: 200px" border="0"/>
+                    <img src="{{ $image }}" width="200px"/>
                 </p>
             </td>
             <td width="82%">

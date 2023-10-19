@@ -338,6 +338,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
               Route::get('bridging/inacbg/get-daftar-pasien-inacbg-rev-2','Bridging\InaCbgController@getDaftarPasienRev');
               Route::get('bridging/inacbg/get-daftar-informasi-tanggungan','Bridging\InaCbgController@getDaftarPasienInformasiTanggungan');
               Route::get('bridging/inacbg/get-list-berkas','Bridging\InaCbgController@getListBerkas');
+              Route::get('bridging/inacbg/get-list-berkas-monitoring','Bridging\InaCbgController@getListBerkasMonitoring');
               Route::get('bridging/inacbg/get-status-berkas','Bridging\InaCbgController@getStatusUpload');
               Route::get('bridging/inacbg/get-data-combo-ina', 'Bridging\InaCbgController@getDataComboIna');
               Route::get('bridging/inacbg/get-rincial-pelayanan', 'Bridging\InaCbgController@getRincianPelayanan');
@@ -346,6 +347,9 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
               Route::get('bridging/inacbg/get-rincian-operasi', 'Bridging\InaCbgController@getLaporanOperasi');
               Route::get('bridging/inacbg/get-emr-pasien', 'Bridging\InaCbgController@getDaftarAsesmenPasien');
               Route::get('bridging/inacbg/get-all-page-inacbg', 'Bridging\InaCbgController@getAllPage');
+              Route::post('bridging/inacbg/post-dokumen-klaim','Bridging\InaCbgController@postDokumenKlaim');
+              Route::post('bridging/inacbg/delete-dokumen-klaim','Bridging\InaCbgController@deleteDokumenKlaim');
+              Route::get('bridging/inacbg/get-parameter','Bridging\InaCbgController@getParameterDok');
            
               Route::post('bridging/inacbg/save-proposi-bridging-inacbg','Bridging\InaCbgController@saveProposiBridgingINACBG');
               Route::post('bridging/inacbg/save-proposi-bridging-inacbg-multi','Bridging\InaCbgController@saveProposiBridgingINACBGMulti');
@@ -2962,6 +2966,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
 
     Route::get('storage/dokumenklaim', 'Registrasi\MonitoringDokumenKlaimController@lihatDokumen');
     Route::get('storage/bundledokumenklaim', 'Registrasi\MonitoringDokumenKlaimController@bundleDokumen');
+    Route::get('storage/bundledokumenklaim-baru', 'Registrasi\MonitoringDokumenKlaimController@bundleDokumenBaru');
 });
 
 Route::get('encode-base64/{data}', function($data){
