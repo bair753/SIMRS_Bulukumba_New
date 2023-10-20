@@ -8446,7 +8446,7 @@ class ReportController extends ApiController{
         $res['pdf']  = false;
         $blade = 'report.kasir.billing';
         $pageWidth = 500;
-        $imagePath = public_path('img\logo_only.png');
+        $imagePath = public_path('img/logo_only.png');
         $image = "data:image/png;base64,".base64_encode(file_get_contents($imagePath));
 
 
@@ -8456,7 +8456,7 @@ class ReportController extends ApiController{
         }
 
         if(isset($r["issimpanberkas"])) {
-            $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
+            $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true, 'dpi' => '600', 'defaultMediaType' => 'print']);
             $pdf = PDF::loadView($blade, array(
                 'print' => $print,
                 'pageWidth' => $pageWidth,
