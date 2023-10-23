@@ -6569,7 +6569,7 @@ class RegistrasiController extends ApiController
                 case when pd.ismobilejkn = true then 
                 (case when pd.ischeckin = true  then 'Sudah Checkin' else 'Belum Checkin' end) else '-' end as statusjkn"), 'pd.statusschedule as statusschedule', 'apd.noantrian')
             ->whereNull('br.norec')
-            ->where('pd.statusenabled', true)
+            // ->where('pd.statusenabled', true)
             ->where('pd.kdprofile', (int)$kdProfile);
 
         if (isset($filter['tglAwal']) && $filter['tglAwal'] != "" && $filter['tglAwal'] != "undefined") {
