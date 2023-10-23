@@ -2106,7 +2106,7 @@ class RadiologiController extends ApiController
         }
 
         $data = DB::select(DB::raw("          
-                SELECT pp.norec,pp.tglpelayanan,ps.nocm,pd.noregistrasi,ps.namapasien,
+                SELECT pp.norec,pp.tglpelayanan,ps.nocm,pd.noregistrasi,ps.namapasien, pa.nosep,
                        CASE WHEN ru1.namaruangan IS NOT NULL THEN ru1.namaruangan ELSE ru2.namaruangan END AS ruangan,
                        klp.kelompokpasien,pro.namaproduk,pp.jumlah,pp.hargajual,
                        CASE WHEN pg.namalengkap IS NULL THEN '-' ELSE pg.namalengkap END AS dokterdpjp,
@@ -2114,6 +2114,7 @@ class RadiologiController extends ApiController
                        hr.tanggal as tglexpertise,
                        to_char(hr.tanggalreport, 'YYYY-MM-DD HH24:MI:SS') as tanggalreport
                 FROM pasiendaftar_t AS pd
+                LEFT JOIN pemakaianasuransi_t AS pa ON pa.noregistrasifk = pd.norec
                 INNER JOIN antrianpasiendiperiksa_t AS apd ON apd.noregistrasifk = pd.norec
                 INNER JOIN pelayananpasien_t AS pp ON pp.noregistrasifk = apd.norec
                 LEFT JOIN pelayananpasienpetugas_t AS ppp ON ppp.pelayananpasien = pp.norec AND ppp.objectjenispetugaspefk = 4

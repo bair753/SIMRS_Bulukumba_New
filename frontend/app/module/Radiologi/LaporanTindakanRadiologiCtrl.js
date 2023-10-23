@@ -209,8 +209,8 @@ define(['initialize'], function (initialize) {
                         }
                         $scope.dataSourceGrid = new kendo.data.DataSource({
                             data: data.data.data,
-                            // group: $scope.group,
-                            // pageSize: 10,
+                            group: $scope.group,
+                            pageSize: 10,
                             total: data.data.data.length,
 
                             serverPaging: false,
@@ -302,11 +302,11 @@ define(['initialize'], function (initialize) {
                         "title": "Tanggal",
                         "width": "100px",                        
                     },
-                    {                       
-                        "field": "tanggalreport",
-                        "title": "Expertise",
-                        "width": "100px",                        
-                    },
+                    // {                       
+                    //     "field": "tanggalreport",
+                    //     "title": "Expertise",
+                    //     "width": "100px",                        
+                    // },
                     {
                         "field": "noregistrasi",
                         "title": "No Reg",
@@ -361,6 +361,12 @@ define(['initialize'], function (initialize) {
                         "title": "Dokter Pemeriksa",
                         "width": "220px",
                         "template": "<span class='style-left'>#: dokter #</span>"
+                    },
+                    {
+                        "field": "nosep",
+                        "title": "No SEP",
+                        "width": "220px",
+                        "template": '# if( nosep==null || nosep=="") {# - # } else {# #= nosep # #} #'
                     },
                     {
                         "field": "harga",
