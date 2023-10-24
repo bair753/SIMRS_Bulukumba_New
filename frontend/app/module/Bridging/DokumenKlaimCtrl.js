@@ -483,7 +483,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 					"title": "Aksi",
 					"width":"30px",
 					"template": "<span class='style-center'>\
-					# if(status!=true) {#\
+					# if(config==null) {#\
 						<div class=\"upload-btn-wrapper\">\
 								<button class=\"btnupload\">Upload</button>\
 								<input type=\"file\" id=\"filePasien\" accept=\"application/pdf\" data-id=\"#: data.id #\" data-namafile=\"#: data.namaberkas #\" data-norec=\"#: data.norec #\" />\
