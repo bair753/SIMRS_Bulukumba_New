@@ -480,7 +480,10 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 					"width":"30px",
 					"template": "<span class='style-center'>\
 					# if(status!=true) {#\
-						Sedang Perbaikan\
+						<div class=\"upload-btn-wrapper\">\
+								<button class=\"btnupload\">Upload</button>\
+								<input type=\"file\" id=\"filePasien\" accept=\"application/pdf\" data-id=\"#: data.id #\" data-namafile=\"#: data.namaberkas #\" data-norec=\"#: data.norec #\" />\
+							</div>\
 					# } else { if(data.kodeexternal == null) {#\
 							<div class=\"upload-btn-wrapper\">\
 								<button class=\"btnupload\">Upload</button>\
