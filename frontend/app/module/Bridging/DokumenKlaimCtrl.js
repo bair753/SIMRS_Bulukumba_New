@@ -474,10 +474,10 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 					"width":"50px",
 				},
 				{
-					"field": "status",
+					"field": "config",
 					"title": "Status",
 					"width":"20px",
-						"template": '# if( status==true) {# Ok # } else {# Maintenance # } #'
+						"template": '# if( config!=null) {# Ok # } else {# Maintenance # } #'
 				},
 				{
 					"title": "Aksi",
