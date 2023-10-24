@@ -8559,8 +8559,23 @@ class ReportController extends ApiController{
             ';
             die;
         }
+        $imagePath = public_path('img/logo_only.png');
+        $image = "data:image/png;base64,".base64_encode(file_get_contents($imagePath));
 
-        return view('report.cetak-surat-keterangan-kontrol', compact('res', 'pageWidth'));
+        if(isset($r["issimpanberkas"])) {
+            $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true, 'dpi' => '600', 'defaultMediaType' => 'print']);
+            $pdf = PDF::loadView('report.cetak-surat-keterangan-kontrol', array(
+                'pageWidth' => $pageWidth,
+                'res' => $res,
+                'image' => $image,
+            ))->setPaper('a4', 'portrait');
+            $this->saveDokumenKlaim($pdf, $r);
+            return;
+        }else{
+            return view('report.cetak-surat-keterangan-kontrol', compact('res', 'pageWidth', 'image'));
+        }
+
+        
     }
 
     public function asesmenAwalMedisRajal(Request $request) {

@@ -219,11 +219,7 @@
     <table width="100%" style="table-layout:fixed;border:none">
         <tr style="text-align:center;border:none">
             <td colspan="1" style="border:none" rowspan="4">
-                @if(stripos(\Request::url(), 'localhost') !== FALSE)
-                <img src="{{ asset('img/logo_only.png') }}" alt="" style="width: 60px;">
-                @else
-                <img src="{{ asset('service/img/logo_only.png') }}" alt="" style="width: 60px;">
-                @endif
+                <img src="{{ $image }}" alt="" style="width: 60px;">
             </td>
             <td colspan="7" style="border:none;text-align:center;"></td>
             <td colspan="1" style="border:none" rowspan="4">
