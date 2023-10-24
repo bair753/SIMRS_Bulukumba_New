@@ -8509,7 +8509,7 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 				+ '&nama=' + nama, '_blank');
 			}
 
-			$scope.cetakSuratKeteranganKontrol = function(){
+			$scope.suratKeteranganKontrol = function(){
 				if ($scope.dataPasienSelected.noregistrasi == undefined) {
 					toastr.error('Pilih Pasien Terlebih dahulu!!!')
 					return;
