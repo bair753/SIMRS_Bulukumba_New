@@ -215,6 +215,10 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 				if ($scope.item.noReg != undefined) {
 					var reg = "&noreg=" + $scope.item.noReg
 				}
+				var sep = ""
+				if ($scope.item.sep != undefined) {
+					var sep = "&nosep=" + $scope.item.sep
+				}
 				var rm = ""
 				if ($scope.item.noRm != undefined) {
 					var rm = "&norm=" + $scope.item.noRm
@@ -279,7 +283,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 					medifirstService.get("registrasi/daftar-registrasi/get-daftar-registrasi-pasien-klaim?" +
 						"tglAwal=" + tglAwal +
 						"&tglAkhir=" + tglAkhir +
-						reg + rm + nm + ins + rg + kp + dk
+						reg + rm + nm + ins + rg + kp + dk + sep
 						+ '&jmlRows=' + jmlRows +
 						isBlmInputSep + isSepTdkSesuai + blmInputDiag
 						+ '&jenisPel=' + jenisPel),

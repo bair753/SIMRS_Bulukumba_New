@@ -8562,14 +8562,14 @@ class ReportController extends ApiController{
         $imagePath = public_path('img/logo_only.png');
         $image = "data:image/png;base64,".base64_encode(file_get_contents($imagePath));
 
-        if(isset($r["issimpanberkas"])) {
+        if(isset($request["issimpanberkas"])) {
             $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true, 'dpi' => '600', 'defaultMediaType' => 'print']);
             $pdf = PDF::loadView('report.cetak-surat-keterangan-kontrol', array(
                 'pageWidth' => $pageWidth,
                 'res' => $res,
                 'image' => $image,
             ))->setPaper('a4', 'portrait');
-            $this->saveDokumenKlaim($pdf, $r);
+            $this->saveDokumenKlaim($pdf, $request);
             return;
         }else{
             return view('report.cetak-surat-keterangan-kontrol', compact('res', 'pageWidth', 'image'));

@@ -6744,6 +6744,9 @@ class RegistrasiController extends ApiController
     if (isset($filter['noreg']) && $filter['noreg'] != "" && $filter['noreg'] != "undefined") {
         $data = $data->where('pd.noregistrasi', '=', $filter['noreg']);
     }
+    if (isset($filter['nosep']) && $filter['nosep'] != "" && $filter['nosep'] != "undefined") {
+        $data = $data->where('pa.nosep', '=', $filter['nosep']);
+    }
     if (isset($filter['norm']) && $filter['norm'] != "" && $filter['norm'] != "undefined") {
         $data = $data->where('ps.nocm', 'ilike', '%' . $filter['norm'] . '%');
     }
