@@ -261,7 +261,19 @@
 
 			<div class="grid_12">
 				<input c-text-box type="input" filter="" class="k-textbox" ng-model="item.nama"
-					ng-keypress="($event.which == 13)? SearchData():item.noRm" />
+					ng-keypress="($event.which == 13)? SearchData():item.nama" />
+			</div>
+		</div>
+
+		<div class="grid_2">
+			<div class="grid_12">
+				<label c-label item="item">No SEP</label>
+			</div>
+			<div class="clear"></div>
+
+			<div class="grid_12">
+				<input c-text-box type="input" filter="" class="k-textbox" ng-model="item.sep"
+					ng-keypress="($event.which == 13)? SearchData():item.sep" />
 			</div>
 		</div>
 
