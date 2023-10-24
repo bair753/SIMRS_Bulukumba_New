@@ -334,8 +334,8 @@
     ]
   },
   {
-    "name": "RGFmdGFyUmVnaXN0cmFzaVBhc2llbk9wZXJhdG9y",
-    "url": "/RGFmdGFyUmVnaXN0cmFzaVBhc2llbk9wZXJhdG9y",
+    "name": "",
+    "url": "/",
     "templateurl": "module/Registrasi/DaftarRegistrasiPasienOperator.html",
     "controller": "DaftarRegistrasiPasienOperatorCtrl",
     "deps": [
