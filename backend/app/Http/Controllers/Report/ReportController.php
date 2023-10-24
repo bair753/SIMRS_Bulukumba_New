@@ -1971,6 +1971,15 @@ class ReportController extends ApiController{
              LEFT JOIN kelas_m kls on kls.id=ap.objectkelasdijaminfk  
              where pd.noregistrasi ='$Noregistrasi' 
         "))->first();
+        if(empty($registrasi->nosep)){
+            echo '
+                <script language="javascript">
+                    window.alert("No SEP belum dimasukkan!!");
+                    window.close()
+                </script>
+            ';
+            die;
+        }
 
         $pageWidth = 719;
         $dataReport = array(
@@ -2012,7 +2021,7 @@ class ReportController extends ApiController{
                 'dataReport' => $dataReport,
                 'image' => $image,
             
-            ));
+            ))->setPaper('a4', 'portrait');
             
             $this->saveDokumenKlaim($pdf, $request);
             
@@ -8457,13 +8466,13 @@ class ReportController extends ApiController{
 
         if(isset($r["issimpanberkas"])) {
             $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true, 'dpi' => '600', 'defaultMediaType' => 'print']);
-            $pdf = PDF::loadView($blade, array(
+            $pdf = PDF::loadView('report.kasir.billing-dom', array(
                 'print' => $print,
                 'pageWidth' => $pageWidth,
                 'r' => $r,
                 'res' => $res,
                 'image' => $image,
-            ));
+            ))->setPaper('a4', 'portrait');
             $this->saveDokumenKlaim($pdf, $r);
             return;
         }else{

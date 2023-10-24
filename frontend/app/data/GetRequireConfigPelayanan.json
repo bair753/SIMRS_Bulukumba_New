@@ -3715,6 +3715,10 @@
             "urlDep": "module/EMR/MonitoringBerkasKlaimCtrl"
         },
         {
+            "nameDep": "DokumenKlaimCtrl",
+            "urlDep": "module/Bridging/DokumenKlaimCtrl"
+        },
+        {
             "nameDep": "ObservasiTandaVitalEndoskopiCtrl",
             "urlDep": "module/EMR/ObservasiTandaVitalEndoskopiCtrl"
         },

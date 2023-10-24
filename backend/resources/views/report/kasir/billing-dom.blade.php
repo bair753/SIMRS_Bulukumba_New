@@ -101,7 +101,7 @@
     <table width="100%">
         <tr>
             <td rowspan="4">
-                <img src="{{ $image }}" alt="" style="width: 60px;display:block; margin:auto;">
+                <img src="{{ $image }}" alt="" style="width: 50px;display:block; margin:auto;">
 
             </td>
             <td rowspan="4" colspan="4"><strong>{!!
@@ -413,8 +413,8 @@
         </tr>
     </table>
 </body>
-<script>
+{{-- <script>
     window.print();
-</script>
+</script> --}}
 
 </html>
