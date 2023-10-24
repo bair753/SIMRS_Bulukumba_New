@@ -6674,6 +6674,135 @@ class RegistrasiController extends ApiController
         }
         return $this->respond($data2);
     }
+
+    public function getDaftarRegistrasiPasienOperatorKlaim(Request $request){
+    $kdProfile = $this->getDataKdProfile($request);
+    $filter = $request->all();
+    $data = \DB::table('pasiendaftar_t as pd')
+        ->join('pasien_m as ps', 'ps.id', '=', 'pd.nocmfk')
+        ->join('ruangan_m as ru', 'ru.id', '=', 'pd.objectruanganlastfk')
+        ->leftjoin('pegawai_m as pg', 'pg.id', '=', 'pd.objectpegawaifk')
+        ->join('kelompokpasien_m as kp', 'kp.id', '=', 'pd.objectkelompokpasienlastfk')
+        ->join('kelas_m as kls', 'kls.id', '=', 'pd.objectkelasfk')
+        ->join('departemen_m as dept', 'dept.id', '=', 'ru.objectdepartemenfk')
+        ->leftjoin('batalregistrasi_t as br', 'br.pasiendaftarfk', '=', 'pd.norec')
+        ->leftjoin('pemakaianasuransi_t as pa', 'pa.noregistrasifk', '=', 'pd.norec')
+        ->leftJoin('strukpelayanan_t as sp', 'sp.norec', '=', 'pd.nostruklastfk')
+        ->leftJoin('strukbuktipenerimaan_t as sbm', 'sbm.norec', '=', 'pd.nosbmlastfk')
+        ->leftjoin('rekanan_m as rek', 'rek.id', '=', 'pd.objectrekananfk')
+        ->leftjoin('asuransipasien_m as asu', 'pa.objectasuransipasienfk', '=', 'asu.id')
+        ->leftjoin('kelas_m as klstg','klstg.id','=','asu.objectkelasdijaminfk')
+        ->leftJoin('antrianpasiendiperiksa_t as apd',function($join)
+        {
+            $join->on('apd.noregistrasifk','=','pd.norec');
+            $join->on('apd.objectruanganfk','=','pd.objectruanganlastfk');
+            $join->whereNull('apd.objectruanganasalfk');
+        })
+        ->leftJoin('detaildiagnosapasien_t as ddt', function($join)
+        {
+            $join->on('ddt.noregistrasifk','=','apd.norec');
+            $join->where('ddt.objectjenisdiagnosafk','=',1);
+        })
+        ->leftJOIN('jenispelayanan_m as jpl', 'pd.jenispelayanan', '=',
+                    DB::raw('cast(jpl.id as text)'))
+        ->leftJOIN('jeniskelamin_m as jks', 'jks.id', '=', 'ps.objectjeniskelaminfk')
+        ->distinct()
+        ->select('pd.norec', 'pd.statusenabled', 'pd.tglregistrasi', 'ps.nocm', 'pd.nocmfk', 'pd.noregistrasi', 'ru.namaruangan', 'ps.namapasien',
+            'kp.kelompokpasien','kp.id as kpid', 'rek.namarekanan', 'pg.namalengkap as namadokter', 'pd.tglpulang', 'pd.statuspasien',
+            'pa.norec as norec_pa', 'pa.objectasuransipasienfk', 'pd.objectpegawaifk as pgid', 'pd.objectruanganlastfk',
+            'pa.nosep as nosep', 'br.norec as norec_br', 'pd.nostruklastfk','klstg.namakelas as kelasditanggung','kls.namakelas',
+            'ps.tgllahir','ru.objectdepartemenfk', 'pd.objectkelasfk','dept.id as deptid','pa.ppkrujukan','ddt.objectdiagnosafk',
+            'jpl.jenispelayanan','pa.objectdiagnosafk as iddiagnosabpjs','ps.nobpjs','jks.jeniskelamin', 'pa.tglcreate',
+            DB::raw("pd.ismobilejkn,
+            case when pd.ismobilejkn = true then 
+            (case when pd.ischeckin = true  then 'Sudah Checkin' else 'Belum Checkin' end) else '-' end as statusjkn"), 'pd.statusschedule as statusschedule', 'apd.noantrian')
+        ->whereNull('br.norec')
+        ->where('pd.statusenabled', true)
+        ->where('pd.kdprofile', (int)$kdProfile);
+
+    if (isset($filter['tglAwal']) && $filter['tglAwal'] != "" && $filter['tglAwal'] != "undefined") {
+        $data = $data->where('pd.tglregistrasi', '>=', $filter['tglAwal']);
+    }
+    if (isset($filter['tglAkhir']) && $filter['tglAkhir'] != "" && $filter['tglAkhir'] != "undefined") {
+        $data = $data->where('pd.tglregistrasi', '<=', $filter['tglAkhir']);
+    }
+    if (isset($filter['deptId']) && $filter['deptId'] != "" && $filter['deptId'] != "undefined") {
+        $data = $data->where('dept.id', '=', $filter['deptId']);
+    }
+    if (isset($filter['ruangId']) && $filter['ruangId'] != "" && $filter['ruangId'] != "undefined") {
+        $data = $data->where('ru.id', '=', $filter['ruangId']);
+    }
+    if (isset($filter['kelId']) && $filter['kelId'] != "" && $filter['kelId'] != "undefined") {
+        $data = $data->where('kp.id', '=', $filter['kelId']);
+    }
+    if (isset($filter['dokId']) && $filter['dokId'] != "" && $filter['dokId'] != "undefined") {
+        $data = $data->where('pg.id', '=', $filter['dokId']);
+    }
+    if (isset($filter['sttts']) && $filter['sttts'] != "" && $filter['sttts'] != "undefined") {
+        $data = $data->where('pd.statuspasien', '=', $filter['sttts']);
+    }
+    if (isset($filter['noreg']) && $filter['noreg'] != "" && $filter['noreg'] != "undefined") {
+        $data = $data->where('pd.noregistrasi', '=', $filter['noreg']);
+    }
+    if (isset($filter['norm']) && $filter['norm'] != "" && $filter['norm'] != "undefined") {
+        $data = $data->where('ps.nocm', 'ilike', '%' . $filter['norm'] . '%');
+    }
+    if (isset($filter['nama']) && $filter['nama'] != "" && $filter['nama'] != "undefined") {
+        $data = $data->where('ps.namapasien', 'ilike', '%' . $filter['nama'] . '%');
+    }
+
+    if (isset($filter['jmlRows']) && $filter['jmlRows'] != "" && $filter['jmlRows'] != "undefined") {
+        $data = $data->take($filter['jmlRows']);
+    }
+    if((isset($filter['isBlmInputSep']) && $filter['isBlmInputSep'] != "" && $filter['isBlmInputSep'] != "undefined" && $filter['isBlmInputSep'] != 'false')
+        && (isset($filter['isSepTdkSesuai']) && $filter['isSepTdkSesuai'] != "" && $filter['isSepTdkSesuai'] != "undefined" && $filter['isSepTdkSesuai'] != 'false')){
+        $data = $data->whereIn('kp.id',[10,2,4]);
+        $data = $data->where(function ($query) {
+            $query ->where('pa.nosep',null)
+                ->Orwhere('pa.nosep',"")
+                ->Orwhere(function ($query2) {
+                    $query2->where('dept.id',16)
+                        ->where('pa.ppkrujukan','<>',"1124R004");
+                });
+        });
+    }
+    elseif (isset($filter['isBlmInputSep']) && $filter['isBlmInputSep'] != "" && $filter['isBlmInputSep'] != "undefined" && $filter['isBlmInputSep'] != 'false') {
+        $data = $data->whereIn('kp.id',[10,2,4]);
+        $data = $data->where(function ($query) {
+            $query ->where('pa.nosep',null)
+                ->Orwhere('pa.nosep',"");
+        });
+    }
+    elseif (isset($filter['isSepTdkSesuai']) && $filter['isSepTdkSesuai'] != "" && $filter['isSepTdkSesuai'] != "undefined" && $filter['isSepTdkSesuai'] != 'false') {
+        $data = $data->whereIn('kp.id',[10,2,4]);
+        $data = $data->where('dept.id',16);
+        $data = $data->where(function ($query) {
+            $query ->where('pa.nosep','<>',null)
+                ->where('pa.nosep','<>',"");
+        });
+
+        $data = $data->where('pa.ppkrujukan','<>',"1124R004");
+    }
+     if (isset($filter['jenisPel']) && $filter['jenisPel'] != "" && $filter['jenisPel'] != "undefined") {
+        $data = $data->where('pd.jenispelayanan', '=', $filter['jenisPel']);
+    }
+
+    $data = $data->orderBy('apd.noantrian');
+
+    $data = $data->get();
+
+    $data2=[];
+    foreach ($data as $key => $value) {
+        if($value->objectdiagnosafk != null){
+            $value->isdiagnosis = true;
+        }else{
+            $value->isdiagnosis = false;
+        }
+        $data2 []=  $value;
+
+    }
+    return $this->respond($data2);
+}
     public function getDataComboOperator(Request $request){
         $kdProfile = $this->getDataKdProfile($request);
         $dataLogin = $request->all();

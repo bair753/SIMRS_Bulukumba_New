@@ -1954,13 +1954,13 @@ class InaCbgController   extends ApiController
         //     $data = $data->where('kp.id', '=', $filter['kelId']);
         // }
         $paramKel  ='';
-        if(isset($request['kelId']) && $request['kelId']!="" && $request['kelId']!="undefined"){
-            $arrKel = explode(',',$request['kelId']) ;
+        if(isset($filter['kelId']) && $filter['kelId']!="" && $filter['kelId']!="undefined"){
+            $arrKel = explode(',',$filter['kelId']) ;
             $kodeKel = [];
             foreach ( $arrKel as $item){
                 $kodeKel[] = (int) $item;
             }
-            $paramKel = ' and kp.id in ('.$request['kelId'].')';
+            $paramKel = ' and kp.id in ('.$filter['kelId'].')';
             $data = $data->whereIn('kp.id',$kodeKel);
         }
         // if (isset($request['kelId']) && $request['kelId'] != "" && $request['kelId'] != "undefined") {
