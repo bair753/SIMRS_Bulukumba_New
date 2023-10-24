@@ -467,28 +467,37 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 				{
 					"field": "namaberkas",
 					"title": "Nama File",
-					"width":"80px",
+					"width":"50px",
 				},
 				{
-					"title": "Action",
+					"field": "status",
+					"title": "Status",
+					"width":"20px",
+						"template": '# if( status==true) {# Ok # } else {# Maintenance # } #'
+				},
+				{
+					"title": "Aksi",
 					"width":"30px",
 					"template": "<span class='style-center'>\
-					# if(data.kodeexternal == null) {#\
-						<div class=\"upload-btn-wrapper\">\
-							<button class=\"btnupload\">Upload</button>\
-							<input type=\"file\" id=\"filePasien\" accept=\"application/pdf\" data-id=\"#: data.id #\" data-namafile=\"#: data.namaberkas #\" data-norec=\"#: data.norec #\" />\
-						</div>\
-						<div class=\"upload-btn-wrapper\">\
-							<button class=\"btncari\" id=\"cariDokumen\" data-id=\"#: data.id #\" data-noreg=\"#: data.noregistrasi #\">Cari Dokumen</button>\
-						</div>\
-					# } else {#\
-						<div class=\"upload-btn-wrapper\">\
-							<button class=\"btnlihat\">Lihat</button>\
-							<input type=\"file\" id=\"LihatDokumenKlaim\" data-noreg=\"#: data.noregistrasi #\" data-namafile=\"#: data.kodeexternal #\" data-documentklaimfk=\"#: data.id #\"/>\
-						</div>\
-						<div class=\"upload-btn-wrapper\">\
-						<button class=\"btnhapus\" id=\"hapusDokumenKlaim\" data-id=\"#: data.id #\" data-noreg=\"#: data.noregistrasi #\" data-namafile=\"#: data.kodeexternal #\" data-documentklaimfk=\"#: data.id #\">Hapus</button>\
-						</div>\
+					# if(status!=true) {#\
+						Sedang Perbaikan\
+					# } else { if(data.kodeexternal == null) {#\
+							<div class=\"upload-btn-wrapper\">\
+								<button class=\"btnupload\">Upload</button>\
+								<input type=\"file\" id=\"filePasien\" accept=\"application/pdf\" data-id=\"#: data.id #\" data-namafile=\"#: data.namaberkas #\" data-norec=\"#: data.norec #\" />\
+							</div>\
+							<div class=\"upload-btn-wrapper\">\
+								<button class=\"btncari\" id=\"cariDokumen\" data-id=\"#: data.id #\" data-noreg=\"#: data.noregistrasi #\">Cari Dokumen</button>\
+							</div>\
+						# } else {#\
+							<div class=\"upload-btn-wrapper\">\
+								<button class=\"btnlihat\">Lihat</button>\
+								<input type=\"file\" id=\"LihatDokumenKlaim\" data-noreg=\"#: data.noregistrasi #\" data-namafile=\"#: data.kodeexternal #\" data-documentklaimfk=\"#: data.id #\"/>\
+							</div>\
+							<div class=\"upload-btn-wrapper\">\
+							<button class=\"btnhapus\" id=\"hapusDokumenKlaim\" data-id=\"#: data.id #\" data-noreg=\"#: data.noregistrasi #\" data-namafile=\"#: data.kodeexternal #\" data-documentklaimfk=\"#: data.id #\">Hapus</button>\
+							</div>\
+						# } #\
 					# } #\
 					</span>",
 				},			
