@@ -422,8 +422,11 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 + dataItem.url 
                 + dataItem.param + "&issimpanberkas=true&iddok="+dataItem.id+"&isberkasnoreg="+dataItem.noregistrasi+"&namafile=" + dataItem.namafile, 
                 '_blank');
-				$scope.isRouteLoading = false
-				$scope.tutupdokumen();
+				setTimeout(function(){ 
+					$scope.isRouteLoading = false
+					$scope.tutupdokumen();
+				 }, 2000);
+				
             }
 
             $scope.tutupdokumen = function() {
