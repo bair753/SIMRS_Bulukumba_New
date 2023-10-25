@@ -442,11 +442,11 @@ class PelayananResepController extends ApiController
                         ->first();
 
                     $jmlPengurang =(float)$qtyJumlah;
-                    DB::table('stokprodukdetail_t')
-                        ->where('kdprofile', $idProfile)
-                        ->where('norec',$GetNorec->norec)
-                        ->sharedLock()
-                        ->increment('qtyproduk', (float)$jmlPengurang);
+                    // DB::table('stokprodukdetail_t')
+                    //     ->where('kdprofile', $idProfile)
+                    //     ->where('norec',$GetNorec->norec)
+                    //     ->sharedLock()
+                    //     ->increment('qtyproduk', (float)$jmlPengurang);
 
                     //## KartuStok
                     $newKS = new KartuStok();
