@@ -8567,7 +8567,7 @@ class ReportController extends ApiController{
 
         if(isset($request["issimpanberkas"])) {
             $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true, 'dpi' => '600', 'defaultMediaType' => 'print']);
-            $pdf = PDF::loadView('report.cetak-surat-keterangan-kontrol', array(
+            $pdf = PDF::loadView('report.cetak-surat-keterangan-kontrol-dom', array(
                 'pageWidth' => $pageWidth,
                 'res' => $res,
                 'image' => $image,
