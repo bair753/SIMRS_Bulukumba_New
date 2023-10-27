@@ -395,7 +395,8 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 					 {namatarif:'Pelayanan Darah' ,tarif:data.tarif_rs.pelayanan_darah},
 					{namatarif:'Rawat Intensif' ,tarif:data.tarif_rs.rawat_intensif},
 					{namatarif:'Obat Kemoterapi' ,tarif:data.tarif_rs.obat_kemoterapi},
-					{namatarif:'Sewa Alat' ,tarif:data.tarif_rs.sewa_alat}
+					{namatarif:'Sewa Alat' ,tarif:data.tarif_rs.sewa_alat},
+					{namatarif:'Tindakan Lain' ,tarif:data.tarif_rs.tindakan_lain}
 				]
 				$scope.totalTarifRS =0
 				for (var i = 0; i < $scope.listTarifRS.length; i++) {
@@ -551,6 +552,7 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 								"alkes": data2[i].tarif_rs.alkes,    //"500000",      
 								"bmhp": data2[i].tarif_rs.bmhp,    //"400000",      
 								"sewa_alat": data2[i].tarif_rs.sewa_alat,    //"210000"    
+								"tindakan_lain": data2[i].tarif_rs.tindakan_lain,    //"210000"    
 							},
 							"tarif_poli_eks": 0,    //"100000",    
 							"nama_dokter": data2[i].namadokter,    //"RUDY, DR",    
@@ -784,6 +786,7 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 								"alkes": data2[i].tarif_rs.alkes,    //"500000",      
 								"bmhp": data2[i].tarif_rs.bmhp,    //"400000",      
 								"sewa_alat": data2[i].tarif_rs.sewa_alat,    //"210000"    
+								"tindakan_lain": data2[i].tarif_rs.tindakan_lain,    //"210000"    
 							},
 							"tarif_poli_eks": 0,    //"100000",    
 							"nama_dokter": data2[i].namadokter,    //"RUDY, DR",    
@@ -1073,6 +1076,7 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 								"alkes": data2[i].tarif_rs.alkes,    //"500000",      
 								"bmhp": data2[i].tarif_rs.bmhp,    //"400000",      
 								"sewa_alat": data2[i].tarif_rs.sewa_alat,    //"210000"    
+								"tindakan_lain": data2[i].tarif_rs.tindakan_lain,    //"210000"    
 							},
 							"pemulasaraan_jenazah": pemulasaraan_covid,
 							"kantong_jenazah": pemulasaraan_covid,
@@ -1502,6 +1506,7 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 									"alkes": dataSave[i].tarif_rs.alkes,    //"500000",      
 									"bmhp": dataSave[i].tarif_rs.bmhp,    //"400000",      
 									"sewa_alat": dataSave[i].tarif_rs.sewa_alat,    //"210000"    
+									"tindakan_lain": dataSave[i].tarif_rs.tindakan_lain,    //"210000"    
 								},
 								"tarif_poli_eks": dataSave[i].tarif_poli_eks,    //"100000",    
 								"nama_dokter": dataSave[i].nama_dokter,    //"RUDY, DR",    
@@ -1677,6 +1682,7 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 									"alkes": dataSave[i].tarif_rs.alkes,    //"500000",      
 									"bmhp": dataSave[i].tarif_rs.bmhp,    //"400000",      
 									"sewa_alat": dataSave[i].tarif_rs.sewa_alat,    //"210000"    
+									"tindakan_lain": dataSave[i].tarif_rs.tindakan_lain,    //"210000"    
 								},
 								"pemulasaraan_jenazah": dataSave[i].pemulasaraan_jenazah,
 								"kantong_jenazah": dataSave[i].kantong_jenazah,
@@ -2141,6 +2147,7 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 										"alkes": dataSave[i].tarif_rs.alkes,    //"500000",      
 										"bmhp": dataSave[i].tarif_rs.bmhp,    //"400000",      
 										"sewa_alat": dataSave[i].tarif_rs.sewa_alat,    //"210000"    
+										"tindakan_lain": dataSave[i].tarif_rs.tindakan_lain,    //"210000"    
 									},
 									"pemulasaraan_jenazah": dataSave[i].pemulasaraan_jenazah,//dataSave[i].pemulasaraan_jenazah,
 									"kantong_jenazah": dataSave[i].kantong_jenazah,//dataSave[i].kantong_jenazah,
@@ -2455,6 +2462,7 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 												"alkes": dataSave[i].tarif_rs.alkes,    //"500000",      
 												"bmhp": dataSave[i].tarif_rs.bmhp,    //"400000",      
 												"sewa_alat": dataSave[i].tarif_rs.sewa_alat,    //"210000"    
+												"tindakan_lain": dataSave[i].tarif_rs.tindakan_lain,    //"210000"    
 											},
 											"pemulasaraan_jenazah": dataSave[i].pemulasaraan_jenazah,//dataSave[i].pemulasaraan_jenazah,
 											"kantong_jenazah": dataSave[i].kantong_jenazah,//dataSave[i].kantong_jenazah,
@@ -2779,6 +2787,7 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 									"alkes": dataSave[i].tarif_rs.alkes,    //"500000",      
 									"bmhp": dataSave[i].tarif_rs.bmhp,    //"400000",      
 									"sewa_alat": dataSave[i].tarif_rs.sewa_alat,    //"210000"    
+									"tindakan_lain": dataSave[i].tarif_rs.tindakan_lain,    //"210000"    
 								},
 								"pemulasaraan_jenazah": dataSave[i].pemulasaraan_jenazah,//dataSave[i].pemulasaraan_jenazah,
 								"kantong_jenazah": dataSave[i].kantong_jenazah,//dataSave[i].kantong_jenazah,
@@ -4455,6 +4464,7 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 											"alkes": dataSave[i].tarif_rs.alkes,    //"500000",      
 											"bmhp": dataSave[i].tarif_rs.bmhp,    //"400000",      
 											"sewa_alat": dataSave[i].tarif_rs.sewa_alat,    //"210000"    
+											"tindakan_lain": dataSave[i].tarif_rs.tindakan_lain,    //"210000"    
 										},
 										"tarif_poli_eks": dataSave[i].tarif_poli_eks,    //"100000",    
 										"nama_dokter": dataSave[i].nama_dokter,    //"RUDY, DR",    
@@ -4484,7 +4494,8 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 									{namatarif:'Pelayanan Darah' ,tarif:dataSave[i].tarif_rs.pelayanan_darah},
 									{namatarif:'Rawat Intensif' ,tarif:dataSave[i].tarif_rs.rawat_intensif},
 									{namatarif:'Obat Kemoterapi' ,tarif:dataSave[i].tarif_rs.obat_kemoterapi},
-									{namatarif:'Sewa Alat' ,tarif:dataSave[i].tarif_rs.sewa_alat}
+									{namatarif:'Sewa Alat' ,tarif:dataSave[i].tarif_rs.sewa_alat},
+									{namatarif:'Tindakan Lain' ,tarif:dataSave[i].tarif_rs.tindakan_lain}
 								]
 								tarifrs[dataSave[i].nomor_sep] = listTarifRS
 							}
