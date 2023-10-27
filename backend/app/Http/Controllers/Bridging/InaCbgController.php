@@ -1688,11 +1688,11 @@ class InaCbgController   extends ApiController
         }
         $dataTarif16 = DB::select(DB::raw("select pd.norec, sum(((pp.hargajual - case when pp.hargadiscount is null then 0 else pp.hargadiscount end) * pp.jumlah)+ case when pp.jasa is null then 0 else pp.jasa end) as ttl,kpb.namaexternal
             from pasiendaftar_t as pd
-            inner join pasien_m as ps on ps.id = pd.nocmfk
-            INNER JOIN antrianpasiendiperiksa_t as apd on apd.noregistrasifk=pd.norec
-            INNER JOIN pelayananpasien_t as pp on pp.noregistrasifk=apd.norec
-            INNER JOIN produk_m as pr on pr.id=pp.produkfk
-            INNER JOIN kelompokprodukbpjs_m as kpb on kpb.id=pr.objectkelompokprodukbpjsfk
+            left join pasien_m as ps on ps.id = pd.nocmfk
+            left JOIN antrianpasiendiperiksa_t as apd on apd.noregistrasifk=pd.norec
+            left JOIN pelayananpasien_t as pp on pp.noregistrasifk=apd.norec
+            left JOIN produk_m as pr on pr.id=pp.produkfk
+            left JOIN kelompokprodukbpjs_m as kpb on kpb.id=pr.objectkelompokprodukbpjsfk
             left join kelompokpasien_m as kp on kp.id = pd.objectkelompokpasienlastfk
             left join batalregistrasi_t as br on br.pasiendaftarfk = pd.norec
             where br.norec is null   
@@ -1722,6 +1722,7 @@ class InaCbgController   extends ApiController
         $alkes ='';
         $bmhp ='';
         $sewa_alat ='';
+        $tindakan_lain ='';
         foreach ($data as $item){
             $norecpd= $data[$i]->norec;
             foreach ($dataTarif16 as $itm){
@@ -1781,6 +1782,9 @@ class InaCbgController   extends ApiController
                     if ($itm->namaexternal == 'sewa_alat'){
                         $sewa_alat = (float)$itm->ttl;
                     }
+                    if ($itm->namaexternal == null){
+                        $tindakan_lain = (float)$itm->ttl;
+                    }
                 }
             }
 
@@ -1803,6 +1807,7 @@ class InaCbgController   extends ApiController
                 'alkes' => (float)$alkes,
                 'bmhp' => (float)$bmhp,
                 'sewa_alat' => (float)$sewa_alat,
+                'tindakan_lain' => (float)$tindakan_lain,
             );
             $prosedur_non_bedah =0;
             $prosedur_bedah =0;
@@ -1822,6 +1827,7 @@ class InaCbgController   extends ApiController
             $alkes =0;
             $bmhp =0;
             $sewa_alat =0;
+            $tindakan_lain =0;
             $data[$i]->tarif_rs = $datatatat;
 
             $i= $i + 1 ;
