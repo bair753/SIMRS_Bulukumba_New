@@ -355,7 +355,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 					}
 					$scope.dataDaftarDokumen = new kendo.data.DataSource({
 						data: $scope.listBerkasMonitoring,
-						pageSize: 10,
+						pageSize: 100,
 						total: $scope.listBerkasMonitoring.length,
 						serverPaging: false,
 						schema: {
