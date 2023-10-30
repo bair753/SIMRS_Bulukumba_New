@@ -588,7 +588,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     }
                     $scope.dataCariDaftarDokumen = new kendo.data.DataSource({
 						data: e.data.data,
-						pageSize: 10,
+						pageSize: 100,
 						total: e.data.data.length,
 						serverPaging: false,
 						schema: {
