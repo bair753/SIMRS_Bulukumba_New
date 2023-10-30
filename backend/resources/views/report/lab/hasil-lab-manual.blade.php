@@ -470,15 +470,15 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
         
         if(p != null){
             jQuery('#qrcodeNamaPemeriksa').qrcode({
-                width	: 100,
-                height	: 100,
+                width	: 70,
+                height	: 70,
                 text	: "Tanda Tangan Digital Oleh {{ $datas[0]->dokterperiksa }}"
             });	
         }
         if(d != null){
             jQuery('#qrcodePenanggungJawab').qrcode({
-                width	: 100,
-                height	: 100,
+                width	: 70,
+                height	: 70,
                 text	: "Tanda Tangan Digital Oleh {!! $datas[0]->dokterpenanggungjawab !!}"
             });
         }
