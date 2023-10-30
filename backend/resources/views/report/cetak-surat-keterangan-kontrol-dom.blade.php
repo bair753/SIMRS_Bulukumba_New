@@ -452,7 +452,13 @@
         <tr style="text-align: center;">
             <td colspan="4" valign="bottom" style="border:none"></td>
             <td style="border:none"></td>
-            <td colspan="14" valign="bottom" style="border:none"><div id="qrcodePetugas2" style="text-align: center"></td>
+            <td colspan="14" valign="bottom" style="border:none">
+                    @foreach($res['d'] as $item)
+                        @if($item->emrdfk == 32116186)
+                        <img src="data:image/png;base64, {!! $item->qrcode !!} " style="height: 70px; width:70px">
+                        @endif
+                    @endforeach    
+            </td>
                 
         </tr>
         <tr style="text-align: center;">
@@ -461,9 +467,9 @@
             <td colspan="14" valign="bottom" style="border:none">
                 <span>
                     @foreach($res['d'] as $item)
-                    @if($item->emrdfk == 32116186)
-                        <span style="font-size:9pt; color:#000000;">{!! $item->value !!}</span>
-                    @endif
+                        @if($item->emrdfk == 32116186)
+                            <span style="font-size:9pt; color:#000000;">{{ substr($item->value, strpos($item->value, '~') + 1) }}</span>
+                        @endif
                     @endforeach    
                 </span>
                 {{-- @{{ item.obj[32116186] ? item.obj[32116186] : '___________________' }} --}}
@@ -490,7 +496,6 @@
    
 </body>
 </html>
-<script type="text/javascript">
     var baseUrl =
             {!! json_encode(url('/')) !!}
     var angular = angular.module('angularApp', [], function ($interpolateProvider) {
