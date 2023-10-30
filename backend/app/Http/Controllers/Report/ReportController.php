@@ -3486,7 +3486,7 @@ class ReportController extends ApiController{
             WHERE
                 pp.noregistrasifk = '$r[norec]' 
                 AND hh.hasil IS NOT NULL 
-                OR pp.norec IN ($r[strNorecPP]) 
+                AND pp.norec IN ($r[strNorecPP]) 
         ) AS DATA 
         ORDER BY
             DATA.nourutjenispemeriksaan ASC
