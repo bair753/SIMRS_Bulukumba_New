@@ -19,6 +19,7 @@ use Barryvdh\DomPDF\Facade as PDF;
 use JasperPHP\JasperPHP;
 use PHPJasper\PHPJasper;
 use Webpatser\Uuid\Uuid;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 
 class ReportController extends ApiController{
@@ -8506,7 +8507,7 @@ class ReportController extends ApiController{
                 pa.noidentitas,
                 al.alamatlengkap,
                 ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
-                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                epd.value, epd.qrcode, ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
                 --ap.noasuransi,ap.namapeserta,
                 pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
                 --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
@@ -8538,6 +8539,9 @@ class ReportController extends ApiController{
         foreach ($data as $z) {
             if ($z->type == "datetime") {
                 $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+            }
+            if ($z->qrcode == null) {
+                $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->generate("Tanda Tangan Digital Oleh ".substr($z->value, strpos($z->value, '~') + 1)));
             }
         }
         $pageWidth = 500;

@@ -425,7 +425,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 				setTimeout(function(){ 
 					$scope.isRouteLoading = false
 					$scope.tutupdokumen();
-				 }, 2000);
+				 }, 2600);
 				
             }
 
@@ -477,37 +477,31 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 					"width":"50px",
 				},
 				{
-					"field": "config",
+					"field": "statusklaim",
 					"title": "Status",
 					"width":"20px",
-						"template": '# if( config!=null) {# Ok # } else {# Maintenance # } #'
+						"template": '# if( statusklaim==true) {# Ok # } else {# Maintenance # } #'
 				},
 				{
 					"title": "Aksi",
 					"width":"30px",
 					"template": "<span class='style-center'>\
-					# if(config==null) {#\
+					# if(data.kodeexternal == null) {#\
 						<div class=\"upload-btn-wrapper\">\
-								<button class=\"btnupload\">Upload</button>\
-								<input type=\"file\" id=\"filePasien\" accept=\"application/pdf\" data-id=\"#: data.id #\" data-namafile=\"#: data.namaberkas #\" data-norec=\"#: data.norec #\" />\
-							</div>\
-					# } else { if(data.kodeexternal == null) {#\
-							<div class=\"upload-btn-wrapper\">\
-								<button class=\"btnupload\">Upload</button>\
-								<input type=\"file\" id=\"filePasien\" accept=\"application/pdf\" data-id=\"#: data.id #\" data-namafile=\"#: data.namaberkas #\" data-norec=\"#: data.norec #\" />\
-							</div>\
-							<div class=\"upload-btn-wrapper\">\
-								<button class=\"btncari\" id=\"cariDokumen\" data-id=\"#: data.id #\" data-noreg=\"#: data.noregistrasi #\">Cari Dokumen</button>\
-							</div>\
-						# } else {#\
-							<div class=\"upload-btn-wrapper\">\
-								<button class=\"btnlihat\">Lihat</button>\
-								<input type=\"file\" id=\"LihatDokumenKlaim\" data-noreg=\"#: data.noregistrasi #\" data-namafile=\"#: data.kodeexternal #\" data-documentklaimfk=\"#: data.id #\"/>\
-							</div>\
-							<div class=\"upload-btn-wrapper\">\
-							<button class=\"btnhapus\" id=\"hapusDokumenKlaim\" data-id=\"#: data.id #\" data-noreg=\"#: data.noregistrasi #\" data-namafile=\"#: data.kodeexternal #\" data-documentklaimfk=\"#: data.id #\">Hapus</button>\
-							</div>\
-						# } #\
+							<button class=\"btnupload\">Upload</button>\
+							<input type=\"file\" id=\"filePasien\" accept=\"application/pdf\" data-id=\"#: data.id #\" data-namafile=\"#: data.namaberkas #\" data-norec=\"#: data.norec #\" />\
+						</div>\
+						<div class=\"upload-btn-wrapper\">\
+							<button class=\"btncari\" id=\"cariDokumen\" data-id=\"#: data.id #\" data-noreg=\"#: data.noregistrasi #\">Cari Dokumen</button>\
+						</div>\
+					# } else {#\
+						<div class=\"upload-btn-wrapper\">\
+							<button class=\"btnlihat\">Lihat</button>\
+							<input type=\"file\" id=\"LihatDokumenKlaim\" data-noreg=\"#: data.noregistrasi #\" data-namafile=\"#: data.kodeexternal #\" data-documentklaimfk=\"#: data.id #\"/>\
+						</div>\
+						<div class=\"upload-btn-wrapper\">\
+						<button class=\"btnhapus\" id=\"hapusDokumenKlaim\" data-id=\"#: data.id #\" data-noreg=\"#: data.noregistrasi #\" data-namafile=\"#: data.kodeexternal #\" data-documentklaimfk=\"#: data.id #\">Hapus</button>\
+						</div>\
 					# } #\
 					</span>",
 				},			
