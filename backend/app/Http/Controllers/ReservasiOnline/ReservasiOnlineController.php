@@ -541,10 +541,10 @@ class ReservasiOnlineController extends ApiController
     {
         DB::beginTransaction();
         try {
-            $pd = AntrianPasienRegistrasi::where('noreservasi', $request['noreservasi'])->update([
+            $pd = AntrianPasienRegistrasi::where('noreservasi', $request['kodebooking'])->update([
                 'ischeckin' => true,
             ]);
-            $pd = PasienDaftar::where('statusschedule', $request['noreservasi'])->update([
+            $pd = PasienDaftar::where('statusschedule', $request['kodebooking'])->update([
                 'statusenabled' => true,
             ]);
 

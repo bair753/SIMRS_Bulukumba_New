@@ -411,17 +411,21 @@ define(['initialize'], function (initialize) {
                 $mdDialog.show(confirm).then(function () {
                     var jsonSave = {
                         "kodebooking": $scope.item.noreservasi,
+                        "norecAPD": $scope.item.norec_pd,
+                        "norecPD": $scope.item.norec_apd,
                         "waktu": new Date().getTime()
                     }
                     $scope.isRouteLoading = true;
                     medifirstService.post("jkn/save-checkin", jsonSave).then(function (data) {               
                         $scope.isRouteLoading = false;
-                        $state.go('UGVtYWthaWFuQXN1cmFuc2k=', {
-                            norecPD: $scope.item.norec_pd,
-                            norecAPD: $scope.item.norec_apd,
-                        });
-                        var cacheSet = undefined;
-                        cacheHelper.set('CachePemakaianAsuransi', cacheSet);         
+                        if($scope.item.objectkelompokpasienfk != 1){
+                            $state.go('UGVtYWthaWFuQXN1cmFuc2k=', {
+                                norecPD: $scope.item.norec_pd,
+                                norecAPD: $scope.item.norec_apd,
+                            });
+                            var cacheSet = undefined;
+                            cacheHelper.set('CachePemakaianAsuransi', cacheSet);    
+                        } 
                     })
                 })
             }
