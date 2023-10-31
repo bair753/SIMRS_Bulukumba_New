@@ -1619,8 +1619,8 @@ class ReportController extends ApiController{
             compact('raw', 'pageWidth','r','details','profile', 'alamatpasien', 'tinggibadan', 'beratbadan', 'isi'));
     }
 
-    public function cetakResepDokterAll(Request $r) {
-        $idProfile = (int) $r->kodeprofile;
+    public function cetakResepDokterDom(Request $r) {
+        $idProfile = (int) $r->kdprofile;
         $apoteker = 101232;
         $profile = \DB::select(DB::raw("
                 select * from profile_m where id = $idProfile limit 1
@@ -1646,7 +1646,7 @@ class ReportController extends ApiController{
                 'apd.norec as norec_apd',
                 'pd.tglregistrasi', 'ps.tgllahir','pg.nosip', 'kl.namakelas', 'kl.id as klid', 'so.tglambilorder', 'so.norec as norec_order','so.isreseppulang','so.isambilobat','so.iskurir')
             ->where('so.kdprofile', $idProfile)
-            ->where('pd.noregistrasi', $r->noregistrasi);
+            ->where('so.noorder', $r->noorder);
         $data = $data->where('so.keteranganorder', 'ilike', '%' . 'Order Farmasi' . '%');
         $data = $data->where('so.objectkelompoktransaksifk', 4);
         $data = $data->where('so.statusenabled', true);
@@ -1727,10 +1727,223 @@ class ReportController extends ApiController{
             inner join ruangan_m rm on rm.id = st.objectruanganfk 
             inner join pasiendaftar_t AS pd ON pd.norec = st.noregistrasifk
             left join kelompokpasien_m AS kp ON kp.id = pd.objectkelompokpasienlastfk
+            where so.noorder = '$r->noorder'
+            and st.statusenabled = true
+            and st.kdprofile = 39
+        "));
+
+        foreach ($raw as $jj) {
+            $dt = DB::select(DB::raw("
+                SELECT distinct ps.nocm, pr.kekuatan, ps.namapasien,to_char(ps.tgllahir, 'DD/MM/YYYY') as tgllahir,CASE WHEN aa.noantri IS NULL THEN sr.noresep ELSE aa.jenis || '-' || aa.noantri END AS noresep,to_char(sr.tglresep, 'DD-MM-YYYY') as tglresep,pr.namaproduk || ' (' || CAST(pp.jumlah AS VARCHAR) || ')' AS namaproduk,pp.aturanpakai,pp.rke,  
+                CASE WHEN alm.alamatlengkap is null then '-' else alm.alamatlengkap end as alamat,ps.notelepon,ss.satuanstandar,pp.jumlah*1 as jumlah,  
+                CASE WHEN pp.issiang = 't' THEN 'Siang' ELSE '-' END AS siang, CASE WHEN pp.ispagi = 't' THEN 'Pagi' ELSE '-' END AS pagi,  
+                CASE WHEN pp.ismalam = 't' THEN 'Malam' ELSE '-' END as malam, CASE WHEN pp.issore = 't' THEN 'Sore' ELSE '-' END as sore,  
+                CASE WHEN pp.keteranganpakai  = '' OR pp.keteranganpakai IS NULL THEN '-' else pp.keteranganpakai END AS keteranganpakai,
+                ru.namaruangan,dep.namadepartemen,pg.namalengkap as apoteker
+                from pelayananpasien_t as pp inner join strukresep_t as sr on sr.norec= pp.strukresepfk  
+                LEFT join produk_m as pr on pr.id = pp.produkfk  
+                LEFT join antrianpasiendiperiksa_t as apd on apd.norec = pp.noregistrasifk  
+                LEFT join pasiendaftar_t as pd on pd.norec=apd.noregistrasifk  
+                left JOIN pegawai_m AS pg ON pg.id = $apoteker
+                LEFT join pasien_m as ps on ps.id = pd.nocmfk  
+                left join alamat_m as alm on alm.nocmfk = ps.id  
+                LEFT JOIN satuanstandar_m as ss on ss.id = pp.satuanviewfk  
+                LEFT JOIN antrianapotik_t as aa on aa.noresep = sr.noresep  
+                LEFT JOIN ruangan_m as ru on ru.id = apd.objectruanganfk 
+                LEFT JOIN departemen_m as dep on dep.id = ru.objectdepartemenfk 
+                where pp.kdprofile = $idProfile 
+                and so.noorder = '$r->noorder'"
+            ));
+
+            $isi = collect(DB::select("
+                SELECT rd.riwayatalergi,rd.jampengkajian,rd.jampenyiapanobat,rd.jamdispening,rd.jamserah,
+                    pg1.namalengkap as petugaspengkajian,
+                    pg2.namalengkap as penyiapanobat,
+                    pg3.namalengkap as dispening,
+                    pg4.namalengkap as serahinformasi,
+                    rd.penulisanresep,
+                    rd.obat,
+                    rd.dosis,
+                    rd.waktufrekuensi,
+                    rd.rute,
+                    rd.pasien,
+                    rd.duplikasiterapi,
+                    rd.interaksiobat,
+                    pg5.namalengkap as farmasi
+                FROM
+                    resepdokter_t as rd
+                    LEFT JOIN pegawai_m as pg1 on pg1.id = rd.petugaspengkajian
+                    LEFT JOIN pegawai_m as pg2 on pg2.id = rd.penyiapanobat
+                    LEFT JOIN pegawai_m as pg3 on pg3.id = rd.dispening
+                    LEFT JOIN pegawai_m as pg4 on pg4.id = rd.serahinformasi
+                    LEFT JOIN pegawai_m as pg5 on pg5.id = rd.farmasi
+                    WHERE nopesanan = '$jj->noorder'
+                "))->first();
+            
+            $rinci[] = array(
+                'noregistrasi' => $jj->noregistrasi,
+                'alamatlengkap' => $jj->alamatlengkap,
+                'noorder' => $jj->noorder,
+                'nocm' => $jj->nocm,
+                'namapasien' => $jj->namapasien,
+                'jeniskelamin' => $jj->jeniskelamin,
+                'tglorder' => $jj->tglorder,
+                'nosip' => $jj->nosip,
+                'namalengkap' => $jj->namalengkap,
+                'kelompokpasien' => $jj->kelompokpasien,
+                'namaruangan' => $jj->namaruangan,
+                'tgllahir' => $jj->tgllahir,
+                'details' => $dt,
+                'isi' => $isi
+            );
+        }
+        $rinci = array_filter($rinci, function($value) {
+            return $value['isi'] != null;
+        });
+
+        $data = [
+            'dokter' => $resulttt,
+            'depo' => $rinci
+        ];
+
+        if(count($data['dokter']) <= 0 or count($data['depo']) <= 0) {
+            echo '
+                <script language="javascript">
+                    window.alert("Data tidak ditemukan, silahkan mengisi informasi resep pasien terlebih dahulu");
+                    window.close()
+                </script>
+            ';
+            die;
+        }
+        return view('report.apotik.resepdokterall',compact('data','profile'));
+    }
+
+    public function cetakResepDokterAll(Request $r) {
+        $idProfile = (int) $r->kodeprofile;
+        $apoteker = 101232;
+        $profile = \DB::select(DB::raw("
+                select * from profile_m where id = $idProfile limit 1
+            "));
+        $data = \DB::table('strukorder_t as so')
+            ->JOIN('pasien_m as ps', 'ps.id', '=', 'so.nocmfk')
+            ->JOIN('jeniskelamin_m as jk', 'jk.id', '=', 'ps.objectjeniskelaminfk')
+            ->JOIN('ruangan_m as ru', 'ru.id', '=', 'so.objectruanganfk')
+            ->JOIN('ruangan_m as ru2', 'ru2.id', '=', 'so.objectruangantujuanfk')
+            ->leftJOIN('pegawai_m as pg', 'pg.id', '=', 'so.objectpegawaiorderfk')
+            ->JOIN('pasiendaftar_t as pd', 'pd.norec', '=', 'so.noregistrasifk')
+            ->JOIN('kelas_m as kl', 'kl.id', '=', 'pd.objectkelasfk')
+            ->leftJOIN('alamat_m as alm', 'alm.nocmfk', '=', 'ps.id')
+            ->leftJOIN('antrianpasiendiperiksa_t as apd', function ($join) {
+                $join->on('apd.noregistrasifk', '=', 'pd.norec')
+                    ->on('apd.objectruanganfk', '=', 'so.objectruanganfk');
+            })
+            ->leftJOIN('kelompokpasien_m as kp', 'kp.id', '=', 'pd.objectkelompokpasienlastfk')
+            ->select('so.noorder', 'ps.nocm', 'ps.namapasien', 'jk.jeniskelamin', 'ru.namaruangan as namaruanganrawat',
+                'so.tglorder', 'pg.namalengkap', 'ru2.namaruangan',
+                'so.statusorder', 'so.namapengambilorder', 'so.noregistrasifk', 'alm.alamatlengkap',
+                'pd.noregistrasi', 'kp.kelompokpasien',
+                'apd.norec as norec_apd',
+                'pd.tglregistrasi', 'ps.tgllahir','pg.nosip', 'kl.namakelas', 'kl.id as klid', 'so.tglambilorder', 'so.norec as norec_order','so.isreseppulang','so.isambilobat','so.iskurir')
+            ->where('so.kdprofile', $idProfile)
+            ->where('pd.noregistrasi', $r->noregistrasi);
+        $data = $data->where('so.keteranganorder', 'ilike', '%' . 'Order Farmasi' . '%');
+        $data = $data->where('so.objectkelompoktransaksifk', 4);
+        $data = $data->where('so.statusenabled', true);
+        $data = $data->get();
+        $status = '';
+
+        $resulttt = [];
+        foreach ($data as $item) {
+            $details = DB::select(DB::raw("
+                    SELECT so.noorder,op.rke, jk.jeniskemasan, pr.namaproduk, ss.satuanstandar, op.aturanpakai, op.jumlah, op.hargasatuan,op.keteranganpakai as keterangan,
+                           op.satuanresepfk,sn.satuanresep,op.tglkadaluarsa
+                    from strukorder_t as so 
+                    left join orderpelayanan_t as op on op.strukorderfk = so.norec
+                    left join produk_m as pr on pr.id=op.objectprodukfk
+                    left join jeniskemasan_m as jk on jk.id=op.jeniskemasanfk
+                    left join satuanstandar_m as ss on ss.id=op.objectsatuanstandarfk
+                    left join satuanresep_m as sn on sn.id=op.satuanresepfk
+                    where soo.kdprofile = $idProfile and so.statusenabled = true and noorder=:noorder and so.statusorder is not null and so.statusorder != 1"),
+                array(
+                    'noorder' => $item->noorder,
+                )
+            );
+            $isi = collect(DB::select("
+                SELECT rd.riwayatalergi,rd.jampengkajian,rd.jampenyiapanobat,rd.jamdispening,rd.jamserah,
+                    pg1.namalengkap as petugaspengkajian,
+                    pg2.namalengkap as penyiapanobat,
+                    pg3.namalengkap as dispening,
+                    pg4.namalengkap as serahinformasi,
+                    rd.penulisanresep,
+                    rd.obat,
+                    rd.dosis,
+                    rd.waktufrekuensi,
+                    rd.rute,
+                    rd.pasien,
+                    rd.duplikasiterapi,
+                    rd.interaksiobat,
+                    pg5.namalengkap as farmasi
+                FROM
+                    resepdokter_t as rd
+                    LEFT JOIN pegawai_m as pg1 on pg1.id = rd.petugaspengkajian
+                    LEFT JOIN pegawai_m as pg2 on pg2.id = rd.penyiapanobat
+                    LEFT JOIN pegawai_m as pg3 on pg3.id = rd.dispening
+                    LEFT JOIN pegawai_m as pg4 on pg4.id = rd.serahinformasi
+                    LEFT JOIN pegawai_m as pg5 on pg5.id = rd.farmasi
+                WHERE nopesanan = '$item->noorder'
+                "))->first();
+            
+            $resulttt[] = array(
+                'noregistrasi' => $item->noregistrasi,
+                'alamatlengkap' => $item->alamatlengkap,
+                'noorder' => $item->noorder,
+                'nocm' => $item->nocm,
+                'namapasien' => $item->namapasien,
+                'jeniskelamin' => $item->jeniskelamin,
+                'tglorder' => $item->tglorder,
+                'nosip' => $item->nosip,
+                'namalengkap' => $item->namalengkap,
+                'kelompokpasien' => $item->kelompokpasien,
+                'namaruangan' => $item->namaruangan,
+                'tgllahir' => $item->tgllahir,
+                'details' => $details,
+                'isi' => $isi
+            );
+        }
+        $resulttt = array_filter($resulttt, function($value) {
+            return $value['isi'] != null;
+        });
+
+        $rinci = [];
+
+        $raw = collect(DB::select("
+            select pm2.nocm, st.noorder,pd.noregistrasi,to_char(pm2.tgllahir,'dd-mm-yyyy') as tgllahir,age(pm2.tgllahir) as umur ,jm.jeniskelamin ,pm2.namapasien ,pm3.namalengkap, rm.namaruangan,alm.alamatlengkap, 
+            to_char(st.tglorder,'dd-mm-yyyy MM:ss') as tglorder,pm3.nosip, kp.kelompokpasien from strukorder_t st
+            inner join pasien_m pm2 on pm2.id = st.nocmfk
+            left join alamat_m as alm ON alm.nocmfk = pm2.id
+            inner join jeniskelamin_m jm on jm.id = pm2.objectjeniskelaminfk
+            inner join pegawai_m pm3 on pm3.id = st.objectpegawaiorderfk
+            inner join ruangan_m rm on rm.id = st.objectruanganfk 
+            inner join pasiendaftar_t AS pd ON pd.norec = st.noregistrasifk
+            left join kelompokpasien_m AS kp ON kp.id = pd.objectkelompokpasienlastfk
             where pd.noregistrasi = '$r->noregistrasi'
             and st.statusenabled = true
             and st.kdprofile = 39
         "));
+
+        if($raw->isempty()){
+            $raw = \DB::table('strukresep_t as s')
+            ->JOIN('antrianpasiendiperiksa_t as at2', 'at2.norec', '=', 's.pasienfk')
+            ->JOIN('pasiendaftar_t as pt', 'pt.norec', '=', 'at2.noregistrasifk')
+            ->JOIN('pasien_m as pm2', 'pm2.id', '=', 'pt.nocmfk')
+            ->leftJOIN('alamat_m as alm', 'alm.nocmfk', '=', 'pm2.id')
+            ->JOIN('jeniskelamin_m as jm', 'jm.id', '=', 'pm2.objectjeniskelaminfk')
+            ->JOIN('pegawai_m as pm3', 'pm3.id', '=', 's.penulisresepfk')
+            ->JOIN('ruangan_m as rm', 'rm.id', '=', 's.ruanganfk')
+            ->leftJOIN('kelompokpasien_m as kp', 'kp.id', '=', 'pt.objectkelompokpasienlastfk')
+            ->select('pm2.nocm','pt.noregistrasi','s.noresep as noorder','pm2.tgllahir as tgllahir', 'pm2.tgllahir as umur' ,'jm.jeniskelamin' ,'pm2.namapasien','alm.alamatlengkap', 'pm3.namalengkap', 'rm.namaruangan', 's.tglresep as tglorder','pm3.nosip', 'kp.kelompokpasien')
+            ->where('pt.noregistrasi', $r->noregistrasi)->get();
+        }
 
         foreach ($raw as $jj) {
             $dt = DB::select(DB::raw("
@@ -1806,7 +2019,7 @@ class ReportController extends ApiController{
             'depo' => $rinci
         ];
 
-        if(count($data['dokter']) <= 0 or count($data['depo']) <= 0) {
+        if(count($data['dokter']) <= 0 and count($data['depo']) <= 0) {
             echo '
                 <script language="javascript">
                     window.alert("Data tidak ditemukan, silahkan mengisi informasi resep pasien terlebih dahulu");
