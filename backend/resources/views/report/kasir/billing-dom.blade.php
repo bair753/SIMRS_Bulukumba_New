@@ -282,13 +282,13 @@
             @endforeach
         </tbody>
         <tfoot>
-            <tr>
+            {{-- <tr>
                 <td align="right" colspan="9">
 
                     <b>Rp{{ number_format($total, 2, '.', ',') }}</b>
 
                 </td>
-            </tr>
+            </tr> --}}
             @php
             $totaltagihan = $totaltagihan + $total;
             $totaldiskon = $totaldiskon + $diskon;
