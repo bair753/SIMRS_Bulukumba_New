@@ -546,6 +546,7 @@ class ReservasiOnlineController extends ApiController
             ]);
             $pd = PasienDaftar::where('statusschedule', $request['kodebooking'])->update([
                 'statusenabled' => true,
+                'tglpulang' => date('Y-m-d H:i:s'),
             ]);
 
             $apd = AntrianPasienDiperiksa::where('noregistrasifk', $request['norecAPD'])->update([
@@ -4776,7 +4777,6 @@ class ReservasiOnlineController extends ApiController
         DB::beginTransaction();
         try {
             $tgl = $request['tglReservasiFix'];
-            
 
             $dataReservasi = \DB::table('antrianpasienregistrasi_t as apr')
                 ->select('apr.norec', 'apr.tanggalreservasi')
@@ -4926,11 +4926,6 @@ class ReservasiOnlineController extends ApiController
                 $dataPD->isonsiteservice = 0;
                 $dataPD->isregistrasilengkap = 0;
                 $dataPD->tglregistrasi = $tglregistgrasi;
-                if ($request['poliKlinik']['objectdepartemenfk'] == 18) {
-                    $dataPD->tglpulang = $tglregistgrasi;
-                } else {
-                    $dataPD->tglpulang = null;
-                }
                 $dataPD->statuskasuspenyakit = false;
                 $dataPD->save();
 
@@ -5125,11 +5120,6 @@ class ReservasiOnlineController extends ApiController
                 $dataPD->isonsiteservice = 0;
                 $dataPD->isregistrasilengkap = 0;
                 $dataPD->tglregistrasi = $tglregistgrasi;
-                if ($request['poliKlinik']['objectdepartemenfk'] == 18) {
-                    $dataPD->tglpulang = $tglregistgrasi;
-                } else {
-                    $dataPD->tglpulang = null;
-                }
                 $dataPD->statuskasuspenyakit = false;
                 $dataPD->save();
 
