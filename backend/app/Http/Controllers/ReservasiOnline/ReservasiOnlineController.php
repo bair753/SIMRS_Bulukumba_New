@@ -4776,6 +4776,7 @@ class ReservasiOnlineController extends ApiController
         DB::beginTransaction();
         try {
             $tgl = $request['tglReservasiFix'];
+            $cekRuangan = \DB::table('ruangan_m as ru')->where('id', $request['objectruanganfk'])->first();
 
             $dataReservasi = \DB::table('antrianpasienregistrasi_t as apr')
                 ->select('apr.norec', 'apr.tanggalreservasi')
@@ -4925,6 +4926,11 @@ class ReservasiOnlineController extends ApiController
                 $dataPD->isonsiteservice = 0;
                 $dataPD->isregistrasilengkap = 0;
                 $dataPD->tglregistrasi = $tglregistgrasi;
+                if ($cekRuangan->objectdepartemenfk == 18) {
+                    $dataPD->tglpulang = $tglregistgrasi;
+                } else {
+                    $dataPD->tglpulang = null;
+                }
                 $dataPD->statuskasuspenyakit = false;
                 $dataPD->save();
 
@@ -5119,6 +5125,11 @@ class ReservasiOnlineController extends ApiController
                 $dataPD->isonsiteservice = 0;
                 $dataPD->isregistrasilengkap = 0;
                 $dataPD->tglregistrasi = $tglregistgrasi;
+                if ($cekRuangan->objectdepartemenfk == 18) {
+                    $dataPD->tglpulang = $tglregistgrasi;
+                } else {
+                    $dataPD->tglpulang = null;
+                }
                 $dataPD->statuskasuspenyakit = false;
                 $dataPD->save();
 
