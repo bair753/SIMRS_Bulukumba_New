@@ -775,6 +775,7 @@ class MyJKNV2Controller extends ApiController
             ]); 
             PasienDaftar::where('statusschedule',$data->noreservasi)->update([
                 'ischeckin' => true,
+                'tglpulang' => date('Y-m-d H:i:s'),
             ]);
             date_default_timezone_set("Asia/Makassar");
             $json = array(
