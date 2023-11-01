@@ -9176,16 +9176,16 @@ class EMRController  extends ApiController
                         ->orderBy('emrdfk')
                         ->get();
                 }
-                if ((!empty($EMR) && isset($head['nocm'])) && trim($EMR->nocm) != $head['nocm']) {
-                    $transMessage = "Kesalahan loading data..!";
-                    DB::rollBack();
-                    $result = array(
-                        "status" => 400,
-                        "message" => $transMessage,
-                        "as" => 'as@epic',
-                    );
-                    return $this->setStatusCode($result['status'])->respond($result, $transMessage);
-                }
+                // if ((!empty($EMR) && isset($head['nocm'])) && trim($EMR->nocm) != $head['nocm']) {
+                //     $transMessage = "Kesalahan loading data..!";
+                //     DB::rollBack();
+                //     $result = array(
+                //         "status" => 400,
+                //         "message" => $transMessage,
+                //         "as" => 'as@epic',
+                //     );
+                //     return $this->setStatusCode($result['status'])->respond($result, $transMessage);
+                // }
 
 
 
