@@ -1620,10 +1620,12 @@ class ReportController extends ApiController{
     }
 
     public function cetakResepDokterDom(Request $r) {
-        $idProfile = (int) $r->kdprofile;
+        $cekdata = \DB::table('strukorder_t as so')->JOIN('pasiendaftar_t as pd', 'pd.norec', '=', 'so.noregistrasifk')
+        ->where('so.noorder', $r['noorder'])->first();
+        $idProfile = (int) $r->kodeprofile;
         $apoteker = 101232;
         $profile = \DB::select(DB::raw("
-                select * from profile_m where id = $idProfile limit 1
+                select * from profile_m where id = 39 limit 1
             "));
         $data = \DB::table('strukorder_t as so')
             ->JOIN('pasien_m as ps', 'ps.id', '=', 'so.nocmfk')
@@ -1645,8 +1647,8 @@ class ReportController extends ApiController{
                 'pd.noregistrasi', 'kp.kelompokpasien',
                 'apd.norec as norec_apd',
                 'pd.tglregistrasi', 'ps.tgllahir','pg.nosip', 'kl.namakelas', 'kl.id as klid', 'so.tglambilorder', 'so.norec as norec_order','so.isreseppulang','so.isambilobat','so.iskurir')
-            ->where('so.kdprofile', $idProfile)
-            ->where('so.noorder', $r->noorder);
+            ->where('so.kdprofile', 39)
+            ->where('pd.noregistrasi', $cekdata->noregistrasi);
         $data = $data->where('so.keteranganorder', 'ilike', '%' . 'Order Farmasi' . '%');
         $data = $data->where('so.objectkelompoktransaksifk', 4);
         $data = $data->where('so.statusenabled', true);
@@ -1712,6 +1714,10 @@ class ReportController extends ApiController{
             );
         }
         $resulttt = array_filter($resulttt, function($value) {
+            return $value['details'] != null;
+        });
+
+        $resulttt = array_filter($resulttt, function($value) {
             return $value['isi'] != null;
         });
 
@@ -1727,10 +1733,24 @@ class ReportController extends ApiController{
             inner join ruangan_m rm on rm.id = st.objectruanganfk 
             inner join pasiendaftar_t AS pd ON pd.norec = st.noregistrasifk
             left join kelompokpasien_m AS kp ON kp.id = pd.objectkelompokpasienlastfk
-            where so.noorder = '$r->noorder'
+            where pd.noregistrasi = '$cekdata->noregistrasi'
             and st.statusenabled = true
             and st.kdprofile = 39
         "));
+
+        if($raw->isempty()){
+            $raw = \DB::table('strukresep_t as s')
+            ->JOIN('antrianpasiendiperiksa_t as at2', 'at2.norec', '=', 's.pasienfk')
+            ->JOIN('pasiendaftar_t as pt', 'pt.norec', '=', 'at2.noregistrasifk')
+            ->JOIN('pasien_m as pm2', 'pm2.id', '=', 'pt.nocmfk')
+            ->leftJOIN('alamat_m as alm', 'alm.nocmfk', '=', 'pm2.id')
+            ->JOIN('jeniskelamin_m as jm', 'jm.id', '=', 'pm2.objectjeniskelaminfk')
+            ->JOIN('pegawai_m as pm3', 'pm3.id', '=', 's.penulisresepfk')
+            ->JOIN('ruangan_m as rm', 'rm.id', '=', 's.ruanganfk')
+            ->leftJOIN('kelompokpasien_m as kp', 'kp.id', '=', 'pt.objectkelompokpasienlastfk')
+            ->select('pm2.nocm','pt.noregistrasi','s.noresep as noorder','pm2.tgllahir as tgllahir', 'pm2.tgllahir as umur' ,'jm.jeniskelamin' ,'pm2.namapasien','alm.alamatlengkap', 'pm3.namalengkap', 'rm.namaruangan', 's.tglresep as tglorder','pm3.nosip', 'kp.kelompokpasien')
+            ->where('pt.noregistrasi', $r->noregistrasi)->get();
+        }
 
         foreach ($raw as $jj) {
             $dt = DB::select(DB::raw("
@@ -1751,8 +1771,8 @@ class ReportController extends ApiController{
                 LEFT JOIN antrianapotik_t as aa on aa.noresep = sr.noresep  
                 LEFT JOIN ruangan_m as ru on ru.id = apd.objectruanganfk 
                 LEFT JOIN departemen_m as dep on dep.id = ru.objectdepartemenfk 
-                where pp.kdprofile = $idProfile 
-                and so.noorder = '$r->noorder'"
+                where pp.kdprofile = 39 
+                and pd.noregistrasi = '$cekdata->noregistrasi'"
             ));
 
             $isi = collect(DB::select("
@@ -1798,6 +1818,10 @@ class ReportController extends ApiController{
             );
         }
         $rinci = array_filter($rinci, function($value) {
+            return $value['details'] != null;
+        });
+
+        $rinci = array_filter($rinci, function($value) {
             return $value['isi'] != null;
         });
 
@@ -1806,7 +1830,7 @@ class ReportController extends ApiController{
             'depo' => $rinci
         ];
 
-        if(count($data['dokter']) <= 0 or count($data['depo']) <= 0) {
+        if(count($data['dokter']) <= 0 and count($data['depo']) <= 0) {
             echo '
                 <script language="javascript">
                     window.alert("Data tidak ditemukan, silahkan mengisi informasi resep pasien terlebih dahulu");
@@ -1815,7 +1839,23 @@ class ReportController extends ApiController{
             ';
             die;
         }
-        return view('report.apotik.resepdokterall',compact('data','profile'));
+
+        $imagePath = public_path("img/logo_only.png");
+        $image = "data:image/png;base64,".base64_encode(file_get_contents($imagePath));
+
+        if(isset($r["issimpanberkas"])) {
+            $pdf = PDF::loadView('report.apotik.resepdokterall-dom', array(
+                'data' => $data,
+                'profile' => $profile,
+                'image' => $image,
+            ))->setPaper('a4', 'portrait');
+            $this->saveDokumenKlaim($pdf, $r);
+            return;
+        }else{
+            return view('report.apotik.resepdokterall',compact('data','profile'));
+        }
+
+        
     }
 
     public function cetakResepDokterAll(Request $r) {
@@ -1910,6 +1950,10 @@ class ReportController extends ApiController{
                 'isi' => $isi
             );
         }
+        $resulttt = array_filter($resulttt, function($value) {
+            return $value['details'] != null;
+        });
+
         $resulttt = array_filter($resulttt, function($value) {
             return $value['isi'] != null;
         });
@@ -2010,6 +2054,10 @@ class ReportController extends ApiController{
                 'isi' => $isi
             );
         }
+        $rinci = array_filter($rinci, function($value) {
+            return $value['details'] != null;
+        });
+
         $rinci = array_filter($rinci, function($value) {
             return $value['isi'] != null;
         });
