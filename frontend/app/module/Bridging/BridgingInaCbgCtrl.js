@@ -1608,10 +1608,10 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 				var dt1 = {}
 				var dt2 = []
 				for (var i = dataSave.length - 1; i >= 0; i--) {
+					if (dataSave[i].tgl_masuk == $scope.dataPasienSelected.tglregistrasi) {
 					if(dataSave[i].statusklaim== '-'){
 
 
-					// if (dataSave[i].nomor_sep == $scope.dataPasienSelected.nosep) {
 						dt1 = {
 							"metadata": {
 								"method": "new_claim"
@@ -1627,7 +1627,7 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 						}
 						dt2.push(dt1)
 					}
-					// }
+					}
 				}
 
 				var objData = {
@@ -1635,7 +1635,7 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 				}
 				// manageTataRekening.savebridginginacbg(objData).then(function(e){
 				for (var i = dataSave.length - 1; i >= 0; i--) {
-					// if (dataSave[i].nomor_sep == $scope.dataPasienSelected.nosep) {
+					if (dataSave[i].tgl_masuk == $scope.dataPasienSelected.tglregistrasi) {
 						if(dataSave[i].statusklaim == '-'){
 						dt1 = {
 							"metadata": {
@@ -1772,7 +1772,7 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 							// }
 						}
 						dt2.push(dt1)
-					// }
+					}
 					}
 				}
 
