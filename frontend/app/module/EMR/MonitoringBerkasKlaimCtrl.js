@@ -49,6 +49,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     $scope.listAdminParu = data.data.adminParu;
                     $scope.listAdminBedahSaraf = data.data.adminBedahSaraf;
                     $scope.listAdminOnkologi = data.data.adminOnkologi;
+                    $scope.listAdminGizi = data.data.adminGizi;
                 })
                 $scope.isRouteLoading = true;
             }
@@ -108,6 +109,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     var adminParu = $scope.listAdminParu;
                     var adminBedahSaraf = $scope.listAdminBedahSaraf;
                     var adminOnkologi = $scope.listAdminOnkologi;
+                    var adminGizi = $scope.listAdminGizi;
                     if(adminRadiologi.includes(medifirstService.getPegawaiLogin().id)){
                         var dataMaster = dataKlaim.filter(function (el) {
                             return el.id == 20 || el.id == 5 || el.id == 32;
@@ -179,6 +181,11 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                             }
                         );
                     }else if(adminOnkologi.includes(medifirstService.getPegawaiLogin().id)){
+                        var dataMaster = dataKlaim.filter(function (el) {
+                            return el.id == 66 || el.id == 15 || el.id == 21 || el.id == 65;
+                            }
+                        );
+                    }else if(adminGizi.includes(medifirstService.getPegawaiLogin().id)){
                         var dataMaster = dataKlaim.filter(function (el) {
                             return el.id == 66 || el.id == 15 || el.id == 21 || el.id == 65;
                             }
