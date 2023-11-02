@@ -425,7 +425,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 				setTimeout(function(){ 
 					$scope.isRouteLoading = false
 					$scope.tutupdokumen();
-				 }, 2600);
+				 }, 2200);
 				
             }
 
