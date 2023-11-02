@@ -6638,6 +6638,22 @@ class ReportController extends ApiController{
             die;
         }
 
+        $imagePath = public_path('img/logo_only.png');
+        $image = "data:image/png;base64,".base64_encode(file_get_contents($imagePath));
+
+        if(isset($request["issimpanberkas"])) {
+            
+            $pdf = PDF::loadView('report.cetak-audiometri-dom', array(
+                'pageWidth' => $pageWidth,
+                'res' => $res,
+                'image' => $image,
+            ))->setPaper('a4', 'portrait');
+            $this->saveDokumenKlaim($pdf, $request);
+            return;
+        }else{
+            return view('report.cetak-audiometri', compact('res', 'pageWidth', 'image', 'imageHusada'));
+        }
+
         return view('report.cetak-audiometri', compact('res'));
     }
 
@@ -6723,6 +6739,22 @@ class ReportController extends ApiController{
                 </script>
             ';
             die;
+        }
+
+        $imagePath = public_path('img/logo_only.png');
+        $image = "data:image/png;base64,".base64_encode(file_get_contents($imagePath));
+
+        if(isset($request["issimpanberkas"])) {
+            
+            $pdf = PDF::loadView('report.cetak-tympanometri-dom', array(
+                'pageWidth' => $pageWidth,
+                'res' => $res,
+                'image' => $image,
+            ))->setPaper('a4', 'portrait');
+            $this->saveDokumenKlaim($pdf, $request);
+            return;
+        }else{
+            return view('report.cetak-tympanometri', compact('res', 'pageWidth', 'image', 'imageHusada'));
         }
 
         return view('report.cetak-tympanometri', compact('res'));
@@ -6812,6 +6844,22 @@ class ReportController extends ApiController{
             die;
         }
 
+        $imagePath = public_path('img/logo_only.png');
+        $image = "data:image/png;base64,".base64_encode(file_get_contents($imagePath));
+
+        if(isset($request["issimpanberkas"])) {
+            
+            $pdf = PDF::loadView('report.cetak-electroencephalogram-dom', array(
+                'pageWidth' => $pageWidth,
+                'res' => $res,
+                'image' => $image,
+            ))->setPaper('a4', 'portrait');
+            $this->saveDokumenKlaim($pdf, $request);
+            return;
+        }else{
+            return view('report.cetak-electroencephalogram', compact('res', 'pageWidth', 'image', 'imageHusada'));
+        }
+
         return view('report.cetak-electroencephalogram', compact('res'));
     }
 
@@ -6899,6 +6947,22 @@ class ReportController extends ApiController{
             die;
         }
 
+        $imagePath = public_path('img/logo_only.png');
+        $image = "data:image/png;base64,".base64_encode(file_get_contents($imagePath));
+
+        if(isset($request["issimpanberkas"])) {
+            
+            $pdf = PDF::loadView('report.cetak-treadmill-dom', array(
+                'pageWidth' => $pageWidth,
+                'res' => $res,
+                'image' => $image,
+            ))->setPaper('a4', 'portrait');
+            $this->saveDokumenKlaim($pdf, $request);
+            return;
+        }else{
+            return view('report.cetak-treadmill', compact('res', 'pageWidth', 'image', 'imageHusada'));
+        }
+
         return view('report.cetak-treadmill', compact('res'));
     }
 
@@ -6984,6 +7048,22 @@ class ReportController extends ApiController{
                 </script>
             ';
             die;
+        }
+
+        $imagePath = public_path("img/logo_only.png");
+        $image = "data:image/png;base64,".base64_encode(file_get_contents($imagePath));
+
+        if(isset($request["issimpanberkas"])) {
+            
+            $pdf = PDF::loadView('report.cetak-holter-monitor-dom', array(
+                'pageWidth' => $pageWidth,
+                'res' => $res,
+                'image' => $image
+            ))->setPaper('a4', 'portrait');
+            $this->saveDokumenKlaim($pdf, $request);
+            return;
+        }else{
+            return view('report.cetak-holter-monitor', compact('res', 'pageWidth'));
         }
 
         return view('report.cetak-holter-monitor', compact('res'));
@@ -7645,7 +7725,7 @@ class ReportController extends ApiController{
         $image = "data:image/png;base64,".base64_encode(file_get_contents($imagePath));
 
         if(isset($request["issimpanberkas"])) {
-            $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true, 'dpi' => '600', 'defaultMediaType' => 'print']);
+            
             $pdf = PDF::loadView('report.cetak-profil-ringkas-dom', array(
                 'pageWidth' => $pageWidth,
                 'res' => $res,
@@ -7656,8 +7736,6 @@ class ReportController extends ApiController{
         }else{
             return view('report.cetak-profil-ringkas', compact('res', 'pageWidth'));
         }
-
-        return view('report.cetak-profil-ringkas', compact('res', 'pageWidth'));
     }
 
     public function buktiPelayananTidakan(Request $request) {
@@ -8697,7 +8775,7 @@ class ReportController extends ApiController{
         }
 
         if(isset($r["issimpanberkas"])) {
-            $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true, 'dpi' => '600', 'defaultMediaType' => 'print']);
+            
             $pdf = PDF::loadView('report.kasir.billing-dom', array(
                 'print' => $print,
                 'pageWidth' => $pageWidth,
@@ -8801,7 +8879,7 @@ class ReportController extends ApiController{
         $imageHusada = "data:image/png;base64,".base64_encode(file_get_contents($imagePathHusada));
 
         if(isset($request["issimpanberkas"])) {
-            $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true, 'dpi' => '600', 'defaultMediaType' => 'print']);
+            
             $pdf = PDF::loadView('report.cetak-surat-keterangan-kontrol-dom', array(
                 'pageWidth' => $pageWidth,
                 'res' => $res,
