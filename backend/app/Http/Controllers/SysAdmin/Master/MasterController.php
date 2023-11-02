@@ -2922,6 +2922,9 @@ class MasterController extends ApiController{
 
         $adminOnkologi = SettingDataFixed::where('id', 1614)->first();
         $adminOnkologi = $adminOnkologi->nilaifield;
+
+        $adminGizi = SettingDataFixed::where('id', 1615)->first();
+        $adminGizi = $adminGizi->nilaifield;
         
         $admin = [
             'adminRadiologi' => $adminRadiologi,
@@ -2939,6 +2942,7 @@ class MasterController extends ApiController{
             'adminParu' => $adminParu,
             'adminBedahSaraf' => $adminBedahSaraf,
             'adminOnkologi' => $adminOnkologi,
+            'adminGizi' => $adminGizi,
         ];
 
         return $this->respond($admin);
