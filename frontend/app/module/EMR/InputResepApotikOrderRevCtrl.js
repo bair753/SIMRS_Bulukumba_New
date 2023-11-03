@@ -255,15 +255,24 @@ define(['initialize'], function (initialize) {
             medifirstService.getPart('emr/get-pegawai-parts', true, 10).then(function (e) {
                 $scope.listPenulisResep = e
 
+                // $scope.item.penulisResep = { id: medifirstService.getPegawaiLogin().id, namalengkap: medifirstService.getPegawaiLogin().namaLengkap , jenispegawai: medifirstService.getPegawaiLogin().jenisPegawai};
+                // if ($scope.item.penulisResep.jenispegawai.id == 1){
+                //     $scope.showProdukOrder = true
+                //     $scope.showProduk = false
+                // }else{
+                //     $scope.item.penulisResep = {id: $scope.item.iddpjp, namalengkap: $scope.item.dokterdpjp};
+                //     $scope.showProdukOrder = false
+                //     $scope.showProduk = true
+                // }
+
                 $scope.item.penulisResep = { id: medifirstService.getPegawaiLogin().id, namalengkap: medifirstService.getPegawaiLogin().namaLengkap , jenispegawai: medifirstService.getPegawaiLogin().jenisPegawai};
                 if ($scope.item.penulisResep.jenispegawai.id == 1){
                     $scope.showProdukOrder = true
                     $scope.showProduk = false
                 }else{
-                    $scope.item.penulisResep = {id: $scope.item.iddpjp, namalengkap: $scope.item.dokterdpjp};
                     $scope.showProdukOrder = false
                     $scope.showProduk = true
-                }
+                    }
             })
            
             $scope.getSatuan = function () {
