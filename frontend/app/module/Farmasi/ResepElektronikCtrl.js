@@ -1309,13 +1309,14 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                                 return;
                             }else{
                                 var stt = 1;
-                                if (confirm('Cetak Resep Dengan Qty Setengahnya ? ')) {
-                                    // Save it!
-                                    stt = "1/2";
-                                } else {
-                                    // Do nothing!
-                                    stt = 1
-                                }
+                                // if (confirm('Cetak Resep Dengan Qty Setengahnya ? ')) {
+                                //     // Save it!
+                                //     stt = "1/2";
+                                // } else {
+                                //     // Do nothing!
+                                //     stt = 1
+                                // }
+                                
                                 window.open(config.baseApiBackend + "report/cetak-resep-dokter?noorder=" + $scope.item.noorder + "&norec=" + $scope.item.norecresep 
                                 + "&nocm=" + $scope.item.nocm + '&kodeprofile=' + profile + '&qtybagi=' + stt + '&alamatpasien=' + alamatpasien + '&tinggibadan=' + tinggibadan + '&beratbadan=' + beratbadan + '&user=' + user.namaLengkap);
                                 // // window.open(config.baseApiBackend + "report/cetak-hasil-lab-histopatologi?norec=" + $scope.dataSelected.norec_pp + '&kdprofile=' + profile
