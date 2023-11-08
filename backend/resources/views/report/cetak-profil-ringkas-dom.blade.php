@@ -22,7 +22,7 @@
             transform:scale(72%);
         }
         body{
-            font-family:Arial, Helvetica, sans-serif;
+            /* font-family:Arial, Helvetica, sans-serif; */
         }
         table{ 
             page-break-inside:auto;

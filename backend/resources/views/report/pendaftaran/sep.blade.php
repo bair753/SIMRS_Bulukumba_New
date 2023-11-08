@@ -5,7 +5,7 @@
     </head>
     <style type="text/css" media="screen">
         * {
-            font-family: Tahoma, Geneva, sans-serif;
+            /* font-family: Tahoma, Geneva, sans-serif; */
         }
 
         html {
