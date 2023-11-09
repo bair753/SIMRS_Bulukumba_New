@@ -8,7 +8,7 @@
 
     <style type="text/css">
         * {
-            font-family: Verdana, Arial, sans-serif;
+            /* font-family: Verdana, Arial, sans-serif; */
         }
 
         table {
