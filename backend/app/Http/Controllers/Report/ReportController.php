@@ -4899,8 +4899,8 @@ class ReportController extends ApiController{
             ->leftJoin('pegawai_m as pg', 'pg.id', '=', 'so.objectpegawaiorderfk')
             ->leftJoin('pegawai_m as pet', 'pet.id', '=', 'so.objectpetugasfk')
             ->leftJoin('antrianpasiendiperiksa_t as apd', 'apd.objectstrukorderfk', '=', 'so.norec')
-            ->select('so.norec', 'so.noorder', 'so.tglorder', 'ru.namaruangan as ruanganasal', 'pg.namalengkap', 
-                'rutuju.namaruangan as ruangantujuan', 'pet.namalengkap as pengonsul',
+            ->select('so.norec', 'so.noorder', 'so.tglorder', 'ru.namaruangan as ruanganasal', 'pg.namalengkap', 'pg.qrcode as qrcodenamalengkap',
+                'rutuju.namaruangan as ruangantujuan', 'pet.namalengkap as pengonsul', 'pet.qrcode as qrcodepengonsul', 
                 'pd.noregistrasi', 'pd.tglregistrasi', 'ps.nocm', 'so.keteranganorder', 'pd.norec as norec_pd',
                 'ps.namapasien', 'ps.tgllahir', 'ps.noidentitas', 'pg.id as pegawaifk', 'so.objectruangantujuanfk', 'so.objectruanganfk', 'apd.norec as norec_apd',
                 'so.keteranganlainnya')
@@ -4917,7 +4917,14 @@ class ReportController extends ApiController{
                 $data = $data->where('ps.nocm',$nocm);
             }
             $data = $data->get();
-            // dd($data);
+            foreach ($data as $z) {
+                if ($z->qrcodepengonsul == null) {
+                    $z->qrcodepengonsul =base64_encode(QrCode::format('svg')->size(50)->generate("Tanda Tangan Digital Oleh ".$z->pengonsul));
+                }
+                if ($z->qrcodenamalengkap == null) {
+                    $z->qrcodenamalengkap =base64_encode(QrCode::format('svg')->size(50)->generate("Tanda Tangan Digital Oleh ".$z->namalengkap));
+                }
+            }
 
         $res['profile'] = Profile::where('id', $kdProfile)->first();
         $res['data'] = $data;
@@ -4931,7 +4938,20 @@ class ReportController extends ApiController{
             die;
         }
 
-        return view('report.cetak-konsul-dokter-all', compact('res'));
+        $imagePath = public_path("img/logo_only.png");
+        $image = "data:image/png;base64,".base64_encode(file_get_contents($imagePath));
+
+        if(isset($request["issimpanberkas"])) {
+            $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true, 'dpi' => '600', 'defaultMediaType' => 'print']);
+            $pdf = PDF::loadView('report.cetak-konsul-dokter-all-dom', array(
+                'res' => $res,
+                'image' => $image,
+            ))->setPaper('a4', 'portrait');
+            $this->saveDokumenKlaim($pdf, $request);
+            return;
+        }else{
+            return view('report.cetak-konsul-dokter-all',compact('res'));
+        }
     }
 
     public function catatanPemberiandanPemantauanObatPasien(Request $request) {
