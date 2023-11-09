@@ -199,8 +199,7 @@
                     </td>
                     <td width="35%" style="text-align: center;">
                         <span style="font-size: 14px"><b>{!! $res['profile']->namalengkap !!}</b></span>
-                        </br>
-                        </br>
+                        <br>
                         <span style="font-size: 12px;">{!! $res['profile']->alamatlengkap !!}</span>
                     </td>
                     <td width="20%">
