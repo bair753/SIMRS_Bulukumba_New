@@ -157,6 +157,8 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 					if ($(this).text() == 'false') { $(this).text('Belum di Coder') }
 					if ($(this).text() == 'Belum di Coder') { $(this).addClass('coder') }
 					if ($(this).text() == '1') { $(this).text('Belum di Grouping') }
+					if ($(this).text() == 'Sudah diupload') { $(this).addClass('green') }
+					if ($(this).text() == 'Belum diupload') { $(this).addClass('red') }
 					if ($(this).text() == 'Belum di Grouping') { $(this).addClass('red') }
 					if ($(this).text() == 'Klaim') { $(this).addClass('green') }
 					if ($(this).text() == 'Grouping') { $(this).addClass('green') }
@@ -311,10 +313,16 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 						// 	"width": "10%"
 						// },
 						{
-							"field": "statuskelengkapandok",
-							"title": "Status Kelengkapan Dokumen",
+							"field": "ringkasanpulang",
+							"title": "Ringkasan Pulang",
 							"width": "10%",
-							"template": '# if( statuskelengkapandok==true) {# Sudah Lengkap # } else {# - #} #'
+							// "template": '# if( ringkasanpulang!=0) {# Sudah diupload # } else {# Belum diupload #} #'
+						},
+						{
+							"field": "dokumenklaim",
+							"title": "Jumlah Dokumen",
+							"width": "10%",
+							// "template": '# if( statuskelengkapandok==true) {# Sudah Lengkap # } else {# - #} #'
 						},
 						
 					]

@@ -157,6 +157,8 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 					if ($(this).text() == 'Belum di Coder') { $(this).addClass('coder') }
 					if ($(this).text() == '1') { $(this).text('Belum di Grouping') }
 					if ($(this).text() == 'Belum di Grouping') { $(this).addClass('red') }
+					if ($(this).text() == 'Sudah diupload') { $(this).addClass('green') }
+					if ($(this).text() == 'Belum diupload') { $(this).addClass('red') }
 					if ($(this).text() == 'Klaim') { $(this).addClass('green') }
 					if ($(this).text() == 'Grouping') { $(this).addClass('green') }
 					if ($(this).text() == 'Final Klaim') { $(this).addClass('green') }
@@ -217,54 +219,18 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 							"width": "20%",
 							"template": "<span class='style-left'>#: namapasien #</span>"
 						},
-						// {
-						// 	"field": "namaruangan",
-						// 	"title": "Nama Ruangan",
-						// 	"width":"150px",
-						// 	"template": "<span class='style-left'>#: namaruangan #</span>"
-						// },
 						{
 							"field": "namadokter",
 							"title": "Nama Dokter",
 							"width": "15%",
 							"template": '# if( namadokter==null) {# - # } else {# #= namadokter # #} #'
 						},
-						// {
-						// 	"field": "kelompokpasien",
-						// 	"title": "Kelompok Pasien",
-						// 	"width":"100px",
-						// 	"template": "<span class='style-left'>#: kelompokpasien #</span>"
-						// },
 						{
 							"field": "tglpulang",
 							"title": "Tgl Pulang",
 							"width": "10%",
 							"template": "<span class='style-left'>{{formatTanggal('#: tglpulang #')}}</span>"
 						},
-						// {
-						// 	"field": "statuspasien",
-						// 	"title": "Status",
-						// 	"width":"80px",
-						// 	"template": "<span class='style-center'>#: statuspasien #</span>"
-						// },
-						// {
-						// 	"field": "nostruk",
-						// 	"title": "NoStrukVerif",
-						// 	"width":"100px",
-						// 	"template": '# if( nostruk==null) {# - # } else {# #= nostruk # #} #'
-						// },
-						// {
-						// 	"field": "nosbm",
-						// 	"title": "NoSBM",
-						// 	"width":"100px",
-						// 	"template": '# if( nosbm==null) {# - # } else {# #= nosbm # #} #'
-						// },
-						// {
-						// 	"field": "kasir",
-						// 	"title": "Kasir",
-						// 	"width":"100px",
-						// 	"template": '# if( kasir==null) {# - # } else {# #= kasir # #} #'
-						// },
 						{
 							"field": "nosep",
 							"title": "No SEP",
@@ -299,21 +265,22 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 							"title": "Diagnosa Utama dan Sekunder",
 							"width": "10%"
 						},
-						// {
-						// 	"field": "status",
-						// 	"title": "Status Berkas",
-						// 	"width": "10%"
-						// },
 						{
 							"field": "statusklaim",
 							"title": "Status ",
 							"width": "10%"
 						},
 						{
-							"field": "statuskelengkapandok",
-							"title": "Status Kelengkapan Dokumen",
+							"field": "ringkasanpulang",
+							"title": "Ringkasan Pulang",
 							"width": "10%",
-							"template": '# if( statuskelengkapandok==true) {# Sudah Lengkap # } else {# - #} #'
+							// "template": '# if( ringkasanpulang!=0) {# Sudah diupload # } else {# Belum diupload #} #'
+						},
+						{
+							"field": "dokumenklaim",
+							"title": "Jumlah Dokumen",
+							"width": "10%",
+							// "template": '# if( statuskelengkapandok==true) {# Sudah Lengkap # } else {# - #} #'
 						},
 						
 					]

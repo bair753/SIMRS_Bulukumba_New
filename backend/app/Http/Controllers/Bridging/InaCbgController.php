@@ -1561,6 +1561,7 @@ class InaCbgController   extends ApiController
             // $data = $data->where('pg.id', '=', $request['kelId']);
             $data = $data->where('kp.id',$request['kelId']);
         }
+        
         if (isset($filter['dokId']) && $filter['dokId'] != "" && $filter['dokId'] != "undefined") {
             $data = $data->where('pg.id', '=', $filter['dokId']);
         }
@@ -1584,7 +1585,54 @@ class InaCbgController   extends ApiController
 
 
 
+        $dataDokumen = \DB::table('monitoringdokklaim_t as md')
+        ->join('pasiendaftar_t as pd', 'pd.norec', '=', 'md.noregistrasifk')
+        ->join('dokumenklaim_m as dk', 'dk.id', '=', 'md.documentklaimfk')
+        ->join('departemen_m as dp', 'dp.id', '=', 'dk.objectdepartemenfk')
+        ->select('pd.norec','md.filename','md.documentklaimfk','dk.kodeexternal','dk.dokumen','dk.objectdepartemenfk')
+        ->where('pd.tglregistrasi', '>=', $filter['tglAwal'])
+        ->where('pd.tglregistrasi', '<=', $filter['tglAkhir'])
+        ->where('pd.kdprofile',$kdProfile);
 
+        if (isset($filter['noreg']) && $filter['noreg'] != "" && $filter['noreg'] != "undefined") {
+            $dataDokumen = $dataDokumen->where('pd.noregistrasi', 'ilike', '%' . $filter['noreg'] . '%');
+        }
+        if (isset($filter['norm']) && $filter['norm'] != "" && $filter['norm'] != "undefined") {
+            $dataDokumen = $dataDokumen->where('ps.nocm', 'like', '%' . $filter['norm'] . '%');
+        }
+        if (isset($filter['nama']) && $filter['nama'] != "" && $filter['nama'] != "undefined") {
+            $dataDokumen = $dataDokumen->where('ps.namapasien', 'like', '%' . $filter['nama'] . '%');
+        }
+        if (isset($filter['deptId']) && $filter['deptId'] != "" && $filter['deptId'] != "undefined") {
+            $dataDokumen = $dataDokumen->where('dk.objectdepartemenfk', '=', $filter['deptId']);
+        }
+        $dataDokumen=$dataDokumen->get();
+
+        $RingkasanPulang = \DB::table('monitoringdokklaim_t as md')
+        ->join('pasiendaftar_t as pd', 'pd.norec', '=', 'md.noregistrasifk')
+        ->join('dokumenklaim_m as dk', 'dk.id', '=', 'md.documentklaimfk')
+        ->join('departemen_m as dp', 'dp.id', '=', 'dk.objectdepartemenfk')
+        ->select('pd.norec','md.filename','md.documentklaimfk','dk.kodeexternal','dk.dokumen','dk.objectdepartemenfk')
+        ->where('pd.kdprofile',$kdProfile)
+        ->where('dk.id',12);
+        if (isset($filter['noreg']) && $filter['noreg'] != "" && $filter['noreg'] != "undefined") {
+            $RingkasanPulang = $RingkasanPulang->where('pd.noregistrasi', 'ilike', '%' . $filter['noreg'] . '%');
+        }
+        if (isset($filter['norm']) && $filter['norm'] != "" && $filter['norm'] != "undefined") {
+            $RingkasanPulang = $RingkasanPulang->where('ps.nocm', 'like', '%' . $filter['norm'] . '%');
+        }
+        if (isset($filter['nama']) && $filter['nama'] != "" && $filter['nama'] != "undefined") {
+            $RingkasanPulang = $RingkasanPulang->where('ps.namapasien', 'like', '%' . $filter['nama'] . '%');
+        }
+        if (isset($filter['deptId']) && $filter['deptId'] != "" && $filter['deptId'] != "undefined") {
+            $RingkasanPulang = $RingkasanPulang->where('dk.objectdepartemenfk', '=', $filter['deptId']);
+        }
+        $RingkasanPulang=$RingkasanPulang->get();
+        if(count($RingkasanPulang) != 0){
+            $RingkasanPulang = "Sudah diupload";
+        }else{
+            $RingkasanPulang = "Belum diupload";
+        }
 
         $dataDiagnosa = \DB::table('detaildiagnosapasien_t as dp')
             ->join('diagnosa_m as dg', 'dg.id', '=', 'dp.objectdiagnosafk')
@@ -1829,6 +1877,8 @@ class InaCbgController   extends ApiController
             $sewa_alat =0;
             $tindakan_lain =0;
             $data[$i]->tarif_rs = $datatatat;
+            $data[$i]->dokumenklaim = count($dataDokumen);
+            $data[$i]->ringkasanpulang = $RingkasanPulang;
 
             $i= $i + 1 ;
 //            $dataTarif16 = DB::select(DB::raw("select kpb.id,kpb.namaexternal,sum(x.total) as ttl
