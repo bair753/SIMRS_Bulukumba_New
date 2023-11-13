@@ -1628,11 +1628,6 @@ class InaCbgController   extends ApiController
             $RingkasanPulang = $RingkasanPulang->where('dk.objectdepartemenfk', '=', $filter['deptId']);
         }
         $RingkasanPulang=$RingkasanPulang->get();
-        if(count($RingkasanPulang) != 0){
-            $RingkasanPulang = "Sudah diupload";
-        }else{
-            $RingkasanPulang = "Belum diupload";
-        }
 
         $dataDiagnosa = \DB::table('detaildiagnosapasien_t as dp')
             ->join('diagnosa_m as dg', 'dg.id', '=', 'dp.objectdiagnosafk')
@@ -1752,6 +1747,7 @@ class InaCbgController   extends ApiController
             group  by pd.norec,kpb.namaexternal order by pd.norec")
         );
         $i = 0 ;
+        $ringpulang = 'Belum diupload';
         $prosedur_non_bedah ='';
         $prosedur_bedah ='';
         $konsultasi ='';
@@ -1836,6 +1832,14 @@ class InaCbgController   extends ApiController
                 }
             }
 
+            foreach ($RingkasanPulang as $ringkaspulang){
+                if ($ringkaspulang->norec == $norecpd){
+                    if ($ringkaspulang->documentklaimfk == 12){
+                        $ringpulang = "Sudah diupload";
+                    }
+                }
+            }
+
             $datatatat = array(
                 'prosedur_non_bedah' => (float)$prosedur_non_bedah,
                 'prosedur_bedah' => (float)$prosedur_bedah,
@@ -1878,7 +1882,7 @@ class InaCbgController   extends ApiController
             $tindakan_lain =0;
             $data[$i]->tarif_rs = $datatatat;
             $data[$i]->dokumenklaim = count($dataDokumen);
-            $data[$i]->ringkasanpulang = $RingkasanPulang;
+            $data[$i]->ringkasanpulang = $ringpulang;
 
             $i= $i + 1 ;
 //            $dataTarif16 = DB::select(DB::raw("select kpb.id,kpb.namaexternal,sum(x.total) as ttl
