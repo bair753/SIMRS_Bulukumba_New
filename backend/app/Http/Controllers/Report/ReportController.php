@@ -8802,7 +8802,7 @@ class ReportController extends ApiController{
             ->where('pp.statusenabled', true)
             ->where('pp.kdprofile', $kdProfile)
             ->where('pd.noregistrasi', $r['noregistrasi'])
-            ->orderBy('pp.tglpelayanan','desc')
+            ->orderBy('pp.tglpelayanan','asc')
             ->get();
 
         $sDokterPemeriksa = $this->settingDataFixed('jenisPetugasDokterPemeriksa', $kdProfile);
