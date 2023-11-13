@@ -5667,7 +5667,7 @@ class ReportController extends ApiController{
                 pa.noidentitas,
                 al.alamatlengkap,
                 ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
-                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                epd.value,epd.qrcode,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
                 --ap.noasuransi,ap.namapeserta,
                 pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
                 --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
@@ -5698,13 +5698,21 @@ class ReportController extends ApiController{
         ));
         foreach ($data as $z) {
             if ($z->type == "datetime") {
-                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                $z->value = date('H:i Y-m-d', strtotime($z->value));
+            }
+            if ($z->qrcode == null) {
+                $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->generate("Tanda Tangan Digital Oleh ".substr($z->value, strpos($z->value, '~') + 1)));
+            }
+
+            if ($z->value != null) {
+                $z->value = substr($z->value, strpos($z->value, '~'));
             }
         }
         $pageWidth = 500;
         $res['profile'] = Profile::where('id', $request['kdprofile'])->first();
 
         $res['d'] = $data;
+        // dd($data);
         $noemrpasien = '';
         if (count($data) == 0) {
             $noemrpasien = $request['emr'];
@@ -5721,7 +5729,21 @@ class ReportController extends ApiController{
             die;
         }
 
-        return view('report.cetak-cppt-rajal', compact('res', 'pageWidth'));
+        $imagePath = public_path("img/logo_only.png");
+        $image = "data:image/png;base64,".base64_encode(file_get_contents($imagePath));
+
+        if(isset($request["issimpanberkas"])) {
+            $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true, 'dpi' => '600', 'defaultMediaType' => 'print']);
+            $pdf = PDF::loadView('report.cetak-cppt-rajal-dom', array(
+                'res' => $res,
+                'pageWidth' => $pageWidth,
+                'image' => $image,
+            ))->setPaper('a4', 'portrait');
+            $this->saveDokumenKlaim($pdf, $request);
+            return;
+        }else{
+            return view('report.cetak-cppt-rajal',compact('res','pageWidth'));
+        }
     }
 
     public function persetujuanTindakanHemodialisa(Request $request) {
@@ -8839,7 +8861,7 @@ class ReportController extends ApiController{
             }
         }
         $res['profile'] = Profile::where('id', $kdProfile)->first();
-        $res['billing'] =  collect($data)->groupBy('namaruangan');
+        $res['billing'] =  collect($data)->groupBy('jenisproduk');
         $res['ismultipenjamin']  = false;
         // $res['klaim']  = $this->getTotalKlaim($r['noregistrasi'], $kdProfile);
         $res['deposit'] = $deposit;
