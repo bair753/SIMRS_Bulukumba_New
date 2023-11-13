@@ -1529,13 +1529,13 @@ class InaCbgController   extends ApiController
             $data = $data->where('ru.id', '=', $filter['ruangId']);
         }
         if (isset($filter['noreg']) && $filter['noreg'] != "" && $filter['noreg'] != "undefined") {
-            $data = $data->where('pd.noregistrasi', 'like', '%' . $filter['noreg'] . '%');
+            $data = $data->where('pd.noregistrasi', 'ilike', '%' . $filter['noreg'] . '%');
         }
         if (isset($filter['norm']) && $filter['norm'] != "" && $filter['norm'] != "undefined") {
-            $data = $data->where('ps.nocm', 'like', '%' . $filter['norm'] . '%');
+            $data = $data->where('ps.nocm', 'ilike', '%' . $filter['norm'] . '%');
         }
         if (isset($filter['nama']) && $filter['nama'] != "" && $filter['nama'] != "undefined") {
-            $data = $data->where('ps.namapasien', 'like', '%' . $filter['nama'] . '%');
+            $data = $data->where('ps.namapasien', 'ilike', '%' . $filter['nama'] . '%');
         }
         if (isset($filter['nosep']) && $filter['nosep'] != "" && $filter['nosep'] != "undefined") {
             $data = $data->where('pas.nosep', '=', $filter['nosep']);
@@ -1598,10 +1598,10 @@ class InaCbgController   extends ApiController
             $dataDokumen = $dataDokumen->where('pd.noregistrasi', 'ilike', '%' . $filter['noreg'] . '%');
         }
         if (isset($filter['norm']) && $filter['norm'] != "" && $filter['norm'] != "undefined") {
-            $dataDokumen = $dataDokumen->where('ps.nocm', 'like', '%' . $filter['norm'] . '%');
+            $dataDokumen = $dataDokumen->where('ps.nocm', 'ilike', '%' . $filter['norm'] . '%');
         }
         if (isset($filter['nama']) && $filter['nama'] != "" && $filter['nama'] != "undefined") {
-            $dataDokumen = $dataDokumen->where('ps.namapasien', 'like', '%' . $filter['nama'] . '%');
+            $dataDokumen = $dataDokumen->where('ps.namapasien', 'ilike', '%' . $filter['nama'] . '%');
         }
         if (isset($filter['deptId']) && $filter['deptId'] != "" && $filter['deptId'] != "undefined") {
             $dataDokumen = $dataDokumen->where('dk.objectdepartemenfk', '=', $filter['deptId']);
@@ -1619,10 +1619,10 @@ class InaCbgController   extends ApiController
             $RingkasanPulang = $RingkasanPulang->where('pd.noregistrasi', 'ilike', '%' . $filter['noreg'] . '%');
         }
         if (isset($filter['norm']) && $filter['norm'] != "" && $filter['norm'] != "undefined") {
-            $RingkasanPulang = $RingkasanPulang->where('ps.nocm', 'like', '%' . $filter['norm'] . '%');
+            $RingkasanPulang = $RingkasanPulang->where('ps.nocm', 'ilike', '%' . $filter['norm'] . '%');
         }
         if (isset($filter['nama']) && $filter['nama'] != "" && $filter['nama'] != "undefined") {
-            $RingkasanPulang = $RingkasanPulang->where('ps.namapasien', 'like', '%' . $filter['nama'] . '%');
+            $RingkasanPulang = $RingkasanPulang->where('ps.namapasien', 'ilike', '%' . $filter['nama'] . '%');
         }
         if (isset($filter['deptId']) && $filter['deptId'] != "" && $filter['deptId'] != "undefined") {
             $RingkasanPulang = $RingkasanPulang->where('dk.objectdepartemenfk', '=', $filter['deptId']);
