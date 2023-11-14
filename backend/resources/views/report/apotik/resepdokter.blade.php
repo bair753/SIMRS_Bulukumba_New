@@ -195,8 +195,7 @@
                                                             <font size="1">:</font>
                                                         </td>
                                                         <td height="5" width="30%">
-                                                            <font size="1">{{ $raw->tgllahir }}
-                                                                ({{ $raw->umur }})</font>
+                                                            <font size="1">{{ $raw->tgllahir }}</font>
                                                         </td>
                                                         <td height="5" width="16%">
                                                             <font size="1">Nomor Izin Praktek</font>
