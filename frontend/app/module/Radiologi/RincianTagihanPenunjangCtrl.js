@@ -2411,14 +2411,14 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 						"&objectjeniskelaminfk=" + jeniskelaminfk + "&umur=" + umurHari + "&norec='" + $scope.dataSelected.norec_pp + "'" ).then(function (data) {
 								// var sourceGrid = []
 								$scope.isRouteLoading = false;
-                                if ($scope.item.DataPemeriksa == undefined) {
-                                    toastr.warning('Pilih terlebih dahulu pemeriksanya!!', 'Peringatan')
-                                    return;
-                            }
-                            if ($scope.item.DataPegawai == undefined) {
-                                    toastr.warning('Pilih terlebih dahulu dokternya!!', 'Peringatan')
-                                    return;
-                            } 
+                            //     if ($scope.item.DataPemeriksa == undefined) {
+                            //         toastr.warning('Pilih terlebih dahulu pemeriksanya!!', 'Peringatan')
+                            //         return;
+                            // }
+                            // if ($scope.item.DataPegawai == undefined) {
+                            //         toastr.warning('Pilih terlebih dahulu dokternya!!', 'Peringatan')
+                            //         return;
+                            // } 
 								$scope.item.DataPemeriksa = {namalengkap: data.data.data[0].pemeriksa, id: data.data.data[0].objectpemeriksafk}
 								$scope.item.DataPegawai = {namalengkap: data.data.data[0].dokter, id: data.data.data[0].objectdokterfk}
 								$scope.item.catatan = data.data.data[0].catatan;

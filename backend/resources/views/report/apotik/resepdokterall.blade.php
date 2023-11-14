@@ -204,8 +204,7 @@
                                                                     <font size="1">:</font>
                                                                 </td>
                                                                 <td height="5" width="30%">
-                                                                    <font size="1">{{ $dokter['tgllahir'] }}
-                                                                        ({{ $dokter['tgllahir'] }})</font>
+                                                                    <font size="1">{{ $dokter['tgllahir'] }}</font>
                                                                 </td>
                                                                 <td height="5" width="16%">
                                                                     <font size="1">Nomor Izin Praktek</font>
@@ -976,8 +975,7 @@
                                                                     <font size="1">:</font>
                                                                 </td>
                                                                 <td height="5" width="30%">
-                                                                    <font size="1">{{ $dokter['tgllahir'] }}
-                                                                        ({{ $dokter['tgllahir'] }})</font>
+                                                                    <font size="1">{{ $dokter['tgllahir'] }}</font>
                                                                 </td>
                                                                 <td height="5" width="16%">
                                                                     <font size="1">Nomor Izin Praktek</font>
