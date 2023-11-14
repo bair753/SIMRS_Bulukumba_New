@@ -1587,6 +1587,7 @@ class InaCbgController   extends ApiController
 
         $dataDokumen = \DB::table('monitoringdokklaim_t as md')
         ->join('pasiendaftar_t as pd', 'pd.norec', '=', 'md.noregistrasifk')
+        ->join('pasien_m as ps', 'ps.id', '=', 'pd.nocmfk')
         ->join('dokumenklaim_m as dk', 'dk.id', '=', 'md.documentklaimfk')
         ->join('departemen_m as dp', 'dp.id', '=', 'dk.objectdepartemenfk')
         ->select('pd.norec','md.filename','md.documentklaimfk','dk.kodeexternal','dk.dokumen','dk.objectdepartemenfk')
@@ -1610,6 +1611,7 @@ class InaCbgController   extends ApiController
 
         $RingkasanPulang = \DB::table('monitoringdokklaim_t as md')
         ->join('pasiendaftar_t as pd', 'pd.norec', '=', 'md.noregistrasifk')
+        ->join('pasien_m as ps', 'ps.id', '=', 'pd.nocmfk')
         ->join('dokumenklaim_m as dk', 'dk.id', '=', 'md.documentklaimfk')
         ->join('departemen_m as dp', 'dp.id', '=', 'dk.objectdepartemenfk')
         ->select('pd.norec','md.filename','md.documentklaimfk','dk.kodeexternal','dk.dokumen','dk.objectdepartemenfk')
