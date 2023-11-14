@@ -158,8 +158,8 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 					if ($(this).text() == 'Belum di Coder') { $(this).addClass('coder') }
 					if ($(this).text() == '1') { $(this).text('Belum di Grouping') }
 					if ($(this).text() == 'Belum di Grouping') { $(this).addClass('red') }
-					if ($(this).text() == 'Sudah diupload') { $(this).addClass('green') }
-					if ($(this).text() == 'Belum diupload') { $(this).addClass('red') }
+					if ($(this).text() == 'Sudah ada') { $(this).addClass('green') }
+					if ($(this).text() == 'Belum ada') { $(this).addClass('red') }
 					if ($(this).text() == 'Klaim') { $(this).addClass('green') }
 					if ($(this).text() == 'Grouping') { $(this).addClass('green') }
 					if ($(this).text() == 'Final Klaim') { $(this).addClass('green') }
