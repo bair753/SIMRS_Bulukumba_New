@@ -3949,8 +3949,7 @@ class ReportController extends ApiController{
                     left join pegawai_m  as pg5 on pg5.id = hh.objectdokterfk
                     left join pegawai_m  as pg6 on pg6.id = hh.objectpemeriksafk
                     WHERE
-                        pp.noregistrasifk = '$r[norec]' 
-                        AND hh.hasil IS NOT NULL 
+                        hh.hasil IS NOT NULL 
                         AND pp.norec IS NOT NULL
                         AND pp.norec = '$arr_norec[$i]'
                 ) AS DATA 
