@@ -1666,7 +1666,7 @@ class ReportController extends ApiController{
                     left join jeniskemasan_m as jk on jk.id=op.jeniskemasanfk
                     left join satuanstandar_m as ss on ss.id=op.objectsatuanstandarfk
                     left join satuanresep_m as sn on sn.id=op.satuanresepfk
-                    where so.kdprofile = $idProfile and so.statusenabled = true and noorder=:noorder and so.statusorder is not null and so.statusorder != 1"),
+                    where so.kdprofile = 39 and so.statusenabled = true and noorder=:noorder and so.statusorder is not null and so.statusorder != 1"),
                 array(
                     'noorder' => $item->noorder,
                 )
