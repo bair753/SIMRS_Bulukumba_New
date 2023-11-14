@@ -1529,10 +1529,10 @@ class InaCbgController   extends ApiController
             $data = $data->where('ru.id', '=', $filter['ruangId']);
         }
         if (isset($filter['noreg']) && $filter['noreg'] != "" && $filter['noreg'] != "undefined") {
-            $data = $data->where('pd.noregistrasi', 'ilike', '%' . $filter['noreg'] . '%');
+            $data = $data->where('pd.noregistrasi', '=', $filter['noreg']);
         }
         if (isset($filter['norm']) && $filter['norm'] != "" && $filter['norm'] != "undefined") {
-            $data = $data->where('ps.nocm', 'ilike', '%' . $filter['norm'] . '%');
+            $data = $data->where('ps.nocm', '=', $filter['norm']);
         }
         if (isset($filter['nama']) && $filter['nama'] != "" && $filter['nama'] != "undefined") {
             $data = $data->where('ps.namapasien', 'ilike', '%' . $filter['nama'] . '%');
@@ -1596,10 +1596,10 @@ class InaCbgController   extends ApiController
         ->where('pd.kdprofile',$kdProfile);
 
         if (isset($filter['noreg']) && $filter['noreg'] != "" && $filter['noreg'] != "undefined") {
-            $dataDokumen = $dataDokumen->where('pd.noregistrasi', 'ilike', '%' . $filter['noreg'] . '%');
+            $dataDokumen = $dataDokumen->where('pd.noregistrasi', '=', $filter['noreg']);
         }
         if (isset($filter['norm']) && $filter['norm'] != "" && $filter['norm'] != "undefined") {
-            $dataDokumen = $dataDokumen->where('ps.nocm', 'ilike', '%' . $filter['norm'] . '%');
+            $dataDokumen = $dataDokumen->where('ps.nocm', '=', $filter['norm']);
         }
         if (isset($filter['nama']) && $filter['nama'] != "" && $filter['nama'] != "undefined") {
             $dataDokumen = $dataDokumen->where('ps.namapasien', 'ilike', '%' . $filter['nama'] . '%');
@@ -1609,25 +1609,36 @@ class InaCbgController   extends ApiController
         }
         $dataDokumen=$dataDokumen->get();
 
-        $RingkasanPulang = \DB::table('monitoringdokklaim_t as md')
-        ->join('pasiendaftar_t as pd', 'pd.norec', '=', 'md.noregistrasifk')
+        // $RingkasanPulang = \DB::table('monitoringdokklaim_t as md')
+        // ->join('pasiendaftar_t as pd', 'pd.norec', '=', 'md.noregistrasifk')
+        // ->join('pasien_m as ps', 'ps.id', '=', 'pd.nocmfk')
+        // ->join('dokumenklaim_m as dk', 'dk.id', '=', 'md.documentklaimfk')
+        // ->join('departemen_m as dp', 'dp.id', '=', 'dk.objectdepartemenfk')
+        // ->select('pd.norec','md.filename','md.documentklaimfk','dk.kodeexternal','dk.dokumen','dk.objectdepartemenfk')
+        // ->where('pd.kdprofile',$kdProfile)
+        // ->where('dk.id',12);
+
+        $RingkasanPulang = \DB::table('emrpasiend_t as emrdp')
+        ->join('emrpasien_t as emrp', 'emrp.noemr', '=', 'emrdp.emrpasienfk')
+        ->join('emrd_t as emrd', 'emrd.id', '=', 'emrdp.emrdfk')
+        ->join('pasiendaftar_t as pd', 'pd.noregistrasi', '=', 'emrp.noregistrasifk')
         ->join('pasien_m as ps', 'ps.id', '=', 'pd.nocmfk')
-        ->join('dokumenklaim_m as dk', 'dk.id', '=', 'md.documentklaimfk')
-        ->join('departemen_m as dp', 'dp.id', '=', 'dk.objectdepartemenfk')
-        ->select('pd.norec','md.filename','md.documentklaimfk','dk.kodeexternal','dk.dokumen','dk.objectdepartemenfk')
+        ->join('ruangan_m as ru', 'ru.id', '=', 'pd.objectruanganlastfk')
+        ->select('pd.norec')
         ->where('pd.kdprofile',$kdProfile)
-        ->where('dk.id',12);
+        ->where('emrdp.emrfk',290030)
+        ->where('emrdp.emrdfk',423819);
         if (isset($filter['noreg']) && $filter['noreg'] != "" && $filter['noreg'] != "undefined") {
-            $RingkasanPulang = $RingkasanPulang->where('pd.noregistrasi', 'ilike', '%' . $filter['noreg'] . '%');
+            $RingkasanPulang = $RingkasanPulang->where('pd.noregistrasi', '=', $filter['noreg']);
         }
         if (isset($filter['norm']) && $filter['norm'] != "" && $filter['norm'] != "undefined") {
-            $RingkasanPulang = $RingkasanPulang->where('ps.nocm', 'ilike', '%' . $filter['norm'] . '%');
+            $RingkasanPulang = $RingkasanPulang->where('ps.nocm', '=', $filter['norm']);
         }
         if (isset($filter['nama']) && $filter['nama'] != "" && $filter['nama'] != "undefined") {
             $RingkasanPulang = $RingkasanPulang->where('ps.namapasien', 'ilike', '%' . $filter['nama'] . '%');
         }
         if (isset($filter['deptId']) && $filter['deptId'] != "" && $filter['deptId'] != "undefined") {
-            $RingkasanPulang = $RingkasanPulang->where('dk.objectdepartemenfk', '=', $filter['deptId']);
+            $RingkasanPulang = $RingkasanPulang->where('ru.objectdepartemenfk', '=', $filter['deptId']);
         }
         $RingkasanPulang=$RingkasanPulang->get();
 
@@ -1644,7 +1655,7 @@ class InaCbgController   extends ApiController
             ->orderBy('dp.objectjenisdiagnosafk', 'asc');
 
         if (isset($filter['noreg']) && $filter['noreg'] != "" && $filter['noreg'] != "undefined") {
-            $dataDiagnosa = $dataDiagnosa->where('pd.noregistrasi', 'ilike', '%' . $filter['noreg'] . '%');
+            $dataDiagnosa = $dataDiagnosa->where('pd.noregistrasi', '=', $filter['noreg']);
         }
         // if (isset($filter['norm']) && $filter['norm'] != "" && $filter['norm'] != "undefined") {
         //     $dataDiagnosa = $dataDiagnosa->where('ps.nocm', 'like', '%' . $filter['norm'] . '%');
@@ -1689,7 +1700,7 @@ class InaCbgController   extends ApiController
             ->where('pd.tglregistrasi', '<=', $filter['tglAkhir'])
             ->where('pd.kdprofile',$kdProfile);
         if (isset($filter['noreg']) && $filter['noreg'] != "" && $filter['noreg'] != "undefined") {
-            $dataICD9 = $dataICD9->where('pd.noregistrasi', 'ilike', '%' . $filter['noreg'] . '%');
+            $dataICD9 = $dataICD9->where('pd.noregistrasi', '=', $filter['noreg']);
         }
         $dataICD9=$dataICD9->get();
         foreach ($data as $item){
@@ -1749,7 +1760,7 @@ class InaCbgController   extends ApiController
             group  by pd.norec,kpb.namaexternal order by pd.norec")
         );
         $i = 0 ;
-        $ringpulang = 'Belum diupload';
+        $ringpulang = "Belum ada";
         $prosedur_non_bedah ='';
         $prosedur_bedah ='';
         $konsultasi ='';
@@ -1836,9 +1847,9 @@ class InaCbgController   extends ApiController
 
             foreach ($RingkasanPulang as $ringkaspulang){
                 if ($ringkaspulang->norec == $norecpd){
-                    if ($ringkaspulang->documentklaimfk == 12){
-                        $ringpulang = "Sudah diupload";
-                    }
+                    $ringpulang = "Sudah ada";
+                }else{
+                    $ringpulang = "Belum ada";
                 }
             }
 
