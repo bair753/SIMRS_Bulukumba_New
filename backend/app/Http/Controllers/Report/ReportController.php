@@ -1830,7 +1830,7 @@ class ReportController extends ApiController{
             'depo' => $rinci
         ];
 
-        if(count($data['dokter']) <= 0 and count($data['depo']) <= 0) {
+        if(empty($data['dokter']) and empty($data['depo'])) {
             echo '
                 <script language="javascript">
                     window.alert("Data tidak ditemukan, silahkan mengisi informasi resep pasien terlebih dahulu");
@@ -1843,11 +1843,15 @@ class ReportController extends ApiController{
         $imagePath = public_path("img/logo_only.png");
         $image = "data:image/png;base64,".base64_encode(file_get_contents($imagePath));
 
+        $centangPath = public_path("img/true.png");
+        $centang = "data:image/png;base64,".base64_encode(file_get_contents($centangPath));
+
         if(isset($r["issimpanberkas"])) {
             $pdf = PDF::loadView('report.apotik.resepdokterall-dom', array(
                 'data' => $data,
                 'profile' => $profile,
                 'image' => $image,
+                'centang' => $centang,
             ))->setPaper('a4', 'portrait');
             $this->saveDokumenKlaim($pdf, $r);
             return;
