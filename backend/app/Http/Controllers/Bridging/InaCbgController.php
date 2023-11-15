@@ -1572,9 +1572,9 @@ class InaCbgController   extends ApiController
         if (isset($filter['status']) && $filter['status'] != "" && $filter['status'] != "undefined") {
             $data = $data->where('pd.statusklaim', '=', $filter['status']);
         }
-//        if (isset($filter['jmlRows']) && $filter['jmlRows'] != "" && $filter['jmlRows'] != "undefined") {
-//            $data = $data->take($filter['jmlRows']);
-//        }
+       if (isset($filter['jmlRows']) && $filter['jmlRows'] != "" && $filter['jmlRows'] != "undefined") {
+           $data = $data->take($filter['jmlRows']);
+       }
         $data = $data->orderBy('pd.noregistrasi');
 
         $data = $data->get();
