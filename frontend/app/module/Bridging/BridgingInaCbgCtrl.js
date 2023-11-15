@@ -18,6 +18,7 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 			$scope.isRanap = false;
 			$scope.isIGD = false;
 			$scope.isAll = false;
+			$scope.isBPJS = false;
 			$scope.pasienPulang = false;
 			$scope.cboUbahDokter = true;
 			$scope.isRouteLoading = false;
@@ -226,6 +227,11 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 							"template": '# if( namadokter==null) {# - # } else {# #= namadokter # #} #'
 						},
 						{
+							"field": "kelompokpasien",
+							"title": "Kelompok Pasien",
+							"width": "10%",
+						},
+						{
 							"field": "tglpulang",
 							"title": "Tgl Pulang",
 							"width": "10%",
@@ -276,12 +282,12 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 							"width": "10%",
 							// "template": '# if( ringkasanpulang!=0) {# Sudah diupload # } else {# Belum diupload #} #'
 						},
-						{
-							"field": "dokumenklaim",
-							"title": "Jumlah Dokumen",
-							"width": "10%",
-							// "template": '# if( statuskelengkapandok==true) {# Sudah Lengkap # } else {# - #} #'
-						},
+						// {
+						// 	"field": "dokumenklaim",
+						// 	"title": "Jumlah Dokumen",
+						// 	"width": "10%",
+						// 	// "template": '# if( statuskelengkapandok==true) {# Sudah Lengkap # } else {# - #} #'
+						// },
 						
 					]
 			};
@@ -379,6 +385,10 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 			}
 
 			$scope.SearchData = function () {
+				if ($scope.item.kelompokpasien.length == 0) {
+					toastr.error('Kelompok harus di pilih minimal satu',"info")
+					return;
+				}
 				if($scope.item.instalasi == undefined){
 					$scope.isAll = true;
 					$scope.isIGD = false;
@@ -4832,7 +4842,12 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 			$scope.popUpDaftarResep.center().open();
 		}
 
-		$scope.klikGridS = function (dataSelected) {
+		$scope.klikGrid = function (dataSelected) {
+			if($scope.dataPasienSelected.kpid == 2 || $scope.dataPasienSelected.kpid == 3){
+				$scope.isBPJS = true;
+			}else{
+				$scope.isBPJS = false;
+			}
 			$scope.dataSelected = dataSelected;
 		}
 

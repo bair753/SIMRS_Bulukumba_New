@@ -214,7 +214,7 @@
 
 				<div class="grid_12">
 					<!-- <input style="width: 100%;" kendo-combo-box k-ng-model="item.kelompokpasien" k-data-text-field="'kelompokpasien'" k-data-value-field="'id'" k-filter="'contains'" k-auto-bind="false" k-data-source="listKelompokPasien" /> -->
-					<select ng-show="listKelompokPasien.length" kendo-multi-select ng-disabled="true"
+					<select ng-show="listKelompokPasien.length" kendo-multi-select 
 						k-options="selectOptionsKelompok" k-filter="'contains'" k-data-source="listKelompokPasien"
 						k-ng-model="item.kelompokpasien"></select>
 					<!-- ng-disabled="true" -->
@@ -544,41 +544,43 @@
 	<!-- <div class="grid_2" >
 				<button class="btnTemplate1"  ng-click="pull_claim()">pull_claim</button>
 			</div> -->
-	<div class="grid_2">
-		<button class="btnTemplate1 buttonHijau" ng-click="new_claim2()">New Claim</button>
-	</div>
-	<div class="grid_2">
-		<button class="btnTemplate1 buttonHijau" ng-click="grouping2()">Grouping</button>
-	</div>
-	<div class="grid_2">
-		<button class="btnTemplate1 buttonHijau" ng-click="claim_final2()">Final Klaim</button>
-	</div>
-	<div class="grid_2">
-		<button class="btnTemplate1" ng-click="send_claim_individual()">Kirim Klaim Online</button>
-	</div>
-	<!-- <div class="grid_2" >
-				<button class="btnTemplate1"  ng-click="finalprintklaim()">Final & Print Klaim</button>
-			</div> -->
-	<div class="grid_2">
-		<button class="btnTemplate1" ng-click="claim_print()">Cetak Klaim</button>
-	</div>
-	<div class="grid_2">
-		<button class="btnTemplate1" ng-click="grouper_2()">Top UP</button>
-	</div>
-	<div class="grid_2">
-		<button class="btnTemplate1" ng-click="popupEdit()">Edit Klaim</button>
-	</div>
-	<div class="grid_2">
-		<button class="btnTemplate1" ng-click="popupHapus()">Hapus Klaim</button>
-	</div>
-	<div class="grid_2">
-		<button class="btnTemplate1" ng-click="popupMerge()">Merge No Pendaftaran</button>
-	</div>
-	<div class="grid_2">
-		<button class="btnTemplate1" ng-click="genPengajuan()">Generete Pengajuan Covid-19</button>
-	</div>
-	<div class="grid_2">
-		<button class="btnTemplate1" ng-click="uploadFile()">Upload File Covid-19</button>
+	<div class="grid_12" ng-show="isBPJS">
+		<div class="grid_2">
+			<button class="btnTemplate1 buttonHijau" ng-click="new_claim2()">New Claim</button>
+		</div>
+		<div class="grid_2">
+			<button class="btnTemplate1 buttonHijau" ng-click="grouping2()">Grouping</button>
+		</div>
+		<div class="grid_2">
+			<button class="btnTemplate1 buttonHijau" ng-click="claim_final2()">Final Klaim</button>
+		</div>
+		<div class="grid_2">
+			<button class="btnTemplate1" ng-click="send_claim_individual()">Kirim Klaim Online</button>
+		</div>
+		<div class="grid_2" >
+					<button class="btnTemplate1"  ng-click="finalprintklaim()">Final & Print Klaim</button>
+				</div>
+		<div class="grid_2">
+			<button class="btnTemplate1" ng-click="claim_print()">Cetak Klaim</button>
+		</div>
+		<div class="grid_2">
+			<button class="btnTemplate1" ng-click="grouper_2()">Top UP</button>
+		</div>
+		<div class="grid_2">
+			<button class="btnTemplate1" ng-click="popupEdit()">Edit Klaim</button>
+		</div>
+		<div class="grid_2">
+			<button class="btnTemplate1" ng-click="popupHapus()">Hapus Klaim</button>
+		</div>
+		<div class="grid_2">
+			<button class="btnTemplate1" ng-click="popupMerge()">Merge No Pendaftaran</button>
+		</div>
+		<div class="grid_2">
+			<button class="btnTemplate1" ng-click="genPengajuan()">Generete Pengajuan Covid-19</button>
+		</div>
+		<div class="grid_2">
+			<button class="btnTemplate1" ng-click="uploadFile()">Upload File Covid-19</button>
+		</div>
 	</div>
 	<div class="grid_2">
 		<button class="btnTemplate1" ng-click="Detail()">Detail Tagihan</button>

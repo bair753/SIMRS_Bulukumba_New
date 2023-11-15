@@ -1548,19 +1548,19 @@ class InaCbgController   extends ApiController
         //     $data = $data->where('kp.id', '=', $filter['kelId']);
         // }
         $paramKel  ='';
-        // if(isset($request['kelId']) && $request['kelId']!="" && $request['kelId']!="undefined"){
-        //     $arrKel = explode(',',$request['kelId']) ;
-        //     $kodeKel = [];
-        //     foreach ( $arrKel as $item){
-        //         $kodeKel[] = (int) $item;
-        //     }
-        //     $paramKel = ' and kp.id in ('.$request['kelId'].')';
-        //     $data = $data->whereIn('kp.id',$kodeKel);
-        // }
-        if (isset($request['kelId']) && $request['kelId'] != "" && $request['kelId'] != "undefined") {
-            // $data = $data->where('pg.id', '=', $request['kelId']);
-            $data = $data->where('kp.id',$request['kelId']);
+        if(isset($request['kelId']) && $request['kelId']!="" && $request['kelId']!="undefined"){
+            $arrKel = explode(',',$request['kelId']) ;
+            $kodeKel = [];
+            foreach ( $arrKel as $item){
+                $kodeKel[] = (int) $item;
+            }
+            $paramKel = ' and kp.id in ('.$request['kelId'].')';
+            $data = $data->whereIn('kp.id',$kodeKel);
         }
+        // if (isset($request['kelId']) && $request['kelId'] != "" && $request['kelId'] != "undefined") {
+        //     // $data = $data->where('pg.id', '=', $request['kelId']);
+        //     $data = $data->where('kp.id',$request['kelId']);
+        // }
         
         if (isset($filter['dokId']) && $filter['dokId'] != "" && $filter['dokId'] != "undefined") {
             $data = $data->where('pg.id', '=', $filter['dokId']);
