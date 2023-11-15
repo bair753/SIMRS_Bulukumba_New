@@ -22,7 +22,7 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 			$scope.pasienPulang = false;
 			$scope.cboUbahDokter = true;
 			$scope.isRouteLoading = false;
-			$scope.item.jmlRows = 50
+			$scope.item.jmlRows = 100
 			$scope.jmlRujukanMasuk = 0
 			$scope.jmlRujukanKeluar = 0
 			var ppkRumahSakit = ""
