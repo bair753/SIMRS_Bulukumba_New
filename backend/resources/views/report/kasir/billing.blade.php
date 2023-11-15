@@ -274,12 +274,20 @@
                     {{ number_format($data->total, 2, '.', ',') }}
                 </td>
             </tr>
+            
             @php
             $nomor = $nomor + 1;
             $total = $total + $data->total;
             $diskon = $diskon + $data->diskon;
             @endphp
             @endforeach
+            <tr style="background-color:aquamarine">
+                <td align="right" colspan="9">
+
+                    <b>Rp{{ number_format($total, 2, '.', ',') }}</b>
+
+                </td>
+            </tr>
         </tbody>
         <tfoot>
             {{-- <tr>
@@ -302,7 +310,7 @@
 
     </table>
     <table width="100%">
-        <tr>
+        {{-- <tr>
             <th colspan="3"></th>
             <td colspan="2">ADMINISTRASI</td>
             <td>:</td>
@@ -313,7 +321,7 @@
             <td colspan="2">MATERAI</td>
             <td>:</td>
             <td colspan="3" style="text-align:right;border:none;">0.00</td>
-        </tr>
+        </tr> --}}
         <tr>
             <th colspan="3"></th>
             <td colspan="2">JUMLAH BIAYA</td>
@@ -328,7 +336,7 @@
             <td></td>
             <td colspan="3" style="text-align:right;border:none;"></td>
         </tr>
-        <tr>
+        {{-- <tr>
             <th colspan="3"></th>
             <td colspan="2">DEPOSIT - UANG MUKA</td>
             <td>:</td>
@@ -339,7 +347,7 @@
             <td colspan="2">DISKON JASA MEDIS</td>
             <td>:</td>
             <td colspan="3" style="text-align:right;border:none;">0.00</td>
-        </tr>
+        </tr> --}}
         <tr>
             <th colspan="3"></th>
             <td colspan="2">DISKON UMUM</td>
@@ -364,7 +372,7 @@
                 <?php echo rupiah($res['dibayar']) ?>
             </td>
         </tr>
-        <tr>
+        {{-- <tr>
             <th colspan="2"></th>
             <td>PERINCIAN</td>
             <td colspan="2">DITANGGUNG PERUSAHAAN</td>
@@ -388,7 +396,7 @@
             <td colspan="2">SURPLUS / MINUS KE RS</td>
             <td>:</td>
             <td colspan="3" style="text-align:right;border:none;">Rp0.00</td>
-        </tr>
+        </tr> --}}
         <tr>
             <th colspan="3"></th>
             <td colspan="2"><b>JUMLAH BIAYA TOTAL</b></td>
