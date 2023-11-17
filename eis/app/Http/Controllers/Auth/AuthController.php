@@ -445,10 +445,10 @@ class AuthController extends ApiController
                     tt.kdprofile = $kdProfile
                 AND tt.statusenabled = TRUE
                 AND kmr.statusenabled = TRUE
-               
+
                 --and ru.id = $objectruanganfk
                 $paramruangs
-            
+
             ) AS tts ON (
                 sb.id = tts.objectstatusbedfk
             )
@@ -824,27 +824,27 @@ sb.id,
                 where tglpulang BETWEEN '$dari' and '$sampai'
                 and objectstatuspulangfk  in (27,28,16,2)
                 and pasiendaftar_t.statusenabled= true
-                and pasiendaftar_t.kdprofile = $kdProfile 
+                and pasiendaftar_t.kdprofile = $kdProfile
                 and ru.objectdepartemenfk=$objectdepartemenfk"))->count();
         $pulangsSembuh = collect(DB::select("select * from pasiendaftar_t
               join ruangan_m as ru on ru.id=pasiendaftar_t.objectruanganlastfk
                 where pasiendaftar_t.tglpulang BETWEEN '$dari' and '$sampai'
                 and pasiendaftar_t.objectstatuspulangfk  in (1,6,15,20)
                 and pasiendaftar_t.statusenabled= true
-                and pasiendaftar_t.kdprofile = $kdProfile 
+                and pasiendaftar_t.kdprofile = $kdProfile
                 and ru.objectdepartemenfk=$objectdepartemenfk"))->count();
         $pulangsSembuhKum = collect(DB::select("select * from pasiendaftar_t
               join ruangan_m as ru on ru.id=pasiendaftar_t.objectruanganlastfk
                 where  pasiendaftar_t.objectstatuspulangfk  in (1,6,15,20)
                 and pasiendaftar_t.statusenabled= true
-                and pasiendaftar_t.kdprofile = $kdProfile 
+                and pasiendaftar_t.kdprofile = $kdProfile
                 and ru.objectdepartemenfk=$objectdepartemenfk"))->count();
         $pulangIsolasiKumulatif = collect(DB::select("select * from pasiendaftar_t
               join ruangan_m as ru on ru.id=pasiendaftar_t.objectruanganlastfk
                 where pasiendaftar_t.tglpulang is not null
                 and pasiendaftar_t.statusenabled= true
                 and pasiendaftar_t.objectstatuspulangfk  in (27,28,16,2)
-                and pasiendaftar_t.kdprofile = $kdProfile 
+                and pasiendaftar_t.kdprofile = $kdProfile
                 and ru.objectdepartemenfk=$objectdepartemenfk"))->count();
         $pulangRujukTowerLain = collect(DB::select("SELECT
                 pd.norec,pd.noregistrasi,st.statuskeluar,sp.statuspulang,
@@ -859,7 +859,7 @@ sb.id,
                 pd.tglpulang BETWEEN '$dari' and '$sampai'
             AND pd.kdprofile = $kdProfile
             AND pd.statusenabled = TRUE
-            and pd.objectstatuspulangfk in (13,14,26) 
+            and pd.objectstatuspulangfk in (13,14,26)
               and ru.objectdepartemenfk=$objectdepartemenfk
             "))->count();
         $rujuk = collect(DB::select("SELECT
@@ -886,7 +886,7 @@ sb.id,
             WHERE
                  pd.kdprofile = $kdProfile
             AND pd.statusenabled = TRUE
-             and pd.objectstatuspulangfk in (13,14,26) 
+             and pd.objectstatuspulangfk in (13,14,26)
               and ru.objectdepartemenfk=$objectdepartemenfk;
             "))->count();
         $rujukKum = collect(DB::select("SELECT
@@ -1277,7 +1277,7 @@ sb.id,
                 INNER JOIN kamar_m AS kmr ON kmr.id = tt.objectkamarfk
                 INNER JOIN ruangan_m AS ru ON ru.id = kmr.objectruanganfk
                 WHERE
-                    tt.kdprofile = $kdProfile 
+                    tt.kdprofile = $kdProfile
                 AND tt.statusenabled = TRUE
                 AND kmr.statusenabled = TRUE"))->count();
         return $data;
@@ -1577,8 +1577,8 @@ sb.id,
         }
         if ($namapasien != '') {
             $namapasien =  str_replace("'", "",  $namapasien);
-            $data = $data->whereRaw("(replace(p.namapasien,'''','') ilike '%" . $namapasien . "%' 
-            or replace(p.nocm,'''','') ilike '%" . $namapasien . "%' 
+            $data = $data->whereRaw("(replace(p.namapasien,'''','') ilike '%" . $namapasien . "%'
+            or replace(p.nocm,'''','') ilike '%" . $namapasien . "%'
             )");
         }
         if ($ruanganfk != '') {
@@ -1706,7 +1706,7 @@ sb.id,
         for ($i = count($data) - 1; $i >= 0; $i--) {
             $id = $data[$i]->id;
 
-            $des =  DB::select(DB::raw("select * from tempattidur_m 
+            $des =  DB::select(DB::raw("select * from tempattidur_m
               where objectkamarfk ='$id' and objectstatusbedfk=2 and kdprofile=$kdProfile and statusenabled=true"));
             //   dd($des);
             if (count($des) == 0) {
@@ -1763,7 +1763,7 @@ sb.id,
                     'objectruanganasalfk' =>  $datana->objectruanganlastfk,
                 ]);
             $ruangasal = DB::select(
-                DB::raw("select * from antrianpasiendiperiksa_t 
+                DB::raw("select * from antrianpasiendiperiksa_t
                          where noregistrasifk=:noregistrasifk and objectruanganfk=:objectruanganfk;"),
                 array(
                     'noregistrasifk' => $datana->norec_pd,
@@ -1879,7 +1879,7 @@ sb.id,
     {
         $kdProfile = session("kdProfile");
         $pasien = collect(DB::select("select pd.noregistrasi,ps.nocm,ps.namapasien,
-                CASE WHEN kmr.namakamar IS NOT NULL THEN   
+                CASE WHEN kmr.namakamar IS NOT NULL THEN
                 dept.namadepartemen || ' ' || ru.namaruangan || ' Kamar ' || kmr.namakamar || ' Bed ' || tt.nomorbed
                 ELSE '-' END AS kamarpasien
                 from antrianpasiendiperiksa_t  as apd
@@ -1963,7 +1963,7 @@ sb.id,
                 }
 
 
-                $datana = collect(DB::select("select 
+                $datana = collect(DB::select("select
                 pd.norec as norec_pd,pd.objectruanganlastfk,
                 pd.tglregistrasi,pd.noregistrasi,
                 apd.objectasalrujukanfk,pd.nocmfk,ps.nocm,
@@ -2083,7 +2083,7 @@ sb.id,
             DB::beginTransaction();
             //##Update Pasiendaftar##
             try {
-                $datana = collect(DB::select("select 
+                $datana = collect(DB::select("select
             pd.norec as norec_pd,pd.objectruanganlastfk,
             pd.tglregistrasi,pd.noregistrasi,
             apd.objectasalrujukanfk,pd.nocmfk,ps.nocm
@@ -2109,7 +2109,7 @@ sb.id,
                     ]);
 
                 $ruangasal = DB::select(
-                    DB::raw("select * from antrianpasiendiperiksa_t 
+                    DB::raw("select * from antrianpasiendiperiksa_t
                      where norec=:norec and kdprofile=:kdProfile;"),
                     array(
                         'kdProfile' => $kdProfile,
@@ -2225,7 +2225,7 @@ sb.id,
         DB::beginTransaction();
         //##Update Pasiendaftar##
         try {
-            $datana = collect(DB::select("select 
+            $datana = collect(DB::select("select
             pd.norec as norec_pd,pd.objectruanganlastfk,
             pd.tglregistrasi,pd.noregistrasi,
             apd.objectasalrujukanfk,pd.nocmfk,ps.nocm
@@ -2251,7 +2251,7 @@ sb.id,
                 ]);
 
             $ruangasal = DB::select(
-                DB::raw("select * from antrianpasiendiperiksa_t 
+                DB::raw("select * from antrianpasiendiperiksa_t
                      where norec=:norec and kdprofile=:kdProfile;"),
                 array(
                     'kdProfile' => $kdProfile,
@@ -2536,7 +2536,7 @@ sb.id,
     {
         $kdProfile = session("kdProfile");
         $pasien = collect(DB::select("select pd.noregistrasi,ps.nocm,ps.namapasien,
-                CASE WHEN kmr.namakamar IS NOT NULL THEN   
+                CASE WHEN kmr.namakamar IS NOT NULL THEN
                 dept.namadepartemen || ' ' || ru.namaruangan || ' Kamar ' || kmr.namakamar || ' Bed ' || tt.nomorbed
                 ELSE '-' END AS kamarpasien,pd.norec as norec_pd
                 from antrianpasiendiperiksa_t  as apd
@@ -2631,20 +2631,20 @@ sb.id,
 
         $getDokter = collect(DB::select("
 
-            SELECT row_number() over(partition by ps.nocm order by so.tglorder) as rownum, ps.namapasien,ps.nocm,pd.noregistrasi,
+            SELECT row_number() over(partition by ps.nocm order by so.tglpelayananawal) as rownum, ps.namapasien,ps.nocm,pd.noregistrasi,
                    ru.namaruangan AS ruangrawat,
-                   so.noorder,so.tglorder AS tgloperasi
+                   so.noorder,so.tglpelayananawal AS tgloperasi
             FROM strukorder_t AS so
             INNER JOIN pasiendaftar_t AS pd ON pd.norec = so.noregistrasifk
             INNER JOIN pasien_m AS ps ON ps.id = pd.nocmfk
             LEFT JOIN jeniskelamin_m AS klm ON klm.id = ps.objectjeniskelaminfk
-            LEFT JOIN ruangan_m AS ru ON ru.id = so.objectruanganfk                                 
+            LEFT JOIN ruangan_m AS ru ON ru.id = so.objectruanganfk
             WHERE so.statusenabled = true AND pd.statusenabled = true
                   AND so.kdprofile = $kdProfile AND pd.kdprofile = $kdProfile
-                  AND so.tglorder BETWEEN '$tglAwal' AND '$tglAkhir'                  
+                  AND so.tglpelayananawal BETWEEN '$tglAwal' AND '$tglAkhir'
                   AND so.keteranganorder = 'Pesan Jadwal Operasi'
                   AND so.objectkelompoktransaksifk = 22
-                  ORDER BY so.tglorder ASC
+                  ORDER BY so.tglpelayananawal ASC
         "));
         // dd($getDokter);
         return view('module.bedah.dashboard-bedah', compact('getPerawat', 'getDokter'));
