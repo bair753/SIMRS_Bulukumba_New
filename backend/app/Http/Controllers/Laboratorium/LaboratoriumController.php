@@ -1017,7 +1017,7 @@ class LaboratoriumController extends ApiController
         $data = DB::select(DB::raw("SELECT pp.noregistrasifk as norec_apd,djp.detailjenisproduk,pp.produkfk,prd.namaproduk  ,maps.detailpemeriksaan,maps.memohasil,
                 maps.nourutdetail,maps.satuanstandarfk,ss.satuanstandar,nn.nilaitext,nn.tipedata,nn.nilaimin,nn.nilaimax,hh.hasil,hh.objectpemeriksafk,pg1.namalengkap as pemeriksa,hh.objectdokterfk,pg2.namalengkap as dokter,hh.catatan,
                 maps.id as map_id,hh.norec as norec_hasil,maps.nourutjenispemeriksaan,maps.nourutdetail,pp.norec as norecPP,nn.nilaimin || '-' || nn.nilaimax as nilainormalstr,
-                hh.flag,nn.id as idnn,maps2.jeniskelaminfk
+                hh.flag,nn.id as idnn,maps2.jeniskelaminfk,maps.loinc_id,maps.loinc_name
                 FROM pelayananpasien_t  as pp
                 inner join produk_m as prd on prd.id = pp.produkfk
                 inner join detailjenisproduk_m as djp on djp.id = prd.objectdetailjenisprodukfk
@@ -1045,6 +1045,7 @@ class LaboratoriumController extends ApiController
         $idProfile = (int) $kdProfile;
         DB::beginTransaction();
         try{
+            $norec = [];
             foreach ($request['hasil'] as $key => $value) {
                 $cek =  HasilLaboratorium::where([
                     // 'noregistrasifk',$request['hasil'][0]['noregistrasifk']
@@ -1057,13 +1058,16 @@ class LaboratoriumController extends ApiController
                     // detailpemeriksaan
                     ])->first();
                 if(!empty($cek)){
-                   $update = HasilLaboratorium::where([
+                    $norec[] = $cek->norec;
+                    $update = HasilLaboratorium::where([
                         // 'noregistrasifk',$request['hasil'][0]['noregistrasifk']
                         // 'norecpelayanan',$value['norecpelayanan']
                         'noregistrasifk' => $value['noregistrasifk'],
                         'norecpelayanan' => $value['norecpelayanan'],
                         'produkfk' => $value['produkfk'],
                         'detailpemeriksaan' => $value['detailpemeriksaan'],
+                        'loinc_id' => $request['loinc_id'],
+                        'loinc_name' => $request['loinc_name']
                         ])->update(
                             [
                                 'hasil' => $value['hasil'],
@@ -1090,7 +1094,10 @@ class LaboratoriumController extends ApiController
                     $h->objectpemeriksafk = $request['pemeriksa'];
                     $h->objectdokterfk = $request['dokter'];
                     $h->catatan = $request['catatan'];
+                    $h->loinc_id = $value['loinc_id'];
+                    $h->loinc_name = $value['loinc_name'];
                     $h->save();
+                    $norec[] = $h->norec;
                 }
     
                     # code...
@@ -1108,9 +1115,25 @@ class LaboratoriumController extends ApiController
         if ($transStatus == 'true') {
             $transMessage = "Sukses";
             DB::commit();
+            $ihs = null;
+
+            foreach ($norec as $it) {
+                $objetoRequest = new \Illuminate\Http\Request();
+                $objetoRequest['norec_hasil'] = $it;
+                $ihs = app('App\Http\Controllers\Bridging\IHSController')->ObservationLab($objetoRequest, true);
+            }
+            $ihs2 = null;
+
+            $objetoRequest2 = new \Illuminate\Http\Request();
+            $objetoRequest2['norec_hasil'] = $it;
+            $objetoRequest2['norec_arr'] = $norec;
+
+            $ihs2 = app('App\Http\Controllers\Bridging\IHSController')->DiagnosticReport($objetoRequest2, true);
             $result = array(
                 "status" => 201,
                 "message" => $transMessage,
+                "Observation" => $ihs,
+                "DiagnosticReport" => $ihs2,
                 "as" => 'er@epic',
             );
 

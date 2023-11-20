@@ -733,6 +733,26 @@ class RawatJalanController extends ApiController
         DB::beginTransaction();
         try {
             $apd = AntrianPasienDiperiksa::where('norec', $request['norec_apd'])->where('kdprofile', $idProfile)->first();
+
+            $norecs = AntrianPasienDiperiksa::where('norec', $request['norec_apd'])
+                ->where('kdprofile', $idProfile)
+                ->first();
+
+                $pd = PasienDaftar::where('norec', $norecs->noregistrasifk)->first();
+                $ihs = null;
+                if($pd->ihs_in_progress == null){
+                    PasienDaftar::where('norec', $norecs->noregistrasifk)->update([
+                        'ihs_in_progress'=> date('Y-m-d H:i:s'),
+                    ]);
+                    $objetoRequest = new \Illuminate\Http\Request();
+                    $objetoRequest ['noregistrasi']= $pd->noregistrasi;
+                    if($pd->ihs_diagnosis != null){
+                        $objetoRequest ['diagnosis']=  json_decode($pd->ihs_diagnosis);
+                    }
+                    $ihs = app('App\Http\Controllers\Bridging\IHSController')->Encounter($objetoRequest,true);
+                
+                }
+
             if (isset($request['kelompokUser']) && $request['kelompokUser'] != 'suster') {
 
                 if ($apd->tgldipanggildokter == null) {
@@ -763,6 +783,7 @@ class RawatJalanController extends ApiController
             $result = array(
                 "status" => 201,
                 "message" => $transMessage,
+                "Encounter" => $ihs
             );
         } else {
             DB::rollBack();

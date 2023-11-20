@@ -642,12 +642,21 @@ class RegistrasiController extends ApiController
                 return $this->setStatusCode(200)->respond($result, $transMessage);
             }else{
                 DB::commit();
+                $antrol = '';
+                if($r_NewPD['norec_pd'] == '' && $r_NewPD['statusschedule'] != '' && $r_NewPD['statusschedule'] != 'Kios-K'){
+                    $antrol = $this->saveAntrolV2($r_NewPD['statusschedule']);
+                }
+                $objetoRequest = new \Illuminate\Http\Request();
+                $objetoRequest ['noregistrasi']= $dataPD->noregistrasi;
+                $ihs = app('App\Http\Controllers\Bridging\IHSController')->Encounter($objetoRequest,true);
                 $transMessage = 'SUKSES';
                 $result = array(
                     'status' => 201,
                     'message'=>$transMessage,
                     'dataPD' => $dataPD,
                     'dataAPD' => $dataAPD,
+                    'antrol'=> $antrol,
+                    'Encounter'=> isset($ihs)? $ihs :null,
                     'as' => 'ramdanegie',
                 );
             }
@@ -1171,12 +1180,13 @@ class RegistrasiController extends ApiController
         $data = \DB::table('pasien_m as ps')
             ->leftjoin('alamat_m as alm','alm.nocmfk','=','ps.id')
             ->leftjoin('jeniskelamin_m as jk','jk.id','=','ps.objectjeniskelaminfk')
+            ->leftjoin('profile_m as pro','pro.id','=','ps.kdprofile')
             ->select('ps.nocm','ps.namapasien','ps.tgldaftar', 'ps.tgllahir',
                 'jk.jeniskelamin','ps.noidentitas','alm.alamatlengkap',
                 'ps.id as nocmfk','ps.namaayah','ps.notelepon','ps.nohp','ps.tglmeninggal','ps.iskompleks','ps.nobpjs'//,
 //                'ps.foto'
                 ,
-                DB::raw('case when ps.foto is null then null else \'ada\' end as photo')
+                DB::raw('case when ps.foto is null then null else \'ada\' end as photo,ps.ihs_number,pro.ihs_id as ihs_profile')
             );
 //        if (isset($request['tglAwal']) && $request['tglAwal'] != "" && $request['tglAwal'] != "undefined") {
 //            $data = $data->where('ps.tgldaftar', '>=', $request['tglAwal']);

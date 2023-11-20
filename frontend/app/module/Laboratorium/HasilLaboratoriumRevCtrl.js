@@ -551,6 +551,8 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                             "flag": $scope.resultGrids._data[i].flag,
                             "detailpemeriksaan": $scope.resultGrids._data[i].detailpemeriksaan,
                             "norecpelayanan" : $scope.resultGrids._data[i].norecpp,
+                            "loinc_name" : $scope.resultGrids._data[i].loinc_name,
+                            "loinc_id" : $scope.resultGrids._data[i].loinc_id
                         });
                 }
 

@@ -545,6 +545,37 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
         Route::post('espay/update-expire-transaction', 'Bridging\BridgingESPAYController@updateExpireTransaction');
         // END ESPAY
 
+        Route::post('bridging/ihs/tools', 'Bridging\IHSController@ihsTools');
+        Route::post('bridging/ihs/generate-token', 'Bridging\IHSController@generateToken');
+        Route::post('bridging/ihs/Organization', 'Bridging\IHSController@Organization');
+        Route::post('bridging/ihs/Location', 'Bridging\IHSController@Location');
+        Route::post('bridging/ihs/Encounter', 'Bridging\IHSController@Encounter');
+        Route::post('bridging/ihs/Condition', 'Bridging\IHSController@Condition');
+        Route::post('bridging/ihs/Practitioner', 'Bridging\IHSController@Practitioner');
+        Route::post('bridging/ihs/update-ihs-pasien', 'Bridging\IHSController@updateIHSPasien');
+        Route::post('bridging/ihs/Medication', 'Bridging\IHSController@Medication');
+        Route::post('bridging/ihs/MedicationRequest', 'Bridging\IHSController@MedicationRequest');
+        Route::post('bridging/ihs/MedicationDispense', 'Bridging\IHSController@MedicationDispense');
+        Route::post('bridging/ihs/MedicationDispenseObatBebas', 'Bridging\IHSController@MedicationDispenseObatBebas');
+        Route::post('bridging/ihs/Observation', 'Bridging\IHSController@Observation');
+        Route::post('bridging/ihs/Procedure', 'Bridging\IHSController@Procedure');
+        Route::post('bridging/ihs/Immunization', 'Bridging\IHSController@Immunization');
+        Route::post('bridging/ihs/Composition', 'Bridging\IHSController@Composition');
+        Route::post('bridging/ihs/ServiceRequest', 'Bridging\IHSController@ServiceRequest');
+        Route::post('bridging/ihs/Specimen', 'Bridging\IHSController@Specimen');
+        Route::post('bridging/ihs/ObservationLab', 'Bridging\IHSController@ObservationLab');
+        Route::post('bridging/ihs/ObservationRad', 'Bridging\IHSController@ObservationRad');
+        Route::post('bridging/ihs/DiagnosticReport', 'Bridging\IHSController@DiagnosticReport');
+        Route::post('bridging/ihs/ObservationLabDiagnos', 'Bridging\IHSController@ObservationLabDiagnos');
+        Route::post('bridging/ihs/AllergyIntolerance', 'Bridging\IHSController@AllergyIntolerance');
+        Route::post('bridging/ihs/ClinicalImpression', 'Bridging\IHSController@ClinicalImpression');
+        Route::post('bridging/ihs/ObservationKesadaran', 'Bridging\IHSController@ObservationKesadaran');
+        Route::post('bridging/ihs/ProcedureEdukasi', 'Bridging\IHSController@ProcedureEdukasi');
+        Route::post('bridging/ihs/ConditionSaatMeninggalkanRS', 'Bridging\IHSController@ConditionSaatMeninggalkanRS');
+        Route::post('bridging/ihs/Encounter-tes', 'Bridging\IHSController@Encountertes');
+        Route::get('bridging/ihs/get-list', 'Bridging\IHSController@getList');
+        Route::get('bridging/ihs/Encounter-list', 'Bridging\IHSController@EncounterList');
+
         Route::group(['prefix' => 'cssd'], function () {
 
         });
@@ -2551,6 +2582,10 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
                 Route::get('sysadmin/master/get-daftar-icdsepuluh', 'SysAdmin\Master\MasterController@getIcdSepuluh');
                 Route::get('sysadmin/master/get-daftar-icdsembilan', 'SysAdmin\Master\MasterController@getIcdSembilan');
                 Route::get('sysadmin/master/get-daftar-master-sifatsurat', 'SysAdmin\Master\MasterController@getDataMasterSifatSurat');
+                Route::get('sysadmin/master/get-data-combo-master-rev', 'SysAdmin\Master\MasterController@getDataComboMasterRev');
+                Route::get('sysadmin/master/get-data-produkapotik', 'SysAdmin\Master\MasterController@getListProdukApotik');
+                Route::get('sysadmin/master/get-daftar-master-pegawai', 'SysAdmin\Master\MasterController@getDataMasterPegawai');
+                // GET //
                 // GET //
 
                 // POST //
@@ -2566,6 +2601,8 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
                 Route::post('sysadmin/master/save-statusenabled-rekanan', 'SysAdmin\Master\MasterController@UpdateStatusEnabledRekanan');
                 Route::post('sysadmin/master/save-data-rekanan', 'SysAdmin\Master\MasterController@saveDataRekanan');
                 Route::post('sysadmin/master/save-kelbil-produk', 'SysAdmin\Master\MasterController@updateKelompokBill');
+                Route::post('sysadmin/master/save-data-master-pegawai', 'SysAdmin\Master\MasterController@saveDataMasterPegawai');
+                Route::post('sysadmin/master/save-data-produk-konsinyasi', 'SysAdmin\Master\MasterController@UpdateStatusKonsinyasi');
 
                 Route::post('sysadmin/master/save-table-row','SysAdmin\Master\MasterController@saveTable');
                 Route::post('sysadmin/master/hapus-tarif-harganetto', 'SysAdmin\Master\MasterController@hapusHargaNettoByKelas');

@@ -651,4 +651,94 @@ Trait Valet {
             return 0;
         }
     }
+
+    public function saveAntrolV2($noreservasi){
+        try{
+            $json = array(
+                "kodebooking" => $noreservasi,
+                "taskid" => 3, //pasien lama langsung task 3 //(akhir waktu layan admisi/mulai waktu tunggu poli)
+                "waktu" => strtotime(date('Y-m-d H:i:s')) * 1000,
+            );
+            $objetoRequest = new \Illuminate\Http\Request();
+            $objetoRequest ['url']= "antrean/updatewaktu";
+            $objetoRequest ['jenis']= "antrean";
+            $objetoRequest ['method']= "POST";
+            $objetoRequest ['data']= $json;
+         
+            $post = app('App\Http\Controllers\Bridging\BridgingBPJSV2Controller')->bpjsTools($objetoRequest);
+       
+            if(is_array($post)){
+                $code = $post['metaData']->code;
+                $message = $post['metaData']->message;
+            }else{
+                $cek = json_decode($post->content(), true);
+                $code = $cek['metaData']['code'];
+                $message = isset($cek['metaData']['message']) ? $cek['metaData']['message']: "";
+            }
+            if($code != '200'){
+                $json2 = array(
+                    "kodebooking" => $noreservasi,
+                    "taskid" => 1, 
+                    "waktu" => strtotime(date('Y-m-d H:i:s')) * 1000,
+                );
+                $objetoRequest2 = new \Illuminate\Http\Request();
+                $objetoRequest2 ['url']= "antrean/updatewaktu";
+                $objetoRequest2 ['jenis']= "antrean";
+                $objetoRequest2 ['method']= "POST";
+                $objetoRequest2 ['data']= $json2;
+             
+                $post2 = app('App\Http\Controllers\Bridging\BridgingBPJSV2Controller')->bpjsTools($objetoRequest2);
+
+                $json3 = array(
+                    "kodebooking" => $noreservasi,
+                    "taskid" => 2, 
+                    "waktu" => (strtotime(date('Y-m-d H:i:s')) * 1000 )-240000 ,
+                );
+                $objetoRequest3 = new \Illuminate\Http\Request();
+                $objetoRequest3 ['url']= "antrean/updatewaktu";
+                $objetoRequest3 ['jenis']= "antrean";
+                $objetoRequest3 ['method']= "POST";
+                $objetoRequest3 ['data']= $json3;
+             
+                $post3 = app('App\Http\Controllers\Bridging\BridgingBPJSV2Controller')->bpjsTools($objetoRequest3);
+
+                $json4 = array(
+                    "kodebooking" => $noreservasi,
+                    "taskid" => 3, 
+                    "waktu" =>  (strtotime(date('Y-m-d H:i:s')) * 1000 )-120000 ,
+                );
+                $objetoRequest4 = new \Illuminate\Http\Request();
+                $objetoRequest4 ['url']= "antrean/updatewaktu";
+                $objetoRequest4 ['jenis']= "antrean";
+                $objetoRequest4 ['method']= "POST";
+                $objetoRequest4 ['data']= $json4;
+             
+                $post5= app('App\Http\Controllers\Bridging\BridgingBPJSV2Controller')->bpjsTools($objetoRequest4);
+                if(is_array($post5)){
+                    $code = $post5['metaData']->code;
+                    $message = $post5['metaData']->message;
+                }else{
+                    $cek = json_decode($post5->content(), true);
+                    $code = $cek['metaData']['code'];
+                    $message = isset($cek['metaData']['message']) ? $cek['metaData']['message']: "";
+                }
+                if($code != '200'){
+                    $result = array("metadata"=>array("message" => "Add antrol gagal : ".$message, "code" => 201));
+                    return $result;
+                }else{
+                    $result = array("metadata"=>array("message" =>$message, "code" => 200));
+                    return $result;
+                }
+                $result = array("metadata"=>array("message" => "Add antrol gagal : ".$message, "code" => 201));
+                return $result;
+            }else{
+                $result = array("metadata"=>array("message" =>$message, "code" => 200));
+                return $result;
+            }
+        } catch (\Exception $e) {
+            $result = array("metadata"=>array("message" =>$e->getMessage().' ' .$e->getLine(), "code" => 201));
+            return $result;
+        }
+
+    }
 }
