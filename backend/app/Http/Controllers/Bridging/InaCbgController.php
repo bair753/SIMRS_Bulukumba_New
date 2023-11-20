@@ -1582,52 +1582,24 @@ class InaCbgController   extends ApiController
         $i = 0 ;
         $dtdt = '';
 
-
-
-
-        $dataDokumen = \DB::table('monitoringdokklaim_t as md')
-        ->join('pasiendaftar_t as pd', 'pd.norec', '=', 'md.noregistrasifk')
-        ->join('pasien_m as ps', 'ps.id', '=', 'pd.nocmfk')
-        ->join('dokumenklaim_m as dk', 'dk.id', '=', 'md.documentklaimfk')
-        ->join('departemen_m as dp', 'dp.id', '=', 'dk.objectdepartemenfk')
-        ->select('pd.norec','md.filename','md.documentklaimfk','dk.kodeexternal','dk.dokumen','dk.objectdepartemenfk')
-        ->where('pd.tglregistrasi', '>=', $filter['tglAwal'])
-        ->where('pd.tglregistrasi', '<=', $filter['tglAkhir'])
-        ->where('pd.kdprofile',$kdProfile);
-
-        if (isset($filter['noreg']) && $filter['noreg'] != "" && $filter['noreg'] != "undefined") {
-            $dataDokumen = $dataDokumen->where('pd.noregistrasi', '=', $filter['noreg']);
-        }
-        if (isset($filter['norm']) && $filter['norm'] != "" && $filter['norm'] != "undefined") {
-            $dataDokumen = $dataDokumen->where('ps.nocm', '=', $filter['norm']);
-        }
-        if (isset($filter['nama']) && $filter['nama'] != "" && $filter['nama'] != "undefined") {
-            $dataDokumen = $dataDokumen->where('ps.namapasien', 'ilike', '%' . $filter['nama'] . '%');
-        }
-        if (isset($filter['deptId']) && $filter['deptId'] != "" && $filter['deptId'] != "undefined") {
-            $dataDokumen = $dataDokumen->where('dk.objectdepartemenfk', '=', $filter['deptId']);
-        }
-        $dataDokumen=$dataDokumen->get();
-
-        // $RingkasanPulang = \DB::table('monitoringdokklaim_t as md')
-        // ->join('pasiendaftar_t as pd', 'pd.norec', '=', 'md.noregistrasifk')
-        // ->join('pasien_m as ps', 'ps.id', '=', 'pd.nocmfk')
-        // ->join('dokumenklaim_m as dk', 'dk.id', '=', 'md.documentklaimfk')
-        // ->join('departemen_m as dp', 'dp.id', '=', 'dk.objectdepartemenfk')
-        // ->select('pd.norec','md.filename','md.documentklaimfk','dk.kodeexternal','dk.dokumen','dk.objectdepartemenfk')
-        // ->where('pd.kdprofile',$kdProfile)
-        // ->where('dk.id',12);
-
         $RingkasanPulang = \DB::table('emrpasiend_t as emrdp')
-        ->join('emrpasien_t as emrp', 'emrp.noemr', '=', 'emrdp.emrpasienfk')
-        ->join('emrd_t as emrd', 'emrd.id', '=', 'emrdp.emrdfk')
-        ->join('pasiendaftar_t as pd', 'pd.noregistrasi', '=', 'emrp.noregistrasifk')
-        ->join('pasien_m as ps', 'ps.id', '=', 'pd.nocmfk')
-        ->join('ruangan_m as ru', 'ru.id', '=', 'pd.objectruanganlastfk')
+        ->leftjoin('emrpasien_t as emrp', 'emrp.noemr', '=', 'emrdp.emrpasienfk')
+        ->leftjoin('emrd_t as emrd', 'emrd.id', '=', 'emrdp.emrdfk')
+        ->leftjoin('pasiendaftar_t as pd', 'pd.noregistrasi', '=', 'emrp.noregistrasifk')
+        ->leftjoin('pemakaianasuransi_t as pas', 'pas.noregistrasifk', '=', 'pd.norec')
+        ->leftjoin('pasien_m as ps', 'ps.id', '=', 'pd.nocmfk')
+        ->leftjoin('ruangan_m as ru', 'ru.id', '=', 'pd.objectruanganlastfk')
         ->select('pd.norec')
         ->where('pd.kdprofile',$kdProfile)
         ->where('emrdp.emrfk',290030)
         ->where('emrdp.emrdfk',423819);
+        if (isset($filter['tglAwal']) && $filter['tglAwal'] != "" && $filter['tglAwal'] != "undefined") {
+            $RingkasanPulang = $RingkasanPulang->where('pd.tglregistrasi', '>=', $filter['tglAwal']);
+        }
+        if (isset($filter['tglAkhir']) && $filter['tglAkhir'] != "" && $filter['tglAkhir'] != "undefined") {
+            $tgl = $filter['tglAkhir'];//." 23:59:59";
+            $RingkasanPulang = $RingkasanPulang->where('pd.tglregistrasi', '<=', $tgl);
+        }
         if (isset($filter['noreg']) && $filter['noreg'] != "" && $filter['noreg'] != "undefined") {
             $RingkasanPulang = $RingkasanPulang->where('pd.noregistrasi', '=', $filter['noreg']);
         }
@@ -1640,12 +1612,20 @@ class InaCbgController   extends ApiController
         if (isset($filter['deptId']) && $filter['deptId'] != "" && $filter['deptId'] != "undefined") {
             $RingkasanPulang = $RingkasanPulang->where('ru.objectdepartemenfk', '=', $filter['deptId']);
         }
+        if (isset($filter['jmlRows']) && $filter['jmlRows'] != "" && $filter['jmlRows'] != "undefined") {
+            $RingkasanPulang = $RingkasanPulang->take($filter['jmlRows']);
+        }
+        if (isset($filter['nosep']) && $filter['nosep'] != "" && $filter['nosep'] != "undefined") {
+            $RingkasanPulang = $RingkasanPulang->where('pas.nosep', '=', $filter['nosep']);
+        }
         $RingkasanPulang=$RingkasanPulang->get();
 
         $dataDiagnosa = \DB::table('detaildiagnosapasien_t as dp')
             ->join('diagnosa_m as dg', 'dg.id', '=', 'dp.objectdiagnosafk')
             ->join('antrianpasiendiperiksa_t as apd', 'apd.norec', '=', 'dp.noregistrasifk')
             ->join('pasiendaftar_t as pd', 'pd.norec', '=', 'apd.noregistrasifk')
+            ->leftjoin('pemakaianasuransi_t as pas', 'pas.noregistrasifk', '=', 'pd.norec')
+            ->leftjoin('pasien_m as ps', 'ps.id', '=', 'pd.nocmfk')
             ->select('dg.kddiagnosa','apd.objectasalrujukanfk','pd.norec')
 //            ->where('apd.noregistrasifk',$data[$i]->norec)
             ->wherein('dp.objectjenisdiagnosafk',array(1,2))
@@ -1657,12 +1637,18 @@ class InaCbgController   extends ApiController
         if (isset($filter['noreg']) && $filter['noreg'] != "" && $filter['noreg'] != "undefined") {
             $dataDiagnosa = $dataDiagnosa->where('pd.noregistrasi', '=', $filter['noreg']);
         }
-        // if (isset($filter['norm']) && $filter['norm'] != "" && $filter['norm'] != "undefined") {
-        //     $dataDiagnosa = $dataDiagnosa->where('ps.nocm', 'like', '%' . $filter['norm'] . '%');
-        // }
-        // if (isset($filter['nama']) && $filter['nama'] != "" && $filter['nama'] != "undefined") {
-        //     $dataDiagnosa = $dataDiagnosa->where('ps.namapasien', 'like', '%' . $filter['nama'] . '%');
-        // }
+        if (isset($filter['norm']) && $filter['norm'] != "" && $filter['norm'] != "undefined") {
+            $dataDiagnosa = $dataDiagnosa->where('ps.nocm', 'like', '%' . $filter['norm'] . '%');
+        }
+        if (isset($filter['nama']) && $filter['nama'] != "" && $filter['nama'] != "undefined") {
+            $dataDiagnosa = $dataDiagnosa->where('ps.namapasien', 'like', '%' . $filter['nama'] . '%');
+        }
+        if (isset($filter['jmlRows']) && $filter['jmlRows'] != "" && $filter['jmlRows'] != "undefined") {
+            $dataDiagnosa = $dataDiagnosa->take($filter['jmlRows']);
+        }
+        if (isset($filter['nosep']) && $filter['nosep'] != "" && $filter['nosep'] != "undefined") {
+            $dataDiagnosa = $dataDiagnosa->where('pas.nosep', '=', $filter['nosep']);
+        }
         $dataDiagnosa=$dataDiagnosa->get();
         foreach ($data as $item){
             $dtdt = '';
@@ -1694,6 +1680,8 @@ class InaCbgController   extends ApiController
             ->join('diagnosatindakan_m as dg', 'dg.id', '=', 'dp.objectdiagnosatindakanfk')
             ->join('antrianpasiendiperiksa_t as apd', 'apd.norec', '=', 'dpa.objectpasienfk')
             ->join('pasiendaftar_t as pd', 'pd.norec', '=', 'apd.noregistrasifk')
+            ->leftjoin('pemakaianasuransi_t as pas', 'pas.noregistrasifk', '=', 'pd.norec')
+            ->leftjoin('pasien_m as ps', 'ps.id', '=', 'pd.nocmfk')
             ->select('dg.kddiagnosatindakan','pd.norec')
 //            ->where('apd.noregistrasifk',$data[$i]->norec)
             ->where('pd.tglregistrasi', '>=', $filter['tglAwal'])
@@ -1701,6 +1689,18 @@ class InaCbgController   extends ApiController
             ->where('pd.kdprofile',$kdProfile);
         if (isset($filter['noreg']) && $filter['noreg'] != "" && $filter['noreg'] != "undefined") {
             $dataICD9 = $dataICD9->where('pd.noregistrasi', '=', $filter['noreg']);
+        }
+        if (isset($filter['norm']) && $filter['norm'] != "" && $filter['norm'] != "undefined") {
+            $dataICD9 = $dataICD9->where('ps.nocm', 'like', '%' . $filter['norm'] . '%');
+        }
+        if (isset($filter['nama']) && $filter['nama'] != "" && $filter['nama'] != "undefined") {
+            $dataICD9 = $dataICD9->where('ps.namapasien', 'like', '%' . $filter['nama'] . '%');
+        }
+        if (isset($filter['jmlRows']) && $filter['jmlRows'] != "" && $filter['jmlRows'] != "undefined") {
+            $dataICD9 = $dataICD9->take($filter['jmlRows']);
+        }
+        if (isset($filter['nosep']) && $filter['nosep'] != "" && $filter['nosep'] != "undefined") {
+            $dataICD9 = $dataICD9->where('pas.nosep', '=', $filter['nosep']);
         }
         $dataICD9=$dataICD9->get();
         foreach ($data as $item){
@@ -1733,6 +1733,7 @@ class InaCbgController   extends ApiController
         $noregs ='' ;
         $norms ='' ;
         $namas ='' ;
+        $seps ='' ;
         if (isset($filter['noreg']) && $filter['noreg'] != "" && $filter['noreg'] != "undefined") {
             $noregs = " and pd.noregistrasi='$filter[noreg]'";
         }
@@ -1742,9 +1743,14 @@ class InaCbgController   extends ApiController
         if (isset($filter['nama']) && $filter['nama'] != "" && $filter['nama'] != "undefined") {
             $namas = " and ps.namapasien ilike '%".$filter['nama']."%'";
         }
+        if (isset($filter['nosep']) && $filter['nosep'] != "" && $filter['nosep'] != "undefined") {
+            $seps = " and pas.nosep ilike '%".$filter['nosep']."%'";
+        }
+
         $dataTarif16 = DB::select(DB::raw("select pd.norec, sum(((pp.hargajual - case when pp.hargadiscount is null then 0 else pp.hargadiscount end) * pp.jumlah)+ case when pp.jasa is null then 0 else pp.jasa end) as ttl,kpb.namaexternal
             from pasiendaftar_t as pd
             left join pasien_m as ps on ps.id = pd.nocmfk
+            left join pemakaianasuransi_t as pas on pas.noregistrasifk = pd.norec
             left JOIN antrianpasiendiperiksa_t as apd on apd.noregistrasifk=pd.norec
             left JOIN pelayananpasien_t as pp on pp.noregistrasifk=apd.norec
             left JOIN produk_m as pr on pr.id=pp.produkfk
@@ -1757,6 +1763,7 @@ class InaCbgController   extends ApiController
             $noregs
             $namas
             $norms
+            $seps
             group  by pd.norec,kpb.namaexternal order by pd.norec")
         );
         $i = 0 ;
@@ -1894,7 +1901,6 @@ class InaCbgController   extends ApiController
             $sewa_alat =0;
             $tindakan_lain =0;
             $data[$i]->tarif_rs = $datatatat;
-            $data[$i]->dokumenklaim = count($dataDokumen);
             $data[$i]->ringkasanpulang = $ringpulang;
 
             $i= $i + 1 ;
