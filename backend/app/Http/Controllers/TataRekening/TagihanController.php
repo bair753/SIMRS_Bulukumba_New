@@ -5068,6 +5068,12 @@ class TagihanController  extends ApiController
         $pasienDaftar->save();
         $strukPelayanan->save();
 
+        if($pasienDaftar->ihs_finished == null){
+            PasienDaftar::where('norec', $pasienDaftar->norec)->update([
+                'ihs_finished' => date('Y-m-d H:i:s'),
+            ]);
+        }
+
         $transStatus = true;
         } catch (\Exception $e) {
             $transStatus = false;
@@ -5077,10 +5083,37 @@ class TagihanController  extends ApiController
         if ($transStatus == 'true') {
             $transMessage = "Simpan Sukses";
             DB::commit();
+            $objetoRequest = new \Illuminate\Http\Request();
+            $objetoRequest ['noregistrasi']= $pasienDaftar->noregistrasi;
+            $ihs = null;
+            if($pasienDaftar->ihs_diagnosis != null){
+                $objetoRequest ['diagnosis']=  json_decode($pasienDaftar->ihs_diagnosis);
+            }
+            $ihs = app('App\Http\Controllers\Bridging\IHSController')->Encounter($objetoRequest,true);
+            //SEND BPJS SMART CLAIM
+            // $PA = DB::table('pemakaianasuransi_t')->where('noregistrasifk',$pasienDaftar->norec)->first();
+            // if(!empty($PA) && $PA->nosep != null){
+            //     $dept = DB::table('ruangan_m')->where('id',$pasienDaftar->objectruanganlastfk)->first();
+            //     $objetoRequest = new \Illuminate\Http\Request();
+            //     $objetoRequest['url'] = "eclaim/rekammedis/insert";
+            //     $objetoRequest['method'] = "POST";
+            //     $objetoRequest['jenis'] = "eRekamMedis";
+            //     $objetoRequest['data'] = [
+            //         "request" => [
+            //             "noSep" => $PA->nosep,
+            //             "jnsPelayanan" => $dept->objectdepartemenfk == 16 ? "1" : "2",
+            //             "bulan" => date('m',strtotime($PA->tanggalsep)),
+            //             "tahun" =>  date('Y',strtotime($PA->tanggalsep)),
+            //         ],
+            //     ];
+            //     $smartClaim = app('App\Http\Controllers\Bridging\BridgingBPJSV2Controller')->bpjsTools($objetoRequest,true);
+            // }
+             //END KIRIM BPJS SMART CLAIM
             $result = array(
                 'status' => 201,
                 'message' => $transMessage,
                 'result' => $strukPelayanan,
+                'Encounter_update' => $ihs,
                 'as' => 'ea@epic',
             );
         } else {

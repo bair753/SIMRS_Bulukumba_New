@@ -3805,6 +3805,14 @@
         {
             "nameDep": "SementaraBerobatCtrl",
             "urlDep": "module/EMR/SementaraBerobatCtrl"
+        },
+        {
+            "nameDep": "IHS_toolsCtrl",
+            "urlDep": "module/Bridging/IHS_toolsCtrl"
+        },
+        {
+            "nameDep": "HistorySatuSehatCtrl",
+            "urlDep": "module/Registrasi/HistorySatuSehatCtrl"
         }
     ]
 }

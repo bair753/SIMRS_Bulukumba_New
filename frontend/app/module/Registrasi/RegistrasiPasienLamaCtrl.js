@@ -1,4 +1,4 @@
-define(['initialize'], function (initialize) {
+define(['initialize','Configuration'], function (initialize,configuration) {
     'use strict';
     initialize.controller('RegistrasiPasienLamaCtrl', ['MedifirstService', 'CacheHelper', '$scope', 'DateHelper', '$state', 'ModelItem', '$mdDialog',
         function (medifirstService, cacheHelper, $scope, DateHelper, $state, ModelItem, $mdDialog) {
@@ -14,6 +14,7 @@ define(['initialize'], function (initialize) {
             $scope.item.tglakhir = $scope.now;
             $scope.tglMeninggal = '';
             $scope.item.Rows = 50;
+            var dRiwayatReg = []
             $scope.Page = {
                 refresh: true,
                 pageSizes: true,
@@ -228,6 +229,13 @@ define(['initialize'], function (initialize) {
                         "template": '# if( iskompleks==1 ) {# ✔ # } else {#  #} #'
 
                     },
+                    {
+                        "field": "ihs_number",
+                        "title": "SATUSEHAT Number",
+                        "width": "80px",
+                        "template": '# if( ihs_number==null) {# - # } else {# #= ihs_number # #} #'
+
+                    }
                 ]
             };
 
@@ -241,11 +249,36 @@ define(['initialize'], function (initialize) {
             }
 
             $scope.klikdua = function (dataPasienSelected) {
-                if (dataPasienSelected.foto != null) {
-                    $scope.item.image = dataPasienSelected.foto
-                    $scope.popUpPhoto.center().open()
+                // if (dataPasienSelected.foto != null) {
+                //     $scope.item.image = dataPasienSelected.foto
+                //     $scope.popUpPhoto.center().open()
 
+                // }
+                $scope.isRouteLoading = true;
+                let data = {
+                    "url": "Patient?identifier=https://fhir.kemkes.go.id/id/nik|" + dataPasienSelected.noidentitas,
+                    "method": "GET",
+                    "data": null
                 }
+
+                medifirstService.postNonMessage("bridging/ihs/tools", data).then(function (e) {
+                
+                    // document.getElementById("jsonIHS").innerHTML = JSON.stringify(e.data, undefined, 4);
+                    $scope.isRouteLoading = false;
+                    // $scope.popUpJson.center().open().maximize();
+                    if(e.data.total> 0 && ( dataPasienSelected.ihs_number == '' ||  dataPasienSelected.ihs_number == null)){
+                        let jsonSend = {
+                            'id':dataPasienSelected.nocmfk,
+                            'ihs_number':e.data.entry[0].resource.id
+                        }
+                        medifirstService.postNonMessage('bridging/ihs/update-ihs-pasien',jsonSend).then(function (z) {
+                            loadData()
+                        })
+                    }
+                
+                }).then(function () {
+                    $scope.isRouteLoading = false;
+                });
 
             }
 
@@ -400,11 +433,33 @@ define(['initialize'], function (initialize) {
                 },
                 selectable: 'row',
                 pageable: true,
+                groupable: true,
                 columns: [
                     {
-                        "field": "no",
-                        "title": "No",
-                        "width": "30px",
+                        "command": [
+                            {
+                                text: "Condition",
+                                click: ihsCondition,
+                                imageClass: " fa fa-check"
+                            },
+                            // {
+                            //     text: "Condition",
+                            //     click: ihsCondition,
+                            //     imageClass: " fa fa-stethoscope"
+                            // }
+                        ],
+                        title: "",
+                        width: "100px",
+                    },
+                    // {
+                    //     "field": "no",
+                    //     "title": "No",
+                    //     "width": "40px",
+                    // },
+                    {
+                        "field": "namaprofile",
+                        "title": "Location",
+                        "width": "150px"
                     },
                     {
                         "field": "tglregistrasi",
@@ -415,7 +470,7 @@ define(['initialize'], function (initialize) {
                     {
                         "field": "noregistrasi",
                         "title": "No Registrasi",
-                        "width": "90px"
+                        "width": "100px"
                     },
                     {
                         "field": "namaruangan",
@@ -436,6 +491,12 @@ define(['initialize'], function (initialize) {
                         "template": "<span class='style-left'>#: namadokter #</span>"
                     },
                     {
+                        "field": "",
+                        "title": "Diagnosa",
+                        "width": "150px",
+                        template: '{{ dataItem.kddiagnosa.join(", ") }}'
+                    },
+                    {
                         "field": "tglpulang",
                         "title": "Tgl Pulang",
                         "width": "80px",
@@ -446,6 +507,13 @@ define(['initialize'], function (initialize) {
                         "title": "Lama Dirawat",
                         "width": "80px"
                         // "template": "<span class='style-left'>{{formatTanggal('#: tglpulang #')}}</span>"
+                    },
+                    {
+                        
+                        "field": "ihs_encounter",
+                        "title": "IHS Encounter",
+                        "width": "200px"
+                        // "template": "<span class='style-left'>{{formatTanggal('#: tglpulang #')}}</span>"
                     }
                 ]
             };
@@ -454,14 +522,15 @@ define(['initialize'], function (initialize) {
                 if ($scope.dataPasienSelected == undefined) {
                     messageContainer.error("Pilih data dulu!")
                 }
+                $scope.itemD.IHS_PROFILE = $scope.dataPasienSelected.ihs_profile;
                 $scope.itemD.noRM = $scope.dataPasienSelected.nocm;
                 $scope.itemD.namaPasien = $scope.dataPasienSelected.namapasien;
                 $scope.itemD.tglLahir = moment($scope.dataPasienSelected.tgllahir).format('DD-MM-YYYY');
                 loadDataRiwayat();
                 $scope.popUpRiwayatRegistrasi.center().open();
-                var actions = $scope.popUpRiwayatRegistrasi.options.actions;
-                actions.splice(actions.indexOf("Close"), 1);
-                $scope.popUpRiwayatRegistrasi.setOptions({ actions: actions });
+                // var actions = $scope.popUpRiwayatRegistrasi.options.actions;
+                // actions.splice(actions.indexOf("Close"), 1);
+                // $scope.popUpRiwayatRegistrasi.setOptions({ actions: actions });
             }
 
             $scope.TutupPopUp = function () {
@@ -535,7 +604,7 @@ define(['initialize'], function (initialize) {
                 if ($scope.itemD.noRegistrasi != undefined) {
                     noReg = "&noReg=" + $scope.itemD.noRegistrasi;
                 }
-
+                dRiwayatReg = []
                 medifirstService.get("registrasi/daftar-riwayat-registrasi?" +
                     tglLahirs + rm + noReg + pasien)
                     .then(function (data) {
@@ -544,6 +613,7 @@ define(['initialize'], function (initialize) {
                         var dRiwayatReg = data.data.daftar;
                         for (var i = 0; i < dRiwayatReg.length; i++) {
                             dRiwayatReg[i].no = i + 1
+                            dRiwayatReg[i].ihs_encounter=  "Encounter/" +  dRiwayatReg[i].ihs_encounter
                             if (dRiwayatReg[i].statusinap == 1) {
                                 jumlahRawat = jumlahRawat + 1;
                                 if (dRiwayatReg[i].tglpulang != undefined) {
@@ -574,6 +644,9 @@ define(['initialize'], function (initialize) {
                                 }
                             }
                         });
+                        $scope.isRouteLoading = true
+                        asyncIHS()
+                        $scope.isRouteLoading = false
                     });
             }
 
@@ -804,6 +877,391 @@ define(['initialize'], function (initialize) {
                     },                 
                 ]
             };
+
+            $scope.ihsTools = function(dataItem){
+                let data = {
+                    "url":dataItem.ihs_encounter,
+                    "method": "GET",
+                    "data": null
+                }
+                $scope.isRouteLoading = true;
+                medifirstService.postNonMessage("bridging/ihs/tools", data).then(function (e) {
+                    document.getElementById("jsonIHS").innerHTML = JSON.stringify(e.data, undefined, 4);
+                    $scope.isRouteLoading = false;
+                    $scope.popUpJson.center().open().maximize();
+                }).then(function () {
+                    $scope.isRouteLoading = false;
+                });
+            }
+            function sendIHS(e) {
+                e.preventDefault();
+                var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+                let data = {
+                    "url":dataItem.ihs_encounter,
+                    "method": "GET",
+                    "data": null
+                }
+                $scope.isRouteLoading = true;
+                medifirstService.postNonMessage("bridging/ihs/tools", data).then(function (e) {
+                    document.getElementById("jsonIHS").innerHTML = JSON.stringify(e.data, undefined, 4);
+                    $scope.isRouteLoading = false;
+                    $scope.popUpJson.center().open().maximize();
+                }).then(function () {
+                    $scope.isRouteLoading = false;
+                });
+            }
+            function ihsCondition(e) {
+                e.preventDefault();
+                var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+                let data = {
+                    "url": "Condition?encounter=" + dataItem.ihs_encounter,
+                    "method": "GET",
+                    "data": null
+                }
+                $scope.isRouteLoading = true;
+                $scope.sourceCondition = new kendo.data.DataSource({
+                    data: [],
+                })
+                medifirstService.postNonMessage("bridging/ihs/tools", data).then(function (e) {
+                    if(e.data.total == 0){
+                        toastr.info('Data Not Found')
+                        return
+                    }
+                    for (let x = 0; x < e.data.entry.length; x++) {
+                        const element = e.data.entry[x];
+                        element.no = x + 1
+                    }
+                    $scope.sourceCondition = new kendo.data.DataSource({
+                        data: e.data.entry,
+                        pageSize: 10,
+                        total: e.data.entry.length,
+                        serverPaging: false,
+                        schema: {
+                            model: {
+                                fields: {
+                                }
+                            }
+                        }
+                    });
+                    $scope.isRouteLoading = false;
+                    $scope.popCondition.center().open()
+                }).then(function () {
+                    $scope.isRouteLoading = false;
+                });
+            }
+            $scope.tutupCond = function(){
+                $scope.popCondition.close()
+            }
+            $scope.columnCond = {
+                toolbar: [
+                    "excel",
+
+                ],
+                excel: {
+                    fileName: "List.xlsx",
+                    allPages: true,
+                },
+                excelExport: function (e) {
+                    var sheet = e.workbook.sheets[0];
+                    sheet.frozenRows = 2;
+                    sheet.mergedCells = ["A1:K1"];
+                    sheet.name = "List";
+
+                    var myHeaders = [{
+                        value: "Condition",
+                        fontSize: 20,
+                        textAlign: "center",
+                        background: "#ffffff",
+
+                    }];
+
+                    sheet.rows.splice(0, 0, { cells: myHeaders, type: "header", height: 70 });
+                },
+                pageable: true,
+                sortable: true,
+                resizable: true,
+                columns: [{
+                    "field": "no",
+                    "title": "No",
+                    "width": "23px",
+                    "attributes": { align: "center" }
+
+                },
+
+                // {
+                //     "field": "resourceType",
+                //     "title": "Resource Type",
+                //     "width": "100px"
+                // },
+                {
+                    "field": "resource.id",
+                    "title": "ID",
+                    "width": "100px"
+                },
+                {
+                    "field": "resource.subject.display",
+                    "title": "Subject Display",
+                    "width": "200px"
+                },
+                {
+                    "field": "resource.subject.reference",
+                    "title": "Subject Reff",
+                    "width": "150px"
+                },
+                {
+                    "field": "resource.encounter.reference",
+                    "title": "Encounter",
+                    "width": "100px"
+                },
+
+                {
+                    "field": "resource.code.coding[0].code",
+                    "title": "Condition Code",
+                    "width": "80px"
+                },
+                {
+                    "field": "resource.code.coding[0].display",
+                    "title": "Condition Display",
+                    "width": "80px"
+                },
+                {
+                    "field": "resource.category[0].coding[0].display",
+                    "title": "Category",
+                    "width": "80px"
+                },
+
+                {
+                    "command": [
+                        {
+                            text: "IHS",
+                            click: sendIHS2,
+                            imageClass: " fa fa-check"
+                        }],
+                    title: "",
+                    width: "80px",
+                }
+
+                ]
+            };
+            function sendIHS2(e) {
+                e.preventDefault();
+                var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+                let data = {
+                    "url": "Condition/" + dataItem.resource.id,
+                    "method": "GET",
+                    "data": null
+                }
+                $scope.isRouteLoading = true;
+                medifirstService.postNonMessage("bridging/ihs/tools", data).then(function (e) {
+                    document.getElementById("jsonIHS").innerHTML = JSON.stringify(e.data, undefined, 4);
+                    $scope.isRouteLoading = false;
+                    $scope.popUpJson.center().open().maximize();
+                }).then(function () {
+                    $scope.isRouteLoading = false;
+                });
+            }
+            // function asyncIHS (){
+                const asyncIHS = async () => {
+                    $scope.isRouteLoading =true
+                    let json = {
+                        "url": "Encounter?subject=Patient/" + $scope.dataPasienSelected.ihs_number,
+                        "method": "GET",
+                        "data": null
+                    }
+                    const xx = {
+                        data : {}
+                    }
+                    
+                    var response = await  medifirstService.postNonMessage("bridging/ihs/tools", json)
+                    xx.data = response.data
+                    // .then(async function (response) {
+                    //     xx.data =  response.data
+                    // })
+                    // const response = await fetch(configuration.baseApiBackend + 'bridging/ihs/tools',{
+                    //         method: 'POST',
+                    //         headers: {
+                    //         'Content-Type': 'application/json'
+                    //         },
+                    //         body: JSON.stringify(json)
+                    //     }
+                    // )
+              
+                    var datas = [];
+                    var zzz= 0
+                    for (var i = xx.data.total - 1; i >= 0; i--) {
+                        var dot = xx.data.entry[i]
+                        if(zzz<=10){
+                                datas.push(dot)
+                        }
+                        // if (new Date(dot.resource.period.start) >= new Date(moment(new Date()).format('YYYY-MM-DD 00:00')) 
+                        // &&  new Date(dot.resource.period.start)  <= new Date(moment(new Date()).format('YYYY-MM-DD 23:59'))  ) {
+                        
+                        // }
+                        zzz =zzz+1
+                    }
+                    // medifirstService.postNonMessage("bridging/ihs/tools", json).then(function (xx) {
+                    if(datas.length > 0){
+                        for (let z = 0; z <datas.length; z++) {
+                            const elementxx = datas[z];
+                            var element =  elementxx.resource
+                            let org_ID = []
+                            if(element.serviceProvider!=undefined){
+                                org_ID =  element.serviceProvider.reference.split('/')
+                            }
+                        
+                            if(org_ID.length > 0 && $scope.itemD.IHS_PROFILE != org_ID[1]){
+                                element.ihs_encounter =  "Encounter/" + element.id 
+                                element.practice = ''
+                                if (element.participant != undefined && element.participant.length>0 && element.participant[0].individual!= undefined && element.participant[0].individual.reference) {
+                                    element.practice = element.participant[0].individual.reference
+                                }
+                                var tglpulang = ''
+                                var tglregis = ''
+                                if(element.statusHistory !=undefined){
+
+
+                                for (let u = 0; u <  element.statusHistory.length; u++) {
+                                    const element2 =  element.statusHistory[u];
+                                        if(element2.status == 'finished'){
+                                            tglpulang = element2.period.end
+                                        
+                                        }
+                                        if(element2.status == 'arrived'){
+                                            tglregis = element2.period.start
+                                        }
+                                    }
+                                }
+                                if(tglregis == ''){
+                                    if(element.period.start!=undefined){
+                                        tglregis = element.period.start
+                                    }
+                                }
+                                if(tglpulang == ''){
+                                    if(element.period.end!=undefined){
+                                        tglpulang =  element.period.end
+                                    }
+                                }
+                                let jsonAPI = {
+                                    "url": "Organization/"+ org_ID[1],
+                                    "method": "GET",
+                                    "data": null
+                                }
+                                let responsex =  await medifirstService.postNonMessage("bridging/ihs/tools", jsonAPI)
+                                const   dataRes  =  responsex.data
+                             
+                          
+                                // const responsex = await fetch(configuration.baseApiBackend + 'bridging/ihs/tools',{
+                                //     method: 'POST',
+                                //     headers: {
+                                //     'Content-Type': 'application/json'
+                                //     },
+                                //     body: JSON.stringify(jsonAPI)
+                                // })
+                                // const dataRes = await responsex.json()
+
+                                let dokter = '';
+                                if(element.practice !=undefined && element.practice !=''){
+                                    let jsonAPI = {
+                                        "url": element.practice,
+                                        "method": "GET",
+                                        "data": null
+                                    }
+                                    let responseDOKTER =  await medifirstService.postNonMessage("bridging/ihs/tools", jsonAPI)
+                                    const resDok  =  responseDOKTER.data
+                                
+                              
+                                    // const responseDOKTER = await fetch(configuration.baseApiBackend + 'bridging/ihs/tools',{
+                                    //     method: 'POST',
+                                    //     headers: {
+                                    //     'Content-Type': 'application/json'
+                                    //     },
+                                    //     body: JSON.stringify(jsonAPI)
+                                    // })
+                                    // const resDok = await responseDOKTER.json()
+                            
+                                    if(resDok.resourceType == 'Practitioner'){
+                                        if(resDok.name!=undefined &&  resDok.name.length >0 
+                                        && resDok.name[0].text!=undefined){
+                                            dokter = resDok.name[0].text
+                                        }
+                                    }
+                                }
+                                dRiwayatReg.push({
+                                    no: dRiwayatReg.length +1 ,
+                                    kelompokpasien: "",
+                                    namadokter:dokter,
+                                    namapasien:element.subject.display,
+                                    namaruangan: element.location[0].location.display,
+                                    nocm: '',
+                                    ihs_id:  element.subject.reference,
+                                    norec: "-",
+                                    noregistrasi: element.id,
+                                    objectdepartemenfk: '',
+                                    objectpegawaifk: '',
+                                    objectruanganlastfk: '',
+                                    statusinap: element.class.code == 'AMB'? 0:1,
+                                    tglpulang: tglpulang,
+                                    tglregistrasi: tglregis,
+                                    ihs_encounter: "Encounter/" + element.id,
+                                    namaprofile: dataRes.name,
+                                })
+                                // });
+                            }
+                        }
+                        $scope.dataRiwayatRegistrasi = new kendo.data.DataSource({
+                            data: dRiwayatReg,
+                            pageSize: 10,
+                            total: dRiwayatReg.length,
+                            serverPaging: false,
+                            schema: {
+                                model: {
+                                    fields: {
+                                    }
+                                }
+                            }
+                        });
+                        var grid = $('#kGriddataRiwayatRegistrasi').data("kendoGrid");
+
+                        // grid.setDataSource($scope.dataRiwayatRegistrasi);
+                        grid.refresh();
+                      
+                    }
+                    $scope.isRouteLoading =false
+                    // })
+                }
+                $scope.klikIHSEncounter = function(e){
+                    if(e.encounter_id == undefined)return
+                    $scope.isRouteLoading = true;
+                    let data = {
+                        "url": e.encounter_id,
+                        "method": "GET",
+                        "data": null
+                    }
+                    medifirstService.postNonMessage("bridging/ihs/tools", data).then(function (e) {
+                        document.getElementById("jsonIHS").innerHTML = JSON.stringify(e.data, undefined, 4);
+                        $scope.isRouteLoading = false;
+                        $scope.popUpJson.center().open().maximize();
+                    }).then(function () {
+                        $scope.isRouteLoading = false;
+                    });
+                }
+
+           $scope.riwayatSatusehat = function(){
+                if($scope.dataPasienSelected == undefined)return 
+                if($scope.dataPasienSelected.ihs_number == null){
+                    toastr.error('Pasien Belum Mendapatkan Nomor Satu Sehat')
+                    return
+                } 
+                $state.go('HistorySatuSehat', {
+                    ihs_number: $scope.dataPasienSelected.ihs_number ,
+                })
+
+           }   
+
+            $scope.kyc = function(){
+                let url = configuration.baseApiBackend.replace('medifirst2000/','')
+                window.open(  url+"kyc-satset?petugas="+ JSON.parse(localStorage.getItem('pegawai')).namaLengkap , "_blank" );
+            }
 
             //** BATAS */
         }

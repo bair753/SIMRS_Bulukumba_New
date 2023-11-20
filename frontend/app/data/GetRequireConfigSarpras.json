@@ -967,7 +967,11 @@
         {
             "nameDep": "InputResepApotikAlkesCtrl",
             "urlDep": "module/Farmasi/InputResepApotikAlkesCtrl"
-        }
+        },
+        {
+            "nameDep": "MasterProdukApotikCtrl",
+            "urlDep": "module/Farmasi/MasterProdukApotikCtrl"
+        }        
         
     ]
 }
