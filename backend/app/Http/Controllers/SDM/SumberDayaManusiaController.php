@@ -1815,7 +1815,7 @@ class SumberDayaManusiaController extends ApiController {
                 if($request->data['mesin'] == 1613){
                     $set1 =$this->settingDataFixed('presensi_10',$kdProfile);
                 }
-                $Connect = fsockopen($set1, "4370", $errno, $errstr, 1);
+                $Connect = fsockopen($set1, "80", $errno, $errstr, 1);
     
                 $soap_request="<SetUserInfo><ArgComKey Xsi:type=\"xsd:integer\">"."0"."</ArgComKey><Arg><PIN>".$request->data['pegawaifk']."</PIN><Name>".$request->data['namalengkap']."</Name></Arg></SetUserInfo>";
                     $newLine="\r\n";
