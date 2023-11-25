@@ -3813,6 +3813,10 @@
         {
             "nameDep": "HistorySatuSehatCtrl",
             "urlDep": "module/Registrasi/HistorySatuSehatCtrl"
+        },
+        {
+            "nameDep": "ObstetriCtrl",
+            "urlDep": "module/EMR/ObstetriCtrl"
         }
     ]
 }
