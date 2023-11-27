@@ -3528,6 +3528,19 @@ class SumberDayaManusiaController extends ApiController {
         );
         return $this->respond($result);
     }
+
+    public function getPresensiFingerprint (Request $request) {
+        $kdProfile = (int) $this->getDataKdProfile($request);
+        $data = SettingDataFixed::select('id','namafield', 'nilaifield', 'keteranganfungsi')
+        ->wherein('id', [1604,1605,1606,1607,1608,1609,1610,1611,1612,1613])
+        ->where('statusenabled',true)->where('kdprofile', $kdProfile)->get();
+        $result = array(
+            'data'  => $data,
+            'as' => 'mr_adhyy',
+        );
+        return $this->respond($result);
+    }
+
     public function saveShiftKerja(Request $request){
         $kdProfile = (int) $this->getDataKdProfile($request);
         DB::beginTransaction();
@@ -3574,6 +3587,21 @@ class SumberDayaManusiaController extends ApiController {
                 'as' => 'er@epic',
             );
         }
+        return $this->setStatusCode($result['status'])->respond($result, $transMessage);
+
+    }
+
+    public function cekKoneksiFingerprint(Request $request){
+        $kdProfile = (int) $this->getDataKdProfile($request);
+
+        $machine = Fingerprint::connect($request['ip'], '80', '');
+
+        $transMessage = "Machine Status : ".$machine->getStatus();
+        $result = array(
+            'status' => 400,
+            'as' => 'mr_adhyy',
+        );
+
         return $this->setStatusCode($result['status'])->respond($result, $transMessage);
 
     }
