@@ -158,6 +158,10 @@
       "urlDep": "module/SDM/ShiftKerjaCtrl"
     },
     {
+      "nameDep": "KoneksiFingerprintCtrl",
+      "urlDep": "module/SDM/KoneksiFingerprintCtrl"
+    },
+    {
       "nameDep": "MapPegawaiToUnitKerjaCtrl",
       "urlDep": "module/SDM/MapPegawaiToUnitKerjaCtrl"
     },
