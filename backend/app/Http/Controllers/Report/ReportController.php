@@ -7070,10 +7070,10 @@ class ReportController extends ApiController{
             $this->saveDokumenKlaim($pdf, $request);
             return;
         }else{
-            return view('report.cetak-treadmill', compact('res', 'pageWidth', 'image', 'imageHusada'));
+            return view('report.cetak-treadmill', compact('res', 'pageWidth'));
         }
 
-        return view('report.cetak-treadmill', compact('res'));
+        // return view('report.cetak-treadmill', compact('res'));
     }
 
     public function holterMonitor(Request $request) {
