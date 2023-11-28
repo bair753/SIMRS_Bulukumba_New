@@ -4922,10 +4922,10 @@ class ReportController extends ApiController{
             $data = $data->get();
             foreach ($data as $z) {
                 if ($z->qrcodepengonsul == null) {
-                    $z->qrcodepengonsul =base64_encode(QrCode::format('svg')->size(50)->generate("Tanda Tangan Digital Oleh ".$z->pengonsul));
+                    $z->qrcodepengonsul =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate("Tanda Tangan Digital Oleh ".$z->pengonsul));
                 }
                 if ($z->qrcodenamalengkap == null) {
-                    $z->qrcodenamalengkap =base64_encode(QrCode::format('svg')->size(50)->generate("Tanda Tangan Digital Oleh ".$z->namalengkap));
+                    $z->qrcodenamalengkap =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate("Tanda Tangan Digital Oleh ".$z->namalengkap));
                 }
             }
 
@@ -5704,7 +5704,7 @@ class ReportController extends ApiController{
                 $z->value = date('H:i Y-m-d', strtotime($z->value));
             }
             if ($z->qrcode == null) {
-                $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->generate("Tanda Tangan Digital Oleh ".substr($z->value, strpos($z->value, '~') + 1)));
+                $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate("Tanda Tangan Digital Oleh ".substr($z->value, strpos($z->value, '~') + 1)));
             }
 
             if ($z->value != null) {
@@ -5715,7 +5715,6 @@ class ReportController extends ApiController{
         $res['profile'] = Profile::where('id', $request['kdprofile'])->first();
 
         $res['d'] = $data;
-        // dd($data);
         $noemrpasien = '';
         if (count($data) == 0) {
             $noemrpasien = $request['emr'];
@@ -5731,10 +5730,9 @@ class ReportController extends ApiController{
             ';
             die;
         }
-
         $imagePath = public_path("img/logo_only.png");
         $image = "data:image/png;base64,".base64_encode(file_get_contents($imagePath));
-
+        
         if(isset($request["issimpanberkas"])) {
             $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true, 'dpi' => '600', 'defaultMediaType' => 'print']);
             $pdf = PDF::loadView('report.cetak-cppt-rajal-dom', array(
@@ -5882,7 +5880,7 @@ class ReportController extends ApiController{
                 $z->value = date('d-m-Y H:i', strtotime($z->value));
             }
             if ($z->qrcode == null) {
-                $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->generate("Tanda Tangan Digital Oleh ".substr($z->value, strpos($z->value, '~') + 1)));
+                $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate("Tanda Tangan Digital Oleh ".substr($z->value, strpos($z->value, '~') + 1)));
             }
         }
         $pageWidth = 500;
@@ -7809,7 +7807,7 @@ class ReportController extends ApiController{
                 $z->value = date('d-m-Y H:i', strtotime($z->value));
             }
             if ($z->qrcode == null) {
-                $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->generate("Tanda Tangan Digital Oleh ".substr($z->value, strpos($z->value, '~') + 1)));
+                $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate("Tanda Tangan Digital Oleh ".substr($z->value, strpos($z->value, '~') + 1)));
             }
         }
         $pageWidth = 500;
@@ -8960,7 +8958,7 @@ class ReportController extends ApiController{
                 $z->value = date('Y-m-d H:i:s', strtotime($z->value));
             }
             if ($z->qrcode == null) {
-                $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->generate("Tanda Tangan Digital Oleh ".substr($z->value, strpos($z->value, '~') + 1)));
+                $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate("Tanda Tangan Digital Oleh ".substr($z->value, strpos($z->value, '~') + 1)));
             }
         }
         $pageWidth = 500;
