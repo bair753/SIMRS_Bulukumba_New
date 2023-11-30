@@ -3592,16 +3592,31 @@ class SumberDayaManusiaController extends ApiController {
     }
 
     public function cekKoneksiFingerprint(Request $request){
-        $kdProfile = (int) $this->getDataKdProfile($request);
+        $Connect = @fsockopen($request['ip'], "80", $errno, $errstr, 1);
+        if($Connect){
+            $transStatus = 'true';
+            $transMessage = "Berhasil connect";
 
-        $machine = Fingerprint::connect($request['ip'], '80', '');
+        }else {
+            $transStatus = 'false';
+            $transMessage = "Gagal connect";
+        };
 
-        $transMessage = "Machine Status : ".$machine->getStatus();
-        $result = array(
-            'status' => 400,
-            'as' => 'mr_adhyy',
-        );
-
+        if ($transStatus != 'false') {
+            $result = array(
+    
+                "status" => 201,
+                "message" => $transMessage,
+                "as" => 'mr_adhyy',
+            );
+        } else {
+            $result = array(
+    
+                "status" => 400,
+                "message" => $transMessage,
+                "as" => 'mr_adhyy',
+            );
+        }
         return $this->setStatusCode($result['status'])->respond($result, $transMessage);
 
     }

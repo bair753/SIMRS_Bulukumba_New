@@ -194,7 +194,7 @@ define(['initialize'], function (initialize) {
                     "ip": dataItem.nilaifield,
                     "id": dataItem.id
                 };
-                medifirstService.post("sdm/cek--koneksi-fingerprint", datasend).then(function (e) {
+                medifirstService.post("sdm/cek-koneksi-fingerprint", datasend).then(function (e) {
                     $scope.refresh();
                 });
             }
