@@ -3592,7 +3592,7 @@ class SumberDayaManusiaController extends ApiController {
     }
 
     public function cekKoneksiFingerprint(Request $request){
-        $Connect = @fsockopen($request['ip'], "0", $errno, $errstr, 1);
+        $Connect = @fsockopen("17.17.17.140", "80", $errno, $errstr, 1);
         if($Connect){
             $transStatus = 'true';
             $transMessage = "Berhasil connect";
