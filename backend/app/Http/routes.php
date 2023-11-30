@@ -2141,7 +2141,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
             Route::get('sdm/get-data-sk', 'SDM\SumberDayaManusiaController@getSuratKeputusan');
             Route::get('sdm/get-list-shift-kerja', 'SDM\SumberDayaManusiaController@getShiftKerja');
             Route::get('sdm/get-presensi-fingerprint', 'SDM\SumberDayaManusiaController@getPresensiFingerprint');
-            Route::post('sdm/cek--koneksi-fingerprint', 'SDM\SumberDayaManusiaController@cekKoneksiFingerprint');
+            Route::post('sdm/cek-koneksi-fingerprint', 'SDM\SumberDayaManusiaController@cekKoneksiFingerprint');
             Route::get('sdm/get-list-pegawai', 'SDM\SumberDayaManusiaController@getComboPegawai');
             Route::get('sdm/get-mapping-pegawai', 'SDM\SumberDayaManusiaController@getMappingPegawai');
             Route::get('sdm/get-datapelayanan-pegawai', 'SDM\SumberDayaManusiaController@getDataPelayananPetugas');

@@ -85,7 +85,7 @@ define(['initialize'], function (initialize) {
                 }
                 cacheHelper.set('MonitoringAbsensiCtrl', chacePeriode);
 
-                medifirstService.get("sdm/get-log-presensi-pegawai?").then(function (data) {
+                medifirstService.get("sdm/get-log-presensi-pegawai").then(function (data) {
 
                         });
 
