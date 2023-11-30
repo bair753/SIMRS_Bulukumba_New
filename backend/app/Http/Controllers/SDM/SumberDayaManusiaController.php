@@ -3592,7 +3592,7 @@ class SumberDayaManusiaController extends ApiController {
     }
 
     public function cekKoneksiFingerprint(Request $request){
-        $Connect = @fsockopen("17.17.17.140", "80", $errno, $errstr, 1);
+        $Connect = @fsockopen($request['ip'], "80", $errno, $errstr, 1);
         if($Connect){
             $transStatus = 'true';
             $transMessage = "Berhasil connect";
@@ -3608,6 +3608,7 @@ class SumberDayaManusiaController extends ApiController {
                 "status" => 201,
                 "message" => $transMessage,
                 "as" => 'mr_adhyy',
+                "ip" => $request['ip'],
             );
         } else {
             $result = array(
@@ -3615,6 +3616,7 @@ class SumberDayaManusiaController extends ApiController {
                 "status" => 400,
                 "message" => $transMessage,
                 "as" => 'mr_adhyy',
+                "ip" => $request['ip'],
             );
         }
         return $this->setStatusCode($result['status'])->respond($result, $transMessage);
