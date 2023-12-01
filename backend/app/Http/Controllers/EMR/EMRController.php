@@ -8013,7 +8013,7 @@ class EMRController  extends ApiController
                     emrdp.emrpasienfk,
                     emrdp.emrfk,
                     emr.reportdisplay,
-                    emrp.norec,emr.caption as namaform
+                    emrp.norec,emr.caption as namaform,emr.norm 
                 FROM
                     emrpasiend_t AS emrdp
                 INNER JOIN emrpasien_t AS emrp ON emrp.noemr = emrdp.emrpasienfk
@@ -8027,7 +8027,8 @@ class EMRController  extends ApiController
                     and emrdp.emrpasienfk='$noemr'
                     GROUP BY emrdp.emrpasienfk,
                     emrdp.emrfk,emrp.norec,emr.caption,
-                    emr.reportdisplay 
+                    emr.reportdisplay,emr.norm 
+                    order by emr.norm 
 
             "));
 
