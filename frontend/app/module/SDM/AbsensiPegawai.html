@@ -75,6 +75,12 @@
                             k-data-text-field="'namalengkap'" k-data-value-field="'id'" k-filter="'contains'"
                             k-auto-bind="false" k-data-source="listPegawai" />
                     </div>
+                    <div class="grid_4">
+                        <label c-label item="item" c-label-text="namaMesin"></label>
+                        <input style="width: 100%;" kendo-combo-box k-ng-model="item.mesin"
+                            k-data-text-field="'namalengkap'" k-data-value-field="'id'" k-filter="'contains'"
+                            k-auto-bind="false" k-data-source="listMesin" />
+                    </div>
                     <!-- <div class="grid_4">
                         <label c-label item="item" c-label-text="bulan"></label>
                         <input style="width: 100%" k-options="monthUngkul" k-ng-model="item.qBulan" kendo-date-picker

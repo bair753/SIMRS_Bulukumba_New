@@ -139,6 +139,11 @@ define(['initialize'], function (initialize) {
                     if ($scope.item.qPegawai != undefined) {
                         idPegawai = "&idPegawai=" + $scope.item.qPegawai.id;
                     }
+
+                    var idMesin = "";
+                    if ($scope.item.mesin != undefined) {
+                        idMesin = "&idMesin=" + $scope.item.mesin.id;
+                    }
     
     
                     var chacePeriode = {
@@ -148,6 +153,7 @@ define(['initialize'], function (initialize) {
     
                     medifirstService.get("sdm/get-absensi-pegawai?"
                         + "&idPegawai=" + idPegawai
+                        + "&idMesin=" + idMesin
                         ).then(function (data) {
                             $scope.isLoadingData = false;
                             var datas = data.data.data;

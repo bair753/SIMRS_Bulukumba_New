@@ -3621,7 +3621,10 @@ class SumberDayaManusiaController extends ApiController {
             ->where('ub.statusenabled',true);
 
         if (isset($request['idPegawai']) && $request['idPegawai'] != "" && $request['idPegawai'] != "undefined") {
-            $data = $data->where('pg.id', '>=', $request['idPegawai']);
+            $data = $data->where('pg.id', '=', $request['idPegawai']);
+        }
+        if (isset($request['idMesin']) && $request['idMesin'] != "" && $request['idMesin'] != "undefined") {
+            $data = $data->where('sdf.id', '=', $request['idMesin']);
         }
 
         // if (isset($request['tglAkhir']) && $request['tglAkhir'] != "" && $request['tglAkhir'] != "undefined") {
