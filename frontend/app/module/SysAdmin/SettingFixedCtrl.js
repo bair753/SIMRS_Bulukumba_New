@@ -256,8 +256,8 @@ define(['initialize'], function (initialize) {
                 }
 
                 var ketFungsi = "";
-                if ($scope.item.ketFungsi != undefined) {
-                    ketFungsi = $scope.item.ketFungsi
+                if ($scope.item.keteranganFungsi != undefined) {
+                    ketFungsi = $scope.item.keteranganFungsi
                 }
 
                 var tabelRelasi = "";
