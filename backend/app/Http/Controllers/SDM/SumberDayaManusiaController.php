@@ -1715,16 +1715,16 @@ class SumberDayaManusiaController extends ApiController {
         $set1 =$this->settingDataFixed('presensi_1',$kdProfile);
         $machine1 = Fingerprint::connect($set1, '80', '0');
 
-        // if($machine1->getStatus() == 'disconnected'){
-        //     $transMessage = "Machine Status : ".$machine1->getStatus();
-        //     $result = array(
-        //         'status' => 400,
-        //         'as' => 'mr_adhyy',
-        //     );
+        if($machine1->getStatus() == 'disconnected'){
+            $transMessage = "Machine Status : ".$machine1->getStatus();
+            $result = array(
+                'status' => 400,
+                'as' => 'mr_adhyy',
+            );
 
-        //     return $this->setStatusCode($result['status'])->respond($result, $transMessage);
+            return $this->setStatusCode($result['status'])->respond($result, $transMessage);
         
-        // }
+        }
         $machine = $machine1->getAttendance();
         $Connect = fsockopen($set1, "80", $errno, $errstr, 1);
 
@@ -1795,16 +1795,16 @@ class SumberDayaManusiaController extends ApiController {
         $kdProfile = (int) $this->getDataKdProfile($request);
         $set1 =$this->settingDataFixed('presensi_2',$kdProfile);
         $machine1 = Fingerprint::connect($set1, '80', '0');
-        // if($machine1->getStatus() == 'disconnected'){
-        //     $transMessage = "Machine Status : ".$machine1->getStatus();
-        //     $result = array(
-        //         'status' => 400,
-        //         'as' => 'mr_adhyy',
-        //     );
+        if($machine1->getStatus() == 'disconnected'){
+            $transMessage = "Machine Status : ".$machine1->getStatus();
+            $result = array(
+                'status' => 400,
+                'as' => 'mr_adhyy',
+            );
 
-        //     return $this->setStatusCode($result['status'])->respond($result, $transMessage);
+            return $this->setStatusCode($result['status'])->respond($result, $transMessage);
         
-        // }
+        }
         $machine = $machine1->getAttendance();
         $Connect = fsockopen($set1, "80", $errno, $errstr, 1);
 
@@ -1874,16 +1874,16 @@ class SumberDayaManusiaController extends ApiController {
         $kdProfile = (int) $this->getDataKdProfile($request);
         $set1 =$this->settingDataFixed('presensi_3',$kdProfile);
         $machine1 = Fingerprint::connect($set1, '80', '0');
-        // if($machine1->getStatus() == 'disconnected'){
-        //     $transMessage = "Machine Status : ".$machine1->getStatus();
-        //     $result = array(
-        //         'status' => 400,
-        //         'as' => 'mr_adhyy',
-        //     );
+        if($machine1->getStatus() == 'disconnected'){
+            $transMessage = "Machine Status : ".$machine1->getStatus();
+            $result = array(
+                'status' => 400,
+                'as' => 'mr_adhyy',
+            );
 
-        //     return $this->setStatusCode($result['status'])->respond($result, $transMessage);
+            return $this->setStatusCode($result['status'])->respond($result, $transMessage);
         
-        // }
+        }
         $machine = $machine1->getAttendance();
         $Connect = fsockopen($set1, "80", $errno, $errstr, 1);
 
@@ -1953,16 +1953,16 @@ class SumberDayaManusiaController extends ApiController {
         $kdProfile = (int) $this->getDataKdProfile($request);
         $set1 =$this->settingDataFixed('presensi_4',$kdProfile);
         $machine1 = Fingerprint::connect($set1, '80', '0');
-        // if($machine1->getStatus() == 'disconnected'){
-        //     $transMessage = "Machine Status : ".$machine1->getStatus();
-        //     $result = array(
-        //         'status' => 400,
-        //         'as' => 'mr_adhyy',
-        //     );
+        if($machine1->getStatus() == 'disconnected'){
+            $transMessage = "Machine Status : ".$machine1->getStatus();
+            $result = array(
+                'status' => 400,
+                'as' => 'mr_adhyy',
+            );
 
-        //     return $this->setStatusCode($result['status'])->respond($result, $transMessage);
+            return $this->setStatusCode($result['status'])->respond($result, $transMessage);
         
-        // }
+        }
         $machine = $machine1->getAttendance();
         $Connect = fsockopen($set1, "80", $errno, $errstr, 1);
 
@@ -2032,16 +2032,16 @@ class SumberDayaManusiaController extends ApiController {
         $kdProfile = (int) $this->getDataKdProfile($request);
         $set1 =$this->settingDataFixed('presensi_5',$kdProfile);
         $machine1 = Fingerprint::connect($set1, '80', '0');
-        // if($machine1->getStatus() == 'disconnected'){
-        //     $transMessage = "Machine Status : ".$machine1->getStatus();
-        //     $result = array(
-        //         'status' => 400,
-        //         'as' => 'mr_adhyy',
-        //     );
+        if($machine1->getStatus() == 'disconnected'){
+            $transMessage = "Machine Status : ".$machine1->getStatus();
+            $result = array(
+                'status' => 400,
+                'as' => 'mr_adhyy',
+            );
 
-        //     return $this->setStatusCode($result['status'])->respond($result, $transMessage);
+            return $this->setStatusCode($result['status'])->respond($result, $transMessage);
         
-        // }
+        }
         $machine = $machine1->getAttendance();
         $Connect = fsockopen($set1, "80", $errno, $errstr, 1);
 
@@ -2111,16 +2111,16 @@ class SumberDayaManusiaController extends ApiController {
         $kdProfile = (int) $this->getDataKdProfile($request);
         $set1 =$this->settingDataFixed('presensi_6',$kdProfile);
         $machine1 = Fingerprint::connect($set1, '80', '0');
-        // if($machine1->getStatus() == 'disconnected'){
-        //     $transMessage = "Machine Status : ".$machine1->getStatus();
-        //     $result = array(
-        //         'status' => 400,
-        //         'as' => 'mr_adhyy',
-        //     );
+        if($machine1->getStatus() == 'disconnected'){
+            $transMessage = "Machine Status : ".$machine1->getStatus();
+            $result = array(
+                'status' => 400,
+                'as' => 'mr_adhyy',
+            );
 
-        //     return $this->setStatusCode($result['status'])->respond($result, $transMessage);
+            return $this->setStatusCode($result['status'])->respond($result, $transMessage);
         
-        // }
+        }
         $machine = $machine1->getAttendance();
         $Connect = fsockopen($set1, "80", $errno, $errstr, 1);
 
@@ -2193,12 +2193,13 @@ class SumberDayaManusiaController extends ApiController {
         if($cekUser == null){
             $machine = Fingerprint::connect($request['ip'], '80', '');
 
-            $transMessage = "Machine Status : ".$machine->getStatus();
-            $result = array(
-                'status' => 400,
-                'as' => 'mr_adhyy',
-            );
+            
             if($machine->getStatus() == 'disconnected'){
+                $transMessage = "Machine Status : ".$machine->getStatus();
+                $result = array(
+                    'status' => 400,
+                    'as' => 'mr_adhyy',
+                );
                 return $this->setStatusCode($result['status'])->respond($result, $transMessage);
             }
 
