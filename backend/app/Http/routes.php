@@ -2110,7 +2110,12 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
         // Route::group(['prefix' => 'sdm'], function () {
             /*GET*/
             //Mesin Presensi
-            Route::get('sdm/get-log-presensi-pegawai', 'SDM\SumberDayaManusiaController@getLogPresensiPegawai1');
+            Route::get('sdm/get-log-presensi-pegawai-1', 'SDM\SumberDayaManusiaController@getLogPresensiPegawai1');
+            Route::get('sdm/get-log-presensi-pegawai-2', 'SDM\SumberDayaManusiaController@getLogPresensiPegawai2');
+            Route::get('sdm/get-log-presensi-pegawai-3', 'SDM\SumberDayaManusiaController@getLogPresensiPegawai3');
+            Route::get('sdm/get-log-presensi-pegawai-4', 'SDM\SumberDayaManusiaController@getLogPresensiPegawai4');
+            Route::get('sdm/get-log-presensi-pegawai-5', 'SDM\SumberDayaManusiaController@getLogPresensiPegawai5');
+            Route::get('sdm/get-log-presensi-pegawai-6', 'SDM\SumberDayaManusiaController@getLogPresensiPegawai6');
             Route::post('sdm/save-user-pegawai', 'SDM\SumberDayaManusiaController@saveUserPegawai');
             Route::post('sdm/hapus-user-pegawai', 'SDM\SumberDayaManusiaController@hapusUserPegawai');
 

@@ -85,10 +85,13 @@ define(['initialize'], function (initialize) {
                 }
                 cacheHelper.set('MonitoringAbsensiCtrl', chacePeriode);
 
-                medifirstService.get("sdm/get-log-presensi-pegawai").then(function (data) {
-
-                        });
-
+                medifirstService.get("sdm/get-log-presensi-pegawai-1").then(function (data) {});
+                medifirstService.get("sdm/get-log-presensi-pegawai-2").then(function (data) {});
+                medifirstService.get("sdm/get-log-presensi-pegawai-3").then(function (data) {});
+                medifirstService.get("sdm/get-log-presensi-pegawai-4").then(function (data) {});
+                medifirstService.get("sdm/get-log-presensi-pegawai-5").then(function (data) {});
+                medifirstService.get("sdm/get-log-presensi-pegawai-6").then(function (data) {});
+                
                 medifirstService.get("sdm/get-monitoring-absensi-pegawai?"
                     + "tglAwal=" + tglAwal
                     + "&tglAkhir=" + tglAkhir
