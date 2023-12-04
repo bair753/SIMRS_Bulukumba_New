@@ -134,6 +134,11 @@ define(['initialize'], function (initialize) {
                     namaruangan = "&ruanganId=" + $scope.item.ruangan.id
                 }
 
+                var instalasi = ""
+                if ($scope.item.instalasi != undefined) {
+                    instalasi = "&instalasiId=" + $scope.item.instalasi.id
+                }
+
                 var dokter = ""
                 if ($scope.item.dokter != undefined) {
                     dokter = "&dokter=" + $scope.item.dokter.id
@@ -165,7 +170,7 @@ define(['initialize'], function (initialize) {
                     "&ruanganArr=" + listRuangan +
                     rm +
                     pasien +
-                    namaruangan +
+                    namaruangan + instalasi + 
                     dokter + kotaKab)
                     .then(function (data) {
                         $scope.isRouteLoading = false;
