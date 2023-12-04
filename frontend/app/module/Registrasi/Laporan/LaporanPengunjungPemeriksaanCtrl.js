@@ -41,35 +41,38 @@ define(['initialize'], function (initialize) {
             $scope.getIsiComboRuangan = function () {
                 $scope.listRuangan = $scope.item.instalasi.ruangan
                 $scope.isRuangan = false;
-            }
-            medifirstService.get("rawatjalan/get-data-combo-dokter", false).then(function (data) {
-                // var datas = []
-                // for (let i = 0; i < data.data.ruanganPelayanan.length; i++) {
-                //     const element = data.data.ruanganPelayanan[i];
-                //     datas.push({ id: element.id, namaruangan: element.namaruangan })
-                // }
-                
-                // $scope.listRuangan = $scope.item.instalasi.ruangan
-                if($scope.listRuangan != undefined){
-                    $scope.selectOptionsRuangan = {
-                        placeholder: "Pilih Ruangan...",
-                        dataTextField: "ruangan",
-                        dataValueField: "id",
-                        // dataSource:{
-                        //     data: $scope.listRuangan
-                        // },
-                        autoBind: true,
+
+                medifirstService.get("rawatjalan/get-data-combo-dokter", false).then(function (data) {
+                    // var datas = []
+                    // for (let i = 0; i < $scope.item.instalasi.ruangan.length; i++) {
+                    //     const element = $scope.item.instalasi.ruangan[i];
+                    //     datas.push({ id: element.id, namaruangan: element.ruangan })
+                    // }
+                    
+                    // $scope.listRuangan = datas
+                    // console.log($scope.listRuangan);
+                    if($scope.listRuangan != undefined){
+                        $scope.selectOptionsRuangan = {
+                            placeholder: "Pilih Ruangan...",
+                            dataTextField: "ruangan",
+                            dataValueField: "id",
+                            // dataSource:{
+                            //     data: $scope.listRuangan
+                            // },
+                            autoBind: true,
+        
+                        };
+                    }else{
+                        $scope.selectOptionsRuangan = {
+                            placeholder: "Pilih Ruangan...",
+                            autoBind: true,
+                        };
+                    }
     
-                    };
-                }else{
-                    $scope.selectOptionsRuangan = {
-                        placeholder: "Pilih Ruangan...",
-                        autoBind: true,
-                    };
-                }
-
-
-            });
+    
+                });
+            }
+            
             loadFirst()
             function loadFirst() {
                 var chacePeriode = cacheHelper.get('RegistrasiPasienLamaRevCtrl');
@@ -111,7 +114,6 @@ define(['initialize'], function (initialize) {
 			}
             loadData()
             function loadData() {
-                console.log($scope.item.ruanganMulti);
 
                 $scope.isRouteLoading = true;
                 var tglAwal = moment($scope.item.periodeAwal).format('DD-MMM-YYYY HH:mm');
