@@ -48,7 +48,7 @@ define(['initialize'], function (initialize) {
                 //     datas.push({ id: element.id, namaruangan: element.namaruangan })
                 // }
                 
-                $scope.listRuangan = $scope.item.instalasi.ruangan
+                // $scope.listRuangan = $scope.item.instalasi.ruangan
                 if($scope.listRuangan != undefined){
                     $scope.selectOptionsRuangan = {
                         placeholder: "Pilih Ruangan...",
