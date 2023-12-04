@@ -61,11 +61,33 @@
 <c-panel item="item" header="'Laporan Kunjungan'" disabled>
 </c-panel>
 <div class="grid_12">    
-    <div class="grid_2" style="margin-top:5px">
+    <div class="grid_2"style="margin-top:5px">
+        <div class="grid_12">
+            <label c-label item="item" c-label-text="Instalasi"></label>
+        </div>
+        <div class="clear"></div>
+
+        <div class="grid_12">
+            <input style="width: 100%;" kendo-combo-box k-ng-model="item.instalasi" k-data-text-field="'departemen'"
+                k-data-value-field="'id'" k-filter="'contains'" k-auto-bind="false" k-data-source="listDepartemen"
+                k-on-change='getIsiComboRuangan()' />
+        </div>
+    </div>
+    <div class="grid_3" style="margin-top:5px" ng-show="!isRuangan">
+        <label c-label c-label-text="namaRuanganYangTidakDitampilkan" real></label>
+        <!-- <input style="width: 100%;" kendo-combo-box k-ng-model="item.ruangan" k-data-text-field="'namaruangan'" 
+            k-data-value-field="'id'" k-filter="'contains'" k-auto-bind="false" k-data-source="listRuangan" /> -->
+        <select kendo-multi-select k-options="selectOptionsRuangan" 
+            k-filter="'contains'" k-data-source="listRuangan" k-ng-model="item.ruanganMulti"></select>
+
+
+        <!--<input style="width: 100%;" kendo-combo-box k-ng-model="item.Ruangan" k-data-text-field="'namaRuangan'" k-data-value-field="'id'" k-filter="'contains'" k-auto-bind="false" k-data-source="ruangans"/>-->
+    </div>
+    <!-- <div class="grid_2" style="margin-top:5px">
         <label c-label c-label-text="namaRuangan" real></label>
         <input style="width: 100%; " kendo-combo-box k-ng-model="item.ruangan" k-data-text-field=" 'namaruangan' "
             k-filter=" 'contains' " k-data-value-field=" 'id' " k-auto-bind="false " k-data-source="listRuangans " />
-    </div>
+    </div> -->
     <div class="grid_2" style="margin-top:5px">
         <div class="grid_12">
             <label c-label item="item" c-label-text="Dokter"></label>

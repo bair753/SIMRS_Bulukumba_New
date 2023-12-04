@@ -9,6 +9,8 @@ define(['initialize'], function (initialize) {
             $scope.item = {};
             $scope.itemD = {};
             $scope.isRouteLoading = false;
+            $scope.isRuangan = true;
+            $scope.item.ruanganMulti = []
 
             $scope.tglMeninggal = '';
             $scope.Page = {
@@ -20,10 +22,12 @@ define(['initialize'], function (initialize) {
             if (kelompokUserLogin == 'radiologi' || kelompokUserLogin == 'laborat') {
                 $scope.isPenunjang = true
             }
+         
             loadCombo()
             function loadCombo() {
                 medifirstService.get("registrasi/laporan/get-combo-box-laporan-pengunjung")
                     .then(function (data) {
+                        $scope.listDepartemen = data.data.departemen;
                         $scope.listRuangans = data.data.ruangan
                         $scope.listDokter = data.data.dokter
                     })
@@ -33,6 +37,38 @@ define(['initialize'], function (initialize) {
                         $scope.listKotaKabupaten = data.data.kotakabupaten
                     })
             }
+            $scope.getIsiComboRuangan = function () {
+                $scope.listRuangan = $scope.item.instalasi.ruangan
+                $scope.isRuangan = false;
+            }
+            medifirstService.get("rawatjalan/get-data-combo-dokter", false).then(function (data) {
+                // var datas = []
+                // for (let i = 0; i < data.data.ruanganPelayanan.length; i++) {
+                //     const element = data.data.ruanganPelayanan[i];
+                //     datas.push({ id: element.id, namaruangan: element.namaruangan })
+                // }
+                
+                $scope.listRuangan = $scope.item.instalasi.ruangan
+                if($scope.listRuangan != undefined){
+                    $scope.selectOptionsRuangan = {
+                        placeholder: "Pilih Ruangan...",
+                        dataTextField: "ruangan",
+                        dataValueField: "id",
+                        // dataSource:{
+                        //     data: $scope.listRuangan
+                        // },
+                        autoBind: true,
+    
+                    };
+                }else{
+                    $scope.selectOptionsRuangan = {
+                        placeholder: "Pilih Ruangan...",
+                        autoBind: true,
+                    };
+                }
+
+
+            });
             loadFirst()
             function loadFirst() {
                 var chacePeriode = cacheHelper.get('RegistrasiPasienLamaRevCtrl');
@@ -48,6 +84,7 @@ define(['initialize'], function (initialize) {
             }
             loadData()
             $scope.SearchData = function () {
+                $scope.isRouteLoading = true;
                 loadData()
             }
             $scope.SearchEnter = function () {
@@ -73,6 +110,7 @@ define(['initialize'], function (initialize) {
 			}
             loadData()
             function loadData() {
+                console.log($scope.item.ruanganMulti);
 
                 $scope.isRouteLoading = true;
                 var tglAwal = moment($scope.item.periodeAwal).format('DD-MMM-YYYY HH:mm');
@@ -103,10 +141,25 @@ define(['initialize'], function (initialize) {
                     kotaKab = "&kotaKab=" + $scope.item.kabupaten.id
                 }
 
+                var listRuangan = ""
+
+                if ($scope.item.ruanganMulti != undefined) {
+                    var a = ""
+                    var b = ""
+                    for (var i = $scope.item.ruanganMulti.length - 1; i >= 0; i--) {
+
+                        var c = $scope.item.ruanganMulti[i].id
+                        b = "," + c
+                        a = a + b
+                    }
+                    listRuangan = a.slice(1, a.length)
+                }
+
 
                 medifirstService.get("registrasi/laporan/get-data-lap-pengunjung-pemeriksaan?" +
                     "tglAwal=" + tglAwal +
                     "&tglAkhir=" + tglAkhir +
+                    "&ruanganArr=" + listRuangan +
                     rm +
                     pasien +
                     namaruangan +

@@ -7026,6 +7026,14 @@ class LaporanPengunjungController extends ApiController
         if (isset($request['kotaKab']) && $request['kotaKab'] != "" && $request['kotaKab'] != "undefined") {
             $data = $data->Where('kkb.id', '=', $request['kotaKab'])	;
         }
+        if (isset($request['ruanganArr']) && $request['ruanganArr'] != "" && $request['ruanganArr'] != "undefined") {
+            $arrRuang = explode(',', $request['ruanganArr']);
+            $kodeRuang = [];
+            foreach ($arrRuang as $item) {
+                $kodeRuang[] = (int) $item;
+            }
+            $data = $data->whereNotIn('rg.id', $kodeRuang);
+        }
 //  
         $data = $data->orderBy('ps.namapasien');
         $data = $data->distinct();
