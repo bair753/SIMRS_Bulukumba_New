@@ -11,6 +11,7 @@ define(['initialize'], function (initialize) {
             $scope.isRouteLoading = false;
             $scope.isRuangan = true;
             $scope.item.ruanganMulti = []
+            $scope.listRuangan = {};
 
             $scope.tglMeninggal = '';
             $scope.Page = {
