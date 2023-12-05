@@ -70,419 +70,37 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 $scope.listDiagnosaSecondary = data;
             });
 
-            $scope.listTanggal = [
-                { "id": 32117538 },
-                { "id": 32117539 },
-                { "id": 32117540 },
-                { "id": 32117541 },
-                { "id": 32117542 },
-                { "id": 32117543 },
-                { "id": 32117544 },
-                { "id": 32117545 },
-                { "id": 32117546 },
-                { "id": 32117547 },
-                { "id": 32117548 },
-                { "id": 32117549 },
-                
-                
-            ]
+            
 
-            $scope.listData1 = [
-                { 
-                    "id": 1,
-                    "namaexternal": "Nadi",
-                    "details": [
-                        { "id": 32117550, "caption": "", "type": "textbox" },
-                        { "id": 32117551, "caption": "", "type": "textbox" },
-                        { "id": 32117552, "caption": "", "type": "textbox" },
-                        { "id": 32117553, "caption": "", "type": "textbox" },
-                        { "id": 32117554, "caption": "", "type": "textbox" },
-                        { "id": 32117555, "caption": "", "type": "textbox" },
-                        { "id": 32117556, "caption": "", "type": "textbox" },
-                        { "id": 32117557, "caption": "", "type": "textbox" },
-                        { "id": 32117558, "caption": "", "type": "textbox" },
-                        { "id": 32117559, "caption": "", "type": "textbox" },
-                        { "id": 32117560, "caption": "", "type": "textbox" },
-                        { "id": 32117561, "caption": "", "type": "textbox" },
-                        { "id": 32117562, "caption": "", "type": "textbox" },
-                        { "id": 32117563, "caption": "", "type": "textbox" },
-                        { "id": 32117564, "caption": "", "type": "textbox" },
-                        { "id": 32117565, "caption": "", "type": "textbox" },
-                        { "id": 32117566, "caption": "", "type": "textbox" },
-                        { "id": 32117567, "caption": "", "type": "textbox" },
-                        { "id": 32117568, "caption": "", "type": "textbox" },
-                        { "id": 32117569, "caption": "", "type": "textbox" },
-                        { "id": 32117570, "caption": "", "type": "textbox" },
-                        { "id": 32117571, "caption": "", "type": "textbox" },
-                        { "id": 32117572, "caption": "", "type": "textbox" },
-                        { "id": 32117573, "caption": "", "type": "textbox" },
-                        { "id": 32117574, "caption": "", "type": "textbox" },
-                        { "id": 32117575, "caption": "", "type": "textbox" },
-                        { "id": 32117576, "caption": "", "type": "textbox" },
-                        { "id": 32117577, "caption": "", "type": "textbox" },
-                        { "id": 32117578, "caption": "", "type": "textbox" },
-                        { "id": 32117579, "caption": "", "type": "textbox" },
-                        { "id": 32117580, "caption": "", "type": "textbox" },
-                        { "id": 32117581, "caption": "", "type": "textbox" },
-                        { "id": 32117582, "caption": "", "type": "textbox" },
-                        { "id": 32117583, "caption": "", "type": "textbox" },
-                        { "id": 32117584, "caption": "", "type": "textbox" },
-                        { "id": 32117585, "caption": "", "type": "textbox" },
-                    ]
-                },
-                {
-                    "id": 2,
-                    "namaexternal": "Sistolik",
-                    "details": [
-                        { "id": 32117590, "caption": "", "type": "textbox" },
-                        { "id": 32117591, "caption": "", "type": "textbox" },
-                        { "id": 32117592, "caption": "", "type": "textbox" },
-                        { "id": 32117593, "caption": "", "type": "textbox" },
-                        { "id": 32117594, "caption": "", "type": "textbox" },
-                        { "id": 32117595, "caption": "", "type": "textbox" },
-                        { "id": 32117596, "caption": "", "type": "textbox" },
-                        { "id": 32117597, "caption": "", "type": "textbox" },
-                        { "id": 32117598, "caption": "", "type": "textbox" },
-                        { "id": 32117599, "caption": "", "type": "textbox" },
-                        { "id": 32117600, "caption": "", "type": "textbox" },
-                        { "id": 32117601, "caption": "", "type": "textbox" },
-                        { "id": 32117602, "caption": "", "type": "textbox" },
-                        { "id": 32117603, "caption": "", "type": "textbox" },
-                        { "id": 32117604, "caption": "", "type": "textbox" },
-                        { "id": 32117605, "caption": "", "type": "textbox" },
-                        { "id": 32117606, "caption": "", "type": "textbox" },
-                        { "id": 32117607, "caption": "", "type": "textbox" },
-                        { "id": 32117608, "caption": "", "type": "textbox" },
-                        { "id": 32117609, "caption": "", "type": "textbox" },
-                        { "id": 32117610, "caption": "", "type": "textbox" },
-                        { "id": 32117611, "caption": "", "type": "textbox" },
-                        { "id": 32117612, "caption": "", "type": "textbox" },
-                        { "id": 32117613, "caption": "", "type": "textbox" },
-                        { "id": 32117614, "caption": "", "type": "textbox" },
-                        { "id": 32117615, "caption": "", "type": "textbox" },
-                        { "id": 32117616, "caption": "", "type": "textbox" },
-                        { "id": 32117617, "caption": "", "type": "textbox" },
-                        { "id": 32117618, "caption": "", "type": "textbox" },
-                        { "id": 32117619, "caption": "", "type": "textbox" },
-                        { "id": 32117620, "caption": "", "type": "textbox" },
-                        { "id": 32117621, "caption": "", "type": "textbox" },
-                        { "id": 32117622, "caption": "", "type": "textbox" },
-                        { "id": 32117623, "caption": "", "type": "textbox" },
-                        { "id": 32117624, "caption": "", "type": "textbox" },
-                        { "id": 32117625, "caption": "", "type": "textbox" },
-                    ]
-                },
-                {
-                    "id": 3,
-                    "namaexternal": "Distolik",
-                    "details": [
-                        { "id": 32117630, "caption": "", "type": "textbox" },
-                        { "id": 32117631, "caption": "", "type": "textbox" },
-                        { "id": 32117632, "caption": "", "type": "textbox" },
-                        { "id": 32117633, "caption": "", "type": "textbox" },
-                        { "id": 32117634, "caption": "", "type": "textbox" },
-                        { "id": 32117635, "caption": "", "type": "textbox" },
-                        { "id": 32117636, "caption": "", "type": "textbox" },
-                        { "id": 32117637, "caption": "", "type": "textbox" },
-                        { "id": 32117638, "caption": "", "type": "textbox" },
-                        { "id": 32117639, "caption": "", "type": "textbox" },
-                        { "id": 32117640, "caption": "", "type": "textbox" },
-                        { "id": 32117641, "caption": "", "type": "textbox" },
-                        { "id": 32117642, "caption": "", "type": "textbox" },
-                        { "id": 32117643, "caption": "", "type": "textbox" },
-                        { "id": 32117644, "caption": "", "type": "textbox" },
-                        { "id": 32117645, "caption": "", "type": "textbox" },
-                        { "id": 32117646, "caption": "", "type": "textbox" },
-                        { "id": 32117647, "caption": "", "type": "textbox" },
-                        { "id": 32117648, "caption": "", "type": "textbox" },
-                        { "id": 32117649, "caption": "", "type": "textbox" },
-                        { "id": 32117650, "caption": "", "type": "textbox" },
-                        { "id": 32117651, "caption": "", "type": "textbox" },
-                        { "id": 32117652, "caption": "", "type": "textbox" },
-                        { "id": 32117653, "caption": "", "type": "textbox" },
-                        { "id": 32117654, "caption": "", "type": "textbox" },
-                        { "id": 32117655, "caption": "", "type": "textbox" },
-                        { "id": 32117656, "caption": "", "type": "textbox" },
-                        { "id": 32117657, "caption": "", "type": "textbox" },
-                        { "id": 32117658, "caption": "", "type": "textbox" },
-                        { "id": 32117659, "caption": "", "type": "textbox" },
-                        { "id": 32117660, "caption": "", "type": "textbox" },
-                        { "id": 32117661, "caption": "", "type": "textbox" },
-                        { "id": 32117662, "caption": "", "type": "textbox" },
-                        { "id": 32117663, "caption": "", "type": "textbox" },
-                        { "id": 32117664, "caption": "", "type": "textbox" },
-                        { "id": 32117665, "caption": "", "type": "textbox" },
-                    ]
-                },
-                {
-                    "id": 4,
-                    "namaexternal": "R",
-                    "details": [
-                        { "id": 32117670, "caption": "", "type": "textbox" },
-                        { "id": 32117671, "caption": "", "type": "textbox" },
-                        { "id": 32117672, "caption": "", "type": "textbox" },
-                        { "id": 32117673, "caption": "", "type": "textbox" },
-                        { "id": 32117674, "caption": "", "type": "textbox" },
-                        { "id": 32117675, "caption": "", "type": "textbox" },
-                        { "id": 32117676, "caption": "", "type": "textbox" },
-                        { "id": 32117677, "caption": "", "type": "textbox" },
-                        { "id": 32117678, "caption": "", "type": "textbox" },
-                        { "id": 32117679, "caption": "", "type": "textbox" },
-                        { "id": 32117680, "caption": "", "type": "textbox" },
-                        { "id": 32117681, "caption": "", "type": "textbox" },
-                        { "id": 32117682, "caption": "", "type": "textbox" },
-                        { "id": 32117683, "caption": "", "type": "textbox" },
-                        { "id": 32117684, "caption": "", "type": "textbox" },
-                        { "id": 32117685, "caption": "", "type": "textbox" },
-                        { "id": 32117686, "caption": "", "type": "textbox" },
-                        { "id": 32117687, "caption": "", "type": "textbox" },
-                        { "id": 32117688, "caption": "", "type": "textbox" },
-                        { "id": 32117689, "caption": "", "type": "textbox" },
-                        { "id": 32117690, "caption": "", "type": "textbox" },
-                        { "id": 32117691, "caption": "", "type": "textbox" },
-                        { "id": 32117692, "caption": "", "type": "textbox" },
-                        { "id": 32117693, "caption": "", "type": "textbox" },
-                        { "id": 32117694, "caption": "", "type": "textbox" },
-                        { "id": 32117695, "caption": "", "type": "textbox" },
-                        { "id": 32117696, "caption": "", "type": "textbox" },
-                        { "id": 32117697, "caption": "", "type": "textbox" },
-                        { "id": 32117698, "caption": "", "type": "textbox" },
-                        { "id": 32117699, "caption": "", "type": "textbox" },
-                        { "id": 32117700, "caption": "", "type": "textbox" },
-                        { "id": 32117701, "caption": "", "type": "textbox" },
-                        { "id": 32117702, "caption": "", "type": "textbox" },
-                        { "id": 32117703, "caption": "", "type": "textbox" },
-                        { "id": 32117704, "caption": "", "type": "textbox" },
-                        { "id": 32117705, "caption": "", "type": "textbox" },
-                    ]
-                },
-                {
-                    "id": 5,
-                    "namaexternal": "TV",
-                    "details": [
-                        { "id": 32117710, "caption": "", "type": "textbox" },
-                        { "id": 32117711, "caption": "", "type": "textbox" },
-                        { "id": 32117712, "caption": "", "type": "textbox" },
-                        { "id": 32117713, "caption": "", "type": "textbox" },
-                        { "id": 32117714, "caption": "", "type": "textbox" },
-                        { "id": 32117715, "caption": "", "type": "textbox" },
-                        { "id": 32117716, "caption": "", "type": "textbox" },
-                        { "id": 32117717, "caption": "", "type": "textbox" },
-                        { "id": 32117718, "caption": "", "type": "textbox" },
-                        { "id": 32117719, "caption": "", "type": "textbox" },
-                        { "id": 32117720, "caption": "", "type": "textbox" },
-                        { "id": 32117721, "caption": "", "type": "textbox" },
-                        { "id": 32117722, "caption": "", "type": "textbox" },
-                        { "id": 32117723, "caption": "", "type": "textbox" },
-                        { "id": 32117724, "caption": "", "type": "textbox" },
-                        { "id": 32117725, "caption": "", "type": "textbox" },
-                        { "id": 32117726, "caption": "", "type": "textbox" },
-                        { "id": 32117727, "caption": "", "type": "textbox" },
-                        { "id": 32117728, "caption": "", "type": "textbox" },
-                        { "id": 32117729, "caption": "", "type": "textbox" },
-                        { "id": 32117730, "caption": "", "type": "textbox" },
-                        { "id": 32117731, "caption": "", "type": "textbox" },
-                        { "id": 32117732, "caption": "", "type": "textbox" },
-                        { "id": 32117733, "caption": "", "type": "textbox" },
-                        { "id": 32117734, "caption": "", "type": "textbox" },
-                        { "id": 32117735, "caption": "", "type": "textbox" },
-                        { "id": 32117736, "caption": "", "type": "textbox" },
-                        { "id": 32117737, "caption": "", "type": "textbox" },
-                        { "id": 32117738, "caption": "", "type": "textbox" },
-                        { "id": 32117739, "caption": "", "type": "textbox" },
-                        { "id": 32117740, "caption": "", "type": "textbox" },
-                        { "id": 32117741, "caption": "", "type": "textbox" },
-                        { "id": 32117742, "caption": "", "type": "textbox" },
-                        { "id": 32117743, "caption": "", "type": "textbox" },
-                        { "id": 32117744, "caption": "", "type": "textbox" },
-                        { "id": 32117745, "caption": "", "type": "textbox" },
-                    ]
-                }
-            ]
-
-            var seriesNadi = []
-            var seriesSistolik = []
-            var seriesDistolik = []
-            var seriesRespirasi = []
-            var seriesTV = []
-            loadChart()
-            function loadChart() {
-                $("#chartNadi").kendoChart({
-                    title: {
-                        text: "Grafik Nadi"
-                    },
-                    legend: {
-                        position: "top"
-                    },
-                    series: [ 
-                        {
-                            type: "line",
-                            data: seriesNadi,
-                            name: "Nadi",
-                            color: "#fc0303",
-
-                        }],
-                    valueAxes: [{
-                        title: { text: "N" },
-                        min: 40,
-                        max: 180,
-                        majorUnit: 20
-                    },
-                    ],
-                    categoryAxis: {
-                        categories: ['P', 'S', 'S', 'M', 'P', 'S', 'S', 'M', 'P', 'S', 'S', 'M', 'P', 'S', 'S', 'M', 'P', 'S', 'S', 'M', 'P', 'S', 'S', 'M', 'P', 'S', 'S', 'M', 'P', 'S', 'S', 'M'],
-                        axisCrossingValues: [0, 35]
-                    }
-                });
-
-                $("#chartSistolik").kendoChart({
-                    
-                    title: {
-                        text: "Grafik Sistolik"
-                    },
-                    legend: {
-                        position: "top"
-                    },
-                    series: [{
-                        type: "line",
-                        data: seriesSistolik,
-                        name: "Sistolik",
-                        color: "#0328fc",
-
-                    }
-                       
-                    ],
-                    valueAxes: [
-                        
-                        {
-                            name: "S",
-                            title: { text: "S" },
-                            min: 32,
-                            max: 42,
-
-                        }
-                    ],
-                    categoryAxis: {
-                        categories: ['P', 'S', 'S', 'M', 'P', 'S', 'S', 'M', 'P', 'S', 'S', 'M', 'P', 'S', 'S', 'M', 'P', 'S', 'S', 'M', 'P', 'S', 'S', 'M', 'P', 'S', 'S', 'M', 'P', 'S', 'S', 'M'],
-                        // categories: ["Mon", "Tue", "Wed", "Thu", "Fri"],
-
-                        axisCrossingValues: [0, 35]
-                    }
-                });
-
-                $("#chartDistolik").kendoChart({
-                    
-                    title: {
-                        text: "Grafik Distolik"
-                    },
-                    legend: {
-                        position: "top"
-                    },
-                    series: [{
-                        type: "line",
-                        data: seriesDistolik,
-                        name: "Distolik",
-                        color: "#34A853",
-
-                    }
-                       
-                    ],
-                    valueAxes: [
-                        
-                        {
-                            name: "P",
-                            title: { text: "P" },
-                            min: 20,
-                            max: 70,
-
-                        }
-                    ],
-                    categoryAxis: {
-                        categories: ['P', 'S', 'S', 'M', 'P', 'S', 'S', 'M', 'P', 'S', 'S', 'M', 'P', 'S', 'S', 'M', 'P', 'S', 'S', 'M', 'P', 'S', 'S', 'M', 'P', 'S', 'S', 'M', 'P', 'S', 'S', 'M'],
-                        // categories: ["Mon", "Tue", "Wed", "Thu", "Fri"],
-
-                        axisCrossingValues: [0, 35]
-                    }
-                });
-
-                $("#chartRespirasi").kendoChart({
-                    
-                    title: {
-                        text: "Grafik Respirasi"
-                    },
-                    legend: {
-                        position: "top"
-                    },
-                    series: [{
-                        type: "line",
-                        data: seriesRespirasi,
-                        name: "Respirasi",
-                        color: "#FBBC05",
-
-                    }
-                       
-                    ],
-                    valueAxes: [
-                        
-                        {
-                            name: "TD",
-                            title: { text: "TD" },
-                            min: 50,
-                            max: 300,
-                            majorUnit: 50
-
-                        }
-                    ],
-                    categoryAxis: {
-                        categories: ['P', 'S', 'S', 'M', 'P', 'S', 'S', 'M', 'P', 'S', 'S', 'M', 'P', 'S', 'S', 'M', 'P', 'S', 'S', 'M', 'P', 'S', 'S', 'M', 'P', 'S', 'S', 'M', 'P', 'S', 'S', 'M'],
-
-                        axisCrossingValues: [0, 35]
-                    }
-                });
-
-                $("#chartTV").kendoChart({
-                   
-                    title: {
-                        text: "Grafik TV"
-                    },
-                    legend: {
-                        position: "top"
-                    },
-                    series: [{
-                        type: "line",
-                        data: seriesTV,
-                        name: "TV",
-                        color: "#0328fc",
-
-                    }
-                        
-                    ],
-                    valueAxes: [
-                         
-                        {
-                            name: "S",
-                            title: { text: "S" },
-                            min: 32,
-                            max: 42,
-                            majorUnit: 0.5
-                        }
-                    ],
-                    categoryAxis: {
-                        categories: ['P', 'S', 'M', 'P', 'S', 'M', 'P', 'S', 'M', 'P', 'S', 'M', 'P', 'S', 'M', 'P', 'S', 'M', 'P', 'S', 'M'],
-
-                        axisCrossingValues: [0, 35]
-                    }
-                });
-            }
-
-            $scope.listNadi = []
-            $scope.listSistolik = []
-            $scope.listDistolik = []
-            $scope.listRespirasi = []
-            $scope.listTV = []
+            // $scope.cetakPdf = function () {
+            //     if (norecEMR == '') return
+            //     var client = new HttpClient();
+            //     client.get('http://127.0.0.1:1237/printvb/e-rekammedis?cetak-emr-asesmen-awal-medis-igd&id=' + $scope.cc.nocm + '&emr=' + norecEMR + '&view=true', function (response) {
+            //         // do something with response
+            //     });
+            // }
 
             $scope.cetakPdf = function () {
 
+                // if($scope.item.obj[31100543] == undefined){
+                //     toastr.warning('Diagnose Pasca Operatif tidak boleh kosong','Peringatan')
+                //     return
+                // }
+
+                // if($scope.item.obj[31100550] == undefined){
+                //     toastr.warning('Prosedur Tindakan yang Dilakukan tidak boleh kosong','Peringatan')
+                //     return
+                // }
+
+                // if($scope.item.obj[31100563] == undefined){
+                //     toastr.warning('No. Alat yang Dipasang tidak boleh kosong','Peringatan')
+                //     return
+                // }
+
+                // if($scope.item.obj[31100568] == undefined){
+                //     toastr.warning('Laporan/Tindakan Operasi tidak boleh kosong','Peringatan')
+                //     return
+                // }
                 
                 if (norecEMR == '') return
 
@@ -568,8 +186,6 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 //medifirstService.get("emr/get-emr-transaksi-detail?noemr="+$state.params.nomorEMR, true).then(function(dat){
                 medifirstService.get("emr/get-rekam-medis-dynamic?emrid=" + $scope.cc.emrfk).then(function (e) {
 
-
-
                     for (var i = e.data.kolom2.length - 1; i >= 0; i--) {
                         if (e.data.kolom2[i].id == 4189 || e.data.kolom2[i].id == 4190 || e.data.kolom2[i].id == 4191 || e.data.kolom2[i].id == 4192)
                             e.data.kolom2.splice(i, 1)
@@ -625,89 +241,20 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                             }
                         }
                     }
-                    var datas = e.data.kolom4
-
-                var detail = []
-                var arrayAskep = []
-
-                var sama = false
-                for (let i = 0; i < datas.length; i++) {
-                    const element = datas[i];
-                    sama = false
-                    // if (element.kodeexternal == 'date') {
-                    //     $scope.listTanggal.push({ id: element.id })
-                    // }
-                    // if (element.kodeexternal == 'date2') {
-                    //     $scope.listTanggal2.push({ id: element.id })
-                    // }
-                    if (element.kodeexternal == 'pernafasan' && element.namaexternal == 'Nadi') {
-                        $scope.listNadi.push({ id: element.id })
-                    }
-                    if (element.kodeexternal == 'pernafasan' && element.namaexternal == 'Sistolik') {
-                        $scope.listSistolik.push({ id: element.id })
-                    }
-                    if (element.kodeexternal == 'pernafasan' && element.namaexternal == 'Distolik') {
-                        $scope.listDistolik.push({ id: element.id })
-                    }
-                    if (element.kodeexternal == 'pernafasan' && element.namaexternal == 'Respirasi') {
-                        $scope.listRespirasi.push({ id: element.id })
-                    }
-                    if (element.kodeexternal == 'pernafasan' && element.namaexternal == 'TV') {
-                        $scope.listTV.push({ id: element.id })
-                    }
-                    
-                    // ARRAY GEJALA
-                    if (element.kodeexternal == 'pernafasan') {
-                        for (let z = 0; z < arrayAskep.length; z++) {
-                            const element2 = arrayAskep[z];
-                            if (element2.namaexternal == element.namaexternal) {
-                                detail.push(element)
-                                element2.details = detail
-                                sama = true
+                    for (var i = e.data.kolom4.length - 1; i >= 0; i--) {
+                        if (e.data.kolom4[i].cbotable != null) {
+                            medifirstService.getPart2(e.data.kolom4[i].id, e.data.kolom4[i].cbotable, true, true, 20).then(function (data) {
+                                $scope.item.objcbo[data.options.idididid] = data
+                            })
+                        }
+                        for (var ii = e.data.kolom4[i].child.length - 1; ii >= 0; ii--) {
+                            if (e.data.kolom4[i].child[ii].cbotable != null) {
+                                medifirstService.getPart2(e.data.kolom4[i].child[ii].id, e.data.kolom4[i].child[ii].cbotable, true, true, 20).then(function (data) {
+                                    $scope.item.objcbo[data.options.idididid] = data
+                                })
                             }
                         }
-                        if (sama == false) {
-                            var datax = {
-                                caption: element.caption,
-                                cbotable: element.cbotable,
-                                child: [],
-                                emrfk: element.emrfk,
-                                headfk: element.headfk,
-                                id: element.id,
-                                kdprofile: element.kdprofile,
-                                kodeexternal: element.kodeexternal,
-                                namaemr: element.namaemr,
-                                namaexternal: element.namaexternal,
-                                nourut: element.nourut,
-                                reportdisplay: element.reportdisplay,
-                                satuan: element.satuan,
-                                statusenabled: element.statusenabled,
-                                style: element.style,
-                                type: element.type,
-
-                            }
-                            arrayAskep.push(datax)
-                        }
-                    }// ARRAY GEJALA
-
-                }
-                // ARRAY GEJALA
-                var gejalaKosongKeun = []
-                for (let k = 0; k < arrayAskep.length; k++) {
-                    const element = arrayAskep[k];
-                    for (let l = 0; l < datas.length; l++) {
-                        const element2 = datas[l];
-                        if (element2.namaexternal == element.namaexternal) {
-                            gejalaKosongKeun.push(element2)
-                            element.details = gejalaKosongKeun
-                        } else {
-                            gejalaKosongKeun = []
-                        }
                     }
-                }
-                
-                // $scope.listData4 = arrayParenteral2
-                onloadchart()
                     if (cacheEMR_TRIASE_PRIMER != undefined) {
                         medifirstService.get("emr/get-emr-transaksi-detail?noemr=" + cacheEMR_TRIASE_PRIMER + "&emrfk=" + $scope.cc.emrfk, true).then(function (dat) {
                             var dataNA = dat.data.data
@@ -843,68 +390,6 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     
                     })
                 })
-                onloadchart()
-            }
-
-            function onloadchart() {
-                for (let y = 0; y < 36; y++) {
-                    var item = $scope.listNadi[y]['id'];
-                    seriesNadi[y] = $scope.item.obj[parseFloat(item)]
-                }
-
-                for (let z = 0; z < 36; z++) {
-                    var item = $scope.listSistolik[z]['id'];
-                    seriesSistolik[z] = $scope.item.obj[parseFloat(item)]
-                }
-
-                for (let z = 0; z < 36; z++) {
-                    var item = $scope.listDistolik[z]['id'];
-                    seriesDistolik[z] = $scope.item.obj[parseFloat(item)]
-                }
-
-                for (let z = 0; z < 36; z++) {
-                    var item = $scope.listRespirasi[z]['id'];
-                    seriesRespirasi[z] = $scope.item.obj[parseFloat(item)]
-                }
-
-                for (let z = 0; z < 36; z++) {
-                    var item = $scope.listTV[z]['id'];
-                    seriesTV[z] = $scope.item.obj[parseFloat(item)]
-                }
-
-
-                for (let x = 0; x < seriesNadi.length; x++) {
-                    if (!isNaN(parseInt(seriesNadi[x])))
-                        seriesNadi[x] = parseInt(seriesNadi[x])
-                    else
-                        seriesNadi[x] = null
-                }
-                for (let x = 0; x < seriesSistolik.length; x++) {
-                    if (!isNaN(parseInt(seriesSistolik[x])))
-                        seriesSistolik[x] = parseInt(seriesSistolik[x])
-                    else
-                        seriesSistolik[x] = null
-                }
-                for (let x = 0; x < seriesDistolik.length; x++) {
-                    if (!isNaN(parseInt(seriesDistolik[x])))
-                        seriesDistolik[x] = parseInt(seriesDistolik[x])
-                    else
-                        seriesDistolik[x] = null
-                }
-                for (let x = 0; x < seriesRespirasi.length; x++) {
-                    if (!isNaN(parseInt(seriesRespirasi[x])))
-                        seriesRespirasi[x] = parseInt(seriesRespirasi[x])
-                    else
-                        seriesRespirasi[x] = null
-                }
-                for (let x = 0; x < seriesTV.length; x++) {
-                    if (!isNaN(parseInt(seriesTV[x])))
-                        seriesTV[x] = parseInt(seriesTV[x])
-                    else
-                        seriesTV[x] = null
-                }
-
-                loadChart()
             }
 
             $scope.kembali = function () {
@@ -1068,63 +553,6 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     //     namaEMR : $scope.cc.emrfk,
                     //     nomorEMR : e.data.data.noemr 
                     // });
-
-                    for (let z = 0; z < 36; z++) {
-                        var item = $scope.listNadi[z]['id'];
-                        seriesNadi[z] = $scope.item.obj[parseFloat(item)]
-                    }
-
-                    for (let z = 0; z < 36; z++) {
-                        var item = $scope.listSistolik[z]['id'];
-                        seriesSistolik[z] = $scope.item.obj[parseFloat(item)]
-                    }
-
-                    for (let z = 0; z < 36; z++) {
-                        var item = $scope.listDistolik[z]['id'];
-                        seriesDistolik[z] = $scope.item.obj[parseFloat(item)]
-                    }
-
-                    for (let z = 0; z < 36; z++) {
-                        var item = $scope.listRespirasi[z]['id'];
-                        seriesRespirasi[z] = $scope.item.obj[parseFloat(item)]
-                    }
-
-                    for (let z = 0; z < 36; z++) {
-                        var item = $scope.listTV[z]['id'];
-                        seriesTV[z] = $scope.item.obj[parseFloat(item)]
-                    }
-                    
-                    for (let x = 0; x < seriesNadi.length; x++) {
-                        if (!isNaN(parseInt(seriesNadi[x])))
-                            seriesNadi[x] = parseInt(seriesNadi[x])
-                        else
-                            seriesNadi[x] = null
-                    }
-                    for (let x = 0; x < seriesSistolik.length; x++) {
-                        if (!isNaN(parseInt(seriesSistolik[x])))
-                            seriesSistolik[x] = parseInt(seriesSistolik[x])
-                        else
-                            seriesSistolik[x] = null
-                    }
-                    for (let x = 0; x < seriesDistolik.length; x++) {
-                        if (!isNaN(parseInt(seriesDistolik[x])))
-                            seriesDistolik[x] = parseInt(seriesDistolik[x])
-                        else
-                            seriesDistolik[x] = null
-                    }
-                    for (let x = 0; x < seriesRespirasi.length; x++) {
-                        if (!isNaN(parseInt(seriesRespirasi[x])))
-                            seriesRespirasi[x] = parseInt(seriesRespirasi[x])
-                        else
-                            seriesRespirasi[x] = null
-                    }
-                    for (let x = 0; x < seriesTV.length; x++) {
-                        if (!isNaN(parseInt(seriesTV[x])))
-                            seriesTV[x] = parseInt(seriesTV[x])
-                        else
-                            seriesTV[x] = null
-                    }
-                    loadChart()
 
                     medifirstService.postLogging('EMR', 'norec emrpasien_t', e.data.data.norec,
                         'Evaluasi Pasca Anestesi / Sedasi (RM 51a)' + ' dengan No EMR - ' + e.data.data.noemr + ' pada No Registrasi '
