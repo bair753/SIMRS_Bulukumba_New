@@ -21314,10 +21314,10 @@
     ]
   },
   {
-    "name": "RekamMedis.AsesmenMedis.MenuIndex.EvaluasiPascaAnestesi1",
-    "url": "/EvaluasiPascaAnestesi1/:index/:idEMR",
-    "templateurl": "module/EMR/EvaluasiPascaAnestesi1.html",
-    "controller": "EvaluasiPascaAnestesi1Ctrl",
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.EvaluasiPascaAnestesi",
+    "url": "/EvaluasiPascaAnestesi/:index/:idEMR",
+    "templateurl": "module/EMR/EvaluasiPascaAnestesi.html",
+    "controller": "EvaluasiPascaAnestesiCtrl",
     "deps": [
       {
         "module": "Services",
@@ -21337,10 +21337,10 @@
     ]
   },
   {
-    "name": "RekamMedis.AsesmenMedis.MenuIndex.EvaluasiPascaAnestesi2",
-    "url": "/EvaluasiPascaAnestesi2/:index/:idEMR",
-    "templateurl": "module/EMR/EvaluasiPascaAnestesi2.html",
-    "controller": "EvaluasiPascaAnestesi2Ctrl",
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.EvaluasiPascaAnestesiLain",
+    "url": "/EvaluasiPascaAnestesiLain/:index/:idEMR",
+    "templateurl": "module/EMR/EvaluasiPascaAnestesiLain.html",
+    "controller": "EvaluasiPascaAnestesiLainCtrl",
     "deps": [
       {
         "module": "Services",
