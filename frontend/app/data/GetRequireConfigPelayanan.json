@@ -3817,6 +3817,14 @@
         {
             "nameDep": "ObstetriCtrl",
             "urlDep": "module/EMR/ObstetriCtrl"
+        },
+        {
+            "nameDep": "EvaluasiPascaAnestesi1Ctrl",
+            "urlDep": "module/EMR/EvaluasiPascaAnestesi1Ctrl"
+        },
+        {
+            "nameDep": "EvaluasiPascaAnestesi2Ctrl",
+            "urlDep": "module/EMR/EvaluasiPascaAnestesi2Ctrl"
         }
     ]
 }

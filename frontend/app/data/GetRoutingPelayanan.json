@@ -21312,6 +21312,52 @@
         "define": "RekamMedisCtrl"
       }
     ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.EvaluasiPascaAnestesi1",
+    "url": "/EvaluasiPascaAnestesi1/:index/:idEMR",
+    "templateurl": "module/EMR/EvaluasiPascaAnestesi1.html",
+    "controller": "EvaluasiPascaAnestesi1Ctrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
+  },
+  {
+    "name": "RekamMedis.AsesmenMedis.MenuIndex.EvaluasiPascaAnestesi2",
+    "url": "/EvaluasiPascaAnestesi2/:index/:idEMR",
+    "templateurl": "module/EMR/EvaluasiPascaAnestesi2.html",
+    "controller": "EvaluasiPascaAnestesi2Ctrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "RekamMedisCtrl"
+      }
+    ]
   }
 
 
