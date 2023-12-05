@@ -3819,12 +3819,12 @@
             "urlDep": "module/EMR/ObstetriCtrl"
         },
         {
-            "nameDep": "EvaluasiPascaAnestesi1Ctrl",
-            "urlDep": "module/EMR/EvaluasiPascaAnestesi1Ctrl"
+            "nameDep": "EvaluasiPascaAnestesiCtrl",
+            "urlDep": "module/EMR/EvaluasiPascaAnestesiCtrl"
         },
         {
-            "nameDep": "EvaluasiPascaAnestesi2Ctrl",
-            "urlDep": "module/EMR/EvaluasiPascaAnestesi2Ctrl"
+            "nameDep": "EvaluasiPascaAnestesiLainCtrl",
+            "urlDep": "module/EMR/EvaluasiPascaAnestesiLainCtrl"
         }
     ]
 }
