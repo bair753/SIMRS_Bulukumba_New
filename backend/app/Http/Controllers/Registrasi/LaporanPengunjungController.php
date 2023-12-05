@@ -7023,6 +7023,9 @@ class LaporanPengunjungController extends ApiController
         if (isset($request['nama']) && $request['nama'] != "" && $request['nama'] != "undefined") {
             $data = $data->Where('ps.namapasien', 'ilike', '%'.$request['nama'].'%')	;
         }
+        if (isset($request['idDiagnosa']) && $request['idDiagnosa'] != "" && $request['idDiagnosa'] != "undefined") {
+            $data = $data->Where('dm.id', '=', $request['idDiagnosa'])	;
+        }
         if (isset($request['dokter']) && $request['dokter'] != "" && $request['dokter'] != "undefined") {
             $data = $data->Where('pg.id', '=', $request['dokter'])	;
         }

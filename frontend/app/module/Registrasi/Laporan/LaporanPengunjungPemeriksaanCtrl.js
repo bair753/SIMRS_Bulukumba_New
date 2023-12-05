@@ -33,6 +33,12 @@ define(['initialize'], function (initialize) {
                         $scope.listDokter = data.data.dokter
                     })
                 // 
+                medifirstService.get("tatarekening/get-data-combo-daftarregpasien", true).then(function (dat) {                                    
+                    $scope.listJenisDiagnosa = dat.data.jenisdiagnosa;                                    
+                });
+                medifirstService.getPart("sysadmin/general/get-datacombo-icd10", true, true, 10).then(function(data) {
+                    $scope.listDiagnosa = data;
+               }); 
                 medifirstService.get("sysadmin/general/get-combo-address")
                     .then(function (data) {
                         $scope.listKotaKabupaten = data.data.kotakabupaten
@@ -163,14 +169,19 @@ define(['initialize'], function (initialize) {
                     listRuangan = a.slice(1, a.length)
                 }
 
+                var tempDiagnosa = ""
+                if ($scope.item.Diagnosa != undefined) {
+                    tempDiagnosa = "&idDiagnosa=" + $scope.item.Diagnosa.id;
+                } 
+
 
                 medifirstService.get("registrasi/laporan/get-data-lap-pengunjung-pemeriksaan?" +
                     "tglAwal=" + tglAwal +
-                    "&tglAkhir=" + tglAkhir +
+                    "&tglAkhir=" + tglAkhir + 
                     "&ruanganArr=" + listRuangan +
                     rm +
                     pasien +
-                    namaruangan + instalasi + 
+                    namaruangan + instalasi + tempDiagnosa +
                     dokter + kotaKab)
                     .then(function (data) {
                         $scope.isRouteLoading = false;

@@ -141,9 +141,23 @@
         <div class="clear"></div>
     </div>
     <div class="grid_12" style="margin-top: 10px;">
-        <div class="grid_10"></div>
+        <div class="grid_10">
+            <div class="grid_2">
+                <label c-label item="item" c-label-text="Jenis Diagnosa"></label>
+                <input ng-disabled="isDisable" style="width: 100%;" kendo-combo-box k-ng-model="item.JenisDiagnosa" k-data-text-field="'jenisdiagnosa'" k-data-value-field="'id'" k-filter="'contains'" k-auto-bind="false" k-data-source="listJenisDiagnosa"/>
+            </div>
+            <div class="grid_2">
+                <label c-label item="item" c-label-text="Kode Diagnosa"></label>
+                <input ng-disabled="isDisable" style="width: 100%;" kendo-combo-box k-ng-model="item.Diagnosa" k-data-text-field="'kddiagnosa'" k-data-value-field="'id'" k-filter="'contains'" k-auto-bind="false" k-data-source="listDiagnosa"/>
+            </div>
+            <div class="grid_4">
+                <label c-label item="item" c-label-text="Nama Diagnosa"></label>
+                <input ng-disabled="isDisable" style="width: 100%;" kendo-combo-box k-ng-model="item.Diagnosa" k-data-text-field="'namadiagnosa'" k-data-value-field="'id'" k-filter="'contains'" k-auto-bind="false" k-data-source="listDiagnosa"/>
+            </div>
+        </div>
+        <!-- <div class="grid_8"></div> -->
         <div class="grid_2">
-            <button class="btnTemplate1" style="margin-top:-20px;margin-left: 0;" ng-click="CetakView()"><i
+            <button class="btnTemplate1" style="margin-top:25px;margin-left: 0;" ng-click="CetakView()"><i
                     class="fa fa-print"></i>Cetak</button>
         </div>
     </div>
