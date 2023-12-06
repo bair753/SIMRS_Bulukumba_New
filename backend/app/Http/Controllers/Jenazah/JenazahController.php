@@ -1484,12 +1484,13 @@ class JenazahController extends ApiController {
         $kdProfile = $this->getDataKdProfile($request);
         $tglAwal = $request['tglAwal'];
         $tglAkhir = $request['tglAkhir'];
-        $data = \DB::select(DB::raw("select pt.norec,pt.tglmeninggal, pt.objectruanganlastfk , rm.namaruangan , pm.namapasien,jm.jeniskelamin ,pm.nocm, date_part('year',now()) - date_part('year',pm.tgllahir) as umur, km.kondisipasien, pm.noidentitas, pm.nobpjs, pm.alamatrmh,
+        $data = \DB::select(DB::raw("select pt.norec,pt.tglmeninggal, pt.objectruanganlastfk , rm.namaruangan , pm.namapasien,jm.jeniskelamin ,pm.nocm, date_part('year',now()) - date_part('year',pm.tgllahir) as umur, km.kondisipasien, pm.noidentitas, pm.nobpjs, alm.alamatlengkap as alamatrmh,
                 kps.kelompokpasien
                 from pasiendaftar_t pt
                 inner join ruangan_m rm on rm.id = pt.objectruanganlastfk
                 inner join pasien_m pm on pm.id = pt.nocmfk
                 inner join jeniskelamin_m jm on jm.id = pm.objectjeniskelaminfk
+                INNER JOIN alamat_m alm ON alm.nocmfk = pm.id
                 inner join kondisipasien_m km on km.id = pt.objectkondisipasienfk
                 inner join kelompokpasien_m kps on kps.id = pt.objectkelompokpasienlastfk
                 --inner join detaildiagnosapasien_t AS ddp on ddp.noregistrasifk=at2.norec
