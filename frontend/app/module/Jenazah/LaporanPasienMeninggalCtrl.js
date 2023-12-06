@@ -242,8 +242,8 @@ define(['initialize'], function (initialize) {
                      },
                      {
                         "field": "kondisipasien",
-                        "title": "Ket mati",
-                        "width": "75px",
+                        "title": "Keterangan Kematian",
+                        "width": "100px",
                         // groupFooterTemplate: "#=data.tunai.sum  #",
                         //  footerTemplate: "#:data.tunai.sum  #"
 
