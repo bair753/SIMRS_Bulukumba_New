@@ -619,9 +619,10 @@ define(['initialize'], function (initialize) {
                 }
                 // debugger
                 dataItem.details.sort(function (a, b) {
-                    if (a.norm < b.norm) { return -1; }
-                    if (a.norm > b.norm) { return 1; }
-                    return 0;
+                    // if (a.norm < b.norm) { return -1; }
+                    // if (a.norm > b.norm) { return 1; }
+                    // return 0;
+                    return a - b;
                 })
                 var data = []
                 data.push(dataItem)
