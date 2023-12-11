@@ -44,7 +44,7 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
 
                 $scope.header = result
                 if (result.foto == null)
-                    $scope.header.image = "images/emr/mask_2.svg"
+                    $scope.header.image = "../app/images/mask-user.png"
                 else
                     $scope.header.image = result.foto
                 localStorage.setItem('usiaPengkajian', JSON.stringify(setUsiaPengkajian));
@@ -130,9 +130,9 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                     $scope.mainTreeViewMenuOption = {
                         dataBound: function (e) {
                             $('span.k-in').each(function () {
-                                if ($(this).text() == 'Catatan Klinik') { $(this).addClass('gemblung') }
+                                if ($(this).text() == 'EMR') { $(this).addClass('gemblung') }
                                 if ($(this).text() == 'Vital Sign') { $(this).addClass('gemblung') }
-                                if ($(this).text() == 'Resep Elektronik') { $(this).addClass('gemblung') }
+                                if ($(this).text() == 'Diagnosis') { $(this).addClass('gemblung') }
 
                             })
                             // var text = "CPPT Vital Sign";
