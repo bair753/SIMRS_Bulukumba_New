@@ -65,7 +65,7 @@
                                 <span>(Tulis nama, beri paraf, Tgl, Jam)</span><br>
                                 <span>(DPJP harus membaca/mereview seluruh rencana asuhan)</span><br>
                             </td>
-                            <td style="text-align: center;width: 2%">#</td>
+                            <!-- <td style="text-align: center;width: 2%">#</td> -->
                         </tr>
                         <tr ng-repeat="list in listDataCppt" ng-show="show.obj[list.id]">
                             <td ng-repeat="jawab in list.detail | orderBy:'id'">
@@ -93,10 +93,10 @@
                                     </div>
                                 </div>
                             </td>
-                            <td style="text-align: center;">
+                            <!-- <td style="text-align: center;">
                                 <button class="btn-custom-ck" ng-if="list.id != 22035003" ng-show="showbtnadd[list.id]" ng-click="addobj(list.id, listDataCppt[$index + 1].id)"><i class="fa fa-plus-circle txt-primary" aria-hidden="true"></i></button>
                                 <button class="btn-custom-ck" ng-if="list.id != 22034963" ng-show="showbtnremove[list.id]" ng-click="removeobj(list.id, listDataCppt[$index - 1].id)"><i class="fa fa-minus-circle txt-danger" aria-hidden="true"></i></button>
-                            </td>
+                            </td> -->
                         </tr>
                     </table>
                 </div>
@@ -106,7 +106,35 @@
             </div>
         </div>
         <div class="grid_12" >
-                <div ng-include='"../app/module/EMR/TemplateButtonDinamis" '></div>
+            <div class="grid_3"></div>
+            <div class="grid_9">
+                <div class="grid_2" ng-show="isCetakV"  >
+                   
+                </div>
+                <div class="grid_6"  ng-show="!isRiwayat && !isCetak && !isCetakV && !isUpload">
+                </div>
+                <div class="grid_2" style="margin-top: 22px" ng-show='tombolSimpanVis'>
+                    <!-- <button class="btnTemplate1" ng-click="Save()"><i class="fa fa-save"></i>Simpan</button> -->
+                </div>
+                <div class="grid_2" style="margin-top: 22px" ng-show="isRiwayat">
+                    <button class="btnTemplate1" ng-click="Riwayat()"><i class="fa fa-th-list"></i>Riwayat</button>
+                </div>
+                <div class="grid_2" style="margin-top: 22px">
+                    <button class="btnTemplate1" ng-click="Batal()"><i class="fa fa-refresh"></i>Batal</button>
+                </div>
+                <div class="grid_2" style="margin-top: 22px">
+                    <button class="btnTemplate1 cancel" ng-click="kembali()"><i class="fa fa-arrow-left"></i>Kembali</button>
+                </div>
+                <div class="grid_2" ng-show="isCetak"  style="margin-top: 22px">
+                    <button class="btnTemplate1" ng-click="cetakPdf()"><i class="fa fa-upload"></i>Cetak</button>
+                </div>
+                <div class="grid_2" ng-show="isUpload"  style="margin-top: 22px;">
+                    <button class="btnTemplate1" style="background-color:coral;" ng-click="upload()"><i class="fa fa-upload"></i>Upload</button>
+                </div>
+                 <div class="grid_2" ng-show="isCetakV"  style="margin-top: 22px">
+                    <button class="btnTemplate1" ng-click="cetakBlade()"><i class="fa fa-print"></i>Cetak View</button>
+                </div>
+            </div>
           
         </div>
     </div>
