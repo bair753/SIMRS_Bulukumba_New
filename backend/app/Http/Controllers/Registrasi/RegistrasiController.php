@@ -6685,6 +6685,60 @@ class RegistrasiController extends ApiController
         return $this->respond($data2);
     }
 
+    public function getDaftarEchoPasien(Request $request){
+        $kdProfile = $this->getDataKdProfile($request);
+        $idProfile = (int) $kdProfile;
+        $norm = $request['norm'];
+        $data =  DB::select(DB::raw("
+        
+            SELECT
+            emrdp.emrpasienfk,
+            emrdp.emrfk,
+            emrp.norec,
+            emr.caption AS namaform,
+            emr.norm ,
+            emrp.tglemr,
+            emrdp.value,
+            pg.namalengkap as namadokter,
+            pd.noregistrasi
+            FROM
+            emrpasiend_t AS emrdp
+            INNER JOIN emrpasien_t AS emrp ON emrp.noemr = emrdp.emrpasienfk 
+            INNER JOIN pegawai_m AS pg ON pg.id = emrdp.pegawaifk
+            INNER JOIN pasiendaftar_t AS pd ON pd.noregistrasi = emrp.noregistrasifk
+            INNER JOIN pasien_m AS ps ON ps.id = pd.nocmfk
+            INNER JOIN emrd_t AS emrd ON emrd.id = emrdp.emrdfk
+            INNER JOIN emr_t AS emr ON emr.ID = emrdp.emrfk 
+            WHERE
+            emrdp.kdprofile = $idProfile 
+            AND emrdp.statusenabled = TRUE 
+            AND emrdp.emrfk = 290157
+            AND ps.nocm = '$norm'
+            AND emrp.jenisemr ILIKE '%asesmen%' 
+            AND emrd.id = 32110720
+            GROUP BY
+            emrdp.emrpasienfk,
+            emrdp.emrfk,
+            emrp.norec,
+            emr.caption,
+            emr.reportdisplay,
+            emr.norm,
+            emrp.tglemr,
+            emrdp.value,
+            pg.namalengkap,
+            pd.noregistrasi
+            ORDER BY
+            emr.norm
+
+       "));
+
+        $result = array(
+            'data' => $data,
+            'message' => 'mr_adhyy@epic',
+        );
+        return $this->respond($data);
+    }
+
     public function getDaftarRegistrasiPasienOperatorKlaim(Request $request){
     $kdProfile = $this->getDataKdProfile($request);
     $filter = $request->all();

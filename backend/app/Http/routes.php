@@ -1794,6 +1794,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
               Route::get('registrasi/daftar-registrasi/get-data-combo-operator-db-lama', 'Registrasi\RegistrasiController@getDataComboOperatordblama');
               // 2019-12 penambahan arif akhir
               Route::get('registrasi/daftar-registrasi/get-daftar-registrasi-pasien', 'Registrasi\RegistrasiController@getDaftarRegistrasiPasienOperator');
+              Route::get('registrasi/daftar-registrasi/get-daftar-echo-pasien', 'Registrasi\RegistrasiController@getDaftarEchoPasien');
               Route::get('registrasi/daftar-registrasi/get-daftar-registrasi-pasien-klaim', 'Registrasi\RegistrasiController@getDaftarRegistrasiPasienOperatorKlaim');
               Route::get('registrasi/daftar-registrasi/get-data-combo-operator', 'Registrasi\RegistrasiController@getDataComboOperator');
               Route::get('registrasi/daftar-registrasi/get-data-diagnosa', 'Registrasi\RegistrasiController@getDiagnosaDaftarAntrian');
