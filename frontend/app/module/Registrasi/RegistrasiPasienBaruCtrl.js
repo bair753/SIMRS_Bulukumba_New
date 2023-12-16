@@ -478,7 +478,7 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                     "item.tglLahir|k-ng-model|Tgl Lahir",
                     "item.jenisKelamin|k-ng-model|Jenis Kelamin",
                     "item.alamatLengkap|ng-model|Alamat",
-                    // "item.desaKelurahan|k-ng-model|Kelurahan",
+                    "item.desaKelurahan|k-ng-model|Kelurahan",
                     "item.noHp|ng-model|No. HP / Ponsel",
                 ];
                 var isValid = ModelItem.setValidation($scope, listRawRequired);
