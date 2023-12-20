@@ -4789,7 +4789,7 @@ class ReportController extends ApiController{
                 pa.noidentitas,
                 al.alamatlengkap,
                 ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
-                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl, pg.qrcode as qrcode,
                 --ap.noasuransi,ap.namapeserta,
                 pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
                 --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
@@ -4823,6 +4823,12 @@ class ReportController extends ApiController{
             if ($z->type == "datetime") {
                 $z->value = date('Y-m-d H:i:s', strtotime($z->value));
             }
+            if ($z->qrcode == null) {
+                $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate("Tanda Tangan Digital Oleh ".$z->namadokter));
+            }
+            if ($z->value != null) {
+                $z->value = substr($z->value, strpos($z->value, '~'));
+            }
         }
         $pageWidth = 500;
         $res['profile'] = Profile::where('id', $request['kdprofile'])->first();
@@ -4844,7 +4850,24 @@ class ReportController extends ApiController{
             die;
         }
 
-        return view('report.cetak-ringkasan-pasien-masuk-keluar', compact('res', 'pageWidth'));
+        $imagePath = public_path("img/logo_only.png");
+        $image = "data:image/png;base64,".base64_encode(file_get_contents($imagePath));
+
+        $centangPath = public_path("img/true.png");
+        $centang = "data:image/png;base64,".base64_encode(file_get_contents($centangPath));
+
+        if(isset($request["issimpanberkas"])) {
+            $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true, 'dpi' => '600', 'defaultMediaType' => 'print']);
+            $pdf = PDF::loadView('report.cetak-ringkasan-pasien-masuk-keluar-dom', array(
+                'res' => $res,
+                'image' => $image,
+                'centang' => $centang
+            ))->setPaper('a4', 'portrait');
+            $this->saveDokumenKlaim($pdf, $request);
+            return;
+        }else{
+            return view('report.cetak-ringkasan-pasien-masuk-keluar',compact('res', 'pageWidth'));
+        }
     }
 
     public function konsulDokter(Request $request)
