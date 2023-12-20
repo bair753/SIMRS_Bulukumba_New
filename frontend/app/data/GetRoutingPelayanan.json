@@ -20506,8 +20506,8 @@
     ]
   },
   {
-    "name": "RekamMedis.AsesmenMedis.MenuIndex.Echocardiografi",
-    "url": "/Echocardiografi/:index/:idEMR",
+    "name": "RekamMedis.AsesmenMedis.Echocardiografi",
+    "url": "/Echocardiografi",
     "templateurl": "module/EMR/Echocardiografi.html",
     "controller": "EchocardiografiCtrl",
     "deps": [
