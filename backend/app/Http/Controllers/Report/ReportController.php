@@ -7206,17 +7206,10 @@ class ReportController extends ApiController{
         $index = $request['index'];
         $kdProfile = (int) $request['kdprofile'];
 
-        if (isset($request['index']) && $request['index'] == 'null') {
-            $index = 'is null';
-        }else{
-            $index = '='.$index;
-        }
-
         $data = DB::select(DB::raw(
             "
             SELECT
                 epd.emrdfk,
-                epd.index,
                 ep.noemr,
                 ed.TYPE,
                 pa.namapasien,
@@ -7251,7 +7244,6 @@ class ReportController extends ApiController{
                     AND ep.kdprofile = '$kdProfile' 
                 AND epd.statusenabled = TRUE 
                 and epd.emrfk = $request[emrfk]
-                and epd.index $index
                 and pa.statusenabled = TRUE
                 
                 ORDER BY
