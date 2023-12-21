@@ -4325,7 +4325,7 @@ class ReportController extends ApiController{
                 pa.noidentitas,
                 al.alamatlengkap,
                 ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
-                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl, pg.qrcode as qrcode,
                 --ap.noasuransi,ap.namapeserta,
                 pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
                 --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
@@ -4359,6 +4359,12 @@ class ReportController extends ApiController{
             if ($z->type == "datetime") {
                 $z->value = date('Y-m-d H:i:s', strtotime($z->value));
             }
+            if ($z->qrcode == null) {
+                $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate("Telah Menandatangani ".$z->qrcode));
+            }
+            if ($z->value != null) {
+                $z->value = substr($z->value, strpos($z->value, '~'));
+            }
         }
         $pageWidth = 500;
         $res['profile'] = Profile::where('id', $request['kdprofile'])->first();
@@ -4379,19 +4385,21 @@ class ReportController extends ApiController{
             ';
             die;
         }
+        $imagePath = public_path('img/logo_only.png');
+        $image = "data:image/png;base64,".base64_encode(file_get_contents($imagePath));
 
 
-
-        // $dataimg = DB::table('emrfoto_t as emrp')
-        // ->select('emrp.*')
-        //     ->where('emrp.statusenabled', true)
-        //     ->where('emrp.kdprofile', $kdProfile)
-        //     ->where('emrp.noemrpasienfk', $noemrpasien)
-        //     ->where('emrp.emrfk', $request['emrfk'])
-        //     ->where('emrp.index', $request['index'])
-        //     ->get();
-        // dd($dataimg);
-        return view('report.cetak-ringkasan-pulang-ranap', compact('res', 'pageWidth'));
+        if(isset($request["issimpanberkas"])) {
+            
+            $pdf = PDF::loadView('report.cetak-ringkasan-pulang-ranap-dom', array(
+                'res' => $res,
+                'image' => $image,
+            ))->setPaper('a4', 'portrait');
+            $this->saveDokumenKlaim($pdf, $request);
+            return;
+        }else{
+            return view('report.cetak-ringkasan-pulang-ranap', compact('res', 'pageWidth'));
+        }
     }
 
     public function uploadringkasanPulang(Request $request) {
@@ -4824,7 +4832,7 @@ class ReportController extends ApiController{
                 $z->value = date('Y-m-d H:i:s', strtotime($z->value));
             }
             if ($z->qrcode == null) {
-                $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate("Tanda Tangan Digital Oleh ".$z->namadokter));
+                $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate("Telah Menandatangani ".$z->namadokter));
             }
             if ($z->value != null) {
                 $z->value = substr($z->value, strpos($z->value, '~'));
@@ -4945,10 +4953,10 @@ class ReportController extends ApiController{
             $data = $data->get();
             foreach ($data as $z) {
                 if ($z->qrcodepengonsul == null) {
-                    $z->qrcodepengonsul =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate("Tanda Tangan Digital Oleh ".$z->pengonsul));
+                    $z->qrcodepengonsul =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate("Telah Menandatangani ".$z->pengonsul));
                 }
                 if ($z->qrcodenamalengkap == null) {
-                    $z->qrcodenamalengkap =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate("Tanda Tangan Digital Oleh ".$z->namalengkap));
+                    $z->qrcodenamalengkap =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate("Telah Menandatangani ".$z->namalengkap));
                 }
             }
 
@@ -5747,7 +5755,7 @@ class ReportController extends ApiController{
                 $z->value = date('H:i Y-m-d', strtotime($z->value));
             }
             if ($z->qrcode == null) {
-                $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate("Tanda Tangan Digital Oleh ".substr($z->value, strpos($z->value, '~') + 1)));
+                $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate("Telah Menandatangani ".substr($z->value, strpos($z->value, '~') + 1)));
             }
 
             if ($z->value != null) {
@@ -5923,7 +5931,7 @@ class ReportController extends ApiController{
                 $z->value = date('d-m-Y H:i', strtotime($z->value));
             }
             if ($z->qrcode == null) {
-                $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate("Tanda Tangan Digital Oleh ".substr($z->value, strpos($z->value, '~') + 1)));
+                $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate("Telah Menandatangani ".substr($z->value, strpos($z->value, '~') + 1)));
             }
         }
         $pageWidth = 500;
@@ -7852,7 +7860,7 @@ class ReportController extends ApiController{
                 $z->value = date('d-m-Y H:i', strtotime($z->value));
             }
             if ($z->qrcode == null) {
-                $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate("Tanda Tangan Digital Oleh ".substr($z->value, strpos($z->value, '~') + 1)));
+                $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate("Telah Menandatangani ".substr($z->value, strpos($z->value, '~') + 1)));
             }
         }
         $pageWidth = 500;
@@ -8183,7 +8191,7 @@ class ReportController extends ApiController{
                     $z->value = date('Y-m-d H:i:s', strtotime($z->value));
                 }
                 if ($z->qrcode == null) {
-                    $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate("Tanda Tangan Digital Oleh ".$z->namadokter));
+                    $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate("Telah Menandatangani ".$z->namadokter));
                 }
                 if ($z->value != null) {
                     $z->value = substr($z->value, strpos($z->value, '~'));
@@ -9026,7 +9034,7 @@ class ReportController extends ApiController{
                 $z->value = date('Y-m-d H:i:s', strtotime($z->value));
             }
             if ($z->qrcode == null) {
-                $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate("Tanda Tangan Digital Oleh ".substr($z->value, strpos($z->value, '~') + 1)));
+                $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate("Telah Menandatangani ".substr($z->value, strpos($z->value, '~') + 1)));
             }
         }
         $pageWidth = 500;
