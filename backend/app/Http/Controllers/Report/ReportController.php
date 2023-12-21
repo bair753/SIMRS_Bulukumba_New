@@ -5012,7 +5012,6 @@ class ReportController extends ApiController{
                     INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
                     INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
                     INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
-                    left JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
                     left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
                     left JOIN pasien_m as pa on ep.nocm =  pa.nocm
                     left JOIN alamat_m as al on pa.id = al.nocmfk
@@ -5037,6 +5036,9 @@ class ReportController extends ApiController{
                 if ($z->type == "datetime") {
                     $z->value = date('Y-m-d H:i:s', strtotime($z->value));
                 }
+                if ($z->value != null) {
+                    $z->value = substr($z->value, strpos($z->value, '~'));
+                }
             }
         }
         // $res = collect($res)->filter()->all();
@@ -5053,7 +5055,25 @@ class ReportController extends ApiController{
             die;
         }
         // dd($res);
-        return view('report.cetak-catatan-pemberian-dan-pemantuan-obat-pasien', compact('res'));
+        $imagePath = public_path("img/logo_only.png");
+        $image = "data:image/png;base64,".base64_encode(file_get_contents($imagePath));
+
+        $centangPath = public_path("img/true.png");
+        $centang = "data:image/png;base64,".base64_encode(file_get_contents($centangPath));
+
+        if(isset($request["issimpanberkas"])) {
+            $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true, 'dpi' => '600', 'defaultMediaType' => 'print']);
+            $pdf = PDF::loadView('report.cetak-catatan-pemberian-dan-pemantuan-obat-pasien-dom', array(
+                'res' => $res,
+                'image' => $image,
+                'centang' => $centang,
+            ))->setPaper('a4', 'portrait');
+            $this->saveDokumenKlaim($pdf, $request);
+            return;
+        }else{
+            return view('report.cetak-catatan-pemberian-dan-pemantuan-obat-pasien',compact('res'));
+        }
+       
     }
 
     public function asesmenAwalKeperawatanIGD(Request $request) {
@@ -7360,14 +7380,7 @@ class ReportController extends ApiController{
     public function bayiSepsis(Request $request) {
         $nocm = $request['nocm'];
         $norec = $request['emr'];
-        $index = $request['index'];
         $kdProfile = (int) $request['kdprofile'];
-
-        if (isset($request['index']) && $request['index'] == 'null') {
-            $index = 'is null';
-        }else{
-            $index = '='.$index;
-        }
 
         $data = DB::select(DB::raw(
             "
@@ -7409,7 +7422,6 @@ class ReportController extends ApiController{
                     AND ep.kdprofile = '$kdProfile' 
                 AND epd.statusenabled = TRUE 
                 and epd.emrfk = $request[emrfk]
-                and epd.index $index
                 and pa.statusenabled = TRUE
                 
                 ORDER BY
@@ -7442,7 +7454,25 @@ class ReportController extends ApiController{
             die;
         }
 
-        return view('report.cetak-bayi-sepsis', compact('res', 'pageWidth'));
+        $imagePath = public_path('img/logo_only.png');
+        $image = "data:image/png;base64,".base64_encode(file_get_contents($imagePath));
+
+        $centangPath = public_path("img/true.png");
+        $centang = "data:image/png;base64,".base64_encode(file_get_contents($centangPath));
+
+        if(isset($request["issimpanberkas"])) {
+            
+            $pdf = PDF::loadView('report.cetak-bayi-sepsis-dom', array(
+                'pageWidth' => $pageWidth,
+                'res' => $res,
+                'image' => $image,
+                'centang' => $centang
+            ))->setPaper('a4', 'portrait');
+            $this->saveDokumenKlaim($pdf, $request);
+            return;
+        }else{
+            return view('report.cetak-bayi-sepsis', compact('res', 'pageWidth'));
+        }
     }
 
     public function alatMonitoringCPAP(Request $request) {

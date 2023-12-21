@@ -18764,8 +18764,8 @@
     ]
   },
   {
-    "name": "RekamMedis.AsesmenMedis.MenuIndex.BayiSepsis",
-    "url": "/BayiSepsis/:index/:idEMR",
+    "name": "RekamMedis.AsesmenMedis.BayiSepsis",
+    "url": "/BayiSepsis",
     "templateurl": "module/EMR/BayiSepsis.html",
     "controller": "BayiSepsisCtrl",
     "deps": [
