@@ -222,12 +222,12 @@
             <td colspan="3" style="border: none"><strong>{!! $res['profile']->namalengkap !!}</strong></td>
             {{-- <td colspan="3" rowspan="2"><strong>{!! $res['profile']->namalengkap !!}</strong><br>{!! $res['profile']->alamatlengkap !!}<br>TELP : (0413) 81292</td> --}}
             <td style="border:none;border-left:1px solid #000">Nomor RM <br> Nama Lengkap</td>
-            <td colspan="4" style="border:none">: {!! $res['d'][0]->nocm  !!} <br> : {!!  $res['d'][0]->namapasien  !!} {!!  $res['d'][0]->jeniskelamin == 'PEREMPUAN' ? '(P)' : '(L)'  !!}</td>
+            <td colspan="4" style="border:none">: {!! $res['d1'][0]->nocm  !!} <br> : {!!  $res['d1'][0]->namapasien  !!} {!!  $res['d1'][0]->jeniskelamin == 'PEREMPUAN' ? '(P)' : '(L)'  !!}</td>
         </tr>
         <tr>
             <td colspan="3" style="border-top: none">{!! $res['profile']->alamatlengkap !!}<br>TELP : (0413) 81292</td>
             <td style="border:none;border-left:1px solid #000">Tanggal Lahir</td>
-            <td colspan="4" style="border:none">: {!! date('d-m-Y',strtotime( $res['d'][0]->tgllahir  )) !!} <br></td>
+            <td colspan="4" style="border:none">: {!! date('d-m-Y',strtotime( $res['d1'][0]->tgllahir  )) !!} <br></td>
         </tr>
         <tr>
             <td colspan="3" style="text-align: center;font-size:16pt"><strong>LEMBAR PENGGUNAAN VENTILATOR</strong></td>
@@ -403,7 +403,7 @@
             obj: [],
             obj2: []
         }
-        var dataLoad = {!! json_encode($res['d'] )!!};
+        var dataLoad = {!! json_encode($res['d1'] )!!};
         for (var i = 0; i <= dataLoad.length - 1; i++) {
             if(dataLoad[i].emrdfk == 3110029){
                 continue;
