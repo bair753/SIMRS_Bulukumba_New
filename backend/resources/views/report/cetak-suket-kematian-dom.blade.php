@@ -103,7 +103,7 @@
 
 <body>
     <div class="header">
-        <<center><img src="{{ $image }}" alt="" style="height: 70px; width:60px;"></center>
+        <center><img src="{{ $image }}" alt="" style="height: 70px; width:60px;"></center>
         <h3>PEMERINTAH KABUPATEN BULUKUMBA</h3>
         <h2>DINAS KESEHATAN</h2>
         <h3>UPT RSUD H. ANDI SULTHAN DAENG RADJA</h3>
