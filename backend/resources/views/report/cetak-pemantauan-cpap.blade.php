@@ -165,28 +165,28 @@
             </td>
             <td colspan="6" class="noborder" >No. RM </td>
             <td colspan="13" class="noborder">
-                : {!! $res['d'][0]->nocm  !!}
+                : {!! $res['d1'][0]->nocm  !!}
             </td>
             <td colspan="5" rowspan="2" class="border-lr bg-dark" style="font-size: xxx-large;text-align:center">RM</td>
         </tr>
         <tr class="noborder">
             <td colspan="6" class="noborder">Nama Lengkap</td>
             <td colspan="11" class="noborder">
-                : {!!  $res['d'][0]->namapasien  !!}
+                : {!!  $res['d1'][0]->namapasien  !!}
             </td>
-            <td colspan="2" class="noborder">{!!  $res['d'][0]->jeniskelamin == 'PEREMPUAN' ? '(P)' : '(L)'  !!}</td>
+            <td colspan="2" class="noborder">{!!  $res['d1'][0]->jeniskelamin == 'PEREMPUAN' ? '(P)' : '(L)'  !!}</td>
         </tr>
         <tr class="noborder">
             <td colspan="6" class="noborder">Tanggal Lahir</td>
             <td colspan="13" class="noborder">
-                : {!! date('d-m-Y',strtotime( $res['d'][0]->tgllahir  )) !!}
+                : {!! date('d-m-Y',strtotime( $res['d1'][0]->tgllahir  )) !!}
             </td>
             <td colspan="5" class="border-lr" rowspan="2" style="font-size: xxx-large;text-align:center">66</td>
         </tr>
         <tr class="noborder">
             <td colspan="6" class="noborder">NIK</td>
             <td colspan="11" class="noborder">
-                : {!! $res['d'][0]->noidentitas  !!}
+                : {!! $res['d1'][0]->noidentitas  !!}
             </td>
         </tr>
         <tr class="bordered bg-dark">
@@ -388,7 +388,9 @@
 						<tr>
 							<td colspan="28" class="noborder"></td>
 						</tr>
-						
+						<tr>
+							<td colspan="28" class="noborder"></td>
+						</tr>
 					</table>
 				</section>
 			</td>
@@ -405,12 +407,12 @@
 		<!-- lembar ke dua  -->
 		<tr style="border-top:1px solid #000">
 			<td colspan="49" class="noborder">
-				Nama Pasien : {!!  $res['d'][0]->namapasien  !!}
+				Nama Pasien : {!!  $res['d1'][0]->namapasien  !!}
 			</td>
 		</tr>
 		<tr>
 			<td colspan="12" class="noborder">
-				Tanggal Lahir : {!! date('d-m-Y',strtotime( $res['d'][0]->tgllahir  )) !!}
+				Tanggal Lahir : {!! date('d-m-Y',strtotime( $res['d1'][0]->tgllahir  )) !!}
 			</td>
 			<td colspan="37" class="noborder">
 				BB @{{ item.obj[32103888] ? item.obj[32103888] : '____' }} kg
@@ -422,83 +424,83 @@
 		</tr>
 		<tr>
 			<td colspan="10">@{{item.obj[32103889] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-			<td colspan="39"@{{ item.obj[32103890] ? item.obj[32103890] : '' }}></td>
+			<td colspan="39">@{{ item.obj[32103890] ? item.obj[32103890] : '' }}</td>
 		</tr>
         <tr>
 			<td colspan="10">@{{item.obj[32103891] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-			<td colspan="39"@{{ item.obj[32103892] ? item.obj[32103892] : '' }}></td>
+			<td colspan="39">@{{ item.obj[32103892] ? item.obj[32103892] : '' }}</td>
 		</tr>
         <tr>
 			<td colspan="10">@{{item.obj[32103893] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-			<td colspan="39"@{{ item.obj[32103894] ? item.obj[32103894] : '' }}></td>
+			<td colspan="39">@{{ item.obj[32103894] ? item.obj[32103894] : '' }}</td>
 		</tr>
         <tr>
 			<td colspan="10">@{{item.obj[32103895] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-			<td colspan="39"@{{ item.obj[32103896] ? item.obj[32103896] : '' }}></td>
+			<td colspan="39">@{{ item.obj[32103896] ? item.obj[32103896] : '' }}</td>
 		</tr>
         <tr>
 			<td colspan="10">@{{item.obj[32103897] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-			<td colspan="39"@{{ item.obj[32103898] ? item.obj[32103898] : '' }}></td>
+			<td colspan="39">@{{ item.obj[32103898] ? item.obj[32103898] : '' }}</td>
 		</tr>
         <tr>
 			<td colspan="10">@{{item.obj[32103899] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-			<td colspan="39"@{{ item.obj[32103900] ? item.obj[32103900] : '' }}></td>
+			<td colspan="39">@{{ item.obj[32103900] ? item.obj[32103900] : '' }}</td>
 		</tr>
         <tr>
 			<td colspan="10">@{{item.obj[32103901] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-			<td colspan="39"@{{ item.obj[32103902] ? item.obj[32103902] : '' }}></td>
+			<td colspan="39">@{{ item.obj[32103902] ? item.obj[32103902] : '' }}</td>
 		</tr>
         <tr>
 			<td colspan="10">@{{item.obj[32103903] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-			<td colspan="39"@{{ item.obj[32103904] ? item.obj[32103904] : '' }}></td>
+			<td colspan="39">@{{ item.obj[32103904] ? item.obj[32103904] : '' }}</td>
 		</tr>
         <tr>
 			<td colspan="10">@{{item.obj[32103905] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-			<td colspan="39"@{{ item.obj[32103906] ? item.obj[32103906] : '' }}></td>
+			<td colspan="39">@{{ item.obj[32103906] ? item.obj[32103906] : '' }}</td>
 		</tr>
         <tr>
 			<td colspan="10">@{{item.obj[32103907] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-			<td colspan="39"@{{ item.obj[32103908] ? item.obj[32103908] : '' }}></td>
+			<td colspan="39">@{{ item.obj[32103908] ? item.obj[32103908] : '' }}</td>
 		</tr>
         <tr>
 			<td colspan="10">@{{item.obj[32103909] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-			<td colspan="39"@{{ item.obj[32103910] ? item.obj[32103910] : '' }}></td>
+			<td colspan="39">@{{ item.obj[32103910] ? item.obj[32103910] : '' }}</td>
 		</tr>
         <tr>
 			<td colspan="10">@{{item.obj[32103911] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-			<td colspan="39"@{{ item.obj[32103912] ? item.obj[32103912] : '' }}></td>
+			<td colspan="39">@{{ item.obj[32103912] ? item.obj[32103912] : '' }}</td>
 		</tr>
         <tr>
 			<td colspan="10">@{{item.obj[32103913] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-			<td colspan="39"@{{ item.obj[32103914] ? item.obj[32103914] : '' }}></td>
+			<td colspan="39">@{{ item.obj[32103914] ? item.obj[32103914] : '' }}</td>
 		</tr>
         <tr>
 			<td colspan="10">@{{item.obj[32103915] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-			<td colspan="39"@{{ item.obj[32103916] ? item.obj[32103916] : '' }}></td>
+			<td colspan="39">@{{ item.obj[32103916] ? item.obj[32103916] : '' }}</td>
 		</tr>
         <tr>
 			<td colspan="10">@{{item.obj[32103917] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-			<td colspan="39"@{{ item.obj[32103918] ? item.obj[32103918] : '' }}></td>
+			<td colspan="39">@{{ item.obj[32103918] ? item.obj[32103918] : '' }}</td>
 		</tr>
         <tr>
 			<td colspan="10">@{{item.obj[32103919] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-			<td colspan="39"@{{ item.obj[32103920] ? item.obj[32103920] : '' }}></td>
+			<td colspan="39">@{{ item.obj[32103920] ? item.obj[32103920] : '' }}</td>
 		</tr>
         <tr>
 			<td colspan="10">@{{item.obj[32103921] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-			<td colspan="39"@{{ item.obj[32103922] ? item.obj[32103922] : '' }}></td>
+			<td colspan="39">@{{ item.obj[32103922] ? item.obj[32103922] : '' }}</td>
 		</tr>
         <tr>
 			<td colspan="10">@{{item.obj[32103923] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-			<td colspan="39"@{{ item.obj[32103924] ? item.obj[32103924] : '' }}></td>
+			<td colspan="39">@{{ item.obj[32103924] ? item.obj[32103924] : '' }}</td>
 		</tr>
         <tr>
 			<td colspan="10">@{{item.obj[32103925] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-			<td colspan="39"@{{ item.obj[32103926] ? item.obj[32103926] : '' }}></td>
+			<td colspan="39">@{{ item.obj[32103926] ? item.obj[32103926] : '' }}</td>
 		</tr>
         <tr>
 			<td colspan="10">@{{item.obj[32103927] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-			<td colspan="39"@{{ item.obj[32103928] ? item.obj[32103928] : '' }}></td>
+			<td colspan="39">@{{ item.obj[32103928] ? item.obj[32103928] : '' }}</td>
 		</tr>
     </table>
 </body>
@@ -535,7 +537,7 @@
             obj2: [],
             objImg: [],
         }
-        var dataLoad = {!! json_encode($res['d'] )!!};
+        var dataLoad = {!! json_encode($res['d1'] )!!};
         for (var i = 0; i <= dataLoad.length - 1; i++) {
             if(dataLoad[i].emrdfk == 3110029){
                 continue;
