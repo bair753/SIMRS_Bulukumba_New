@@ -418,14 +418,21 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     toastr.info("Infor", "Data tidak ditemukan");
                     return
                 }
-                window.open(baseTransaksi 
-                + dataItem.url 
-                + dataItem.param + "&issimpanberkas=true&iddok="+dataItem.id+"&isberkasnoreg="+dataItem.noregistrasi+"&namafile=" + dataItem.namafile, 
-                '_blank');
-				setTimeout(function(){ 
+                // window.open(baseTransaksi 
+                // + dataItem.url 
+                // + dataItem.param + "&issimpanberkas=true&iddok="+dataItem.id+"&isberkasnoreg="+dataItem.noregistrasi+"&namafile=" + dataItem.namafile, 
+                // '_blank');
+				// setTimeout(function(){ 
+				// 	$scope.isRouteLoading = false
+				// 	$scope.tutupdokumen();
+				//  }, 3000);
+				$scope.isRouteLoading = true;
+				 medifirstService.get(dataItem.url + dataItem.param + "&issimpanberkas=true&iddok="
+				 +dataItem.id+"&isberkasnoreg="+dataItem.noregistrasi+"&namafile=" + dataItem.namafile).then(function (e) {
 					$scope.isRouteLoading = false
 					$scope.tutupdokumen();
-				 }, 3000);
+
+						})
 				
             }
 
