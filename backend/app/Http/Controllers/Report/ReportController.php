@@ -4354,19 +4354,20 @@ class ReportController extends ApiController{
                 ed.nourut
                 "
         ));
-        // dd($data);
         foreach ($data as $z) {
+            
             if ($z->type == "datetime") {
                 $z->value = date('Y-m-d H:i:s', strtotime($z->value));
             }
-            if ($z->qrcode == null) {
-                $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate($z->value));
-            }
-
             if ($z->value != null) {
                 $z->value = substr($z->value, strpos($z->value, '~'));
             }
+            if ($z->qrcode == null && substr($z->value, strpos($z->value, '~'))) {
+                $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate($z->value));
+            }
+            
         }
+        // dd($data);
         $pageWidth = 500;
         $res['profile'] = Profile::where('id', $request['kdprofile'])->first();
 
@@ -4832,12 +4833,11 @@ class ReportController extends ApiController{
             if ($z->type == "datetime") {
                 $z->value = date('Y-m-d H:i:s', strtotime($z->value));
             }
-            if ($z->qrcode == null) {
-                $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate($z->value));
-            }
-
             if ($z->value != null) {
                 $z->value = substr($z->value, strpos($z->value, '~'));
+            }
+            if ($z->qrcode == null && substr($z->value, strpos($z->value, '~'))) {
+                $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate($z->value));
             }
         }
         $pageWidth = 500;
@@ -5137,18 +5137,17 @@ class ReportController extends ApiController{
         ));
         // dd($data);
         foreach ($data as $z) {
-            if ($z->type == "datetime") {
-                $z->value = date('H:i d-m-Y', strtotime($z->value));
-            }
             if ($z->type == "time") {
                 $z->value = date('H:i', strtotime($z->value));
             }
-            if ($z->qrcode == null) {
-                $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate($z->value));
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
             }
-
             if ($z->value != null) {
                 $z->value = substr($z->value, strpos($z->value, '~'));
+            }
+            if ($z->qrcode == null && substr($z->value, strpos($z->value, '~'))) {
+                $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate($z->value));
             }
         }
         $pageWidth = 500;
@@ -5329,13 +5328,11 @@ class ReportController extends ApiController{
                 if ($z->type == "time") {
                     $z->value = date('H:i', strtotime($z->value));
                 }
-                if ($z->qrcode == null) {
-                    $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate($z->value));
-                    // $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate($z->value));
-                }
-    
                 if ($z->value != null) {
                     $z->value = substr($z->value, strpos($z->value, '~'));
+                }
+                if ($z->qrcode == null && substr($z->value, strpos($z->value, '~'))) {
+                    $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate($z->value));
                 }
             }
         }
@@ -5500,12 +5497,11 @@ class ReportController extends ApiController{
             if ($z->type == "datetime") {
                 $z->value = date('Y-m-d H:i:s', strtotime($z->value));
             }
-            if ($z->qrcode == null) {
-                $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate($z->value));
-            }
-
             if ($z->value != null) {
                 $z->value = substr($z->value, strpos($z->value, '~'));
+            }
+            if ($z->qrcode == null && substr($z->value, strpos($z->value, '~'))) {
+                $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate($z->value));
             }
         }
         $pageWidth = 500;
@@ -5677,18 +5673,17 @@ class ReportController extends ApiController{
         ));
         // dd($data);
         foreach ($data as $z) {
-            if ($z->type == "datetime") {
-                $z->value = date('H:i d-m-Y', strtotime($z->value));
-            }
             if ($z->type == "time") {
                 $z->value = date('H:i', strtotime($z->value));
             }
-            if ($z->qrcode == null) {
-                $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate($z->value));
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
             }
-
             if ($z->value != null) {
                 $z->value = substr($z->value, strpos($z->value, '~'));
+            }
+            if ($z->qrcode == null && substr($z->value, strpos($z->value, '~'))) {
+                $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate($z->value));
             }
         }
         $pageWidth = 500;
@@ -5858,18 +5853,17 @@ class ReportController extends ApiController{
                 "
         ));
         foreach ($data as $z) {
-            if ($z->type == "datetime") {
-                $z->value = date('H:i d-m-Y', strtotime($z->value));
-            }
             if ($z->type == "time") {
                 $z->value = date('H:i', strtotime($z->value));
             }
-            if ($z->qrcode == null) {
-                $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate($z->value));
+            if ($z->type == "datetime") {
+                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
             }
-
             if ($z->value != null) {
                 $z->value = substr($z->value, strpos($z->value, '~'));
+            }
+            if ($z->qrcode == null && substr($z->value, strpos($z->value, '~'))) {
+                $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate($z->value));
             }
         }
         $pageWidth = 500;
@@ -6038,9 +6032,15 @@ class ReportController extends ApiController{
         ));
         foreach ($data as $z) {
             if ($z->type == "datetime") {
-                $z->value = date('d-m-Y H:i', strtotime($z->value));
+                $z->value = date('H:i d-m-Y', strtotime($z->value));
             }
-            if ($z->qrcode == null) {
+            if ($z->type == "time") {
+                $z->value = date('H:i', strtotime($z->value));
+            }
+            if ($z->value != null) {
+                $z->value = substr($z->value, strpos($z->value, '~'));
+            }
+            if ($z->qrcode == null && substr($z->value, strpos($z->value, '~'))) {
                 $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate($z->value));
             }
         }
@@ -7993,9 +7993,15 @@ class ReportController extends ApiController{
 
         foreach ($data as $z) {
             if ($z->type == "datetime") {
-                $z->value = date('d-m-Y H:i', strtotime($z->value));
+                $z->value = date('H:i d-m-Y', strtotime($z->value));
             }
-            if ($z->qrcode == null) {
+            if ($z->type == "time") {
+                $z->value = date('H:i', strtotime($z->value));
+            }
+            if ($z->value != null) {
+                $z->value = substr($z->value, strpos($z->value, '~'));
+            }
+            if ($z->qrcode == null && substr($z->value, strpos($z->value, '~'))) {
                 $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate($z->value));
             }
         }
@@ -8324,14 +8330,16 @@ class ReportController extends ApiController{
             ));
             foreach ($res['d'.$a] as $z) {
                 if ($z->type == "datetime") {
-                    $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                    $z->value = date('H:i d-m-Y', strtotime($z->value));
                 }
-                if ($z->qrcode == null) {
-                    $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate($z->value));
+                if ($z->type == "time") {
+                    $z->value = date('H:i', strtotime($z->value));
                 }
-    
                 if ($z->value != null) {
                     $z->value = substr($z->value, strpos($z->value, '~'));
+                }
+                if ($z->qrcode == null && substr($z->value, strpos($z->value, '~'))) {
+                    $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate($z->value));
                 }
             }
         }
@@ -8746,12 +8754,11 @@ class ReportController extends ApiController{
                 if ($z->type == "time") {
                     $z->value = date('H:i', strtotime($z->value));
                 }
-                if ($z->qrcode == null) {
-                    $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate($z->value));
-                }
-    
                 if ($z->value != null) {
                     $z->value = substr($z->value, strpos($z->value, '~'));
+                }
+                if ($z->qrcode == null && substr($z->value, strpos($z->value, '~'))) {
+                    $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate($z->value));
                 }
             }
         }
@@ -9183,9 +9190,15 @@ class ReportController extends ApiController{
         ));
         foreach ($data as $z) {
             if ($z->type == "datetime") {
-                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                $z->value = date('H:i d-m-Y', strtotime($z->value));
             }
-            if ($z->qrcode == null) {
+            if ($z->type == "time") {
+                $z->value = date('H:i', strtotime($z->value));
+            }
+            if ($z->value != null) {
+                $z->value = substr($z->value, strpos($z->value, '~'));
+            }
+            if ($z->qrcode == null && substr($z->value, strpos($z->value, '~'))) {
                 $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate($z->value));
             }
         }
