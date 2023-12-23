@@ -27,6 +27,7 @@ define(['initialize'], function (initialize) {
 
             function LoadCombo() {
                 medifirstService.getPart("sysadmin/general/get-combo-pegawai", true, true, 20).then(function (data) {
+                    $scope.cari();
                     $scope.listPegawai = data;
                 });
 
