@@ -2130,7 +2130,7 @@
     </div>
 </body>
 @endif
-
+{{-- 
 @if (!empty($res['d11']))
 <body>
     <div class="format">
@@ -5114,6 +5114,6 @@
         </table>
     </div>
 </body>
-@endif
+@endif --}}
 
 </html>
