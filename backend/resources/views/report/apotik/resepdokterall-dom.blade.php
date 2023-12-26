@@ -49,22 +49,20 @@
             background-color: lightgray
         }
 
-        .format{
+        /* .format{
             page-break-after: always;
         }
 
         .format2{
             page-break-after: avoid;
-        }
+        } */
     </style>
 </head>
 
 
-<body>
-
-    <?php date_default_timezone_set('Asia/Makassar'); ?>
-    @foreach ($data['depo'] as $depo)
-
+<?php date_default_timezone_set('Asia/Makassar'); ?>
+@foreach ($data['depo'] as $depo)
+    <body>
         <div class="format">
             <table width="100%">
                 <tbody>
@@ -688,9 +686,10 @@
             </table>
             <!--end-->
         </div>
-    @endforeach
-
-    @foreach ($data['dokter'] as $dokter)
+    </body>
+@endforeach
+@foreach ($data['dokter'] as $dokter)
+    <body>
         <div class="format2">
             <table width="100%">
                 <tbody>
@@ -1314,8 +1313,8 @@
             </table>
             <!--end-->
         </div>
-    @endforeach
-
-</body>
+        
+    </body>
+@endforeach
 
 </html>
