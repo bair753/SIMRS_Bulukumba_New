@@ -5768,7 +5768,7 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 					if (local != null) {
 						var profile = local.id;
 						window.open(baseTransaksi + "report/cetak-ekspertise-usg-all?norec=" + $scope.dataSelectedHasilRad.norecHasilRadiologi + '&kdprofile=' + profile + '&nocm=' + $scope.dataSelectedHasilRad.nocm
-							+ '&nama=' + nama, '_blank');
+						+ '&noregistrasi=' + $scope.dataSelectedHasilRad.noregistrasi + '&nama=' + nama, '_blank');
 					}
 				// }
 			}
