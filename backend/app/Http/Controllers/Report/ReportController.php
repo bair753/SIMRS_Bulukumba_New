@@ -3822,7 +3822,7 @@ class ReportController extends ApiController{
         $content = $pdf->download()->getOriginalContent();
 
         $path = 'dokumen_klaim/'.$request['isberkasnoreg'];
-
+        DB::beginTransaction();
         try {
             $savePath = public_path($path);
             \File::makeDirectory($savePath, 0755, true, true);
@@ -3846,24 +3846,45 @@ class ReportController extends ApiController{
             );
             DB::table('dokklaim_t')->updateOrInsert(["filename" => $namafile], $dataInsert);
 
-            echo '
-            <script language="javascript">
-                window.close()
-            </script>';
-            die;
+            // echo '
+            // <script language="javascript">
+            //     window.close()
+            // </script>';
+            // die;
+            $transStatus = true;
         } catch (\Exception $e) {
-            echo '
-            <script language="javascript">
-                window.alert("Gagal.");
-                window.close()
-            </script>';
-            die;
+            // echo '
+            // <script language="javascript">
+            //     window.alert("Gagal.");
+            //     window.close()
+            // </script>';
+            // die;
+            $transStatus = false;
+            $transMessage = $e->getMessage();
         }
+        if ($transStatus) {
+            $transMessage = 'Simpan Berhasil';
+            DB::commit();
+            $result = array(
+                "status" => 201,
+                "message" => $transMessage,
+                "as" => 'mr_adhyy@epic',
+            );
+        } else {
+            
+            DB::rollBack();
+            $result = array(
+                "status" => 400,
+                "message" => $transMessage,
+                "as" => 'mr_adhyy@epic',
+            );
+        }
+        return $this->setStatusCode($result['status'])->respond($result, $transMessage);
     }
 
     public function cetakHasilLabAll(Request $r)
     {
-        $arr_norec = explode (",",$r->strNorecPP);
+        $arr_norec = explode (",",$r->strnorecpp);
         $kdProfile = (int) $this->settingDataFixed('KdProfileAktif', 35);
         $profile = collect(DB::select("
             select * from profile_m where statusenabled = true
@@ -3871,7 +3892,7 @@ class ReportController extends ApiController{
         $pageWidth = 950;
         $head = array();
 
-        for ($i=0; $i < $r->countnorec; $i++) { 
+        for ($i=0; $i < count($arr_norec); $i++) { 
             $res = collect(DB::select("
                 SELECT
                 * 
@@ -3899,6 +3920,7 @@ class ReportController extends ApiController{
                     pp.tglpelayanan AS tglawal,
                     pg.namalengkap AS pengorder,
                     pg6.namalengkap AS dokterperiksa,
+                    pg6.qrcode as qrcodedokterperiksa,
                     pg2.namalengkap AS dpjp,
                     pm.tgllahir,
                     to_char( pm.tgllahir, 'DD-MM-YYYY' ) AS tgllahirs,
@@ -3928,7 +3950,7 @@ class ReportController extends ApiController{
                     apd.tglmasuk AS tglverif,
                     hh.tglhasil AS tglakhir,
                     ( 'Tgl Selesai  :  ' || hh.tglhasil || '          (-)         Tgl. Mulai :  ' || pp.tglpelayanan || '    (=)    Durasi :  ' || ( hh.tglhasil - pp.tglpelayanan ) ) AS tat,
-                    hh.flag,pg5.namalengkap as dokterpenanggungjawab,
+                    hh.flag,pg5.namalengkap as dokterpenanggungjawab,pg5.qrcode as qrcodedokterpenanggungjawab,
                     CASE WHEN rj.objectdepartemenfk = 18 THEN 'RAWAT JALAN' WHEN rj.objectdepartemenfk = 16 THEN 'RAWAT INAP' WHEN rj.objectdepartemenfk = 24 THEN 'GAWAT DARURAT' ELSE 'PENUNJANG' END AS jeniskunjungan,
                     CASE WHEN kmr.namakamar IS NULL THEN '-' ELSE kmr.namakamar END AS namakamar,CASE WHEN ttr.nomorbed IS NULL THEN '-' ELSE CAST(ttr.nomorbed AS VARCHAR) END AS nomorbed,
                     CASE WHEN so.tglorder IS NULL THEN apd.tglmasuk ELSE so.tglorder END AS tglorder,
@@ -3955,7 +3977,7 @@ class ReportController extends ApiController{
                     INNER JOIN detailjenisproduk_m AS djp ON djp.id = prd.objectdetailjenisprodukfk
                     INNER JOIN maphasillab_m AS maps ON maps.produkfk = prd.id 
                     INNER JOIN maphasillabdetail_m AS maps2 ON maps2.maphasilfk = maps.id 
-                    AND maps2.kelompokumurfk IN ( SELECT ID FROM kelompokumur_m kuu WHERE $r[umur] BETWEEN kuu.umurmin AND kuu.umurmax )
+                    AND maps2.kelompokumurfk IN ( SELECT ID FROM kelompokumur_m kuu WHERE 3406 BETWEEN kuu.umurmin AND kuu.umurmax )
                     LEFT JOIN pegawai_m AS pg3 ON pg3.id = p3.objectpegawaifk AND p3.objectpegawaifk = '4'
                     INNER JOIN nilainormal_m AS nn ON nn.id = maps2.nilainormalfk
                     LEFT JOIN satuanstandar_m AS ss ON ss.id = maps.satuanstandarfk
@@ -4009,12 +4031,16 @@ class ReportController extends ApiController{
         }
         
          $cek = $res[0];
+         if ($cek->qrcodedokterperiksa == null) {
+            $cek->qrcodedokterperiksa =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate($cek->dokterperiksa));
+        }
+        if ($cek->qrcodedokterpenanggungjawab == null) {
+            $cek->qrcodedokterpenanggungjawab =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate($cek->dokterpenanggungjawab));
+        }
         
-
          $head = collect($head)->filter( function ( $item ) { 
             return strlen( $item ) > 100; 
         }); 
-            // dd($res);
           
         $dataReport = array(
             'namaprofile' => $profile,
@@ -4024,11 +4050,27 @@ class ReportController extends ApiController{
             'cek' => $cek,
         );
         // dd($dataReport);
-        
-        return view(
-            'report.lab.hasil-lab-all',
-            compact('res', 'head', 'cek', 'headi', 'pageWidth', 'r', 'profile')
-        );
+
+        $imagePath = public_path('img/logo_only.png');
+        $image = "data:image/png;base64,".base64_encode(file_get_contents($imagePath));
+
+        if(isset($r["issimpanberkas"])) {
+            
+            $pdf = PDF::loadView('report.lab.hasil-lab-all-dom', array(
+                'res' => $res,
+                'head' => $head,
+                'cek' => $cek,
+                'headi' => $headi,
+                'pageWidth' => $pageWidth,
+                'r' => $r,
+                'profile' => $profile,
+                'image' => $image,
+            ))->setPaper('a4', 'portrait');
+            $this->saveDokumenKlaim($pdf, $r);
+            return;
+        }else{
+            return view('report.lab.hasil-lab-all', compact('res', 'head', 'cek', 'headi', 'pageWidth', 'r', 'profile', 'image'));
+        }
     }
 
     public function cetakSuratBayar(Request $request)
