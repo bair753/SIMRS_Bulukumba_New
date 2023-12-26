@@ -5819,7 +5819,7 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 								+ "&objectjeniskelaminfk=" + jeniskelaminfk
 								+ "&umur=" + umurHari
 								+ "&strIdPegawai=" + user.namaLengkap 
-								+ "&strNorecPP=" + norec_pp
+								+ "&strnorecpp=" + norec_pp
 								+ "&countnorec=" + norec_pp.length
 								+ "&doketr=" + dokter.namalengkap 
 								+ "&pemeriksa=" + pemeriksa.namalengkap 
