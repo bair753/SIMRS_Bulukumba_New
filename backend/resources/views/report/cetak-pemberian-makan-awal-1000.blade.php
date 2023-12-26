@@ -389,8 +389,8 @@
 			<td colspan="" class="text-center noborder btm">@{{ item.obj[1001030] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }}10</td>
 			<td colspan="" class="text-center noborder btm">@{{ item.obj[1001031] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }}11</td>
 			<td colspan="" class="text-center noborder btm">@{{ item.obj[1001032] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }}12</td>
-			<td colspan="" class="text-center noborder blf btm">@{{ item.obj[1001032] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }}Dis</td>
-			<td colspan="3" class="text-center noborder btm">@{{ item.obj[1001033] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }}M - emp su</td>
+			<td colspan="" class="text-center noborder blf btm">@{{ item.obj[1001033] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }}Dis</td>
+			<td colspan="3" class="text-center noborder btm">@{{ item.obj[1001034] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }}M - emp su</td>
 			<td colspan="" class="text-center noborder btm">@{{ item.obj[1001035] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }}D</td>
 			<td colspan="7" class="text-center">@{{ item.obj[1001036] ? item.obj[1001036] : '' }}</td>
 		</tr>
