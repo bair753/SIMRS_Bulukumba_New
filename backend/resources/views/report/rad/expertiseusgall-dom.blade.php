@@ -136,6 +136,7 @@ table{
 
                                 </td>
                                 <td style="background-color:#FFF" width="65%" align="center">
+                                    BTK, SS <br>
                                     <img src="data:image/png;base64, {!! $item->qrcode !!} " style="height: 70px; width:70px;">
                                     <div style="padding-right: 50px; font-size:20pt"
                                         id="qrDokter{{ $item->pgid }}{{ $no }}">
