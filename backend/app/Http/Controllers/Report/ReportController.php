@@ -4414,7 +4414,7 @@ class ReportController extends ApiController{
         foreach ($data as $z) {
             
             if ($z->type == "datetime") {
-                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                $z->value = date('d-m-Y H:i', strtotime($z->value));
             }
             if ($z->value != null) {
                 $z->value = substr($z->value, strpos($z->value, '~'));
@@ -4513,7 +4513,7 @@ class ReportController extends ApiController{
         // dd($data);
         foreach ($data as $z) {
             if ($z->type == "datetime") {
-                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                $z->value = date('d-m-Y H:i', strtotime($z->value));
             }
         }
         $pageWidth = 500;
@@ -4615,7 +4615,7 @@ class ReportController extends ApiController{
         // dd($data);
         foreach ($data as $z) {
             if ($z->type == "datetime") {
-                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                $z->value = date('d-m-Y H:i', strtotime($z->value));
             }
         }
         $pageWidth = 500;
@@ -4888,7 +4888,7 @@ class ReportController extends ApiController{
         // dd($data);
         foreach ($data as $z) {
             if ($z->type == "datetime") {
-                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                $z->value = date('d-m-Y H:i', strtotime($z->value));
             }
             if ($z->value != null) {
                 $z->value = substr($z->value, strpos($z->value, '~'));
@@ -5101,7 +5101,7 @@ class ReportController extends ApiController{
             ));
             foreach ($res['d'.$a] as $z) {
                 if ($z->type == "datetime") {
-                    $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                    $z->value = date('d-m-Y H:i', strtotime($z->value));
                 }
                 if ($z->value != null) {
                     $z->value = substr($z->value, strpos($z->value, '~'));
@@ -5198,7 +5198,7 @@ class ReportController extends ApiController{
                 $z->value = date('H:i', strtotime($z->value));
             }
             if ($z->type == "datetime") {
-                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                $z->value = date('d-m-Y H:i', strtotime($z->value));
             }
             if ($z->value != null) {
                 $z->value = substr($z->value, strpos($z->value, '~'));
@@ -5299,7 +5299,7 @@ class ReportController extends ApiController{
         // dd($data);
         foreach ($data as $z) {
             if ($z->type == "datetime") {
-                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                $z->value = date('d-m-Y H:i', strtotime($z->value));
             }
         }
         $pageWidth = 500;
@@ -5479,7 +5479,7 @@ class ReportController extends ApiController{
             ));
             foreach ($res['d'.$a] as $z) {
                 if ($z->type == "datetime") {
-                    $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                    $z->value = date('d-m-Y H:i', strtotime($z->value));
                 }
             }
         }
@@ -5552,7 +5552,7 @@ class ReportController extends ApiController{
         // dd($data);
         foreach ($data as $z) {
             if ($z->type == "datetime") {
-                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                $z->value = date('d-m-Y H:i', strtotime($z->value));
             }
             if ($z->value != null) {
                 $z->value = substr($z->value, strpos($z->value, '~'));
@@ -5653,7 +5653,7 @@ class ReportController extends ApiController{
         // dd($data);
         foreach ($data as $z) {
             if ($z->type == "datetime") {
-                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                $z->value = date('d-m-Y H:i', strtotime($z->value));
             }
         }
         $pageWidth = 500;
@@ -5734,7 +5734,7 @@ class ReportController extends ApiController{
                 $z->value = date('H:i', strtotime($z->value));
             }
             if ($z->type == "datetime") {
-                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                $z->value = date('d-m-Y H:i', strtotime($z->value));
             }
             if ($z->value != null) {
                 $z->value = substr($z->value, strpos($z->value, '~'));
@@ -5838,7 +5838,7 @@ class ReportController extends ApiController{
             ));
             foreach ($res['d'.$a] as $z) {
                 if ($z->type == "datetime") {
-                    $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                    $z->value = date('d-m-Y H:i', strtotime($z->value));
                 }
             }
         }
@@ -5914,7 +5914,7 @@ class ReportController extends ApiController{
                 $z->value = date('H:i', strtotime($z->value));
             }
             if ($z->type == "datetime") {
-                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                $z->value = date('d-m-Y H:i', strtotime($z->value));
             }
             if ($z->value != null) {
                 $z->value = substr($z->value, strpos($z->value, '~'));
@@ -6011,7 +6011,7 @@ class ReportController extends ApiController{
         ));
         foreach ($data as $z) {
             if ($z->type == "datetime") {
-                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                $z->value = date('d-m-Y H:i', strtotime($z->value));
             }
         }
         $pageWidth = 500;
@@ -6190,7 +6190,7 @@ class ReportController extends ApiController{
         ));
         foreach ($data as $z) {
             if ($z->type == "datetime") {
-                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                $z->value = date('d-m-Y H:i', strtotime($z->value));
             }
         }
         $pageWidth = 500;
@@ -6268,7 +6268,7 @@ class ReportController extends ApiController{
         ));
         foreach ($data as $z) {
             if ($z->type == "datetime") {
-                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                $z->value = date('d-m-Y H:i', strtotime($z->value));
             }
         }
         $pageWidth = 500;
@@ -6354,7 +6354,7 @@ class ReportController extends ApiController{
         ));
         foreach ($data as $z) {
             if ($z->type == "datetime") {
-                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                $z->value = date('d-m-Y H:i', strtotime($z->value));
             }
         }
         $pageWidth = 500;
@@ -6440,7 +6440,7 @@ class ReportController extends ApiController{
         ));
         foreach ($data as $z) {
             if ($z->type == "datetime") {
-                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                $z->value = date('d-m-Y H:i', strtotime($z->value));
             }
         }
         $pageWidth = 500;
@@ -6526,7 +6526,7 @@ class ReportController extends ApiController{
         ));
         foreach ($data as $z) {
             if ($z->type == "datetime") {
-                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                $z->value = date('d-m-Y H:i', strtotime($z->value));
             }
         }
         $pageWidth = 500;
@@ -6612,7 +6612,7 @@ class ReportController extends ApiController{
         ));
         foreach ($data as $z) {
             if ($z->type == "datetime") {
-                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                $z->value = date('d-m-Y H:i', strtotime($z->value));
             }
         }
         $pageWidth = 500;
@@ -6702,7 +6702,7 @@ class ReportController extends ApiController{
             ));
             foreach ($res['d'.$a] as $z) {
                 if ($z->type == "datetime") {
-                    $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                    $z->value = date('d-m-Y H:i', strtotime($z->value));
                 }
             }
         }
@@ -6782,7 +6782,7 @@ class ReportController extends ApiController{
             ));
             foreach ($res['d'.$a] as $z) {
                 if ($z->type == "datetime") {
-                    $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                    $z->value = date('d-m-Y H:i', strtotime($z->value));
                 }
             }
         }
@@ -6862,7 +6862,7 @@ class ReportController extends ApiController{
             ));
             foreach ($res['d'.$a] as $z) {
                 if ($z->type == "datetime") {
-                    $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                    $z->value = date('d-m-Y H:i', strtotime($z->value));
                 }
             }
         }
@@ -6941,7 +6941,7 @@ class ReportController extends ApiController{
 
         foreach ($data as $z) {
             if ($z->type == "datetime") {
-                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                $z->value = date('d-m-Y H:i', strtotime($z->value));
             }
         }
         $pageWidth = 500;
@@ -7044,7 +7044,7 @@ class ReportController extends ApiController{
 
         foreach ($data as $z) {
             if ($z->type == "datetime") {
-                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                $z->value = date('d-m-Y H:i', strtotime($z->value));
             }
         }
         $pageWidth = 500;
@@ -7147,7 +7147,7 @@ class ReportController extends ApiController{
 
         foreach ($data as $z) {
             if ($z->type == "datetime") {
-                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                $z->value = date('d-m-Y H:i', strtotime($z->value));
             }
         }
         $pageWidth = 500;
@@ -7250,7 +7250,7 @@ class ReportController extends ApiController{
 
         foreach ($data as $z) {
             if ($z->type == "datetime") {
-                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                $z->value = date('d-m-Y H:i', strtotime($z->value));
             }
         }
         $pageWidth = 500;
@@ -7353,7 +7353,7 @@ class ReportController extends ApiController{
 
         foreach ($data as $z) {
             if ($z->type == "datetime") {
-                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                $z->value = date('d-m-Y H:i', strtotime($z->value));
             }
         }
         $pageWidth = 500;
@@ -7416,7 +7416,7 @@ class ReportController extends ApiController{
                 pa.noidentitas,
                 al.alamatlengkap,
                 ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
-                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl, epd.qrcode,
                 --ap.noasuransi,ap.namapeserta,
                 pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
                 --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
@@ -7447,10 +7447,19 @@ class ReportController extends ApiController{
         ));
 
         foreach ($data as $z) {
+            
             if ($z->type == "datetime") {
-                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                $z->value = date('d-m-Y H:i', strtotime($z->value));
             }
+            if ($z->value != null) {
+                $z->value = substr($z->value, strpos($z->value, '~'));
+            }
+            if ($z->qrcode == null && substr($z->value, strpos($z->value, '~'))) {
+                $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate($z->value));
+            }
+            
         }
+        // dd($data);
         $pageWidth = 500;
         $res['profile'] = Profile::where('id', $request['kdprofile'])->first();
 
@@ -7461,6 +7470,7 @@ class ReportController extends ApiController{
         } else {
             $noemrpasien = $data[0]->noemr;
         }
+
         if(empty($res['d'])){
             echo '
                 <script language="javascript">
@@ -7470,8 +7480,24 @@ class ReportController extends ApiController{
             ';
             die;
         }
+        $imagePath = public_path('img/logo_only.png');
+        $image = "data:image/png;base64,".base64_encode(file_get_contents($imagePath));
 
-        return view('report.cetak-echocardiografi', compact('res', 'pageWidth'));
+        $centangPath = public_path("img/true.png");
+        $centang = "data:image/png;base64,".base64_encode(file_get_contents($centangPath));
+
+        if(isset($request["issimpanberkas"])) {
+            
+            $pdf = PDF::loadView('report.cetak-echocardiografi-dom', array(
+                'res' => $res,
+                'image' => $image,
+                'centang' => $centang,
+            ))->setPaper('a4', 'portrait');
+            $this->saveDokumenKlaim($pdf, $request);
+            return;
+        }else{
+            return view('report.cetak-echocardiografi-dom', compact('res', 'pageWidth', 'image', 'centang'));
+        }
     }
 
     public function lembarKerjaNeonatus(Request $request) {
@@ -7526,7 +7552,7 @@ class ReportController extends ApiController{
 
         foreach ($data as $z) {
             if ($z->type == "datetime") {
-                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                $z->value = date('d-m-Y H:i', strtotime($z->value));
             }
         }
         $pageWidth = 500;
@@ -7606,7 +7632,7 @@ class ReportController extends ApiController{
 
         foreach ($data as $z) {
             if ($z->type == "datetime") {
-                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                $z->value = date('d-m-Y H:i', strtotime($z->value));
             }
         }
         $pageWidth = 500;
@@ -7893,7 +7919,7 @@ class ReportController extends ApiController{
             ));
             foreach ($res['d'.$a] as $z) {
                 if ($z->type == "datetime") {
-                    $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                    $z->value = date('d-m-Y H:i', strtotime($z->value));
                 }
             }
         }
@@ -7972,7 +7998,7 @@ class ReportController extends ApiController{
 
         foreach ($data as $z) {
             if ($z->type == "datetime") {
-                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                $z->value = date('d-m-Y H:i', strtotime($z->value));
             }
         }
         $pageWidth = 500;
@@ -8150,7 +8176,7 @@ class ReportController extends ApiController{
         ));
         foreach ($data as $z) {
             if ($z->type == "datetime") {
-                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                $z->value = date('d-m-Y H:i', strtotime($z->value));
             }
         }
         $pageWidth = 500;
@@ -8228,7 +8254,7 @@ class ReportController extends ApiController{
         ));
         foreach ($data as $z) {
             if ($z->type == "datetime") {
-                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                $z->value = date('d-m-Y H:i', strtotime($z->value));
             }
         }
         $pageWidth = 500;
@@ -8306,7 +8332,7 @@ class ReportController extends ApiController{
         ));
         foreach ($data as $z) {
             if ($z->type == "datetime") {
-                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                $z->value = date('d-m-Y H:i', strtotime($z->value));
             }
         }
         $pageWidth = 500;
@@ -8496,7 +8522,7 @@ class ReportController extends ApiController{
 
         foreach ($data as $z) {
             if ($z->type == "datetime") {
-                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                $z->value = date('d-m-Y H:i', strtotime($z->value));
             }
         }
         $pageWidth = 500;
@@ -8577,7 +8603,7 @@ class ReportController extends ApiController{
             ));
             foreach ($res['d'.$a] as $z) {
                 if ($z->type == "datetime") {
-                    $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                    $z->value = date('d-m-Y H:i', strtotime($z->value));
                 }
             }
         }
@@ -8654,7 +8680,7 @@ class ReportController extends ApiController{
             ));
             foreach ($res['d'.$a] as $z) {
                 if ($z->type == "datetime") {
-                    $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                    $z->value = date('d-m-Y H:i', strtotime($z->value));
                 }
             }
         }
@@ -8730,7 +8756,7 @@ class ReportController extends ApiController{
             ));
             foreach ($res['d'.$a] as $z) {
                 if ($z->type == "datetime") {
-                    $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                    $z->value = date('d-m-Y H:i', strtotime($z->value));
                 }
             }
         }
@@ -8907,7 +8933,7 @@ class ReportController extends ApiController{
         ));
         foreach ($data as $z) {
             if ($z->type == "datetime") {
-                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                $z->value = date('d-m-Y H:i', strtotime($z->value));
             }
         }
         $pageWidth = 500;
@@ -8987,7 +9013,7 @@ class ReportController extends ApiController{
         ));
         foreach ($data as $z) {
             if ($z->type == "datetime") {
-                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                $z->value = date('d-m-Y H:i', strtotime($z->value));
             }
         }
         $pageWidth = 500;
@@ -9353,7 +9379,7 @@ class ReportController extends ApiController{
         // dd($data);
         foreach ($data as $z) {
             if ($z->type == "datetime") {
-                $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                $z->value = date('d-m-Y H:i', strtotime($z->value));
             }
         }
         $pageWidth = 500;
@@ -9434,7 +9460,7 @@ class ReportController extends ApiController{
             ));
             foreach ($res['d'.$a] as $z) {
                 if ($z->type == "datetime") {
-                    $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                    $z->value = date('d-m-Y H:i', strtotime($z->value));
                 }
             }
         }
@@ -9541,7 +9567,7 @@ class ReportController extends ApiController{
             ));
             foreach ($res['d'.$a] as $z) {
                 if ($z->type == "datetime") {
-                    $z->value = date('Y-m-d H:i:s', strtotime($z->value));
+                    $z->value = date('d-m-Y H:i', strtotime($z->value));
                 }
             }
         }
