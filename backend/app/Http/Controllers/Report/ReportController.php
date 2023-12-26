@@ -3822,7 +3822,7 @@ class ReportController extends ApiController{
         $content = $pdf->download()->getOriginalContent();
 
         $path = 'dokumen_klaim/'.$request['isberkasnoreg'];
-
+        DB::beginTransaction();
         try {
             $savePath = public_path($path);
             \File::makeDirectory($savePath, 0755, true, true);
@@ -3846,19 +3846,40 @@ class ReportController extends ApiController{
             );
             DB::table('dokklaim_t')->updateOrInsert(["filename" => $namafile], $dataInsert);
 
-            echo '
-            <script language="javascript">
-                window.close()
-            </script>';
-            die;
+            // echo '
+            // <script language="javascript">
+            //     window.close()
+            // </script>';
+            // die;
+            $transStatus = true;
         } catch (\Exception $e) {
-            echo '
-            <script language="javascript">
-                window.alert("Gagal.");
-                window.close()
-            </script>';
-            die;
+            // echo '
+            // <script language="javascript">
+            //     window.alert("Gagal.");
+            //     window.close()
+            // </script>';
+            // die;
+            $transStatus = false;
+            $transMessage = $e->getMessage();
         }
+        if ($transStatus) {
+            $transMessage = 'Simpan Berhasil';
+            DB::commit();
+            $result = array(
+                "status" => 201,
+                "message" => $transMessage,
+                "as" => 'mr_adhyy@epic',
+            );
+        } else {
+            
+            DB::rollBack();
+            $result = array(
+                "status" => 400,
+                "message" => $transMessage,
+                "as" => 'mr_adhyy@epic',
+            );
+        }
+        return $this->setStatusCode($result['status'])->respond($result, $transMessage);
     }
 
     public function cetakHasilLabAll(Request $r)
