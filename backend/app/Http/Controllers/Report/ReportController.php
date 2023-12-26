@@ -801,6 +801,7 @@ class ReportController extends ApiController{
     public function cetakEkspertiseUsgAll(Request $r) {
         $norec = $r['norec'];
         $nocm = $r['nocm'];
+        $noregistrasi = $r['noregistrasi'];
         $kdProfile = (int)$r['kdprofile'];
         $raw = collect(DB::select("
             SELECT
@@ -811,7 +812,7 @@ class ReportController extends ApiController{
                 alm.alamatlengkap || ' ' || ds.namadesakelurahan || ' '|| kc.namakecamatan
                 || ' ' || kk.namakotakabupaten || ' '  || pro.namapropinsi )
             END AS alamatlengkap,
-            pg.namalengkap as perujuk,pg2.namalengkap as dokterrad, p3.dokterluar as dokterluar,
+            pg.namalengkap as perujuk,pg2.namalengkap as dokterrad, p3.dokterluar as dokterluar, pg2.qrcode,
             pr.namaproduk,replace(so.keterangan, '~', '<br>') as keterangan,pd.noregistrasi,pg2.nippns,pg3.namalengkap as dokterpengirim,
             pg2.id as pgid
             FROM
@@ -836,20 +837,34 @@ class ReportController extends ApiController{
             LEFT JOIN pegawai_m as pg3 on pg3.id = sot.objectpegawaiorderfk
             WHERE
                 -- so.norec = '$norec'
-                ps.nocm = '$nocm'
+                -- ps.nocm = '$nocm'
+                pd.noregistrasi = '$noregistrasi'
             AND so.kdprofile = $kdProfile
             AND so.statusenabled = TRUE
         "));
-        // dd($raw);
+        foreach ($raw as $z) {
+            if ($z->qrcode == null) {
+                $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate($z->dokterrad));
+            }
+        }
         if(empty($raw)){
             echo 'Data Tidak ada ';
             return;
         }
 ;
         $pageWidth = 950;
-
-        return view('report.rad.expertiseusgall',
-            compact('raw', 'pageWidth','r'));
+        if(isset($r["issimpanberkas"])) {
+            
+            $pdf = PDF::loadView('report.rad.expertiseusgall-dom', array(
+                'pageWidth' => $pageWidth,
+                'raw' => $raw,
+                'r' => $r,
+            ))->setPaper('a4', 'portrait');
+            $this->saveDokumenKlaim($pdf, $r);
+            return;
+        }else{
+            return view('report.rad.expertiseusgall-dom',compact('raw', 'pageWidth','r'));
+        }
 
     }
 
