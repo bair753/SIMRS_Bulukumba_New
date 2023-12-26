@@ -446,7 +446,7 @@
                         </td>
                         @if ($depo['isi']->penulisanresep == 't')
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <img src="{{ $centang}}" width="20px" height="20px" />
+                            <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
                             <font size="1"><input type="checkbox" name="" id="">
@@ -458,7 +458,7 @@
                             </font>
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <img src="{{ $centang}}" width="20px" height="20px" />
+                            <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         @endif
                         <td height="5" style="border-right:solid 1.0pt; padding-left:3pt; ">
@@ -473,7 +473,7 @@
                         </td>
                         @if ($depo['isi']->obat == 't')
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <img src="{{ $centang}}" width="20px" height="20px" />
+                            <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
                             <font size="1"><input type="checkbox" name="" id="">
@@ -485,7 +485,7 @@
                             </font>
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <img src="{{ $centang}}" width="20px" height="20px" />
+                            <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         @endif
                         <td height="5" style="border-right:solid 1.0pt; padding-left:3pt; ">
@@ -499,7 +499,7 @@
                         </td>
                         @if ($depo['isi']->dosis == 't')
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <img src="{{ $centang}}" width="20px" height="20px" />
+                            <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
                             <font size="1"><input type="checkbox" name="" id="">
@@ -511,7 +511,7 @@
                             </font>
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <img src="{{ $centang}}" width="20px" height="20px" />
+                            <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         @endif
                         <td height="5" style="border-right:solid 1.0pt; padding-left:3pt; ">
@@ -529,7 +529,7 @@
                         </td>
                         @if ($depo['isi']->waktufrekuensi == 't')
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <img src="{{ $centang}}" width="20px" height="20px" />
+                            <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
                             <font size="1"><input type="checkbox" name="" id="">
@@ -541,7 +541,7 @@
                             </font>
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <img src="{{ $centang}}" width="20px" height="20px" />
+                            <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         @endif
 
@@ -559,7 +559,7 @@
                         </td>
                         @if ($depo['isi']->rute == 't')
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <img src="{{ $centang}}" width="20px" height="20px" />
+                            <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
                             <font size="1"><input type="checkbox" name="" id="">
@@ -571,7 +571,7 @@
                             </font>
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <img src="{{ $centang}}" width="20px" height="20px" />
+                            <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         @endif
 
@@ -586,7 +586,7 @@
                         </td>
                         @if ($depo['isi']->pasien == 't')
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <img src="{{ $centang}}" width="20px" height="20px" />
+                            <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
                             <font size="1"><input type="checkbox" name="" id="">
@@ -598,7 +598,7 @@
                             </font>
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <img src="{{ $centang}}" width="20px" height="20px" />
+                            <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         @endif
 
@@ -613,7 +613,7 @@
                         </td>
                         @if ($depo['isi']->duplikasiterapi == 't')
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <img src="{{ $centang}}" width="20px" height="20px" />
+                            <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
                             <font size="1"><input type="checkbox" name="" id="">
@@ -625,7 +625,7 @@
                             </font>
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <img src="{{ $centang}}" width="20px" height="20px" />
+                            <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         @endif
                         <td height="5" style="border-right:solid 1.0pt; padding-left:3pt; ">
@@ -639,7 +639,7 @@
                         </td>
                         @if ($depo['isi']->interaksiobat == 't')
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <img src="{{ $centang}}" width="20px" height="20px" />
+                            <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
                             <font size="1"><input type="checkbox" name="" id="">
@@ -651,7 +651,7 @@
                             </font>
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <img src="{{ $centang}}" width="20px" height="20px" />
+                            <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         @endif
 
@@ -1072,7 +1072,7 @@
                         </td>
                         @if ($dokter['isi']->penulisanresep == 't')
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <img src="{{ $centang}}" width="20px" height="20px" />
+                            <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
                             <font size="1"><input type="checkbox" name="" id="">
@@ -1084,7 +1084,7 @@
                             </font>
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <img src="{{ $centang}}" width="20px" height="20px" />
+                            <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         @endif
                         <td height="5" style="border-right:solid 1.0pt; padding-left:3pt; ">
@@ -1099,7 +1099,7 @@
                         </td>
                         @if ($dokter['isi']->obat == 't')
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <img src="{{ $centang}}" width="20px" height="20px" />
+                            <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
                             <font size="1"><input type="checkbox" name="" id="">
@@ -1111,7 +1111,7 @@
                             </font>
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <img src="{{ $centang}}" width="20px" height="20px" />
+                            <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         @endif
                         <td height="5" style="border-right:solid 1.0pt; padding-left:3pt; ">
@@ -1125,7 +1125,7 @@
                         </td>
                         @if ($dokter['isi']->dosis == 't')
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <img src="{{ $centang}}" width="20px" height="20px" />
+                            <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
                             <font size="1"><input type="checkbox" name="" id="">
@@ -1137,7 +1137,7 @@
                             </font>
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <img src="{{ $centang}}" width="20px" height="20px" />
+                            <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         @endif
                         <td height="5" style="border-right:solid 1.0pt; padding-left:3pt; ">
@@ -1155,7 +1155,7 @@
                         </td>
                         @if ($dokter['isi']->waktufrekuensi == 't')
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <img src="{{ $centang}}" width="20px" height="20px" />
+                            <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
                             <font size="1"><input type="checkbox" name="" id="">
@@ -1167,7 +1167,7 @@
                             </font>
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <img src="{{ $centang}}" width="20px" height="20px" />
+                            <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         @endif
         
@@ -1185,7 +1185,7 @@
                         </td>
                         @if ($dokter['isi']->rute == 't')
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <img src="{{ $centang}}" width="20px" height="20px" />
+                            <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
                             <font size="1"><input type="checkbox" name="" id="">
@@ -1197,7 +1197,7 @@
                             </font>
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <img src="{{ $centang}}" width="20px" height="20px" />
+                            <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         @endif
         
@@ -1212,7 +1212,7 @@
                         </td>
                         @if ($dokter['isi']->pasien == 't')
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <img src="{{ $centang}}" width="20px" height="20px" />
+                            <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
                             <font size="1"><input type="checkbox" name="" id="">
@@ -1224,7 +1224,7 @@
                             </font>
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <img src="{{ $centang}}" width="20px" height="20px" />
+                            <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         @endif
         
@@ -1239,7 +1239,7 @@
                         </td>
                         @if ($dokter['isi']->duplikasiterapi == 't')
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <img src="{{ $centang}}" width="20px" height="20px" />
+                            <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
                             <font size="1"><input type="checkbox" name="" id="">
@@ -1251,7 +1251,7 @@
                             </font>
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <img src="{{ $centang}}" width="20px" height="20px" />
+                            <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         @endif
                         <td height="5" style="border-right:solid 1.0pt; padding-left:3pt; ">
@@ -1265,7 +1265,7 @@
                         </td>
                         @if ($dokter['isi']->interaksiobat == 't')
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <img src="{{ $centang}}" width="20px" height="20px" />
+                            <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
                             <font size="1"><input type="checkbox" name="" id="">
@@ -1277,7 +1277,7 @@
                             </font>
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <img src="{{ $centang}}" width="20px" height="20px" />
+                            <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         @endif
         
