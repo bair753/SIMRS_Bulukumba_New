@@ -863,7 +863,7 @@ class ReportController extends ApiController{
             $this->saveDokumenKlaim($pdf, $r);
             return;
         }else{
-            return view('report.rad.expertiseusgall-dom',compact('raw', 'pageWidth','r'));
+            return view('report.rad.expertiseusgall',compact('raw', 'pageWidth','r'));
         }
 
     }
