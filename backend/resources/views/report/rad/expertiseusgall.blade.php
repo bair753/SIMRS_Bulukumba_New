@@ -137,7 +137,7 @@ $d = App\Http\Controllers\Report\ReportController::getProfile();
                             <td style="background-color:#FFF" width="65%" align="center">
                                 <font style="padding-right: 50px; font-size:14pt">BTK,SS</font><br>
                                 <div style="padding-right: 50px; font-size:20pt" id="qrDokter{{ $item->pgid }}{{ $no }}"></div>
-                                <font style="padding-right: 50px; font-size:14pt"><u>( {{ $item->dokterrad }} )</u></font><br>
+                                <font style="padding-right: 50px; font-size:12pt"><u>( {{ $item->dokterrad }} )</u></font><br>
                                 <font style="padding-right: 50px; font-size:14pt">Spesialis Radiologi</font><br><br>
                             </td>
                         </tr>
