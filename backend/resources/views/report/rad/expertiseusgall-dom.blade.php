@@ -142,7 +142,7 @@ table{
                                         id="qrDokter{{ $item->pgid }}{{ $no }}">
                                         
                                     </div>
-                                  <u>( {{ $item->dokterrad }} )</u>
+                                  <u style="font-size: 12pt">( {{ $item->dokterrad }} )</u>
                                   <br>
                                    Spesialis Radiologi<br><br>
                                 </td>
