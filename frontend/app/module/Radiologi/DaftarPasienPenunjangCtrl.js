@@ -278,7 +278,7 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
 					if (local != null) {
 						var profile = local.id;
 						window.open(baseTransaksi + "report/cetak-ekspertise-usg-all?norec=" + $scope.dataSelected.norec_apd + '&kdprofile=' + profile + '&nocm=' + $scope.dataSelected.nocm
-							+ '&nama=' + nama, '_blank');
+                        + '&noregistrasi=' + $scope.dataSelected.noregistrasi + '&nama=' + nama, '_blank');
 					}
 				// }
 			}	
