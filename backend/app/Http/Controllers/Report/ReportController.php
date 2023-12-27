@@ -6730,7 +6730,7 @@ class ReportController extends ApiController{
             $this->saveDokumenKlaim($pdf, $request);
             return;
         }else{
-            return view('report.cetak-ekg-dom',compact('res', 'image', 'centang'));
+            return view('report.cetak-ekg',compact('res', 'image', 'centang'));
         };
     }
 
@@ -7508,7 +7508,7 @@ class ReportController extends ApiController{
             $this->saveDokumenKlaim($pdf, $request);
             return;
         }else{
-            return view('report.cetak-echocardiografi-dom', compact('res', 'pageWidth', 'image', 'centang'));
+            return view('report.cetak-echocardiografi', compact('res', 'pageWidth', 'image', 'centang'));
         }
     }
 
@@ -8554,7 +8554,7 @@ class ReportController extends ApiController{
             $this->saveDokumenKlaim($pdf, $request);
             return;
         }else{
-            return view('report.cetak-pemberian-makan-awal-1000-dom', compact('res', 'image', 'centang'));
+            return view('report.cetak-pemberian-makan-awal-1000', compact('res', 'image', 'centang'));
         }
     }
 
