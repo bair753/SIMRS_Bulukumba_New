@@ -175,28 +175,28 @@
             </td>
             <td colspan="6" class="noborder" style="font-size: 10pt">No. RM </td>
             <td colspan="13" class="noborder" style="font-size: 10pt">
-                : {!! $res['d'][0]->nocm  !!}
+                : {!! $res['d1'][0]->nocm  !!}
             </td>
             <td colspan="5" rowspan="2" class="border-lr bg-dark" style="font-size: xxx-large;text-align:center">RM</td>
         </tr>
         <tr class="noborder">
             <td colspan="6" class="noborder" style="font-size: 10pt">Nama Lengkap</td>
             <td colspan="11" class="noborder" style="font-size: 10pt">
-                : {!!  $res['d'][0]->namapasien  !!}
+                : {!!  $res['d1'][0]->namapasien  !!}
             </td>
-            <td colspan="2" class="noborder" style="font-size: 10pt">{!!  $res['d'][0]->jeniskelamin == 'PEREMPUAN' ? '(P)' : '(L)'  !!}</td>
+            <td colspan="2" class="noborder" style="font-size: 10pt">{!!  $res['d1'][0]->jeniskelamin == 'PEREMPUAN' ? '(P)' : '(L)'  !!}</td>
         </tr>
         <tr class="noborder">
             <td colspan="6" class="noborder" style="font-size: 10pt">Tanggal Lahir</td>
             <td colspan="13" class="noborder" style="font-size: 10pt">
-                : {!! date('d-m-Y',strtotime( $res['d'][0]->tgllahir  )) !!}
+                : {!! date('d-m-Y',strtotime( $res['d1'][0]->tgllahir  )) !!}
             </td>
             <td colspan="5" class="border-lr" rowspan="2" style="font-size: xxx-large;text-align:center">69</td>
         </tr>
         <tr class="noborder">
             <td colspan="6" class="noborder" style="font-size: 10pt">NIK</td>
             <td colspan="11" class="noborder" style="font-size: 10pt">
-                : {!! $res['d'][0]->noidentitas  !!}
+                : {!! $res['d1'][0]->noidentitas  !!}
             </td>
         </tr>
         <tr class="bordered bg-dark-small">
@@ -835,7 +835,7 @@
             obj: [],
             obj2: []
         }
-        var dataLoad = {!! json_encode($res['d'] )!!};
+        var dataLoad = {!! json_encode($res['d1'] )!!};
         for (var i = 0; i <= dataLoad.length - 1; i++) {
             if(dataLoad[i].emrdfk == 3110029){
                 continue;
