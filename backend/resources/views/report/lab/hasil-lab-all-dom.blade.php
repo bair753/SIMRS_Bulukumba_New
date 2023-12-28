@@ -72,16 +72,11 @@
     }
 </style>
 
-
-
-@foreach ($head as $aa)
+<?php $no = 1; $i = 0; ?>
+@foreach ($head as $aa => $bb)
 <body>
-    @php
-    $noo = 1;
-    @endphp
     <div align="center">
-        <table cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0" width="100%"
-          >
+        <table cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" border="0" width="100%" >
             <tbody>
                 <tr>
                     <td>
@@ -268,20 +263,17 @@
                                     <font style="font-size: 9pt" color="#000000">Keterangan</font>
                                 </td>
                             </tr>
-                            @foreach($aa as $item)
                             <tr>
                                 <td colspan="7" style="text-align:left;">
                                     <font style="font-size: 12pt;font-weight:bold;" color="#000000">
-                                        {{ strtoupper($item[0]->detailjenisproduk) }}</font>
+                                        {{ strtoupper($bb[0]->detailjenisproduk) }}</font>
                                 </td>
                             </tr>
-                            @php
-                            $no = 1;
-                            @endphp
-                            @foreach($item as $data)
+                            <?php $no2 = 1; ?>
+                            @foreach($bb as $data)
                             <tr>
                                 <td style="text-align:center;">
-                                    <font style="font-size: 10pt" color="#000000">{{ $no }}</font>
+                                    <font style="font-size: 10pt" color="#000000">{{ $no2 }}</font>
                                 </td>
                                 <td style="text-align:left;">
                                     <font style="font-size: 10pt" color="#000000">{{ $data->detailpemeriksaan }}</font>
@@ -325,10 +317,10 @@
                                     <font style="font-size: 10pt" color="#000000">{{ $data->keterangan_lab }}</font>
                                 </td>
                             </tr>
-                            @php
+                            {{-- @php
                             $no = $no + 1;
-                            @endphp
-                            @endforeach
+                            @endphp --}}
+                            <?php $no2++; ?>
                             @endforeach
                         </table>
                     </td>
@@ -391,43 +383,10 @@
                             </tr>
                         </table>
                     </td>
-                </tr>
+                </tr> 
                 <tr>
                     <td>
                         <table>
-                            {{-- <tr>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                            </tr> --}}
                             <tr>
                                 <td>{{ $cek->tat }}</td>
                             </tr>
@@ -443,10 +402,8 @@
             </tbody>
         </table>
     </div>
-    @php
-    $noo++;
-    @endphp
 </body>
+<?php $no++; $i++; ?>
 @endforeach
 
 </html>
