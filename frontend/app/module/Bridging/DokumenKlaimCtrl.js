@@ -330,9 +330,6 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 					return
 				}
 				var dpid = $scope.dataPasienSelected.objectdepartemenfk
-				if(dpid != 16) {
-					dpid = 18
-				}
 				$scope.listBerkasMonitoring =[]
 				$scope.isRouteLoading = true
 				medifirstService.get('bridging/inacbg/get-list-berkas-monitoring?dpid=' + dpid + '&noregistrasifk='+$scope.dataPasienSelected.norec ).then(function(e){

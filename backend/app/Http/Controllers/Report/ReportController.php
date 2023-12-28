@@ -1358,8 +1358,9 @@ class ReportController extends ApiController{
         ->leftjoin('pegawai_m AS pg2', 'pg2.id', '=', 'hpl.dokterpemeriksa')
         ->leftjoin('pegawai_m AS dokterpengirim', 'dokterpengirim.id', '=', 'hpl.dokterpengirimfk')
         ->leftjoin('alamat_m as alm', 'alm.nocmfk', '=', 'pm.id')
-        ->wherein('pp.norec', $norec)
+        // ->wherein('pp.norec', $norec)
         ->where('hpl.statusenabled', true)
+        ->where('pd.noregistrasi', $r->noregistrasi)
         ->select('pd.noregistrasi', 'pm.nocm', 'pm.namapasien', 'pm.tgllahir', 'hpl.dokterluar', 'dokterpengirim.namalengkap as namadokterpengirim', 'pg1.namalengkap as namapenanggungjawab',
     'pg2.namalengkap as namadokterpemeriksa', 'jk.jeniskelamin', 'pm.tgllahir', 'hpl.haemoglobin', 'hpl.leukosit', 'hpl.eritrosit', 'hpl.trombosit', 'hpl.rasio', 'hpl.tanggal as tgljawab', 'hpl.dokterpemeriksa',
 'hpl.keteritrosit', 'hpl.ketleukosit', 'hpl.kettrombosit', 'hpl.kesimpulan', 'ru.namaruangan as asal', 'pg1.nosip' ,'kps.kelompokpasien', 'pd.norec as norec_pd', 'pd.objectruanganlastfk', 'alm.alamatlengkap')
@@ -1397,8 +1398,9 @@ class ReportController extends ApiController{
         ->leftjoin('pegawai_m AS dokterpengirim', 'dokterpengirim.id', '=', 'hpl.dokterpengirimfk')
         ->leftjoin('pegawai_m AS pg1', 'pg1.id', '=', 'hpl.pegawaifk')
         ->leftjoin('alamat_m as alm', 'alm.nocmfk', '=', 'pm.id')
-        ->wherein('pp.norec', $norec)
+        // ->wherein('pp.norec', $norec)
         ->where('hpl.statusenabled', true)
+        ->where('pd.noregistrasi', $r->noregistrasi)
         ->select('pd.noregistrasi', 'pm.nocm', 'pm.namapasien', 'pm.tgllahir', 'hpl.dokterluar', 'dokterpengirim.namalengkap as namadokterpengirim', 'hpl.nomorpa', 'so.tglorder as tglterima', 'pg1.namalengkap as namapenanggungjawab', 'pg1.nippns',
     'jk.jeniskelamin', 'pm.tgllahir', 'hpl.jaringanasal', 'hpl.getjaringan', 'hpl.diagnosaklinik', 'hpl.keteranganklinik', 'hpl.tanggal as tgljawab', 'hpl.makroskopik','hpl.mikroskopik',
 'hpl.kesimpulan', 'hpl.anjuran', 'hpl.topografi', 'hpl.morfologi', 'hpl.diagnosapb','hpl.keteranganpb','ru.namaruangan as asal', 'pg1.nosip','kps.kelompokpasien', 'pd.norec as norec_pd', 'pd.objectruanganlastfk', 'alm.alamatlengkap', 'dm.kddiagnosa', 'hpl.jenis', 'dm.namadiagnosa as diagnosa')

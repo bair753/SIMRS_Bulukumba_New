@@ -240,7 +240,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 
                 var profile = local.id;
                 window.open(config.baseApiBackend + "report/cetak-hasil-lab-edt-all?norec=" + $scope.norec_edt + '&kdprofile=' + profile
-                        + '&user=' + user + '&jenis=his', '_blank');
+                + '&noregistrasi=' + $scope.item.noregistrasi + '&user=' + user + '&jenis=his', '_blank');
             }
 
             $scope.cetakPA = function () {
@@ -248,8 +248,8 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 var user = medifirstService.getPegawaiLogin().namaLengkap
 
                 var profile = local.id;
-                window.open(config.baseApiBackend + "report/cetak-hasil-lab-pa-all?norec=" + $scope.norec_pa + '&kdprofile=' + profile
-                        + '&user=' + user + '&jenis=his', '_blank');
+                window.open(config.baseApiBackend + "report/cetak-hasil-lab-pa-all?norec=" + $scope.norec_pa + '&kdprofile=' + profile 
+                + '&noregistrasi=' + $scope.item.noregistrasi + '&user=' + user + '&jenis=his', '_blank');
             }
 
         }
