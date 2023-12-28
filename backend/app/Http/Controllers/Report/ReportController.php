@@ -4153,6 +4153,7 @@ class ReportController extends ApiController{
                     INNER JOIN antrianpasiendiperiksa_t AS apd ON apd.norec = pp.noregistrasifk
                     INNER JOIN pasiendaftar_t AS pd ON pd.norec = apd.noregistrasifk
                     LEFT JOIN strukorder_t AS so ON so.norec = pp.strukorderfk
+                    LEFT JOIN ruangan_m AS rj3 ON rj3.id = apd.objectruanganfk
                     LEFT JOIN ruangan_m AS rj ON pd.objectruanganlastfk = rj.id 
                     LEFT JOIN ruangan_m AS rj2 ON rj2.id = so.objectruanganfk
                     INNER JOIN pasien_m AS pm ON pm.id = pd.nocmfk
@@ -4185,6 +4186,7 @@ class ReportController extends ApiController{
                         hh.hasil IS NOT NULL 
                         AND pp.norec IS NOT NULL
                         AND pd.noregistrasi = '$noregistrasi'
+                        AND rj3.id = 575
                 ) AS DATA 
                 ORDER BY
                     DATA.nourutjenispemeriksaan ASC
