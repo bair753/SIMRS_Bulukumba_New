@@ -8663,7 +8663,7 @@ class ReportController extends ApiController{
         $norec = $request['emr'];
         $kdProfile = (int) $request['kdprofile'];
 
-        for($a = 1; $a <= 7; $a++){
+        for($a = 1; $a <= 32; $a++){
             $res['d'.$a] = DB::select(DB::raw(
                 "
                 SELECT
@@ -8714,12 +8714,12 @@ class ReportController extends ApiController{
                 if ($z->type == "datetime") {
                     $z->value = date('d-m-Y H:i', strtotime($z->value));
                 }
+                if ($z->type == "date") {
+                    $z->value = date('d-m-Y', strtotime($z->value));
+                }
             }
         }
-        // $res = collect($res)->filter()->all();
-      
         $res['profile'] = Profile::where('id', $request['kdprofile'])->first();
-
         if(empty($res)){
             echo '
                 <script language="javascript">
@@ -8729,8 +8729,29 @@ class ReportController extends ApiController{
             ';
             die;
         }
+        $imagePath = public_path('img/logo_only.png');
+        $image = "data:image/png;base64,".base64_encode(file_get_contents($imagePath));
 
-        return view('report.cetak-pemberian-makan-awal-2000', compact('res'));
+        $centangPath = public_path("img/true.png");
+        $centang = "data:image/png;base64,".base64_encode(file_get_contents($centangPath));
+        
+        $keteranganPath = public_path("img/pemberianmakanawal.png");
+        $keterangan = "data:image/png;base64,".base64_encode(file_get_contents($keteranganPath));
+
+        if(isset($request["issimpanberkas"])) {
+            
+            $pdf = PDF::loadView('report.cetak-pemberian-makan-awal-2000-dom', array(
+                'res' => $res,
+                'image' => $image,
+                'centang' => $centang,
+                'keterangan' => $keterangan,
+
+            ));
+            $this->saveDokumenKlaim($pdf, $request);
+            return;
+        }else{
+            return view('report.cetak-pemberian-makan-awal-2000', compact('res', 'image', 'centang', 'keterangan'));
+        }
     }
 
     public function pemberianMakanAwal2500(Request $request) {
@@ -8738,7 +8759,7 @@ class ReportController extends ApiController{
         $norec = $request['emr'];
         $kdProfile = (int) $request['kdprofile'];
 
-        for($a = 1; $a <= 7; $a++){
+        for($a = 1; $a <= 32; $a++){
             $res['d'.$a] = DB::select(DB::raw(
                 "
                 SELECT
@@ -8789,12 +8810,12 @@ class ReportController extends ApiController{
                 if ($z->type == "datetime") {
                     $z->value = date('d-m-Y H:i', strtotime($z->value));
                 }
+                if ($z->type == "date") {
+                    $z->value = date('d-m-Y', strtotime($z->value));
+                }
             }
         }
-        // $res = collect($res)->filter()->all();
-      
         $res['profile'] = Profile::where('id', $request['kdprofile'])->first();
-
         if(empty($res)){
             echo '
                 <script language="javascript">
@@ -8804,8 +8825,29 @@ class ReportController extends ApiController{
             ';
             die;
         }
+        $imagePath = public_path('img/logo_only.png');
+        $image = "data:image/png;base64,".base64_encode(file_get_contents($imagePath));
 
-        return view('report.cetak-pemberian-makan-awal-2500', compact('res'));
+        $centangPath = public_path("img/true.png");
+        $centang = "data:image/png;base64,".base64_encode(file_get_contents($centangPath));
+        
+        $keteranganPath = public_path("img/pemberianmakanawal.png");
+        $keterangan = "data:image/png;base64,".base64_encode(file_get_contents($keteranganPath));
+
+        if(isset($request["issimpanberkas"])) {
+            
+            $pdf = PDF::loadView('report.cetak-pemberian-makan-awal-2500-dom', array(
+                'res' => $res,
+                'image' => $image,
+                'centang' => $centang,
+                'keterangan' => $keterangan,
+
+            ));
+            $this->saveDokumenKlaim($pdf, $request);
+            return;
+        }else{
+            return view('report.cetak-pemberian-makan-awal-2500-dom', compact('res', 'image', 'centang', 'keterangan'));
+        }
     }
 
     public function lembarPenggunaanVentilator(Request $request) {
