@@ -9043,7 +9043,7 @@ class ReportController extends ApiController{
             $this->saveDokumenKlaim($pdf, $request);
             return;
         }else{
-            return view('report.cetak-pemberian-makan-awal-2500-dom', compact('res', 'image', 'centang', 'keterangan'));
+            return view('report.cetak-pemberian-makan-awal-2500', compact('res', 'image', 'centang', 'keterangan'));
         }
     }
 
