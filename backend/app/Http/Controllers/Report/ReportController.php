@@ -4614,15 +4614,14 @@ class ReportController extends ApiController{
             if ($z->type == "datetime") {
                 $z->value = date('d-m-Y H:i', strtotime($z->value));
             }
-            if ($z->value != null) {
-                $z->value = substr($z->value, strpos($z->value, '~'));
-            }
-            if ($z->qrcode == null && substr($z->value, strpos($z->value, '~'))) {
-                $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate($z->value));
-            }
+            // if ($z->value != null) {
+            //     $z->value = substr($z->value, strpos($z->value, '~'));
+            // }
+            // if ($z->qrcode == null && substr($z->value, strpos($z->value, '~'))) {
+            //     $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate($z->value));
+            // }
             
         }
-        // dd($data);
         $pageWidth = 500;
         $res['profile'] = Profile::where('id', $request['kdprofile'])->first();
 

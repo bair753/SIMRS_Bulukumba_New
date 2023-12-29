@@ -266,7 +266,11 @@
             <td colspan="7" style="border:none">: @{{ item.obj[32104094] ? item.obj[32104094] : '..................................................' }}</td>
         </tr>
         <tr>
-            <td colspan="9" style="border:none;text-align: justify;line-height: 20pt;">Yang tersebut namanya di atas benar telah meninggal dunia di Rumah Sakit Umum Daerah H. Andi Sulthan Daeng Radja pada hari @{{item.obj[32104096] | toDate | date:'EEEE'}} Tanggal @{{item.obj[32104096] | toDate | date:'dd-MM-yyyy'}} Jam @{{item.obj[32104096] | toDate | date:'HH:mm'}} yang dirawat dari tanggal @{{item.obj[32104097] | toDate | date:'dd-MM-yyyy HH:mm'}} dengan Diagnosa @{{ item.obj[32104098] ? item.obj[32104098] : '..................................................' }} </td>
+            <td colspan="9" style="border:none;text-align: justify;line-height: 20pt;">Yang tersebut namanya di atas benar telah meninggal dunia di Rumah Sakit Umum Daerah H. Andi Sulthan Daeng Radja pada 
+                {{-- hari @{{item.obj[32104096] | toDate | date:'EEEE'}}  --}}
+                Tanggal / Jam @foreach($res['d'] as $item) @if($item->emrdfk == 32104096) {!! $item->value !!} @endif @endforeach
+                {{-- Jam @{{item.obj[32104096] | toDate | date:'HH:mm'}} --}}
+                 yang dirawat dari Tanggal / Jam @foreach($res['d'] as $item) @if($item->emrdfk == 32104097) {!! $item->value !!} @endif @endforeach dengan Diagnosa @{{ item.obj[32104098] ? item.obj[32104098] : '..................................................' }} </td>
         </tr>
         <tr>
             <td colspan="9" style="border:none">Demikian surat keterangan ini dibuat untuk dipergunakan seperlunya</td>
