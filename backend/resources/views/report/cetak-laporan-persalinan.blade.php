@@ -224,21 +224,21 @@
                 </td>
                 <td rowspan="4" colspan="3" style="text-align:center;font-size:larger;border:none"><strong>{!! $res['profile']->namalengkap !!}</strong> <br>{!! $res['profile']->alamatlengkap !!}<br>TELP : (0413) 81292</td>
                 <td style="border:none;border-left:1px solid #000">No. RM </td>
-                <td colspan="3" style="border:none">: {!! $res['d'][0]->nocm  !!}</td>
+                <td colspan="3" style="border:none">: {!! $res['d1'][0]->nocm  !!}</td>
                 <td rowspan="2" style="font-size:xx-large;text-align: center;" class="bg-dark">RM</td>
             </tr>
             <tr>
                 <td style="border:none;border-left:1px solid #000">Nama Lengkap</td>
-                <td colspan="3" style="border:none">: {!!  $res['d'][0]->namapasien  !!} {!!  $res['d'][0]->jeniskelamin == 'PEREMPUAN' ? '(P)' : '(L)'  !!}</td>
+                <td colspan="3" style="border:none">: {!!  $res['d1'][0]->namapasien  !!} {!!  $res['d1'][0]->jeniskelamin == 'PEREMPUAN' ? '(P)' : '(L)'  !!}</td>
             </tr>
             <tr>
                 <td style="border:none;border-left:1px solid #000">Tanggal Lahir</td>
-                <td colspan="3" style="border:none">: {!! date('d-m-Y',strtotime( $res['d'][0]->tgllahir  )) !!}</td>
+                <td colspan="3" style="border:none">: {!! date('d-m-Y',strtotime( $res['d1'][0]->tgllahir  )) !!}</td>
                 <td rowspan="2" style="font-size:xx-large;text-align: center;">59</td>
             </tr>
             <tr>
                 <td style="border:none;border-left:1px solid #000">NIK</td>
-                <td colspan="3" style="border:none">: {!! $res['d'][0]->noidentitas  !!}</td>
+                <td colspan="3" style="border:none">: {!! $res['d1'][0]->noidentitas  !!}</td>
             </tr>
             <tr>
                 <td colspan="9" class="bg-dark" style="font-size:x-large">
@@ -256,11 +256,11 @@
                 <th colspan="8" style="border:1px solid #000">RIWAYAT PERSALINAN</th>
             </tr>
             <tr style="border:1px solid #000">
-                <td>@{{item.obj[31100370] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td>@foreach($res['d1'] as $item) @if($item->emrdfk == 31100370) {!! $item->value !!} @endif @endforeach</td>
                 <td colspan="8"  style="border:none;">Pasien masuk kamar bersalin</td>
             </tr>
             <tr>
-                <td rowspan="4">@{{item.obj[31100371] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td rowspan="4">@foreach($res['d1'] as $item) @if($item->emrdfk == 31100371) {!! $item->value !!} @endif @endforeach</td>
                 <td colspan="8"  style="border:none;">PEMERIKSAAN LUAR</td>
             </tr>
             <tr>
@@ -281,7 +281,7 @@
                 <td colspan="6"  style="border:none;"></td>
             </tr>
             <tr style="border:1px solid #000;border-bottom:none">
-                <td rowspan="4">@{{item.obj[31100413] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td rowspan="4">@foreach($res['d1'] as $item) @if($item->emrdfk == 31100413) {!! $item->value !!} @endif @endforeach</td>
                 <td colspan="4" style="border:1px solid #000;border-bottom:none;border-top:none">PEMERIKSAAN DALAM</td>
                 <td colspan="1"  style="border:none">Air Ketuban</td>
                 <td colspan="3" style="border:none">: 
@@ -334,7 +334,7 @@
                 </td>
             </tr>
             <tr style="border:none">
-                <td rowspan="3">@{{item.obj[31100414] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td rowspan="3">@foreach($res['d1'] as $item) @if($item->emrdfk == 31100414) {!! $item->value !!} @endif @endforeach</td>
                 <td colspan="1" style="border:none">Lahir bayi</td>
                 <td colspan="3" style="border:1px solid #000;border-bottom:none;border-top:none;border-left:none">: 
                     @{{ item.obj[31100401] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Laki-laki
@@ -367,7 +367,7 @@
                 </td>
             </tr>
             <tr style="border:none">
-                <td rowspan="3">@{{item.obj[31100415] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td rowspan="3">@foreach($res['d1'] as $item) @if($item->emrdfk == 31100415) {!! $item->value !!} @endif @endforeach</td>
                 <td colspan="1" style="border:none">Plasenta lahir</td>
                 <td colspan="3" style="border:1px solid #000;border-bottom:none;border-top:none;border-left:none">: 
                     @{{ item.obj[31100416] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Spontan
@@ -461,7 +461,7 @@
             <tr style="border:1px solid #000;border-bottom:none;">
                 <td colspan="6" style="border:none">Diagnosa Kebidanan	:  @{{ item.obj[31100444] ? item.obj[31100444] : '' }}</td>
                 <td colspan="3" style="border:none">
-                    Bulukumba : @{{item.obj[31100445] | toDate | date:'dd MMMM yyyy'}} Pukul : @{{item.obj[31100445] | toDate | date:'HH:mm'}}
+                    Bulukumba : @foreach($res['d1'] as $item) @if($item->emrdfk == 31100445) {!! $item->value !!} @endif @endforeach
                 </td>
             </tr>
             <tr>
@@ -525,7 +525,7 @@
             obj: [],
             obj2: []
         }
-        var dataLoad = {!! json_encode($res['d'] )!!};
+        var dataLoad = {!! json_encode($res['d1'] )!!};
         for (var i = 0; i <= dataLoad.length - 1; i++) {
             if(dataLoad[i].emrdfk == 3110029){
                 continue;

@@ -336,7 +336,7 @@
             </tr>
             <tr style="border:none">
                 <td colspan="7" style="border:none"></td>
-                <td colspan="3" style="border:none">Bulukumba, @{{item.obj[32108999] | toDate | date:'dd-MM-yyyy HH:mm'}}</td>
+                <td colspan="3" style="border:none">Bulukumba, @foreach($res['d'] as $item) @if($item->emrdfk == 32108999) {!! $item->value !!} @endif @endforeach</td>
             </tr>
             <tr style="border:none">
                 <td colspan="7" style="border:none"></td>

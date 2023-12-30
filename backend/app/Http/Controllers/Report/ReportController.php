@@ -4614,9 +4614,19 @@ class ReportController extends ApiController{
             if ($z->type == "datetime") {
                 $z->value = date('d-m-Y H:i', strtotime($z->value));
             }
-            // if ($z->value != null) {
-            //     $z->value = substr($z->value, strpos($z->value, '~'));
-            // }
+            if ($z->value != null) {
+                $z->value = substr($z->value, strpos($z->value, '~'));
+            }
+            if($z->emrdfk == 423817){
+                $z->value1 =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate($z->value));
+            }
+            if($z->emrdfk == 423818){
+                $z->value2 =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate($z->value));
+            }
+            if($z->emrdfk == 423819){
+                $z->value3 =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate($z->value));
+            }
+            
             // if ($z->qrcode == null && substr($z->value, strpos($z->value, '~'))) {
             //     $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate($z->value));
             // }
@@ -5975,7 +5985,7 @@ class ReportController extends ApiController{
             $this->saveDokumenKlaim($pdf, $request);
             return;
         }else{
-            return view('report.cetak-suket-kelahiran',compact('res', 'pageWidth'));
+            return view('report.cetak-suket-kelahiran',compact('res', 'image', 'centang', 'pageWidth'));
         }
     }
 
@@ -5984,7 +5994,7 @@ class ReportController extends ApiController{
         $norec = $request['emr'];
         $kdProfile = (int) $request['kdprofile'];
 
-        for($a = 1; $a <= 20; $a++){
+        for($a = 1; $a <= 32; $a++){
             $res['d'.$a] = DB::select(DB::raw(
                 "
                 SELECT
@@ -6001,7 +6011,7 @@ class ReportController extends ApiController{
                     pa.noidentitas,
                     al.alamatlengkap,
                     ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
-                    epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
+                    epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl, epd.qrcode,
                     --ap.noasuransi,ap.namapeserta,
                     pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
                     --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
@@ -6033,14 +6043,20 @@ class ReportController extends ApiController{
             ));
             foreach ($res['d'.$a] as $z) {
                 if ($z->type == "datetime") {
-                    $z->value = date('d-m-Y H:i', strtotime($z->value));
+                    $z->value = date('H:i d-m-Y', strtotime($z->value));
+                }
+                if ($z->type == "time") {
+                    $z->value = date('H:i', strtotime($z->value));
+                }
+                if ($z->value != null) {
+                    $z->value = substr($z->value, strpos($z->value, '~'));
+                }
+                if ($z->qrcode == null && substr($z->value, strpos($z->value, '~'))) {
+                    $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate($z->value));
                 }
             }
         }
-        // $res = collect($res)->filter()->all();
-      
         $res['profile'] = Profile::where('id', $request['kdprofile'])->first();
-
         if(empty($res)){
             echo '
                 <script language="javascript">
@@ -6051,7 +6067,24 @@ class ReportController extends ApiController{
             die;
         }
 
-        return view('report.cetak-cppt', compact('res'));
+        $imagePath = public_path("img/logo_only.png");
+        $image = "data:image/png;base64,".base64_encode(file_get_contents($imagePath));
+
+        $centangPath = public_path("img/true.png");
+        $centang = "data:image/png;base64,".base64_encode(file_get_contents($centangPath));
+
+        if(isset($request["issimpanberkas"])) {
+            $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true, 'dpi' => '600', 'defaultMediaType' => 'print']);
+            $pdf = PDF::loadView('report.cetak-cppt-dom', array(
+                'res' => $res,
+                'image' => $image,
+                'centang' => $centang
+            ))->setPaper('a4', 'portrait');
+            $this->saveDokumenKlaim($pdf, $request);
+            return;
+        }else{
+            return view('report.cetak-cppt',compact('res', 'image'));
+        }
     }
 
     public function printcpptrajal(Request $request) {
@@ -6664,77 +6697,72 @@ class ReportController extends ApiController{
     public function laporanPersalinan(Request $request) {
         $nocm = $request['nocm'];
         $norec = $request['emr'];
-        $index = $request['index'];
         $kdProfile = (int) $request['kdprofile'];
 
-        if (isset($request['index']) && $request['index'] == 'null') {
-            $index = 'is null';
-        }else{
-            $index = '='.$index;
-        }
-
-        $data = DB::select(DB::raw(
-            "
-            SELECT
-                epd.emrdfk,
-                epd.index,
-                ep.noemr,
-                ed.TYPE,
-                pa.namapasien,
-                TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
-                pa.nohp,
-                pa.nocm,
-                ep.jeniskelamin,
-                ep.umur,
-                pa.noidentitas,
-                al.alamatlengkap,
-                ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
-                epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
-                --ap.noasuransi,ap.namapeserta,
-                pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
-                --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
-            FROM
-                emrpasien_t AS ep
-                INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
-                INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
+        for($a = 1; $a <= 7; $a++){
+            $res['d'.$a] = DB::select(DB::raw(
+                "
+                SELECT
+                    epd.emrdfk,
+                    epd.index,
+                    ep.noemr,
+                    ed.TYPE,
+                    pa.namapasien,
+                    TO_CHAR(pa.tgllahir, 'DD-MM-YYYY') as tgllahir,
+                    pa.nohp,
+                    pa.nocm,
+                    ep.jeniskelamin,
+                    ep.umur,
+                    pa.noidentitas,
+                    al.alamatlengkap,
+                    ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
+                    epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl, epd.qrcode,
+                    --ap.noasuransi,ap.namapeserta,
+                    pdd.pendidikan,pk.pekerjaan,ag.agama,sp.statusperkawinan
+                    --case when ed.TYPE = 'datetime' then TO_CHAR(TO_TIMESTAMP(epd.value, 'YYYY-MM-DD HH24:MI:SS'),'YYYY-MM-DD HH24:MI:SS') else epd.value end as value
+                FROM
+                    emrpasien_t AS ep
+                    INNER JOIN emrpasiend_t AS epd ON ep.noemr = epd.emrpasienfk
+                    INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
                     INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
                     INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
-                left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
-                left JOIN pasien_m as pa on ep.nocm =  pa.nocm
-                left JOIN alamat_m as al on pa.id = al.nocmfk
-                left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
-                left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
-                left JOIN agama_m as ag on pa.objectagamafk = ag.id
-                left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
-                -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
-            WHERE
-                ep.norec = '$norec'
-                    AND ep.kdprofile = '$kdProfile' 
-                AND epd.statusenabled = TRUE 
-                and epd.emrfk = $request[emrfk]
-                and epd.index $index
-                and pa.statusenabled = TRUE
-                
-                ORDER BY
-                ed.nourut
-                "
-        ));
-        foreach ($data as $z) {
-            if ($z->type == "datetime") {
-                $z->value = date('d-m-Y H:i', strtotime($z->value));
+                    left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
+                    left JOIN pasien_m as pa on ep.nocm =  pa.nocm
+                    left JOIN alamat_m as al on pa.id = al.nocmfk
+                    left JOIN pendidikan_m as pdd on pa.objectpendidikanfk = pdd.id
+                    left JOIN pekerjaan_m as pk on pa.objectpekerjaanfk = pk.id
+                    left JOIN agama_m as ag on pa.objectagamafk = ag.id
+                    left JOIN statusperkawinan_m as sp on pa.objectstatusperkawinanfk = sp.id
+                    -- left JOIN asuransipasien_m AS ap ON ap.nocmfk = pr.nocmfk
+                WHERE
+                    ep.norec = '$norec'
+                        AND ep.kdprofile = '$kdProfile' 
+                    AND epd.statusenabled = TRUE 
+                    and epd.emrfk = $request[emrfk]
+                    and epd.index = $a
+                    and pa.statusenabled = TRUE
+                    
+                    ORDER BY
+                    ed.nourut
+                    "
+            ));
+            foreach ($res['d'.$a] as $z) {
+                if ($z->type == "datetime") {
+                    $z->value = date('H:i d-m-Y', strtotime($z->value));
+                }
+                if ($z->type == "time") {
+                    $z->value = date('H:i', strtotime($z->value));
+                }
+                if ($z->value != null) {
+                    $z->value = substr($z->value, strpos($z->value, '~'));
+                }
+                if ($z->qrcode == null && substr($z->value, strpos($z->value, '~'))) {
+                    $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate($z->value));
+                }
             }
         }
-        $pageWidth = 500;
         $res['profile'] = Profile::where('id', $request['kdprofile'])->first();
-
-        $res['d'] = $data;
-        $noemrpasien = '';
-        if (count($data) == 0) {
-            $noemrpasien = $request['emr'];
-        } else {
-            $noemrpasien = $data[0]->noemr;
-        }
-        if(empty($res['d'])){
+        if(empty($res)){
             echo '
                 <script language="javascript">
                     window.alert("Data tidak ada.");
@@ -6744,7 +6772,24 @@ class ReportController extends ApiController{
             die;
         }
 
-        return view('report.cetak-laporan-persalinan', compact('res', 'pageWidth'));
+        $imagePath = public_path("img/logo_only.png");
+        $image = "data:image/png;base64,".base64_encode(file_get_contents($imagePath));
+
+        $centangPath = public_path("img/true.png");
+        $centang = "data:image/png;base64,".base64_encode(file_get_contents($centangPath));
+
+        if(isset($request["issimpanberkas"])) {
+            $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true, 'dpi' => '600', 'defaultMediaType' => 'print']);
+            $pdf = PDF::loadView('report.cetak-laporan-persalinan-dom', array(
+                'res' => $res,
+                'image' => $image,
+                'centang' => $centang
+            ))->setPaper('a4', 'portrait');
+            $this->saveDokumenKlaim($pdf, $request);
+            return;
+        }else{
+            return view('report.cetak-laporan-persalinan',compact('res', 'image', 'centang'));
+        }
     }
 
     public function partograf(Request $request) {
