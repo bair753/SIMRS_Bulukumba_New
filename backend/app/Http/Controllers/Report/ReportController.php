@@ -1362,9 +1362,14 @@ class ReportController extends ApiController{
         ->where('hpl.statusenabled', true)
         ->where('pd.noregistrasi', $r->noregistrasi)
         ->select('pd.noregistrasi', 'pm.nocm', 'pm.namapasien', 'pm.tgllahir', 'hpl.dokterluar', 'dokterpengirim.namalengkap as namadokterpengirim', 'pg1.namalengkap as namapenanggungjawab',
-    'pg2.namalengkap as namadokterpemeriksa', 'jk.jeniskelamin', 'pm.tgllahir', 'hpl.haemoglobin', 'hpl.leukosit', 'hpl.eritrosit', 'hpl.trombosit', 'hpl.rasio', 'hpl.tanggal as tgljawab', 'hpl.dokterpemeriksa',
+    'pg2.namalengkap as namadokterpemeriksa', 'pg2.qrcode as qrcodedokterpemeriksa', 'jk.jeniskelamin', 'pm.tgllahir', 'hpl.haemoglobin', 'hpl.leukosit', 'hpl.eritrosit', 'hpl.trombosit', 'hpl.rasio', 'hpl.tanggal as tgljawab', 'hpl.dokterpemeriksa',
 'hpl.keteritrosit', 'hpl.ketleukosit', 'hpl.kettrombosit', 'hpl.kesimpulan', 'ru.namaruangan as asal', 'pg1.nosip' ,'kps.kelompokpasien', 'pd.norec as norec_pd', 'pd.objectruanganlastfk', 'alm.alamatlengkap')
         ->get();
+        foreach ($raw as $z) {
+            if ($z->qrcodedokterpemeriksa == null) {
+                $z->qrcodedokterpemeriksa =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate("Tanda Tangan Digital Oleh " . $z->qrcodedokterpemeriksa));
+            }
+        }
         if(empty($raw)){
             echo '
             <script language="javascript">
@@ -1373,8 +1378,18 @@ class ReportController extends ApiController{
             </script>
         ';
         die;
+        }
+        if(isset($r["issimpanberkas"])) {
+            
+            $pdf = PDF::loadView('report.lab.edt-all-dom', array(
+                'profile' => $profile,
+                'raw' => $raw,
+                'r' => $r,
+            ))->setPaper('a4', 'portrait');
+            $this->saveDokumenKlaim($pdf, $r);
+            return;
         }else{
-            return view('report.lab.edt-all', compact('raw','r', 'profile'));
+            return view('report.lab.edt-all',compact('raw', 'profile','r'));
         }
     }
 

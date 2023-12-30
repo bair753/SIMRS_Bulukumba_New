@@ -31,17 +31,15 @@
     <style>
         *{
             padding:0;
-            margin:0;
+            /* margin:0; */
             box-sizing:border-box;
         }
-        body{
-            width:210mm;
-            height:297mm;
-            margin-top:250mm;
-            margin-bottom:250mm;
-            margin-left:250mm;
-            margin-right:250mm;
-            margin:0 auto; 
+        body {
+            margin-top: 20px;
+            margin-left: 20px;
+            /* font-family: DejaVu Sans, Arial, Helvetica, sans-serif; */
+            box-sizing: border-box;
+            font-size: 10pt;
         }
         @page{
             size: A4;
@@ -172,6 +170,9 @@
     </style>
 </head>
 <body>
+    @php
+        $no = 1;
+    @endphp
 @foreach ($raw as $item)
     <div class="format">
         <table width='100%'>
@@ -234,7 +235,7 @@
             <tr class="-P3">
                 <td colspan="5" class="noborder"></td>
                 <td colspan="12" class="noborder">HAEMOGLOBIN</td>
-                <td colspan="41" class="noborder">: {{ $item->haemoglobin }} gr%</td>\
+                <td colspan="41" class="noborder">: {{ $item->haemoglobin }} gr%</td>
             </tr>
             <tr class="p3">
                 <td colspan="5" class="noborder"></td>
@@ -315,7 +316,7 @@
             </tr>
             <tr class="text-center">
                 <td colspan="44" class="noborder"></td>
-                <td colspan="24" class="noborder"><div id="qrcoded1{{ $item->dokterpemeriksa }}" style="text-align: center"></td>
+                <td colspan="24" class="noborder"><div id="qrDokter{{ $item->dokterpemeriksa }}{{ $no }}" style="text-align: center"></td>
             </tr>
             <tr class="text-center">
                 <td colspan="44" class="noborder"></td>
@@ -330,17 +331,15 @@
     
 </body>
 <script>
-    var d1 = {!! json_encode($item->namadokterpemeriksa )!!}
-        
-        if(d1 != undefined){
-            jQuery('#qrcoded1{{ $item->dokterpemeriksa }}').qrcode({
-                width	: 100,
-                height	: 100,
-                text	: "Tanda Tangan Digital Oleh " + d1
-            });	
-        }
-    
+        $('#qrDokter{{ $item->dokterpemeriksa }}{{ $no }}').qrcode({
+            text: 'Tanda Tangan Digital Oleh {{ $item->namadokterpemeriksa }}{{ $no }}',
+            height: 75,
+            width: 75
+        });
 </script>
+@php
+    $no++;
+@endphp
 @endforeach
 <script>
         $(document).ready(function () {
