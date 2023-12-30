@@ -294,8 +294,8 @@
             </tr>
             <tr style="border:none;">
                 <td colspan="3" style="border:none;">ALAMAT</td>
-                <td style="border:none;">: @{{ item.obj[32108990] ? item.obj[32108990] : '..................................................' }}</td>
-                <td colspan="6" style="border:none;"></td>
+                <td style="border:none;"colspan="7" >: @{{ item.obj[32108990] ? item.obj[32108990] : '..................................................' }}</td>
+                {{-- <td colspan="6" style="border:none;"></td> --}}
             </tr>
             <tr style="border:none;" height="50px"></tr>
             <tr>
@@ -319,8 +319,8 @@
             </tr>
             <tr style="border:none;">
                 <td colspan="3" style="border:none;">ALAMAT</td>
-                <td style="border:none;">: @{{ item.obj[32108994] ? item.obj[32108994] : '..................................................' }}</td>
-                <td colspan="6" style="border:none;"></td>
+                <td style="border:none;" colspan="7">: @{{ item.obj[32108994] ? item.obj[32108994] : '..................................................' }}</td>
+                {{-- <td colspan="6" style="border:none;"></td> --}}
             </tr>
             <tr style="border:none;" height="50px"></tr>
             <tr style="border:none;">
@@ -336,7 +336,7 @@
             </tr>
             <tr style="border:none">
                 <td colspan="7" style="border:none"></td>
-                <td colspan="3" style="border:none">Bulukumba, @{{item.obj[32108999] | toDate | date:'dd-MM-yyyy HH:mm'}}</td>
+                <td colspan="3" style="border:none">Bulukumba, @foreach($res['d'] as $item) @if($item->emrdfk == 32108999) {!! $item->value !!} @endif @endforeach</td>
             </tr>
             <tr style="border:none">
                 <td colspan="7" style="border:none"></td>

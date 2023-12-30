@@ -212,11 +212,11 @@
       <span class="f-s-15 background-gray"><b>Obat yang Diberikan</b> </span><span class="background-gray"> <b>:</b>
       </span><span> @foreach($res['d'] as $item) @if($item->emrdfk == 423813) {!! $item->value !!} @endif @endforeach</span>
     </div>
-    <div class="border-doang" style="overflow: auto; min-height: 60px">
+    <div class="border-doang" style="overflow: auto; min-height: 30px">
       <span class="f-s-15 background-gray"><b>Kondisi Pasien</b> </span><span class="background-gray"> <b>:</b>
       </span><span> @foreach($res['d'] as $item) @if($item->emrdfk == 423814) {!! $item->value !!} @endif @endforeach</span>
     </div>
-    <div class="border-doang" style="overflow: auto; min-height: 60px">
+    <div class="border-doang" style="overflow: auto; min-height: 30px">
       <span class="f-s-15 background-gray"><b>Tindak Lanjut</b> </span><span class="background-gray"> <b>:</b>
       </span><span> @foreach($res['d'] as $item) @if($item->emrdfk == 423815) {!! $item->value !!} @endif @endforeach</span>
     </div>
@@ -236,7 +236,7 @@
             <span>Pasien</span>
         </div>
         <br>
-        <center>@foreach($res['d'] as $item) @if($item->emrdfk == 423817) <img src="data:image/png;base64, {!! $item->qrcode !!} " style="height: 70px; width:70px;"> @endif @endforeach</center>
+        <center>@foreach($res['d'] as $item) @if($item->emrdfk == 423817) <img src="data:image/png;base64, {!! $item->value1 !!} " style="height: 70px; width:70px;"> @endif @endforeach</center>
         <br>
         <div style="text-align: center">
             <span>( @foreach($res['d'] as $item) @if($item->emrdfk == 423817) {!! $item->value !!} @endif @endforeach )</span>
@@ -247,7 +247,7 @@
             <span>Keluarga Pasien</span>
         </div>
         <br>
-        <center>@foreach($res['d'] as $item) @if($item->emrdfk == 423818) <img src="data:image/png;base64, {!! $item->qrcode !!} " style="height: 70px; width:70px;"> @endif @endforeach</center>
+        <center>@foreach($res['d'] as $item) @if($item->emrdfk == 423818) <img src="data:image/png;base64, {!! $item->value2 !!} " style="height: 70px; width:70px;"> @endif @endforeach</center>
         <br>
         <div style="text-align: center">
             <span>( @foreach($res['d'] as $item) @if($item->emrdfk == 423818) {!! $item->value !!} @endif @endforeach )</span>
@@ -258,7 +258,7 @@
             <span>DPJP</span>
         </div>
         <br>
-        <center>@foreach($res['d'] as $item) @if($item->emrdfk == 423819) <img src="data:image/png;base64, {!! $item->qrcode !!} " style="height: 70px; width:70px;"> @endif @endforeach</center>
+        <center>@foreach($res['d'] as $item) @if($item->emrdfk == 423819) <img src="data:image/png;base64, {!! $item->value3 !!} " style="height: 70px; width:70px;"> @endif @endforeach</center>
         <br>
         <div style="text-align: center">
             <span>( @foreach($res['d'] as $item) @if($item->emrdfk == 423819) {!! $item->value !!} @endif @endforeach )</span>
