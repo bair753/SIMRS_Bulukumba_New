@@ -284,8 +284,8 @@
             </tr>
             <tr style="border:none;">
                 <td colspan="3" style="border:none;">UMUR</td>
-                <td style="border:none;">: @{{ item.obj[32108988] ? item.obj[32108988] : '..................................................' }}</td>
-                <td colspan="6" style="border:none;"></td>
+                <td style="border:none;" colspan="7">: @{{ item.obj[32108988] ? item.obj[32108988] : '..................................................' }}</td>
+                {{-- <td colspan="6" style="border:none;"></td> --}}
             </tr>
             <tr style="border:none;">
                 <td colspan="3" style="border:none;">PEKERJAAN</td>
@@ -309,13 +309,13 @@
             </tr>
             <tr style="border:none;">
                 <td colspan="3" style="border:none;">UMUR</td>
-                <td style="border:none;">: @{{ item.obj[32108992] ? item.obj[32108992] : '..................................................' }}</td>
-                <td colspan="6" style="border:none;"></td>
+                <td style="border:none;" colspan="7">: @{{ item.obj[32108992] ? item.obj[32108992] : '..................................................' }}</td>
+                {{-- <td colspan="6" style="border:none;"></td> --}}
             </tr>
             <tr style="border:none;">
                 <td colspan="3" style="border:none;">PEKERJAAN</td>
-                <td style="border:none;">: @{{ item.obj[32108993] ? item.obj[32108993] : '..................................................' }}</td>
-                <td colspan="6" style="border:none;"></td>
+                <td style="border:none;" colspan="7">: @{{ item.obj[32108993] ? item.obj[32108993] : '..................................................' }}</td>
+                {{-- <td colspan="6" style="border:none;"></td> --}}
             </tr>
             <tr style="border:none;">
                 <td colspan="3" style="border:none;">ALAMAT</td>
