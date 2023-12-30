@@ -16,7 +16,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
             var norecEMR = '';
             $scope.cc.emrfk = 290190;
             var dataLoad = [];
-            $scope.isCetak = false;
+            $scope.isCetak = true;
             $scope.allDisabled = false;
             var pegawaiInputDetail  = '';
             var cacheNomorEMR = cacheHelper.get('cacheNomorEMR');
@@ -119,6 +119,19 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 } else {
                     $scope.cc.norec_emr = nomorEMR
                 }
+            }
+
+            $scope.cetakPdf = function () {
+                if (norecEMR == '') return
+
+                var local = JSON.parse(localStorage.getItem('profile'));
+                var nama = medifirstService.getPegawaiLogin().namalengkap;
+                console.log(config.baseApiBackend);
+                window.open(config.baseApiBackend + 'report/cetak-persetujuan-tes-skrining?nocm='
+                    + $scope.cc.nocm + '&norec_apd=' + $scope.cc.norec + '&emr=' + norecEMR
+                    + '&emrfk=' + $scope.cc.emrfk
+                    + '&kdprofile=' + local.id
+                    + '&nama=' + nama, '_blank');
             }
 
             if (nomorEMR == '-') {

@@ -16,7 +16,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
             var norecEMR = '';
             $scope.cc.emrfk = 290189;
             var dataLoad = [];
-            $scope.isCetak = false;
+            $scope.isCetak = true;
             $scope.allDisabled = false;
             var pegawaiInputDetail  = '';
             var cacheNomorEMR = cacheHelper.get('cacheNomorEMR');
@@ -72,7 +72,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 var local = JSON.parse(localStorage.getItem('profile'));
                 var nama = medifirstService.getPegawaiLogin().namalengkap;
                 console.log(config.baseApiBackend);
-                window.open(config.baseApiBackend + 'report/cetak-suket-kematian?nocm='
+                window.open(config.baseApiBackend + 'report/cetak-penolakan-tes-skrining?nocm='
                     + $scope.cc.nocm + '&norec_apd=' + $scope.cc.norec + '&emr=' + norecEMR
                     + '&emrfk=' + $scope.cc.emrfk
                     + '&kdprofile=' + local.id

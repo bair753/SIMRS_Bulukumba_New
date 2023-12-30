@@ -518,84 +518,104 @@
 		<td colspan="17" style="text-align: center"><b>Keterangan</b></td>
 	</tr>
 	<tr>
-		<td colspan="3" style="text-align: center">@{{item.obj[1000892] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-		<td colspan="17" style="text-align: center">@{{ item.obj[1000893] ? item.obj[1000893] : '' }}</td>
+		<td colspan="3" style="text-align: center">@foreach($res['d'] as $item) @if($item->emrdfk == 1000892) {!! $item->value !!} @endif @endforeach
+		</td>
+		<td colspan="17" style="text-align: center">@foreach($res['d'] as $item) @if($item->emrdfk == 1000893) {!! $item->value !!} @endif @endforeach</td>
 	</tr>
-    <tr>
-		<td colspan="3" style="text-align: center">@{{item.obj[1000894] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-		<td colspan="17" style="text-align: center">@{{ item.obj[1000895] ? item.obj[1000895] : '' }}</td>
+	<tr>
+		<td colspan="3" style="text-align: center">@foreach($res['d'] as $item) @if($item->emrdfk == 1000894) {!! $item->value !!} @endif @endforeach
+		</td>
+		<td colspan="17" style="text-align: center">@foreach($res['d'] as $item) @if($item->emrdfk == 1000895) {!! $item->value !!} @endif @endforeach</td>
 	</tr>
-    <tr>
-		<td colspan="3" style="text-align: center">@{{item.obj[1000896] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-		<td colspan="17" style="text-align: center">@{{ item.obj[1000897] ? item.obj[1000897] : '' }}</td>
+	<tr>
+		<td colspan="3" style="text-align: center">@foreach($res['d'] as $item) @if($item->emrdfk == 1000896) {!! $item->value !!} @endif @endforeach
+		</td>
+		<td colspan="17" style="text-align: center">@foreach($res['d'] as $item) @if($item->emrdfk == 1000897) {!! $item->value !!} @endif @endforeach</td>
 	</tr>
-    <tr>
-		<td colspan="3" style="text-align: center">@{{item.obj[1000898] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-		<td colspan="17" style="text-align: center">@{{ item.obj[1000899] ? item.obj[1000899] : '' }}</td>
+	<tr>
+		<td colspan="3" style="text-align: center">@foreach($res['d'] as $item) @if($item->emrdfk == 1000898) {!! $item->value !!} @endif @endforeach
+		</td>
+		<td colspan="17" style="text-align: center">@foreach($res['d'] as $item) @if($item->emrdfk == 1000899) {!! $item->value !!} @endif @endforeach</td>
 	</tr>
-    <tr>
-		<td colspan="3" style="text-align: center">@{{item.obj[1000900] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-		<td colspan="17" style="text-align: center">@{{ item.obj[1000901] ? item.obj[1000901] : '' }}</td>
+	<tr>
+		<td colspan="3" style="text-align: center">@foreach($res['d'] as $item) @if($item->emrdfk == 1000900) {!! $item->value !!} @endif @endforeach
+		</td>
+		<td colspan="17" style="text-align: center">@foreach($res['d'] as $item) @if($item->emrdfk == 1000901) {!! $item->value !!} @endif @endforeach</td>
 	</tr>
-    <tr>
-		<td colspan="3" style="text-align: center">@{{item.obj[1000902] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-		<td colspan="17" style="text-align: center">@{{ item.obj[1000903] ? item.obj[1000903] : '' }}</td>
+	<tr>
+		<td colspan="3" style="text-align: center">@foreach($res['d'] as $item) @if($item->emrdfk == 1000902) {!! $item->value !!} @endif @endforeach
+		</td>
+		<td colspan="17" style="text-align: center">@foreach($res['d'] as $item) @if($item->emrdfk == 1000903) {!! $item->value !!} @endif @endforeach</td>
 	</tr>
-    <tr>
-		<td colspan="3" style="text-align: center">@{{item.obj[1000904] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-		<td colspan="17" style="text-align: center">@{{ item.obj[1000905] ? item.obj[1000905] : '' }}</td>
+	<tr>
+		<td colspan="3" style="text-align: center">@foreach($res['d'] as $item) @if($item->emrdfk == 1000904) {!! $item->value !!} @endif @endforeach
+		</td>
+		<td colspan="17" style="text-align: center">@foreach($res['d'] as $item) @if($item->emrdfk == 1000905) {!! $item->value !!} @endif @endforeach</td>
 	</tr>
-    <tr>
-		<td colspan="3" style="text-align: center">@{{item.obj[1000906] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-		<td colspan="17" style="text-align: center">@{{ item.obj[1000907] ? item.obj[1000907] : '' }}</td>
+	<tr>
+		<td colspan="3" style="text-align: center">@foreach($res['d'] as $item) @if($item->emrdfk == 1000906) {!! $item->value !!} @endif @endforeach
+		</td>
+		<td colspan="17" style="text-align: center">@foreach($res['d'] as $item) @if($item->emrdfk == 1000907) {!! $item->value !!} @endif @endforeach</td>
 	</tr>
-    <tr>
-		<td colspan="3" style="text-align: center">@{{item.obj[1000908] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-		<td colspan="17" style="text-align: center">@{{ item.obj[1000909] ? item.obj[1000909] : '' }}</td>
+	<tr>
+		<td colspan="3" style="text-align: center">@foreach($res['d'] as $item) @if($item->emrdfk == 1000908) {!! $item->value !!} @endif @endforeach
+		</td>
+		<td colspan="17" style="text-align: center">@foreach($res['d'] as $item) @if($item->emrdfk == 1000909) {!! $item->value !!} @endif @endforeach</td>
 	</tr>
-    <tr>
-		<td colspan="3" style="text-align: center">@{{item.obj[1000910] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-		<td colspan="17" style="text-align: center">@{{ item.obj[1000911] ? item.obj[1000911] : '' }}</td>
+	<tr>
+		<td colspan="3" style="text-align: center">@foreach($res['d'] as $item) @if($item->emrdfk == 1000910) {!! $item->value !!} @endif @endforeach
+		</td>
+		<td colspan="17" style="text-align: center">@foreach($res['d'] as $item) @if($item->emrdfk == 1000911) {!! $item->value !!} @endif @endforeach</td>
 	</tr>
-    <tr>
-		<td colspan="3" style="text-align: center">@{{item.obj[1000912] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-		<td colspan="17" style="text-align: center">@{{ item.obj[1000913] ? item.obj[1000913] : '' }}</td>
+	<tr>
+		<td colspan="3" style="text-align: center">@foreach($res['d'] as $item) @if($item->emrdfk == 1000912) {!! $item->value !!} @endif @endforeach
+		</td>
+		<td colspan="17" style="text-align: center">@foreach($res['d'] as $item) @if($item->emrdfk == 1000913) {!! $item->value !!} @endif @endforeach</td>
 	</tr>
-    <tr>
-		<td colspan="3" style="text-align: center">@{{item.obj[1000914] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-		<td colspan="17" style="text-align: center">@{{ item.obj[1000915] ? item.obj[1000915] : '' }}</td>
+	<tr>
+		<td colspan="3" style="text-align: center">@foreach($res['d'] as $item) @if($item->emrdfk == 1000914) {!! $item->value !!} @endif @endforeach
+		</td>
+		<td colspan="17" style="text-align: center">@foreach($res['d'] as $item) @if($item->emrdfk == 1000915) {!! $item->value !!} @endif @endforeach</td>
 	</tr>
-    <tr>
-		<td colspan="3" style="text-align: center">@{{item.obj[1000916] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-		<td colspan="17" style="text-align: center">@{{ item.obj[1000917] ? item.obj[1000917] : '' }}</td>
+	<tr>
+		<td colspan="3" style="text-align: center">@foreach($res['d'] as $item) @if($item->emrdfk == 1000916) {!! $item->value !!} @endif @endforeach
+		</td>
+		<td colspan="17" style="text-align: center">@foreach($res['d'] as $item) @if($item->emrdfk == 1000917) {!! $item->value !!} @endif @endforeach</td>
 	</tr>
-    <tr>
-		<td colspan="3" style="text-align: center">@{{item.obj[1000918] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-		<td colspan="17" style="text-align: center">@{{ item.obj[1000919] ? item.obj[1000919] : '' }}</td>
+	<tr>
+		<td colspan="3" style="text-align: center">@foreach($res['d'] as $item) @if($item->emrdfk == 1000918) {!! $item->value !!} @endif @endforeach
+		</td>
+		<td colspan="17" style="text-align: center">@foreach($res['d'] as $item) @if($item->emrdfk == 1000919) {!! $item->value !!} @endif @endforeach</td>
 	</tr>
-    <tr>
-		<td colspan="3" style="text-align: center">@{{item.obj[1000920] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-		<td colspan="17" style="text-align: center">@{{ item.obj[1000921] ? item.obj[1000921] : '' }}</td>
+	<tr>
+		<td colspan="3" style="text-align: center">@foreach($res['d'] as $item) @if($item->emrdfk == 1000920) {!! $item->value !!} @endif @endforeach
+		</td>
+		<td colspan="17" style="text-align: center">@foreach($res['d'] as $item) @if($item->emrdfk == 1000921) {!! $item->value !!} @endif @endforeach</td>
 	</tr>
-    <tr>
-		<td colspan="3" style="text-align: center">@{{item.obj[1000922] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-		<td colspan="17" style="text-align: center">@{{ item.obj[1000923] ? item.obj[1000923] : '' }}</td>
+	<tr>
+		<td colspan="3" style="text-align: center">@foreach($res['d'] as $item) @if($item->emrdfk == 1000922) {!! $item->value !!} @endif @endforeach
+		</td>
+		<td colspan="17" style="text-align: center">@foreach($res['d'] as $item) @if($item->emrdfk == 1000923) {!! $item->value !!} @endif @endforeach</td>
 	</tr>
-    <tr>
-		<td colspan="3" style="text-align: center">@{{item.obj[1000924] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-		<td colspan="17" style="text-align: center">@{{ item.obj[1000925] ? item.obj[1000925] : '' }}</td>
+	<tr>
+		<td colspan="3" style="text-align: center">@foreach($res['d'] as $item) @if($item->emrdfk == 1000924) {!! $item->value !!} @endif @endforeach
+		</td>
+		<td colspan="17" style="text-align: center">@foreach($res['d'] as $item) @if($item->emrdfk == 1000925) {!! $item->value !!} @endif @endforeach</td>
 	</tr>
-    <tr>
-		<td colspan="3" style="text-align: center">@{{item.obj[1000926] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-		<td colspan="17" style="text-align: center">@{{ item.obj[1000927] ? item.obj[1000927] : '' }}</td>
+	<tr>
+		<td colspan="3" style="text-align: center">@foreach($res['d'] as $item) @if($item->emrdfk == 1000926) {!! $item->value !!} @endif @endforeach
+		</td>
+		<td colspan="17" style="text-align: center">@foreach($res['d'] as $item) @if($item->emrdfk == 1000927) {!! $item->value !!} @endif @endforeach</td>
 	</tr>
-    <tr>
-		<td colspan="3" style="text-align: center">@{{item.obj[1000928] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-		<td colspan="17" style="text-align: center">@{{ item.obj[1000929] ? item.obj[1000929] : '' }}</td>
+	<tr>
+		<td colspan="3" style="text-align: center">@foreach($res['d'] as $item) @if($item->emrdfk == 1000928) {!! $item->value !!} @endif @endforeach
+		</td>
+		<td colspan="17" style="text-align: center">@foreach($res['d'] as $item) @if($item->emrdfk == 1000929) {!! $item->value !!} @endif @endforeach</td>
 	</tr>
-    <tr>
-		<td colspan="3" style="text-align: center">@{{item.obj[1000930] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-		<td colspan="17" style="text-align: center">@{{ item.obj[1000931] ? item.obj[1000931] : '' }}</td>
+	<tr>
+		<td colspan="3" style="text-align: center">@foreach($res['d'] as $item) @if($item->emrdfk == 1000930) {!! $item->value !!} @endif @endforeach
+		</td>
+		<td colspan="17" style="text-align: center">@foreach($res['d'] as $item) @if($item->emrdfk == 1000931) {!! $item->value !!} @endif @endforeach</td>
 	</tr>
 </table>
 </div>
