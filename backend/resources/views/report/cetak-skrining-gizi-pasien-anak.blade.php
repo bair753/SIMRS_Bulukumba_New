@@ -228,7 +228,7 @@
                 </tr>
                 <tr>
                     <td colspan="6" class="noborder p3">Tanggal MRS</td>
-                    <td colspan="18" class="noborder p3">: @{{item.obj[32116648] | toDate | date:'dd-MM-yyyy HH:mm'}}</td>
+                    <td colspan="18" class="noborder p3">: @foreach($res['d1'] as $item) @if($item->emrdfk == 32116648) {!! $item->value !!} @endif @endforeach</td>
                     <td colspan="6" class="noborder blf p3">Diagnosis DPJP</td>
                     <td colspan="19" class="noborder p3">: @{{ item.obj[32116650] ? item.obj[32116650] : '' }}</td>
                 </tr>
@@ -465,7 +465,7 @@
                 </tr>
                 <tr>
                     <td colspan="6" class="noborder p3">Tanggal MRS</td>
-                    <td colspan="18" class="noborder p3">: @{{item.obji2[32116648] | toDate | date:'dd-MM-yyyy HH:mm'}}</td>
+                    <td colspan="18" class="noborder p3">: @foreach($res['d2'] as $item) @if($item->emrdfk == 32116648) {!! $item->value !!} @endif @endforeach</td>
                     <td colspan="6" class="noborder blf p3">Diagnosis DPJP</td>
                     <td colspan="19" class="noborder p3">: @{{ item.obji2[32116650] ? item.obji2[32116650] : '' }}</td>
                 </tr>
@@ -702,7 +702,7 @@
                 </tr>
                 <tr>
                     <td colspan="6" class="noborder p3">Tanggal MRS</td>
-                    <td colspan="18" class="noborder p3">: @{{item.obji3[32116648] | toDate | date:'dd-MM-yyyy HH:mm'}}</td>
+                    <td colspan="18" class="noborder p3">: @foreach($res['d3'] as $item) @if($item->emrdfk == 32116648) {!! $item->value !!} @endif @endforeach</td>
                     <td colspan="6" class="noborder blf p3">Diagnosis DPJP</td>
                     <td colspan="19" class="noborder p3">: @{{ item.obji3[32116650] ? item.obji3[32116650] : '' }}</td>
                 </tr>
@@ -939,7 +939,7 @@
                 </tr>
                 <tr>
                     <td colspan="6" class="noborder p3">Tanggal MRS</td>
-                    <td colspan="18" class="noborder p3">: @{{item.obji4[32116648] | toDate | date:'dd-MM-yyyy HH:mm'}}</td>
+                    <td colspan="18" class="noborder p3">: @foreach($res['d4'] as $item) @if($item->emrdfk == 32116648) {!! $item->value !!} @endif @endforeach</td>
                     <td colspan="6" class="noborder blf p3">Diagnosis DPJP</td>
                     <td colspan="19" class="noborder p3">: @{{ item.obji4[32116650] ? item.obji4[32116650] : '' }}</td>
                 </tr>
@@ -1176,7 +1176,7 @@
                 </tr>
                 <tr>
                     <td colspan="6" class="noborder p3">Tanggal MRS</td>
-                    <td colspan="18" class="noborder p3">: @{{item.obji5[32116648] | toDate | date:'dd-MM-yyyy HH:mm'}}</td>
+                    <td colspan="18" class="noborder p3">: @foreach($res['d5'] as $item) @if($item->emrdfk == 32116648) {!! $item->value !!} @endif @endforeach</td>
                     <td colspan="6" class="noborder blf p3">Diagnosis DPJP</td>
                     <td colspan="19" class="noborder p3">: @{{ item.obji5[32116650] ? item.obji5[32116650] : '' }}</td>
                 </tr>
@@ -1413,7 +1413,7 @@
                 </tr>
                 <tr>
                     <td colspan="6" class="noborder p3">Tanggal MRS</td>
-                    <td colspan="18" class="noborder p3">: @{{item.obji6[32116648] | toDate | date:'dd-MM-yyyy HH:mm'}}</td>
+                    <td colspan="18" class="noborder p3">: @foreach($res['d6'] as $item) @if($item->emrdfk == 32116648) {!! $item->value !!} @endif @endforeach</td>
                     <td colspan="6" class="noborder blf p3">Diagnosis DPJP</td>
                     <td colspan="19" class="noborder p3">: @{{ item.obji6[32116650] ? item.obji6[32116650] : '' }}</td>
                 </tr>
@@ -1650,7 +1650,7 @@
                 </tr>
                 <tr>
                     <td colspan="6" class="noborder p3">Tanggal MRS</td>
-                    <td colspan="18" class="noborder p3">: @{{item.obji7[32116648] | toDate | date:'dd-MM-yyyy HH:mm'}}</td>
+                    <td colspan="18" class="noborder p3">: @foreach($res['d7'] as $item) @if($item->emrdfk == 32116648) {!! $item->value !!} @endif @endforeach</td>
                     <td colspan="6" class="noborder blf p3">Diagnosis DPJP</td>
                     <td colspan="19" class="noborder p3">: @{{ item.obji7[32116650] ? item.obji7[32116650] : '' }}</td>
                 </tr>
