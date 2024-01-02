@@ -163,9 +163,9 @@
         td{
             padding:.3rem
         }
-        section{
+        /* section{
             page-break-after: always
-        }
+        } */
     </style>
 </head>
 
@@ -5718,9 +5718,4 @@
         </section>
     </body>
 @endif
-
-
-<script>
-     window.print();
-</script>
 </html>

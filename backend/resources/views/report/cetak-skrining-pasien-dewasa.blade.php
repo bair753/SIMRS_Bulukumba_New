@@ -450,22 +450,22 @@
                     <td colspan="49">(Skala MORSE)</td>
                 </tr>
                 <tr>
-                    <td colspan="3" rowspan="2" class="text-center">No</td>
-                    <td colspan="16" rowspan="2" class="text-center">Risiko Rendah dan Sedang</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obj[428200] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obj[428201] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obj[428202] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obj[428203] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obj[428204] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obj[428205] | toDate | date:'dd-MM-yyyy'}}</td>
+                    <td colspan="3" class="text-center">No</td>
+                    <td colspan="16" class="text-center">Risiko Rendah dan Sedang</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d1'] as $item) @if($item->emrdfk == 428200) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d1'] as $item) @if($item->emrdfk == 428201) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d1'] as $item) @if($item->emrdfk == 428202) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d1'] as $item) @if($item->emrdfk == 428203) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d1'] as $item) @if($item->emrdfk == 428204) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d1'] as $item) @if($item->emrdfk == 428205) {!! $item->value !!} @endif @endforeach</td>
                 </tr>
                 <tr>
-                    <td colspan="5" class="p3">Jam: @{{item.obj[428200] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obj[428201] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obj[428202] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obj[428203] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obj[428204] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obj[428205] | toDate | date:'HH:mm'}}</td>
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obj[428200] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obj[428201] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obj[428202] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obj[428203] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obj[428204] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obj[428205] | toDate | date:'HH:mm'}}</td> --}}
                 </tr>
                 <tr style="font-size: small;">
                     <td colspan="3" class="p3">1</td>
@@ -577,22 +577,22 @@
                     <td colspan="5" class="p3 text-center">@{{ item.obj[428281] ? item.obj[428281] : '' }}</td>
                 </tr>
                 <tr>
-                    <td colspan="3" rowspan="2" class="text-center">No</td>
-                    <td colspan="16" rowspan="2" class="text-center">Risiko Tinggi</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obj[428282] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obj[428283] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obj[428284] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obj[428285] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obj[428286] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obj[428287] | toDate | date:'dd-MM-yyyy'}}</td>
+                    <td colspan="3" class="text-center">No</td>
+                    <td colspan="16" class="text-center">Risiko Tinggi</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d1'] as $item) @if($item->emrdfk == 428282) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d1'] as $item) @if($item->emrdfk == 428283) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d1'] as $item) @if($item->emrdfk == 428284) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d1'] as $item) @if($item->emrdfk == 428285) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d1'] as $item) @if($item->emrdfk == 428286) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d1'] as $item) @if($item->emrdfk == 428287) {!! $item->value !!} @endif @endforeach</td>
                 </tr>
                 <tr>
-                    <td colspan="5" class="p3">Jam: @{{item.obj[428282] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obj[428283] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obj[428284] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obj[428285] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obj[428286] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obj[428287] | toDate | date:'HH:mm'}}</td>
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obj[428282] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obj[428283] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obj[428284] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obj[428285] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obj[428286] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obj[428287] | toDate | date:'HH:mm'}}</td> --}}
                 </tr>
                 <tr style="font-size: small;">
                     <td colspan="3" class="p3" valign="top">1</td>
@@ -963,22 +963,22 @@
                     <td colspan="49">(Skala MORSE)</td>
                 </tr>
                 <tr>
-                    <td colspan="3" rowspan="2" class="text-center">No</td>
-                    <td colspan="16" rowspan="2" class="text-center">Risiko Rendah dan Sedang</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji2[428200] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji2[428201] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji2[428202] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji2[428203] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji2[428204] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji2[428205] | toDate | date:'dd-MM-yyyy'}}</td>
+                    <td colspan="3" class="text-center">No</td>
+                    <td colspan="16" class="text-center">Risiko Rendah dan Sedang</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d2'] as $item) @if($item->emrdfk == 428200) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d2'] as $item) @if($item->emrdfk == 428201) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d2'] as $item) @if($item->emrdfk == 428202) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d2'] as $item) @if($item->emrdfk == 428203) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d2'] as $item) @if($item->emrdfk == 428204) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d2'] as $item) @if($item->emrdfk == 428205) {!! $item->value !!} @endif @endforeach</td>
                 </tr>
                 <tr>
-                    <td colspan="5" class="p3">Jam: @{{item.obji2[428200] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji2[428201] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji2[428202] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji2[428203] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji2[428204] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji2[428205] | toDate | date:'HH:mm'}}</td>
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji2[428200] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji2[428201] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji2[428202] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji2[428203] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji2[428204] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji2[428205] | toDate | date:'HH:mm'}}</td> --}}
                 </tr>
                 <tr style="font-size: small;">
                     <td colspan="3" class="p3">1</td>
@@ -1090,22 +1090,22 @@
                     <td colspan="5" class="p3 text-center">@{{ item.obji2[428281] ? item.obji2[428281] : '' }}</td>
                 </tr>
                 <tr>
-                    <td colspan="3" rowspan="2" class="text-center">No</td>
-                    <td colspan="16" rowspan="2" class="text-center">Risiko Tinggi</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji2[428282] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji2[428283] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji2[428284] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji2[428285] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji2[428286] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji2[428287] | toDate | date:'dd-MM-yyyy'}}</td>
+                    <td colspan="3" class="text-center">No</td>
+                    <td colspan="16" class="text-center">Risiko Tinggi</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d2'] as $item) @if($item->emrdfk == 428282) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d2'] as $item) @if($item->emrdfk == 428283) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d2'] as $item) @if($item->emrdfk == 428284) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d2'] as $item) @if($item->emrdfk == 428285) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d2'] as $item) @if($item->emrdfk == 428286) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d2'] as $item) @if($item->emrdfk == 428287) {!! $item->value !!} @endif @endforeach</td>
                 </tr>
                 <tr>
-                    <td colspan="5" class="p3">Jam: @{{item.obji2[428282] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji2[428283] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji2[428284] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji2[428285] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji2[428286] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji2[428287] | toDate | date:'HH:mm'}}</td>
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji2[428282] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji2[428283] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji2[428284] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji2[428285] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji2[428286] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji2[428287] | toDate | date:'HH:mm'}}</td> --}}
                 </tr>
                 <tr style="font-size: small;">
                     <td colspan="3" class="p3" valign="top">1</td>
@@ -1476,22 +1476,22 @@
                     <td colspan="49">(Skala MORSE)</td>
                 </tr>
                 <tr>
-                    <td colspan="3" rowspan="2" class="text-center">No</td>
-                    <td colspan="16" rowspan="2" class="text-center">Risiko Rendah dan Sedang</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji3[428200] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji3[428201] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji3[428202] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji3[428203] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji3[428204] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji3[428205] | toDate | date:'dd-MM-yyyy'}}</td>
+                    <td colspan="3" class="text-center">No</td>
+                    <td colspan="16" class="text-center">Risiko Rendah dan Sedang</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d3'] as $item) @if($item->emrdfk == 428200) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d3'] as $item) @if($item->emrdfk == 428201) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d3'] as $item) @if($item->emrdfk == 428202) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d3'] as $item) @if($item->emrdfk == 428203) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d3'] as $item) @if($item->emrdfk == 428204) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d3'] as $item) @if($item->emrdfk == 428205) {!! $item->value !!} @endif @endforeach</td>
                 </tr>
                 <tr>
-                    <td colspan="5" class="p3">Jam: @{{item.obji3[428200] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji3[428201] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji3[428202] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji3[428203] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji3[428204] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji3[428205] | toDate | date:'HH:mm'}}</td>
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji3[428200] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji3[428201] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji3[428202] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji3[428203] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji3[428204] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji3[428205] | toDate | date:'HH:mm'}}</td> --}}
                 </tr>
                 <tr style="font-size: small;">
                     <td colspan="3" class="p3">1</td>
@@ -1603,22 +1603,22 @@
                     <td colspan="5" class="p3 text-center">@{{ item.obji3[428281] ? item.obji3[428281] : '' }}</td>
                 </tr>
                 <tr>
-                    <td colspan="3" rowspan="2" class="text-center">No</td>
-                    <td colspan="16" rowspan="2" class="text-center">Risiko Tinggi</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji3[428282] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji3[428283] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji3[428284] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji3[428285] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji3[428286] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji3[428287] | toDate | date:'dd-MM-yyyy'}}</td>
+                    <td colspan="3" class="text-center">No</td>
+                    <td colspan="16" class="text-center">Risiko Tinggi</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d3'] as $item) @if($item->emrdfk == 428282) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d3'] as $item) @if($item->emrdfk == 428283) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d3'] as $item) @if($item->emrdfk == 428284) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d3'] as $item) @if($item->emrdfk == 428285) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d3'] as $item) @if($item->emrdfk == 428286) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d3'] as $item) @if($item->emrdfk == 428287) {!! $item->value !!} @endif @endforeach</td>
                 </tr>
                 <tr>
-                    <td colspan="5" class="p3">Jam: @{{item.obji3[428282] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji3[428283] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji3[428284] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji3[428285] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji3[428286] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji3[428287] | toDate | date:'HH:mm'}}</td>
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji3[428282] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji3[428283] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji3[428284] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji3[428285] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji3[428286] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji3[428287] | toDate | date:'HH:mm'}}</td> --}}
                 </tr>
                 <tr style="font-size: small;">
                     <td colspan="3" class="p3" valign="top">1</td>
@@ -1989,22 +1989,22 @@
                     <td colspan="49">(Skala MORSE)</td>
                 </tr>
                 <tr>
-                    <td colspan="3" rowspan="2" class="text-center">No</td>
-                    <td colspan="16" rowspan="2" class="text-center">Risiko Rendah dan Sedang</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji4[428200] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji4[428201] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji4[428202] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji4[428203] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji4[428204] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji4[428205] | toDate | date:'dd-MM-yyyy'}}</td>
+                    <td colspan="3" class="text-center">No</td>
+                    <td colspan="16" class="text-center">Risiko Rendah dan Sedang</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d4'] as $item) @if($item->emrdfk == 428200) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d4'] as $item) @if($item->emrdfk == 428201) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d4'] as $item) @if($item->emrdfk == 428202) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d4'] as $item) @if($item->emrdfk == 428203) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d4'] as $item) @if($item->emrdfk == 428204) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d4'] as $item) @if($item->emrdfk == 428205) {!! $item->value !!} @endif @endforeach</td>
                 </tr>
                 <tr>
-                    <td colspan="5" class="p3">Jam: @{{item.obji4[428200] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji4[428201] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji4[428202] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji4[428203] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji4[428204] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji4[428205] | toDate | date:'HH:mm'}}</td>
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji4[428200] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji4[428201] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji4[428202] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji4[428203] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji4[428204] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji4[428205] | toDate | date:'HH:mm'}}</td> --}}
                 </tr>
                 <tr style="font-size: small;">
                     <td colspan="3" class="p3">1</td>
@@ -2116,22 +2116,22 @@
                     <td colspan="5" class="p3 text-center">@{{ item.obji4[428281] ? item.obji4[428281] : '' }}</td>
                 </tr>
                 <tr>
-                    <td colspan="3" rowspan="2" class="text-center">No</td>
-                    <td colspan="16" rowspan="2" class="text-center">Risiko Tinggi</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji4[428282] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji4[428283] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji4[428284] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji4[428285] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji4[428286] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji4[428287] | toDate | date:'dd-MM-yyyy'}}</td>
+                    <td colspan="3" class="text-center">No</td>
+                    <td colspan="16" class="text-center">Risiko Tinggi</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d4'] as $item) @if($item->emrdfk == 428282) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d4'] as $item) @if($item->emrdfk == 428283) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d4'] as $item) @if($item->emrdfk == 428284) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d4'] as $item) @if($item->emrdfk == 428285) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d4'] as $item) @if($item->emrdfk == 428286) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d4'] as $item) @if($item->emrdfk == 428287) {!! $item->value !!} @endif @endforeach</td>
                 </tr>
                 <tr>
-                    <td colspan="5" class="p3">Jam: @{{item.obji4[428282] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji4[428283] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji4[428284] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji4[428285] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji4[428286] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji4[428287] | toDate | date:'HH:mm'}}</td>
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji4[428282] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji4[428283] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji4[428284] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji4[428285] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji4[428286] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji4[428287] | toDate | date:'HH:mm'}}</td> --}}
                 </tr>
                 <tr style="font-size: small;">
                     <td colspan="3" class="p3" valign="top">1</td>
@@ -2502,22 +2502,22 @@
                     <td colspan="49">(Skala MORSE)</td>
                 </tr>
                 <tr>
-                    <td colspan="3" rowspan="2" class="text-center">No</td>
-                    <td colspan="16" rowspan="2" class="text-center">Risiko Rendah dan Sedang</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji5[428200] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji5[428201] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji5[428202] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji5[428203] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji5[428204] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji5[428205] | toDate | date:'dd-MM-yyyy'}}</td>
+                    <td colspan="3" class="text-center">No</td>
+                    <td colspan="16" class="text-center">Risiko Rendah dan Sedang</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d5'] as $item) @if($item->emrdfk == 428200) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d5'] as $item) @if($item->emrdfk == 428201) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d5'] as $item) @if($item->emrdfk == 428202) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d5'] as $item) @if($item->emrdfk == 428203) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d5'] as $item) @if($item->emrdfk == 428204) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d5'] as $item) @if($item->emrdfk == 428205) {!! $item->value !!} @endif @endforeach</td>
                 </tr>
                 <tr>
-                    <td colspan="5" class="p3">Jam: @{{item.obji5[428200] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji5[428201] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji5[428202] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji5[428203] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji5[428204] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji5[428205] | toDate | date:'HH:mm'}}</td>
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji5[428200] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji5[428201] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji5[428202] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji5[428203] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji5[428204] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji5[428205] | toDate | date:'HH:mm'}}</td> --}}
                 </tr>
                 <tr style="font-size: small;">
                     <td colspan="3" class="p3">1</td>
@@ -2629,22 +2629,22 @@
                     <td colspan="5" class="p3 text-center">@{{ item.obji5[428281] ? item.obji5[428281] : '' }}</td>
                 </tr>
                 <tr>
-                    <td colspan="3" rowspan="2" class="text-center">No</td>
-                    <td colspan="16" rowspan="2" class="text-center">Risiko Tinggi</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji5[428282] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji5[428283] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji5[428284] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji5[428285] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji5[428286] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji5[428287] | toDate | date:'dd-MM-yyyy'}}</td>
+                    <td colspan="3" class="text-center">No</td>
+                    <td colspan="16" class="text-center">Risiko Tinggi</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d5'] as $item) @if($item->emrdfk == 428282) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d5'] as $item) @if($item->emrdfk == 428283) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d5'] as $item) @if($item->emrdfk == 428284) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d5'] as $item) @if($item->emrdfk == 428285) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d5'] as $item) @if($item->emrdfk == 428286) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d5'] as $item) @if($item->emrdfk == 428287) {!! $item->value !!} @endif @endforeach</td>
                 </tr>
                 <tr>
-                    <td colspan="5" class="p3">Jam: @{{item.obji5[428282] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji5[428283] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji5[428284] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji5[428285] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji5[428286] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji5[428287] | toDate | date:'HH:mm'}}</td>
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji5[428282] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji5[428283] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji5[428284] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji5[428285] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji5[428286] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji5[428287] | toDate | date:'HH:mm'}}</td> --}}
                 </tr>
                 <tr style="font-size: small;">
                     <td colspan="3" class="p3" valign="top">1</td>
@@ -3015,22 +3015,22 @@
                     <td colspan="49">(Skala MORSE)</td>
                 </tr>
                 <tr>
-                    <td colspan="3" rowspan="2" class="text-center">No</td>
-                    <td colspan="16" rowspan="2" class="text-center">Risiko Rendah dan Sedang</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji6[428200] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji6[428201] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji6[428202] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji6[428203] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji6[428204] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji6[428205] | toDate | date:'dd-MM-yyyy'}}</td>
+                    <td colspan="3" class="text-center">No</td>
+                    <td colspan="16" class="text-center">Risiko Rendah dan Sedang</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d6'] as $item) @if($item->emrdfk == 428200) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d6'] as $item) @if($item->emrdfk == 428201) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d6'] as $item) @if($item->emrdfk == 428202) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d6'] as $item) @if($item->emrdfk == 428203) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d6'] as $item) @if($item->emrdfk == 428204) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d6'] as $item) @if($item->emrdfk == 428205) {!! $item->value !!} @endif @endforeach</td>
                 </tr>
                 <tr>
-                    <td colspan="5" class="p3">Jam: @{{item.obji6[428200] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji6[428201] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji6[428202] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji6[428203] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji6[428204] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji6[428205] | toDate | date:'HH:mm'}}</td>
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji6[428200] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji6[428201] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji6[428202] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji6[428203] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji6[428204] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji6[428205] | toDate | date:'HH:mm'}}</td> --}}
                 </tr>
                 <tr style="font-size: small;">
                     <td colspan="3" class="p3">1</td>
@@ -3142,22 +3142,22 @@
                     <td colspan="5" class="p3 text-center">@{{ item.obji6[428281] ? item.obji6[428281] : '' }}</td>
                 </tr>
                 <tr>
-                    <td colspan="3" rowspan="2" class="text-center">No</td>
-                    <td colspan="16" rowspan="2" class="text-center">Risiko Tinggi</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji6[428282] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji6[428283] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji6[428284] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji6[428285] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji6[428286] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji6[428287] | toDate | date:'dd-MM-yyyy'}}</td>
+                    <td colspan="3" class="text-center">No</td>
+                    <td colspan="16" class="text-center">Risiko Tinggi</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d6'] as $item) @if($item->emrdfk == 428282) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d6'] as $item) @if($item->emrdfk == 428283) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d6'] as $item) @if($item->emrdfk == 428284) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d6'] as $item) @if($item->emrdfk == 428285) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d6'] as $item) @if($item->emrdfk == 428286) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d6'] as $item) @if($item->emrdfk == 428287) {!! $item->value !!} @endif @endforeach</td>
                 </tr>
                 <tr>
-                    <td colspan="5" class="p3">Jam: @{{item.obji6[428282] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji6[428283] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji6[428284] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji6[428285] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji6[428286] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji6[428287] | toDate | date:'HH:mm'}}</td>
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji6[428282] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji6[428283] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji6[428284] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji6[428285] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji6[428286] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji6[428287] | toDate | date:'HH:mm'}}</td> --}}
                 </tr>
                 <tr style="font-size: small;">
                     <td colspan="3" class="p3" valign="top">1</td>
@@ -3528,22 +3528,22 @@
                     <td colspan="49">(Skala MORSE)</td>
                 </tr>
                 <tr>
-                    <td colspan="3" rowspan="2" class="text-center">No</td>
-                    <td colspan="16" rowspan="2" class="text-center">Risiko Rendah dan Sedang</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji7[428200] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji7[428201] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji7[428202] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji7[428203] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji7[428204] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji7[428205] | toDate | date:'dd-MM-yyyy'}}</td>
+                    <td colspan="3" class="text-center">No</td>
+                    <td colspan="16" class="text-center">Risiko Rendah dan Sedang</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d7'] as $item) @if($item->emrdfk == 428200) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d7'] as $item) @if($item->emrdfk == 428201) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d7'] as $item) @if($item->emrdfk == 428202) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d7'] as $item) @if($item->emrdfk == 428203) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d7'] as $item) @if($item->emrdfk == 428204) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d7'] as $item) @if($item->emrdfk == 428205) {!! $item->value !!} @endif @endforeach</td>
                 </tr>
                 <tr>
-                    <td colspan="5" class="p3">Jam: @{{item.obji7[428200] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji7[428201] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji7[428202] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji7[428203] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji7[428204] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji7[428205] | toDate | date:'HH:mm'}}</td>
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji7[428200] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji7[428201] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji7[428202] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji7[428203] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji7[428204] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji7[428205] | toDate | date:'HH:mm'}}</td> --}}
                 </tr>
                 <tr style="font-size: small;">
                     <td colspan="3" class="p3">1</td>
@@ -3655,22 +3655,22 @@
                     <td colspan="5" class="p3 text-center">@{{ item.obji7[428281] ? item.obji7[428281] : '' }}</td>
                 </tr>
                 <tr>
-                    <td colspan="3" rowspan="2" class="text-center">No</td>
-                    <td colspan="16" rowspan="2" class="text-center">Risiko Tinggi</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji7[428282] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji7[428283] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji7[428284] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji7[428285] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji7[428286] | toDate | date:'dd-MM-yyyy'}}</td>
-                    <td colspan="5" class="p3">Tgl: @{{item.obji7[428287] | toDate | date:'dd-MM-yyyy'}}</td>
+                    <td colspan="3" class="text-center">No</td>
+                    <td colspan="16" class="text-center">Risiko Tinggi</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d7'] as $item) @if($item->emrdfk == 428282) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d7'] as $item) @if($item->emrdfk == 428283) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d7'] as $item) @if($item->emrdfk == 428284) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d7'] as $item) @if($item->emrdfk == 428285) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d7'] as $item) @if($item->emrdfk == 428286) {!! $item->value !!} @endif @endforeach</td>
+                    <td colspan="5" class="p3">Tgl/Jam: @foreach($res['d7'] as $item) @if($item->emrdfk == 428287) {!! $item->value !!} @endif @endforeach</td>
                 </tr>
                 <tr>
-                    <td colspan="5" class="p3">Jam: @{{item.obji7[428282] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji7[428283] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji7[428284] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji7[428285] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji7[428286] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="5" class="p3">Jam: @{{item.obji7[428287] | toDate | date:'HH:mm'}}</td>
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji7[428282] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji7[428283] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji7[428284] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji7[428285] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji7[428286] | toDate | date:'HH:mm'}}</td> --}}
+                    {{-- <td colspan="5" class="p3">Jam: @{{item.obji7[428287] | toDate | date:'HH:mm'}}</td> --}}
                 </tr>
                 <tr style="font-size: small;">
                     <td colspan="3" class="p3" valign="top">1</td>
