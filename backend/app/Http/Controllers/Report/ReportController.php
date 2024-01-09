@@ -1416,11 +1416,18 @@ class ReportController extends ApiController{
         // ->wherein('pp.norec', $norec)
         ->where('hpl.statusenabled', true)
         ->where('pd.noregistrasi', $r->noregistrasi)
-        ->select('pd.noregistrasi', 'pm.nocm', 'pm.namapasien', 'pm.tgllahir', 'hpl.dokterluar', 'dokterpengirim.namalengkap as namadokterpengirim', 'hpl.nomorpa', 'so.tglorder as tglterima', 'pg1.namalengkap as namapenanggungjawab', 'pg1.nippns',
+        ->select('pd.noregistrasi', 'pm.nocm', 'pm.namapasien', 'pm.tgllahir','pg1.qrcode as qrcodedokterperiksa', 'hpl.dokterluar', 'dokterpengirim.namalengkap as namadokterpengirim', 'hpl.nomorpa', 'so.tglorder as tglterima', 'pg1.namalengkap as namapenanggungjawab', 'pg1.nippns',
     'jk.jeniskelamin', 'pm.tgllahir', 'hpl.jaringanasal', 'hpl.getjaringan', 'hpl.diagnosaklinik', 'hpl.keteranganklinik', 'hpl.tanggal as tgljawab', 'hpl.makroskopik','hpl.mikroskopik',
 'hpl.kesimpulan', 'hpl.anjuran', 'hpl.topografi', 'hpl.morfologi', 'hpl.diagnosapb','hpl.keteranganpb','ru.namaruangan as asal', 'pg1.nosip','kps.kelompokpasien', 'pd.norec as norec_pd', 'pd.objectruanganlastfk', 'alm.alamatlengkap', 'dm.kddiagnosa', 'hpl.jenis', 'dm.namadiagnosa as diagnosa')
         ->first();
         $raw->umur = $this->getAge($raw->tgllahir ,date('Y-m-d'));
+
+        if ($raw->qrcodedokterperiksa == null) {
+            $raw->qrcodedokterperiksa =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate($raw->namadokterpengirim));
+        }
+
+        $imagePath = public_path("img/logo_only.png");
+        $image = "data:image/png;base64,".base64_encode(file_get_contents($imagePath));
         if(empty($raw)){
             echo '
             <script language="javascript">
@@ -1430,11 +1437,36 @@ class ReportController extends ApiController{
         ';
         die;
         }else{
-            if($raw->jenis == 'pa'){
-                return view('report.lab.histopatologi', compact('raw','r', 'profile'));
+            if(isset($r["issimpanberkas"])) {
+                if($raw->jenis == 'pa'){
+                    $pdf = PDF::loadView('report.lab.histopatologi-dom', array(
+                        'profile' => $profile,
+                        'raw' => $raw,
+                        'r' => $r,
+                        'image' => $image,
+                    ))->setPaper('a4', 'portrait');
+                    $this->saveDokumenKlaim($pdf, $r);
+                    return;
+                }else{
+                    $pdf = PDF::loadView('report.lab.sitologi-dom', array(
+                        'profile' => $profile,
+                        'raw' => $raw,
+                        'r' => $r,
+                        'image' => $image,
+                    ))->setPaper('a4', 'portrait');
+                    $this->saveDokumenKlaim($pdf, $r);
+                    return;
+                }
+                
+            }else{
+                if($raw->jenis == 'pa'){
+                    return view('report.lab.histopatologi', compact('raw','r', 'profile', 'image'));
+                }else{
+                    return view('report.lab.sitologi', compact('raw','r', 'profile', 'image'));
+                }
             }
-    
-            return view('report.lab.sitologi', compact('raw','r', 'profile'));
+
+            
         }
     }
 
