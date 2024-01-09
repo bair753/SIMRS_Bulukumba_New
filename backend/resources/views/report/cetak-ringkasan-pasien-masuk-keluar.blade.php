@@ -201,7 +201,7 @@
             <!-- part 3 -->
             <tr style="height:20px;vertical-align: top;border-top:1px solid #000;text-align: center;">
                 <td colspan="2" style="border:none;">Sebab Dirawat : @{{ item.obj[420325] ? item.obj[420325] : '' }}</td>
-                <td colspan="4" style="border:none;">Masuk Tanggal : @{{item.obj[420327] | toDate | date:'dd MMMM yyyy'}}</td>
+                <td colspan="4" style="border:none;">Masuk Tanggal : @foreach($res['d'] as $item) @if($item->emrdfk == 420327) {!! $item->value !!} @endif @endforeach</td>
                 <td colspan="14" style="border:none;">Jam : @{{item.obj[420329] | toDate | date:'HH:mm'}}</td>
             </tr>
             <tr style="height:20px;vertical-align: top;text-align: center;">
@@ -236,8 +236,8 @@
                 <td colspan="14"  style="border:none" >Pindahan dari ruang : @{{ item.obj[420343] ? item.obj[420343] : '' }}</td>
             </tr>
             <tr style="border:1px solid #000;border-top:none; text-align:center;height:25px">
-                <td style="border:none" colspan="6">Kelas: @{{ item.obj[420341] ? item.obj[420341] : '______________' }}, Tgl: @{{item.obj[420342] | toDate | date:'dd MMMM yyyy'}}, Jam: @{{item.obj[420342] | toDate | date:'HH:mm'}}</td>
-                <td  style="border:none" colspan="14">Kelas: @{{ item.obj[420344] ? item.obj[420344] : '______________' }}, Tgl: @{{item.obj[420345] | toDate | date:'dd MMMM yyyy'}}, Jam: @{{item.obj[420345] | toDate | date:'HH:mm'}}</td>
+                <td style="border:none" colspan="6">Kelas: @{{ item.obj[420341] ? item.obj[420341] : '______________' }}, Tgl / Jam: @foreach($res['d'] as $item) @if($item->emrdfk == 420342) {!! $item->value !!} @endif @endforeach</td>
+                <td  style="border:none" colspan="14">Kelas: @{{ item.obj[420344] ? item.obj[420344] : '______________' }}, Tgl / Jam: @foreach($res['d'] as $item) @if($item->emrdfk == 420345) {!! $item->value !!} @endif @endforeach</td>
             </tr>
             <tr>
                 <td colspan="5" height="25px" valign="top">Meninggal Tgl : @{{item.obj[420346] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
@@ -318,11 +318,11 @@
                 <td  style="border:none"  colspan="13">@{{ item.obj[420389] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Dirujuk Ke: @{{ item.obj[420390] ? item.obj[420390] : '__________' }}</td>
             </tr>
             <tr style="border:none;border-top:1px solid #000;height:25px">
-                <td style="border:none;border-right:1px solid #000" colspan="5">Keluar Tanggal : @{{item.obj[420391] | toDate | date:'dd MMMM yyyy'}}</td>
+                <td style="border:none;border-right:1px solid #000" colspan="5">Keluar Tanggal/Jam: @foreach($res['d'] as $item) @if($item->emrdfk == 420391) {!! $item->value !!} @endif @endforeach</td>
                 <td style="border:none" colspan="15">Dokter Penanggung Jawab Pelayanan : @{{ item.obj[420393] ? item.obj[420393] : '' }}</td>
             </tr>
             <tr style="border:none;height:25px">
-                <td style="border:none;border-right:1px solid #000" colspan="5">Jam : @{{item.obj[420391] | toDate | date:'HH:mm'}}</td>
+                <td style="border:none;border-right:1px solid #000" colspan="5"></td>
                 <td style="border:none" colspan="15" rowspan="2"><div id="qrcodeDPJP" style="text-align: center"></div></td>
             </tr>
             <tr style="border:none;height:25px">
