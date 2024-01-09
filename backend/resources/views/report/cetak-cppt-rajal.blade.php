@@ -257,7 +257,7 @@
             </tr>
             {{-- 1 --}}
             <tr style="height:150px">
-                <td>@{{item.obj[421650] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td>@{{item.obj[421650] | toDate | date:'MMMM dd yyyy HH:mm'}}</td>
                 <td>@{{ item.obj[421651] ? item.obj[421651] : '' }}</td>
                 <td colspan="3">@{{ item.obj[421652] ? item.obj[421652] : '' }} <br><br> 
                     Paraf : @{{ item.obj[421653] ? item.obj[421653] : '' }}
@@ -266,7 +266,7 @@
                 </td>
                 <td colspan="2">@{{ item.obj[421654] ? item.obj[421654] : '' }}</td>
                 <td colspan="2">@{{ item.obj[421655] ? item.obj[421655] : '' }} <br><br> 
-                    Tanggal : @{{item.obj[421656] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
+                    Tanggal : @{{item.obj[421656] | toDate | date:'MMMM dd yyyy HH:mm'}} <br><br> 
                     Paraf : @{{ item.obj[421657] ? item.obj[421657] : '' }}
                     <br>
                     <div id="qrcoded1" style="text-align: right"></div>
@@ -274,7 +274,7 @@
             </tr>
             {{-- 2 --}} 
             <tr style="height:150px" ng-show="item.obj[421658]!=undefined">
-                <td>@{{item.obj[421658] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td>@{{item.obj[421658] | toDate | date:'MMMM dd yyyy HH:mm'}}</td>
                 <td>@{{ item.obj[421659] ? item.obj[421659] : '' }}</td>
                 <td colspan="3">@{{ item.obj[421660] ? item.obj[421660] : '' }} <br><br> 
                     Paraf : @{{ item.obj[421661] ? item.obj[421661] : '' }}
@@ -283,7 +283,7 @@
                 </td>
                 <td colspan="2">@{{ item.obj[421662] ? item.obj[421662] : '' }}</td>
                 <td colspan="2">@{{ item.obj[421663] ? item.obj[421663] : '' }} <br><br> 
-                    Tanggal : @{{item.obj[421664] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
+                    Tanggal : @{{item.obj[421664] | toDate | date:'MMMM dd yyyy HH:mm'}} <br><br> 
                     Paraf : @{{ item.obj[421665] ? item.obj[421665] : '' }}
                     <br>
                     <div id="qrcoded2" style="text-align: right"></div>
@@ -291,7 +291,7 @@
             </tr>
             {{-- 3 --}}
             <tr style="height:150px" ng-show="item.obj[421666]!=undefined">
-                <td>@{{item.obj[421666] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td>@{{item.obj[421666] | toDate | date:'MMMM dd yyyy HH:mm'}}</td>
                 <td>@{{ item.obj[421667] ? item.obj[421667] : '' }}</td>
                 <td colspan="3">@{{ item.obj[421668] ? item.obj[421668] : '' }} <br><br> 
                     Paraf : @{{ item.obj[421669] ? item.obj[421669] : '' }}
@@ -300,7 +300,7 @@
                 </td>
                 <td colspan="2">@{{ item.obj[421670] ? item.obj[421670] : '' }}</td>
                 <td colspan="2">@{{ item.obj[421671] ? item.obj[421671] : '' }} <br><br> 
-                    Tanggal : @{{item.obj[421672] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
+                    Tanggal : @{{item.obj[421672] | toDate | date:'MMMM dd yyyy HH:mm'}} <br><br> 
                     Paraf : @{{ item.obj[421673] ? item.obj[421673] : '' }}
                     <br>
                     <div id="qrcoded3" style="text-align: right"></div>
@@ -308,7 +308,7 @@
             </tr>
             {{-- 4 --}}
             <tr style="height:150px" ng-show="item.obj[421674]!=undefined">
-                <td>@{{item.obj[421674] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td>@{{item.obj[421674] | toDate | date:'MMMM dd yyyy HH:mm'}}</td>
                 <td>@{{ item.obj[421675] ? item.obj[421675] : '' }}</td>
                 <td colspan="3">@{{ item.obj[421676] ? item.obj[421676] : '' }} <br><br> 
                     Paraf : @{{ item.obj[421677] ? item.obj[421677] : '' }}
@@ -317,7 +317,7 @@
                 </td>
                 <td colspan="2">@{{ item.obj[421678] ? item.obj[421678] : '' }}</td>
                 <td colspan="2">@{{ item.obj[421679] ? item.obj[421679] : '' }} <br><br> 
-                    Tanggal : @{{item.obj[421680] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
+                    Tanggal : @{{item.obj[421680] | toDate | date:'MMMM dd yyyy HH:mm'}} <br><br> 
                     Paraf : @{{ item.obj[421681] ? item.obj[421681] : '' }}
                     <br>
                     <div id="qrcoded4" style="text-align: right"></div>
@@ -325,7 +325,7 @@
             </tr>
             {{-- 5 --}}
             <tr style="height:150px" ng-show="item.obj[421682]!=undefined">
-                <td>@{{item.obj[421682] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td>@{{item.obj[421682] | toDate | date:'MMMM dd yyyy HH:mm'}}</td>
                 <td>@{{ item.obj[421683] ? item.obj[421683] : '' }}</td>
                 <td colspan="3">@{{ item.obj[421684] ? item.obj[421684] : '' }} <br><br> 
                     Paraf : @{{ item.obj[421685] ? item.obj[421685] : '' }}
@@ -334,7 +334,7 @@
                 </td>
                 <td colspan="2">@{{ item.obj[421686] ? item.obj[421686] : '' }}</td>
                 <td colspan="2">@{{ item.obj[421687] ? item.obj[421687] : '' }} <br><br> 
-                    Tanggal : @{{item.obj[421688] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
+                    Tanggal : @{{item.obj[421688] | toDate | date:'MMMM dd yyyy HH:mm'}} <br><br> 
                     Paraf : @{{ item.obj[421689] ? item.obj[421689] : '' }}
                     <br>
                     <div id="qrcoded5" style="text-align: right"></div>
@@ -342,7 +342,7 @@
             </tr>
             {{-- 6 --}}
             <tr style="height:150px" ng-show="item.obj[421690]!=undefined">
-                <td>@{{item.obj[421690] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td>@{{item.obj[421690] | toDate | date:'MMMM dd yyyy HH:mm'}}</td>
                 <td>@{{ item.obj[421691] ? item.obj[421691] : '' }}</td>
                 <td colspan="3">@{{ item.obj[421692] ? item.obj[421692] : '' }} <br><br> 
                     Paraf : @{{ item.obj[421693] ? item.obj[421693] : '' }}
@@ -351,7 +351,7 @@
                 </td>
                 <td colspan="2">@{{ item.obj[421694] ? item.obj[421694] : '' }}</td>
                 <td colspan="2">@{{ item.obj[421695] ? item.obj[421695] : '' }} <br><br> 
-                    Tanggal : @{{item.obj[421696] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
+                    Tanggal : @{{item.obj[421696] | toDate | date:'MMMM dd yyyy HH:mm'}} <br><br> 
                     Paraf : @{{ item.obj[421697] ? item.obj[421697] : '' }}
                     <br>
                     <div id="qrcoded6" style="text-align: right"></div>
@@ -359,7 +359,7 @@
             </tr>
             {{-- 7 --}}
             <tr style="height:150px" ng-show="item.obj[421698]!=undefined">
-                <td>@{{item.obj[421698] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td>@{{item.obj[421698] | toDate | date:'MMMM dd yyyy HH:mm'}}</td>
                 <td>@{{ item.obj[421699] ? item.obj[421699] : '' }}</td>
                 <td colspan="3">@{{ item.obj[421700] ? item.obj[421700] : '' }} <br><br> 
                     Paraf : @{{ item.obj[421701] ? item.obj[421701] : '' }}
@@ -368,7 +368,7 @@
                 </td>
                 <td colspan="2">@{{ item.obj[421702] ? item.obj[421702] : '' }}</td>
                 <td colspan="2">@{{ item.obj[421703] ? item.obj[421703] : '' }} <br><br> 
-                    Tanggal : @{{item.obj[421704] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
+                    Tanggal : @{{item.obj[421704] | toDate | date:'MMMM dd yyyy HH:mm'}} <br><br> 
                     Paraf : @{{ item.obj[421705] ? item.obj[421705] : '' }}
                     <br>
                     <div id="qrcoded7" style="text-align: right"></div>
@@ -376,7 +376,7 @@
             </tr>
             {{-- 8 --}}
             <tr style="height:150px" ng-show="item.obj[421706]!=undefined">
-                <td>@{{item.obj[421706] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td>@{{item.obj[421706] | toDate | date:'MMMM dd yyyy HH:mm'}}</td>
                 <td>@{{ item.obj[421707] ? item.obj[421707] : '' }}</td>
                 <td colspan="3">@{{ item.obj[421708] ? item.obj[421708] : '' }} <br><br> 
                     Paraf : @{{ item.obj[421709] ? item.obj[421709] : '' }}
@@ -385,7 +385,7 @@
                 </td>
                 <td colspan="2">@{{ item.obj[421710] ? item.obj[421710] : '' }}</td>
                 <td colspan="2">@{{ item.obj[421711] ? item.obj[421711] : '' }} <br><br> 
-                    Tanggal : @{{item.obj[421712] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
+                    Tanggal : @{{item.obj[421712] | toDate | date:'MMMM dd yyyy HH:mm'}} <br><br> 
                     Paraf : @{{ item.obj[421713] ? item.obj[421713] : '' }}
                     <br>
                     <div id="qrcoded8" style="text-align: right"></div>
@@ -393,7 +393,7 @@
             </tr>
             {{-- 9 --}}
             <tr style="height:150px" ng-show="item.obj[421714]!=undefined">
-                <td>@{{item.obj[421714] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td>@{{item.obj[421714] | toDate | date:'MMMM dd yyyy HH:mm'}}</td>
                 <td>@{{ item.obj[421715] ? item.obj[421715] : '' }}</td>
                 <td colspan="3">@{{ item.obj[421716] ? item.obj[421716] : '' }} <br><br> 
                     Paraf : @{{ item.obj[421717] ? item.obj[421717] : '' }}
@@ -402,7 +402,7 @@
                 </td>
                 <td colspan="2">@{{ item.obj[421718] ? item.obj[421718] : '' }}</td>
                 <td colspan="2">@{{ item.obj[421719] ? item.obj[421719] : '' }} <br><br> 
-                    Tanggal : @{{item.obj[421720] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
+                    Tanggal : @{{item.obj[421720] | toDate | date:'MMMM dd yyyy HH:mm'}} <br><br> 
                     Paraf : @{{ item.obj[421721] ? item.obj[421721] : '' }}
                     <br>
                     <div id="qrcoded9" style="text-align: right"></div>
@@ -410,7 +410,7 @@
             </tr>
             {{-- 10 --}}
             <tr style="height:150px" ng-show="item.obj[421722]!=undefined">
-                <td>@{{item.obj[421722] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td>@{{item.obj[421722] | toDate | date:'MMMM dd yyyy HH:mm'}}</td>
                 <td>@{{ item.obj[421723] ? item.obj[421723] : '' }}</td>
                 <td colspan="3">@{{ item.obj[421724] ? item.obj[421724] : '' }} <br><br> 
                     Paraf : @{{ item.obj[421725] ? item.obj[421725] : '' }}
@@ -419,7 +419,7 @@
                 </td>
                 <td colspan="2">@{{ item.obj[421726] ? item.obj[421726] : '' }}</td>
                 <td colspan="2">@{{ item.obj[421727] ? item.obj[421727] : '' }} <br><br> 
-                    Tanggal : @{{item.obj[421728] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
+                    Tanggal : @{{item.obj[421728] | toDate | date:'MMMM dd yyyy HH:mm'}} <br><br> 
                     Paraf : @{{ item.obj[421729] ? item.obj[421729] : '' }}
                     <br>
                     <div id="qrcoded10" style="text-align: right"></div>
@@ -427,7 +427,7 @@
             </tr>
             {{-- 11 --}}
             <tr style="height:150px" ng-show="item.obj[421730]!=undefined">
-                <td>@{{item.obj[421730] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td>@{{item.obj[421730] | toDate | date:'MMMM dd yyyy HH:mm'}}</td>
                 <td>@{{ item.obj[421731] ? item.obj[421731] : '' }}</td>
                 <td colspan="3">@{{ item.obj[421732] ? item.obj[421732] : '' }} <br><br> 
                     Paraf : @{{ item.obj[421733] ? item.obj[421733] : '' }}
@@ -436,7 +436,7 @@
                 </td>
                 <td colspan="2">@{{ item.obj[421734] ? item.obj[421734] : '' }}</td>
                 <td colspan="2">@{{ item.obj[421735] ? item.obj[421735] : '' }} <br><br> 
-                    Tanggal : @{{item.obj[421736] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
+                    Tanggal : @{{item.obj[421736] | toDate | date:'MMMM dd yyyy HH:mm'}} <br><br> 
                     Paraf : @{{ item.obj[421737] ? item.obj[421737] : '' }}
                     <br>
                     <div id="qrcoded11" style="text-align: right"></div>
@@ -444,7 +444,7 @@
             </tr>
             {{-- 12 --}}
             <tr style="height:150px" ng-show="item.obj[421738]!=undefined">
-                <td>@{{item.obj[421738] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td>@{{item.obj[421738] | toDate | date:'MMMM dd yyyy HH:mm'}}</td>
                 <td>@{{ item.obj[421739] ? item.obj[421739] : '' }}</td>
                 <td colspan="3">@{{ item.obj[421740] ? item.obj[421740] : '' }} <br><br> 
                     Paraf : @{{ item.obj[421741] ? item.obj[421741] : '' }}
@@ -453,7 +453,7 @@
                 </td>
                 <td colspan="2">@{{ item.obj[421742] ? item.obj[421742] : '' }}</td>
                 <td colspan="2">@{{ item.obj[421744] ? item.obj[421744] : '' }} <br><br> 
-                    Tanggal : @{{item.obj[421744] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
+                    Tanggal : @{{item.obj[421744] | toDate | date:'MMMM dd yyyy HH:mm'}} <br><br> 
                     Paraf : @{{ item.obj[421745] ? item.obj[421745] : '' }}
                     <br>
                     <div id="qrcoded12" style="text-align: right"></div>
@@ -461,7 +461,7 @@
             </tr>
             {{-- 13 --}}
             <tr style="height:150px" ng-show="item.obj[421746]!=undefined">
-                <td>@{{item.obj[421746] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td>@{{item.obj[421746] | toDate | date:'MMMM dd yyyy HH:mm'}}</td>
                 <td>@{{ item.obj[421747] ? item.obj[421747] : '' }}</td>
                 <td colspan="3">@{{ item.obj[421748] ? item.obj[421748] : '' }} <br><br> 
                     Paraf : @{{ item.obj[421749] ? item.obj[421749] : '' }}
@@ -470,7 +470,7 @@
                 </td>
                 <td colspan="2">@{{ item.obj[421750] ? item.obj[421750] : '' }}</td>
                 <td colspan="2">@{{ item.obj[421751] ? item.obj[421751] : '' }} <br><br> 
-                    Tanggal : @{{item.obj[421752] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
+                    Tanggal : @{{item.obj[421752] | toDate | date:'MMMM dd yyyy HH:mm'}} <br><br> 
                     Paraf : @{{ item.obj[421753] ? item.obj[421753] : '' }}
                     <br>
                     <div id="qrcoded13" style="text-align: right"></div>
@@ -478,7 +478,7 @@
             </tr>
             {{-- 14 --}}
             <tr style="height:150px" ng-show="item.obj[421754]!=undefined">
-                <td>@{{item.obj[421754] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td>@{{item.obj[421754] | toDate | date:'MMMM dd yyyy HH:mm'}}</td>
                 <td>@{{ item.obj[421755] ? item.obj[421755] : '' }}</td>
                 <td colspan="3">@{{ item.obj[421756] ? item.obj[421756] : '' }} <br><br> 
                     Paraf : @{{ item.obj[421757] ? item.obj[421757] : '' }}
@@ -487,7 +487,7 @@
                 </td>
                 <td colspan="2">@{{ item.obj[421758] ? item.obj[421758] : '' }}</td>
                 <td colspan="2">@{{ item.obj[421759] ? item.obj[421759] : '' }} <br><br> 
-                    Tanggal : @{{item.obj[421760] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
+                    Tanggal : @{{item.obj[421760] | toDate | date:'MMMM dd yyyy HH:mm'}} <br><br> 
                     Paraf : @{{ item.obj[421761] ? item.obj[421761] : '' }}
                     <br>
                     <div id="qrcoded14" style="text-align: right"></div>
@@ -495,7 +495,7 @@
             </tr>
             {{-- 15 --}}
             <tr style="height:150px" ng-show="item.obj[421762]!=undefined">
-                <td>@{{item.obj[421762] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td>@{{item.obj[421762] | toDate | date:'MMMM dd yyyy HH:mm'}}</td>
                 <td>@{{ item.obj[421763] ? item.obj[421763] : '' }}</td>
                 <td colspan="3">@{{ item.obj[421764] ? item.obj[421764] : '' }} <br><br> 
                     Paraf : @{{ item.obj[421765] ? item.obj[421765] : '' }}
@@ -504,7 +504,7 @@
                 </td>
                 <td colspan="2">@{{ item.obj[421766] ? item.obj[421766] : '' }}</td>
                 <td colspan="2">@{{ item.obj[421767] ? item.obj[421767] : '' }} <br><br> 
-                    Tanggal : @{{item.obj[421768] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
+                    Tanggal : @{{item.obj[421768] | toDate | date:'MMMM dd yyyy HH:mm'}} <br><br> 
                     Paraf : @{{ item.obj[421769] ? item.obj[421769] : '' }}
                     <br>
                     <div id="qrcoded15" style="text-align: right"></div>
@@ -512,7 +512,7 @@
             </tr>
             {{-- 16 --}}
             <tr style="height:150px" ng-show="item.obj[421770]!=undefined">
-                <td>@{{item.obj[421770] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td>@{{item.obj[421770] | toDate | date:'MMMM dd yyyy HH:mm'}}</td>
                 <td>@{{ item.obj[421771] ? item.obj[421771] : '' }}</td>
                 <td colspan="3">@{{ item.obj[421772] ? item.obj[421772] : '' }} <br><br> 
                     Paraf : @{{ item.obj[421773] ? item.obj[421773] : '' }}
@@ -521,7 +521,7 @@
                 </td>
                 <td colspan="2">@{{ item.obj[421774] ? item.obj[421774] : '' }}</td>
                 <td colspan="2">@{{ item.obj[421775] ? item.obj[421775] : '' }} <br><br> 
-                    Tanggal : @{{item.obj[421776] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
+                    Tanggal : @{{item.obj[421776] | toDate | date:'MMMM dd yyyy HH:mm'}} <br><br> 
                     Paraf : @{{ item.obj[421777] ? item.obj[421777] : '' }}
                     <br>
                     <div id="qrcoded16" style="text-align: right"></div>
@@ -529,7 +529,7 @@
             </tr>
             {{-- 17 --}}
             <tr style="height:150px" ng-show="item.obj[421778]!=undefined">
-                <td>@{{item.obj[421778] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td>@{{item.obj[421778] | toDate | date:'MMMM dd yyyy HH:mm'}}</td>
                 <td>@{{ item.obj[421779] ? item.obj[421779] : '' }}</td>
                 <td colspan="3">@{{ item.obj[421780] ? item.obj[421780] : '' }} <br><br> 
                     Paraf : @{{ item.obj[421781] ? item.obj[421781] : '' }}
@@ -538,7 +538,7 @@
                 </td>
                 <td colspan="2">@{{ item.obj[421782] ? item.obj[421782] : '' }}</td>
                 <td colspan="2">@{{ item.obj[421783] ? item.obj[421783] : '' }} <br><br> 
-                    Tanggal : @{{item.obj[421784] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
+                    Tanggal : @{{item.obj[421784] | toDate | date:'MMMM dd yyyy HH:mm'}} <br><br> 
                     Paraf : @{{ item.obj[421785] ? item.obj[421785] : '' }}
                     <br>
                     <div id="qrcoded17" style="text-align: right"></div>
@@ -546,7 +546,7 @@
             </tr>
             {{-- 18 --}}
             <tr style="height:150px" ng-show="item.obj[421786]!=undefined">
-                <td>@{{item.obj[421786] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td>@{{item.obj[421786] | toDate | date:'MMMM dd yyyy HH:mm'}}</td>
                 <td>@{{ item.obj[421787] ? item.obj[421787] : '' }}</td>
                 <td colspan="3">@{{ item.obj[421788] ? item.obj[421788] : '' }} <br><br> 
                     Paraf : @{{ item.obj[421789] ? item.obj[421789] : '' }}
@@ -555,7 +555,7 @@
                 </td>
                 <td colspan="2">@{{ item.obj[421790] ? item.obj[421790] : '' }}</td>
                 <td colspan="2">@{{ item.obj[421791] ? item.obj[421791] : '' }} <br><br> 
-                    Tanggal : @{{item.obj[421792] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
+                    Tanggal : @{{item.obj[421792] | toDate | date:'MMMM dd yyyy HH:mm'}} <br><br> 
                     Paraf : @{{ item.obj[421793] ? item.obj[421793] : '' }}
                     <br>
                     <div id="qrcoded18" style="text-align: right"></div>
@@ -563,7 +563,7 @@
             </tr>
             {{-- 19 --}}
             <tr style="height:150px" ng-show="item.obj[421794]!=undefined">
-                <td>@{{item.obj[421794] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td>@{{item.obj[421794] | toDate | date:'MMMM dd yyyy HH:mm'}}</td>
                 <td>@{{ item.obj[421795] ? item.obj[421795] : '' }}</td>
                 <td colspan="3">@{{ item.obj[421796] ? item.obj[421796] : '' }} <br><br> 
                     Paraf : @{{ item.obj[421797] ? item.obj[421797] : '' }}
@@ -572,7 +572,7 @@
                 </td>
                 <td colspan="2">@{{ item.obj[421798] ? item.obj[421798] : '' }}</td>
                 <td colspan="2">@{{ item.obj[421799] ? item.obj[421799] : '' }} <br><br> 
-                    Tanggal : @{{item.obj[421800] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
+                    Tanggal : @{{item.obj[421800] | toDate | date:'MMMM dd yyyy HH:mm'}} <br><br> 
                     Paraf : @{{ item.obj[421801] ? item.obj[421801] : '' }}
                     <br>
                     <div id="qrcoded19" style="text-align: right"></div>
@@ -580,7 +580,7 @@
             </tr>
             {{-- 20 --}}
             <tr style="height:150px" ng-show="item.obj[421802]!=undefined">
-                <td>@{{item.obj[421802] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td>@{{item.obj[421802] | toDate | date:'MMMM dd yyyy HH:mm'}}</td>
                 <td>@{{ item.obj[421803] ? item.obj[421803] : '' }}</td>
                 <td colspan="3">@{{ item.obj[421804] ? item.obj[421804] : '' }} <br><br> 
                     Paraf : @{{ item.obj[421805] ? item.obj[421805] : '' }}
@@ -589,7 +589,7 @@
                 </td>
                 <td colspan="2">@{{ item.obj[421806] ? item.obj[421806] : '' }}</td>
                 <td colspan="2">@{{ item.obj[421807] ? item.obj[421807] : '' }} <br><br> 
-                    Tanggal : @{{item.obj[421808] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
+                    Tanggal : @{{item.obj[421808] | toDate | date:'MMMM dd yyyy HH:mm'}} <br><br> 
                     Paraf : @{{ item.obj[421809] ? item.obj[421809] : '' }}
                     <br>
                     <div id="qrcoded20" style="text-align: right"></div>
@@ -597,7 +597,7 @@
             </tr>
             {{-- 21 --}}
             <tr style="height:150px" ng-show="item.obj[421810]!=undefined">
-                <td>@{{item.obj[421810] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+                <td>@{{item.obj[421810] | toDate | date:'MMMM dd yyyy HH:mm'}}</td>
                 <td>@{{ item.obj[421811] ? item.obj[421811] : '' }}</td>
                 <td colspan="3">@{{ item.obj[421812] ? item.obj[421812] : '' }} <br><br> 
                     Paraf : @{{ item.obj[421813] ? item.obj[421813] : '' }}
@@ -606,7 +606,7 @@
                 </td>
                 <td colspan="2">@{{ item.obj[421814] ? item.obj[421814] : '' }}</td>
                 <td colspan="2">@{{ item.obj[421815] ? item.obj[421815] : '' }} <br><br> 
-                    Tanggal : @{{item.obj[421816] | toDate | date:'dd MMMM yyyy HH:mm'}} <br><br> 
+                    Tanggal : @{{item.obj[421816] | toDate | date:'MMMM dd yyyy HH:mm'}} <br><br> 
                     Paraf : @{{ item.obj[421817] ? item.obj[421817] : '' }}
                     <br>
                     <div id="qrcoded21" style="text-align: right"></div>
