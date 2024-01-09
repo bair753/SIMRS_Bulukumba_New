@@ -257,7 +257,7 @@
             </tr>
             {{-- 1 --}}
             <tr style="height:150px">
-                <td>@foreach($res['d1'] as $item) @if($item->emrdfk == 421650) {!! $item->value !!} @endif @endforeach</td>
+                <td>@foreach($res['d'] as $item) @if($item->emrdfk == 421650) {!! $item->value !!} @endif @endforeach</td>
                 <td>@{{ item.obj[421651] ? item.obj[421651] : '' }}</td>
                 <td colspan="3">@{{ item.obj[421652] ? item.obj[421652] : '' }} <br><br> 
                     Paraf : @{{ item.obj[421653] ? item.obj[421653] : '' }}
@@ -266,15 +266,15 @@
                 </td>
                 <td colspan="2">@{{ item.obj[421654] ? item.obj[421654] : '' }}</td>
                 <td colspan="2">@{{ item.obj[421655] ? item.obj[421655] : '' }} <br><br> 
-                    Tanggal : @foreach($res['d1'] as $item) @if($item->emrdfk == 421656) {!! $item->value !!} @endif @endforeach <br><br> 
+                    Tanggal : @foreach($res['d'] as $item) @if($item->emrdfk == 421656) {!! $item->value !!} @endif @endforeach <br><br> 
                     Paraf : @{{ item.obj[421657] ? item.obj[421657] : '' }}
                     <br>
-                    <div id="qrcoded1" style="text-align: right"></div>
+                    <div id="qrcoded" style="text-align: right"></div>
                 </td>
             </tr>
             {{-- 2 --}} 
             <tr style="height:150px" ng-show="item.obj[421658]!=undefined">
-                <td>@foreach($res['d1'] as $item) @if($item->emrdfk == 421658) {!! $item->value !!} @endif @endforeach</td>
+                <td>@foreach($res['d'] as $item) @if($item->emrdfk == 421658) {!! $item->value !!} @endif @endforeach</td>
                 <td>@{{ item.obj[421659] ? item.obj[421659] : '' }}</td>
                 <td colspan="3">@{{ item.obj[421660] ? item.obj[421660] : '' }} <br><br> 
                     Paraf : @{{ item.obj[421661] ? item.obj[421661] : '' }}
@@ -283,7 +283,7 @@
                 </td>
                 <td colspan="2">@{{ item.obj[421662] ? item.obj[421662] : '' }}</td>
                 <td colspan="2">@{{ item.obj[421663] ? item.obj[421663] : '' }} <br><br> 
-                    Tanggal : @foreach($res['d1'] as $item) @if($item->emrdfk == 421664) {!! $item->value !!} @endif @endforeach <br><br> 
+                    Tanggal : @foreach($res['d'] as $item) @if($item->emrdfk == 421664) {!! $item->value !!} @endif @endforeach <br><br> 
                     Paraf : @{{ item.obj[421665] ? item.obj[421665] : '' }}
                     <br>
                     <div id="qrcoded2" style="text-align: right"></div>
@@ -291,7 +291,7 @@
             </tr>
             {{-- 3 --}}
             <tr style="height:150px" ng-show="item.obj[421666]!=undefined">
-                <td>@foreach($res['d1'] as $item) @if($item->emrdfk == 421666) {!! $item->value !!} @endif @endforeach</td>
+                <td>@foreach($res['d'] as $item) @if($item->emrdfk == 421666) {!! $item->value !!} @endif @endforeach</td>
                 <td>@{{ item.obj[421667] ? item.obj[421667] : '' }}</td>
                 <td colspan="3">@{{ item.obj[421668] ? item.obj[421668] : '' }} <br><br> 
                     Paraf : @{{ item.obj[421669] ? item.obj[421669] : '' }}
@@ -300,7 +300,7 @@
                 </td>
                 <td colspan="2">@{{ item.obj[421670] ? item.obj[421670] : '' }}</td>
                 <td colspan="2">@{{ item.obj[421671] ? item.obj[421671] : '' }} <br><br> 
-                    Tanggal : @foreach($res['d1'] as $item) @if($item->emrdfk == 421672) {!! $item->value !!} @endif @endforeach <br><br> 
+                    Tanggal : @foreach($res['d'] as $item) @if($item->emrdfk == 421672) {!! $item->value !!} @endif @endforeach <br><br> 
                     Paraf : @{{ item.obj[421673] ? item.obj[421673] : '' }}
                     <br>
                     <div id="qrcoded3" style="text-align: right"></div>
@@ -308,7 +308,7 @@
             </tr>
             {{-- 4 --}}
             <tr style="height:150px" ng-show="item.obj[421674]!=undefined">
-                <td>@foreach($res['d1'] as $item) @if($item->emrdfk == 421674) {!! $item->value !!} @endif @endforeach</td>
+                <td>@foreach($res['d'] as $item) @if($item->emrdfk == 421674) {!! $item->value !!} @endif @endforeach</td>
                 <td>@{{ item.obj[421675] ? item.obj[421675] : '' }}</td>
                 <td colspan="3">@{{ item.obj[421676] ? item.obj[421676] : '' }} <br><br> 
                     Paraf : @{{ item.obj[421677] ? item.obj[421677] : '' }}
@@ -317,7 +317,7 @@
                 </td>
                 <td colspan="2">@{{ item.obj[421678] ? item.obj[421678] : '' }}</td>
                 <td colspan="2">@{{ item.obj[421679] ? item.obj[421679] : '' }} <br><br> 
-                    Tanggal : @foreach($res['d1'] as $item) @if($item->emrdfk == 421680) {!! $item->value !!} @endif @endforeach <br><br> 
+                    Tanggal : @foreach($res['d'] as $item) @if($item->emrdfk == 421680) {!! $item->value !!} @endif @endforeach <br><br> 
                     Paraf : @{{ item.obj[421681] ? item.obj[421681] : '' }}
                     <br>
                     <div id="qrcoded4" style="text-align: right"></div>
@@ -325,7 +325,7 @@
             </tr>
             {{-- 5 --}}
             <tr style="height:150px" ng-show="item.obj[421682]!=undefined">
-                <td>@foreach($res['d1'] as $item) @if($item->emrdfk == 421682) {!! $item->value !!} @endif @endforeach</td>
+                <td>@foreach($res['d'] as $item) @if($item->emrdfk == 421682) {!! $item->value !!} @endif @endforeach</td>
                 <td>@{{ item.obj[421683] ? item.obj[421683] : '' }}</td>
                 <td colspan="3">@{{ item.obj[421684] ? item.obj[421684] : '' }} <br><br> 
                     Paraf : @{{ item.obj[421685] ? item.obj[421685] : '' }}
@@ -334,7 +334,7 @@
                 </td>
                 <td colspan="2">@{{ item.obj[421686] ? item.obj[421686] : '' }}</td>
                 <td colspan="2">@{{ item.obj[421687] ? item.obj[421687] : '' }} <br><br> 
-                    Tanggal : @foreach($res['d1'] as $item) @if($item->emrdfk == 421688) {!! $item->value !!} @endif @endforeach <br><br> 
+                    Tanggal : @foreach($res['d'] as $item) @if($item->emrdfk == 421688) {!! $item->value !!} @endif @endforeach <br><br> 
                     Paraf : @{{ item.obj[421689] ? item.obj[421689] : '' }}
                     <br>
                     <div id="qrcoded5" style="text-align: right"></div>
@@ -342,7 +342,7 @@
             </tr>
             {{-- 6 --}}
             <tr style="height:150px" ng-show="item.obj[421690]!=undefined">
-                <td>@foreach($res['d1'] as $item) @if($item->emrdfk == 421690) {!! $item->value !!} @endif @endforeach</td>
+                <td>@foreach($res['d'] as $item) @if($item->emrdfk == 421690) {!! $item->value !!} @endif @endforeach</td>
                 <td>@{{ item.obj[421691] ? item.obj[421691] : '' }}</td>
                 <td colspan="3">@{{ item.obj[421692] ? item.obj[421692] : '' }} <br><br> 
                     Paraf : @{{ item.obj[421693] ? item.obj[421693] : '' }}
@@ -351,7 +351,7 @@
                 </td>
                 <td colspan="2">@{{ item.obj[421694] ? item.obj[421694] : '' }}</td>
                 <td colspan="2">@{{ item.obj[421695] ? item.obj[421695] : '' }} <br><br> 
-                    Tanggal : @foreach($res['d1'] as $item) @if($item->emrdfk == 421696) {!! $item->value !!} @endif @endforeach <br><br> 
+                    Tanggal : @foreach($res['d'] as $item) @if($item->emrdfk == 421696) {!! $item->value !!} @endif @endforeach <br><br> 
                     Paraf : @{{ item.obj[421697] ? item.obj[421697] : '' }}
                     <br>
                     <div id="qrcoded6" style="text-align: right"></div>
@@ -359,7 +359,7 @@
             </tr>
             {{-- 7 --}}
             <tr style="height:150px" ng-show="item.obj[421698]!=undefined">
-                <td>@foreach($res['d1'] as $item) @if($item->emrdfk == 421698) {!! $item->value !!} @endif @endforeach</td>
+                <td>@foreach($res['d'] as $item) @if($item->emrdfk == 421698) {!! $item->value !!} @endif @endforeach</td>
                 <td>@{{ item.obj[421699] ? item.obj[421699] : '' }}</td>
                 <td colspan="3">@{{ item.obj[421700] ? item.obj[421700] : '' }} <br><br> 
                     Paraf : @{{ item.obj[421701] ? item.obj[421701] : '' }}
@@ -368,7 +368,7 @@
                 </td>
                 <td colspan="2">@{{ item.obj[421702] ? item.obj[421702] : '' }}</td>
                 <td colspan="2">@{{ item.obj[421703] ? item.obj[421703] : '' }} <br><br> 
-                    Tanggal : @foreach($res['d1'] as $item) @if($item->emrdfk == 421704) {!! $item->value !!} @endif @endforeach <br><br> 
+                    Tanggal : @foreach($res['d'] as $item) @if($item->emrdfk == 421704) {!! $item->value !!} @endif @endforeach <br><br> 
                     Paraf : @{{ item.obj[421705] ? item.obj[421705] : '' }}
                     <br>
                     <div id="qrcoded7" style="text-align: right"></div>
@@ -376,7 +376,7 @@
             </tr>
             {{-- 8 --}}
             <tr style="height:150px" ng-show="item.obj[421706]!=undefined">
-                <td>@foreach($res['d1'] as $item) @if($item->emrdfk == 421706) {!! $item->value !!} @endif @endforeach</td>
+                <td>@foreach($res['d'] as $item) @if($item->emrdfk == 421706) {!! $item->value !!} @endif @endforeach</td>
                 <td>@{{ item.obj[421707] ? item.obj[421707] : '' }}</td>
                 <td colspan="3">@{{ item.obj[421708] ? item.obj[421708] : '' }} <br><br> 
                     Paraf : @{{ item.obj[421709] ? item.obj[421709] : '' }}
@@ -385,7 +385,7 @@
                 </td>
                 <td colspan="2">@{{ item.obj[421710] ? item.obj[421710] : '' }}</td>
                 <td colspan="2">@{{ item.obj[421711] ? item.obj[421711] : '' }} <br><br> 
-                    Tanggal : @foreach($res['d1'] as $item) @if($item->emrdfk == 421712) {!! $item->value !!} @endif @endforeach <br><br> 
+                    Tanggal : @foreach($res['d'] as $item) @if($item->emrdfk == 421712) {!! $item->value !!} @endif @endforeach <br><br> 
                     Paraf : @{{ item.obj[421713] ? item.obj[421713] : '' }}
                     <br>
                     <div id="qrcoded8" style="text-align: right"></div>
@@ -393,7 +393,7 @@
             </tr>
             {{-- 9 --}}
             <tr style="height:150px" ng-show="item.obj[421714]!=undefined">
-                <td>@foreach($res['d1'] as $item) @if($item->emrdfk == 421714) {!! $item->value !!} @endif @endforeach</td>
+                <td>@foreach($res['d'] as $item) @if($item->emrdfk == 421714) {!! $item->value !!} @endif @endforeach</td>
                 <td>@{{ item.obj[421715] ? item.obj[421715] : '' }}</td>
                 <td colspan="3">@{{ item.obj[421716] ? item.obj[421716] : '' }} <br><br> 
                     Paraf : @{{ item.obj[421717] ? item.obj[421717] : '' }}
@@ -402,7 +402,7 @@
                 </td>
                 <td colspan="2">@{{ item.obj[421718] ? item.obj[421718] : '' }}</td>
                 <td colspan="2">@{{ item.obj[421719] ? item.obj[421719] : '' }} <br><br> 
-                    Tanggal : @foreach($res['d1'] as $item) @if($item->emrdfk == 421720) {!! $item->value !!} @endif @endforeach <br><br> 
+                    Tanggal : @foreach($res['d'] as $item) @if($item->emrdfk == 421720) {!! $item->value !!} @endif @endforeach <br><br> 
                     Paraf : @{{ item.obj[421721] ? item.obj[421721] : '' }}
                     <br>
                     <div id="qrcoded9" style="text-align: right"></div>
@@ -410,7 +410,7 @@
             </tr>
             {{-- 10 --}}
             <tr style="height:150px" ng-show="item.obj[421722]!=undefined">
-                <td>@foreach($res['d1'] as $item) @if($item->emrdfk == 421722) {!! $item->value !!} @endif @endforeach</td>
+                <td>@foreach($res['d'] as $item) @if($item->emrdfk == 421722) {!! $item->value !!} @endif @endforeach</td>
                 <td>@{{ item.obj[421723] ? item.obj[421723] : '' }}</td>
                 <td colspan="3">@{{ item.obj[421724] ? item.obj[421724] : '' }} <br><br> 
                     Paraf : @{{ item.obj[421725] ? item.obj[421725] : '' }}
@@ -419,15 +419,15 @@
                 </td>
                 <td colspan="2">@{{ item.obj[421726] ? item.obj[421726] : '' }}</td>
                 <td colspan="2">@{{ item.obj[421727] ? item.obj[421727] : '' }} <br><br> 
-                    Tanggal : @foreach($res['d1'] as $item) @if($item->emrdfk == 421728) {!! $item->value !!} @endif @endforeach <br><br> 
+                    Tanggal : @foreach($res['d'] as $item) @if($item->emrdfk == 421728) {!! $item->value !!} @endif @endforeach <br><br> 
                     Paraf : @{{ item.obj[421729] ? item.obj[421729] : '' }}
                     <br>
-                    <div id="qrcoded10" style="text-align: right"></div>
+                    <div id="qrcoded0" style="text-align: right"></div>
                 </td>
             </tr>
             {{-- 11 --}}
             <tr style="height:150px" ng-show="item.obj[421730]!=undefined">
-                <td>@foreach($res['d1'] as $item) @if($item->emrdfk == 421730) {!! $item->value !!} @endif @endforeach</td>
+                <td>@foreach($res['d'] as $item) @if($item->emrdfk == 421730) {!! $item->value !!} @endif @endforeach</td>
                 <td>@{{ item.obj[421731] ? item.obj[421731] : '' }}</td>
                 <td colspan="3">@{{ item.obj[421732] ? item.obj[421732] : '' }} <br><br> 
                     Paraf : @{{ item.obj[421733] ? item.obj[421733] : '' }}
@@ -436,15 +436,15 @@
                 </td>
                 <td colspan="2">@{{ item.obj[421734] ? item.obj[421734] : '' }}</td>
                 <td colspan="2">@{{ item.obj[421735] ? item.obj[421735] : '' }} <br><br> 
-                    Tanggal : @foreach($res['d1'] as $item) @if($item->emrdfk == 421736) {!! $item->value !!} @endif @endforeach <br><br> 
+                    Tanggal : @foreach($res['d'] as $item) @if($item->emrdfk == 421736) {!! $item->value !!} @endif @endforeach <br><br> 
                     Paraf : @{{ item.obj[421737] ? item.obj[421737] : '' }}
                     <br>
-                    <div id="qrcoded11" style="text-align: right"></div>
+                    <div id="qrcoded1" style="text-align: right"></div>
                 </td>
             </tr>
             {{-- 12 --}}
             <tr style="height:150px" ng-show="item.obj[421738]!=undefined">
-                <td>@foreach($res['d1'] as $item) @if($item->emrdfk == 421738) {!! $item->value !!} @endif @endforeach</td>
+                <td>@foreach($res['d'] as $item) @if($item->emrdfk == 421738) {!! $item->value !!} @endif @endforeach</td>
                 <td>@{{ item.obj[421739] ? item.obj[421739] : '' }}</td>
                 <td colspan="3">@{{ item.obj[421740] ? item.obj[421740] : '' }} <br><br> 
                     Paraf : @{{ item.obj[421741] ? item.obj[421741] : '' }}
@@ -453,15 +453,15 @@
                 </td>
                 <td colspan="2">@{{ item.obj[421742] ? item.obj[421742] : '' }}</td>
                 <td colspan="2">@{{ item.obj[421744] ? item.obj[421744] : '' }} <br><br> 
-                    Tanggal : @foreach($res['d1'] as $item) @if($item->emrdfk == 421744) {!! $item->value !!} @endif @endforeach <br><br> 
+                    Tanggal : @foreach($res['d'] as $item) @if($item->emrdfk == 421744) {!! $item->value !!} @endif @endforeach <br><br> 
                     Paraf : @{{ item.obj[421745] ? item.obj[421745] : '' }}
                     <br>
-                    <div id="qrcoded12" style="text-align: right"></div>
+                    <div id="qrcoded2" style="text-align: right"></div>
                 </td>
             </tr>
             {{-- 13 --}}
             <tr style="height:150px" ng-show="item.obj[421746]!=undefined">
-                <td>@foreach($res['d1'] as $item) @if($item->emrdfk == 421746) {!! $item->value !!} @endif @endforeach</td>
+                <td>@foreach($res['d'] as $item) @if($item->emrdfk == 421746) {!! $item->value !!} @endif @endforeach</td>
                 <td>@{{ item.obj[421747] ? item.obj[421747] : '' }}</td>
                 <td colspan="3">@{{ item.obj[421748] ? item.obj[421748] : '' }} <br><br> 
                     Paraf : @{{ item.obj[421749] ? item.obj[421749] : '' }}
@@ -470,32 +470,32 @@
                 </td>
                 <td colspan="2">@{{ item.obj[421750] ? item.obj[421750] : '' }}</td>
                 <td colspan="2">@{{ item.obj[421751] ? item.obj[421751] : '' }} <br><br> 
-                    Tanggal : @foreach($res['d1'] as $item) @if($item->emrdfk == 421752) {!! $item->value !!} @endif @endforeach <br><br> 
+                    Tanggal : @foreach($res['d'] as $item) @if($item->emrdfk == 421752) {!! $item->value !!} @endif @endforeach <br><br> 
                     Paraf : @{{ item.obj[421753] ? item.obj[421753] : '' }}
                     <br>
-                    <div id="qrcoded13" style="text-align: right"></div>
+                    <div id="qrcoded3" style="text-align: right"></div>
                 </td>
             </tr>
             {{-- 14 --}}
             <tr style="height:150px" ng-show="item.obj[421754]!=undefined">
-                <td>@foreach($res['d1'] as $item) @if($item->emrdfk == 421754) {!! $item->value !!} @endif @endforeach</td>
+                <td>@foreach($res['d'] as $item) @if($item->emrdfk == 421754) {!! $item->value !!} @endif @endforeach</td>
                 <td>@{{ item.obj[421755] ? item.obj[421755] : '' }}</td>
                 <td colspan="3">@{{ item.obj[421756] ? item.obj[421756] : '' }} <br><br> 
                     Paraf : @{{ item.obj[421757] ? item.obj[421757] : '' }}
                     <br>
-                    <div id="qrcoded14" style="text-align: right"></div>
+                    <div id="qrcoded4" style="text-align: right"></div>
                 </td>
                 <td colspan="2">@{{ item.obj[421758] ? item.obj[421758] : '' }}</td>
                 <td colspan="2">@{{ item.obj[421759] ? item.obj[421759] : '' }} <br><br> 
-                    Tanggal : @foreach($res['d1'] as $item) @if($item->emrdfk == 421760) {!! $item->value !!} @endif @endforeach <br><br> 
+                    Tanggal : @foreach($res['d'] as $item) @if($item->emrdfk == 421760) {!! $item->value !!} @endif @endforeach <br><br> 
                     Paraf : @{{ item.obj[421761] ? item.obj[421761] : '' }}
                     <br>
-                    <div id="qrcoded14" style="text-align: right"></div>
+                    <div id="qrcoded4" style="text-align: right"></div>
                 </td>
             </tr>
             {{-- 15 --}}
             <tr style="height:150px" ng-show="item.obj[421762]!=undefined">
-                <td>@foreach($res['d1'] as $item) @if($item->emrdfk == 421762) {!! $item->value !!} @endif @endforeach</td>
+                <td>@foreach($res['d'] as $item) @if($item->emrdfk == 421762) {!! $item->value !!} @endif @endforeach</td>
                 <td>@{{ item.obj[421763] ? item.obj[421763] : '' }}</td>
                 <td colspan="3">@{{ item.obj[421764] ? item.obj[421764] : '' }} <br><br> 
                     Paraf : @{{ item.obj[421765] ? item.obj[421765] : '' }}
@@ -504,15 +504,15 @@
                 </td>
                 <td colspan="2">@{{ item.obj[421766] ? item.obj[421766] : '' }}</td>
                 <td colspan="2">@{{ item.obj[421767] ? item.obj[421767] : '' }} <br><br> 
-                    Tanggal : @foreach($res['d1'] as $item) @if($item->emrdfk == 421768) {!! $item->value !!} @endif @endforeach <br><br> 
+                    Tanggal : @foreach($res['d'] as $item) @if($item->emrdfk == 421768) {!! $item->value !!} @endif @endforeach <br><br> 
                     Paraf : @{{ item.obj[421769] ? item.obj[421769] : '' }}
                     <br>
-                    <div id="qrcoded15" style="text-align: right"></div>
+                    <div id="qrcoded5" style="text-align: right"></div>
                 </td>
             </tr>
             {{-- 16 --}}
             <tr style="height:150px" ng-show="item.obj[421770]!=undefined">
-                <td>@foreach($res['d1'] as $item) @if($item->emrdfk == 421770) {!! $item->value !!} @endif @endforeach</td>
+                <td>@foreach($res['d'] as $item) @if($item->emrdfk == 421770) {!! $item->value !!} @endif @endforeach</td>
                 <td>@{{ item.obj[421771] ? item.obj[421771] : '' }}</td>
                 <td colspan="3">@{{ item.obj[421772] ? item.obj[421772] : '' }} <br><br> 
                     Paraf : @{{ item.obj[421773] ? item.obj[421773] : '' }}
@@ -521,15 +521,15 @@
                 </td>
                 <td colspan="2">@{{ item.obj[421774] ? item.obj[421774] : '' }}</td>
                 <td colspan="2">@{{ item.obj[421775] ? item.obj[421775] : '' }} <br><br> 
-                    Tanggal : @foreach($res['d1'] as $item) @if($item->emrdfk == 421776) {!! $item->value !!} @endif @endforeach <br><br> 
+                    Tanggal : @foreach($res['d'] as $item) @if($item->emrdfk == 421776) {!! $item->value !!} @endif @endforeach <br><br> 
                     Paraf : @{{ item.obj[421777] ? item.obj[421777] : '' }}
                     <br>
-                    <div id="qrcoded16" style="text-align: right"></div>
+                    <div id="qrcoded6" style="text-align: right"></div>
                 </td>
             </tr>
             {{-- 17 --}}
             <tr style="height:150px" ng-show="item.obj[421778]!=undefined">
-                <td>@foreach($res['d1'] as $item) @if($item->emrdfk == 421778) {!! $item->value !!} @endif @endforeach</td>
+                <td>@foreach($res['d'] as $item) @if($item->emrdfk == 421778) {!! $item->value !!} @endif @endforeach</td>
                 <td>@{{ item.obj[421779] ? item.obj[421779] : '' }}</td>
                 <td colspan="3">@{{ item.obj[421780] ? item.obj[421780] : '' }} <br><br> 
                     Paraf : @{{ item.obj[421781] ? item.obj[421781] : '' }}
@@ -538,15 +538,15 @@
                 </td>
                 <td colspan="2">@{{ item.obj[421782] ? item.obj[421782] : '' }}</td>
                 <td colspan="2">@{{ item.obj[421783] ? item.obj[421783] : '' }} <br><br> 
-                    Tanggal : @foreach($res['d1'] as $item) @if($item->emrdfk == 421784) {!! $item->value !!} @endif @endforeach <br><br> 
+                    Tanggal : @foreach($res['d'] as $item) @if($item->emrdfk == 421784) {!! $item->value !!} @endif @endforeach <br><br> 
                     Paraf : @{{ item.obj[421785] ? item.obj[421785] : '' }}
                     <br>
-                    <div id="qrcoded17" style="text-align: right"></div>
+                    <div id="qrcoded7" style="text-align: right"></div>
                 </td>
             </tr>
             {{-- 18 --}}
             <tr style="height:150px" ng-show="item.obj[421786]!=undefined">
-                <td>@foreach($res['d1'] as $item) @if($item->emrdfk == 421786) {!! $item->value !!} @endif @endforeach</td>
+                <td>@foreach($res['d'] as $item) @if($item->emrdfk == 421786) {!! $item->value !!} @endif @endforeach</td>
                 <td>@{{ item.obj[421787] ? item.obj[421787] : '' }}</td>
                 <td colspan="3">@{{ item.obj[421788] ? item.obj[421788] : '' }} <br><br> 
                     Paraf : @{{ item.obj[421789] ? item.obj[421789] : '' }}
@@ -555,15 +555,15 @@
                 </td>
                 <td colspan="2">@{{ item.obj[421790] ? item.obj[421790] : '' }}</td>
                 <td colspan="2">@{{ item.obj[421791] ? item.obj[421791] : '' }} <br><br> 
-                    Tanggal : @foreach($res['d1'] as $item) @if($item->emrdfk == 421792) {!! $item->value !!} @endif @endforeach <br><br> 
+                    Tanggal : @foreach($res['d'] as $item) @if($item->emrdfk == 421792) {!! $item->value !!} @endif @endforeach <br><br> 
                     Paraf : @{{ item.obj[421793] ? item.obj[421793] : '' }}
                     <br>
-                    <div id="qrcoded18" style="text-align: right"></div>
+                    <div id="qrcoded8" style="text-align: right"></div>
                 </td>
             </tr>
             {{-- 19 --}}
             <tr style="height:150px" ng-show="item.obj[421794]!=undefined">
-                <td>@foreach($res['d1'] as $item) @if($item->emrdfk == 421794) {!! $item->value !!} @endif @endforeach</td>
+                <td>@foreach($res['d'] as $item) @if($item->emrdfk == 421794) {!! $item->value !!} @endif @endforeach</td>
                 <td>@{{ item.obj[421795] ? item.obj[421795] : '' }}</td>
                 <td colspan="3">@{{ item.obj[421796] ? item.obj[421796] : '' }} <br><br> 
                     Paraf : @{{ item.obj[421797] ? item.obj[421797] : '' }}
@@ -572,15 +572,15 @@
                 </td>
                 <td colspan="2">@{{ item.obj[421798] ? item.obj[421798] : '' }}</td>
                 <td colspan="2">@{{ item.obj[421799] ? item.obj[421799] : '' }} <br><br> 
-                    Tanggal : @foreach($res['d1'] as $item) @if($item->emrdfk == 421800) {!! $item->value !!} @endif @endforeach <br><br> 
+                    Tanggal : @foreach($res['d'] as $item) @if($item->emrdfk == 421800) {!! $item->value !!} @endif @endforeach <br><br> 
                     Paraf : @{{ item.obj[421801] ? item.obj[421801] : '' }}
                     <br>
-                    <div id="qrcoded19" style="text-align: right"></div>
+                    <div id="qrcoded9" style="text-align: right"></div>
                 </td>
             </tr>
             {{-- 20 --}}
             <tr style="height:150px" ng-show="item.obj[421802]!=undefined">
-                <td>@foreach($res['d1'] as $item) @if($item->emrdfk == 421802) {!! $item->value !!} @endif @endforeach</td>
+                <td>@foreach($res['d'] as $item) @if($item->emrdfk == 421802) {!! $item->value !!} @endif @endforeach</td>
                 <td>@{{ item.obj[421803] ? item.obj[421803] : '' }}</td>
                 <td colspan="3">@{{ item.obj[421804] ? item.obj[421804] : '' }} <br><br> 
                     Paraf : @{{ item.obj[421805] ? item.obj[421805] : '' }}
@@ -589,7 +589,7 @@
                 </td>
                 <td colspan="2">@{{ item.obj[421806] ? item.obj[421806] : '' }}</td>
                 <td colspan="2">@{{ item.obj[421807] ? item.obj[421807] : '' }} <br><br> 
-                    Tanggal : @foreach($res['d1'] as $item) @if($item->emrdfk == 421808) {!! $item->value !!} @endif @endforeach <br><br> 
+                    Tanggal : @foreach($res['d'] as $item) @if($item->emrdfk == 421808) {!! $item->value !!} @endif @endforeach <br><br> 
                     Paraf : @{{ item.obj[421809] ? item.obj[421809] : '' }}
                     <br>
                     <div id="qrcoded20" style="text-align: right"></div>
@@ -597,7 +597,7 @@
             </tr>
             {{-- 21 --}}
             <tr style="height:150px" ng-show="item.obj[421810]!=undefined">
-                <td>@foreach($res['d1'] as $item) @if($item->emrdfk == 421810) {!! $item->value !!} @endif @endforeach</td>
+                <td>@foreach($res['d'] as $item) @if($item->emrdfk == 421810) {!! $item->value !!} @endif @endforeach</td>
                 <td>@{{ item.obj[421811] ? item.obj[421811] : '' }}</td>
                 <td colspan="3">@{{ item.obj[421812] ? item.obj[421812] : '' }} <br><br> 
                     Paraf : @{{ item.obj[421813] ? item.obj[421813] : '' }}
@@ -606,7 +606,7 @@
                 </td>
                 <td colspan="2">@{{ item.obj[421814] ? item.obj[421814] : '' }}</td>
                 <td colspan="2">@{{ item.obj[421815] ? item.obj[421815] : '' }} <br><br> 
-                    Tanggal : @foreach($res['d1'] as $item) @if($item->emrdfk == 421816) {!! $item->value !!} @endif @endforeach <br><br> 
+                    Tanggal : @foreach($res['d'] as $item) @if($item->emrdfk == 421816) {!! $item->value !!} @endif @endforeach <br><br> 
                     Paraf : @{{ item.obj[421817] ? item.obj[421817] : '' }}
                     <br>
                     <div id="qrcoded21" style="text-align: right"></div>
@@ -776,7 +776,7 @@
         // $scope.item.obj['diagnose_pasca_operatif'] = diagnose_pasca_operatif;
 
         var p1 = $scope.item.obj[421653];
-        var d1 = $scope.item.obj[421657];
+        var d = $scope.item.obj[421657];
 
         var p2 = $scope.item.obj[421661];
         var d2 = $scope.item.obj[421665];
@@ -803,34 +803,34 @@
         var d9 = $scope.item.obj[421721];
 
         var p10 = $scope.item.obj[421725];
-        var d10 = $scope.item.obj[421729];
+        var d0 = $scope.item.obj[421729];
 
         var p11 = $scope.item.obj[421733];
-        var d11 = $scope.item.obj[421737];
+        var d1 = $scope.item.obj[421737];
 
         var p12 = $scope.item.obj[421741];
-        var d12 = $scope.item.obj[421745];
+        var d2 = $scope.item.obj[421745];
 
         var p13 = $scope.item.obj[421749];
-        var d13 = $scope.item.obj[421753];
+        var d3 = $scope.item.obj[421753];
 
         var p14 = $scope.item.obj[421757];
-        var d14 = $scope.item.obj[421761];
+        var d4 = $scope.item.obj[421761];
 
         var p15 = $scope.item.obj[421765];
-        var d15 = $scope.item.obj[421769];
+        var d5 = $scope.item.obj[421769];
 
         var p16 = $scope.item.obj[421773];
-        var d16 = $scope.item.obj[421777];
+        var d6 = $scope.item.obj[421777];
 
         var p17 = $scope.item.obj[421781];
-        var d17 = $scope.item.obj[421785];
+        var d7 = $scope.item.obj[421785];
 
         var p18 = $scope.item.obj[421789];
-        var d18 = $scope.item.obj[421793];
+        var d8 = $scope.item.obj[421793];
 
         var p19 = $scope.item.obj[421797];
-        var d19 = $scope.item.obj[421801];
+        var d9 = $scope.item.obj[421801];
 
         var p20 = $scope.item.obj[421805];
         var d20 = $scope.item.obj[421809];
@@ -846,11 +846,11 @@
             });	
         }
         
-        if (d1 != undefined) {
-            jQuery('#qrcoded1').qrcode({
+        if (d != undefined) {
+            jQuery('#qrcoded').qrcode({
             width	: 70,
 			height	: 70,
-            text	: "Tanda Tangan Digital Oleh " + d1
+            text	: "Tanda Tangan Digital Oleh " + d
         });
         }
 
@@ -990,11 +990,11 @@
             });	
         }
         
-        if (d10 != undefined) {
-            jQuery('#qrcoded10').qrcode({
+        if (d0 != undefined) {
+            jQuery('#qrcoded0').qrcode({
             width	: 70,
 			height	: 70,
-            text	: "Tanda Tangan Digital Oleh " + d10
+            text	: "Tanda Tangan Digital Oleh " + d0
         });
         }
 
@@ -1006,11 +1006,11 @@
             });	
         }
         
-        if (d11 != undefined) {
-            jQuery('#qrcoded11').qrcode({
+        if (d1 != undefined) {
+            jQuery('#qrcoded1').qrcode({
             width	: 70,
 			height	: 70,
-            text	: "Tanda Tangan Digital Oleh " + d11
+            text	: "Tanda Tangan Digital Oleh " + d1
         });
         }
 
@@ -1022,11 +1022,11 @@
             });	
         }
         
-        if (d12 != undefined) {
-            jQuery('#qrcoded12').qrcode({
+        if (d2 != undefined) {
+            jQuery('#qrcoded2').qrcode({
             width	: 70,
 			height	: 70,
-            text	: "Tanda Tangan Digital Oleh " + d12
+            text	: "Tanda Tangan Digital Oleh " + d2
         });
         }
 
@@ -1038,11 +1038,11 @@
             });	
         }
         
-        if (d13 != undefined) {
-            jQuery('#qrcoded13').qrcode({
+        if (d3 != undefined) {
+            jQuery('#qrcoded3').qrcode({
             width	: 70,
 			height	: 70,
-            text	: "Tanda Tangan Digital Oleh " + d13
+            text	: "Tanda Tangan Digital Oleh " + d3
         });
         }
 
@@ -1054,11 +1054,11 @@
             });	
         }
         
-        if (d14 != undefined) {
-            jQuery('#qrcoded14').qrcode({
+        if (d4 != undefined) {
+            jQuery('#qrcoded4').qrcode({
             width	: 70,
 			height	: 70,
-            text	: "Tanda Tangan Digital Oleh " + d14
+            text	: "Tanda Tangan Digital Oleh " + d4
         });
         }
 
@@ -1070,11 +1070,11 @@
             });	
         }
         
-        if (d15 != undefined) {
-            jQuery('#qrcoded15').qrcode({
+        if (d5 != undefined) {
+            jQuery('#qrcoded5').qrcode({
             width	: 70,
 			height	: 70,
-            text	: "Tanda Tangan Digital Oleh " + d15
+            text	: "Tanda Tangan Digital Oleh " + d5
         });
         }
 
@@ -1086,11 +1086,11 @@
             });	
         }
         
-        if (d16 != undefined) {
-            jQuery('#qrcoded16').qrcode({
+        if (d6 != undefined) {
+            jQuery('#qrcoded6').qrcode({
             width	: 70,
 			height	: 70,
-            text	: "Tanda Tangan Digital Oleh " + d16
+            text	: "Tanda Tangan Digital Oleh " + d6
         });
         }
 
@@ -1102,11 +1102,11 @@
             });	
         }
         
-        if (d17 != undefined) {
-            jQuery('#qrcoded17').qrcode({
+        if (d7 != undefined) {
+            jQuery('#qrcoded7').qrcode({
             width	: 70,
 			height	: 70,
-            text	: "Tanda Tangan Digital Oleh " + d17
+            text	: "Tanda Tangan Digital Oleh " + d7
         });
         }
 
@@ -1118,11 +1118,11 @@
             });	
         }
         
-        if (d18 != undefined) {
-            jQuery('#qrcoded18').qrcode({
+        if (d8 != undefined) {
+            jQuery('#qrcoded8').qrcode({
             width	: 70,
 			height	: 70,
-            text	: "Tanda Tangan Digital Oleh " + d18
+            text	: "Tanda Tangan Digital Oleh " + d8
         });
         }
 
@@ -1134,11 +1134,11 @@
             });	
         }
         
-        if (d19 != undefined) {
-            jQuery('#qrcoded19').qrcode({
+        if (d9 != undefined) {
+            jQuery('#qrcoded9').qrcode({
             width	: 70,
 			height	: 70,
-            text	: "Tanda Tangan Digital Oleh " + d19
+            text	: "Tanda Tangan Digital Oleh " + d9
         });
         }
 
