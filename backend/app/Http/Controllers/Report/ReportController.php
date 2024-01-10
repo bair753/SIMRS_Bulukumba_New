@@ -5636,6 +5636,9 @@ class ReportController extends ApiController{
                 if ($z->type == "datetime") {
                     $z->value = date('H:i d-m-Y', strtotime($z->value));
                 }
+                if ($z->type == "date") {
+                    $z->value = date('d-m-Y', strtotime($z->value));
+                }
                 if ($z->type == "time") {
                     $z->value = date('H:i', strtotime($z->value));
                 }
