@@ -318,10 +318,10 @@
                     <td style="border:none;border-right: 1px solid #000;" colspan="2">@{{ item.obj[31100556] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Emergency</td>
                 </tr>
                 <tr height="50px" valign="top">
-                    <td colspan="2">Tanggal Operasi : @{{item.obj[31100564] | toDate | date:'dd MMMM yyyy'}}</td>
-                    <td colspan="2">Jam Operasi Dimulai : @{{item.obj[31100565] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="2">Jam Operasi Selesai : @{{item.obj[31100566] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="3">Lama Operasi Berlangsung : @{{ item.obj[31100567] ? item.obj[31100567] : '' }}</td>
+                    <td colspan="2">Tanggal Operasi : @foreach($res['d1'] as $item) @if($item->emrdfk == 31100564) {!! $item->value !!} @endif @endforeach </td>
+                    <td colspan="2">Jam Operasi Dimulai : @foreach($res['d1'] as $item) @if($item->emrdfk == 31100565) {!! $item->value !!} @endif @endforeach </td>
+                    <td colspan="2">Jam Operasi Selesai : @foreach($res['d1'] as $item) @if($item->emrdfk == 31100566) {!! $item->value !!} @endif @endforeach </td>
+                    <td colspan="3">Lama Operasi Berlangsung : @foreach($res['d1'] as $item) @if($item->emrdfk == 31100567) {!! $item->value !!} @endif @endforeach </td>
                 </tr>
                 <tr height="70px" valign="top">
                     <td colspan="9" style="border:none">Laporan Tindakan/ Operasi : (jika perlu dapat dilanjutkan di halaman sebelah) : @{{ item.obj[31100568] ? item.obj[31100568] : '' }}</td>
@@ -495,10 +495,10 @@
                     <td style="border:none;border-right: 1px solid #000;" colspan="2">@{{ item.obji2[31100556] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Emergency</td>
                 </tr>
                 <tr height="50px" valign="top">
-                    <td colspan="2">Tanggal Operasi : @{{item.obji2[31100564] | toDate | date:'dd MMMM yyyy'}}</td>
-                    <td colspan="2">Jam Operasi Dimulai : @{{item.obji2[31100565] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="2">Jam Operasi Selesai : @{{item.obji2[31100566] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="3">Lama Operasi Berlangsung : @{{ item.obji2[31100567] ? item.obji2[31100567] : '' }}</td>
+                    <td colspan="2">Tanggal Operasi : @foreach($res['d2'] as $item) @if($item->emrdfk == 31100564) {!! $item->value !!} @endif @endforeach </td>
+                    <td colspan="2">Jam Operasi Dimulai : @foreach($res['d2'] as $item) @if($item->emrdfk == 31100565) {!! $item->value !!} @endif @endforeach </td>
+                    <td colspan="2">Jam Operasi Selesai : @foreach($res['d2'] as $item) @if($item->emrdfk == 31100566) {!! $item->value !!} @endif @endforeach </td>
+                    <td colspan="3">Lama Operasi Berlangsung : @foreach($res['d2'] as $item) @if($item->emrdfk == 31100567) {!! $item->value !!} @endif @endforeach </td>
                 </tr>
                 <tr height="70px" valign="top">
                     <td colspan="9" style="border:none">Laporan Tindakan/ Operasi : (jika perlu dapat dilanjutkan di halaman sebelah) : @{{ item.obji2[31100568] ? item.obji2[31100568] : '' }}</td>
@@ -672,10 +672,10 @@
                     <td style="border:none;border-right: 1px solid #000;" colspan="2">@{{ item.obji3[31100556] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Emergency</td>
                 </tr>
                 <tr height="50px" valign="top">
-                    <td colspan="2">Tanggal Operasi : @{{item.obji3[31100564] | toDate | date:'dd MMMM yyyy'}}</td>
-                    <td colspan="2">Jam Operasi Dimulai : @{{item.obji3[31100565] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="2">Jam Operasi Selesai : @{{item.obji3[31100566] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="3">Lama Operasi Berlangsung : @{{ item.obji3[31100567] ? item.obji3[31100567] : '' }}</td>
+                    <td colspan="2">Tanggal Operasi : @foreach($res['d3'] as $item) @if($item->emrdfk == 31100564) {!! $item->value !!} @endif @endforeach </td>
+                    <td colspan="2">Jam Operasi Dimulai : @foreach($res['d3'] as $item) @if($item->emrdfk == 31100565) {!! $item->value !!} @endif @endforeach </td>
+                    <td colspan="2">Jam Operasi Selesai : @foreach($res['d3'] as $item) @if($item->emrdfk == 31100566) {!! $item->value !!} @endif @endforeach </td>
+                    <td colspan="3">Lama Operasi Berlangsung : @foreach($res['d3'] as $item) @if($item->emrdfk == 31100567) {!! $item->value !!} @endif @endforeach </td>
                 </tr>
                 <tr height="70px" valign="top">
                     <td colspan="9" style="border:none">Laporan Tindakan/ Operasi : (jika perlu dapat dilanjutkan di halaman sebelah) : @{{ item.obji3[31100568] ? item.obji3[31100568] : '' }}</td>
@@ -849,10 +849,10 @@
                     <td style="border:none;border-right: 1px solid #000;" colspan="2">@{{ item.obji4[31100556] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Emergency</td>
                 </tr>
                 <tr height="50px" valign="top">
-                    <td colspan="2">Tanggal Operasi : @{{item.obji4[31100564] | toDate | date:'dd MMMM yyyy'}}</td>
-                    <td colspan="2">Jam Operasi Dimulai : @{{item.obji4[31100565] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="2">Jam Operasi Selesai : @{{item.obji4[31100566] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="3">Lama Operasi Berlangsung : @{{ item.obji4[31100567] ? item.obji4[31100567] : '' }}</td>
+                    <td colspan="2">Tanggal Operasi : @foreach($res['d4'] as $item) @if($item->emrdfk == 31100564) {!! $item->value !!} @endif @endforeach </td>
+                    <td colspan="2">Jam Operasi Dimulai : @foreach($res['d4'] as $item) @if($item->emrdfk == 31100565) {!! $item->value !!} @endif @endforeach </td>
+                    <td colspan="2">Jam Operasi Selesai : @foreach($res['d4'] as $item) @if($item->emrdfk == 31100566) {!! $item->value !!} @endif @endforeach </td>
+                    <td colspan="3">Lama Operasi Berlangsung : @foreach($res['d4'] as $item) @if($item->emrdfk == 31100567) {!! $item->value !!} @endif @endforeach </td>
                 </tr>
                 <tr height="70px" valign="top">
                     <td colspan="9" style="border:none">Laporan Tindakan/ Operasi : (jika perlu dapat dilanjutkan di halaman sebelah) : @{{ item.obji4[31100568] ? item.obji4[31100568] : '' }}</td>
@@ -1026,10 +1026,10 @@
                     <td style="border:none;border-right: 1px solid #000;" colspan="2">@{{ item.obji5[31100556] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Emergency</td>
                 </tr>
                 <tr height="50px" valign="top">
-                    <td colspan="2">Tanggal Operasi : @{{item.obji5[31100564] | toDate | date:'dd MMMM yyyy'}}</td>
-                    <td colspan="2">Jam Operasi Dimulai : @{{item.obji5[31100565] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="2">Jam Operasi Selesai : @{{item.obji5[31100566] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="3">Lama Operasi Berlangsung : @{{ item.obji5[31100567] ? item.obji5[31100567] : '' }}</td>
+                    <td colspan="2">Tanggal Operasi : @foreach($res['d5'] as $item) @if($item->emrdfk == 31100564) {!! $item->value !!} @endif @endforeach </td>
+                    <td colspan="2">Jam Operasi Dimulai : @foreach($res['d5'] as $item) @if($item->emrdfk == 31100565) {!! $item->value !!} @endif @endforeach </td>
+                    <td colspan="2">Jam Operasi Selesai : @foreach($res['d5'] as $item) @if($item->emrdfk == 31100566) {!! $item->value !!} @endif @endforeach </td>
+                    <td colspan="3">Lama Operasi Berlangsung : @foreach($res['d5'] as $item) @if($item->emrdfk == 31100567) {!! $item->value !!} @endif @endforeach </td>
                 </tr>
                 <tr height="70px" valign="top">
                     <td colspan="9" style="border:none">Laporan Tindakan/ Operasi : (jika perlu dapat dilanjutkan di halaman sebelah) : @{{ item.obji5[31100568] ? item.obji5[31100568] : '' }}</td>
@@ -1203,10 +1203,10 @@
                     <td style="border:none;border-right: 1px solid #000;" colspan="2">@{{ item.obji6[31100556] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Emergency</td>
                 </tr>
                 <tr height="50px" valign="top">
-                    <td colspan="2">Tanggal Operasi : @{{item.obji6[31100564] | toDate | date:'dd MMMM yyyy'}}</td>
-                    <td colspan="2">Jam Operasi Dimulai : @{{item.obji6[31100565] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="2">Jam Operasi Selesai : @{{item.obji6[31100566] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="3">Lama Operasi Berlangsung : @{{ item.obji6[31100567] ? item.obji6[31100567] : '' }}</td>
+                    <td colspan="2">Tanggal Operasi : @foreach($res['d6'] as $item) @if($item->emrdfk == 31100564) {!! $item->value !!} @endif @endforeach </td>
+                    <td colspan="2">Jam Operasi Dimulai : @foreach($res['d6'] as $item) @if($item->emrdfk == 31100565) {!! $item->value !!} @endif @endforeach </td>
+                    <td colspan="2">Jam Operasi Selesai : @foreach($res['d6'] as $item) @if($item->emrdfk == 31100566) {!! $item->value !!} @endif @endforeach </td>
+                    <td colspan="3">Lama Operasi Berlangsung : @foreach($res['d6'] as $item) @if($item->emrdfk == 31100567) {!! $item->value !!} @endif @endforeach </td>
                 </tr>
                 <tr height="70px" valign="top">
                     <td colspan="9" style="border:none">Laporan Tindakan/ Operasi : (jika perlu dapat dilanjutkan di halaman sebelah) : @{{ item.obji6[31100568] ? item.obji6[31100568] : '' }}</td>
@@ -1380,10 +1380,10 @@
                     <td style="border:none;border-right: 1px solid #000;" colspan="2">@{{ item.obji7[31100556] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Emergency</td>
                 </tr>
                 <tr height="50px" valign="top">
-                    <td colspan="2">Tanggal Operasi : @{{item.obji7[31100564] | toDate | date:'dd MMMM yyyy'}}</td>
-                    <td colspan="2">Jam Operasi Dimulai : @{{item.obji7[31100565] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="2">Jam Operasi Selesai : @{{item.obji7[31100566] | toDate | date:'HH:mm'}}</td>
-                    <td colspan="3">Lama Operasi Berlangsung : @{{ item.obji7[31100567] ? item.obji7[31100567] : '' }}</td>
+                    <td colspan="2">Tanggal Operasi : @foreach($res['d7'] as $item) @if($item->emrdfk == 31100564) {!! $item->value !!} @endif @endforeach </td>
+                    <td colspan="2">Jam Operasi Dimulai : @foreach($res['d7'] as $item) @if($item->emrdfk == 31100565) {!! $item->value !!} @endif @endforeach </td>
+                    <td colspan="2">Jam Operasi Selesai : @foreach($res['d7'] as $item) @if($item->emrdfk == 31100566) {!! $item->value !!} @endif @endforeach </td>
+                    <td colspan="3">Lama Operasi Berlangsung : @foreach($res['d7'] as $item) @if($item->emrdfk == 31100567) {!! $item->value !!} @endif @endforeach </td>
                 </tr>
                 <tr height="70px" valign="top">
                     <td colspan="9" style="border:none">Laporan Tindakan/ Operasi : (jika perlu dapat dilanjutkan di halaman sebelah) : @{{ item.obji7[31100568] ? item.obji7[31100568] : '' }}</td>
