@@ -7180,7 +7180,6 @@ class ReportController extends ApiController{
                     ep.umur,
                     pa.noidentitas,
                     al.alamatlengkap,
-                    ef.image,
                     ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
                     epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
                     --ap.noasuransi,ap.namapeserta,
@@ -7192,7 +7191,6 @@ class ReportController extends ApiController{
                     INNER JOIN emrd_t AS ed ON epd.emrdfk = ed.ID
                     INNER JOIN antrianpasiendiperiksa_t AS pd ON pd.norec = ep.norec_apd
                     INNER JOIN pasiendaftar_t AS pr ON pr.norec = pd.noregistrasifk
-                    INNER JOIN emrfoto_t AS ef ON ef.noemrpasienfk = ep.noemr
                     left JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
                     left JOIN pasien_m as pa on ep.nocm =  pa.nocm
                     left JOIN alamat_m as al on pa.id = al.nocmfk
@@ -7207,9 +7205,7 @@ class ReportController extends ApiController{
                     AND epd.statusenabled = TRUE 
                     and epd.emrfk = $request[emrfk]
                     and epd.index = $a
-                    and ef.index = $a
                     and pa.statusenabled = TRUE
-                    and ef.statusenabled = '1'
                     ORDER BY
                     ed.nourut
                     "
@@ -7222,6 +7218,17 @@ class ReportController extends ApiController{
                     $z->value = substr($z->value, strpos($z->value, '~'));
                 }
             }
+            foreach ($res['d'.$a] as $y) {
+                $res['img'.$a] = \DB::table('emrfoto_t as emrp')
+
+                ->select('emrp.*')
+                ->where('emrp.statusenabled', true)
+                ->where('emrp.kdprofile', $kdProfile)
+                ->where('emrp.noemrpasienfk', $y->noemr)
+                ->where('emrp.emrfk', $request->emrfk)
+                ->first();
+            }
+            
         }
         // $res = collect($res)->filter()->all();
     //   dd($res);
