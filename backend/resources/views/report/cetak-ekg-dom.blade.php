@@ -188,7 +188,7 @@
                 <td colspan="30" class="noborder text-center">Pelaksana : @foreach($res['d1'] as $item) @if($item->emrdfk == 31101097) {!! $item->value !!} @endif @endforeach</td>
             </tr>
             <tr>
-                <td colspan="49" style="text-align: center">@foreach($res['d1'] as $item) @if($item->emrdfk == 31101096) <img src="{!! $item->image !!}" style="width:600px;"> @endif @endforeach</td>
+                <td colspan="49" style="text-align: center"><center><img style="width: 550px;" src="{!! $res['img1']->image  !!}" /></center></td>
             </tr>
         </table>
     </div>
@@ -242,7 +242,7 @@
                 <td colspan="30" class="noborder text-center">Pelaksana : @foreach($res['d2'] as $item) @if($item->emrdfk == 31101097) {!! $item->value !!} @endif @endforeach</td>
             </tr>
             <tr>
-                <td colspan="49" style="text-align: center">@foreach($res['d2'] as $item) @if($item->emrdfk == 31101096) <img src="{!! $item->image !!}" style="width:600px;"> @endif @endforeach</td>
+                <td colspan="49" style="text-align: center"><center><img style="width: 550px;" src="{!! $res['img1']->image  !!}" /></center></td>
             </tr>
         </table>
     </div>
@@ -296,7 +296,7 @@
                 <td colspan="30" class="noborder text-center">Pelaksana : @foreach($res['d3'] as $item) @if($item->emrdfk == 31101097) {!! $item->value !!} @endif @endforeach</td>
             </tr>
             <tr>
-                <td colspan="49" style="text-align: center">@foreach($res['d3'] as $item) @if($item->emrdfk == 31101096) <img src="{!! $item->image !!}" style="width:600px;"> @endif @endforeach</td>
+                <td colspan="49" style="text-align: center"><center><img style="width: 550px;" src="{!! $res['img1']->image  !!}" /></center></td>
             </tr>
         </table>
     </div>
@@ -350,7 +350,7 @@
                 <td colspan="30" class="noborder text-center">Pelaksana : @foreach($res['d4'] as $item) @if($item->emrdfk == 31101097) {!! $item->value !!} @endif @endforeach</td>
             </tr>
             <tr>
-                <td colspan="49" style="text-align: center">@foreach($res['d4'] as $item) @if($item->emrdfk == 31101096) <img src="{!! $item->image !!}" style="width:600px;"> @endif @endforeach</td>
+                <td colspan="49" style="text-align: center"><center><img style="width: 550px;" src="{!! $res['img1']->image  !!}" /></center></td>
             </tr>
         </table>
     </div>
@@ -404,7 +404,7 @@
                 <td colspan="30" class="noborder text-center">Pelaksana : @foreach($res['d5'] as $item) @if($item->emrdfk == 31101097) {!! $item->value !!} @endif @endforeach</td>
             </tr>
             <tr>
-                <td colspan="49" style="text-align: center">@foreach($res['d5'] as $item) @if($item->emrdfk == 31101096) <img src="{!! $item->image !!}" style="width:600px;"> @endif @endforeach</td>
+                <td colspan="49" style="text-align: center"><center><img style="width: 550px;" src="{!! $res['img1']->image  !!}" /></center></td>
             </tr>
         </table>
     </div>

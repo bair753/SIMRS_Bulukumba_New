@@ -253,7 +253,7 @@
                 </tr>
                 <tr style="border:px solid #000; border-top:none;border-bottom:none" height="10pt">
                     <td  style="border:none;" colspan="12">
-                        <center><img class="gambarAset" style="width: 750px;" src="{!! $res['d1'][0]->image  !!}" /></center>
+                        <center><img class="gambarAset" style="width: 750px;" src="{!! $res['img1']->image  !!}" /></center>
                     </td>
                 </tr>
 
@@ -302,7 +302,7 @@
                 </tr>
                 <tr style="border:px solid #000; border-top:none;border-bottom:none" height="10pt">
                     <td  style="border:none;" colspan="12">
-                        <center><img class="gambarAset" style="width: 750px;" src="{!! $res['d2'][0]->image  !!}" /></center>
+                        <center><img class="gambarAset" style="width: 750px;" src="{!! $res['img2']->image  !!}" /></center>
                     </td>
                 </tr>
 
@@ -351,7 +351,7 @@
                 </tr>
                 <tr style="border:px solid #000; border-top:none;border-bottom:none" height="10pt">
                     <td  style="border:none;" colspan="12">
-                        <center><img class="gambarAset" style="width: 750px;" src="{!! $res['d3'][0]->image  !!}" /></center>
+                        <center><img class="gambarAset" style="width: 750px;" src="{!! $res['img3']->image  !!}" /></center>
                     </td>
                 </tr>
 
@@ -400,7 +400,7 @@
                 </tr>
                 <tr style="border:px solid #000; border-top:none;border-bottom:none" height="10pt">
                     <td  style="border:none;" colspan="12">
-                        <center><img class="gambarAset" style="width: 750px;" src="{!! $res['d4'][0]->image  !!}" /></center>
+                        <center><img class="gambarAset" style="width: 750px;" src="{!! $res['img4']->image  !!}" /></center>
                     </td>
                 </tr>
 
@@ -449,7 +449,7 @@
                 </tr>
                 <tr style="border:px solid #000; border-top:none;border-bottom:none" height="10pt">
                     <td  style="border:none;" colspan="12">
-                        <center><img class="gambarAset" style="width: 750px;" src="{!! $res['d5'][0]->image  !!}" /></center>
+                        <center><img class="gambarAset" style="width: 750px;" src="{!! $res['img5']->image  !!}" /></center>
                     </td>
                 </tr>
 
@@ -498,7 +498,7 @@
                 </tr>
                 <tr style="border:px solid #000; border-top:none;border-bottom:none" height="10pt">
                     <td  style="border:none;" colspan="12">
-                        <center><img class="gambarAset" style="width: 750px;" src="{!! $res['d6'][0]->image  !!}" /></center>
+                        <center><img class="gambarAset" style="width: 750px;" src="{!! $res['img6']->image  !!}" /></center>
                     </td>
                 </tr>
 
@@ -547,7 +547,7 @@
                 </tr>
                 <tr style="border:px solid #000; border-top:none;border-bottom:none" height="10pt">
                     <td  style="border:none;" colspan="12">
-                        <center><img class="gambarAset" style="width: 750px;" src="{!! $res['d7'][0]->image  !!}" /></center>
+                        <center><img class="gambarAset" style="width: 750px;" src="{!! $res['img7']->image  !!}" /></center>
                     </td>
                 </tr>
 
