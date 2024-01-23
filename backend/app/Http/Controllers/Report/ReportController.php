@@ -9490,10 +9490,13 @@ class ReportController extends ApiController{
             ));
             foreach ($res['d'.$a] as $z) {
                 if ($z->type == "datetime") {
-                    $z->value = date('H:i d-m-Y', strtotime($z->value));
+                    $z->value = date('d-m-Y H:i', strtotime($z->value));
                 }
                 if ($z->type == "time") {
                     $z->value = date('H:i', strtotime($z->value));
+                }
+                if ($z->type == "date") {
+                    $z->value = date('d-m-Y', strtotime($z->value));
                 }
                 if ($z->value != null) {
                     $z->value = substr($z->value, strpos($z->value, '~'));
