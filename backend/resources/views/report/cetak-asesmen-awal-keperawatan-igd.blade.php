@@ -249,17 +249,17 @@
             </tr>
             <tr height="18px">
                 <td colspan="7">Respon Time : @{{ item.obj[420616] ? item.obj[420616] : '' }}</td>
-                <td colspan="9">Tanggal : @{{item.obj[420617] | toDate | date:'dd MMMM yyyy'}}</td>
-                <td colspan="3" style="border:none">Masuk Pukul</td>
-                <td colspan="3" style="border:none">: @{{item.obj[420617] | toDate | date:'HH:mm'}} WITA</td>
+                <td colspan="9">Tanggal/Jam Masuk: @foreach($res['d'] as $item) @if($item->emrdfk == 420617) {!! $item->value !!} @endif @endforeach</td>
+                {{-- <td colspan="3" style="border:none">Masuk Pukul</td>
+                <td colspan="3" style="border:none">: @foreach($res['d'] as $item) @if($item->emrdfk == 420617) {!! $item->value !!} @endif @endforeach WITA</td> --}}
             </tr>
             <tr height="18px">
                 <td colspan="4" style="border:none">Cara Pembayaran :</td>
                 <td colspan="3" style="border:none;vertical-align:middle">@{{ item.obj[420620] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Umum</td>
                 <td colspan="3" style="border:none;vertical-align:middle">@{{ item.obj[420621] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Asuransi</td>
                 <td colspan="6" style="border:none;border-right:1px solid #000;vertical-align:middle">@{{ item.obj[420622] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} BPJS No. : @{{ item.obj[420623] ? item.obj[420623] : '' }}</td>
-                <td colspan="3" style="border:none">Diperiksa Pukul</td>
-                <td colspan="3" style="border:none">: @{{item.obj[420618] | toDate | date:'HH:mm'}} WITA</td>
+                <td colspan="2" style="border:none">Diperiksa Pukul</td>
+                <td colspan="4" style="border:none">: @foreach($res['d'] as $item) @if($item->emrdfk == 420618) {!! $item->value !!} @endif @endforeach WITA</td>
             </tr>
             <tr height="18px" style="border:1px solid #000">
                 <td colspan="4" >Jenis Kasus</td>
@@ -380,7 +380,7 @@
             <tr height="18px">
                 <td colspan="6" style="border:none;border-right:1px solid #000"><strong>Pupil</strong></td>
                 <td colspan="6" style="border:none;border-right:1px solid #000">@{{ item.obj[420675] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Luka</td>
-                <td colspan="6" style="border:none;">Penentuan Kematian Pukul: @{{item.obj[420679] | toDate | date:'HH:mm'}} WITA</td>
+                <td colspan="6" style="border:none;">Penentuan Kematian Pukul: @foreach($res['d'] as $item) @if($item->emrdfk == 420679) {!! $item->value !!} @endif @endforeach WITA</td>
             </tr>
             <tr height="18px">
                 <td colspan="2" style="border:none">@{{ item.obj[420664] ? '[&#10004;]' : '[&nbsp;&nbsp;&nbsp;]' }} Isokor</td>
@@ -640,87 +640,87 @@
             </tr>
             <tr height="18px">
                 <td colspan="4" valign="top" rowspan="16">Implementasi/<br>Tindakan Kolaborasi</td>
-                <td colspan="2" style="text-align: center;">Tgl/Pukul</td>
-                <td colspan="11" style="text-align: center;">Implementas Keperewatan/Tindakan Kolaborasi</td>
+                <td colspan="3" style="text-align: center;">Tgl/Pukul</td>
+                <td colspan="10" style="text-align: center;">Implementas Keperewatan/Tindakan Kolaborasi</td>
                 <td colspan="5" style="text-align: center;">Nama dan Tanda Tangan</td>
             </tr>
             <tr height="18px">
-                <td colspan="2">@{{item.obj[420816] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-                <td colspan="11">@{{ item.obj[420817] ? item.obj[420817] : '' }}</td>
+                <td colspan="3">@foreach($res['d'] as $item) @if($item->emrdfk == 420816) {!! $item->value !!} @endif @endforeach</td>
+                <td colspan="10">@{{ item.obj[420817] ? item.obj[420817] : '' }}</td>
                 <td colspan="5">@{{ item.obj[420818] ? item.obj[420818] : '' }}</td>
             </tr>
             <tr height="18px">
-                <td colspan="2">@{{item.obj[420819] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-                <td colspan="11">@{{ item.obj[420820] ? item.obj[420820] : '' }}</td>
+                <td colspan="3">@foreach($res['d'] as $item) @if($item->emrdfk == 420819) {!! $item->value !!} @endif @endforeach</td>
+                <td colspan="10">@{{ item.obj[420820] ? item.obj[420820] : '' }}</td>
                 <td colspan="5">@{{ item.obj[420821] ? item.obj[420821] : '' }}</td>
             </tr>
             <tr height="18px">
-                <td colspan="2">@{{item.obj[420822] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-                <td colspan="11">@{{ item.obj[420823] ? item.obj[420823] : '' }}</td>
+                <td colspan="3">@foreach($res['d'] as $item) @if($item->emrdfk == 420822) {!! $item->value !!} @endif @endforeach</td>
+                <td colspan="10">@{{ item.obj[420823] ? item.obj[420823] : '' }}</td>
                 <td colspan="5">@{{ item.obj[420824] ? item.obj[420824] : '' }}</td>
             </tr>
             <tr height="18px">
-                <td colspan="2">@{{item.obj[420825] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-                <td colspan="11">@{{ item.obj[420826] ? item.obj[420826] : '' }}</td>
+                <td colspan="3">@foreach($res['d'] as $item) @if($item->emrdfk == 420825) {!! $item->value !!} @endif @endforeach</td>
+                <td colspan="10">@{{ item.obj[420826] ? item.obj[420826] : '' }}</td>
                 <td colspan="5">@{{ item.obj[420827] ? item.obj[420827] : '' }}</td>
             </tr>
             <tr height="18px">
-                <td colspan="2">@{{item.obj[420828] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-                <td colspan="11">@{{ item.obj[420829] ? item.obj[420829] : '' }}</td>
+                <td colspan="3">@foreach($res['d'] as $item) @if($item->emrdfk == 420828) {!! $item->value !!} @endif @endforeach</td>
+                <td colspan="10">@{{ item.obj[420829] ? item.obj[420829] : '' }}</td>
                 <td colspan="5">@{{ item.obj[420830] ? item.obj[420830] : '' }}</td>
             </tr>
             <tr height="18px">
-                <td colspan="2">@{{item.obj[420831] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-                <td colspan="11">@{{ item.obj[420832] ? item.obj[420832] : '' }}</td>
+                <td colspan="3">@foreach($res['d'] as $item) @if($item->emrdfk == 420831) {!! $item->value !!} @endif @endforeach</td>
+                <td colspan="10">@{{ item.obj[420832] ? item.obj[420832] : '' }}</td>
                 <td colspan="5">@{{ item.obj[420833] ? item.obj[420833] : '' }}</td>
             </tr>
             <tr height="18px">
-                <td colspan="2">@{{item.obj[420834] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-                <td colspan="11">@{{ item.obj[420835] ? item.obj[420835] : '' }}</td>
+                <td colspan="3">@foreach($res['d'] as $item) @if($item->emrdfk == 420834) {!! $item->value !!} @endif @endforeach</td>
+                <td colspan="10">@{{ item.obj[420835] ? item.obj[420835] : '' }}</td>
                 <td colspan="5">@{{ item.obj[420836] ? item.obj[420836] : '' }}</td>
             </tr>
             <tr height="18px">
-                <td colspan="2">@{{item.obj[420837] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-                <td colspan="11">@{{ item.obj[420838] ? item.obj[420838] : '' }}</td>
+                <td colspan="3">@foreach($res['d'] as $item) @if($item->emrdfk == 420837) {!! $item->value !!} @endif @endforeach</td>
+                <td colspan="10">@{{ item.obj[420838] ? item.obj[420838] : '' }}</td>
                 <td colspan="5">@{{ item.obj[420839] ? item.obj[420839] : '' }}</td>
             </tr>
             <tr height="18px">
-                <td colspan="2">@{{item.obj[420840] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-                <td colspan="11">@{{ item.obj[420841] ? item.obj[420841] : '' }}</td>
+                <td colspan="3">@foreach($res['d'] as $item) @if($item->emrdfk == 420840) {!! $item->value !!} @endif @endforeach</td>
+                <td colspan="10">@{{ item.obj[420841] ? item.obj[420841] : '' }}</td>
                 <td colspan="5">@{{ item.obj[420842] ? item.obj[420842] : '' }}</td>
             </tr>
             <tr height="18px">
-                <td colspan="2">@{{item.obj[420843] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-                <td colspan="11">@{{ item.obj[420844] ? item.obj[420844] : '' }}</td>
+                <td colspan="3">@foreach($res['d'] as $item) @if($item->emrdfk == 420843) {!! $item->value !!} @endif @endforeach</td>
+                <td colspan="10">@{{ item.obj[420844] ? item.obj[420844] : '' }}</td>
                 <td colspan="5">@{{ item.obj[420845] ? item.obj[420845] : '' }}</td>
             </tr>
             <tr height="18px">
-                <td colspan="2">@{{item.obj[420846] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-                <td colspan="11">@{{ item.obj[420847] ? item.obj[420847] : '' }}</td>
+                <td colspan="3">@foreach($res['d'] as $item) @if($item->emrdfk == 420846) {!! $item->value !!} @endif @endforeach</td>
+                <td colspan="10">@{{ item.obj[420847] ? item.obj[420847] : '' }}</td>
                 <td colspan="5">@{{ item.obj[420848] ? item.obj[420848] : '' }}</td>
             </tr>
             <tr height="18px">
-                <td colspan="2">@{{item.obj[420849] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-                <td colspan="11">@{{ item.obj[420850] ? item.obj[420850] : '' }}</td>
+                <td colspan="3">@foreach($res['d'] as $item) @if($item->emrdfk == 420849) {!! $item->value !!} @endif @endforeach</td>
+                <td colspan="10">@{{ item.obj[420850] ? item.obj[420850] : '' }}</td>
                 <td colspan="5">@{{ item.obj[420851] ? item.obj[420851] : '' }}</td>
             </tr>
             <tr height="18px">
-                <td colspan="2">@{{item.obj[420852] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-                <td colspan="11">@{{ item.obj[420853] ? item.obj[420853] : '' }}</td>
+                <td colspan="3">@foreach($res['d'] as $item) @if($item->emrdfk == 420852) {!! $item->value !!} @endif @endforeach</td>
+                <td colspan="10">@{{ item.obj[420853] ? item.obj[420853] : '' }}</td>
                 <td colspan="5">@{{ item.obj[420854] ? item.obj[420854] : '' }}</td>
             </tr>
             <tr height="18px">
-                <td colspan="2">@{{item.obj[420855] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-                <td colspan="11">@{{ item.obj[420856] ? item.obj[420856] : '' }}</td>
+                <td colspan="3">@foreach($res['d'] as $item) @if($item->emrdfk == 420855) {!! $item->value !!} @endif @endforeach</td>
+                <td colspan="10">@{{ item.obj[420856] ? item.obj[420856] : '' }}</td>
                 <td colspan="5">@{{ item.obj[420857] ? item.obj[420857] : '' }}</td>
             </tr>
             <tr height="18px">
-                <td colspan="2">@{{item.obj[420858] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
-                <td colspan="11">@{{ item.obj[420859] ? item.obj[420859] : '' }}</td>
+                <td colspan="3">@foreach($res['d'] as $item) @if($item->emrdfk == 420858) {!! $item->value !!} @endif @endforeach</td>
+                <td colspan="10">@{{ item.obj[420859] ? item.obj[420859] : '' }}</td>
                 <td colspan="5">@{{ item.obj[420860] ? item.obj[420860] : '' }}</td>
             </tr>
             <tr >
-                <td style="border:none;border-right:1px solid #000" colspan="11">Bulukumba: @{{item.obj[420861] | toDate | date:'dd MMMM yyyy'}} Pukul : @{{item.obj[420861] | toDate | date:'HH:mm'}} WITA</td>
+                <td style="border:none;border-right:1px solid #000" colspan="11">Bulukumba: @foreach($res['d'] as $item) @if($item->emrdfk == 420861) {!! $item->value !!} @endif @endforeach Pukul : @foreach($res['d'] as $item) @if($item->emrdfk == 420861) {!! $item->value !!} @endif @endforeach WITA</td>
                 <td style="border:none;" colspan="11">Tanda Tangan</td>
             </tr>
             <tr>
