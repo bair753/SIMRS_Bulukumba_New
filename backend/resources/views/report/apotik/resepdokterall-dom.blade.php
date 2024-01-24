@@ -87,13 +87,13 @@
                             </center>
                         </td>
                     </tr>
-                </tbody>
+                
             </table>
             <center>
                 <h2> <u>RESEP</u></h2>
             </center>
             <table width="100%">
-                <tbody valign="top">
+                
                     <tr>
                         <td width="15%">
                             No. Rekam Medik
@@ -272,11 +272,11 @@
                         </td>
                     </tr>
 
-                </tbody>
+                
             </table>
 
             <table width="100%">
-                <thead>
+                
                     <tr>
                         <td height="5">
                             <b>R/Ke
@@ -303,8 +303,8 @@
                             <b>Paraf
                         </td>
                     </tr>
-                </thead>
-                <tbody valign="top">
+                
+                
                     <?php foreach ($depo['details'] as $d) { ?>
                     <tr>
                         <td height="5">
@@ -333,11 +333,11 @@
                         </td>
                     </tr>
                     <?php } ?>
-                </tbody>
+                
             </table>
             <br>
             <table width="100%">
-                <tbody valign="top">
+                
                     <tr>
                         <td style="text-align: center" colspan="8" height="5">
                             <font size="2" style="font-weight:bold;" >--- Diisi
@@ -345,10 +345,10 @@
 
                         </td>
                     </tr>
-                    <tr>
+                    {{-- <tr>
                         <td align="center" colspan="8" height="5">
                         </td>
-                    </tr>
+                    </tr> --}}
                     <tr>
                         <td colspan="2" height="5" width="25%"
                             style="border-left:solid 1.0pt; border-top:solid 1.0pt; text-align:center; padding-bottom:3px;">
@@ -414,11 +414,11 @@
                                 {{ $depo['isi']->serahinformasi }}
                         </td>
                     </tr>
-                </tbody>
+                
             </table>
             <br>
             <table c width="100%" align="center" style="border: solid 1.0pt">
-                <tbody valign="top">
+                
                     <tr>
                         <td height="5"
                             style="padding-left:3pt; padding-bottom:3pt; border-bottom:solid 1.0pt; border-right:solid 1.0pt;">
@@ -682,7 +682,7 @@
                         </td>
 
                     </tr>
-                </tbody>
+                
             </table>
             <!--end-->
         </div>
@@ -714,13 +714,13 @@
                             </center>
                         </td>
                     </tr>
-                </tbody>
+                
             </table>
             <center>
                 <h2> <u>RESEP</u></h2>
             </center>
             <table width="100%">
-                <tbody valign="top">
+                
                     <tr>
                         <td width="15%">
                             No. Rekam Medik
@@ -899,11 +899,11 @@
                         </td>
                     </tr>
         
-                </tbody>
+                
             </table>
         
             <table width="100%">
-                <thead>
+                
                     <tr>
                         <td height="5">
                             <b>R/Ke
@@ -930,8 +930,8 @@
                             <b>Paraf
                         </td>
                     </tr>
-                </thead>
-                <tbody valign="top">
+                
+                
                     <?php foreach ($dokter['details'] as $d) { ?>
                     <tr>
                         <td height="5">
@@ -960,11 +960,11 @@
                         </td>
                     </tr>
                     <?php } ?>
-                </tbody>
+                
             </table>
             <br>
             <table width="100%">
-                <tbody valign="top">
+                
                     <tr>
                         <td style="text-align: center" colspan="8" height="5">
                             <font size="2" style="font-weight:bold;" >--- Diisi
@@ -1041,11 +1041,11 @@
                                 {{ $dokter['isi']->serahinformasi }}
                         </td>
                     </tr>
-                </tbody>
+                
             </table>
             <br>
             <table c width="100%" align="center" style="border: solid 1.0pt">
-                <tbody valign="top">
+                
                     <tr>
                         <td height="5"
                             style="padding-left:3pt; padding-bottom:3pt; border-bottom:solid 1.0pt; border-right:solid 1.0pt;">
@@ -1309,7 +1309,7 @@
                         </td>
         
                     </tr>
-                </tbody>
+                
             </table>
             <!--end-->
         </div>
