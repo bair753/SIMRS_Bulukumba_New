@@ -4080,6 +4080,27 @@ class ReportController extends ApiController{
         }
         
          $cek = $res[0];
+
+         if ($cek->dokterperiksa == null) {
+            echo '
+                <script language="javascript">
+                    window.alert("Dokter Periksa Tidak Ditemukan");
+                    window.close()
+                </script>
+            ';
+            die;
+        }
+        if ($cek->dokterpenanggungjawab == null) {
+            echo '
+                <script language="javascript">
+                    window.alert("Dokter Penanggung Jawab Tidak Ditemukan");
+                    window.close()
+                </script>
+            ';
+            die;
+            
+        }
+
          if ($cek->qrcodedokterperiksa == null) {
             $cek->qrcodedokterperiksa =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate($cek->dokterperiksa));
         }
@@ -4275,6 +4296,26 @@ class ReportController extends ApiController{
         
         
          $cek = $res['d1'][0];
+
+         if ($cek->dokterperiksa == null) {
+            $transMessage = "Dokter Periksa Tidak Ditemukan";
+            $result = array(
+                "status" => 400,
+                "message" => $transMessage,
+                "as" => 'mr_adhyy@epic',
+            );
+            return $this->setStatusCode($result['status'])->respond($result, $transMessage);
+        }
+        if ($cek->dokterpenanggungjawab == null) {
+            $transMessage = "Dokter Penanggung Jawab Tidak Ditemukan";
+            $result = array(
+                "status" => 400,
+                "message" => $transMessage,
+                "as" => 'mr_adhyy@epic',
+            );
+            return $this->setStatusCode($result['status'])->respond($result, $transMessage);
+        }
+
          if ($cek->qrcodedokterperiksa == null) {
             $cek->qrcodedokterperiksa =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate($cek->dokterperiksa));
         }
