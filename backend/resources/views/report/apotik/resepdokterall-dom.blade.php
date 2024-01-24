@@ -447,13 +447,11 @@
                             <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <font size="1"><input type="checkbox" name="" id="">
-                            </font>
+                            -
                         </td>
                         @else
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <font size="1"><input type="checkbox" name="" id="">
-                            </font>
+                            -
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
                             <img src="{{ $centang}}" width="10px" height="10px" />
@@ -474,13 +472,11 @@
                             <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <font size="1"><input type="checkbox" name="" id="">
-                            </font>
+                            -
                         </td>
                         @else
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <font size="1"><input type="checkbox" name="" id="">
-                            </font>
+                            -
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
                             <img src="{{ $centang}}" width="10px" height="10px" />
@@ -500,13 +496,11 @@
                             <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <font size="1"><input type="checkbox" name="" id="">
-                            </font>
+                            -
                         </td>
                         @else
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <font size="1"><input type="checkbox" name="" id="">
-                            </font>
+                            -
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
                             <img src="{{ $centang}}" width="10px" height="10px" />
@@ -530,13 +524,11 @@
                             <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <font size="1"><input type="checkbox" name="" id="">
-                            </font>
+                            -
                         </td>
                         @else
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <font size="1"><input type="checkbox" name="" id="">
-                            </font>
+                            -
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
                             <img src="{{ $centang}}" width="10px" height="10px" />
@@ -560,13 +552,11 @@
                             <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <font size="1"><input type="checkbox" name="" id="">
-                            </font>
+                            -
                         </td>
                         @else
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <font size="1"><input type="checkbox" name="" id="">
-                            </font>
+                            -
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
                             <img src="{{ $centang}}" width="10px" height="10px" />
@@ -587,13 +577,11 @@
                             <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <font size="1"><input type="checkbox" name="" id="">
-                            </font>
+                            -
                         </td>
                         @else
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <font size="1"><input type="checkbox" name="" id="">
-                            </font>
+                            -
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
                             <img src="{{ $centang}}" width="10px" height="10px" />
@@ -614,13 +602,11 @@
                             <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <font size="1"><input type="checkbox" name="" id="">
-                            </font>
+                            -
                         </td>
                         @else
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <font size="1"><input type="checkbox" name="" id="">
-                            </font>
+                            -
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
                             <img src="{{ $centang}}" width="10px" height="10px" />
@@ -640,13 +626,11 @@
                             <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <font size="1"><input type="checkbox" name="" id="">
-                            </font>
+                            -
                         </td>
                         @else
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <font size="1"><input type="checkbox" name="" id="">
-                            </font>
+                            -
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
                             <img src="{{ $centang}}" width="10px" height="10px" />
@@ -1074,13 +1058,11 @@
                             <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <font size="1"><input type="checkbox" name="" id="">
-                            </font>
+                            -
                         </td>
                         @else
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <font size="1"><input type="checkbox" name="" id="">
-                            </font>
+                            -
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
                             <img src="{{ $centang}}" width="10px" height="10px" />
@@ -1101,13 +1083,11 @@
                             <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <font size="1"><input type="checkbox" name="" id="">
-                            </font>
+                            -
                         </td>
                         @else
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <font size="1"><input type="checkbox" name="" id="">
-                            </font>
+                            -
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
                             <img src="{{ $centang}}" width="10px" height="10px" />
@@ -1127,13 +1107,11 @@
                             <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <font size="1"><input type="checkbox" name="" id="">
-                            </font>
+                            -
                         </td>
                         @else
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <font size="1"><input type="checkbox" name="" id="">
-                            </font>
+                            -
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
                             <img src="{{ $centang}}" width="10px" height="10px" />
@@ -1157,13 +1135,11 @@
                             <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <font size="1"><input type="checkbox" name="" id="">
-                            </font>
+                            -
                         </td>
                         @else
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <font size="1"><input type="checkbox" name="" id="">
-                            </font>
+                            -
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
                             <img src="{{ $centang}}" width="10px" height="10px" />
@@ -1187,13 +1163,11 @@
                             <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <font size="1"><input type="checkbox" name="" id="">
-                            </font>
+                            -
                         </td>
                         @else
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <font size="1"><input type="checkbox" name="" id="">
-                            </font>
+                            -
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
                             <img src="{{ $centang}}" width="10px" height="10px" />
@@ -1214,13 +1188,11 @@
                             <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <font size="1"><input type="checkbox" name="" id="">
-                            </font>
+                            -
                         </td>
                         @else
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <font size="1"><input type="checkbox" name="" id="">
-                            </font>
+                            -
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
                             <img src="{{ $centang}}" width="10px" height="10px" />
@@ -1241,13 +1213,11 @@
                             <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <font size="1"><input type="checkbox" name="" id="">
-                            </font>
+                            -
                         </td>
                         @else
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <font size="1"><input type="checkbox" name="" id="">
-                            </font>
+                            -
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
                             <img src="{{ $centang}}" width="10px" height="10px" />
@@ -1267,13 +1237,11 @@
                             <img src="{{ $centang}}" width="10px" height="10px" />
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <font size="1"><input type="checkbox" name="" id="">
-                            </font>
+                            -
                         </td>
                         @else
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
-                            <font size="1"><input type="checkbox" name="" id="">
-                            </font>
+                            -
                         </td>
                         <td height="5" style="text-align: center; border-right:solid 1.0pt;">
                             <img src="{{ $centang}}" width="10px" height="10px" />
