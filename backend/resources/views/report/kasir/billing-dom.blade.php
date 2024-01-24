@@ -101,7 +101,7 @@
     <table width="100%">
         <tr>
             <td rowspan="4">
-                <img src="{{ $image }}" alt="" style="width: 50px;display:block; margin:auto;">
+                <img src="{{ $image }}" alt="" style="width: 50px; margin:auto;">
 
             </td>
             <td rowspan="4" colspan="4"><strong>{!!
@@ -175,7 +175,6 @@
         </tr>
     </table>
     <table width="100%" class="tabledetail">
-        <thead>
             <tr>
                 <th>
                     No
@@ -205,7 +204,6 @@
                     Sub Total
                 </th>
             </tr>
-        </thead>
         @php
         $nomor = 1;
         $totaltagihan = 0;
@@ -214,8 +212,8 @@
         $totaldiklaim = 0;
         @endphp
         @foreach ($res['billing'] as $ruangan)
-        <thead style="background-color:aqua;">
-            <tr>
+        {{-- <thead style="background-color:aqua;"> --}}
+            <tr style="background-color:aqua;">
                 <td colspan="9">
                     <span class="text-normal bold">
                         <b> {{ strtoupper($ruangan[0]->namaruangan) }}</b>
@@ -231,8 +229,8 @@
 
                 </td>
             </tr>
-        </thead>
-        <tbody>
+        {{-- </thead> --}}
+        {{-- <tbody> --}}
             @php
             $total = 0;
             $diskon = 0;
@@ -287,8 +285,8 @@
 
                 </td>
             </tr>
-        </tbody>
-        <tfoot>
+        {{-- </tbody> --}}
+        {{-- <tr> --}}
             {{-- <tr>
                 <td align="right" colspan="9">
 
@@ -304,7 +302,7 @@
             @endforeach
             @endforeach
 
-        </tfoot>
+        {{-- </tr> --}}
 
 
     </table>

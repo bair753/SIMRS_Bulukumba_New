@@ -425,11 +425,17 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 				//  }, 3000);
 				$scope.isRouteLoading = true;
 				 medifirstService.get(dataItem.url + dataItem.param + "&issimpanberkas=true&iddok="
-				 +dataItem.id+"&isberkasnoreg="+dataItem.noregistrasi+"&namafile=" + dataItem.namafile).then(function (e) {
-					$scope.isRouteLoading = false
-					$scope.tutupdokumen();
-
-						})
+				 +dataItem.id+"&isberkasnoreg="+dataItem.noregistrasi+"&namafile=" + dataItem.namafile).then(function (c) {
+					if (c.status == 200) {
+						$scope.isRouteLoading = false
+						$scope.tutupdokumen();
+						toastr.success("Berhasil menyimpan berkas");
+					}else{
+						toastr.error("Gagal menyimpan berkas");
+						$scope.isRouteLoading = false
+						$scope.tutupdokumen();
+					}
+				});
 				
             }
 
@@ -581,7 +587,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
             })
 
 			$('body ').on('click','#cariDokumen',function(e){
-				console.log($scope);
+				// console.log($scope);
                 var id = $(this).data("id");
                 var noregistrasi = $(this).data("noreg");
                 $scope.isRouteLoading = true
