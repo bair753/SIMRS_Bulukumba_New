@@ -266,7 +266,7 @@
             </tr>
             <tr>
                 <th colspan="10" style="text-align:center;">
-                    NOMOR : 440	/ @{{ item.obj[32108986] ? item.obj[32108986] : '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' }} / RSUD - BLK / 2023
+                    NOMOR : 440	/ @{{ item.obj[32108986] ? item.obj[32108986] : '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' }} / RSUD - BLK / <?php echo date('Y'); ?>
                 </th>
             </tr>
             <tr style="border:none;" height="50px">
