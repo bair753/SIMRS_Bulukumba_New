@@ -113,7 +113,7 @@
     </div>
     <div class="header">
         <h3>SURAT KETERANGAN KEMATIAN</h3>
-        <p class="subject"> NOMOR: 440 / @foreach($res['d'] as $item) @if($item->emrdfk == 32104095) {!! $item->value !!} @endif @endforeach / RSUD-BLK / 2023
+        <p class="subject"> NOMOR: 440 / @foreach($res['d'] as $item) @if($item->emrdfk == 32104095) {!! $item->value !!} @endif @endforeach / RSUD-BLK / <?php echo date('Y'); ?>
         </p>
     </div>
     <p>Yang bertanda tangan di bawah ini menerangkan bawah:
