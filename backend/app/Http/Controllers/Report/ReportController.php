@@ -2533,7 +2533,7 @@ class ReportController extends ApiController{
             
         }else{
             
-            return view('report.pendaftaran.sepV2-dom',
+            return view('report.pendaftaran.sepV2',
             compact('dataReport', 'pageWidth','profile', 'image'));
         }
 
