@@ -256,12 +256,12 @@
                                         {{-- batas --}}
                                         <td height="20"><font style="font-size: 10pt;" color="#000000" face="Tahoma">Tgl Keluar</font></td>
                                         <td height="20"><font style="font-size: 10pt;" color="#000000" face="Tahoma">:</font></td>
-                                        <td height="20"><font style="font-size: 10pt;" color="#000000" face="Tahoma"></font></td>
+                                        <td height="20"><font style="font-size: 10pt;" color="#000000" face="Tahoma">{{ $dataReport['suratJaminan']->tglkeluar }}</font></td>
                                     </tr>
                                     <tr>
                                         <td height="20"><font style="font-size: 10pt;" color="#000000" face="Tahoma">Diagnosa Penyakit</font></td>
                                         <td height="20"><font style="font-size: 10pt;" color="#000000" face="Tahoma">:</font></td>
-                                        <td height="20" colspan="4"><font style="font-size: 10pt;" color="#000000" face="Tahoma"></font></td>
+                                        <td height="20" colspan="4"><font style="font-size: 10pt;" color="#000000" face="Tahoma">{{ $dataReport['diagnosa'] }}</font></td>
                                     </tr>
                                     <tr>
                                         <td height="20"><font style="font-size: 10pt;" color="#000000" face="Tahoma">Prosedur/Tindakan</font></td>

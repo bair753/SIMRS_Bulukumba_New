@@ -2453,6 +2453,7 @@ class ReportController extends ApiController{
             ,pm.nobpjs || ' ( MR : ' || pm.nocm || ' )' as nobpjs
             ,pg.namalengkap AS dokter
             ,to_char(pd.tglregistrasi, 'DD/MM/YYYY' ) AS tglmasuk 
+            ,to_char(pd.tglpulang, 'DD/MM/YYYY' ) AS tglkeluar 
             FROM pasiendaftar_t AS pd
             LEFT JOIN ruangan_m AS ru ON ru.id = pd.objectruanganlastfk
             LEFT JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
@@ -2463,6 +2464,21 @@ class ReportController extends ApiController{
 		    LEFT JOIN rekanan_m AS rkn ON rkn.id = pd.objectrekananfk
             WHERE pd.noregistrasi = '". $noregistrasi ."'
         "))->first();
+
+        $diagnosa = \DB::table('pasiendaftar_t AS pd')
+            ->join('antrianpasiendiperiksa_t AS apd','apd.noregistrasifk','=','pd.norec')
+            ->join('detaildiagnosapasien_t as ddg','ddg.noregistrasifk','=','apd.norec')
+            ->join('diagnosa_m AS dm','dm.id','=','ddg.objectdiagnosafk')
+            ->select(DB::raw("CASE WHEN apd.norec IS NULL THEN ' , ' ELSE dm.kddiagnosa || ', ' || dm.namadiagnosa END AS diagnosa"))
+//            ->where('pd.kdprofile', $kdProfile)
+            ->where('ddg.objectjenisdiagnosafk', 1)
+            ->where('pd.noregistrasi',  $noregistrasi)
+            ->first();
+        $namaDiagnosa='';
+        if ($diagnosa != null){
+            $namaDiagnosa = $diagnosa->diagnosa;
+        }
+
         $spri = collect(DB::select("
             SELECT to_char(tglrencanakontrol, 'dd Month yyyy') as tglrencana
             ,to_char(tglterbitkontrol, 'dd Month yyyy') as tglterbit
@@ -2488,6 +2504,7 @@ class ReportController extends ApiController{
             'data' => $datas,
             'suratJaminan' => $suratJaminan,
             'spri' => $spri,
+            'diagnosa' => $namaDiagnosa,
             'ttdpasien' => $ttdpasien,
             'ttddokter' => $ttddokter,
             'ttdrumahsakit' => $ttdrumahsakit,
