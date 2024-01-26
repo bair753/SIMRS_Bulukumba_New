@@ -13,7 +13,7 @@
         }
 
         body {
-            font-size: 14px;
+            font-size: 9pt;
             margin: 36pt;
         }
 
@@ -165,7 +165,7 @@
                                     </td>
                                     <td>
 
-                                        {{ $dataReport['tgllahir'] }}
+                                        {{ $dataReport['tgllahir'] }} Kelamin : {{ $dataReport['jeniskelamin'] }}
                                     </td>
                                     <td>
                                         Jenis Rawat
@@ -180,14 +180,14 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        Jenis Kelamin
+                                        No. Telepon
                                     </td>
                                     <td>
                                         :
                                     </td>
                                     <td>
 
-                                        {{ $dataReport['jeniskelamin'] }}
+                                        {{ $dataReport['notelepon'] }}
                                     </td>
                                     <td>
                                         Kelas Rawat
@@ -278,14 +278,14 @@
 
                                     </td>
                                     <td>
-                                        _________________
+                                        {{ $dataReport['namapeserta'] }}
 
                                     </td>
                                     <td>
 
                                     </td>
                                     <td>
-                                        _________________
+                                        {{ $dataReport['namapeserta'] }}
 
                                     </td>
                                 </tr>
@@ -293,14 +293,17 @@
                                     <td colspan="4">
                                         <table>
                                             <tr>
-                                                <td >
-                                                    *Saya
-                                                    Menyetujui BPJS Kesehatan menggunakan informasi Medis Pasien jika
-                                                    diperlukan. <br />
-                                                    *SEP bukan
-                                                    sebagai bukti penjaminan peserta <br />
-                                                    Cetakan Ke
-                                                    1 tanggal <br />
+                                                <td style="font-size:7pt">
+    *Saya menyetujui BPJS Kesehatan untuk : <br>
+    a. membuka dan atau menggunakan informasi medis Pasien untuk keperluan administrasi, pembayaran asuransi atau
+    jaminan pembiayaan kesehatan <br>
+    b. memberikan akses informasi medis atau riwayat pelayanan kepada dokter/tenaga medis pada RSUD H. A. SULTHAN DG. RADJA
+    untuk kepentingan pemeliharaan kesehatan, pengobatan, penyembuhan, dan perawatan Pasien <br>
+    *Saya mengetahui dan memahami : <br>
+    a. Rumah Sakit dapat melakukan koordinasi dengan PT Jasa Raharja / PT Taspen / PT ASABRI / BPJS Ketenagakerjaan atau
+ Penjamin lainnya, jika Peserta merupakan pasien yang mengalami kecelakaan lalulintas dan / atau kecelakaan kerja <br>
+ b. SEP bukan sebagai bukti penjaminan peserta
+
                                                 </td>
                                             </tr>
                                         </table>
