@@ -2287,7 +2287,7 @@ class ReportController extends ApiController{
         $registrasi = collect(DB::select("
              SELECT pa.nosep,to_char(pa.tanggalsep, 'DD-MM-YYYY HH:mm') AS tanggalsep,pa.nokepesertaan,pi.nocm,pd.noregistrasi,
                     pa.norujukan,ap.namapeserta,to_char(pi.tgllahir, 'DD-MM-YYYY') AS tgllahir,jk.jeniskelamin, 
-                    rp.namaruangan,rp.kodeexternal as namapoli,pa.ppkrujukan,  
+                    rp.namaruangan,rp.kodeexternal as namapoli,pa.ppkrujukan, ps.notelepon 
                     (CASE WHEN rp.objectdepartemenfk=16 then 'Rawat Inap' else 'Rawat Jalan' END) as jenisrawat, 
                     dg.kddiagnosa, (case when dg.namadiagnosa is null then '-' else dg.namadiagnosa end) as namadiagnosa ,  
                     ap.jenispeserta,ap.kdprovider,ap.nmprovider,kls.namakelas,pa.catatan
@@ -2379,6 +2379,7 @@ class ReportController extends ApiController{
             ,pa.nokepesertaan || ' ( MR : ' || pi.nocm || ' )' as nokepesertaan
             ,pa.nokepesertaan as nobpjs
             ,pi.nocm
+            ,pi.notelepon
             ,pd.noregistrasi
             ,apdp.noantrian
             ,pa.norujukan
@@ -2492,8 +2493,30 @@ class ReportController extends ApiController{
             'ttdrumahsakit' => $ttdrumahsakit,
         );
 
-        return view('report.pendaftaran.sepV2',
-            compact('dataReport', 'pageWidth','profile'));
+        $imagePath = public_path("img/logo_bpjs.png");
+        $image = "data:image/png;base64,".base64_encode(file_get_contents($imagePath));
+
+        if(isset($request["issimpanberkas"])) {
+            // PDF::setOptions(['isPhpEnabled' => true, 'isJavascriptEnabled', true, 'isRemoteEnabled', true]);
+            $pdf = PDF::setOptions(['isPhpEnabled' => true, 'isJavascriptEnabled' => true, 'isRemoteEnabled' => true]);
+            $pdf->loadView('report.pendaftaran.sepV2-dom', array(
+                'profile' => $profile,
+                'pageWidth' => $pageWidth,
+                'dataReport' => $dataReport,
+                'image' => $image,
+            
+            ))->setPaper('a4', 'portrait');
+            
+            $this->saveDokumenKlaim($pdf, $request);
+            
+        }else{
+            
+            return view('report.pendaftaran.sepV2',
+            compact('dataReport', 'pageWidth','profile', 'image'));
+        }
+
+        // return view('report.pendaftaran.sepV2',
+        //     compact('dataReport', 'pageWidth','profile'));
     }
 
     public function ttdDigital($noregistrasi, $type)

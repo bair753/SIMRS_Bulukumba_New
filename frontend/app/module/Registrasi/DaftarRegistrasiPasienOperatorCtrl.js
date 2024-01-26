@@ -922,19 +922,31 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 
 				// 	}
 				// }
-				if ($scope.dataPasienSelected.noregistrasi != undefined && $scope.dataPasienSelected.kelompokpasien !== "Umum/Pribadi") {
-					let json = {
-						"url": "SEP/" + $scope.dataPasienSelected.nosep,
-						"method": "GET",
-						"data": null
-					}
-					medifirstService.postNonMessage("bridging/bpjs/tools", json).then(function (e) {
-						if (e.data.metaData.code == 200) {
-							cetakSEP(e.data.response)
-						}
-						else toastr.info(e.data.metaData.code, 'Info')
-					})
+				// if ($scope.dataPasienSelected.noregistrasi != undefined && $scope.dataPasienSelected.kelompokpasien !== "Umum/Pribadi") {
+				// 	let json = {
+				// 		"url": "SEP/" + $scope.dataPasienSelected.nosep,
+				// 		"method": "GET",
+				// 		"data": null
+				// 	}
+				// 	medifirstService.postNonMessage("bridging/bpjs/tools", json).then(function (e) {
+				// 		if (e.data.metaData.code == 200) {
+				// 			cetakSEP(e.data.response)
+				// 		}
+				// 		else toastr.info(e.data.metaData.code, 'Info')
+				// 	})
+				// }
+
+				if ($scope.dataPasienSelected == undefined) {
+					toastr.error("Pilih Dahulu Pasien!")
+					return
 				}
+				var local = JSON.parse(localStorage.getItem('profile'))
+					var nama = medifirstService.getPegawaiLogin().namaLengkap
+					if (local != null) {
+						var profile = local.id;
+						window.open(config.baseApiBackend + "report/cetak-sep-new?noregistrasi="+ $scope.dataPasienSelected.noregistrasi + '&kdprofile=' + profile
+							+ '&nama=' + nama, '_blank');
+					}
 			}
 
 			//operator/get-data-pasien-mau-batal

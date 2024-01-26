@@ -179,15 +179,22 @@
                         <tr>
                             <td colspan="6">
                                 <table cellspacing="0" cellpadding="0" border="0" bgcolor="#FFFFFF" width="100%" align="left">
-                                    <tr>
-                                        <td height="5" width="60%" style="vertical-align:top" align="left">
-                                            <font style="font-size: 8pt;font-style:italic;" color="#000000" face="Tahoma">*Saya Menyetujui BPJS Kesehatan menggunakan informasi Medis Pasien jika diperlukan.</font><br/>
-                                            <font style="font-size: 8pt;font-style:italic;" color="#000000" face="Tahoma">*SEP bukan sebagai bukti penjaminan peserta</font><br/>
+                                    <tr >
+                                        <td height="5" width="60%" style="vertical-align:top;" align="left">
+                                            <font style="font-size: 5pt;font-style:italic;" color="#000000" face="Tahoma">*Saya menyetujui BPJS Kesehatan untuk :</font><br/>
+                                            <font style="font-size: 5pt;font-style:italic;" color="#000000" face="Tahoma">a. membuka dan atau menggunakan informasi medis Pasien untuk keperluan administrasi, pembayaran asuransi atau
+                                                jaminan pembiayaan kesehatan</font><br/>
+                                            <font style="font-size: 5pt;font-style:italic;" color="#000000" face="Tahoma">b. memberikan akses informasi medis atau riwayat pelayanan kepada dokter/tenaga medis pada RSUD H. A. SULTHAN DG. RADJA
+                                                untuk kepentingan pemeliharaan kesehatan, pengobatan, penyembuhan, dan perawatan Pasien</font><br/>
+                                            <font style="font-size: 5pt;font-style:italic;" color="#000000" face="Tahoma">*Saya mengetahui dan memahami :</font><br/>
+                                            <font style="font-size: 5pt;font-style:italic;" color="#000000" face="Tahoma">a. Rumah Sakit dapat melakukan koordinasi dengan PT Jasa Raharja / PT Taspen / PT ASABRI / BPJS Ketenagakerjaan atau
+                                                Penjamin lainnya, jika Peserta merupakan pasien yang mengalami kecelakaan lalulintas dan / atau kecelakaan kerja</font><br/>
+                                            <font style="font-size: 5pt;font-style:italic;" color="#000000" face="Tahoma">b. SEP bukan sebagai bukti penjaminan peserta</font><br/>
                                             @if($dataReport['data']->objectdepartemenfk == 16)
-                                            <font style="font-size: 8pt;font-style:italic;" color="#000000" face="Tahoma">** Dengan diterbitkan SEP ini, Peserta rawat inap telah mendapatkan informasi dan <br> menampati kelas rawat sesuai hak akses kelasnya (terkecuali kelas penuh atau naik kelas <br> sesuai aturan yang berlaku)</font><br/>
+                                            <font style="font-size: 5pt;font-style:italic;" color="#000000" face="Tahoma">** Dengan diterbitkan SEP ini, Peserta rawat inap telah mendapatkan informasi dan <br> menampati kelas rawat sesuai hak akses kelasnya (terkecuali kelas penuh atau naik kelas <br> sesuai aturan yang berlaku)</font><br/>
                                             @endif
-                                            <font style="font-size: 8pt;font-style:italic;" color="#000000" face="Tahoma">dengan terlebih dahulu.</font><br/>
-                                            <font style="font-size: 8pt;font-style:italic;" color="#000000" face="Tahoma">Cetakan Ke 1 {{ $dataReport['tglAyeuna'] }}</font><br/>
+                                            <font style="font-size: 5pt;font-style:italic;" color="#000000" face="Tahoma">dengan terlebih dahulu.</font><br/>
+                                            <font style="font-size: 5pt;font-style:italic;" color="#000000" face="Tahoma">Cetakan Ke 1 {{ $dataReport['tglAyeuna'] }}</font><br/>
                                         </td>
                                         <td height="5" width="40%" style="vertical-align:top" align="center">
                                             <div style="text-align: center" id="qrSEP"></div>
