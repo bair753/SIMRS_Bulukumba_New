@@ -76,7 +76,7 @@
                     <table cellpadding="0" border="0" bgcolor="#FFFFFF" width="100%" align="left">
                         <tr>
                             <td width="15%" align="right" colspan="6">
-                                <font style="font-size: 24pt;font-family: '3 of 9 Barcode', sans-serif;" color="#000000">{{ "*".$dataReport['data']->nosep."*" }}</font>
+                                <font style="font-size: 24pt;font-family: 'Code39';" color="#000000">{{ $dataReport['data']->nosep }}</font>
                             </td>
                         </tr>
                         <tr>
@@ -327,7 +327,7 @@
                             <td width="2%"><font style="font-size: 10pt;" color="#000000" face="Tahoma"></font></td>
                             <td width="50%"><font style="font-size: 10pt;" color="#000000" face="Tahoma">{{ $dataReport['spri']->namadokter }}</font></td>
                             <td width="33%" rowspan="2">
-                                <font style="font-size: 18pt;font-family: '3 of 9 Barcode', sans-serif;" color="#000000">{{ "*".$dataReport['spri']->nosuratkontrol."*" }}</font>
+                                <font style="font-size: 18pt;font-family: 'Code39';" color="#000000">{{ $dataReport['spri']->nosuratkontrol }}</font>
                             </td>
                         </tr>
                         <tr>

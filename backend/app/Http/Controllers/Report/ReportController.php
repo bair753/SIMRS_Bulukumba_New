@@ -2465,6 +2465,10 @@ class ReportController extends ApiController{
             WHERE pd.noregistrasi = '". $noregistrasi ."'
         "))->first();
 
+        $datas->qrcodenamapasien = base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate($datas->namapeserta));
+        $datas->qrcodedokter = base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate($datas->namadjpjpmelayanni));
+        $profile->qrcodeprofile = base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate($profile->namalengkap));
+
         $diagnosa = \DB::table('pasiendaftar_t AS pd')
             ->join('antrianpasiendiperiksa_t AS apd','apd.noregistrasifk','=','pd.norec')
             ->join('detaildiagnosapasien_t as ddg','ddg.noregistrasifk','=','apd.norec')
@@ -2499,6 +2503,7 @@ class ReportController extends ApiController{
         $pageWidth = 819;
         $dataReport = array(
             'namaprofile' => $profile->namalengkap,
+            'qrcodeprofile' => $profile->qrcodeprofile,
             'alamat' => $profile->alamatlengkap,
             'tglAyeuna' => $tglAyeuna,
             'data' => $datas,
@@ -2528,7 +2533,7 @@ class ReportController extends ApiController{
             
         }else{
             
-            return view('report.pendaftaran.sepV2',
+            return view('report.pendaftaran.sepV2-dom',
             compact('dataReport', 'pageWidth','profile', 'image'));
         }
 
