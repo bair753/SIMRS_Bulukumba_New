@@ -10124,11 +10124,11 @@ class ReportController extends ApiController{
                 "
         ));
         // dd($data);
-        foreach ($data as $z) {
-            if ($z->type == "datetime") {
-                $z->value = date('d-m-Y H:i', strtotime($z->value));
-            }
-        }
+        // foreach ($data as $z) {
+        //     if ($z->type == "datetime") {
+        //         $z->value = date('d-m-Y H:i', strtotime($z->value));
+        //     }
+        // }
         $pageWidth = 500;
         $res['profile'] = Profile::where('id', $request['kdprofile'])->first();
 
