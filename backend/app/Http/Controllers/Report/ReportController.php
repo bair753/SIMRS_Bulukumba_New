@@ -2383,7 +2383,7 @@ class ReportController extends ApiController{
             ,pd.noregistrasi
             ,apdp.noantrian
             ,pa.norujukan
-            ,ap.namapeserta
+            ,pi.namapasien as namapeserta
             ,ap.tgllahir
             ,jk.jeniskelamin
             ,pa.ppkrujukan
@@ -2398,6 +2398,7 @@ class ReportController extends ApiController{
             ,pa.prolanisprb
             ,pa.namadjpjpmelayanni
             ,rp.objectdepartemenfk
+            ,klsp.namakelas
             ,CASE WHEN rp.objectdepartemenfk = 18 THEN
             CASE WHEN pa.polirujukankode IS NULL THEN rp.namaruangan ELSE pa.polirujukannama END
             ELSE '-' END AS namaruangan
@@ -2412,7 +2413,7 @@ class ReportController extends ApiController{
             ,CASE WHEN dg.kddiagnosa IS NULL THEN '-' ELSE dg.kddiagnosa END || '-' || ( CASE WHEN dg.namadiagnosa IS NULL THEN '-' ELSE dg.namadiagnosa END ) AS namadiagnosa
             ,CASE WHEN pa.cob = TRUE THEN 'Ya' ELSE '' END AS cob
             ,CASE WHEN rp.objectdepartemenfk = 16 THEN true ELSE false END AS isSPRI
-            ,CASE WHEN rp.objectdepartemenfk = 16 THEN kls.namakelas ELSE '-' END AS namakelas
+            -- ,CASE WHEN rp.objectdepartemenfk = 16 THEN kls.namakelas ELSE '-' END AS namakelas
             ,CASE WHEN pa.penjaminlaka = '1' THEN 'Jasa Raharja PT' 
             WHEN pa.penjaminlaka = '2' THEN 'BPJS Ketenagakerjaan'
             WHEN pa.penjaminlaka = '3' THEN 'TASPEN PT'
@@ -2428,6 +2429,7 @@ class ReportController extends ApiController{
             LEFT JOIN ruangan_m AS rp ON rp.id = pd.objectruanganlastfk
             LEFT JOIN diagnosa_m AS dg ON pa.diagnosisfk = dg.id
             LEFT JOIN kelas_m AS kls ON kls.id = ap.objectkelasdijaminfk
+            LEFT JOIN kelas_m AS klsp ON klsp.id = pd.objectkelasfk
             WHERE pd.noregistrasi = '". $noregistrasi ."'
             AND pa.nosep IS NOT NULL
         "))->first();
