@@ -3,6 +3,9 @@
 
     <link rel="stylesheet" href="{{ public_path('vendor/invoices/bootstrap.min.css') }}">
     </head>
+    @php
+    use SimpleSoftwareIO\QrCode\Facades\QrCode;
+@endphp
     <style type="text/css" media="screen">
         * {
             /* font-family: Tahoma, Geneva, sans-serif; */
@@ -219,10 +222,10 @@
                                     <td>
 
                                     </td>
-                                    <td>
+                                    {{-- <td>
                                         Petugas Bpjs Kesehatan
 
-                                    </td>
+                                    </td> --}}
                                 </tr>
                                 <tr>
                                     <td>
@@ -239,7 +242,7 @@
 
                                     </td>
                                     <td>
-
+                                        {!! QrCode::format('svg')->size(70)->encoding('UTF-8')->generate($dataReport['namapeserta']) !!}
                                     </td>
                                     <td>
 
@@ -284,10 +287,10 @@
                                     <td>
 
                                     </td>
-                                    <td>
+                                    {{-- <td>
                                         {{ $dataReport['namapeserta'] }}
 
-                                    </td>
+                                    </td> --}}
                                 </tr>
                                 <tr>
                                     <td colspan="4">
