@@ -2287,7 +2287,7 @@ class ReportController extends ApiController{
         $registrasi = collect(DB::select("
              SELECT pa.nosep,to_char(pa.tanggalsep, 'DD-MM-YYYY HH:mm') AS tanggalsep,pa.nokepesertaan,pi.nocm,pd.noregistrasi,
                     pa.norujukan,ap.namapeserta,to_char(pi.tgllahir, 'DD-MM-YYYY') AS tgllahir,jk.jeniskelamin, 
-                    rp.namaruangan,rp.kodeexternal as namapoli,pa.ppkrujukan, ps.notelepon 
+                    rp.namaruangan,rp.kodeexternal as namapoli,pa.ppkrujukan, pi.notelepon, 
                     (CASE WHEN rp.objectdepartemenfk=16 then 'Rawat Inap' else 'Rawat Jalan' END) as jenisrawat, 
                     dg.kddiagnosa, (case when dg.namadiagnosa is null then '-' else dg.namadiagnosa end) as namadiagnosa ,  
                     ap.jenispeserta,ap.kdprovider,ap.nmprovider,kls.namakelas,pa.catatan
