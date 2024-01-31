@@ -2523,7 +2523,7 @@ class ReportController extends ApiController{
         if(isset($request["issimpanberkas"])) {
             // PDF::setOptions(['isPhpEnabled' => true, 'isJavascriptEnabled', true, 'isRemoteEnabled', true]);
             $pdf = PDF::setOptions(['isPhpEnabled' => true, 'isJavascriptEnabled' => true, 'isRemoteEnabled' => true]);
-            $pdf->loadView('report.pendaftaran.sepV2-dom', array(
+            $pdf->loadView('report.pendaftaran.sep', array(
                 'profile' => $profile,
                 'pageWidth' => $pageWidth,
                 'dataReport' => $dataReport,
@@ -9649,7 +9649,7 @@ class ReportController extends ApiController{
                 ep.jeniskelamin,
                 ep.umur,
                 pa.noidentitas,
-                al.alamatlengkap,
+                al.alamatlengkap,epd.qrcode,
                 ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
                 epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
                 --ap.noasuransi,ap.namapeserta,
@@ -9682,7 +9682,16 @@ class ReportController extends ApiController{
         ));
         foreach ($data as $z) {
             if ($z->type == "datetime") {
-                $z->value = date('d-m-Y H:i', strtotime($z->value));
+                $z->value = date('d-m-Y', strtotime($z->value));
+            }
+            if ($z->type == "time") {
+                $z->value = date('H:i', strtotime($z->value));
+            }
+            if ($z->value != null) {
+                $z->value = substr($z->value, strpos($z->value, '~'));
+            }
+            if ($z->qrcode == null && substr($z->value, strpos($z->value, '~'))) {
+                $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate($z->value));
             }
         }
         $pageWidth = 500;
@@ -9705,7 +9714,26 @@ class ReportController extends ApiController{
             die;
         }
 
-        return view('report.cetak-jadwal-tindakan-hemodialisa', compact('res', 'pageWidth'));
+        $imagePath = public_path("img/logo_only.png");
+        $image = "data:image/png;base64,".base64_encode(file_get_contents($imagePath));
+
+        $centangPath = public_path("img/true.png");
+        $centang = "data:image/png;base64,".base64_encode(file_get_contents($centangPath));
+
+        if(isset($request["issimpanberkas"])) {
+            $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true, 'dpi' => '600', 'defaultMediaType' => 'print']);
+            $pdf = PDF::loadView('report.cetak-jadwal-tindakan-hemodialisa-dom', array(
+                'res' => $res,
+                'image' => $image,
+                'centang' => $centang
+            ))->setPaper('a4', 'portrait');
+            $this->saveDokumenKlaim($pdf, $request);
+            return;
+        }else{
+            return view('report.cetak-jadwal-tindakan-hemodialisa',compact('res', 'pageWidth', 'image'));
+        }
+
+        // return view('report.cetak-jadwal-tindakan-hemodialisa', compact('res', 'pageWidth'));
     }
 
     public function jaminanPenunjangDiagnostik(Request $request) {
@@ -9729,7 +9757,7 @@ class ReportController extends ApiController{
                 pk.pekerjaan,
                 ep.umur,
                 pa.noidentitas,
-                al.alamatlengkap,
+                al.alamatlengkap,epd.qrcode,
                 ep.noregistrasifk as noregistrasi , TO_CHAR(pr.tglregistrasi, 'DD-MM-YYYY HH24:MM:SS') as tglregistrasi,
                 epd.value,ep.namaruangan,pg.namalengkap as namadokter, epd.tgl,
                 --ap.noasuransi,ap.namapeserta,
@@ -9762,7 +9790,16 @@ class ReportController extends ApiController{
         ));
         foreach ($data as $z) {
             if ($z->type == "datetime") {
-                $z->value = date('d-m-Y H:i', strtotime($z->value));
+                $z->value = date('d-m-Y', strtotime($z->value));
+            }
+            if ($z->type == "time") {
+                $z->value = date('H:i', strtotime($z->value));
+            }
+            if ($z->value != null) {
+                $z->value = substr($z->value, strpos($z->value, '~'));
+            }
+            if ($z->qrcode == null && substr($z->value, strpos($z->value, '~'))) {
+                $z->qrcode =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate($z->value));
             }
         }
         $pageWidth = 500;
@@ -9785,7 +9822,26 @@ class ReportController extends ApiController{
             die;
         }
 
-        return view('report.cetak-jaminan-penunjang-diagnostik', compact('res', 'pageWidth'));
+        $imagePath = public_path("img/logo_only.png");
+        $image = "data:image/png;base64,".base64_encode(file_get_contents($imagePath));
+
+        $centangPath = public_path("img/true.png");
+        $centang = "data:image/png;base64,".base64_encode(file_get_contents($centangPath));
+
+        if(isset($request["issimpanberkas"])) {
+            $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true, 'dpi' => '600', 'defaultMediaType' => 'print']);
+            $pdf = PDF::loadView('report.cetak-jaminan-penunjang-diagnostik-dom', array(
+                'res' => $res,
+                'image' => $image,
+                'centang' => $centang
+            ))->setPaper('a4', 'portrait');
+            $this->saveDokumenKlaim($pdf, $request);
+            return;
+        }else{
+            return view('report.cetak-jaminan-penunjang-diagnostik',compact('res', 'pageWidth', 'image'));
+        }
+
+        // return view('report.cetak-jaminan-penunjang-diagnostik', compact('res', 'pageWidth'));
     }
 
     public function cetakRincBilling(Request $r)
