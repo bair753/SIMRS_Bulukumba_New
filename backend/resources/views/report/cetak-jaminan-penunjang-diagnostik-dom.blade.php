@@ -1,9 +1,6 @@
 
 <!DOCTYPE html>
 <html lang="en" ng-app="angularApp">
-@php
-    use SimpleSoftwareIO\QrCode\Facades\QrCode;
-@endphp
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -292,7 +289,7 @@
             <td style="border:none"></td>
             <td colspan="4" valign="bottom" style="border:none">@foreach($res['d'] as $item)
                 @if($item->emrdfk == 32116151)
-                {!! QrCode::format('svg')->size(70)->encoding('UTF-8')->generate($item->value) !!}
+                <img src="data:image/png;base64, {!! $item->qrcode !!} " style="height: 70px; width:70px">
                 @endif
             @endforeach </td>
         </tr>

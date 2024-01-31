@@ -1,42 +1,15 @@
 
 <!DOCTYPE html>
 <html lang="en" ng-app="angularApp">
+@php
+    use SimpleSoftwareIO\QrCode\Facades\QrCode;
+@endphp
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jadwal Tindakan Hemodialisa</title>
-    @if (stripos(\Request::url(), 'localhost') !== false)
-        {{-- <link rel="stylesheet" href="{{ asset('css/report/paper.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/report/table.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/report/tabel.css') }}"> --}}
-        <script src="{{ asset('js/jquery.min.js') }}"></script>
-        <script src="{{ asset('js/jquery.qr-code.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('js/qrcode/src/jquery.qrcode.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('js/qrcode/src/qrcode.js') }}"></script>
-        {{-- <link href="{{ asset('css/style.css') }}" rel="stylesheet"> --}}
-        <!-- angular -->
-        <script src="{{ asset('js/angular/angular.min.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('js/angular/angular-route.min.js') }}" type="text/javascript"></script>
-        <script type="text/javascript" src="{{ asset('js/angular/angular-animate.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('js/angular/angular-aria.min.js') }}"></script>
-        <script src="{{ asset('js/angular/angular-material.js') }}" type="text/javascript"></script>
-    @else
-        <link rel="stylesheet" href="{{ asset('service/css/report/paper.css') }}">
-        <link rel="stylesheet" href="{{ asset('service/css/report/table.css') }}">
-        <link rel="stylesheet" href="{{ asset('service/css/report/tabel.css') }}">
-        <script src="{{ asset('service/js/jquery.min.js') }}"></script>
-        <script src="{{ asset('service/js/jquery.qr-code.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('js/qrcode/src/jquery.qrcode.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('js/qrcode/src/qrcode.js') }}"></script>
-        {{-- <link href="{{ asset('service/css/style.css') }}" rel="stylesheet"> --}}
-        <!-- angular -->
-        <script src="{{ asset('service/js/angular/angular.min.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('service/js/angular/angular-route.min.js') }}" type="text/javascript"></script>
-        <script type="text/javascript" src="{{ asset('service/js/angular/angular-animate.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('service/js/angular/angular-aria.min.js') }}"></script>
-        <script src="{{ asset('service/js/angular/angular-material.js') }}" type="text/javascript"></script>
-    @endif
+    
     <style>
         *{
             padding:0;
@@ -54,7 +27,7 @@
             transform:scale(72%);
         }
         body{
-            font-family:Arial, Helvetica, sans-serif;
+            /* font-family:Arial, Helvetica, sans-serif; */
         }
         table{ 
             page-break-inside:auto 
@@ -69,21 +42,21 @@
         section{
             width:210mm
         }
-		.rotate{
-			transform: rotate(-90deg);
-		}
-		.text-center{
-			text-align: center;
-		}
-		.p05{
-			padding:.2rem;
-		}
+        .rotate{
+            transform: rotate(-90deg);
+        }
+        .text-center{
+            text-align: center;
+        }
+        .p05{
+            padding:.2rem;
+        }
         body{
             width:210mm;
             height:279mm;
             margin:0 auto;
             /* border:.1rem solid rgba(0,0,0,0.35); */
-			border-bottom:none;
+            border-bottom:none;
         }
         header{
             width:100%;
@@ -116,7 +89,7 @@
         .info{
             border-left:1px solid #000;
             border-right:1px solid #000;
-			border-collapse:collapse;
+            border-collapse:collapse;
             flex-grow:1;
             padding:.3rem;
         }
@@ -149,31 +122,31 @@
             padding:.5rem;
             text-align:center;
         }
-		.bordered{
-			border:1px solid black;
-			border-collapse:collapse;
-			padding:.2rem;
-			box-sizing: border-box;
-		}
+        .bordered{
+            border:1px solid black;
+            border-collapse:collapse;
+            padding:.2rem;
+            box-sizing: border-box;
+        }
         .border-top{
             border-top:.1rem solid rgba(0,0,0,0.45);
-			border-collapse:collapse;
-			box-sizing: border-box;
+            border-collapse:collapse;
+            box-sizing: border-box;
         }
         .border-bottom{
             border-bottom:.1rem solid rgba(0,0,0,0.45);
-			border-collapse:collapse;
-			box-sizing: border-box;
+            border-collapse:collapse;
+            box-sizing: border-box;
         }
         .border-left{
             border-left:.1rem solid rgba(0,0,0,0.45);
-			border-collapse:collapse;
-			box-sizing: border-box;
+            border-collapse:collapse;
+            box-sizing: border-box;
         }
         .border-right{
             border-right:.1rem solid rgba(0,0,0,0.45);
-			border-collapse:collapse;
-			box-sizing: border-box;
+            border-collapse:collapse;
+            box-sizing: border-box;
         }
         .flex{
             display:flex;
@@ -215,15 +188,11 @@
         }
     </style>
 </head>
-<body ng-controller="cetakJadwalTindakanHemo">
-    <table width="100%" style="table-layout:fixed;border:none">
+<body ng-controller="cetakJadwalTindakanHemo"   cellspacing="0">
+    <table width="100%" cellspacing="0" cellpadding="0" border="0"  style="padding:  10px 10px 10px 40px; text-align: center; border:none">
         <tr style="text-align:center;border:none">
             <td colspan="1" style="border:none" rowspan="4">
-                @if(stripos(\Request::url(), 'localhost') !== FALSE)
-                <img src="{{ asset('img/logo_only.png') }}" alt="" style="width: 60px;">
-                @else
-                <img src="{{ asset('service/img/logo_only.png') }}" alt="" style="width: 60px;">
-                @endif
+                <img src="{{ $image }}" alt="" style="height: 70px; width:60px; text-align: center;">
             </td>
             <td colspan="7" style="border:none;text-align:center;"><h2>PEMERINTAH KABUPATEN BULUKUMBA</h2></td>
             <td colspan="1" style="border:none" rowspan="4">
@@ -243,12 +212,12 @@
         </tr>
         <tr style="text-align:center;border:none">
             <td colspan="7" style="border:none">Jalan Serikaya No. 17 Bulukumba 92512 Telpon (0413) 81290, 81292 FAX. 85030 </td>
-        </tr><tr style="text-align:center">
-            <td colspan="9" style="border:none;"><hr style="border:2px solid #000"></td>
         </tr>
-        <tr style="height:20px;"></tr>
+        <tr style="text-align:center">
+            <td colspan="9"  style="border:none;"><hr style="border:2px solid #000"></td>
+        </tr>
     </table>
-    <table width="100%" style="border:none">
+    <table  width="100%" cellspacing="0" cellpadding="0" border="0"  style="padding:  10px 10px 10px 40px; border:none; font-size:13px;">
         <tr>
             <td>Kepada Yth.</td>
         </tr>
@@ -271,7 +240,7 @@
             <td>Dengan hormat,</td>
         </tr>
         <tr>
-            <td>Bersama ini kami mohon fasilitas Hemodialisis @{{ item.obj[32116153] ? item.obj[32116153] : '' }} *) kali seminggu terhadap :</td>
+            <td>Bersama ini kami mohon fasilitas Hemodialisis @foreach($res['d'] as $item) @if($item->emrdfk == 32116153) {!! $item->value !!} @endif @endforeach *) kali seminggu terhadap :</td>
         </tr>
         <tr>
             <td></td>
@@ -292,19 +261,19 @@
             <td></td>
         </tr>
         <tr>
-            <td>Yang sementara / diusulkan *) menjalani Hemodialisis @{{ item.obj[32116153] ? item.obj[32116153] : '' }} *) kali seminggu, Segera setelah keadaan penderita membaik, kami akan turunkan frekuensinya. Klinis/alasan menaikkan frekuensi ialah :</td>
+            <td>Yang sementara / diusulkan *) menjalani Hemodialisis @foreach($res['d'] as $item) @if($item->emrdfk == 32116153) {!! $item->value !!} @endif @endforeach *) kali seminggu, Segera setelah keadaan penderita membaik, kami akan turunkan frekuensinya. Klinis/alasan menaikkan frekuensi ialah :</td>
         </tr>
         <tr>
-            <td>@{{ item.obj[32116160] ? item.obj[32116160] : '' }}</td>
+            <td>@foreach($res['d'] as $item) @if($item->emrdfk == 32116160) {!! $item->value !!} @endif @endforeach</td>
         </tr>
         <tr>
             <td></td>
         </tr>
         <tr>
-            <td>Lab&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Ureum : @{{ item.obj[32116161] ? item.obj[32116161] : '...' }} mg%, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Kreatin : @{{ item.obj[32116162] ? item.obj[32116162] : '...' }} mg%, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TKK : @{{ item.obj[32116163] ? item.obj[32116163] : '...' }} ml/menit</td>
+            <td>Lab&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Ureum : @foreach($res['d'] as $item) @if($item->emrdfk == 32116161) {!! $item->value !!} @endif @endforeach mg%, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Kreatin : @foreach($res['d'] as $item) @if($item->emrdfk == 32116162) {!! $item->value !!} @endif @endforeach mg%, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TKK : @foreach($res['d'] as $item) @if($item->emrdfk == 32116163) {!! $item->value !!} @endif @endforeach ml/menit</td>
         </tr>
         <tr>
-            <td>Diagnosis&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: @{{ item.obj[32116154] ? item.obj[32116154] : '...' }}</td>
+            <td>Diagnosis&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: @foreach($res['d'] as $item) @if($item->emrdfk == 32116154) {!! $item->value !!} @endif @endforeach</td>
         </tr>
         <tr>
             <td></td>
@@ -313,226 +282,67 @@
             <td>Jadwal Tindakan : </td>
         </tr>
         <tr>
-            <td>1. @{{item.obj[32116164] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+            <td>1. @foreach($res['d'] as $item) @if($item->emrdfk == 32116164) {!! $item->value !!} @endif @endforeach</td>
         </tr>
         <tr>
-            <td>2. @{{item.obj[32116165] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+            <td>2. @foreach($res['d'] as $item) @if($item->emrdfk == 32116165) {!! $item->value !!} @endif @endforeach</td>
         </tr>
         <tr>
-            <td>3. @{{item.obj[32116166] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+            <td>3. @foreach($res['d'] as $item) @if($item->emrdfk == 32116166) {!! $item->value !!} @endif @endforeach</td>
         </tr>
         <tr>
-            <td>4. @{{item.obj[31104748] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+            <td>4. @foreach($res['d'] as $item) @if($item->emrdfk == 31104748) {!! $item->value !!} @endif @endforeach</td>
         </tr>
     </table>
 
-    <table width="100%" style="table-layout:fixed;border:none">
-        <tr style="height:20px;"></tr>
+    <table width="100%" cellspacing="0" cellpadding="0" border="0"  style="padding:  10px 10px 10px 40px; border:none; font-size:13px;">
+        <tr><td style="height:20px;" colspan="14"></td></tr>
         <tr style="text-align: center;">
-            <td colspan="4" style="border:none"></td>
+            <td colspan="14" style="border:none"></td>
             <td style="border:none"></td>
-            <td colspan="4" style="border:none">Bulukumba, @{{item.obj[32116167] | toDate | date:'dd MMMM yyyy HH:mm'}}</td>
+            <td colspan="4" style="border:none">Bulukumba,
+                <span>
+                    @foreach($res['d'] as $item)
+                    @if($item->emrdfk == 32116167)
+                        <span style="font-size:9pt; color:#000000;">{!! $item->value !!}</span>
+                    @endif
+                    @endforeach    
+                </span>
+            </td>
+        </tr>
+        
+        <tr style="text-align: center;">
+            <td colspan="14" style="border:none"></td>
+            <td style="border:none"></td>
+            <td colspan="4" style="border:none">Dokter Yang Menerima <br> Dari Bagian Hemodialisa</td>
         </tr>
         <tr style="text-align: center;">
-            <td colspan="4" style="border:none"></td>
+            <td colspan="14" valign="bottom" style="border:none"></td>
             <td style="border:none"></td>
-            <td colspan="4" style="border:none">Dokter Yang Menerima</td>
-        </tr>
-        <tr style="text-align: center;">
-            <td colspan="4" style="border:none"></td>
-            <td style="border:none"></td>
-            <td colspan="4" style="border:none">Dari Bagian Hemodialisa</td>
-        </tr>
-        <tr style="text-align: center;">
-            <td colspan="4" valign="bottom" style="border:none"><div id="qrcodePetugas1" style="text-align: center"></td>
-            <td style="border:none"></td>
-            <td colspan="4" valign="bottom" style="border:none"><div id="qrcodePetugas2" style="text-align: center"></td>
-        </tr>
-        <tr style="text-align: center;">
-            <td colspan="4" valign="bottom" style="border:none"></td>
-            <td style="border:none"></td>
-            <td colspan="4" valign="bottom" style="border:none">@{{ item.obj[32116168] ? item.obj[32116168] : '___________________' }}</td>
-        </tr>
-
-    </table>
-</body>
-<script type="text/javascript">
-    var baseUrl =
-            {!! json_encode(url('/')) !!}
-    var angular = angular.module('angularApp', [], function ($interpolateProvider) {
-            $interpolateProvider.startSymbol('@{{');
-            $interpolateProvider.endSymbol('}}');
-        }).factory('httpService', function ($http, $q) {
-            return {
-                get: function (url) {
-                    // $("#showLoading").show()
-                    var deffer = $q.defer();
-                    $http.get(baseUrl + '/' + url, {
-                        headers: {
-                            'Content-Type': 'application/json',
-                        }
-                    }).then(function successCallback(response) {
-                        deffer.resolve(response);
-                        // $("#showLoading").hide()
-                    }, function errorCallback(response) {
-                        deffer.reject(response);
-                        // $("#showLoading").hide()
-                    });
-                    return deffer.promise;
-                },
-            }
-        })
-  
-    angular.controller('cetakJadwalTindakanHemo', function ($scope, $http, httpService) {
-        $scope.item = {
-            obj: [],
-            obj2: []
-        }
-        var dataLoad = {!! json_encode($res['d'] )!!};
-        for (var i = 0; i <= dataLoad.length - 1; i++) {
-            if(dataLoad[i].emrdfk == 3110029){
-                continue;
-            }
-            if (dataLoad[i].type == "textbox") {
-                $('#id_'+dataLoad[i].emrdfk).html( dataLoad[i].value)
-                $scope.item.obj[dataLoad[i].emrdfk] = dataLoad[i].value
-            }
-            if (dataLoad[i].type == "checkbox") {
-                var chekedd = false
-                if (dataLoad[i].value == '1') {
-                    var chekedd = true
-                }
-                $scope.item.obj[dataLoad[i].emrdfk] = chekedd
-            }
-            if (dataLoad[i].type == "radio") {
-                $scope.item.obj[dataLoad[i].emrdfk] = dataLoad[i].value
-  
-            }
-  
-            if (dataLoad[i].type == "datetime") {
-                $('#id_'+dataLoad[i].emrdfk).html( dataLoad[i].value)
-                $scope.item.obj[dataLoad[i].emrdfk] = dataLoad[i].value
-            }
-            if (dataLoad[i].type == "time") {
-                $scope.item.obj[dataLoad[i].emrdfk] = dataLoad[i].value
-            }
-            if (dataLoad[i].type == "date") {
-                $scope.item.obj[dataLoad[i].emrdfk] = dataLoad[i].value
-            }
-  
-            if (dataLoad[i].type == "checkboxtextbox") {
-                $scope.item.obj[dataLoad[i].emrdfk] = dataLoad[i].value
-                $scope.item.obj2[dataLoad[i].emrdfk] = true
-            }
-            if (dataLoad[i].type == "textarea") {
-                $('#id_'+dataLoad[i].emrdfk).html( dataLoad[i].value)
-                $scope.item.obj[dataLoad[i].emrdfk] = dataLoad[i].value
-            }
-            if (dataLoad[i].type == "combobox") {
-     
-                var str = dataLoad[i].value
-                if(str != null)
-                {
-                    var res = str.split("~");
-                    
-                    $scope.item.obj[dataLoad[i].emrdfk] = res[1]
-                    $('#id_'+dataLoad[i].emrdfk).html ( res[1])
-                }
-            }
-            if (dataLoad[i].type == "combobox2") {
-                var str = dataLoad[i].value
-                var res = str.split("~");
+            <td colspan="4" valign="bottom" style="border:none">
+                    @foreach($res['d'] as $item)
+                        @if($item->emrdfk == 32116168)
+                        {!! QrCode::format('svg')->size(70)->encoding('UTF-8')->generate($item->value) !!}
+                        @endif
+                    @endforeach    
+            </td>
                 
-                $scope.item.obj[dataLoad[i].emrdfk+""+1] = res[0]
-                $scope.item.obj[dataLoad[i].emrdfk] = res[1]
-                $('#id_'+dataLoad[i].emrdfk).html ( res[1])
-  
-            }
-  
-            if (dataLoad[i].emrdfk == '423816' ) {
-                $scope.hariTgl = dataLoad[i].value
-            }
-  
-            if (dataLoad[i].emrdfk == '2000001974' ) {
-                $scope.jamPeriksa = dataLoad[i].value
-            }
-  
-            if (dataLoad[i].emrdfk == '2000002354' ) {
-                $scope.tgl1 = dataLoad[i].value
-            }
-            if (dataLoad[i].emrdfk == '2000002357' ) {
-                $scope.tgl2 = dataLoad[i].value
-            }
-            if (dataLoad[i].emrdfk == '2000002360' ) {
-                $scope.tgl3 = dataLoad[i].value
-            }
-            if (dataLoad[i].emrdfk == '2000002363' ) {
-                $scope.tgl4 = dataLoad[i].value
-            }
-            if (dataLoad[i].emrdfk == '2000002366' ) {
-                $scope.tgl5 = dataLoad[i].value
-            }
-            if (dataLoad[i].emrdfk == '2000002369' ) {
-                $scope.tgl6 = dataLoad[i].value
-            }
-            if (dataLoad[i].emrdfk == '2000002372' ) {
-                $scope.tgl7 = dataLoad[i].value
-            }
-            if (dataLoad[i].emrdfk == '2000002375' ) {
-                $scope.tgl8 = dataLoad[i].value
-            }
-            if (dataLoad[i].emrdfk == '2000002378' ) {
-                $scope.tgl9 = dataLoad[i].value
-            }
-            if (dataLoad[i].emrdfk == '2000002381' ) {
-                $scope.tgl10 = dataLoad[i].value
-            }
-            if (dataLoad[i].emrdfk == '2000002384' ) {
-                $scope.tgl11 = dataLoad[i].value
-            }
-            if (dataLoad[i].emrdfk == '2000002387' ) {
-                $scope.tgl12 = dataLoad[i].value
-            }
-            if (dataLoad[i].emrdfk == '2000002390' ) {
-                $scope.tgl13 = dataLoad[i].value
-            }
-            if (dataLoad[i].emrdfk == '2000002393' ) {
-                $scope.tgl14 = dataLoad[i].value
-            }
-            if (dataLoad[i].emrdfk == '2000002396' ) {
-                $scope.tgl15 = dataLoad[i].value
-            }
-            
-            if (dataLoad[i].emrdfk == '2000002408' ) {
-                $scope.pukul2 = dataLoad[i].value
-            }
-  
-            $scope.tglemr = dataLoad[i].tgl
-        }
-        // var keluhan_saat_ini = $scope.item.obj[422203].replace(/(?:\r\n|\r|\n)/g, ', ');
-  
-        // $scope.item.obj['keluhan_saat_ini'] = keluhan_saat_ini;
-  
-        var petugas2 = $scope.item.obj[32116168];
-        
-        if(petugas2 != undefined){
-            jQuery('#qrcodePetugas2').qrcode({
-                width	: 100,
-                height	: 100,
-                text	: "Tanda Tangan Digital Oleh " + petugas2
-            });	
-        }
-        
-    })
-    angular.filter('toDate', function() {
-        return function(items) {
-            if(items != null){
-                 return new Date(items);
-            }
-        };
-    });
-    $(document).ready(function () {
-        window.print();
-    });
-  </script>
+        </tr>
+        <tr style="text-align: center;">
+            <td colspan="14" valign="bottom" style="border:none"></td>
+            <td style="border:none"></td>
+            <td colspan="4" valign="bottom" style="border:none">
+                <span>
+                    @foreach($res['d'] as $item)
+                        @if($item->emrdfk == 32116168)
+                            <span style="font-size:9pt; color:#000000;">{{ substr($item->value, strpos($item->value, '~') + 1) }}</span>
+                        @endif
+                    @endforeach    
+                </span>
+            </td>
+        </tr>
+    </table>
+
+</body>
+
 </html>

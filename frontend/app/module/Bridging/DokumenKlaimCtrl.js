@@ -426,6 +426,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 				$scope.isRouteLoading = true;
 				 medifirstService.get(dataItem.url + dataItem.param + "&issimpanberkas=true&iddok="
 				 +dataItem.id+"&isberkasnoreg="+dataItem.noregistrasi+"&namafile=" + dataItem.namafile).then(function (c) {
+					console.log(c);
 					if (c.status == 200) {
 						$scope.isRouteLoading = false
 						$scope.tutupdokumen();
