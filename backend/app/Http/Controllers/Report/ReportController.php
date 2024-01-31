@@ -2322,6 +2322,7 @@ class ReportController extends ApiController{
             'noregistrasi' => $registrasi->noregistrasi,
             'jenispeserta' => $registrasi->jenispeserta,
             'namapeserta' => $registrasi->namapeserta,
+            'notelepon' => $registrasi->notelepon,
             'cob' => "",
             'tgllahir' => $registrasi->tgllahir,
             'jeniskelamin' => $registrasi->jeniskelamin,
