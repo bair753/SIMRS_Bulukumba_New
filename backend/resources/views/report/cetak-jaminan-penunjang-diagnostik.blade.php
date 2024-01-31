@@ -220,54 +220,54 @@
             <td colspan="9"><b>PERMINTAAN SURAT JAMINAN PENUNJANG DIAGNOSTIK / TINDAKAN DARI KANTOR CABANG BPJS KESEHATAN</b></td>
         </tr>
         <tr>
-            <td colspan="1">Nama Penderita</td>
-            <td colspan="1">:</td>
-            <td colspan="10">{!! $res['d'][0]->namapasien  !!}</td>
+            <td colspan="4">Nama Penderita</td>
+            <td colspan="4">:</td>
+            <td colspan="4">{!! $res['d'][0]->namapasien  !!}</td>
         </tr>
         <tr>
-            <td colspan="1">Tgl. Lahir</td>
-            <td colspan="1">:</td>
-            <td colspan="10">{!! date('d-m-Y',strtotime( $res['d'][0]->tgllahir  )) !!}</td>
+            <td colspan="4">Tgl. Lahir</td>
+            <td colspan="4">:</td>
+            <td colspan="4">{!! date('d-m-Y',strtotime( $res['d'][0]->tgllahir  )) !!}</td>
         </tr>
         <tr>
-            <td colspan="1">No. RM</td>
-            <td colspan="1">:</td>
-            <td colspan="10">{!! $res['d'][0]->nocm  !!}</td>
+            <td colspan="4">No. RM</td>
+            <td colspan="4">:</td>
+            <td colspan="4">{!! $res['d'][0]->nocm  !!}</td>
         </tr>
         <tr>
-            <td colspan="1">Alamat</td>
-            <td colspan="1">:</td>
-            <td colspan="10">{!! $res['d'][0]->alamatlengkap  !!}</td>
+            <td colspan="4">Alamat</td>
+            <td colspan="4">:</td>
+            <td colspan="4">{!! $res['d'][0]->alamatlengkap  !!}</td>
         </tr>
         <tr>
-            <td colspan="1">Pekerjaan</td>
-            <td colspan="1">:</td>
-            <td colspan="10">{!! $res['d'][0]->pekerjaan  !!}</td>
+            <td colspan="4">Pekerjaan</td>
+            <td colspan="4">:</td>
+            <td colspan="4">{!! $res['d'][0]->pekerjaan  !!}</td>
         </tr>
         <tr>
-            <td colspan="1">No. HP</td>
-            <td colspan="1">:</td>
-            <td colspan="10">@foreach($res['d'] as $item) @if($item->emrdfk == 32116146) {!! $item->value !!} @endif @endforeach</td>
+            <td colspan="4">No. HP</td>
+            <td colspan="4">:</td>
+            <td colspan="4">@foreach($res['d'] as $item) @if($item->emrdfk == 32116146) {!! $item->value !!} @endif @endforeach</td>
         </tr>
         <tr>
-            <td colspan="1">No. BPJS</td>
-            <td colspan="1">:</td>
-            <td colspan="10">{!! $res['d'][0]->nobpjs  !!}</td>
+            <td colspan="4">No. BPJS</td>
+            <td colspan="4">:</td>
+            <td colspan="4">{!! $res['d'][0]->nobpjs  !!}</td>
         </tr>
         <tr>
-            <td colspan="1">Tgl. Kunjungan</td>
-            <td colspan="1">:</td>
-            <td colspan="10">@foreach($res['d'] as $item) @if($item->emrdfk == 32116148) {!! $item->value !!} @endif @endforeach</td>
+            <td colspan="4">Tgl. Kunjungan</td>
+            <td colspan="4">:</td>
+            <td colspan="4">@foreach($res['d'] as $item) @if($item->emrdfk == 32116148) {!! $item->value !!} @endif @endforeach</td>
         </tr>
         <tr>
-            <td colspan="1">Diagnosa Masuk</td>
-            <td colspan="1">:</td>
-            <td colspan="10">@foreach($res['d'] as $item) @if($item->emrdfk == 32116149) {!! $item->value !!} @endif @endforeach</td>
+            <td colspan="4">Diagnosa Masuk</td>
+            <td colspan="4">:</td>
+            <td colspan="4">@foreach($res['d'] as $item) @if($item->emrdfk == 32116149) {!! $item->value !!} @endif @endforeach</td>
         </tr>
         <tr>
-            <td colspan="1">Jadwal</td>
-            <td colspan="1">:</td>
-            <td colspan="10">Terlampir</td>
+            <td colspan="4">Jadwal</td>
+            <td colspan="4">:</td>
+            <td colspan="4">Terlampir</td>
         </tr>
     </table>
 
