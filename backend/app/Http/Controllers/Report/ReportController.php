@@ -1420,11 +1420,23 @@ class ReportController extends ApiController{
     'jk.jeniskelamin', 'pm.tgllahir', 'hpl.jaringanasal', 'hpl.getjaringan', 'hpl.diagnosaklinik', 'hpl.keteranganklinik', 'hpl.tanggal as tgljawab', 'hpl.makroskopik','hpl.mikroskopik',
 'hpl.kesimpulan', 'hpl.anjuran', 'hpl.topografi', 'hpl.morfologi', 'hpl.diagnosapb','hpl.keteranganpb','ru.namaruangan as asal', 'pg1.nosip','kps.kelompokpasien', 'pd.norec as norec_pd', 'pd.objectruanganlastfk', 'alm.alamatlengkap', 'dm.kddiagnosa', 'hpl.jenis', 'dm.namadiagnosa as diagnosa')
         ->first();
-        $raw->umur = $this->getAge($raw->tgllahir ,date('Y-m-d'));
 
-        if ($raw->qrcodedokterperiksa == null) {
-            $raw->qrcodedokterperiksa =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate($raw->namadokterpengirim));
-        }
+        if ($raw) { // Cek apakah $raw bukan null (artinya data ditemukan)
+            if (property_exists($raw, 'tgllahir')) {
+                $raw->umur = $this->getAge($raw->tgllahir, date('Y-m-d'));
+                // Lakukan sesuatu dengan $umur
+            }
+        
+            if ($raw->qrcodedokterperiksa == null) {
+                $raw->qrcodedokterperiksa = base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate($raw->namadokterpengirim));
+            }
+        } 
+
+        // $raw->umur = $this->getAge($raw->tgllahir ,date('Y-m-d'));
+
+        // if ($raw->qrcodedokterperiksa == null) {
+        //     $raw->qrcodedokterperiksa =base64_encode(QrCode::format('svg')->size(50)->encoding('UTF-8')->generate($raw->namadokterpengirim));
+        // }
 
         $imagePath = public_path("img/logo_only.png");
         $image = "data:image/png;base64,".base64_encode(file_get_contents($imagePath));
