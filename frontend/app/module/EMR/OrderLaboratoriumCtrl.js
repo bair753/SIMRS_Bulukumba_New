@@ -306,7 +306,7 @@ define(['initialize'], function (initialize) {
                         0: $scope.item.noMr,
                         1: $scope.item.namaPasien,
                         2: $scope.item.jenisKelamin,
-                        3: $scope.item.noregistrasi,
+                        3: $scope.dataSelectedRiwayat.noregistrasi,
                         4: $scope.item.umur,
                         5: $scope.item.kelompokPasien,
                         6: $scope.item.tglRegistrasi,
