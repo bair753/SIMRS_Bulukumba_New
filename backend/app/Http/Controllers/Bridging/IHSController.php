@@ -1714,7 +1714,7 @@ class IHSController extends ApiController
                     array(
                         'reference' => 'Encounter/' . $item->ihs_encounter,
                     ),
-                    'authoredOn' => date('Y-m-d', strtotime($item->tglorder)),
+                    'authoredOn' => date('Y-m-d\TH:i:sP', strtotime($item->tglorder)),
                     'requester' =>
                     array(
                         'reference' => 'Practitioner/' . $item->ihs_practitioner,
@@ -1851,6 +1851,10 @@ class IHSController extends ApiController
                         //     'system' => 'http://unitsofmeasure.org',
                         //     'code' => 'd',
                         // ),
+                        'performer' =>
+                        array(
+                            "reference" => "Organization/" . $profile->ihs_id
+                        ),
                     ),
                 );
 

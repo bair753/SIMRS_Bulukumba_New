@@ -2611,6 +2611,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
                 Route::post('sysadmin/master/save-kelbil-produk', 'SysAdmin\Master\MasterController@updateKelompokBill');
                 Route::post('sysadmin/master/save-data-master-pegawai', 'SysAdmin\Master\MasterController@saveDataMasterPegawai');
                 Route::post('sysadmin/master/save-data-produk-konsinyasi', 'SysAdmin\Master\MasterController@UpdateStatusKonsinyasi');
+                Route::post('sysadmin/master/save-data-produk-apotik', 'SysAdmin\Master\MasterController@saveDataProdukApotik');
 
                 Route::post('sysadmin/master/save-table-row','SysAdmin\Master\MasterController@saveTable');
                 Route::post('sysadmin/master/hapus-tarif-harganetto', 'SysAdmin\Master\MasterController@hapusHargaNettoByKelas');
