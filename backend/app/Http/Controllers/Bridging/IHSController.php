@@ -3819,7 +3819,7 @@ class IHSController extends ApiController
                 INNER JOIN pasiendaftar_t AS pd ON so.noregistrasifk = pd.norec 
                 INNER JOIN produk_m AS pr ON pr.ID = op.objectprodukfk
                 INNER JOIN pasien_m AS ps ON ps.ID = pd.nocmfk
-                INNER JOIN pegawai_m AS pg ON pg.ID = pd.objectpegawaifk
+                INNER JOIN pegawai_m AS pg ON pg.ID = so.objectpegawaiorderfk
                 INNER JOIN ruangan_m AS ru ON ru.ID = so.objectruanganfk
                 LEFT JOIN pegawai_m AS pg2 ON pg2.ID = pd.objectpegawaifk
             WHERE
@@ -3923,7 +3923,7 @@ class IHSController extends ApiController
                 $objetoRequest['data'] = $data;
 
                 $response =  $this->ihsTools($objetoRequest, true);
-                dd($response);
+
                 $noterror = true;
                 if ($response->resourceType == 'OperationOutcome') {
                     $noterror = false;
