@@ -6,6 +6,7 @@
 /Backend/composer.lock
 /Backend/.idea
 /backend/vendor
+/backend/public
 /medical-support-system/vendor
 /medical-support-system/.idea
 /DashboardIndikator
