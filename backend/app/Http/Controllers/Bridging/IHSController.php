@@ -3829,7 +3829,6 @@ class IHSController extends ApiController
            "));
 
 
-
             if (count($q) == 0) {
                 $response = array(
                     "issue" =>  'Specimen doesnt exist',
@@ -3893,7 +3892,7 @@ class IHSController extends ApiController
                         'collectedDateTime' =>  $this->dateISO($item->tglorder),
                         'collector' =>
                         array(
-                            'reference' => 'Practitioner/' . $item->ihs_practitioner,
+                            'reference' => 'Practitioner/' . $item->ihs_performer,
                         ),
                     ),
                     'subject' =>
