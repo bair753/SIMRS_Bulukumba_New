@@ -3072,20 +3072,46 @@ class BridgingBPJSV2Controller extends ApiController
                 $headers['headers'][3]  = 'x-signature:' .$headers['cons']['signature'];
                 $headers['headers'][4]  = 'user_key:' . $this->getUserKeyAntreanBPJSv2();
             }
+            if (isset($request['jenis']) && $request['jenis'] == 'i-care') {
+                $baseURL = $this->getUrlBrigdingBPJS_ICARE();
+                $headers['headers'][0]  = 'Content-Type: application/json';
+                // $headers['headers'][4]  = 'user_key:' . $this->getUserKeyICARE();
+            }
+            if (isset($request['jenis']) && $request['jenis'] == 'eRekamMedis') {
+                $baseURL = $this->urlERekamMedis();
+                $headers['headers'][0]  = 'Content-Type: text/plain';
+                $jsonErekamMedis = $request['data'];
 
+                $key = $headers['cons']['data'] .  $headers['cons']['secretKey'] . $this->getKodeRS();
+
+                $objetoRequest = new \Illuminate\Http\Request();
+                $objetoRequest['nosep'] = $request['data']['request']['noSep'];
+
+                $getMRBundle = app('App\Http\Controllers\Bridging\BridgingBPJSV2Controller')->getMRBundle($objetoRequest, true);
+                $jsonErekamMedis['request']['dataMR'] = $this->compressGZIP($getMRBundle, $key);
+
+                $dataJsonSend = json_encode($jsonErekamMedis);
+            }
             $url =   $baseURL . $request['url'];
   
             $response = $this->curlAPI2($headers['headers'], $dataJsonSend, $url, $methods, null);
  
-            $cekData = array(
-                'request' => array(
-                    'url' => $url,
-                    'headers' =>  $headers['headers'],
-                    'payload' =>$dataJsonSend,
-                    'secretKey' => $headers['cons']['secretKey'],
-                ), 'response' => $response
-            );
-         
+            // $cekData = array(
+            //     'request' => array(
+            //         'url' => $url,
+            //         'headers' =>  $headers['headers'],
+            //         'payload' =>$dataJsonSend,
+            //         'secretKey' => $headers['cons']['secretKey'],
+            //     ), 'response' => $response
+            // );
+            
+            if (isset($request['jenis']) && $request['jenis'] == 'eRekamMedis') {
+                $objetoRequest = new \Illuminate\Http\Request();
+                $objetoRequest['nosep'] = $request['data']['request']['noSep'];
+                $objetoRequest['keterangan'] = $response;
+                $this->saveLogMRBundle($objetoRequest);
+            }
+            
             if (isset($request['jenis']) && $request['jenis'] == 'antrean') {
                 $consId = $headers['cons']['data'];
                 $signature = $headers['cons']['secretKey'];

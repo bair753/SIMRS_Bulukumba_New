@@ -91,7 +91,25 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                     19: $scope.header.objectdepartemenfk,
                     20: $scope.header.jenispelayanan,
                     21: $scope.header.objectkelompokpasienlastfk,
-                    22: $scope.header.noreservasi
+                    22: $scope.header.noreservasi,
+                    23: $scope.header.noidentitas,
+                    24: $scope.header.nobpjs,
+                    25: $scope.header.nosep,
+                    26: $scope.header.namalengkap,
+                    27: $scope.header.objectpegawaifk,
+                    28: $scope.header.pekerjaan,
+                    29: $scope.header.pendidikan,
+                    30: $scope.header.agama,
+                    31: $scope.header.kebangsaan,
+                    32: $scope.header.statusperkawinan,
+                    33: $scope.header.nohp,
+                    34: $scope.header.ketalergi,
+                    35: $scope.header.ketalergiobat,
+                    36: $scope.header.tempatlahir,
+                    37: $scope.header.tglmeninggal,
+                    38: $scope.header.nip_dokter,
+                    39: $scope.header.tglpulang,
+
                 }
                 cacheHelper.set('CacheInputDiagnosaDokter', arrStr);
                 cacheHelper.set('InputResepApotikOrderRevCtrl', arrStr);
@@ -267,6 +285,57 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                 if (departemen == 18 || departemen == 28 || departemen == 24) { $scope.isRawatJalan = true }
                 if (departemen == 16 || departemen == 35) { $scope.isRawatInap = true }
 
+            }
+
+            $scope.iCareBaru = function () {
+                if ($scope.header.nobpjs == undefined) {
+                    toastr.warning("Pasien tidak tidak memiliki No. BPJS", "Peringatan")
+                    return
+                }
+                $scope.isRouteLoading = false;
+                var json = {
+                    "url": `SEP/${$scope.header.nosep}`,
+                    "method": "GET",
+                    "data": null
+                }
+                medifirstService.postNonMessage("bridging/bpjs/tools", json).then(function (e) {
+                    $scope.isRouteLoading = false;
+                    if (e.data.metaData.code === "200") {
+                        $scope.dataSep = e.data.response;
+                        $scope.item.dpjpSurkon = $scope.dataSep.dpjp.nmDPJP;
+                        $scope.item.kodedpjpSurkon = $scope.dataSep.dpjp.kdDPJP;
+                    } else {
+                        window.messageContainer.error("Sep tidak ditemukan !");
+                        return
+                    }
+
+                    var dpjpLayan = $scope.item.kodedpjpSurkon
+                    let Send = {
+                        "url": "api/rs/validate",
+                        "method": "POST",
+                        "jenis": "i-care",
+                        "data": {
+                            "param": $scope.header.nobpjs,
+                            "kodedokter": dpjpLayan ? parseInt(dpjpLayan) : null
+                        }
+                    }
+                    medifirstService.postNonMessage("bridging/bpjs/tools", Send).then(function (e) {
+                        if (e.data.metaData.code == "200") {
+                            var width = screen.availWidth;
+                            var height = screen.availHeight;
+
+                            // Membuka URL di jendela popup
+                            var popup = window.open(e.data.response.url, 'popupWindow', 'width=' + width + ',height=' + height + ',scrollbars=yes');
+
+                            // Fokus pada jendela popup
+                            if (popup) {
+                                popup.focus();
+                            }
+                        } else {
+                            window.messageContainer.error(e.data.metaData.message);
+                        }
+                    })
+                })
             }
 
         }

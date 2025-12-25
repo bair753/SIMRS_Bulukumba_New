@@ -166,6 +166,19 @@ Trait PelayananPasienTrait
         
         return $set->nilaifield;
     }
+    protected function getUrlBrigdingBPJS_ICARE()
+    {
+        $statusBridgingProduction = SettingDataFixed::where('namafield', 'isBridgingProduction')->first();
+        if (!empty($statusBridgingProduction) && $statusBridgingProduction->nilaifield == 'false') {
+            $set = SettingDataFixed::where('namafield', 'linkBPJS')->first();
+            $rep =  str_replace('vclaim-rest-dev/', 'ihs_dev/', $set->nilaifield);
+        } else {
+            $set = SettingDataFixed::where('namafield', 'linkBPJSV1.1')->first();
+            $rep =  str_replace('vclaim-rest/', 'wsihs/', $set->nilaifield);
+        }
+
+        return $rep;
+    }
     protected function dateRange( $first, $last, $step = '+1 day', $format = 'Y-m-d' ) {
         $dates = [];
         $current = strtotime( $first );
