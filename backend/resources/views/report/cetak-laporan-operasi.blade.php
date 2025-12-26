@@ -265,7 +265,7 @@
                     <td colspan="5">Komplikasi Selama Operasi : @{{ item.obj[31100542] ? item.obj[31100542] : '' }}</td>
                 </tr>
                 <tr>
-                    <td rowspan="4" colspan="4">Diagnose Pasca Operatif : @{{ item.obj[31100541] ? item.obj[31100541] : '' }}</td>
+                    <td rowspan="4" colspan="4">Diagnose Pasca Operatif : @{{ item.obj[31100543] ? item.obj[31100543] : '' }}</td>
                     <td colspan="2" style="border:none">Intake</td>
                     <td colspan="3" style="border:none">Output</td>
                 </tr>

@@ -239,7 +239,7 @@
             <td colspan="9" style="border:none">Jalan Serikaya No. 17 Bulukumba 92512 Telpon (0413) 81290, 81292 FAX. 85030 <br> Website: https://rsud.bulukumbakab.go.id, Email: sultanhandgradja@yahoo.com <hr style="border:2px solid #000"></td>
         </tr>
         <tr style="text-align:center">
-            <td colspan="9" style="border:none;"><h2 style="font-size: 20pt">SURAT KETERANGAN SEMENTARA BEROBAT</h2> <br> Nomor: @{{ item.obj[32116796] ? item.obj[32116796] : '' }} tahun</td>
+            <td colspan="9" style="border:none;"><h2 style="font-size: 20pt">SURAT KETERANGAN SEMENTARA BEROBAT</h2> <br> Nomor: @{{ item.obj[32116796] ? item.obj[32116796] : '' }}</td>
         </tr>
         <tr style="height:20px"></tr>
         <tr>

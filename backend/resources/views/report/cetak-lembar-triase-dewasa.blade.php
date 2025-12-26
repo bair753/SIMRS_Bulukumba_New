@@ -257,11 +257,11 @@
 
                 </td>
                 <td colspan="4" style="border-bottom:none">
-                    Tanggal	: @{{item.obj[420517] | toDate | date:'dd MMMM yyyy'}}
+                    Tanggal	/ Pukul : @{{item.obj[420517] | date:'dd MMMM yyyy'}} WITA
                 </td>
             </tr>
             <tr>
-                <td colspan="4" style="border-top:none;">Pukul	: @{{item.obj[420517] | toDate | date:'HH:mm'}} WITA</td>
+               <!-- <td colspan="4" style="border-top:none;">Pukul	: @{{item.obj[420517] | toDate | date:'HH:mm'}} WITA</td> -->
             </tr>
             <tr>
                 <td colspan="12">Petunjuk : Beri tanda (v) pada Kolom yang anda anggap sesuai dengan kondisi pasien</td>

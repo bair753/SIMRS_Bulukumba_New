@@ -69,7 +69,7 @@ return [
         'mysql' => [
             'driver' => 'mysql',
             'host' => 'localhost',
-            'port' => '3306',
+            'port' => '3307:',
             'database' => 'istanab2_as123',
             'username' => 'root',
             'password' => '',
@@ -83,7 +83,7 @@ return [
         'pgsql' => [
             'driver' => 'pgsql',
             'host' => env('DB_HOST', 'localhost'),
-            'port' => env('DB_PORT', '5432'),
+            'port' => env('DB_PORT', '5431'),
             'database' => env('DB_DATABASE', 'forge'),
             'username' => env('DB_USERNAME', 'forge'),
             'password' => env('DB_PASSWORD', ''),

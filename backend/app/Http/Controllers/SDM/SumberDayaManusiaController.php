@@ -1752,19 +1752,7 @@ class SumberDayaManusiaController extends ApiController {
                     $logAP->save();
             }
 
-            //Hapus Log Presensi
-            $soap_request="<ClearData><ArgComKey xsi:type=\"xsd:integer\">"."0"."</ArgComKey><Arg><Value xsi:type=\"xsd:integer\">3</Value></Arg></ClearData>";
-            $newLine="\r\n";
-            fputs($Connect, "POST /iWsService HTTP/1.0".$newLine);
-            fputs($Connect, "Content-Type: text/xml".$newLine);
-            fputs($Connect, "Content-Length: ".strlen($soap_request).$newLine.$newLine);
-            fputs($Connect, $soap_request.$newLine);
-            $buffer="";
-            while($Response=fgets($Connect, 1024)){
-                $buffer=$buffer.$Response;
-            }
-            $buffer=$this->parse_presensi($buffer,"<Information>","</Information>");
-
+           
             $transStatus = 'true';
             $transMessage = "Berhasil import Log Presensi";
             } catch (\Throwable $th) {
@@ -1832,18 +1820,7 @@ class SumberDayaManusiaController extends ApiController {
                     $logAP->save();
             }
 
-            //Hapus Log Presensi
-            $soap_request="<ClearData><ArgComKey xsi:type=\"xsd:integer\">"."0"."</ArgComKey><Arg><Value xsi:type=\"xsd:integer\">3</Value></Arg></ClearData>";
-            $newLine="\r\n";
-            fputs($Connect, "POST /iWsService HTTP/1.0".$newLine);
-            fputs($Connect, "Content-Type: text/xml".$newLine);
-            fputs($Connect, "Content-Length: ".strlen($soap_request).$newLine.$newLine);
-            fputs($Connect, $soap_request.$newLine);
-            $buffer="";
-            while($Response=fgets($Connect, 1024)){
-                $buffer=$buffer.$Response;
-            }
-            $buffer=$this->parse_presensi($buffer,"<Information>","</Information>");
+           
 
             $transStatus = 'true';
             $transMessage = "Berhasil import Log Presensi";
@@ -1911,19 +1888,8 @@ class SumberDayaManusiaController extends ApiController {
                     $logAP->save();
             }
 
-            //Hapus Log Presensi
-            $soap_request="<ClearData><ArgComKey xsi:type=\"xsd:integer\">"."0"."</ArgComKey><Arg><Value xsi:type=\"xsd:integer\">3</Value></Arg></ClearData>";
-            $newLine="\r\n";
-            fputs($Connect, "POST /iWsService HTTP/1.0".$newLine);
-            fputs($Connect, "Content-Type: text/xml".$newLine);
-            fputs($Connect, "Content-Length: ".strlen($soap_request).$newLine.$newLine);
-            fputs($Connect, $soap_request.$newLine);
-            $buffer="";
-            while($Response=fgets($Connect, 1024)){
-                $buffer=$buffer.$Response;
-            }
-            $buffer=$this->parse_presensi($buffer,"<Information>","</Information>");
-
+         
+          
             $transStatus = 'true';
             $transMessage = "Berhasil import Log Presensi";
             } catch (\Throwable $th) {
@@ -1989,19 +1955,7 @@ class SumberDayaManusiaController extends ApiController {
                     $logAP->workcode = $value['workcode'];
                     $logAP->save();
             }
-
-            //Hapus Log Presensi
-            $soap_request="<ClearData><ArgComKey xsi:type=\"xsd:integer\">"."0"."</ArgComKey><Arg><Value xsi:type=\"xsd:integer\">3</Value></Arg></ClearData>";
-            $newLine="\r\n";
-            fputs($Connect, "POST /iWsService HTTP/1.0".$newLine);
-            fputs($Connect, "Content-Type: text/xml".$newLine);
-            fputs($Connect, "Content-Length: ".strlen($soap_request).$newLine.$newLine);
-            fputs($Connect, $soap_request.$newLine);
-            $buffer="";
-            while($Response=fgets($Connect, 1024)){
-                $buffer=$buffer.$Response;
-            }
-            $buffer=$this->parse_presensi($buffer,"<Information>","</Information>");
+  
 
             $transStatus = 'true';
             $transMessage = "Berhasil import Log Presensi";
@@ -2070,17 +2024,7 @@ class SumberDayaManusiaController extends ApiController {
             }
 
             //Hapus Log Presensi
-            $soap_request="<ClearData><ArgComKey xsi:type=\"xsd:integer\">"."0"."</ArgComKey><Arg><Value xsi:type=\"xsd:integer\">3</Value></Arg></ClearData>";
-            $newLine="\r\n";
-            fputs($Connect, "POST /iWsService HTTP/1.0".$newLine);
-            fputs($Connect, "Content-Type: text/xml".$newLine);
-            fputs($Connect, "Content-Length: ".strlen($soap_request).$newLine.$newLine);
-            fputs($Connect, $soap_request.$newLine);
-            $buffer="";
-            while($Response=fgets($Connect, 1024)){
-                $buffer=$buffer.$Response;
-            }
-            $buffer=$this->parse_presensi($buffer,"<Information>","</Information>");
+            // 
 
             $transStatus = 'true';
             $transMessage = "Berhasil import Log Presensi";
@@ -2148,18 +2092,146 @@ class SumberDayaManusiaController extends ApiController {
                     $logAP->save();
             }
 
-            //Hapus Log Presensi
-            $soap_request="<ClearData><ArgComKey xsi:type=\"xsd:integer\">"."0"."</ArgComKey><Arg><Value xsi:type=\"xsd:integer\">3</Value></Arg></ClearData>";
-            $newLine="\r\n";
-            fputs($Connect, "POST /iWsService HTTP/1.0".$newLine);
-            fputs($Connect, "Content-Type: text/xml".$newLine);
-            fputs($Connect, "Content-Length: ".strlen($soap_request).$newLine.$newLine);
-            fputs($Connect, $soap_request.$newLine);
-            $buffer="";
-            while($Response=fgets($Connect, 1024)){
-                $buffer=$buffer.$Response;
+         
+            
+
+            $transStatus = 'true';
+            $transMessage = "Berhasil import Log Presensi";
+            } catch (\Throwable $th) {
+                $transStatus = 'false';
+                $transMessage = $th->getMessage();
             }
-            $buffer=$this->parse_presensi($buffer,"<Information>","</Information>");
+
+            if ($transStatus != 'false') {
+                $result = array(
+
+                    "status" => 201,
+                    "message" => $transMessage,
+                    "as" => 'mr_adhyy',
+                );
+            } else {
+                $result = array(
+
+                    "status" => 400,
+                    "message" => $transMessage,
+                    "as" => 'mr_adhyy',
+                );
+            }
+            return $this->setStatusCode($result['status'])->respond($result, $transMessage);
+    }
+    
+    public function getLogPresensiPegawai7 (Request $request) {
+        $kdProfile = (int) $this->getDataKdProfile($request);
+        $set1 =$this->settingDataFixed('presensi_6',$kdProfile);
+        $machine1 = Fingerprint::connect($set1, '80', '0');
+        // if($machine1->getStatus() == 'disconnected'){
+        //     $transMessage = "Machine Status : ".$machine1->getStatus();
+        //     $result = array(
+        //         'status' => 400,
+        //         'as' => 'mr_adhyy',
+        //     );
+
+        //     return $this->setStatusCode($result['status'])->respond($result, $transMessage);
+        
+        // }
+        $machine = $machine1->getAttendance();
+        $Connect = fsockopen($set1, "80", $errno, $errstr, 1);
+
+        try {
+            //Insert Log Presensi
+            foreach ($machine as $key => $value) {
+                $find_before = \DB::table('sdm_absensipegawai_t as ap')->where('pegawaifk',$value['pin'])
+                ->where('tglhistori', $value['datetime'])
+                ->where('verified', $value['verified'])
+                ->where('status', $value['status'])
+                ->where('workcode', $value['workcode'])->first();
+                    if($find_before){
+                      continue;
+                    };
+
+                    $logAP = new SDM_AbsensiPegawai();
+                    $logAP->norec = $logAP->generateNewId();
+                    $logAP->kdprofile = $kdProfile;
+                    $logAP->statusenabled = true;
+                    $logAP->pegawaifk = $value['pin'];
+                    $logAP->tglhistori = $value['datetime'];
+                    $logAP->verified = $value['verified'];
+                    $logAP->status = $value['status'];
+                    $logAP->workcode = $value['workcode'];
+                    $logAP->save();
+            }
+
+            //Hapus Log Presensi
+            
+
+            $transStatus = 'true';
+            $transMessage = "Berhasil import Log Presensi";
+            } catch (\Throwable $th) {
+                $transStatus = 'false';
+                $transMessage = $th->getMessage();
+            }
+
+            if ($transStatus != 'false') {
+                $result = array(
+
+                    "status" => 201,
+                    "message" => $transMessage,
+                    "as" => 'mr_adhyy',
+                );
+            } else {
+                $result = array(
+
+                    "status" => 400,
+                    "message" => $transMessage,
+                    "as" => 'mr_adhyy',
+                );
+            }
+            return $this->setStatusCode($result['status'])->respond($result, $transMessage);
+    }
+    
+    public function getLogPresensiPegawai8 (Request $request) {
+        $kdProfile = (int) $this->getDataKdProfile($request);
+        $set1 =$this->settingDataFixed('presensi_6',$kdProfile);
+        $machine1 = Fingerprint::connect($set1, '80', '0');
+        // if($machine1->getStatus() == 'disconnected'){
+        //     $transMessage = "Machine Status : ".$machine1->getStatus();
+        //     $result = array(
+        //         'status' => 400,
+        //         'as' => 'mr_adhyy',
+        //     );
+
+        //     return $this->setStatusCode($result['status'])->respond($result, $transMessage);
+        
+        // }
+        $machine = $machine1->getAttendance();
+        $Connect = fsockopen($set1, "80", $errno, $errstr, 1);
+
+        try {
+            //Insert Log Presensi
+            foreach ($machine as $key => $value) {
+                $find_before = \DB::table('sdm_absensipegawai_t as ap')->where('pegawaifk',$value['pin'])
+                ->where('tglhistori', $value['datetime'])
+                ->where('verified', $value['verified'])
+                ->where('status', $value['status'])
+                ->where('workcode', $value['workcode'])->first();
+                    if($find_before){
+                      continue;
+                    };
+
+                    $logAP = new SDM_AbsensiPegawai();
+                    $logAP->norec = $logAP->generateNewId();
+                    $logAP->kdprofile = $kdProfile;
+                    $logAP->statusenabled = true;
+                    $logAP->pegawaifk = $value['pin'];
+                    $logAP->tglhistori = $value['datetime'];
+                    $logAP->verified = $value['verified'];
+                    $logAP->status = $value['status'];
+                    $logAP->workcode = $value['workcode'];
+                    $logAP->save();
+            }
+
+            
+            
 
             $transStatus = 'true';
             $transMessage = "Berhasil import Log Presensi";

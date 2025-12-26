@@ -31,7 +31,9 @@
         "twilio/sdk": "^6.11",
         "neoxia/laravel-sftp": "^1.0",
         "mpdf/mpdf": ">=7.0",
-        "nullpunkt/lz-string-php": "^1.3"
+        "nullpunkt/lz-string-php": "^1.3",
+        "webklex/laravel-pdfmerger": "^1.3",
+        "fahriztx/zksoapphp": "^1.0"
     },
     "require-dev": {
         "mockery/mockery": "0.9.*",
