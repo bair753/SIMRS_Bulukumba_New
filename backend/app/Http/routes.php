@@ -1945,6 +1945,11 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
                Route::get('registrasi/riwayat-cppt-applama', 'Bridging\RiwayatAppLamaController@getDaftarRiwayatCPPT');
              //** END RIWAYAT APP LAMA *//
 
+             // ICARE
+              Route::post('registrasi/save-proporsi-i-care', 'Registrasi\RegistrasiController@saveProporsiICare');
+              Route::get('registrasi/get-proporsi-i-care', 'Registrasi\RegistrasiController@getProporsiICare');
+              Route::get('registrasi/get-proporsi-i-care-dpjp', 'Registrasi\RegistrasiController@getProporsiICareDPJP');
+
 
         // });
         // Route::group(['prefix' => 'remunerasi'], function () {

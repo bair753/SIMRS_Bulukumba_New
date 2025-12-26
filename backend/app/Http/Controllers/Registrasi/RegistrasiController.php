@@ -17,6 +17,7 @@ use App\Master\FlagGenerateNoCm;
 use App\Master\JenisDiagnosa;
 use App\Master\JenisKelamin;
 use App\Master\Pasien;
+use App\Master\Pegawai;
 use App\Master\Pendidikan;
 use App\Master\Ruangan;
 use App\Master\RunningNumber;
@@ -6578,8 +6579,13 @@ class RegistrasiController extends ApiController
                 DB::raw("pd.ismobilejkn,
                 case when pd.ismobilejkn = true then 
                 (case when pd.ischeckin = true  then 'Sudah Checkin' else 'Belum Checkin' end) else '-' end as statusjkn"), 'pd.statusschedule as statusschedule', 'apd.noantrian')
-            ->whereNull('br.norec')
-            // ->where('pd.statusenabled', true)
+            // ->whereNull('br.norec')
+            ->whereNotExists(function ($query) {
+                $query->select(DB::raw(1))
+                    ->from('batalregistrasi_t as br')
+                    ->whereColumn('br.pasiendaftarfk', 'pd.norec');
+            })
+            ->where('pd.statusenabled', true)
             ->where('pd.kdprofile', (int)$kdProfile);
 
         if (isset($filter['tglAwal']) && $filter['tglAwal'] != "" && $filter['tglAwal'] != "undefined") {
@@ -11787,4 +11793,84 @@ GROUP BY y.KET
         );
         return $result;
     }
+    public function saveProporsiICare(Request $request)
+    {
+        $dataLogin = $request->all();
+        $kdProfile = $this->getDataKdProfile($request);
+        $idProfile = (int) $kdProfile;
+
+        $pasienDaftar = PasienDaftar::where('noregistrasi', $request['noregistrasi'])
+            ->where('kdprofile', $idProfile)
+            ->update([
+                'proporsicare' => 'sudah dihitung'
+            ]);
+
+        $result = array(
+            'status' => 201,
+            'message' => 'Proporsi iCare berhasil disimpan',
+            'data' => $pasienDaftar,
+            'as' => 'zaid@mgr'
+        );
+
+        return $this->setStatusCode($result['status'])->respond($result, $result['message']);
+    }
+    public function getProporsiICare(Request $request)
+    {
+        $dataLogin = $request->all();
+        $kdProfile = $this->getDataKdProfile($request);
+        $idProfile = (int) $kdProfile;
+
+        $pasienDaftar = PasienDaftar::where('noregistrasi', $request['noregistrasi'])
+            ->where('kdprofile', $idProfile)
+            ->where('proporsicare', 'sudah dihitung')
+            ->get();
+
+        if (count($pasienDaftar) == 0) {
+            $result = array(
+                'status' => 201,
+                'message' => 'Proporsi iCare belum dihitung',
+                'data' => $pasienDaftar,
+                'as' => 'zaid@mgr'
+            );
+        } else {
+            $result = array(
+                'status' => 200,
+                'message' => 'Proporsi iCare sudah dihitung',
+                'data' => $pasienDaftar,
+                'as' => 'zaid@mgr'
+            );
+        }
+
+        return $this->setStatusCode($result['status'])->respond($result, $result['message']);
+    }
+    public function getProporsiICareDPJP(Request $request)
+    {
+        $dataLogin = $request->all();
+        $kdProfile = $this->getDataKdProfile($request);
+        $idProfile = (int) $kdProfile;
+
+        $pegawaiAcc = Pegawai::where('id', $request['idPegawai'])
+            ->where('kdprofile', $idProfile)
+            ->where('isdpjp', 'YES')
+            ->get();
+
+        if (count($pegawaiAcc) == 0) {
+            $result = array(
+                'status' => 201,
+                'message' => 'Proporsi iCare Pegawai not accptance',
+                'data' => $pegawaiAcc,
+                'as' => 'zaid@mgr'
+            );
+        } else {
+            $result = array(
+                'status' => 200,
+                'message' => 'Proporsi iCare Pegawai accptance',
+                'data' => $pegawaiAcc,
+                'as' => 'zaid@mgr'
+            );
+        }
+
+        return $this->setStatusCode($result['status'])->respond($result, $result['message']);
+    }
+
 }

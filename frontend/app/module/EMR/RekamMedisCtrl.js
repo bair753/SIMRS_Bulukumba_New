@@ -1,7 +1,7 @@
 define(['initialize', 'Configuration'], function (initialize, configuration) {
     'use strict';
-    initialize.controller('RekamMedisCtrl', ['$rootScope', '$scope', '$state', 'DateHelper', 'MedifirstService', 'CacheHelper',
-        function ($rootScope, $scope, $state, dateHelper, medifirstService, cacheHelper) {
+    initialize.controller('RekamMedisCtrl', ['$rootScope', '$scope', 'ModelItem', '$state', 'DateHelper', 'MedifirstService', 'CacheHelper',
+        function ($rootScope, $scope, ModelItem, $state, dateHelper, medifirstService, cacheHelper) {
             $scope.now = new Date();
 
             $scope.header = {};
@@ -11,6 +11,8 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
             var usia = ''
             var departemen = ''
             $scope.isLoadingNav = false
+            $scope.dataLogin = JSON.parse(localStorage.getItem('pegawai'))
+            $scope.pegawai = ModelItem.getPegawai();
             // cacheHelper.set('cacheRekamMedis', undefined);
             $scope.getRekamMedisCheck = function (checkNoregis) {
                 $rootScope.getRekamMedisCheck(checkNoregis);
@@ -20,6 +22,7 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                 $rootScope.isShowNavEMR = !$rootScope.isShowNavEMR
             }
 
+            $scope.showicare = false;
             // norec Antrian Etateh
             medifirstService.get('emr/get-antrian-pasien-norec/' + $state.params.noRec).then(function (e) {
                 var result = e.data.result
@@ -164,7 +167,9 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                     }
                     // var treeview = $("#treeview").data("kendoTreeView");
                     // .expandPath([2, 5])
-                    $scope.showNavigasiTree =true   
+                    $scope.showNavigasiTree =true
+                    
+                    iCare();
 
                 }, function (error) {
                     $scope.isLoadingNav = false
@@ -285,6 +290,93 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                 if (departemen == 18 || departemen == 28 || departemen == 24) { $scope.isRawatJalan = true }
                 if (departemen == 16 || departemen == 35) { $scope.isRawatInap = true }
 
+            }
+
+            async function iCare() {
+                medifirstService.get("registrasi/get-proporsi-i-care-dpjp?" + "&idPegawai=" + $scope.pegawai.id).then(function (e) {
+                    $scope.isRouteLoading = false;
+                    if (e.data.message === "Proporsi iCare Pegawai accptance") {
+                        medifirstService.get("registrasi/get-proporsi-i-care?" + "&noregistrasi=" + $scope.header.noregistrasi).then(function (e) {
+                            $scope.isRouteLoading = false;
+                            if (e.data.message === "Proporsi iCare belum dihitung") {
+                                toastr.success(e.data.message);
+                                if ($scope.header.nobpjs == undefined) {
+                                    toastr.warning("Pasien tidak tidak memiliki No. BPJS", "Peringatan")
+                                    return
+                                }
+                                console.log('masuk sini');
+                                $scope.isRouteLoading = false;
+                                var json = {
+                                    "url": `SEP/${$scope.header.nosep}`,
+                                    "method": "GET",
+                                    "data": null
+                                }
+                                medifirstService.postNonMessage("bridging/bpjs/tools", json).then(function (e) {
+                                    $scope.isRouteLoading = false;
+                                    if (e.data.metaData.code === "200") {
+                                        $scope.dataSep = e.data.response;
+                                        $scope.item.dpjpSurkon = $scope.dataSep.dpjp.nmDPJP;
+                                        $scope.item.kodedpjpSurkon = $scope.dataSep.dpjp.kdDPJP;
+                                        // let SendIcare = {
+                                        //     "noregistrasi": $scope.header.noregistrasi,
+                                        // }
+                                        // medifirstService.postNonMessage("registrasi/save-proporsi-i-care", SendIcare).then(function (e) {
+                                        //     if (e.data.status == "201") {
+                                        //         toastr.success(e.data.message);
+                                        //     } else {
+                                        //         console.log('gagal')
+                                        //     }
+                                        // })
+                                    } else {
+                                        window.messageContainer.error("Sep tidak ditemukan !");
+                                        return
+                                    }
+
+                                    var dpjpLayan = $scope.item.kodedpjpSurkon
+                                    let Send = {
+                                        "url": "api/rs/validate",
+                                        "method": "POST",
+                                        "jenis": "i-care",
+                                        "data": {
+                                            "param": $scope.header.nobpjs,
+                                            "kodedokter": dpjpLayan ? parseInt(dpjpLayan) : null
+                                        }
+                                    }
+                                    medifirstService.postNonMessage("bridging/bpjs/tools", Send).then(function (e) {
+                                        if (e.data.metaData.code == "200") {
+                                            let SendIcare = {
+                                                "noregistrasi": $scope.header.noregistrasi,
+                                            }
+                                            medifirstService.postNonMessage("registrasi/save-proporsi-i-care", SendIcare).then(function (e) {
+                                                if (e.data.status == "201") {
+                                                    toastr.success(e.data.message);
+                                                } else {
+                                                    console.log('gagal')
+                                                }
+                                            })
+                                            var width = screen.availWidth;
+                                            var height = screen.availHeight;
+
+                                            // Membuka URL di jendela popup
+                                            var popup = window.open(e.data.response.url, 'popupWindow', 'width=' + width + ',height=' + height + ',scrollbars=yes');
+
+                                            // Fokus pada jendela popup
+                                            if (popup) {
+                                                popup.focus();
+                                            }
+                                        } else {
+                                            window.messageContainer.error(e.data.metaData.message);
+                                        }
+                                    })
+                                })
+                            } else {
+                                toastr.success(e.data.message);
+                            }
+                        })
+                    } else {
+                        toastr.error(e.data.message)
+                    }
+                });
             }
 
             $scope.iCareBaru = function () {
