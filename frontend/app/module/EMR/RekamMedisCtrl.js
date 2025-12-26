@@ -7,6 +7,7 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
             $scope.header = {};
             var usrDokter = medifirstService.getPegawaiLogin().jenisPegawai.id;
             $scope.checkNoregis =true;
+            $scope.item = {};
             // $scope.checkNoregis = (usrDokter == 1) ? false : true;
             var usia = ''
             var departemen = ''
