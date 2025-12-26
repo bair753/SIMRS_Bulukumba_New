@@ -127,3 +127,11 @@ Thumbs.db
 /backend/.env
 /frontend/app/javascripts/Setting.js
 *.tmp
+/backend/public/dokumen_klaim/
+frontend/node_modules_backup/
+backend/vendornew
+composer.json
+composer.lock
+frontend/bower_components_backup/
+frontend_backup_2025-12-13/
+vendor/
