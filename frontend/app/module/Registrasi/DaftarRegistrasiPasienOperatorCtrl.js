@@ -246,10 +246,10 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 					},
 					{
 						"field": "statusschedule",
-						"title": "Sirudal",
+						"title": "Onsite",
 						"width": "80px",
 						// "template": '# if(statusschedule != `Kios-K`) {# ✔ # } else {# - #} #'
-						"template": '# if( statusschedule==false) {# ✔ # } else {# - #} #'
+						"template": '# if( statusschedule==false) {# - # } else {# - #} #'
 					},
 					{
 						"field": "statusjkn",

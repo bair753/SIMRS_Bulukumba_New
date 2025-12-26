@@ -113,7 +113,8 @@ app.post('/app/mobile-authentication/:id', function(req, res) {
     //     })
     // }
     res.send({ message: "success" });
-    res.end();
+    // perbaikan
+    // res.end();
 });
 app.post('/app/Login', function(req, res) {
 
@@ -137,18 +138,21 @@ app.post('/app/Login', function(req, res) {
         });
         listLogin.push(token);
     }
-    res.end();
+    // res.end();
+    // perbaikan
 });
 app.put('/app/Login', function(req, res) {
     var arr = req.headers.authorization.split(' ');
     res.send(new Buffer(arr[1], 'base64'));
-    res.end();
+    // res.end();
+    // perbaikan
 });
 app.delete('/app/Login', function(req, res) {
     delete req.headers.authorization;
     listLogin.indexOf(req.headers.authorization);
     res.send('success');
-    res.end();
+    // res.end();
+    // perbaikan
 });
 app.use(function(req, res, next) {
     console.log(req.url);
@@ -159,8 +163,11 @@ app.use(function(req, res, next) {
 //            res.redirect('/app/Login');
 //        } else {
             res.redirect('/app/Login');
+            //tambahan
+            return;
 //        }
-        res.end();
+        // perbaikan
+        // res.end();
 
     }
 
@@ -170,7 +177,9 @@ app.use(function(req, res, next) {
         url = path.join(__dirname, 'app', url.substring(1));
         url = url.split('?')[0];
         res.sendFile(url);
-        res.end();
+        // perbaikan
+        // res.end();
+        //batas perbaikan
         return;
     }
 
@@ -178,7 +187,8 @@ app.use(function(req, res, next) {
     if (!(req.headers.cookie === undefined || req.headers.authorization === undefined) && indexLogin < 0) {
 
         res.redirect('/app/Login');
-        res.end();
+        // pebaikan
+        // res.end();
 
         return;
     }
@@ -248,14 +258,11 @@ app.use(function(req, res, next) {
                             result = result.slice(0, req.query.take);
                         res.send(result);
                     } else res.send([]);
-                    res.end();
+                    //perbaikan
+                    // res.end();
 
                 });
             });
-
-
-
-
 
         } else {
 
@@ -274,7 +281,8 @@ app.use(function(req, res, next) {
                     } else
                         res.send(data);
                 } else res.send([]);
-                res.end();
+                // perbaikan
+                // res.end();
             });
         }
 
@@ -333,11 +341,13 @@ app.use(function(req, res, next) {
                 if (req.url === '/app/reservasiOnline') {
                     //res.render(url);
                     renderMeWithoutError(res,url);
-                    res.end();
+                    // perbaikan
+                    // res.end();
                 } else if (req.url === '/app/antrian') {
                     //res.render(url);
                     renderMeWithoutError(res,url);
-                    res.end();
+                    // perbaikan
+                    // res.end();
                 } else {
 
                     //syamsu
@@ -347,7 +357,7 @@ app.use(function(req, res, next) {
                         message: 'Unauthorize'
                     });*/
                     console.log("send redirect to login ");
-                    res.send('<script>window.location = "/app/Login"; </script>');
+                    return res.send('<script>window.location = "/app/Login"; </script>');
                 }
             } else res.render(url);
 
@@ -357,11 +367,13 @@ app.use(function(req, res, next) {
                  if (req.url === '/app/reservasiOnline') {
                     //res.render(url);
                     renderMeWithoutError(res,url);
-                    res.end();
+                    // perbaikan
+                    // res.end();
                 } else if (req.url === '/app/antrian') {
                     //res.render(url);
                     renderMeWithoutError(res,url);
-                    res.end();
+                    // perbaikan
+                    // res.end();
                 } else {
                     //syamsu
                     //Kalau belum login atau sudah expire, redirect ke halaman Login
@@ -369,8 +381,8 @@ app.use(function(req, res, next) {
                         statusCode: 401,
                         message: 'Unauthorize'
                     });*/
-                    console.log("send redirect to login ");
-                    res.send('<script>window.location = "/app/Login"; </script>');
+                    console.log("logout send redirect to login ");
+                    return res.send('<script>window.location = "/app/Login"; </script>');
                 }
             } else {
                 //res.render(url);

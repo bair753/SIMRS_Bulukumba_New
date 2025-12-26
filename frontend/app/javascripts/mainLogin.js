@@ -6,7 +6,7 @@ require.config({
         'LoginService': window.root + 'javascripts/Services/LoginService',
         'HttpServices': window.root + 'javascripts/Services/HttpServices',
         'core': window.root + 'javascripts/core',
-        // 'jQuery': 'jquery',
+        //'jQuery': 'jquery',
         'Configuration': window.root + 'javascripts/Setting',
         'Service': window.root + 'javascripts/Services/Service',
         'Helper': window.root + 'javascripts/Helper',    
@@ -112,8 +112,8 @@ require(['LoginService', 'core', "kendo.angular", 'Configuration', 'Helper', 'jQ
                                 if (error.data != null)
                                     window.messageContainer.error(error.data.messages)
                                 else
-                                    window.messageContainer.error('Login Gagal, Koneksi Internet Tidak Stabil')
-                                    // window.messageContainer.error('Gagal masuk ke dalam system')
+                                    //window.messageContainer.error('Login Gagal, Koneksi Internet Tidak Stabil')
+                                    window.messageContainer.error('Gagal masuk ke dalam system')
                                 $scope.isBusy = false;
                                 // window.messageContainer.error('Gagal masuk ke dalam system')
                             });
@@ -126,7 +126,6 @@ require(['LoginService', 'core', "kendo.angular", 'Configuration', 'Helper', 'jQ
 
                         var datauserlogin = JSON.parse(window.localStorage.getItem("datauserlogin"));
                         var blmLogout = !(datauserlogin == undefined || datauserlogin == null);
-
                         if (blmLogout) {
                             loginService.logout().then(function (e) {
                                 var pegawai = JSON.parse(window.localStorage.getItem("pegawai"));
