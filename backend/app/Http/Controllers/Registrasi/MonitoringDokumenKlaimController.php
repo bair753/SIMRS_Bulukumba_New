@@ -212,7 +212,7 @@ class MonitoringDokumenKlaimController extends  ApiController
 
         // $fileName = 'bundle_'.$request['noregistrasi'].'.pdf';
         $fileName = 'bundle_'.$request['Nosep'].'.pdf';
-        $pathbundle = 'dokumenklaim/'.$request['noregistrasi'] . "/" . $fileName;
+        $pathbundle = 'dokumen_klaim/'.$request['noregistrasi'] . "/" . $fileName;
         if (File::exists($pathbundle)){
             File::delete($pathbundle);
         }
