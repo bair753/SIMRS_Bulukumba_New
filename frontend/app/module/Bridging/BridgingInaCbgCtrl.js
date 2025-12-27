@@ -5148,27 +5148,27 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
                 + dataItem.param, 
                 '_blank');
             }
-            function simpanDokumen(e) {
-				e.preventDefault();
-                var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
-                if(dataItem.param == "?q=q") {
-                    toastr.info("Infor", "Data tidak ditemukan");
-                    return
-                }
-                window.open(baseTransaksi 
-                + dataItem.url 
-                + dataItem.param + "&issimpanberkas=true&iddok="+dataItem.id+"&isberkasnoreg="+dataItem.noregistrasi+"&namafile=" + dataItem.namafile, 
-                '_blank');
-				$scope.isRouteLoading = false
-				$scope.tutupdokumen();
-            }
+            // function simpanDokumen(e) {
+			// 	e.preventDefault();
+            //     var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+            //     if(dataItem.param == "?q=q") {
+            //         toastr.info("Infor", "Data tidak ditemukan");
+            //         return
+            //     }
+            //     window.open(baseTransaksi 
+            //     + dataItem.url 
+            //     + dataItem.param + "&issimpanberkas=true&iddok="+dataItem.id+"&isberkasnoreg="+dataItem.noregistrasi+"&namafile=" + dataItem.namafile, 
+            //     '_blank');
+			// 	$scope.isRouteLoading = false
+			// 	$scope.tutupdokumen();
+            // }
 
-            $scope.tutupdokumen = function() {
-                $scope.uploadKelengkapanNew();
-                $scope.popUpData.close();
-            }
+            // $scope.tutupdokumen = function() {
+            //     $scope.uploadKelengkapanNew();
+            //     $scope.popUpData.close();
+            // }
 
-			$scope.bunldedokumen = function() {
+			$scope.bunldedokumenBaru = function() {
 				var noregistrasi = $scope.dataPasienSelected.noregistrasi;
                 var strBACKEND = baseTransaksi.replace('service/medifirst2000/', '')
                 window.open(strBACKEND + "service/storage/bundledokumenklaim-baru?noregistrasi="+ noregistrasi);
@@ -9083,7 +9083,7 @@ define(['initialize', 'Configuration'], function (initialize,configuration) {
             }
 
             $scope.tutupdokumen = function() {
-                $scope.uploadKelengkapanNew();
+                $scope.uploadKelengkapanNew2();
                 $scope.popUpData.close();
             }
 
