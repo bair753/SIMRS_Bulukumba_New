@@ -55,12 +55,32 @@
 	}
 
 	.btnlihat {
-		/* background-color: DodgerBlue; */
-		background-color: rgb(99, 86, 241);
+		background-color: rgb(99, 86, 241) !important;
 		border: none;
 		color: white;
 		padding: 8px 12px;
-		font-size: 12px;
+		font-size: 15px;
+		cursor: pointer;
+	}
+
+	.upload-btn-wrapper {
+		position: relative;
+		overflow: hidden;
+		display: inline-block;
+	}
+
+	.upload-btn-wrapper input[type=file] {
+		cursor: inherit;
+		display: block;
+		font-size: 999px;
+		filter: alpha(opacity=0);
+		min-height: 100%;
+		min-width: 100%;
+		opacity: 0;
+		position: absolute;
+		right: 0;
+		text-align: right;
+		top: 0;
 		cursor: pointer;
 	}
 
@@ -68,7 +88,7 @@
 		/* background-color: DodgerBlue; */
 		background-color: rgb(244, 181, 36);
 		border: none;
-		color: white;
+		color: black;
 		padding: 8px 12px;
 		font-size: 12px;
 		cursor: pointer;
@@ -151,6 +171,19 @@
 		text-decoration: none;
 		display: inline-block;
 		cursor: pointer;
+	}
+
+	.merah {
+		color: red !important;
+		font-size: 1.6em;
+	}
+
+	.md-dialog-container {
+		z-index: 20001;
+	}
+
+	md-backdrop.md-dialog-backdrop {
+		z-index: 20000;
 	}
 </style><!-- <div ng-controller="DaftarPasienPulangKasirCtrl"> -->
 <div ng-show="dataVOloaded">
@@ -595,8 +628,11 @@
 	<div class="grid_2">
 		<button class="btnTemplate1" ng-click="Detail()">Detail Tagihan</button>
 	</div>
-	<div class="grid_2">
+	<!-- <div class="grid_2">
 		<button class="btnTemplate1 button" ng-click="uploadKelengkapan()">Kelengkapan Dokumen</button>
+	</div> -->
+	<div class="grid_2">
+		<button class="btnTemplate1" ng-click="uploadKelengkapanNew2()">Kelengkapan Dokumen</button>
 	</div>
 	<div class="grid_2">
 		<button class="btnTemplate1" ng-click="bundlingdocument()">Bundle Dokumen</button>
@@ -2601,7 +2637,7 @@
 
 
 				</div>
-				<div kendo-window="popupUploadNew" k-title="'Kelengkapan Dokumen'" k-width="1000"  k-visible="false" k-on-open="win2visible = true" k-on-close="win2visible = false">
+				<!-- <div kendo-window="popupUploadNew" k-title="'Kelengkapan Dokumen'" k-width="1000"  k-visible="false" k-on-open="win2visible = true" k-on-close="win2visible = false">
 					<div class="panel panel-default container_12">
 						<div class="grid_6">
 							<div class="grid_12">
@@ -2632,22 +2668,125 @@
 										k-ng-model="dataSelectedDokumen" ng-click="klikGridDokumen(dataSelectedDokumen)">
 									</kendo-grid>
 								</div>
-								<!-- <div class="grid_12">
-									<table width="100%" id="customers">
-										<tr ng-repeat="stat in listBerkas | orderBy:'id'">
-											<td width="80%">
-												<label c-label item="item">{{stat.namaberkas}}</label>
-											</td>
-											<td width="20%">
-												<button class="k-button" ng-click="previewV2(stat.id)">Preview </button> -->
-												<!-- <button class="k-button" ng-click="uploadV2()" style="float:right;margin-right: 2px;">Upload </button> -->
-											<!-- </td>
-										</tr>
-									</table>
-								</div> -->
+								
 								<button class="k-button" ng-click="bunldedokumen()" style="float:right;margin-top: 5px;">Bundle Dokumen </button>
 							</fieldset>
 						</div>
+					</div>
+				</div> -->
+
+				<!-- pop up file tanpa upload  -->
+				<div kendo-window="popupUploadNew" k-title="'Kelengkapan Dokumen'" k-width="1000" k-visible="false"
+					k-on-open="win2visible = true" k-on-close="win2visible = false">
+					<div ng-cloak>
+						<md-content>
+							<md-tabs md-dynamic-height md-border-bottom>
+								<md-tab label="Kelengkapan Dokumen">
+									<md-content class="md-padding">
+										<div class="panel panel-default container_12">
+											<div class="grid_6">
+												<div class="grid_12">
+													<label c-label item="item">No RM</label>
+												</div>
+												<div class="clear"></div>
+
+												<div class="grid_12">
+													<input c-text-box type="input" filter="" class="k-textbox"
+														ng-model="dataPasienSelected.nocm" disabled />
+												</div>
+											</div>
+											<div class="grid_6">
+												<div class="grid_12">
+													<label c-label item="item">Nama Pasien</label>
+												</div>
+												<div class="clear"></div>
+
+												<div class="grid_12">
+													<input c-text-box type="input" filter="" class="k-textbox"
+														ng-model="dataPasienSelected.namapasien" disabled />
+												</div>
+											</div>
+											<div class="grid_12">
+												<fieldset>
+													<legend><b>Jenis File</b></legend>
+													<div class="grid_12 headerBox">
+														<kendo-grid id="kGridDokumen" data-source="dataDaftarDokumen"
+															options="columnDaftarDokumen" k-selectable="'row'" k-sortable="'true'"
+															k-resizable="'true'" k-ng-model="dataSelectedDokumen"
+															ng-click="klikGridDokumen(dataSelectedDokumen)">
+														</kendo-grid>
+													</div>
+													<!-- <div class="grid_12">
+										<table width="100%" id="customers">
+											<tr ng-repeat="stat in listBerkas | orderBy:'id'">
+												<td width="80%">
+													<label c-label item="item">{{stat.namaberkas}}</label>
+												</td>
+												<td width="20%">
+													<button class="k-button" ng-click="previewV2(stat.id)">Preview </button> -->
+													<!-- <button class="k-button" ng-click="uploadV2()" style="float:right;margin-right: 2px;">Upload </button> -->
+													<!-- </td>
+											</tr>
+										</table>
+									</div> -->
+													<button class="k-button" ng-click="bunldedokumen()"
+														style="float:right;margin-top: 5px;">Bundle Dokumen
+													</button>
+												</fieldset>
+											</div>
+										</div>
+									</md-content>
+								</md-tab>
+								<md-tab label="Upload Kelengkapan Dokumen">
+									<md-content class="md-padding">
+										<div class="panel panel-default container_12" style="padding: 0px 10px;">
+											<fieldset>
+												<legend><label c-label item="item">Buat Dokumen Pasien</label></legend>
+												<div class="grid_12">
+													<div class="grid_3">
+														<label c-label item="item">Nama File</label>
+													</div>
+													<div class="grid_9">
+														<!-- <input c-text-box type="input" filter="" class="k-textbox" ng-model="item.namafile" /> -->
+														<input style="width: 100%;" kendo-combo-box k-ng-model="item.namafile"
+															k-data-text-field="'nama'" k-data-value-field="'id'" k-filter="'contains'"
+															k-auto-bind="false" k-data-source="listJenisBerkas" />
+													</div>
+												</div>
+												<div class="grid_12">
+													<div class="grid_3">
+														<label c-label item="item">Keterangan</label>
+													</div>
+													<div class="grid_9">
+														<textarea class="k-textbox" style="height: 76px; width: 100%; resize: none;"
+															ng-model="item.keterangan"></textarea>
+													</div>
+												</div>
+												<div class="grid_12">
+													<div class="grid_3">
+														<label c-label item="item">Unggah File</label>
+													</div>
+													<div class="grid_9">
+														<form method="post" enctype="multipart/form-data" id="formFile">
+															<input type="file" id="filePasienNew" accept="application/pdf" />
+														</form>
+													</div>
+												</div>
+											</fieldset>
+
+											<div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
+												<button class="k-button k-button-icontext k-primary k-grid-update"
+													ng-disabled="disabledSimpan" ng-click="Save()" id="btnSimpan"><span
+														class="k-icon k-update"></span>Simpan</button>
+												<button class="k-button  k-button-icontext" ng-disabled="disabledBatal"
+													ng-click="batal()" id="btnBatal"><span class="k-icon k-cancel"></span>Batal</button>
+											</div>
+
+										</div>
+									</md-content>
+								</md-tab>
+							</md-tabs>
+						</md-content>
 					</div>
 				</div>
 
