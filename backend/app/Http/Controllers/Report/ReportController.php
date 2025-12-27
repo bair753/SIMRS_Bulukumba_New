@@ -7,6 +7,7 @@ use App\Datatrans\PasienDaftar;
 use App\Http\Controllers\ApiController;
 use App\Master\KelompokTransaksi;
 use App\Master\Ruangan;
+use App\Transaksi\PasienDaftar as PasienDaftarTrans;
 use App\Traits\Valet;
 use App\Transaksi\HasilLaboratorium;
 use App\Web\Profile;
@@ -2380,6 +2381,7 @@ class ReportController extends ApiController{
         $kdProfile = (int)$request['kdprofile'];
         $noregistrasi = $request['noregistrasi'];
         $tglAyeuna = date('Y-m-d H:i:s');
+        $ppkPelayanan = $this->settingDataFixed('namaPPKRujukan', $kdProfile);
 
         $profile = collect(DB::select("
             select * from profile_m where id = 39 limit 1
@@ -2410,6 +2412,8 @@ class ReportController extends ApiController{
 	        ,pa.penjaminlaka
             ,pa.prolanisprb
             ,pa.namadjpjpmelayanni
+            ,pa.katarak
+            ,pa.poliasalkode
             ,rp.objectdepartemenfk
             ,klsp.namakelas
             ,CASE WHEN rp.objectdepartemenfk = 18 THEN
@@ -2515,8 +2519,13 @@ class ReportController extends ApiController{
         $ttdpasien = $tulisanheader . $datas->namapeserta . "/r" . $tulisanfooter;
         $ttddokter = $tulisanheader . $suratJaminan->dokter . "/r" . $tulisanfooter;
         $ttdrumahsakit = $tulisanheader . "RSUD H.A SULTHAN DG. RADJA /r" . $tulisanfooter;
+
+        $kode = $datas->nokepesertaan ?: $datas->nocm; // Pakai norm kalau nokepesertaan kosong
+        $qrcode = base64_encode(QrCode::format('svg')->size(50)->generate($kode));
+        
         $pageWidth = 819;
         $dataReport = array(
+            'ppkPelayanan' => $ppkPelayanan,
             'namaprofile' => $profile->namalengkap,
             'qrcodeprofile' => $profile->qrcodeprofile,
             'alamat' => $profile->alamatlengkap,
@@ -2528,21 +2537,51 @@ class ReportController extends ApiController{
             'ttdpasien' => $ttdpasien,
             'ttddokter' => $ttddokter,
             'ttdrumahsakit' => $ttdrumahsakit,
+            'tanggal' => $tglAyeuna,
         );
 
+        // dd($dataReport['data']);
         $imagePath = public_path("img/logo_bpjs.png");
         $image = "data:image/png;base64,".base64_encode(file_get_contents($imagePath));
 
+        $baseUrl = request()->getSchemeAndHttpHost();
+        $noreg = $dataReport['suratJaminan']->noregistrasi;
+
+        $urlPasien = $baseUrl . '/service/medifirst2000/report/ttd-digital/' . $noreg . '/pasien';
+        $qrcodePasien = base64_encode(QrCode::format('svg')->size(50)->generate($urlPasien));
+
+        $urlSJDokter = $baseUrl . '/service/medifirst2000/report/ttd-digital/' . $noreg . '/dokter';
+        $qrSJPDokter = base64_encode(QrCode::format('svg')->size(50)->generate($urlSJDokter));
+
+        $urlSJPRS = $baseUrl . '/service/medifirst2000/report/ttd-digital/' . $noreg . '/rs';
+        $qrSJPRS = base64_encode(QrCode::format('svg')->size(50)->generate($urlSJPRS));
+
+        $urlSPRI = $baseUrl . '/service/medifirst2000/report/ttd-digital/' . $noreg . '/spri';
+        $qrSPRI = base64_encode(QrCode::format('svg')->size(50)->generate($urlSPRI));
+
         if(isset($request["issimpanberkas"])) {
             // PDF::setOptions(['isPhpEnabled' => true, 'isJavascriptEnabled', true, 'isRemoteEnabled', true]);
-            $pdf = PDF::setOptions(['isPhpEnabled' => true, 'isJavascriptEnabled' => true, 'isRemoteEnabled' => true]);
-            $pdf->loadView('report.pendaftaran.sep', array(
+            // $pdf = PDF::setOptions(['isPhpEnabled' => true, 'isJavascriptEnabled' => true, 'isRemoteEnabled' => true]);
+            // $pdf->loadView('report.pendaftaran.sepV2-dom', array(
+            //     'profile' => $profile,
+            //     'pageWidth' => $pageWidth,
+            //     'dataReport' => $dataReport,
+            //     'image' => $image,
+            //     'qrcode' => $qrcode,
+            
+            // ))->setPaper('a4', 'portrait');
+
+            $pdf = PDF::loadView('report.pendaftaran.sepV2-dom', array(
                 'profile' => $profile,
                 'pageWidth' => $pageWidth,
                 'dataReport' => $dataReport,
                 'image' => $image,
-            
-            ))->setPaper('a4', 'portrait');
+                'qrcode' => $qrcode,
+                'qrcodePasien' => $qrcodePasien,
+                'qrSJPDokter' => $qrSJPDokter,
+                'qrSJPRS' => $qrSJPRS,
+                'qrSPRI' => $qrSPRI,
+            ));
             
             $this->saveDokumenKlaim($pdf, $request);
             
@@ -2550,6 +2589,21 @@ class ReportController extends ApiController{
             
             return view('report.pendaftaran.sepV2',
             compact('dataReport', 'pageWidth','profile', 'image'));
+
+            // ini_set('max_execution_time', 300);
+            // $pdf = PDF::loadView('report.pendaftaran.sepV2-dom', array(
+            //     'profile' => $profile,
+            //     'pageWidth' => $pageWidth,
+            //     'dataReport' => $dataReport,
+            //     'image' => $image,
+            //     'qrcode' => $qrcode,
+            //     'qrcodePasien' => $qrcodePasien,
+            //     'qrSJPDokter' => $qrSJPDokter,
+            //     'qrSJPRS' => $qrSJPRS,
+            //     'qrSPRI' => $qrSPRI,
+            // ));
+
+            // return $pdf->stream();
         }
 
         // return view('report.pendaftaran.sepV2',
@@ -3925,7 +3979,106 @@ class ReportController extends ApiController{
         );
     }
 
-    function saveDokumenKlaim($pdf, $request) {
+    public function saveDokumenKlaim($pdf, $request)
+    {
+        ini_set('max_execution_time', 10000); //6 minutes
+        ini_set('memory_limit', '4048M');
+        $profile = collect(DB::select("select * from profile_m where statusenabled = true"))->first();
+        $content = $pdf->download()->getOriginalContent();
+        $path = 'dokumen_klaim/' . $request['isberkasnoreg'];
+
+        try {
+
+            $dataRegistrasi = PasienDaftarTrans::where('noregistrasi', $request['isberkasnoreg'])->first();
+            $waktu = time();
+
+            $cek = DB::table("dokklaim_t")
+                ->where('noregistrasifk', $dataRegistrasi->norec)
+                ->where('documentklaimfk', $request['iddok'])
+                ->where('isgenerate', true)
+                ->whereRaw("filename not ilike '%EXPERTISE RADIOLOGI%' and filename not ilike '%HASIL LAB%'")
+                ->get();
+
+            //dd($cek);
+
+            if (empty($cek)) {
+                $savePath = public_path($path);
+                \File::makeDirectory($savePath, 0755, true, true);
+                if ($request['namafile'] == 'HASIL LAB') {
+                    $namafile = $request['namafile'] . '_' . $request['isberkasnoreg'] . '_' . $request['noorder'] . '.pdf';
+                } else if ($request['namadownloadfile'] == 'EXPERTISE RADIOLOGI') {
+                    $namafile = $request['namadownloadfile'] . '_' . $request['isberkasnoreg'] . '.pdf';
+                } else {
+                    $namafile = $request['namafile'] . '_' . $request['isberkasnoreg'] . '.pdf';
+                }
+
+                $public_path = $savePath . "/" . $namafile;
+
+                if (\File::exists($savePath . "/" . $namafile)) {
+                    $pdf->save($savePath . "/" . $waktu . ' ' . $namafile);
+                } else {
+                    $pdf->save($public_path);
+                }
+
+                $Dkmn = DB::table("dokklaim_t")
+                    ->where('noregistrasifk', $dataRegistrasi->norec)
+                    ->where('documentklaimfk', $request['iddok'])
+                    ->where('filename', $namafile)
+                    ->get();
+
+                if (!empty($Dkmn)) {
+                    $dataInsert = array(
+                        "norec" => substr(Uuid::generate(), 0, 32),
+                        "kdprofile" => $profile->id,
+                        "statusenabled" => true,
+                        "filename" => $waktu . ' ' . $namafile,
+                        "filepath" => $path . '/' . $waktu . ' ' . $namafile,
+                        "nocmfk" => $dataRegistrasi->nocmfk,
+                        "noregistrasifk" => $dataRegistrasi->norec,
+                        "documentklaimfk" => $request['iddok'],
+                        "tglupload" => date('Y-m-d H:i:s'),
+                        "isgenerate" => true,
+                    );
+                } else {
+                    $dataInsert = array(
+                        "norec" => substr(Uuid::generate(), 0, 32),
+                        "kdprofile" => $profile->id,
+                        "statusenabled" => true,
+                        "filename" => $namafile,
+                        "filepath" => $path . '/' . $namafile,
+                        "nocmfk" => $dataRegistrasi->nocmfk,
+                        "noregistrasifk" => $dataRegistrasi->norec,
+                        "documentklaimfk" => $request['iddok'],
+                        "tglupload" => date('Y-m-d H:i:s'),
+                        "isgenerate" => true,
+                    );
+                }
+
+
+                DB::table('dokklaim_t')->insert($dataInsert);
+
+                echo '
+                <script language="javascript">
+                    window.alert("OK.");
+                    window.close()
+                </script>';
+                die;
+            } else {
+                echo '
+                <script language="javascript">
+                
+                    window.alert("OK.");
+                    window.close()
+                </script>';
+                die;
+            }
+        } catch (\Exception $e) {
+            echo $e->getLine() . ' ' . $e->getMessage();
+            die;
+        }
+    }
+
+    function saveDokumenKlaimOld($pdf, $request) {
         ini_set('max_execution_time', 2000);
         $profile = collect(DB::select("select * from profile_m where statusenabled = true"))->first();
         $content = $pdf->download()->getOriginalContent();
