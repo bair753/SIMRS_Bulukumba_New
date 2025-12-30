@@ -4835,5 +4835,140 @@
         "define": "MedifirstService"
       }
     ]
+  },
+  {
+    "name": "ApotikOnlineTools",
+    "url": "/ApotikOnlineTools",
+    "templateurl": "module/Farmasi/Bridging/ApotikOnlineTools.html",
+    "controller": "ApotikOnlineToolsCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      }
+    ]
+  },
+  {
+    "name": "ApotikOnlineTools.MonitoringApotikOnline",
+    "url": "/MonitoringApotikOnline",
+    "templateurl": "module/Farmasi/Bridging/MonitoringApotikOnline.html",
+    "controller": "MonitoringApotikOnlineCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "BPJSToolsCtrl"
+      }
+    ]
+  },
+  {
+    "name": "ApotikOnlineTools.SEPApotikOnline",
+    "url": "/SEPApotikOnline",
+    "templateurl": "module/Farmasi/Bridging/SEPApotikOnline.html",
+    "controller": "SEPApotikOnlineCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "BPJSToolsCtrl"
+      }
+    ]
+  },
+  {
+    "name": "ApotikOnlineTools.RiwayatObat",
+    "url": "/RiwayatObat",
+    "templateurl": "module/Farmasi/Bridging/RiwayatObat.html",
+    "controller": "RiwayatObatCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "BPJSToolsCtrl"
+      }
+    ]
+  },
+  {
+    "name": "ApotikOnlineTools.ReferensiVclaimApotik",
+    "url": "/ReferensiVclaimApotik",
+    "templateurl": "module/Farmasi/Bridging/ReferensiVclaimApotik.html",
+    "controller": "ReferensiVclaimApotikCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "BPJSToolsCtrl"
+      }
+    ]
+  },
+  {
+    "name": "ApotikOnlineTools.SEPApotikOnlineDataKirimClaim",
+    "url": "/SEPApotikOnlineDataKirimClaim",
+    "templateurl": "module/Farmasi/Bridging/SEPApotikOnlineDataKirimClaim.html",
+    "controller": "SEPApotikOnlineDataKirimClaimCtrl",
+    "deps": [
+      {
+        "module": "Services",
+        "define": "Service"
+      },
+      {
+        "module": "LoginServices",
+        "define": "LoginService"
+      },
+      {
+        "module": "MedifirstService",
+        "define": "MedifirstService"
+      },
+      {
+        "define": "BPJSToolsCtrl"
+      }
+    ]
   }
 ]

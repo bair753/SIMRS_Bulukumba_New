@@ -971,7 +971,31 @@
         {
             "nameDep": "MasterProdukApotikCtrl",
             "urlDep": "module/Farmasi/MasterProdukApotikCtrl"
-        }        
+        },
+        {
+            "nameDep": "ApotikOnlineToolsCtrl",
+            "urlDep": "module/Farmasi/Bridging/ApotikOnlineToolsCtrl"
+        },
+        {
+            "nameDep": "MonitoringApotikOnlineCtrl",
+            "urlDep": "module/Farmasi/Bridging/MonitoringApotikOnlineCtrl"
+        },
+        {
+            "nameDep": "SEPApotikOnlineCtrl",
+            "urlDep": "module/Farmasi/Bridging/SEPApotikOnlineCtrl"
+        },
+        {
+            "nameDep": "RiwayatObatCtrl",
+            "urlDep": "module/Farmasi/Bridging/RiwayatObatCtrl"
+        },
+        {
+            "nameDep": "ReferensiVclaimApotikCtrl",
+            "urlDep": "module/Farmasi/Bridging/ReferensiVclaimApotikCtrl"
+        },
+        {
+            "nameDep": "SEPApotikOnlineDataKirimClaimCtrl",
+            "urlDep": "module/Farmasi/Bridging/SEPApotikOnlineDataKirimClaimCtrl"
+        }       
         
     ]
 }

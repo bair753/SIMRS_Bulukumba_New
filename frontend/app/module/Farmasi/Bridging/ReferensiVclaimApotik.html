@@ -1,0 +1,237 @@
+<!-- <div class="panel panel-default container_12">
+    <div class="panel-body"> -->
+        <div class="panel panel-default">
+            <div class="panel-heading " style="font-size: 18px; "><span c-translate>Referensi</span>
+                <span class="icon fa fa-chevron-circle-down " ng-show="!isShowPotensi " style="right:10px
+                                                                                    " ng-click="showPotensi() "></span>
+                <span class="icon fa fa-chevron-circle-up " ng-show="isShowPotensi " style="right:10px
+                                                                                    " ng-click="showPotensi() "></span>
+            </div>
+            <div class="panel-body " ng-show="isShowPotensi ">
+                <div class="grid_12 animated no-padding ">
+                    <div ng-cloak>
+                        <md-content>
+                            <md-tabs md-dynamic-height md-border-bottom>
+                                <md-tab label="Daftar Obat DPHO">
+                                    <md-content class="md-padding">
+                                        <div class="panel panel-default container_12">
+                                            <div class="panel-body">
+                                                <div class="grid_12">
+                                                    <div class="grid_12">
+                                                        <div class="grid_12">
+                                                            <label c-label>Results :</label>
+                                                        </div>
+                                                        <pre id="jsonKlaim" class="json-viewer"></pre>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </md-content>
+                                </md-tab>
+                                <md-tab label="Data Poli">
+                                    <md-content class="md-padding">
+                                        <div class="panel panel-default container_12">
+                                            <div class="panel-body">
+                                                <div class="grid_12">
+                                                    <div class="grid_4">
+                                                        <div class="grid_12">
+                                                            <div class="grid_10">
+                                                                <div class="grid_12">
+                                                                    <label c-label item="item" c-label-text="Kode atau Nama Poli" real></label>
+                                                                </div>
+                                                                <div class="grid_12">
+                                                                    <input c-text-box type="input" class="k-textbox" ng-model="poli.poli"/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="grid_1 pull-right">
+                                                                <em style="margin-top:10px;" ng-click='clearPoli()' id="iconButton" data-role="button" class="k-button k-button-icon" role="button"
+                                                                    aria-disabled="false" tabindex="0"><span
+                                                                        class="k-sprite k-icon k-i-cancel">Clear</span></em>
+                                                            </div>
+                                                            <div class="grid_1 pull-right">
+                                                                <button style="margin-top:10px;" class="k-button k-primary k-button-icon" ng-click="findPoli(poli)"><span
+                                                                        class="k-sprite k-icon k-i-search">Find</span></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="grid_8">
+                                                        <div class="grid_12">
+                                                            <label c-label>Results :</label>
+                                                        </div>
+                                                        <pre id="jsonPoli" class="json-viewer"></pre>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+        
+                                    </md-content>
+                                </md-tab>
+                                <md-tab label="Fasilitas Kesehatan">
+                                    <md-content class="md-padding">
+                                        <div class="panel panel-default container_12">
+                                            <div class="panel-body">
+                                                <div class="grid_12">
+                                                    <div class="grid_6">
+                                                        <div class="grid_12">
+                                                            <div class="grid_5">
+                                                                <div class="grid_12">
+                                                                    <label c-label item="item" c-label-text="Nama Faskes" real></label>
+                                                                </div>
+                                                                <div class="grid_12">
+                                                                    <input c-text-box type="input" class="k-textbox" ng-model="faskes.nama"/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="grid_5" style="margin-top: -7px;">
+                                                                <label c-label>Jenis Faskes</label>
+                                                                <input style="width: 100%;" kendo-combo-box k-ng-model="faskes.jenisfaskes"
+                                                                    k-data-text-field="'nama'" k-data-value-field="'id'" k-filter="'contains'"
+                                                                    k-auto-bind="false" k-data-source="listJenisFaskes" />
+                                                            </div>
+                                                            <div class="grid_1 pull-right">
+                                                                <em style="margin-top:10px;" ng-click='clearFaskes()' id="iconButton" data-role="button" class="k-button k-button-icon" role="button"
+                                                                    aria-disabled="false" tabindex="0"><span
+                                                                        class="k-sprite k-icon k-i-cancel">Clear</span></em>
+                                                            </div>
+                                                            <div class="grid_1 pull-right">
+                                                                <button style="margin-top:10px;" class="k-button k-primary k-button-icon" ng-click="findFaskes(faskes)"><span
+                                                                        class="k-sprite k-icon k-i-search">Find</span></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="grid_6">
+                                                        <div class="grid_12">
+                                                            <label c-label>Results :</label>
+                                                        </div>
+                                                        <pre id="jsonFaskes" class="json-viewer"></pre>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+        
+                                    </md-content>
+                                </md-tab>
+                                <md-tab label="Setting Apotik">
+                                    <md-content class="md-padding">
+                                        <div class="panel panel-default container_12">
+                                            <div class="panel-body">
+                                                <div class="grid_12">
+                                                    <div class="grid_4">
+                                                        <div class="grid_12">
+                                                            <div class="grid_10">
+                                                                <div class="grid_12">
+                                                                    <label c-label item="item" c-label-text="Kode Apotik" real></label>
+                                                                </div>
+                                                                <div class="grid_12">
+                                                                    <input c-text-box type="input" class="k-textbox" ng-model="setting.kode"/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="grid_1 pull-right">
+                                                                <em style="margin-top:10px;" ng-click='clearSetting()' id="iconButton" data-role="button" class="k-button k-button-icon" role="button"
+                                                                    aria-disabled="false" tabindex="0"><span
+                                                                        class="k-sprite k-icon k-i-cancel">Clear</span></em>
+                                                            </div>
+                                                            <div class="grid_1 pull-right">
+                                                                <button style="margin-top:10px;" class="k-button k-primary k-button-icon" ng-click="findSetting(setting)"><span
+                                                                        class="k-sprite k-icon k-i-search">Find</span></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="grid_8">
+                                                        <div class="grid_12">
+                                                            <label c-label>Results :</label>
+                                                        </div>
+                                                        <pre id="jsonSetting" class="json-viewer"></pre>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+        
+                                    </md-content>
+                                </md-tab>
+                                <md-tab label="Spesialistik">
+                                    <md-content class="md-padding">
+                                        <div class="panel panel-default container_12">
+                                            <div class="panel-body">
+                                                <div class="grid_12">
+                                                    <div class="grid_12">
+                                                        <div class="grid_12">
+                                                            <label c-label>Results :</label>
+                                                        </div>
+                                                        <pre id="jsonSpesialis" class="json-viewer"></pre>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </md-content>
+                                </md-tab>
+                                <md-tab label="Obat">
+                                    <md-content class="md-padding">
+                                        <div class="panel panel-default container_12">
+                                            <div class="panel-body">
+                                                <div class="grid_12">
+                                                    <div class="grid_8">
+                                                        <div class="grid_12">
+                                                            <div class="grid_3" style="margin-top: -7px;">
+                                                                <div class="grid_12">
+                                                                    <label c-label item="item" c-label-text="Jenis Obat" real></label>
+                                                                </div>
+                                                                <div class="grid_12">
+                                                                    <input style="width: 100%;" kendo-combo-box k-ng-model="obat.kode"
+                                                                    k-data-text-field="'nama'" k-data-value-field="'id'" k-filter="'contains'"
+                                                                    k-auto-bind="false" k-data-source="listJenisObat" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="grid_4" style="margin-top: -7px;">
+                                                                <div class="grid_12">
+                                                                    <label c-label item="item" c-label-text="Tgl Resep" real></label>
+                                                                </div>
+                                                                <div class="grid_12">
+                                                                    <input style="width: 100%" k-ng-model="obat.tglresep" kendo-datepicker
+                                                                    placeholer="yyyy-MM-dd" k-format="'yyyy-MM-dd'" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="grid_3">
+                                                                <div class="grid_12">
+                                                                    <label c-label item="item" c-label-text="Nama Obat" real></label>
+                                                                </div>
+                                                                <div class="grid_12">
+                                                                    <input c-text-box type="input" class="k-textbox" ng-model="obat.filter"/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="grid_1 pull-right">
+                                                                <em style="margin-top:10px;" ng-click='clearObat()' id="iconButton" data-role="button" class="k-button k-button-icon" role="button"
+                                                                    aria-disabled="false" tabindex="0"><span
+                                                                        class="k-sprite k-icon k-i-cancel">Clear</span></em>
+                                                            </div>
+                                                            <div class="grid_1 pull-right">
+                                                                <button style="margin-top:10px;" class="k-button k-primary k-button-icon" ng-click="findObat(obat)"><span
+                                                                        class="k-sprite k-icon k-i-search">Find</span></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="grid_4">
+                                                        <div class="grid_12">
+                                                            <label c-label>Results :</label>
+                                                        </div>
+                                                        <pre id="jsonObat" class="json-viewer"></pre>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+        
+                                    </md-content>
+                                </md-tab>
+                            </md-tabs>
+                        </md-content>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <style type="text/css">
+            .json-viewer {
+                margin-top: 26px;
+                padding: 2em 0 2em 5em;
+                background: lightgrey;
+            }
+        </style>

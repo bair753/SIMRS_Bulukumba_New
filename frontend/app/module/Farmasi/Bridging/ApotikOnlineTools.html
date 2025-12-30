@@ -1,0 +1,133 @@
+<div class="grid_12 headerBox">
+    <h1 style="color: white;"><b>Apotik Online Tools </b></h1>
+</div>
+<div class="clear"></div>
+
+<br />
+<div class="grid_2">
+    <div class="breadcrumb-box">
+        <div class="nav-container">
+            <a class="n1" 
+               ng-class="{'active': currentState == 'ApotikOnlineTools.ReferensiVclaimApotik'}"
+               ng-click="nav('ApotikOnlineTools.ReferensiVclaimApotik')">
+               Referensi
+            </a>
+            
+            <a class="n1" 
+               ng-class="{'active': currentState == 'ApotikOnlineTools.MonitoringApotikOnline'}"
+               ng-click="nav('ApotikOnlineTools.MonitoringApotikOnline')">
+               Monitoring
+            </a>
+            
+            <a class="n1" 
+               ng-class="{'active': currentState == 'ApotikOnlineTools.SEPApotikOnline'}"
+               ng-click="nav('ApotikOnlineTools.SEPApotikOnline')">
+               SEP
+            </a>
+            
+            <a class="n1" 
+               ng-class="{'active': currentState == 'ApotikOnlineTools.RiwayatObat'}"
+               ng-click="nav('ApotikOnlineTools.RiwayatObat')">
+               Riwayat Pelayanan
+            </a>
+            
+            <a class="n1" 
+               ng-class="{'active': currentState == 'ApotikOnlineTools.SEPApotikOnlineDataKirimClaim'}"
+               ng-click="nav('ApotikOnlineTools.SEPApotikOnlineDataKirimClaim')">
+               Kirim Data
+            </a>
+        </div>
+    </div>
+</div>
+<div class="grid_10">
+
+
+    <div ui-view></div>
+</div>
+
+
+<style type="text/css">
+    .panel-white {
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        margin-bottom: 20px;
+    }
+
+    .panel-heading {
+        padding: 15px;
+        background-color: #41abf2;
+        color: white;
+        border-radius: 8px 8px 0 0;
+        text-align: center;
+        font-weight: bold;
+        font-size: 1.2em;
+    }
+
+    /* Container Layout */
+    .wrapper {
+        display: flex;
+        gap: 20px;
+    }
+
+    .sidebar {
+        width: 250px;
+        flex-shrink: 0;
+    }
+
+    .content-area {
+        flex-grow: 1;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        min-height: 400px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    /* --- STYLING PANAH (ARROW) --- */
+    .nav-container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .n1 {
+        cursor: pointer;
+        display: block;
+        position: relative;
+        padding: 12px 25px;
+        background-color: #fbbf24; /* Warna Kuning */
+        color: #000000; /* Teks Hitam */
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        /* Membuat bentuk panah menggunakan clip-path */
+        clip-path: polygon(0% 0%, 85% 0%, 100% 50%, 85% 100%, 0% 100%);
+        border: none;
+        outline: none;
+        text-align: left;
+    }
+
+    /* Hover State: Putih */
+    .n1:hover {
+        background-color: #ffffff;
+        color: #000000;
+        padding-left: 35px; /* Efek geser sedikit */
+        box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+    }
+
+    /* Active State: Kuning Lebih Gelap & Tetap Menonjol */
+    .n1.active {
+        background-color: #22C55E;
+        color: #FFFFFF;
+        font-weight: 800;
+        padding-left: 35px;
+        clip-path: polygon(0% 0%, 80% 0%, 100% 50%, 80% 100%, 0% 100%);
+    }
+
+    .breadcrumb-box {
+        background: #41abf2;
+        padding: 15px;
+        border-radius: 8px;
+    }
+</style>
