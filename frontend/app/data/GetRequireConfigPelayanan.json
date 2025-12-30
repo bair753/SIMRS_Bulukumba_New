@@ -3829,6 +3829,10 @@
         {
             "nameDep": "RiwayatEchocardiografiCtrl",
             "urlDep": "module/EMR/RiwayatEchocardiografiCtrl"
-        }
+        },
+        {
+            "nameDep": "BridgingInaCbgIdrgCtrl",
+            "urlDep": "module/Bridging/BridgingInaCbgIdrgCtrl"
+          }
     ]
 }

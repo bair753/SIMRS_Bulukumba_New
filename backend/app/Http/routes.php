@@ -576,6 +576,9 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
         Route::get('bridging/ihs/get-list', 'Bridging\IHSController@getList');
         Route::get('bridging/ihs/Encounter-list', 'Bridging\IHSController@EncounterList');
 
+        // Bridging IDRG 
+        Route::get('bridging/inacbg/get/daftar/pasien/inacbg/idrg/integrasi','Bridging\InaCbgIdrgController@getDaftarPasienIdrgIna');
+        
         Route::group(['prefix' => 'cssd'], function () {
 
         });
