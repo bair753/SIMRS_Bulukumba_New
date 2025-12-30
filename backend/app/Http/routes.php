@@ -3024,6 +3024,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
     });
 
     Route::get('storage/dokumenklaim', 'Registrasi\MonitoringDokumenKlaimController@lihatDokumen');
+    Route::get('storage/bundledokumenklaim-old', 'Registrasi\MonitoringDokumenKlaimController@bundleDokumenOld');
     Route::get('storage/bundledokumenklaim/{Nosep}', 'Registrasi\MonitoringDokumenKlaimController@bundleDokumen');
     Route::get('storage/bundledokumenklaim-baru', 'Registrasi\MonitoringDokumenKlaimController@bundleDokumenBaru');
 });
