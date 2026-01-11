@@ -398,6 +398,21 @@ Trait PelayananPasienTrait
         }
         return $set->nilaifield;
     }
+
+    protected function getUrlBrigdingApotikOnline(){
+        $statusBridgingProduction = SettingDataFixed::where('namafield', 'isBridgingProduction')->first();
+        if(!empty($statusBridgingProduction)){
+            if($statusBridgingProduction->nilaifield == 'false') {
+                $set = SettingDataFixed::where('namafield', 'linkApotikOnline')->first();
+            } else{
+                $set = SettingDataFixed::where('namafield', 'linkApotikOnline')->first();
+            }
+        }else{
+            $set = SettingDataFixed::where('namafield', 'linkApotikOnline')->first();
+        }
+        return $set->nilaifield;
+    }
+
     protected function tokenNAR(){
         $set = SettingDataFixed::where('namafield', 'tokenNAR')
             ->where('kdprofile',$this->getKdProfile())->first();
@@ -406,6 +421,25 @@ Trait PelayananPasienTrait
     protected function userKeyBPJS(){
         $set = SettingDataFixed::where('namafield', 'userKeyBPJS')
             ->where('kdprofile',$this->getKdProfile())->first();
+        return $set->nilaifield;
+    }
+
+    protected function userKeyApotikOnline(){
+        $set = SettingDataFixed::where('namafield', 'userkeyApotikOnline')
+            ->where('kdprofile',$this->getKdProfile())->first();
+        return $set->nilaifield;
+    }
+
+    protected function getIdConsumerApotikOnline()
+    {
+        $set = SettingDataFixed::where('namafield', 'idConsumerApotikOnline')
+            ->where('kdprofile', $this->getKdProfile())->first();
+        return $set->nilaifield;
+    }
+    protected function getPasswordConsumerApotikOnline()
+    {
+        $set = SettingDataFixed::where('namafield', 'PasswordConsumerApotikOnline')
+            ->where('kdprofile', $this->getKdProfile())->first();
         return $set->nilaifield;
     }
     

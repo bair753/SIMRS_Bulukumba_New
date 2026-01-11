@@ -579,6 +579,24 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
         // Bridging IDRG 
         Route::get('bridging/inacbg/get/daftar/pasien/inacbg/idrg/integrasi','Bridging\InaCbgIdrgController@getDaftarPasienIdrgIna');
         
+        // INTEGRASI APOTIK ONLINE
+        Route::get('bridging/bpjs/get-sep-apotik-online', 'Bridging\BridgingBPJSV2Controller@getSEPApotek');
+        Route::get('bridging/bpjs/get-daftar-obat-dpho', 'Bridging\BridgingBPJSV2Controller@getDPHO');
+        Route::get('bridging/bpjs/get-daftar-spesialistik', 'Bridging\BridgingBPJSV2Controller@getSpesialistik');
+        Route::get('bridging/bpjs/get-poli-apotik-online', 'Bridging\BridgingBPJSV2Controller@getPoliApotikOnline');
+        Route::get('bridging/bpjs/get-setting-apotik-online', 'Bridging\BridgingBPJSV2Controller@getSettingApotikOnline');
+        Route::get('bridging/bpjs/get-obat-apotik-online', 'Bridging\BridgingBPJSV2Controller@getObatApotikOnline');
+        Route::get('bridging/bpjs/get-faskes-apotik-online', 'Bridging\BridgingBPJSV2Controller@getFaskesApotikOnline');
+        Route::post('bridging/bpjs/save-resep-apotik-online', 'Bridging\BridgingBPJSV2Controller@insertResepApotikOnline');
+        Route::post('bridging/bpjs/save-non-racikan-apotik-online', 'Bridging\BridgingBPJSV2Controller@insertNonRacikanApotikOnline');
+        Route::post('bridging/bpjs/save-racikan-apotik-online', 'Bridging\BridgingBPJSV2Controller@insertRacikanApotikOnline');
+        Route::post('bridging/bpjs/daftarresep', 'Bridging\BridgingBPJSV2Controller@daftarResep');
+        Route::post('bridging/bpjs/hapusresep', 'Bridging\BridgingBPJSV2Controller@hapusresep');
+        Route::get('bridging/bpjs/get-monitoring-klaim-apotik-online', 'Bridging\BridgingBPJSV2Controller@getMonitoringKlaimApotikOnline');
+        Route::get('bridging/bpjs/get-riwayat-obat', 'Bridging\BridgingBPJSV2Controller@getRiwayatObat');
+        Route::post('bridging/bpjs/draft-apotik-oline-tools', 'Bridging\BridgingBPJSV2Controller@SaveDraftApotikOnlineTools');
+        Route::get('bridging/bpjs/get/draft-apotik-oline-tools', 'Bridging\BridgingBPJSV2Controller@GetDraftApotikOnlineTools');
+
         Route::group(['prefix' => 'cssd'], function () {
 
         });

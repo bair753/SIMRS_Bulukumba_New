@@ -3350,4 +3350,257 @@ class BridgingBPJSV2Controller extends ApiController
 
         return $this->setStatusCode($result['status'])->respond($result, $transMessage);
     }
+
+    function getHeaderApotikOnline($type = null)
+    {
+        $data = $this->getIdConsumerApotikOnline();
+
+        $secretKey = $this->getPasswordConsumerApotikOnline();
+        date_default_timezone_set('UTC');
+        $tStamp = strval(time() - strtotime('1970-01-01 00:00:00'));
+        $signature = hash_hmac('sha256', $data . "&" . $tStamp, $secretKey, true);
+
+        $encodedSignature = base64_encode($signature);
+
+        $data = trim((string)$data);
+        $encodedSignature = trim((string)$encodedSignature);
+        $tStamp = trim((string)$tStamp);
+        $secretKey = trim((string)$secretKey);
+
+        $header = array(
+            "Content-Type: Application/x-www-form-urlencoded",
+            "X-cons-id: " . $data,
+            "X-timestamp: " . $tStamp,
+            "X-signature: " . $encodedSignature,
+            "user_key: " . $this->userKeyApotikOnline()
+        );
+        // dd($header);
+        $header['headers'] = $header;
+        $header['cons'] = array(
+            'data' => $data,
+            'secretKey' => $secretKey,
+            'signature' => $encodedSignature,
+            'tStamp' => $tStamp,
+            'user_key' =>  $this->userKeyApotikOnline(),
+        );
+        return $header;
+    }
+
+    public function getMonitoringKlaimApotikOnline(Request $request)
+    {
+        $kdProfile = $this->getDataKdProfile($request);
+        $headers = $this->getHeaderApotikOnline();
+        $dataJsonSend = null;
+        $methods = 'GET';
+        //var_dump($this->getUrlBrigdingApotikOnline());
+        $url = $this->getUrlBrigdingApotikOnline() . "monitoring/klaim/"
+            . $request['bulan'] . "/" . $request['tahun'] . "/" . $request['jenisobat'] . "/" . $request['status'];
+        //var_dump($url);
+        $response = $this->curlAPI($headers, $dataJsonSend, $url, $methods, $this->getPortBrigdingBPJS());
+        return $this->respond($response);
+    }
+    public function getRiwayatObat(Request $request)
+    {
+        $kdProfile = $this->getDataKdProfile($request);
+        $headers = $this->getHeaderApotikOnline();
+        $dataJsonSend = null;
+        $methods = 'GET';
+        //var_dump($this->getUrlBrigdingApotikOnline());
+        $url = $this->getUrlBrigdingApotikOnline() . "riwayatobat/"
+            . $request['tglAwal'] . "/" . $request['tglAkhir'] . "/" . $request['noKartu'];
+        //var_dump($url);
+        $response = $this->curlAPI($headers, $dataJsonSend, $url, $methods, $this->getPortBrigdingBPJS());
+        return $this->respond($response);
+    }
+
+    public function getSEPApotikOnline(Request $request)
+    {
+        $kdProfile = $this->getDataKdProfile($request);
+        $headers = $this->getHeaderApotikOnline();
+        $dataJsonSend = null;
+        $methods = 'GET';
+        //var_dump($this->getUrlBrigdingApotikOnline());
+        $url = $this->getUrlBrigdingApotikOnline() . "sep/" . $request['nosep'];
+        //var_dump($url);
+        $response = $this->curlAPI($headers, $dataJsonSend, $url, $methods, $this->getPortBrigdingBPJS());
+        return $this->respond($response);
+    }
+
+    public function getDPHO(Request $request)
+    {
+        $kdProfile = $this->getDataKdProfile($request);
+        $headers = $this->getHeaderApotikOnline();
+        // dd($headers);
+        $dataJsonSend = null;
+        $methods = 'GET';
+
+        $url = $this->getUrlBrigdingApotikOnline() . "referensi/dpho";
+        $response = $this->curlAPI($headers, $dataJsonSend, $url, $methods);
+        return $this->respond($response);
+    }
+    public function getSEPApotek(Request $request)
+    {
+        $kdProfile = $this->getDataKdProfile($request);
+        $headers = $this->getHeaderApotikOnline();
+        // dd($headers);
+        $dataJsonSend = null;
+        $methods = 'GET';
+
+        $url = $this->getUrlBrigdingApotikOnline() . "sep/" . $request['nosep'];
+        // dd($url);
+        $response = $this->curlAPI($headers, $dataJsonSend, $url, $methods);
+        return $this->respond($response);
+    }
+
+    public function getPoliApotikOnline(Request $request)
+    {
+        $kdProfile = $this->getDataKdProfile($request);
+        $headers = $this->getHeaderApotikOnline();
+        $dataJsonSend = null;
+        $methods = 'GET';
+
+        $url = $this->getUrlBrigdingApotikOnline() . "referensi/poli/" . $request['poli'];
+
+        $response = $this->curlAPI($headers, $dataJsonSend, $url, $methods, $this->getPortBrigdingBPJS());
+        return $this->respond($response);
+    }
+
+    public function getSettingApotikOnline(Request $request)
+    {
+        $kdProfile = $this->getDataKdProfile($request);
+        $headers = $this->getHeaderApotikOnline();
+        $dataJsonSend = null;
+        $methods = 'GET';
+
+        $url = $this->getUrlBrigdingApotikOnline() . "referensi/settingppk/read/" . $request['kode'];
+
+        $response = $this->curlAPI($headers, $dataJsonSend, $url, $methods, $this->getPortBrigdingBPJS());
+        return $this->respond($response);
+    }
+
+    public function getObatApotikOnline(Request $request)
+    {
+        $kdProfile = $this->getDataKdProfile($request);
+        $headers = $this->getHeaderApotikOnline();
+        $dataJsonSend = null;
+        $methods = 'GET';
+
+        $url = $this->getUrlBrigdingApotikOnline() . "referensi/obat/" . $request['kode'] . "/" . $request['tglresep'] . "/" . $request['filter'];
+
+        $response = $this->curlAPI($headers, $dataJsonSend, $url, $methods, $this->getPortBrigdingBPJS());
+        return $this->respond($response);
+    }
+
+    public function getFaskesApotikOnline(Request $request)
+    {
+        $kdProfile = $this->getDataKdProfile($request);
+        $headers = $this->getHeaderApotikOnline();
+        $dataJsonSend = null;
+        $methods = 'GET';
+
+        $url = $this->getUrlBrigdingApotikOnline() . "referensi/ppk/" . $request['id'] . "/" . $request['nama'];
+
+        $response = $this->curlAPI($headers, $dataJsonSend, $url, $methods, $this->getPortBrigdingBPJS());
+        return $this->respond($response);
+    }
+
+    public function insertResepApotikOnline(Request $request)
+    {
+        $kdProfile = $this->getDataKdProfile($request);
+        $headers = $this->getHeaderApotikOnline();
+        // dd($headers);
+        $dataJsonSend = json_encode($request['data']);
+        $methods = 'POST';
+        $url =  $this->getUrlBrigdingApotikOnline() . "sjpresep/v3/insert";
+        $response = $this->curlAPI($headers, $dataJsonSend, $url, $methods, $this->getPortBrigdingBPJS());
+        return $this->respond($response);
+    }
+
+    public function daftarResep(Request $request)
+    {
+        $kdProfile = $this->getDataKdProfile($request);
+        $headers = $this->getHeaderApotikOnline();
+        // dd($headers);
+        $dataJsonSend = json_encode($request['data']);
+        $methods = 'POST';
+        $url =  $this->getUrlBrigdingApotikOnline() . "daftarresep";
+        // dd($url);
+        $response = $this->curlAPI($headers, $dataJsonSend, $url, $methods, $this->getPortBrigdingBPJS());
+        return $this->respond($response);
+    }
+    public function hapusresep(Request $request)
+    {
+        $kdProfile = $this->getDataKdProfile($request);
+        $headers = $this->getHeaderApotikOnline();
+        // dd($headers);
+        $dataJsonSend = json_encode($request['data']);
+        $methods = 'DELETE';
+        $url =  $this->getUrlBrigdingApotikOnline() . "hapusresep";
+        $response = $this->curlAPI($headers, $dataJsonSend, $url, $methods, $this->getPortBrigdingBPJS());
+        return $this->respond($response);
+    }
+
+    public function insertNonRacikanApotikOnline(Request $request)
+    {
+        $kdProfile = $this->getDataKdProfile($request);
+        $headers = $this->getHeaderApotikOnline();
+        $url = $this->getUrlBrigdingApotikOnline() . "obatnonracikan/v3/insert";
+        $methods = 'POST';
+        $responses = [];
+
+        foreach ($request['data'] as $dataItem) {
+            // Menyusun format data JSON yang sesuai dengan request
+            $dataJsonSend = json_encode([
+                'NOSJP' => $dataItem['NOSJP'],
+                'NORESEP' => $dataItem['NORESEP'],
+                'KDOBT' => $dataItem['KDOBT'],
+                'NMOBAT' => $dataItem['NMOBAT'],
+                'SIGNA1OBT' => $dataItem['SIGNA1OBT'],
+                'SIGNA2OBT' => $dataItem['SIGNA2OBT'],
+                'JMLOBT' => $dataItem['JMLOBT'],
+                'JHO' => $dataItem['JHO'],
+                'CatKhsObt' => $dataItem['CatKhsObt']
+            ]);
+
+            $response = $this->curlAPI($headers, $dataJsonSend, $url, $methods, $this->getPortBrigdingBPJS());
+            $responses[] = $response;
+        }
+
+        return $this->respond($responses);
+    }
+
+
+
+    public function insertRacikanApotikOnline(Request $request)
+    {
+        $kdProfile = $this->getDataKdProfile($request);
+        $headers = $this->getHeaderApotikOnline();
+        $url = $this->getUrlBrigdingApotikOnline() . "obatracikan/v3/insert";
+        $methods = 'POST';
+        $responses = [];
+
+        foreach ($request['data'] as $dataItem) {
+            // Menyusun format data JSON yang sesuai dengan request
+            $dataJsonSend = json_encode([
+                'NOSJP' => $dataItem['NOSJP'],
+                'NORESEP' => $dataItem['NORESEP'],
+                'JNSROBT' => $dataItem['JNSROBT'],
+                'KDOBT' => $dataItem['KDOBT'],
+                'NMOBAT' => isset($dataItem['NMOBAT']) ? $dataItem['NMOBAT'] : null, // Menambahkan pengecekan apakah NMOBAT ada
+                'SIGNA1OBT' => isset($dataItem['SIGNA1OBT']) ? $dataItem['SIGNA1OBT'] : null,
+                'SIGNA2OBT' => isset($dataItem['SIGNA2OBT']) ? $dataItem['SIGNA2OBT'] : null,
+                'PERMINTAAN' => isset($dataItem['PERMINTAAN']) ? $dataItem['PERMINTAAN'] : null,
+                'JMLOBT' => isset($dataItem['JMLOBT']) ? $dataItem['JMLOBT'] : null,
+                'JHO' => isset($dataItem['JHO']) ? $dataItem['JHO'] : null,
+                'CatKhsObt' => isset($dataItem['CatKhsObt']) ? $dataItem['CatKhsObt'] : null
+            ]);
+
+            $response = $this->curlAPI($headers, $dataJsonSend, $url, $methods, $this->getPortBrigdingBPJS());
+            $responses[] = $response;
+        }
+
+        return $this->respond($responses);
+    }
+
+    
 }
