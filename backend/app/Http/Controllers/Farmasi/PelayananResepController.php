@@ -3276,4 +3276,62 @@ class PelayananResepController extends ApiController
         }
         return $this->setStatusCode($result['status'])->respond($result, $transMessage);
     }
+
+    public function getDaftarRegistrasiPasienApotikOnline(Request $request)
+    {
+        $kdProfile = (int) $this->getDataKdProfile($request);
+        $data = \DB::table('pasiendaftar_t as pd')
+            ->join('pasien_m as ps', 'ps.id', '=', 'pd.nocmfk')
+            ->join('ruangan_m as ru', 'ru.id', '=', 'pd.objectruanganlastfk')
+            ->leftjoin('pegawai_m as pg', 'pg.id', '=', 'pd.objectpegawaifk')
+            ->leftJoin('kelompokpasien_m as kp', 'kp.id', '=', 'pd.objectkelompokpasienlastfk')
+            ->leftJoin('departemen_m as dept', 'dept.id', '=', 'ru.objectdepartemenfk')
+            ->leftJoin('rekanan_m as rkn', 'rkn.id', '=', 'pd.objectrekananfk')
+            ->leftJoin('strukpelayanan_t as sp', 'sp.norec', '=', 'pd.nostruklastfk')
+            ->leftJoin('strukbuktipenerimaan_t as sbm', 'sbm.norec', '=', 'pd.nosbmlastfk')
+            ->leftjoin('loginuser_s as lu', 'lu.id', '=', 'sbm.objectpegawaipenerimafk')
+            ->leftjoin('pegawai_m as pgs', 'pgs.id', '=', 'lu.objectpegawaifk')
+            ->leftjoin('pemakaianasuransi_t as pas', 'pas.noregistrasifk', '=', 'pd.norec')
+            ->leftjoin('jeniskelamin_m as jk', 'jk.id', '=', 'ps.objectjeniskelaminfk')
+            ->select(DB::raw("pd.norec, pd.tglregistrasi, ps.nocm, pd.noregistrasi, ru.namaruangan, ps.namapasien, kp.kelompokpasien,ps.tgllahir,ru.kdinternal,
+                    pd.tglpulang, pd.statuspasien, sp.nostruk, sbm.nosbm, pg.id as pgid, pg.namalengkap as namadokter,rkn.namarekanan as namapenjamin,ps.nobpjs,
+                    pgs.namalengkap as kasir,pd.objectruanganlastfk as ruanganid,pas.nosep,pas.tanggalsep,pas.norec as norec_pa,ps.tglmeninggal,ps.objectjeniskelaminfk,jk.jeniskelamin"))
+            ->where('pd.statusenabled', true)
+            ->where('kp.id', 2)
+            ->where('pd.kdprofile', $kdProfile);
+
+        $filter = $request->all();
+        if (isset($filter['deptId']) && $filter['deptId'] != "" && $filter['deptId'] != "undefined") {
+            $data = $data->where('dept.id', '=', $filter['deptId']);
+        }
+        if (isset($filter['ruangId']) && $filter['ruangId'] != "" && $filter['ruangId'] != "undefined") {
+            $data = $data->where('ru.id', '=', $filter['ruangId']);
+        }
+        if (isset($filter['kelId']) && $filter['kelId'] != "" && $filter['kelId'] != "undefined") {
+            $data = $data->where('kp.id', '=', $filter['kelId']);
+        }
+        if (isset($filter['dokId']) && $filter['dokId'] != "" && $filter['dokId'] != "undefined") {
+            $data = $data->where('pg.id', '=', $filter['dokId']);
+        }
+        if (isset($filter['sttts']) && $filter['sttts'] != "" && $filter['sttts'] != "undefined") {
+            $data = $data->where('pd.statuspasien', '=', $filter['sttts']);
+        }
+        if (isset($filter['noreg']) && $filter['noreg'] != "" && $filter['noreg'] != "undefined") {
+            $data = $data->where('pd.noregistrasi', 'ilike', '%' . $filter['noreg'] . '%');
+        }
+        if (isset($filter['norm']) && $filter['norm'] != "" && $filter['norm'] != "undefined") {
+            $data = $data->where('ps.nocm', 'ilike', '%' . $filter['norm'] . '%');
+        }
+        if (isset($filter['nama']) && $filter['nama'] != "" && $filter['nama'] != "undefined") {
+            $data = $data->where('ps.namapasien', 'ilike', '%' . $filter['nama'] . '%');
+        }
+        if (isset($filter['jmlRows']) && $filter['jmlRows'] != "" && $filter['jmlRows'] != "undefined") {
+            $data = $data->take($filter['jmlRows']);
+        }
+        $data = $data->orderBy('pd.noregistrasi');
+
+        $data = $data->get();
+
+        return $this->respond($data);
+    }
 }

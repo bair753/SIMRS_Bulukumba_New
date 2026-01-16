@@ -10565,4 +10565,76 @@ class ReportController extends ApiController{
         }
 
     }
+
+    public function cetakResepDokterFull(Request $r)
+    {
+        $kdProfile = (int)$r['kodeprofile'];
+        $noorder = $r['noorder'];
+        $norec = $r['norec'];
+        $nocm = $r['nocm'];
+        $qtybagi = 1;
+        if ($r['qtybagi'] == "1/2") {
+            $qtybagi = 0.5;
+        } else {
+            $qtybagi = (int)$r['qtybagi'];
+        }
+        $profile = \DB::select(DB::raw("
+                select * from profile_m where id = $kdProfile limit 1
+            "));
+        $raw = collect(DB::select("
+            select pm2.nocm ,to_char(pm2.tgllahir,'dd-mm-yyyy') as tgllahir,age(pm2.tgllahir) as umur ,jm.jeniskelamin ,pm2.namapasien ,pm3.namalengkap, rm.namaruangan, skt.prinsipbesar, pm2.nobpjs, --pd.jmlitter,
+            to_char(st.tglorder,'dd-mm-yyyy MM:ss') as tglorder,CASE WHEN pm3.nosip IS NULL THEN '-' ELSE pm3.nosip END AS nosip,kp.id, kp.kelompokpasien --to_char(pd.tglpengambilaniter,'dd-mm-yyyy') as tglpengambilaniter 
+            from strukorder_t st
+            inner join pasien_m pm2 on pm2.id = st.nocmfk
+            left join skriningfarmasi_t as skt on skt.strukresepfk = st.norec
+            inner join jeniskelamin_m jm on jm.id = pm2.objectjeniskelaminfk
+            inner join pegawai_m pm3 on pm3.id = st.objectpegawaiorderfk
+            inner join ruangan_m rm on rm.id = st.objectruanganfk 
+            inner join pasiendaftar_t AS pd ON pd.norec = st.noregistrasifk
+            --left JOIN pemakaianasuransi_t pas ON pd.norec = pas.noregistrasifk
+            left join kelompokpasien_m AS kp ON kp.id = pd.objectkelompokpasienlastfk
+            where st.noorder = '$noorder'
+        "))->first();
+        $detel = [];
+        $details = \DB::select(DB::raw("select ot.rke,pm.namaproduk,ot.dosis,pm.kekuatan ,ot.jumlah as jumlah, ot.aturanpakai from strukorder_t st
+            inner join orderpelayanan_t ot on ot.strukorderfk = st.norec 
+            inner join produk_m pm on pm.id = ot.objectprodukfk 
+            where st.noorder = '$noorder'"));
+            //    dd($raw);
+        if (!empty($raw)) {
+            // $raw->umur = $this->getAge($raw->tgllahir ,date('Y-m-d'));
+        } else if (empty($raw)) {
+            $raw = collect(DB::select("
+                select pm2.nocm ,to_char(pm2.tgllahir,'dd-mm-yyyy') as tgllahir,age(pm2.tgllahir) as umur ,jm.jeniskelamin ,pm2.namapasien ,pm3.namalengkap,CASE WHEN pm3.nosip IS NULL THEN '-' ELSE pm3.nosip END AS nosip, rm.namaruangan, to_char(s.tglresep ,'dd-mm-yyyy MM:ss') as tglorder,pm3.nosip, kp.id,kp.kelompokpasien, skt.prinsipbesar, pm2.nobpjs -- pt.jmlitter, to_char(pt.tglpengambilaniter,'dd-mm-yyyy') as tglpengambilaniter
+                from strukresep_t s
+                inner join antrianpasiendiperiksa_t at2 on at2.norec = s.pasienfk 
+                inner join pasiendaftar_t pt on pt.norec = at2.noregistrasifk
+                --left JOIN pemakaianasuransi_t pas ON pt.norec = pas.noregistrasifk
+                left join skriningfarmasi_t as skt on skt.strukresepfk = s.norec
+                inner join pasien_m pm2 on pm2.id = pt.nocmfk 
+                inner join jeniskelamin_m jm on jm.id = pm2.objectjeniskelaminfk
+                inner join pegawai_m pm3 on pm3.id = s.penulisresepfk 
+                inner join ruangan_m rm on rm.id = s.ruanganfk 
+                left join kelompokpasien_m AS kp ON kp.id = pt.objectkelompokpasienlastfk
+                where s.norec = '$norec'
+            "))->first();
+            $details = \DB::select(DB::raw("
+                select pt.rke,pt.dosis, pt.jumlah , pt.aturanpakai , pm.namaproduk, pm.kekuatan from pelayananpasien_t pt 
+                inner join produk_m pm on pm.id = pt.produkfk 
+                where strukresepfk = '$norec'
+            "));
+        } else {
+            echo 'Data Tidak ada ';
+            return;
+        }
+        //    dd($raw);
+        $pageWidth = 950;
+
+        // return $r['norec'];
+
+        return view(
+            'report.apotik.resepdokter-full',
+            compact('raw', 'pageWidth', 'r', 'details', 'profile')
+        );
+    }
 }

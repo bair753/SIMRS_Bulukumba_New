@@ -270,18 +270,22 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                             dat.data[i].kronis = ""
                         }
                     }
-                    $scope.sourceRincians = dat.data;
+                    $scope.sourceRincians = new kendo.data.DataSource({
+                        data: dat.data,
+                        group: $scope.group,
+                    })
+                    // $scope.sourceRincians = dat.data;
                 });
             }
 
-            // $scope.group = {
-            //     field: "noresep",
-            //     aggregates: [
-            //         {
-            //             field: "noresep",
-            //             aggregate: "count"
-            //         }]
-            // };
+            $scope.group = {
+                field: "noresep",
+                aggregates: [
+                    {
+                        field: "noresep",
+                        aggregate: "count"
+                    }]
+            };
 
             $scope.columnRincians = {
                 sortable: true,
@@ -555,6 +559,10 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 
             $scope.openPopUp = function (dataItem) {
                 $scope.selectedItem = dataItem;
+                if($scope.selectedItem.length == 0){
+                    toastr.error('Ceklist data terlebih dahulut');
+                    return
+                }
                 $scope.popUpdataAddOns.center().open();
             };
 

@@ -596,6 +596,9 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
         Route::get('bridging/bpjs/get-riwayat-obat', 'Bridging\BridgingBPJSV2Controller@getRiwayatObat');
         Route::post('bridging/bpjs/draft-apotik-oline-tools', 'Bridging\BridgingBPJSV2Controller@SaveDraftApotikOnlineTools');
         Route::get('bridging/bpjs/get/draft-apotik-oline-tools', 'Bridging\BridgingBPJSV2Controller@GetDraftApotikOnlineTools');
+        Route::get('farmasi/get-data-registrasi-pasien-farmasi-apotik-online', 'Farmasi\PelayananResepController@getDaftarRegistrasiPasienApotikOnline');
+        Route::get('report/cetak-resep-dokter-full','Report\ReportController@cetakResepDokterFull');
+        Route::get('report/cetak-resep-dokter-full-baru-new-fh-wd','Report\ReportController@cetakResepDokterFullBaruNewFHWD');
 
         Route::group(['prefix' => 'cssd'], function () {
 
