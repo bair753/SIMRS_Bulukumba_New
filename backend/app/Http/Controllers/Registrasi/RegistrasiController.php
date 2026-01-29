@@ -11873,4 +11873,191 @@ GROUP BY y.KET
         return $this->setStatusCode($result['status'])->respond($result, $result['message']);
     }
 
+    public function getDaftarRiwayatRegistrasiNew2(Request $request)
+    {
+        $kdProfile = $this->getDataKdProfile($request);
+
+        /* =======================
+        * QUERY UTAMA (TETAP)
+        * ======================= */
+        $data = DB::table('pasien_m as ps')
+            ->join('pasiendaftar_t as pd', 'pd.nocmfk', '=', 'ps.id')
+            ->join('ruangan_m as ru', 'ru.id', '=', 'pd.objectruanganlastfk')
+            ->join('kelompokpasien_m as kp', 'kp.id', '=', 'pd.objectkelompokpasienlastfk')
+            ->leftJoin('pegawai_m as pg', 'pg.id', '=', 'pd.objectpegawaifk')
+            ->select(DB::raw("
+                pd.norec,
+                pd.tglregistrasi,
+                ps.nocm,
+                pd.noregistrasi,
+                ps.namapasien,
+                pd.objectruanganlastfk,
+                kp.kelompokpasien,
+                ru.namaruangan,
+                pd.nocmfk,
+                pd.objectpegawaifk,
+                pg.namalengkap as namadokter,
+                pd.tglpulang,
+                ru.objectdepartemenfk,
+                null as diagnosa,
+                null as kddiagnosatindakan,
+                null as diagnosaina,
+                null as diagnosadokter
+            "))
+            ->where('pd.statusenabled', true)
+            ->where('ps.statusenabled', true)
+            ->where('ps.kdprofile', (int)$kdProfile)
+            ->where('ps.nocm', $request['nocm'])
+            ->orderBy('pd.tglregistrasi', 'desc')
+            ->take(30)
+            ->get();
+
+        if (count($data) === 0) {
+            return $this->respond([
+                'data' => [],
+                'message' => 'ea@epic'
+            ]);
+        }
+
+        /* =======================
+        * KUMPULKAN NOREC
+        * ======================= */
+        $data = collect($data);
+
+        $norecs = $data->pluck('norec')->toArray();
+        $noregistrasi = $data->pluck('noregistrasi')->toArray();
+
+        /* =======================
+        * DIAGNOSA UTAMA
+        * ======================= */
+        $diagnosa = collect(
+            DB::table('antrianpasiendiperiksa_t as apd')
+                ->leftJoin('detaildiagnosapasien_t as ddp', function ($join) {
+                    $join->on('ddp.noregistrasifk', '=', 'apd.norec')
+                        ->whereIn('ddp.objectjenisdiagnosafk', [1, 2]);
+                })
+                ->join('diagnosa_m as dg', 'dg.id', '=', 'ddp.objectdiagnosafk')
+                ->select('apd.noregistrasifk', 'dg.kddiagnosa')
+                ->whereIn('apd.noregistrasifk', $norecs)
+                ->orderBy('ddp.objectjenisdiagnosafk')
+                ->get()
+        )->groupBy('noregistrasifk');
+
+
+        /* =======================
+        * DIAGNOSA INA-CBG
+        * ======================= */
+        $diagnosaINA = collect(DB::table('antrianpasiendiperiksa_t as apd')
+            ->leftJoin('detaildiagnosapasien_t as ddp', function ($join) {
+                $join->on('ddp.noregistrasifk', '=', 'apd.norec')
+                    ->whereIn('ddp.objectjenisdiagnosafk', [8, 9, 10, 11]);
+            })
+            ->join('diagnosa_m as dg', 'dg.id', '=', 'ddp.objectdiagnosafk')
+            ->select('apd.noregistrasifk', 'dg.kddiagnosa')
+            ->whereIn('apd.noregistrasifk', $norecs)
+            ->orderBy('ddp.objectjenisdiagnosafk')
+            ->get()
+             )->groupBy('noregistrasifk');
+
+
+        /* =======================
+        * ICD 9
+        * ======================= */
+        $icd9 = collect(DB::table('diagnosatindakanpasien_t as dpa')
+            ->join('detaildiagnosatindakanpasien_t as dp', 'dpa.norec', '=', 'dp.objectdiagnosatindakanpasienfk')
+            ->join('diagnosatindakan_m as dg', 'dg.id', '=', 'dp.objectdiagnosatindakanfk')
+            ->join('antrianpasiendiperiksa_t as apd', 'apd.norec', '=', 'dpa.objectpasienfk')
+            ->select('apd.noregistrasifk', 'dg.kddiagnosatindakan')
+            ->whereIn('apd.noregistrasifk', $norecs)
+            ->get()
+              )->groupBy('noregistrasifk');
+
+
+        /* =======================
+        * EMR (RAW SQL SEKALI)
+        * ======================= */
+      $dataEMR = DB::select(DB::raw("
+    SELECT value, emrdfk, noregistrasifk,noregistrasi
+    FROM (
+        SELECT
+            epd.value,
+            epd.emrdfk,
+            ep.noregistrasifk,
+            pd.noregistrasi,
+            ROW_NUMBER() OVER (
+                PARTITION BY epd.emrdfk, ep.noregistrasifk
+                ORDER BY epd.tgl DESC
+            ) AS rn
+        FROM emrpasiend_t epd
+        JOIN emrpasien_t ep ON ep.noemr = epd.emrpasienfk
+        JOIN pasiendaftar_t pd ON ep.noregistrasifk = pd.noregistrasi
+        JOIN pasien_m ps ON ps.id = pd.nocmfk
+        WHERE epd.kdprofile = :kdProfile
+          AND epd.emrfk IN (470093,470092,470098,470099,470304,470305)
+          AND ps.nocm = :nocm
+          AND ep.noregistrasifk = ANY (:noreg)
+    ) x
+    WHERE rn = 1
+"), [
+    'kdProfile' => $kdProfile,
+    'nocm'      => $request['nocm'],
+    'noreg'     => '{' . implode(',', $noregistrasi) . '}'
+]);
+
+
+        $emrMap = [];
+        foreach ($dataEMR as $emr) {
+            $emrMap[$emr->noregistrasi][$emr->emrdfk] = $emr->value;
+        }
+        $prioritasEmr = [
+            47001593,
+            47001653,
+            47001073,
+            47000956,
+            1902344078,
+            1902344116,
+            1901311483,
+            1902364811,
+        ];
+
+        // dd($emrMap[$emr->noregistrasi]);
+        /* =======================
+        * FINAL LOOP (RINGAN)
+        * ======================= */
+        foreach ($data as $d) {
+
+            if (isset($diagnosa[$d->norec])) {
+                foreach ($diagnosa[$d->norec] as $dg) {
+                    $d->diagnosa .= $dg->kddiagnosa;
+                }
+            }
+
+            if (isset($diagnosaINA[$d->norec])) {
+                foreach ($diagnosaINA[$d->norec] as $dg) {
+                    $d->diagnosaina .= $dg->kddiagnosa . ' , ';
+                }
+            }
+
+            if (isset($icd9[$d->norec])) {
+                foreach ($icd9[$d->norec] as $dg) {
+                    $d->kddiagnosatindakan .= $dg->kddiagnosatindakan . ' , ';
+                }
+            }
+
+            if (isset($emrMap[$d->noregistrasi])) {
+                foreach ($prioritasEmr as $kode) {
+                    if (isset($emrMap[$d->noregistrasi][$kode])) {
+                        $d->diagnosadokter = $emrMap[$d->noregistrasi][$kode];
+                        break;
+                    }
+                }
+            }
+        }
+
+        return $this->respond([
+            'data' => $data,
+            'message' => 'ea@epic'
+        ]);
+    }
+
 }

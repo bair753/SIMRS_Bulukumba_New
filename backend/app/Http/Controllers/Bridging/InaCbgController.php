@@ -3149,4 +3149,46 @@ class InaCbgController   extends ApiController
         return $this->respond($result);
     }
 
+    public function getDaftarPasienIntensif(Request $request)
+    {
+        $noregistrasifk = $request['noregistrasifk'];
+        $data = DB::select(DB::raw("SELECT
+                apd.tglkeluar,
+                apd.tglmasuk 
+            FROM
+                antrianpasiendiperiksa_t AS apd 
+            WHERE
+                noregistrasifk = '$noregistrasifk' 
+                AND objectruanganfk IN ( 959, 963, 966 )"));
+
+        $los = 0;
+        if ($data != []) {
+            foreach ($data as $key => $d) {
+                $selisih = date_diff(date_create($d->tglmasuk), date_create($d->tglkeluar));
+                $los = $selisih->days + 1 + $los;
+            }
+        }
+
+        $icu_los = $los;
+        $result = array(
+            'data' => $icu_los,
+            'message' => 'Mantap'
+        );
+
+        return $this->respond($result);
+    }
+
+    public function GetPasienTbProspective(Request $request)
+    {
+        $Noregistrasi = $request['noregistrasifk'];
+
+        $PasienDaftar = PasienDaftar::where('noregistrasi', $Noregistrasi)->select('nostb')->first();
+
+        $result = array(
+            'data' => $PasienDaftar,
+            'message' => 'IAN'
+        );
+        return $this->respond($result);
+    }
+
 }

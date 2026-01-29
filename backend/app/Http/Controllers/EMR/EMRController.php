@@ -10789,4 +10789,257 @@ class EMRController  extends ApiController
         return $dataAsistenOperasi;
     }
 
+    public function getRiwayatVitalSign(Request $request)
+    {
+        $kdProfile = $this->getDataKdProfile($request);
+        $noregistrasi = $request['noregistrasi'];
+
+        $data = DB::select(DB::raw("
+                SELECT DISTINCT
+                emr.id,
+                ept.value,
+                em.caption,
+                ep.norec_apd,
+                ep.norec 
+            FROM
+                emrpasien_t AS ep
+                LEFT JOIN emrpasiend_t AS ept ON ept.emrpasienfk = ep.noemr
+                LEFT JOIN emr_t AS em ON em.ID = ep.emrfk 
+                LEFT JOIN emrd_t as emr on emr.id = ept.emrdfk
+            WHERE
+                ep.emrfk = 147
+                and ep.kdprofile = $kdProfile
+                and ep.noregistrasifk = '$noregistrasi'
+                AND ep.statusenabled = TRUE
+                "));
+
+        $result = array(
+            'data' => $data,
+        );
+
+        return $this->respond($result);
+    }
+
+    public function getRiwayatTindakanRajal(Request $request)
+    {
+        $kdProfile = $this->getDataKdProfile($request);
+        $noregistrasi = $request['noregistrasi'];
+
+        $data = DB::select(DB::raw("
+                    SELECT
+                    pp.norec,
+                    pp.tglpelayanan,
+                    pp.rke,
+                    pr.ID AS prid,
+                    pr.namaproduk,
+                    pp.jumlah,
+                    kl.ID AS klid,
+                    kl.namakelas,
+                    ru.ID AS ruid,
+                    ru.namaruangan,
+                    --dpm.id,
+                    --dpm.namadepartemen,
+                    pp.produkfk,
+                    pp.hargajual,
+                    pp.hargadiscount,
+                    --sp.nostruk,
+                    --sp.tglstruk,
+                    apd.norec AS norec_apd,
+                    pg.ID AS pgid,
+                    pg.namalengkap,
+                    --sbm.nosbm,
+                    --sp.norec AS norec_sp,
+                    pp.jasa,
+                    pd.nocmfk,
+                    ru2.objectdepartemenfk AS deptid,
+                    pd.nocmfk,
+                    pd.nostruklastfk,
+                    --ag.ID AS agid,
+                    --ag.agama,
+                    pas.tgllahir,
+                    kp.ID AS kpid,
+                    kp.kelompokpasien,
+                    pas.objectstatusperkawinanfk,
+                    pas.namaayah,
+                    pas.namasuamiistri,
+                    pas.ID AS pasid,
+                    pas.nocm,
+                    --jkel.ID AS jkelid,
+                    --jkel.jeniskelamin,
+                    --jkel.reportdisplay AS jk,
+                    pd.noregistrasi,
+                    pas.namapasien,
+                    pd.tglregistrasi,
+                    pd.norec AS norec_pd,
+                    pd.tglpulang,
+                    pas.notelepon,
+                    kls.ID AS klsid,
+                    kls.namakelas,
+                    pd.objectrekananfk AS rekananid,
+                    ru2.namaruangan AS ruanganlast,
+                    kls2.ID AS klsid2,
+                    kls2.namakelas AS namakelas2,
+                    sr.noresep,
+                    --rk.namarekanan,
+                    --rusr.namaruangan AS ruanganfarmasi,
+                    --pgsr.namalengkap AS penulisresep,
+                    --jp.jenisproduk,
+                    --kpBpjs.kelompokprodukbpjs AS kelompokprodukbpjs,
+                    pgpj.namalengkap AS dokterpj,
+                    pp.jasa,
+                    --kamar.namakamar,
+                    --sp.totalharusdibayar,
+                    --sp.totalprekanan,
+                    --sppj.totalppenjamin,
+                    --sp.totalbiayatambahan,
+                    --pgsbm.namalengkap AS namalengkapsbm,
+                    pd.kdprofile,
+                    pp.aturanpakai,
+                    pp.iscito,
+                    pd.statuspasien,
+                    pp.isparamedis,
+                    ru2.ID AS ruanganlastid,
+                    pp.istarifdetault,
+                    pp.hargadijamin,
+                    --pp.hargabhp,
+                    pp.strukresepfk 
+                FROM
+                    pasiendaftar_t AS pd
+                    LEFT JOIN antrianpasiendiperiksa_t AS apd ON apd.noregistrasifk = pd.norec
+                    LEFT JOIN pelayananpasien_t AS pp ON pp.noregistrasifk = apd.norec
+                    LEFT JOIN produk_m AS pr ON pr.ID = pp.produkfk
+                    --LEFT JOIN detailjenisproduk_m AS djp ON djp.ID = pr.objectdetailjenisprodukfk
+                    --LEFT JOIN jenisproduk_m AS jp ON jp.ID = djp.objectjenisprodukfk
+                    --LEFT JOIN kelompokprodukbpjs_m AS kpBpjs ON kpBpjs.ID = pr.objectkelompokprodukbpjsfk
+                    LEFT JOIN kelas_m AS kl ON kl.ID = apd.objectkelasfk
+                    LEFT JOIN ruangan_m AS ru ON ru.ID = apd.objectruanganfk
+                    INNER JOIN ruangan_m AS ru2 ON ru2.ID = pd.objectruanganlastfk
+                    INNER JOIN pasien_m AS pas ON pas.ID = pd.nocmfk
+                    --LEFT JOIN departemen_m as dpm on dpm.id = ru.objectdepartemenfk
+                    --LEFT JOIN agama_m AS ag ON ag.ID = pas.objectagamafk
+                    --LEFT JOIN jeniskelamin_m AS jkel ON jkel.ID = pas.objectjeniskelaminfk
+                    LEFT JOIN kelompokpasien_m AS kp ON kp.ID = pd.objectkelompokpasienlastfk
+                    LEFT JOIN kelas_m AS kls ON kls.ID = apd.objectkelasfk
+                    LEFT JOIN kelas_m AS kls2 ON kls2.ID = pd.objectkelasfk
+                    LEFT JOIN pegawai_m AS pg ON pg.ID = apd.objectpegawaifk
+                    LEFT JOIN pegawai_m AS pgpj ON pgpj.ID = pd.objectpegawaifk
+                    --LEFT JOIN rekanan_m AS rk ON rk.ID = pd.objectrekananfk
+                    LEFT JOIN strukresep_t AS sr ON sr.norec = pp.strukresepfk
+                    --LEFT JOIN ruangan_m AS rusr ON rusr.ID = sr.ruanganfk
+                    --LEFT JOIN kamar_m AS kamar ON kamar.ID = apd.objectkamarfk
+                    --LEFT JOIN pegawai_m AS pgsr ON pgsr.ID = sr.penulisresepfk
+                    --LEFT JOIN strukpelayanan_t AS sp ON sp.norec = pp.strukfk
+                    --LEFT JOIN strukpelayananpenjamin_t AS sppj ON sp.norec = sppj.nostrukfk
+                    --LEFT JOIN strukbuktipenerimaan_t AS sbm ON sp.nosbmlastfk = sbm.norec
+                    --LEFT JOIN pegawai_m AS pgsbm ON pgsbm.ID = sbm.objectpegawaipenerimafk 
+                WHERE
+                    pd.kdprofile = $kdProfile 
+                    --and dpm.id = 18
+                    AND pd.noregistrasi = '$noregistrasi'
+                    --AND pp.strukresepfk IS NULL 
+                ORDER BY
+                    pp.tglpelayanan DESC
+                "));
+
+        $result = array(
+            'data' => $data,
+        );
+
+        return $this->respond($result);
+    }
+
+    public function getRiwayatResep(Request $request)
+    {
+        $kdProfile = $this->getDataKdProfile($request);
+        $noregistrasi = $request['noregistrasi'];
+
+        $data = DB::select(DB::raw("
+                    SELECT
+                    ps.nocm,
+                    ps.namapasien,
+                    jk.jeniskelamin,
+                    pp.tglpelayanan,
+                    pp.produkfk,
+                    pr.namaproduk,
+                    ss.satuanstandar,
+                    ss.id AS satuanstandarfk,
+                    pp.jumlah,
+                    pp.hargasatuan,
+                    pp.hargadiscount,
+                    sp.nostruk,
+                    pd.noregistrasi,
+                    pp.keteranganpakai,
+                    ks.nilaikonversi,
+                    ss2.satuanstandar AS satuanstandar2,
+                    ss2.id AS satuanstandar2fk,
+                    sr.noresep,
+                    sr.norec AS norec_resep,
+                    pp.rke,
+                    jkm.jeniskemasan,
+                    jk.id AS jkid,
+                    jkm.id AS jkmid,
+                    pp.jenisobatfk,
+                    jra.jenisracikan,
+                    pp.jasa,
+                    ru2.id AS ruangandepoid,
+                    ru2.namaruangan AS ruangandepo,
+                    pp.aturanpakai,
+                    ru.namaruangan,
+                    dok.namalengkap AS dokter,
+                    pp.ispagi,
+                    pp.issiang,
+                    pp.ismalam,
+                    pp.issore,
+                    pp.iskronis,
+                    sr.isreseppulang AS reseppulang,
+                CASE
+                        
+                        WHEN pr.kekuatan IS NOT NULL 
+                        AND rs.NAME IS NOT NULL THEN
+                            pr.kekuatan || ' ' || rs.NAME ELSE'' 
+                            END AS kekuatan,
+                        sn.satuanresep,
+                        pp.satuanresepfk,
+                        pp.tglkadaluarsa,
+                        pp.dosis,
+                        djp.detailjenisproduk,
+                        jp.jenisproduk,
+                        sr.pasienfk 
+                    FROM
+                        pelayananpasien_t AS pp
+                        INNER JOIN antrianpasiendiperiksa_t AS apd ON apd.norec = pp.noregistrasifk
+                        INNER JOIN pasiendaftar_t AS pd ON pd.norec = apd.noregistrasifk
+                        INNER JOIN pasien_m AS ps ON ps.id = pd.nocmfk
+                        INNER JOIN jeniskelamin_m AS jk ON jk.id = ps.objectjeniskelaminfk
+                        INNER JOIN produk_m AS pr ON pr.id = pp.produkfk
+                        INNER JOIN ruangan_m AS ru ON ru.id = apd.objectruanganfk
+                        INNER JOIN jeniskemasan_m AS jkm ON jkm.id = pp.jeniskemasanfk
+                        LEFT JOIN jenisracikan_m AS jra ON jra.id = pp.jenisobatfk
+                        LEFT JOIN satuanstandar_m AS ss ON ss.id = pp.satuanviewfk
+                        LEFT JOIN satuanstandar_m AS ss2 ON ss2.id = pr.objectsatuanstandarfk
+                        INNER JOIN detailjenisproduk_m AS djp ON djp.id = pr.objectdetailjenisprodukfk
+                        INNER JOIN jenisproduk_m AS jp ON jp.id = djp.objectjenisprodukfk
+                        LEFT JOIN strukpelayanan_t AS sp ON sp.norec = pp.strukfk
+                        LEFT JOIN konversisatuan_t AS ks ON ks.objekprodukfk = pr.id 
+                        AND ks.satuanstandar_tujuan = pp.satuanviewfk
+                        LEFT JOIN strukresep_t AS sr ON sr.norec = pp.strukresepfk
+                        LEFT JOIN ruangan_m AS ru2 ON ru2.id = sr.ruanganfk
+                        LEFT JOIN pegawai_m AS dok ON dok.id = sr.penulisresepfk
+                        LEFT JOIN rm_sediaan_m AS rs ON rs.id = pr.objectsediaanfk
+                        LEFT JOIN satuanresep_m AS sn ON sn.id = pp.satuanresepfk 
+                    WHERE
+                        pp.kdprofile = $kdProfile 
+                        AND jp.id = 97 
+                        AND pd.noregistrasi = '$noregistrasi' 
+                ORDER BY
+                    pp.tglpelayanan DESC
+                "));
+
+        $result = array(
+            'data' => $data,
+        );
+
+        return $this->respond($result);
+    }
+
 }
