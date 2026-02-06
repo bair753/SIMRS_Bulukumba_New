@@ -12733,6 +12733,60 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
 				})
 			}
 
+			$scope.showInvalidCodeConfirm = function () {
+				$mdDialog.show({
+					parent: angular.element(document.body),
+					clickOutsideToClose: false,
+					escapeToClose: false,
+					template:
+						'<md-dialog aria-label="Kode Diagnosa Tidak Valid">' +
+						'  <md-dialog-content style="padding:24px; max-width:500px;">' +
+						'    <h2 class="md-title" style="color:#d32f2f;">⚠️ Kode Diagnosa Tidak Valid</h2>' +
+						'    <p style="font-size:16px; line-height:1.6; margin-top:16px;">' +
+						'      Kode diagnosa ini tidak dapat digunakan untuk proses coding ' +
+						'      karena <b>valid code bernilai 0</b>.' +
+						'    </p>' +
+						'    <p style="font-size:16px; line-height:1.6;">' +
+						'      Silakan pilih kode diagnosa lain.' +
+						'    </p>' +
+						'  </md-dialog-content>' +
+						'  <md-dialog-actions layout="row" layout-align="end center">' +
+						'    <md-button class="md-primary" ng-click="closeDialog()">Mengerti</md-button>' +
+						'  </md-dialog-actions>' +
+						'</md-dialog>',
+					controller: function ($scope, $mdDialog) {
+						$scope.closeDialog = function () {
+							$mdDialog.hide();
+						};
+					}
+				});
+			};
+			
+			$scope.showWarningDialogBigText = function (message) {
+				$mdDialog.show({
+					parent: angular.element(document.body),
+					clickOutsideToClose: false,
+					template:
+						'<md-dialog aria-label="Peringatan">' +
+						'  <md-dialog-content style="padding:24px;">' +
+						'    <h2 class="md-title" style="color:#d32f2f;">⚠️ Peringatan</h2>' +
+						'    <p style="font-size:16px; line-height:1.6; margin-top:16px;">' +
+								message +
+						'    </p>' +
+						'  </md-dialog-content>' +
+						'  <md-dialog-actions layout="row" layout-align="end center">' +
+						'    <md-button class="md-primary" ng-click="closeDialog()">OK</md-button>' +
+						'  </md-dialog-actions>' +
+						'</md-dialog>',
+					controller: function ($scope, $mdDialog) {
+						$scope.closeDialog = function () {
+							$mdDialog.hide();
+						};
+					}
+				});
+			};
+
+
 			// save diagnosa idrg
 
 			$scope.diagnosa_icd_10_idrg = function () {
@@ -12753,30 +12807,34 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
 
 				if (selected.valid_code === false) {
 					if (jenis == '8') {
-						var confirm = $mdDialog.confirm()
-							.title('Peringatan')
-							.textContent('Kode ini tidak valid untuk digunakan dalam coding karena valid code bernilai 0 !')
-							.ariaLabel('Lucky day')
-							.ok('Okey.');
+						$scope.showInvalidCodeConfirm();
+    					return;
+						// var confirm = $mdDialog.confirm()
+						// 	.title('Peringatan')
+						// 	.textContent('Kode ini tidak valid untuk digunakan dalam coding karena valid code bernilai 0 !')
+						// 	.ariaLabel('Lucky day')
+						// 	.ok('Okey.');
 
-						$mdDialog.show(confirm).then(function () {
-							// delete $scope.item.diagnosisPrimer.id;
-						});
+						// $mdDialog.show(confirm).then(function () {
+						// 	// delete $scope.item.diagnosisPrimer.id;
+						// });
 
-						return; // ⬅️ tambahkan ini supaya eksekusi berhenti, API tidak lanjut
+						// return; // ⬅️ tambahkan ini supaya eksekusi berhenti, API tidak lanjut
 					}
 					if (jenis == '9') {
-						var confirm = $mdDialog.confirm()
-							.title('Peringatan')
-							.textContent('Kode ini tidak valid untuk digunakan dalam coding karena valid code bernilai 0 !')
-							.ariaLabel('Lucky day')
-							.ok('Okey.');
+						$scope.showInvalidCodeConfirm();
+    					return;
+						// var confirm = $mdDialog.confirm()
+						// 	.title('Peringatan')
+						// 	.textContent('Kode ini tidak valid untuk digunakan dalam coding karena valid code bernilai 0 !')
+						// 	.ariaLabel('Lucky day')
+						// 	.ok('Okey.');
 
-						$mdDialog.show(confirm).then(function () {
-							// delete $scope.item.diagnosisPrimer.id;
-						});
+						// $mdDialog.show(confirm).then(function () {
+						// 	// delete $scope.item.diagnosisPrimer.id;
+						// });
 
-						return; // ⬅️ tambahkan ini supaya eksekusi berhenti, API tidak lanjut
+						// return; // ⬅️ tambahkan ini supaya eksekusi berhenti, API tidak lanjut
 					}
 				}
 
@@ -12785,30 +12843,38 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
 					if (selected.accpdx == 'N') {
 						// alert("Kode ini tidak boleh digunakan sebagai Diagnosa Primer!");
 						// return;
-						var confirm = $mdDialog.confirm()
-							.title('Peringatan')
-							.textContent('Kode ini tidak boleh digunakan sebagai Diagnosa Primer!')
-							.ariaLabel('Lucky day')
-							.ok('Okey.');
+						// var confirm = $mdDialog.confirm()
+						// 	.title('Peringatan')
+						// 	.textContent('Kode ini tidak boleh digunakan sebagai Diagnosa Primer!')
+						// 	.ariaLabel('Lucky day')
+						// 	.ok('Okey.');
 
-						$mdDialog.show(confirm).then(function () {
-							// delete $scope.item.diagnosisPrimer.id;
-						});
+						// $mdDialog.show(confirm).then(function () {
+						// 	// delete $scope.item.diagnosisPrimer.id;
+						// });
+
+						$scope.showWarningDialogBigText(
+							'Kode ini <b>tidak boleh</b> digunakan sebagai Diagnosa Primer!'
+						);
 
 						return; // ⬅️ tambahkan ini supaya eksekusi berhenti, API tidak lanjut
 					}
 					if (selected.asterisk === true) {
 						// alert("Kode Asterisk (*) tidak boleh digunakan sebagai Diagnosa Primer!");
 						// return;
-						var confirm = $mdDialog.confirm()
-							.title('Peringatan')
-							.textContent('Kode Asterisk (*) tidak boleh digunakan sebagai Diagnosa Primer!')
-							.ariaLabel('Lucky day')
-							.ok('Okey.');
+						// var confirm = $mdDialog.confirm()
+						// 	.title('Peringatan')
+						// 	.textContent('Kode Asterisk (*) tidak boleh digunakan sebagai Diagnosa Primer!')
+						// 	.ariaLabel('Lucky day')
+						// 	.ok('Okey.');
 
-						$mdDialog.show(confirm).then(function () {
-							// delete $scope.item.diagnosisPrimer.id;
-						});
+						// $mdDialog.show(confirm).then(function () {
+						// 	// delete $scope.item.diagnosisPrimer.id;
+						// });
+
+						$scope.showWarningDialogBigText(
+							'Kode Asterisk (*) tidak boleh digunakan sebagai Diagnosa Primer!'
+						);
 
 						return; // ⬅️ tambahkan ini supaya eksekusi berhenti, API tidak lanjut
 					}
