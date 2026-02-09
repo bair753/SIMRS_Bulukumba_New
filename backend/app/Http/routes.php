@@ -361,6 +361,30 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
               Route::post('bridging/inacbg/save-pengajuan-klaim','Bridging\InaCbgController@savePengajuanKlaim');
               Route::post('tatarekening/simpan-verifikasi-tagihan-inacbg/{noRegister}','Bridging\InaCbgController@simpanVerifikasiTagihanInacbg');
 
+              // Bridging IDRG 
+              Route::get('bridging/inacbg/get/daftar/pasien/inacbg/idrg/integrasi','Bridging\InaCbgIdrgController@getDaftarPasienIdrgIna');
+              Route::get('bridging/inacbg/get-daftar-pasien-intensif','Bridging\InaCbgController@getDaftarPasienIntensif');
+              Route::get('bridging/inacbg/get-pasien-tb','Bridging\InaCbgController@GetPasienTbProspective');
+              Route::post('idrg/save/diagnosa/pasien','Bridging\DiagnosaIdrGController@saveDiagnosaPasienIdrg');
+              Route::post('idrg/save/diagnosa/pasien-inacbg','Bridging\DiagnosaIdrGController@saveDiagnosaPasienInacbg');
+              Route::post('idrg/save/diagnosa/tindakan/pasien','Bridging\DiagnosaIdrGController@saveDiagnosaTindakanPasienIdrg');
+              Route::post('idrg/save/diagnosa/tindakan/pasien/inacbg/new','Bridging\DiagnosaIdrGController@saveDiagnosaTindakanPasienInaCbg');
+              Route::post('idrg/save-diagnosa-pasien-import', 'Bridging\DiagnosaIdrGController@saveDiagnosaPasienIdrgImport');
+              Route::post('idrg/save-diagnosa-tindakan-pasien-import', 'Bridging\DiagnosaIdrGController@saveDiagnosaTindakanPasienIdrgImport');
+              Route::get('registrasi/get/diagnosa/10/by/noreg/inacbg/idrg','Bridging\InaCbgIdrgController@getDiagnosaPasienByNoregInaCbgNew');
+              Route::get('registrasi/get/diagnosa/9/by/noreg/inacbg/idrg','Bridging\InaCbgIdrgController@getDiagnosaPasienByNoregICD9InaCbgNew');
+              Route::get('emr/get-emr-riwayat-vitalsign', 'EMR\EMRController@getRiwayatVitalSign');
+              Route::get('emr/get-emr-riwayat-tindakanrajal', 'EMR\EMRController@getRiwayatTindakanRajal');
+              Route::get('emr/get-emr-riwayat-resep', 'EMR\EMRController@getRiwayatResep');
+              Route::get('registrasi/daftar-riwayat-registrasi-new-2', 'Registrasi\RegistrasiController@getDaftarRiwayatRegistrasiNew2');
+              Route::get('registrasi/daftar-registrasi/get-data-diagnosa-idrg-icd-ten-kode-nama-baru','Bridging\DiagnosaIdrGController@getDiagnosaIcdInacbgTen');
+              Route::post('bridging/inacbg/save-dpjp', 'Bridging\InaCbgController@saveDPJP');
+              Route::get('registrasi/daftar-registrasi/get-data-diagnosa-idrg-icd-nen-kode-nama-baru','Bridging\DiagnosaIdrGController@getDiagnosaIcdNenInacbg');
+              Route::get('registrasi/daftar-registrasi/get-data-diagnosa-idrg-icd-ten-kode-nama','Bridging\DiagnosaIdrGController@getDiagnosaIcdTen');
+              Route::get('registrasi/daftar-registrasi/get-data-diagnosa-idrg-icd-nen-kode-nama','Bridging\DiagnosaIdrGController@getDiagnosaIcdNen');
+              Route::get('registrasi/daftar-registrasi/get-data-diagnosa-idrg-icd-o-kode-nama','Bridging\DiagnosaIdrGController@getDiagnosaIcdO');
+              Route::post('bridging/inacbg/save-bridging-inacbg-tools', 'Bridging\InaCbgIdrgController@saveBridgingINACBGTools');
+
               //** BPJS DATA PENUNJANG */
               Route::post('bridging/bpjs/save-data-mappingdkoterbpjs','Bridging\BridgingBPJSV2Controller@saveMappingDokterBpjsDokterRs');
               Route::get('bridging/bpjs/get-data-mappingdkoterbpjs', 'Bridging\BridgingBPJSV2Controller@getDaftarMappingDokterBpjsToDokterRs');
@@ -575,30 +599,6 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
         Route::post('bridging/ihs/Encounter-tes', 'Bridging\IHSController@Encountertes');
         Route::get('bridging/ihs/get-list', 'Bridging\IHSController@getList');
         Route::get('bridging/ihs/Encounter-list', 'Bridging\IHSController@EncounterList');
-
-        // Bridging IDRG 
-        Route::get('bridging/inacbg/get/daftar/pasien/inacbg/idrg/integrasi','Bridging\InaCbgIdrgController@getDaftarPasienIdrgIna');
-        Route::get('bridging/inacbg/get-daftar-pasien-intensif','Bridging\InaCbgController@getDaftarPasienIntensif');
-        Route::get('bridging/inacbg/get-pasien-tb','Bridging\InaCbgController@GetPasienTbProspective');
-        Route::post('idrg/save/diagnosa/pasien','Bridging\DiagnosaIdrGController@saveDiagnosaPasienIdrg');
-        Route::post('idrg/save/diagnosa/pasien-inacbg','Bridging\DiagnosaIdrGController@saveDiagnosaPasienInacbg');
-        Route::post('idrg/save/diagnosa/tindakan/pasien','Bridging\DiagnosaIdrGController@saveDiagnosaTindakanPasienIdrg');
-        Route::post('idrg/save/diagnosa/tindakan/pasien/inacbg/new','Bridging\DiagnosaIdrGController@saveDiagnosaTindakanPasienInaCbg');
-        Route::post('idrg/save-diagnosa-pasien-import', 'Bridging\DiagnosaIdrGController@saveDiagnosaPasienIdrgImport');
-        Route::post('idrg/save-diagnosa-tindakan-pasien-import', 'Bridging\DiagnosaIdrGController@saveDiagnosaTindakanPasienIdrgImport');
-        Route::get('registrasi/get/diagnosa/10/by/noreg/inacbg/idrg','Bridging\InaCbgIdrgController@getDiagnosaPasienByNoregInaCbgNew');
-        Route::get('registrasi/get/diagnosa/9/by/noreg/inacbg/idrg','Bridging\InaCbgIdrgController@getDiagnosaPasienByNoregICD9InaCbgNew');
-        Route::get('emr/get-emr-riwayat-vitalsign', 'EMR\EMRController@getRiwayatVitalSign');
-        Route::get('emr/get-emr-riwayat-tindakanrajal', 'EMR\EMRController@getRiwayatTindakanRajal');
-        Route::get('emr/get-emr-riwayat-resep', 'EMR\EMRController@getRiwayatResep');
-        Route::get('registrasi/daftar-riwayat-registrasi-new-2', 'Registrasi\RegistrasiController@getDaftarRiwayatRegistrasiNew2');
-        Route::get('registrasi/daftar-registrasi/get-data-diagnosa-idrg-icd-ten-kode-nama-baru','Bridging\DiagnosaIdrGController@getDiagnosaIcdInacbgTen');
-        Route::post('bridging/inacbg/save-dpjp', 'Bridging\InaCbgController@saveDPJP');
-        Route::get('registrasi/daftar-registrasi/get-data-diagnosa-idrg-icd-nen-kode-nama-baru','Bridging\DiagnosaIdrGController@getDiagnosaIcdNenInacbg');
-        Route::get('registrasi/daftar-registrasi/get-data-diagnosa-idrg-icd-ten-kode-nama','Bridging\DiagnosaIdrGController@getDiagnosaIcdTen');
-        Route::get('registrasi/daftar-registrasi/get-data-diagnosa-idrg-icd-nen-kode-nama','Bridging\DiagnosaIdrGController@getDiagnosaIcdNen');
-        Route::get('registrasi/daftar-registrasi/get-data-diagnosa-idrg-icd-o-kode-nama','Bridging\DiagnosaIdrGController@getDiagnosaIcdO');
-        Route::post('bridging/inacbg/save-bridging-inacbg-tools', 'Bridging\InaCbgIdrgController@saveBridgingINACBGTools');
         
         // INTEGRASI APOTIK ONLINE
         Route::get('bridging/bpjs/get-sep-apotik-online', 'Bridging\BridgingBPJSV2Controller@getSEPApotek');
