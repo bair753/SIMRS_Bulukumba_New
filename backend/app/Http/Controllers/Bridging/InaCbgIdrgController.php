@@ -217,7 +217,7 @@ class InaCbgIdrgController extends ApiController
             }
         }
 
-        $data = \DB::table('pasiendaftar_t as pd')
+        $data = \DB::table('ppasiendaftar_t as pd')
             ->join('pasien_m as ps', 'ps.id', '=', 'pd.nocmfk')
             ->join('ruangan_m as ru', 'ru.id', '=', 'pd.objectruanganlastfk')
             ->join('departemen_m as dp', 'dp.id', '=', 'ru.objectdepartemenfk')
