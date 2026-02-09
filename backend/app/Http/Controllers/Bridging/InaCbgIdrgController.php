@@ -49,8 +49,8 @@ class InaCbgIdrgController extends ApiController
                 $key = $item->nilaifield;
             }
             if ($item->namafield == 'url') {
-                $url = $item->nilaifield;
-                // $url = "http://10.70.0.114/E-Klaim/ws.php?mode=debug";
+                // $url = $item->nilaifield;
+                $url = "http://10.10.10.172/E-Klaim/ws.php?mode=debug";
             }
         }
 
