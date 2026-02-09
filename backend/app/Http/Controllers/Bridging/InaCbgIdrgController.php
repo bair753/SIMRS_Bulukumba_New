@@ -182,6 +182,7 @@ class InaCbgIdrgController extends ApiController
     {
         $dataLogin = $request->all();
         $kdProfile = (int)$this->getDataKdProfile($request);
+        dd($kdProfile);
         $deptRanap = explode(',', $this->settingDataFixed('kdDepartemenRanapFix', $kdProfile));
         $number = 10000;
         ini_set('max_execution_time', $number);
