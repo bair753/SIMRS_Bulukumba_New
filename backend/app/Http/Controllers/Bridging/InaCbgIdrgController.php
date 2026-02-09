@@ -183,8 +183,9 @@ class InaCbgIdrgController extends ApiController
         $dataLogin = $request->all();
         $kdProfile = (int)$this->getDataKdProfile($request);
         $deptRanap = explode(',', $this->settingDataFixed('kdDepartemenRanapFix', $kdProfile));
-        $number = 0;
+        $number = 10000;
         ini_set('max_execution_time', $number);
+        ini_set('memory_limit', '4048M');
         $kdDepartemenRawatInap = [];
         foreach ($deptRanap as $itemRanap) {
             $kdDepartemenRawatInap[] =  (int)$itemRanap;
