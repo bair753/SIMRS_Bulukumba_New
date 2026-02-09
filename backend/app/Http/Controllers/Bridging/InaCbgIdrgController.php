@@ -392,7 +392,6 @@ class InaCbgIdrgController extends ApiController
         
         $filter = $request->all();
 
-        dd($filter);
         if (isset($filter['ispulang']) && $filter['ispulang'] == true) {
             if (isset($filter['tglAwal']) && $filter['tglAwal'] != "" && $filter['tglAwal'] != "undefined") {
                 $data = $data->where('pd.tglpulang', '>=', $filter['tglAwal']);
@@ -490,6 +489,9 @@ class InaCbgIdrgController extends ApiController
         if (isset($filter['pegklaim']) && $filter['pegklaim'] != "" && $filter['pegklaim'] != "undefined") {
             $data = $data->where('pd.pegawaifinalklaim', 'ilike', '%' . $filter['pegklaim'] . '%');
         }
+
+        dd('lewat filter');
+
         $data = $data->orderBy('pd.noregistrasi');
         $data = $data->groupBy(
             'ipg.norec',
