@@ -182,42 +182,41 @@ class InaCbgIdrgController extends ApiController
     {
         $dataLogin = $request->all();
         $kdProfile = (int)$this->getDataKdProfile($request);
-        dd($kdProfile);
         $deptRanap = explode(',', $this->settingDataFixed('kdDepartemenRanapFix', $kdProfile));
-        $number = 10000;
+        $number = 0;
         ini_set('max_execution_time', $number);
         ini_set('memory_limit', '4048M');
-        // $kdDepartemenRawatInap = [];
-        // foreach ($deptRanap as $itemRanap) {
-        //     $kdDepartemenRawatInap[] =  (int)$itemRanap;
-        // }
-        // $data  = \DB::table('settingdatafixed_m')
-        //     ->select('namafield', 'nilaifield')
-        //     ->where('keteranganfungsi', 'inacbg')
-        //     ->where('kdprofile', $kdProfile)
-        //     ->get();
-        // // $dataPegawaiUser = DB::select(
-        // //     DB::raw("select pg.id,pg.namalengkap,pg.noidentitas from loginuser_s as lu
-        // //         INNER JOIN pegawai_m as pg on lu.objectpegawaifk=pg.id
-        // //         where lu.id=:idLoginUser"),
-        // //     array(
-        // //         'idLoginUser' => $dataLogin['userData']['id'],
-        // //     )
-        // // );
-        // foreach ($data as $item) {
-        //     if ($item->namafield == 'codernik') {
-        //         $codernik = $item->nilaifield;
-        //     }
-        //     if ($item->namafield == 'key') {
-        //         $key = $item->nilaifield;
-        //     }
-        //     if ($item->namafield == 'url') {
-        //         $url = $item->nilaifield;
-        //     }
-        //     if ($item->namafield == 'kodetarif') {
-        //         $kodetarif = $item->nilaifield;
-        //     }
-        // }
+        $kdDepartemenRawatInap = [];
+        foreach ($deptRanap as $itemRanap) {
+            $kdDepartemenRawatInap[] =  (int)$itemRanap;
+        }
+        $data  = \DB::table('settingdatafixed_m')
+            ->select('namafield', 'nilaifield')
+            ->where('keteranganfungsi', 'inacbg')
+            ->where('kdprofile', $kdProfile)
+            ->get();
+        // $dataPegawaiUser = DB::select(
+        //     DB::raw("select pg.id,pg.namalengkap,pg.noidentitas from loginuser_s as lu
+        //         INNER JOIN pegawai_m as pg on lu.objectpegawaifk=pg.id
+        //         where lu.id=:idLoginUser"),
+        //     array(
+        //         'idLoginUser' => $dataLogin['userData']['id'],
+        //     )
+        // );
+        foreach ($data as $item) {
+            if ($item->namafield == 'codernik') {
+                $codernik = $item->nilaifield;
+            }
+            if ($item->namafield == 'key') {
+                $key = $item->nilaifield;
+            }
+            if ($item->namafield == 'url') {
+                $url = $item->nilaifield;
+            }
+            if ($item->namafield == 'kodetarif') {
+                $kodetarif = $item->nilaifield;
+            }
+        }
 
         $data = \DB::table('pasiendaftar_t as pd')
             ->join('pasien_m as ps', 'ps.id', '=', 'pd.nocmfk')
@@ -389,9 +388,11 @@ class InaCbgIdrgController extends ApiController
             ->where('pd.statusenabled', true)
             ->where('pd.kdprofile', $kdProfile)
             ->whereNotNull('pd.tglpulang');
-
+        
+        
         $filter = $request->all();
 
+        dd($filter);
         if (isset($filter['ispulang']) && $filter['ispulang'] == true) {
             if (isset($filter['tglAwal']) && $filter['tglAwal'] != "" && $filter['tglAwal'] != "undefined") {
                 $data = $data->where('pd.tglpulang', '>=', $filter['tglAwal']);
