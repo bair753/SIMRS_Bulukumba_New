@@ -186,37 +186,37 @@ class InaCbgIdrgController extends ApiController
         $number = 10000;
         ini_set('max_execution_time', $number);
         ini_set('memory_limit', '4048M');
-        $kdDepartemenRawatInap = [];
-        foreach ($deptRanap as $itemRanap) {
-            $kdDepartemenRawatInap[] =  (int)$itemRanap;
-        }
-        $data  = \DB::table('settingdatafixed_m')
-            ->select('namafield', 'nilaifield')
-            ->where('keteranganfungsi', 'inacbg')
-            ->where('kdprofile', $kdProfile)
-            ->get();
-        // $dataPegawaiUser = DB::select(
-        //     DB::raw("select pg.id,pg.namalengkap,pg.noidentitas from loginuser_s as lu
-        //         INNER JOIN pegawai_m as pg on lu.objectpegawaifk=pg.id
-        //         where lu.id=:idLoginUser"),
-        //     array(
-        //         'idLoginUser' => $dataLogin['userData']['id'],
-        //     )
-        // );
-        foreach ($data as $item) {
-            if ($item->namafield == 'codernik') {
-                $codernik = $item->nilaifield;
-            }
-            if ($item->namafield == 'key') {
-                $key = $item->nilaifield;
-            }
-            if ($item->namafield == 'url') {
-                $url = $item->nilaifield;
-            }
-            if ($item->namafield == 'kodetarif') {
-                $kodetarif = $item->nilaifield;
-            }
-        }
+        // $kdDepartemenRawatInap = [];
+        // foreach ($deptRanap as $itemRanap) {
+        //     $kdDepartemenRawatInap[] =  (int)$itemRanap;
+        // }
+        // $data  = \DB::table('settingdatafixed_m')
+        //     ->select('namafield', 'nilaifield')
+        //     ->where('keteranganfungsi', 'inacbg')
+        //     ->where('kdprofile', $kdProfile)
+        //     ->get();
+        // // $dataPegawaiUser = DB::select(
+        // //     DB::raw("select pg.id,pg.namalengkap,pg.noidentitas from loginuser_s as lu
+        // //         INNER JOIN pegawai_m as pg on lu.objectpegawaifk=pg.id
+        // //         where lu.id=:idLoginUser"),
+        // //     array(
+        // //         'idLoginUser' => $dataLogin['userData']['id'],
+        // //     )
+        // // );
+        // foreach ($data as $item) {
+        //     if ($item->namafield == 'codernik') {
+        //         $codernik = $item->nilaifield;
+        //     }
+        //     if ($item->namafield == 'key') {
+        //         $key = $item->nilaifield;
+        //     }
+        //     if ($item->namafield == 'url') {
+        //         $url = $item->nilaifield;
+        //     }
+        //     if ($item->namafield == 'kodetarif') {
+        //         $kodetarif = $item->nilaifield;
+        //     }
+        // }
 
         $data = \DB::table('pasiendaftar_t as pd')
             ->join('pasien_m as ps', 'ps.id', '=', 'pd.nocmfk')
