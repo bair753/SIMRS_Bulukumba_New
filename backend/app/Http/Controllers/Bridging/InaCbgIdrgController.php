@@ -490,8 +490,6 @@ class InaCbgIdrgController extends ApiController
             $data = $data->where('pd.pegawaifinalklaim', 'ilike', '%' . $filter['pegklaim'] . '%');
         }
 
-        dd('lewat filter');
-
         $data = $data->orderBy('pd.noregistrasi');
         $data = $data->groupBy(
             'ipg.norec',
