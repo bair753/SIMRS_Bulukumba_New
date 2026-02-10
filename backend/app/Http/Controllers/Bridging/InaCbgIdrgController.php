@@ -36,6 +36,8 @@ class InaCbgIdrgController extends ApiController
 
     public function saveBridgingINACBGTools(Request $request)
     {
+        $isDebug = true;
+
         $data  = \DB::table('settingdatafixed_m')
             ->select('namafield', 'nilaifield')
             ->where('keteranganfungsi', 'inacbg')
@@ -58,7 +60,13 @@ class InaCbgIdrgController extends ApiController
         $responseArr = [];
         foreach ($dataReq as $dataLoop) {
             $json_request = json_encode($dataLoop);
-            $payload = $this->inacbg_encrypt($json_request, $key);
+            
+            if ($isDebug) {
+                $payload = json_encode($dataLoop);
+            } else {
+                $payload = $this->inacbg_encrypt($json_request, $key);
+            }
+            
             $header = array("Content-Type: application/x-www-form-urlencoded");
 
             $ch = curl_init();
@@ -81,7 +89,11 @@ class InaCbgIdrgController extends ApiController
                 $first,
                 strlen($response) - $first - $last
             );
-            $response = $this->inacbg_decrypt($response, $key);
+            if ($isDebug) {
+                $response = json_decode($response, true);
+            } else {
+                $response = $this->inacbg_decrypt($response, $key);
+            }            
             // $jsonInaCbg = json_decode($response);
             $responseArr[] = array(
                 'datarequest' => $dataLoop,
