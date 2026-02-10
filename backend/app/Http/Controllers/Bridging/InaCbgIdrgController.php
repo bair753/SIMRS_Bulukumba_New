@@ -131,29 +131,36 @@ class InaCbgIdrgController extends ApiController
     // Decryption Function
     function inacbg_decrypt($str, $strkey)
     {
-        /// make binary representation of $key
         $key = hex2bin($strkey);
-        /// check key length, must be 256 bit or 32 bytes
-        if (mb_strlen($key, "8bit") !== 32) {
+        if (strlen($key) !== 32) {
             throw new \Exception("Needs a 256-bit key!");
         }
-        /// calculate iv size
-        $iv_size = openssl_cipher_iv_length("aes-256-cbc");
-        /// breakdown parts
-        $decoded = base64_decode($str);
-        $signature = mb_substr($decoded, 0, 10, "8bit");
-        $iv = mb_substr($decoded, 10, $iv_size, "8bit");
-        $encrypted = mb_substr($decoded, $iv_size + 10, NULL, "8bit");
-        /// check signature, against padding oracle attack
-        $calc_signature = mb_substr(hash_hmac(
-            "sha256",
-            $encrypted,
-            $key,
-            true
-        ), 0, 10, "8bit");
-        if ($this->inacbg_compare($signature, $calc_signature)) {
-            //            return "SIGNATURE_NOT_MATCH"; /// signature doesn't match
+
+        $decoded = base64_decode($str, true);
+        if ($decoded === false || strlen($decoded) < 26) {
+            throw new \Exception("Invalid encrypted payload");
         }
+
+        $iv_size = openssl_cipher_iv_length("aes-256-cbc");
+
+        $signature = substr($decoded, 0, 10);
+        $iv        = substr($decoded, 10, $iv_size);
+        $encrypted = substr($decoded, 10 + $iv_size);
+
+        if (strlen($iv) !== 16) {
+            throw new \Exception("Invalid IV length: " . strlen($iv));
+        }
+
+        $calc_signature = substr(
+            hash_hmac("sha256", $encrypted, $key, true),
+            0,
+            10
+        );
+
+        if (!hash_equals($signature, $calc_signature)) {
+            throw new \Exception("Signature mismatch");
+        }
+
         $decrypted = openssl_decrypt(
             $encrypted,
             "aes-256-cbc",
@@ -161,8 +168,12 @@ class InaCbgIdrgController extends ApiController
             OPENSSL_RAW_DATA,
             $iv
         );
-        $dtdtd = json_decode($decrypted);
-        return $dtdtd;
+
+        if ($decrypted === false) {
+            throw new \Exception("Decrypt failed");
+        }
+
+        return json_decode($decrypted);
     }
     /// Compare Function
     function inacbg_compare($a, $b)
