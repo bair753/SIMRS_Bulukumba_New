@@ -582,7 +582,7 @@ class InaCbgIdrgController extends ApiController
         );
         $data = $data->get();
 
-        dd($data);
+        // dd($data);
         foreach ($data as $key => $d) {
             $selisih = date_diff(date_create($d->tglregistrasi), date_create($d->tglpulang));
             $selisih2 = strtotime($d->tglpulang) - strtotime($d->tglregistrasi);
