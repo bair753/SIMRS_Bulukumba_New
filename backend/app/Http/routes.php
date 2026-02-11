@@ -377,6 +377,15 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
               Route::get('emr/get-emr-riwayat-tindakanrajal', 'EMR\EMRController@getRiwayatTindakanRajal');
               Route::get('emr/get-emr-riwayat-resep', 'EMR\EMRController@getRiwayatResep');
               Route::get('registrasi/daftar-riwayat-registrasi-new-2', 'Registrasi\RegistrasiController@getDaftarRiwayatRegistrasiNew2');
+              Route::post('registrasi/daftar-antrian-pasien/delete-diagnosa-pasien-inacbg','Registrasi\RegistrasiController@deleteDiagnosaPasienInacbg');
+              
+              // Idrg Req Res
+              Route::post('inacbg/idrg/save/res/res','Bridging\InaCbgIdrgController@saveToReqRes');
+              Route::post('inacbg/idrg/save/gruping/res','Bridging\InaCbgIdrgController@saveResGruping');
+              Route::post('inacbg/idrg/save/gruping/delete/res','Bridging\InaCbgIdrgController@deleteResGruping');
+              Route::post('inacbg/save/gruping/res','Bridging\InaCbgIdrgController@saveResGrupingInacbg');
+
+              // diagnosa Idrg Baru
               Route::get('registrasi/daftar-registrasi/get-data-diagnosa-idrg-icd-ten-kode-nama-baru','Bridging\DiagnosaIdrGController@getDiagnosaIcdInacbgTen');
               Route::post('bridging/inacbg/save-dpjp', 'Bridging\InaCbgController@saveDPJP');
               Route::get('registrasi/daftar-registrasi/get-data-diagnosa-idrg-icd-nen-kode-nama-baru','Bridging\DiagnosaIdrGController@getDiagnosaIcdNenInacbg');

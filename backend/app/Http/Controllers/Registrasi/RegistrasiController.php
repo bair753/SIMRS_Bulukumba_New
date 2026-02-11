@@ -12060,4 +12060,34 @@ GROUP BY y.KET
         ]);
     }
 
+    public function deleteDiagnosaPasienInacbg(Request $request)
+    {
+        $dataLogin = $request->all();
+        $kdProfile = $this->getDataKdProfile($request);
+        DB::beginTransaction();
+        if ($request['diagnosa']['norec_dp'] != '') {
+            try {
+                $data1 = DetailDiagnosaPasien::where('norec', $request['diagnosa']['norec_dp'])->where('kdprofile', (int)$kdProfile)->delete();
+                $transStatus = 'true';
+            } catch (\Exception $e) {
+                $transStatus = false;
+            }
+            // try {
+            //     $data2 = DiagnosaPasien::where('norec', $request['diagnosa']['norec_dp'])->where('kdprofile', (int)$kdProfile)->delete();
+            //     $transStatus = 'true';
+            // } catch (\Exception $e) {
+            //     $transStatus = false;
+            // }
+        }
+        if ($transStatus = 'true') {
+            DB::commit();
+            $transMessage = "Data Terhapus";
+        } else {
+            DB::rollBack();
+            $transMessage = "Data Gagal Dihapus";
+        }
+
+        return $this->setStatusCode(201)->respond([], $transMessage);
+    }
+
 }
