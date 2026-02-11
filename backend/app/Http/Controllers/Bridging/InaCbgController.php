@@ -3191,4 +3191,38 @@ class InaCbgController   extends ApiController
         return $this->respond($result);
     }
 
+    public function deleteStatusKlaim(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            PasienDaftar::where('noregistrasi', $request['noregistrasi'])
+                ->update([
+                    'statusklaim' => null,
+                    'tglklaim' => null
+                ]);
+
+            $transStatus = 'true';
+            $transMessage = "Sukses";
+        } catch (\Exception $e) {
+            $transStatus = 'false';
+            $transMessage = "Simpan Status Gagal  ";
+        }
+
+        if ($transStatus != 'false') {
+            DB::commit();
+            $result = array(
+                "status" => 201,
+                "message" => $transMessage,
+            );
+        } else {
+            DB::rollBack();
+            $result = array(
+                "status" => 400,
+                "message" => $transMessage,
+            );
+        }
+
+        return $this->setStatusCode($result['status'])->respond($result, $transMessage);
+    }
+
 }

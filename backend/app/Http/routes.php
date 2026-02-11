@@ -378,7 +378,8 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
               Route::get('emr/get-emr-riwayat-resep', 'EMR\EMRController@getRiwayatResep');
               Route::get('registrasi/daftar-riwayat-registrasi-new-2', 'Registrasi\RegistrasiController@getDaftarRiwayatRegistrasiNew2');
               Route::post('registrasi/daftar-antrian-pasien/delete-diagnosa-pasien-inacbg','Registrasi\RegistrasiController@deleteDiagnosaPasienInacbg');
-              
+              Route::post('bridging/inacbg/delete-status-klaim','Bridging\InaCbgController@deleteStatusKlaim');
+
               // Idrg Req Res
               Route::post('inacbg/idrg/save/res/res','Bridging\InaCbgIdrgController@saveToReqRes');
               Route::post('inacbg/idrg/save/gruping/res','Bridging\InaCbgIdrgController@saveResGruping');
