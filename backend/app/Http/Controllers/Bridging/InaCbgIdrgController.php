@@ -62,7 +62,7 @@ class InaCbgIdrgController extends ApiController
             $json_request = json_encode($dataLoop);
             
             if ($isDebug) {
-                $payload = json_encode($dataLoop);
+                $payload = $json_request;
             } else {
                 $payload = $this->inacbg_encrypt($json_request, $key);
             }
@@ -82,18 +82,22 @@ class InaCbgIdrgController extends ApiController
             if ($err) {
                 return $this->setStatusCode(400)->respond($err, $err);
             }
-            $first  = strpos($response, "\n") + 1;
-            $last   = strrpos($response, "\n") - 1;
-            $response  = substr(
-                $response,
-                $first,
-                strlen($response) - $first - $last
-            );
             if ($isDebug) {
+                // DEBUG MODE → response JSON polos
                 $response = json_decode($response, true);
             } else {
+                // PRODUCTION MODE → terenkripsi
+                $first  = strpos($response, "\n") + 1;
+                $last   = strrpos($response, "\n") - 1;
+            
+                $response = substr(
+                    $response,
+                    $first,
+                    strlen($response) - $first - $last
+                );
+            
                 $response = $this->inacbg_decrypt($response, $key);
-            }            
+            }         
             // $jsonInaCbg = json_decode($response);
             $responseArr[] = array(
                 'datarequest' => $dataLoop,
