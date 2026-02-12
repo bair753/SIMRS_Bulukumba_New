@@ -166,6 +166,15 @@ Trait PelayananPasienTrait
         
         return $set->nilaifield;
     }
+    protected function getUserKeyICARE(){
+        // $statusBridgingProduction = SettingDataFixed::where('namafield', 'isAntreanBPJSProduction')->first();
+        // if($statusBridgingProduction->nilaifield == 'false')
+        //     $set = SettingDataFixed::where('namafield', 'UserKeyAntreanBPJS_dev')->first();
+        // else
+            $set = SettingDataFixed::where('namafield', 'userkeyICARE')->first();
+        
+        return $set->nilaifield;
+    }
     protected function getUrlBrigdingBPJS_ICARE()
     {
         $statusBridgingProduction = SettingDataFixed::where('namafield', 'isBridgingProduction')->first();
