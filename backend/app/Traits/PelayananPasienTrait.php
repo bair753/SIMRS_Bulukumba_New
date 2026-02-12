@@ -169,7 +169,7 @@ Trait PelayananPasienTrait
     protected function getUrlBrigdingBPJS_ICARE()
     {
         $statusBridgingProduction = SettingDataFixed::where('namafield', 'isBridgingProduction')->first();
-        if (!empty($statusBridgingProduction) && $statusBridgingProduction->nilaifield == 'false') {
+        if (!empty($statusBridgingProduction) && $statusBridgingProduction->nilaifield == 'true') {
             $set = SettingDataFixed::where('namafield', 'linkBPJS')->first();
             $rep =  str_replace('vclaim-rest-dev/', 'ihs_dev/', $set->nilaifield);
         } else {
