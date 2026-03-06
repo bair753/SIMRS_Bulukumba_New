@@ -138,32 +138,39 @@
                                         <div class="panel panel-default container_12">
                                             <div class="panel-body">
                                                 <div class="grid_12">
-                                                    <div class="grid_4">
+                                                    <div class="grid_3">
                                                         <div class="grid_12">
-                                                            <div class="grid_10">
-                                                                <div class="grid_12">
-                                                                    <label c-label item="item" c-label-text="Kode Apotik" real></label>
-                                                                </div>
-                                                                <div class="grid_12">
-                                                                    <input c-text-box type="input" class="k-textbox" ng-model="setting.kode"/>
-                                                                </div>
-                                                            </div>
-                                                            <div class="grid_1 pull-right">
-                                                                <em style="margin-top:10px;" ng-click='clearSetting()' id="iconButton" data-role="button" class="k-button k-button-icon" role="button"
-                                                                    aria-disabled="false" tabindex="0"><span
-                                                                        class="k-sprite k-icon k-i-cancel">Clear</span></em>
-                                                            </div>
-                                                            <div class="grid_1 pull-right">
-                                                                <button style="margin-top:10px;" class="k-button k-primary k-button-icon" ng-click="findSetting(setting)"><span
-                                                                        class="k-sprite k-icon k-i-search">Find</span></button>
-                                                            </div>
+                                                            <label c-label item="item" c-label-text="Kode Apotik" real></label>
+                                                        </div>
+                                                        <div class="grid_12">
+                                                            <input c-text-box type="input" class="k-textbox" ng-model="setting.kode"/>
                                                         </div>
                                                     </div>
-                                                    <div class="grid_8">
-                                                        <div class="grid_12">
-                                                            <label c-label>Results :</label>
-                                                        </div>
-                                                        <pre id="jsonSetting" class="json-viewer"></pre>
+                                                    <div class="grid_2" style="display:flex; gap:5px; align-items:end; margin-top: 5px;">
+                                                        <button style="margin-top:10px;" 
+                                                            class="k-button k-primary k-button-icon"
+                                                            ng-click="findSetting(setting)">
+                                                            <span class="k-sprite k-icon k-i-search">Find</span>
+                                                        </button>
+                                                
+                                                        <em style="margin-top:10px;"
+                                                            ng-click='clearSetting()'
+                                                            id="iconButton"
+                                                            data-role="button"
+                                                            class="k-button k-button-icon">
+                                                            <span class="k-sprite k-icon k-i-cancel">Clear</span>
+                                                        </em>
+                                                    </div>
+                                                </div>
+                                                <div class="grid_12">
+                                                    <div class="grid_12 headerBox">
+                                                        <p>Daftar Data Apotik</p>
+                                                    </div>
+                                                    <div class="clear"></div>
+                                                    <div class="grid_12 borderBox">
+                                                        <kendo-grid id="kGrid" data-source="dataDaftarApotik" options="columnDaftarApotik"
+                                                            k-selectable="'row'" k-sortable="'true'" k-resizable="'true'" k-ng-model="dataApotikSelected"
+                                                            ng-click="klikGridApotik(dataApotikSelected)"></kendo-grid>
                                                     </div>
                                                 </div>
                                             </div>
@@ -195,53 +202,61 @@
                                         <div class="panel panel-default container_12">
                                             <div class="panel-body">
                                                 <div class="grid_12">
-                                                    <div class="grid_8">
+                                                    <div class="grid_3">
                                                         <div class="grid_12">
-                                                            <div class="grid_3" style="margin-top: -7px;">
-                                                                <div class="grid_12">
-                                                                    <label c-label item="item" c-label-text="Jenis Obat" real></label>
-                                                                </div>
-                                                                <div class="grid_12">
-                                                                    <input style="width: 100%;" kendo-combo-box k-ng-model="obat.kode"
-                                                                    k-data-text-field="'nama'" k-data-value-field="'id'" k-filter="'contains'"
-                                                                    k-auto-bind="false" k-data-source="listJenisObat" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="grid_4" style="margin-top: -7px;">
-                                                                <div class="grid_12">
-                                                                    <label c-label item="item" c-label-text="Tgl Resep" real></label>
-                                                                </div>
-                                                                <div class="grid_12">
-                                                                    <input style="width: 100%" k-ng-model="obat.tglresep" kendo-datepicker
-                                                                    placeholer="yyyy-MM-dd" k-format="'yyyy-MM-dd'" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="grid_3">
-                                                                <div class="grid_12">
-                                                                    <label c-label item="item" c-label-text="Nama Obat" real></label>
-                                                                </div>
-                                                                <div class="grid_12">
-                                                                    <input c-text-box type="input" class="k-textbox" ng-model="obat.filter"/>
-                                                                </div>
-                                                            </div>
-                                                            <div class="grid_1 pull-right">
-                                                                <em style="margin-top:10px;" ng-click='clearObat()' id="iconButton" data-role="button" class="k-button k-button-icon" role="button"
-                                                                    aria-disabled="false" tabindex="0"><span
-                                                                        class="k-sprite k-icon k-i-cancel">Clear</span></em>
-                                                            </div>
-                                                            <div class="grid_1 pull-right">
-                                                                <button style="margin-top:10px;" class="k-button k-primary k-button-icon" ng-click="findObat(obat)"><span
-                                                                        class="k-sprite k-icon k-i-search">Find</span></button>
-                                                            </div>
+                                                            <label c-label item="item" c-label-text="Jenis Obat" real></label>
+                                                        </div>
+                                                        <div class="grid_12">
+                                                            <input style="width: 100%;" kendo-combo-box k-ng-model="obat.kode"
+                                                            k-data-text-field="'nama'" k-data-value-field="'id'" k-filter="'contains'"
+                                                            k-auto-bind="false" k-data-source="listJenisObat" />
                                                         </div>
                                                     </div>
-                                                    <div class="grid_4">
+                                                    <div class="grid_3">
                                                         <div class="grid_12">
-                                                            <label c-label>Results :</label>
+                                                            <label c-label item="item" c-label-text="Tgl Resep" real></label>
                                                         </div>
-                                                        <pre id="jsonObat" class="json-viewer"></pre>
+                                                        <div class="grid_12">
+                                                            <input style="width: 100%" k-ng-model="obat.tglresep" kendo-datepicker
+                                                            placeholer="yyyy-MM-dd" k-format="'yyyy-MM-dd'" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="grid_3">
+                                                        <div class="grid_12" style="padding-bottom: 5px;">
+                                                            <label c-label item="item" c-label-text="Nama Obat" real></label>
+                                                        </div>
+                                                        <div class="grid_12">
+                                                            <input c-text-box type="input" class="k-textbox" ng-model="obat.filter"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="grid_2" style="display:flex; gap:5px; align-items:end; margin-top: 10px;">
+                                                        <button style="margin-top:10px;" 
+                                                            class="k-button k-primary k-button-icon"
+                                                            ng-click="findObat(obat)">
+                                                            <span class="k-sprite k-icon k-i-search">Find</span>
+                                                        </button>
+                                                
+                                                        <em style="margin-top:10px;"
+                                                            ng-click='clearObat()'
+                                                            id="iconButton"
+                                                            data-role="button"
+                                                            class="k-button k-button-icon">
+                                                            <span class="k-sprite k-icon k-i-cancel">Clear</span>
+                                                        </em>
                                                     </div>
                                                 </div>
+                                                <div class="grid_12">
+                                                    <div class="grid_12 headerBox">
+                                                        <p>Daftar Obat</p>
+                                                    </div>
+                                                    <div class="clear"></div>
+                                                    <div class="grid_12 borderBox">
+                                                        <kendo-grid id="kGrid" data-source="dataDaftarObat" options="columnDaftarObat"
+                                                            k-selectable="'row'" k-sortable="'true'" k-resizable="'true'" k-ng-model="dataObatSelected"
+                                                            ng-click="klikGridObat(dataObatSelected)"></kendo-grid>
+                                                    </div>
+                                                </div>
+                                                
                                             </div>
                                         </div>
         

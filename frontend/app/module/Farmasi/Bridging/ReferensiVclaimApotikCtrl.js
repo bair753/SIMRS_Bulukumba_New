@@ -219,7 +219,21 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                 medifirstService.get("bridging/bpjs/get-setting-apotik-online?kode="
                     + data.kode
                 ).then(function (e) {
-                    document.getElementById("jsonSetting").innerHTML = JSON.stringify(e.data, undefined, 4);
+                    // document.getElementById("jsonSetting").innerHTML = JSON.stringify(e.data, undefined, 4);
+                    let datas = e.data.response;
+
+                    if (!Array.isArray(datas)) {
+                        datas = [datas];
+                    }
+
+                    for (var i = 0; i < datas.length; i++) {
+                        datas[i].no = i + 1
+                    }
+                    $scope.dataDaftarApotik = new kendo.data.DataSource({
+                        data: datas,
+                        pageSize: 20,
+                        // group: $scope.group,
+                    })
                 }).then(function () {
                     $scope.isRouteLoading = false;
                 });
@@ -262,7 +276,16 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                     + "&tglresep=" + data.tglresep
                     + "&filter=" + data.filter
                 ).then(function (e) {
-                    document.getElementById("jsonObat").innerHTML = JSON.stringify(e.data, undefined, 4);
+                    // document.getElementById("jsonObat").innerHTML = JSON.stringify(e.data, undefined, 4);
+                    const datas = e.data.response.list;
+                    for (var i = 0; i < datas.length; i++) {
+                        datas[i].no = i + 1
+                    }
+                    $scope.dataDaftarObat = new kendo.data.DataSource({
+                        data: datas,
+                        pageSize: 20,
+                        // group: $scope.group,
+                    })
                 }).then(function () {
                     $scope.isRouteLoading = false;
                 });
@@ -522,6 +545,174 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                             "title": "Nama Faskes",
                             "width": "150px",
                             "template": "<span class='style-left'>#: nama #</span>"
+                        },
+                    ]
+            };
+
+            $scope.columnDaftarApotik = {
+                toolbar: [
+                    "excel",
+                ],
+                excel: {
+                    fileName: "DaftarApotik.xlsx",
+                    allPages: true,
+                },
+                excelExport: function (e) {
+                    var sheet = e.workbook.sheets[0];
+                    sheet.frozenRows = 2;
+                    sheet.mergedCells = ["A1:M1"];
+                    sheet.name = "Orders";
+
+                    var myHeaders = [{
+                        value: "Daftar Apotik",
+                        fontSize: 20,
+                        textAlign: "center",
+                        background: "#ffffff",
+                    }];
+
+                    sheet.rows.splice(0, 0, { cells: myHeaders, type: "header", height: 70 });
+                },
+                selectable: 'row',
+                pageable: true,
+                columns:
+                    [
+                        {
+                            "field": "no",
+                            "title": "No",
+                            "width": "40px",
+                            "template": "<span class='style-center'>#: no #</span>"
+                        },
+                        {
+                            "field": "kode",
+                            "title": "Kode",
+                            "width": "100px",
+                            "template": "<span class='style-left'>#: kode #</span>"
+                        },
+                        {
+                            "field": "namaapoteker",
+                            "title": "Apoteker",
+                            "width": "150px",
+                            "template": "<span class='style-left'>#: namaapoteker #</span>"
+                        },
+                        {
+                            "field": "namakepala",
+                            "title": "Kepala",
+                            "width": "150px",
+                            "template": "<span class='style-left'>#: namakepala #</span>"
+                        },
+                        {
+                            "field": "jabatankepala",
+                            "title": "Jabatan",
+                            "width": "150px",
+                            "template": "<span class='style-left'>#: jabatankepala #</span>"
+                        },
+                        {
+                            "field": "nipkepala",
+                            "title": "NIP Kepala",
+                            "width": "150px",
+                            "template": "<span class='style-left'>#: nipkepala #</span>"
+                        },
+                        {
+                            "field": "siup",
+                            "title": "SIUP",
+                            "width": "150px",
+                            "template": "<span class='style-left'>#: siup #</span>"
+                        },
+                        {
+                            "field": "alamat",
+                            "title": "Alamat",
+                            "width": "150px",
+                            "template": "<span class='style-left'>#: alamat #</span>"
+                        },
+                        {
+                            "field": "kota",
+                            "title": "Kota",
+                            "width": "80px",
+                            "template": "<span class='style-left'>#: kota #</span>"
+                        },
+                        {
+                            "field": "namaverifikator",
+                            "title": "Verifikator",
+                            "width": "150px",
+                            "template": "<span class='style-left'>#: namaverifikator #</span>"
+                        },
+                        {
+                            "field": "nppverifikator",
+                            "title": "NPP Verifikator",
+                            "width": "20",
+                            "template": "<span class='style-left'>#: nppverifikator #</span>"
+                        },
+                        {
+                            "field": "namapetugasapotek",
+                            "title": "Petugas Apotek",
+                            "width": "100px",
+                            "template": "<span class='style-left'>#: namapetugasapotek #</span>"
+                        },
+                        {
+                            "field": "nippetugasapotek",
+                            "title": "NIP Petugas Apotek",
+                            "width": "150px",
+                            "template": "<span class='style-left'>#: nippetugasapotek #</span>"
+                        },
+                        {
+                            "field": "checkstock",
+                            "title": "Check Stock",
+                            "width": "80px",
+                            "template": "<span class='style-left'>#: checkstock #</span>"
+                        },
+                    ]
+            };
+
+            $scope.columnDaftarObat = {
+                toolbar: [
+                    "excel",
+                ],
+                excel: {
+                    fileName: "DaftarObat.xlsx",
+                    allPages: true,
+                },
+                excelExport: function (e) {
+                    var sheet = e.workbook.sheets[0];
+                    sheet.frozenRows = 2;
+                    sheet.mergedCells = ["A1:M1"];
+                    sheet.name = "Orders";
+
+                    var myHeaders = [{
+                        value: "Daftar Obat",
+                        fontSize: 20,
+                        textAlign: "center",
+                        background: "#ffffff",
+                    }];
+
+                    sheet.rows.splice(0, 0, { cells: myHeaders, type: "header", height: 70 });
+                },
+                selectable: 'row',
+                pageable: true,
+                columns:
+                    [
+                        {
+                            "field": "no",
+                            "title": "No",
+                            "width": "20px",
+                            "template": "<span class='style-center'>#: no #</span>"
+                        },
+                        {
+                            "field": "kode",
+                            "title": "Kode",
+                            "width": "30px",
+                            "template": "<span class='style-left'>#: kode #</span>"
+                        },
+                        {
+                            "field": "nama",
+                            "title": "Nama Obat",
+                            "width": "150px",
+                            "template": "<span class='style-left'>#: nama #</span>"
+                        },
+                        {
+                            "field": "harga",
+                            "title": "Harga",
+                            "width": "40px",
+                            "template": "<span class='style-right'>{{formatRupiah('#: harga #', '')}}</span>"
                         },
                     ]
             };
