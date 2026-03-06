@@ -44,32 +44,39 @@
                                         <div class="panel panel-default container_12">
                                             <div class="panel-body">
                                                 <div class="grid_12">
-                                                    <div class="grid_4">
+                                                    <div class="grid_3">
                                                         <div class="grid_12">
-                                                            <div class="grid_10">
-                                                                <div class="grid_12">
-                                                                    <label c-label item="item" c-label-text="Kode atau Nama Poli" real></label>
-                                                                </div>
-                                                                <div class="grid_12">
-                                                                    <input c-text-box type="input" class="k-textbox" ng-model="poli.poli"/>
-                                                                </div>
-                                                            </div>
-                                                            <div class="grid_1 pull-right">
-                                                                <em style="margin-top:10px;" ng-click='clearPoli()' id="iconButton" data-role="button" class="k-button k-button-icon" role="button"
-                                                                    aria-disabled="false" tabindex="0"><span
-                                                                        class="k-sprite k-icon k-i-cancel">Clear</span></em>
-                                                            </div>
-                                                            <div class="grid_1 pull-right">
-                                                                <button style="margin-top:10px;" class="k-button k-primary k-button-icon" ng-click="findPoli(poli)"><span
-                                                                        class="k-sprite k-icon k-i-search">Find</span></button>
-                                                            </div>
+                                                            <label c-label item="item" c-label-text="Kode atau Nama Poli" real></label>
+                                                        </div>
+                                                        <div class="grid_12">
+                                                            <input c-text-box type="input" class="k-textbox" ng-model="poli.poli"/>
                                                         </div>
                                                     </div>
-                                                    <div class="grid_8">
-                                                        <div class="grid_12">
-                                                            <label c-label>Results :</label>
-                                                        </div>
-                                                        <pre id="jsonPoli" class="json-viewer"></pre>
+                                                    <div class="grid_2" style="display:flex; gap:5px; align-items:end; margin-top: 5px;">
+                                                        <button style="margin-top:10px;" 
+                                                            class="k-button k-primary k-button-icon"
+                                                            ng-click="findPoli(poli)">
+                                                            <span class="k-sprite k-icon k-i-search">Find</span>
+                                                        </button>
+                                                
+                                                        <em style="margin-top:10px;"
+                                                            ng-click='clearPoli()'
+                                                            id="iconButton"
+                                                            data-role="button"
+                                                            class="k-button k-button-icon">
+                                                            <span class="k-sprite k-icon k-i-cancel">Clear</span>
+                                                        </em>
+                                                    </div>
+                                                </div>
+                                                <div class="grid_12">
+                                                    <div class="grid_12 headerBox">
+                                                        <p>Daftar Data Poli</p>
+                                                    </div>
+                                                    <div class="clear"></div>
+                                                    <div class="grid_12 borderBox">
+                                                        <kendo-grid id="kGrid" data-source="dataDaftarPoli" options="columnDaftarPoli"
+                                                            k-selectable="'row'" k-sortable="'true'" k-resizable="'true'" k-ng-model="dataPoliSelected"
+                                                            ng-click="klikGridPoli(dataPoliSelected)"></kendo-grid>
                                                     </div>
                                                 </div>
                                             </div>
@@ -82,38 +89,43 @@
                                         <div class="panel panel-default container_12">
                                             <div class="panel-body">
                                                 <div class="grid_12">
-                                                    <div class="grid_6">
+                                                    <div class="grid_3">
+                                                        <label c-label style="padding-bottom: 5px;">Nama Faskes</label>
                                                         <div class="grid_12">
-                                                            <div class="grid_5">
-                                                                <div class="grid_12">
-                                                                    <label c-label item="item" c-label-text="Nama Faskes" real></label>
-                                                                </div>
-                                                                <div class="grid_12">
-                                                                    <input c-text-box type="input" class="k-textbox" ng-model="faskes.nama"/>
-                                                                </div>
-                                                            </div>
-                                                            <div class="grid_5" style="margin-top: -7px;">
-                                                                <label c-label>Jenis Faskes</label>
-                                                                <input style="width: 100%;" kendo-combo-box k-ng-model="faskes.jenisfaskes"
-                                                                    k-data-text-field="'nama'" k-data-value-field="'id'" k-filter="'contains'"
-                                                                    k-auto-bind="false" k-data-source="listJenisFaskes" />
-                                                            </div>
-                                                            <div class="grid_1 pull-right">
-                                                                <em style="margin-top:10px;" ng-click='clearFaskes()' id="iconButton" data-role="button" class="k-button k-button-icon" role="button"
-                                                                    aria-disabled="false" tabindex="0"><span
-                                                                        class="k-sprite k-icon k-i-cancel">Clear</span></em>
-                                                            </div>
-                                                            <div class="grid_1 pull-right">
-                                                                <button style="margin-top:10px;" class="k-button k-primary k-button-icon" ng-click="findFaskes(faskes)"><span
-                                                                        class="k-sprite k-icon k-i-search">Find</span></button>
-                                                            </div>
+                                                            <input c-text-box type="input" class="k-textbox" ng-model="faskes.nama"/>
                                                         </div>
                                                     </div>
-                                                    <div class="grid_6">
-                                                        <div class="grid_12">
-                                                            <label c-label>Results :</label>
-                                                        </div>
-                                                        <pre id="jsonFaskes" class="json-viewer"></pre>
+                                                    <div class="grid_3">
+                                                        <label c-label>Jenis Faskes</label>
+                                                        <input style="width: 100%;" kendo-combo-box k-ng-model="faskes.jenisfaskes"
+                                                            k-data-text-field="'nama'" k-data-value-field="'id'" k-filter="'contains'"
+                                                            k-auto-bind="false" k-data-source="listJenisFaskes" />
+                                                    </div>
+                                                    <div class="grid_2" style="display:flex; gap:5px; align-items:end; margin-top: 10px;">
+                                                        <button style="margin-top:10px;" 
+                                                            class="k-button k-primary k-button-icon"
+                                                            ng-click="findFaskes(faskes)">
+                                                            <span class="k-sprite k-icon k-i-search">Find</span>
+                                                        </button>
+                                                
+                                                        <em style="margin-top:10px;"
+                                                            ng-click='clearFaskes()'
+                                                            id="iconButton"
+                                                            data-role="button"
+                                                            class="k-button k-button-icon">
+                                                            <span class="k-sprite k-icon k-i-cancel">Clear</span>
+                                                        </em>
+                                                    </div>
+                                                </div>
+                                                <div class="grid_12">
+                                                    <div class="grid_12 headerBox">
+                                                        <p>Daftar Faskes</p>
+                                                    </div>
+                                                    <div class="clear"></div>
+                                                    <div class="grid_12 borderBox">
+                                                        <kendo-grid id="kGrid" data-source="dataDaftarFaskes" options="columnDaftarFaskes"
+                                                            k-selectable="'row'" k-sortable="'true'" k-resizable="'true'" k-ng-model="dataFaskesSelected"
+                                                            ng-click="klikGridFaskes(dataFaskesSelected)"></kendo-grid>
                                                     </div>
                                                 </div>
                                             </div>
@@ -164,11 +176,14 @@
                                         <div class="panel panel-default container_12">
                                             <div class="panel-body">
                                                 <div class="grid_12">
-                                                    <div class="grid_12">
-                                                        <div class="grid_12">
-                                                            <label c-label>Results :</label>
-                                                        </div>
-                                                        <pre id="jsonSpesialis" class="json-viewer"></pre>
+                                                    <div class="grid_12 headerBox">
+                                                        <p>Daftar Data Spesialistik</p>
+                                                    </div>
+                                                    <div class="clear"></div>
+                                                    <div class="grid_12 borderBox">
+                                                        <kendo-grid id="kGrid" data-source="dataDaftarSpesialistik" options="columnDaftarSpesialistik"
+                                                            k-selectable="'row'" k-sortable="'true'" k-resizable="'true'" k-ng-model="dataSpesialistikSelected"
+                                                            ng-click="klikGridSpesialistik(dataSpesialistikSelected)"></kendo-grid>
                                                     </div>
                                                 </div>
                                             </div>

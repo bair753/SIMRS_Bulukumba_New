@@ -119,30 +119,39 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
             }
             ];
 
-            medifirstService.get("bridging/bpjs/get-daftar-obat-dpho").then(function (e) {
-                // document.getElementById("jsonKlaim").innerHTML = JSON.stringify(e.data, undefined, 4);
-                const datas = e.data.response.list;
-                for (var i = 0; i < datas.length; i++) {
-                    datas[i].no = i + 1
-                    // dat.data[i].total = parseFloat(dat.data[i].jumlah) * (parseFloat(dat.data[i].hargasatuan) - parseFloat(dat.data[i].hargadiscount))
-                    // dat.data[i].total = parseFloat(dat.data[i].total) + parseFloat(dat.data[i].jasa)
-                    // if (dat.data[i].iskronis == true || dat.data[i].iskronis == 't') {
-                    //     dat.data[i].kronis = "✔"
-                    // } else {
-                    //     dat.data[i].kronis = ""
-                    // }
-                }
-                $scope.dataDaftarObatDPHO = new kendo.data.DataSource({
-                    data: datas,
-                    pageSize: 20,
-                    // group: $scope.group,
-                })
-            }).then(function () {
-                $scope.isRouteLoading = false;
-            });
+            // medifirstService.get("bridging/bpjs/get-daftar-obat-dpho").then(function (e) {
+            //     // document.getElementById("jsonKlaim").innerHTML = JSON.stringify(e.data, undefined, 4);
+            //     const datas = e.data.response.list;
+            //     for (var i = 0; i < datas.length; i++) {
+            //         datas[i].no = i + 1
+            //         // dat.data[i].total = parseFloat(dat.data[i].jumlah) * (parseFloat(dat.data[i].hargasatuan) - parseFloat(dat.data[i].hargadiscount))
+            //         // dat.data[i].total = parseFloat(dat.data[i].total) + parseFloat(dat.data[i].jasa)
+            //         // if (dat.data[i].iskronis == true || dat.data[i].iskronis == 't') {
+            //         //     dat.data[i].kronis = "✔"
+            //         // } else {
+            //         //     dat.data[i].kronis = ""
+            //         // }
+            //     }
+            //     $scope.dataDaftarObatDPHO = new kendo.data.DataSource({
+            //         data: datas,
+            //         pageSize: 20,
+            //         // group: $scope.group,
+            //     })
+            // }).then(function () {
+            //     $scope.isRouteLoading = false;
+            // });
 
             medifirstService.get("bridging/bpjs/get-daftar-spesialistik").then(function (e) {
-                document.getElementById("jsonSpesialis").innerHTML = JSON.stringify(e.data, undefined, 4);
+                // document.getElementById("jsonSpesialis").innerHTML = JSON.stringify(e.data, undefined, 4);
+                const datas = e.data.response.list;
+                    for (var i = 0; i < datas.length; i++) {
+                        datas[i].no = i + 1
+                    }
+                    $scope.dataDaftarSpesialistik = new kendo.data.DataSource({
+                        data: datas,
+                        pageSize: 20,
+                        // group: $scope.group,
+                    })
             }).then(function () {
                 $scope.isRouteLoading = false;
             });
@@ -187,7 +196,16 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                 medifirstService.get("bridging/bpjs/get-poli-apotik-online?poli="
                     + data.poli
                 ).then(function (e) {
-                    document.getElementById("jsonPoli").innerHTML = JSON.stringify(e.data, undefined, 4);
+                    // document.getElementById("jsonPoli").innerHTML = JSON.stringify(e.data, undefined, 4);
+                    const datas = e.data.response.list;
+                    for (var i = 0; i < datas.length; i++) {
+                        datas[i].no = i + 1
+                    }
+                    $scope.dataDaftarPoli = new kendo.data.DataSource({
+                        data: datas,
+                        pageSize: 20,
+                        // group: $scope.group,
+                    })
                 }).then(function () {
                     $scope.isRouteLoading = false;
                 });
@@ -217,7 +235,16 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                     + data.nama
                     + "&id=" + data.id
                 ).then(function (e) {
-                    document.getElementById("jsonFaskes").innerHTML = JSON.stringify(e.data, undefined, 4);
+                    // document.getElementById("jsonFaskes").innerHTML = JSON.stringify(e.data, undefined, 4);
+                    const datas = e.data.response.list;
+                    for (var i = 0; i < datas.length; i++) {
+                        datas[i].no = i + 1
+                    }
+                    $scope.dataDaftarFaskes = new kendo.data.DataSource({
+                        data: datas,
+                        pageSize: 20,
+                        // group: $scope.group,
+                    })
                 }).then(function () {
                     $scope.isRouteLoading = false;
                 });
@@ -352,6 +379,150 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                         //     title: "",
                         //     width: "70px",
                         // }
+                    ]
+            };
+
+            $scope.columnDaftarPoli = {
+                toolbar: [
+                    "excel",
+                ],
+                excel: {
+                    fileName: "DaftarPoli.xlsx",
+                    allPages: true,
+                },
+                excelExport: function (e) {
+                    var sheet = e.workbook.sheets[0];
+                    sheet.frozenRows = 2;
+                    sheet.mergedCells = ["A1:M1"];
+                    sheet.name = "Orders";
+
+                    var myHeaders = [{
+                        value: "Daftar Poli",
+                        fontSize: 20,
+                        textAlign: "center",
+                        background: "#ffffff",
+                    }];
+
+                    sheet.rows.splice(0, 0, { cells: myHeaders, type: "header", height: 70 });
+                },
+                selectable: 'row',
+                pageable: true,
+                columns:
+                    [
+                        {
+                            "field": "no",
+                            "title": "No",
+                            "width": "20px",
+                            "template": "<span class='style-center'>#: no #</span>"
+                        },
+                        {
+                            "field": "kode",
+                            "title": "Kode",
+                            "width": "20px",
+                            "template": "<span class='style-left'>#: kode #</span>"
+                        },
+                        {
+                            "field": "nama",
+                            "title": "Nama Poli",
+                            "width": "150px",
+                            "template": "<span class='style-left'>#: nama #</span>"
+                        },
+                    ]
+            };
+
+            $scope.columnDaftarSpesialistik = {
+                toolbar: [
+                    "excel",
+                ],
+                excel: {
+                    fileName: "DaftarSpesialistik.xlsx",
+                    allPages: true,
+                },
+                excelExport: function (e) {
+                    var sheet = e.workbook.sheets[0];
+                    sheet.frozenRows = 2;
+                    sheet.mergedCells = ["A1:M1"];
+                    sheet.name = "Orders";
+
+                    var myHeaders = [{
+                        value: "Daftar Spesialistik",
+                        fontSize: 20,
+                        textAlign: "center",
+                        background: "#ffffff",
+                    }];
+
+                    sheet.rows.splice(0, 0, { cells: myHeaders, type: "header", height: 70 });
+                },
+                selectable: 'row',
+                pageable: true,
+                columns:
+                    [
+                        {
+                            "field": "no",
+                            "title": "No",
+                            "width": "20px",
+                            "template": "<span class='style-center'>#: no #</span>"
+                        },
+                        {
+                            "field": "kode",
+                            "title": "Kode",
+                            "width": "20px",
+                            "template": "<span class='style-left'>#: kode #</span>"
+                        },
+                        {
+                            "field": "nama",
+                            "title": "Nama Spesialistik",
+                            "width": "150px",
+                            "template": "<span class='style-left'>#: nama #</span>"
+                        },
+                    ]
+            };
+
+            $scope.columnDaftarFaskes = {
+                toolbar: [
+                    "excel",
+                ],
+                excel: {
+                    fileName: "DaftarFaskes.xlsx",
+                    allPages: true,
+                },
+                excelExport: function (e) {
+                    var sheet = e.workbook.sheets[0];
+                    sheet.frozenRows = 2;
+                    sheet.mergedCells = ["A1:M1"];
+                    sheet.name = "Orders";
+
+                    var myHeaders = [{
+                        value: "Daftar Faskes",
+                        fontSize: 20,
+                        textAlign: "center",
+                        background: "#ffffff",
+                    }];
+
+                    sheet.rows.splice(0, 0, { cells: myHeaders, type: "header", height: 70 });
+                },
+                selectable: 'row',
+                pageable: true,
+                columns:
+                    [
+                        {
+                            "field": "no",
+                            "title": "No",
+                            "width": "20px",
+                            "template": "<span class='style-center'>#: no #</span>"
+                        },
+                        {
+                            "field": "kode",
+                            "title": "Kode",
+                            "width": "30px",
+                            "template": "<span class='style-left'>#: kode #</span>"
+                        },
+                        {
+                            "field": "nama",
+                            "title": "Nama Faskes",
+                            "width": "150px",
+                            "template": "<span class='style-left'>#: nama #</span>"
+                        },
                     ]
             };
         }
