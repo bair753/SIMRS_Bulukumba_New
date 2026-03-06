@@ -17,13 +17,24 @@
                                         <div class="panel panel-default container_12">
                                             <div class="panel-body">
                                                 <div class="grid_12">
+                                                    <div class="grid_12 headerBox">
+                                                        <p>Daftar Obat DPHO</p>
+                                                    </div>
+                                                    <div class="clear"></div>
+                                                    <div class="grid_12 borderBox">
+                                                        <kendo-grid id="kGrid" data-source="dataDaftarObatDPHO" options="columnDaftarObatDPHO"
+                                                            k-selectable="'row'" k-sortable="'true'" k-resizable="'true'" k-ng-model="dataObatSelected"
+                                                            ng-click="klikGrid(dataObatSelected)"></kendo-grid>
+                                                    </div>
+                                                </div>
+                                                <!-- <div class="grid_12">
                                                     <div class="grid_12">
                                                         <div class="grid_12">
                                                             <label c-label>Results :</label>
                                                         </div>
                                                         <pre id="jsonKlaim" class="json-viewer"></pre>
                                                     </div>
-                                                </div>
+                                                </div> -->
                                             </div>
                                         </div>
                                     </md-content>

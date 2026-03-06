@@ -120,7 +120,23 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
             ];
 
             medifirstService.get("bridging/bpjs/get-daftar-obat-dpho").then(function (e) {
-                document.getElementById("jsonKlaim").innerHTML = JSON.stringify(e.data, undefined, 4);
+                // document.getElementById("jsonKlaim").innerHTML = JSON.stringify(e.data, undefined, 4);
+                const datas = e.data.response.list;
+                for (var i = 0; i < datas.length; i++) {
+                    datas[i].no = i + 1
+                    // dat.data[i].total = parseFloat(dat.data[i].jumlah) * (parseFloat(dat.data[i].hargasatuan) - parseFloat(dat.data[i].hargadiscount))
+                    // dat.data[i].total = parseFloat(dat.data[i].total) + parseFloat(dat.data[i].jasa)
+                    // if (dat.data[i].iskronis == true || dat.data[i].iskronis == 't') {
+                    //     dat.data[i].kronis = "✔"
+                    // } else {
+                    //     dat.data[i].kronis = ""
+                    // }
+                }
+                $scope.dataDaftarObatDPHO = new kendo.data.DataSource({
+                    data: datas,
+                    pageSize: 20,
+                    // group: $scope.group,
+                })
             }).then(function () {
                 $scope.isRouteLoading = false;
             });
@@ -224,6 +240,120 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                     $scope.isRouteLoading = false;
                 });
             }
+
+            $scope.formatRupiah = function (value, currency) {
+                return currency + " " + parseFloat(value).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
+            }
+
+            $scope.columnDaftarObatDPHO = {
+                toolbar: [
+                    "excel",
+                ],
+                excel: {
+                    fileName: "DaftarObatDPHO.xlsx",
+                    allPages: true,
+                },
+                excelExport: function (e) {
+                    var sheet = e.workbook.sheets[0];
+                    sheet.frozenRows = 2;
+                    sheet.mergedCells = ["A1:M1"];
+                    sheet.name = "Orders";
+
+                    var myHeaders = [{
+                        value: "Daftar Obat DPHO",
+                        fontSize: 20,
+                        textAlign: "center",
+                        background: "#ffffff",
+                    }];
+
+                    sheet.rows.splice(0, 0, { cells: myHeaders, type: "header", height: 70 });
+                },
+                selectable: 'row',
+                pageable: true,
+                columns:
+                    [
+                        {
+                            "field": "kodeobat",
+                            "title": "Kode Obat",
+                            "width": "120px",
+                            "template": "<span class='style-left'>#: kodeobat #</span>"
+                        },
+                        {
+                            "field": "namaobat",
+                            "title": "Nama Obat",
+                            "width": "150px",
+                            "template": "<span class='style-left'>#: namaobat #</span>"
+                        },
+                        {
+                            "field": "prb",
+                            "title": "PRB",
+                            "width": "80px",
+                            "template": "<span class='style-center'>#: prb #</span>"
+                        },
+                        {
+                            "field": "kronis",
+                            "title": "Kronis",
+                            "width": "80px",
+                            "template": "<span class='style-center'>#: kronis #</span>"
+                        },
+                        {
+                            "field": "kemo",
+                            "title": "Kemo",
+                            "width": "80px",
+                            "template": "<span class='style-center'>#: kemo #</span>"
+                        },
+                        {
+                            "field": "harga",
+                            "title": "Harga",
+                            "width": "80px",
+                            "template": "<span class='style-right'>{{formatRupiah('#: harga #', '')}}</span>"
+                        },
+                        {
+                            "field": "restriksi",
+                            "title": "Retreksi",
+                            "width": "100px",
+                            "template": "<span class='style-center'>#: restriksi #</span>"
+                        },
+                        {
+                            "field": "generik",
+                            "title": "Generik",
+                            "width": "150px",
+                            "template": "<span class='style-left'>#: generik #</span>"
+                        },
+                        {
+                            "field": "sedia",
+                            "title": "Sedia",
+                            "width": "80px",
+                            "template": "<span class='style-center'>#: sedia #</span>"
+                        },
+                        {
+                            "field": "stok",
+                            "title": "Stok",
+                            "width": "80px",
+                            "template": "<span class='style-center'>#: stok #</span>"
+                            // "template": '# if( stok==null) {# <span class="style-center"> - </span> # } else {# <span class="style-center">#: stok #</span> #} #'
+                        },
+                        {
+                            "field": "aktif",
+                            "title": "Aktif",
+                            "width": "80px",
+                            "template": "<span class='style-center'>#: aktif #</span>"
+                            // "template": '# if( aktif==null) {# <span class="style-center"> - </span> # } else {# <span class="style-center">#: aktif #</span> #} #'
+
+                        },
+                        // {
+                        //     "command": [
+                        //         {
+                        //             text: "Detail",
+                        //             click: getDetailPelayananResep,
+                        //             imageClass: "k-icon k-i-search"
+                        //         }
+                        //     ],
+                        //     title: "",
+                        //     width: "70px",
+                        // }
+                    ]
+            };
         }
     ]);
 });
