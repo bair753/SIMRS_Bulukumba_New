@@ -222,6 +222,13 @@ define(['Configuration'], function (config) {
                 });
             },
 
+            postLoggingAntrol: function(jenislog,referensi, noreff,keterangan,reqlogging,reslogging) {
+                return r.get({
+                   url: baseApiBackend + "sysadmin/logging/save-log-all-taksid?jenislog="+jenislog+"&referensi=" +
+                        referensi +'&noreff='+ noreff +'&keterangan='+keterangan +'&reqlogging='+reqlogging +'&reslogging='+reslogging
+                });
+            },
+
             getMicroService: function(url){
                 return r.getMicroService({
                     url: baseApiBackend + url

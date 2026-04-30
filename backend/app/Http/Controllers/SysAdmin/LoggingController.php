@@ -17,6 +17,7 @@ use App\Master\Produk;
 use App\Transaksi\AntrianPasienDiperiksa;
 use App\Transaksi\LoggingUser;
 use App\Transaksi\PasienDaftar;
+use App\Transaksi\LoggingTaksId;
 use App\Transaksi\PelayananPasien;
 use App\Transaksi\PelayananPasienDelete;
 use App\Transaksi\PelayananPasienPetugas;
@@ -1295,6 +1296,54 @@ class LoggingController extends ApiController
             $logUser->save();
             $res = $logUser->jenislog ;
             $transMsg = "Simpan Log ".$res." Sukses ";
+        } catch (\Exception $e) {
+            $transStatus = false;
+            $transMsg = "Simpan Log Gagal ";
+        }
+
+        if ($transStatus == true) {
+            DB::commit();
+            $result = array(
+                "status" => 201,
+                "message" => $transMsg,
+                "as" => 'Inhuman'
+            );
+        } else {
+            DB::rollBack();
+            $result = array(
+                "status" => 400,
+                "message" => $transMsg
+            );
+        }
+        return $this->respond($result);
+    }
+
+    public function saveLoggingAllTaksId(Request $request)
+    {
+        $kdProfile = (int) $this->getDataKdProfile($request);
+        DB::beginTransaction();
+        $kdProfile = $this->getDataKdProfile($request);
+        $transStatus = true;
+        $dataLogin = $request->all();
+        $newId = LoggingTaksId::max('id');
+        $newId = $newId + 1;
+        $logUser = new LoggingTaksId();
+        $logUser->id = $newId;
+        $logUser->norec = $logUser->generateNewId();
+        $logUser->kdprofile = $kdProfile;
+        $logUser->statusenabled = true;
+        $logUser->jenislog = $request['jenislog'];
+        $logUser->noreff = $request['noreff'];
+        $logUser->referensi = $request['referensi'];
+        $logUser->keterangan = $request['keterangan'];
+        $logUser->reqlogging = $request['reqlogging'];
+        $logUser->reslogging = $request['reslogging'];
+        $logUser->objectloginuserfk =  $dataLogin['userData']['id'];
+        $logUser->tanggal = $this->getDateTime()->format('Y-m-d H:i:s');
+        try {
+            $logUser->save();
+            $res = $logUser->jenislog;
+            $transMsg = "Simpan Log " . $res . " Sukses ";
         } catch (\Exception $e) {
             $transStatus = false;
             $transMsg = "Simpan Log Gagal ";

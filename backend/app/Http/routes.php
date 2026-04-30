@@ -814,6 +814,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
           Route::get('emr/get-rencana','EMR\EMRController@getRencana');
           Route::post('emr/post-perjanjian/{method}','EMR\EMRController@postPerjanjianPasien');
           Route::get('emr/get-perjanjian','EMR\EMRController@getPasienPerjanjian');
+          Route::get('registrasi/get-data-pasien-reservasi-regis', 'Registrasi\RegistrasiController@getDataPasienReservasiRegis');
           Route::post('emr/post-cppt/{method}','EMR\EMRController@postCPPT');
           Route::get('emr/get-cppt','EMR\EMRController@getCPPT');
 
@@ -2439,6 +2440,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
               Route::get('sysadmin/logging/save-log-retur-resep', 'SysAdmin\LoggingController@saveLogReturResep');
               Route::get('sysadmin/logging/Daftar-log-user', 'SysAdmin\LoggingController@getDaftarLog');
               Route::get('sysadmin/logging/save-log-all', 'SysAdmin\LoggingController@saveLoggingAll');
+              Route::get('sysadmin/logging/save-log-all-taksid', 'SysAdmin\LoggingController@saveLoggingAllTaksId');
               Route::get('sysadmin/logging/get-data-combo', 'SysAdmin\LoggingController@getCombo');
               Route::get('sysadmin/logging/get-aktivitas-user', 'SysAdmin\LoggingController@getAktivitasUser');
               Route::get('sysadmin/logging/save-log-bayar', 'SysAdmin\LoggingController@saveLogBayartTagihanPasien');
