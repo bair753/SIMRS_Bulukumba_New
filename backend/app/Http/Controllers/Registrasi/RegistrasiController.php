@@ -6186,6 +6186,90 @@ class RegistrasiController extends ApiController
         return $this->respond($result);
     }
 
+    public function getDataPasienReservasiRegis(Request $request)
+    {
+        $kdProfile = $this->getDataKdProfile($request);
+        $data = \DB::table('antrianpasienregistrasi_t as apr')
+            ->leftJoin('pasiendaftar_t as pd', 'pd.statusschedule', '=', 'apr.noreservasi')
+            // ->leftJoin('antrianpasiendiperiksa_t as apd','apd.noregistrasifk','=','pd.norec')
+            ->leftJoin('antrianpasiendiperiksa_t as apd', function ($join) {
+                $join->on('apd.noregistrasifk', '=', 'pd.norec');
+                $join->on('apd.objectruanganfk', '=', 'pd.objectruanganasalfk');
+                $join->on('apd.tglmasuk', '=', 'pd.tglregistrasi');
+            })
+            ->leftJoin('pasien_m as pm', 'pm.id', '=', 'apr.nocmfk')
+            ->leftJoin('ruangan_m as ru', 'ru.id', '=', 'apr.objectruanganfk')
+            ->leftJoin('pegawai_m as pg', 'pg.id', '=', 'apr.objectpegawaifk')
+            ->leftJoin('kelompokpasien_m as kps', 'kps.id', '=', 'apr.objectkelompokpasienfk')
+            ->select(
+                'apr.norec',
+                'pm.nocm',
+                'apr.noreservasi',
+                'apr.tanggalreservasi',
+                'apr.objectruanganfk',
+                'apr.objectpegawaifk',
+                'ru.namaruangan',
+                'apr.isconfirm',
+                'pg.namalengkap as dokter',
+                'apr.notelepon',
+                'pm.namapasien',
+                'apr.namapasien',
+                'apr.objectkelompokpasienfk',
+                'kps.kelompokpasien',
+                'apr.tglinput',
+                'apr.nocmfk',
+                // 'apr.isconfirmjkn',
+                'pd.ischeckin',
+                'apd.norec as norec_apd',
+                'pd.norec as norec_pd',
+                'pd.noregistrasi',
+                'ru.prefixnoantrian',
+                'pm.id as idpasien',
+                'ru.iseksekutif',
+                // DB::raw('(case when pm.namapasien is null then apr.namapasien else pm.namapasien end) as namapasien,
+                // (case when apr.isconfirm=\'true\' then \'Confirm\' else case when strukpraorderfk is not null then \'Next Order\' else \'Reservasi\' end end) as status,apr.ismobilejkn,apd.noantrian,apr.jenis,
+                // (case when apr.ismobilejkn=\'true\' then \'Mobile JKN\' when apr.iskiosk = \'true\' then \'Kios K\' when apr.ismanual = \'true\' then \'Manual\' else case when strukpraorderfk is not null then \'Next Order\' else \'E-Reservasi\' end end ) as typeperjanjian')
+                DB::raw("(case when pm.namapasien is null then apr.namapasien else pm.namapasien end) as namapasien,
+                (case when apr.isconfirm='true' then 'Confirm' else 'Reservasi' end) as status,
+                apr.ismobilejkn,
+                apd.noantrian,
+                apr.jenis,
+                (case 
+                    when apr.ismobilejkn='true' then 'Mobile JKN' 
+                    when apr.iskiosk = 'true' then 'Kios K' 
+                    --when apr.ismanual = 'true' then 'Manual' 
+                    else 'E-Reservasi' 
+                end) as typeperjanjian")
+            )
+            ->where('apr.noreservasi', $request['kdReservasi'])
+            ->where('apr.statusenabled', true)
+            ->where('apr.kdprofile', (int)$kdProfile)
+            ->whereNotNull('apr.noreservasi');
+
+        // if(isset($filter['namapasienapr']) && $filter['namapasienapr'] != "" && $filter['namapasienapr'] != "undefined") {
+        //     $data = $data->orWhere('apr.namapasien','ilike','%'. $filter['namapasienapr'] .'%');
+        // }
+        $data = $data->orderBy('apr.tanggalreservasi', 'asc');
+        $data = $data->get();
+        foreach ($data as $d) {
+            $d->nomorantrean  = null;
+            if ($d->ismobilejkn == true) {
+                $huruf = 'Z';
+                if ($d->prefixnoantrian != null) {
+                    $huruf = $d->prefixnoantrian;
+                }
+                $nomorAntrian = $huruf . '-' . str_pad($d->noantrian, 4, "0", STR_PAD_LEFT);
+                $d->nomorantrean = $nomorAntrian;
+            }
+        }
+
+        $result = array(
+            'data' => $data,
+            'message' => 'cepot',
+        );
+        return $this->respond($result);
+    }
+
     public function getDiagnosaDaftarAntrian(Request $request){
         $req = $request->all();
         $icdIX = \DB::table('diagnosa_m as dg')

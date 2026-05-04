@@ -1617,17 +1617,39 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                             "data": null
                         }
     
-                        let resSURKON = await medifirstService.postNonMessage('bridging/bpjs/tools', jsonSURKON)
-                        if(resSURKON.data.metaData.code == 200){
-                            noref = resSURKON.data.response.list[0].noSuratKontrol
-                            jenisKunjungan = 3
-                            if(resSURKON.data.response.list[0].terbitSEP =='Sudah'){
-								let NGASAL =  resSURKON.data.response.list[0].noSuratKontrol.replace('K','Z')
-                                noref = NGASAL
+                        // let resSURKON = await medifirstService.postNonMessage('bridging/bpjs/tools', jsonSURKON)
+                        // if(resSURKON.data.metaData.code == 200){
+                        //     noref = resSURKON.data.response.list[0].noSuratKontrol
+                        //     jenisKunjungan = 3
+                        //     if(resSURKON.data.response.list[0].terbitSEP =='Sudah'){
+						// 		let NGASAL =  resSURKON.data.response.list[0].noSuratKontrol.replace('K','Z')
+                        //         noref = NGASAL
+                        //     }
+                        // }else{
+                        //     jenisKunjungan = 2
+                        //     // noref = noregistrasi // pake no nternal aja
+                        // }
+
+                        const today = new Date().toISOString().split('T')[0];
+                        let resSURKON = await medifirstService.postNonMessage('bridging/bpjs/tools', jsonSURKON);
+
+                        if (resSURKON.data.metaData.code == 200) {
+                            let filteredList = resSURKON.data.response.list.filter(item => item.tglRencanaKontrol === today);
+
+                            if (filteredList.length > 0) {
+                                noref = filteredList[0].noSuratKontrol;
+                                jenisKunjungan = 3;
+
+                                if (filteredList[0].terbitSEP == 'Sudah') {
+                                    let filteredList = resSURKON.data.response.list.filter(item => item.tglRencanaKontrol === today);
+                                    noref = filteredList[0].noSuratKontrol;
+                                    noref = noref;
+                                }
+                            } else {
+                                jenisKunjungan = 2;
                             }
-                        }else{
-                            jenisKunjungan = 2
-                            // noref = noregistrasi // pake no nternal aja
+                        } else {
+                            jenisKunjungan = 2;
                         }
                       }
                     }
@@ -1699,31 +1721,136 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                                     }
                                 }
                                 medifirstService.postNonMessage('bridging/bpjs/tools', data).then(function (e) {
-                                    if(e.data.metaData.code == 200)
-                                    {
+                                    if (e.data.metaData.code == 200) {
                                         // update catatan antrian online status terkirim
                                         saveMonitoringTaksId(apd.noregistrasifk, 2, new Date().getTime(), true);
+                                        let currentTime = new Date().getTime();
+                                        // Menambahkan 2 menit (2 * 60 * 1000 milidetik)
+                                        let newTime = currentTime + 3 * 60 * 1000;
+
+                                        // Mengubah waktu baru menjadi objek Date jika diperlukan
+                                        let newDate = new Date(newTime);
                                         var data = {
                                             "url": "antrean/updatewaktu",
                                             "jenis": "antrean",
                                             "method": "POST",
-                                            "data":                                                 
+                                            "data":
                                             {
                                                 "kodebooking": noregistrasi,
                                                 "taskid": 3,//(akhir waktu layan admisi/mulai waktu tunggu poli), 
-                                                "waktu": new Date().getTime()
+                                                "waktu": newDate
                                             }
                                         }
-                                        medifirstService.postNonMessage('bridging/bpjs/tools', data).then(function (e) {
-                                            if(e.data.metaData.code == 200)
-                                            {
-                                                // update catatan antrian online status terkirim
-                                                saveMonitoringTaksId(apd.noregistrasifk, 3, new Date().getTime(), true);
-                                            }else{
-                                                saveMonitoringTaksId(apd.noregistrasifk, 3, new Date().getTime(), false);
-                                            }
-                                        })
-                                    }else{
+                                        // medifirstService.postNonMessage('bridging/bpjs/tools', data).then(function (e) {
+                                        //     if (e.data.metaData.code == 200) {
+                                        //         // update catatan antrian online status terkirim
+                                        //         saveMonitoringTaksId(apd.noregistrasifk, 4, new Date().getTime(), true);
+                                        //         let currentTime = new Date().getTime();
+                                        //         // Menambahkan 2 menit (2 * 60 * 1000 milidetik)
+                                        //         let newTime = currentTime + 5 * 60 * 1000;
+
+                                        //         // Mengubah waktu baru menjadi objek Date jika diperlukan
+                                        //         let newDate = new Date(newTime);
+                                        //         var data = {
+                                        //             "url": "antrean/updatewaktu",
+                                        //             "jenis": "antrean",
+                                        //             "method": "POST",
+                                        //             "data":
+                                        //             {
+                                        //                 "kodebooking": noregistrasi,
+                                        //                 "taskid": 4,//(akhir waktu layan admisi/mulai waktu tunggu poli), 
+                                        //                 "waktu": newDate
+                                        //             }
+                                        //         }
+                                        //         medifirstService.postNonMessage('bridging/bpjs/tools', data).then(function (e) {
+                                        //             if (e.data.metaData.code == 200) {
+                                        //                 // update catatan antrian online status terkirim
+                                        //                 saveMonitoringTaksId(apd.noregistrasifk, 4, new Date().getTime(), true);
+                                        //                 let currentTime = new Date().getTime();
+                                        //                 // Menambahkan 2 menit (2 * 60 * 1000 milidetik)
+                                        //                 let newTime = currentTime + 6 * 60 * 1000;
+
+                                        //                 // Mengubah waktu baru menjadi objek Date jika diperlukan
+                                        //                 let newDate = new Date(newTime);
+                                        //                 var data = {
+                                        //                     "url": "antrean/updatewaktu",
+                                        //                     "jenis": "antrean",
+                                        //                     "method": "POST",
+                                        //                     "data":
+                                        //                     {
+                                        //                         "kodebooking": noregistrasi,
+                                        //                         "taskid": 5,//(akhir waktu layan admisi/mulai waktu tunggu poli), 
+                                        //                         "waktu": newDate
+                                        //                     }
+                                        //                 }
+                                        //                 medifirstService.postNonMessage('bridging/bpjs/tools', data).then(function (e) {
+                                        //                     if (e.data.metaData.code == 200) {
+                                        //                         // update catatan antrian online status terkirim
+                                        //                         saveMonitoringTaksId(apd.noregistrasifk, 5, new Date().getTime(), true);
+                                        //                         let currentTime = new Date().getTime();
+                                        //                         // Menambahkan 2 menit (2 * 60 * 1000 milidetik)
+                                        //                         let newTime = currentTime + 7 * 60 * 1000;
+
+                                        //                         // Mengubah waktu baru menjadi objek Date jika diperlukan
+                                        //                         let newDate = new Date(newTime);
+                                        //                         var data = {
+                                        //                             "url": "antrean/updatewaktu",
+                                        //                             "jenis": "antrean",
+                                        //                             "method": "POST",
+                                        //                             "data":
+                                        //                             {
+                                        //                                 "kodebooking": noregistrasi,
+                                        //                                 "taskid": 6,//(akhir waktu layan admisi/mulai waktu tunggu poli), 
+                                        //                                 "waktu": newDate
+                                        //                             }
+                                        //                         }
+                                        //                         medifirstService.postNonMessage('bridging/bpjs/tools', data).then(function (e) {
+                                        //                             if (e.data.metaData.code == 200) {
+                                        //                                 // update catatan antrian online status terkirim
+                                        //                                 saveMonitoringTaksId(apd.noregistrasifk, 6, new Date().getTime(), true);
+                                        //                                 let currentTime = new Date().getTime();
+                                        //                                 // Menambahkan 2 menit (2 * 60 * 1000 milidetik)
+                                        //                                 let newTime = currentTime + 8 * 60 * 1000;
+
+                                        //                                 // Mengubah waktu baru menjadi objek Date jika diperlukan
+                                        //                                 let newDate = new Date(newTime);
+                                        //                                 var data = {
+                                        //                                     "url": "antrean/updatewaktu",
+                                        //                                     "jenis": "antrean",
+                                        //                                     "method": "POST",
+                                        //                                     "data":
+                                        //                                     {
+                                        //                                         "kodebooking": noregistrasi,
+                                        //                                         "taskid": 7,//(akhir waktu layan admisi/mulai waktu tunggu poli), 
+                                        //                                         "waktu": newDate
+                                        //                                     }
+                                        //                                 }
+                                        //                                 medifirstService.postNonMessage('bridging/bpjs/tools', data).then(function (e) {
+                                        //                                     if (e.data.metaData.code == 200) {
+                                        //                                         // update catatan antrian online status terkirim
+                                        //                                         saveMonitoringTaksId(apd.noregistrasifk, 7, new Date().getTime(), true);
+                                        //                                     } else {
+                                        //                                         saveMonitoringTaksId(apd.noregistrasifk, 7, new Date().getTime(), false);
+                                        //                                     }
+                                        //                                 })
+                                        //                             } else {
+                                        //                                 saveMonitoringTaksId(apd.noregistrasifk, 6, new Date().getTime(), false);
+                                        //                             }
+                                        //                         })
+                                        //                     } else {
+                                        //                         saveMonitoringTaksId(apd.noregistrasifk, 5, new Date().getTime(), false);
+                                        //                     }
+                                        //                 })
+                                        //             } else {
+                                        //                 saveMonitoringTaksId(apd.noregistrasifk, 4, new Date().getTime(), false);
+                                        //             }
+                                        //         })
+                                        //     } else {
+                                        //         saveMonitoringTaksId(apd.noregistrasifk, 3, new Date().getTime(), false);
+                                        //     }
+                                        // })
+                                        // saveMonitoringTaksId(apd.noregistrasifk, 3, new Date().getTime(), false);
+                                    } else {
                                         saveMonitoringTaksId(apd.noregistrasifk, 2, new Date().getTime(), false);
                                     }
                                 })

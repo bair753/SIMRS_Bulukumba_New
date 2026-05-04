@@ -43,6 +43,7 @@ define(['initialize'], function (initialize) {
                     $scope.cc.objectruanganfk = chacePeriode[11]
                     $scope.cc.namaruangan = chacePeriode[12]
                     $scope.cc.DataNoregis = chacePeriode[13]
+                    $scope.cc.noreservasi = chacePeriode[22];
                     $scope.cc.norec_emr = '-'
                     // if (nomorEMR == '') {
                     //     $scope.cc.norec_emr = ''
@@ -314,6 +315,45 @@ define(['initialize'], function (initialize) {
                     data: arrSave//$scope.item.obj
                 }
                 medifirstService.post('emr/save-emr-dinamis', jsonSave).then(function (e) {
+                    var paramreservasi = "";
+                    if (
+                        $scope.cc.noreservasi == "-" ||
+                        $scope.cc.noreservasi == "" ||
+                        $scope.cc.noreservasi == null ||
+                        $scope.cc.noreservasi == undefined
+                    ) {
+                        paramreservasi = "000000000";
+                    } else {
+                        paramreservasi = $scope.cc.noreservasi;
+                    }
+
+                    medifirstService
+                    .get(
+                        "registrasi/get-data-pasien-reservasi-regis?" +
+                        "&kdReservasi=" +
+                        paramreservasi
+                        // + "&namapasienapr=" + $scope.namaPasien
+                    )
+                    .then(function (data) {
+                        var reservasidata = data.data.data[0];
+                        if (data.data.data.length > 0) {
+                            // if (reservasidata.tglinput < "2024-10-28 23:59") {
+                            //     let params = reservasidata.noreservasi;
+                            //     saveAntrol(params, $scope.cc.norec_pd);
+                            // } else {
+                            //     let params = $scope.cc.noregistrasi;
+                            //     saveAntrol(params, $scope.cc.norec_pd);
+                            // }
+                            let params = reservasidata.noreservasi;
+                            saveAntrol(params, $scope.cc.norec_pd);
+                        } else {
+                            let params = $scope.cc.noregistrasi;
+                            saveAntrol(params, $scope.cc.norec_pd);
+                        }
+                    });
+                    // saveAntrol(params, $scope.cc.norec_pd)
+                    startProcess($scope.cc.norec_pd);
+
                     //satusehat
                     let json = {
                         "noregistrasi": $scope.cc.noregistrasi
@@ -554,6 +594,153 @@ define(['initialize'], function (initialize) {
 
 
             }
+
+            // Fungsi utama untuk memulai proses
+            async function startProcess(norec_pd) {
+                // Mulai dari task ID 1 hingga 4
+                for (let taskid = 1; taskid <= 4; taskid++) {
+                await repeatUntilSuccess(norec_pd, taskid);
+                }
+            }
+
+            async function repeatUntilSuccess(norec_pd, taskid, maxRetries = 2) { // Naikkan maxRetries agar retry berjalan
+                let attempts = 0; 
+                while (attempts < maxRetries) {
+                    attempts++; 
+                    try {
+                        const data = await getAntrolData(norec_pd);
+                        const response = await sendAntrolData(data, taskid, norec_pd);
+            
+                        // Simpan Log
+                        await logData(taskid, data, response, norec_pd);
+            
+                        const metaData = response.data.metaData;
+            
+                        // 1. Cek jika sukses (Code 200) atau sudah ada (Code 208)
+                        if (metaData.code === 200 || metaData.code === "200") {
+                            break; // Berhasil, keluar dari loop
+                        }
+            
+                        if (metaData.code === 208 || metaData.code === "208") {
+                            const message = metaData.message;
+                            if (
+                                message.includes(`TaskId=${taskid} sudah ada`) ||
+                                message === "Terdapat duplikasi Kode Booking"
+                            ) {
+                                break; // Sudah terproses, keluar dari loop
+                            }
+                        }
+            
+                        // 2. LOGIKA RETRY: Cek jika error 404 seperti yang Anda maksud
+                        if (metaData.code === 404 || metaData.code === "404") {
+                            if (metaData.message.includes("Gagal dicoba kembali (BPJS Kesehatan)")) {
+                                console.warn(`Attempt ${attempts}: Mendapatkan error 404 BPJS, mencoba mengirim ulang taskid ${taskid}...`);
+                                
+                                // Jika belum mencapai maxRetries, loop akan lanjut ke iterasi berikutnya (mengirim ulang)
+                                if (attempts < maxRetries) {
+                                    await new Promise((resolve) => setTimeout(resolve, 2000)); // Tunggu 2 detik sebelum retry
+                                    continue; 
+                                }
+                            }
+                        }
+            
+                    } catch (error) {
+                        if (attempts === maxRetries) {
+                            break;
+                        }
+                    }
+                    
+                    await new Promise((resolve) => setTimeout(resolve, 1000));
+                }
+            }
+        
+            // Mendapatkan data antrean
+            function getAntrolData(norec_pd) {
+            return medifirstService.get(
+                `registrasi/get-data-antrean?norec_pd=${norec_pd}`
+            );
+            }
+        
+            // Mengirimkan data antrean
+            function sendAntrolData(data, taskid) {
+            const initialTime = new Date().getTime();
+            const increment = 5 * 60 * 1000; // 5 menit dalam milidetik
+            const waktu = initialTime + (taskid - 1) * increment; // Tambah waktu berdasarkan task ID
+    
+            let url;
+            let postData;
+    
+            if (taskid === 1) {
+                url = "antrean/add"; // URL khusus untuk taskid 1
+                postData = {
+                url: url,
+                jenis: "antrean",
+                method: "POST",
+                data: {
+                    kodebooking: data.data.kodebooking, // Hanya kodebooking untuk taskid 1
+                    jenispasien: data.data.jenispasien,
+                    nomorkartu: data.data.nomorkartu,
+                    nik: data.data.nik,
+                    nohp: data.data.nohp,
+                    kodepoli: data.data.kodepoli,
+                    namapoli: data.data.namapoli,
+                    pasienbaru: data.data.pasienbaru,
+                    norm: data.data.norm,
+                    tanggalperiksa: data.data.tanggalperiksa,
+                    kodedokter: data.data.kodedokter,
+                    namadokter: data.data.namadokter,
+                    jampraktek: data.data.jampraktek,
+                    jeniskunjungan: data.data.jeniskunjungan,
+                    nomorreferensi: data.data.nomorreferensi,
+                    nomorantrean: data.data.nomorantrean,
+                    angkaantrean: data.data.angkaantrean,
+                    estimasidilayani: data.data.estimasidilayani,
+                    sisakuotajkn: data.data.sisakuotajkn,
+                    kuotajkn: data.data.kuotajkn,
+                    sisakuotanonjkn: data.data.sisakuotanonjkn,
+                    kuotanonjkn: data.data.kuotanonjkn,
+                    keterangan: data.data.keterangan,
+                },
+                };
+            } else {
+                url = "antrean/updatewaktu"; // URL default untuk taskid lainnya
+                postData = {
+                url: url,
+                jenis: "antrean",
+                method: "POST",
+                data: {
+                    kodebooking: data.data.kodebooking, // Menggunakan data.data.kodebooking untuk taskid lainnya
+                    taskid: taskid,
+                    waktu: waktu,
+                },
+                };
+            }
+                // console.log('event loop',postData);
+                return medifirstService.postNonMessage("bridging/bpjs/tools", postData);
+                // const response =  medifirstService.postNonMessage('bridging/bpjs/tools', postData);
+        
+                // // Simpan log setelah data dikirim
+                // logData(taskid, postData, response);
+        
+                // return response;
+            }
+        
+            // Menyimpan log
+            function logData(taskid, data, response, norec_pd) {
+            if (taskid === 1 && response.data.metaData.code === 200) {
+                console.log(`Task ID ${taskid} completed successfully.`);
+                SendProporsiTaksid(norec_pd);
+            }
+            return medifirstService.postLoggingAntrol(
+                `Antrol Task ID ${taskid} - Dengan Noregis ${$scope.cc.noregistrasi}`,
+                "norec Pasien Daftar",
+                data.data.kodebooking,
+                `Tambah Antrean KE ${taskid} Kode ${data.data.kodebooking}`,
+                `Request: ${JSON.stringify(data.data)}`,
+                `Response: ${JSON.stringify(response.data)}`
+            );
+            }
+        
             //***********************************
 
         }
