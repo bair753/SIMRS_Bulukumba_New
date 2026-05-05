@@ -676,7 +676,15 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                                 }
                             }else{
                                 if ( isRegisOnline == '') {
-                                    saveAntrol($scope.Noregistrasi,$scope.resultAPD)
+                                    var validIds = [
+                                        782, 784, 785, 787, 788, 789, 790, 791, 792, 793, 
+                                        794, 795, 796, 797, 798, 799, 800, 801, 802, 803, 
+                                        804, 805, 806, 808, 809, 810, 836, 838, 846, 847
+                                    ];
+
+                                    if (validIds.includes($scope.item.ruangan.id)) {
+                                        saveAntrol($scope.Noregistrasi,$scope.resultAPD)
+                                    }
                                 }
                             }
 
