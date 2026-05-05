@@ -119,27 +119,27 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
             }
             ];
 
-            // medifirstService.get("bridging/bpjs/get-daftar-obat-dpho").then(function (e) {
-            //     // document.getElementById("jsonKlaim").innerHTML = JSON.stringify(e.data, undefined, 4);
-            //     const datas = e.data.response.list;
-            //     for (var i = 0; i < datas.length; i++) {
-            //         datas[i].no = i + 1
-            //         // dat.data[i].total = parseFloat(dat.data[i].jumlah) * (parseFloat(dat.data[i].hargasatuan) - parseFloat(dat.data[i].hargadiscount))
-            //         // dat.data[i].total = parseFloat(dat.data[i].total) + parseFloat(dat.data[i].jasa)
-            //         // if (dat.data[i].iskronis == true || dat.data[i].iskronis == 't') {
-            //         //     dat.data[i].kronis = "✔"
-            //         // } else {
-            //         //     dat.data[i].kronis = ""
-            //         // }
-            //     }
-            //     $scope.dataDaftarObatDPHO = new kendo.data.DataSource({
-            //         data: datas,
-            //         pageSize: 20,
-            //         // group: $scope.group,
-            //     })
-            // }).then(function () {
-            //     $scope.isRouteLoading = false;
-            // });
+            medifirstService.get("bridging/bpjs/get-daftar-obat-dpho").then(function (e) {
+                // document.getElementById("jsonKlaim").innerHTML = JSON.stringify(e.data, undefined, 4);
+                const datas = e.data.response.list;
+                for (var i = 0; i < datas.length; i++) {
+                    datas[i].no = i + 1
+                    // dat.data[i].total = parseFloat(dat.data[i].jumlah) * (parseFloat(dat.data[i].hargasatuan) - parseFloat(dat.data[i].hargadiscount))
+                    // dat.data[i].total = parseFloat(dat.data[i].total) + parseFloat(dat.data[i].jasa)
+                    // if (dat.data[i].iskronis == true || dat.data[i].iskronis == 't') {
+                    //     dat.data[i].kronis = "✔"
+                    // } else {
+                    //     dat.data[i].kronis = ""
+                    // }
+                }
+                $scope.dataDaftarObatDPHO = new kendo.data.DataSource({
+                    data: datas,
+                    pageSize: 20,
+                    // group: $scope.group,
+                })
+            }).then(function () {
+                $scope.isRouteLoading = false;
+            });
 
             medifirstService.get("bridging/bpjs/get-daftar-spesialistik").then(function (e) {
                 // document.getElementById("jsonSpesialis").innerHTML = JSON.stringify(e.data, undefined, 4);
