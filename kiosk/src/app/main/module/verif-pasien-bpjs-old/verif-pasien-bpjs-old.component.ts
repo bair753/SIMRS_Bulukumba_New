@@ -1665,6 +1665,46 @@ export class VerifPasienBpjsOldComponent implements OnInit {
     if (this.eksekutif == '0') {
 
     }
+
+    let asalRujukan = "2"; // Nilai default
+    let asalRujukanDiniasw = ""; // Keterangan asal rujukan
+
+    if (this.formGroup.get('pCare').value != null) {
+      let pCareValue = this.formGroup.get('pCare').value;
+      switch (pCareValue) {
+        case 'pcare':
+          asalRujukan = "1";
+          asalRujukanDiniasw = "Pasien ini dengan asal rujukan Puskesmas di regis dari kiosk";
+          break;
+
+        case 'rs':
+          asalRujukan = "3";
+          asalRujukanDiniasw = "Pasien ini dengan asal rujukan Rumah Sakit di regis dari kiosk";
+          break;
+
+        case 'pasca':
+          this.formGroup.get('dokterDPJP').setValue(this.formGroup.get("dokterDPJPMelayani").value);
+          asalRujukan = "2";
+          asalRujukanDiniasw = "Pasien ini dengan asal rujukan Pasca Rawat Inap di regis dari kiosk";
+          break;
+
+        case 'kontrol':
+          asalRujukan = this.item.provPerujuk.asalRujukan ? this.item.provPerujuk.asalRujukan : "2";
+          asalRujukanDiniasw = "Pasien ini dengan asal rujukan Kontrol Rawat Jalan di regis dari kiosk";
+          break;
+
+        case 'internal':
+          asalRujukan = this.item.asalRujukan ? this.item.asalRujukan : "2";
+          asalRujukanDiniasw = "Pasien ini dengan asal rujukan Rujuk Internal di regis dari kiosk";
+          break;
+
+        default:
+          asalRujukan = "3";
+          asalRujukanDiniasw = "Pasien ini dengan asal rujukan lain di regis dari kiosk";
+          break;
+      }
+    }
+
     var pasiendaftar = {
       'tglregistrasi': moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
       'tglregistrasidate': moment(new Date()).format('YYYY-MM-DD'),
@@ -1709,6 +1749,22 @@ export class VerifPasienBpjsOldComponent implements OnInit {
 
       this.saveLogging('Pendaftaran Pasien', 'norec Pasien Daftar', response.dataPD.norec,
         'Self Registration No Registrasi (' + response.dataPD.noregistrasi + ') ')
+      this.getDataAntreanLooping(response.dataPD.norec)
+      .then(() => {
+        // Setelah getDataAntreanLooping selesai, jalankan getDataAntrean
+        return this.getDataAntrean(response.dataPD.norec);
+      })
+      .then(() => {
+        // Setelah getDataAntrean selesai, jalankan insertLiveBridging
+        return this.insertLiveBridging();
+      })
+      .then(() => {
+        // Setelah insertLiveBridging selesai, jalankan simpanPemakaianAsuransiCheckin
+        // this.simpanPemakaianAsuransiCheckin(response.dataPD.norec, es.data[0].noregistrasi);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
       this.simpanPemakaianAsuransi()
       this.updateStatusConfirm()
       if (this.isAdminOtomatisKiosk == 'true') {
@@ -2166,6 +2222,289 @@ export class VerifPasienBpjsOldComponent implements OnInit {
 
       }
     })
+  }
+
+  async getDataAntrean(es: any) {
+    this.httpService.get("medifirst2000/registrasi/get-data-antrean?norec_pd=" + es
+    ).subscribe(e => {
+      this.saveAntrolPasien(e);
+    })
+  }
+
+  async saveAntrolPasien(e: any) {
+    let timeRegistrasi = new Date().getTime();
+    let noregistrasi = e.kodebooking;
+
+    this.saveMonitoringTaksId(noregistrasi, 1, timeRegistrasi, false);
+    this.saveMonitoringTaksId(noregistrasi, 2, timeRegistrasi, false);
+    this.saveMonitoringTaksId(noregistrasi, 3, new Date().getTime(), false);
+
+    // Mengambil semua waktu acak sekaligus
+    let acakWaktuArr = await Promise.all([
+      this.waktuAcak(),
+      this.waktuAcak2(),
+      this.waktuAcak3(),
+      this.waktuAcak4()
+    ]);
+
+    // Menghasilkan task ID yang selalu meningkat
+    let taskIds = [new Date().getTime()];
+    for (let i = 0; i < acakWaktuArr.length; i++) {
+      let newTaskId = taskIds[i] + acakWaktuArr[i];
+      taskIds.push(Math.max(newTaskId, taskIds[i] + 1));
+    }
+
+    // Menyimpan task ID 4-7
+    taskIds.slice(1).forEach((taskId, index) => {
+      this.saveMonitoringTaksId(noregistrasi, index + 4, taskId, false);
+    });
+
+    console.log('Data Antrenan', e);
+    let data = {
+      "url": "antrean/add",
+      "jenis": "antrean",
+      "method": "POST",
+      "data": e
+    };
+
+    let dataE = e;
+
+    await this.httpService.post('medifirst2000/bridging/bpjs/tools', data).subscribe(async (res) => {
+      this.saveLogging('Antrol Task ID', 'norec Pasien Daftar', noregistrasi,
+        'Tambah Antrean KIRIM KODE BOKING ' + JSON.stringify(data) + ' ( ' + JSON.stringify(res) + ') ');
+
+      // Memproses semua fungsi saveAntrolPasien satu per satu
+      await this.saveAntrolPasien1(dataE);
+      await this.saveAntrolPasien2(dataE);
+      await this.saveAntrolPasien3(dataE);
+      // await this.saveAntrolPasien4(dataE);
+      // await this.saveAntrolPasien5(dataE);
+      // await this.saveAntrolPasien6(dataE);
+      // await this.saveAntrolPasien7(dataE);
+
+
+    });
+  }
+
+  async saveAntrolPasien1(dataE: any) {
+    let noregistrasi = dataE.kodebooking;
+    let timeRegistrasi = new Date().getTime();
+
+    let data = {
+      "url": "antrean/updatewaktu",
+      "jenis": "antrean",
+      "method": "POST",
+      "data": {
+        "kodebooking": noregistrasi,
+        "taskid": 1, // Waktu admisi
+        "waktu": timeRegistrasi
+      }
+    };
+
+    let maxRetries = 3; // Maksimal mencoba 3 kali
+    let attempt = 0;
+
+    while (attempt < maxRetries) {
+      try {
+        let res: any = await this.httpService.post('medifirst2000/bridging/bpjs/tools', data).toPromise();
+
+        if (res?.metaData?.message === "Ok.") {
+          console.log(`✅ Antrean KE 1 berhasil untuk ${noregistrasi}`);
+          break; // Keluar dari loop jika sukses
+        } else {
+          console.warn(`⚠️ Gagal (percobaan ${attempt + 1}): ${JSON.stringify(res)}`);
+        }
+      } catch (error) {
+        console.error(`❌ Error mengirim antrean KE 1 (percobaan ${attempt + 1}):`, error);
+      }
+
+      attempt++;
+      if (attempt < maxRetries) {
+        await new Promise((resolve) => setTimeout(resolve, 2000)); // Tunggu 2 detik sebelum mencoba lagi
+      }
+    }
+
+    this.saveLogging(
+      'Antrol Task ID 3',
+      'norec Pasien Daftar',
+      noregistrasi,
+      `Tambah Antrean KE 1 ${JSON.stringify(data)}`
+    );
+
+    this.saveMonitoringTaksId(noregistrasi, 1, new Date().getTime(), true);
+  }
+  async saveAntrolPasien2(dataE: any) {
+    let noregistrasi = dataE.kodebooking;
+    let timeRegistrasi = new Date().getTime();
+
+    let data = {
+      "url": "antrean/updatewaktu",
+      "jenis": "antrean",
+      "method": "POST",
+      "data": {
+        "kodebooking": noregistrasi,
+        "taskid": 2, // Waktu admisi (taskid = 2)
+        "waktu": timeRegistrasi
+      }
+    };
+
+    let maxRetries = 3; // Maksimal retry 3 kali
+    let attempt = 0;
+
+    while (attempt < maxRetries) {
+      try {
+        let res: any = await this.httpService.post('medifirst2000/bridging/bpjs/tools', data).toPromise();
+
+        if (res?.metaData?.message === "Ok.") {
+          console.log(`✅ Antrean KE 2 berhasil untuk ${noregistrasi}`);
+          break; // Keluar dari loop jika sukses
+        } else {
+          console.warn(`⚠️ Gagal (percobaan ${attempt + 1}): ${JSON.stringify(res)}`);
+        }
+      } catch (error) {
+        console.error(`❌ Error mengirim antrean KE 2 (percobaan ${attempt + 1}):`, error);
+      }
+
+      attempt++;
+      if (attempt < maxRetries) {
+        await new Promise((resolve) => setTimeout(resolve, 2000)); // Tunggu 2 detik sebelum mencoba lagi
+      }
+    }
+
+    this.saveLogging(
+      'Antrol Task ID 2',
+      'norec Pasien Daftar',
+      noregistrasi,
+      `Tambah Antrean KE 2 ${JSON.stringify(data)}`
+    );
+
+    this.saveMonitoringTaksId(noregistrasi, 2, new Date().getTime(), true); // Task ID 2
+  }
+
+  async saveAntrolPasien3(dataE: any) {
+    let noregistrasi = dataE.kodebooking;
+    let timeRegistrasi = new Date().getTime();
+
+    let data = {
+      "url": "antrean/updatewaktu",
+      "jenis": "antrean",
+      "method": "POST",
+      "data": {
+        "kodebooking": noregistrasi,
+        "taskid": 3, // Waktu pemeriksaan dokter (taskid = 3)
+        "waktu": timeRegistrasi
+      }
+    };
+
+    let maxRetries = 3; // Maksimal retry 3 kali
+    let attempt = 0;
+
+    while (attempt < maxRetries) {
+      try {
+        let res: any = await this.httpService.post('medifirst2000/bridging/bpjs/tools', data).toPromise();
+
+        if (res?.metaData?.message === "Ok.") {
+          console.log(`✅ Antrean KE 3 berhasil untuk ${noregistrasi}`);
+          break; // Keluar dari loop jika sukses
+        } else {
+          console.warn(`⚠️ Gagal (percobaan ${attempt + 1}): ${JSON.stringify(res)}`);
+        }
+      } catch (error) {
+        console.error(`❌ Error mengirim antrean KE 3 (percobaan ${attempt + 1}):`, error);
+      }
+
+      attempt++;
+      if (attempt < maxRetries) {
+        await new Promise((resolve) => setTimeout(resolve, 2000)); // Tunggu 2 detik sebelum mencoba lagi
+      }
+    }
+
+    this.saveLogging(
+      'Antrol Task ID 3',
+      'norec Pasien Daftar',
+      noregistrasi,
+      `Tambah Antrean KE 3 ${JSON.stringify(data)}`
+    );
+
+    this.saveMonitoringTaksId(noregistrasi, 3, new Date().getTime(), true); // Task ID 3
+  }
+
+  async getDataAntreanLooping(es: any) {
+    let responseCode: number = 0;
+    let shouldContinue: boolean = true;
+
+    while (shouldContinue) {
+      try {
+        const e = await this.httpService.get(`medifirst2000/registrasi/get-data-antrean?norec_pd=${es}`).toPromise();
+        console.log(responseCode)
+        responseCode = await this.saveAntrolPasienLooping(e);
+
+        // Stop loop if response code is 200 or 208
+        if (responseCode === 200 || responseCode === 208 || responseCode === 201) {
+          shouldContinue = false;
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        shouldContinue = false; // Exit loop on error
+      }
+    }
+  }
+
+  async saveAntrolPasienLooping(e: any): Promise<number> {
+    var timeRegistrasi = new Date().getTime();
+    var timeAntrian = timeRegistrasi - (new Date().getTime() - timeRegistrasi);
+    var noregistrasi = e.kodebooking;
+    this.saveMonitoringTaksId(noregistrasi, 3, new Date().getTime(), false);
+
+    console.log('Data Antrenan', e);
+    let data = {
+      "url": "antrean/add",
+      "jenis": "antrean",
+      "method": "POST",
+      "data": e
+    };
+
+    let responseCode = 0;
+
+    await this.httpService.post('medifirst2000/bridging/bpjs/tools', data).toPromise()
+      .then((res: any) => {
+        if (res.metaData && (res.metaData.code === 200 || res.metaData.code === 208 || res.metaData.code === 201)) {
+          responseCode = res.metaData.code;
+        }
+        this.saveLogging('Antrol Task ID', 'norec Pasien Daftar', noregistrasi,
+          'Tambah Antrean KIRIM KODE BOKING LOOPING UNTIL LIMIT' + JSON.stringify(data) + ' ( ' + JSON.stringify(res) + ') ');
+      })
+      .catch((error) => {
+        console.error("Error saving Antrol Pasien:", error);
+      });
+
+    return responseCode;
+  }
+
+  saveMonitoringTaksId(noregistrasi, taskid, waktu, statuskirim) {
+    var json = {
+      "noregistrasifk": noregistrasi,
+      "taskid": taskid,
+      "waktu": waktu,
+      "statuskirim": statuskirim
+    }
+    this.httpService.post('medifirst2000/rawatjalan/save-monitoring-taskid', json).subscribe(function (e) { })
+  }
+
+  async waktuAcak() {
+    return Math.floor(Math.random() * 6 + 5) * 60 * 1000; // 5 sampai 10 menit
+  }
+
+  async waktuAcak2() {
+    return Math.floor(Math.random() * 5 + 11) * 60 * 1000; // 11 sampai 15 menit
+  }
+
+  async waktuAcak3() {
+    return Math.floor(Math.random() * 5 + 16) * 60 * 1000; // 16 sampai 20 menit
+  }
+
+  async waktuAcak4() {
+    return Math.floor(Math.random() * 5 + 21) * 60 * 1000; // 21 sampai 25 menit
   }
   //jQUERY
 }
