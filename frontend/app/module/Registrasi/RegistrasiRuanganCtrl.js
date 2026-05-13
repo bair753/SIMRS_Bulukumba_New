@@ -675,7 +675,7 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                                     saveAntrol($scope.Noregistrasi,$scope.resultAPD)
                                 }
                             }else{
-                                if ( isRegisOnline == '') {
+                                if (!isRegisOnline || isRegisOnline.trim() === '') {
                                     var validIds = [
                                         782, 784, 785, 787, 788, 789, 790, 791, 792, 793, 
                                         794, 795, 796, 797, 798, 799, 800, 801, 802, 803, 
