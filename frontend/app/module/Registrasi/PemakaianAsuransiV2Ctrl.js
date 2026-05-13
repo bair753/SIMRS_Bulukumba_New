@@ -2076,54 +2076,65 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                           }
                         }
 
-                        var data = {
-                            "url": "antrean/add",
-                            "jenis": "antrean",
-                            "method": "POST",
-                            "data": {
-                            "kodebooking": kodebooking, //noregistrasi,
-                            "jenispasien": params.data.jenispasien, //isBPJS ? 'JKN' : 'NON JKN',
-                            "nomorkartu": params.data.nokartu, //isBPJS ? ($scope.item.pasien.nobpjs ? $scope.item.pasien.nobpjs : ""):"",
-                            "nik": params.data.nik, //$scope.item.pasien.noidentitas ? $scope.item.pasien.noidentitas : "",
-                            "nohp": params.data.nohp, //$scope.item.pasien.notelepon ? $scope.item.pasien.notelepon.substring(0,12) : "000000000000",
-                            "kodepoli": params.data.kodepoli, //$scope.item.ruangan.kodebpjs ?$scope.item.ruangan.kodebpjs :'',
-                            "namapoli": params.data.namapoli, //$scope.item.ruangan.namaruangan ,
-                            "pasienbaru": params.data.pasienbaru, //status,
-                            "norm": params.data.norm, //$scope.item.pasien.nocm,
-                            "tanggalperiksa": params.data.tanggalperiksa, //moment($scope.item.tglRegistrasi).format('YYYY-MM-DD'),
-                            "kodedokter": params.data.kodedokter, //kodeDokterBPJS != ''? kodeDokterBPJS.kodedokter:'',
-                            "namadokter": params.data.namadokter, //kodeDokterBPJS != ''? kodeDokterBPJS.namadokter:'', 
-                            "jampraktek":   kodeDokterBPJS != ''? kodeDokterBPJS.jadwal:'',  
-                            "jeniskunjungan": jenisKunjungan,
-                            "nomorreferensi": noref.substring(0, 19),
-                            "nomorantrean": params.data.nomorantrean, //apd.noantrian,
-                            "angkaantrean": params.data.angkaantrean, //apd.noantrian,
-                            "estimasidilayani": new Date().getTime(),
-                            "sisakuotajkn": 0,
-                            "kuotajkn": 0,
-                            "sisakuotanonjkn": 0,
-                            "kuotanonjkn": 0,
-                            "keterangan": ""
+                        var validIds = [
+                            782, 784, 785, 787, 788, 789, 790, 791, 792, 793, 
+                            794, 795, 796, 797, 798, 799, 800, 801, 802, 803, 
+                            806, 808, 809, 810, 836, 838, 846, 847
+                        ];
+
+                        if (params && params.data.kdruangan) {
+                            if (validIds.includes(params.data.kdruangan)) {
+                                var data = {
+                                    "url": "antrean/add",
+                                    "jenis": "antrean",
+                                    "method": "POST",
+                                    "data": {
+                                    "kodebooking": kodebooking, //noregistrasi,
+                                    "jenispasien": params.data.jenispasien, //isBPJS ? 'JKN' : 'NON JKN',
+                                    "nomorkartu": params.data.nokartu, //isBPJS ? ($scope.item.pasien.nobpjs ? $scope.item.pasien.nobpjs : ""):"",
+                                    "nik": params.data.nik, //$scope.item.pasien.noidentitas ? $scope.item.pasien.noidentitas : "",
+                                    "nohp": params.data.nohp, //$scope.item.pasien.notelepon ? $scope.item.pasien.notelepon.substring(0,12) : "000000000000",
+                                    "kodepoli": params.data.kodepoli, //$scope.item.ruangan.kodebpjs ?$scope.item.ruangan.kodebpjs :'',
+                                    "namapoli": params.data.namapoli, //$scope.item.ruangan.namaruangan ,
+                                    "pasienbaru": params.data.pasienbaru, //status,
+                                    "norm": params.data.norm, //$scope.item.pasien.nocm,
+                                    "tanggalperiksa": params.data.tanggalperiksa, //moment($scope.item.tglRegistrasi).format('YYYY-MM-DD'),
+                                    "kodedokter": params.data.kodedokter, //kodeDokterBPJS != ''? kodeDokterBPJS.kodedokter:'',
+                                    "namadokter": params.data.namadokter, //kodeDokterBPJS != ''? kodeDokterBPJS.namadokter:'', 
+                                    "jampraktek":   kodeDokterBPJS != ''? kodeDokterBPJS.jadwal:'',  
+                                    "jeniskunjungan": jenisKunjungan,
+                                    "nomorreferensi": noref.substring(0, 19),
+                                    "nomorantrean": params.data.nomorantrean, //apd.noantrian,
+                                    "angkaantrean": params.data.angkaantrean, //apd.noantrian,
+                                    "estimasidilayani": new Date().getTime(),
+                                    "sisakuotajkn": 0,
+                                    "kuotajkn": 0,
+                                    "sisakuotanonjkn": 0,
+                                    "kuotanonjkn": 0,
+                                    "keterangan": ""
+                                    }
+                                }
+                                medifirstService.postNonMessage('bridging/bpjs/tools', data).then(function (x) {
+                                    // simpan log
+                                    saveAntrolSatu(params, datapd);
+                                    
+                                    saveMonitoringTaksId(norec_pd, 1, new Date().getTime(), true)
+                                    medifirstService.postLogging('Antrol Task ID', 'norec Pasien Daftar',
+                                        kodebooking, 'SEND KODE BOKING KUY ' + kodebooking + ' | ' +
+                                        JSON.stringify(data) + ' | ' + JSON.stringify(x.data))
+        
+                                    medifirstService.postLoggingAntrol(
+                                        `Antrol Add Task ID 1 - Dengan No Registrasi ${kodebooking}`,
+                                        'norec Pasien Daftar',
+                                        kodebooking,
+                                        `Tambah Antrean KE 1 Kode ${kodebooking}`,
+                                        `Request: ${JSON.stringify(data)}`,
+                                        `Response: ${JSON.stringify(x.data)}`
+                                    );
+                                })
                             }
                         }
-                        medifirstService.postNonMessage('bridging/bpjs/tools', data).then(function (x) {
-                            // simpan log
-                            saveAntrolSatu(params, datapd);
-                            
-                            saveMonitoringTaksId(norec_pd, 1, new Date().getTime(), false)
-                            medifirstService.postLogging('Antrol Task ID', 'norec Pasien Daftar',
-                                kodebooking, 'SEND KODE BOKING KUY ' + kodebooking + ' | ' +
-                                JSON.stringify(data) + ' | ' + JSON.stringify(x.data))
 
-                            medifirstService.postLoggingAntrol(
-                                `Antrol Add Task ID 1 - Dengan No Registrasi ${kodebooking}`,
-                                'norec Pasien Daftar',
-                                kodebooking,
-                                `Tambah Antrean KE 1 Kode ${kodebooking}`,
-                                `Request: ${JSON.stringify(data)}`,
-                                `Response: ${JSON.stringify(x.data)}`
-                            );
-                        })
                     })
                 })
             }

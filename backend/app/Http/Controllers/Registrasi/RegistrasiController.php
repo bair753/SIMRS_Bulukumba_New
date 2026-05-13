@@ -11843,6 +11843,7 @@ GROUP BY y.KET
             ,rm.prefixnoantrian as nomorantrean
             ,apd.noantrian as angkaantrean
             ,rm.noruangan as kodebpjs
+            ,rm.id as kdruangan
             from pasiendaftar_t pd
             inner join antrianpasiendiperiksa_t apd on apd.noregistrasifk = pd.norec
             inner join pasien_m ps on ps.id = pd.nocmfk
