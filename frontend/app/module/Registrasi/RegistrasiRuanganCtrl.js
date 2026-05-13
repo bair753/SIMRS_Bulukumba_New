@@ -679,12 +679,18 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                                     var validIds = [
                                         782, 784, 785, 787, 788, 789, 790, 791, 792, 793, 
                                         794, 795, 796, 797, 798, 799, 800, 801, 802, 803, 
-                                        804, 805, 806, 808, 809, 810, 836, 838, 846, 847
+                                        806, 808, 809, 810, 836, 838, 846, 847
                                     ];
 
-                                    if (validIds.includes($scope.item.ruangan.id)) {
-                                        saveAntrol($scope.Noregistrasi,$scope.resultAPD)
+                                    if ($scope.item.ruangan && $scope.item.ruangan.id) {
+                                        if (validIds.includes($scope.item.ruangan.id)) {
+                                            saveAntrol($scope.Noregistrasi, $scope.resultAPD);
+                                        }
                                     }
+
+                                    // if (validIds.includes($scope.item.ruangan.id)) {
+                                    //     saveAntrol($scope.Noregistrasi,$scope.resultAPD)
+                                    // }
                                 }
                             }
 
