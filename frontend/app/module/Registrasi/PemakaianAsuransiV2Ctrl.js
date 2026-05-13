@@ -1963,24 +1963,167 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                 })
             }
 
-            function GetDataPasien(norec_pd) {
-                medifirstService.get('registrasi/get-data-antrean?norec_pd=' + norec_pd).then(function (e) {
+            async function GetDataPasien(norec_pd) {
+                await medifirstService.get('registrasi/get-data-antrean?norec_pd=' + norec_pd).then( async function (e) {
                     var kodebooking = e.data.kodebooking
                     var params = e
                     var datapd = norec_pd
-                    var data = {
-                        "url": "antrean/add",
+                    // var data = {
+                    //     "url": "antrean/add",
+                    //     "jenis": "antrean",
+                    //     "method": "POST",
+                    //     "data": e.data
+                    // }
+
+                    var json  = {
+                        "url": "jadwaldokter/kodepoli/"+ params.data.kodebpjs +"/tanggal/"+ moment(params.data.tanggalperiksa).format('YYYY-MM-DD'),
                         "jenis": "antrean",
-                        "method": "POST",
-                        "data": e.data
+                        "method": "GET",
+                        "data": null
                     }
-                    medifirstService.postNonMessage('bridging/bpjs/tools', data).then(function (x) {
-                        // simpan log
-                        saveAntrolSatu(params, datapd);
-                        saveMonitoringTaksId(norec_pd, 1, new Date().getTime(), false)
-                        medifirstService.postLogging('Antrol Task ID', 'norec Pasien Daftar',
-                            kodebooking, 'SEND KODE BOKING KUY' + kodebooking + ' | ' +
-                            JSON.stringify(data) + ' | ' + JSON.stringify(x.data))
+                    $scope.dataAntrol ={}
+                    await medifirstService.postNonMessage('bridging/bpjs/tools', json).then(async function (z) {
+                        // if(z.data.metaData.code == 201) {return}
+                        // if(z.data.response == null)return
+                        // if(z.data.response.length == 0)return
+                        var kodebpjsDokterR = params.data.kodedokter
+                        if(!params){
+                            kodebpjsDokterR = 0
+                        }    
+                        var kodeDokterBPJS = ''
+                        for (var i = z.data.response.length - 1; i >= 0; i--) {
+                            const element = z.data.response[i]
+                            if(element.kodedokter == kodebpjsDokterR){
+                                kodeDokterBPJS = {
+                                    "jadwal" : element.jadwal,
+                                    "namadokter" : element.namadokter,
+                                    "kodedokter" : element.kodedokter,
+                                }
+                                break;
+                            }
+                        }
+                        // if(kodeDokterBPJS == '')
+                        // return
+
+                        var nobpjs = params.data.nomorkartu
+                        if(nobpjs==null)nobpjs= '0000000000000'
+                        var noref= nobpjs+params.data.norm
+                        let JENIS = 1
+                        let jenisKunjungan = 1 // {1 (Rujukan FKTP), 2 (Rujukan Internal), 3 (Kontrol), 4 (Rujukan Antar RS)}
+                        if(isBPJS){
+                            var jsonRujukan = {
+                                "url": `Rujukan/Peserta/${params.data.nomorkartu}`,
+                                "method": "GET",
+                                "data": null
+                            }
+                            let resRujukan = await medifirstService.postNonMessage('bridging/bpjs/tools', jsonRujukan)
+                            if(resRujukan.data.metaData.code == 200){
+                                JENIS = 1
+                                noref = resRujukan.data.response.rujukan.noKunjungan
+                            }else{
+                                var jsonRujukan = {
+                                    "url": `Rujukan/RS/Peserta/${params.data.nomorkartu}`,
+                                    "method": "GET",
+                                    "data": null
+                                }
+                                let resRujukan = await medifirstService.postNonMessage('bridging/bpjs/tools', jsonRujukan)
+                                if(resRujukan.data.metaData.code == 200){
+                                    JENIS = 2
+                                    noref = resRujukan.data.response.rujukan.noKunjungan
+                                }
+                            }
+                        }
+                        //cek jml sep rujukan
+    
+                        var jsonJML = {
+                            "url":`Rujukan/JumlahSEP/${JENIS}/${noref}`,
+                            "method": "GET",
+                            "data": null
+                        }
+    
+                        let resJML = await medifirstService.postNonMessage('bridging/bpjs/tools', jsonJML)
+                        if(resJML.data.metaData.code == 200){
+                          if(resJML.data.response.jumlahSEP > 0){
+                            // var dari = moment(new Date(new Date().setDate(new Date().getDate() -1))).format('YYYY-MM-DD')
+                            // var sampai = moment(new Date()).format('YYYY-MM-DD')
+                            var jsonSURKON = {
+                                "url": `RencanaKontrol/ListRencanaKontrol/Bulan/${moment(new Date()).format("MM")}/Tahun/${new Date().getFullYear()}/Nokartu/${params.data.nomorkartu}/filter/2`,
+                                "method": "GET",
+                                "data": null
+                            }
+        
+                            const today = new Date().toISOString().split('T')[0];
+                            let resSURKON = await medifirstService.postNonMessage('bridging/bpjs/tools', jsonSURKON);
+    
+                            if (resSURKON.data.metaData.code == 200) {
+                                let filteredList = resSURKON.data.response.list.filter(item => item.tglRencanaKontrol === today);
+    
+                                if (filteredList.length > 0) {
+                                    noref = filteredList[0].noSuratKontrol;
+                                    jenisKunjungan = 3;
+    
+                                    if (filteredList[0].terbitSEP == 'Sudah') {
+                                        let filteredList = resSURKON.data.response.list.filter(item => item.tglRencanaKontrol === today);
+                                        noref = filteredList[0].noSuratKontrol;
+                                        noref = noref;
+                                    }
+                                } else {
+                                    jenisKunjungan = 2;
+                                }
+                            } else {
+                                jenisKunjungan = 2;
+                            }
+                          }
+                        }
+
+                        var data = {
+                            "url": "antrean/add",
+                            "jenis": "antrean",
+                            "method": "POST",
+                            "data": {
+                            "kodebooking": kodebooking, //noregistrasi,
+                            "jenispasien": params.data.jenispasien, //isBPJS ? 'JKN' : 'NON JKN',
+                            "nomorkartu": params.data.nokartu, //isBPJS ? ($scope.item.pasien.nobpjs ? $scope.item.pasien.nobpjs : ""):"",
+                            "nik": params.data.nik, //$scope.item.pasien.noidentitas ? $scope.item.pasien.noidentitas : "",
+                            "nohp": params.data.nohp, //$scope.item.pasien.notelepon ? $scope.item.pasien.notelepon.substring(0,12) : "000000000000",
+                            "kodepoli": params.data.kodepoli, //$scope.item.ruangan.kodebpjs ?$scope.item.ruangan.kodebpjs :'',
+                            "namapoli": params.data.namapoli, //$scope.item.ruangan.namaruangan ,
+                            "pasienbaru": params.data.pasienbaru, //status,
+                            "norm": params.data.norm, //$scope.item.pasien.nocm,
+                            "tanggalperiksa": params.data.tanggalperiksa, //moment($scope.item.tglRegistrasi).format('YYYY-MM-DD'),
+                            "kodedokter": params.data.kodedokter, //kodeDokterBPJS != ''? kodeDokterBPJS.kodedokter:'',
+                            "namadokter": params.data.namadokter, //kodeDokterBPJS != ''? kodeDokterBPJS.namadokter:'', 
+                            "jampraktek":   kodeDokterBPJS != ''? kodeDokterBPJS.jadwal:'',  
+                            "jeniskunjungan": jenisKunjungan,
+                            "nomorreferensi": noref.substring(0, 19),
+                            "nomorantrean": params.data.nomorantrean, //apd.noantrian,
+                            "angkaantrean": params.data.angkaantrean, //apd.noantrian,
+                            "estimasidilayani": new Date().getTime(),
+                            "sisakuotajkn": 0,
+                            "kuotajkn": 0,
+                            "sisakuotanonjkn": 0,
+                            "kuotanonjkn": 0,
+                            "keterangan": ""
+                            }
+                        }
+                        medifirstService.postNonMessage('bridging/bpjs/tools', data).then(function (x) {
+                            // simpan log
+                            saveAntrolSatu(params, datapd);
+                            
+                            saveMonitoringTaksId(norec_pd, 1, new Date().getTime(), false)
+                            medifirstService.postLogging('Antrol Task ID', 'norec Pasien Daftar',
+                                kodebooking, 'SEND KODE BOKING KUY ' + kodebooking + ' | ' +
+                                JSON.stringify(data) + ' | ' + JSON.stringify(x.data))
+
+                            medifirstService.postLoggingAntrol(
+                                `Antrol Add Task ID 1 - Dengan No Registrasi ${kodebooking}`,
+                                'norec Pasien Daftar',
+                                kodebooking,
+                                `Tambah Antrean KE 1 Kode ${kodebooking}`,
+                                `Request: ${JSON.stringify(data)}`,
+                                `Response: ${JSON.stringify(x.data)}`
+                            );
+                        })
                     })
                 })
             }

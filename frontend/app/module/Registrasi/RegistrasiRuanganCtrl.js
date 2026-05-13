@@ -675,7 +675,10 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                                     saveAntrol($scope.Noregistrasi,$scope.resultAPD)
                                 }
                             }else{
+                                console.log('masuk sini');
                                 if (!isRegisOnline || isRegisOnline.trim() === '') {
+                                    console.log('masuk if');
+
                                     var validIds = [
                                         782, 784, 785, 787, 788, 789, 790, 791, 792, 793, 
                                         794, 795, 796, 797, 798, 799, 800, 801, 802, 803, 
@@ -1699,9 +1702,19 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                     }
                     $scope.dataAntrol = data
                     await medifirstService.postNonMessage('bridging/bpjs/tools', data).then(function (e) {
-                         $scope.saveLogging('Antrol Task ID', 'norec Pasien Daftar',
+                        $scope.saveLogging('Antrol Task ID', 'norec Pasien Daftar',
                          noregistrasi, 'Tambah Antrean Kode ' + noregistrasi +' | '+
                          JSON.stringify($scope.dataAntrol) + ' | '+ JSON.stringify(e.data))
+
+                        medifirstService.postLoggingAntrol(
+                            `Antrol Add Task ID 1 - Dengan No Registrasi ${noregistrasi}`,
+                            'norec Pasien Daftar',
+                            $scope.dataAntrol.data.kodebooking,
+                            `Tambah Antrean KE 1 Kode ${$scope.dataAntrol.data.kodebooking}`,
+                            `Request: ${JSON.stringify($scope.dataAntrol)}`,
+                            `Response: ${JSON.stringify(e.data)}`
+                        );
+
                         if(e.data.metaData.code == 201)return
                          var data = {
                             "url": "antrean/updatewaktu",

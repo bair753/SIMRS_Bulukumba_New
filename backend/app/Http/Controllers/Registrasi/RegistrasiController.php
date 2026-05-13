@@ -11842,6 +11842,7 @@ GROUP BY y.KET
             ,case when pd.objectkelompokpasienlastfk = 2 then substring(ps.nobpjs || ps.nocm, 1, 19) else '' end as nomorreferensi
             ,rm.prefixnoantrian as nomorantrean
             ,apd.noantrian as angkaantrean
+            ,rm.noruangan as kodebpjs
             from pasiendaftar_t pd
             inner join antrianpasiendiperiksa_t apd on apd.noregistrasifk = pd.norec
             inner join pasien_m ps on ps.id = pd.nocmfk
