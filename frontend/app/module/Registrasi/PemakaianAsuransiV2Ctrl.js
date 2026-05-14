@@ -1922,10 +1922,10 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                     asuransipasien: asuransipasien,
                     pemakaianasuransi: pemakaianasuransi
                 }
-                
+
                 medifirstService.post("registrasi/save-asuransipasien", objSave).then(function (e) {
                     GetDataPasien($scope.currentNorecPD)
-                    startProcess($scope.currentNorecPD)
+                    // startProcess($scope.currentNorecPD)
                     var msgLogging = ""
                     var lognosep = nosep
                     if (nosep == "") {

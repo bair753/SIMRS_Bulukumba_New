@@ -1761,27 +1761,113 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     noOrder: 'InputInsidenInternal'
                 });
             }
+            // function saveAntrol(param, norec_pd){
+            //     var data = {
+            //        "url": "antrean/updatewaktu",
+            //        "jenis": "antrean",
+            //        "method": "POST",
+            //        "data":                                                 
+            //        {
+            //           "kodebooking": param,
+            //           "taskid": 4,//Waktu layan poli
+            //           "waktu": new Date().getTime()  
+            //        }
+            //     }
+            //     saveMonitoringTaksId(norec_pd, 4, new Date().getTime(), false)
+            //     medifirstService.postNonMessage('bridging/bpjs/tools', data).then(function (e) {
+            //         if(e.data.metaData.code == 200) {
+            //             saveMonitoringTaksId(norec_pd, 4, new Date().getTime(), true)
+            //         } else {
+            //             repeatSendTaskId(norec_pd, 4)
+            //         } 
+
+            //         medifirstService.postLoggingAntrol(
+            //             `Antrol Task ID - Dengan No Registrasi ${e.data.kodebooking}`,
+            //             'norec Pasien Daftar',
+            //             e.data.kodebooking,
+            //             `Update Antrean Kode ${e.data.kodebooking}`,
+            //             `Request: ${JSON.stringify(data)}`,
+            //             `Response: ${JSON.stringify(x.data)}`,
+            //             `${data.data.taskid}`
+            //         );
+            //     })
+            // }
+
             function saveAntrol(param, norec_pd){
-                var data = {
-                   "url": "antrean/updatewaktu",
-                   "jenis": "antrean",
-                   "method": "POST",
-                   "data":                                                 
-                   {
-                      "kodebooking": param,
-                      "taskid": 4,//Waktu layan poli
-                      "waktu": new Date().getTime()  
-                   }
+
+                // Random offset 1-59 detik, berbeda tiap pasien
+                var randomOffset = function() {
+                    return Math.floor((Math.random() * 59 + 1) * 1000) // 1 - 59 detik dalam ms
                 }
-                saveMonitoringTaksId(norec_pd, 4, new Date().getTime(), false)
+            
+                // Task 4: now + random offset → tiap pasien beda
+                var waktuTaskId4 = new Date().getTime() + randomOffset()
+            
+                var data = {
+                    "url": "antrean/updatewaktu",
+                    "jenis": "antrean",
+                    "method": "POST",
+                    "data": {
+                        "kodebooking": param,
+                        "taskid": 4,
+                        "waktu": waktuTaskId4
+                    }
+                }
+            
+                saveMonitoringTaksId(norec_pd, 4, waktuTaskId4, false)
                 medifirstService.postNonMessage('bridging/bpjs/tools', data).then(function (e) {
                     if(e.data.metaData.code == 200) {
-                        saveMonitoringTaksId(norec_pd, 4, new Date().getTime(), true)
+                        saveMonitoringTaksId(norec_pd, 4, waktuTaskId4, true)
                     } else {
                         repeatSendTaskId(norec_pd, 4)
-                    } 
+                    }
+            
+                    medifirstService.postLoggingAntrol(
+                        `Antrol Task ID - Dengan No Registrasi ${param}`,
+                        'norec Pasien Daftar',
+                        param,
+                        `Update Antrean Kode ${param}`,
+                        `Request: ${JSON.stringify(data)}`,
+                        `Response: ${JSON.stringify(e.data)}`,
+                        `${data.data.taskid}`
+                    );
+            
+                    // Task 5: task4 + random 1-10 menit + random offset → tiap pasien beda
+                    var randomMenit = Math.floor((Math.random() * 10 + 1) * 60 * 1000)
+                    var waktuTaskId5 = waktuTaskId4 + randomMenit + randomOffset()
+            
+                    var dataTaskId5 = {
+                        "url": "antrean/updatewaktu",
+                        "jenis": "antrean",
+                        "method": "POST",
+                        "data": {
+                            "kodebooking": param,
+                            "taskid": 5,
+                            "waktu": waktuTaskId5
+                        }
+                    }
+            
+                    saveMonitoringTaksId(norec_pd, 5, waktuTaskId5, false)
+                    medifirstService.postNonMessage('bridging/bpjs/tools', dataTaskId5).then(function (e5) {
+                        if(e5.data.metaData.code == 200) {
+                            saveMonitoringTaksId(norec_pd, 5, waktuTaskId5, true)
+                        } else {
+                            repeatSendTaskId(norec_pd, 5)
+                        }
+            
+                        medifirstService.postLoggingAntrol(
+                            `Antrol Task ID - Dengan No Registrasi ${param}`,
+                            'norec Pasien Daftar',
+                            param,
+                            `Update Antrean Kode ${param}`,
+                            `Request: ${JSON.stringify(dataTaskId5)}`,
+                            `Response: ${JSON.stringify(e5.data)}`,
+                            `${dataTaskId5.data.taskid}`
+                        );
+                    })
                 })
             }
+            
             function saveMonitoringTaksId(noregistrasifk, taskid, waktu, statuskirim) {
                 var json = {
                     "noregistrasifk": noregistrasifk,

@@ -352,7 +352,7 @@ define(['initialize'], function (initialize) {
                         }
                     });
                     // saveAntrol(params, $scope.cc.norec_pd)
-                    startProcess($scope.cc.norec_pd);
+                    // startProcess($scope.cc.norec_pd);
 
                     //satusehat
                     let json = {
@@ -595,11 +595,106 @@ define(['initialize'], function (initialize) {
 
             }
 
+            function saveAntrol(param, norec_pd) {
+                medifirstService.get('registrasi/get-data-antrean?norec_pd=' + norec_pd).then(function (e) {
+                    var data = {
+                        "url": "antrean/updatewaktu",
+                        "jenis": "antrean",
+                        "method": "POST",
+                        // "data": e.data
+                        "data": {
+                            "kodebooking": param,
+                            "taskid": 4,//Waktu layan poli
+                            "waktu": new Date().getTime()
+                        }
+                    }
+                    medifirstService.postNonMessage('bridging/bpjs/tools', data).then(function (x) {
+                        if (x.data.metaData.code == 200) {
+                            saveMonitoringTaksId(norec_pd, 4, new Date().getTime(), true)
+                            // simpan log
+                            medifirstService.postLogging('Antrol Task ID 4', 'norec Pasien Daftar',
+                                e.data.kodebooking, 'Tambah Antrean KE 4 Kode ' +  e.data.kodebooking + ' | ' +
+                                JSON.stringify(data) + ' | ' + JSON.stringify(x.data))
+                        } else {
+                            repeatSendTaskId(norec_pd, 4)
+                        }
+                        // simpan log
+                        medifirstService.postLoggingAntrol(
+                            `Antrol Task ID - Dengan No Registrasi ${e.data.kodebooking}`,
+                            'norec Pasien Daftar',
+                            e.data.kodebooking,
+                            `Update Antrean Kode ${e.data.kodebooking}`,
+                            `Request: ${JSON.stringify(data)}`,
+                            `Response: ${JSON.stringify(x.data)}`,
+                            `${data.data.taskid}`
+                        );
+
+                        medifirstService.postLogging('Antrol Task ID', 'norec Pasien Daftar',
+                            e.data.kodebooking, 'Tambah Antrean KE 4 Kode ' +  e.data.kodebooking + ' | ' +
+                            JSON.stringify(data) + ' | ' + JSON.stringify(x.data))
+
+                        // mengabil data catatan task id dari 1 - 4
+                        medifirstService.get('rawatjalan/get-monitoring-taskid?taskid=' + 4 + '&norec_pd=' + norec_pd).then(function (res) {
+                            updateWaktuId(res,  e.data.kodebooking, norec_pd)
+                        })
+                    })
+                })
+            }
+
+            function repeatSendTaskId(norec_pd, taskid) {
+                medifirstService.get('registrasi/get-data-antrean?norec_pd=' + norec_pd).then(function (e) {
+                    var data = {
+                        "url": "antrean/updatewaktu",
+                        "jenis": "antrean",
+                        "method": "POST",
+                        // "data": e.data
+                        "data": {
+                            "kodebooking": e.data.kodebooking,
+                            "taskid": 4,//Waktu layan poli
+                            "waktu": new Date().getTime()
+                        }
+                    }
+                    medifirstService.postNonMessage('bridging/bpjs/tools', data).then(function (x) {
+                        // simpan log
+                        medifirstService.postLogging('Antrol Task ID', 'norec Pasien Daftar',
+                            e.data.kodebooking, 'Tambah Antrean KE 4 Kode ' + e.data.kodebooking + ' | ' +
+                            JSON.stringify(data) + ' | ' + JSON.stringify(x.data))
+
+                        // mengabil data catatan task id dari 1 - 4
+                        medifirstService.get('rawatjalan/get-monitoring-taskid?taskid=' + taskid + '&norec_pd=' + norec_pd).then(function (res) {
+                            updateWaktuId(res, e.data.kodebooking, norec_pd)
+                        })
+                    })
+                })
+            }
+
+            async function updateWaktuId(res, kodebooking, norec_pd) {
+                for (let i = 0; i < res.data.length; i++) {
+                    const element = res.data[i];
+                    var data = {
+                        "url": "antrean/updatewaktu",
+                        "jenis": "antrean",
+                        "method": "POST",
+                        "data":
+                        {
+                            "kodebooking": kodebooking,
+                            "taskid": element.taskid,
+                            "waktu": parseInt(element.waktu)
+                        }
+                    }
+                    await medifirstService.postNonMessage('bridging/bpjs/tools', data).then(async function (e) {
+                        if (e.data.metaData.code == 200) {
+                            await saveMonitoringTaksId(norec_pd, element.taskid, parseInt(element.waktu), true);
+                        }
+                    })
+                }
+            }
+
             // Fungsi utama untuk memulai proses
             async function startProcess(norec_pd) {
                 // Mulai dari task ID 1 hingga 4
                 for (let taskid = 1; taskid <= 4; taskid++) {
-                await repeatUntilSuccess(norec_pd, taskid);
+                    await repeatUntilSuccess(norec_pd, taskid);
                 }
             }
 
@@ -656,89 +751,99 @@ define(['initialize'], function (initialize) {
         
             // Mendapatkan data antrean
             function getAntrolData(norec_pd) {
-            return medifirstService.get(
-                `registrasi/get-data-antrean?norec_pd=${norec_pd}`
-            );
+                return medifirstService.get(
+                    `registrasi/get-data-antrean?norec_pd=${norec_pd}`
+                );
             }
         
             // Mengirimkan data antrean
             function sendAntrolData(data, taskid) {
-            const initialTime = new Date().getTime();
-            const increment = 5 * 60 * 1000; // 5 menit dalam milidetik
-            const waktu = initialTime + (taskid - 1) * increment; // Tambah waktu berdasarkan task ID
-    
-            let url;
-            let postData;
-    
-            if (taskid === 1) {
-                url = "antrean/add"; // URL khusus untuk taskid 1
-                postData = {
-                url: url,
-                jenis: "antrean",
-                method: "POST",
-                data: {
-                    kodebooking: data.data.kodebooking, // Hanya kodebooking untuk taskid 1
-                    jenispasien: data.data.jenispasien,
-                    nomorkartu: data.data.nomorkartu,
-                    nik: data.data.nik,
-                    nohp: data.data.nohp,
-                    kodepoli: data.data.kodepoli,
-                    namapoli: data.data.namapoli,
-                    pasienbaru: data.data.pasienbaru,
-                    norm: data.data.norm,
-                    tanggalperiksa: data.data.tanggalperiksa,
-                    kodedokter: data.data.kodedokter,
-                    namadokter: data.data.namadokter,
-                    jampraktek: data.data.jampraktek,
-                    jeniskunjungan: data.data.jeniskunjungan,
-                    nomorreferensi: data.data.nomorreferensi,
-                    nomorantrean: data.data.nomorantrean,
-                    angkaantrean: data.data.angkaantrean,
-                    estimasidilayani: data.data.estimasidilayani,
-                    sisakuotajkn: data.data.sisakuotajkn,
-                    kuotajkn: data.data.kuotajkn,
-                    sisakuotanonjkn: data.data.sisakuotanonjkn,
-                    kuotanonjkn: data.data.kuotanonjkn,
-                    keterangan: data.data.keterangan,
-                },
-                };
-            } else {
-                url = "antrean/updatewaktu"; // URL default untuk taskid lainnya
-                postData = {
-                url: url,
-                jenis: "antrean",
-                method: "POST",
-                data: {
-                    kodebooking: data.data.kodebooking, // Menggunakan data.data.kodebooking untuk taskid lainnya
-                    taskid: taskid,
-                    waktu: waktu,
-                },
-                };
-            }
-                // console.log('event loop',postData);
-                return medifirstService.postNonMessage("bridging/bpjs/tools", postData);
-                // const response =  medifirstService.postNonMessage('bridging/bpjs/tools', postData);
+                const initialTime = new Date().getTime();
+                const increment = 5 * 60 * 1000; // 5 menit dalam milidetik
+                const waktu = initialTime + (taskid - 1) * increment; // Tambah waktu berdasarkan task ID
         
-                // // Simpan log setelah data dikirim
-                // logData(taskid, postData, response);
+                let url;
+                let postData;
         
-                // return response;
+                if (taskid === 1) {
+                    url = "antrean/add"; // URL khusus untuk taskid 1
+                    postData = {
+                    url: url,
+                    jenis: "antrean",
+                    method: "POST",
+                    data: {
+                        kodebooking: data.data.kodebooking, // Hanya kodebooking untuk taskid 1
+                        jenispasien: data.data.jenispasien,
+                        nomorkartu: data.data.nomorkartu,
+                        nik: data.data.nik,
+                        nohp: data.data.nohp,
+                        kodepoli: data.data.kodepoli,
+                        namapoli: data.data.namapoli,
+                        pasienbaru: data.data.pasienbaru,
+                        norm: data.data.norm,
+                        tanggalperiksa: data.data.tanggalperiksa,
+                        kodedokter: data.data.kodedokter,
+                        namadokter: data.data.namadokter,
+                        jampraktek: data.data.jampraktek,
+                        jeniskunjungan: data.data.jeniskunjungan,
+                        nomorreferensi: data.data.nomorreferensi,
+                        nomorantrean: data.data.nomorantrean,
+                        angkaantrean: data.data.angkaantrean,
+                        estimasidilayani: data.data.estimasidilayani,
+                        sisakuotajkn: data.data.sisakuotajkn,
+                        kuotajkn: data.data.kuotajkn,
+                        sisakuotanonjkn: data.data.sisakuotanonjkn,
+                        kuotanonjkn: data.data.kuotanonjkn,
+                        keterangan: data.data.keterangan,
+                    },
+                    };
+                } else {
+                    url = "antrean/updatewaktu"; // URL default untuk taskid lainnya
+                        postData = {
+                        url: url,
+                        jenis: "antrean",
+                        method: "POST",
+                        data: {
+                            kodebooking: data.data.kodebooking, // Menggunakan data.data.kodebooking untuk taskid lainnya
+                            taskid: taskid,
+                            waktu: waktu,
+                        },
+                    };
+                }
+                    // console.log('event loop',postData);
+                    return medifirstService.postNonMessage("bridging/bpjs/tools", postData);
+                    // const response =  medifirstService.postNonMessage('bridging/bpjs/tools', postData);
+            
+                    // // Simpan log setelah data dikirim
+                    // logData(taskid, postData, response);
+            
+                    // return response;
             }
         
             // Menyimpan log
             function logData(taskid, data, response, norec_pd) {
-            if (taskid === 1 && response.data.metaData.code === 200) {
-                console.log(`Task ID ${taskid} completed successfully.`);
-                SendProporsiTaksid(norec_pd);
+                if (taskid === 1 && response.data.metaData.code === 200) {
+                    console.log(`Task ID ${taskid} completed successfully.`);
+                    SendProporsiTaksid(norec_pd);
+                }
+                return medifirstService.postLoggingAntrol(
+                    `Antrol Task ID ${taskid} - Dengan Noregis ${$scope.cc.noregistrasi}`,
+                    "norec Pasien Daftar",
+                    data.data.kodebooking,
+                    `Tambah Antrean KE ${taskid} Kode ${data.data.kodebooking}`,
+                    `Request: ${JSON.stringify(data.data)}`,
+                    `Response: ${JSON.stringify(response.data)}`
+                );
             }
-            return medifirstService.postLoggingAntrol(
-                `Antrol Task ID ${taskid} - Dengan Noregis ${$scope.cc.noregistrasi}`,
-                "norec Pasien Daftar",
-                data.data.kodebooking,
-                `Tambah Antrean KE ${taskid} Kode ${data.data.kodebooking}`,
-                `Request: ${JSON.stringify(data.data)}`,
-                `Response: ${JSON.stringify(response.data)}`
-            );
+
+            function saveMonitoringTaksId(noregistrasifk, taskid, waktu, statuskirim) {
+                var json = {
+                    "noregistrasifk": noregistrasifk,
+                    "taskid": taskid,
+                    "waktu": waktu,
+                    "statuskirim": statuskirim
+                }
+                medifirstService.postNonMessage('rawatjalan/save-monitoring-taskid', json).then(function (e) { })
             }
         
             //***********************************
