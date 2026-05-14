@@ -1338,6 +1338,7 @@ class LoggingController extends ApiController
         $logUser->keterangan = $request['keterangan'];
         $logUser->reqlogging = $request['reqlogging'];
         $logUser->reslogging = $request['reslogging'];
+        $logUser->uniqtaksid = $request['uniqtaksid'];
         $logUser->objectloginuserfk =  $dataLogin['userData']['id'];
         $logUser->tanggal = $this->getDateTime()->format('Y-m-d H:i:s');
         try {

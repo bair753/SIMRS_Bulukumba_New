@@ -11871,6 +11871,8 @@ GROUP BY y.KET
             'nomorantrean' => $data->nomorantrean ."-". str_pad((int)$data->angkaantrean, 4, "0", STR_PAD_LEFT),
             'angkaantrean' => $data->angkaantrean,
             'estimasidilayani' => strtotime(date('Y-m-d H:i:s')) * 1000,
+            'kodebpjs' => $data->kodebpjs,
+            'kdruangan' => $data->kdruangan,
             'sisakuotajkn' => 0,
             'kuotajkn' => 0,
             'sisakuotanonjkn' => 0,

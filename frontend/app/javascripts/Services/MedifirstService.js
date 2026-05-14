@@ -222,10 +222,10 @@ define(['Configuration'], function (config) {
                 });
             },
 
-            postLoggingAntrol: function(jenislog,referensi, noreff,keterangan,reqlogging,reslogging) {
+            postLoggingAntrol: function(jenislog,referensi, noreff,keterangan,reqlogging,reslogging,uniqtaksid) {
                 return r.get({
                    url: baseApiBackend + "sysadmin/logging/save-log-all-taksid?jenislog="+jenislog+"&referensi=" +
-                        referensi +'&noreff='+ noreff +'&keterangan='+keterangan +'&reqlogging='+reqlogging +'&reslogging='+reslogging
+                        referensi +'&noreff='+ noreff +'&keterangan='+keterangan +'&reqlogging='+reqlogging +'&reslogging='+reslogging+'&uniqtaksid='+uniqtaksid
                 });
             },
 

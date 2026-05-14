@@ -1922,6 +1922,7 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                     asuransipasien: asuransipasien,
                     pemakaianasuransi: pemakaianasuransi
                 }
+                
                 medifirstService.post("registrasi/save-asuransipasien", objSave).then(function (e) {
                     GetDataPasien($scope.currentNorecPD)
                     startProcess($scope.currentNorecPD)
@@ -1991,15 +1992,17 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                             kodebpjsDokterR = 0
                         }    
                         var kodeDokterBPJS = ''
-                        for (var i = z.data.response.length - 1; i >= 0; i--) {
-                            const element = z.data.response[i]
-                            if(element.kodedokter == kodebpjsDokterR){
-                                kodeDokterBPJS = {
-                                    "jadwal" : element.jadwal,
-                                    "namadokter" : element.namadokter,
-                                    "kodedokter" : element.kodedokter,
+                        if (z.data.response) {
+                            for (var i = z.data.response.length - 1; i >= 0; i--) {
+                                const element = z.data.response[i]
+                                if(element.kodedokter == kodebpjsDokterR){
+                                    kodeDokterBPJS = {
+                                        "jadwal" : element.jadwal,
+                                        "namadokter" : element.namadokter,
+                                        "kodedokter" : element.kodedokter,
+                                    }
+                                    break;
                                 }
-                                break;
                             }
                         }
                         // if(kodeDokterBPJS == '')
@@ -2007,10 +2010,11 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
 
                         var nobpjs = params.data.nomorkartu
                         if(nobpjs==null)nobpjs= '0000000000000'
-                        var noref= nobpjs+params.data.norm
+                        var noref= $scope.model.noRujukan //nobpjs+params.data.norm
                         let JENIS = 1
                         let jenisKunjungan = 1 // {1 (Rujukan FKTP), 2 (Rujukan Internal), 3 (Kontrol), 4 (Rujukan Antar RS)}
-                        if(isBPJS){
+                        console.log('bjs', $scope.bpjs);
+                        if($scope.bpjs == true){
                             var jsonRujukan = {
                                 "url": `Rujukan/Peserta/${params.data.nomorkartu}`,
                                 "method": "GET",
@@ -2091,17 +2095,17 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                                     "data": {
                                     "kodebooking": kodebooking, //noregistrasi,
                                     "jenispasien": params.data.jenispasien, //isBPJS ? 'JKN' : 'NON JKN',
-                                    "nomorkartu": params.data.nokartu, //isBPJS ? ($scope.item.pasien.nobpjs ? $scope.item.pasien.nobpjs : ""):"",
+                                    "nomorkartu": params.data.nomorkartu, //isBPJS ? ($scope.item.pasien.nobpjs ? $scope.item.pasien.nobpjs : ""):"",
                                     "nik": params.data.nik, //$scope.item.pasien.noidentitas ? $scope.item.pasien.noidentitas : "",
                                     "nohp": params.data.nohp, //$scope.item.pasien.notelepon ? $scope.item.pasien.notelepon.substring(0,12) : "000000000000",
-                                    "kodepoli": params.data.kodepoli, //$scope.item.ruangan.kodebpjs ?$scope.item.ruangan.kodebpjs :'',
+                                    "kodepoli": params.data.kodebpjs, //$scope.item.ruangan.kodebpjs ?$scope.item.ruangan.kodebpjs :'',
                                     "namapoli": params.data.namapoli, //$scope.item.ruangan.namaruangan ,
                                     "pasienbaru": params.data.pasienbaru, //status,
                                     "norm": params.data.norm, //$scope.item.pasien.nocm,
                                     "tanggalperiksa": params.data.tanggalperiksa, //moment($scope.item.tglRegistrasi).format('YYYY-MM-DD'),
                                     "kodedokter": params.data.kodedokter, //kodeDokterBPJS != ''? kodeDokterBPJS.kodedokter:'',
                                     "namadokter": params.data.namadokter, //kodeDokterBPJS != ''? kodeDokterBPJS.namadokter:'', 
-                                    "jampraktek":   kodeDokterBPJS != ''? kodeDokterBPJS.jadwal:'',  
+                                    "jampraktek":   kodeDokterBPJS != ''? kodeDokterBPJS.jadwal:params.data.jampraktek,  
                                     "jeniskunjungan": jenisKunjungan,
                                     "nomorreferensi": noref.substring(0, 19),
                                     "nomorantrean": params.data.nomorantrean, //apd.noantrian,
@@ -2124,12 +2128,13 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                                         JSON.stringify(data) + ' | ' + JSON.stringify(x.data))
         
                                     medifirstService.postLoggingAntrol(
-                                        `Antrol Add Task ID 1 - Dengan No Registrasi ${kodebooking}`,
+                                        `Antrol Task ID - Dengan No Registrasi ${kodebooking}`,
                                         'norec Pasien Daftar',
                                         kodebooking,
-                                        `Tambah Antrean KE 1 Kode ${kodebooking}`,
+                                        `Tambah Antrean Kode ${kodebooking}`,
                                         `Request: ${JSON.stringify(data)}`,
-                                        `Response: ${JSON.stringify(x.data)}`
+                                        `Response: ${JSON.stringify(x.data)}`,
+                                        `${1}`
                                     );
                                 })
                             }
@@ -2165,6 +2170,16 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                     medifirstService.postLogging('Antrol Task ID 1 ', 'norec Pasien Daftar',
                         kodebooking, 'Tambah Antrean KE 1 Kode ' + kodebooking + ' | ' +
                         JSON.stringify(data) + ' | ' + JSON.stringify(x.data))
+
+                    medifirstService.postLoggingAntrol(
+                            `Antrol Task ID - Dengan No Registrasi ${kodebooking}`,
+                            'norec Pasien Daftar',
+                            kodebooking,
+                            `Update Antrean Kode ${kodebooking}`,
+                            `Request: ${JSON.stringify(data)}`,
+                            `Response: ${JSON.stringify(x.data)}`,
+                            `${data.data.taskid}`
+                    );
                 })
             }
 
@@ -2191,6 +2206,15 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                     medifirstService.postLogging('Antrol Task ID 2 ', 'norec Pasien Daftar',
                         kodebooking, 'Tambah Antrean KE 2 Kode ' + kodebooking + ' | ' +
                         JSON.stringify(data) + ' | ' + JSON.stringify(x.data))
+                    medifirstService.postLoggingAntrol(
+                        `Antrol Task ID - Dengan No Registrasi ${kodebooking}`,
+                        'norec Pasien Daftar',
+                        kodebooking,
+                        `Update Antrean Kode ${kodebooking}`,
+                        `Request: ${JSON.stringify(data)}`,
+                        `Response: ${JSON.stringify(x.data)}`,
+                        `${data.data.taskid}`
+                    );
                 })
             }
 
@@ -2215,6 +2239,16 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                     medifirstService.postLogging('Antrol Task ID 3 ', 'norec Pasien Daftar',
                         kodebooking, 'Tambah Antrean KE 3 Kode ' + kodebooking + ' | ' +
                         JSON.stringify(data) + ' | ' + JSON.stringify(x.data))
+
+                    medifirstService.postLoggingAntrol(
+                        `Antrol Task ID - Dengan No Registrasi ${kodebooking}`,
+                        'norec Pasien Daftar',
+                        kodebooking,
+                        `Update Antrean Kode ${kodebooking}`,
+                        `Request: ${JSON.stringify(data)}`,
+                        `Response: ${JSON.stringify(x.data)}`,
+                        `${data.data.taskid}`
+                    );
                 })
             }
 
@@ -2408,7 +2442,8 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                     data.data.kodebooking,
                     `Tambah Antrean KE ${taskid} Kode ${data.data.kodebooking}`,
                     `Request: ${JSON.stringify(data.data)}`,
-                    `Response: ${JSON.stringify(response.data)}`
+                    `Response: ${JSON.stringify(response.data)}`,
+                    `${taskid}`
                 );
             }
             
