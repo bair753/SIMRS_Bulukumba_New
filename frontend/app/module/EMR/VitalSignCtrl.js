@@ -619,15 +619,25 @@ define(['initialize'], function (initialize) {
                             repeatSendTaskId(norec_pd, 4)
                         }
                         // simpan log
-                        medifirstService.postLoggingAntrol(
-                            `Antrol Task ID - Dengan No Registrasi ${e.data.kodebooking}`,
-                            'norec Pasien Daftar',
-                            e.data.kodebooking,
-                            `Update Antrean Kode ${e.data.kodebooking}`,
-                            `Request: ${JSON.stringify(data)}`,
-                            `Response: ${JSON.stringify(x.data)}`,
-                            `${data.data.taskid}`
-                        );
+                        var validIds = [
+                            782, 784, 785, 787, 788, 789, 790, 791, 792, 793, 
+                            794, 795, 796, 797, 798, 799, 800, 801, 802, 803, 
+                            806, 808, 809, 810, 836, 838, 846, 847
+                        ];
+
+                        if ($scope.cc.objectruanganfk) {
+                            if (validIds.includes($scope.cc.objectruanganfk)) {
+                                medifirstService.postLoggingAntrol(
+                                    `Antrol Task ID - Dengan No Registrasi ${e.data.kodebooking}`,
+                                    'norec Pasien Daftar',
+                                    e.data.kodebooking,
+                                    `Update Antrean Kode ${e.data.kodebooking}`,
+                                    `Request: ${JSON.stringify(data)}`,
+                                    `Response: ${JSON.stringify(x.data)}`,
+                                    `${data.data.taskid}`
+                                );
+                            }
+                        }
 
                         medifirstService.postLogging('Antrol Task ID', 'norec Pasien Daftar',
                             e.data.kodebooking, 'Tambah Antrean KE 4 Kode ' +  e.data.kodebooking + ' | ' +

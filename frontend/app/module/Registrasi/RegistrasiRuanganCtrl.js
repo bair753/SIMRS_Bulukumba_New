@@ -1707,12 +1707,13 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                          JSON.stringify($scope.dataAntrol) + ' | '+ JSON.stringify(e.data))
 
                         medifirstService.postLoggingAntrol(
-                            `Antrol Add Task ID 1 - Dengan No Registrasi ${noregistrasi}`,
+                            `Antrol Task ID - Dengan No Registrasi ${noregistrasi}`,
                             'norec Pasien Daftar',
                             $scope.dataAntrol.data.kodebooking,
-                            `Tambah Antrean KE 1 Kode ${$scope.dataAntrol.data.kodebooking}`,
+                            `Tambah Antrean Kode ${$scope.dataAntrol.data.kodebooking}`,
                             `Request: ${JSON.stringify($scope.dataAntrol)}`,
-                            `Response: ${JSON.stringify(e.data)}`
+                            `Response: ${JSON.stringify(e.data)}`,
+                            `${1}`
                         );
 
                         if(e.data.metaData.code == 201)return

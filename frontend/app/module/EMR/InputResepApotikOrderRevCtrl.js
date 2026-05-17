@@ -1985,15 +1985,26 @@ define(['initialize'], function (initialize) {
                     repeatSendTaskId(norec_pd, 5)
                 }
         
-                medifirstService.postLoggingAntrol(
-                    `Antrol Task ID - Dengan No Registrasi ${param}`,
-                    'norec Pasien Daftar',
-                    param,
-                    `Update Antrean Kode ${param}`,
-                    `Request: ${JSON.stringify(data)}`,
-                    `Response: ${JSON.stringify(e.data)}`,
-                    `${data.data.taskid}`
-                );
+                var validIds = [
+                    782, 784, 785, 787, 788, 789, 790, 791, 792, 793, 
+                    794, 795, 796, 797, 798, 799, 800, 801, 802, 803, 
+                    806, 808, 809, 810, 836, 838, 846, 847
+                ];
+
+                if ($scope.item.ruangan && $scope.item.ruangan.id) {
+                    if (validIds.includes($scope.item.ruangan.id)) {
+                        medifirstService.postLoggingAntrol(
+                            `Antrol Task ID - Dengan No Registrasi ${param}`,
+                            'norec Pasien Daftar',
+                            param,
+                            `Update Antrean Kode ${param}`,
+                            `Request: ${JSON.stringify(data)}`,
+                            `Response: ${JSON.stringify(e.data)}`,
+                            `${data.data.taskid}`
+                        );
+                    }
+                }
+                
         
                 // Task ID 6 → selisih 20 menit + random offset dari task ID 5
                 var waktuTaskId6 = waktuTaskId5 + (20 * 60 * 1000) + randomOffset()
@@ -2017,15 +2028,25 @@ define(['initialize'], function (initialize) {
                         repeatSendTaskId(norec_pd, 6)
                     }
         
-                    medifirstService.postLoggingAntrol(
-                        `Antrol Task ID - Dengan No Registrasi ${param}`,
-                        'norec Pasien Daftar',
-                        param,
-                        `Update Antrean Kode ${param}`,
-                        `Request: ${JSON.stringify(dataTaskId6)}`,
-                        `Response: ${JSON.stringify(e6.data)}`,
-                        `${dataTaskId6.data.taskid}`
-                    );
+                    var validIds = [
+                        782, 784, 785, 787, 788, 789, 790, 791, 792, 793, 
+                        794, 795, 796, 797, 798, 799, 800, 801, 802, 803, 
+                        806, 808, 809, 810, 836, 838, 846, 847
+                    ];
+
+                    if ($scope.item.ruangan && $scope.item.ruangan.id) {
+                        if (validIds.includes($scope.item.ruangan.id)) {
+                            medifirstService.postLoggingAntrol(
+                                `Antrol Task ID - Dengan No Registrasi ${param}`,
+                                'norec Pasien Daftar',
+                                param,
+                                `Update Antrean Kode ${param}`,
+                                `Request: ${JSON.stringify(dataTaskId6)}`,
+                                `Response: ${JSON.stringify(e6.data)}`,
+                                `${dataTaskId6.data.taskid}`
+                            );
+                        }
+                    }
         
                     // Task ID 7 → selisih 15 menit + random offset dari task ID 6
                     var waktuTaskId7 = waktuTaskId6 + (15 * 60 * 1000) + randomOffset()
@@ -2049,15 +2070,26 @@ define(['initialize'], function (initialize) {
                             repeatSendTaskId(norec_pd, 7)
                         }
         
-                        medifirstService.postLoggingAntrol(
-                            `Antrol Task ID - Dengan No Registrasi ${param}`,
-                            'norec Pasien Daftar',
-                            param,
-                            `Update Antrean Kode ${param}`,
-                            `Request: ${JSON.stringify(dataTaskId7)}`,
-                            `Response: ${JSON.stringify(e7.data)}`,
-                            `${dataTaskId7.data.taskid}`
-                        );
+                        var validIds = [
+                            782, 784, 785, 787, 788, 789, 790, 791, 792, 793, 
+                            794, 795, 796, 797, 798, 799, 800, 801, 802, 803, 
+                            806, 808, 809, 810, 836, 838, 846, 847
+                        ];
+
+                        if ($scope.item.ruangan && $scope.item.ruangan.id) {
+                            if (validIds.includes($scope.item.ruangan.id)) {
+                                medifirstService.postLoggingAntrol(
+                                    `Antrol Task ID - Dengan No Registrasi ${param}`,
+                                    'norec Pasien Daftar',
+                                    param,
+                                    `Update Antrean Kode ${param}`,
+                                    `Request: ${JSON.stringify(dataTaskId7)}`,
+                                    `Response: ${JSON.stringify(e7.data)}`,
+                                    `${dataTaskId7.data.taskid}`
+                                );
+                            }
+                        }
+                        
                     })
                 })
             })
