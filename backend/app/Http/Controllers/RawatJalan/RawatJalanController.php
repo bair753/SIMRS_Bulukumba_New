@@ -2040,6 +2040,515 @@ class RawatJalanController extends ApiController
         return $this->respond($data);
     }
 
+    public function getInformasiMonitoringTaksIdBPJS(Request $request)
+    {
+
+        $kdProfile = $this->getDataKdProfile($request);
+        $tglawal = $request['tglAwal'];
+        $tglakhir = $request['tglAkhir'];
+
+        $nocm = "";
+        if (isset($request['norm']) && $request['norm'] != '' && $request['norm'] != null) {
+            $nocm = " and ps.nocm = '" . $request['norm'] . "'";
+        }
+        $nama = "";
+        if (isset($request['nama']) && $request['nama'] != '' && $request['nama'] != null) {
+            $nama = " and ps.namapasien ilike '%" . $request['nama'] . "%'";
+        }
+        $ruangId = "";
+        if (isset($request['ruangId']) && $request['ruangId'] != '' && $request['ruangId'] != null) {
+            $ruangId = " and rm.id = '" . $request['ruangId'] . "'";
+        }
+        $kdBooking = "";
+        if (isset($request['kdBooking']) && $request['kdBooking'] != '' && $request['kdBooking'] != null) {
+            $kdBooking = " and pd.noregistrasi = '" . $request['kdBooking'] . "'";
+        }
+        $kelId = "";
+        if (isset($request['kelId']) && $request['kelId'] != '' && $request['kelId'] != null) {
+            $kelId = " and kp.id = '" . $request['kelId'] . "'";
+        }
+
+        $data = collect(DB::select("
+            SELECT DISTINCT ON (ps.nocm)
+                ps.nocm AS norm,
+        --        pd.noregistrasi AS noregistrasi,
+                pd.norec as norec_pd,
+                pd.tglregistrasi,
+                pa.nosep,
+                COALESCE(NULLIF(TRIM(pd.statusschedule), ''), pd.noregistrasi) AS kodebooking,
+
+                -- Task ID 1-4 dari loggingtaksid_t
+                MAX(CASE WHEN lt.uniqtaksid::INT = 1 THEN lt.uniqtaksid END) AS taskid1,
+                MAX(CASE WHEN lt.uniqtaksid::INT = 2 THEN lt.uniqtaksid END) AS taskid2,
+                MAX(CASE WHEN lt.uniqtaksid::INT = 3 THEN lt.uniqtaksid END) AS taskid3,
+                MAX(CASE WHEN lt.uniqtaksid::INT = 4 THEN lt.uniqtaksid END) AS taskid4,
+
+                -- Task ID 5-7 dari monitoringtaskid_t
+                MAX(CASE WHEN mtd.taskid = 5 THEN mtd.taskid END) AS taskid5,
+                MAX(CASE WHEN mtd.taskid = 6 THEN mtd.taskid END) AS taskid6,
+                MAX(CASE WHEN mtd.taskid = 7 THEN mtd.taskid END) AS taskid7,
+
+                -- Status 1-4 dari loggingtaksid_t
+                BOOL_OR(lt.uniqtaksid::INT = 1) AS status_1,
+                BOOL_OR(lt.uniqtaksid::INT = 2) AS status_2,
+                BOOL_OR(lt.uniqtaksid::INT = 3) AS status_3,
+                BOOL_OR(lt.uniqtaksid::INT = 4) AS status_4,
+
+                -- Status 5-7 dari monitoringtaskid_t
+                BOOL_OR(mtd.taskid = 5) AS status_5,
+                BOOL_OR(mtd.taskid = 6) AS status_6,
+                BOOL_OR(mtd.taskid = 7) AS status_7,
+
+                -- Statuskirim 1-4: true jika reslogging mengandung \"code\":200
+                BOOL_OR(CASE WHEN lt.uniqtaksid::INT = 1 THEN lt.reslogging ~ '\"code\"\s*:\s*200' ELSE false END) AS statuskirim_1,
+                BOOL_OR(CASE WHEN lt.uniqtaksid::INT = 2 THEN lt.reslogging ~ '\"code\"\s*:\s*200' ELSE false END) AS statuskirim_2,
+                BOOL_OR(CASE WHEN lt.uniqtaksid::INT = 3 THEN lt.reslogging ~ '\"code\"\s*:\s*200' ELSE false END) AS statuskirim_3,
+                BOOL_OR(CASE WHEN lt.uniqtaksid::INT = 4 THEN lt.reslogging ~ '\"code\"\s*:\s*200' ELSE false END) AS statuskirim_4,
+
+                -- Statuskirim 5-7 dari kolom statuskirim monitoringtaskid_t
+                BOOL_OR(CASE WHEN mtd.taskid = 5 THEN mtd.statuskirim ELSE false END) AS statuskirim_5,
+                BOOL_OR(CASE WHEN mtd.taskid = 6 THEN mtd.statuskirim ELSE false END) AS statuskirim_6,
+                BOOL_OR(CASE WHEN mtd.taskid = 7 THEN mtd.statuskirim ELSE false END) AS statuskirim_7,
+
+                -- Waktu semua dari monitoringtaskid_t
+                COALESCE(MAX(CASE WHEN mtd.taskid = 1 THEN mtd.waktu::text END), '-') AS waktutaskid1,
+                COALESCE(MAX(CASE WHEN mtd.taskid = 2 THEN mtd.waktu::text END), '-') AS waktutaskid2,
+                COALESCE(MAX(CASE WHEN mtd.taskid = 3 THEN mtd.waktu::text END), '-') AS waktutaskid3,
+                COALESCE(MAX(CASE WHEN mtd.taskid = 4 THEN mtd.waktu::text END), '-') AS waktutaskid4,
+                COALESCE(MAX(CASE WHEN mtd.taskid = 5 THEN mtd.waktu::text END), '-') AS waktutaskid5,
+                COALESCE(MAX(CASE WHEN mtd.taskid = 6 THEN mtd.waktu::text END), '-') AS waktutaskid6,
+                COALESCE(MAX(CASE WHEN mtd.taskid = 7 THEN mtd.waktu::text END), '-') AS waktutaskid7,
+
+                ps.namapasien,
+                rm.namaruangan
+
+            FROM pasiendaftar_t pd
+            JOIN pasien_m ps ON pd.nocmfk = ps.id
+            -- JOIN loggingtaksid untuk task 1-4 (status & statuskirim)
+            LEFT JOIN loggingtaksid_t lt ON (
+                TRIM(lt.noreff) = pd.noregistrasi
+                OR TRIM(lt.noreff) = pd.statusschedule
+            ) AND lt.uniqtaksid::INT BETWEEN 1 AND 4
+            -- JOIN monitoringtaskid untuk semua task (waktu 1-7, status & statuskirim 5-7)
+            LEFT JOIN monitoringtaskid_t mtd ON mtd.noregistrasifk = pd.norec
+            LEFT JOIN ruangan_m rm ON rm.id = pd.objectruanganlastfk
+            LEFT JOIN batalregistrasi_t br ON br.pasiendaftarfk = pd.norec
+            LEFT JOIN kelompokpasien_m kp ON kp.id = pd.objectkelompokpasienlastfk
+            LEFT JOIN departemen_m dept ON dept.id = rm.objectdepartemenfk
+            LEFT JOIN pemakaianasuransi_t pa ON pa.noregistrasifk = pd.norec
+            WHERE
+                rm.objectdepartemenfk = 18
+                AND pd.objectkelompokpasienlastfk = '2'
+                AND pd.statusenabled = true
+                $nocm
+                $kdBooking
+                AND ps.statusenabled = true
+                AND br.norec IS NULL
+                AND pd.tglregistrasi BETWEEN '$tglawal' and '$tglakhir'
+            GROUP BY
+                ps.nocm,
+                pd.noregistrasi,
+                pd.norec,
+                pd.tglregistrasi,
+                pa.nosep,
+                pd.statusschedule,
+                ps.namapasien,
+                rm.namaruangan
+            ORDER BY ps.nocm, pd.tglregistrasi desc;
+        "));
+
+        $rekapan = collect(DB::select("
+            WITH raw_data_rekapan AS (
+                SELECT
+                    rm.namaruangan,
+                    pd.noregistrasi,
+                    ps.nocm,
+                    COALESCE(NULLIF(TRIM(pd.statusschedule), ''), pd.noregistrasi) AS kodebooking,
+                    COALESCE(MAX(CASE WHEN mtd.taskid = 1 THEN mtd.waktu::text END), '-') AS waktutaskid1,
+                    COALESCE(MAX(CASE WHEN mtd.taskid = 2 THEN mtd.waktu::text END), '-') AS waktutaskid2,
+                    COALESCE(MAX(CASE WHEN mtd.taskid = 3 THEN mtd.waktu::text END), '-') AS waktutaskid3,
+                    COALESCE(MAX(CASE WHEN mtd.taskid = 4 THEN mtd.waktu::text END), '-') AS waktutaskid4,
+                    COALESCE(MAX(CASE WHEN mtd.taskid = 5 THEN mtd.waktu::text END), '-') AS waktutaskid5,
+                    COALESCE(MAX(CASE WHEN mtd.taskid = 6 THEN mtd.waktu::text END), '-') AS waktutaskid6,
+                    COALESCE(MAX(CASE WHEN mtd.taskid = 7 THEN mtd.waktu::text END), '-') AS waktutaskid7,
+                    
+                    -- HITUNG DURASI TASK 1 KE 2
+                    EXTRACT(EPOCH FROM (
+                        CASE 
+                            WHEN MAX(CASE WHEN mtd.taskid = 2 THEN mtd.waktu::text END) IS NULL OR MAX(CASE WHEN mtd.taskid = 2 THEN mtd.waktu::text END) = '-' THEN NULL
+                            WHEN MAX(CASE WHEN mtd.taskid = 2 THEN mtd.waktu::text END) ~ '^[0-9]+$' THEN TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 2 THEN mtd.waktu::text END)::bigint / 1000)
+                            ELSE TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 2 THEN mtd.waktu::text END), 'DD-MM-YYYY HH24:MI:SS')
+                        END
+                        - 
+                        CASE 
+                            WHEN MAX(CASE WHEN mtd.taskid = 1 THEN mtd.waktu::text END) IS NULL OR MAX(CASE WHEN mtd.taskid = 1 THEN mtd.waktu::text END) = '-' THEN NULL
+                            WHEN MAX(CASE WHEN mtd.taskid = 1 THEN mtd.waktu::text END) ~ '^[0-9]+$' THEN TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 1 THEN mtd.waktu::text END)::bigint / 1000)
+                            ELSE TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 1 THEN mtd.waktu::text END), 'DD-MM-YYYY HH24:MI:SS')
+                        END
+                    )) / 60 AS durasi_1_2,
+                    
+                    -- DURASI TASK 2 KE 3
+                    EXTRACT(EPOCH FROM (
+                        CASE 
+                            WHEN MAX(CASE WHEN mtd.taskid = 3 THEN mtd.waktu::text END) IS NULL OR MAX(CASE WHEN mtd.taskid = 3 THEN mtd.waktu::text END) = '-' THEN NULL
+                            WHEN MAX(CASE WHEN mtd.taskid = 3 THEN mtd.waktu::text END) ~ '^[0-9]+$' THEN TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 3 THEN mtd.waktu::text END)::bigint / 1000)
+                            ELSE TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 3 THEN mtd.waktu::text END), 'DD-MM-YYYY HH24:MI:SS')
+                        END
+                        - 
+                        CASE 
+                            WHEN MAX(CASE WHEN mtd.taskid = 2 THEN mtd.waktu::text END) IS NULL OR MAX(CASE WHEN mtd.taskid = 2 THEN mtd.waktu::text END) = '-' THEN NULL
+                            WHEN MAX(CASE WHEN mtd.taskid = 2 THEN mtd.waktu::text END) ~ '^[0-9]+$' THEN TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 2 THEN mtd.waktu::text END)::bigint / 1000)
+                            ELSE TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 2 THEN mtd.waktu::text END), 'DD-MM-YYYY HH24:MI:SS')
+                        END
+                    )) / 60 AS durasi_2_3,
+
+                    -- DURASI TASK 3 KE 4
+                    EXTRACT(EPOCH FROM (
+                        CASE 
+                            WHEN MAX(CASE WHEN mtd.taskid = 4 THEN mtd.waktu::text END) IS NULL OR MAX(CASE WHEN mtd.taskid = 4 THEN mtd.waktu::text END) = '-' THEN NULL
+                            WHEN MAX(CASE WHEN mtd.taskid = 4 THEN mtd.waktu::text END) ~ '^[0-9]+$' THEN TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 4 THEN mtd.waktu::text END)::bigint / 1000)
+                            ELSE TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 4 THEN mtd.waktu::text END), 'DD-MM-YYYY HH24:MI:SS')
+                        END
+                        - 
+                        CASE 
+                            WHEN MAX(CASE WHEN mtd.taskid = 3 THEN mtd.waktu::text END) IS NULL OR MAX(CASE WHEN mtd.taskid = 3 THEN mtd.waktu::text END) = '-' THEN NULL
+                            WHEN MAX(CASE WHEN mtd.taskid = 3 THEN mtd.waktu::text END) ~ '^[0-9]+$' THEN TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 3 THEN mtd.waktu::text END)::bigint / 1000)
+                            ELSE TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 3 THEN mtd.waktu::text END), 'DD-MM-YYYY HH24:MI:SS')
+                        END
+                    )) / 60 AS durasi_3_4,
+
+                    -- DURASI TASK 4 KE 5
+                    EXTRACT(EPOCH FROM (
+                        CASE 
+                            WHEN MAX(CASE WHEN mtd.taskid = 5 THEN mtd.waktu::text END) IS NULL OR MAX(CASE WHEN mtd.taskid = 5 THEN mtd.waktu::text END) = '-' THEN NULL
+                            WHEN MAX(CASE WHEN mtd.taskid = 5 THEN mtd.waktu::text END) ~ '^[0-9]+$' THEN TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 5 THEN mtd.waktu::text END)::bigint / 1000)
+                            ELSE TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 5 THEN mtd.waktu::text END), 'DD-MM-YYYY HH24:MI:SS')
+                        END
+                        - 
+                        CASE 
+                            WHEN MAX(CASE WHEN mtd.taskid = 4 THEN mtd.waktu::text END) IS NULL OR MAX(CASE WHEN mtd.taskid = 4 THEN mtd.waktu::text END) = '-' THEN NULL
+                            WHEN MAX(CASE WHEN mtd.taskid = 4 THEN mtd.waktu::text END) ~ '^[0-9]+$' THEN TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 4 THEN mtd.waktu::text END)::bigint / 1000)
+                            ELSE TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 4 THEN mtd.waktu::text END), 'DD-MM-YYYY HH24:MI:SS')
+                        END
+                    )) / 60 AS durasi_4_5,
+
+                    -- DURASI TASK 5 KE 6
+                    EXTRACT(EPOCH FROM (
+                        CASE 
+                            WHEN MAX(CASE WHEN mtd.taskid = 6 THEN mtd.waktu::text END) IS NULL OR MAX(CASE WHEN mtd.taskid = 6 THEN mtd.waktu::text END) = '-' THEN NULL
+                            WHEN MAX(CASE WHEN mtd.taskid = 6 THEN mtd.waktu::text END) ~ '^[0-9]+$' THEN TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 6 THEN mtd.waktu::text END)::bigint / 1000)
+                            ELSE TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 6 THEN mtd.waktu::text END), 'DD-MM-YYYY HH24:MI:SS')
+                        END
+                        - 
+                        CASE 
+                            WHEN MAX(CASE WHEN mtd.taskid = 5 THEN mtd.waktu::text END) IS NULL OR MAX(CASE WHEN mtd.taskid = 5 THEN mtd.waktu::text END) = '-' THEN NULL
+                            WHEN MAX(CASE WHEN mtd.taskid = 5 THEN mtd.waktu::text END) ~ '^[0-9]+$' THEN TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 5 THEN mtd.waktu::text END)::bigint / 1000)
+                            ELSE TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 5 THEN mtd.waktu::text END), 'DD-MM-YYYY HH24:MI:SS')
+                        END
+                    )) / 60 AS durasi_5_6,
+
+                    -- DURASI TASK 6 KE 7
+                    EXTRACT(EPOCH FROM (
+                        CASE 
+                            WHEN MAX(CASE WHEN mtd.taskid = 7 THEN mtd.waktu::text END) IS NULL OR MAX(CASE WHEN mtd.taskid = 7 THEN mtd.waktu::text END) = '-' THEN NULL
+                            WHEN MAX(CASE WHEN mtd.taskid = 7 THEN mtd.waktu::text END) ~ '^[0-9]+$' THEN TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 7 THEN mtd.waktu::text END)::bigint / 1000)
+                            ELSE TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 7 THEN mtd.waktu::text END), 'DD-MM-YYYY HH24:MI:SS')
+                        END
+                        - 
+                        CASE 
+                            WHEN MAX(CASE WHEN mtd.taskid = 6 THEN mtd.waktu::text END) IS NULL OR MAX(CASE WHEN mtd.taskid = 6 THEN mtd.waktu::text END) = '-' THEN NULL
+                            WHEN MAX(CASE WHEN mtd.taskid = 6 THEN mtd.waktu::text END) ~ '^[0-9]+$' THEN TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 6 THEN mtd.waktu::text END)::bigint / 1000)
+                            ELSE TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 6 THEN mtd.waktu::text END), 'DD-MM-YYYY HH24:MI:SS')
+                        END
+                    )) / 60 AS durasi_6_7
+                FROM
+                    pasiendaftar_t pd
+                    JOIN pasien_m ps ON pd.nocmfk = ps.id
+                    LEFT JOIN monitoringtaskid_t mtd ON mtd.noregistrasifk = pd.norec
+                    LEFT JOIN ruangan_m rm ON rm.id = pd.objectruanganlastfk
+                    LEFT JOIN batalregistrasi_t br ON br.pasiendaftarfk = pd.norec
+                WHERE
+                    rm.objectdepartemenfk = 18
+                    AND pd.objectkelompokpasienlastfk = '2'
+                    AND pd.statusenabled = TRUE
+                    AND ps.statusenabled = TRUE
+                    AND br.norec IS NULL
+                    AND pd.tglregistrasi BETWEEN '$tglawal' AND '$tglakhir'
+                GROUP BY
+                    rm.namaruangan,
+                    pd.noregistrasi,
+                    ps.nocm,
+                    pd.statusschedule
+            ),
+
+            analisis AS (
+                SELECT
+                    namaruangan,
+                    COUNT(*) AS total_pasien,
+                    COUNT(NULLIF(waktutaskid1, '-')) AS jml_task1,
+                    COUNT(NULLIF(waktutaskid2, '-')) AS jml_task2,
+                    COUNT(NULLIF(waktutaskid3, '-')) AS jml_task3,
+                    COUNT(NULLIF(waktutaskid4, '-')) AS jml_task4,
+                    COUNT(NULLIF(waktutaskid5, '-')) AS jml_task5,
+                    COUNT(NULLIF(waktutaskid6, '-')) AS jml_task6,
+                    COUNT(NULLIF(waktutaskid7, '-')) AS jml_task7,
+                    ROUND(AVG(COALESCE(durasi_1_2, 0) + COALESCE(durasi_2_3, 0))::numeric, 2) AS avg_durasi_1_3,
+                    ROUND(AVG(durasi_3_4)::numeric, 2) AS avg_durasi_3_4,
+                    ROUND(AVG(durasi_4_5)::numeric, 2) AS avg_durasi_4_5,
+                    ROUND(AVG(durasi_5_6)::numeric, 2) AS avg_durasi_5_6,
+                    ROUND(AVG(durasi_6_7)::numeric, 2) AS avg_durasi_6_7,
+                    COUNT(*) FILTER (
+                        WHERE waktutaskid3 <> '-'
+                        AND waktutaskid4 <> '-'
+                        AND waktutaskid5 <> '-'
+                        AND waktutaskid6 <> '-'
+                        AND waktutaskid7 <> '-'
+                    ) AS pasien_lengkap
+                FROM raw_data_rekapan
+                GROUP BY namaruangan
+            ),
+
+            semua_pasien AS (
+                SELECT
+                    namaruangan,
+                    noregistrasi
+                FROM raw_data_rekapan
+            ),
+
+            pasien_tidak_lengkap AS (
+                SELECT
+                    namaruangan,
+                    noregistrasi
+                FROM raw_data_rekapan
+                WHERE (
+                    waktutaskid3 = '-'
+                    OR waktutaskid4 = '-'
+                    OR waktutaskid5 = '-'
+                    OR waktutaskid6 = '-'
+                    OR waktutaskid7 = '-'
+                )
+            )
+
+            SELECT
+                a.*,
+                ROUND((jml_task1 * 100.0) / total_pasien, 1) AS persen_task1,
+                ROUND((jml_task2 * 100.0) / total_pasien, 1) AS persen_task2,
+                ROUND((jml_task3 * 100.0) / total_pasien, 1) AS persen_task3,
+                ROUND((jml_task4 * 100.0) / total_pasien, 1) AS persen_task4,
+                ROUND((jml_task5 * 100.0) / total_pasien, 1) AS persen_task5,
+                ROUND((jml_task6 * 100.0) / total_pasien, 1) AS persen_task6,
+                ROUND((jml_task7 * 100.0) / total_pasien, 1) AS persen_task7,
+                (total_pasien - pasien_lengkap) AS pasien_tidak_lengkap,
+                ARRAY(
+                    SELECT sp.noregistrasi
+                    FROM semua_pasien sp
+                    WHERE sp.namaruangan = a.namaruangan
+                ) AS semua_noregistrasi,
+                ARRAY(
+                    SELECT pt.noregistrasi
+                    FROM pasien_tidak_lengkap pt
+                    WHERE pt.namaruangan = a.namaruangan
+                ) AS noregistrasi_tidak_lengkap
+            FROM analisis a;
+        "));
+
+        $monitoring = collect(DB::select("
+            WITH raw_data AS (
+                SELECT
+                    rm.namaruangan,
+                    pd.noregistrasi, -- Ditambahkan agar bisa dipanggil di CTE durasi_total
+                    COALESCE(NULLIF(TRIM(pd.statusschedule), ''), pd.noregistrasi) AS kodebooking,
+                    EXTRACT(EPOCH FROM (
+                        -- Ambil waktu task 2, bersihkan formatnya, lalu jadikan TIMESTAMP
+                        CASE 
+                            WHEN MAX(CASE WHEN mtd.taskid = 2 THEN mtd.waktu::text END) IS NULL OR MAX(CASE WHEN mtd.taskid = 2 THEN mtd.waktu::text END) = '-' THEN NULL
+                            WHEN MAX(CASE WHEN mtd.taskid = 2 THEN mtd.waktu::text END) ~ '^[0-9]+$' THEN TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 2 THEN mtd.waktu::text END)::bigint / 1000)
+                            ELSE TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 2 THEN mtd.waktu::text END), 'DD-MM-YYYY HH24:MI:SS')
+                        END
+                        - 
+                        -- Ambil waktu task 1, bersihkan formatnya, lalu jadikan TIMESTAMP
+                        CASE 
+                            WHEN MAX(CASE WHEN mtd.taskid = 1 THEN mtd.waktu::text END) IS NULL OR MAX(CASE WHEN mtd.taskid = 1 THEN mtd.waktu::text END) = '-' THEN NULL
+                            WHEN MAX(CASE WHEN mtd.taskid = 1 THEN mtd.waktu::text END) ~ '^[0-9]+$' THEN TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 1 THEN mtd.waktu::text END)::bigint / 1000)
+                            ELSE TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 1 THEN mtd.waktu::text END), 'DD-MM-YYYY HH24:MI:SS')
+                        END
+                    )) / 60 AS durasi_1_2,
+                     -- DURASI TASK 2 KE 3
+                    EXTRACT(EPOCH FROM (
+                        CASE 
+                            WHEN MAX(CASE WHEN mtd.taskid = 3 THEN mtd.waktu::text END) IS NULL OR MAX(CASE WHEN mtd.taskid = 3 THEN mtd.waktu::text END) = '-' THEN NULL
+                            WHEN MAX(CASE WHEN mtd.taskid = 3 THEN mtd.waktu::text END) ~ '^[0-9]+$' THEN TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 3 THEN mtd.waktu::text END)::bigint / 1000)
+                            ELSE TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 3 THEN mtd.waktu::text END), 'DD-MM-YYYY HH24:MI:SS')
+                        END
+                        - 
+                        CASE 
+                            WHEN MAX(CASE WHEN mtd.taskid = 2 THEN mtd.waktu::text END) IS NULL OR MAX(CASE WHEN mtd.taskid = 2 THEN mtd.waktu::text END) = '-' THEN NULL
+                            WHEN MAX(CASE WHEN mtd.taskid = 2 THEN mtd.waktu::text END) ~ '^[0-9]+$' THEN TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 2 THEN mtd.waktu::text END)::bigint / 1000)
+                            ELSE TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 2 THEN mtd.waktu::text END), 'DD-MM-YYYY HH24:MI:SS')
+                        END
+                    )) / 60 AS durasi_2_3,
+
+                    -- DURASI TASK 3 KE 4
+                    EXTRACT(EPOCH FROM (
+                        CASE 
+                            WHEN MAX(CASE WHEN mtd.taskid = 4 THEN mtd.waktu::text END) IS NULL OR MAX(CASE WHEN mtd.taskid = 4 THEN mtd.waktu::text END) = '-' THEN NULL
+                            WHEN MAX(CASE WHEN mtd.taskid = 4 THEN mtd.waktu::text END) ~ '^[0-9]+$' THEN TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 4 THEN mtd.waktu::text END)::bigint / 1000)
+                            ELSE TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 4 THEN mtd.waktu::text END), 'DD-MM-YYYY HH24:MI:SS')
+                        END
+                        - 
+                        CASE 
+                            WHEN MAX(CASE WHEN mtd.taskid = 3 THEN mtd.waktu::text END) IS NULL OR MAX(CASE WHEN mtd.taskid = 3 THEN mtd.waktu::text END) = '-' THEN NULL
+                            WHEN MAX(CASE WHEN mtd.taskid = 3 THEN mtd.waktu::text END) ~ '^[0-9]+$' THEN TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 3 THEN mtd.waktu::text END)::bigint / 1000)
+                            ELSE TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 3 THEN mtd.waktu::text END), 'DD-MM-YYYY HH24:MI:SS')
+                        END
+                    )) / 60 AS durasi_3_4,
+
+                    -- DURASI TASK 4 KE 5
+                    EXTRACT(EPOCH FROM (
+                        CASE 
+                            WHEN MAX(CASE WHEN mtd.taskid = 5 THEN mtd.waktu::text END) IS NULL OR MAX(CASE WHEN mtd.taskid = 5 THEN mtd.waktu::text END) = '-' THEN NULL
+                            WHEN MAX(CASE WHEN mtd.taskid = 5 THEN mtd.waktu::text END) ~ '^[0-9]+$' THEN TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 5 THEN mtd.waktu::text END)::bigint / 1000)
+                            ELSE TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 5 THEN mtd.waktu::text END), 'DD-MM-YYYY HH24:MI:SS')
+                        END
+                        - 
+                        CASE 
+                            WHEN MAX(CASE WHEN mtd.taskid = 4 THEN mtd.waktu::text END) IS NULL OR MAX(CASE WHEN mtd.taskid = 4 THEN mtd.waktu::text END) = '-' THEN NULL
+                            WHEN MAX(CASE WHEN mtd.taskid = 4 THEN mtd.waktu::text END) ~ '^[0-9]+$' THEN TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 4 THEN mtd.waktu::text END)::bigint / 1000)
+                            ELSE TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 4 THEN mtd.waktu::text END), 'DD-MM-YYYY HH24:MI:SS')
+                        END
+                    )) / 60 AS durasi_4_5,
+
+                    -- DURASI TASK 5 KE 6
+                    EXTRACT(EPOCH FROM (
+                        CASE 
+                            WHEN MAX(CASE WHEN mtd.taskid = 6 THEN mtd.waktu::text END) IS NULL OR MAX(CASE WHEN mtd.taskid = 6 THEN mtd.waktu::text END) = '-' THEN NULL
+                            WHEN MAX(CASE WHEN mtd.taskid = 6 THEN mtd.waktu::text END) ~ '^[0-9]+$' THEN TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 6 THEN mtd.waktu::text END)::bigint / 1000)
+                            ELSE TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 6 THEN mtd.waktu::text END), 'DD-MM-YYYY HH24:MI:SS')
+                        END
+                        - 
+                        CASE 
+                            WHEN MAX(CASE WHEN mtd.taskid = 5 THEN mtd.waktu::text END) IS NULL OR MAX(CASE WHEN mtd.taskid = 5 THEN mtd.waktu::text END) = '-' THEN NULL
+                            WHEN MAX(CASE WHEN mtd.taskid = 5 THEN mtd.waktu::text END) ~ '^[0-9]+$' THEN TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 5 THEN mtd.waktu::text END)::bigint / 1000)
+                            ELSE TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 5 THEN mtd.waktu::text END), 'DD-MM-YYYY HH24:MI:SS')
+                        END
+                    )) / 60 AS durasi_5_6,
+
+                    -- DURASI TASK 6 KE 7
+                    EXTRACT(EPOCH FROM (
+                        CASE 
+                            WHEN MAX(CASE WHEN mtd.taskid = 7 THEN mtd.waktu::text END) IS NULL OR MAX(CASE WHEN mtd.taskid = 7 THEN mtd.waktu::text END) = '-' THEN NULL
+                            WHEN MAX(CASE WHEN mtd.taskid = 7 THEN mtd.waktu::text END) ~ '^[0-9]+$' THEN TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 7 THEN mtd.waktu::text END)::bigint / 1000)
+                            ELSE TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 7 THEN mtd.waktu::text END), 'DD-MM-YYYY HH24:MI:SS')
+                        END
+                        - 
+                        CASE 
+                            WHEN MAX(CASE WHEN mtd.taskid = 6 THEN mtd.waktu::text END) IS NULL OR MAX(CASE WHEN mtd.taskid = 6 THEN mtd.waktu::text END) = '-' THEN NULL
+                            WHEN MAX(CASE WHEN mtd.taskid = 6 THEN mtd.waktu::text END) ~ '^[0-9]+$' THEN TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 6 THEN mtd.waktu::text END)::bigint / 1000)
+                            ELSE TO_TIMESTAMP(MAX(CASE WHEN mtd.taskid = 6 THEN mtd.waktu::text END), 'DD-MM-YYYY HH24:MI:SS')
+                        END
+                    )) / 60 AS durasi_6_7
+                FROM
+                    pasiendaftar_t pd
+                    JOIN pasien_m ps ON pd.nocmfk = ps.id
+                    LEFT JOIN monitoringtaskid_t mtd ON mtd.noregistrasifk = pd.norec
+                    LEFT JOIN ruangan_m rm ON rm.id = pd.objectruanganlastfk
+                    LEFT JOIN batalregistrasi_t br ON br.pasiendaftarfk = pd.norec
+                WHERE
+                    rm.objectdepartemenfk = 18
+                    AND pd.objectkelompokpasienlastfk = '2'
+                    AND pd.statusenabled = TRUE
+                    AND ps.statusenabled = TRUE
+                    AND rm.kdinternal IS NOT NULL
+                    AND br.norec IS NULL
+                    AND pd.tglregistrasi BETWEEN '$tglawal' AND '$tglakhir'
+                GROUP BY
+                    rm.namaruangan,
+                    pd.noregistrasi,
+                    pd.statusschedule
+            ),
+
+            durasi_total AS (
+                SELECT
+                    namaruangan,
+                    noregistrasi,
+                    (COALESCE(durasi_1_2, 0) + COALESCE(durasi_2_3, 0) + durasi_3_4 + durasi_4_5 + durasi_5_6 + durasi_6_7) AS total_durasi
+                FROM raw_data
+                WHERE
+                    durasi_3_4 IS NOT NULL
+                    AND durasi_4_5 IS NOT NULL
+                    AND durasi_5_6 IS NOT NULL
+                    AND durasi_6_7 IS NOT NULL
+            )
+
+            SELECT
+                namaruangan,
+                COUNT(*) AS jumlah_pasien_lengkap,
+                ROUND(AVG(total_durasi)::numeric, 2) AS rata_rata_menit_dari_task1_sampai_7
+            FROM durasi_total
+            GROUP BY namaruangan
+            ORDER BY rata_rata_menit_dari_task1_sampai_7 DESC;
+        "));
+
+        $totalRecords = $data->count(); // Total jumlah data
+        $taskidNullCounts = [
+            'taskid1' => 0,
+            'taskid2' => 0,
+            'taskid3' => 0,
+            'taskid4' => 0,
+            'taskid5' => 0,
+            'taskid6' => 0,
+            'taskid7' => 0,
+        ];
+
+        $taskidNotNullCounts = [
+            'taskid1' => 0,
+            'taskid2' => 0,
+            'taskid3' => 0,
+            'taskid4' => 0,
+            'taskid5' => 0,
+            'taskid6' => 0,
+            'taskid7' => 0,
+        ];
+
+        // Loop melalui setiap data dan hitung taskid yang null dan tidak null
+        $data->each(function ($item) use (&$taskidNullCounts, &$taskidNotNullCounts) {
+            for ($i = 1; $i <= 7; $i++) {
+                $taskid = "taskid{$i}";
+                if (is_null($item->$taskid)) {
+                    $taskidNullCounts[$taskid]++;
+                } else {
+                    $taskidNotNullCounts[$taskid]++;
+                }
+            }
+        });
+
+        // Hitung persentase taskid yang null dan tidak null
+        $taskidNullPercentages = [];
+        $taskidNotNullPercentages = [];
+
+        for ($i = 1; $i <= 7; $i++) {
+            $taskid = "taskid{$i}";
+            $taskidNullPercentages[$taskid] = number_format(($taskidNullCounts[$taskid] / $totalRecords) * 100, 2);
+            $taskidNotNullPercentages[$taskid] = number_format(($taskidNotNullCounts[$taskid] / $totalRecords) * 100, 2);
+        }
+
+        $summary = [
+            'totalRecords' => $totalRecords,
+            'taskidNullCounts' => $taskidNullCounts,
+            'taskidNotNullCounts' => $taskidNotNullCounts,
+            'taskidNullPercentages' => $taskidNullPercentages,
+            'taskidNotNullPercentages' => $taskidNotNullPercentages,
+        ];
+
+        $result = array(
+            'data' => $data,
+            'taskid' => $summary,
+            'rekapan' => $rekapan,
+            'monitoring' => $monitoring,
+        );
+        return $this->respond($result);
+    }
+
     public function savePulangPasienRajal(Request $request)
     {
         $detLogin = $request->all();

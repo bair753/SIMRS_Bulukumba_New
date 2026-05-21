@@ -1696,6 +1696,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
           Route::post('rawatjalan/save-monitoring-taskid', 'RawatJalan\RawatJalanController@saveMonitoringTaksId');
           Route::get('rawatjalan/get-monitoring-taskid', 'RawatJalan\RawatJalanController@getMonitoringTaksId');
           Route::get('rawatjalan/get-informasi-monitoring-taskid', 'RawatJalan\RawatJalanController@getInformasiMonitoringTaksId');
+          Route::get('rawatjalan/get-informasi-monitoring-taskid-bpjs', 'RawatJalan\RawatJalanController@getInformasiMonitoringTaksIdBPJS');
           Route::post('rawatjalan/save-pulang-pasien', 'RawatJalan\RawatJalanController@savePulangPasienRajal');
           Route::get('rawatjalan/get-antril-combo', 'RawatJalan\RawatJalanController@getComboAntrol');
           Route::post('rawatjalan/disabled-monitoring-taskid', 'RawatJalan\RawatJalanController@disabledMonitoringTaksId');
@@ -2439,6 +2440,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
               Route::get('sysadmin/logging/save-log-batal-bayar', 'SysAdmin\LoggingController@saveLogBatalBayar');
               Route::get('sysadmin/logging/save-log-retur-resep', 'SysAdmin\LoggingController@saveLogReturResep');
               Route::get('sysadmin/logging/Daftar-log-user', 'SysAdmin\LoggingController@getDaftarLog');
+              Route::get('sysadmin/logging/Daftar-log-taskId', 'SysAdmin\LoggingController@getDaftarLogTaskId');
               Route::get('sysadmin/logging/save-log-all', 'SysAdmin\LoggingController@saveLoggingAll');
               Route::get('sysadmin/logging/save-log-all-taksid', 'SysAdmin\LoggingController@saveLoggingAllTaksId');
               Route::get('sysadmin/logging/get-data-combo', 'SysAdmin\LoggingController@getCombo');

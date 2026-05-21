@@ -1497,6 +1497,58 @@ class LoggingController extends ApiController
         return $this->respond($result);
     }
 
+    public function getDaftarLogTaskId(Request $request)
+    {
+        $kdProfile = (int) $this->getDataKdProfile($request);
+        $tglAwal = $request['tglAwal'];
+        $tglAkhir = $request['tglAkhir'];
+        $taskid = $request['taskid'];
+        $kodebooking = $request['kodebooking'];
+        $LimitRow = '';
+        $JenisLoging = ' ';
+        if (isset($request['JenisLoging']) && $request['JenisLoging'] != "" && $request['JenisLoging'] != "undefined") {
+            $JenisLoging = " and lg.jenislog ilike '%" . $request['JenisLoging'] . "%'";
+        }
+        $UserId = ' ';
+        if (isset($request['UserId']) && $request['UserId'] != "" && $request['UserId'] != "undefined") {
+            $UserId = ' and pg.id = ' . $request['UserId'];
+        }
+        $Keterangan = ' ';
+        if (isset($request['Keterangan']) && $request['Keterangan'] != "" && $request['Keterangan'] != "undefined") {
+            $Keterangan = "and lg.keterangan ilike '%" . $request['Keterangan'] . "%'";
+        }
+        $jenisPegawai = ' ';
+        if (isset($request['jenisPegawai']) && $request['jenisPegawai'] != "" && $request['jenisPegawai'] != "undefined") {
+            $jenisPegawai = "and lg.keterangan ilike '%" . $request['jenisPegawai'] . "%'";
+        }
+        $LimitRow = ' ';
+        if (isset($request['LimitRow']) && $request['LimitRow'] != "" && $request['LimitRow'] != "undefined") {
+            $LimitRow = ' limit ' . $request['LimitRow'];
+        }
+
+        // $JenisLoging 
+        // $UserId
+        // $Keterangan
+        // $jenisPegawai
+
+        $data = DB::select(
+            DB::raw("
+                select  lg.noreff,lg.tanggal,lg.reqlogging,lg.reslogging,lg.uniqtaksid as taskid
+                from loggingtaksid_t as lg
+                where lg.kdprofile = $kdProfile and lg.tanggal between '$tglAwal' and '$tglAkhir' and lg.noreff = '$kodebooking'
+                and lg.uniqtaksid = '$taskid'
+                order by lg.tanggal desc"
+            )
+        );
+
+
+        $result = array(
+            'daftar' => $data,
+            'message' => 'er@epic',
+        );
+        return $this->respond($result);
+    }
+
     public function saveLogMeninggalPasienRJ(Request $request){
         $kdProfile = (int) $this->getDataKdProfile($request);
         DB::beginTransaction();
