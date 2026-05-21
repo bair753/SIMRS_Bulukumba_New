@@ -2624,6 +2624,26 @@ define(['initialize'], function (initialize) {
                     } else {
                         repeatSendTaskId(norec_pd, task)
                     }
+
+                    var validIds = [
+                        782, 784, 785, 787, 788, 789, 790, 791, 792, 793, 
+                        794, 795, 796, 797, 798, 799, 800, 801, 802, 803, 
+                        806, 808, 809, 810, 836, 838, 846, 847
+                    ];
+
+                    if ($scope.item.ruangan) {
+                        if (validIds.includes($scope.item.ruangan.id)) {
+                            medifirstService.postLoggingAntrol(
+                                `Antrol Task ID - Dengan No Registrasi ${e.data.kodebooking}`,
+                                'norec Pasien Daftar',
+                                e.data.kodebooking,
+                                `Update Antrean Kode ${e.data.kodebooking}`,
+                                `Request: ${JSON.stringify(data)}`,
+                                `Response: ${JSON.stringify(x.data)}`,
+                                `${data.data.taskid}`
+                            );
+                        }
+                    }
                 })
             }
             
