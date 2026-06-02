@@ -11945,14 +11945,14 @@ GROUP BY y.KET
         if (count($pegawaiAcc) == 0) {
             $result = array(
                 'status' => 201,
-                'message' => 'Proporsi iCare Pegawai not accptance',
+                'message' => 'Proporsi iCare Pegawai not acceptance',
                 'data' => $pegawaiAcc,
                 'as' => 'zaid@mgr'
             );
         } else {
             $result = array(
                 'status' => 200,
-                'message' => 'Proporsi iCare Pegawai accptance',
+                'message' => 'Proporsi iCare Pegawai acceptance',
                 'data' => $pegawaiAcc,
                 'as' => 'zaid@mgr'
             );

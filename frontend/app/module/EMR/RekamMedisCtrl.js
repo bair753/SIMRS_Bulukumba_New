@@ -296,7 +296,7 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
             async function iCare() {
                 medifirstService.get("registrasi/get-proporsi-i-care-dpjp?" + "&idPegawai=" + $scope.pegawai.id).then(function (e) {
                     $scope.isRouteLoading = false;
-                    if (e.data.message === "Proporsi iCare Pegawai accptance") {
+                    if (e.data.message === "Proporsi iCare Pegawai acceptance") {
                         medifirstService.get("registrasi/get-proporsi-i-care?" + "&noregistrasi=" + $scope.header.noregistrasi).then(function (e) {
                             $scope.isRouteLoading = false;
                             if (e.data.message === "Proporsi iCare belum dihitung") {
