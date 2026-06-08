@@ -1873,6 +1873,23 @@ export class VerifPasienBpjsOldComponent implements OnInit {
     })
   }
 
+  saveLoggingTaskId(jenis, referensi, noreff, ket, reqJson, resJson, taskId) {
+      // Gunakan encodeURIComponent agar karakter aneh/spasi di JSON tidak merusak URL
+      const url = "medifirst2000/sysadmin/logging/save-log-taskid?jenislog=" + encodeURIComponent(jenis)
+        + "&referensi=" + encodeURIComponent(referensi)
+        + "&noreff=" + noreff
+        + "&keterangan=" + encodeURIComponent(ket)
+        + "&reqlogging=" + encodeURIComponent(reqJson)
+        + "&reslogging=" + encodeURIComponent(resJson)
+        + "&uniqtaksid=" + taskId;
+
+      this.httpService.get(url).subscribe(e => {
+          // Log berhasil disimpan
+      }, err => {
+          console.error("Gagal save logging:", err);
+      });
+  }
+
 
   simpanPemakaianAsuransi() {
 
@@ -2269,10 +2286,22 @@ export class VerifPasienBpjsOldComponent implements OnInit {
 
     let dataE = e;
 
+    const statusAksi = (data.url === 'antrean/add') ? 'Tambah' : 'Update';
+    const teksKeterangan = `${statusAksi} KIOS-K Antrean Kode ${noregistrasi}`;
+
     await this.httpService.post('medifirst2000/bridging/bpjs/tools', data).subscribe(async (res) => {
       this.saveLogging('Antrol Task ID', 'norec Pasien Daftar', noregistrasi,
         'Tambah Antrean KIRIM KODE BOKING ' + JSON.stringify(data) + ' ( ' + JSON.stringify(res) + ') ');
 
+      this.saveLoggingTaskId(
+        'Antrol Task ID',               // jenis
+        'norec Pasien Daftar',          // referensi
+        noregistrasi,                   // noreff
+        teksKeterangan,                 // keterangan (Otomatis Tambah / Update berdasarkan URL)
+        JSON.stringify(data),           // reqJson
+        JSON.stringify(res),            // resJson
+        1                   // taskId
+      );
       // Memproses semua fungsi saveAntrolPasien satu per satu
       await this.saveAntrolPasien1(dataE);
       await this.saveAntrolPasien2(dataE);
@@ -2303,10 +2332,11 @@ export class VerifPasienBpjsOldComponent implements OnInit {
 
     let maxRetries = 3; // Maksimal mencoba 3 kali
     let attempt = 0;
+    let res: any = null; 
 
     while (attempt < maxRetries) {
       try {
-        let res: any = await this.httpService.post('medifirst2000/bridging/bpjs/tools', data).toPromise();
+        res = await this.httpService.post('medifirst2000/bridging/bpjs/tools', data).toPromise();
 
         if (res?.metaData?.message === "Ok.") {
           console.log(`✅ Antrean KE 1 berhasil untuk ${noregistrasi}`);
@@ -2331,6 +2361,16 @@ export class VerifPasienBpjsOldComponent implements OnInit {
       `Tambah Antrean KE 1 ${JSON.stringify(data)}`
     );
 
+    this.saveLoggingTaskId(
+      'Antrol Task ID',               // jenis
+      'norec Pasien Daftar ',          // referensi
+      noregistrasi,                   // noreff
+      `Update Antrean KIOS-K Kode ${noregistrasi}`,                 // keterangan (Otomatis Tambah / Update berdasarkan URL)
+      JSON.stringify(data),           // reqJson
+      JSON.stringify(res),            // resJson
+      1                   // taskId
+    );
+    
     this.saveMonitoringTaksId(noregistrasi, 1, new Date().getTime(), true);
   }
   async saveAntrolPasien2(dataE: any) {
