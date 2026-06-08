@@ -2242,11 +2242,13 @@ export class VerifPasienBpjsOldComponent implements OnInit {
   }
 
   async getDataAntrean(es: any) {
-    this.httpService.get("medifirst2000/registrasi/get-data-antrean?norec_pd=" + es
-    ).subscribe(e => {
-      this.saveAntrolPasien(e);
-    })
-  }
+    return new Promise((resolve, reject) => {
+        this.httpService.get("medifirst2000/registrasi/get-data-antrean?norec_pd=" + es
+        ).subscribe(e => {
+            this.saveAntrolPasien(e).then(() => resolve(e));
+        }, err => reject(err))
+    });
+}
 
   async saveAntrolPasien(e: any) {
     let timeRegistrasi = new Date().getTime();
@@ -2256,64 +2258,64 @@ export class VerifPasienBpjsOldComponent implements OnInit {
     this.saveMonitoringTaksId(noregistrasi, 2, timeRegistrasi, false);
     this.saveMonitoringTaksId(noregistrasi, 3, new Date().getTime(), false);
 
-    // Mengambil semua waktu acak sekaligus
     let acakWaktuArr = await Promise.all([
-      this.waktuAcak(),
-      this.waktuAcak2(),
-      this.waktuAcak3(),
-      this.waktuAcak4()
+        this.waktuAcak(),
+        this.waktuAcak2(),
+        this.waktuAcak3(),
+        this.waktuAcak4()
     ]);
 
-    // Menghasilkan task ID yang selalu meningkat
     let taskIds = [new Date().getTime()];
     for (let i = 0; i < acakWaktuArr.length; i++) {
-      let newTaskId = taskIds[i] + acakWaktuArr[i];
-      taskIds.push(Math.max(newTaskId, taskIds[i] + 1));
+        let newTaskId = taskIds[i] + acakWaktuArr[i];
+        taskIds.push(Math.max(newTaskId, taskIds[i] + 1));
     }
 
-    // Menyimpan task ID 4-7
     taskIds.slice(1).forEach((taskId, index) => {
-      this.saveMonitoringTaksId(noregistrasi, index + 4, taskId, false);
+        this.saveMonitoringTaksId(noregistrasi, index + 4, taskId, false);
     });
 
     console.log('Data Antrenan', e);
+
     let data = {
-      "url": "antrean/add",
-      "jenis": "antrean",
-      "method": "POST",
-      "data": e
+        "url": "antrean/add",
+        "jenis": "antrean",
+        "method": "POST",
+        "data": e
     };
 
     let dataE = e;
-
     const statusAksi = (data.url === 'antrean/add') ? 'Tambah' : 'Update';
     const teksKeterangan = `${statusAksi} KIOS-K Antrean Kode ${noregistrasi}`;
 
-    await this.httpService.post('medifirst2000/bridging/bpjs/tools', data).subscribe(async (res) => {
-      this.saveLogging('Antrol Task ID', 'norec Pasien Daftar', noregistrasi,
-        'Tambah Antrean KIRIM KODE BOKING ' + JSON.stringify(data) + ' ( ' + JSON.stringify(res) + ') ');
+    return new Promise((resolve, reject) => {
+        this.httpService.post('medifirst2000/bridging/bpjs/tools', data).subscribe(async (res) => {
+            this.saveLogging(
+                'Antrol Task ID',
+                'norec Pasien Daftar',
+                noregistrasi,
+                'Tambah Antrean KIRIM KODE BOKING ' + JSON.stringify(data) + ' ( ' + JSON.stringify(res) + ') '
+            );
 
-      this.saveLoggingTaskId(
-        'Antrol Task ID',               // jenis
-        'norec Pasien Daftar',          // referensi
-        noregistrasi,                   // noreff
-        teksKeterangan,                 // keterangan (Otomatis Tambah / Update berdasarkan URL)
-        JSON.stringify(data),           // reqJson
-        JSON.stringify(res),            // resJson
-        1                   // taskId
-      );
-      // Memproses semua fungsi saveAntrolPasien satu per satu
-      await this.saveAntrolPasien1(dataE);
-      await this.saveAntrolPasien2(dataE);
-      await this.saveAntrolPasien3(dataE);
-      // await this.saveAntrolPasien4(dataE);
-      // await this.saveAntrolPasien5(dataE);
-      // await this.saveAntrolPasien6(dataE);
-      // await this.saveAntrolPasien7(dataE);
+            this.saveLoggingTaskId(
+                'Antrol Task ID',
+                'norec Pasien Daftar',
+                noregistrasi,
+                teksKeterangan,
+                JSON.stringify(data),
+                JSON.stringify(res),
+                1
+            );
 
+            await this.saveAntrolPasien1(dataE);
+            await this.saveAntrolPasien2(dataE);
+            await this.saveAntrolPasien3(dataE);
 
+            resolve(res);
+        }, err => reject(err));
     });
   }
+
 
   async saveAntrolPasien1(dataE: any) {
     let noregistrasi = dataE.kodebooking;

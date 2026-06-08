@@ -1537,7 +1537,7 @@ class LoggingController extends ApiController
                 from loggingtaksid_t as lg
                 where lg.kdprofile = $kdProfile and lg.tanggal between '$tglAwal' and '$tglAkhir' and lg.noreff = '$kodebooking'
                 and lg.uniqtaksid = '$taskid'
-                order by lg.tanggal desc"
+                order by lg.tanggal asc"
             )
         );
 
