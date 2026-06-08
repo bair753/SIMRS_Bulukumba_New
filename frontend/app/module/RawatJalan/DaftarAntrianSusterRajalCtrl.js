@@ -2328,18 +2328,21 @@ define(['initialize'], function (initialize) {
                         806, 808, 809, 810, 836, 838, 846, 847
                     ];
 
-                    if ($scope.item.ruangan) {
-                        if (validIds.includes($scope.item.ruangan.id)) {
-                            medifirstService.postLoggingAntrol(
-                                `Antrol Task ID - Dengan No Registrasi ${e.data.kodebooking}`,
-                                'norec Pasien Daftar',
-                                e.data.kodebooking,
-                                `Update Antrean Kode ${e.data.kodebooking}`,
-                                `Request: ${JSON.stringify(data)}`,
-                                `Response: ${JSON.stringify(x.data)}`,
-                                `${data.data.taskid}`
-                            );
-                        }
+                    var isRuanganValid = $scope.item.ruangan && validIds.includes(parseInt($scope.item.ruangan.id));
+                    var isRuanganMultiValid = $scope.item.ruanganMulti && $scope.item.ruanganMulti.some(function(room) {
+                        return validIds.includes(parseInt(room.id));
+                    });
+
+                    if (isRuanganValid || isRuanganMultiValid) {
+                        medifirstService.postLoggingAntrol(
+                            `Antrol Task ID - Dengan No Registrasi ${e.data.kodebooking}`,
+                            'norec Pasien Daftar',
+                            e.data.kodebooking,
+                            `Update Antrean Kode ${e.data.kodebooking}`,
+                            `Request: ${JSON.stringify(data)}`,
+                            `Response: ${JSON.stringify(e.data)}`,
+                            `${data.data.taskid}`
+                        );
                     }
                 })
             }

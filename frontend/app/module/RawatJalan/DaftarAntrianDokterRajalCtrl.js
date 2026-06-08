@@ -1871,8 +1871,8 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                             806, 808, 809, 810, 836, 838, 846, 847
                         ];
 
-                        if ($scope.item.ruangan && $scope.item.ruangan.id) {
-                            if (validIds.includes($scope.item.ruangan.id)) {
+                        if ($scope.dataPasienSelected && $scope.dataPasienSelected.objectruanganfk) {
+                            if (validIds.includes($scope.dataPasienSelected.objectruanganfk)) {
                                 medifirstService.postLoggingAntrol(
                                     `Antrol Task ID - Dengan No Registrasi ${param}`,
                                     'norec Pasien Daftar',
