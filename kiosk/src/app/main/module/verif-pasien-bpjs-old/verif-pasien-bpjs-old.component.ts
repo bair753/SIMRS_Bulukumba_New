@@ -2474,54 +2474,84 @@ export class VerifPasienBpjsOldComponent implements OnInit {
   async getDataAntreanLooping(es: any) {
     let responseCode: number = 0;
     let shouldContinue: boolean = true;
+    let maxRetries = 3; // ✅ Batas maksimal loop
+    let attempt = 0;
 
-    while (shouldContinue) {
-      try {
-        const e = await this.httpService.get(`medifirst2000/registrasi/get-data-antrean?norec_pd=${es}`).toPromise();
-        console.log(responseCode)
-        responseCode = await this.saveAntrolPasienLooping(e);
+    while (shouldContinue && attempt < maxRetries) {
+        try {
+            const e = await this.httpService.get(`medifirst2000/registrasi/get-data-antrean?norec_pd=${es}`).toPromise();
+            console.log(responseCode);
+            responseCode = await this.saveAntrolPasienLooping(e);
 
-        // Stop loop if response code is 200 or 208
-        if (responseCode === 200 || responseCode === 208 || responseCode === 201) {
-          shouldContinue = false;
+            if (responseCode === 200 || responseCode === 208 || responseCode === 201) {
+                shouldContinue = false;
+            }
+        } catch (error) {
+            console.error("Error fetching data:", error);
+            shouldContinue = false;
         }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        shouldContinue = false; // Exit loop on error
-      }
+
+        attempt++;
+        if (shouldContinue) {
+            await new Promise(resolve => setTimeout(resolve, 2000)); // tunggu 2 detik sebelum retry
+        }
+    }
+
+    if (attempt >= maxRetries) {
+        console.warn(`⚠️ getDataAntreanLooping berhenti setelah ${maxRetries} percobaan`);
     }
   }
 
   async saveAntrolPasienLooping(e: any): Promise<number> {
-    var timeRegistrasi = new Date().getTime();
-    var timeAntrian = timeRegistrasi - (new Date().getTime() - timeRegistrasi);
     var noregistrasi = e.kodebooking;
+    
     this.saveMonitoringTaksId(noregistrasi, 3, new Date().getTime(), false);
 
     console.log('Data Antrenan', e);
+
     let data = {
-      "url": "antrean/add",
-      "jenis": "antrean",
-      "method": "POST",
-      "data": e
+        "url": "antrean/add",
+        "jenis": "antrean",
+        "method": "POST",
+        "data": e
     };
 
     let responseCode = 0;
+    let res: any = null;
 
     await this.httpService.post('medifirst2000/bridging/bpjs/tools', data).toPromise()
-      .then((res: any) => {
-        if (res.metaData && (res.metaData.code === 200 || res.metaData.code === 208 || res.metaData.code === 201)) {
-          responseCode = res.metaData.code;
-        }
-        this.saveLogging('Antrol Task ID', 'norec Pasien Daftar', noregistrasi,
-          'Tambah Antrean KIRIM KODE BOKING LOOPING UNTIL LIMIT' + JSON.stringify(data) + ' ( ' + JSON.stringify(res) + ') ');
-      })
-      .catch((error) => {
-        console.error("Error saving Antrol Pasien:", error);
-      });
+        .then((response: any) => {
+            res = response;
+            if (res.metaData && (res.metaData.code === 200 || res.metaData.code === 208 || res.metaData.code === 201)) {
+                responseCode = res.metaData.code;
+                console.log(`✅ Antrean Looping berhasil untuk ${noregistrasi} | Code: ${responseCode}`);
+            } else {
+                console.warn(`⚠️ Response tidak sesuai: ${JSON.stringify(res)}`);
+            }
+        })
+        .catch((error) => {
+            console.error("❌ Error saving Antrol Pasien Looping:", error);
+        });
+
+    this.saveLogging(
+        'Antrol Task ID',
+        'norec Pasien Daftar',
+        noregistrasi,
+        'Tambah Antrean KIRIM KODE BOKING LOOPING UNTIL LIMIT ' + JSON.stringify(data) + ' ( ' + JSON.stringify(res) + ') '
+    );
+
+    this.saveLoggingTaskId(
+        'Antrol Task ID',                               // jenis
+        'norec Pasien Daftar',                          // referensi
+        noregistrasi,                                   // noreff
+        `Tambah Antrean KIOS-K Looping Kode ${noregistrasi}`, // keterangan
+        JSON.stringify(data),                           // reqJson
+        JSON.stringify(res),                            // resJson
+        1                                               // taskId
+    );
 
     return responseCode;
-  }
+}
 
   saveMonitoringTaksId(noregistrasi, taskid, waktu, statuskirim) {
     var json = {
