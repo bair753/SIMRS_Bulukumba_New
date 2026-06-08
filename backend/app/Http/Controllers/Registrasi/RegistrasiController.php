@@ -11897,7 +11897,7 @@ GROUP BY y.KET
             'status' => 201,
             'message' => 'Proporsi iCare berhasil disimpan',
             'data' => $pasienDaftar,
-            'as' => 'zaid@mgr'
+            'as' => 'simrs@blkmb'
         );
 
         return $this->setStatusCode($result['status'])->respond($result, $result['message']);
@@ -11918,14 +11918,14 @@ GROUP BY y.KET
                 'status' => 201,
                 'message' => 'Proporsi iCare belum dihitung',
                 'data' => $pasienDaftar,
-                'as' => 'zaid@mgr'
+                'as' => 'simrs@blkmb'
             );
         } else {
             $result = array(
                 'status' => 200,
                 'message' => 'Proporsi iCare sudah dihitung',
                 'data' => $pasienDaftar,
-                'as' => 'zaid@mgr'
+                'as' => 'simrs@blkmb'
             );
         }
 
