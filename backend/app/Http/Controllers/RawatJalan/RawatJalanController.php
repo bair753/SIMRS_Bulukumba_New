@@ -2042,7 +2042,9 @@ class RawatJalanController extends ApiController
 
     public function getInformasiMonitoringTaksIdBPJS(Request $request)
     {
-
+        ini_set('max_execution_time', 10000); //6 minutes
+        ini_set('memory_limit', '4048M');
+        
         $kdProfile = $this->getDataKdProfile($request);
         $tglawal = $request['tglAwal'];
         $tglakhir = $request['tglAkhir'];
@@ -2142,6 +2144,7 @@ class RawatJalanController extends ApiController
                 AND pd.statusenabled = true
                 $nocm
                 $kdBooking
+                $ruangId
                 AND ps.statusenabled = true
                 AND br.norec IS NULL
                 AND pd.tglregistrasi BETWEEN '$tglawal' and '$tglakhir'
