@@ -183,7 +183,7 @@ Trait PelayananPasienTrait
             $rep =  str_replace('vclaim-rest-dev/', 'ihs_dev/', $set->nilaifield);
         } else {
             $set = SettingDataFixed::where('namafield', 'linkBPJSV1.1')->first();
-            $rep = "https://new-apijkn.bpjs-kesehatan.go.id/ihs/"; //str_replace('vclaim-rest/', 'ihs/', $set->nilaifield);
+            $rep =  str_replace('vclaim-rest/', 'wsihs/', $set->nilaifield);
         }
 
         return $rep;
