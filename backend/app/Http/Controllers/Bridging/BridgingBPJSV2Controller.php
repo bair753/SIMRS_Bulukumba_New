@@ -3075,7 +3075,7 @@ class BridgingBPJSV2Controller extends ApiController
             if (isset($request['jenis']) && $request['jenis'] == 'i-care') {
                 $baseURL = $this->getUrlBrigdingBPJS_ICARE();
                 $headers['headers'][0]  = 'Content-Type: application/json';
-                $headers['headers'][4]  = 'user_key:' . $this->getUserKeyICARE();
+                // $headers['headers'][4]  = 'user_key:' . $this->getUserKeyICARE();
             }
             if (isset($request['jenis']) && $request['jenis'] == 'eRekamMedis') {
                 $baseURL = $this->urlERekamMedis();
