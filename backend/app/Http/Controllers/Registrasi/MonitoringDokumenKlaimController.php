@@ -130,7 +130,7 @@ class MonitoringDokumenKlaimController extends  ApiController
 
         if (!$dataRegistrasi) {
             \Log::error('bundleDokumenOld: PasienDaftar not found', ['noregistrasi' => $request['noregistrasi']]);
-            // return response error di sini, jangan lanjut
+            return response()->json(['message' => 'Data registrasi tidak ditemukan'], 404);
         }
 
         $dataDokumen = DB::table('monitoringdokklaim_t as mk')
