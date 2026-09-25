@@ -128,6 +128,11 @@ class MonitoringDokumenKlaimController extends  ApiController
     public function bundleDokumenOld(Request $request) {
         $dataRegistrasi = PasienDaftar::where('noregistrasi', $request['noregistrasi'])->first();
 
+        if (!$dataRegistrasi) {
+            \Log::error('bundleDokumenOld: PasienDaftar not found', ['noregistrasi' => $request['noregistrasi']]);
+            // return response error di sini, jangan lanjut
+        }
+
         $dataDokumen = DB::table('monitoringdokklaim_t as mk')
         ->join("dokumenklaim_m as dk", "dk.id", "=", "mk.documentklaimfk")
         ->where('mk.statusenabled', true)
@@ -135,6 +140,8 @@ class MonitoringDokumenKlaimController extends  ApiController
         ->where('dk.objectdepartemenfk', $request['instalasi'])
         ->orderBy('dk.nourut')
         ->get();
+
+        \Log::info('bundleDokumenOld: dataDokumen count', ['count' => count($dataDokumen)]);
 
         $fileName = 'bundle_'.$request['noregistrasi'].'.pdf';
         $pathbundle = 'dokumen_klaim/'.$request['noregistrasi'] . "/" . $fileName;
@@ -162,6 +169,11 @@ class MonitoringDokumenKlaimController extends  ApiController
                 $namafiletemp = public_path($basepath . "/temp_". $item->filename);
                 $namafile = public_path($basepath . "/". $item->filename);
 
+                \Log::info('bundleDokumenOld: checking file', [
+                    'namafile' => $namafile,
+                    'exists' => file_exists($namafile),
+                ]);
+                
                 exec('cp "'.$namafile.'" "'.$namafiletemp.'"');
                 exec('gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile="'.$namafiletemp.'" "'.$namafile.'"'); 
                 exec('mv "'.$namafiletemp.'" "'.$namafile.'"');
