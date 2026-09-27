@@ -21,6 +21,8 @@ use Webklex\PDFMerger\Facades\PDFMergerFacade as PDFMerger;
 use Symfony\Component\Filesystem\Filesystem;
 use Xthiago\PDFVersionConverter\Converter\GhostscriptConverterCommand;
 use Xthiago\PDFVersionConverter\Converter\GhostscriptConverter;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
 
 class MonitoringDokumenKlaimController extends  ApiController
 {
@@ -126,17 +128,23 @@ class MonitoringDokumenKlaimController extends  ApiController
     }
 
     public function bundleDokumenOld(Request $request) {
+        $log = new Logger('dokumenklaim');
+        $log->pushHandler(new StreamHandler(
+            storage_path('logs/dokumenklaim-' . date('Y-m-d') . '.log'),
+            Logger::DEBUG
+        ));
+    
         try {
             $dataRegistrasi = PasienDaftar::where('noregistrasi', $request['noregistrasi'])->first();
     
             if (!$dataRegistrasi) {
-                \Log::warning('bundleDokumenOld: PasienDaftar tidak ditemukan', [
+                $log->warning('PasienDaftar tidak ditemukan', [
                     'noregistrasi' => $request['noregistrasi'],
                 ]);
                 return response()->json(['message' => 'Data registrasi tidak ditemukan'], 404);
             }
     
-            \Log::info('bundleDokumenOld: params diterima', [
+            $log->info('Params diterima', [
                 'noregistrasi' => $request['noregistrasi'],
                 'instalasi' => $request['instalasi'],
                 'norec' => $dataRegistrasi->norec,
@@ -150,10 +158,10 @@ class MonitoringDokumenKlaimController extends  ApiController
                 ->orderBy('dk.nourut')
                 ->get();
     
-            \Log::info('bundleDokumenOld: dataDokumen count', ['count' => count($dataDokumen)]);
+            $log->info('Jumlah dataDokumen ditemukan', ['count' => count($dataDokumen)]);
     
             if (count($dataDokumen) === 0) {
-                \Log::warning('bundleDokumenOld: tidak ada dokumen ditemukan', [
+                $log->warning('Tidak ada dokumen ditemukan untuk kombinasi ini', [
                     'norec' => $dataRegistrasi->norec,
                     'instalasi' => $request['instalasi'],
                 ]);
@@ -180,10 +188,10 @@ class MonitoringDokumenKlaimController extends  ApiController
                 $namafile = public_path($basepath . "/" . $item->filename);
     
                 if (!file_exists($namafile)) {
-                    \Log::error('bundleDokumenOld: file fisik tidak ditemukan', [
+                    $log->error('File fisik tidak ditemukan', [
                         'namafile' => $namafile,
                     ]);
-                    continue; // skip file yang tidak ada, jangan hentikan seluruh proses
+                    continue;
                 }
     
                 exec('cp "' . $namafile . '" "' . $namafiletemp . '"');
@@ -194,7 +202,7 @@ class MonitoringDokumenKlaimController extends  ApiController
             }
     
             if (count($file) === 0) {
-                \Log::error('bundleDokumenOld: semua file fisik hilang, tidak ada yang bisa di-merge', [
+                $log->error('Semua file fisik hilang, tidak ada yang bisa di-merge', [
                     'norec' => $dataRegistrasi->norec,
                 ]);
                 echo '
@@ -212,6 +220,8 @@ class MonitoringDokumenKlaimController extends  ApiController
             $pdf->merge();
             $pdf->save(public_path($pathbundle));
     
+            $log->info('Berhasil membuat bundle PDF', ['path' => $pathbundle]);
+    
             $fileContent = File::get($pathbundle);
             $type = File::mimeType($pathbundle);
     
@@ -220,7 +230,7 @@ class MonitoringDokumenKlaimController extends  ApiController
             return $response;
     
         } catch (\Throwable $e) {
-            \Log::error('bundleDokumenOld: exception terjadi', [
+            $log->error('Exception terjadi', [
                 'message' => $e->getMessage(),
                 'file' => $e->getFile(),
                 'line' => $e->getLine(),
