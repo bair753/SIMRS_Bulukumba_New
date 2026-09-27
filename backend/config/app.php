@@ -172,7 +172,7 @@ return [
 	    Codedge\Fpdf\FpdfServiceProvider::class, // [1]
 	    //https://packagist.org/packages/codedge/laravel-fpdf
         //L5Swagger\L5SwaggerServiceProvider::class,
-	// Webklex\PDFMerger\Providers\PDFMergerServiceProvider::class,
+	    Webklex\PDFMerger\Providers\PDFMergerServiceProvider::class,
     ],
 
     /*
