@@ -126,67 +126,83 @@ class MonitoringDokumenKlaimController extends  ApiController
     }
 
     public function bundleDokumenOld(Request $request) {
-        $dataRegistrasi = PasienDaftar::where('noregistrasi', $request['noregistrasi'])->first();
-
-        // if (!$dataRegistrasi) {
-        //     \Log::error('bundleDokumenOld: PasienDaftar not found', ['noregistrasi' => $request['noregistrasi']]);
-        //     return response()->json(['message' => 'Data registrasi tidak ditemukan'], 404);
-        // }
-
-        $dataDokumen = DB::table('monitoringdokklaim_t as mk')
-        ->join("dokumenklaim_m as dk", "dk.id", "=", "mk.documentklaimfk")
-        ->where('mk.statusenabled', true)
-        ->where('mk.noregistrasifk', $dataRegistrasi->norec)
-        ->where('dk.objectdepartemenfk', $request['instalasi'])
-        ->orderBy('dk.nourut')
-        ->get();
-
-        dd($dataDokumen);
-        
-        // \Log::info('bundleDokumenOld: dataDokumen count', ['count' => count($dataDokumen)]);
-
-        $fileName = 'bundle_'.$request['noregistrasi'].'.pdf';
-        $pathbundle = 'dokumen_klaim/'.$request['noregistrasi'] . "/" . $fileName;
-        if (File::exists($pathbundle)){
-            File::delete($pathbundle);
-        }
-
-        if(count($dataDokumen) > 0){
+        try {
+            $dataRegistrasi = PasienDaftar::where('noregistrasi', $request['noregistrasi'])->first();
+    
+            if (!$dataRegistrasi) {
+                \Log::warning('bundleDokumenOld: PasienDaftar tidak ditemukan', [
+                    'noregistrasi' => $request['noregistrasi'],
+                ]);
+                return response()->json(['message' => 'Data registrasi tidak ditemukan'], 404);
+            }
+    
+            \Log::info('bundleDokumenOld: params diterima', [
+                'noregistrasi' => $request['noregistrasi'],
+                'instalasi' => $request['instalasi'],
+                'norec' => $dataRegistrasi->norec,
+            ]);
+    
+            $dataDokumen = DB::table('monitoringdokklaim_t as mk')
+                ->join("dokumenklaim_m as dk", "dk.id", "=", "mk.documentklaimfk")
+                ->where('mk.statusenabled', true)
+                ->where('mk.noregistrasifk', $dataRegistrasi->norec)
+                ->where('dk.objectdepartemenfk', $request['instalasi'])
+                ->orderBy('dk.nourut')
+                ->get();
+    
+            \Log::info('bundleDokumenOld: dataDokumen count', ['count' => count($dataDokumen)]);
+    
+            if (count($dataDokumen) === 0) {
+                \Log::warning('bundleDokumenOld: tidak ada dokumen ditemukan', [
+                    'norec' => $dataRegistrasi->norec,
+                    'instalasi' => $request['instalasi'],
+                ]);
+                echo '
+                <script language="javascript">
+                    window.alert("Tidak ada data.");
+                    window.close()
+                </script>';
+                die;
+            }
+    
+            $fileName = 'bundle_' . $request['noregistrasi'] . '.pdf';
+            $pathbundle = 'dokumen_klaim/' . $request['noregistrasi'] . "/" . $fileName;
+    
+            if (File::exists($pathbundle)) {
+                File::delete($pathbundle);
+            }
+    
             $file = [];
-            foreach($dataDokumen as $item) {
-                
-                // Script converte gs untuk coba di local window *Note: harus install wsl terlebih dahulu !
-                // $path = explode("/", $item->filepath);
-                // $basepath = $path[0] . "/" . $path[1];
-                // $namafiletemp = str_replace("\\", "/", str_replace("C:\\","/mnt/c/", public_path($basepath . "/temp_". $item->filename)));
-                // $namafile = str_replace("\\", "/", str_replace("C:\\","/mnt/c/", public_path($basepath . "/". $item->filename)));
-
-                // exec('wsl cp "'.$namafile.'" "'.$namafiletemp.'"');
-                // exec('wsl gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile="'.$namafiletemp.'" "'.$namafile.'"'); 
-                // exec('wsl mv "'.$namafiletemp.'" "'.$namafile.'"');
-
-                // Script converte gs server
+            foreach ($dataDokumen as $item) {
                 $path = explode("/", $item->filepath);
                 $basepath = $path[0] . "/" . $path[1];
-                $namafiletemp = public_path($basepath . "/temp_". $item->filename);
-                $namafile = public_path($basepath . "/". $item->filename);
-
-                // \Log::info('bundleDokumenOld: checking file', [
-                //     'namafile' => $namafile,
-                //     'exists' => file_exists($namafile),
-                // ]);
-                
-                exec('cp "'.$namafile.'" "'.$namafiletemp.'"');
-                exec('gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile="'.$namafiletemp.'" "'.$namafile.'"'); 
-                exec('mv "'.$namafiletemp.'" "'.$namafile.'"');
-
-                // $command = new GhostscriptConverterCommand();
-                // $filesystem = new Filesystem();
-
-                // $converter = new GhostscriptConverter($command, $filesystem);
-                // $converter->convert(public_path($item->filepath), '1.4');
-
+                $namafiletemp = public_path($basepath . "/temp_" . $item->filename);
+                $namafile = public_path($basepath . "/" . $item->filename);
+    
+                if (!file_exists($namafile)) {
+                    \Log::error('bundleDokumenOld: file fisik tidak ditemukan', [
+                        'namafile' => $namafile,
+                    ]);
+                    continue; // skip file yang tidak ada, jangan hentikan seluruh proses
+                }
+    
+                exec('cp "' . $namafile . '" "' . $namafiletemp . '"');
+                exec('gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile="' . $namafiletemp . '" "' . $namafile . '"');
+                exec('mv "' . $namafiletemp . '" "' . $namafile . '"');
+    
                 array_push($file, public_path($item->filepath));
+            }
+    
+            if (count($file) === 0) {
+                \Log::error('bundleDokumenOld: semua file fisik hilang, tidak ada yang bisa di-merge', [
+                    'norec' => $dataRegistrasi->norec,
+                ]);
+                echo '
+                <script language="javascript">
+                    window.alert("File dokumen tidak ditemukan di server.");
+                    window.close()
+                </script>';
+                die;
             }
     
             $pdf = PDFMerger::init();
@@ -196,20 +212,25 @@ class MonitoringDokumenKlaimController extends  ApiController
             $pdf->merge();
             $pdf->save(public_path($pathbundle));
     
-            $file = File::get($pathbundle);
+            $fileContent = File::get($pathbundle);
             $type = File::mimeType($pathbundle);
-
-            $response = Response::make($file, 200);
+    
+            $response = Response::make($fileContent, 200);
             $response->header("Content-Type", $type);
             return $response;
-
-        } else {
-            echo '
-            <script language="javascript">
-                window.alert("Tidak ada dataaaaaa.");
-                window.close()
-            </script>';
-            die;
+    
+        } catch (\Throwable $e) {
+            \Log::error('bundleDokumenOld: exception terjadi', [
+                'message' => $e->getMessage(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+                'trace' => $e->getTraceAsString(),
+            ]);
+    
+            return response()->json([
+                'message' => 'Terjadi kesalahan saat memproses bundle dokumen',
+                'error' => $e->getMessage(),
+            ], 500);
         }
     }
 
