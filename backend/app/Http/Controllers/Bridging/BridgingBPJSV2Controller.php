@@ -22,6 +22,7 @@ use App\Transaksi\BPJSGagalKlaimTxt;
 use App\Transaksi\PemakaianAsuransi;
 use App\Transaksi\StrukPelayanan;
 use App\Transaksi\TempBilling;
+use App\Transaksi\AntrolRetryQueue;
 use Illuminate\Http\Request;
 use App\Traits\PelayananPasienTrait;
 use App\User;
@@ -3051,19 +3052,141 @@ class BridgingBPJSV2Controller extends ApiController
         );
         return $header;
     }
+    // public function bpjsTools(Request $request)
+    // {
+    //     try {
+    //         // $kdProfile = $this->getDataKdProfile($request);
+    //         $headers = $this->getHeaderBPJSV2();
+    //         $dataJsonSend = null;
+
+    //         if ($request['data'] != null) {
+    //             $dataJsonSend = json_encode($request['data']);
+    //         }
+           
+    //         $methods = $request['method'];
+    //         $baseURL = $this->getUrlBrigdingBPJS();
+    //         if (isset($request['jenis']) && $request['jenis'] == 'antrean') {
+    //             $baseURL =  $this->getUrlAntreanBPJSv2();
+    //             $headers['headers'][0]  = 'Content-Type: application/json';
+    //             $headers['headers'][1]  = 'x-cons-id:' .$headers['cons']['data'];
+    //             $headers['headers'][2]  = 'x-timestamp:' . $headers['cons']['tStamp'];
+    //             $headers['headers'][3]  = 'x-signature:' .$headers['cons']['signature'];
+    //             $headers['headers'][4]  = 'user_key:' . $this->getUserKeyAntreanBPJSv2();
+    //         }
+    //         if (isset($request['jenis']) && $request['jenis'] == 'i-care') {
+    //             $baseURL = $this->getUrlBrigdingBPJS_ICARE();
+    //             $headers['headers'][0]  = 'Content-Type: application/json';
+    //             // $headers['headers'][4]  = 'user_key:' . $this->getUserKeyICARE();
+    //         }
+    //         if (isset($request['jenis']) && $request['jenis'] == 'eRekamMedis') {
+    //             $baseURL = $this->urlERekamMedis();
+    //             $headers['headers'][0]  = 'Content-Type: text/plain';
+    //             $jsonErekamMedis = $request['data'];
+
+    //             $key = $headers['cons']['data'] .  $headers['cons']['secretKey'] . $this->getKodeRS();
+
+    //             $objetoRequest = new \Illuminate\Http\Request();
+    //             $objetoRequest['nosep'] = $request['data']['request']['noSep'];
+
+    //             $getMRBundle = app('App\Http\Controllers\Bridging\BridgingBPJSV2Controller')->getMRBundle($objetoRequest, true);
+    //             $jsonErekamMedis['request']['dataMR'] = $this->compressGZIP($getMRBundle, $key);
+
+    //             $dataJsonSend = json_encode($jsonErekamMedis);
+    //         }
+    //         $url =   $baseURL . $request['url'];
+  
+    //         $response = $this->curlAPI2($headers['headers'], $dataJsonSend, $url, $methods, null);
+ 
+    //         // $cekData = array(
+    //         //     'request' => array(
+    //         //         'url' => $url,
+    //         //         'headers' =>  $headers['headers'],
+    //         //         'payload' =>$dataJsonSend,
+    //         //         'secretKey' => $headers['cons']['secretKey'],
+    //         //     ), 'response' => $response
+    //         // );
+            
+    //         if (isset($request['jenis']) && $request['jenis'] == 'eRekamMedis') {
+    //             $objetoRequest = new \Illuminate\Http\Request();
+    //             $objetoRequest['nosep'] = $request['data']['request']['noSep'];
+    //             $objetoRequest['keterangan'] = $response;
+    //             $this->saveLogMRBundle($objetoRequest);
+    //         }
+            
+    //         if (isset($request['jenis']) && $request['jenis'] == 'antrean') {
+    //             $consId = $headers['cons']['data'];
+    //             $signature = $headers['cons']['secretKey'];
+    //             $timestamp = $headers['cons']['tStamp'];
+    //             $key = $consId . $signature . (string)$timestamp;
+    //             if(isset($response->response)){
+    //                 return $this->stringDecryptAntrean($key, $response); 
+    //             }else{
+                   
+    //                 if(isset( $response->metadata)){
+    //                     $data2 = array(
+    //                         'metaData' => $response->metadata,
+    //                         'response' => null,
+    //                     );
+    //                 }else{
+    //                     $data2 = array(
+    //                         'metaData' => array(
+    //                             'code'=> 201,
+    //                             'message' => 'BPJS : '.$response
+    //                         ) ,
+    //                         'response' => null,
+    //                     );
+    //                 }
+                   
+    //                 return $this->respond($data2);
+    //             }
+                
+    //         }else if (isset($response->metaData)) {
+    //             $consId = $headers['cons']['data'];
+    //             $signature = $headers['cons']['secretKey'];
+    //             $timestamp = $headers['cons']['tStamp'];
+    //             $key = $consId . $signature . (string)$timestamp;
+
+    //             return $this->stringDecrypt2($key, $response);
+    //         } else {
+    //             $response2 = array(
+    //                 "metaData" => array(
+    //                     "code" => "404",
+    //                     "message" => $response
+    //                 ),
+    //                 "response" => null
+    //             );
+    //             return $this->respond($response2);
+    //         }
+    //     } catch (\Exception $e) {
+    //         $response = array(
+    //             "metaData" => array(
+    //                 "code" => "404",
+    //                 "message" => "Transaksi tidak dapat di proses, Gagal dicoba kembali (BPJS Kesehatan)!"
+    //             ),
+    //             "response" => null,
+    //             "e"=> $e->getMessage(). ' '.$e->getLine()
+    //         );
+    
+    //         return $this->respond($response);
+    //     }
+    //     // return $this->respond($response);
+    // }
     public function bpjsTools(Request $request)
     {
+        $isTaskIdUpdate = false;
+        $taskIdLogContext = [];
+
         try {
-            // $kdProfile = $this->getDataKdProfile($request);
             $headers = $this->getHeaderBPJSV2();
             $dataJsonSend = null;
 
             if ($request['data'] != null) {
                 $dataJsonSend = json_encode($request['data']);
             }
-           
+
             $methods = $request['method'];
             $baseURL = $this->getUrlBrigdingBPJS();
+
             if (isset($request['jenis']) && $request['jenis'] == 'antrean') {
                 $baseURL =  $this->getUrlAntreanBPJSv2();
                 $headers['headers'][0]  = 'Content-Type: application/json';
@@ -3071,11 +3194,22 @@ class BridgingBPJSV2Controller extends ApiController
                 $headers['headers'][2]  = 'x-timestamp:' . $headers['cons']['tStamp'];
                 $headers['headers'][3]  = 'x-signature:' .$headers['cons']['signature'];
                 $headers['headers'][4]  = 'user_key:' . $this->getUserKeyAntreanBPJSv2();
+
+                if (isset($request['url']) && strpos($request['url'], 'antrean/updatewaktu') !== false) {
+                    $isTaskIdUpdate = true;
+                    $taskIdLogContext = [
+                        'kodebooking' => $request['data']['kodebooking'] ?? null,
+                        'taskid'      => $request['data']['taskid'] ?? null,
+                        'waktu_kirim' => isset($request['data']['waktu'])
+                            ? date('Y-m-d H:i:s', is_numeric($request['data']['waktu']) ? $request['data']['waktu'] / 1000 : strtotime($request['data']['waktu']))
+                            : null,
+                    ];
+                }
             }
+
             if (isset($request['jenis']) && $request['jenis'] == 'i-care') {
                 $baseURL = $this->getUrlBrigdingBPJS_ICARE();
                 $headers['headers'][0]  = 'Content-Type: application/json';
-                // $headers['headers'][4]  = 'user_key:' . $this->getUserKeyICARE();
             }
             if (isset($request['jenis']) && $request['jenis'] == 'eRekamMedis') {
                 $baseURL = $this->urlERekamMedis();
@@ -3093,34 +3227,35 @@ class BridgingBPJSV2Controller extends ApiController
                 $dataJsonSend = json_encode($jsonErekamMedis);
             }
             $url =   $baseURL . $request['url'];
-  
+
             $response = $this->curlAPI2($headers['headers'], $dataJsonSend, $url, $methods, null);
- 
-            // $cekData = array(
-            //     'request' => array(
-            //         'url' => $url,
-            //         'headers' =>  $headers['headers'],
-            //         'payload' =>$dataJsonSend,
-            //         'secretKey' => $headers['cons']['secretKey'],
-            //     ), 'response' => $response
-            // );
-            
+
             if (isset($request['jenis']) && $request['jenis'] == 'eRekamMedis') {
                 $objetoRequest = new \Illuminate\Http\Request();
                 $objetoRequest['nosep'] = $request['data']['request']['noSep'];
                 $objetoRequest['keterangan'] = $response;
                 $this->saveLogMRBundle($objetoRequest);
             }
-            
+
             if (isset($request['jenis']) && $request['jenis'] == 'antrean') {
                 $consId = $headers['cons']['data'];
                 $signature = $headers['cons']['secretKey'];
                 $timestamp = $headers['cons']['tStamp'];
                 $key = $consId . $signature . (string)$timestamp;
+
                 if(isset($response->response)){
-                    return $this->stringDecryptAntrean($key, $response); 
+                    $decrypted = $this->stringDecryptAntrean($key, $response);
+
+                    if ($isTaskIdUpdate) {
+                        try {
+                            $this->logAntrolTaskId('SUKSES', $taskIdLogContext);
+                        } catch (\Exception $logEx) {
+                            // sengaja diabaikan, logging tidak boleh mengganggu proses utama
+                        }
+                    }
+
+                    return $decrypted;
                 }else{
-                   
                     if(isset( $response->metadata)){
                         $data2 = array(
                             'metaData' => $response->metadata,
@@ -3135,10 +3270,21 @@ class BridgingBPJSV2Controller extends ApiController
                             'response' => null,
                         );
                     }
-                   
+
+                    if ($isTaskIdUpdate) {
+                        try {
+                            $this->logAntrolTaskId('GAGAL', array_merge($taskIdLogContext, [
+                                'code'    => $data2['metaData']['code'],
+                                'message' => $data2['metaData']['message'],
+                            ]));
+                        } catch (\Exception $logEx) {
+                            // sengaja diabaikan
+                        }
+                    }
+
                     return $this->respond($data2);
                 }
-                
+
             }else if (isset($response->metaData)) {
                 $consId = $headers['cons']['data'];
                 $signature = $headers['cons']['secretKey'];
@@ -3157,6 +3303,16 @@ class BridgingBPJSV2Controller extends ApiController
                 return $this->respond($response2);
             }
         } catch (\Exception $e) {
+            if ($isTaskIdUpdate) {
+                try {
+                    $this->logAntrolTaskId('EXCEPTION', array_merge($taskIdLogContext, [
+                        'exception' => $e->getMessage() . ' ' . $e->getLine(),
+                    ]));
+                } catch (\Exception $logEx) {
+                    // sengaja diabaikan
+                }
+            }
+
             $response = array(
                 "metaData" => array(
                     "code" => "404",
@@ -3165,11 +3321,11 @@ class BridgingBPJSV2Controller extends ApiController
                 "response" => null,
                 "e"=> $e->getMessage(). ' '.$e->getLine()
             );
-    
+
             return $this->respond($response);
         }
-        // return $this->respond($response);
     }
+
     protected function curlAPI2($headers, $dataJsonSend = null, $url, $method, $tipe = null)
     {
         $curl = curl_init();
@@ -3602,5 +3758,37 @@ class BridgingBPJSV2Controller extends ApiController
         return $this->respond($responses);
     }
 
-    
+    private function logAntrolTaskId($status, $context = [])
+    {
+        $logDir = storage_path('logs/antrol-taskid/');
+        if (!is_dir($logDir)) {
+            mkdir($logDir, 0777, true);
+        }
+
+        $logFile = $logDir . "antrol-taskid-" . date('Y-m-d') . ".log";
+
+        $line = sprintf(
+            "[%s] %s | %s\n",
+            date('Y-m-d H:i:s'),
+            $status,
+            json_encode($context)
+        );
+
+        file_put_contents($logFile, $line, FILE_APPEND);
+    }
+
+    public function enqueueRetry(Request $request)
+    {
+        AntrolRetryQueue::create([
+            'kodebooking'      => $request->input('kodebooking'),
+            'taskid'           => $request->input('taskid'),
+            'waktu'            => $request->input('waktu'),
+            'noregistrasifk'   => $request->input('noregistrasifk'),
+            'jumlah_percobaan' => 3,
+            'status'           => 'pending',
+        ]);
+
+        return response()->json(['status' => 'ok']);
+    }
+
 }
