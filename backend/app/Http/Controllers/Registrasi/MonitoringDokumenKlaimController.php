@@ -128,8 +128,6 @@ class MonitoringDokumenKlaimController extends  ApiController
     }
 
     public function bundleDokumenOld(Request $request) {
-        file_put_contents(storage_path('logs/DEBUG_MASUK.txt'), date('Y-m-d H:i:s') . "\n", FILE_APPEND);
-
         $log = new Logger('dokumenklaim');
         $log->pushHandler(new StreamHandler(
             storage_path('logs/dokumenklaim-' . date('Y-m-d') . '.log'),

@@ -3082,6 +3082,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
         return Response::download($path,  $request['filename'], $headers);
     });
 
+    // bundledokumen
     Route::get('storage/dokumenklaim', 'Registrasi\MonitoringDokumenKlaimController@lihatDokumen');
     Route::get('storage/bundledokumenklaim-old', 'Registrasi\MonitoringDokumenKlaimController@bundleDokumenOld');
     Route::get('storage/bundledokumenklaim/{Nosep}', 'Registrasi\MonitoringDokumenKlaimController@bundleDokumen');
