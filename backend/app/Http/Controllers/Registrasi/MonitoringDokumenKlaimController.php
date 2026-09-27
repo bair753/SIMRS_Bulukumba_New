@@ -206,7 +206,7 @@ class MonitoringDokumenKlaimController extends  ApiController
         } else {
             echo '
             <script language="javascript">
-                window.alert("Tidak ada data.");
+                window.alert("Tidak ada dataaaaaa.");
                 window.close()
             </script>';
             die;
