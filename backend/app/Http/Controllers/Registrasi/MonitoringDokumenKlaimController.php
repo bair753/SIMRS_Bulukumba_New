@@ -128,10 +128,10 @@ class MonitoringDokumenKlaimController extends  ApiController
     public function bundleDokumenOld(Request $request) {
         $dataRegistrasi = PasienDaftar::where('noregistrasi', $request['noregistrasi'])->first();
 
-        if (!$dataRegistrasi) {
-            \Log::error('bundleDokumenOld: PasienDaftar not found', ['noregistrasi' => $request['noregistrasi']]);
-            return response()->json(['message' => 'Data registrasi tidak ditemukan'], 404);
-        }
+        // if (!$dataRegistrasi) {
+        //     \Log::error('bundleDokumenOld: PasienDaftar not found', ['noregistrasi' => $request['noregistrasi']]);
+        //     return response()->json(['message' => 'Data registrasi tidak ditemukan'], 404);
+        // }
 
         $dataDokumen = DB::table('monitoringdokklaim_t as mk')
         ->join("dokumenklaim_m as dk", "dk.id", "=", "mk.documentklaimfk")
@@ -141,7 +141,9 @@ class MonitoringDokumenKlaimController extends  ApiController
         ->orderBy('dk.nourut')
         ->get();
 
-        \Log::info('bundleDokumenOld: dataDokumen count', ['count' => count($dataDokumen)]);
+        dd($dataDokumen);
+        
+        // \Log::info('bundleDokumenOld: dataDokumen count', ['count' => count($dataDokumen)]);
 
         $fileName = 'bundle_'.$request['noregistrasi'].'.pdf';
         $pathbundle = 'dokumen_klaim/'.$request['noregistrasi'] . "/" . $fileName;
@@ -169,10 +171,10 @@ class MonitoringDokumenKlaimController extends  ApiController
                 $namafiletemp = public_path($basepath . "/temp_". $item->filename);
                 $namafile = public_path($basepath . "/". $item->filename);
 
-                \Log::info('bundleDokumenOld: checking file', [
-                    'namafile' => $namafile,
-                    'exists' => file_exists($namafile),
-                ]);
+                // \Log::info('bundleDokumenOld: checking file', [
+                //     'namafile' => $namafile,
+                //     'exists' => file_exists($namafile),
+                // ]);
                 
                 exec('cp "'.$namafile.'" "'.$namafiletemp.'"');
                 exec('gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile="'.$namafiletemp.'" "'.$namafile.'"'); 
