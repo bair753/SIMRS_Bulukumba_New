@@ -34,6 +34,8 @@ use App\Master\Ruangan;
 use App\Master\Alamat;
 use App\Transaksi\AntrianPasienRegistrasi;
 use App\Transaksi\BPJSRencanaKontrol;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
 
 class BridgingBPJSV2Controller extends ApiController
 {
@@ -3758,6 +3760,7 @@ class BridgingBPJSV2Controller extends ApiController
         return $this->respond($responses);
     }
 
+
     private function logAntrolTaskId($status, $context = [])
     {
         $logDir = storage_path('logs/antrol-taskid/');
@@ -3765,16 +3768,25 @@ class BridgingBPJSV2Controller extends ApiController
             mkdir($logDir, 0777, true);
         }
 
-        $logFile = $logDir . "antrol-taskid-" . date('Y-m-d') . ".log";
+        $log = new Logger('antrol-taskid');
+        $log->pushHandler(new StreamHandler(
+            $logDir . 'antrol-taskid-' . date('Y-m-d') . '.log',
+            Logger::DEBUG
+        ));
 
-        $line = sprintf(
-            "[%s] %s | %s\n",
-            date('Y-m-d H:i:s'),
-            $status,
-            json_encode($context)
-        );
-
-        file_put_contents($logFile, $line, FILE_APPEND);
+        switch ($status) {
+            case 'SUKSES':
+                $log->info('TaskID Update', $context);
+                break;
+            case 'GAGAL':
+                $log->warning('TaskID Update', $context);
+                break;
+            case 'EXCEPTION':
+                $log->error('TaskID Update', $context);
+                break;
+            default:
+                $log->info($status, $context);
+        }
     }
 
     public function enqueueRetry(Request $request)
