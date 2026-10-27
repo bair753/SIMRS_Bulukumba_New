@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, NgZone, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
 import { Table } from 'primeng/table';
@@ -20,11 +20,10 @@ export class ViewerFarmasiComponent implements OnInit {
   dataSource: any[] = []
   color = ['white', 'blue', 'gray', 'darkgray', 'orange']
   listKelas = []
-  dipanggilN: boolean = false;
-  dipanggilR: boolean = false;
+  dipanggil: boolean = false;
   value = 10
-  antriTerakhirN: any
-  antriTerakhirR: any
+  antriTerakhir: any
+  namaPasien: any = '-'
   count_defaultTable: any = 15
   countTable: any = this.count_defaultTable
   totalPage: any = 3
@@ -50,6 +49,7 @@ export class ViewerFarmasiComponent implements OnInit {
     private alertService: AlertService,
     private socket: SocketService,
     private route: ActivatedRoute,
+    private ngZone: NgZone,
     @Inject(DOCUMENT) private document: any
   ) {
     this.apiService.get('viewer/get-data-viewer-far').subscribe(e => {
@@ -57,7 +57,6 @@ export class ViewerFarmasiComponent implements OnInit {
       this.paramRuang = ''
       this.listRuanganAktif = []
       this.route.params.subscribe(params => {
-        // Defaults to 0 if no query param provided.
         let ru = params['ruanganid'];
 
         this.paramRuang = ru
@@ -81,51 +80,44 @@ export class ViewerFarmasiComponent implements OnInit {
 
       });
       if (e.data.length > 0) {
-        for (let i = 0; i < e.data.length; i++) {
-          const element = e.data[i];
-          if (element.jenis == "N") {
-            this.item.antriTerakhirN = element.jenis + '-' + element.noantrian
-          }
-          if (element.jenis == "R") {
-            this.item.antriTerakhirR = element.jenis + '-' + element.noantrian
-          }
-        }
+        const element = e.data[e.data.length - 1];
+        this.item.antriTerakhir = element.jenis + '-' + element.noantrian
       }
     })
     this.socket.on('tampilkan-antrian-farmasi', (data: any) => {
+      // Callback socket.io berjalan di luar Angular Zone, jadi seluruh
+      // logika di sini dibungkus ngZone.run() supaya tampilan ikut refresh.
+      this.ngZone.run(() => {
 
-      let result = JSON.parse(data)
-      let status = false
-      if (result.status == 'load') {
-        this.load()
-      } else {
-        var no = result.noantri
-        status = false
+        let result = JSON.parse(data)
+        let status = false
+        if (result.status == 'load') {
+          this.load()
+        } else {
+          var no = result.noantri
+          status = false
 
-        for (let x = 0; x < this.listRuanganAktif.length; x++) {
-          const element2 = this.listRuanganAktif[x];
-          if (element2.namaruangan == result.namaruangan) {
-            status = true
-            this.item.antriTerakhir = result.noregistrasi.substring(4)
-            this.item.jenis = result.jenis
-            this.item.ruangan = result.namaruangan
-            no = this.item.antriTerakhir
-            break
+          for (let x = 0; x < this.listRuanganAktif.length; x++) {
+            const element2 = this.listRuanganAktif[x];
+            if (element2.namaruangan == result.namaruangan) {
+              status = true
+              this.item.antriTerakhir = result.noregistrasi.substring(4)
+              this.item.jenis = result.jenis
+              this.item.ruangan = result.namaruangan
+              this.item.namaPasien = result.namapasien
+              no = this.item.antriTerakhir
+              break
+            }
           }
         }
-      }
-      if (status == true) {
-        if (this.item.jenis == 'Non Racikan') {
-          this.dipanggilN = true
-          this.antriTerakhirN = this.item.antriTerakhir
-        } else {
-          this.dipanggilR = true
-          this.antriTerakhirR = this.item.antriTerakhir
+        if (status == true) {
+          this.dipanggil = true
+          this.antriTerakhir = this.item.antriTerakhir
+          this.namaPasien = this.item.namaPasien != undefined && this.item.namaPasien != '' ? this.item.namaPasien : '-'
+          this.playAudio(this.namaPasien);
         }
-        this.playAudio('Nomor Antrian. ' + no
-          + '. Ke Loket . Farmasi');
-      }
 
+      });
 
     });
 
@@ -134,41 +126,61 @@ export class ViewerFarmasiComponent implements OnInit {
   ngOnInit(): void {
     this.elem = document.documentElement;
     this.load()
-
-    // this.loadTable(this.start_otomatis, this.limit_otomatis)
-    // this.loadKelas()
-    // this.apiTimer = setInterval(() => {
-    //   this.timerTable()
-    //   this.timerPanel()
-    // }, (1000)); //1 second
-
-
   }
-  playAudio(nomor) {
+  playBell(): Promise<void> {
+    return new Promise((resolve) => {
+      try {
+        const AudioContextClass = (window as any).AudioContext || (window as any).webkitAudioContext;
+        const ctx = new AudioContextClass();
+        const notes = [1046.5, 1318.5]; // dua nada lonceng, terdengar seperti "ding-dong"
+        const noteDuration = 0.45;
 
-    // setTimeout(() => {
+        notes.forEach((freq, i) => {
+          const startTime = ctx.currentTime + i * noteDuration;
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, startTime);
+          gain.gain.setValueAtTime(0.0001, startTime);
+          gain.gain.exponentialRampToValueAtTime(0.5, startTime + 0.02);
+          gain.gain.exponentialRampToValueAtTime(0.0001, startTime + noteDuration);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(startTime);
+          osc.stop(startTime + noteDuration);
+        });
 
-    var synthesis = window.speechSynthesis;
-    // Get the first `en` language voice in the list
-    var voice = synthesis.getVoices().filter(function (voice) {
-      return voice.lang === 'id-ID';
-    })[0];
-    // Create an utterance object
-    var utterance = new SpeechSynthesisUtterance(nomor);
-    // Set utterance properties 
-    utterance.voice = voice;
-    utterance.lang = 'id-ID';
-    // utterance.text = document.querySelector("textarea").value;
-    utterance.pitch = 1;
-    utterance.rate = 0.8;
-    utterance.volume = 1;
-    // Speak the utterance
-    synthesis.speak(utterance);
-    // this.audio.pause();
+        setTimeout(() => {
+          ctx.close();
+          resolve();
+        }, notes.length * noteDuration * 1000 + 150);
+      } catch (e) {
+        resolve();
+      }
+    });
+  }
+  playAudio(namaPasien) {
+
+    this.playBell().then(() => {
+      var synthesis = window.speechSynthesis;
+      var voice = synthesis.getVoices().filter(function (voice) {
+        return voice.lang === 'id-ID';
+      })[0];
+      var teks = (namaPasien && namaPasien != '-' ? namaPasien : 'Pasien')
+        + ', silahkan ke Farmasi untuk mengambil obat.';
+      var utterance = new SpeechSynthesisUtterance(teks);
+      utterance.voice = voice;
+      utterance.lang = 'id-ID';
+      utterance.pitch = 1;
+      utterance.rate = 0.8;
+      utterance.volume = 1;
+      synthesis.speak(utterance);
+    });
 
     setTimeout(() => {
-      this.dipanggilN = false
-      this.dipanggilR = false
+      this.ngZone.run(() => {
+        this.dipanggil = false
+      });
     }, (5000));
 
   }
@@ -180,83 +192,14 @@ export class ViewerFarmasiComponent implements OnInit {
     })
 
   }
-  // timerPanel() {
-  //   this.countPanel = this.countPanel - 1;
-  //   if (this.countPanel <= 0) {
-  //     this.countPanel = this.count_defaultPanel;
-  //     this.loadKelas();
-
-  //   }
-  //   this.timerPanels = this.countPanel + " Detik"; // watch
-  // }
-
-  // timerTable() {
-  //   this.countTable = this.countTable - 1;
-  //   if (this.countTable <= 0) {
-  //     this.countTable = this.count_defaultTable;
-
-  //     // event Load Table
-
-  //     // page selanjutnya
-  //     this.page_otomatis = this.page_otomatis + 1;
-  //     if (this.page_otomatis > this.totalPage) {
-  //       this.page_otomatis = this.page_default;
-  //     }
-
-  //     this.start_otomatis = 0;
-  //     this.limit_otomatis = 10;
-  //     for (var j = 1; j <= this.totalPage; j++) {
-  //       if (j == this.page_otomatis) {
-  //         this.loadTable(this.start_otomatis, this.limit_otomatis);
-  //       }
-
-  //       this.start_otomatis = this.start_otomatis + 10;
-
-  //     }
-
-
-
-  //   }
-  //   this.infoPage = this.page_otomatis + ' dari ' + this.totalPage + ' Halaman'; // info page
-  //   this.timerTables = this.countTable + " Detik"; // watch
-  // }
-  // loadTable(start, limit_otomatis) {
-  //   this.dataSource = []
-  //   this.apiService.get('bed/get-ruangan?offset=' + start + '&limit=' + limit_otomatis).subscribe(e => {
-
-  //     for (let x = 0; x < e.length; x++) {
-  //       const element = e[x];
-  //       element.no = start + x + 1
-  //     }
-  //     this.dataSource = e
-  //   })
-  // }
-  // loadKelas() {
-  //   this.listKelas = []
-  //   this.apiService.get('bed/get-kelas').subscribe(e => {
-  //     let z = 0
-  //     for (let x = 0; x < e.length; x++) {
-  //       const element = e[x];
-  //       if (this.color[z] == undefined) z = 0
-  //       element.sisa = parseFloat(element.kapasitas) - parseFloat(element.tersedia)
-  //       element.persen = parseFloat(element.sisa) / parseFloat(element.kapasitas) * 100
-  //       element.color = this.color[z]
-  //       z = z + 1
-  //     }
-  //     this.listKelas = e
-  //   })
-  // }
   openFullscreen() {
     if (this.elem.requestFullscreen) {
       this.elem.requestFullscreen();
     } else if (this.elem.mozRequestFullScreen) {
-      /* Firefox */
       this.elem.mozRequestFullScreen();
     } else if (this.elem.webkitRequestFullscreen) {
-      /* Chrome, Safari and Opera */
       this.elem.webkitRequestFullscreen();
     } else if (this.elem.msRequestFullscreen) {
-      /* IE/Edge */
       this.elem.msRequestFullscreen();
     }
     this.isFullscreen = true
@@ -265,13 +208,10 @@ export class ViewerFarmasiComponent implements OnInit {
     if (this.document.exitFullscreen) {
       this.document.exitFullscreen();
     } else if (this.document.mozCancelFullScreen) {
-      /* Firefox */
       this.document.mozCancelFullScreen();
     } else if (this.document.webkitExitFullscreen) {
-      /* Chrome, Safari and Opera */
       this.document.webkitExitFullscreen();
     } else if (this.document.msExitFullscreen) {
-      /* IE/Edge */
       this.document.msExitFullscreen();
     }
     this.isFullscreen = false

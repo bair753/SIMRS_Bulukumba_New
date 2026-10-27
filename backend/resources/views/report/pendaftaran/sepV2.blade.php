@@ -398,67 +398,33 @@
     $(function () {
         'use strict';
         var APP_URL = "http://10.10.10.12/service/medifirst2000/report/ttd-digital/";
-        $.ajax({
-            "url": "https://tinyurl.com/api-create.php?url=" + APP_URL + "{{ $dataReport['suratJaminan']->noregistrasi }}" + "/pasien",
-            "method": "GET",
-            "timeout": 0,
-            "success": function(response) {
-                $('#qrSEP').qrcode({
-                    text: response,
-                    height: 55,
-                    width: 55
-                });
-            }
-        })
-        $.ajax({
-            "url": "https://tinyurl.com/api-create.php?url=" + APP_URL + "{{ $dataReport['suratJaminan']->noregistrasi }}" + "/pasien",
-            "method": "GET",
-            "timeout": 0,
-            "success": function(response) {
-                $('#qrSJPPasien').qrcode({
-                    text: response,
-                    height: 55,
-                    width: 55
-                });
-            }
-        })
-        $.ajax({
-            "url": "https://tinyurl.com/api-create.php?url=" + APP_URL + "{{ $dataReport['suratJaminan']->noregistrasi }}" + "/dokter",
-            "method": "GET",
-            "timeout": 0,
-            "success": function(response) {
-                $('#qrSJPDokter').qrcode({
-                    text: response,
-                    height: 55,
-                    width: 55
-                });
-            }
-        })
-        $.ajax({
-            "url": "https://tinyurl.com/api-create.php?url=" + APP_URL + "{{ $dataReport['suratJaminan']->noregistrasi }}" + "/rs",
-            "method": "GET",
-            "timeout": 0,
-            "success": function(response) {
-                $('#qrSJPRS').qrcode({
-                    text: response,
-                    height: 55,
-                    width: 55
-                });
-            }
-        })
-        $.ajax({
-            "url": "https://tinyurl.com/api-create.php?url=" + APP_URL + "{{ $dataReport['suratJaminan']->noregistrasi }}" + "/spri",
-            "method": "GET",
-            "timeout": 0,
-            "success": function(response) {
-                $('#qrSPRI').qrcode({
-                    text: response,
-                    height: 55,
-                    width: 55
-                });
-                setTimeout(function(){ window.print() }, 1000);
-            }
-        })
+        var SHORTEN_URL = "/service/medifirst2000/report/shorten-url";
+
+        function buatQR(targetUrl, elementId, callback) {
+            $.ajax({
+                "url": SHORTEN_URL + "?url=" + encodeURIComponent(targetUrl),
+                "method": "GET",
+                "timeout": 0,
+                "success": function (response) {
+                    $(elementId).qrcode({
+                        text: response,
+                        height: 55,
+                        width: 55
+                    });
+                    if (typeof callback === 'function') {
+                        callback();
+                    }
+                }
+            });
+        }
+
+        buatQR(APP_URL + "{{ $dataReport['suratJaminan']->noregistrasi }}" + "/pasien", '#qrSEP');
+        buatQR(APP_URL + "{{ $dataReport['suratJaminan']->noregistrasi }}" + "/pasien", '#qrSJPPasien');
+        buatQR(APP_URL + "{{ $dataReport['suratJaminan']->noregistrasi }}" + "/dokter", '#qrSJPDokter');
+        buatQR(APP_URL + "{{ $dataReport['suratJaminan']->noregistrasi }}" + "/rs", '#qrSJPRS');
+        buatQR(APP_URL + "{{ $dataReport['suratJaminan']->noregistrasi }}" + "/spri", '#qrSPRI', function () {
+            setTimeout(function () { window.print() }, 1000);
+        });
     })
 </script>
 </html>

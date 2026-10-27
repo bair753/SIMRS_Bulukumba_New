@@ -76,197 +76,75 @@ export class InformasiKamarComponent implements OnInit {
       }
     };
   }
-  getData() {
-    var arrRuangRI = [];
-    this.isShowKamar = true
-    this.httpService.get('medifirst2000/rawatinap/get-daftar-ruangan-ri').subscribe(e => {
-      var dataRI: any = e;
-      for (var j = 0; j < dataRI.length; j++) {
-        arrRuangRI[j] = dataRI[j].id;
-      }
-    })
-    
-    this.httpService.get('medifirst2000/kiosk/get-view-bed-tea').subscribe(e => {
-      var data: any = e[0];
-      this.jumlahTempatTidur = data.kamartotal;
-      this.JumlahIsi = data.kamarisi;
-      this.JumlahKosong = data.kamarkosong;
-      // this.jumlahTempatTidur=this.jumlahTempatTidur.kamartotal
-    })
-    this.httpService.get('medifirst2000/kiosk/get-view-bed').subscribe(e => {
-      var data: any = e;
-      var arrRuang = [];
-      var arrKamar = [];
-      var arrTT = [];
-      var arr = [];
-      var arrayS = {};
-      var arrayK = {};
-      var arrayM = {};
-      var stt = true;
-      for (var i = 0; i < data.length; i++) {
-        arrayM = {
-          idtempattidur: data[i].idtempattidur,
-          idruangan: data[i].idruangan,
-          namaruangan: data[i].namaruangan,
-          idkamar: data[i].idkamar,
-          namakamar: data[i].namakamar,
-          reportdisplay: data[i].reportdisplay,
-          nomorbed: data[i].nomorbed,
-          idstatusbed: data[i].idstatusbed,
-          statusbed: data[i].statusbed
-        };
-        arrTT.push(arrayM)
-      }
-      for (var i = 0; i < data.length; i++) {
-        //kamar
-        stt = true;
-        for (var j = 0; j < arrKamar.length; j++) {
-          if (data[i].idkamar == arrKamar[j].idkamar) {
-            arrKamar[j].qtyBed = arrKamar[j].qtyBed + 1;
-            if (data[i].idstatusbed == 1) {
-              arrKamar[j].isi = arrKamar[j].isi + 1;
-            } else {
-              arrKamar[j].kosong = arrKamar[j].kosong + 1;
-            }
-            stt = false;
-          }
-        }
-        if (stt == true) {
-          var arrTTT = [];
-          for (var j = 0; j < arrTT.length; j++) {
-            if (arrTT[j].idkamar == data[i].idkamar) {
-              arrTTT.push(arrTT[j]);
-            }
-          }
+getData() {
+    this.isShowKamar = true;
 
-          if (data[i].idstatusbed == 1) {
-            arrayK = {
-              idruangan: data[i].idruangan,
-              idkamar: data[i].idkamar,
-              namakamar: data[i].namakamar,
-              idkelas: data[i].idkelas,
-              namakelas: data[i].namakelas,
-              qtyBed: 1,
-              isi: 1,
-              kosong: 0,
-              tempattidur: arrTTT
-            };
-          } else {
-            arrayK = {
-              idruangan: data[i].idruangan,
-              idkamar: data[i].idkamar,
-              namakamar: data[i].namakamar,
-              idkelas: data[i].idkelas,
-              namakelas: data[i].namakelas,
-              qtyBed: 1,
-              isi: 0,
-              kosong: 1,
-              tempattidur: arrTTT
-            };
-          }
-          arrKamar.push(arrayK);
+    // 1. Ambil Ringkasan Total Bed
+    this.httpService.get('medifirst2000/kiosk/get-view-bed-tea').subscribe((e: any) => {
+      if (e && e[0]) {
+        this.jumlahTempatTidur = e[0].kamartotal;
+        this.JumlahIsi = e[0].kamarisi;
+        this.JumlahKosong = e[0].kamarkosong;
+      }
+    });
+
+    // 2. Ambil Detail Bed Per Ruangan
+    this.httpService.get('medifirst2000/kiosk/get-view-bed').subscribe((data: any) => {
+      if (!Array.isArray(data)) return;
+
+      const mapRuangan = new Map<number, any>();
+
+      // Agregasi Data Berdasarkan ID Ruangan secara Akurat
+      data.forEach((bed: any) => {
+        const idRuang = bed.idruangan;
+        const isTerisi = bed.idstatusbed === 1;
+
+        if (!mapRuangan.has(idRuang)) {
+          mapRuangan.set(idRuang, {
+            idruangan: idRuang,
+            namaruangan: bed.namaruangan,
+            qtyBed: 0,
+            isi: 0,
+            kosong: 0,
+            bg: '',
+            warna: ''
+          });
         }
 
+        const ruang = mapRuangan.get(idRuang);
+        ruang.qtyBed += 1;
+        if (isTerisi) {
+          ruang.isi += 1;
+        } else {
+          ruang.kosong += 1;
+        }
+      });
 
-      }
-      var sama = false
-      var newAr = [];
+      // Ubah Map menjadi Array
+      const arrRuang = Array.from(mapRuangan.values());
+
+      // Tentukan Warna & Skema Background
+      const warnaList = ['sales', 'views', 'users', 'checkin', 'warna1', 'warna2', 'warna3', 'warna4'];
       
-      for (let i = 0; i < arrKamar.length; i++) {
-        sama = false;
-        for (let z = 0; z < newAr.length; z++) {
-          if (arrKamar[i].namakelas == newAr[z].namakelas && arrKamar[i].idruangan == newAr[z].idruangan) {
-            sama = true;
-            // newAr[z].namakelas = arrKamar[i].namakelas
-            newAr[z].qtyBed = newAr[z].qtyBed + arrKamar[i].qtyBed
-            newAr[z].kosong = newAr[z].kosong + arrKamar[i].kosong
-            newAr[z].isi = newAr[z].isi + arrKamar[i].isi
-          }
-        }
-        if (sama == false) {
-          var datas = {
-            namakelas: arrKamar[i].namakelas,
-            idruangan: arrKamar[i].idruangan,
-            qtyBed: arrKamar[i].qtyBed,
-            isi: arrKamar[i].isi,
-            kosong: arrKamar[i].kosong,
-          }
-          newAr.push(datas);
-        }
-      }
-      //console.log(newAr)
+      arrRuang.forEach((ruang, index) => {
+        ruang.warna = warnaList[index % warnaList.length];
+        ruang.bg = ruang.qtyBed === ruang.isi ? 'bg-maroon-gradient' : 'bg-aqua-gradient';
 
-      for (var i = 0; i < data.length; i++) {
-        //ruang
-        stt = true;
-        for (var j = 0; j < arrRuang.length; j++) {
-          if (data[i].idruangan == arrRuang[j].idruangan) {
-            arrRuang[j].qtyBed = arrRuang[j].qtyBed + 1;
-            if (data[i].idstatusbed == 1) {
-              arrRuang[j].isi = arrRuang[j].isi + 1;
-            } else {
-              arrRuang[j].kosong = arrRuang[j].qtyBed - arrRuang[j].isi;
-            }
-            stt = false;
-          }
-        }
-        if (stt == true) {
-          var arrTTT = [];
-          for (var j = 0; j < newAr.length; j++) {
-            if (newAr[j].idruangan == data[i].idruangan) {
-              arrTTT.push(newAr[j]);
-            }
-          }
-          if (data[i].idstatusbed == 1) {
-            arrayS = {
-              idruangan: data[i].idruangan,
-              namaruangan: data[i].namaruangan,
-              qtyBed: 1,
-              isi: 1,
-              kosong: 0,
-              kamar: arrTTT
-            };
-          } else {
-            arrayS = {
-              idruangan: data[i].idruangan,
-              namaruangan: data[i].namaruangan,
-              qtyBed: 1,
-              isi: 0,
-              kosong: 1,
-              kamar: arrTTT
-            };
-          }
+        // Fix ID Ruangan langsung sesuai objeknya (mencegah data tertukar & angka minus)
+        this.httpService.get("medifirst2000/rawatinap/get-daftar-pasien-masih-dirawat?ruanganId=" + ruang.idruangan)
+          .subscribe((res: any) => {
+            const listPasien = res?.data || (Array.isArray(res) ? res : []);
+            ruang.isi = listPasien.length;
+            
+            // Proteksi Math.max agar TIDAK PERNAH MINUS
+            ruang.kosong = Math.max(0, ruang.qtyBed - ruang.isi);
+          });
+      });
 
-          arrRuang.push(arrayS);
-        }
-
-      }
-      let warna = ['sales', 'views', 'users', 'checkin',
-        'warna1', 'warna2', 'warna3', 'warna4',
-        'sales', 'views', 'users', 'checkin',
-        'warna1', 'warna2', 'warna3', 'warna4',
-        'sales', 'views', 'users', 'checkin',
-        'warna1', 'warna2', 'warna3', 'warna4',
-        'sales', 'views', 'users', 'checkin',
-        'warna1', 'warna2', 'warna3', 'warna4',
-        'sales', 'views', 'users', 'checkin']
-      for (let i = 0; i < arrRuang.length; i++) {
-        this.httpService.get("medifirst2000/rawatinap/get-daftar-pasien-masih-dirawat?ruanganId=" + arrRuangRI[i]).subscribe(e => {
-          arrRuang[i].isi = e.length;
-          arrRuang[i].kosong = arrRuang[i].qtyBed - arrRuang[i].isi;
-        })
-        arrRuang[i].warna = warna[i]
-        if (arrRuang[i].qtyBed == arrRuang[i].isi)
-          arrRuang[i].bg = 'bg-maroon-gradient'
-        else
-          arrRuang[i].bg = 'bg-aqua-gradient'
-
-      }
-      this.isShowKamar = false
-      //console.log(arrRuang)
-      this.dataKamar = arrRuang
-      this.totalKamar = arrRuang.length
-    })
+      this.dataKamar = arrRuang;
+      this.totalKamar = arrRuang.length;
+      this.isShowKamar = false;
+    });
   }
   lookDetail(idRU, namaruangan,modalSuccess) {
     this.httpService.get("medifirst2000/rawatinap/get-daftar-pasien-masih-dirawat?ruanganId=" + idRU).subscribe(e => {

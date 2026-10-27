@@ -253,44 +253,31 @@
     var APP_URL = {!! json_encode(url('/')) !!}
     $(function () {
         'use strict';
-        var APP_URL = "http://simrs.rsudbulukumba.id/service/medifirst2000/report/ttd-digital/";
-        $.ajax({
-            "url": "https://tinyurl.com/api-create.php?url=" + APP_URL + "{{ $datas->noregistrasi }}" + "/pasien",
-            "method": "GET",
-            "timeout": 0,
-            "success": function(response) {
-                $('#qrPasien').qrcode({
-                    text: response,
-                    height: 75,
-                    width: 75
-                });
-            }
-        })
-        $.ajax({
-            "url": "https://tinyurl.com/api-create.php?url=" + APP_URL + "{{ $datas->noregistrasi }}" + "/dokter",
-            "method": "GET",
-            "timeout": 0,
-            "success": function(response) {
-                $('#qrDokter').qrcode({
-                    text: response,
-                    height: 75,
-                    width: 75
-                });
-            }
-        })
-        $.ajax({
-            "url": "https://tinyurl.com/api-create.php?url=" + APP_URL + "{{ $datas->noregistrasi }}" + "/rs",
-            "method": "GET",
-            "timeout": 0,
-            "success": function(response) {
-                $('#qrPemberi').qrcode({
-                    text: response,
-                    height: 75,
-                    width: 75
-                });
-                setTimeout(function(){ window.print() }, 1000);
+        var TTD_URL = "http://simrs.rsudbulukumba.id/service/medifirst2000/report/ttd-digital/";
+        var SHORTEN_URL = "/service/medifirst2000/report/shorten-url";
 
-            }
-        })
+        function buatQR(targetUrl, elementId, callback) {
+            $.ajax({
+                "url": SHORTEN_URL + "?url=" + encodeURIComponent(targetUrl),
+                "method": "GET",
+                "timeout": 0,
+                "success": function (response) {
+                    $(elementId).qrcode({
+                        text: response,
+                        height: 75,
+                        width: 75
+                    });
+                    if (typeof callback === 'function') {
+                        callback();
+                    }
+                }
+            });
+        }
+
+        buatQR(TTD_URL + "{{ $datas->noregistrasi }}" + "/pasien", '#qrPasien');
+        buatQR(TTD_URL + "{{ $datas->noregistrasi }}" + "/dokter", '#qrDokter');
+        buatQR(TTD_URL + "{{ $datas->noregistrasi }}" + "/rs", '#qrPemberi', function () {
+            setTimeout(function () { window.print() }, 1000);
+        });
     })
 </script>

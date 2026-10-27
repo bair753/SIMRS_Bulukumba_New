@@ -219,6 +219,7 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
 
               Route::post('bridging/bpjs/tools', 'Bridging\BridgingBPJSV2Controller@bpjsTools');
               //End SEP
+              Route::get('report/shorten-url', 'Report\ReportController@shortenUrl');
               //*PESERTA
               Route::get('bridging/bpjs/get-no-peserta', 'Bridging\BridgingBPJSV2Controller@getNoPeserta');
               Route::get('bridging/bpjs/get-nik', 'Bridging\BridgingBPJSV2Controller@getNIK');

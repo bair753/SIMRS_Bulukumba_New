@@ -166,7 +166,7 @@ define(['initialize'], function (initialize) {
                     $scope.isRouteLoading = false;
                     // $scope.listPenulisResep = dat.data.penulisresep;
                     $scope.listRuangan = dat.data.ruanganfarmasi;
-                    $scope.listRuangan.splice(5);
+                    $scope.listRuangan.splice(6);
                     $scope.listJenisKemasan = dat.data.jeniskemasan;
                     $scope.listProduk = dat.data.produk;
                     $scope.listAsalProduk = dat.data.asalproduk;

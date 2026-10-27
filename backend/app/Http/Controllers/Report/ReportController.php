@@ -7,7 +7,6 @@ use App\Datatrans\PasienDaftar;
 use App\Http\Controllers\ApiController;
 use App\Master\KelompokTransaksi;
 use App\Master\Ruangan;
-use App\Transaksi\PasienDaftar as PasienDaftarTrans;
 use App\Traits\Valet;
 use App\Transaksi\HasilLaboratorium;
 use App\Web\Profile;
@@ -109,8 +108,8 @@ class ReportController extends ApiController{
             ->join('kelas_m AS kls','kls.id','=','pd.objectkelasfk')
             ->select(DB::raw(  "'B/287/VIII/' || to_char(now(),'YYYY') AS nomor,pm.nocm,pm.namapasien,pm.tempatlahir,
                                                 to_char(pm.tgllahir,'DD-MM-YYYY') AS tgllahir,jk.jeniskelamin,kls.namakelas,
-			                                    dept.namadepartemen,ru.namaruangan,so.tglorder,pg.namalengkap,apd.tglmasuk,
-			                                    CASE WHEN pm.notelepon IS NULL THEN '' ELSE pm.notelepon END AS notelepon"))
+                                                dept.namadepartemen,ru.namaruangan,so.tglorder,pg.namalengkap,apd.tglmasuk,
+                                                CASE WHEN pm.notelepon IS NULL THEN '' ELSE pm.notelepon END AS notelepon"))
             ->where('apd.norec', $request['norec_apd'])
 //                    ->where('apd.kdprofile', $kdProfile)
             ->first();
@@ -118,7 +117,7 @@ class ReportController extends ApiController{
             ->leftJoin('pangkat_m AS pt','pt.id','=','pg.objectpangkatfk')
             ->leftJoin('jabatan_m AS jb','jb.id','=','pg.objectjabataninternalfk')
             ->select(DB::raw("pg.namalengkap,pg.nippns,CASE WHEN pg.objectpangkatfk IS NULL THEN '' ELSE pt.namapangkat END AS pangkat,
-			                                 CASE WHEN pg.nippns IS NULL THEN '' ELSE pg.nippns END AS nippns,CASE WHEN pg.objectjabataninternalfk IS NULL THEN '' ELSE jb.namajabatan END AS jabatan"))
+                                             CASE WHEN pg.nippns IS NULL THEN '' ELSE pg.nippns END AS nippns,CASE WHEN pg.objectjabataninternalfk IS NULL THEN '' ELSE jb.namajabatan END AS jabatan"))
 //                     ->where('pg.kdprofile', $kdProfile)
             ->where('pg.id',$idKelapaLab)
             ->first();
@@ -242,7 +241,7 @@ class ReportController extends ApiController{
             ->leftJoin('pangkat_m AS pt','pt.id','=','pg.objectpangkatfk')
             ->leftJoin('jabatan_m AS jb','jb.id','=','pg.objectjabataninternalfk')
             ->select(DB::raw("pg.namalengkap,pg.nippns,CASE WHEN pg.objectpangkatfk IS NULL THEN '' ELSE pt.namapangkat END AS pangkat,
-			                         CASE WHEN pg.nippns IS NULL THEN '' ELSE pg.nippns END AS nippns,CASE WHEN pg.objectjabataninternalfk IS NULL THEN '' ELSE jb.namajabatan END AS jabatan"))
+                                     CASE WHEN pg.nippns IS NULL THEN '' ELSE pg.nippns END AS nippns,CASE WHEN pg.objectjabataninternalfk IS NULL THEN '' ELSE jb.namajabatan END AS jabatan"))
             ->where('pg.kdprofile', $kdProfile)
             ->where('pg.id',$idKepalaRs)
             ->first();
@@ -288,7 +287,7 @@ class ReportController extends ApiController{
             ->where('id', $kdProfile)
             ->first();//DB::select(DB::raw("select * from profile_m where id = '$kdProfile' limit 1"));
         $data = DB::select(DB::raw("
-            						SELECT distinct ps.nocm, ps.namapasien,to_char(ps.tgllahir, 'DD/MM/YYYY') as tgllahir,CASE WHEN aa.noantri IS NULL THEN sr.noresep ELSE aa.jenis || '-' || aa.noantri END AS noresep,to_char(sr.tglresep, 'DD-MM-YYYY') as tglresep,pr.namaproduk || ' (' || CAST(pp.jumlah AS VARCHAR) || ')' AS namaproduk,pp.aturanpakai,pp.rke,  
+                                    SELECT distinct ps.nocm, ps.namapasien,to_char(ps.tgllahir, 'DD/MM/YYYY') as tgllahir,CASE WHEN aa.noantri IS NULL THEN sr.noresep ELSE aa.jenis || '-' || aa.noantri END AS noresep,to_char(sr.tglresep, 'DD-MM-YYYY') as tglresep,pr.namaproduk || ' (' || CAST(pp.jumlah AS VARCHAR) || ')' AS namaproduk,pp.aturanpakai,pp.rke,  
                                     CASE WHEN alm.alamatlengkap is null then '-' else alm.alamatlengkap end as alamat,ps.notelepon,ss.satuanstandar,pp.jumlah,  
                                     CASE WHEN pp.issiang = 't' THEN 'Siang' ELSE '-' END AS siang, CASE WHEN pp.ispagi = 't' THEN 'Pagi' ELSE '-' END AS pagi,  
                                     CASE WHEN pp.ismalam = 't' THEN 'Malam' ELSE '-' END as malam, CASE WHEN pp.issore = 't' THEN 'Sore' ELSE '-' END as sore,  
@@ -443,13 +442,13 @@ class ReportController extends ApiController{
                                     CASE WHEN pg.nippns IS NULL THEN '' ELSE pg.nippns END AS nippns,  
                                     CASE WHEN pg.objectjabataninternalfk IS NULL THEN '' ELSE jb.namajabatan END AS jabatan,  
                                     CASE WHEN pd.tglpulang IS NOT NULL THEN pd.tglpulang ELSE NOW() END AS tglpulang,
-			                        ru.namaruangan	|| ' / ' || kmr.namakamar || ' ( ' || tt.nomorbed || ' )' as kamar,
-			                        CASE WHEN pm.penanggungjawab IS NOT NULL THEN pm.penanggungjawab ELSE pm.namapasien END AS penanggungjawab,
-			                        CASE WHEN pm.notelepon IS NULL AND pm.nohp IS NULL THEN '' 
-			                        WHEN pm.notelepon IS NOT NULL AND pm.nohp IS NOT NULL THEN pm.notelepon || ' / ' || pm.nohp
-			                        WHEN pm.notelepon IS NOT NULL AND pm.nohp IS NULL THEN pm.notelepon
-			                        WHEN pm.nohp IS NOT NULL AND pm.notelepon IS NULL THEN pm.nohp END AS notelepon,
-			                        dk.namadesakelurahan,kc.namakecamatan,kb.namakotakabupaten,prop.namapropinsi,alm.kodepos,dep.namadepartemen"))
+                                    ru.namaruangan  || ' / ' || kmr.namakamar || ' ( ' || tt.nomorbed || ' )' as kamar,
+                                    CASE WHEN pm.penanggungjawab IS NOT NULL THEN pm.penanggungjawab ELSE pm.namapasien END AS penanggungjawab,
+                                    CASE WHEN pm.notelepon IS NULL AND pm.nohp IS NULL THEN '' 
+                                    WHEN pm.notelepon IS NOT NULL AND pm.nohp IS NOT NULL THEN pm.notelepon || ' / ' || pm.nohp
+                                    WHEN pm.notelepon IS NOT NULL AND pm.nohp IS NULL THEN pm.notelepon
+                                    WHEN pm.nohp IS NOT NULL AND pm.notelepon IS NULL THEN pm.nohp END AS notelepon,
+                                    dk.namadesakelurahan,kc.namakecamatan,kb.namakotakabupaten,prop.namapropinsi,alm.kodepos,dep.namadepartemen"))
             ->where('sk.kdprofile', $kdProfile)
             ->where('sk.norec', $request['norec'])
             ->get();
@@ -461,7 +460,7 @@ class ReportController extends ApiController{
             ->leftJoin('pangkat_m AS pt','pt.id','=','pg.objectpangkatfk')
             ->leftJoin('jabatan_m AS jb','jb.id','=','pg.objectjabataninternalfk')
             ->select(DB::raw("pg.namalengkap,pg.nippns,CASE WHEN pg.objectpangkatfk IS NULL THEN '' ELSE pt.namapangkat END AS pangkat,
-			                         CASE WHEN pg.nippns IS NULL THEN '' ELSE pg.nippns END AS nippns,CASE WHEN pg.objectjabataninternalfk IS NULL THEN '' ELSE jb.namajabatan END AS jabatan"))
+                                     CASE WHEN pg.nippns IS NULL THEN '' ELSE pg.nippns END AS nippns,CASE WHEN pg.objectjabataninternalfk IS NULL THEN '' ELSE jb.namajabatan END AS jabatan"))
             ->where('pg.kdprofile', $kdProfile)
             ->where('pg.id',$idKepalaRs)
             ->first();
@@ -969,7 +968,7 @@ class ReportController extends ApiController{
             LEFT JOIN kamar_m AS km ON km.id = tt.objectkamarfk
             LEFT JOIN ruangan_m AS ru ON ru.id = km.objectruanganfk
             LEFT JOIN kelas_m AS kl ON kl.id = km.objectkelasfk
-            WHERE 	ru.objectdepartemenfk IN (16, 35)
+            WHERE   ru.objectdepartemenfk IN (16, 35)
             AND ru.statusenabled = 1
             AND km.statusenabled = 1
             AND tt.statusenabled = 1
@@ -2381,7 +2380,6 @@ class ReportController extends ApiController{
         $kdProfile = (int)$request['kdprofile'];
         $noregistrasi = $request['noregistrasi'];
         $tglAyeuna = date('Y-m-d H:i:s');
-        $ppkPelayanan = $this->settingDataFixed('namaPPKRujukan', $kdProfile);
 
         $profile = collect(DB::select("
             select * from profile_m where id = 39 limit 1
@@ -2408,12 +2406,10 @@ class ReportController extends ApiController{
             ,ap.nmprovider
             ,pa.catatan
             ,kls.namakelas AS haknamakelas
-	        ,ap.notelpmobile
-	        ,pa.penjaminlaka
+            ,ap.notelpmobile
+            ,pa.penjaminlaka
             ,pa.prolanisprb
             ,pa.namadjpjpmelayanni
-            ,pa.katarak
-            ,pa.poliasalkode
             ,rp.objectdepartemenfk
             ,klsp.namakelas
             ,CASE WHEN rp.objectdepartemenfk = 18 THEN
@@ -2476,11 +2472,11 @@ class ReportController extends ApiController{
             FROM pasiendaftar_t AS pd
             LEFT JOIN ruangan_m AS ru ON ru.id = pd.objectruanganlastfk
             LEFT JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
-		    INNER JOIN pasien_m AS pm ON pm.id = pd.nocmfk
+            INNER JOIN pasien_m AS pm ON pm.id = pd.nocmfk
             LEFT JOIN alamat_m AS alm ON alm.nocmfk = pm.id
             LEFT JOIN departemen_m AS dp ON dp.id = ru.objectdepartemenfk
             LEFT JOIN kelompokpasien_m AS kp ON kp.id = pd.objectkelompokpasienlastfk
-		    LEFT JOIN rekanan_m AS rkn ON rkn.id = pd.objectrekananfk
+            LEFT JOIN rekanan_m AS rkn ON rkn.id = pd.objectrekananfk
             WHERE pd.noregistrasi = '". $noregistrasi ."'
         "))->first();
 
@@ -2519,13 +2515,8 @@ class ReportController extends ApiController{
         $ttdpasien = $tulisanheader . $datas->namapeserta . "/r" . $tulisanfooter;
         $ttddokter = $tulisanheader . $suratJaminan->dokter . "/r" . $tulisanfooter;
         $ttdrumahsakit = $tulisanheader . "RSUD H.A SULTHAN DG. RADJA /r" . $tulisanfooter;
-
-        $kode = $datas->nokepesertaan ?: $datas->nocm; // Pakai norm kalau nokepesertaan kosong
-        $qrcode = base64_encode(QrCode::format('svg')->size(50)->generate($kode));
-        
         $pageWidth = 819;
         $dataReport = array(
-            'ppkPelayanan' => $ppkPelayanan,
             'namaprofile' => $profile->namalengkap,
             'qrcodeprofile' => $profile->qrcodeprofile,
             'alamat' => $profile->alamatlengkap,
@@ -2537,51 +2528,21 @@ class ReportController extends ApiController{
             'ttdpasien' => $ttdpasien,
             'ttddokter' => $ttddokter,
             'ttdrumahsakit' => $ttdrumahsakit,
-            'tanggal' => $tglAyeuna,
         );
 
-        // dd($dataReport['data']);
         $imagePath = public_path("img/logo_bpjs.png");
         $image = "data:image/png;base64,".base64_encode(file_get_contents($imagePath));
 
-        $baseUrl = request()->getSchemeAndHttpHost();
-        $noreg = $dataReport['suratJaminan']->noregistrasi;
-
-        $urlPasien = $baseUrl . '/service/medifirst2000/report/ttd-digital/' . $noreg . '/pasien';
-        $qrcodePasien = base64_encode(QrCode::format('svg')->size(50)->generate($urlPasien));
-
-        $urlSJDokter = $baseUrl . '/service/medifirst2000/report/ttd-digital/' . $noreg . '/dokter';
-        $qrSJPDokter = base64_encode(QrCode::format('svg')->size(50)->generate($urlSJDokter));
-
-        $urlSJPRS = $baseUrl . '/service/medifirst2000/report/ttd-digital/' . $noreg . '/rs';
-        $qrSJPRS = base64_encode(QrCode::format('svg')->size(50)->generate($urlSJPRS));
-
-        $urlSPRI = $baseUrl . '/service/medifirst2000/report/ttd-digital/' . $noreg . '/spri';
-        $qrSPRI = base64_encode(QrCode::format('svg')->size(50)->generate($urlSPRI));
-
         if(isset($request["issimpanberkas"])) {
             // PDF::setOptions(['isPhpEnabled' => true, 'isJavascriptEnabled', true, 'isRemoteEnabled', true]);
-            // $pdf = PDF::setOptions(['isPhpEnabled' => true, 'isJavascriptEnabled' => true, 'isRemoteEnabled' => true]);
-            // $pdf->loadView('report.pendaftaran.sepV2-dom', array(
-            //     'profile' => $profile,
-            //     'pageWidth' => $pageWidth,
-            //     'dataReport' => $dataReport,
-            //     'image' => $image,
-            //     'qrcode' => $qrcode,
-            
-            // ))->setPaper('a4', 'portrait');
-
-            $pdf = PDF::loadView('report.pendaftaran.sepV2-dom', array(
+            $pdf = PDF::setOptions(['isPhpEnabled' => true, 'isJavascriptEnabled' => true, 'isRemoteEnabled' => true]);
+            $pdf->loadView('report.pendaftaran.sep', array(
                 'profile' => $profile,
                 'pageWidth' => $pageWidth,
                 'dataReport' => $dataReport,
                 'image' => $image,
-                'qrcode' => $qrcode,
-                'qrcodePasien' => $qrcodePasien,
-                'qrSJPDokter' => $qrSJPDokter,
-                'qrSJPRS' => $qrSJPRS,
-                'qrSPRI' => $qrSPRI,
-            ));
+            
+            ))->setPaper('a4', 'portrait');
             
             $this->saveDokumenKlaim($pdf, $request);
             
@@ -2589,21 +2550,6 @@ class ReportController extends ApiController{
             
             return view('report.pendaftaran.sepV2',
             compact('dataReport', 'pageWidth','profile', 'image'));
-
-            // ini_set('max_execution_time', 300);
-            // $pdf = PDF::loadView('report.pendaftaran.sepV2-dom', array(
-            //     'profile' => $profile,
-            //     'pageWidth' => $pageWidth,
-            //     'dataReport' => $dataReport,
-            //     'image' => $image,
-            //     'qrcode' => $qrcode,
-            //     'qrcodePasien' => $qrcodePasien,
-            //     'qrSJPDokter' => $qrSJPDokter,
-            //     'qrSJPRS' => $qrSJPRS,
-            //     'qrSPRI' => $qrSPRI,
-            // ));
-
-            // return $pdf->stream();
         }
 
         // return view('report.pendaftaran.sepV2',
@@ -2620,7 +2566,7 @@ class ReportController extends ApiController{
             ,to_char(pd.tglregistrasi, 'YYYY-MM-DD') AS tglmasuk
             FROM pasiendaftar_t AS pd
             LEFT JOIN pegawai_m AS pg ON pg.id = pd.objectpegawaifk
-		    INNER JOIN pasien_m AS pm ON pm.id = pd.nocmfk
+            INNER JOIN pasien_m AS pm ON pm.id = pd.nocmfk
             WHERE pd.noregistrasi = '". $noregistrasi ."'
         "))->first();
         $spri = collect(DB::select("SELECT * FROM bpjsrencanakontrol_t 
@@ -2647,6 +2593,22 @@ class ReportController extends ApiController{
         return $ttddigital;
     }
 
+    public function shortenUrl(Request $request)
+{
+    $url = $request->query('url');
+    if (!$url) {
+        return response('', 400);
+    }
+ 
+    $shortUrl = @file_get_contents('https://tinyurl.com/api-create.php?url=' . urlencode($url));
+ 
+    if ($shortUrl === false || empty($shortUrl)) {
+        return response($url);
+    }
+ 
+    return response(trim($shortUrl));
+}
+
     public function cetakCPPT(Request $request)
     {
         $kdProfile = (int)$request['kdprofile'];
@@ -2661,7 +2623,7 @@ class ReportController extends ApiController{
 
         $pasien = collect(DB::select("
             select ps.nocm, ps.namapasien, to_char(ps.tgllahir,'dd-MM-yyyy') as tgllahir,
-			       CASE WHEN ps.objectjeniskelaminfk=1 then 'L' else 'P' END as jk,
+                   CASE WHEN ps.objectjeniskelaminfk=1 then 'L' else 'P' END as jk,
                    to_char(pd.tglregistrasi,'dd-MM-yyyy hh24:mi:ss') as tglregistrasi,rm.namaruangan,
                    al.alamatlengkap,al.kecamatan,al.kotakabupaten
             from antrianpasiendiperiksa_t apd
@@ -3877,7 +3839,7 @@ class ReportController extends ApiController{
                 WHEN hh.hasil IS NULL THEN '' 
                 WHEN hh.FLAG = 'Y' THEN '*   ' || hh.hasil 
                 ELSE hh.hasil 
-		    END AS hasil,
+            END AS hasil,
             hh.keterangan as keterangan_lab,
             CASE WHEN hh.FLAG = 'Y' THEN '*' ELSE '' END AS stathasil,
             hh.hasil as hasilawal,
@@ -3979,106 +3941,7 @@ class ReportController extends ApiController{
         );
     }
 
-    public function saveDokumenKlaim($pdf, $request)
-    {
-        ini_set('max_execution_time', 10000); //6 minutes
-        ini_set('memory_limit', '4048M');
-        $profile = collect(DB::select("select * from profile_m where statusenabled = true"))->first();
-        $content = $pdf->download()->getOriginalContent();
-        $path = 'dokumen_klaim/' . $request['isberkasnoreg'];
-
-        try {
-
-            $dataRegistrasi = PasienDaftarTrans::where('noregistrasi', $request['isberkasnoreg'])->first();
-            $waktu = time();
-
-            $cek = DB::table("dokklaim_t")
-                ->where('noregistrasifk', $dataRegistrasi->norec)
-                ->where('documentklaimfk', $request['iddok'])
-                ->where('isgenerate', true)
-                ->whereRaw("filename not ilike '%EXPERTISE RADIOLOGI%' and filename not ilike '%HASIL LAB%'")
-                ->get();
-
-            //dd($cek);
-
-            if (empty($cek)) {
-                $savePath = public_path($path);
-                \File::makeDirectory($savePath, 0755, true, true);
-                if ($request['namafile'] == 'HASIL LAB') {
-                    $namafile = $request['namafile'] . '_' . $request['isberkasnoreg'] . '_' . $request['noorder'] . '.pdf';
-                } else if ($request['namadownloadfile'] == 'EXPERTISE RADIOLOGI') {
-                    $namafile = $request['namadownloadfile'] . '_' . $request['isberkasnoreg'] . '.pdf';
-                } else {
-                    $namafile = $request['namafile'] . '_' . $request['isberkasnoreg'] . '.pdf';
-                }
-
-                $public_path = $savePath . "/" . $namafile;
-
-                if (\File::exists($savePath . "/" . $namafile)) {
-                    $pdf->save($savePath . "/" . $waktu . ' ' . $namafile);
-                } else {
-                    $pdf->save($public_path);
-                }
-
-                $Dkmn = DB::table("dokklaim_t")
-                    ->where('noregistrasifk', $dataRegistrasi->norec)
-                    ->where('documentklaimfk', $request['iddok'])
-                    ->where('filename', $namafile)
-                    ->get();
-
-                if (!empty($Dkmn)) {
-                    $dataInsert = array(
-                        "norec" => substr(Uuid::generate(), 0, 32),
-                        "kdprofile" => $profile->id,
-                        "statusenabled" => true,
-                        "filename" => $waktu . ' ' . $namafile,
-                        "filepath" => $path . '/' . $waktu . ' ' . $namafile,
-                        "nocmfk" => $dataRegistrasi->nocmfk,
-                        "noregistrasifk" => $dataRegistrasi->norec,
-                        "documentklaimfk" => $request['iddok'],
-                        "tglupload" => date('Y-m-d H:i:s'),
-                        "isgenerate" => true,
-                    );
-                } else {
-                    $dataInsert = array(
-                        "norec" => substr(Uuid::generate(), 0, 32),
-                        "kdprofile" => $profile->id,
-                        "statusenabled" => true,
-                        "filename" => $namafile,
-                        "filepath" => $path . '/' . $namafile,
-                        "nocmfk" => $dataRegistrasi->nocmfk,
-                        "noregistrasifk" => $dataRegistrasi->norec,
-                        "documentklaimfk" => $request['iddok'],
-                        "tglupload" => date('Y-m-d H:i:s'),
-                        "isgenerate" => true,
-                    );
-                }
-
-
-                DB::table('dokklaim_t')->insert($dataInsert);
-
-                echo '
-                <script language="javascript">
-                    window.alert("OK.");
-                    window.close()
-                </script>';
-                die;
-            } else {
-                echo '
-                <script language="javascript">
-                
-                    window.alert("OK.");
-                    window.close()
-                </script>';
-                die;
-            }
-        } catch (\Exception $e) {
-            echo $e->getLine() . ' ' . $e->getMessage();
-            die;
-        }
-    }
-
-    function saveDokumenKlaimOld($pdf, $request) {
+    function saveDokumenKlaim($pdf, $request) {
         ini_set('max_execution_time', 2000);
         $profile = collect(DB::select("select * from profile_m where statusenabled = true"))->first();
         $content = $pdf->download()->getOriginalContent();
@@ -4699,7 +4562,7 @@ class ReportController extends ApiController{
         FROM
             temp_billing_t 
         WHERE
-	        noregistrasi = '$noreg' 
+            noregistrasi = '$noreg' 
             AND tglpelayanan IS NOT NULL 
             AND namaproduk NOT IN ( 'Biaya Administrasi', 'Biaya Materai' ) 
         ORDER BY
@@ -5167,7 +5030,7 @@ class ReportController extends ApiController{
         $kdProfile = (int) $request['kdprofile'];
         $apoteker = 101232;
         $data = DB::select(DB::raw("
-            						SELECT distinct ps.nocm, ps.namapasien,to_char(ps.tgllahir, 'DD/MM/YYYY') as tgllahir,CASE WHEN aa.noantri IS NULL THEN sr.noresep ELSE aa.jenis || '-' || aa.noantri END AS noresep,to_char(sr.tglresep, 'DD-MM-YYYY') as tglresep,pr.namaproduk || ' (' || CAST(pp.jumlah AS VARCHAR) || ')' AS namaproduk,pp.aturanpakai,pp.rke,  
+                                    SELECT distinct ps.nocm, ps.namapasien,to_char(ps.tgllahir, 'DD/MM/YYYY') as tgllahir,CASE WHEN aa.noantri IS NULL THEN sr.noresep ELSE aa.jenis || '-' || aa.noantri END AS noresep,to_char(sr.tglresep, 'DD-MM-YYYY') as tglresep,pr.namaproduk || ' (' || CAST(pp.jumlah AS VARCHAR) || ')' AS namaproduk,pp.aturanpakai,pp.rke,  
                                     CASE WHEN alm.alamatlengkap is null then '-' else alm.alamatlengkap end as alamat,ps.notelepon,ss.satuanstandar,pp.jumlah,  
                                     CASE WHEN pp.issiang = 't' THEN 'Siang' ELSE '-' END AS siang, CASE WHEN pp.ispagi = 't' THEN 'Pagi' ELSE '-' END AS pagi,  
                                     CASE WHEN pp.ismalam = 't' THEN 'Malam' ELSE '-' END as malam, CASE WHEN pp.issore = 't' THEN 'Sore' ELSE '-' END as sore,  
@@ -5214,7 +5077,7 @@ class ReportController extends ApiController{
         $apoteker = 101232;
         $kdProfile = (int) $request['kdprofile'];
         $data = DB::select(DB::raw("
-            						SELECT distinct ps.nocm, ps.namapasien,to_char(ps.tgllahir, 'DD/MM/YYYY') as tgllahir,CASE WHEN aa.noantri IS NULL THEN sr.noresep ELSE aa.jenis || '-' || aa.noantri END AS noresep,to_char(sr.tglresep, 'DD-MM-YYYY') as tglresep,pr.namaproduk || ' (' || CAST(pp.jumlah AS VARCHAR) || ')' AS namaproduk,pp.aturanpakai,pp.rke,  
+                                    SELECT distinct ps.nocm, ps.namapasien,to_char(ps.tgllahir, 'DD/MM/YYYY') as tgllahir,CASE WHEN aa.noantri IS NULL THEN sr.noresep ELSE aa.jenis || '-' || aa.noantri END AS noresep,to_char(sr.tglresep, 'DD-MM-YYYY') as tglresep,pr.namaproduk || ' (' || CAST(pp.jumlah AS VARCHAR) || ')' AS namaproduk,pp.aturanpakai,pp.rke,  
                                     CASE WHEN alm.alamatlengkap is null then '-' else alm.alamatlengkap end as alamat,ps.notelepon,ss.satuanstandar,pp.jumlah,  
                                     CASE WHEN pp.issiang = 't' THEN 'Siang' ELSE '-' END AS siang, CASE WHEN pp.ispagi = 't' THEN 'Pagi' ELSE '-' END AS pagi,  
                                     CASE WHEN pp.ismalam = 't' THEN 'Malam' ELSE '-' END as malam, CASE WHEN pp.issore = 't' THEN 'Sore' ELSE '-' END as sore,  
@@ -5284,7 +5147,7 @@ class ReportController extends ApiController{
         $kdProfile = (int) $request['kdprofile'];
         dd($kdProfile);
         $data = DB::select(DB::raw("
-            						SELECT distinct ps.nocm, ps.namapasien,to_char(ps.tgllahir, 'DD/MM/YYYY') as tgllahir,CASE WHEN aa.noantri IS NULL THEN sr.noresep ELSE aa.jenis || '-' || aa.noantri END AS noresep,to_char(sr.tglresep, 'DD-MM-YYYY') as tglresep,pr.namaproduk || ' (' || CAST(pp.jumlah AS VARCHAR) || ')' AS namaproduk,pp.aturanpakai,pp.rke,  
+                                    SELECT distinct ps.nocm, ps.namapasien,to_char(ps.tgllahir, 'DD/MM/YYYY') as tgllahir,CASE WHEN aa.noantri IS NULL THEN sr.noresep ELSE aa.jenis || '-' || aa.noantri END AS noresep,to_char(sr.tglresep, 'DD-MM-YYYY') as tglresep,pr.namaproduk || ' (' || CAST(pp.jumlah AS VARCHAR) || ')' AS namaproduk,pp.aturanpakai,pp.rke,  
                                     CASE WHEN alm.alamatlengkap is null then '-' else alm.alamatlengkap end as alamat,ps.notelepon,ss.satuanstandar,pp.jumlah,  
                                     CASE WHEN pp.issiang = 't' THEN 'Siang' ELSE '-' END AS siang, CASE WHEN pp.ispagi = 't' THEN 'Pagi' ELSE '-' END AS pagi,  
                                     CASE WHEN pp.ismalam = 't' THEN 'Malam' ELSE '-' END as malam, CASE WHEN pp.issore = 't' THEN 'Sore' ELSE '-' END as sore,  
@@ -10564,77 +10427,5 @@ class ReportController extends ApiController{
             return view('report.cetak-transfusi-darah', compact('res'));
         }
 
-    }
-
-    public function cetakResepDokterFull(Request $r)
-    {
-        $kdProfile = (int)$r['kodeprofile'];
-        $noorder = $r['noorder'];
-        $norec = $r['norec'];
-        $nocm = $r['nocm'];
-        $qtybagi = 1;
-        if ($r['qtybagi'] == "1/2") {
-            $qtybagi = 0.5;
-        } else {
-            $qtybagi = (int)$r['qtybagi'];
-        }
-        $profile = \DB::select(DB::raw("
-                select * from profile_m where id = $kdProfile limit 1
-            "));
-        $raw = collect(DB::select("
-            select pm2.nocm ,to_char(pm2.tgllahir,'dd-mm-yyyy') as tgllahir,age(pm2.tgllahir) as umur ,jm.jeniskelamin ,pm2.namapasien ,pm3.namalengkap, rm.namaruangan, skt.prinsipbesar, pm2.nobpjs, --pd.jmlitter,
-            to_char(st.tglorder,'dd-mm-yyyy MM:ss') as tglorder,CASE WHEN pm3.nosip IS NULL THEN '-' ELSE pm3.nosip END AS nosip,kp.id, kp.kelompokpasien --to_char(pd.tglpengambilaniter,'dd-mm-yyyy') as tglpengambilaniter 
-            from strukorder_t st
-            inner join pasien_m pm2 on pm2.id = st.nocmfk
-            left join skriningfarmasi_t as skt on skt.strukresepfk = st.norec
-            inner join jeniskelamin_m jm on jm.id = pm2.objectjeniskelaminfk
-            inner join pegawai_m pm3 on pm3.id = st.objectpegawaiorderfk
-            inner join ruangan_m rm on rm.id = st.objectruanganfk 
-            inner join pasiendaftar_t AS pd ON pd.norec = st.noregistrasifk
-            --left JOIN pemakaianasuransi_t pas ON pd.norec = pas.noregistrasifk
-            left join kelompokpasien_m AS kp ON kp.id = pd.objectkelompokpasienlastfk
-            where st.noorder = '$noorder'
-        "))->first();
-        $detel = [];
-        $details = \DB::select(DB::raw("select ot.rke,pm.namaproduk,ot.dosis,pm.kekuatan ,ot.jumlah as jumlah, ot.aturanpakai from strukorder_t st
-            inner join orderpelayanan_t ot on ot.strukorderfk = st.norec 
-            inner join produk_m pm on pm.id = ot.objectprodukfk 
-            where st.noorder = '$noorder'"));
-            //    dd($raw);
-        if (!empty($raw)) {
-            // $raw->umur = $this->getAge($raw->tgllahir ,date('Y-m-d'));
-        } else if (empty($raw)) {
-            $raw = collect(DB::select("
-                select pm2.nocm ,to_char(pm2.tgllahir,'dd-mm-yyyy') as tgllahir,age(pm2.tgllahir) as umur ,jm.jeniskelamin ,pm2.namapasien ,pm3.namalengkap,CASE WHEN pm3.nosip IS NULL THEN '-' ELSE pm3.nosip END AS nosip, rm.namaruangan, to_char(s.tglresep ,'dd-mm-yyyy MM:ss') as tglorder,pm3.nosip, kp.id,kp.kelompokpasien, skt.prinsipbesar, pm2.nobpjs -- pt.jmlitter, to_char(pt.tglpengambilaniter,'dd-mm-yyyy') as tglpengambilaniter
-                from strukresep_t s
-                inner join antrianpasiendiperiksa_t at2 on at2.norec = s.pasienfk 
-                inner join pasiendaftar_t pt on pt.norec = at2.noregistrasifk
-                --left JOIN pemakaianasuransi_t pas ON pt.norec = pas.noregistrasifk
-                left join skriningfarmasi_t as skt on skt.strukresepfk = s.norec
-                inner join pasien_m pm2 on pm2.id = pt.nocmfk 
-                inner join jeniskelamin_m jm on jm.id = pm2.objectjeniskelaminfk
-                inner join pegawai_m pm3 on pm3.id = s.penulisresepfk 
-                inner join ruangan_m rm on rm.id = s.ruanganfk 
-                left join kelompokpasien_m AS kp ON kp.id = pt.objectkelompokpasienlastfk
-                where s.norec = '$norec'
-            "))->first();
-            $details = \DB::select(DB::raw("
-                select pt.rke,pt.dosis, pt.jumlah , pt.aturanpakai , pm.namaproduk, pm.kekuatan from pelayananpasien_t pt 
-                inner join produk_m pm on pm.id = pt.produkfk 
-                where strukresepfk = '$norec'
-            "));
-        } else {
-            echo 'Data Tidak ada ';
-            return;
-        }
-        //    dd($raw);
-        $pageWidth = 950;
-
-        // return $r['norec'];
-
-        return view(
-            'report.apotik.resepdokter-full',
-            compact('raw', 'pageWidth', 'r', 'details', 'profile')
-        );
     }
 }

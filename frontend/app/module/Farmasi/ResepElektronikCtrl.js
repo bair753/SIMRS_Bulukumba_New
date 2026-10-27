@@ -1031,6 +1031,76 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     });
                 }
             }
+            // ==================================================================
+            // SOCKET PANGGILAN FARMASI
+            // Menghubungkan langsung ke socket-server (server.js, port 2226)
+            // yang sama dipakai oleh viewer-farmasi (Angular) untuk memanggil
+            // nama/nomor antrian pasien.
+            //
+            // PENTING: kalau tombol Panggil Pasien masih gagal / tidak muncul
+            // di viewer, kemungkinan besar SOCKET_URL_FARMASI di bawah ini perlu
+            // disesuaikan dengan alamat socket server yang benar (misalnya
+            // ditambah port ':2226' atau lewat path proxy tertentu). Cek nilai
+            // yang dipakai viewer-farmasi lewat Config.get().socketIO untuk
+            // memastikan alamatnya sama persis.
+            // ==================================================================
+            var SOCKET_URL_FARMASI = 'https://simrs.rsudbulukumba.id';
+            var socketFarmasi = null;
+
+            function initSocketFarmasi(callback) {
+                if (socketFarmasi != null) {
+                    callback(socketFarmasi);
+                    return;
+                }
+                function connect() {
+                    socketFarmasi = io(SOCKET_URL_FARMASI, {
+                        transports: ['websocket', 'polling']
+                    });
+                    socketFarmasi.on('connect', function () {
+                        console.log('Socket Panggilan Farmasi terhubung ke ' + SOCKET_URL_FARMASI);
+                    });
+                    socketFarmasi.on('connect_error', function (err) {
+                        console.error('Socket Panggilan Farmasi gagal connect : ', err);
+                        toastr.error('Gagal terhubung ke server panggilan, hubungi admin IT !!');
+                    });
+                    callback(socketFarmasi);
+                }
+                if (typeof io === 'undefined') {
+                    var script = document.createElement('script');
+                    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js';
+                    script.onload = connect;
+                    script.onerror = function () {
+                        toastr.error('Gagal memuat library socket.io, hubungi admin IT !!');
+                    };
+                    document.head.appendChild(script);
+                } else {
+                    connect();
+                }
+            }
+
+            $scope.panggilPasien = function () {
+                if ($scope.item == undefined || $scope.item.noregistrasi == undefined) {
+                    toastr.error("Pilih data pasien terlebih dahulu !!");
+                    return;
+                }
+                var objPanggil = {
+                    noantri: $scope.item.noantri,
+                    namaruangan: $scope.item.namaruangan,
+                    noregistrasi: $scope.item.noregistrasi,
+                    jenis: $scope.item.jenis,
+                    namapasien: $scope.item.namapasien
+                }
+                initSocketFarmasi(function (socket) {
+                    // Kirim objek langsung (JANGAN di-JSON.stringify di sini),
+                    // karena server.js sudah melakukan JSON.stringify() sendiri
+                    // sebelum meneruskannya sebagai event 'tampilkan-antrian-farmasi'.
+                    socket.emit('call-antrian-farmasi', objPanggil);
+                    toastr.success('Berhasil memanggil pasien ' + $scope.item.namapasien);
+                    medifirstService.postLogging('Panggil Pasien Farmasi', 'No Registrasi',
+                        $scope.item.noregistrasi, 'Panggil Pasien Farmasi No Registrasi: ' + $scope.item.noregistrasi + '/ Nama Pasien : ' + $scope.item.namapasien).then(function (res) {
+                        });
+                });
+            }
             $scope.formatRupiah = function (value, currency) {
                 return currency + " " + parseFloat(value).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
             }
@@ -1260,16 +1330,16 @@ define(['initialize', 'Configuration'], function (initialize, config) {
             
             $scope.saveResep = function (){
                 var objSave = {
-					nopesanan: $scope.item.noorder,
-					riwayatalergi: $scope.item.riwayatAlergi != undefined ? $scope.item.riwayatAlergi : '',
+                    nopesanan: $scope.item.noorder,
+                    riwayatalergi: $scope.item.riwayatAlergi != undefined ? $scope.item.riwayatAlergi : '',
                     jampengkajian: $scope.item.jamPengkajian != undefined ? moment($scope.item.jamPengkajian).format('YYYY-MM-DD HH:mm') : null,
-					pengkajian: $scope.item.pengkajian != undefined ? $scope.item.pengkajian.id : null,
+                    pengkajian: $scope.item.pengkajian != undefined ? $scope.item.pengkajian.id : null,
                     jampenyiapanobat: $scope.item.jamPenyiapanObat != undefined ? moment($scope.item.jamPenyiapanObat).format('YYYY-MM-DD HH:mm') : null,
-					penyiapanobat: $scope.item.penyiapanObat != undefined ? $scope.item.penyiapanObat.id : null,
+                    penyiapanobat: $scope.item.penyiapanObat != undefined ? $scope.item.penyiapanObat.id : null,
                     jamdispening: $scope.item.jamDispening != undefined ? moment($scope.item.jamDispening).format('YYYY-MM-DD HH:mm') : null,
                     dispening: $scope.item.dispening != undefined ? $scope.item.dispening.id : null,
                     jamserahinformasi: $scope.item.jamSerahInformasi != undefined ? moment($scope.item.jamSerahInformasi).format('YYYY-MM-DD HH:mm') : null,
-					serahinformasi: $scope.item.serahInformasi != undefined ? $scope.item.serahInformasi.id : null,
+                    serahinformasi: $scope.item.serahInformasi != undefined ? $scope.item.serahInformasi.id : null,
                     penulisresep: $scope.item.penulisResep != undefined ? $scope.item.penulisResep : false,
                     obat: $scope.item.obat != undefined ? $scope.item.obat : false,
                     dosis: $scope.item.dosis != undefined ? $scope.item.dosis : false,
@@ -1279,7 +1349,7 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     duplikasiterapi: $scope.item.duplikasiTerapi != undefined ? $scope.item.duplikasiTerapi : false,
                     interaksiobat: $scope.item.interaksiObat != undefined ? $scope.item.interaksiObat : false,
                     farmasi: medifirstService.getPegawaiLogin().id,
-				}
+                }
                 medifirstService.post('farmasi/save-resep-obat', objSave).then(function (e) {
 
                 })

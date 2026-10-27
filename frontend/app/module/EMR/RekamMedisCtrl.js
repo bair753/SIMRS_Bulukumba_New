@@ -24,6 +24,9 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
             }
 
             $scope.showicare = false;
+            $(document).on('click', '.toast-close-button', function () {
+    $(this).closest('.toast').remove();
+});
             // norec Antrian Etateh
             medifirstService.get('emr/get-antrian-pasien-norec/' + $state.params.noRec).then(function (e) {
                 var result = e.data.result
@@ -359,6 +362,7 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                                             var height = screen.availHeight;
 
                                             // Membuka URL di jendela popup
+
                                             var popup = window.open(e.data.response.url, 'popupWindow', 'width=' + width + ',height=' + height + ',scrollbars=yes');
 
                                             // Fokus pada jendela popup

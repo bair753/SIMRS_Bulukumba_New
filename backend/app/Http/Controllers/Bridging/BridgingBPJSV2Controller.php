@@ -3274,6 +3274,26 @@ class BridgingBPJSV2Controller extends ApiController
                     }
 
                     if ($isTaskIdUpdate) {
+    try {
+        $metaData = $data2['metaData'];
+
+        if (is_object($metaData)) {
+            $code = $metaData->code ?? null;
+            $message = $metaData->message ?? null;
+        } else {
+            $code = $metaData['code'] ?? null;
+            $message = $metaData['message'] ?? null;
+        }
+
+        $this->logAntrolTaskId('GAGAL', array_merge($taskIdLogContext, [
+            'code'    => $code,
+            'message' => $message,
+        ]));
+    } catch (\Throwable $logEx) {
+        // logging tidak boleh mengganggu proses utama
+    }
+}
+                  /*  if ($isTaskIdUpdate) {
                         try {
                             $this->logAntrolTaskId('GAGAL', array_merge($taskIdLogContext, [
                                 'code'    => $data2['metaData']['code'],
@@ -3282,7 +3302,7 @@ class BridgingBPJSV2Controller extends ApiController
                         } catch (\Exception $logEx) {
                             // sengaja diabaikan
                         }
-                    }
+                    }*/
 
                     return $this->respond($data2);
                 }

@@ -4099,7 +4099,6 @@ class SumberDayaManusiaController extends ApiController {
         return $this->setStatusCode($result['status'])->respond($result, $transMessage);
 
     }
-
     public function getComboPegawai (Request $request){
         $kdProfile = (int) $this->getDataKdProfile($request);
         $paket = Pegawai::where('statusenabled',true)->where('kdprofile', $kdProfile)->get();
