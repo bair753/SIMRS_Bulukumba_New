@@ -33,6 +33,6 @@ cd frontend
 ```
 9. Download dependency, kemudian extract
 ```sh
-https://drive.google.com/file/d/1dSwZmIxpBIa6uJQFe6q0c11FCiS3kKlL/view?usp=sharing
+https://drive.google.com/file/d/1RvLic5IhZ7UKRJIwvQTjip0lXBFsbp6Z/view?usp=sharing
 ```
 10. Set konfigurasi API di `frontend/app/javascripts/Setting.js`.
