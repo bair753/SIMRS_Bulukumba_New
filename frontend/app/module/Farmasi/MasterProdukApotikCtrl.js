@@ -623,7 +623,7 @@ define(['initialize'], function (initialize) {
                         }
                       
                     }else{
-                        loadData();
+                        // loadData();
                         toastr.success(z.data.resourceType)
                     }
                    

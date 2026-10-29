@@ -610,6 +610,12 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
         Route::post('bridging/ihs/Encounter-tes', 'Bridging\IHSController@Encountertes');
         Route::get('bridging/ihs/get-list', 'Bridging\IHSController@getList');
         Route::get('bridging/ihs/Encounter-list', 'Bridging\IHSController@EncounterList');
+        Route::post('bridging/ihs/QuestionnaireResponse', 'Bridging\IHSController@QuestionnaireResponse');
+        Route::post('bridging/ihs/CarePlan', 'Bridging\IHSController@CarePlan');
+        Route::post('bridging/ihs/ImagingStudy', 'Bridging\IHSController@ImagingStudy');
+        Route::post('bridging/ihs/EpisodeOfCare', 'Bridging\IHSController@EpisodeOfCare');
+        Route::post('bridging/ihs/NutritionOrder', 'Bridging\IHSController@NutritionOrder');
+        Route::post('bridging/ihs/MedicationStatement', 'Bridging\IHSController@MedicationStatement');
         
         // INTEGRASI APOTIK ONLINE
         Route::get('bridging/bpjs/get-sep-apotik-online', 'Bridging\BridgingBPJSV2Controller@getSEPApotek');
