@@ -2,8 +2,7 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
     'use strict';
     initialize.controller('RiwayatObatCtrl', ['$scope', '$state', 'MedifirstService',
         function ($scope, $state, medifirstService) {
-            $scope.now = new Date();
-
+            
             $scope.monthUngkul = {
                 start: "year",
                 depth: "year"
@@ -12,7 +11,6 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                 start: "decade",
                 depth: "decade"
             }
-
             $scope.nav = function (state) {
                 $scope.currentState = state;
                 $state.go(state, $state.params);
@@ -20,15 +18,23 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
             }
             $scope.histori = {}
             $scope.kunjungan = {};
+            $scope.now = new Date();
+
             $scope.klaim = {};
+
+            $scope.klaim.tglAwal = moment()
+                .subtract(2, 'years')
+                .startOf('day')
+                .toDate();
+
+            $scope.klaim.tglAkhir = moment()
+                .startOf('day')
+                .toDate();
             $scope.raharja = {}
             $scope.clear = function () {
 
                 $scope.isRouteLoading = false;
-                $scope.klaim = {
-                    bulan: moment($scope.now).format('MM'),
-                    tahun: moment($scope.now).format('YYYY')
-                };
+                $scope.klaim.noKartu = undefined;
             };
             $scope.isShowPembuatanSep = false;
             $scope.isShowPotensi = true;
@@ -83,13 +89,93 @@ define(['initialize', 'Configuration'], function (initialize, configuration) {
                     + "&noKartu="
                     + data.noKartu
                 ).then(function (e) {
-                    document.getElementById("jsonKlaim").innerHTML = JSON.stringify(e.data, undefined, 4);
+                    // document.getElementById("jsonKlaim").innerHTML = JSON.stringify(e.data, undefined, 4);
+                    
+                    $scope.isRouteLoading = false;
+                    var response = e.data.response.list || {};
+
+                    // Header
+                    console.log(response);
+                    $scope.namapeserta = response.namapeserta || '-';
+                    $scope.nokartu = response.nokartu || '-';
+                    $scope.tgllhr = response.tgllhr || '-';
+
+                    // Detail
+                    var data = response.history || [];
+                    console.log(data);
+                    $scope.dataDaftarPasienPulang = new kendo.data.DataSource({
+                        data: data,
+                        pageSize: 10
+                    });
                 }).then(function () {
                     $scope.isRouteLoading = false;
                 });
             }
             // END KLAIM
+             $scope.columnDaftarPasienPulang = {
+                toolbar: [
+                    "excel",
+                ],
+                excel: {
+                    fileName: "DaftarKlaimApotek.xlsx",
+                    allPages: true,
+                },
+                excelExport: function (e) {
+                    var sheet = e.workbook.sheets[0];
+                    sheet.frozenRows = 2;
+                    sheet.mergedCells = ["A1:J1"];
+                    sheet.name = "Orders";
 
+                    var myHeaders = [{
+                        value: "Daftar Klaim Apotek",
+                        fontSize: 20,
+                        textAlign: "center",
+                        background: "#ffffff",
+                    }];
+
+                    sheet.rows.splice(0, 0, { cells: myHeaders, type: "header", height: 70 });
+                },
+                selectable: 'row',
+                pageable: true,
+                columns: [
+                    {
+                        field: "nosjp",
+                        title: "No SJP",
+                        width: "180px"
+                    },
+                    {
+                        field: "tglpelayanan",
+                        title: "Tgl Pelayanan",
+                        width: "130px"
+                    },
+                    {
+                        field: "noresep",
+                        title: "No Resep",
+                        width: "120px"
+                    },
+                    {
+                        field: "kodeobat",
+                        title: "Kode Obat",
+                        width: "150px"
+                    },
+                    {
+                        field: "namaobat",
+                        title: "Nama Obat",
+                        width: "300px"
+                    },
+                    {
+                        field: "jmlobat",
+                        title: "Jumlah Obat",
+                        width: "120px",
+                        attributes: {
+                            style: "text-align:right"
+                        },
+                        headerAttributes: {
+                            style: "text-align:center"
+                        }
+                    }
+                ]
+            };
             // HISTROI
             $scope.findHistori = function (data) {
                 $scope.isRouteLoading = true;

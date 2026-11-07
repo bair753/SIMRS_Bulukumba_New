@@ -1,0 +1,82 @@
+<style type="text/css">
+    .json-viewer {
+        margin-top: 26px;
+        padding: 2em 0 2em 5em;
+        background: lightgrey;
+    }
+</style>
+
+<div class="grid_12">
+    <div class="panel panel-default panel-white">
+        <div class="panel-body">
+            <div class="grid_12">
+                <div class="grid_12">
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading " style="font-size: 18px; "><span c-translate>OBAT</span>
+                            <span class="icon fa fa-chevron-circle-down " ng-show="!isShowPotensi " style="right:10px
+                                                                                " ng-click="showPotensi() "></span>
+                            <span class="icon fa fa-chevron-circle-up " ng-show="isShowPotensi " style="right:10px
+                                                                                " ng-click="showPotensi() "></span>
+                        </div>
+                        <div class="panel-body " ng-show="isShowPotensi ">
+                            <div class="grid_12 animated no-padding ">
+                                <div ng-cloak>
+                                    <md-content>
+                                        <md-tabs md-dynamic-height md-border-bottom>
+                                            <md-tab label="OBAT">
+                                                <md-content class="md-padding">
+                                                    <div class="panel panel-default container_12">
+                                                        <div class="panel-body">
+                                                            <div class="grid_12">
+                                                                <div class="grid_4">
+                                                                    <div class="grid_12">
+                                                                        <div class="grid_10">
+                                                                            <div class="grid_12">
+                                                                                <label c-label item="item" c-label-text="Obat" real></label>
+                                                                            </div>
+                                                                            <div class="grid_12">
+                                                                                 <input kendo-combo-box k-ng-model="obat.produk"
+                                                                                    k-data-text-field="'namaproduk'" k-data-value-field="'id'"
+                                                                                    k-filter="'contains'" k-auto-bind="false" k-data-source="listProduk"
+                                                                                    k-on-change='getSatuan()' />
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="grid_10">
+                                                                            <div class="grid_12">
+                                                                                <label c-label item="item" c-label-text="Jumlah" real></label>
+                                                                            </div>
+                                                                            <div class="grid_12">
+                                                                                <input c-text-box type="input" class="k-textbox" ng-model="obat.jumlah"/>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="grid_12">
+                                                                        <div class="grid_3">
+                                                                            <button style="" class="k-button k-primary" ng-click="Update()">Update</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="grid_8">
+                                                                    <div class="grid_12">
+                                                                        <label c-label>Results :</label>
+                                                                    </div>
+                                                                    <pre id="jsonSEP" class="json-viewer"></pre>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </md-content>
+                                            </md-tab>
+                                        </md-tabs>
+                                    </md-content>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-include=' "../app/template/Shared/TemplateLoading" '></div>

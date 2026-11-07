@@ -60,6 +60,28 @@
 </div>
 <div class="grid_12">
     <div class="grid_12 borderBox containerBorderBox">
+        <div class="grid_4">
+				<div class="grid_12">
+					<label c-label item="item" c-label-text="Periode Registrasi"></label>
+				</div>
+				<div class="clear"></div>
+
+				<div class="grid_12">
+					<!-- AwalPeriode -->
+					<div class="grid_6 padDatePicker">
+						<input style="width: 100%" k-ng-model="item.periodeAwal" kendo-datetimepicker
+							placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+					</div>
+
+					<!-- AkhirPeriode -->
+					<div class="grid_6 padDatePicker">
+						<input style="width: 100%" k-ng-model="item.periodeAkhir" kendo-datetimepicker
+							placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" />
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+
         <div class="grid_2">
             <div class="grid_12">
                 <label c-label item="item" c-label-text="Instalasi"></label>
@@ -148,6 +170,15 @@
                 ng-keypress="($event.which == 13)? SearchData():item.nama" />
         </div>
     </div>
+    <div class="grid_2">
+        <div class="grid_12">
+            <label c-label item="item" c-label-text="SEP"></label>
+        </div>
+        <div class="grid_12">
+            <input c-text-box type="input" filter="" class="k-textbox" ng-model="item.nosep"
+                ng-keypress="($event.which == 13)? SearchData():item.nosep" />
+        </div>
+    </div>
     <div class="grid_1">
         <div class="grid_12">
             <label c-label item="item" c-label-text="Rows"></label>
@@ -180,29 +211,36 @@
 </div>
 <div kendo-window="popUpdataAddOns" k-title="'Rincian Resep'" k-width="500" k-visible="false"
     k-on-open="win2visible = true" k-on-close=" win2visible=false">
-    <div class="grid_2" ng-hide="hidebpjs">
-        <div class="grid_12">
-            <label c-label item="item" c-label-text="Jenis Obat Apotik Online"></label>
+    <div class="grid_12">
+        <div class="grid_6" ng-hide="hidebpjs">
+            <div class="grid_12">
+                <label c-label item="item" c-label-text="Jenis Obat Apotik Online"></label>
+            </div>
+            <div class="grid_12">
+                <input kendo-combo-box k-ng-model="selectedItem.jenisObat" k-data-text-field="'jenisobat'"
+                    k-data-value-field="'id'" k-filter="'contains'" k-auto-bind="false" k-data-source="listJenisObat" />
+            </div>
         </div>
+        <div class="grid_6" ng-hide="hidebpjs">
+            <div class="grid_12">
+                <label c-label item="item" c-label-text="Iterasi"></label>
+            </div>
+            <div class="grid_12">
+                <input kendo-combo-box
+                    k-ng-model="selectedItem.iterasi"
+                    k-data-source="listIterasi"
+                    k-data-text-field="'iterasi'"
+                    k-data-value-field="'id'"
+                    k-value-primitive="false"
+                    k-auto-bind="true" />
+            </div>
+        </div>
+        
         <div class="grid_12">
-            <input kendo-combo-box k-ng-model="selectedItem.jenisObat" k-data-text-field="'jenisobat'"
-                k-data-value-field="'id'" k-filter="'contains'" k-auto-bind="false" k-data-source="listJenisObat" />
+            <button class="k-button k-primary  k-button-icontext" ng-click="saveData()">Save</button>
         </div>
     </div>
-    <div class="grid_2" ng-hide="hidebpjs">
-        <div class="grid_12">
-            <label c-label item="item" c-label-text="Iterasi"></label>
-        </div>
-        <div class="grid_12">
-            <input kendo-combo-box k-ng-model="selectedItem.iterasi" k-data-text-field="'iterasi'"
-                k-data-value-field="'id'" k-filter="'contains'" k-auto-bind="false" k-data-source="listIterasi" />
-        </div>
-    </div>
-    <div class="grid_12" style="margin-top: 25px;">
-        <button class="k-button k-primary  k-button-icontext" ng-click="saveData()">
-            <span class="k-icon fa fa-save"></span>Save Data</button>
-        <!-- <button ng-click="saveData()">Save</button> -->
-    </div>
+   
 </div>
 <div class="grid_12">
     <div kendo-window="popUpLayanan" k-title="'Rincian Resep'" k-width="1300" k-visible="false"
@@ -215,24 +253,42 @@
                 </kendo-grid>
             </div>
             <div class="grid_12">
-                <div class="grid_4">
-                    <div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
-                        <button class="k-button k-primary  k-button-icontext" ng-click="cetakResepDokterFull()">
-                            <span class="k-icon fa fa-edit"></span>Cetak Resep</button>
+                <div class="grid_2">
+                    <div class="k-edit-buttons" style="margin-top:10px">
+                        <button class="k-button k-primary  k-button-icontext" ng-click="Cetak()">
+                            <span class="k-icon fa fa-edit"></span>Cetak</button>
                     </div>
                 </div>
-                <div class="grid_4">
-                    <div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
+                <div class="grid_2">
+                    <div class="k-edit-buttons" style="margin-top:10px">
                         <button class="k-button k-primary  k-button-icontext" ng-click="kirimOnline()">
                             <span class="k-icon fa fa-edit"></span>Kirim Online</button>
                     </div>
                 </div>
-                <div class="grid_4">
-                    <div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
+                <div class="grid_2">
+                    <div class="k-edit-buttons" style="margin-top:10px">
+                        <button class="k-button k-primary  k-button-icontext" ng-click="ttdElek()">
+                            <span class="k-icon fa fa-edit"></span>TTE</button>
+                    </div>
+                </div>
+                <div class="grid_2">
+                    <div class="k-edit-buttons" style="margin-top:10px">
+                        <button class="k-button k-primary  k-button-icontext" ng-click="lihatDok()">
+                            <span class="k-icon fa fa-search"></span>Lihat TTE</button>
+                    </div>
+                </div>
+                <div class="grid_2">
+                    <div class="k-edit-buttons" style="margin-top:10px">
+                        <button class="k-button k-button-icontext" ng-click="HapusTte()">
+                            <span class="k-icon fa fa-trash"></span>Hapus TTE</button>
+                    </div>
+                </div>
+                <!-- <div class="grid_4">
+                    <div class="k-edit-buttons" style="margin-top:10px">
                         <button class="k-button k-primary  k-button-icontext" ng-click="simpanSkrining()">
                             <span class="k-icon fa fa-edit"></span>Cetak Bill Resep</button>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -304,7 +360,7 @@
             <div class="grid_12">
                 <label c-label item="item" c-label-text="Jenis Obat Apotik Online"></label>
             </div>
-            <div class="grid_12">
+            <div class="grid_12"> 
                 <input kendo-combo-box k-ng-model="item.JnsTgl" k-data-text-field="'jenistgl'" k-data-value-field="'id'"
                     k-filter="'contains'" k-auto-bind="false" k-data-source="JnsTgl" />
             </div>
@@ -347,9 +403,17 @@
                 k-ng-model="dataObatBpjs"
                 ng-click="klikGridBpjs(dataObatBpjs)">
             </kendo-grid> -->
-            <kendo-grid id="kGrid2" data-source="dataObatBpjs" options="columnObatBpjs" k-selectable="'row'"
-                k-sortable="'true'" k-resizable="'true'" k-groupable="true" k-pageable="true" k-ng-model="dataKlikBpjs"
-                ng-click="klikBpjs(dataKlikBpjs)">
+                <kendo-grid
+                    id="kGriddataObatBpjs2"
+                    data-source="dataObatBpjs"
+                    options="columnObatBpjs"
+                    k-pageable="'true'"
+                    k-sortable="'true'"
+                    k-resizable="'true'"
+                    k-selectable="'row'"
+                    k-ng-model="dataKlikBpjs"
+                    ng-click="klikBpjs(dataKlikBpjs)">
+                </kendo-grid>
         </div>
     </div>
     <div class="grid_12">
@@ -357,5 +421,259 @@
             <button class="k-button k-primary k-button-icontext" ng-click="DeleteOnline()">
                 <span class="k-icon fa fa-edit"></span>Delete Online</button>
         </div>
+        <div class="k-edit-buttons k-state-default pull-right" style="margin-top:10px">
+            <button class="k-button k-primary k-button-icontext" ng-click="DaftarPelayananBpjs()">
+                <span class="k-icon fa fa-edit"></span>Dafar Pelayanan Resep Bpjs</button>
+        </div>
+
+    </div>
+</div>
+
+<div kendo-window="PopUpDaftarPelayananResepBpjs" k-title="'Daftar Resep Bpjs'" k-visible="false" k-width="1280" k-height="500">
+    <div class="grid_12">
+        <div class="grid_2" ng-hide="hidebpjs">
+            <div class="grid_12">
+                <label c-label item="item" c-label-text="Jenis Obat Apotik Online"></label>
+            </div>
+            <div class="grid_12">
+                <input kendo-combo-box k-ng-model="item.jenisObat" k-data-text-field="'jenisobat'"
+                    k-data-value-field="'id'" k-filter="'contains'" k-auto-bind="false" k-data-source="listJenisObat" />
+            </div>
+        </div>
+        <div class="grid_2" ng-hide="hidebpjs">
+            <div class="grid_12">
+                <label c-label item="item" c-label-text="Jenis Obat Apotik Online"></label>
+            </div>
+            <div class="grid_12"> 
+                <input kendo-combo-box k-ng-model="item.JnsTgl" k-data-text-field="'jenistgl'" k-data-value-field="'id'"
+                    k-filter="'contains'" k-auto-bind="false" k-data-source="JnsTgl" />
+            </div>
+        </div>
+        <div class="grid_4" style="margin-top: -7px">
+            <div class="grid_12">
+                <label c-label item="item" c-label-text="Tgl Mulai" real></label>
+            </div>
+            <div class="grid_12 padDatePicker">
+                <input style="width: 100%" k-ng-model="item.periodeAwal" kendo-datetimepicker k-max="now"
+                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" parsedate="yyyy-MM-dd HH:mm" />
+            </div>
+        </div>
+        <div class="grid_4" style="margin-top: -7px">
+            <div class="grid_12">
+                <label c-label item="item" c-label-text="Tgl Akhir" real></label>
+            </div>
+            <div class="grid_12 padDatePicker">
+                <input style="width: 100%" k-ng-model="item.periodeAkhir" kendo-datetimepicker
+                    placeholer="yyyy-MM-dd HH:mm" k-format="'yyyy-MM-dd HH:mm'" />
+            </div>
+        </div>
+        <div class="grid_1">
+            <div class="grid_12">
+                <label>&nbsp;</label>
+            </div>
+            <div class="grid_12">
+                <button class="btnTemplate1" style="margin-left: 0;" ng-click="GetDaftarResepBpjs()">Cari</button>
+            </div>
+        </div>
+    </div>
+    <div class="grid_12" style="margin-top: 4rem">
+        <div class="grid_12 headerBox">
+            <p>Daftar Resep Bpjs</p>
+        </div>
+        <div class="clear"></div>
+        <div class="grid_12 borderBox">
+            <!-- <kendo-grid id="kGrid3" k-data-source="dataObatBpjs" k-options="columnObatBpjs"
+                k-selectable="'row'" k-sortable="'true'" k-resizable="'true'"
+                k-ng-model="dataObatBpjs"
+                ng-click="klikGridBpjs(dataObatBpjs)">
+            </kendo-grid> -->
+            <!-- <kendo-grid id="kGrid2" data-source="dataObatBpjs" options="columnObatBpjs" k-selectable="'row'"
+                k-sortable="'true'" k-resizable="'true'" k-groupable="true" k-pageable="true" k-ng-model="dataKlikBpjs"
+                ng-click="klikBpjs(dataKlikBpjs)"> -->
+                <kendo-grid
+                    id="kGriddataObatBpjs2"
+                    data-source="dataObatBpjs"
+                    options="columnObatBpjs"
+                    k-pageable="'true'"
+                    k-sortable="'true'"
+                    k-resizable="'true'"
+                    k-selectable="'row'"
+                    k-ng-model="dataKlikBpjs"
+                    ng-click="klikBpjs(dataKlikBpjs)">
+                </kendo-grid>
+        </div>
+    </div>
+    <div class="grid_12">
+        <div class="k-edit-buttons k-state-default pull-right" style="margin-top:10px">
+            <button class="k-button k-primary k-button-icontext" ng-click="DeleteOnline()">
+                <span class="k-icon fa fa-edit"></span>Delete Online</button>
+        </div>
+        <div class="k-edit-buttons k-state-default pull-right" style="margin-top:10px">
+            <button class="k-button k-primary k-button-icontext" ng-click="DaftarPelayananBpjs()">
+                <span class="k-icon fa fa-edit"></span>Dafar Pelayanan Resep Bpjs</button>
+        </div>
+
+    </div>
+</div>
+
+<div kendo-window="PopUpDaftarPelayananBpjs" k-title="'Daftar Pelayanan Resep Bpjs'" k-visible="false" k-width="1280" k-height="500">
+    <div class="grid_12">
+<kendo-grid id="kGrid2" data-source="dataPelayananBpjs" options="columnPelayananObatBpjs" k-selectable="'row'"
+                k-sortable="'true'" k-resizable="'true'" k-groupable="true" k-pageable="true" k-ng-model="dataKlikBpjs"
+                ng-click="klikBpjs(dataKlikBpjs)">
+
+                </div>
+                <div class="grid_12">
+        <div class="k-edit-buttons k-state-default pull-right" style="margin-top:10px">
+            <button class="k-button k-primary k-button-icontext" ng-click="DeleteOnlineObat()">
+                <span class="k-icon fa fa-edit"></span>Delete Online Obat</button>
+        </div>
+
+    </div>
+</div>
+
+<!-- pop up TTE -->
+<div kendo-window="popUpTTD" k-title="'Tanda Tangani Dokumen'" k-width="800" k-visible="false" k-on-open="win2visible = true"
+    k-on-close="win2visible = false">
+    <div class="panel panel-default container_12" style="padding: 0px 10px;">
+        <fieldset>
+            <legend><label c-label item="item"> Dokumen</label></legend>
+
+            <div class="grid_12">
+                <div class="grid_3" style=" margin-top: 10px;">
+                    <label c-label item="item">Dokter</label>
+                </div>
+                <div class="grid_9">
+                    <input style="width: 100%;" kendo-combo-box k-ng-model="item.pegawai"
+                        k-data-text-field="'namalengkap'" k-data-value-field="'id'" k-filter="'contains'"
+                        k-auto-bind="false" k-data-source="listPegawaiBsre" k-on-change="changeTTD(item.pegawai)" disabled />
+                </div>
+            </div>
+            <div class="grid_12">
+                <div class="grid_3" style=" margin-top: 10px;">
+                    <label c-label item="item">NIK</label>
+                </div>
+                <div class="grid_7">
+                    <input c-text-box type="input" filter="" class="k-textbox" ng-model="item.nik" />
+                </div>
+                <div class="grid_2" style="margin-top: 5px;">
+                    <button class="k-button k-button-icontext k-primary k-grid-update"
+                        ng-click="cekUser()" id="btnSimpanCek"><span class="k-icon k-update"></span>Cek User</button>
+                </div>
+            </div>
+            <div class="grid_12">
+                <div class="grid_3" style=" margin-top: 10px;">
+                    <label c-label item="item">Pass Phrase</label>
+                </div>
+                <div class="grid_9">
+                    <input c-text-box type="password" filter="" class="k-textbox" ng-model="item.passphrase" autocomplete="off" />
+                </div>
+            </div>
+            <div class="grid_12">
+                <div class="grid_3" style=" margin-top: 10px;">
+                    <label c-label item="item">Nama Dokumen</label>
+                </div>
+                <div class="grid_9">
+                    <input c-text-box type="input" filter="" class="k-textbox" ng-model="item.namadokumen" />
+                </div>
+            </div>
+            <div class="grid_12">
+                <div class="grid_3" style=" margin-top: 10px;">
+                    <label c-label item="item">Dokumen</label>
+                </div>
+                <div class="grid_9">
+                    <div class="grid_4" style="margin-top: 5px;">
+                        <button class="k-button k-button-icontext k-primary success k-grid-update"
+                            ng-click="lihatDok()" id="btnLihatDok"><span class="fa fa-eye"></span>&nbsp;Lihat Dokumen</button>
+                    </div>
+                </div>
+            </div>
+            <div class="grid_12">
+                <div class="grid_3">
+                    <label c-label item="item">Keterangan</label>
+                </div>
+                <div class="grid_9">
+                    <textarea class="k-textbox" style="height: 76px; width: 100%; resize: none;"
+                        ng-model="item.reason"></textarea>
+                </div>
+            </div>
+        </fieldset>
+
+        <div class="k-edit-buttons  k-state-default pull-right" style="margin-top:10px">
+            <button class="k-button k-button-icontext k-primary k-grid-update" ng-disabled="disabledSimpan2"
+                ng-click="SaveUpdate()" id="btnSimpan2"><span class="k-icon k-update"></span>Tanda Tangani</button>
+            <button class="k-button  k-button-icontext" ng-disabled="disabledBatal" ng-click="batal()"
+                id="btnBatal2"><span class="k-icon k-cancel"></span>Batal</button>
+        </div>
+    </div>
+</div>
+
+<div kendo-window="popUpDoneVerif" k-title="'Detail'" k-width="1200" k-visible="false" k-on-open="win2visible = true"
+    k-on-close="win2visible = false">
+    <div class="panel panel-default container_12">
+        <md-content class="md-padding">
+            <div class="grid_12">
+                <div class="grid_6">
+                    <div class="grid_6"><label c-label item="item">Summary</label></div>
+                    <div class="grid_6"><label>: {{ verify.conclusion }}</label></div>
+                </div>
+                <div class="grid_6">
+                    <div class="grid_6"><label c-label item="item">Notes</label></div>
+                    <div class="grid_6"><label>: {{ verify.description }}</label></div>
+                </div>
+            </div>
+            <hr>
+            <div class="grid_12">
+                <fieldset>
+                    <legend><label c-label item="item"> Info Signer</label></legend>
+                    <div class="grid_12" ng-repeat="signature in verify.signatureInformations">
+                        <div class="grid_6">
+                            <div class="grid_6"><label c-label item="item">Signer Name</label></div>
+                            <div class="grid_6"><label>: {{ signature.signerName }}</label></div>
+                        </div>
+                        <div class="grid_6">
+                            <div class="grid_6"><label c-label item="item">Signature Date</label></div>
+                            <div class="grid_6"><label>: {{ signature.signatureDate | date:'yyyy-MM-dd HH:mm:ss' }}</label></div>
+                        </div>
+                        <div class="grid_6">
+                            <div class="grid_6"><label c-label item="item">Location</label></div>
+                            <div class="grid_6"><label>: {{ signature.location }}</label></div>
+                        </div>
+                        <div class="grid_6">
+                            <div class="grid_6"><label c-label item="item">Reason</label></div>
+                            <div class="grid_6"><label>: {{ signature.reason }}</label></div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <hr>
+            <div class="grid_12">
+                <fieldset>
+                    <legend><label c-label item="item">Certificate Details</label></legend>
+                    <div class="grid_12" ng-repeat="cert in verify.signatureInformations[0].certificateDetails">
+                        <div class="grid_6">
+                            <div class="grid_6"><label c-label item="item">Common Name</label></div>
+                            <div class="grid_6"><label>: {{ cert.commonName }}</label></div>
+                        </div>
+                        <div class="grid_6">
+                            <div class="grid_6"><label c-label item="item">Issuer Name</label></div>
+                            <div class="grid_6"><label>: {{ cert.issuerName }}</label></div>
+                        </div>
+                        <div class="grid_6">
+                            <div class="grid_6"><label c-label item="item">Serial Number</label></div>
+                            <div class="grid_6"><label>: {{ cert.serialNumber }}</label></div>
+                        </div>
+                        <div class="grid_6">
+                            <div class="grid_6"><label c-label item="item">Valid From</label></div>
+                            <div class="grid_6"><label>: {{ cert.notBeforeDate | date:'yyyy-MM-dd' }}</label></div>
+                        </div>
+                        <div class="grid_6">
+                            <div class="grid_6"><label c-label item="item">Valid Until</label></div>
+                            <div class="grid_6"><label>: {{ cert.notAfterDate | date:'yyyy-MM-dd' }}</label></div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </md-content>
     </div>
 </div>

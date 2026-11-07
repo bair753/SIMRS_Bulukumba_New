@@ -233,6 +233,16 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                             "width": "100px",
                         },
                         {
+                            "field": "nobpjs",
+                            "title": "No BPJS",
+                            "width": "100px",
+                        },
+                        {
+                            "field": "jmlitter",
+                            "title": "jmlitter",
+                            "width": "100px",
+                        },
+                        {
                             "command": [
                                 {
                                     text: "Detail",
@@ -248,10 +258,12 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 
             $scope.TutupPopUp = function () {
                 $scope.sourceRincians = [];
+                $scope.selectedData2 = [];
                 $scope.popUpLayanan.close()
             }
 
             function getDetailPelayananResep(e) {
+                $scope.selectedData2 = [];
                 e.preventDefault();
                 var tr = $(e.target).closest("tr");
                 var dataItem = this.dataItem(tr);
@@ -270,22 +282,18 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                             dat.data[i].kronis = ""
                         }
                     }
-                    $scope.sourceRincians = new kendo.data.DataSource({
-                        data: dat.data,
-                        group: $scope.group,
-                    })
-                    // $scope.sourceRincians = dat.data;
+                    $scope.sourceRincians = dat.data;
                 });
             }
 
-            $scope.group = {
-                field: "noresep",
-                aggregates: [
-                    {
-                        field: "noresep",
-                        aggregate: "count"
-                    }]
-            };
+            // $scope.group = {
+            //     field: "noresep",
+            //     aggregates: [
+            //         {
+            //             field: "noresep",
+            //             aggregate: "count"
+            //         }]
+            // };
 
             $scope.columnRincians = {
                 sortable: true,
@@ -344,6 +352,11 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                         "field": "jumlah",
                         "title": "Qty",
                         "width": "40px",
+                    },
+                    {
+                        "field": "aturanpakai",
+                        "title": "Aturan Pakai",
+                        "width": "85px",
                     },
                     {
                         "field": "hargasatuan",
@@ -416,6 +429,12 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     var nm = "&nama=" + $scope.item.nama
                     tempNamaOrReg = $scope.item.nama;
                 }
+                var sep = ""
+                var tempnosep = ""
+                if ($scope.item.nosep != undefined) {
+                    var nm = "&nosep=" + $scope.item.nosep
+                    tempnosep = $scope.item.nosep;
+                }
 
                 var ins = ""
                 var tempInstalasiIdArr = {};
@@ -444,8 +463,8 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 }
 
                 $q.all([
-                    medifirstService.get("farmasi/get-data-registrasi-pasien-farmasi-apotik-online?" +
-                        reg + rm + nm + ins + rg + kp
+                    medifirstService.get("farmasi/get-data-registrasi-pasien-farmasi-apotik-online?tglAwal=" + tglAwal + '&tglAkhir=' + tglAkhir
+                        +reg + rm + nm + ins + rg + kp + sep
                         + '&jmlRows=' + jmlRows),
                 ]).then(function (data) {
                     $scope.isRouteLoading = false;
@@ -558,296 +577,429 @@ define(['initialize', 'Configuration'], function (initialize, config) {
             }
 
             $scope.openPopUp = function (dataItem) {
-                $scope.selectedItem = dataItem;
-                if($scope.selectedItem.length == 0){
-                    toastr.error('Ceklist data terlebih dahulut');
-                    return
-                }
+
+                $scope.selectedItem = angular.copy(dataItem);
+
+                
+                // isi combo Iterasi
+                $scope.selectedItem.iterasi = $scope.listIterasi.find(function(e){
+                    return e.id == Number($scope.dataPasienSelected.jmlitter);
+                });
+
+                console.log($scope.selectedItem.jmlitter);
+                console.log($scope.selectedItem.iterasi);
+
                 $scope.popUpdataAddOns.center().open();
             };
+            function validJenisObat(item, jenisId) {
 
-            $scope.saveData = function () {
-                $scope.selectedData2.push({
-                    jenisObat: $scope.selectedItem.jenisObat.id,
-                    iterasi: $scope.selectedItem.iterasi.id
-                });
+                    switch (parseInt(jenisId)) {
 
-                // cek status kepesertaan
-                medifirstService.get("bridging/bpjs/get-no-peserta?nokartu=" + $scope.dataPasienSelected.nobpjs + "&tglsep=" + new moment(new Date).format('YYYY-MM-DD')).then(function (e) {
-                    toastr.info(e.data.response.peserta.statusPeserta.keterangan, 'Status Peserta');
-                    toastr.info(e.data.response.peserta.informasi.prolanisPRB, 'Status Peserta PRB');
-                }).then(function () {
-                    $scope.isRouteLoading = false;
-                });
-                medifirstService.get("bridging/bpjs/cek-sep?nosep=" + $scope.dataPasienSelected.nosep).then(function (e) {
-                    // Ambil tanggal SEP dari response
-                    let tglSep = new Date(e.data.response.tglSep);
-                    // Ambil tanggal sekarang
-                    let tglSekarang = new Date();
+                        case 1: // PRB
+                            return item.prbbpjs === true;
 
-                    // Hitung selisih hari antara tanggal sekarang dan tanggal SEP
-                    let selisihHari = Math.floor((tglSekarang - tglSep) / (1000 * 60 * 60 * 24));
+                        case 2: // Kronis
+                            return item.kronisbpjs === true;
 
-                    // Validasi apakah selisih lebih dari 15 hari
-                    if (selisihHari > 15) {
-                        toastr.warning("Resep melebihi 15 hari dari tanggal SEP", 'Validasi Resep');
-                    } else {
-                        toastr.info("Resep Tidak melebihi 15 hari dari tanggal SEP", 'Validasi Resep');
+                        case 3: // Kemoterapi
+                            return item.kemobpjs === true;
+
+                        default:
+                            return false;
                     }
-                }).then(function () {
+                }
+            function ApiCekPeserta(nomor, type) {
+                let tlgpelayanan = new moment(new Date).format("YYYY-MM-DD")
+                let json = {
+                    "url": `Peserta/${type}/${nomor}/tglSEP/${tlgpelayanan}`,
+                    "method": "GET",
+                    "data": null
+                }
+                $scope.isRouteLoading = true;
+                medifirstService.postNonMessage("bridging/bpjs/tools", json).then(function (e) {
                     $scope.isRouteLoading = false;
-                });
+                    if (e.data.metaData.code === "200") {
+                        toastr.info(e.data.response.peserta.statusPeserta.keterangan, 'Status Peserta');
+                        console.log("MASUK SINI BRO DIA MISKIN")
+                        return;
+                    } else {
+                        console.log("MASUK SINI BRO DIA JUGA MISKIN TAPI BISA BAYAR")
+                    }
+                })
+            }
+            $scope.findPRB = function (listPRB, noKartu) {
 
-                $scope.popUpdataAddOns.center().close();
-                // var apotikonline = {
-                //     // "TGLSJP": $scope.dataPasienSelected.tanggalsep,
-                //     "TGLSJP": $scope.now,
-                //     "REFASALSJP": $scope.dataPasienSelected.nosep,
-                //     // "REFASALSJP": '1004R0010724V000015',
-                //     "POLIRSP": $scope.dataPasienSelected.kdinternal,
-                //     "KDJNSOBAT": $scope.selectedItem.jenisObat.id,
-                //     "NORESEP": $scope.dataSelectedRincian.noresep.slice(-5),
-                //     "IDUSERSJP": $scope.dataPasienSelected.nocm,
-                //     "TGLRSP": moment($scope.dataSelectedRincian.tglpelayanan).format('YYYY-MM-DD HH:mm:ss'),
-                //     "TGLPELRSP": moment($scope.dataSelectedRincian.tglpelayanan).format('YYYY-MM-DD HH:mm:ss'),
-                //     "KdDokter": $scope.dataSelectedRincian.penulisresepfk,
-                //     "iterasi": $scope.selectedItem.iterasi.id
-                // }
-                var apotikonline = {
-                    "TGLSJP": $scope.now, // atau bisa gunakan $scope.dataPasienSelected.tanggalsep jika tanggal ini yang ingin digunakan
-                    "REFASALSJP": $scope.dataPasienSelected.nosep,
-                    "POLIRSP": $scope.dataPasienSelected.kdinternal,
-                    "KDJNSOBAT": $scope.selectedItem.jenisObat.id,
-                    "NORESEP": $scope.dataSelectedRincian.noresep.slice(-5),
-                    "IDUSERSJP": $scope.dataPasienSelected.nocm,
-                    "TGLRSP": moment($scope.dataSelectedRincian.tglpelayanan).subtract(1, 'days').format('YYYY-MM-DD HH:mm:ss'),
-                    "TGLPELRSP": moment($scope.dataSelectedRincian.tglpelayanan).subtract(1, 'days').format('YYYY-MM-DD HH:mm:ss'),
-                    "KdDokter": $scope.dataSelectedRincian.penulisresepfk,
-                    "iterasi": $scope.selectedItem.iterasi.id
+                if (!listPRB || !listPRB.length)
+                    return null;
+
+                return listPRB.find(item =>
+                    item.peserta &&
+                    item.peserta.noKartu == noKartu
+                ) || null;
+            };
+
+            $scope.checkKepesertaanByNoSrb = async function (noKartu) {
+                console.log(noKartu);
+                try {
+                    const tglawal = moment($scope.now).subtract(7, 'days').format('YYYY-MM-DD');
+                    const tglakhir = moment($scope.now).format('YYYY-MM-DD');
+
+                    const data = {
+                        url: `prb/tglMulai/${tglawal}/tglAkhir/${tglakhir}`,
+                        method: "GET",
+                        data: null
+                    };
+
+                    const e = await medifirstService.postNonMessage("bridging/bpjs/tools", data);
+
+                    // document.getElementById("jsonCekSRB").innerHTML =
+                    //     JSON.stringify(e.data, undefined, 4);
+
+                    const listPRB = e.data?.response?.prb?.list || [];
+
+                    const dataPRB = $scope.findPRB(listPRB, noKartu);
+
+                    if (dataPRB) {
+
+                        $scope.dataPRB = dataPRB;
+
+                        toastr.success(
+                            'Data PRB ditemukan. No SRB : ' + dataPRB.noSRB,
+                            'PRB'
+                        );
+
+                        return dataPRB;
+
+                    } else {
+
+                        $scope.dataPRB = null;
+
+                        toastr.info(
+                            'Pasien tidak terdaftar pada data PRB.',
+                            'Info'
+                        );
+
+                        return null;
+                    }
+
+                } catch (err) {
+
+                    $scope.dataPRB = null;
+
+                    toastr.error('Gagal mengambil data PRB');
+                    console.error(err);
+                    return null;
+                }
+            };
+            $scope.cekSEP = async function (noSep) {
+
+                try {
+
+                    const e = await medifirstService.get(
+                        'bridging/bpjs/cek-sep?nosep=' + noSep
+                    );
+
+                    console.log(e.data);
+
+                    return e.data;
+
+                } catch (err) {
+
+                    console.error(err);
+
+                    toastr.error('Gagal mengambil data SEP');
+
+                    return null;
+                }
+            };
+                
+           $scope.saveData = async function () {
+                const dataPRB = await $scope.checkKepesertaanByNoSrb(
+                    $scope.dataPasienSelected.nobpjs
+                );
+                    console.log($scope.selectedItem.iterasi.id);
+                if ($scope.selectedItem.iterasi.id == 1) {
+
+                    const sep = await $scope.cekSEP($scope.dataPasienSelected.nosep);
+
+                    if (!sep)
+                        return;
+
+                    const jnsPelayanan = sep.response.jnsPelayanan;
+
+                    if (jnsPelayanan == 'Rawat Inap') {
+                        toastr.warning(
+                            'SEP Rawat Inap tidak dapat dilakukan Iterasi.',
+                            'Apotik Online'
+                        );
+                        return;
+                    }
+                }
+
+                // kalau mau dihentikan ketika pasien tidak ada PRB
+                if ($scope.selectedItem.jenisObat.id == 1 && !dataPRB) {
+                    return;
+                }
+                 
+                ApiCekPeserta($scope.dataPasienSelected.nobpjs, "nokartu");
+             
+                const dataList = ($scope.selectedData2 || []).filter(x => x && x.noresep);
+
+                if (!dataList.length) {
+                    toastr.warning('Tidak ada data resep');
+                    return;
+                }
+
+                function parseSigna(aturanpakai) {
+                    if (!aturanpakai) return { signa1: 1, signa2: 1 };
+
+                    const match = aturanpakai.match(/(\d+)\D+(\d+)/);
+
+                    return {
+                        signa1: match ? parseInt(match[1]) : 1,
+                        signa2: match ? parseInt(match[2]) : 1
+                    };
+                }
+                function getNamaJenisObat(id) {
+
+                    switch (parseInt(id)) {
+
+                        case 1:
+                            return 'PRB';
+
+                        case 2:
+                            return 'Kronis Belum Stabil';
+
+                        case 3:
+                            return 'Kemoterapi';
+
+                        default:
+                            return 'BPJS';
+                    }
+                }
+                function validJenisObat(item) {
+
+                    switch (parseInt($scope.selectedItem.jenisObat.id)) {
+
+                        case 1:
+                            return item.prbbpjs === true;
+
+                        case 2:
+                            return item.kronisbpjs === true;
+
+                        case 3:
+                            return item.kemobpjs === true;
+
+                        default:
+                            return false;
+                    }
+                }
+
+                const items = [];
+
+                for (const item of dataList) {
+
+                    if (!item.kdobatbpjs || !item.namaobatbpjs)
+                        continue;
+
+                    if (!validJenisObat(item)) {
+
+                        toastr.warning(
+                            item.namaproduk +
+                            ' bukan termasuk obat ' +
+                            getNamaJenisObat($scope.selectedItem.jenisObat.id),
+                            'Apotik Online'
+                        );
+
+                        continue;
+                    }
+
+                    items.push(item);
+                }
+
+                if (!items.length) {
+                    toastr.warning('Tidak ada obat yang dapat dikirim ke Apotik Online.');
+                    return;
+                }
+                console.log("=== KIRIM RESEP ===");
+                console.log("Jumlah item :", items.length);
+                console.table(items.map(x => ({
+                    noresep: x.noresep,
+                    obat: x.namaproduk,
+                    kdobat: x.kdobatbpjs
+                })));
+                const noresepUtama = items
+                    .map(x => x.noresep)
+                    .sort()[0];
+
+                const first = items[0];
+
+                const apotikonline = {
+                    TGLSJP: moment($scope.now).format('YYYY-MM-DD 00:00:00'),
+                    REFASALSJP: $scope.dataPasienSelected.nosep,
+                    POLIRSP: $scope.dataPasienSelected.kdinternal,
+                    KDJNSOBAT: $scope.selectedItem.jenisObat.id,
+                    NORESEP: noresepUtama.slice(-5),
+                    IDUSERSJP: $scope.dataPasienSelected.nocm,
+                    TGLRSP: moment(first.tglpelayanan).format('YYYY-MM-DD 00:00:00'),
+                    TGLPELRSP: moment(first.tglpelayanan).format('YYYY-MM-DD 00:00:00'),
+                    KdDokter: first.penulisresepfk,
+                    iterasi: $scope.selectedItem.iterasi.id
                 };
 
+                try {
 
-                var datas = {
-                    data: apotikonline
-                }
-                medifirstService.post('bridging/bpjs/save-resep-apotik-online', datas).then(function (e) {
+                    const resHeader = await medifirstService.post(
+                        'bridging/bpjs/save-resep-apotik-online',
+                        { data: apotikonline }
+                    );
 
-                    if (e.data.metaData.code == 200) {
-                        toastr.info(e.data.metaData.message, 'Apotik Online');
+                    const meta = resHeader.data.metaData || {};
+                    const message = meta.message || '';
+                    const msg = message.toLowerCase();
 
-                        // Mengambil NOSJP dari message
-                        var message = e.data.metaData.message;
-                        var nosjpMatch = message.match(/NOSJP:\s(\S+)/);
-                        var nosjp = nosjpMatch ? nosjpMatch[1] : '';
+                    const isSuccess =
+                        meta.code == 200 ||
+                        msg.includes('data sudah di entry') ||
+                        msg.includes('sudah dijadikan sjp induk iterasi');
 
-                        var arrnonracikan = [];
-                        var arrracikan = [];
-                        var x = 0;
-                        var r1 = 0;
-                        var r2 = 0;
-
-                        for (var i = 0; i < $scope.selectedData2.length; i++) {
-                            var item = $scope.selectedData2[i];
-                            if (item.jeniskemasanfk == 2) {
-                                arrnonracikan[r1] = {
-                                    "NOSJP": nosjp,
-                                    "NORESEP": $scope.dataSelectedRincian.noresep.slice(-5),
-                                    "KDOBT": item.kdobatbpjs,
-                                    "NMOBAT": item.namaobatbpjs,
-                                    "SIGNA1OBT": item.aturanpakai ? item.aturanpakai.substring(0, 1) : '',
-                                    "SIGNA2OBT": item.aturanpakai ? item.aturanpakai.slice(-1) : '',
-                                    "JMLOBT": item.jumlah,
-                                    "JHO": item.jumlah / parseInt(item.aturanpakai ? item.aturanpakai.substring(0, 1) : ''),
-                                    "CatKhsObt": ''
-                                };
-                                r1++;
-                            } else if (item.jeniskemasanfk != 2 && item.kdobatbpjs && item.namaobatbpjs) { // Validasi data racikan
-                                x++;
-                                var no = x < 10 ? '0' + x : '' + x;
-                                arrracikan[r2] = {
-                                    "NOSJP": nosjp,
-                                    "NORESEP": $scope.dataSelectedRincian.noresep.slice(-5),
-                                    "JNSROBT": "R." + no,
-                                    "KDOBT": item.kdobatbpjs,
-                                    "NMOBAT": item.namaobatbpjs,
-                                    "SIGNA1OBT": item.aturanpakai ? item.aturanpakai.substring(0, 1) : '',
-                                    "SIGNA2OBT": item.aturanpakai ? item.aturanpakai.slice(-1) : '',
-                                    "PERMINTAAN": item.dosis,
-                                    "JMLOBT": item.jumlah,
-                                    "JHO": 23, // Sesuaikan jika perlu
-                                    "CatKhsObt": ''
-                                };
-                                r2++;
-                            }
-                        }
-
-                        if (arrnonracikan.length > 0) {
-                            var arr1 = { data: arrnonracikan };
-                            medifirstService.post('bridging/bpjs/save-non-racikan-apotik-online', arr1).then(function (e) {
-                                console.log(e)
-                                console.log(e.data[0].metaData.message)
-                                // Tambahkan logika jika diperlukan setelah pengiriman data non-racikan
-                                toastr.info(e.data[0].metaData.message, 'Apotik Online');
-                            });
-                        }
-
-                        if (arrracikan.length > 0) {
-                            var arr2 = { data: arrracikan };
-                            medifirstService.post('bridging/bpjs/save-racikan-apotik-online', arr2).then(function (e) {
-                                console.log(e)
-                                console.log(e.data[0].metaData.message)
-                                // Tambahkan logika jika diperlukan setelah pengiriman data racikan
-                                toastr.info(e.data[0].metaData.message, 'Apotik Online');
-                            });
-                        }
-
-                    } else {
-                        toastr.info(e.data.metaData.message, 'Apotik Online');
+                    if (!isSuccess) {
+                        toastr.warning(message, 'Apotik Online');
+                        return;
                     }
-                });
-                // medifirstService.post('bridging/bpjs/save-resep-apotik-online', datas).then(function (e) {
 
-                //     if (e.data.metaData.code == 200) {
-                //         toastr.success('Data Berhasil di Kirim');
+                    toastr.info(message, 'Apotik Online');
 
-                //         // Mengambil NOSJP dari message
-                //         var message = e.data.metaData.message;
-                //         var nosjpMatch = message.match(/NOSJP:\s(\S+)/);
-                //         var nosjp = nosjpMatch ? nosjpMatch[1] : '';
+                    const match =
+                        message.match(/NOSJP:\s*([^\s]+)/i) ||
+                        message.match(/NoSEP Apotik:\s*([^\s]+)/i) ||
+                        message.match(/NoApotik\s*([^\s]+)/i);
 
-                //         var arrnonracikan = [];
-                //         var arrracikan = [];
-                //         var x = 0;
-                //         var no = '';
-                //         var r1 = 0;
-                //         var r2 = 0;
+                    const nosjp = match
+                        ? match[1].trim()
+                        : $scope.dataPasienSelected.nosep;
 
-                //         for (var i = 0; i < $scope.selectedData2.length; i++) {
-                //             if ($scope.selectedData2[i].jeniskemasanfk === 2) {
-                //                 arrnonracikan[r1] = {
-                //                     "NOSJP": nosjp,
-                //                     "NORESEP": $scope.dataSelectedRincian.noresep.slice(-5),
-                //                     "KDOBT": $scope.selectedData2[i].kdobatbpjs,
-                //                     "NMOBAT": $scope.selectedData2[i].namaobatbpjs,
-                //                     "SIGNA1OBT": $scope.selectedData2[i].aturanpakai ? $scope.selectedData2[i].aturanpakai.substring(0, 1) : '',
-                //                     "SIGNA2OBT": $scope.selectedData2[i].aturanpakai ? $scope.selectedData2[i].aturanpakai.slice(-1) : '',
-                //                     "JMLOBT": $scope.selectedData2[i].jumlah,
-                //                     "JHO": $scope.selectedData2[i].jumlah / parseInt($scope.selectedData2[i].aturanpakai ? $scope.selectedData2[i].aturanpakai.substring(0, 1) : ''),
-                //                     "CatKhsObt": ''
-                //                 };
-                //                 r1++;
-                //             } else if ($scope.selectedData2[i].jeniskemasanfk !== 2){
-                //                 x++;
-                //                 no = x < 10 ? '0' + x : '' + x;
-                //                 arrracikan[r2] = {
-                //                     "NOSJP": nosjp,
-                //                     "NORESEP": $scope.dataSelectedRincian.noresep.slice(-5),
-                //                     "JNSROBT": "R." + no,
-                //                     "KDOBT": $scope.selectedData2[i].kdobatbpjs,
-                //                     "NMOBAT": $scope.selectedData2[i].namaobatbpjs,
-                //                     "SIGNA1OBT": $scope.selectedData2[i].aturanpakai ? $scope.selectedData2[i].aturanpakai.substring(0, 1) : '',
-                //                     "SIGNA2OBT": $scope.selectedData2[i].aturanpakai ? $scope.selectedData2[i].aturanpakai.slice(-1) : '',
-                //                     "PERMINTAAN": $scope.selectedData2[i].dosis,
-                //                     "JMLOBT": $scope.selectedData2[i].jumlah,
-                //                     "JHO": 23, // Sesuaikan jika perlu
-                //                     "CatKhsObt": ''
-                //                 };
-                //                 r2++;
-                //             }
-                //         }
+                    if (!nosjp) {
+                        toastr.error('NOSJP tidak ditemukan');
+                        return;
+                    }
 
-                //         if (arrnonracikan.length > 0) {
-                //             var arr1 = { data: arrnonracikan };
-                //             medifirstService.post('bridging/bpjs/save-non-racikan-apotik-online', arr1).then(function (e) {
-                //                 // Tambahkan logika jika diperlukan setelah pengiriman data non-racikan
-                //             });
-                //         }
+                    let racikanNo = 0;
 
-                //         if (arrracikan.length > 0) {
-                //             var arr2 = { data: arrracikan };
-                //             medifirstService.post('bridging/bpjs/save-racikan-apotik-online', arr2).then(function (e) {
-                //                 // Tambahkan logika jika diperlukan setelah pengiriman data racikan
-                //             });
-                //         }
+                    for (const item of items) {
 
-                //     } else {
-                //         toastr.error('Data Gagal di Kirim');
-                //     }
-                // });
+                        const signa = parseSigna(item.aturanpakai);
 
-                // medifirstService.post('bridging/bpjs/save-resep-apotik-online', datas).then(function (e) {
+                        if (signa.signa1 <= 0) {
+                            signa.signa1 = 1;
+                        }
 
-                //     if (e.data.metaData.code == 200) {
-                //         toastr.success('Data Berhasil di Kirim');
-                //     } else {
-                //         toastr.error('Data Gagal di Kirim');
-                //     }
-                //     var arrnonracikan = []
-                //     var arrracikan = []
-                //     var x = 0
-                //     var no = ''
-                //     var r1 = 0
-                //     var r2 = 0
-                //     for (var i = 0; i < $scope.selectedData2.length; i++) {
-                //         // if ($scope.selectedData2[i].isfornas == true) {
-                //             if ($scope.selectedData2[i].jeniskemasanfk == 2) {
-                //                 arrnonracikan[r1] = {
-                //                     "NOSJP": $scope.dataPasienSelected.nosep,
-                //                     // "NOSJP": '1004R0010724V000015',
-                //                     "NORESEP": $scope.dataSelectedRincian.noresep.slice(-5),
-                //                     // "KDOBT": $scope.selectedData2[i].kdapotikonline, //--
-                //                     "KDOBT": '0117A005',
-                //                     "NMOBAT": $scope.selectedData2[i].namaproduk, //--
-                //                     "SIGNA1OBT": $scope.selectedData2[i].aturanpakai ? $scope.selectedData2[i].aturanpakai.substring(0, 1) : '',
-                //                     "SIGNA2OBT": $scope.selectedData2[i].aturanpakai ? $scope.selectedData2[i].aturanpakai.slice(-1) : '',
-                //                     "JMLOBT": $scope.selectedData2[i].jumlah,
-                //                     "JHO": $scope.selectedData2[i].jumlah / parseInt($scope.selectedData2[i].aturanpakai ? $scope.selectedData2[i].aturanpakai.substring(0, 1) : ''), //--
-                //                     "CatKhsObt": '',
-                //                 }
-                //                 r1++
-                //             } else {
-                //                 x++
-                //                 if (x < 10) {
-                //                     no = '0' + x
-                //                 } else {
-                //                     no = '' + x
-                //                 }
-                //                 arrracikan[r2] = {
-                //                     "NOSJP": $scope.dataPasienSelected.nosep,
-                //                     // "NOSJP": '1004R0010724V000015',
-                //                     "NORESEP": $scope.dataSelectedRincian.noresep.slice(-5),
-                //                     "JNSROBT": "R." + no,
-                //                     // "KDOBT": $scope.selectedData2[i].kdapotikonline, //--
-                //                     "KDOBT": '0117A005',
-                //                     "NMOBAT": $scope.selectedData2[i].namaproduk, //--
-                //                     "SIGNA1OBT": $scope.selectedData2[i].aturanpakai ? $scope.selectedData2[i].aturanpakai.substring(0, 1) : '',
-                //                     "SIGNA2OBT": $scope.selectedData2[i].aturanpakai ? $scope.selectedData2[i].aturanpakai.slice(-1) : '',
-                //                     "PERMINTAAN": $scope.selectedData2[i].dosis,
-                //                     "JMLOBT": $scope.selectedData2[i].jumlah,
-                //                     "JHO": 23, //--
-                //                     "CatKhsObt": '',
-                //                 }
-                //                 r2++
-                //             }
-                //         // }
-                //     }
+                        const jml = parseFloat(item.jumlah) || 0;
+                        const jho = Math.ceil(jml / signa.signa1) || 1;
 
-                //     if (arrnonracikan != []) {
-                //         var arr1 = {
-                //             data: arrnonracikan
-                //         }
+                        const isNonRacikan =
+                            (item.jeniskemasan || '').trim().toLowerCase().includes('non racikan');
 
-                //         medifirstService.post('bridging/bpjs/save-non-racikan-apotik-online', arr1).then(function (e) { });
-                //     }
+                        console.log('ITEM:', item);
+                        console.log('JENIS KEMASAN:', item.jeniskemasan);
+                        console.log('IS NON RACIKAN:', isNonRacikan);
 
-                //     if (arrracikan != []) {
-                //         var arr2 = {
-                //             data: arrracikan
-                //         }
+                        let payload;
+                        let endpoint;
 
-                //         medifirstService.post('bridging/bpjs/save-racikan-apotik-online', arr2).then(function (e) { });
-                //     }
-                // });
+                        if (isNonRacikan) {
+
+                            payload = {
+                                data: [{
+                                    NOSJP: nosjp,
+                                    NORESEP: noresepUtama.slice(-5),
+                                    KDOBT: item.kdobatbpjs,
+                                    NMOBAT: item.namaobatbpjs,
+                                    SIGNA1OBT: 1,
+                                    SIGNA2OBT: 1,
+                                    JMLOBT: jml,
+                                    JHO: jho,
+                                    CatKhsObt: ''
+                                }]
+                            };
+
+                            endpoint = 'bridging/bpjs/save-non-racikan-apotik-online';
+
+                        } else {
+
+                            racikanNo++;
+
+                            const no = racikanNo.toString().padStart(2, '0');
+
+                            payload = {
+                                data: [{
+                                    NOSJP: nosjp,
+                                    NORESEP: noresepUtama.slice(-5),
+                                    JNSROBT: 'R.' + no,
+                                    KDOBT: item.kdobatbpjs,
+                                    NMOBAT: item.namaobatbpjs,
+                                    SIGNA1OBT: signa.signa1,
+                                    SIGNA2OBT: signa.signa2,
+                                    PERMINTAAN: parseFloat(item.dosis || item.sedia || 1),
+                                    JMLOBT: jml,
+                                    JHO: jho,
+                                    CatKhsObt: 'RACIKAN ' + no
+                                }]
+                            };
+
+                            endpoint = 'bridging/bpjs/save-racikan-apotik-online';
+                        }
+
+                        try {
+
+                            console.log('ENDPOINT:', endpoint);
+                            console.log('PAYLOAD:', payload);
+
+                            const result = await medifirstService.post(endpoint, payload);
+
+                            const resMeta = result?.[0]?.data?.metaData;
+
+                            if (resMeta) {
+
+                                switch (resMeta.code) {
+
+                                    case '200':
+                                        toastr.success(resMeta.message, 'Sukses');
+                                        break;
+
+                                    case '201':
+                                        toastr.info(resMeta.message, 'Informasi');
+                                        break;
+
+                                    case '400':
+                                        toastr.warning(resMeta.message, 'Peringatan');
+                                        break;
+
+                                    case '404':
+                                        toastr.error(resMeta.message, 'Error');
+                                        break;
+
+                                    default:
+                                        toastr.info(
+                                            resMeta.message || 'Respon diterima'
+                                        );
+                                }
+                            }
+
+                            await new Promise(resolve => setTimeout(resolve, 150));
+
+                        } catch (err) {
+
+                            console.error('ERROR ITEM:', item);
+                            console.error('ERROR:', err);
+                        }
+                    }
+
+                } catch (err) {
+                    console.error('ERROR HEADER', err);
+                    toastr.error('Gagal kirim header resep');
+                }
+
             };
 
             var HttpClient = function () {
@@ -867,7 +1019,28 @@ define(['initialize', 'Configuration'], function (initialize, config) {
             medifirstService.get('sysadmin/settingdatafixed/get/statusBridgingTemporary').then(function (dat) {
                 statusBridgingTemporary = dat.data
             })
+            $scope.Cetak = function () {
 
+                if (!$scope.dataPasienSelected) {
+                    toastr.error('Pilih Pasien dulu');
+                    return;
+                }
+
+                if (!$scope.dataSelectedRincian || !$scope.dataSelectedRincian.noresep) {
+                    toastr.error('Pilih No Order dulu');
+                    return;
+                }
+
+                window.open(
+                    config.baseApiBackend +
+                    'report/cetak-bundle-sep-resep-billing' +
+                    '?noregistrasi=' + $scope.dataPasienSelected.noregistrasi +
+                    '&noorder=' + $scope.dataSelectedRincian.noresep +
+                    '&norec=' + $scope.dataSelectedRincian.norec_resep +
+                    '&kdprofile=' + medifirstService.getProfile().kdprofile,
+                    '_blank'
+                );
+            };
             $scope.CetakSEP = function () {
                 if ($scope.dataPasienSelected == undefined) {
                     toastr.error('Pilih Pasien dulu', 'Info');
@@ -1189,18 +1362,81 @@ define(['initialize', 'Configuration'], function (initialize, config) {
             }
 
 
-            $scope.DaftarResepBpjs = function (dataItem) {
+             $scope.DaftarResepBpjs = function (dataItem) {
                 $scope.selectedItem = dataItem;
                 $scope.PopUpDaftarResepBpjs.center().open();
+            } 
+            $scope.DaftarPelayananBpjs = function () {
+
+    medifirstService
+        .post("bridging/bpjs/DaftarPelayananObat"  +
+                        "?nosjp=" + $scope.dataKlikBpjs.NOAPOTIK +
+                        "&refasalsjp=" + $scope.dataKlikBpjs.NOSEP_KUNJUNGAN +
+                        "&noresep=" + $scope.dataKlikBpjs.NORESEP)
+
+        .then(function (e) {
+
+            var res = e.data.response || {};
+
+                        $scope.PopUpDaftarPelayananBpjs.center().open();
+            var details = [];
+
+            if (res.listobat && res.listobat.length > 0) {
+
+                res.listobat.forEach(function (obat) {
+
+                    details.push({
+
+                        noSepApotek: res.noSepApotek,
+                        noSepAsal: res.noSepAsal,
+                        noresep: res.noresep,
+                        nokartu: res.nokartu,
+                        nmpst: res.nmpst,
+                        kdjnsobat: res.kdjnsobat,
+                        nmjnsobat: res.nmjnsobat,
+                        tglpelayanan: res.tglpelayanan,
+
+                        kodeobat: obat.kodeobat,
+                        namaobat: obat.namaobat,
+                        tipeobat: obat.tipeobat,
+                        signa1: obat.signa1,
+                        signa2: obat.signa2,
+                        hari: obat.hari,
+                        permintaan: obat.permintaan,
+                        jumlah: obat.jumlah,
+                        harga: obat.harga
+
+                    });
+
+                });
+
             }
+            
+            $scope.dataPelayananBpjs = new kendo.data.DataSource({
+                data: details,
+                pageSize: 10
+            });
+
+        });
+
+};
+           
 
             $scope.GetDaftarResepBpjs = function () {
+                if ($scope.item.jenisObat == null) {
+                    toastr.error("jenisObat belum Dipilih !");
+                    return
+                }
+                if ($scope.item.JnsTgl == null) {
+                    toastr.error("JnsTgl belum Dipilih !");
+                    return
+                }
                 var data = {
                     "kdppk": "0117A005",
                     "KdJnsObat": $scope.item.jenisObat.id,
                     "JnsTgl": $scope.item.JnsTgl.jenistgl,
-                    "TglMulai": moment($scope.item.periodeAwal).format('YYYY-MM-DD'),
-                    "TglAkhir": moment($scope.item.periodeAkhir).format('YYYY-MM-DD')
+                    "TglMulai": moment($scope.item.periodeAwal).format('YYYY-MM-DD HH:mm:ss'),
+                    "TglAkhir": moment($scope.item.periodeAkhir).format('YYYY-MM-DD HH:mm:ss')
                 }
                 console.log('DATA BARU KIRIM', data);
                 var datas = {
@@ -1222,9 +1458,63 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     });
                 });
             }
+            $scope.onSearchTindakan = function () {
+				applyFilter(
+					[
+						"NORESEP",
+						"NOAPOTIK",
+						"NOSEP_KUNJUNGAN",
+						"NOKARTU",
+						"NAMA"
+					],
+					$scope.item.search,
+					'kGriddataObatBpjs2'
+				);
+			};
+            function applyFilter(fields, keyword, gridID) {
+				var grid = $("#" + gridID).data("kendoGrid");
+				if (!grid) return;
 
+				// kalau kosong → reset filter
+				if (!keyword) {
+					grid.dataSource.filter({});
+					return;
+				}
+
+				var filters = [];
+
+				angular.forEach(fields, function (field) {
+					filters.push({
+						field: field,
+						operator: "contains",
+						value: keyword
+					});
+				});
+
+				grid.dataSource.filter({
+					logic: "or",
+					filters: filters
+				});
+			}
             $scope.columnObatBpjs = {
-                toolbar: ["excel"],
+              toolbar: [
+                "excel",
+                {
+                    template:
+                        '<div class="grid_4" style="margin-top:-8px;">' +
+                            '<div class="grid_2" style="margin-top:10px;">' +
+                                '<label>Search</label>' +
+                            '</div>' +
+                            '<div class="grid_10">' +
+                                '<input class="k-textbox" ' +
+                                    'ng-model="item.search" ' +
+                                    'ng-change="onSearchTindakan()" ' +
+                                    'ng-model-options="{ debounce: 300 }" ' +
+                                    'placeholder="Cari No kartu/Nama/ nosep..." />' +
+                            '</div>' +
+                        '</div>'
+                }
+            ],
                 excel: {
                     fileName: "DaftarResepBpjs.xlsx",
                     allPages: true,
@@ -1318,6 +1608,147 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 ]
             };
 
+            $scope.columnPelayananObatBpjs = {
+                toolbar: ["excel"],
+                excel: {
+                    fileName: "DaftarPelayananObatBPJS.xlsx",
+                    allPages: true,
+                },
+
+                excelExport: function (e) {
+
+                    var sheet = e.workbook.sheets[0];
+
+                    sheet.frozenRows = 2;
+                    sheet.mergedCells = ["A1:N1"];
+                    sheet.name = "Pelayanan Obat BPJS";
+
+                    var myHeaders = [{
+                        value: "Daftar Pelayanan Obat BPJS",
+                        fontSize: 20,
+                        textAlign: "center",
+                        background: "#ffffff",
+                    }];
+
+                    sheet.rows.splice(0, 0, {
+                        cells: myHeaders,
+                        type: "header",
+                        height: 70
+                    });
+
+                },
+
+                selectable: 'row',
+                pageable: true,
+
+                columns: [
+
+                    {
+                        field: "noSepApotek",
+                        title: "No SEP Apotek",
+                        width: "180px"
+                    },
+
+                    {
+                        field: "noSepAsal",
+                        title: "No SEP Asal",
+                        width: "180px"
+                    },
+
+                    {
+                        field: "noresep",
+                        title: "No Resep",
+                        width: "100px"
+                    },
+
+                    {
+                        field: "nokartu",
+                        title: "No Kartu",
+                        width: "150px"
+                    },
+
+                    {
+                        field: "nmpst",
+                        title: "Nama Pasien",
+                        width: "180px"
+                    },
+
+                    {
+                        field: "kdjnsobat",
+                        title: "Kode Jenis Obat",
+                        width: "120px"
+                    },
+
+                    {
+                        field: "nmjnsobat",
+                        title: "Jenis Obat",
+                        width: "180px"
+                    },
+
+                    {
+                        field: "tglpelayanan",
+                        title: "Tgl Pelayanan",
+                        width: "120px",
+                        template: "<span class='style-left'>{{formatTanggal('#: tglpelayanan #')}}</span>"
+                    },
+
+                    {
+                        field: "kodeobat",
+                        title: "Kode Obat",
+                        width: "140px"
+                    },
+
+                    {
+                        field: "namaobat",
+                        title: "Nama Obat",
+                        width: "250px"
+                    },
+
+                    {
+                        field: "tipeobat",
+                        title: "Tipe Obat",
+                        width: "100px"
+                    },
+
+                    {
+                        field: "signa1",
+                        title: "Signa 1",
+                        width: "90px"
+                    },
+
+                    {
+                        field: "signa2",
+                        title: "Signa 2",
+                        width: "90px"
+                    },
+
+                    {
+                        field: "hari",
+                        title: "Hari",
+                        width: "80px"
+                    },
+
+                    {
+                        field: "permintaan",
+                        title: "Permintaan",
+                        width: "100px"
+                    },
+
+                    {
+                        field: "jumlah",
+                        title: "Jumlah",
+                        width: "100px"
+                    },
+
+                    {
+                        field: "harga",
+                        title: "Harga",
+                        width: "100px"
+                    }
+
+                ]
+            };
+
 
             // Dummy Data untuk Daftar Resep BPJS
             // $scope.GetDaftarResepBpjs = function () {
@@ -1372,7 +1803,24 @@ define(['initialize', 'Configuration'], function (initialize, config) {
             // };
 
             $scope.columnObatBpjs = {
-                toolbar: ["excel"],
+                  toolbar: [
+                "excel",
+                {
+                    template:
+                        '<div class="grid_4" style="margin-top:-8px;">' +
+                            '<div class="grid_2" style="margin-top:10px;">' +
+                                '<label>Search</label>' +
+                            '</div>' +
+                            '<div class="grid_10">' +
+                                '<input class="k-textbox" ' +
+                                    'ng-model="item.search" ' +
+                                    'ng-change="onSearchTindakan()" ' +
+                                    'ng-model-options="{ debounce: 300 }" ' +
+                                    'placeholder="Cari No kartu/Nama/ nosep..." />' +
+                            '</div>' +
+                        '</div>'
+                }
+            ],
                 excel: {
                     fileName: "DaftarResepBpjs.xlsx",
                     allPages: true,
@@ -1405,11 +1853,11 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                     { field: "TGLENTRY", title: "Tgl Entry", width: "100px", template: "<span class='style-left'>{{formatTanggal('#: TGLENTRY #')}}</span>" },
                     { field: "TGLRESEP", title: "Tgl Resep", width: "100px", template: "<span class='style-left'>{{formatTanggal('#: TGLRESEP #')}}</span>" },
                     { field: "TGLPELRSP", title: "Tgl Pelayanan Resep", width: "100px", template: "<span class='style-left'>{{formatTanggal('#: TGLPELRSP #')}}</span>" },
-                    // { field: "BYTAGRSP", title: "Biaya Resep", width: "100px" },
-                    // { field: "BYVERRSP", title: "Verifikasi Resep", width: "100px" },
-                    // { field: "KDJNSOBAT", title: "Kode Jenis Obat", width: "100px" },
-                    // { field: "FASKESASAL", title: "Faskes Asal", width: "100px" },
-                    // { field: "FLAGITER", title: "Flag Iterasi", width: "100px" }
+                    { field: "BYTAGRSP", title: "Biaya Resep", width: "100px" },
+                    { field: "BYVERRSP", title: "Verifikasi Resep", width: "100px" },
+                    { field: "KDJNSOBAT", title: "Kode Jenis Obat", width: "100px" },
+                    { field: "FASKESASAL", title: "Faskes Asal", width: "100px" },
+                    { field: "FLAGITER", title: "Flag Iterasi", width: "100px" }
                 ]
             };
 
@@ -1419,6 +1867,34 @@ define(['initialize', 'Configuration'], function (initialize, config) {
                 // Check if this function is modifying or clearing the data unintentionally
             };
 
+            $scope.DeleteOnlineObat = function () {
+        
+                var data = {
+                    "nosepapotek" : $scope.dataKlikBpjs.noSepApotek,
+                    "noresep" : $scope.dataKlikBpjs.noresep,
+                    "kodeobat" : $scope.dataKlikBpjs.kodeobat,
+                    "tipeobat" : $scope.dataKlikBpjs.tipeobat
+                };
+                console.log('DATA DELETE KIRIM', data);
+
+                var datas = {
+                    data: data
+                };
+
+                medifirstService.post('bridging/bpjs/hapusresepobat', datas).then(function (e) {
+                    console.log('DATA DELETE', e);
+
+                    if (e && e.data.metaData) {
+                        if (e.data.metaData.code === '200') {
+                            toastr.success(e.data.metaData.message);
+                        } else {
+                            toastr.error(e.data.metaData.message);
+                        }
+                    } else {
+                        toastr.error('Terjadi kesalahan saat menghapus resep.');
+                    }
+                });
+            };
             $scope.DeleteOnline = function () {
                 var data = {
                     "nosjp": $scope.dataKlikBpjs.NOAPOTIK,
@@ -1433,8 +1909,211 @@ define(['initialize', 'Configuration'], function (initialize, config) {
 
                 medifirstService.post('bridging/bpjs/hapusresep', datas).then(function (e) {
                     console.log('DATA DELETE', e);
+
+                    if (e && e.data.metaData) {
+                        if (e.data.metaData.code === '200') {
+                            toastr.success(e.data.metaData.message);
+                        } else {
+                            toastr.error(e.data.metaData.message);
+                        }
+                    } else {
+                        toastr.error('Terjadi kesalahan saat menghapus resep.');
+                    }
                 });
             };
+
+            // =====================================================================
+            // TTE (BSRE) - Bundle SEP + Resep + Billing Apotik Online
+            // =====================================================================
+            $scope.disabledSimpan2 = false;
+            $scope.disabledBatal = false;
+            $scope.listPegawaiBsre = [];
+            $scope.changeTTD = function () { };
+
+            function getNorecPd() {
+                // butuh field norec_pd di query get-data-registrasi-pasien-farmasi-apotik-online (pd.norec as norec_pd)
+                return ($scope.dataPasienSelected && $scope.dataPasienSelected.norec) || '';
+            }
+
+            function validasiPilihan(perluResep) {
+                if (!$scope.dataPasienSelected || !$scope.dataPasienSelected.noregistrasi) {
+                    toastr.error('Pilih Pasien dulu', 'Info');
+                    return false;
+                }
+                if (perluResep && (!$scope.dataSelectedRincian || !$scope.dataSelectedRincian.noresep)) {
+                    toastr.error('Pilih No Resep dulu', 'Info');
+                    return false;
+                }
+                return true;
+            }
+
+            function cekDokumenTTE(callback) {
+                var norecPd = getNorecPd();
+                if (!norecPd) {
+                    toastr.error('norec_pd pasien tidak ditemukan', 'Info');
+                    return;
+                }
+                medifirstService.get("emr/cek_ttd_bsre_apol?norec_pd=" + $scope.dataPasienSelected.noregistrasi, true).then(function (dat) {
+                    callback((dat.data && dat.data.data) || []);
+                }, function (error) {
+                    console.error('Error checking file status:', error);
+                });
+            }
+
+            $scope.lihatDok = function () {
+                if (!validasiPilihan(false)) return;
+                cekDokumenTTE(function (dataLoad) {
+                    if (dataLoad.length === 0) {
+                        toastr.info('Dokumen TTE belum ada', 'Info');
+                        return;
+                    }
+                    var strBACKEND = config.baseApiBackend.replace('service/medifirst2000/', '');
+                    window.open(strBACKEND + "service/storage_path?path=" + dataLoad[0].file
+                        + "&mimetype=application/pdf");
+                });
+            };
+
+            $scope.HapusTte = function () {
+                if (!validasiPilihan(false)) return;
+                cekDokumenTTE(function (dataLoad) {
+                    if (dataLoad.length === 0) {
+                        toastr.info('Dokumen TTE belum ada', 'Info');
+                        return;
+                    }
+                    if (!confirm('Hapus TTE dokumen ini?')) return;
+                    medifirstService.post('bsre-esign/hapus-ttd-pengajuan-apotikonline', { 'norec': dataLoad[0].id }).then(function () {
+                        toastr.success('Berhasil Hapus TTD');
+                    });
+                });
+            };
+
+            $scope.ttdElek = function () {
+                if (!validasiPilihan(true)) return;
+                $scope.savePengajuanTTE(medifirstService.getPegawaiLogin().id);
+            };
+
+            $scope.savePengajuanTTE = function (pegawai) {
+                if (pegawai == undefined) return;
+
+                var url = 'report/apotikonline-tte'
+                    + '?noregistrasi=' + encodeURIComponent($scope.dataPasienSelected.noregistrasi)
+                    + '&noorder=' + encodeURIComponent($scope.dataSelectedRincian.noresep)
+                    + '&norec=' + encodeURIComponent($scope.dataSelectedRincian.norec_resep || '')
+                    + '&norec_pd=' + encodeURIComponent(getNorecPd())
+                    + '&kdprofile=' + medifirstService.getProfile().kdprofile
+                    + '&isttd=true'
+                    + '&pegawaittd=' + pegawai;
+
+                $scope.isRouteLoading = true;
+                medifirstService.get(url).then(function (data) {
+                    $scope.isRouteLoading = false;
+                    var res = data.data || {};
+                    var dokumen = res.dokumen;
+                    if (res.status != 201 || !dokumen) {
+                        toastr.error(res.message || 'Pengajuan TTE gagal', 'TTE');
+                        return;
+                    }
+                    $scope.item.norecDOK = dokumen.id;
+                    $scope.item.pegawai = { id: dokumen.pegawaifk, namalengkap: dokumen.namalengkap };
+                    $scope.listPegawaiBsre = [$scope.item.pegawai];
+                    $scope.item.nik = dokumen.nik_pegawai;
+                    $scope.item.file = dokumen.file;
+                    $scope.item.namadokumen = dokumen.namadokumen;
+                    $scope.item.nomoremr = dokumen.nomoremr;
+                    $scope.item.linkQR = dokumen.linkQR;
+                    $scope.item.reason = dokumen.reason;
+                    $scope.popUpTTD.center().open();
+                }, function () {
+                    $scope.isRouteLoading = false;
+                });
+            };
+
+            $scope.SaveUpdate = function () {
+                if ($scope.item.pegawai == undefined) {
+                    toastr.error("Pegawai harus di isi!");
+                    return;
+                }
+                if ($scope.item.nik == undefined) {
+                    toastr.error("NIK harus di isi!");
+                    return;
+                }
+                if ($scope.item.namadokumen == undefined) {
+                    toastr.error("Nama Dokumen harus di isi!");
+                    return;
+                }
+                if ($scope.item.passphrase == undefined) {
+                    toastr.error("Pass Phrase harus di isi!");
+                    return;
+                }
+                var json = {
+                    'norec': $scope.item.norecDOK,
+                    'passphrase': $scope.item.passphrase,
+                    'nik': $scope.item.nik,
+                    'reason': $scope.item.reason ? $scope.item.reason : null,
+                    'iduser': medifirstService.getUserLogin().id,
+                    'xAxis': '680',
+                    'yAxis': '230',
+                    'width': '230',
+                    'height': '150'
+                };
+
+                var btnSimpan = angular.element(document.getElementById("btnSimpan2"));
+                var spinElementSimpan = angular.element('<span class="fa fa-spinner fa-spin"></span>&nbsp;<span> Sedang menyimpan</span>');
+                var textElementSimpan = angular.element('<span class="k-icon k-update"></span><span>Simpan</span>');
+
+                btnSimpan.empty();
+                btnSimpan.append(spinElementSimpan);
+                $scope.disabledSimpan2 = true;
+                $scope.disabledBatal = true;
+
+                medifirstService.post('bsre-esign/save-ttd-pengajuan-apotikonline', json).then(function (e) {
+                    btnSimpan.empty();
+                    btnSimpan.append(textElementSimpan);
+                    $scope.disabledSimpan2 = false;
+                    $scope.disabledBatal = false;
+
+                    if (!e.data || !e.data.dokumen) {
+                        toastr.error((e.data && e.data.message) || 'TTE gagal', 'TTE');
+                        return;
+                    }
+                    $scope.signatureId = e.data.dokumen.id;
+                    $scope.item.passphrase = undefined;
+                    $scope.batal();
+                    $scope.VerifDokumen();
+                }, function () {
+                    btnSimpan.empty();
+                    btnSimpan.append(textElementSimpan);
+                    $scope.disabledSimpan2 = false;
+                    $scope.disabledBatal = false;
+                });
+            };
+
+            $scope.VerifDokumen = function () {
+                if (!$scope.signatureId) {
+                    toastr.error("Signature ID not available.");
+                    return;
+                }
+                medifirstService.post("bsre-esign/verify-ttd-v2-apotikonline?id=" + $scope.signatureId).then(function (dat) {
+                    if (dat.data == false || dat.data.status != undefined) {
+                        toastr.error(dat.data.message);
+                        return;
+                    }
+                    $scope.verify = dat.data;
+                    $scope.popUpDoneVerif.center().open();
+                });
+            };
+
+            $scope.batal = function () {
+                $scope.item.norecDOK = undefined
+                $scope.item.pegawai = undefined
+                $scope.item.nik = undefined
+                $scope.item.file = undefined
+                $scope.item.namadokumen = undefined
+                $scope.item.nomoremr = undefined
+                $scope.item.linkQR = undefined
+                $scope.item.reason = undefined
+                $scope.popUpTTD.close()
+            }
 
         }
     ]);

@@ -977,6 +977,10 @@
             "urlDep": "module/Farmasi/Bridging/ApotikOnlineToolsCtrl"
         },
         {
+            "nameDep": "MenuMappingObatBpjsCtrl",
+            "urlDep": "module/Farmasi/Bridging/MenuMappingObatBpjsCtrl"
+        },
+        {
             "nameDep": "MonitoringApotikOnlineCtrl",
             "urlDep": "module/Farmasi/Bridging/MonitoringApotikOnlineCtrl"
         },
