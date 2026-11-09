@@ -436,71 +436,64 @@ Trait PelayananPasienTrait
 
     protected function userKeyApotikOnline()
     {
+        $kdProfile = $this->getKdProfile();
+
         $statusBridgingProduction = SettingDataFixed::where('namafield', 'isBridgingApolProd')
+            ->where('kdprofile', $kdProfile)
             ->first();
 
-        if (!empty($statusBridgingProduction)) {
-            if ($statusBridgingProduction->nilaifield == 'false') {
-                $set = SettingDataFixed::where('namafield', 'userkeyApotikOnlineDev')
-                    ->where('kdprofile', $this->getKdProfile())
-                    ->first();
-            } else {
-                $set = SettingDataFixed::where('namafield', 'userkeyApotikOnline')
-                    ->where('kdprofile', $this->getKdProfile())
-                    ->first();
-            }
-        } else {
-            $set = SettingDataFixed::where('namafield', 'userkeyApotikOnline')
-                ->first();
+        $namafield = 'userkeyApotikOnline';
+
+        if ($statusBridgingProduction && $statusBridgingProduction->nilaifield == 'false') {
+            $namafield = 'userkeyApotikOnlineDev';
         }
 
-        return !empty($set) ? $set->nilaifield : null;
-    }
+        $set = SettingDataFixed::where('namafield', $namafield)
+            ->where('kdprofile', $kdProfile)
+            ->first();
 
+        return $set ? $set->nilaifield : null;
+    }
     protected function getIdConsumerApotikOnline()
     {
+        $kdProfile = $this->getKdProfile();
+
         $statusBridgingProduction = SettingDataFixed::where('namafield', 'isBridgingApolProd')
+            ->where('kdprofile', $kdProfile)
             ->first();
 
-        if (!empty($statusBridgingProduction)) {
-            if ($statusBridgingProduction->nilaifield == 'false') {
-                $set = SettingDataFixed::where('namafield', 'idConsumerApotikOnlineDev')
-                    ->where('kdprofile', $this->getKdProfile())
-                    ->first();
-            } else {
-                $set = SettingDataFixed::where('namafield', 'idConsumerApotikOnline')
-                    ->where('kdprofile', $this->getKdProfile())
-                    ->first();
-            }
-        } else {
-            $set = SettingDataFixed::where('namafield', 'idConsumerApotikOnline')
-                ->first();
+        $namafield = 'idConsumerApotikOnline';
+
+        if ($statusBridgingProduction && $statusBridgingProduction->nilaifield == 'false') {
+            $namafield = 'idConsumerApotikOnlineDev';
         }
 
-        return !empty($set) ? $set->nilaifield : null;
+        $set = SettingDataFixed::where('namafield', $namafield)
+            ->where('kdprofile', $kdProfile)
+            ->first();
+
+        return $set ? $set->nilaifield : null;
     }
 
     protected function getPasswordConsumerApotikOnline()
     {
+        $kdProfile = $this->getKdProfile();
+
         $statusBridgingProduction = SettingDataFixed::where('namafield', 'isBridgingApolProd')
+            ->where('kdprofile', $kdProfile)
             ->first();
 
-        if (!empty($statusBridgingProduction)) {
-            if ($statusBridgingProduction->nilaifield == 'false') {
-                $set = SettingDataFixed::where('namafield', 'PasswordConsumerApotikOnlineDev')
-                    ->where('kdprofile', $this->getKdProfile())
-                    ->first();
-            } else {
-                $set = SettingDataFixed::where('namafield', 'PasswordConsumerApotikOnline')
-                    ->where('kdprofile', $this->getKdProfile())
-                    ->first();
-            }
-        } else {
-            $set = SettingDataFixed::where('namafield', 'PasswordConsumerApotikOnline')
-                ->first();
+        $namafield = 'PasswordConsumerApotikOnline';
+
+        if ($statusBridgingProduction && $statusBridgingProduction->nilaifield == 'false') {
+            $namafield = 'PasswordConsumerApotikOnlineDev';
         }
 
-        return !empty($set) ? $set->nilaifield : null;
+        $set = SettingDataFixed::where('namafield', $namafield)
+            ->where('kdprofile', $kdProfile)
+            ->first();
+
+        return $set ? $set->nilaifield : null;
     }
-    
+        
 }
