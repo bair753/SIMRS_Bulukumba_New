@@ -3456,6 +3456,11 @@ class BridgingBPJSV2Controller extends ApiController
 
         if ($transStatus != 'false') {
             DB::commit();
+            if ($request['tipe'] == 'insert') {
+                $objetoRequest = new \Illuminate\Http\Request();
+                $objetoRequest['suratkontrol'] =$data1->nosuratkontrol;
+                $ihs = app('App\Http\Controllers\Bridging\IHSController')->CarePlan($objetoRequest, true);
+            }
             $result = array(
                 "status" => 201,
                 "message" => $transMessage,

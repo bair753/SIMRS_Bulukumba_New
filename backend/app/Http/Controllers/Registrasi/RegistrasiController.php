@@ -650,6 +650,7 @@ class RegistrasiController extends ApiController
                 $objetoRequest = new \Illuminate\Http\Request();
                 $objetoRequest ['noregistrasi']= $dataPD->noregistrasi;
                 $ihs = app('App\Http\Controllers\Bridging\IHSController')->Encounter($objetoRequest,true);
+                $ihs = app('App\Http\Controllers\Bridging\IHSController')->QuestionnaireResponse($objetoRequest,true);
                 $transMessage = 'SUKSES';
                 $result = array(
                     'status' => 201,

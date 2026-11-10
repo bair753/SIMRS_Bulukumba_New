@@ -1905,6 +1905,26 @@ class RadiologiController extends ApiController
 
             $transMessage = "Simpan";
             DB::commit();
+             if (empty($dataSO) && !empty($request['pelayananpasienfk'])) {
+
+                $dataStrukorder = DB::table('pelayananpasien_t AS pp')
+                    ->join('strukorder_t AS so', 'so.norec', '=', 'pp.strukorderfk')
+                    ->where('pp.norec', $request['pelayananpasienfk'])
+                    ->where('pp.kdprofile', $idProfile)
+                    ->where('pp.statusenabled', true)
+                    ->where('so.kdprofile', $idProfile)
+                    ->where('so.statusenabled', true)
+                    ->select('so.noorder')
+                    ->first();
+
+                if ($dataStrukorder && !empty($dataStrukorder->noorder)) {
+                    $objetoRequest = new \Illuminate\Http\Request();
+                    $objetoRequest['noorder'] = $dataStrukorder->noorder;
+
+                    $ihs = app('App\Http\Controllers\Bridging\IHSController')
+                        ->ImagingStudy($objetoRequest, true);
+                }
+            }
             $result = array(
                 "status" => 201,
                 "message" => $transMessage,

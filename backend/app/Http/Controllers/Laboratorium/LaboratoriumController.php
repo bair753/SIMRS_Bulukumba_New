@@ -1115,20 +1115,42 @@ class LaboratoriumController extends ApiController
         if ($transStatus == 'true') {
             $transMessage = "Sukses";
             DB::commit();
-            $ihs = null;
+
+            $ihs = array();
+            $ihs2 = null;
+
+            $noorder = DB::table('hasillaboratorium_t AS hl')
+                ->join('antrianpasiendiperiksa_t AS apd', 'apd.norec', '=', 'hl.noregistrasifk')
+                ->join('pasiendaftar_t AS pd', 'pd.norec', '=', 'apd.noregistrasifk')
+                ->join('strukorder_t AS so', 'so.noregistrasifk', '=', 'pd.norec')
+                ->join('pasien_m AS ps', 'ps.id', '=', 'pd.nocmfk')
+                ->leftJoin('produk_m AS pr', 'pr.id', '=', 'hl.produkfk')
+                ->whereIn('hl.norec', $norec)
+                ->where('hl.kdprofile', $idProfile)
+                ->whereNotNull('so.noorder')
+                ->distinct()
+                ->pluck('so.noorder')
+                ->toArray();
 
             foreach ($norec as $it) {
                 $objetoRequest = new \Illuminate\Http\Request();
                 $objetoRequest['norec_hasil'] = $it;
-                $ihs = app('App\Http\Controllers\Bridging\IHSController')->ObservationLab($objetoRequest, true);
+                $objetoRequest['noorder'] = $noorder;
+
+                $ihs[] = app('App\Http\Controllers\Bridging\IHSController')
+                    ->ObservationLab($objetoRequest, true);
             }
-            $ihs2 = null;
 
-            $objetoRequest2 = new \Illuminate\Http\Request();
-            $objetoRequest2['norec_hasil'] = $it;
-            $objetoRequest2['norec_arr'] = $norec;
+            if (count($norec) > 0) {
+                $objetoRequest2 = new \Illuminate\Http\Request();
+                $objetoRequest2['norec_hasil'] = $norec[0];
+                $objetoRequest2['norec_arr'] = $norec;
+                $objetoRequest2['noorder'] = $noorder;
 
-            $ihs2 = app('App\Http\Controllers\Bridging\IHSController')->DiagnosticReport($objetoRequest2, true);
+                $ihs2 = app('App\Http\Controllers\Bridging\IHSController')
+                    ->DiagnosticReport($objetoRequest2, true);
+            }
+
             $result = array(
                 "status" => 201,
                 "message" => $transMessage,
@@ -1136,7 +1158,6 @@ class LaboratoriumController extends ApiController
                 "DiagnosticReport" => $ihs2,
                 "as" => 'er@epic',
             );
-
         } else {
             $transMessage = "Simpan  gagal!!";
             DB::rollBack();

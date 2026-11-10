@@ -826,13 +826,59 @@ define(['initialize'], function (initialize) {
 						// }
 
 						medifirstService.post('gizi/save-order-gizi', data).then(function (result) {
+							console.log(result);
+							if (
+									result.data.status === 201 &&
+									Array.isArray(result.data.dataOrderPelayanan)
+								) {
+									var promises = [];
+
+									result.data.dataOrderPelayanan.forEach(function (item) {
+										promises.push(
+											medifirstService.post('bridging/ihs/NutritionOrder', {
+												norec_op: item.norec
+											}).then(function (res) {
+												console.log(
+													'NutritionOrder SATUSEHAT:',
+													item.norec,
+													res
+												);
+
+												return res;
+											}).catch(function (err) {
+												console.error(
+													'NutritionOrder SATUSEHAT gagal:',
+													item.norec,
+													err
+												);
+
+												throw err;
+											})
+										);
+									});
+
+									Promise.all(promises)
+										.then(function () {
+											return medifirstService.post('bridging/ihs/Composition', {
+												noorder: result.data.strukorder.noorder
+											});
+										})
+										.then(function (res) {
+											console.log('Composition SATUSEHAT:', res);
+										})
+										.catch(function (err) {
+											console.error('Pengiriman SATUSEHAT gagal:', err);
+											toastr.error('Pengiriman NutritionOrder atau Composition ke Satu Sehat gagal.');
+										});
+								}
+
 							$scope.tombolSimpanVis = false;
 							$scope.selectedData = [];
 							$scope.popUpOrder.close();
 							kosongkan();
-							loadData()
+							loadData();
 
-						})
+						});
 					});
 			}
 

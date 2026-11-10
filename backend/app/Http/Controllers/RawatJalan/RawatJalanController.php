@@ -1832,6 +1832,7 @@ class RawatJalanController extends ApiController
                         $objetoRequest ['diagnosis']=  json_decode($pd->ihs_diagnosis);
                     }
                     $ihs = app('App\Http\Controllers\Bridging\IHSController')->Encounter($objetoRequest,true);
+                    $ihs = app('App\Http\Controllers\Bridging\IHSController')->EpisodeOfCare($objetoRequest,true);
                 
                 }
 

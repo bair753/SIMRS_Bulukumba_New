@@ -135,6 +135,7 @@ class GiziController extends ApiController
                 $dataSO->save();
                 $dataSOnorec = $dataSO->norec;
 
+                $dataOPs = [];
                 foreach ($item['details'] as $itemDetails) {
                     $dataOP = new OrderPelayanan;
                     $dataOP->norec = $dataOP->generateNewId();
@@ -168,6 +169,7 @@ class GiziController extends ApiController
                     $dataOP->strukorderfk = $dataSOnorec;
                     $dataOP->tglpelayanan =$item['tglorder'];
                     $dataOP->save();
+                     $dataOPs[] = $dataOP;
                 }
 //            }
             $transStatus = 'true';
@@ -182,6 +184,7 @@ class GiziController extends ApiController
                 "status" => 201,
                 "message" => $transMessage,
                 "strukorder" => $dataSO,
+                "dataOrderPelayanan" => $dataOPs,
                 "as" => 'inhuman',
             );
 
