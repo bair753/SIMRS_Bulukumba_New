@@ -3070,6 +3070,81 @@ class InaCbgController   extends ApiController
         }
         return $this->setStatusCode($result['status'])->respond($result, $transMessage);
     }
+    public function getVitalsign(Request $request)
+    {
+        $noregistrasi = $request['noregistrasifk'];
+        $kdProfile = $this->getDataKdProfile($request);
+
+        $data = DB::selectOne(DB::raw("
+            SELECT
+                pd.noregistrasi,
+                MAX(CASE WHEN epd.emrdfk = 4241 THEN epd.value END) AS tekanan_darah,
+                MAX(CASE WHEN epd.emrdfk = 4243 THEN epd.value END) AS birth_weight
+            FROM emrpasiend_t epd
+            INNER JOIN emrpasien_t ep
+                ON ep.noemr = epd.emrpasienfk
+            INNER JOIN pasiendaftar_t pd
+                ON pd.noregistrasi = TRIM(ep.noregistrasifk)
+            WHERE
+                epd.kdprofile = $kdProfile
+                AND pd.noregistrasi = '$noregistrasi'
+                AND epd.emrfk = 147
+                AND ep.statusenabled = true
+                AND epd.emrdfk IN (4241,4243)
+            GROUP BY pd.noregistrasi
+        "));
+
+        $sistole = 0;
+        $diastole = 0;
+        $birth_weight = 0;
+
+        if ($data && !empty($data->tekanan_darah)) {
+            $val = explode('/', $data->tekanan_darah);
+            $sistole = (float)($val[0] ?? 0);
+            $diastole = (float)($val[1] ?? 0);
+        }
+
+        if ($data && !empty($data->birth_weight)) {
+            $birth_weight = (float)$data->birth_weight;
+        }
+
+        $data = [
+            'noregistrasi' => $noregistrasi,
+            'sistole' => $sistole,
+            'diastole' => $diastole,
+            'birth_weight' => $birth_weight
+        ];
+
+        $result = [
+            'data' => $data,
+            'message' => 'OK'
+        ];
+
+        return $this->respond($result);
+    }
+    public function GetPasienkantongDarah(Request $request)
+    {
+        $noregistrasi = $request->noregistrasi;
+
+        $produk = [
+            1002134667,1002121791,12789,1002134668,1002121790,12781,1002134669,1002121795,12837,1002134670,1002121794,
+            12829,1002134671,1002121793,12805,1002134672,1002121792,12797,1002134673,1002121797,12821,1002134674,1002121796,
+            33682,1002129101,12813
+        ];
+
+        $PasienDaftar = PelayananPasien::from('pelayananpasien_t as pp')
+            ->join('antrianpasiendiperiksa_t as apd', 'apd.norec', '=', 'pp.noregistrasifk')
+            ->join('pasiendaftar_t as pd', 'pd.norec', '=', 'apd.noregistrasifk')
+            ->where('pd.noregistrasi', $noregistrasi)
+            ->whereIn('pp.produkfk', $produk)
+            ->select(DB::raw('COALESCE(SUM(pp.jumlah),0) as qty'))
+            ->first();
+
+        return $this->respond([
+            'data' => $PasienDaftar,
+            'message' => 'ZAID'
+        ]);
+    }
 
     public function getLaporanOperasi(Request $request) {
         $kdProfile = $this->getDataKdProfile($request);

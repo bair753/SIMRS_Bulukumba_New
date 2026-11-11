@@ -3837,6 +3837,12 @@
         {
             "nameDep": "BridgingInaCbgIdrgCtrl",
             "urlDep": "module/Bridging/BridgingInaCbgIdrgCtrl"
-          }
+        },
+        {
+            "nameDep": "BridgingInaCbgIdrgNewCtrl",
+            "urlDep": "module/Bridging/BridgingInaCbgIdrgNewCtrl"
+        }
+
+          
     ]
 }

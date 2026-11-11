@@ -364,7 +364,12 @@ Route::group(['middleware' => 'cors', 'prefix' => 'service'], function () {
 
               // Bridging IDRG 
               Route::get('bridging/inacbg/get/daftar/pasien/inacbg/idrg/integrasi','Bridging\InaCbgIdrgController@getDaftarPasienIdrgIna');
+              
+              Route::get('bridging/inacbg/get/daftar/pasien/inacbg/idrg/integrasi3','Bridging\InaCbgIdrgController@getDaftarPasienIdrgIna3');
+              
               Route::get('bridging/inacbg/get-daftar-pasien-intensif','Bridging\InaCbgController@getDaftarPasienIntensif');
+              Route::get('bridging/inacbg/get-vitalsign','Bridging\InaCbgController@getVitalsign');
+              Route::get('bridging/inacbg/get-pasien-kantong-darah','Bridging\InaCbgController@GetPasienkantongDarah');
               Route::get('bridging/inacbg/get-pasien-tb','Bridging\InaCbgController@GetPasienTbProspective');
               Route::post('idrg/save/diagnosa/pasien','Bridging\DiagnosaIdrGController@saveDiagnosaPasienIdrg');
               Route::post('idrg/save/diagnosa/pasien-inacbg','Bridging\DiagnosaIdrGController@saveDiagnosaPasienInacbg');
